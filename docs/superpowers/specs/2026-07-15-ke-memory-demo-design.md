@@ -290,8 +290,8 @@ Matcher 是符号匹配效果的 LLM 模拟器，不被描述为完整的逻辑�
 
 ### 8.2 正交 embedding 路径
 
-默认使用本地 `BAAI/bge-m3`，上游 revision 固定为
-`5617a9f61b028005a4858fdac845db406aefb181`。`embedding.local_path` 必须指向独立的
+默认使用本地 `Qwen/Qwen3-Embedding-0.6B`，上游 revision 固定为
+`97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3`。`embedding.local_path` 必须指向独立的
 本地模型目录，加载时启用 `local_files_only`，正式运行不下载模型。Preflight 计算
 模型 config、tokenizer 和 weight files 的确定性内容指纹并写入 experiment manifest；
 路径缺失、文件不完整或内容指纹在同一实验中变化时运行失败。Embedding 文档包括：
@@ -302,7 +302,10 @@ Matcher 是符号匹配效果的 LLM 模拟器，不被描述为完整的逻辑�
 - AggregateNode 摘要和聚合 KE。
 
 长文本按 1024 tokenizer tokens、128 tokens overlap 确定性切分。向量以 float32
-保存，Demo 数据量下使用精确 cosine，不引入独立向量数据库。
+保存并做 L2 normalization，使用完整 1024 维输出。Query text 使用固定模板
+`Instruct: Given an agent-memory question, retrieve conversation evidence needed to answer it.\nQuery: {question}`；
+document 编码不加 instruction。Instruction 和编码参数均进入 prompt/config hash。
+Demo 数据量下使用精确 cosine，不引入独立向量数据库。
 
 正交性约束为：
 
@@ -405,7 +408,7 @@ derived_from 和 lifecycle，以支持对象级追溯。
 |---|---|---|---|
 | KE 抽取、归纳、match、统一回答 | `gpt-5.4` | `https://api.penguinsaichat.dpdns.org/v1` | `KE_MEMORY_WORK_API_KEY` |
 | 独立 Judge | `deepseek-v4-pro` | `https://api.deepseek.com/v1` | `KE_MEMORY_JUDGE_API_KEY` |
-| 正交 embedding | `BAAI/bge-m3@5617a9f61b028005a4858fdac845db406aefb181` | 本地文件系统 | 无 |
+| 正交 embedding | `Qwen/Qwen3-Embedding-0.6B@97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3` | 本地文件系统 | 无 |
 
 用户提供的实际 key 只写入项目根目录 `.env.local`。该文件必须加入 `.gitignore`、
 权限设为 `0600`，且不得进入 trace、报告或 snapshot。由于 key 已在对话中出现，
