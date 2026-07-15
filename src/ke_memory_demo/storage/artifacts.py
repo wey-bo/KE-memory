@@ -2,12 +2,12 @@ from __future__ import annotations
 
 from collections.abc import Callable, Generator, Iterable, Iterator, Mapping
 from contextlib import contextmanager
+import errno
+import fcntl
 import hashlib
 import os
 from pathlib import Path
-import shutil
 import stat
-import threading
 from types import MappingProxyType
 from typing import Annotated, TypeVar
 from uuid import uuid4
@@ -27,13 +27,7 @@ from ke_memory_demo.domain import (
     ToolEvent,
 )
 
-from .layout import (
-    StateLayout,
-    StorageError,
-    UnsafeStoragePathError,
-    fsync_directory,
-    validate_storage_name,
-)
+from .layout import StateLayout, StorageError, UnsafeStoragePathError, validate_storage_name
 
 
 ModelT = TypeVar("ModelT", bound=BaseModel)
@@ -111,9 +105,6 @@ DEFAULT_MODEL_REGISTRY: Mapping[str, type[BaseModel]] = MappingProxyType(
 
 
 _write_once = os.write
-_replace = os.replace
-_ACTIVE_WRITERS: set[tuple[Path, str, str]] = set()
-_ACTIVE_WRITERS_LOCK = threading.Lock()
 
 
 class ArtifactStore:
@@ -160,52 +151,11 @@ class ArtifactStore:
         *,
         canonical: bool = False,
     ) -> StageManifest:
-        stage_path = (
-            self.layout.canonical_stage(run_id, stage)
-            if canonical
-            else self.layout.staging_stage(run_id, stage)
+        manifest, _snapshots = self._validated_stage_snapshot(
+            run_id,
+            stage,
+            canonical=canonical,
         )
-        location = "canonical" if canonical else "staging"
-        try:
-            self.layout.require_directory(stage_path)
-        except UnsafeStoragePathError as error:
-            if not stage_path.exists():
-                raise ArtifactValidationError(
-                    f"{location} stage does not exist: {run_id}/{stage}"
-                ) from error
-            raise
-
-        manifest = self._read_manifest(stage_path)
-        if manifest.run_id != run_id or manifest.stage != stage:
-            raise ArtifactValidationError(
-                f"manifest identity does not match {location} stage {run_id}/{stage}"
-            )
-
-        expected_entries = {"manifest.json", *(artifact.path for artifact in manifest.artifacts)}
-        actual_entries: set[str] = set()
-        for entry in stage_path.iterdir():
-            self.layout.assert_safe(entry)
-            metadata = entry.lstat()
-            if stat.S_ISLNK(metadata.st_mode):
-                raise UnsafeStoragePathError(f"managed artifact is a symlink: {entry}")
-            if not stat.S_ISREG(metadata.st_mode):
-                raise ArtifactValidationError(f"unexpected non-file in stage: {entry.name}")
-            actual_entries.add(entry.name)
-        if actual_entries != expected_entries:
-            raise ArtifactValidationError(
-                f"manifest files disagree with stage contents: expected {sorted(expected_entries)}, "
-                f"found {sorted(actual_entries)}"
-            )
-
-        for digest in manifest.artifacts:
-            model = self._registered_model(digest.name)
-            expected_model = _qualified_model_name(model)
-            if digest.model != expected_model:
-                raise ArtifactValidationError(
-                    f"artifact {digest.name!r} model is {digest.model!r}, expected {expected_model!r}"
-                )
-            artifact_path = self.layout.artifact(stage_path, digest.name)
-            self._validate_artifact(artifact_path, digest, model)
         return manifest
 
     def read_jsonl(
@@ -223,19 +173,14 @@ class ArtifactStore:
                 f"requested model {_qualified_model_name(model)!r} does not match registered "
                 f"model {_qualified_model_name(registered)!r} for artifact {name!r}"
             )
-        manifest = self.validate_stage(run_id, stage, canonical=canonical)
-        digest = next(
-            (artifact for artifact in manifest.artifacts if artifact.name == name),
-            None,
+        manifest, snapshots = self._validated_stage_snapshot(
+            run_id,
+            stage,
+            canonical=canonical,
         )
-        if digest is None:
+        if not any(artifact.name == name for artifact in manifest.artifacts):
             raise ArtifactValidationError(f"artifact {name!r} is not present in the stage manifest")
-        stage_path = (
-            self.layout.canonical_stage(run_id, stage)
-            if canonical
-            else self.layout.staging_stage(run_id, stage)
-        )
-        data = self.layout.artifact(stage_path, name).read_bytes()
+        data = snapshots[name]
         values = tuple(
             model.model_validate_json(line) for line in _record_lines(data, artifact_name=name)
         )
@@ -247,36 +192,61 @@ class ArtifactStore:
 
     @contextmanager
     def stage_writer(self, run_id: str, stage: str) -> Generator[_StageWriter, None, None]:
+        validate_storage_name(run_id, label="run ID")
+        validate_storage_name(stage, label="stage")
         with self._writer_guard(run_id, stage):
-            stage_path = self.layout.staging_stage(run_id, stage)
-            if stage_path.exists():
-                self.layout.assert_safe(stage_path)
-                raise WriterConflictError(
-                    f"staging data already exists for {run_id}/{stage}; remove or promote it first"
-                )
-            self.layout.ensure_directory(stage_path)
-            empty_manifest = StageManifest(run_id=run_id, stage=stage, artifacts=())
-            _write_bytes_atomic(
-                stage_path / "manifest.json",
-                canonical_json(empty_manifest),
-                layout=self.layout,
-            )
-            writer = _StageWriter(
-                lambda name, records: self._write_jsonl_unlocked(
-                    run_id,
-                    stage,
-                    name,
-                    records,
-                )
-            )
-            try:
-                yield writer
-                self._promote_unlocked(run_id, stage)
-            except BaseException:
-                self._remove_staging_stage(stage_path)
-                raise
-            finally:
-                writer.close()
+            run_path = self.layout.staging_root / run_id
+            with _pin_directory(self.layout, run_path, create=True) as run_fd:
+                existing = _stat_at(run_fd, stage)
+                if existing is not None:
+                    if stat.S_ISLNK(existing.st_mode):
+                        raise UnsafeStoragePathError(
+                            f"staging stage is a symlink: {run_id}/{stage}"
+                        )
+                    raise WriterConflictError(
+                        f"staging data already exists for {run_id}/{stage}; "
+                        "remove or promote it first"
+                    )
+
+                stage_fd = -1
+                created = False
+                writer: _StageWriter | None = None
+                try:
+                    os.mkdir(stage, mode=0o700, dir_fd=run_fd)
+                    created = True
+                    os.fsync(run_fd)
+                    stage_fd = _open_directory_checked(run_fd, stage)
+                    empty_manifest = StageManifest(run_id=run_id, stage=stage, artifacts=())
+                    _write_bytes_atomic_at(
+                        stage_fd,
+                        "manifest.json",
+                        canonical_json(empty_manifest),
+                    )
+                    writer = _StageWriter(
+                        lambda artifact_name, artifact_records: self._write_jsonl_to_fd(
+                            stage_fd,
+                            run_id,
+                            stage,
+                            artifact_name,
+                            artifact_records,
+                        )
+                    )
+                    yield writer
+                    self._promote_pinned(
+                        run_id,
+                        stage,
+                        staging_parent_fd=run_fd,
+                        staging_fd=stage_fd,
+                    )
+                except BaseException:
+                    if created:
+                        _remove_owned_stage(run_fd, stage, stage_fd)
+                    raise
+                finally:
+                    if writer is not None:
+                        writer.close()
+                    if stage_fd >= 0:
+                        os.close(stage_fd)
 
     def _write_jsonl_unlocked(
         self,
@@ -285,21 +255,27 @@ class ArtifactStore:
         name: str,
         records: Iterable[object],
     ) -> ArtifactDigest:
-        model = self._registered_model(name)
         stage_path = self.layout.staging_stage(run_id, stage)
-        if stage_path.exists():
-            self.layout.require_directory(stage_path)
-            entries = tuple(stage_path.iterdir())
-            if entries:
-                if not (stage_path / "manifest.json").exists():
-                    raise ArtifactValidationError(
-                        f"staging stage {run_id}/{stage} is incomplete: manifest.json is missing"
-                    )
-                previous = self.validate_stage(run_id, stage)
-            else:
-                previous = StageManifest(run_id=run_id, stage=stage, artifacts=())
+        with _pin_directory(self.layout, stage_path, create=True) as stage_fd:
+            return self._write_jsonl_to_fd(stage_fd, run_id, stage, name, records)
+
+    def _write_jsonl_to_fd(
+        self,
+        stage_fd: int,
+        run_id: str,
+        stage: str,
+        name: str,
+        records: Iterable[object],
+    ) -> ArtifactDigest:
+        model = self._registered_model(name)
+        entries = tuple(os.listdir(stage_fd))
+        if entries:
+            if "manifest.json" not in entries:
+                raise ArtifactValidationError(
+                    f"staging stage {run_id}/{stage} is incomplete: manifest.json is missing"
+                )
+            previous, _snapshots = self._validate_stage_fd(stage_fd, run_id, stage)
         else:
-            self.layout.ensure_directory(stage_path)
             previous = StageManifest(run_id=run_id, stage=stage, artifacts=())
 
         payload_parts: list[bytes] = []
@@ -311,6 +287,7 @@ class ArtifactStore:
             raise ArtifactValidationError(
                 f"record validation failed for artifact {name!r}: {error}"
             ) from error
+
         payload = b"".join(payload_parts)
         digest = ArtifactDigest(
             name=name,
@@ -319,8 +296,7 @@ class ArtifactStore:
             record_count=len(payload_parts),
             sha256=hashlib.sha256(payload).hexdigest(),
         )
-        artifact_path = self.layout.artifact(stage_path, name)
-        _write_bytes_atomic(artifact_path, payload, layout=self.layout)
+        _write_bytes_atomic_at(stage_fd, digest.path, payload)
 
         by_name = {artifact.name: artifact for artifact in previous.artifacts}
         by_name[name] = digest
@@ -329,67 +305,100 @@ class ArtifactStore:
             stage=stage,
             artifacts=tuple(by_name[key] for key in sorted(by_name)),
         )
-        _write_bytes_atomic(
-            stage_path / "manifest.json",
-            canonical_json(manifest),
-            layout=self.layout,
-        )
+        _write_bytes_atomic_at(stage_fd, "manifest.json", canonical_json(manifest))
         return digest
 
-    def _promote_unlocked(self, run_id: str, stage: str) -> StageManifest:
-        manifest = self.validate_stage(run_id, stage)
-        staging = self.layout.staging_stage(run_id, stage)
-        canonical = self.layout.canonical_stage(run_id, stage)
-        self.layout.ensure_directory(canonical.parent)
-        backup = canonical.parent / f".{stage}.backup-{uuid4().hex}"
-        had_canonical = canonical.exists()
-        if had_canonical:
-            self.layout.require_directory(canonical)
-
-        old_moved = False
-        new_moved = False
+    def _validated_stage_snapshot(
+        self,
+        run_id: str,
+        stage: str,
+        *,
+        canonical: bool,
+    ) -> tuple[StageManifest, dict[str, bytes]]:
+        stage_path = (
+            self.layout.canonical_stage(run_id, stage)
+            if canonical
+            else self.layout.staging_stage(run_id, stage)
+        )
+        location = "canonical" if canonical else "staging"
         try:
-            if had_canonical:
-                _replace(canonical, backup)
-                old_moved = True
-                fsync_directory(canonical.parent)
-            _replace(staging, canonical)
-            new_moved = True
-            fsync_directory(staging.parent)
-            fsync_directory(canonical.parent)
-        except BaseException as error:
-            try:
-                if new_moved and canonical.exists():
-                    _replace(canonical, staging)
-                    fsync_directory(staging.parent)
-                    fsync_directory(canonical.parent)
-                if old_moved and backup.exists():
-                    _replace(backup, canonical)
-                    fsync_directory(canonical.parent)
-            except BaseException as rollback_error:
-                raise ArtifactValidationError(
-                    f"promotion failed and rollback failed for {run_id}/{stage}: {rollback_error}"
-                ) from error
-            raise
-
-        if backup.exists():
-            shutil.rmtree(backup)
-            fsync_directory(canonical.parent)
-        self._prune_empty_staging_parent(staging.parent)
-        return manifest
-
-    def _read_manifest(self, stage_path: Path) -> StageManifest:
-        path = stage_path / "manifest.json"
-        self.layout.assert_safe(path)
-        try:
-            metadata = path.lstat()
-            if stat.S_ISLNK(metadata.st_mode) or not stat.S_ISREG(metadata.st_mode):
-                raise UnsafeStoragePathError(f"stage manifest is not a regular file: {path}")
-            return StageManifest.model_validate_json(path.read_bytes())
+            with _pin_directory(self.layout, stage_path, create=False) as stage_fd:
+                return self._validate_stage_fd(stage_fd, run_id, stage)
         except FileNotFoundError as error:
-            raise ArtifactValidationError(f"stage manifest does not exist: {path}") from error
-        except ValidationError as error:
-            raise ArtifactValidationError(f"stage manifest is invalid: {error}") from error
+            raise ArtifactValidationError(
+                f"{location} stage does not exist or is incomplete: {run_id}/{stage}"
+            ) from error
+
+    def _validate_stage_fd(
+        self,
+        stage_fd: int,
+        run_id: str,
+        stage: str,
+    ) -> tuple[StageManifest, dict[str, bytes]]:
+        manifest = _parse_manifest(_read_regular_at(stage_fd, "manifest.json"))
+        if manifest.run_id != run_id or manifest.stage != stage:
+            raise ArtifactValidationError(
+                f"manifest identity does not match stage {run_id}/{stage}"
+            )
+
+        expected_entries = {"manifest.json", *(artifact.path for artifact in manifest.artifacts)}
+        actual_entries = set(os.listdir(stage_fd))
+        if actual_entries != expected_entries:
+            raise ArtifactValidationError(
+                f"manifest files disagree with stage contents: expected {sorted(expected_entries)}, "
+                f"found {sorted(actual_entries)}"
+            )
+
+        snapshots: dict[str, bytes] = {}
+        for digest in manifest.artifacts:
+            model = self._registered_model(digest.name)
+            expected_model = _qualified_model_name(model)
+            if digest.model != expected_model:
+                raise ArtifactValidationError(
+                    f"artifact {digest.name!r} model is {digest.model!r}, expected {expected_model!r}"
+                )
+            data = _read_regular_at(stage_fd, digest.path)
+            _validate_artifact_bytes(data, digest, model)
+            snapshots[digest.name] = data
+        return manifest, snapshots
+
+    def _promote_unlocked(self, run_id: str, stage: str) -> StageManifest:
+        staging_parent = self.layout.staging_root / run_id
+        try:
+            with _pin_directory(self.layout, staging_parent, create=False) as staging_parent_fd:
+                staging_fd = _open_directory_checked(staging_parent_fd, stage)
+                try:
+                    return self._promote_pinned(
+                        run_id,
+                        stage,
+                        staging_parent_fd=staging_parent_fd,
+                        staging_fd=staging_fd,
+                    )
+                finally:
+                    os.close(staging_fd)
+        except FileNotFoundError as error:
+            raise ArtifactValidationError(
+                f"staging stage does not exist: {run_id}/{stage}"
+            ) from error
+
+    def _promote_pinned(
+        self,
+        run_id: str,
+        stage: str,
+        *,
+        staging_parent_fd: int,
+        staging_fd: int,
+    ) -> StageManifest:
+        manifest, _snapshots = self._validate_stage_fd(staging_fd, run_id, stage)
+        canonical_parent = self.layout.runs_root / run_id
+        with _pin_directory(self.layout, canonical_parent, create=True) as canonical_parent_fd:
+            return _promote_directory(
+                stage,
+                manifest,
+                staging_parent_fd=staging_parent_fd,
+                staging_fd=staging_fd,
+                canonical_parent_fd=canonical_parent_fd,
+            )
 
     def _registered_model(self, name: str) -> type[BaseModel]:
         validate_storage_name(name, label="artifact name")
@@ -398,68 +407,23 @@ class ArtifactStore:
         except KeyError as error:
             raise ModelRegistryError(f"unknown artifact name: {name!r}") from error
 
-    def _validate_artifact(
-        self,
-        path: Path,
-        digest: ArtifactDigest,
-        model: type[BaseModel],
-    ) -> None:
-        self.layout.assert_safe(path)
-        try:
-            metadata = path.lstat()
-        except FileNotFoundError as error:
-            raise ArtifactValidationError(f"artifact is missing: {path}") from error
-        if stat.S_ISLNK(metadata.st_mode):
-            raise UnsafeStoragePathError(f"managed artifact is a symlink: {path}")
-        if not stat.S_ISREG(metadata.st_mode):
-            raise ArtifactValidationError(f"artifact is not a regular file: {path}")
-        data = path.read_bytes()
-        if hashlib.sha256(data).hexdigest() != digest.sha256:
-            raise ArtifactValidationError(f"artifact digest does not match manifest: {digest.name}")
-        lines = _record_lines(data, artifact_name=digest.name)
-        if len(lines) != digest.record_count:
-            raise ArtifactValidationError(f"artifact record count does not match: {digest.name}")
-        for index, line in enumerate(lines, start=1):
-            try:
-                record = model.model_validate_json(line)
-            except ValidationError as error:
-                raise ArtifactValidationError(
-                    f"artifact {digest.name!r} line {index} is invalid: {error}"
-                ) from error
-            if canonical_json(record) != line:
-                raise ArtifactValidationError(
-                    f"artifact {digest.name!r} line {index} is not canonical JSON"
-                )
-
     @contextmanager
     def _writer_guard(self, run_id: str, stage: str) -> Generator[None, None, None]:
         validate_storage_name(run_id, label="run ID")
         validate_storage_name(stage, label="stage")
-        key = (self.root, run_id, stage)
-        with _ACTIVE_WRITERS_LOCK:
-            if key in _ACTIVE_WRITERS:
-                raise WriterConflictError(f"writer already active for {run_id}/{stage}")
-            _ACTIVE_WRITERS.add(key)
-        try:
-            yield
-        finally:
-            with _ACTIVE_WRITERS_LOCK:
-                _ACTIVE_WRITERS.remove(key)
-
-    def _remove_staging_stage(self, stage_path: Path) -> None:
-        if not stage_path.exists():
-            return
-        self.layout.require_directory(stage_path)
-        shutil.rmtree(stage_path)
-        fsync_directory(stage_path.parent)
-        self._prune_empty_staging_parent(stage_path.parent)
-
-    def _prune_empty_staging_parent(self, run_staging: Path) -> None:
-        try:
-            run_staging.rmdir()
-        except OSError:
-            return
-        fsync_directory(run_staging.parent)
+        with _pin_directory(self.layout, self.layout.staging_root, create=True) as lock_fd:
+            try:
+                fcntl.flock(lock_fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            except OSError as error:
+                if error.errno in (errno.EACCES, errno.EAGAIN):
+                    raise WriterConflictError(
+                        f"writer already active for {run_id}/{stage}"
+                    ) from error
+                raise
+            try:
+                yield
+            finally:
+                fcntl.flock(lock_fd, fcntl.LOCK_UN)
 
 
 class _StageWriter:
@@ -483,6 +447,36 @@ def _qualified_model_name(model: type[BaseModel]) -> str:
     return f"{model.__module__}.{model.__qualname__}"
 
 
+def _parse_manifest(data: bytes) -> StageManifest:
+    try:
+        return StageManifest.model_validate_json(data)
+    except ValidationError as error:
+        raise ArtifactValidationError(f"stage manifest is invalid: {error}") from error
+
+
+def _validate_artifact_bytes(
+    data: bytes,
+    digest: ArtifactDigest,
+    model: type[BaseModel],
+) -> None:
+    if hashlib.sha256(data).hexdigest() != digest.sha256:
+        raise ArtifactValidationError(f"artifact digest does not match manifest: {digest.name}")
+    lines = _record_lines(data, artifact_name=digest.name)
+    if len(lines) != digest.record_count:
+        raise ArtifactValidationError(f"artifact record count does not match: {digest.name}")
+    for index, line in enumerate(lines, start=1):
+        try:
+            record = model.model_validate_json(line)
+        except ValidationError as error:
+            raise ArtifactValidationError(
+                f"artifact {digest.name!r} line {index} is invalid: {error}"
+            ) from error
+        if canonical_json(record) != line:
+            raise ArtifactValidationError(
+                f"artifact {digest.name!r} line {index} is not canonical JSON"
+            )
+
+
 def _record_lines(data: bytes, *, artifact_name: str) -> tuple[bytes, ...]:
     if not data:
         return ()
@@ -494,36 +488,127 @@ def _record_lines(data: bytes, *, artifact_name: str) -> tuple[bytes, ...]:
     return lines
 
 
-def _write_bytes_atomic(path: Path, payload: bytes, *, layout: StateLayout) -> None:
-    layout.assert_safe(path)
-    layout.ensure_directory(path.parent)
-    if path.exists() or path.is_symlink():
-        layout.assert_safe(path)
-        metadata = path.lstat()
-        if stat.S_ISLNK(metadata.st_mode):
-            raise UnsafeStoragePathError(f"managed artifact is a symlink: {path}")
-        if not stat.S_ISREG(metadata.st_mode):
-            raise UnsafeStoragePathError(f"managed artifact is not a regular file: {path}")
-    temporary = path.parent / f".{path.name}.tmp-{uuid4().hex}"
+@contextmanager
+def _pin_directory(
+    layout: StateLayout,
+    path: Path,
+    *,
+    create: bool,
+) -> Generator[int, None, None]:
+    try:
+        relative = path.relative_to(layout.root)
+    except ValueError as error:
+        raise UnsafeStoragePathError(f"managed path escapes state root: {path}") from error
+
+    flags = os.O_RDONLY | getattr(os, "O_DIRECTORY", 0) | getattr(os, "O_NOFOLLOW", 0)
+    descriptor = os.open(layout.root, flags)
+    try:
+        for component in relative.parts:
+            try:
+                child = _open_directory_at(descriptor, component)
+            except FileNotFoundError:
+                if not create:
+                    raise
+                try:
+                    os.mkdir(component, mode=0o700, dir_fd=descriptor)
+                    os.fsync(descriptor)
+                except FileExistsError:
+                    pass
+                child = _open_directory_checked(descriptor, component)
+            except OSError as error:
+                raise _unsafe_component(path, component, error) from error
+            os.close(descriptor)
+            descriptor = child
+        yield descriptor
+    finally:
+        os.close(descriptor)
+
+
+def _open_directory_at(directory_fd: int, name: str) -> int:
+    return os.open(
+        name,
+        os.O_RDONLY | getattr(os, "O_DIRECTORY", 0) | getattr(os, "O_NOFOLLOW", 0),
+        dir_fd=directory_fd,
+    )
+
+
+def _open_directory_checked(directory_fd: int, name: str) -> int:
+    try:
+        return _open_directory_at(directory_fd, name)
+    except OSError as error:
+        if isinstance(error, FileNotFoundError):
+            raise
+        raise UnsafeStoragePathError(f"managed directory is unsafe or a symlink: {name}") from error
+
+
+def _open_regular_at(
+    directory_fd: int,
+    name: str,
+    flags: int,
+    mode: int = 0o600,
+) -> int:
     descriptor = os.open(
+        name,
+        flags | getattr(os, "O_NOFOLLOW", 0),
+        mode,
+        dir_fd=directory_fd,
+    )
+    metadata = os.fstat(descriptor)
+    if not stat.S_ISREG(metadata.st_mode):
+        os.close(descriptor)
+        raise UnsafeStoragePathError(f"managed artifact is not a regular file: {name}")
+    return descriptor
+
+
+def _read_regular_at(directory_fd: int, name: str) -> bytes:
+    try:
+        descriptor = _open_regular_at(directory_fd, name, os.O_RDONLY)
+    except OSError as error:
+        raise UnsafeStoragePathError(
+            f"managed artifact is unsafe, missing, or a symlink: {name}"
+        ) from error
+    try:
+        chunks: list[bytes] = []
+        while True:
+            chunk = os.read(descriptor, 1024 * 1024)
+            if not chunk:
+                return b"".join(chunks)
+            chunks.append(chunk)
+    finally:
+        os.close(descriptor)
+
+
+def _write_bytes_atomic_at(directory_fd: int, name: str, payload: bytes) -> None:
+    existing = _stat_at(directory_fd, name)
+    if existing is not None:
+        if stat.S_ISLNK(existing.st_mode) or not stat.S_ISREG(existing.st_mode):
+            raise UnsafeStoragePathError(f"managed artifact is not a regular file: {name}")
+
+    temporary = f".{name}.tmp-{uuid4().hex}"
+    descriptor = _open_regular_at(
+        directory_fd,
         temporary,
-        os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_NOFOLLOW", 0),
-        0o600,
+        os.O_WRONLY | os.O_CREAT | os.O_EXCL,
     )
     try:
         _write_all(descriptor, payload)
         os.fsync(descriptor)
     except BaseException:
         os.close(descriptor)
-        temporary.unlink(missing_ok=True)
+        _unlink_at_best_effort(directory_fd, temporary)
         raise
     else:
         os.close(descriptor)
     try:
-        _replace(temporary, path)
-        fsync_directory(path.parent)
+        _replace_at(
+            temporary,
+            name,
+            source_dir_fd=directory_fd,
+            destination_dir_fd=directory_fd,
+        )
+        os.fsync(directory_fd)
     except BaseException:
-        temporary.unlink(missing_ok=True)
+        _unlink_at_best_effort(directory_fd, temporary)
         raise
 
 
@@ -538,3 +623,279 @@ def _write_all(descriptor: int, payload: bytes) -> None:
         if count <= 0:
             raise OSError("write returned no progress")
         written += count
+
+
+def _replace_at(
+    source: str,
+    destination: str,
+    *,
+    source_dir_fd: int,
+    destination_dir_fd: int,
+) -> None:
+    os.replace(
+        source,
+        destination,
+        src_dir_fd=source_dir_fd,
+        dst_dir_fd=destination_dir_fd,
+    )
+
+
+def _promotion_fsync(directory_fd: int, *, step: str) -> None:
+    del step
+    os.fsync(directory_fd)
+
+
+def _promote_directory(
+    stage: str,
+    manifest: StageManifest,
+    *,
+    staging_parent_fd: int,
+    staging_fd: int,
+    canonical_parent_fd: int,
+) -> StageManifest:
+    canonical_entry = _stat_at(canonical_parent_fd, stage)
+    if canonical_entry is not None and (
+        stat.S_ISLNK(canonical_entry.st_mode) or not stat.S_ISDIR(canonical_entry.st_mode)
+    ):
+        raise UnsafeStoragePathError(f"canonical stage is unsafe or a symlink: {stage}")
+
+    backup_name = f".{stage}.backup-{uuid4().hex}"
+    recovery_name = f".{stage}.recovery-{uuid4().hex}"
+    failed_name = f".{stage}.failed-{uuid4().hex}"
+    had_canonical = canonical_entry is not None
+    if had_canonical:
+        canonical_fd = _open_directory_checked(canonical_parent_fd, stage)
+        try:
+            _copy_tree_at(canonical_fd, canonical_parent_fd, recovery_name)
+        finally:
+            os.close(canonical_fd)
+
+    old_moved = False
+    new_moved = False
+    committed = False
+    try:
+        if had_canonical:
+            _replace_at(
+                stage,
+                backup_name,
+                source_dir_fd=canonical_parent_fd,
+                destination_dir_fd=canonical_parent_fd,
+            )
+            old_moved = True
+            _promotion_fsync(canonical_parent_fd, step="old-to-backup-parent")
+
+        _replace_at(
+            stage,
+            stage,
+            source_dir_fd=staging_parent_fd,
+            destination_dir_fd=canonical_parent_fd,
+        )
+        new_moved = True
+        moved_metadata = _stat_at(canonical_parent_fd, stage)
+        pinned_metadata = os.fstat(staging_fd)
+        if moved_metadata is None or (
+            moved_metadata.st_dev,
+            moved_metadata.st_ino,
+        ) != (pinned_metadata.st_dev, pinned_metadata.st_ino):
+            raise UnsafeStoragePathError("promoted stage does not match the validated directory")
+        _promotion_fsync(staging_parent_fd, step="commit-staging-parent")
+        _promotion_fsync(canonical_parent_fd, step="commit-canonical-parent")
+        committed = True
+    except BaseException as error:
+        try:
+            _rollback_promotion(
+                stage,
+                backup_name=backup_name,
+                recovery_name=recovery_name,
+                failed_name=failed_name,
+                had_canonical=had_canonical,
+                old_moved=old_moved,
+                new_moved=new_moved,
+                staging_parent_fd=staging_parent_fd,
+                canonical_parent_fd=canonical_parent_fd,
+            )
+        except BaseException as rollback_error:
+            raise ArtifactValidationError(
+                f"promotion failed and rollback failed for {manifest.run_id}/{stage}: "
+                f"{rollback_error}"
+            ) from error
+        raise
+
+    if committed:
+        _cleanup_after_commit(canonical_parent_fd, backup_name, recovery_name, failed_name)
+    return manifest
+
+
+def _rollback_promotion(
+    stage: str,
+    *,
+    backup_name: str,
+    recovery_name: str,
+    failed_name: str,
+    had_canonical: bool,
+    old_moved: bool,
+    new_moved: bool,
+    staging_parent_fd: int,
+    canonical_parent_fd: int,
+) -> None:
+    if new_moved:
+        try:
+            _replace_at(
+                stage,
+                stage,
+                source_dir_fd=canonical_parent_fd,
+                destination_dir_fd=staging_parent_fd,
+            )
+        except BaseException:
+            try:
+                _replace_at(
+                    stage,
+                    failed_name,
+                    source_dir_fd=canonical_parent_fd,
+                    destination_dir_fd=canonical_parent_fd,
+                )
+            except BaseException:
+                _cleanup_tree_at(canonical_parent_fd, stage)
+        _promotion_fsync(staging_parent_fd, step="rollback-staging-parent")
+
+    if had_canonical and old_moved:
+        try:
+            _replace_at(
+                backup_name,
+                stage,
+                source_dir_fd=canonical_parent_fd,
+                destination_dir_fd=canonical_parent_fd,
+            )
+        except BaseException:
+            _replace_at(
+                recovery_name,
+                stage,
+                source_dir_fd=canonical_parent_fd,
+                destination_dir_fd=canonical_parent_fd,
+            )
+        _promotion_fsync(canonical_parent_fd, step="rollback-canonical-parent")
+    elif not had_canonical:
+        entry = _stat_at(canonical_parent_fd, stage)
+        if entry is not None:
+            _cleanup_tree_at(canonical_parent_fd, stage)
+            _promotion_fsync(canonical_parent_fd, step="rollback-empty-canonical-parent")
+
+    _cleanup_after_commit(canonical_parent_fd, backup_name, recovery_name, failed_name)
+
+
+def _copy_tree_at(source_fd: int, destination_parent_fd: int, destination: str) -> None:
+    os.mkdir(destination, mode=0o700, dir_fd=destination_parent_fd)
+    destination_fd = -1
+    try:
+        destination_fd = _open_directory_checked(destination_parent_fd, destination)
+        _copy_directory_contents(source_fd, destination_fd)
+        os.fsync(destination_fd)
+        os.fsync(destination_parent_fd)
+    except BaseException:
+        if destination_fd >= 0:
+            os.close(destination_fd)
+            destination_fd = -1
+        try:
+            _cleanup_tree_at(destination_parent_fd, destination)
+        except Exception:
+            pass
+        raise
+    finally:
+        if destination_fd >= 0:
+            os.close(destination_fd)
+
+
+def _copy_directory_contents(source_fd: int, destination_fd: int) -> None:
+    for name in sorted(os.listdir(source_fd)):
+        metadata = os.stat(name, dir_fd=source_fd, follow_symlinks=False)
+        if stat.S_ISREG(metadata.st_mode):
+            source_file = _open_regular_at(source_fd, name, os.O_RDONLY)
+            destination_file = _open_regular_at(
+                destination_fd,
+                name,
+                os.O_WRONLY | os.O_CREAT | os.O_EXCL,
+                metadata.st_mode & 0o777,
+            )
+            try:
+                while True:
+                    chunk = os.read(source_file, 1024 * 1024)
+                    if not chunk:
+                        break
+                    _write_all(destination_file, chunk)
+                os.fsync(destination_file)
+            finally:
+                os.close(source_file)
+                os.close(destination_file)
+        elif stat.S_ISDIR(metadata.st_mode):
+            os.mkdir(name, mode=metadata.st_mode & 0o777, dir_fd=destination_fd)
+            source_child = _open_directory_checked(source_fd, name)
+            destination_child = _open_directory_checked(destination_fd, name)
+            try:
+                _copy_directory_contents(source_child, destination_child)
+                os.fsync(destination_child)
+            finally:
+                os.close(source_child)
+                os.close(destination_child)
+        else:
+            raise UnsafeStoragePathError(f"canonical stage contains an unsafe entry: {name}")
+
+
+def _cleanup_tree_at(parent_fd: int, name: str) -> None:
+    metadata = _stat_at(parent_fd, name)
+    if metadata is None:
+        return
+    if not stat.S_ISDIR(metadata.st_mode) or stat.S_ISLNK(metadata.st_mode):
+        raise UnsafeStoragePathError(f"cleanup target is not a safe directory: {name}")
+    directory_fd = _open_directory_checked(parent_fd, name)
+    try:
+        for entry in os.listdir(directory_fd):
+            child = os.stat(entry, dir_fd=directory_fd, follow_symlinks=False)
+            if stat.S_ISDIR(child.st_mode) and not stat.S_ISLNK(child.st_mode):
+                _cleanup_tree_at(directory_fd, entry)
+            else:
+                os.unlink(entry, dir_fd=directory_fd)
+        os.fsync(directory_fd)
+    finally:
+        os.close(directory_fd)
+    os.rmdir(name, dir_fd=parent_fd)
+    os.fsync(parent_fd)
+
+
+def _cleanup_after_commit(parent_fd: int, *names: str) -> None:
+    for name in names:
+        try:
+            _cleanup_tree_at(parent_fd, name)
+        except Exception:
+            pass
+
+
+def _remove_owned_stage(parent_fd: int, name: str, stage_fd: int) -> None:
+    entry = _stat_at(parent_fd, name)
+    if entry is None:
+        return
+    if stage_fd >= 0:
+        pinned = os.fstat(stage_fd)
+        if (entry.st_dev, entry.st_ino) != (pinned.st_dev, pinned.st_ino):
+            raise UnsafeStoragePathError("staging path changed while the writer owned it")
+    _cleanup_tree_at(parent_fd, name)
+
+
+def _stat_at(directory_fd: int, name: str) -> os.stat_result | None:
+    try:
+        return os.stat(name, dir_fd=directory_fd, follow_symlinks=False)
+    except FileNotFoundError:
+        return None
+
+
+def _unlink_at_best_effort(directory_fd: int, name: str) -> None:
+    try:
+        os.unlink(name, dir_fd=directory_fd)
+        os.fsync(directory_fd)
+    except FileNotFoundError:
+        pass
+
+
+def _unsafe_component(path: Path, component: str, error: OSError) -> UnsafeStoragePathError:
+    return UnsafeStoragePathError(
+        f"managed path contains an unsafe or symlinked component {component!r}: {path}"
+    )

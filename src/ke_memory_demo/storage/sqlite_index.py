@@ -6,6 +6,7 @@ import hashlib
 import os
 from pathlib import Path
 import sqlite3
+import stat
 from types import MappingProxyType
 from typing import Literal, TypeVar, cast
 from uuid import uuid4
@@ -95,56 +96,17 @@ class MemoryIndex:
 
         self.db_path.parent.mkdir(parents=True, exist_ok=True)
         temporary = self.db_path.parent / f".{self.db_path.name}.tmp-{uuid4().hex}"
-        connection: sqlite3.Connection | None = None
-        integrity_result: tuple[str, ...] = ()
-        build_completed = False
         try:
-            connection = sqlite3.connect(temporary)
-            connection.execute("PRAGMA foreign_keys = ON")
-            connection.execute("PRAGMA journal_mode = DELETE")
-            connection.execute("PRAGMA synchronous = FULL")
-            _create_schema(connection)
-            connection.execute("BEGIN IMMEDIATE")
-            try:
-                _insert_all(connection, ordered_exchanges, ordered_kes, ordered_aggregates)
-                connection.commit()
-            except BaseException:
-                connection.rollback()
-                raise
-            _create_lookup_indexes(connection)
-
-            foreign_key_violations = connection.execute("PRAGMA foreign_key_check").fetchall()
-            if foreign_key_violations:
-                raise IndexBuildError(
-                    f"index rebuild failed foreign-key validation: {foreign_key_violations!r}"
-                )
-            integrity_result = _run_integrity_check(connection)
-            if integrity_result != ("ok",):
-                raise IndexBuildError(
-                    f"index integrity check did not return exactly 'ok': {integrity_result!r}"
-                )
-            stats = _read_stats(connection, integrity_result="ok")
-            build_completed = True
-        except IndexBuildError:
+            stats = _build_temporary_database(
+                temporary,
+                ordered_exchanges,
+                ordered_kes,
+                ordered_aggregates,
+            )
+            _install_cache(temporary, self.db_path)
+        except BaseException:
+            _remove_temporary_database(temporary)
             raise
-        except (OSError, sqlite3.Error, TypeError, ValueError) as error:
-            raise IndexBuildError(f"index rebuild failed: {error}") from error
-        finally:
-            if connection is not None:
-                connection.close()
-            if not build_completed:
-                _remove_temporary_database(temporary)
-
-        try:
-            _fsync_file(temporary)
-            fsync_directory(temporary.parent)
-            _replace(temporary, self.db_path)
-            fsync_directory(self.db_path.parent)
-        except OSError as error:
-            _remove_temporary_database(temporary)
-            raise IndexBuildError(f"cache replace failed: {error}") from error
-        finally:
-            _remove_temporary_database(temporary)
         return stats
 
     def ordered_exchange_ids(self) -> tuple[str, ...]:
@@ -732,6 +694,121 @@ def _fsync_file(path: Path) -> None:
         os.fsync(descriptor)
     finally:
         os.close(descriptor)
+
+
+def _build_temporary_database(
+    path: Path,
+    exchanges: tuple[Exchange, ...],
+    knowledge_equations: tuple[KnowledgeEquation, ...],
+    aggregates: tuple[AggregateNode, ...],
+) -> IndexStats:
+    try:
+        connection = sqlite3.connect(path)
+    except (OSError, sqlite3.Error) as error:
+        raise IndexBuildError(f"index rebuild failed: {error}") from error
+
+    try:
+        try:
+            connection.execute("PRAGMA foreign_keys = ON")
+            connection.execute("PRAGMA journal_mode = DELETE")
+            connection.execute("PRAGMA synchronous = FULL")
+            _create_schema(connection)
+            connection.execute("BEGIN IMMEDIATE")
+            try:
+                _insert_all(connection, exchanges, knowledge_equations, aggregates)
+                connection.commit()
+            except BaseException:
+                connection.rollback()
+                raise
+            _create_lookup_indexes(connection)
+
+            foreign_key_violations = connection.execute("PRAGMA foreign_key_check").fetchall()
+            if foreign_key_violations:
+                raise IndexBuildError(
+                    f"index rebuild failed foreign-key validation: {foreign_key_violations!r}"
+                )
+            integrity_result = _run_integrity_check(connection)
+            if integrity_result != ("ok",):
+                raise IndexBuildError(
+                    f"index integrity check did not return exactly 'ok': {integrity_result!r}"
+                )
+            return _read_stats(connection, integrity_result="ok")
+        except IndexBuildError:
+            raise
+        except (OSError, sqlite3.Error, TypeError, ValueError) as error:
+            raise IndexBuildError(f"index rebuild failed: {error}") from error
+    finally:
+        try:
+            _close_connection(connection)
+        except (OSError, sqlite3.Error) as error:
+            raise IndexBuildError(f"index connection close failed: {error}") from error
+
+
+def _close_connection(connection: sqlite3.Connection) -> None:
+    connection.close()
+
+
+def _install_cache(temporary: Path, destination: Path) -> None:
+    backup = destination.parent / f".{destination.name}.backup-{uuid4().hex}"
+    prior_metadata: os.stat_result | None
+    try:
+        prior_metadata = destination.lstat()
+    except FileNotFoundError:
+        prior_metadata = None
+    if prior_metadata is not None and not stat.S_ISREG(prior_metadata.st_mode):
+        raise IndexBuildError(f"prior cache is not a regular file: {destination}")
+
+    had_prior = prior_metadata is not None
+    replaced = False
+    committed = False
+    try:
+        _fsync_file(temporary)
+        if had_prior:
+            _fsync_file(destination)
+            os.link(destination, backup, follow_symlinks=False)
+            fsync_directory(destination.parent)
+        _replace(temporary, destination)
+        replaced = True
+        fsync_directory(destination.parent)
+        committed = True
+    except OSError as error:
+        if replaced:
+            _restore_prior_cache(destination, backup, had_prior=had_prior)
+        _cleanup_cache_backup_best_effort(backup)
+        raise IndexBuildError(f"cache replace or fsync failed: {error}") from error
+    finally:
+        _remove_temporary_database(temporary)
+
+    if committed and had_prior:
+        try:
+            _cleanup_cache_backup(backup)
+        except Exception:
+            pass
+
+
+def _restore_prior_cache(destination: Path, backup: Path, *, had_prior: bool) -> None:
+    if had_prior:
+        try:
+            _replace(backup, destination)
+        except OSError:
+            destination.unlink(missing_ok=True)
+            os.link(backup, destination, follow_symlinks=False)
+        fsync_directory(destination.parent)
+        return
+    destination.unlink(missing_ok=True)
+    fsync_directory(destination.parent)
+
+
+def _cleanup_cache_backup(path: Path) -> None:
+    path.unlink(missing_ok=True)
+    fsync_directory(path.parent)
+
+
+def _cleanup_cache_backup_best_effort(path: Path) -> None:
+    try:
+        _cleanup_cache_backup(path)
+    except Exception:
+        pass
 
 
 def _remove_temporary_database(path: Path) -> None:

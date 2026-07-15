@@ -471,6 +471,29 @@ def test_integrity_failure_preserves_prior_cache(
     assert not list(tmp_path.glob(".memory.sqlite3.tmp-*"))
 
 
+def test_connection_close_failure_preserves_prior_cache_and_cleans_temporary_database(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from ke_memory_demo.storage import sqlite_index
+
+    index, _ = _build_index(tmp_path / "memory.sqlite3")
+    original = index.db_path.read_bytes()
+    exchanges, kes, aggregates = _fixture()
+
+    def close_then_fail(connection: sqlite3.Connection) -> None:
+        connection.close()
+        raise sqlite3.OperationalError("injected close failure")
+
+    monkeypatch.setattr(sqlite_index, "_close_connection", close_then_fail, raising=False)
+
+    with pytest.raises(IndexBuildError, match="close"):
+        index.rebuild(exchanges, kes, aggregates)
+
+    assert index.db_path.read_bytes() == original
+    assert not list(tmp_path.glob(".memory.sqlite3.tmp-*"))
+
+
 def test_replace_failure_preserves_prior_cache(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -491,6 +514,64 @@ def test_replace_failure_preserves_prior_cache(
 
     assert index.db_path.read_bytes() == original
     assert not list(tmp_path.glob(".memory.sqlite3.tmp-*"))
+
+
+def test_destination_directory_fsync_failure_restores_prior_cache(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from ke_memory_demo.storage import sqlite_index
+
+    index, _ = _build_index(tmp_path / "memory.sqlite3")
+    original = index.db_path.read_bytes()
+    _, kes, aggregates = _fixture()
+    calls = 0
+    real_fsync_directory = sqlite_index.fsync_directory
+
+    def fail_post_replace_fsync(path: Path) -> None:
+        nonlocal calls
+        if path == tmp_path:
+            calls += 1
+            if calls == 2:
+                raise OSError("injected destination fsync failure")
+        real_fsync_directory(path)
+
+    monkeypatch.setattr(sqlite_index, "fsync_directory", fail_post_replace_fsync)
+
+    with pytest.raises(IndexBuildError, match="fsync|replace"):
+        index.rebuild((_exchanges()[0],), kes, aggregates)
+
+    assert calls >= 2
+    assert index.db_path.read_bytes() == original
+    assert not list(tmp_path.glob(".memory.sqlite3.tmp-*"))
+
+
+def test_prior_cache_backup_cleanup_failure_is_non_failing_after_commit(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from ke_memory_demo.storage import sqlite_index
+
+    index, _ = _build_index(tmp_path / "memory.sqlite3")
+    original = index.db_path.read_bytes()
+    _, kes, aggregates = _fixture()
+    attempted: list[Path] = []
+
+    def fail_backup_cleanup(path: Path) -> None:
+        attempted.append(path)
+        raise RuntimeError("injected cache backup cleanup failure")
+
+    monkeypatch.setattr(
+        sqlite_index,
+        "_cleanup_cache_backup",
+        fail_backup_cleanup,
+        raising=False,
+    )
+
+    index.rebuild((_exchanges()[0],), kes, aggregates)
+
+    assert attempted
+    assert index.db_path.read_bytes() != original
 
 
 def test_lookup_requires_an_existing_cache(tmp_path: Path) -> None:

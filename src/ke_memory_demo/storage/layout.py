@@ -22,7 +22,7 @@ class UnsafeStoragePathError(StorageError):
 
 
 def validate_storage_name(value: str, *, label: str) -> str:
-    if _PORTABLE_NAME.fullmatch(value) is None:
+    if _PORTABLE_NAME.fullmatch(value) is None or ".." in value:
         raise InvalidStorageNameError(
             f"{label} must use nonempty ASCII letters, digits, '.', '_', or '-', "
             "and must not start with '.'"
