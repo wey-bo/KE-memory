@@ -25,25 +25,80 @@ def unset_live_environment(monkeypatch: pytest.MonkeyPatch) -> None:
 
 def test_settings_keep_secret_values_out_of_toml(project_root: Path):
     settings = load_settings(project_root)
-    assert settings.work.model == "gpt-5.4"
     assert settings.work.api_key_env == "KE_MEMORY_WORK_API_KEY"
-    assert settings.embedding.dimension == 1024
+    assert settings.judge.api_key_env == "KE_MEMORY_JUDGE_API_KEY"
+    assert settings.embedding.local_path_env == "KE_MEMORY_EMBEDDING_PATH"
     assert "sk-" not in (project_root / "config/models.toml").read_text()
 
 
-def test_settings_load_all_exact_experiment_and_es_values(project_root: Path):
+def test_settings_load_all_exact_model_values(project_root: Path):
     settings = load_settings(project_root)
 
-    assert settings.dataset.archive_path == Path("/public/home/wwb/datasets/BEAM.zip")
-    assert settings.dataset.selected_directories == (4, 15, 17)
-    assert settings.dataset.expected_sessions == 13
-    assert settings.dataset.expected_exchanges == 385
-    assert settings.dataset.expected_questions == 60
-    assert settings.retrieval.evidence_budget_tokens == 8192
-    assert settings.retrieval.answer_max_output_tokens == 1024
-    assert settings.aggregation.max_semantic_depth == 2
-    assert settings.es.fields.canonical == "term"
-    assert settings.es.roles.operator == ("operator", "relation", "predicate", "action")
+    assert settings.work.model_dump() == {
+        "model": "gpt-5.4",
+        "base_url": "https://api.penguinsaichat.dpdns.org/v1",
+        "api_key_env": "KE_MEMORY_WORK_API_KEY",
+        "temperature": 0.0,
+        "max_output_tokens": 4096,
+    }
+    assert settings.judge.model_dump() == {
+        "model": "deepseek-v4-pro",
+        "base_url": "https://api.deepseek.com/v1",
+        "api_key_env": "KE_MEMORY_JUDGE_API_KEY",
+        "temperature": 0.0,
+        "max_output_tokens": 2048,
+    }
+    assert settings.embedding.model_dump() == {
+        "model": "Qwen/Qwen3-Embedding-0.6B",
+        "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+        "local_path_env": "KE_MEMORY_EMBEDDING_PATH",
+        "dimension": 1024,
+        "chunk_tokens": 1024,
+        "overlap_tokens": 128,
+        "local_files_only": True,
+    }
+
+
+def test_settings_load_all_exact_experiment_values(project_root: Path):
+    settings = load_settings(project_root)
+
+    assert settings.dataset.model_dump() == {
+        "archive_path": Path("/public/home/wwb/datasets/BEAM.zip"),
+        "archive_sha256": "690106a93ab88dac46e8fef1e84884acc889518424240f57a47428d3efbe6346",
+        "selected_directories": (4, 15, 17),
+        "expected_sessions": 13,
+        "expected_exchanges": 385,
+        "expected_questions": 60,
+    }
+    assert settings.retrieval.model_dump() == {
+        "evidence_budget_tokens": 8192,
+        "answer_max_output_tokens": 1024,
+    }
+    assert settings.aggregation.model_dump() == {"max_semantic_depth": 2}
+
+
+def test_settings_load_all_exact_elasticsearch_values(project_root: Path):
+    settings = load_settings(project_root)
+
+    assert settings.es.model_dump() == {
+        "endpoint_env": "KE_MEMORY_ES_URL",
+        "index_env": "KE_MEMORY_ES_INDEX",
+        "api_key_env": "KE_MEMORY_ES_API_KEY",
+        "request_timeout_seconds": 30.0,
+        "fields": {
+            "canonical": "term",
+            "type": "type",
+            "aliases": "aliases",
+            "relations": "relations",
+            "relation_type": "type",
+            "relation_target_id": "target_id",
+        },
+        "roles": {
+            "concept": ("concept", "class", "entity_type"),
+            "individual": ("individual", "instance", "entity"),
+            "operator": ("operator", "relation", "predicate", "action"),
+        },
+    }
 
 
 def test_load_settings_does_not_require_live_environment(project_root: Path):
