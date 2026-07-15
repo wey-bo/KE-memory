@@ -33,8 +33,8 @@ def _normalize_json(value: object) -> JsonValue:
         if not math.isfinite(value):
             raise ValueError("canonical JSON does not support NaN or infinity")
         return value
-    if isinstance(value, list | tuple):
-        sequence = cast(list[object] | tuple[object, ...], value)
+    if isinstance(value, list):
+        sequence = cast(list[object], value)
         return [_normalize_json(item) for item in sequence]
     if isinstance(value, dict):
         mapping = cast(dict[object, object], value)

@@ -144,6 +144,18 @@ def test_receipt_models_copy_metadata_and_convert_record_ids_to_tuples() -> None
         IngestReceipt.model_validate({**receipt.model_dump(), "source_content_hash": "A" * 64})
 
 
+def test_ingest_receipt_allows_an_empty_system_record_id_tuple() -> None:
+    receipt = IngestReceipt(
+        system_id="fake",
+        namespace="run-1:conversation-1",
+        source_exchange_id="exchange-1",
+        system_record_ids=(),
+        source_content_hash="a" * 64,
+    )
+
+    assert receipt.system_record_ids == ()
+
+
 def test_readiness_receipt_validates_pending_state() -> None:
     ready = ReadinessReceipt(
         system_id="fake",

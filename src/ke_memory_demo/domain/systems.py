@@ -39,7 +39,7 @@ class IngestReceipt(_SystemRecord):
     system_id: NonEmptyString
     namespace: NonEmptyString
     source_exchange_id: NonEmptyString
-    system_record_ids: Annotated[tuple[NonEmptyString, ...], Field(min_length=1)]
+    system_record_ids: tuple[NonEmptyString, ...]
     source_content_hash: Sha256Hex
     metadata: JsonObject = Field(default_factory=dict)
 

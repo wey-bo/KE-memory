@@ -31,26 +31,34 @@ def _message(
     return Message(id=message_id, role=role, content=content, source_order=source_order)
 
 
-def _exchange(exchange_id: str = "exchange-1", global_ordinal: int = 0) -> Exchange:
+def _exchange(
+    exchange_id: str = "exchange-1",
+    global_ordinal: int = 0,
+    *,
+    session_id: str = "session-1",
+    user_id: str = "message-u",
+    assistant_id: str = "message-a",
+    event_ids: tuple[str, str] = ("event-call", "event-result"),
+) -> Exchange:
     return Exchange(
         id=exchange_id,
-        session_id="session-1",
-        user=_message("message-u", MessageRole.USER, "run it", 0),
+        session_id=session_id,
+        user=_message(user_id, MessageRole.USER, "run it", 0),
         events=(
             ToolEvent(
-                id="event-call",
+                id=event_ids[0],
                 kind=ToolEventKind.TOOL_CALL,
                 content='{"name":"run"}',
                 source_order=1,
             ),
             ToolEvent(
-                id="event-result",
+                id=event_ids[1],
                 kind=ToolEventKind.TOOL_RESULT,
                 content='{"ok":true}',
                 source_order=2,
             ),
         ),
-        assistant=_message("message-a", MessageRole.ASSISTANT, "done", 3),
+        assistant=_message(assistant_id, MessageRole.ASSISTANT, "done", 3),
         global_ordinal=global_ordinal,
     )
 
@@ -296,6 +304,107 @@ def test_conversation_validates_session_ownership_and_unique_ids() -> None:
     matching = Session(id="session-1", conversation_id="conversation-1", exchanges=())
     with pytest.raises(ValidationError, match="duplicate session"):
         Conversation(id="conversation-1", sessions=(matching, matching))
+
+
+def test_conversation_requires_global_ordinals_to_increase_across_sessions() -> None:
+    first = _exchange(
+        "exchange-1",
+        global_ordinal=2,
+        session_id="session-1",
+        user_id="message-u-1",
+        assistant_id="message-a-1",
+        event_ids=("event-call-1", "event-result-1"),
+    )
+    second = _exchange(
+        "exchange-2",
+        global_ordinal=1,
+        session_id="session-2",
+        user_id="message-u-2",
+        assistant_id="message-a-2",
+        event_ids=("event-call-2", "event-result-2"),
+    )
+    sessions = (
+        Session(id="session-1", conversation_id="conversation-1", exchanges=(first,)),
+        Session(id="session-2", conversation_id="conversation-1", exchanges=(second,)),
+    )
+
+    with pytest.raises(ValidationError, match="global ordinal order"):
+        Conversation(id="conversation-1", sessions=sessions)
+
+
+def test_conversation_rejects_duplicate_exchange_ids_across_sessions() -> None:
+    first = _exchange(
+        "exchange-shared",
+        global_ordinal=0,
+        session_id="session-1",
+        user_id="message-u-1",
+        assistant_id="message-a-1",
+        event_ids=("event-call-1", "event-result-1"),
+    )
+    second = _exchange(
+        "exchange-shared",
+        global_ordinal=1,
+        session_id="session-2",
+        user_id="message-u-2",
+        assistant_id="message-a-2",
+        event_ids=("event-call-2", "event-result-2"),
+    )
+    sessions = (
+        Session(id="session-1", conversation_id="conversation-1", exchanges=(first,)),
+        Session(id="session-2", conversation_id="conversation-1", exchanges=(second,)),
+    )
+
+    with pytest.raises(ValidationError, match="duplicate exchange"):
+        Conversation(id="conversation-1", sessions=sessions)
+
+
+def test_conversation_rejects_duplicate_message_ids_across_exchanges_and_roles() -> None:
+    first = _exchange(
+        "exchange-1",
+        global_ordinal=0,
+        assistant_id="message-shared",
+        event_ids=("event-call-1", "event-result-1"),
+    )
+    second = _exchange(
+        "exchange-2",
+        global_ordinal=1,
+        user_id="message-shared",
+        assistant_id="message-a-2",
+        event_ids=("event-call-2", "event-result-2"),
+    )
+    session = Session(
+        id="session-1",
+        conversation_id="conversation-1",
+        exchanges=(first, second),
+    )
+
+    with pytest.raises(ValidationError, match="duplicate message"):
+        Conversation(id="conversation-1", sessions=(session,))
+
+
+def test_conversation_rejects_duplicate_tool_event_ids_across_exchanges_and_kinds() -> None:
+    first = _exchange(
+        "exchange-1",
+        global_ordinal=0,
+        user_id="message-u-1",
+        assistant_id="message-a-1",
+        event_ids=("event-shared", "event-result-1"),
+    )
+    second = _exchange(
+        "exchange-2",
+        global_ordinal=1,
+        user_id="message-u-2",
+        assistant_id="message-a-2",
+        event_ids=("event-call-2", "event-shared"),
+    )
+    session = Session(
+        id="session-1",
+        conversation_id="conversation-1",
+        exchanges=(first, second),
+    )
+
+    with pytest.raises(ValidationError, match="duplicate tool event"):
+        Conversation(id="conversation-1", sessions=(session,))
 
 
 def test_conversation_models_reject_extra_fields() -> None:

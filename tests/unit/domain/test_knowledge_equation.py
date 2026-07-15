@@ -176,6 +176,20 @@ def test_canonical_json_rejects_unsupported_values_and_non_string_keys() -> None
         canonical_json(cast(JsonValue, {1: "not-json"}))
 
 
+def test_canonical_json_rejects_a_raw_python_tuple() -> None:
+    with pytest.raises(TypeError, match="tuple"):
+        canonical_json(cast(JsonValue, (1, 2)))
+
+
+def test_canonical_json_serializes_pydantic_tuple_fields_as_json_arrays() -> None:
+    application = _lhs()
+
+    serialized = canonical_json(application)
+
+    assert serialized == canonical_json(application.model_dump(mode="json"))
+    assert b'"arguments":[' in serialized
+
+
 def test_content_id_is_stable_and_rejects_an_empty_prefix() -> None:
     first = content_id("test", {"right": 2, "left": 1})
     second = content_id("test", {"left": 1, "right": 2})

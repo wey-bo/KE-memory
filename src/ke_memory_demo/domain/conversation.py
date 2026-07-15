@@ -145,6 +145,25 @@ class Conversation(_ConversationRecord):
                     f"{session.conversation_id}, not {self.id}"
                 )
         _reject_duplicates(tuple(session.id for session in self.sessions), "session")
+
+        exchanges = tuple(exchange for session in self.sessions for exchange in session.exchanges)
+        global_ordinals = tuple(exchange.global_ordinal for exchange in exchanges)
+        if any(left >= right for left, right in zip(global_ordinals, global_ordinals[1:])):
+            raise ValueError("conversation exchanges must have strict global ordinal order")
+
+        _reject_duplicates(tuple(exchange.id for exchange in exchanges), "exchange")
+        _reject_duplicates(
+            tuple(
+                message.id
+                for exchange in exchanges
+                for message in (exchange.user, exchange.assistant)
+            ),
+            "message",
+        )
+        _reject_duplicates(
+            tuple(event.id for exchange in exchanges for event in exchange.events),
+            "tool event",
+        )
         return self
 
 
