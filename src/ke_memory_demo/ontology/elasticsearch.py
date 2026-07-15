@@ -5,7 +5,7 @@ from dataclasses import dataclass
 import hashlib
 import math
 from types import TracebackType
-from typing import cast
+from typing import NoReturn, cast
 import unicodedata
 from urllib.parse import quote
 
@@ -36,19 +36,32 @@ from .models import (
 )
 
 
-_SCALAR_MAPPING_TYPES = frozenset(
-    {
-        "keyword",
-        "constant_keyword",
-        "wildcard",
-        "text",
-        "match_only_text",
-        "search_as_you_type",
-    }
-)
-_EXACT_BATCH_SIZE = 50
-_LEXICAL_BATCH_SIZE = 100
+_KEYWORD_MAPPING_TYPES = frozenset({"keyword", "constant_keyword", "wildcard"})
+_ANALYZED_MAPPING_TYPES = frozenset({"text", "match_only_text", "search_as_you_type"})
+_SCALAR_MAPPING_TYPES = _KEYWORD_MAPPING_TYPES | _ANALYZED_MAPPING_TYPES
+_MAX_CANDIDATE_FORMS = 16
+_MAX_QUERY_CLAUSES = 100
 _MAX_RESPONSE_SIZE = 100
+
+
+@dataclass(frozen=True)
+class _MappedField:
+    source_path: str
+    keyword_paths: tuple[str, ...]
+    analyzed_paths: tuple[str, ...]
+
+
+@dataclass(frozen=True)
+class _LookupPlan:
+    canonical: _MappedField
+    aliases: _MappedField
+
+    @property
+    def fields(self) -> tuple[_MappedField, _MappedField]:
+        return (self.canonical, self.aliases)
+
+
+_MISSING = object()
 
 
 @dataclass(frozen=True)
@@ -79,6 +92,7 @@ class ElasticsearchVocabulary:
         self._client = client or httpx.AsyncClient(timeout=connection.timeout_seconds)
         self._closed = False
         self._pinned_identity: IndexIdentity | None = None
+        self._lookup_plan: _LookupPlan | None = None
         self._role_by_source_type = self._build_role_map(connection)
 
     @classmethod
@@ -130,10 +144,16 @@ class ElasticsearchVocabulary:
     async def index_identity(self) -> IndexIdentity:
         cat_path = f"/_cat/indices/{self._encoded_index}"
         mapping_path = f"/{self._encoded_index}/_mapping"
-        cat_payload = await self._request("GET", cat_path, params={"format": "json"})
+        cat_before_payload = await self._request("GET", cat_path, params={"format": "json"})
         mapping_payload = await self._request("GET", mapping_path)
-        index_name, index_uuid = self._parse_cat_identity(cat_payload)
-        self._validate_mapping(mapping_payload)
+        cat_after_payload = await self._request("GET", cat_path, params={"format": "json"})
+        before = self._parse_cat_identity(cat_before_payload)
+        after = self._parse_cat_identity(cat_after_payload)
+        if before != after:
+            raise OntologyDriftError("Elasticsearch index identity changed during mapping read")
+        index_name, index_uuid = before
+        self._validate_cat_name(index_name)
+        lookup_plan = self._validate_mapping(mapping_payload, index_name)
         mapping_hash = hashlib.sha256(canonical_json(cast(JsonValue, mapping_payload))).hexdigest()
         identity = IndexIdentity(
             index_name=index_name,
@@ -144,6 +164,7 @@ class ElasticsearchVocabulary:
             self._pinned_identity = identity
         elif identity != self._pinned_identity:
             raise OntologyDriftError("Elasticsearch index identity changed after it was pinned")
+        self._lookup_plan = lookup_plan
         return identity
 
     async def resolve_terms(self, surface_terms: Sequence[str]) -> list[OntologyBinding]:
@@ -154,55 +175,45 @@ class ElasticsearchVocabulary:
 
         unique_surfaces = list(dict.fromkeys(normalized))
         matches: dict[str, _Match | None] = {surface: None for surface in unique_surfaces}
-        ambiguous: set[str] = set()
+        candidate_forms: dict[str, list[str]] = {surface: [] for surface in unique_surfaces}
+        for original, normalized_surface in zip(originals, normalized, strict=True):
+            forms = candidate_forms[normalized_surface]
+            for form in self._candidate_forms(original, normalized_surface):
+                if form not in forms and len(forms) < _MAX_CANDIDATE_FORMS:
+                    forms.append(form)
 
-        for batch in self._batches(unique_surfaces, _EXACT_BATCH_SIZE):
-            payload = await self._request(
+        lookup_plan = self._require_lookup_plan()
+        for surface in unique_surfaces:
+            exact_payload = await self._request(
                 "POST",
                 f"/{self._encoded_index}/_search",
-                json_body=self._exact_query(batch),
+                json_body=self._exact_query(candidate_forms[surface], lookup_plan),
             )
-            candidates = self._parse_search_hits(payload)
-            for surface in batch:
-                exact_matches = self._exact_matches(surface, candidates)
-                selected, is_ambiguous = self._select_exact(exact_matches)
+            candidates = self._parse_search_hits(exact_payload)
+            exact_matches = self._exact_matches(surface, candidates)
+            selected, is_ambiguous = self._select_exact(exact_matches)
+            if is_ambiguous:
+                continue
+            if selected is not None:
                 matches[surface] = selected
-                if is_ambiguous:
-                    ambiguous.add(surface)
+                continue
 
-        unresolved = [
-            surface
-            for surface in unique_surfaces
-            if matches[surface] is None and surface not in ambiguous
-        ]
-        for batch in self._batches(unresolved, _LEXICAL_BATCH_SIZE):
-            payload = await self._request(
+            lexical_payload = await self._request(
                 "POST",
                 f"/{self._encoded_index}/_search",
-                json_body=self._lexical_query(batch),
+                json_body=self._lexical_query(surface, lookup_plan),
             )
-            candidates = self._parse_search_hits(payload)
-            for index, surface in enumerate(batch):
-                query_name = f"lexical_{index}"
-                applicable: list[_Match] = []
-                for candidate in candidates:
-                    if candidate.matched_queries is None:
-                        if len(batch) != 1:
-                            raise OntologySchemaError(
-                                "lexical search hit is missing matched_queries"
-                            )
-                    elif query_name not in candidate.matched_queries:
-                        continue
-                    applicable.append(_Match(candidate=candidate, match_kind=2, matched_alias=None))
-                if applicable:
-                    matches[surface] = min(
-                        applicable,
-                        key=lambda match: (
-                            match.match_kind,
-                            -match.candidate.score,
-                            match.candidate.term.document_id,
-                        ),
-                    )
+            lexical_candidates = self._parse_search_hits(lexical_payload)
+            if lexical_candidates:
+                candidate = min(
+                    lexical_candidates,
+                    key=lambda item: (-item.score, item.term.document_id),
+                )
+                matches[surface] = _Match(
+                    candidate=candidate,
+                    match_kind=2,
+                    matched_alias=None,
+                )
 
         return [
             self._binding_for(surface, normalized_surface, matches[normalized_surface])
@@ -333,17 +344,36 @@ class ElasticsearchVocabulary:
             self._require_non_empty_string(item.get("uuid"), "index identity UUID"),
         )
 
-    def _validate_mapping(self, payload: object) -> None:
+    def _validate_cat_name(self, index_name: str) -> None:
+        if index_name != self._connection.index:
+            self._raise_identity_name_mismatch("CAT index name does not match the configured index")
+
+    def _raise_identity_name_mismatch(self, message: str) -> NoReturn:
+        if self._pinned_identity is not None:
+            raise OntologyDriftError("Elasticsearch index identity changed after it was pinned")
+        raise OntologySchemaError(message)
+
+    def _validate_mapping(
+        self,
+        payload: object,
+        cat_index_name: str,
+    ) -> _LookupPlan:
         root = self._require_object(payload, "mapping response")
         if len(root) != 1:
             raise OntologySchemaError("mapping response must contain exactly one index")
-        index_mapping = self._require_object(next(iter(root.values())), "index mapping")
+        mapping_index_name, raw_index_mapping = next(iter(root.items()))
+        if mapping_index_name != self._connection.index or mapping_index_name != cat_index_name:
+            self._raise_identity_name_mismatch(
+                "mapping index name does not match the configured and CAT index"
+            )
+        index_mapping = self._require_object(raw_index_mapping, "index mapping")
         mappings = self._require_object(index_mapping.get("mappings"), "mappings")
         properties = self._require_object(mappings.get("properties"), "mapping properties")
 
         fields = self._connection.fields
-        for path in (fields.canonical, fields.type, fields.aliases):
-            self._require_scalar_mapping(properties, path)
+        canonical = self._mapped_field(properties, fields.canonical)
+        self._require_scalar_mapping(properties, fields.type)
+        aliases = self._mapped_field(properties, fields.aliases)
 
         relation_mapping = self._find_mapping(properties, fields.relations)
         relation_type = relation_mapping.get("type", "object")
@@ -357,16 +387,51 @@ class ElasticsearchVocabulary:
         )
         self._require_scalar_mapping(relation_properties, fields.relation_type)
         self._require_scalar_mapping(relation_properties, fields.relation_target_id)
+        return _LookupPlan(canonical=canonical, aliases=aliases)
 
     def _require_scalar_mapping(
         self,
         properties: Mapping[str, object],
         path: str,
-    ) -> None:
+    ) -> dict[str, object]:
         mapping = self._find_mapping(properties, path)
         mapping_type = mapping.get("type")
         if mapping_type not in _SCALAR_MAPPING_TYPES:
             raise OntologySchemaError(f"mapping field {path!r} must have a scalar text type")
+        return mapping
+
+    def _mapped_field(
+        self,
+        properties: Mapping[str, object],
+        path: str,
+    ) -> _MappedField:
+        mapping = self._require_scalar_mapping(properties, path)
+        mapping_type = cast(str, mapping["type"])
+        keyword_paths: list[str] = []
+        analyzed_paths: list[str] = []
+        if mapping_type in _KEYWORD_MAPPING_TYPES:
+            keyword_paths.append(path)
+        else:
+            analyzed_paths.append(path)
+            raw_multifields = mapping.get("fields")
+            if raw_multifields is not None:
+                multifields = self._require_object(
+                    raw_multifields,
+                    f"mapping field {path!r} multifields",
+                )
+                for name in sorted(multifields):
+                    multifield = self._require_object(
+                        multifields[name],
+                        f"mapping field {path!r}.{name}",
+                    )
+                    if multifield.get("type") in _KEYWORD_MAPPING_TYPES:
+                        keyword_paths.append(f"{path}.{name}")
+                        break
+        return _MappedField(
+            source_path=path,
+            keyword_paths=tuple(keyword_paths),
+            analyzed_paths=tuple(analyzed_paths),
+        )
 
     def _find_mapping(
         self,
@@ -394,6 +459,15 @@ class ElasticsearchVocabulary:
             raise OntologySchemaError("search timed_out must be a boolean")
         if timed_out:
             raise OntologyUnavailableError("Elasticsearch search timed out")
+        shards = self._require_object(root.get("_shards"), "search _shards")
+        shard_counts: dict[str, int] = {}
+        for name in ("total", "successful", "skipped", "failed"):
+            value = shards.get(name)
+            if isinstance(value, bool) or not isinstance(value, int) or value < 0:
+                raise OntologySchemaError(f"search _shards.{name} must be a non-negative integer")
+            shard_counts[name] = value
+        if shard_counts["failed"] != 0:
+            raise OntologyUnavailableError("Elasticsearch search did not complete on all shards")
         hits_wrapper = self._require_object(root.get("hits"), "search hits")
         raw_hits_value = hits_wrapper.get("hits")
         if not isinstance(raw_hits_value, list):
@@ -441,12 +515,26 @@ class ElasticsearchVocabulary:
         source = self._require_object(raw_source, f"document {document_id!r} _source")
         fields = self._connection.fields
         canonical = self._require_non_empty_string(
-            source.get(fields.canonical), f"document {document_id!r} canonical term"
+            self._path_value(
+                source,
+                fields.canonical,
+                f"document {document_id!r} canonical term",
+            ),
+            f"document {document_id!r} canonical term",
         )
         source_type = self._require_non_empty_string(
-            source.get(fields.type), f"document {document_id!r} source type"
+            self._path_value(
+                source,
+                fields.type,
+                f"document {document_id!r} source type",
+            ),
+            f"document {document_id!r} source type",
         )
-        raw_aliases_value = source.get(fields.aliases)
+        raw_aliases_value = self._path_value(
+            source,
+            fields.aliases,
+            f"document {document_id!r} aliases",
+        )
         if not isinstance(raw_aliases_value, list):
             raise OntologySchemaError(
                 f"document {document_id!r} aliases must be a list of non-empty strings"
@@ -457,7 +545,11 @@ class ElasticsearchVocabulary:
                 f"document {document_id!r} aliases must be a list of non-empty strings"
             )
         aliases = tuple(cast(list[str], raw_aliases))
-        raw_relations_value = source.get(fields.relations)
+        raw_relations_value = self._path_value(
+            source,
+            fields.relations,
+            f"document {document_id!r} relations",
+        )
         if not isinstance(raw_relations_value, list):
             raise OntologySchemaError(f"document {document_id!r} relations must be a list")
         raw_relations = cast(list[object], raw_relations_value)
@@ -466,11 +558,19 @@ class ElasticsearchVocabulary:
         for raw_relation in raw_relations:
             relation = self._require_object(raw_relation, f"document {document_id!r} relation")
             relation_type = self._require_non_empty_string(
-                relation.get(fields.relation_type),
+                self._path_value(
+                    relation,
+                    fields.relation_type,
+                    f"document {document_id!r} relation type",
+                ),
                 f"document {document_id!r} relation type",
             )
             target_id = self._require_non_empty_string(
-                relation.get(fields.relation_target_id),
+                self._path_value(
+                    relation,
+                    fields.relation_target_id,
+                    f"document {document_id!r} relation target",
+                ),
                 f"document {document_id!r} relation target",
             )
             relations.append(
@@ -568,53 +668,70 @@ class ElasticsearchVocabulary:
             ),
         )
 
-    def _exact_query(self, surfaces: Sequence[str]) -> dict[str, object]:
-        should: list[object] = []
-        fields = self._connection.fields
-        for index, surface in enumerate(surfaces):
-            should.extend(
-                [
-                    {
-                        "term": {
-                            fields.canonical: {
-                                "value": surface,
-                                "_name": f"canonical_{index}",
-                            }
-                        }
-                    },
-                    {
-                        "term": {
-                            fields.aliases: {
-                                "value": surface,
-                                "_name": f"alias_{index}",
-                            }
-                        }
-                    },
-                ]
-            )
-        return self._search_body(surfaces, should)
-
-    def _lexical_query(self, surfaces: Sequence[str]) -> dict[str, object]:
-        fields = self._connection.fields
-        should: list[object] = [
-            {
-                "multi_match": {
-                    "query": surface,
-                    "fields": [fields.canonical, fields.aliases],
-                    "type": "best_fields",
-                    "operator": "and",
-                    "_name": f"lexical_{index}",
-                }
-            }
-            for index, surface in enumerate(surfaces)
-        ]
-        return self._search_body(surfaces, should)
-
-    def _search_body(
+    def _exact_query(
         self,
-        surfaces: Sequence[str],
-        should: list[object],
+        forms: Sequence[str],
+        plan: _LookupPlan,
     ) -> dict[str, object]:
+        should: list[object] = []
+        for mapped_field in plan.fields:
+            for path in mapped_field.keyword_paths:
+                for form in forms:
+                    should.append(
+                        {
+                            "term": {
+                                path: {
+                                    "value": form,
+                                    "case_insensitive": True,
+                                }
+                            }
+                        }
+                    )
+            for path in mapped_field.analyzed_paths:
+                for form in forms:
+                    should.append({"match_phrase": {path: {"query": form}}})
+        return self._search_body(should[:_MAX_QUERY_CLAUSES])
+
+    def _lexical_query(
+        self,
+        surface: str,
+        plan: _LookupPlan,
+    ) -> dict[str, object]:
+        should: list[object] = []
+        keyword_paths: list[str] = []
+        analyzed_paths: list[str] = []
+        for mapped_field in plan.fields:
+            keyword_paths.extend(mapped_field.keyword_paths)
+            analyzed_paths.extend(mapped_field.analyzed_paths)
+        pattern = self._wildcard_pattern(surface)
+        for path in dict.fromkeys(keyword_paths):
+            should.append(
+                {
+                    "wildcard": {
+                        path: {
+                            "value": pattern,
+                            "case_insensitive": True,
+                        }
+                    }
+                }
+            )
+        unique_analyzed_paths = list(dict.fromkeys(analyzed_paths))
+        if unique_analyzed_paths:
+            should.append(
+                {
+                    "multi_match": {
+                        "query": surface,
+                        "fields": unique_analyzed_paths,
+                        "type": "best_fields",
+                        "operator": "and",
+                    }
+                }
+            )
+        return self._search_body(should[:_MAX_QUERY_CLAUSES])
+
+    def _search_body(self, should: list[object]) -> dict[str, object]:
+        if not should:
+            raise OntologyError("validated mapping produced no usable search clauses")
         fields = self._connection.fields
         source_fields = list(
             dict.fromkeys((fields.canonical, fields.type, fields.aliases, fields.relations))
@@ -622,10 +739,21 @@ class ElasticsearchVocabulary:
         return {
             "_source": source_fields,
             "query": {"bool": {"minimum_should_match": 1, "should": should}},
-            "size": min(_MAX_RESPONSE_SIZE, max(1, len(surfaces) * 10)),
+            "size": _MAX_RESPONSE_SIZE,
             "sort": [{"_score": {"order": "desc"}}],
             "track_total_hits": False,
         }
+
+    @staticmethod
+    def _candidate_forms(surface: str, normalized_surface: str) -> tuple[str, ...]:
+        raw_collapsed = " ".join(surface.strip().split())
+        nfkc_collapsed = " ".join(unicodedata.normalize("NFKC", surface).strip().split())
+        return tuple(dict.fromkeys((raw_collapsed, nfkc_collapsed, normalized_surface)))
+
+    @staticmethod
+    def _wildcard_pattern(surface: str) -> str:
+        escaped = surface.replace("\\", "\\\\").replace("*", "\\*").replace("?", "\\?")
+        return f"*{escaped.replace(' ', '*')}*"
 
     @classmethod
     def _validate_surfaces(
@@ -662,9 +790,27 @@ class ElasticsearchVocabulary:
         normalized = unicodedata.normalize("NFKC", surface)
         return " ".join(normalized.strip().split()).casefold()
 
-    @staticmethod
-    def _batches(values: Sequence[str], size: int) -> list[list[str]]:
-        return [list(values[offset : offset + size]) for offset in range(0, len(values), size)]
+    def _path_value(
+        self,
+        root: Mapping[str, object],
+        path: str,
+        label: str,
+    ) -> object:
+        direct = root.get(path, _MISSING)
+        if direct is not _MISSING:
+            return direct
+        current: object = root
+        for segment in path.split("."):
+            current_mapping = self._require_object(current, f"{label} intermediate")
+            if segment not in current_mapping:
+                raise OntologySchemaError(f"{label} path {path!r} is missing")
+            current = current_mapping[segment]
+        return current
+
+    def _require_lookup_plan(self) -> _LookupPlan:
+        if self._lookup_plan is None:
+            raise OntologyError("Elasticsearch mapping has not been validated")
+        return self._lookup_plan
 
     @staticmethod
     def _require_object(value: object, label: str) -> dict[str, object]:

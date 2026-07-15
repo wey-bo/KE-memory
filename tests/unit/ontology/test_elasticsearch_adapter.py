@@ -43,25 +43,36 @@ def _connection(
     endpoint: str = "https://es.test.invalid",
     index: str = "vocab",
     api_key: str = "unit-secret-value",
+    fields: ElasticsearchFields = FIELDS,
 ) -> ElasticsearchConnection:
     return ElasticsearchConnection(
         endpoint=endpoint,
         index=index,
         api_key=SecretStr(api_key),
         timeout_seconds=2.5,
-        fields=FIELDS,
+        fields=fields,
         roles=ROLES,
     )
 
 
-def _mapping(*, canonical_type: str = "keyword") -> JsonObject:
+def _mapping(
+    *,
+    canonical_type: str = "keyword",
+    aliases_type: str = "keyword",
+    keyword_multifields: bool = False,
+) -> JsonObject:
+    canonical_mapping: JsonObject = {"type": canonical_type}
+    aliases_mapping: JsonObject = {"type": aliases_type}
+    if keyword_multifields:
+        canonical_mapping["fields"] = {"raw": {"type": "keyword"}}
+        aliases_mapping["fields"] = {"raw": {"type": "keyword"}}
     return {
         "vocab": {
             "mappings": {
                 "properties": {
-                    "term": {"type": canonical_type},
+                    "term": canonical_mapping,
                     "type": {"type": "keyword"},
-                    "aliases": {"type": "keyword"},
+                    "aliases": aliases_mapping,
                     "relations": {
                         "type": "nested",
                         "properties": {
@@ -71,6 +82,71 @@ def _mapping(*, canonical_type: str = "keyword") -> JsonObject:
                     },
                 }
             }
+        }
+    }
+
+
+DOTTED_FIELDS = ElasticsearchFields(
+    canonical="ontology.labels.term",
+    type="ontology.kind",
+    aliases="ontology.labels.aliases",
+    relations="ontology.links",
+    relation_type="meta.kind",
+    relation_target_id="target.id",
+)
+
+
+def _dotted_mapping() -> JsonObject:
+    return {
+        "vocab": {
+            "mappings": {
+                "properties": {
+                    "ontology": {
+                        "type": "object",
+                        "properties": {
+                            "labels": {
+                                "type": "object",
+                                "properties": {
+                                    "term": {
+                                        "type": "text",
+                                        "fields": {"raw": {"type": "keyword"}},
+                                    },
+                                    "aliases": {"type": "keyword"},
+                                },
+                            },
+                            "kind": {"type": "keyword"},
+                            "links": {
+                                "type": "nested",
+                                "properties": {
+                                    "meta": {
+                                        "type": "object",
+                                        "properties": {"kind": {"type": "keyword"}},
+                                    },
+                                    "target": {
+                                        "type": "object",
+                                        "properties": {"id": {"type": "keyword"}},
+                                    },
+                                },
+                            },
+                        },
+                    }
+                }
+            }
+        }
+    }
+
+
+def _dotted_source() -> JsonObject:
+    return {
+        "ontology": {
+            "labels": {"term": "Triangle", "aliases": ["Tri"]},
+            "kind": "concept",
+            "links": [
+                {
+                    "meta": {"kind": "broader"},
+                    "target": {"id": "shape"},
+                }
+            ],
         }
     }
 
@@ -135,10 +211,12 @@ class EsHarness:
         self.identity_versions: list[tuple[str, str, JsonObject]] = [
             ("vocab", "uuid-1", _mapping())
         ]
+        self.cat_identities: list[tuple[str, str]] | None = None
         self.statuses: dict[tuple[str, str], int] = {}
         self.invalid_json_paths: set[str] = set()
         self.failure: Exception | None = None
-        self._identity_call = -1
+        self._cat_call = 0
+        self._mapping_call = 0
         self.client = httpx.AsyncClient(transport=httpx.MockTransport(self.handle))
 
     async def handle(self, request: httpx.Request) -> httpx.Response:
@@ -154,15 +232,21 @@ class EsHarness:
         if request.method == "GET" and path == "/_cluster/health":
             payload = self.health_response
         elif request.method == "GET" and path == "/_cat/indices/vocab":
-            self._identity_call += 1
-            index_name, index_uuid, _ = self.identity_versions[
-                min(self._identity_call, len(self.identity_versions) - 1)
-            ]
+            if self.cat_identities is None:
+                index_name, index_uuid, _ = self.identity_versions[
+                    min(self._mapping_call, len(self.identity_versions) - 1)
+                ]
+            else:
+                index_name, index_uuid = self.cat_identities[
+                    min(self._cat_call, len(self.cat_identities) - 1)
+                ]
+            self._cat_call += 1
             payload = [{"index": index_name, "uuid": index_uuid}]
         elif request.method == "GET" and path == "/vocab/_mapping":
             _, _, payload = self.identity_versions[
-                min(max(self._identity_call, 0), len(self.identity_versions) - 1)
+                min(self._mapping_call, len(self.identity_versions) - 1)
             ]
+            self._mapping_call += 1
         elif request.method == "POST" and path == "/vocab/_search":
             payload = (
                 self.search_responses.pop(0) if self.search_responses else _search_response([])
@@ -178,8 +262,11 @@ class EsHarness:
             request=request,
         )
 
-    def adapter(self) -> ElasticsearchVocabulary:
-        return ElasticsearchVocabulary(_connection(), client=self.client)
+    def adapter(
+        self,
+        connection: ElasticsearchConnection | None = None,
+    ) -> ElasticsearchVocabulary:
+        return ElasticsearchVocabulary(connection or _connection(), client=self.client)
 
 
 @pytest.fixture
@@ -193,6 +280,7 @@ async def test_resolve_terms_sends_exact_read_only_shapes_and_preserves_misses(
 ) -> None:
     es.search_responses = [
         _search_response([_hit("concept:triangle", _source("triangle"), score=7.0)]),
+        _search_response([]),
         _search_response([]),
     ]
 
@@ -214,43 +302,167 @@ async def test_resolve_terms_sends_exact_read_only_shapes_and_preserves_misses(
     assert [(request.method, request.url.path) for request in es.requests] == [
         ("GET", "/_cat/indices/vocab"),
         ("GET", "/vocab/_mapping"),
+        ("GET", "/_cat/indices/vocab"),
+        ("POST", "/vocab/_search"),
         ("POST", "/vocab/_search"),
         ("POST", "/vocab/_search"),
     ]
     assert es.requests[0].url.query == b"format=json"
-    exact_body = json.loads(es.requests[2].content)
+    exact_body = json.loads(es.requests[3].content)
     assert exact_body == {
         "_source": ["term", "type", "aliases", "relations"],
         "query": {
             "bool": {
                 "minimum_should_match": 1,
                 "should": [
-                    {"term": {"term": {"value": "triangle", "_name": "canonical_0"}}},
-                    {"term": {"aliases": {"value": "triangle", "_name": "alias_0"}}},
-                    {"term": {"term": {"value": "unknown phrase", "_name": "canonical_1"}}},
-                    {"term": {"aliases": {"value": "unknown phrase", "_name": "alias_1"}}},
+                    {"term": {"term": {"value": "triangle", "case_insensitive": True}}},
+                    {"term": {"aliases": {"value": "triangle", "case_insensitive": True}}},
                 ],
             }
         },
-        "size": 20,
+        "size": 100,
         "sort": [{"_score": {"order": "desc"}}],
         "track_total_hits": False,
     }
-    lexical_body = json.loads(es.requests[3].content)
+    second_exact_body = json.loads(es.requests[4].content)
+    assert "unknown phrase" in json.dumps(second_exact_body)
+    assert "triangle" not in json.dumps(second_exact_body)
+    lexical_body = json.loads(es.requests[5].content)
     assert lexical_body["query"]["bool"]["should"] == [
         {
-            "multi_match": {
-                "query": "unknown phrase",
-                "fields": ["term", "aliases"],
-                "type": "best_fields",
-                "operator": "and",
-                "_name": "lexical_0",
+            "wildcard": {
+                "term": {
+                    "value": "*unknown*phrase*",
+                    "case_insensitive": True,
+                }
             }
-        }
+        },
+        {
+            "wildcard": {
+                "aliases": {
+                    "value": "*unknown*phrase*",
+                    "case_insensitive": True,
+                }
+            }
+        },
     ]
     assert all(
         request.headers["authorization"] == "ApiKey unit-secret-value" for request in es.requests
     )
+
+
+@pytest.mark.asyncio
+async def test_keyword_exact_queries_retrieve_case_insensitive_canonical_and_alias(
+    es: EsHarness,
+) -> None:
+    es.search_responses = [
+        _search_response([_hit("canonical", _source("TRIANGLE"), score=1.0)]),
+        _search_response(
+            [
+                _hit(
+                    "alias",
+                    _source("three-sided polygon", aliases=["THREE SIDE"]),
+                    score=1.0,
+                )
+            ]
+        ),
+    ]
+
+    bindings = await es.adapter().resolve_terms(["TriAngle", "Three Side"])
+
+    assert [binding.document_id for binding in bindings] == ["canonical", "alias"]
+    search_requests = [request for request in es.requests if request.url.path == "/vocab/_search"]
+    assert len(search_requests) == 2
+    first_body = json.loads(search_requests[0].content)
+    first_terms = first_body["query"]["bool"]["should"]
+    assert {next(iter(clause["term"].values()))["value"] for clause in first_terms} == {
+        "TriAngle",
+        "triangle",
+    }
+    assert all(
+        next(iter(clause["term"].values()))["case_insensitive"] is True for clause in first_terms
+    )
+    assert "Three Side" not in json.dumps(first_body)
+
+
+@pytest.mark.asyncio
+async def test_text_exact_query_uses_phrase_and_concrete_keyword_multifield(
+    es: EsHarness,
+) -> None:
+    es.identity_versions = [
+        (
+            "vocab",
+            "uuid-1",
+            _mapping(
+                canonical_type="text",
+                aliases_type="text",
+                keyword_multifields=True,
+            ),
+        )
+    ]
+    es.search_responses = [_search_response([_hit("new-york", _source("New York"), score=1.0)])]
+
+    binding = (await es.adapter().resolve_terms(["new york"]))[0]
+
+    assert binding.document_id == "new-york"
+    body = json.loads(es.requests[-1].content)
+    should = body["query"]["bool"]["should"]
+    assert {
+        next(iter(clause["match_phrase"])) for clause in should if "match_phrase" in clause
+    } == {
+        "term",
+        "aliases",
+    }
+    assert {next(iter(clause["term"])) for clause in should if "term" in clause} == {
+        "term.raw",
+        "aliases.raw",
+    }
+
+
+@pytest.mark.asyncio
+async def test_keyword_lexical_fallback_uses_case_insensitive_wildcards(
+    es: EsHarness,
+) -> None:
+    es.search_responses = [
+        _search_response([]),
+        _search_response([_hit("triangular", _source("Triangular Shape"), score=2.0)]),
+    ]
+
+    binding = (await es.adapter().resolve_terms(["triang"]))[0]
+
+    assert binding.document_id == "triangular"
+    lexical = json.loads(es.requests[-1].content)
+    clauses = lexical["query"]["bool"]["should"]
+    assert {next(iter(clause["wildcard"])) for clause in clauses} == {"term", "aliases"}
+    assert all(
+        next(iter(clause["wildcard"].values()))
+        == {
+            "value": "*triang*",
+            "case_insensitive": True,
+        }
+        for clause in clauses
+    )
+
+
+@pytest.mark.asyncio
+async def test_each_surface_has_independent_scores_and_exact_ambiguity(
+    es: EsHarness,
+) -> None:
+    es.search_responses = [
+        _search_response([_hit("alpha", _source("alpha"), score=0.1)]),
+        _search_response(
+            [
+                _hit("beta-b", _source("beta"), score=3.0),
+                _hit("beta-a", _source("beta"), score=3.0),
+            ]
+        ),
+    ]
+
+    bindings = await es.adapter().resolve_terms(["alpha", "beta"])
+
+    assert bindings[0].document_id == "alpha"
+    assert bindings[1].status is OntologyBindingStatus.UNRESOLVED
+    assert [request.url.path for request in es.requests].count("/vocab/_search") == 2
     assert all(
         forbidden not in request.url.path
         for request in es.requests
@@ -284,7 +496,7 @@ async def test_normalization_alias_ranking_and_duplicate_mapping(es: EsHarness) 
     assert [binding.surface_form for binding in bindings] == [original, "triangle shape", original]
     assert all(binding.normalized_surface == "triangle shape" for binding in bindings)
     body = json.loads(es.requests[-1].content)
-    assert len(body["query"]["bool"]["should"]) == 2
+    assert len(body["query"]["bool"]["should"]) <= 100
 
 
 @pytest.mark.asyncio
@@ -368,21 +580,103 @@ async def test_unknown_source_type_retains_identity_as_unresolved_role(es: EsHar
 
 
 @pytest.mark.asyncio
-async def test_search_batches_keep_size_and_clause_count_bounded(es: EsHarness) -> None:
-    surfaces = [f"term {index}" for index in range(120)]
-    es.search_responses = [_search_response([]) for _ in range(5)]
+async def test_dotted_mapping_and_source_paths_resolve_terms_and_relations(
+    es: EsHarness,
+) -> None:
+    es.identity_versions = [("vocab", "uuid-1", _dotted_mapping())]
+    es.search_responses = [_search_response([_hit("triangle", _dotted_source())])]
+    connection = _connection(fields=DOTTED_FIELDS)
+
+    binding = (await es.adapter(connection).resolve_terms(["triangle"]))[0]
+
+    assert binding.document_id == "triangle"
+    assert binding.canonical_term == "Triangle"
+    assert binding.aliases == ("Tri",)
+    assert binding.relations == (OntologyRelationRef(relation_type="broader", target_id="shape"),)
+    body = json.loads(es.requests[-1].content)
+    assert body["_source"] == [
+        "ontology.labels.term",
+        "ontology.kind",
+        "ontology.labels.aliases",
+        "ontology.links",
+    ]
+    should = body["query"]["bool"]["should"]
+    assert any("ontology.labels.term" in clause.get("match_phrase", {}) for clause in should)
+    assert any("ontology.labels.term.raw" in clause.get("term", {}) for clause in should)
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    "source",
+    [
+        {"ontology": {"kind": "concept", "links": []}},
+        {"ontology": "not-an-object"},
+        {
+            "ontology": {
+                "labels": {"term": "Triangle", "aliases": "Tri"},
+                "kind": "concept",
+                "links": [],
+            }
+        },
+        {
+            "ontology": {
+                "labels": {"term": "Triangle", "aliases": []},
+                "kind": "concept",
+                "links": [{"meta": "not-an-object", "target": {"id": "shape"}}],
+            }
+        },
+    ],
+)
+async def test_dotted_source_missing_intermediate_and_type_errors_are_schema_failures(
+    es: EsHarness,
+    source: JsonObject,
+) -> None:
+    es.identity_versions = [("vocab", "uuid-1", _dotted_mapping())]
+    es.search_responses = [_search_response([_hit("triangle", source)])]
+
+    with pytest.raises(OntologySchemaError):
+        await es.adapter(_connection(fields=DOTTED_FIELDS)).resolve_terms(["triangle"])
+
+
+@pytest.mark.asyncio
+async def test_dotted_mapping_missing_intermediate_is_a_schema_failure(es: EsHarness) -> None:
+    mapping = _dotted_mapping()
+    ontology = mapping["vocab"]["mappings"]["properties"]["ontology"]
+    del ontology["properties"]["labels"]
+    es.identity_versions = [("vocab", "uuid-1", mapping)]
+
+    with pytest.raises(OntologySchemaError, match="ontology.labels.term"):
+        await es.adapter(_connection(fields=DOTTED_FIELDS)).index_identity()
+
+
+@pytest.mark.asyncio
+async def test_multiple_surfaces_use_separate_capped_exact_and_lexical_searches(
+    es: EsHarness,
+) -> None:
+    surfaces = ["first term", "second term", "third term"]
+    es.search_responses = [_search_response([]) for _ in range(6)]
 
     bindings = await es.adapter().resolve_terms(surfaces)
 
-    assert len(bindings) == 120
+    assert len(bindings) == 3
     search_bodies = [
         json.loads(request.content)
         for request in es.requests
         if request.url.path == "/vocab/_search"
     ]
-    assert len(search_bodies) == 5
+    assert len(search_bodies) == 6
     assert all(1 <= body["size"] <= 100 for body in search_bodies)
     assert all(len(body["query"]["bool"]["should"]) <= 100 for body in search_bodies)
+    for index, surface in enumerate(surfaces):
+        matching_bodies = search_bodies[index * 2 : index * 2 + 2]
+        assert surface in json.dumps(matching_bodies[0])
+        assert f"*{surface.replace(' ', '*')}*" in json.dumps(matching_bodies[1])
+        assert all(
+            other not in json.dumps(body)
+            for body in matching_bodies
+            for other in surfaces
+            if other != surface
+        )
 
 
 @pytest.mark.asyncio
@@ -481,6 +775,13 @@ async def test_index_identity_pins_then_detects_each_drift_dimension(
         ("vocab", "uuid-1", _mapping()),
         second_identity,
     ]
+    second_name, second_uuid, _ = second_identity
+    es.cat_identities = [
+        ("vocab", "uuid-1"),
+        ("vocab", "uuid-1"),
+        (second_name, second_uuid),
+        (second_name, second_uuid),
+    ]
     adapter = es.adapter()
 
     identity = await adapter.index_identity()
@@ -498,6 +799,12 @@ async def test_data_method_checks_pinned_identity_before_search(es: EsHarness) -
         ("vocab", "uuid-1", _mapping()),
         ("vocab", "uuid-2", _mapping()),
     ]
+    es.cat_identities = [
+        ("vocab", "uuid-1"),
+        ("vocab", "uuid-1"),
+        ("vocab", "uuid-2"),
+        ("vocab", "uuid-2"),
+    ]
     adapter = es.adapter()
     await adapter.index_identity()
 
@@ -505,6 +812,41 @@ async def test_data_method_checks_pinned_identity_before_search(es: EsHarness) -
         await adapter.resolve_terms(["triangle"])
 
     assert not any(request.url.path == "/vocab/_search" for request in es.requests)
+
+
+@pytest.mark.asyncio
+async def test_first_identity_rejects_mapping_root_for_another_index(es: EsHarness) -> None:
+    mapping = _mapping()
+    mapping["other-index"] = mapping.pop("vocab")
+    es.identity_versions = [("vocab", "uuid-1", mapping)]
+
+    with pytest.raises(OntologySchemaError, match="mapping index name"):
+        await es.adapter().index_identity()
+
+
+@pytest.mark.asyncio
+async def test_first_identity_rejects_cat_name_that_is_not_configured(es: EsHarness) -> None:
+    es.cat_identities = [("other-index", "uuid-1")]
+
+    with pytest.raises(OntologySchemaError, match="CAT index name"):
+        await es.adapter().index_identity()
+
+
+@pytest.mark.asyncio
+async def test_identity_detects_cat_rollover_around_mapping_read(es: EsHarness) -> None:
+    es.cat_identities = [
+        ("vocab", "uuid-before"),
+        ("vocab", "uuid-after"),
+    ]
+
+    with pytest.raises(OntologyDriftError, match="changed during mapping read"):
+        await es.adapter().index_identity()
+
+    assert [request.url.path for request in es.requests] == [
+        "/_cat/indices/vocab",
+        "/vocab/_mapping",
+        "/_cat/indices/vocab",
+    ]
 
 
 @pytest.mark.asyncio
@@ -576,6 +918,39 @@ async def test_transient_http_status_is_unavailable(es: EsHarness, status: int) 
 
 
 @pytest.mark.asyncio
+async def test_redirect_is_not_followed_or_forwarded_authorization() -> None:
+    requests: list[httpx.Request] = []
+    secret = "redirect-secret-value"
+
+    async def handler(request: httpx.Request) -> httpx.Response:
+        requests.append(request)
+        return httpx.Response(
+            302,
+            headers={"location": "https://redirect.test.invalid/capture"},
+            content=f"body contains {secret}".encode(),
+            request=request,
+        )
+
+    client = httpx.AsyncClient(
+        transport=httpx.MockTransport(handler),
+        follow_redirects=True,
+    )
+    adapter = ElasticsearchVocabulary(_connection(api_key=secret), client=client)
+
+    async with adapter:
+        with pytest.raises(OntologyError) as exc_info:
+            await adapter.health()
+
+    assert type(exc_info.value) is OntologyError
+    assert len(requests) == 1
+    assert requests[0].url.host == "es.test.invalid"
+    assert requests[0].headers["authorization"] == f"ApiKey {secret}"
+    assert all(request.url.host != "redirect.test.invalid" for request in requests)
+    assert secret not in str(exc_info.value)
+    assert "body contains" not in str(exc_info.value)
+
+
+@pytest.mark.asyncio
 @pytest.mark.parametrize(
     "failure",
     [
@@ -617,9 +992,47 @@ async def test_invalid_json_mapping_and_search_shapes_are_schema_failures(es: Es
         await invalid_mapping.adapter().index_identity()
 
     invalid_search = EsHarness()
-    invalid_search.search_responses = [{"hits": {"hits": "not-a-list"}}]
+    invalid_search_response = _search_response([])
+    invalid_search_response["hits"]["hits"] = "not-a-list"
+    invalid_search.search_responses = [invalid_search_response]
     with pytest.raises(OntologySchemaError, match="hits"):
         await invalid_search.adapter().resolve_terms(["triangle"])
+
+
+@pytest.mark.asyncio
+async def test_failed_search_shards_are_unavailable_without_detail_leak(es: EsHarness) -> None:
+    secret_detail = "sensitive-shard-detail"
+    response = _search_response([])
+    response["_shards"]["failed"] = 1
+    response["_shards"]["failures"] = [{"reason": secret_detail}]
+    es.search_responses = [response]
+
+    with pytest.raises(OntologyUnavailableError) as exc_info:
+        await es.adapter().resolve_terms(["triangle"])
+
+    assert secret_detail not in str(exc_info.value)
+    assert "failure" not in str(exc_info.value).casefold()
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    "shards",
+    [
+        None,
+        {"total": 1, "successful": 1, "skipped": 0},
+        {"total": 1, "successful": 1, "skipped": 0, "failed": "0"},
+    ],
+)
+async def test_malformed_search_shards_are_schema_failures(
+    es: EsHarness,
+    shards: object,
+) -> None:
+    response = _search_response([])
+    response["_shards"] = shards
+    es.search_responses = [response]
+
+    with pytest.raises(OntologySchemaError, match="shards"):
+        await es.adapter().resolve_terms(["triangle"])
 
 
 @pytest.mark.asyncio
