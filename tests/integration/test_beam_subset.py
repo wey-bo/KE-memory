@@ -9,7 +9,7 @@ from zipfile import ZipFile
 
 import pytest
 
-from ke_memory_demo.core.json import JsonObject
+from ke_memory_demo.core.json import JsonObject, JsonValue, canonical_json
 from ke_memory_demo.domain import Conversation
 from ke_memory_demo.ingestion import load_beam_subset, select_beam_directories
 
@@ -94,6 +94,17 @@ def _all_domain_ids(conversation: Conversation) -> list[str]:
     return identifiers
 
 
+def _walk_json(value: JsonValue) -> list[JsonValue]:
+    values = [value]
+    if isinstance(value, dict):
+        for nested in value.values():
+            values.extend(_walk_json(nested))
+    elif isinstance(value, list):
+        for nested in value:
+            values.extend(_walk_json(nested))
+    return values
+
+
 def test_fixed_beam_subset_is_normalized_exactly_without_network(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -159,15 +170,31 @@ def test_fixed_beam_subset_is_normalized_exactly_without_network(
                 for exchange in exchanges
             )
 
-            question_texts = {
+            question_texts = [
                 cast(str, question["question"]) for question in conversation.probing_questions
-            }
-            rendered_record_content = {
+            ]
+            rendered_exchange_content = "\n".join(
                 record.content
                 for exchange in exchanges
                 for record in (exchange.user, *exchange.events, exchange.assistant)
-            }
-            assert question_texts.isdisjoint(rendered_record_content)
+            )
+            assert all(
+                question_text not in rendered_exchange_content for question_text in question_texts
+            )
+
+            session_payload: JsonValue = [
+                cast(JsonValue, session.model_dump(mode="json"))
+                for session in conversation.sessions
+            ]
+            serialized_session_content = canonical_json(session_payload)
+            session_values = _walk_json(session_payload)
+            assert all(
+                question not in session_values for question in conversation.probing_questions
+            )
+            assert all(
+                canonical_json(question) not in serialized_session_content
+                for question in conversation.probing_questions
+            )
             assert [question["category"] for question in conversation.probing_questions] == [
                 category for category in QUESTION_CATEGORIES for _ in range(2)
             ]

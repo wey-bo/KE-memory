@@ -337,20 +337,30 @@ def test_loader_wraps_an_unreadable_archive_as_a_typed_failure(tmp_path: Path) -
 
 
 def test_probing_questions_flatten_in_category_insertion_order_and_preserve_values() -> None:
-    questions = _valid_questions()
+    canonical_questions = _valid_questions()
+    category_order = (
+        "temporal_reasoning",
+        "abstention",
+        *(
+            category
+            for category in QUESTION_CATEGORIES
+            if category not in {"abstention", "temporal_reasoning"}
+        ),
+    )
+    questions: JsonObject = {category: canonical_questions[category] for category in category_order}
     original = deepcopy(questions)
 
     flattened = _flatten_probing_questions(questions, directory_id=4)
 
     assert len(flattened) == 20
     assert [question["category"] for question in flattened] == [
-        category for category in QUESTION_CATEGORIES for _ in range(2)
+        category for category in category_order for _ in range(2)
     ]
     assert [question["category_ordinal"] for question in flattened] == [0, 1] * 10
     assert questions == original
     assert flattened[0] == {
-        **cast(JsonObject, cast(list[JsonValue], questions["abstention"])[0]),
-        "category": "abstention",
+        **cast(JsonObject, cast(list[JsonValue], questions["temporal_reasoning"])[0]),
+        "category": "temporal_reasoning",
         "category_ordinal": 0,
     }
 
