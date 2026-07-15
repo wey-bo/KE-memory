@@ -1,1 +1,26 @@
 .worktrees/
+
+# Local secrets and environments
+.env.local
+.venv/
+.baseline-envs/
+
+# Generated runtime state
+var/
+*.sqlite3
+/ke-memory-demo-state/
+
+# Python tooling
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+
+# Local model artifacts
+/models/
+*.safetensors
+*.pt
+*.pth
+*.onnx
+*.gguf
+pytorch_model*.bin

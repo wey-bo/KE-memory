@@ -1,0 +1,17 @@
+endpoint_env = "KE_MEMORY_ES_URL"
+index_env = "KE_MEMORY_ES_INDEX"
+api_key_env = "KE_MEMORY_ES_API_KEY"
+request_timeout_seconds = 30.0
+
+[fields]
+canonical = "term"
+type = "type"
+aliases = "aliases"
+relations = "relations"
+relation_type = "type"
+relation_target_id = "target_id"
+
+[roles]
+concept = ["concept", "class", "entity_type"]
+individual = ["individual", "instance", "entity"]
+operator = ["operator", "relation", "predicate", "action"]

@@ -1,0 +1,14 @@
+[dataset]
+archive_path = "/public/home/wwb/datasets/BEAM.zip"
+archive_sha256 = "690106a93ab88dac46e8fef1e84884acc889518424240f57a47428d3efbe6346"
+selected_directories = [4, 15, 17]
+expected_sessions = 13
+expected_exchanges = 385
+expected_questions = 60
+
+[retrieval]
+evidence_budget_tokens = 8192
+answer_max_output_tokens = 1024
+
+[aggregation]
+max_semantic_depth = 2
