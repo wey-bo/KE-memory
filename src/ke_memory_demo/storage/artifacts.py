@@ -495,6 +495,7 @@ def _pin_directory(
     *,
     create: bool,
 ) -> Generator[int, None, None]:
+    layout.assert_safe(path)
     try:
         relative = path.relative_to(layout.root)
     except ValueError as error:
@@ -778,7 +779,7 @@ def _rollback_promotion(
         entry = _stat_at(canonical_parent_fd, stage)
         if entry is not None:
             _cleanup_tree_at(canonical_parent_fd, stage)
-            _promotion_fsync(canonical_parent_fd, step="rollback-empty-canonical-parent")
+        _promotion_fsync(canonical_parent_fd, step="rollback-empty-canonical-parent")
 
     _cleanup_after_commit(canonical_parent_fd, backup_name, recovery_name, failed_name)
 

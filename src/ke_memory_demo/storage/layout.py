@@ -22,7 +22,7 @@ class UnsafeStoragePathError(StorageError):
 
 
 def validate_storage_name(value: str, *, label: str) -> str:
-    if _PORTABLE_NAME.fullmatch(value) is None or ".." in value:
+    if _PORTABLE_NAME.fullmatch(value) is None:
         raise InvalidStorageNameError(
             f"{label} must use nonempty ASCII letters, digits, '.', '_', or '-', "
             "and must not start with '.'"
@@ -93,6 +93,14 @@ class StateLayout:
     def assert_safe(self, path: Path) -> None:
         try:
             relative = path.relative_to(self.root)
+        except ValueError as error:
+            raise UnsafeStoragePathError(f"managed path escapes state root: {path}") from error
+        if ".." in relative.parts:
+            raise UnsafeStoragePathError(f"managed path contains a '..' component: {path}")
+
+        normalized = Path(os.path.normpath(path))
+        try:
+            normalized.relative_to(self.root)
         except ValueError as error:
             raise UnsafeStoragePathError(f"managed path escapes state root: {path}") from error
 

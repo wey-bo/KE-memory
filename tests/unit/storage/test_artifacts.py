@@ -21,6 +21,7 @@ from ke_memory_demo.storage import (
     ArtifactValidationError,
     InvalidStorageNameError,
     ModelRegistryError,
+    StateLayout,
     StageManifest,
     UnsafeStoragePathError,
     WriterConflictError,
@@ -146,14 +147,83 @@ def test_registry_can_be_extended_but_unknown_and_wrong_models_fail(tmp_path: Pa
         ("run", "stäge", "exchanges"),
         ("run", "stage", ".hidden"),
         ("run", "stage", "bad/name"),
-        ("run..escape", "stage", "exchanges"),
-        ("run", "stage..escape", "exchanges"),
-        ("run", "stage", "exchange..escape"),
     ],
 )
 def test_names_must_be_portable(run_id: str, stage: str, name: str, tmp_path: Path) -> None:
     with pytest.raises(InvalidStorageNameError):
         ArtifactStore(tmp_path).write_jsonl(run_id, stage, name, [])
+
+
+def test_adjacent_dots_are_valid_portable_name_characters(tmp_path: Path) -> None:
+    store = ArtifactStore(tmp_path, registry={"records..2026": _CustomRecord})
+
+    with store.stage_writer("run..2026", "stage..v1") as writer:
+        writer.write("records..2026", [_CustomRecord(id="record-1")])
+
+    assert list(store.read_jsonl("run..2026", "stage..v1", "records..2026", _CustomRecord)) == [
+        _CustomRecord(id="record-1")
+    ]
+
+
+def test_layout_assert_safe_rejects_a_dotdot_component(tmp_path: Path) -> None:
+    layout = StateLayout(tmp_path / "state")
+    outside = tmp_path / "outside-assert"
+    outside.mkdir()
+    marker = outside / "marker"
+    marker.write_text("unchanged")
+
+    with pytest.raises(UnsafeStoragePathError, match=r"escapes|\.\."):
+        layout.assert_safe(layout.root / ".." / outside.name)
+
+    assert marker.read_text() == "unchanged"
+
+
+def test_layout_ensure_directory_rejects_dotdot_before_mkdir(tmp_path: Path) -> None:
+    layout = StateLayout(tmp_path / "state")
+    outside = tmp_path / "outside-ensure"
+
+    with pytest.raises(UnsafeStoragePathError, match=r"escapes|\.\."):
+        layout.ensure_directory(layout.root / ".." / outside.name)
+
+    assert not outside.exists()
+
+
+def test_layout_require_directory_rejects_dotdot_before_access(tmp_path: Path) -> None:
+    layout = StateLayout(tmp_path / "state")
+    outside = tmp_path / "outside-require"
+    outside.mkdir()
+
+    with pytest.raises(UnsafeStoragePathError, match=r"escapes|\.\."):
+        layout.require_directory(layout.root / ".." / outside.name)
+
+    assert list(outside.iterdir()) == []
+
+
+def test_layout_artifact_rejects_a_dotdot_stage_path(tmp_path: Path) -> None:
+    layout = StateLayout(tmp_path / "state")
+    outside = tmp_path / "outside-artifact"
+
+    with pytest.raises(UnsafeStoragePathError, match=r"escapes|\.\."):
+        layout.artifact(layout.root / ".." / outside.name, "messages")
+
+    assert not outside.exists()
+
+
+def test_descriptor_pin_rejects_dotdot_before_traversal(tmp_path: Path) -> None:
+    from ke_memory_demo.storage import artifacts
+
+    layout = StateLayout(tmp_path / "state")
+    outside = tmp_path / "outside-pin"
+
+    with pytest.raises(UnsafeStoragePathError, match=r"escapes|\.\."):
+        with artifacts._pin_directory(  # pyright: ignore[reportPrivateUsage]
+            layout,
+            layout.root / ".." / outside.name,
+            create=True,
+        ):
+            pass
+
+    assert not outside.exists()
 
 
 def test_stage_symlink_outside_root_is_rejected(tmp_path: Path) -> None:
@@ -574,6 +644,35 @@ def test_commit_fsync_failure_restores_the_prior_canonical_stage(
         store.promote_stage("run-1", "ingested")
 
     assert canonical.read_bytes() == original
+
+
+def test_first_promotion_commit_failure_durably_restores_canonical_absence(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from ke_memory_demo.storage import artifacts
+
+    store = ArtifactStore(tmp_path)
+    steps: list[str] = []
+    failed = False
+
+    def fail_first_commit_fsync(directory_fd: int, *, step: str) -> None:
+        nonlocal failed
+        steps.append(step)
+        if step == "commit-canonical-parent" and not failed:
+            failed = True
+            raise OSError("injected first-promotion commit fsync failure")
+        os.fsync(directory_fd)
+
+    monkeypatch.setattr(artifacts, "_promotion_fsync", fail_first_commit_fsync)
+
+    with pytest.raises(OSError, match="first-promotion commit"):
+        with store.stage_writer("run-1", "first-stage") as writer:
+            writer.write("exchanges", [_exchange()])
+
+    assert not (tmp_path / "runs/run-1/first-stage").exists()
+    assert not (tmp_path / ".staging/run-1/first-stage").exists()
+    assert "rollback-empty-canonical-parent" in steps
 
 
 def test_restore_rename_failure_uses_the_durable_recovery_copy(
