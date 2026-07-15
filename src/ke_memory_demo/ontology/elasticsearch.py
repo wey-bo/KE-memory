@@ -153,17 +153,17 @@ class ElasticsearchVocabulary:
             raise OntologyDriftError("Elasticsearch index identity changed during mapping read")
         index_name, index_uuid = before
         self._validate_cat_name(index_name)
-        lookup_plan = self._validate_mapping(mapping_payload, index_name)
         mapping_hash = hashlib.sha256(canonical_json(cast(JsonValue, mapping_payload))).hexdigest()
         identity = IndexIdentity(
             index_name=index_name,
             index_uuid=index_uuid,
             mapping_sha256=mapping_hash,
         )
+        if self._pinned_identity is not None and identity != self._pinned_identity:
+            raise OntologyDriftError("Elasticsearch index identity changed after it was pinned")
+        lookup_plan = self._validate_mapping(mapping_payload, index_name)
         if self._pinned_identity is None:
             self._pinned_identity = identity
-        elif identity != self._pinned_identity:
-            raise OntologyDriftError("Elasticsearch index identity changed after it was pinned")
         self._lookup_plan = lookup_plan
         return identity
 
@@ -204,16 +204,24 @@ class ElasticsearchVocabulary:
                 json_body=self._lexical_query(surface, lookup_plan),
             )
             lexical_candidates = self._parse_search_hits(lexical_payload)
-            if lexical_candidates:
-                candidate = min(
-                    lexical_candidates,
-                    key=lambda item: (-item.score, item.term.document_id),
-                )
-                matches[surface] = _Match(
-                    candidate=candidate,
-                    match_kind=2,
-                    matched_alias=None,
-                )
+            recovered_exact = self._exact_matches(surface, lexical_candidates)
+            recovered, is_ambiguous = self._select_exact(recovered_exact)
+            if is_ambiguous:
+                continue
+            if recovered is not None:
+                matches[surface] = recovered
+                continue
+            if not lexical_candidates:
+                continue
+            candidate = min(
+                lexical_candidates,
+                key=lambda item: (-item.score, item.term.document_id),
+            )
+            matches[surface] = _Match(
+                candidate=candidate,
+                match_kind=2,
+                matched_alias=None,
+            )
 
         return [
             self._binding_for(surface, normalized_surface, matches[normalized_surface])
@@ -317,7 +325,11 @@ class ElasticsearchVocabulary:
             )
         if response.status_code == 404:
             raise OntologyNotFoundError(f"Elasticsearch resource not found for {method} {path}")
-        if response.status_code == 429 or response.status_code >= 500:
+        if response.status_code == 400:
+            raise OntologySchemaError(
+                f"Elasticsearch rejected the schema or query for {method} {path}"
+            )
+        if response.status_code in {408, 429} or response.status_code >= 500:
             raise OntologyUnavailableError(
                 f"Elasticsearch unavailable with HTTP {response.status_code}"
             )
@@ -398,7 +410,19 @@ class ElasticsearchVocabulary:
         mapping_type = mapping.get("type")
         if mapping_type not in _SCALAR_MAPPING_TYPES:
             raise OntologySchemaError(f"mapping field {path!r} must have a scalar text type")
+        self._require_searchable_mapping(mapping, path)
         return mapping
+
+    @staticmethod
+    def _require_searchable_mapping(
+        mapping: Mapping[str, object],
+        path: str,
+    ) -> None:
+        indexed = mapping.get("index", True)
+        if not isinstance(indexed, bool):
+            raise OntologySchemaError(f"mapping field {path!r} index must be a boolean")
+        if not indexed:
+            raise OntologySchemaError(f"mapping field {path!r} must be searchable")
 
     def _mapped_field(
         self,
@@ -412,6 +436,11 @@ class ElasticsearchVocabulary:
         if mapping_type in _KEYWORD_MAPPING_TYPES:
             keyword_paths.append(path)
         else:
+            index_options = mapping.get("index_options", "positions")
+            if index_options not in {"positions", "offsets"}:
+                raise OntologySchemaError(
+                    f"mapping field {path!r} index_options must support phrase positions"
+                )
             analyzed_paths.append(path)
             raw_multifields = mapping.get("fields")
             if raw_multifields is not None:
@@ -425,6 +454,10 @@ class ElasticsearchVocabulary:
                         f"mapping field {path!r}.{name}",
                     )
                     if multifield.get("type") in _KEYWORD_MAPPING_TYPES:
+                        self._require_searchable_mapping(
+                            multifield,
+                            f"{path}.{name}",
+                        )
                         keyword_paths.append(f"{path}.{name}")
                         break
         return _MappedField(
@@ -748,7 +781,31 @@ class ElasticsearchVocabulary:
     def _candidate_forms(surface: str, normalized_surface: str) -> tuple[str, ...]:
         raw_collapsed = " ".join(surface.strip().split())
         nfkc_collapsed = " ".join(unicodedata.normalize("NFKC", surface).strip().split())
-        return tuple(dict.fromkeys((raw_collapsed, nfkc_collapsed, normalized_surface)))
+        candidates = [raw_collapsed, nfkc_collapsed, normalized_surface]
+        for canonical_form in (
+            unicodedata.normalize("NFC", normalized_surface),
+            unicodedata.normalize("NFD", normalized_surface),
+        ):
+            for case_form in (
+                canonical_form,
+                canonical_form.upper(),
+                canonical_form.title(),
+            ):
+                candidates.append(case_form)
+                candidates.append(ElasticsearchVocabulary._fullwidth_ascii_compatibility(case_form))
+        return tuple(dict.fromkeys(candidates))[:_MAX_CANDIDATE_FORMS]
+
+    @staticmethod
+    def _fullwidth_ascii_compatibility(value: str) -> str:
+        characters: list[str] = []
+        for character in value:
+            if character == " ":
+                characters.append("\u3000")
+            elif "!" <= character <= "~":
+                characters.append(chr(ord(character) + 0xFEE0))
+            else:
+                characters.append(character)
+        return "".join(characters)
 
     @staticmethod
     def _wildcard_pattern(surface: str) -> str:
