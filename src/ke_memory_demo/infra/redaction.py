@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Iterable, Mapping
+import json
 import re
 from typing import TypeVar, cast
 
@@ -69,9 +70,36 @@ def _normalized_secrets(known_secrets: Iterable[str]) -> tuple[str, ...]:
 
 
 def _redact_string(value: str, secrets: tuple[str, ...]) -> str:
+    try:
+        decoded = json.loads(value)
+    except (TypeError, ValueError):
+        return _replace_secret_variants(value, secrets)
+
+    redacted_decoded = _redact_value(decoded, secrets)
+    if redacted_decoded == decoded:
+        return _replace_secret_variants(value, secrets)
+    return json.dumps(
+        redacted_decoded,
+        ensure_ascii=False,
+        separators=(",", ":"),
+        sort_keys=True,
+    )
+
+
+def _replace_secret_variants(value: str, secrets: tuple[str, ...]) -> str:
+    variants = {
+        variant
+        for secret in secrets
+        for variant in (
+            secret,
+            json.dumps(secret, ensure_ascii=False)[1:-1],
+            json.dumps(secret, ensure_ascii=True)[1:-1],
+        )
+        if variant
+    }
     redacted = value
-    for secret in secrets:
-        redacted = redacted.replace(secret, REDACTED)
+    for variant in sorted(variants, key=len, reverse=True):
+        redacted = redacted.replace(variant, REDACTED)
     return redacted
 
 

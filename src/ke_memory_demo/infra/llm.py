@@ -2,9 +2,11 @@ from __future__ import annotations
 
 import asyncio
 from collections.abc import Awaitable, Callable, Iterable, Mapping, Sequence
+import inspect
 import math
 import re
 import time
+from types import TracebackType
 from typing import Any, Protocol, TypeVar, cast
 
 from openai import AsyncOpenAI
@@ -92,6 +94,7 @@ class StructuredModelClient:
         known_secrets: Iterable[str] = (),
         sleep: Sleep = asyncio.sleep,
         clock: Clock = time.time,
+        _owns_client: bool = False,
     ) -> None:
         self._settings = settings
         self._client = cast(_AsyncOpenAICompatible, client)
@@ -100,6 +103,8 @@ class StructuredModelClient:
         self._known_secrets = tuple(secret for secret in known_secrets if secret)
         self._sleep = sleep
         self._clock = clock
+        self._owns_client = _owns_client
+        self._closed = False
 
     def __repr__(self) -> str:
         return (
@@ -131,7 +136,45 @@ class StructuredModelClient:
             known_secrets=(secret,),
             sleep=sleep,
             clock=clock,
+            _owns_client=True,
         )
+
+    async def __aenter__(self) -> StructuredModelClient:
+        if self._closed:
+            raise InvariantModelError("structured model client is closed")
+        return self
+
+    async def __aexit__(
+        self,
+        _exc_type: type[BaseException] | None,
+        _exc_value: BaseException | None,
+        _traceback: TracebackType | None,
+    ) -> None:
+        await self.aclose()
+
+    async def aclose(self) -> None:
+        if self._closed:
+            return
+        self._closed = True
+        if not self._owns_client:
+            return
+
+        terminal_error: ModelClientError | None = None
+        try:
+            close = getattr(self._client, "close", None)
+            if not callable(close):
+                raise InvariantModelError("owned model client does not provide async close")
+            result = close()
+            if not inspect.isawaitable(result):
+                raise InvariantModelError("owned model client does not provide async close")
+            await cast(Awaitable[object], result)
+        except ModelClientError as error:
+            terminal_error = self._detached_error(error)
+        except Exception:
+            terminal_error = InvariantModelError("owned model client close failed")
+
+        if terminal_error is not None:
+            raise terminal_error
 
     async def complete(
         self,
@@ -139,6 +182,24 @@ class StructuredModelClient:
         messages: Sequence[Mapping[str, object]],
         trace_context: TraceContext | Mapping[str, object],
     ) -> ModelT:
+        terminal_error: ModelClientError | None = None
+        try:
+            return await self._complete(model_type, messages, trace_context)
+        except ModelClientError as error:
+            terminal_error = self._detached_error(error)
+        except Exception:
+            terminal_error = InvariantModelError("structured model client invariant failed")
+
+        raise terminal_error
+
+    async def _complete(
+        self,
+        model_type: type[ModelT],
+        messages: Sequence[Mapping[str, object]],
+        trace_context: TraceContext | Mapping[str, object],
+    ) -> ModelT:
+        if self._closed:
+            raise InvariantModelError("structured model client is closed")
         request_messages = self._validated_messages(messages)
         context = self._redacted_context(trace_context)
         structured_request = 1
@@ -205,6 +266,7 @@ class StructuredModelClient:
             try:
                 content = self._response_content(response)
             except PermanentModelError as error:
+                error_type = "invariant" if isinstance(error, InvariantModelError) else "permanent"
                 self._record_trace(
                     context=context,
                     transport_attempt=transport_attempt,
@@ -212,7 +274,7 @@ class StructuredModelClient:
                     latency_seconds=latency,
                     request=redacted_request,
                     response=response_tree,
-                    error={"type": "permanent", "message": str(error)},
+                    error={"type": error_type, "message": str(error)},
                     usage=usage,
                 )
                 raise error from None
@@ -241,6 +303,21 @@ class StructuredModelClient:
                 structured_request += 1
                 request_messages = self._repair_messages(request_messages, content)
                 continue
+            except Exception:
+                self._record_trace(
+                    context=context,
+                    transport_attempt=transport_attempt,
+                    structured_request=structured_request,
+                    latency_seconds=latency,
+                    request=redacted_request,
+                    response=response_tree,
+                    error={
+                        "type": "invariant",
+                        "message": "structured response validator failed",
+                    },
+                    usage=usage,
+                )
+                raise InvariantModelError("structured response validator failed") from None
 
             self._record_trace(
                 context=context,
@@ -353,8 +430,7 @@ class StructuredModelClient:
 
         request_id = getattr(response, "_request_id", None)
         if not isinstance(request_id, str) or not request_id:
-            completion_id = getattr(response, "id", None)
-            request_id = completion_id if isinstance(completion_id, str) and completion_id else None
+            request_id = None
 
         input_tokens = _required_token_count(usage, "prompt_tokens", "input_tokens")
         output_tokens = _required_token_count(usage, "completion_tokens", "output_tokens")
@@ -375,9 +451,12 @@ class StructuredModelClient:
 
     def _response_content(self, response: object) -> str:
         choices = getattr(response, "choices", None)
-        if not isinstance(choices, Sequence) or isinstance(choices, str | bytes) or not choices:
-            raise InvariantModelError("provider response is missing a completion choice")
-        choice = cast(Sequence[object], choices)[0]
+        if not isinstance(choices, Sequence) or isinstance(choices, str | bytes):
+            raise InvariantModelError("provider response must contain exactly one choice")
+        choice_values = cast(Sequence[object], choices)
+        if len(choice_values) != 1:
+            raise InvariantModelError("provider response must contain exactly one choice")
+        choice = choice_values[0]
         message = getattr(choice, "message", None)
         finish_reason = getattr(choice, "finish_reason", None)
         refusal = getattr(message, "refusal", None)
@@ -409,18 +488,21 @@ class StructuredModelClient:
         usage: UsageRecord | None,
     ) -> None:
         try:
-            self._trace_recorder.record(
-                ModelTrace(
-                    context=context,
-                    transport_attempt=transport_attempt,
-                    structured_request=structured_request,
-                    latency_seconds=latency_seconds,
-                    request=request,
-                    response=response,
-                    error=error,
-                    usage=usage,
-                )
+            trace = ModelTrace(
+                context=context,
+                transport_attempt=transport_attempt,
+                structured_request=structured_request,
+                latency_seconds=latency_seconds,
+                request=request,
+                response=response,
+                error=error,
+                usage=usage,
             )
+            redacted = redact_tree(
+                trace.model_dump(mode="json"),
+                known_secrets=self._known_secrets,
+            )
+            self._trace_recorder.record(ModelTrace.model_validate(redacted))
         except Exception:
             raise InvariantModelError("model trace recording failed") from None
 
@@ -442,6 +524,9 @@ class StructuredModelClient:
         if status_code is None:
             return InvariantModelError("model transport failed with an unexpected local error")
         return PermanentModelError("model provider rejected the request permanently")
+
+    def _detached_error(self, error: ModelClientError) -> ModelClientError:
+        return type(error)(redact_text(str(error), known_secrets=self._known_secrets))
 
 
 def _schema_name(model_type: type[BaseModel]) -> str:

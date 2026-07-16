@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import json
+
 from ke_memory_demo.infra.redaction import REDACTED, redact_tree
 
 
@@ -71,3 +73,33 @@ def test_redaction_preserves_token_usage_fields() -> None:
 
 def test_empty_known_secrets_are_ignored() -> None:
     assert redact_tree("unchanged", known_secrets={"", "   "}) == "unchanged"
+
+
+def test_valid_json_text_is_structurally_redacted_after_decoding() -> None:
+    secret = 'quote"slash\\line\n\t雪'
+    source = json.dumps(
+        {secret: {"value": f"prefix {secret} suffix"}},
+        ensure_ascii=True,
+    )
+
+    result = redact_tree(source, known_secrets={secret})
+
+    assert json.loads(result) == {
+        REDACTED: {"value": f"prefix {REDACTED} suffix"},
+    }
+    assert secret not in result
+
+
+def test_malformed_text_redacts_literal_and_both_json_escaped_secret_forms() -> None:
+    secret = 'quote"slash\\line\n\t雪'
+    encodings = {
+        secret,
+        json.dumps(secret, ensure_ascii=False)[1:-1],
+        json.dumps(secret, ensure_ascii=True)[1:-1],
+    }
+
+    for encoded in encodings:
+        source = f"prefix::{encoded}::malformed{{"
+        result = redact_tree(source, known_secrets={secret})
+        assert encoded not in result
+        assert REDACTED in result

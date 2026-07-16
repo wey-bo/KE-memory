@@ -1,8 +1,9 @@
 from __future__ import annotations
 
-from collections.abc import Callable
+from collections.abc import Callable, Sequence
 from datetime import UTC, datetime
 from email.utils import format_datetime
+import json
 from pathlib import Path
 from typing import Literal, cast
 
@@ -11,11 +12,13 @@ from openai.types.chat import ChatCompletion
 from openai.types.chat.chat_completion import Choice
 from openai.types.chat.chat_completion_message import ChatCompletionMessage
 from openai.types.completion_usage import CompletionUsage
-from pydantic import BaseModel, ValidationError
+from pydantic import BaseModel, ValidationError, field_validator
 
 from ke_memory_demo.infra.llm import (
+    AuthenticationModelError,
     ContentPolicyModelError,
     InvariantModelError,
+    ModelClientError,
     PermanentModelError,
     StructuredModelClient,
     StructuredOutputError,
@@ -68,10 +71,20 @@ class UnsupportedSchemaOutput(BaseModel):
     callback: Callable[[], int]
 
 
+class TypeErrorValidatorOutput(BaseModel):
+    value: int
+
+    @field_validator("value")
+    @classmethod
+    def _raise_type_error(cls, _value: int) -> int:
+        raise TypeError("validator-type-secret")
+
+
 def _completion(
     content: str | None,
     *,
-    request_id: str = "request-1",
+    request_id: str | None = "request-1",
+    completion_id: str | None = None,
     model: str = "provider-model",
     input_tokens: int = 10,
     output_tokens: int = 4,
@@ -89,7 +102,7 @@ def _completion(
     if cost is not None:
         usage_values["cost"] = cost
     response = ChatCompletion(
-        id=f"chat-{request_id}",
+        id=completion_id or f"chat-{request_id or 'without-http-request-id'}",
         choices=[
             Choice(
                 finish_reason=finish_reason,
@@ -108,16 +121,17 @@ def _completion(
         object="chat.completion",
         usage=CompletionUsage.model_validate(usage_values),
     )
-    object.__setattr__(response, "_request_id", request_id)
+    if request_id is not None:
+        object.__setattr__(response, "_request_id", request_id)
     return response
 
 
 class _FakeCompletions:
-    def __init__(self, queued: list[ChatCompletion | Exception]) -> None:
+    def __init__(self, queued: list[object | Exception]) -> None:
         self.queued = queued
         self.calls: list[dict[str, object]] = []
 
-    async def create(self, **kwargs: object) -> ChatCompletion:
+    async def create(self, **kwargs: object) -> object:
         self.calls.append(dict(kwargs))
         if not self.queued:
             raise AssertionError("unexpected provider call")
@@ -133,9 +147,13 @@ class _FakeChat:
 
 
 class _FakeClient:
-    def __init__(self, queued: list[ChatCompletion | Exception]) -> None:
+    def __init__(self, queued: list[object | Exception]) -> None:
         self.completions = _FakeCompletions(queued)
         self.chat = _FakeChat(self.completions)
+        self.close_calls = 0
+
+    async def close(self) -> None:
+        self.close_calls += 1
 
 
 class _Clock:
@@ -165,7 +183,7 @@ def _model_settings(
 
 
 def _structured_client(
-    queued: list[ChatCompletion | Exception],
+    queued: list[object | Exception],
     *,
     settings: ModelSettings | None = None,
     supports_json_schema: bool = True,
@@ -188,6 +206,100 @@ def _structured_client(
         clock=_Clock(),
     )
     return client, fake, recorder, delays
+
+
+def _exception_graph(error: BaseException) -> tuple[BaseException, ...]:
+    pending = [error]
+    seen: set[int] = set()
+    graph: list[BaseException] = []
+    while pending:
+        current = pending.pop()
+        if id(current) in seen:
+            continue
+        seen.add(id(current))
+        graph.append(current)
+        if current.__cause__ is not None:
+            pending.append(current.__cause__)
+        if current.__context__ is not None:
+            pending.append(current.__context__)
+    return tuple(graph)
+
+
+def _assert_detached_secret_safe(error: ModelClientError, secret: str) -> None:
+    graph = _exception_graph(error)
+    assert graph == (error,)
+    assert error.__cause__ is None
+    assert error.__context__ is None
+    assert all(secret not in str(item) and secret not in repr(item) for item in graph)
+
+
+def _assert_secret_not_recoverable(value: object, secret: str) -> None:
+    serialized = json.dumps(value, ensure_ascii=False, sort_keys=True)
+    assert secret not in serialized
+    assert json.dumps(secret, ensure_ascii=False)[1:-1] not in serialized
+    assert json.dumps(secret, ensure_ascii=True)[1:-1] not in serialized
+
+    def visit(item: object, depth: int = 0) -> None:
+        assert depth < 8
+        if isinstance(item, dict):
+            mapping = cast(dict[object, object], item)
+            for key, nested in mapping.items():
+                visit(key, depth + 1)
+                visit(nested, depth + 1)
+            return
+        if isinstance(item, list | tuple):
+            sequence = cast(Sequence[object], item)
+            for nested in sequence:
+                visit(nested, depth + 1)
+            return
+        if not isinstance(item, str):
+            return
+        assert secret not in item
+        assert json.dumps(secret, ensure_ascii=False)[1:-1] not in item
+        assert json.dumps(secret, ensure_ascii=True)[1:-1] not in item
+        try:
+            decoded = json.loads(item)
+        except (TypeError, ValueError):
+            return
+        if decoded != item:
+            visit(decoded, depth + 1)
+
+    visit(value)
+
+
+class _SecretRepr:
+    def __init__(self, secret: str) -> None:
+        self._secret = secret
+
+    def __repr__(self) -> str:
+        return self._secret
+
+
+class _ExplodingUsage:
+    def __init__(self, secret: str) -> None:
+        self._secret = secret
+
+    @property
+    def prompt_tokens(self) -> int:
+        raise RuntimeError(self._secret)
+
+
+class _ExplodingMessage:
+    def __init__(self, secret: str) -> None:
+        self._secret = secret
+
+    @property
+    def refusal(self) -> str | None:
+        raise RuntimeError(self._secret)
+
+
+class _FailingRecorder:
+    def __init__(self, secret: str) -> None:
+        self._secret = secret
+
+    def record(self, trace: ModelTrace) -> None:
+        del trace
+        raise RuntimeError(self._secret)
 
 
 @pytest.mark.parametrize(
@@ -359,6 +471,94 @@ async def test_schema_mode_uses_exact_kwargs_and_records_redacted_usage() -> Non
 
 
 @pytest.mark.asyncio
+async def test_trace_boundary_redacts_encoded_content_context_and_usage_identity() -> None:
+    secret = 'trace"slash\\line\n\t雪'
+    content = json.dumps({"value": secret}, ensure_ascii=True)
+    client, _fake, recorder, _delays = _structured_client(
+        [
+            _completion(
+                content,
+                request_id=f"request::{secret}",
+                model=f"model::{secret}",
+            )
+        ],
+        known_secrets={secret},
+    )
+
+    result = await client.complete(
+        TextOutput,
+        [{"role": "user", "content": json.dumps({"credential": secret}, ensure_ascii=True)}],
+        TraceContext(
+            operation="extract",
+            metadata={secret: json.dumps({"value": secret}, ensure_ascii=True)},
+        ),
+    )
+
+    assert result.value == secret
+    assert len(recorder.records) == 1
+    _assert_secret_not_recoverable(recorder.records[0].model_dump(mode="json"), secret)
+
+
+@pytest.mark.asyncio
+async def test_repair_request_never_retransmits_decodable_known_secret() -> None:
+    secret = 'repair"slash\\line\n\t雪'
+    invalid = json.dumps({"value": "bad", "leak": secret}, ensure_ascii=True)
+    client, fake, _recorder, _delays = _structured_client(
+        [_completion(invalid), _completion('{"value":3}')],
+        known_secrets={secret},
+    )
+
+    result = await client.complete(
+        ExampleOutput,
+        [{"role": "user", "content": "JSON"}],
+        TraceContext(operation="extract"),
+    )
+
+    assert result.value == 3
+    repair_messages = fake.completions.calls[1]["messages"]
+    _assert_secret_not_recoverable(repair_messages, secret)
+
+
+@pytest.mark.asyncio
+async def test_artifact_trace_jsonl_contains_no_literal_or_decodable_secret(tmp_path: Path) -> None:
+    secret = 'artifact"slash\\line\n\t雪'
+    store = ArtifactStore(tmp_path, registry={MODEL_TRACE_ARTIFACT: ModelTrace})
+    fake = _FakeClient(
+        [
+            _completion(
+                json.dumps({"value": secret}, ensure_ascii=True),
+                request_id=f"request::{secret}",
+                model=f"model::{secret}",
+            )
+        ]
+    )
+
+    with store.stage_writer("run-1", "extract") as writer:
+        client = StructuredModelClient(
+            _model_settings(),
+            client=fake,
+            supports_json_schema=True,
+            trace_recorder=ArtifactTraceRecorder(writer),
+            known_secrets={secret},
+            clock=_Clock(),
+        )
+        result = await client.complete(
+            TextOutput,
+            [{"role": "user", "content": json.dumps(secret, ensure_ascii=True)}],
+            TraceContext(operation="extract", metadata={"encoded": json.dumps(secret)}),
+        )
+        assert result.value == secret
+
+        payload = (tmp_path / ".staging/run-1/extract/model_traces.jsonl").read_text()
+        assert secret not in payload
+        _assert_secret_not_recoverable(json.loads(payload), secret)
+
+    canonical = (tmp_path / "runs/run-1/extract/model_traces.jsonl").read_text()
+    assert secret not in canonical
+    _assert_secret_not_recoverable(json.loads(canonical), secret)
+
+
+@pytest.mark.asyncio
 async def test_json_object_mode_keeps_validation_and_configured_temperature() -> None:
     settings = _model_settings(
         model="deepseek-v4-pro",
@@ -383,6 +583,52 @@ async def test_json_object_mode_keeps_validation_and_configured_temperature() ->
     assert request["temperature"] == 0.25
     assert request["max_completion_tokens"] == 321
     assert len(recorder.usage_records) == 1
+
+
+@pytest.mark.asyncio
+async def test_usage_request_id_is_provider_http_request_id_not_completion_id() -> None:
+    client, _fake, recorder, _delays = _structured_client(
+        [
+            _completion(
+                '{"value":3}',
+                request_id="http-request-17",
+                completion_id="chat-completion-99",
+            )
+        ]
+    )
+
+    await client.complete(
+        ExampleOutput,
+        [{"role": "user", "content": "JSON"}],
+        TraceContext(operation="extract"),
+    )
+
+    assert recorder.usage_records[0].request_id == "http-request-17"
+    assert recorder.records[0].response is not None
+    assert recorder.records[0].response["id"] == "chat-completion-99"
+
+
+@pytest.mark.asyncio
+async def test_usage_request_id_remains_none_when_http_request_id_is_absent() -> None:
+    client, _fake, recorder, _delays = _structured_client(
+        [
+            _completion(
+                '{"value":3}',
+                request_id=None,
+                completion_id="chat-completion-only",
+            )
+        ]
+    )
+
+    await client.complete(
+        ExampleOutput,
+        [{"role": "user", "content": "JSON"}],
+        TraceContext(operation="extract"),
+    )
+
+    assert recorder.usage_records[0].request_id is None
+    assert recorder.records[0].response is not None
+    assert recorder.records[0].response["id"] == "chat-completion-only"
 
 
 @pytest.mark.parametrize("model", ["gpt-5", "gpt-5.4-mini", "o1", "o1-preview", "o3-mini"])
@@ -454,6 +700,35 @@ async def test_three_schema_failures_raise_structured_output_error() -> None:
 
 
 @pytest.mark.asyncio
+async def test_validator_type_error_is_traced_invariant_and_not_repaired() -> None:
+    secret = "validator-type-secret"
+    client, fake, recorder, delays = _structured_client(
+        [_completion('{"value":3}'), _completion('{"value":4}')],
+        known_secrets={secret},
+    )
+
+    with pytest.raises(InvariantModelError) as captured:
+        await client.complete(
+            TypeErrorValidatorOutput,
+            [{"role": "user", "content": "JSON"}],
+            TraceContext(operation="extract"),
+        )
+
+    assert len(fake.completions.calls) == 1
+    assert len(fake.completions.queued) == 1
+    assert delays == []
+    assert len(recorder.records) == 1
+    trace = recorder.records[0]
+    assert trace.response is not None
+    assert trace.usage is not None
+    assert trace.error == {
+        "type": "invariant",
+        "message": "structured response validator failed",
+    }
+    _assert_detached_secret_safe(captured.value, secret)
+
+
+@pytest.mark.asyncio
 async def test_transient_failures_stop_at_four_calls_with_exact_delays_and_safe_errors() -> None:
     secret = "transport-secret"
     client, fake, recorder, delays = _structured_client(
@@ -480,6 +755,25 @@ async def test_transient_failures_stop_at_four_calls_with_exact_delays_and_safe_
     assert [trace.transport_attempt for trace in recorder.records] == [1, 2, 3, 4]
     assert secret not in str(captured.value)
     assert secret not in "".join(trace.model_dump_json() for trace in recorder.records)
+    _assert_detached_secret_safe(captured.value, secret)
+
+
+@pytest.mark.asyncio
+async def test_authentication_error_has_no_raw_provider_exception_graph() -> None:
+    secret = "auth-graph-secret"
+    client, _fake, _recorder, _delays = _structured_client(
+        [_StatusError(401, message=secret)],
+        known_secrets={secret},
+    )
+
+    with pytest.raises(AuthenticationModelError) as captured:
+        await client.complete(
+            ExampleOutput,
+            [{"role": "user", "content": "JSON"}],
+            TraceContext(operation="extract"),
+        )
+
+    _assert_detached_secret_safe(captured.value, secret)
 
 
 @pytest.mark.asyncio
@@ -526,6 +820,28 @@ async def test_transport_and_repair_calls_share_one_four_call_budget() -> None:
     assert len(recorder.usage_records) == 2
 
 
+@pytest.mark.asyncio
+async def test_schema_exhaustion_has_no_pydantic_exception_graph() -> None:
+    secret = "schema-graph-secret"
+    client, _fake, _recorder, _delays = _structured_client(
+        [
+            _completion(f'{{"value":"{secret}"}}'),
+            _completion(f'{{"value":"{secret}"}}'),
+            _completion(f'{{"value":"{secret}"}}'),
+        ],
+        known_secrets={secret},
+    )
+
+    with pytest.raises(StructuredOutputError) as captured:
+        await client.complete(
+            ExampleOutput,
+            [{"role": "user", "content": "JSON"}],
+            TraceContext(operation="extract"),
+        )
+
+    _assert_detached_secret_safe(captured.value, secret)
+
+
 @pytest.mark.parametrize("status_code", [400, 401, 403, 404])
 @pytest.mark.asyncio
 async def test_permanent_transport_errors_are_not_retried(status_code: int) -> None:
@@ -562,6 +878,51 @@ async def test_content_policy_response_is_a_typed_permanent_error() -> None:
 
 
 @pytest.mark.asyncio
+async def test_zero_choices_is_traced_as_typed_invariant() -> None:
+    response = _completion('{"value":3}')
+    object.__setattr__(response, "choices", [])
+    client, fake, recorder, delays = _structured_client([response])
+
+    with pytest.raises(InvariantModelError, match="exactly one"):
+        await client.complete(
+            ExampleOutput,
+            [{"role": "user", "content": "JSON"}],
+            TraceContext(operation="extract"),
+        )
+
+    assert len(fake.completions.calls) == 1
+    assert delays == []
+    assert len(recorder.records) == 1
+    assert recorder.records[0].response is not None
+    assert recorder.records[0].usage is not None
+
+
+@pytest.mark.asyncio
+async def test_multiple_choices_rejects_dangerous_second_choice_as_invariant() -> None:
+    response = _completion('{"value":3}')
+    dangerous = _completion(
+        None,
+        finish_reason="content_filter",
+        refusal="dangerous second choice",
+    ).choices[0]
+    object.__setattr__(response, "choices", [response.choices[0], dangerous])
+    client, fake, recorder, delays = _structured_client([response])
+
+    with pytest.raises(InvariantModelError, match="exactly one"):
+        await client.complete(
+            ExampleOutput,
+            [{"role": "user", "content": "JSON"}],
+            TraceContext(operation="extract"),
+        )
+
+    assert len(fake.completions.calls) == 1
+    assert delays == []
+    assert len(recorder.records) == 1
+    assert recorder.records[0].response is not None
+    assert len(cast(list[object], recorder.records[0].response["choices"])) == 2
+
+
+@pytest.mark.asyncio
 async def test_missing_usage_is_a_typed_invariant_error() -> None:
     response = _completion('{"value":3}')
     object.__setattr__(response, "usage", None)
@@ -581,10 +942,92 @@ async def test_missing_usage_is_a_typed_invariant_error() -> None:
 
 
 @pytest.mark.asyncio
+async def test_invalid_local_input_has_no_validation_exception_graph() -> None:
+    secret = "input-graph-secret"
+    client, fake, _recorder, _delays = _structured_client(
+        [],
+        known_secrets={secret},
+    )
+
+    with pytest.raises(InvariantModelError) as captured:
+        await client.complete(
+            ExampleOutput,
+            [{"role": "user", "content": _SecretRepr(secret)}],
+            TraceContext(operation="extract"),
+        )
+
+    assert fake.completions.calls == []
+    _assert_detached_secret_safe(captured.value, secret)
+
+
+@pytest.mark.asyncio
+async def test_usage_parser_failure_has_no_raw_exception_graph() -> None:
+    secret = "usage-graph-secret"
+    response = _completion('{"value":3}')
+    object.__setattr__(response, "usage", _ExplodingUsage(secret))
+    client, _fake, _recorder, _delays = _structured_client(
+        [response],
+        known_secrets={secret},
+    )
+
+    with pytest.raises(InvariantModelError) as captured:
+        await client.complete(
+            ExampleOutput,
+            [{"role": "user", "content": "JSON"}],
+            TraceContext(operation="extract"),
+        )
+
+    _assert_detached_secret_safe(captured.value, secret)
+
+
+@pytest.mark.asyncio
+async def test_response_parser_failure_has_no_raw_exception_graph() -> None:
+    secret = "response-graph-secret"
+    response = _completion('{"value":3}')
+    object.__setattr__(response.choices[0], "message", _ExplodingMessage(secret))
+    client, _fake, _recorder, _delays = _structured_client(
+        [response],
+        known_secrets={secret},
+    )
+
+    with pytest.raises(InvariantModelError) as captured:
+        await client.complete(
+            ExampleOutput,
+            [{"role": "user", "content": "JSON"}],
+            TraceContext(operation="extract"),
+        )
+
+    _assert_detached_secret_safe(captured.value, secret)
+
+
+@pytest.mark.asyncio
+async def test_recorder_failure_has_no_raw_exception_graph() -> None:
+    secret = "recorder-graph-secret"
+    fake = _FakeClient([_completion('{"value":3}')])
+    client = StructuredModelClient(
+        _model_settings(),
+        client=fake,
+        supports_json_schema=True,
+        trace_recorder=_FailingRecorder(secret),
+        known_secrets={secret},
+        clock=_Clock(),
+    )
+
+    with pytest.raises(InvariantModelError) as captured:
+        await client.complete(
+            ExampleOutput,
+            [{"role": "user", "content": "JSON"}],
+            TraceContext(operation="extract"),
+        )
+
+    _assert_detached_secret_safe(captured.value, secret)
+
+
+@pytest.mark.asyncio
 async def test_unrepresentable_json_schema_is_a_typed_invariant_without_provider_call() -> None:
     client, fake, recorder, delays = _structured_client([])
 
-    with pytest.raises(InvariantModelError, match="schema"):
+    with pytest.raises(InvariantModelError, match="schema") as captured:
         await client.complete(
             UnsupportedSchemaOutput,
             [{"role": "user", "content": "JSON"}],
@@ -594,6 +1037,7 @@ async def test_unrepresentable_json_schema_is_a_typed_invariant_without_provider
     assert fake.completions.calls == []
     assert recorder.records == ()
     assert delays == []
+    _assert_detached_secret_safe(captured.value, "schema-generation-secret")
 
 
 def test_production_constructor_uses_work_secret_without_exposing_it(
@@ -625,3 +1069,90 @@ def test_production_constructor_uses_work_secret_without_exposing_it(
         "max_retries": 0,
     }
     assert secret not in repr(client)
+
+
+@pytest.mark.asyncio
+async def test_injected_client_is_caller_owned_and_close_is_idempotent() -> None:
+    client, fake, _recorder, _delays = _structured_client([_completion('{"value":3}')])
+
+    await client.aclose()
+    await client.aclose()
+
+    assert fake.close_calls == 0
+
+
+@pytest.mark.asyncio
+async def test_complete_after_close_is_detached_invariant_before_transport() -> None:
+    secret = "closed-client-secret"
+    client, fake, _recorder, _delays = _structured_client(
+        [_completion('{"value":3}')],
+        known_secrets={secret},
+    )
+    await client.aclose()
+
+    with pytest.raises(InvariantModelError, match="closed") as captured:
+        await client.complete(
+            ExampleOutput,
+            [{"role": "user", "content": secret}],
+            TraceContext(operation="extract"),
+        )
+
+    assert fake.completions.calls == []
+    _assert_detached_secret_safe(captured.value, secret)
+
+
+@pytest.mark.asyncio
+async def test_from_app_settings_owns_and_closes_client_once(
+    project_root: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from ke_memory_demo.infra import llm
+
+    fake = _FakeClient([])
+    monkeypatch.setenv("KE_MEMORY_WORK_API_KEY", "owned-close-test-secret")
+
+    def fake_async_openai(**_kwargs: object) -> _FakeClient:
+        return fake
+
+    monkeypatch.setattr(llm, "AsyncOpenAI", fake_async_openai)
+    client = StructuredModelClient.from_app_settings(
+        load_settings(project_root),
+        supports_json_schema=True,
+        trace_recorder=InMemoryTraceRecorder(),
+    )
+
+    await client.aclose()
+    await client.aclose()
+
+    assert fake.close_calls == 1
+
+
+@pytest.mark.asyncio
+async def test_owned_client_async_context_closes_on_exit(
+    project_root: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from ke_memory_demo.infra import llm
+
+    fake = _FakeClient([_completion('{"value":3}')])
+    monkeypatch.setenv("KE_MEMORY_WORK_API_KEY", "owned-context-test-secret")
+
+    def fake_async_openai(**_kwargs: object) -> _FakeClient:
+        return fake
+
+    monkeypatch.setattr(llm, "AsyncOpenAI", fake_async_openai)
+
+    async with StructuredModelClient.from_app_settings(
+        load_settings(project_root),
+        supports_json_schema=True,
+        trace_recorder=InMemoryTraceRecorder(),
+    ) as client:
+        result = await client.complete(
+            ExampleOutput,
+            [{"role": "user", "content": "JSON"}],
+            TraceContext(operation="extract"),
+        )
+        assert result.value == 3
+        assert fake.close_calls == 0
+
+    assert fake.close_calls == 1
