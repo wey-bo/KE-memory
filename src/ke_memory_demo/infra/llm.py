@@ -106,6 +106,14 @@ class StructuredModelClient:
         self._owns_client = _owns_client
         self._closed = False
 
+    @property
+    def model_name(self) -> str:
+        return self._settings.model
+
+    @property
+    def max_output_tokens(self) -> int:
+        return self._settings.max_output_tokens
+
     def __repr__(self) -> str:
         return (
             f"{type(self).__name__}(model={self._settings.model!r}, "
