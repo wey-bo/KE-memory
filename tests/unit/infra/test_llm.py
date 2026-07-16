@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Callable, Sequence
+import copy
 from datetime import UTC, datetime
 from email.utils import format_datetime
 import json
@@ -445,7 +446,9 @@ async def test_schema_mode_uses_exact_kwargs_and_records_redacted_usage() -> Non
     request = fake.completions.calls[0]
     assert set(request) == {"model", "messages", "max_completion_tokens", "response_format"}
     assert request["model"] == "gpt-5.4"
-    assert request["messages"] == messages
+    assert request["messages"] == [
+        {"role": "user", "content": "return JSON, credential=[REDACTED]"}
+    ]
     assert request["max_completion_tokens"] == 4096
     assert "temperature" not in request
     response_format = cast(dict[str, object], request["response_format"])
@@ -517,6 +520,68 @@ async def test_repair_request_never_retransmits_decodable_known_secret() -> None
     assert result.value == 3
     repair_messages = fake.completions.calls[1]["messages"]
     _assert_secret_not_recoverable(repair_messages, secret)
+
+
+@pytest.mark.asyncio
+async def test_all_provider_calls_use_sanitized_copy_of_original_prompt_messages() -> None:
+    secret = 'prompt"slash\\line\n\t雪'
+    messages: list[dict[str, object]] = [
+        {"role": "system", "content": f"literal::{secret}"},
+        {
+            "role": "user",
+            "content": json.dumps({"credential": secret}, ensure_ascii=True),
+        },
+        {
+            "role": "user",
+            "content": [{"type": "text", "text": f"nested::{secret}"}],
+        },
+    ]
+    original = copy.deepcopy(messages)
+    client, fake, recorder, _delays = _structured_client(
+        [_completion('{"value":"bad"}'), _completion('{"value":3}')],
+        known_secrets={secret},
+    )
+
+    result = await client.complete(
+        ExampleOutput,
+        messages,
+        TraceContext(operation="extract"),
+    )
+
+    assert result.value == 3
+    assert messages == original
+    assert len(fake.completions.calls) == 2
+    for call in fake.completions.calls:
+        _assert_secret_not_recoverable(call["messages"], secret)
+    for trace in recorder.records:
+        _assert_secret_not_recoverable(trace.model_dump(mode="json"), secret)
+
+
+@pytest.mark.asyncio
+async def test_secret_free_provider_messages_retain_exact_values_and_order() -> None:
+    messages: list[dict[str, object]] = [
+        {"role": "system", "content": "  preserve spacing  "},
+        {
+            "role": "user",
+            "content": [
+                {"type": "text", "text": "first"},
+                {"type": "text", "text": "second"},
+            ],
+        },
+        {"role": "tool", "content": '{"safe": true, "count": 2}'},
+    ]
+    original = copy.deepcopy(messages)
+    client, fake, _recorder, _delays = _structured_client([_completion('{"value":3}')])
+
+    result = await client.complete(
+        ExampleOutput,
+        messages,
+        TraceContext(operation="extract"),
+    )
+
+    assert result.value == 3
+    assert messages == original
+    assert fake.completions.calls[0]["messages"] == original
 
 
 @pytest.mark.asyncio

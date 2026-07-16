@@ -363,7 +363,9 @@ class StructuredModelClient:
 
     def _validated_messages(self, messages: Sequence[Mapping[str, object]]) -> list[JsonObject]:
         try:
-            return _MESSAGE_LIST.validate_python(list(messages))
+            validated = _MESSAGE_LIST.validate_python(list(messages))
+            redacted = redact_tree(validated, known_secrets=self._known_secrets)
+            return _MESSAGE_LIST.validate_python(redacted)
         except ValidationError:
             raise InvariantModelError("messages must contain JSON-compatible objects") from None
 
