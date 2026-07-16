@@ -5,7 +5,7 @@ from collections.abc import Iterable, Mapping, Sequence
 from datetime import datetime
 from typing import Annotated, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_validator
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from ke_memory_demo.domain import (
     AggregateNode,
@@ -19,12 +19,17 @@ from ke_memory_demo.domain import (
     content_id,
 )
 
-from .session import SessionMemory
+from .session import (
+    SessionMemory,
+    validate_session_memory,
+    validate_session_memory_shape,
+)
 from .validation import (
     AggregationInvariantError,
     authenticate_knowledge_equation,
     expression_assertion_refs,
     normalize_identity,
+    records_by_id,
 )
 
 
@@ -67,15 +72,33 @@ class AggregateCandidate(_CandidateRecord):
 
 def generate_depth1_candidates(
     session_memories: Sequence[SessionMemory],
+    turn_kes: Mapping[str, KnowledgeEquation],
 ) -> tuple[AggregateCandidate, ...]:
-    memories = tuple(session_memories)
+    memories = tuple(validate_session_memory_shape(memory) for memory in session_memories)
+    source_turn_kes = records_by_id(turn_kes, label="source Turn KE")
+    claimed_by: dict[str, str] = {}
     for memory in memories:
-        try:
-            SessionMemory.model_validate(memory.model_dump(mode="python"))
-        except ValidationError as error:
-            raise AggregationInvariantError(
-                f"SessionMemory {memory.session_id} is not an authentic validated record"
-            ) from error
+        for source_id in memory.source_turn_ke_ids:
+            previous = claimed_by.get(source_id)
+            if previous is not None:
+                raise AggregationInvariantError(
+                    f"source Turn KE {source_id} is claimed by more than one SessionMemory"
+                )
+            claimed_by[source_id] = memory.session_id
+            if source_id not in source_turn_kes:
+                raise AggregationInvariantError(
+                    f"SessionMemory {memory.session_id} source Turn KE is missing: {source_id}"
+                )
+    extra_sources = sorted(set(source_turn_kes).difference(claimed_by))
+    if extra_sources:
+        raise AggregationInvariantError(
+            f"source Turn KE mapping contains extra record {extra_sources[0]}"
+        )
+    for memory in memories:
+        selected = {
+            source_id: source_turn_kes[source_id] for source_id in memory.source_turn_ke_ids
+        }
+        validate_session_memory(memory, selected)
     session_ids = tuple(memory.session_id for memory in memories)
     if len(session_ids) != len(set(session_ids)):
         raise AggregationInvariantError("duplicate SessionMemory session ID")
@@ -104,7 +127,8 @@ def generate_depth1_candidates(
     for equation_id in sorted(equations):
         equation = equations[equation_id]
         by_subject[subject_identity(equation.lhs)].append(equation_id)
-        by_operator[operator_identity(equation)].append(equation_id)
+        for identity in sorted(_operator_identities(equation)):
+            by_operator[identity].append(equation_id)
     for members in by_subject.values():
         _offer_group(groups, members, SHARED_SUBJECT, owners=owners)
     for members in by_operator.values():
@@ -122,7 +146,7 @@ def generate_depth1_candidates(
         {key: value.temporal for key, value in equations.items()},
         owners=owners,
         subjects={key: subject_identity(value.lhs) for key, value in equations.items()},
-        operators={key: operator_identity(value) for key, value in equations.items()},
+        operators={key: _operator_identities(value) for key, value in equations.items()},
     )
     return _materialize_candidates(1, groups)
 
@@ -147,7 +171,11 @@ def generate_depth2_candidates(
         for member in node.member_refs:
             by_member[member].append(node_id)
         node_subjects = {subject_identity(assertion.lhs) for assertion in node.assertions}
-        node_operators = {operator_identity(assertion) for assertion in node.assertions}
+        node_operators = {
+            identity
+            for assertion in node.assertions
+            for identity in _operator_identities(assertion)
+        }
         for identity in sorted(node_subjects):
             by_subject[identity].append(node_id)
         for identity in sorted(node_operators):
@@ -170,7 +198,11 @@ def generate_depth2_candidates(
         for node_id, node in nodes.items()
     }
     operators = {
-        node_id: frozenset(operator_identity(assertion) for assertion in node.assertions)
+        node_id: frozenset(
+            identity
+            for assertion in node.assertions
+            for identity in _operator_identities(assertion)
+        )
         for node_id, node in nodes.items()
     }
     _offer_temporal_adjacencies(
@@ -199,6 +231,15 @@ def operator_identity(equation: KnowledgeEquation) -> str:
     )
 
 
+def _operator_identities(equation: KnowledgeEquation) -> frozenset[str]:
+    identities = {
+        identity
+        for expression in (equation.lhs, equation.rhs)
+        for identity in _operators_in_expression(expression)
+    }
+    return frozenset(identities or {EQUATION_OPERATOR_IDENTITY})
+
+
 def _expression_identity(expression: Expression) -> str:
     if isinstance(expression, AssertionRef):
         return normalize_identity(expression.assertion_id)
@@ -215,6 +256,23 @@ def _operator_in_expression(expression: Expression) -> str | None:
     if isinstance(expression, OperatorRef):
         return normalize_identity(expression.term_id)
     return None
+
+
+def _operators_in_expression(expression: Expression) -> frozenset[str]:
+    if isinstance(expression, OperatorApplication):
+        return frozenset(
+            {
+                normalize_identity(expression.operator.term_id),
+                *(
+                    identity
+                    for argument in expression.arguments
+                    for identity in _operators_in_expression(argument)
+                ),
+            }
+        )
+    if isinstance(expression, OperatorRef):
+        return frozenset((normalize_identity(expression.term_id),))
+    return frozenset()
 
 
 def _ke_explicit_refs(equation: KnowledgeEquation) -> set[str]:

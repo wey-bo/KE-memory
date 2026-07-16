@@ -32,10 +32,12 @@ from .validation import (
     evidence_union,
     ontology_binding_union,
     records_by_id,
+    same_runtime_shape,
     sorted_unique_spans,
     span_key,
     temporal_envelope,
     validate_expression_authority,
+    validate_knowledge_equation_relations,
 )
 
 
@@ -454,10 +456,7 @@ def validate_session_memory(
     memory: SessionMemory,
     turn_kes: Mapping[str, KnowledgeEquation] | Sequence[KnowledgeEquation],
 ) -> None:
-    try:
-        SessionMemory.model_validate(memory.model_dump(mode="python"))
-    except ValidationError as error:
-        raise AggregationInvariantError("record is not a validated SessionMemory") from error
+    memory = validate_session_memory_shape(memory)
     lower = records_by_id(turn_kes, label="Turn KE")
     for equation in lower.values():
         authenticate_knowledge_equation(
@@ -466,6 +465,7 @@ def validate_session_memory(
         )
         if equation.level is not KnowledgeLevel.TURN:
             raise AggregationInvariantError(f"source record {equation.id} is not a Turn-level KE")
+    source_ids = set(lower)
     missing_sources = sorted(set(memory.source_turn_ke_ids).difference(lower))
     if missing_sources:
         raise AggregationInvariantError(
@@ -489,6 +489,11 @@ def validate_session_memory(
             raise AggregationInvariantError("SessionMemory assertion lower refs must be sorted")
         cited_ids = equation.derived_from
         cited = _resolve_lower(cited_ids, lower, label=f"Session assertion {equation.id}")
+        validate_knowledge_equation_relations(
+            equation,
+            source_ids,
+            label=f"Session assertion {equation.id}",
+        )
         used_terms = validate_expression_authority(
             equation.lhs,
             equation.rhs,
@@ -519,6 +524,16 @@ def validate_session_memory(
     )
     if memory.evidence_closure != expected_closure:
         raise AggregationInvariantError("SessionMemory evidence closure is not exact")
+
+
+def validate_session_memory_shape(memory: SessionMemory) -> SessionMemory:
+    try:
+        validated = SessionMemory.model_validate(memory.model_dump(mode="python", warnings=False))
+    except (AttributeError, TypeError, ValidationError, ValueError) as error:
+        raise AggregationInvariantError("SessionMemory record has an invalid shape") from error
+    if not same_runtime_shape(memory, validated):
+        raise AggregationInvariantError("SessionMemory has a noncanonical runtime shape")
+    return validated
 
 
 def _validated_output(value: object) -> SessionAggregationOutput:

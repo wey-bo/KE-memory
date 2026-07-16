@@ -31,16 +31,23 @@ from .candidates import (
     generate_depth1_candidates,
     generate_depth2_candidates,
 )
-from .session import SessionMemory, StructuredCompletionClient
+from .session import (
+    SessionMemory,
+    StructuredCompletionClient,
+    validate_session_memory_shape,
+)
 from .validation import (
     AggregationInvariantError,
     authenticate_knowledge_equation,
     evidence_union,
+    expression_assertion_refs,
     ontology_binding_union,
     records_by_id,
+    same_runtime_shape,
     sorted_unique_spans,
     temporal_envelope,
     validate_expression_authority,
+    validate_knowledge_equation_relations,
 )
 
 
@@ -155,6 +162,16 @@ def create_aggregate_node(
             raise AggregationInvariantError("aggregate node assertion has an invalid lifecycle")
         if assertion.produced_in_stage != SEMANTIC_DAG_STAGE:
             raise AggregationInvariantError("aggregate node assertion has the wrong stage")
+        invalid_assertion_refs = sorted(
+            reference
+            for expression in (assertion.lhs, assertion.rhs)
+            for reference in expression_assertion_refs(expression)
+            if not reference.startswith("ke:")
+        )
+        if invalid_assertion_refs:
+            raise AggregationInvariantError(
+                "aggregate assertion AssertionRef must name a KnowledgeEquation"
+            )
     assertion_lower_refs = {
         reference for assertion in assertion_records for reference in assertion.derived_from
     }
@@ -195,18 +212,25 @@ def create_aggregate_node(
 
 
 class SemanticDAGBuilder:
-    def __init__(self, model: StructuredCompletionClient, *, run_id: str) -> None:
+    def __init__(
+        self,
+        model: StructuredCompletionClient,
+        turn_kes: Mapping[str, KnowledgeEquation],
+        *,
+        run_id: str,
+    ) -> None:
         if not run_id:
             raise ValueError("run_id must not be empty")
         self._model = model
+        self._turn_kes = dict(turn_kes)
         self._run_id = run_id
 
     async def build(self, session_memories: Sequence[SessionMemory]) -> SemanticDAG:
-        memories = tuple(session_memories)
+        memories = tuple(validate_session_memory_shape(memory) for memory in session_memories)
+        depth1_candidates = generate_depth1_candidates(memories, self._turn_kes)
         known_kes = {
             equation.id: equation for memory in memories for equation in memory.knowledge_equations
         }
-        depth1_candidates = generate_depth1_candidates(memories)
         if not depth1_candidates:
             return SemanticDAG(nodes=())
 
@@ -389,6 +413,7 @@ class SemanticDAGBuilder:
             cited_records,
             cited_ids,
             label=f"aggregate assertion {proposal.key}",
+            allowed_assertion_ids={record.id for record in cited_records},
         )
         return KnowledgeEquation.create(
             level=KnowledgeLevel.AGGREGATE,
@@ -442,6 +467,13 @@ def validate_evidence_closure(
         authenticate_knowledge_equation(equation, label=f"known Session KE {equation.id}")
         if equation.level is not KnowledgeLevel.SESSION:
             raise AggregationInvariantError(f"known KE {equation.id} is not Session-level")
+    lower_ids = set(lower_kes)
+    for equation in lower_kes.values():
+        validate_knowledge_equation_relations(
+            equation,
+            lower_ids,
+            label=f"known Session KE {equation.id}",
+        )
     nodes_by_id = _nodes_by_id(nodes)
     for node in nodes:
         if node.depth not in (1, 2):
@@ -449,6 +481,14 @@ def validate_evidence_closure(
         if node.id in node.member_refs:
             raise AggregationInvariantError(f"aggregate node {node.id} has a self edge")
         closure = _node_closure(node, lower_kes, nodes_by_id)
+        if len(node.member_refs) < 2:
+            raise AggregationInvariantError(
+                "aggregate node canonical shape requires at least two unique members"
+            )
+        if not node.assertions:
+            raise AggregationInvariantError(
+                "aggregate node canonical shape requires at least one assertion"
+            )
         transitive_ids = set(closure.refs)
         if not set(node.derived_from).issubset(transitive_ids):
             raise AggregationInvariantError("node derived_from escapes transitive member closure")
@@ -472,6 +512,14 @@ def validate_evidence_closure(
                 raise AggregationInvariantError("aggregate assertion has an invalid lifecycle")
             if assertion.produced_in_stage != SEMANTIC_DAG_STAGE:
                 raise AggregationInvariantError("aggregate assertion has the wrong stage")
+            allowed_relation_ids = {
+                record.id for records in closure.symbol_records.values() for record in records
+            }
+            validate_knowledge_equation_relations(
+                assertion,
+                allowed_relation_ids,
+                label=f"aggregate assertion {assertion.id}",
+            )
             if assertion.derived_from != tuple(sorted(assertion.derived_from)):
                 raise AggregationInvariantError("aggregate assertion lower refs must be sorted")
             if not set(assertion.derived_from).issubset(transitive_ids):
@@ -489,6 +537,7 @@ def validate_evidence_closure(
                 cited_records,
                 assertion.derived_from,
                 label=f"aggregate assertion {assertion.id}",
+                allowed_assertion_ids={record.id for record in cited_records},
             )
             expected_evidence = sorted_unique_spans(
                 span
@@ -536,9 +585,9 @@ def _authenticate_aggregate_node(node: AggregateNode) -> None:
         {
             "schema_version": SCHEMA_VERSION,
             "node_kind": node.node_kind.value,
-            "member_refs": list(sorted(node.member_refs)),
-            "derived_from": list(sorted(node.derived_from)),
-            "assertion_ids": sorted(assertion.id for assertion in node.assertions),
+            "member_refs": list(node.member_refs),
+            "derived_from": list(node.derived_from),
+            "assertion_ids": [assertion.id for assertion in node.assertions],
             "depth": node.depth,
         },
     )
@@ -656,6 +705,7 @@ def _node_closure_inner(
 def _nodes_by_id(nodes: Sequence[AggregateNode]) -> dict[str, AggregateNode]:
     result: dict[str, AggregateNode] = {}
     for node in nodes:
+        _validate_aggregate_node_shape(node)
         if node.id in result:
             raise AggregationInvariantError(f"duplicate aggregate node {node.id}")
         result[node.id] = node
@@ -663,6 +713,41 @@ def _nodes_by_id(nodes: Sequence[AggregateNode]) -> dict[str, AggregateNode]:
     if len(revisions) != len(set(revisions)):
         raise AggregationInvariantError("duplicate aggregate node revision")
     return result
+
+
+def _validate_aggregate_node_shape(node: AggregateNode) -> None:
+    try:
+        validated = AggregateNode.model_validate(node.model_dump(mode="python", warnings=False))
+    except (AttributeError, TypeError, ValidationError, ValueError) as error:
+        if not isinstance(error, ValidationError):
+            raise AggregationInvariantError("aggregate node has an invalid shape") from error
+        nested_revision = any(
+            details["loc"]
+            and details["loc"][0] == "assertions"
+            and "revision" in details["msg"].casefold()
+            for details in error.errors()
+        )
+        if nested_revision:
+            raise AggregationInvariantError(
+                "aggregate assertion has an invalid revision"
+            ) from error
+        raise AggregationInvariantError("aggregate node has an invalid shape") from error
+    if not same_runtime_shape(node, validated):
+        raise AggregationInvariantError("aggregate node has a noncanonical runtime shape")
+
+    if node.member_refs != tuple(sorted(node.member_refs)):
+        raise AggregationInvariantError("aggregate node member refs are not canonical")
+    if node.derived_from != tuple(sorted(node.derived_from)):
+        raise AggregationInvariantError("aggregate node derived refs are not canonical")
+    if node.assertions != tuple(sorted(node.assertions, key=lambda item: item.id)):
+        raise AggregationInvariantError("aggregate node assertions are not canonical")
+    assertion_revisions = tuple(assertion.revision for assertion in node.assertions)
+    if len(assertion_revisions) != len(set(assertion_revisions)):
+        raise AggregationInvariantError(
+            "aggregate node assertion revisions are not a canonical unique tuple"
+        )
+    if node.evidence_closure != sorted_unique_spans(node.evidence_closure):
+        raise AggregationInvariantError("aggregate node evidence closure is not canonical")
 
 
 def _reject_cycles(nodes: Mapping[str, AggregateNode]) -> None:

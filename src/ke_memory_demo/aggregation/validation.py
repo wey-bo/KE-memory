@@ -5,7 +5,7 @@ from datetime import datetime
 from typing import cast
 import unicodedata
 
-from pydantic import ValidationError
+from pydantic import BaseModel, ValidationError
 
 from ke_memory_demo.domain import (
     AssertionRef,
@@ -15,11 +15,13 @@ from ke_memory_demo.domain import (
     KnowledgeEquation,
     MessageSpan,
     OntologyBinding,
+    OntologyBindingStatus,
     OntologyRole,
     OperatorApplication,
     OperatorRef,
     TemporalMetadata,
     canonical_json,
+    content_id,
 )
 
 
@@ -33,6 +35,28 @@ type AtomicTerm = tuple[str, str, OntologyRole]
 
 def span_key(span: MessageSpan) -> SpanKey:
     return (span.message_id, span.start_char, span.end_char, span.text_hash)
+
+
+def same_runtime_shape(value: object, validated: object) -> bool:
+    if type(value) is not type(validated):
+        return False
+    if isinstance(validated, BaseModel):
+        return all(
+            same_runtime_shape(getattr(value, field), getattr(validated, field))
+            for field in type(validated).model_fields
+        )
+    if isinstance(validated, tuple):
+        raw_tuple = cast(tuple[object, ...], value)
+        validated_tuple = cast(tuple[object, ...], validated)
+        return len(raw_tuple) == len(validated_tuple) and all(
+            same_runtime_shape(raw_item, validated_item)
+            for raw_item, validated_item in zip(
+                raw_tuple,
+                validated_tuple,
+                strict=True,
+            )
+        )
+    return True
 
 
 def sorted_unique_spans(spans: Iterable[MessageSpan]) -> tuple[MessageSpan, ...]:
@@ -74,25 +98,23 @@ def validate_expression_authority(
     cited_ids: Sequence[str],
     *,
     label: str,
-) -> tuple[str, ...]:
-    used_atoms = {
-        (term_id, role)
-        for expression in (lhs, rhs)
-        for term_id, _, role in expression_terms(expression)
-    }
+    allowed_assertion_ids: Iterable[str] | None = None,
+) -> tuple[AtomicTerm, ...]:
+    used_atoms = {atom for expression in (lhs, rhs) for atom in expression_terms(expression)}
     offered_atoms = {
-        (term_id, role)
+        atom
         for record in cited_records
         for expression in (record.lhs, record.rhs)
-        for term_id, _, role in expression_terms(expression)
+        for atom in expression_terms(expression)
     }
     invented = sorted(
-        used_atoms.difference(offered_atoms), key=lambda item: (item[0], item[1].value)
+        used_atoms.difference(offered_atoms),
+        key=lambda item: (item[0], normalize_identity(item[1]), item[2].value),
     )
     if invented:
         raise AggregationInvariantError(
             f"{label} uses invented term or operator role {invented[0][0]} "
-            f"as {invented[0][1].value}"
+            f"as {invented[0][2].value}"
         )
 
     assertion_refs = {
@@ -100,12 +122,18 @@ def validate_expression_authority(
         for expression in (lhs, rhs)
         for reference in expression_assertion_refs(expression)
     }
-    dangling = sorted(assertion_refs.difference(cited_ids))
+    allowed_refs = set(cited_ids if allowed_assertion_ids is None else allowed_assertion_ids)
+    dangling = sorted(assertion_refs.difference(allowed_refs))
     if dangling:
         raise AggregationInvariantError(
-            f"{label} AssertionRef does not name a cited lower record: {dangling[0]}"
+            f"{label} AssertionRef does not name a cited lower KnowledgeEquation: {dangling[0]}"
         )
-    return tuple(sorted(term_id for term_id, _ in used_atoms))
+    return tuple(
+        sorted(
+            used_atoms,
+            key=lambda item: (item[0], normalize_identity(item[1]), item[2].value),
+        )
+    )
 
 
 def evidence_union(records: Iterable[KnowledgeEquation]) -> tuple[MessageSpan, ...]:
@@ -138,38 +166,35 @@ def temporal_envelope(temporals: Iterable[TemporalMetadata]) -> TemporalMetadata
 
 
 def ontology_binding_union(
-    used_term_ids: Iterable[str],
+    used_atoms: Iterable[AtomicTerm],
     records: Iterable[KnowledgeEquation],
 ) -> tuple[OntologyBinding, ...]:
-    used = set(used_term_ids)
+    used = set(used_atoms)
     unique: dict[bytes, OntologyBinding] = {}
     for record in records:
-        atoms = tuple(
+        record_atoms = {
             term for expression in (record.lhs, record.rhs) for term in expression_terms(expression)
-        )
+        }
+        applicable_atoms = used.intersection(record_atoms)
         for binding in record.ontology_bindings:
-            applicable = {
-                term_id
-                for term_id, label, _ in atoms
-                if binding.document_id == term_id
-                or normalize_identity(binding.normalized_surface) == normalize_identity(label)
-            }
-            if not applicable.intersection(used):
+            if not any(_binding_applies_to_atom(binding, atom) for atom in applicable_atoms):
                 continue
             key = canonical_json(binding)
             unique[key] = binding
-    offered_by_term = {
-        term_id
-        for record in records
-        for expression in (record.lhs, record.rhs)
-        for term_id, _, _ in expression_terms(expression)
-    }
-    unbound = sorted(used.difference(offered_by_term))
-    if unbound:
-        raise AggregationInvariantError(
-            f"ontology binding union requested unknown term ID {unbound[0]}"
-        )
     return tuple(unique[key] for key in sorted(unique))
+
+
+def _binding_applies_to_atom(binding: OntologyBinding, atom: AtomicTerm) -> bool:
+    term_id, label, role = atom
+    if binding.status is OntologyBindingStatus.RESOLVED:
+        return binding.document_id == term_id and binding.role is role
+
+    normalized_surface = normalize_identity(binding.normalized_surface)
+    if normalize_identity(binding.surface_form) != normalized_surface:
+        return False
+    return normalize_identity(label) == normalized_surface and term_id == content_id(
+        f"unresolved-{role.value}", normalized_surface
+    )
 
 
 def authenticate_knowledge_equation(
@@ -182,6 +207,23 @@ def authenticate_knowledge_equation(
     except ValidationError as error:
         detail = "revision" if "revision" in str(error) else "identity"
         raise AggregationInvariantError(f"{label} has an invalid {detail}") from error
+
+
+def validate_knowledge_equation_relations(
+    equation: KnowledgeEquation,
+    allowed_ids: set[str] | frozenset[str],
+    *,
+    label: str,
+) -> None:
+    for field, references in (
+        ("contradicts", equation.contradicts),
+        ("supersedes", equation.supersedes),
+    ):
+        invalid = sorted(set(references).difference(allowed_ids))
+        if invalid:
+            raise AggregationInvariantError(
+                f"{label} {field} does not name a lower KnowledgeEquation: {invalid[0]}"
+            )
 
 
 def normalize_identity(value: str) -> str:

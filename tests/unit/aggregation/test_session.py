@@ -20,6 +20,7 @@ from ke_memory_demo.aggregation import (
     SessionMemory,
     validate_session_memory,
 )
+from ke_memory_demo.core.json import canonical_json
 from ke_memory_demo.domain import (
     AssertionRef,
     ConceptRef,
@@ -43,6 +44,7 @@ from ke_memory_demo.domain import (
     TemporalMetadata,
     ToolEvent,
     ToolEventKind,
+    content_id,
 )
 from ke_memory_demo.infra.telemetry import TraceContext
 
@@ -140,14 +142,18 @@ def _turn_ke(
     operator: str = "operator:prefers",
     temporal: TemporalMetadata | None = None,
     binding: OntologyBinding | None = None,
+    bindings: Sequence[OntologyBinding] | None = None,
+    lhs: Expression | None = None,
+    rhs: Expression | None = None,
     run_id: str = "turn-run",
 ) -> KnowledgeEquation:
     user = session.exchanges[0].user
     spans = tuple(evidence) if evidence is not None else (_span(user, 0, 17),)
     return KnowledgeEquation.create(
         level="turn",
-        lhs=IndividualRef(term_id=subject, label="Alice"),
-        rhs=OperatorApplication(
+        lhs=lhs or IndividualRef(term_id=subject, label="Alice"),
+        rhs=rhs
+        or OperatorApplication(
             operator=OperatorRef(term_id=operator, label="prefers"),
             arguments=(ConceptRef(term_id=value, label="tea"),),
         ),
@@ -157,7 +163,9 @@ def _turn_ke(
         lifecycle="active",
         speaker="user",
         temporal=temporal,
-        ontology_bindings=((binding or _binding(value)),),
+        ontology_bindings=(
+            tuple(bindings) if bindings is not None else ((binding or _binding(value)),)
+        ),
         evidence_refs=spans,
         confidence=0.91,
         produced_in_run_id=run_id,
@@ -470,6 +478,133 @@ async def test_session_proposal_cannot_retype_a_cited_term_id_as_an_operator() -
 
 
 @pytest.mark.asyncio
+@pytest.mark.parametrize(
+    "case",
+    (
+        "same_label_different_resolved_id",
+        "same_document_different_role",
+        "unresolved_same_surface_different_role",
+        "unresolved_role",
+        "nested_expression",
+    ),
+)
+async def test_session_binding_union_is_exact_for_used_atoms(case: str) -> None:
+    session = _session()
+    source_lhs, source_rhs, bindings, lhs, rhs, expected = _ontology_binding_case(case)
+    turn_ke = _turn_ke(
+        session,
+        lhs=source_lhs,
+        rhs=source_rhs,
+        bindings=bindings,
+    )
+    proposal = _proposal(turn_ke, lhs=lhs, rhs=rhs)
+
+    memory = await SessionAggregator(
+        FakeSessionModel(_output(turn_ke, proposals=(proposal,))),
+        (turn_ke,),
+        _coverage(session, turn_ke),
+        run_id="session-run",
+    ).aggregate(session)
+
+    assert memory.knowledge_equations[0].ontology_bindings == expected
+    validate_session_memory(memory, {turn_ke.id: turn_ke})
+
+
+@pytest.mark.parametrize("tamper", ("over_broad", "under_broad"))
+def test_validate_session_memory_rejects_inexact_role_aware_binding_sets(tamper: str) -> None:
+    session = _session()
+    source_lhs, source_rhs, bindings, lhs, rhs, expected = _ontology_binding_case(
+        "same_label_different_resolved_id"
+    )
+    turn_ke = _turn_ke(
+        session,
+        lhs=source_lhs,
+        rhs=source_rhs,
+        bindings=bindings,
+    )
+    assertion = KnowledgeEquation.create(
+        level="session",
+        lhs=lhs,
+        rhs=rhs,
+        gloss="Exact binding assertion",
+        modality="fact",
+        polarity="positive",
+        lifecycle="active",
+        speaker="derived",
+        ontology_bindings=expected,
+        evidence_refs=turn_ke.evidence_refs,
+        derived_from=(turn_ke.id,),
+        confidence=0.8,
+        produced_in_run_id="session-run",
+        produced_in_stage="session-aggregated",
+    )
+    tampered_bindings = (
+        tuple(sorted(bindings, key=canonical_json)) if tamper == "over_broad" else ()
+    )
+    tampered = _copy_knowledge_equation(assertion, ontology_bindings=tampered_bindings)
+    memory = SessionMemory(
+        session_id=session.id,
+        summary="Binding validation",
+        knowledge_equations=(tampered,),
+        source_turn_ke_ids=(turn_ke.id,),
+        evidence_closure=turn_ke.evidence_refs,
+    )
+
+    with pytest.raises(AggregationInvariantError, match="ontology bindings are not exact"):
+        validate_session_memory(memory, {turn_ke.id: turn_ke})
+
+
+@pytest.mark.parametrize(
+    ("field", "target_kind"),
+    (
+        ("contradicts", "dangling"),
+        ("contradicts", "wrong_level"),
+        ("supersedes", "dangling"),
+        ("supersedes", "wrong_level"),
+    ),
+)
+def test_validate_session_memory_rejects_dangling_or_wrong_level_ke_relations(
+    field: str,
+    target_kind: str,
+) -> None:
+    session = _session()
+    turn_ke = _turn_ke(session)
+    wrong_level = KnowledgeEquation.create(
+        level="session",
+        lhs=turn_ke.lhs,
+        rhs=turn_ke.rhs,
+        gloss="Wrong-level relation target",
+        modality="fact",
+        polarity="positive",
+        lifecycle="active",
+        speaker="derived",
+        ontology_bindings=turn_ke.ontology_bindings,
+        evidence_refs=turn_ke.evidence_refs,
+        derived_from=(turn_ke.id,),
+        confidence=0.8,
+        produced_in_run_id="session-run",
+        produced_in_stage="session-aggregated",
+    )
+    target = "ke:missing" if target_kind == "dangling" else wrong_level.id
+    relation_updates = {field: (target,)}
+    assertion = _copy_knowledge_equation(
+        wrong_level,
+        ontology_bindings=wrong_level.ontology_bindings,
+        **relation_updates,
+    )
+    memory = SessionMemory(
+        session_id=session.id,
+        summary="Relation validation",
+        knowledge_equations=(assertion,),
+        source_turn_ke_ids=(turn_ke.id,),
+        evidence_closure=turn_ke.evidence_refs,
+    )
+
+    with pytest.raises(AggregationInvariantError, match="contradicts|supersedes|Turn KE"):
+        validate_session_memory(memory, {turn_ke.id: turn_ke})
+
+
+@pytest.mark.asyncio
 async def test_session_assertion_gets_exact_evidence_binding_and_open_temporal_envelope() -> None:
     session = _session()
     start = datetime(2026, 1, 3, tzinfo=UTC)
@@ -679,7 +814,9 @@ async def test_validate_session_memory_reauthenticates_top_level_and_source_turn
     unsorted = memory.model_copy(
         update={"source_turn_ke_ids": tuple(reversed(memory.source_turn_ke_ids))}
     )
-    with pytest.raises(AggregationInvariantError, match="validated SessionMemory"):
+    with pytest.raises(
+        AggregationInvariantError, match="SessionMemory record has an invalid shape"
+    ):
         validate_session_memory(unsorted, {first.id: first, second.id: second})
 
     forged = first.model_copy(update={"revision": "0" * 64})
@@ -759,3 +896,124 @@ async def test_validate_session_memory_rejects_authentic_unsorted_assertion_lowe
 
 def _span_key(span: MessageSpan) -> tuple[str, int, int, str]:
     return (span.message_id, span.start_char, span.end_char, span.text_hash)
+
+
+def _ontology_binding_case(
+    case: str,
+) -> tuple[
+    Expression,
+    Expression,
+    tuple[OntologyBinding, ...],
+    Expression,
+    Expression,
+    tuple[OntologyBinding, ...],
+]:
+    if case == "same_label_different_resolved_id":
+        wanted = ConceptRef(term_id="concept:wanted", label="shared")
+        other = ConceptRef(term_id="concept:other", label="shared")
+        bindings = (
+            _resolved_binding("concept:wanted", "shared", OntologyRole.CONCEPT),
+            _resolved_binding("concept:other", "shared", OntologyRole.CONCEPT),
+        )
+        return wanted, other, bindings, wanted, wanted, (bindings[0],)
+    if case == "same_document_different_role":
+        wanted = ConceptRef(term_id="entity:shared", label="shared")
+        other = OperatorRef(term_id="entity:shared", label="shared")
+        bindings = (
+            _resolved_binding("entity:shared", "shared", OntologyRole.CONCEPT),
+            _resolved_binding("entity:shared", "shared", OntologyRole.OPERATOR),
+        )
+        return wanted, other, bindings, wanted, wanted, (bindings[0],)
+    if case == "unresolved_same_surface_different_role":
+        normalized = "mystery"
+        wanted = ConceptRef(
+            term_id=content_id("unresolved-concept", normalized),
+            label="Mystery",
+        )
+        other = OperatorRef(
+            term_id=content_id("unresolved-operator", normalized),
+            label="Mystery",
+        )
+        binding = OntologyBinding(
+            surface_form="Mystery",
+            normalized_surface=normalized,
+            status=OntologyBindingStatus.UNRESOLVED,
+        )
+        return wanted, other, (binding,), wanted, wanted, (binding,)
+    if case == "unresolved_role":
+        normalized = "ambiguous"
+        wanted = ConceptRef(
+            term_id=content_id("unresolved-concept", normalized),
+            label="Ambiguous",
+        )
+        binding = OntologyBinding(
+            surface_form="Ambiguous",
+            normalized_surface=normalized,
+            status=OntologyBindingStatus.UNRESOLVED_ROLE,
+            document_id="roleless-document",
+            canonical_term="Ambiguous",
+            source_type="ambiguous",
+        )
+        return wanted, wanted, (binding,), wanted, wanted, (binding,)
+
+    subject = IndividualRef(term_id="person:alice", label="Alice")
+    value = ConceptRef(term_id="concept:nested", label="Nested")
+    inner = OperatorApplication(
+        operator=OperatorRef(term_id="operator:inner", label="inner"),
+        arguments=(value,),
+    )
+    outer = OperatorApplication(
+        operator=OperatorRef(term_id="operator:outer", label="outer"),
+        arguments=(inner,),
+    )
+    bindings = (
+        _resolved_binding("concept:nested", "Nested", OntologyRole.CONCEPT),
+        _resolved_binding("operator:inner", "inner", OntologyRole.OPERATOR),
+        _resolved_binding("operator:outer", "outer", OntologyRole.OPERATOR),
+    )
+    expected = tuple(sorted(bindings[:2], key=canonical_json))
+    return subject, outer, bindings, subject, inner, expected
+
+
+def _resolved_binding(
+    document_id: str,
+    surface: str,
+    role: OntologyRole,
+) -> OntologyBinding:
+    return OntologyBinding(
+        surface_form=surface,
+        normalized_surface=surface.casefold(),
+        status=OntologyBindingStatus.RESOLVED,
+        document_id=document_id,
+        canonical_term=surface.title(),
+        role=role,
+        source_type="test",
+    )
+
+
+def _copy_knowledge_equation(
+    equation: KnowledgeEquation,
+    *,
+    ontology_bindings: Sequence[OntologyBinding],
+    contradicts: Sequence[str] | None = None,
+    supersedes: Sequence[str] | None = None,
+) -> KnowledgeEquation:
+    return KnowledgeEquation.create(
+        level=equation.level,
+        lhs=equation.lhs,
+        rhs=equation.rhs,
+        gloss=equation.gloss,
+        modality=equation.modality,
+        polarity=equation.polarity,
+        lifecycle=equation.lifecycle,
+        speaker=equation.speaker,
+        temporal=equation.temporal,
+        ontology_bindings=ontology_bindings,
+        evidence_refs=equation.evidence_refs,
+        derived_from=equation.derived_from,
+        contradicts=(equation.contradicts if contradicts is None else contradicts),
+        supersedes=(equation.supersedes if supersedes is None else supersedes),
+        confidence=equation.confidence,
+        produced_in_run_id=equation.produced_in_run_id,
+        produced_in_stage=equation.produced_in_stage,
+    )
