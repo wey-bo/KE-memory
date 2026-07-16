@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import json
 
+import pytest
+
 from ke_memory_demo.infra.redaction import REDACTED, redact_tree
 
 
@@ -105,10 +107,24 @@ def test_malformed_text_redacts_literal_and_both_json_escaped_secret_forms() -> 
         assert REDACTED in result
 
 
-def test_malformed_scanner_redacts_optional_slash_escape() -> None:
-    secret = "alpha/beta"
-    source = r"prefix::alpha\/beta::broken{"
-
+@pytest.mark.parametrize(
+    ("secret", "encoded"),
+    [
+        pytest.param("alpha/beta", r"alpha\/beta", id="optional-slash-escape"),
+        pytest.param(
+            'quote"slash\\back\bform\fline\nreturn\rtab\t',
+            json.dumps('quote"slash\\back\bform\fline\nreturn\rtab\t', ensure_ascii=True)[1:-1],
+            id="quote-backslash-control-escapes",
+        ),
+        pytest.param(
+            "emoji-😀-done",
+            r"emoji-\uD83D\uDE00-done",
+            id="valid-surrogate-pair",
+        ),
+    ],
+)
+def test_malformed_scanner_redacts_json_escape_variants(secret: str, encoded: str) -> None:
+    source = f"prefix::{encoded}::broken{{"
     result = redact_tree(source, known_secrets={secret})
 
     assert result == f"prefix::{REDACTED}::broken{{"
@@ -128,32 +144,11 @@ def test_malformed_scanner_redacts_per_character_and_mixed_unicode_escapes() -> 
         assert secret not in json.loads(f'"{result}"')
 
 
-def test_malformed_scanner_redacts_quote_backslash_and_control_escapes() -> None:
-    secret = 'quote"slash\\back\bform\fline\nreturn\rtab\t'
-    encoded = json.dumps(secret, ensure_ascii=True)[1:-1]
-    source = f"prefix::{encoded}::broken{{"
-
-    result = redact_tree(source, known_secrets={secret})
-
-    assert result == f"prefix::{REDACTED}::broken{{"
-    assert secret not in json.loads(f'"{result}"')
-
-
 def test_malformed_scanner_redacts_literal_secret_that_looks_like_json_escape() -> None:
     secret = r"alpha\nbeta"
     source = f"prefix::{secret}::broken{{"
 
     assert redact_tree(source, known_secrets={secret, "alpha"}) == (f"prefix::{REDACTED}::broken{{")
-
-
-def test_malformed_scanner_redacts_valid_surrogate_pair() -> None:
-    secret = "emoji-😀-done"
-    source = r"prefix::emoji-\uD83D\uDE00-done::broken{"
-
-    result = redact_tree(source, known_secrets={secret})
-
-    assert result == f"prefix::{REDACTED}::broken{{"
-    assert secret not in json.loads(f'"{result}"')
 
 
 def test_malformed_scanner_prefers_longest_overlapping_secret_and_redacts_all_matches() -> None:
@@ -170,19 +165,23 @@ def test_malformed_scanner_prefers_longest_overlapping_secret_and_redacts_all_ma
     assert "beta" not in decoded
 
 
-def test_malformed_scanner_preserves_invalid_escapes_as_ordinary_text() -> None:
-    source = r"prefix::alpha\qbeta::\u12G4::\uD83D-tail"
-
-    assert (
-        redact_tree(
-            source,
-            known_secrets={"alphaqbeta", "ሴ", "😀"},
-        )
-        == source
-    )
-
-
-def test_malformed_scanner_preserves_non_secret_input_exactly() -> None:
-    source = r"prefix::safe\/path::\u0062eta::\"quoted\"::broken{"
-
-    assert redact_tree(source, known_secrets={"alpha/beta"}) == source
+@pytest.mark.parametrize(
+    ("source", "known_secrets"),
+    [
+        pytest.param(
+            r"prefix::alpha\qbeta::\u12G4::\uD83D-tail",
+            {"alphaqbeta", "ሴ", "😀"},
+            id="invalid-escape-literals",
+        ),
+        pytest.param(
+            r"prefix::safe\/path::\u0062eta::\"quoted\"::broken{",
+            {"alpha/beta"},
+            id="nonmatching-escaped-text",
+        ),
+    ],
+)
+def test_malformed_scanner_preserves_non_secret_input_exactly(
+    source: str,
+    known_secrets: set[str],
+) -> None:
+    assert redact_tree(source, known_secrets=known_secrets) == source

@@ -650,14 +650,35 @@ async def test_json_object_mode_keeps_validation_and_configured_temperature() ->
     assert len(recorder.usage_records) == 1
 
 
+@pytest.mark.parametrize(
+    ("request_id", "completion_id", "expected_request_id"),
+    [
+        pytest.param(
+            "http-request-17",
+            "chat-completion-99",
+            "http-request-17",
+            id="provider-http-request-id",
+        ),
+        pytest.param(
+            None,
+            "chat-completion-only",
+            None,
+            id="missing-provider-http-request-id",
+        ),
+    ],
+)
 @pytest.mark.asyncio
-async def test_usage_request_id_is_provider_http_request_id_not_completion_id() -> None:
+async def test_usage_request_id_tracks_provider_http_request_id(
+    request_id: str | None,
+    completion_id: str,
+    expected_request_id: str | None,
+) -> None:
     client, _fake, recorder, _delays = _structured_client(
         [
             _completion(
                 '{"value":3}',
-                request_id="http-request-17",
-                completion_id="chat-completion-99",
+                request_id=request_id,
+                completion_id=completion_id,
             )
         ]
     )
@@ -668,32 +689,9 @@ async def test_usage_request_id_is_provider_http_request_id_not_completion_id() 
         TraceContext(operation="extract"),
     )
 
-    assert recorder.usage_records[0].request_id == "http-request-17"
+    assert recorder.usage_records[0].request_id == expected_request_id
     assert recorder.records[0].response is not None
-    assert recorder.records[0].response["id"] == "chat-completion-99"
-
-
-@pytest.mark.asyncio
-async def test_usage_request_id_remains_none_when_http_request_id_is_absent() -> None:
-    client, _fake, recorder, _delays = _structured_client(
-        [
-            _completion(
-                '{"value":3}',
-                request_id=None,
-                completion_id="chat-completion-only",
-            )
-        ]
-    )
-
-    await client.complete(
-        ExampleOutput,
-        [{"role": "user", "content": "JSON"}],
-        TraceContext(operation="extract"),
-    )
-
-    assert recorder.usage_records[0].request_id is None
-    assert recorder.records[0].response is not None
-    assert recorder.records[0].response["id"] == "chat-completion-only"
+    assert recorder.records[0].response["id"] == completion_id
 
 
 @pytest.mark.parametrize("model", ["gpt-5", "gpt-5.4-mini", "o1", "o1-preview", "o3-mini"])

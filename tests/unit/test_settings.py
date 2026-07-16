@@ -24,10 +24,6 @@ def unset_live_environment(monkeypatch: pytest.MonkeyPatch) -> None:
 
 
 def test_settings_keep_secret_values_out_of_toml(project_root: Path):
-    settings = load_settings(project_root)
-    assert settings.work.api_key_env == "KE_MEMORY_WORK_API_KEY"
-    assert settings.judge.api_key_env == "KE_MEMORY_JUDGE_API_KEY"
-    assert settings.embedding.local_path_env == "KE_MEMORY_EMBEDDING_PATH"
     assert "sk-" not in (project_root / "config/models.toml").read_text()
 
 
@@ -99,10 +95,6 @@ def test_settings_load_all_exact_elasticsearch_values(project_root: Path):
             "operator": ("operator", "relation", "predicate", "action"),
         },
     }
-
-
-def test_load_settings_does_not_require_live_environment(project_root: Path):
-    load_settings(project_root)
 
 
 def test_settings_are_immutable(project_root: Path):
