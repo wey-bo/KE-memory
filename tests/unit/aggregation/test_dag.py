@@ -570,7 +570,7 @@ async def test_builder_executes_depth2_pass_with_node_members_only() -> None:
 
 
 @pytest.mark.asyncio
-@pytest.mark.parametrize("tamper", ["invent", "members", "duplicate"])
+@pytest.mark.parametrize("tamper", ("invent", "members", "order", "duplicate"))
 async def test_model_can_only_accept_exact_offered_candidate_membership_once(tamper: str) -> None:
     one = _session_ke("one")
     two = _session_ke("two")
@@ -582,6 +582,10 @@ async def test_model_can_only_accept_exact_offered_candidate_membership_once(tam
         accepted = (proposal.model_copy(update={"candidate_id": "candidate:invented"}),)
     elif tamper == "members":
         accepted = (proposal.model_copy(update={"member_refs": (one.id, "ke:invented")}),)
+    elif tamper == "order":
+        accepted = (
+            proposal.model_copy(update={"member_refs": tuple(reversed(proposal.member_refs))}),
+        )
     else:
         accepted = (proposal, proposal)
     forged = AggregateSelectionOutput.model_construct(accepted=accepted)
@@ -1186,6 +1190,42 @@ async def test_builder_rejects_inexact_turn_ke_sources_before_model_call(case: s
     assert model.calls == []
 
 
+@pytest.mark.asyncio
+@pytest.mark.parametrize("public_path", ("candidate_generator", "builder"))
+@pytest.mark.parametrize("field", ("derived_from", "contradicts", "supersedes"))
+async def test_depth1_boundaries_reject_dangling_global_turn_ke_relations_before_model_call(
+    field: str,
+    public_path: str,
+) -> None:
+    memories, source_turn_kes = _global_turn_relation_fixture((field,), dangling=True)
+    model = FakeDAGModel(())
+
+    with pytest.raises(AggregationInvariantError, match=rf"source Turn KE.*{field}"):
+        if public_path == "candidate_generator":
+            generate_depth1_candidates(memories, source_turn_kes)
+        else:
+            await SemanticDAGBuilder(model, source_turn_kes, run_id="dag-run").build(memories)
+
+    assert model.calls == []
+
+
+@pytest.mark.asyncio
+async def test_global_turn_ke_relations_may_target_a_different_cross_session_turn_ke() -> None:
+    memories, source_turn_kes = _global_turn_relation_fixture(
+        ("derived_from", "contradicts", "supersedes"),
+        dangling=False,
+    )
+
+    candidates = generate_depth1_candidates(memories, source_turn_kes)
+    model = FakeDAGModel((AggregateSelectionOutput(),))
+
+    assert candidates
+    assert await SemanticDAGBuilder(model, source_turn_kes, run_id="dag-run").build(memories) == (
+        SemanticDAG()
+    )
+    assert len(model.calls) == 1
+
+
 def test_validate_semantic_dag_rejects_self_dangling_cycle_and_depth_type_errors() -> None:
     one = _session_ke("one")
     two = _session_ke("two")
@@ -1582,6 +1622,32 @@ def _source_mapping_fixture(
         _memory("mapping-s2", (rhs_assertion,)),
     )
     return memories, {source.id: source}
+
+
+def _global_turn_relation_fixture(
+    fields: Sequence[str],
+    *,
+    dangling: bool,
+) -> tuple[tuple[SessionMemory, ...], dict[str, KnowledgeEquation]]:
+    first = _session_ke("global-relation-first")
+    second = _session_ke("global-relation-second")
+    first_source = _SOURCE_TURN_KES[first.derived_from[0]]
+    second_source = _SOURCE_TURN_KES[second.derived_from[0]]
+    target_id = "ke:missing" if dangling else second_source.id
+    linked_source = _recreate_equation(
+        first_source,
+        **{field: (target_id,) for field in fields},
+    )
+    linked_session = _session_equation_from_turn(
+        linked_source,
+        linked_source.lhs,
+        linked_source.rhs,
+    )
+    memories = (
+        _memory("global-relation-s1", (linked_session,)),
+        _memory("global-relation-s2", (second,)),
+    )
+    return memories, {linked_source.id: linked_source, second_source.id: second_source}
 
 
 def _noncanonical_memory_fixture(

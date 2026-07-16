@@ -29,7 +29,7 @@ from .validation import (
     authenticate_knowledge_equation,
     expression_assertion_refs,
     normalize_identity,
-    records_by_id,
+    validate_global_turn_kes,
 )
 
 
@@ -74,8 +74,8 @@ def generate_depth1_candidates(
     session_memories: Sequence[SessionMemory],
     turn_kes: Mapping[str, KnowledgeEquation],
 ) -> tuple[AggregateCandidate, ...]:
+    source_turn_kes = validate_global_turn_kes(turn_kes)
     memories = tuple(validate_session_memory_shape(memory) for memory in session_memories)
-    source_turn_kes = records_by_id(turn_kes, label="source Turn KE")
     claimed_by: dict[str, str] = {}
     for memory in memories:
         for source_id in memory.source_turn_ke_ids:

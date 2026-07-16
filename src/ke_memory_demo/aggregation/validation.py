@@ -13,6 +13,7 @@ from ke_memory_demo.domain import (
     Expression,
     IndividualRef,
     KnowledgeEquation,
+    KnowledgeLevel,
     MessageSpan,
     OntologyBinding,
     OntologyBindingStatus,
@@ -207,6 +208,35 @@ def authenticate_knowledge_equation(
     except ValidationError as error:
         detail = "revision" if "revision" in str(error) else "identity"
         raise AggregationInvariantError(f"{label} has an invalid {detail}") from error
+
+
+def validate_global_turn_kes(
+    turn_kes: Mapping[str, KnowledgeEquation] | Sequence[KnowledgeEquation],
+) -> dict[str, KnowledgeEquation]:
+    records = records_by_id(turn_kes, label="source Turn KE")
+    for equation in records.values():
+        authenticate_knowledge_equation(equation, label=f"source Turn KE {equation.id}")
+        if equation.level is not KnowledgeLevel.TURN:
+            raise AggregationInvariantError(f"source Turn KE {equation.id} is not a Turn-level KE")
+
+    record_ids = set(records)
+    for equation in records.values():
+        for field, references in (
+            ("derived_from", equation.derived_from),
+            ("contradicts", equation.contradicts),
+            ("supersedes", equation.supersedes),
+        ):
+            if equation.id in references:
+                raise AggregationInvariantError(
+                    f"source Turn KE {equation.id} {field} must not reference itself"
+                )
+            missing = sorted(set(references).difference(record_ids))
+            if missing:
+                raise AggregationInvariantError(
+                    f"source Turn KE {equation.id} {field} does not name a global "
+                    f"Turn-level KE: {missing[0]}"
+                )
+    return records
 
 
 def validate_knowledge_equation_relations(

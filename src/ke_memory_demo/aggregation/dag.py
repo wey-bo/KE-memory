@@ -47,6 +47,7 @@ from .validation import (
     sorted_unique_spans,
     temporal_envelope,
     validate_expression_authority,
+    validate_global_turn_kes,
     validate_knowledge_equation_relations,
 )
 
@@ -226,6 +227,7 @@ class SemanticDAGBuilder:
         self._run_id = run_id
 
     async def build(self, session_memories: Sequence[SessionMemory]) -> SemanticDAG:
+        validate_global_turn_kes(self._turn_kes)
         memories = tuple(validate_session_memory_shape(memory) for memory in session_memories)
         depth1_candidates = generate_depth1_candidates(memories, self._turn_kes)
         known_kes = {
@@ -358,7 +360,7 @@ class SemanticDAGBuilder:
             )
         if proposal.depth != depth or candidate.depth != depth:
             raise AggregationInvariantError("model accepted a candidate at the wrong depth")
-        if tuple(sorted(proposal.member_refs)) != candidate.member_refs:
+        if proposal.member_refs != candidate.member_refs:
             raise AggregationInvariantError("model changed offered candidate member refs")
 
         closure = _candidate_closure(candidate, known_kes, known_nodes)
