@@ -438,6 +438,18 @@ class _FakeEmbeddingBackend:
         raise AssertionError(f"unexpected query: {question}")
 
 
+def test_document_generation_chunk_configuration_cannot_be_overridden() -> None:
+    with pytest.raises(TypeError, match="unexpected keyword argument 'chunk_tokens'"):
+        generate_embedding_documents(
+            (),
+            (),
+            (),
+            (),
+            backend=_FakeEmbeddingBackend(),
+            chunk_tokens=1,  # pyright: ignore[reportCallIssue]
+        )
+
+
 def _knowledge_equation(
     *,
     level: KnowledgeLevel,
@@ -548,8 +560,6 @@ def test_document_generation_covers_each_layer_with_deterministic_provenance(
         (aggregate,),
         backend=backend,
         tokenizer=backend.tokenizer,
-        chunk_tokens=10_000,
-        overlap_tokens=128,
     )
 
     assert [document.id for document in documents] == sorted(document.id for document in documents)
@@ -586,6 +596,4 @@ def test_document_generation_rejects_cross_session_evidence(
             (foreign_session,),
             (aggregate,),
             backend=_FakeEmbeddingBackend(),
-            chunk_tokens=10_000,
-            overlap_tokens=128,
         )

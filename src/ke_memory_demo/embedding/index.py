@@ -40,6 +40,8 @@ ModelT = TypeVar("ModelT", bound=BaseModel)
 
 INDEX_FORMAT_VERSION = "ke-memory-exact-vector-index/v1"
 _INDEX_FILENAMES = frozenset({"documents.jsonl", "vectors.npy", "manifest.json"})
+_DOCUMENT_CHUNK_TOKENS = 1024
+_DOCUMENT_OVERLAP_TOKENS = 128
 
 
 class EmbeddingError(RuntimeError):
@@ -332,8 +334,6 @@ def generate_embedding_documents(
     *,
     backend: EmbeddingBackend,
     tokenizer: Tokenizer | None = None,
-    chunk_tokens: int = 1024,
-    overlap_tokens: int = 128,
 ) -> tuple[EmbeddingDocument, ...]:
     validated_exchanges = _validated_records(exchanges, Exchange, label="exchange")
     validated_turn_kes = _validated_records(turn_kes, KnowledgeEquation, label="Turn KE")
@@ -464,8 +464,8 @@ def generate_embedding_documents(
         chunks = chunk_text(
             source.text,
             actual_tokenizer,
-            chunk_tokens=chunk_tokens,
-            overlap_tokens=overlap_tokens,
+            chunk_tokens=_DOCUMENT_CHUNK_TOKENS,
+            overlap_tokens=_DOCUMENT_OVERLAP_TOKENS,
         )
         if not chunks:
             raise EmbeddingInvariantError(
