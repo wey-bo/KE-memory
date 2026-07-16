@@ -2,12 +2,14 @@ from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
 from datetime import UTC, datetime
+import json
 from typing import Literal, TypeVar, cast
 
 import pytest
 from pydantic import BaseModel, ValidationError
 
 from ke_memory_demo.domain import (
+    AssertionRef,
     ConceptRef,
     IndividualRef,
     KnowledgeEquation,
@@ -59,6 +61,8 @@ def _ke(
     lifecycle: str = "active",
     valid_from: datetime | None = None,
     valid_to: datetime | None = None,
+    event_time: datetime | None = None,
+    mentioned_at: datetime | None = None,
     run_id: str = "source-run",
 ) -> KnowledgeEquation:
     return KnowledgeEquation.create(
@@ -73,7 +77,12 @@ def _ke(
         polarity=polarity,
         lifecycle=lifecycle,
         speaker="user",
-        temporal=TemporalMetadata(valid_from=valid_from, valid_to=valid_to),
+        temporal=TemporalMetadata(
+            valid_from=valid_from,
+            valid_to=valid_to,
+            event_time=event_time,
+            mentioned_at=mentioned_at,
+        ),
         evidence_refs=(
             MessageSpan(
                 message_id=f"message-{value}",
@@ -103,6 +112,318 @@ def _decision(
         reason=f"test {decision}",
         explicit_retraction=explicit_retraction,
     )
+
+
+def _revision(
+    equation: KnowledgeEquation,
+    *,
+    lifecycle: str | None = None,
+    gloss: str | None = None,
+    run_id: str = "revision-run",
+) -> KnowledgeEquation:
+    return KnowledgeEquation.create(
+        level=equation.level,
+        lhs=equation.lhs,
+        rhs=equation.rhs,
+        gloss=gloss or equation.gloss,
+        modality=equation.modality,
+        polarity=equation.polarity,
+        lifecycle=lifecycle or equation.lifecycle,
+        speaker=equation.speaker,
+        temporal=equation.temporal,
+        ontology_bindings=equation.ontology_bindings,
+        evidence_refs=equation.evidence_refs,
+        derived_from=equation.derived_from,
+        contradicts=equation.contradicts,
+        supersedes=equation.supersedes,
+        confidence=equation.confidence,
+        produced_in_run_id=run_id,
+        produced_in_stage="lifecycle-maintained",
+    )
+
+
+def _operator_free_ke(
+    kind: Literal["concept", "individual", "assertion"],
+    value: str,
+    *,
+    subject: str = "shared-subject",
+) -> KnowledgeEquation:
+    if kind == "concept":
+        lhs = ConceptRef(term_id=subject, label=subject)
+        rhs = ConceptRef(term_id=value, label=value)
+    elif kind == "individual":
+        lhs = IndividualRef(term_id=subject, label=subject)
+        rhs = IndividualRef(term_id=value, label=value)
+    else:
+        lhs = AssertionRef(assertion_id=subject)
+        rhs = AssertionRef(assertion_id=value)
+    return KnowledgeEquation.create(
+        level="turn",
+        lhs=lhs,
+        rhs=rhs,
+        gloss=f"{subject} equals {value}",
+        modality="fact",
+        polarity="positive",
+        lifecycle="active",
+        speaker="user",
+        evidence_refs=(
+            MessageSpan(
+                message_id=f"operator-free-{kind}-{value}",
+                start_char=0,
+                end_char=1,
+                text_hash="1" * 64,
+            ),
+        ),
+        confidence=0.8,
+        produced_in_run_id="source-run",
+        produced_in_stage="turn-ke-extracted",
+    )
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("kind", ["concept", "individual", "assertion"])
+async def test_operator_free_atomic_equations_use_total_symbolic_identity(
+    kind: Literal["concept", "individual", "assertion"],
+) -> None:
+    old = _operator_free_ke(kind, "old-value")
+    new = _operator_free_ke(kind, "new-value")
+    matcher = FakeMatcher(LifecycleMatchOutput(matches=(_decision(old, new, "no_match"),)))
+
+    result = await LifecycleMaintainer(matcher, run_id="lifecycle-run").apply(
+        (old,),
+        (new,),
+    )
+
+    payload = json.loads(str(matcher.calls[0][1][1]["content"]))
+    assert payload["offered_pairs"][0]["operator_identity"] == "__equation__"
+    assert result.appended_revisions == (new,)
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("kind", ["concept", "individual", "assertion"])
+async def test_operator_free_equations_with_different_subjects_do_not_match(
+    kind: Literal["concept", "individual", "assertion"],
+) -> None:
+    old = _operator_free_ke(kind, "old-value", subject="first-subject")
+    new = _operator_free_ke(kind, "new-value", subject="second-subject")
+    matcher = FakeMatcher(LifecycleMatchOutput(matches=()))
+
+    result = await LifecycleMaintainer(matcher, run_id="lifecycle-run").apply(
+        (old,),
+        (new,),
+    )
+
+    assert matcher.calls == []
+    assert result.appended_revisions == (new,)
+
+
+@pytest.mark.asyncio
+async def test_explicit_operator_identity_remains_its_normalized_term_id() -> None:
+    old = _ke("red", operator="  LIKES  ")
+    new = _ke("blue", operator="  likes  ")
+    matcher = FakeMatcher(LifecycleMatchOutput(matches=(_decision(old, new, "no_match"),)))
+
+    await LifecycleMaintainer(matcher, run_id="lifecycle-run").apply(
+        (old,),
+        (new,),
+    )
+
+    payload = json.loads(str(matcher.calls[0][1][1]["content"]))
+    assert payload["offered_pairs"][0]["operator_identity"] == "likes"
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("terminal", ["superseded", "retracted", "contradicted"])
+async def test_terminal_current_records_are_never_offered_or_regressed(terminal: str) -> None:
+    old = _ke("red", lifecycle=terminal)
+    new = _ke("blue")
+    matcher = FakeMatcher(LifecycleMatchOutput(matches=(_decision(old, new, "updates"),)))
+
+    result = await LifecycleMaintainer(matcher, run_id="lifecycle-run").apply(
+        (old,),
+        (new,),
+    )
+
+    assert matcher.calls == []
+    assert result.appended_revisions == (new,)
+    current_by_id = {equation.id: equation for equation in result.current_records}
+    assert current_by_id[old.id] == old
+    assert current_by_id[old.id].lifecycle.value == terminal
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    ("case", "offered"),
+    [
+        ("open_future", True),
+        ("open_past", True),
+        ("same_point", True),
+        ("inclusive_boundary", True),
+        ("different_points", False),
+        ("disjoint_ranges", False),
+    ],
+)
+async def test_temporal_candidate_boundaries(case: str, offered: bool) -> None:
+    boundary = datetime(2025, 1, 2, tzinfo=UTC)
+    if case == "open_future":
+        old = _ke("red", valid_from=datetime(2025, 1, 1, tzinfo=UTC))
+        new = _ke("blue", valid_from=datetime(2030, 1, 1, tzinfo=UTC))
+    elif case == "open_past":
+        old = _ke("red", valid_to=boundary)
+        new = _ke("blue", valid_to=datetime(2024, 1, 1, tzinfo=UTC))
+    elif case == "same_point":
+        old = _ke("red", event_time=boundary)
+        new = _ke("blue", mentioned_at=boundary)
+    elif case == "inclusive_boundary":
+        old = _ke("red", valid_to=boundary)
+        new = _ke("blue", valid_from=boundary)
+    elif case == "different_points":
+        old = _ke("red", event_time=datetime(2025, 1, 1, tzinfo=UTC))
+        new = _ke("blue", event_time=boundary)
+    else:
+        old = _ke(
+            "red",
+            valid_from=datetime(2024, 1, 1, tzinfo=UTC),
+            valid_to=datetime(2024, 1, 2, tzinfo=UTC),
+        )
+        new = _ke(
+            "blue",
+            valid_from=datetime(2025, 1, 1, tzinfo=UTC),
+            valid_to=boundary,
+        )
+    output = (
+        LifecycleMatchOutput(matches=(_decision(old, new, "no_match"),))
+        if offered
+        else LifecycleMatchOutput(matches=())
+    )
+    matcher = FakeMatcher(output)
+
+    result = await LifecycleMaintainer(matcher, run_id="lifecycle-run").apply(
+        (old,),
+        (new,),
+    )
+
+    assert bool(matcher.calls) is offered
+    assert result.appended_revisions == (new,)
+
+
+@pytest.mark.asyncio
+async def test_combined_update_and_contradiction_preserve_links_order_and_inputs() -> None:
+    updated_old = _ke("red")
+    contradicted_old = _ke("green")
+    new = _ke("blue", polarity="negative")
+    before = tuple(item.model_dump_json() for item in (updated_old, contradicted_old, new))
+    matcher = FakeMatcher(
+        LifecycleMatchOutput(
+            matches=(
+                _decision(updated_old, new, "updates"),
+                _decision(contradicted_old, new, "contradicts"),
+            )
+        )
+    )
+
+    result = await LifecycleMaintainer(matcher, run_id="lifecycle-run").apply(
+        (updated_old, contradicted_old),
+        (new,),
+    )
+
+    revised = {item.id: item for item in result.appended_revisions}
+    assert revised[updated_old.id].lifecycle.value == "superseded"
+    assert revised[contradicted_old.id].lifecycle == contradicted_old.lifecycle
+    assert revised[contradicted_old.id].contradicts == (new.id,)
+    assert revised[new.id].supersedes == (updated_old.id,)
+    assert revised[new.id].contradicts == (contradicted_old.id,)
+    assert tuple(item.id for item in result.appended_revisions) == (
+        *sorted((updated_old.id, contradicted_old.id)),
+        new.id,
+    )
+    assert tuple(item.id for item in result.current_records) == tuple(
+        sorted((updated_old.id, contradicted_old.id, new.id))
+    )
+    assert all(
+        item.produced_in_run_id == "lifecycle-run"
+        and item.produced_in_stage == "lifecycle-maintained"
+        for item in result.appended_revisions
+    )
+    assert tuple(item.model_dump_json() for item in (updated_old, contradicted_old, new)) == before
+    assert tuple(KnowledgeEquation.model_validate_json(item) for item in before) == (
+        updated_old,
+        contradicted_old,
+        new,
+    )
+
+
+@pytest.mark.asyncio
+async def test_identical_logical_id_replay_is_a_complete_no_op() -> None:
+    current = _ke("red")
+    replay = KnowledgeEquation.model_validate_json(current.model_dump_json())
+    assert replay == current
+    assert replay is not current
+    matcher = FakeMatcher(LifecycleMatchOutput(matches=()))
+
+    result = await LifecycleMaintainer(matcher, run_id="lifecycle-run").apply(
+        (current,),
+        (replay,),
+    )
+
+    assert matcher.calls == []
+    assert result.decisions == ()
+    assert result.appended_revisions == ()
+    assert result.current_records == (current,)
+
+
+@pytest.mark.asyncio
+async def test_conflicting_logical_id_revision_fails_before_matcher_call() -> None:
+    current = _ke("red")
+    collision = _revision(current, lifecycle="uncertain", gloss="conflicting replay")
+    matcher = FakeMatcher(LifecycleMatchOutput(matches=()))
+
+    with pytest.raises(LifecycleInvariantError, match="logical ID collision"):
+        await LifecycleMaintainer(matcher, run_id="lifecycle-run").apply(
+            (current,),
+            (collision,),
+        )
+
+    assert matcher.calls == []
+    assert current.lifecycle.value == "active"
+    assert collision.lifecycle.value == "uncertain"
+
+
+@pytest.mark.asyncio
+async def test_replay_of_historical_but_not_current_revision_is_a_collision() -> None:
+    historical = _ke("red")
+    current = _revision(historical, lifecycle="uncertain")
+    matcher = FakeMatcher(LifecycleMatchOutput(matches=()))
+
+    with pytest.raises(LifecycleInvariantError, match="logical ID collision"):
+        await LifecycleMaintainer(matcher, run_id="lifecycle-run").apply(
+            (historical, current),
+            (historical,),
+        )
+
+    assert matcher.calls == []
+    assert historical.revision != current.revision
+
+
+@pytest.mark.asyncio
+async def test_replayed_old_record_can_be_transitioned_once_by_another_new_ke() -> None:
+    old = _ke("red")
+    replacement = _ke("blue")
+    matcher = FakeMatcher(LifecycleMatchOutput(matches=(_decision(old, replacement, "updates"),)))
+
+    result = await LifecycleMaintainer(matcher, run_id="lifecycle-run").apply(
+        (old,),
+        (old, replacement),
+    )
+
+    appended_by_id = {equation.id: equation for equation in result.appended_revisions}
+    assert len(appended_by_id) == len(result.appended_revisions) == 2
+    assert appended_by_id[old.id].lifecycle.value == "superseded"
+    assert appended_by_id[replacement.id].supersedes == (old.id,)
+    assert {equation.id for equation in result.current_records} == {
+        old.id,
+        replacement.id,
+    }
 
 
 @pytest.mark.asyncio

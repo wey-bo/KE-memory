@@ -33,6 +33,8 @@ from ke_memory_demo.extraction import (
     ProposalAssertionRef,
     ProposalConceptRef,
     ProposalIndividualRef,
+    ProposalOperatorApplication,
+    ProposalOperatorRef,
     TurnKEDraft,
     TurnKEExtractor,
     TurnKEOutput,
@@ -76,12 +78,20 @@ class FakeModel:
 
 
 class FakeVocabulary:
-    def __init__(self, bindings: Mapping[str, OntologyBinding]) -> None:
+    def __init__(
+        self,
+        bindings: Mapping[str, OntologyBinding],
+        *,
+        results: Sequence[OntologyBinding] | None = None,
+    ) -> None:
         self.bindings = dict(bindings)
+        self.results = tuple(results) if results is not None else None
         self.calls: list[tuple[str, ...]] = []
 
     async def resolve_terms(self, surface_terms: Sequence[str]) -> list[OntologyBinding]:
         self.calls.append(tuple(surface_terms))
+        if self.results is not None:
+            return list(self.results)
         return [self.bindings[surface] for surface in surface_terms]
 
     async def health(self) -> OntologyHealth:
@@ -332,6 +342,105 @@ async def test_invalid_draft_fails_before_ontology_resolution() -> None:
 
 
 @pytest.mark.asyncio
+async def test_invalid_evidence_span_fails_before_ontology_resolution() -> None:
+    draft = _draft()
+    invalid_unit = draft.information_units[0].model_copy(
+        update={"source_spans": (DraftSpan(message_id="user-1", start_char=0, end_char=99),)}
+    )
+    invalid = TurnKEDraft(
+        information_units=(invalid_unit, draft.information_units[1]),
+        coverage=draft.coverage,
+    )
+    model = FakeModel(invalid, _output())
+    vocabulary = FakeVocabulary(_bindings())
+
+    with pytest.raises(ExtractionInvariantError, match="invalid evidence|outside"):
+        await TurnKEExtractor(model, vocabulary, run_id="run-7").extract(_exchange())
+
+    assert vocabulary.calls == []
+    assert len(model.calls) == 1
+
+
+@pytest.mark.asyncio
+async def test_unknown_draft_coverage_unit_fails_before_ontology_resolution() -> None:
+    draft = _draft()
+    invalid_coverage = draft.coverage[0].model_copy(update={"unit_keys": ("missing-unit",)})
+    invalid = TurnKEDraft(
+        information_units=draft.information_units,
+        coverage=(invalid_coverage, *draft.coverage[1:]),
+    )
+    model = FakeModel(invalid, _output())
+    vocabulary = FakeVocabulary(_bindings())
+
+    with pytest.raises(ExtractionInvariantError, match="unknown reference"):
+        await TurnKEExtractor(model, vocabulary, run_id="run-7").extract(_exchange())
+
+    assert vocabulary.calls == []
+    assert len(model.calls) == 1
+
+
+@pytest.mark.asyncio
+async def test_unknown_proposal_unit_fails_after_binding_pass() -> None:
+    invalid_proposal = (
+        _output().proposals[0].model_copy(update={"information_unit_keys": ("missing-unit",)})
+    )
+    model = FakeModel(
+        _draft(),
+        TurnKEOutput(proposals=(invalid_proposal, _output().proposals[1])),
+    )
+    vocabulary = FakeVocabulary(_bindings())
+
+    with pytest.raises(ExtractionInvariantError, match="unknown information unit"):
+        await TurnKEExtractor(model, vocabulary, run_id="run-7").extract(_exchange())
+
+    assert vocabulary.calls == [("special theorem", "triangle")]
+    assert len(model.calls) == 2
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    "case",
+    ["missing", "extra", "wrong_order", "normalized", "duplicate"],
+)
+async def test_inconsistent_resolver_output_fails_before_binding_pass(case: str) -> None:
+    normal = _bindings()
+    special = normal["special theorem"]
+    triangle = normal["triangle"]
+    if case == "missing":
+        results = (special,)
+    elif case == "extra":
+        results = (
+            special,
+            triangle,
+            OntologyBinding(
+                surface_form="square",
+                normalized_surface="square",
+                status=OntologyBindingStatus.UNRESOLVED,
+            ),
+        )
+    elif case == "wrong_order":
+        results = (triangle, special)
+    elif case == "normalized":
+        results = (
+            special,
+            triangle.model_copy(update={"normalized_surface": "wrong"}),
+        )
+    else:
+        results = (special, special)
+    model = FakeModel(_draft(), _output())
+    vocabulary = FakeVocabulary(normal, results=results)
+
+    with pytest.raises(
+        ExtractionInvariantError,
+        match="count|order|normalized|duplicate|omitted|unrequested",
+    ):
+        await TurnKEExtractor(model, vocabulary, run_id="run-7").extract(_exchange())
+
+    assert vocabulary.calls == [("special theorem", "triangle")]
+    assert len(model.calls) == 1
+
+
+@pytest.mark.asyncio
 async def test_unoffered_document_id_is_rejected() -> None:
     model = FakeModel(_draft(), _output(triangle_candidate="fabricated-id"))
 
@@ -346,13 +455,17 @@ async def test_unoffered_document_id_is_rejected() -> None:
 @pytest.mark.asyncio
 async def test_expression_kind_must_match_surface_role() -> None:
     model = FakeModel(_draft(), _output(triangle_kind="individual"))
+    vocabulary = FakeVocabulary(_bindings())
 
     with pytest.raises(ExtractionInvariantError, match="role"):
         await TurnKEExtractor(
             model,
-            FakeVocabulary(_bindings()),
+            vocabulary,
             run_id="run-7",
         ).extract(_exchange())
+
+    assert vocabulary.calls == [("special theorem", "triangle")]
+    assert len(model.calls) == 2
 
 
 @pytest.mark.asyncio
@@ -401,6 +514,356 @@ async def test_unresolved_role_binding_is_retained_when_marker_is_selected() -> 
     assert triangle_ke.ontology_bindings[0].status.value == "unresolved_role"
     assert triangle_ke.ontology_bindings[0].document_id == "roleless-7"
     assert getattr(triangle_ke.lhs, "term_id", None) != "roleless-7"
+
+
+@pytest.mark.asyncio
+async def test_normalized_raw_variants_share_lookup_but_preserve_labels_and_bindings() -> None:
+    wide_triangle = "ＴＲＩＡＮＧＬＥ"
+    exchange = Exchange(
+        id="variant-exchange",
+        session_id="session-1",
+        user=Message(
+            id="variant-user",
+            role=MessageRole.USER,
+            content=f"Triangle {wide_triangle}",
+            source_order=0,
+        ),
+        assistant=Message(
+            id="variant-assistant",
+            role=MessageRole.ASSISTANT,
+            content="",
+            source_order=1,
+        ),
+        global_ordinal=4,
+    )
+    draft = TurnKEDraft(
+        information_units=(
+            DraftInformationUnit(
+                key="ascii-unit",
+                gloss="ASCII triangle",
+                modality=Modality.FACT,
+                polarity=Polarity.POSITIVE,
+                speaker=Speaker.USER,
+                surface_mentions=(
+                    DraftSurfaceMention(
+                        surface_form="Triangle",
+                        expected_role=OntologyRole.CONCEPT,
+                    ),
+                ),
+                source_spans=(DraftSpan(message_id="variant-user", start_char=0, end_char=8),),
+            ),
+            DraftInformationUnit(
+                key="wide-unit",
+                gloss="Wide triangle",
+                modality=Modality.FACT,
+                polarity=Polarity.POSITIVE,
+                speaker=Speaker.USER,
+                surface_mentions=(
+                    DraftSurfaceMention(
+                        surface_form=wide_triangle,
+                        expected_role=OntologyRole.CONCEPT,
+                    ),
+                ),
+                source_spans=(DraftSpan(message_id="variant-user", start_char=9, end_char=17),),
+            ),
+        ),
+        coverage=(
+            DraftCoverageRange(
+                message_id="variant-user",
+                start_char=0,
+                end_char=8,
+                status=CoverageStatus.REPRESENTED,
+                unit_keys=("ascii-unit",),
+            ),
+            DraftCoverageRange(
+                message_id="variant-user",
+                start_char=8,
+                end_char=9,
+                status=CoverageStatus.NON_MEMORY,
+            ),
+            DraftCoverageRange(
+                message_id="variant-user",
+                start_char=9,
+                end_char=17,
+                status=CoverageStatus.REPRESENTED,
+                unit_keys=("wide-unit",),
+            ),
+        ),
+    )
+    output = TurnKEOutput(
+        proposals=tuple(
+            TurnKEProposal(
+                key=key,
+                information_unit_keys=(unit_key,),
+                lhs=ProposalConceptRef(surface_form=raw, candidate_id="c7"),
+                rhs=ProposalConceptRef(surface_form=raw, candidate_id="c7"),
+                gloss=f"Remember {raw}",
+                modality=Modality.FACT,
+                polarity=Polarity.POSITIVE,
+                lifecycle="active",
+                confidence=0.9,
+            )
+            for key, unit_key, raw in (
+                ("ascii-ke", "ascii-unit", "Triangle"),
+                ("wide-ke", "wide-unit", wide_triangle),
+            )
+        )
+    )
+    vocabulary = FakeVocabulary(
+        {
+            "Triangle": OntologyBinding(
+                surface_form="Triangle",
+                normalized_surface="triangle",
+                status=OntologyBindingStatus.RESOLVED,
+                document_id="c7",
+                canonical_term="Triangle",
+                role=OntologyRole.CONCEPT,
+                source_type="mathematical_concept",
+            )
+        }
+    )
+
+    result = await TurnKEExtractor(
+        FakeModel(draft, output),
+        vocabulary,
+        run_id="run-variants",
+    ).extract(exchange)
+
+    assert vocabulary.calls == [("Triangle",)]
+    by_label = {
+        getattr(equation.lhs, "label", ""): equation for equation in result.knowledge_equations
+    }
+    assert set(by_label) == {"Triangle", wide_triangle}
+    for raw, equation in by_label.items():
+        assert getattr(equation.lhs, "term_id", None) == "c7"
+        assert equation.ontology_bindings[0].surface_form == raw
+        assert equation.ontology_bindings[0].normalized_surface == "triangle"
+
+
+@pytest.mark.asyncio
+async def test_fan_in_combines_all_unit_evidence_and_coverage_into_one_ke() -> None:
+    output = TurnKEOutput(
+        proposals=(
+            TurnKEProposal(
+                key="combined",
+                information_unit_keys=("unit-triangle", "unit-special"),
+                lhs=ProposalConceptRef(surface_form="triangle", candidate_id="c7"),
+                rhs=ProposalConceptRef(
+                    surface_form="special theorem",
+                    candidate_id=UNRESOLVED_MARKER,
+                ),
+                gloss="Triangle relates to the special theorem.",
+                modality=Modality.FACT,
+                polarity=Polarity.POSITIVE,
+                lifecycle="active",
+                confidence=0.85,
+            ),
+        )
+    )
+
+    result = await TurnKEExtractor(
+        FakeModel(_draft(), output),
+        FakeVocabulary(_bindings()),
+        run_id="run-7",
+    ).extract(_exchange())
+
+    equation = result.knowledge_equations[0]
+    assert tuple((span.start_char, span.end_char) for span in equation.evidence_refs) == (
+        (0, 8),
+        (9, 24),
+    )
+    assert all(
+        entry.ke_ids == (equation.id,)
+        for entry in result.coverage
+        if entry.status is CoverageStatus.REPRESENTED
+    )
+
+
+@pytest.mark.asyncio
+async def test_fan_out_maps_one_unit_to_every_realizing_final_ke_id() -> None:
+    base = _output().proposals[0]
+    dependent = TurnKEProposal(
+        key="ke-triangle-derived",
+        information_unit_keys=("unit-triangle",),
+        lhs=ProposalAssertionRef(assertion_key=base.key),
+        rhs=ProposalConceptRef(surface_form="triangle", candidate_id="c7"),
+        gloss="Derived triangle assertion.",
+        modality=Modality.FACT,
+        polarity=Polarity.POSITIVE,
+        lifecycle="active",
+        confidence=0.8,
+    )
+    output = TurnKEOutput(proposals=(dependent, base, _output().proposals[1]))
+
+    result = await TurnKEExtractor(
+        FakeModel(_draft(), output),
+        FakeVocabulary(_bindings()),
+        run_id="run-7",
+    ).extract(_exchange())
+
+    triangle_equations = tuple(
+        equation
+        for equation in result.knowledge_equations
+        if equation.evidence_refs[0].start_char == 0
+    )
+    assert len(triangle_equations) == 2
+    triangle_coverage = next(
+        entry
+        for entry in result.coverage
+        if entry.start_char == 0 and entry.status is CoverageStatus.REPRESENTED
+    )
+    assert triangle_coverage.ke_ids == tuple(sorted(equation.id for equation in triangle_equations))
+
+
+@pytest.mark.asyncio
+async def test_nested_expressions_attach_each_applicable_binding_once() -> None:
+    exchange = Exchange(
+        id="nested-exchange",
+        session_id="session-1",
+        user=Message(
+            id="nested-user",
+            role=MessageRole.USER,
+            content="Alice likes triangle",
+            source_order=0,
+        ),
+        assistant=Message(
+            id="nested-assistant",
+            role=MessageRole.ASSISTANT,
+            content="",
+            source_order=1,
+        ),
+        global_ordinal=5,
+    )
+    draft = TurnKEDraft(
+        information_units=(
+            DraftInformationUnit(
+                key="nested-unit",
+                gloss="Alice likes triangle.",
+                modality=Modality.FACT,
+                polarity=Polarity.POSITIVE,
+                speaker=Speaker.USER,
+                surface_mentions=(
+                    DraftSurfaceMention(
+                        surface_form="Alice", expected_role=OntologyRole.INDIVIDUAL
+                    ),
+                    DraftSurfaceMention(surface_form="likes", expected_role=OntologyRole.OPERATOR),
+                    DraftSurfaceMention(
+                        surface_form="triangle", expected_role=OntologyRole.CONCEPT
+                    ),
+                ),
+                source_spans=(DraftSpan(message_id="nested-user", start_char=0, end_char=20),),
+            ),
+        ),
+        coverage=(
+            DraftCoverageRange(
+                message_id="nested-user",
+                start_char=0,
+                end_char=20,
+                status=CoverageStatus.REPRESENTED,
+                unit_keys=("nested-unit",),
+            ),
+        ),
+    )
+    nested_application = ProposalOperatorApplication(
+        operator=ProposalOperatorRef(surface_form="likes", candidate_id="o1"),
+        arguments=(
+            ProposalIndividualRef(surface_form="Alice", candidate_id="i1"),
+            ProposalConceptRef(surface_form="triangle", candidate_id="c1"),
+        ),
+    )
+    output = TurnKEOutput(
+        proposals=(
+            TurnKEProposal(
+                key="nested-ke",
+                information_unit_keys=("nested-unit",),
+                lhs=ProposalIndividualRef(surface_form="Alice", candidate_id="i1"),
+                rhs=ProposalOperatorApplication(
+                    operator=ProposalOperatorRef(surface_form="likes", candidate_id="o1"),
+                    arguments=(
+                        ProposalConceptRef(surface_form="triangle", candidate_id="c1"),
+                        nested_application,
+                    ),
+                ),
+                gloss="Alice likes triangle recursively.",
+                modality=Modality.FACT,
+                polarity=Polarity.POSITIVE,
+                lifecycle="active",
+                confidence=0.9,
+            ),
+        )
+    )
+    vocabulary = FakeVocabulary(
+        {
+            "Alice": OntologyBinding(
+                surface_form="Alice",
+                normalized_surface="alice",
+                status=OntologyBindingStatus.RESOLVED,
+                document_id="i1",
+                canonical_term="Alice",
+                role=OntologyRole.INDIVIDUAL,
+                source_type="person",
+            ),
+            "likes": OntologyBinding(
+                surface_form="likes",
+                normalized_surface="likes",
+                status=OntologyBindingStatus.RESOLVED,
+                document_id="o1",
+                canonical_term="likes",
+                role=OntologyRole.OPERATOR,
+                source_type="relation",
+            ),
+            "triangle": OntologyBinding(
+                surface_form="triangle",
+                normalized_surface="triangle",
+                status=OntologyBindingStatus.RESOLVED,
+                document_id="c1",
+                canonical_term="Triangle",
+                role=OntologyRole.CONCEPT,
+                source_type="mathematical_concept",
+            ),
+        }
+    )
+
+    result = await TurnKEExtractor(
+        FakeModel(draft, output),
+        vocabulary,
+        run_id="run-nested",
+    ).extract(exchange)
+
+    assert vocabulary.calls == [("Alice", "likes", "triangle")]
+    bindings = result.knowledge_equations[0].ontology_bindings
+    assert len(bindings) == 3
+    assert {binding.document_id for binding in bindings} == {"i1", "o1", "c1"}
+
+
+@pytest.mark.asyncio
+async def test_binding_prompt_contains_safe_context_and_only_selectable_candidates() -> None:
+    bindings = _bindings()
+    bindings["special theorem"] = OntologyBinding(
+        surface_form="special theorem",
+        normalized_surface="special theorem",
+        status=OntologyBindingStatus.UNRESOLVED_ROLE,
+        document_id="roleless-private-id",
+        canonical_term="Special theorem",
+        source_type="ambiguous",
+    )
+    model = FakeModel(_draft(), _output())
+
+    await TurnKEExtractor(
+        model,
+        FakeVocabulary(bindings),
+        run_id="run-7",
+    ).extract(_exchange())
+
+    binding_message = model.calls[1][1][1]
+    content = str(binding_message["content"])
+    payload = json.loads(content)
+    bundles = payload["candidate_bundles"]
+    assert {bundle["offered_document_id"] for bundle in bundles} == {None, "c7"}
+    assert {bundle["unresolved_marker"] for bundle in bundles} == {UNRESOLVED_MARKER}
+    assert "roleless-private-id" not in content
+    assert payload["exchange_context"]["events"][0]["content"] == ('{"verbatim": "tool context"}')
+    assert payload["validated_draft"] == _draft().model_dump(mode="json")
 
 
 @pytest.mark.asyncio

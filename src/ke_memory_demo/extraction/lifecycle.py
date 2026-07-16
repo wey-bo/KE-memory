@@ -31,6 +31,10 @@ from .turn_ke import StructuredCompletionClient, normalize_surface
 
 LIFECYCLE_STAGE = "lifecycle-maintained"
 _PROMPT_ROOT = Path(__file__).resolve().parents[3] / "prompts"
+_EQUATION_OPERATOR_IDENTITY = "__equation__"
+_TERMINAL_LIFECYCLES = frozenset(
+    {Lifecycle.SUPERSEDED, Lifecycle.RETRACTED, Lifecycle.CONTRADICTED}
+)
 
 
 class LifecycleInvariantError(ValueError):
@@ -56,7 +60,8 @@ class LifecycleMaintainer:
         current_existing: dict[str, KnowledgeEquation] = {}
         for equation in existing:
             current_existing[equation.id] = equation
-        new_by_id = {equation.id: equation for equation in new}
+        effective_new = _effective_new_records(current_existing, new)
+        new_by_id = {equation.id: equation for equation in effective_new}
 
         candidates = _generate_candidates(current_existing, new_by_id)
         decisions: tuple[LifecycleMatchDecision, ...] = ()
@@ -121,8 +126,18 @@ class LifecycleMaintainer:
             appended_new.append(equation)
 
         appended = (*appended_old, *appended_new)
+        appended_ids = tuple(equation.id for equation in appended)
+        if len(appended_ids) != len(set(appended_ids)):
+            raise LifecycleInvariantError(
+                "lifecycle effects produced more than one appended revision per logical ID"
+            )
         current = dict(current_existing)
         current.update({equation.id: equation for equation in appended})
+        expected_current_ids = set(current_existing).union(new_by_id)
+        if len(current) != len(expected_current_ids) or set(current) != expected_current_ids:
+            raise LifecycleInvariantError(
+                "lifecycle effects did not produce exactly one current record per logical ID"
+            )
         return LifecycleResult(
             decisions=decisions,
             appended_revisions=appended,
@@ -159,10 +174,10 @@ def _generate_candidates(
     candidates: dict[tuple[str, str], LifecycleMatchCandidate] = {}
     for old_id in sorted(existing):
         old = existing[old_id]
+        if old.lifecycle in _TERMINAL_LIFECYCLES:
+            continue
         old_subject = _subject_identity(old.lhs)
         old_operator = _operator_identity(old)
-        if old_subject is None or old_operator is None:
-            continue
         for new_id in sorted(new):
             current = new[new_id]
             if old_id == new_id:
@@ -238,7 +253,7 @@ def _validate_decisions(
     return decisions
 
 
-def _subject_identity(expression: Expression) -> str | None:
+def _subject_identity(expression: Expression) -> str:
     if isinstance(expression, OperatorApplication):
         if expression.arguments:
             return _expression_identity(expression.arguments[0])
@@ -256,8 +271,12 @@ def _expression_identity(expression: Expression) -> str:
     return _identity(expression.term_id)
 
 
-def _operator_identity(equation: KnowledgeEquation) -> str | None:
-    return _operator_in_expression(equation.rhs) or _operator_in_expression(equation.lhs)
+def _operator_identity(equation: KnowledgeEquation) -> str:
+    return (
+        _operator_in_expression(equation.rhs)
+        or _operator_in_expression(equation.lhs)
+        or _EQUATION_OPERATOR_IDENTITY
+    )
 
 
 def _operator_in_expression(expression: Expression) -> str | None:
@@ -336,3 +355,19 @@ def _reject_duplicate_new_records(new: Sequence[KnowledgeEquation]) -> None:
     revisions = tuple(item.revision for item in new)
     if len(revisions) != len(set(revisions)):
         raise LifecycleInvariantError("duplicate new knowledge-equation revisions are not allowed")
+
+
+def _effective_new_records(
+    current_existing: Mapping[str, KnowledgeEquation],
+    new: Sequence[KnowledgeEquation],
+) -> tuple[KnowledgeEquation, ...]:
+    effective: list[KnowledgeEquation] = []
+    for equation in new:
+        current = current_existing.get(equation.id)
+        if current is None:
+            effective.append(equation)
+        elif equation != current:
+            raise LifecycleInvariantError(
+                f"logical ID collision has conflicting revisions: {equation.id}"
+            )
+    return tuple(effective)

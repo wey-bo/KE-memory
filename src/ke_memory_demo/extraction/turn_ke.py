@@ -249,10 +249,19 @@ class TurnKEExtractor:
         )
         bindings = await self._vocabulary.resolve_terms(queries) if queries else []
 
+        if len(bindings) != len(queries):
+            raise ExtractionInvariantError(
+                "ontology resolver result count does not match requested surfaces"
+            )
         returned: dict[str, OntologyBinding] = {}
         expected_normalized = set(surface_details)
-        for binding in bindings:
+        for query, binding in zip(queries, bindings, strict=True):
+            expected = normalize_surface(query)
             normalized = normalize_surface(binding.surface_form)
+            if normalized != expected:
+                raise ExtractionInvariantError(
+                    "ontology resolver result order does not match requested surfaces"
+                )
             if normalized not in expected_normalized:
                 raise ExtractionInvariantError(
                     f"ontology resolver returned an unrequested surface: {binding.surface_form}"
