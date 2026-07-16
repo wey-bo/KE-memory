@@ -206,16 +206,11 @@ class ElasticsearchVocabulary:
             )
             lexical_candidates = self._parse_search_hits(lexical_payload)
             if exact_matches:
-                candidates_by_id: dict[str, _Candidate] = {}
-                for candidate in (*candidates, *lexical_candidates):
-                    candidates_by_id.setdefault(candidate.term.document_id, candidate)
-                combined_exact = self._exact_matches(surface, list(candidates_by_id.values()))
-                if any(match.match_kind == 0 for match in combined_exact):
-                    combined_selected, combined_is_ambiguous = self._select_exact(combined_exact)
-                    if not combined_is_ambiguous:
-                        matches[surface] = combined_selected
-                elif not primary_is_ambiguous:
-                    matches[surface] = primary_selected
+                combined_candidates = self._combine_candidates(candidates, lexical_candidates)
+                combined_exact = self._exact_matches(surface, combined_candidates)
+                combined_selected, combined_is_ambiguous = self._select_exact(combined_exact)
+                if not combined_is_ambiguous:
+                    matches[surface] = combined_selected
                 continue
 
             recovered_exact = self._exact_matches(surface, lexical_candidates)
@@ -424,7 +419,6 @@ class ElasticsearchVocabulary:
         mapping_type = mapping.get("type")
         if mapping_type not in _SCALAR_MAPPING_TYPES:
             raise OntologySchemaError(f"mapping field {path!r} must have a scalar text type")
-        self._require_searchable_mapping(mapping, path)
         return mapping
 
     @staticmethod
@@ -444,6 +438,7 @@ class ElasticsearchVocabulary:
         path: str,
     ) -> _MappedField:
         mapping = self._require_scalar_mapping(properties, path)
+        self._require_searchable_mapping(mapping, path)
         mapping_type = cast(str, mapping["type"])
         keyword_paths: list[str] = []
         analyzed_paths: list[str] = []
@@ -520,6 +515,10 @@ class ElasticsearchVocabulary:
         if not isinstance(raw_hits_value, list):
             raise OntologySchemaError("search hits.hits must be a list")
         raw_hits = cast(list[object], raw_hits_value)
+        if len(raw_hits) > _MAX_RESPONSE_SIZE:
+            raise OntologySchemaError(
+                f"search hits.hits must contain at most {_MAX_RESPONSE_SIZE} items"
+            )
 
         seen_ids: set[str] = set()
         candidates: list[_Candidate] = []
@@ -557,6 +556,25 @@ class ElasticsearchVocabulary:
                 )
             )
         return candidates
+
+    @staticmethod
+    def _combine_candidates(
+        primary: Sequence[_Candidate],
+        fallback: Sequence[_Candidate],
+    ) -> list[_Candidate]:
+        by_document_id: dict[str, _Candidate] = {}
+        for candidate in (*primary, *fallback):
+            document_id = candidate.term.document_id
+            existing = by_document_id.get(document_id)
+            if existing is None:
+                by_document_id[document_id] = candidate
+            elif existing.term != candidate.term:
+                raise OntologySchemaError(
+                    f"search responses contain conflicting document ID {document_id!r}"
+                )
+            elif candidate.score > existing.score:
+                by_document_id[document_id] = candidate
+        return list(by_document_id.values())
 
     def _parse_source(self, document_id: str, raw_source: object) -> OntologyTerm:
         source = self._require_object(raw_source, f"document {document_id!r} _source")

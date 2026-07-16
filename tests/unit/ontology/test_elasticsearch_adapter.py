@@ -521,6 +521,89 @@ async def test_alias_only_primary_runs_fallback_and_prefers_normalized_exact_can
 
 
 @pytest.mark.asyncio
+async def test_alias_only_union_prefers_better_scored_fallback_alias(es: EsHarness) -> None:
+    es.search_responses = [
+        _search_response(
+            [_hit("primary-alias", _source("primary", aliases=["triangle"]), score=2.0)]
+        ),
+        _search_response(
+            [_hit("fallback-alias", _source("fallback", aliases=["triangle"]), score=5.0)]
+        ),
+    ]
+
+    binding = (await es.adapter().resolve_terms(["triangle"]))[0]
+
+    assert binding.document_id == "fallback-alias"
+    assert binding.matched_alias == "triangle"
+
+
+@pytest.mark.asyncio
+async def test_alias_only_union_preserves_exact_tie_ambiguity_across_requests(
+    es: EsHarness,
+) -> None:
+    es.search_responses = [
+        _search_response(
+            [_hit("primary-alias", _source("primary", aliases=["triangle"]), score=3.0)]
+        ),
+        _search_response(
+            [_hit("fallback-alias", _source("fallback", aliases=["triangle"]), score=3.0)]
+        ),
+    ]
+
+    binding = (await es.adapter().resolve_terms(["triangle"]))[0]
+
+    assert binding.status is OntologyBindingStatus.UNRESOLVED
+
+
+@pytest.mark.asyncio
+async def test_alias_only_union_rejects_conflicting_repeated_document_id(
+    es: EsHarness,
+) -> None:
+    es.search_responses = [
+        _search_response([_hit("repeated", _source("primary", aliases=["triangle"]), score=2.0)]),
+        _search_response([_hit("repeated", _source("triangle"), score=5.0)]),
+    ]
+
+    with pytest.raises(OntologySchemaError, match="conflicting document ID"):
+        await es.adapter().resolve_terms(["triangle"])
+
+
+@pytest.mark.asyncio
+async def test_alias_only_union_uses_highest_score_for_identical_repeated_term(
+    es: EsHarness,
+) -> None:
+    repeated_source = _source("shared", aliases=["triangle"])
+    es.search_responses = [
+        _search_response(
+            [
+                _hit(
+                    "repeated",
+                    repeated_source,
+                    score=1.0,
+                    matched_queries=["primary"],
+                ),
+                _hit("primary-best", _source("other", aliases=["triangle"]), score=2.0),
+            ]
+        ),
+        _search_response(
+            [
+                _hit(
+                    "repeated",
+                    repeated_source,
+                    score=3.0,
+                    matched_queries=["fallback"],
+                )
+            ]
+        ),
+    ]
+
+    binding = (await es.adapter().resolve_terms(["triangle"]))[0]
+
+    assert binding.document_id == "repeated"
+    assert binding.matched_alias == "triangle"
+
+
+@pytest.mark.asyncio
 async def test_lexical_fallback_preserves_recovered_exact_ambiguity(es: EsHarness) -> None:
     def return_hits_only_for_applicable_fallback(request: httpx.Request) -> JsonObject:
         body = json.loads(request.content)
@@ -1222,6 +1305,32 @@ async def test_lookup_mapping_rejects_index_false_fields(
 
 
 @pytest.mark.asyncio
+@pytest.mark.parametrize(
+    "field_path",
+    [
+        ("type",),
+        ("relations", "properties", "type"),
+        ("relations", "properties", "target_id"),
+    ],
+    ids=["source-type", "relation-type", "relation-target"],
+)
+async def test_non_lookup_scalar_mapping_may_be_unindexed(
+    es: EsHarness,
+    field_path: tuple[str, ...],
+) -> None:
+    mapping = _mapping()
+    field_mapping = mapping["vocab"]["mappings"]["properties"]
+    for segment in field_path:
+        field_mapping = field_mapping[segment]
+    field_mapping["index"] = False
+    es.identity_versions = [("vocab", "uuid-1", mapping)]
+
+    identity = await es.adapter().index_identity()
+
+    assert identity.index_name == "vocab"
+
+
+@pytest.mark.asyncio
 @pytest.mark.parametrize("index_options", ["docs", "freqs"])
 async def test_analyzed_lookup_mapping_requires_phrase_positions(
     es: EsHarness,
@@ -1295,6 +1404,42 @@ async def test_malformed_hits_are_schema_failures(es: EsHarness, hit: JsonObject
     es.search_responses = [_search_response([hit])]
 
     with pytest.raises(OntologySchemaError):
+        await es.adapter().resolve_terms(["triangle"])
+
+
+@pytest.mark.asyncio
+async def test_search_response_accepts_exactly_one_hundred_hits(es: EsHarness) -> None:
+    es.search_responses = [
+        _search_response(
+            [
+                _hit(
+                    f"candidate-{index}",
+                    _source(f"candidate {index}"),
+                    score=float(index),
+                )
+                for index in range(100)
+            ]
+        ),
+        _search_response([]),
+    ]
+
+    binding = (await es.adapter().resolve_terms(["triangle"]))[0]
+
+    assert binding.status is OntologyBindingStatus.UNRESOLVED
+
+
+@pytest.mark.asyncio
+async def test_search_response_rejects_more_than_one_hundred_hits_before_parsing(
+    es: EsHarness,
+) -> None:
+    hits = [_hit("malformed", {"term": 7})]
+    hits.extend(
+        _hit(f"candidate-{index}", _source(f"candidate {index}"), score=float(index))
+        for index in range(100)
+    )
+    es.search_responses = [_search_response(hits)]
+
+    with pytest.raises(OntologySchemaError, match="at most 100"):
         await es.adapter().resolve_terms(["triangle"])
 
 
