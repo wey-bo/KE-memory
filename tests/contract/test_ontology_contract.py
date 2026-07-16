@@ -71,6 +71,11 @@ def _mapping() -> JsonObject:
     }
 
 
+def test_adapter_declares_bounded_best_effort_normalization_without_exhaustive_claim() -> None:
+    assert ElasticsearchVocabulary.normalization_mode == "bounded-best-effort"
+    assert "exhaustive" not in ElasticsearchVocabulary.normalization_mode
+
+
 @pytest.mark.asyncio
 async def test_protocol_conformance_and_only_five_allowlisted_request_shapes() -> None:
     observed: list[tuple[str, str, bytes]] = []

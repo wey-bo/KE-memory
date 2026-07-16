@@ -378,7 +378,7 @@ async def test_keyword_exact_queries_retrieve_case_insensitive_canonical_and_ali
 
     assert [binding.document_id for binding in bindings] == ["canonical", "alias"]
     search_requests = [request for request in es.requests if request.url.path == "/vocab/_search"]
-    assert len(search_requests) == 2
+    assert len(search_requests) == 3
     first_body = json.loads(search_requests[0].content)
     first_terms = first_body["query"]["bool"]["should"]
     assert {next(iter(clause["term"].values()))["value"] for clause in first_terms}.issuperset(
@@ -439,7 +439,7 @@ async def test_keyword_exact_query_emits_bounded_unicode_compatibility_candidate
         for request in es.requests
         if request.url.path == "/vocab/_search"
     ]
-    assert len(search_bodies) == 1
+    assert len(search_bodies) == (2 if matched_alias is not None else 1)
     assert all(len(body["query"]["bool"]["should"]) <= 100 for body in search_bodies)
 
 
@@ -474,6 +474,50 @@ async def test_lexical_fallback_reclassifies_recovered_exact_canonical_before_al
 
     assert binding.document_id == "canonical-low"
     assert binding.matched_alias is None
+
+
+@pytest.mark.asyncio
+async def test_alias_only_primary_runs_fallback_and_prefers_normalized_exact_canonical(
+    es: EsHarness,
+) -> None:
+    primary_alias = _hit(
+        "alias-high",
+        _source("three-sided polygon", aliases=["TRIANGLE"]),
+        score=100.0,
+    )
+    es.search_responses = [
+        _search_response([primary_alias]),
+        _search_response(
+            [
+                _hit(
+                    "alias-high",
+                    _source("three-sided polygon", aliases=["TRIANGLE"]),
+                    score=0.5,
+                ),
+                _hit("canonical-low", _source("Ｔｒｉａｎｇｌｅ"), score=0.1),
+            ]
+        ),
+    ]
+
+    binding = (await es.adapter().resolve_terms(["triangle"]))[0]
+
+    assert binding.document_id == "canonical-low"
+    assert binding.canonical_term == "Ｔｒｉａｎｇｌｅ"
+    assert binding.matched_alias is None
+    assert [(request.method, request.url.path) for request in es.requests] == [
+        ("GET", "/_cat/indices/vocab"),
+        ("GET", "/vocab/_mapping"),
+        ("GET", "/_cat/indices/vocab"),
+        ("POST", "/vocab/_search"),
+        ("POST", "/vocab/_search"),
+    ]
+    exact_body, fallback_body = [
+        json.loads(request.content)
+        for request in es.requests
+        if request.url.path == "/vocab/_search"
+    ]
+    assert all("term" in clause for clause in exact_body["query"]["bool"]["should"])
+    assert all("wildcard" in clause for clause in fallback_body["query"]["bool"]["should"])
 
 
 @pytest.mark.asyncio

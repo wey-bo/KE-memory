@@ -79,6 +79,8 @@ class _Match:
 
 
 class ElasticsearchVocabulary:
+    normalization_mode = "bounded-best-effort"
+
     def __init__(
         self,
         connection: ElasticsearchConnection,
@@ -191,11 +193,10 @@ class ElasticsearchVocabulary:
             )
             candidates = self._parse_search_hits(exact_payload)
             exact_matches = self._exact_matches(surface, candidates)
-            selected, is_ambiguous = self._select_exact(exact_matches)
-            if is_ambiguous:
-                continue
-            if selected is not None:
-                matches[surface] = selected
+            primary_selected, primary_is_ambiguous = self._select_exact(exact_matches)
+            if any(match.match_kind == 0 for match in exact_matches):
+                if not primary_is_ambiguous:
+                    matches[surface] = primary_selected
                 continue
 
             lexical_payload = await self._request(
@@ -204,6 +205,19 @@ class ElasticsearchVocabulary:
                 json_body=self._lexical_query(surface, lookup_plan),
             )
             lexical_candidates = self._parse_search_hits(lexical_payload)
+            if exact_matches:
+                candidates_by_id: dict[str, _Candidate] = {}
+                for candidate in (*candidates, *lexical_candidates):
+                    candidates_by_id.setdefault(candidate.term.document_id, candidate)
+                combined_exact = self._exact_matches(surface, list(candidates_by_id.values()))
+                if any(match.match_kind == 0 for match in combined_exact):
+                    combined_selected, combined_is_ambiguous = self._select_exact(combined_exact)
+                    if not combined_is_ambiguous:
+                        matches[surface] = combined_selected
+                elif not primary_is_ambiguous:
+                    matches[surface] = primary_selected
+                continue
+
             recovered_exact = self._exact_matches(surface, lexical_candidates)
             recovered, is_ambiguous = self._select_exact(recovered_exact)
             if is_ambiguous:
