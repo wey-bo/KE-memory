@@ -89,24 +89,31 @@ class _Stages:
 
 class _Retrieval:
     def __init__(self) -> None:
-        self.calls: list[tuple[str, int]] = []
+        self.calls: list[tuple[RunScope, str, int]] = []
 
     async def retrieve(
         self,
+        scope: RunScope,
         question: str,
         evidence_budget_tokens: int,
     ) -> tuple[Evidence, ...]:
-        self.calls.append((question, evidence_budget_tokens))
+        self.calls.append((scope, question, evidence_budget_tokens))
         return (_evidence(),)
 
 
 class _Usage:
     def __init__(self) -> None:
-        self.values: tuple[UsageRecord, ...] = ()
+        self.values: dict[RunScope, tuple[UsageRecord, ...]] = {}
+        self.calls: list[RunScope] = []
 
-    @property
-    def usage_records(self) -> tuple[UsageRecord, ...]:
-        return self.values
+    def usage_records(self, scope: RunScope) -> tuple[UsageRecord, ...]:
+        self.calls.append(scope)
+        return self.values.get(scope, ())
+
+
+class _CharacterTokenCounter:
+    def count(self, text: str) -> int:
+        return len(text)
 
 
 def _scope() -> RunScope:
@@ -124,10 +131,16 @@ async def test_ke_memory_system_maps_staged_operations_to_the_common_protocol(
     stages = _Stages()
     retrieval = _Retrieval()
     usage = _Usage()
-    system = KEMemorySystem(ArtifactStore(tmp_path / "state"), stages, retrieval, usage)
+    system = KEMemorySystem(
+        ArtifactStore(tmp_path / "state"),
+        stages,
+        retrieval,
+        usage,
+        token_counter=_CharacterTokenCounter(),
+    )
 
     identity = await system.prepare(_scope())
-    usage.values = (
+    usage.values[_scope()] = (
         UsageRecord(
             request_id="request-1",
             model="gpt-5.4",
@@ -148,7 +161,7 @@ async def test_ke_memory_system_maps_staged_operations_to_the_common_protocol(
     exchange = _exchange()
     ingest = await system.ingest(exchange)
     readiness = await system.await_ready()
-    evidence = await system.retrieve("status?", 100)
+    evidence = await system.retrieve("status?", 1000)
     stats = await system.stats()
 
     assert isinstance(system, MemorySystem)
@@ -162,31 +175,62 @@ async def test_ke_memory_system_maps_staged_operations_to_the_common_protocol(
     assert readiness.ready
     assert stages.ready_calls == [(_scope(), EMBEDDING_READY_STAGE)]
     assert evidence == (_evidence(),)
-    assert retrieval.calls == [("status?", 100)]
+    assert retrieval.calls == [(_scope(), "status?", 1000)]
     assert stats.call_count == 2
     assert stats.input_tokens == 30
     assert stats.output_tokens == 7
     assert math.isclose(stats.total_latency_seconds, 0.5)
+    assert usage.calls == [_scope()]
 
 
 @pytest.mark.asyncio
 async def test_ke_memory_system_requires_successful_embedding_ready(
     tmp_path: Path,
 ) -> None:
-    stages = _Stages(
-        StageReadiness(stage="turn-ke-extracted", successful=True, pending_count=0)
-    )
+    stages = _Stages(StageReadiness(stage="turn-ke-extracted", successful=True, pending_count=0))
     system = KEMemorySystem(
         ArtifactStore(tmp_path / "state"),
         stages,
         _Retrieval(),
         _Usage(),
+        token_counter=_CharacterTokenCounter(),
     )
     await system.prepare(_scope())
 
     with pytest.raises(KEMemorySystemError, match="embedding-ready"):
         await system.await_ready()
     with pytest.raises(KEMemorySystemError, match="ready"):
+        await system.retrieve("status?", 100)
+
+
+@pytest.mark.asyncio
+async def test_ke_memory_system_rejects_retrieval_over_exact_serialized_budget(
+    tmp_path: Path,
+) -> None:
+    class _OversizedRetrieval:
+        async def retrieve(
+            self,
+            scope: RunScope,
+            question: str,
+            evidence_budget_tokens: int,
+        ) -> tuple[Evidence, ...]:
+            return (
+                _evidence().model_copy(
+                    update={"metadata": {"provenance": "p" * 200}, "token_count": 1}
+                ),
+            )
+
+    system = KEMemorySystem(
+        ArtifactStore(tmp_path / "state"),
+        _Stages(),
+        _OversizedRetrieval(),
+        _Usage(),
+        token_counter=_CharacterTokenCounter(),
+    )
+    await system.prepare(_scope())
+    await system.await_ready()
+
+    with pytest.raises(KEMemorySystemError, match="requested evidence budget"):
         await system.retrieve("status?", 100)
 
 
@@ -203,7 +247,13 @@ async def test_reset_deletes_only_current_runtime_cache_not_canonical_or_other_c
     store.layout.ensure_directory(other_cache)
     (other_cache / "keep.bin").write_bytes(b"keep")
     stages = _Stages()
-    system = KEMemorySystem(store, stages, _Retrieval(), _Usage())
+    system = KEMemorySystem(
+        store,
+        stages,
+        _Retrieval(),
+        _Usage(),
+        token_counter=_CharacterTokenCounter(),
+    )
     await system.prepare(_scope())
     runtime_cache = stages.prepare_calls[0][1]
 
@@ -214,3 +264,62 @@ async def test_reset_deletes_only_current_runtime_cache_not_canonical_or_other_c
     assert not runtime_cache.exists()
     assert canonical.read_bytes() == canonical_bytes
     assert (other_cache / "keep.bin").read_bytes() == b"keep"
+
+
+@pytest.mark.asyncio
+async def test_reset_and_reprepare_cannot_leak_retrieval_or_usage_from_old_scope(
+    tmp_path: Path,
+) -> None:
+    old_scope = _scope()
+    new_scope = RunScope(
+        run_id="run-2",
+        conversation_id="conversation-2",
+        system_id="ke-memory",
+    )
+    retrieval = _Retrieval()
+    usage = _Usage()
+    system = KEMemorySystem(
+        ArtifactStore(tmp_path / "state"),
+        _Stages(),
+        retrieval,
+        usage,
+        token_counter=_CharacterTokenCounter(),
+    )
+    await system.prepare(old_scope)
+    await system.await_ready()
+    await system.retrieve("old question", 1000)
+    usage.values[old_scope] = (
+        UsageRecord(
+            request_id="old-request",
+            model="gpt-5.4",
+            latency_seconds=1.0,
+            input_tokens=100,
+            output_tokens=10,
+            total_tokens=110,
+        ),
+    )
+    await system.reset()
+
+    await system.prepare(new_scope)
+    await system.await_ready()
+    await system.retrieve("new question", 1000)
+    usage.values[new_scope] = (
+        UsageRecord(
+            request_id="new-request",
+            model="gpt-5.4",
+            latency_seconds=0.2,
+            input_tokens=7,
+            output_tokens=3,
+            total_tokens=10,
+        ),
+    )
+    stats = await system.stats()
+
+    assert retrieval.calls == [
+        (old_scope, "old question", 1000),
+        (new_scope, "new question", 1000),
+    ]
+    assert stats.call_count == 1
+    assert stats.input_tokens == 7
+    assert stats.output_tokens == 3
+    assert usage.calls == [new_scope]

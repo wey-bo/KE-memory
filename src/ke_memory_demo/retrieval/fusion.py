@@ -13,11 +13,13 @@ from ke_memory_demo.core.json import JsonObject, JsonValue, canonical_json
 from ke_memory_demo.domain import Evidence, MessageSpan, TemporalMetadata
 
 from .matcher import KEMatchDecision, MatchRelation
+from .evidence_payload import serialize_evidence_payload
 from .symbolic import SourceFragment, SymbolicCandidate
 from .tokens import TokenCounter
 
 
 MAX_EVIDENCE_TOKENS = 8192
+MAX_MANDATORY_SEARCH_STATES = 100_000
 NonEmptyString = Annotated[str, Field(min_length=1)]
 FiniteFloat = Annotated[float, Field(allow_inf_nan=False)]
 
@@ -105,7 +107,7 @@ class EvidenceFusion:
         symbolic_candidates: Sequence[SymbolicCandidate],
         matches: Sequence[KEMatchDecision],
         embedding_candidates: Sequence[EvidenceCandidate],
-        budget: int = MAX_EVIDENCE_TOKENS,
+        budget: int | None = None,
     ) -> tuple[Evidence, ...]:
         symbolic = tuple(
             SymbolicCandidate.model_validate(item.model_dump(mode="python"))
@@ -147,18 +149,20 @@ class EvidenceFusion:
             )
         )
         merged = _merge_candidates(expanded, self._validated_token_count)
-        selected = _select_candidates(merged, actual_budget)
-        ranked = sorted(selected, key=lambda item: (-item.score, item.candidate_id, item.key))
-        return tuple(
-            _to_evidence(item, rank)
-            for rank, item in enumerate(ranked, start=1)
-        )
+        selected = _select_candidates(merged, actual_budget, self._serialized_token_count)
+        evidence = _ranked_evidence(selected)
+        if self._serialized_token_count(selected) > actual_budget:
+            raise EvidenceBudgetError("serialized evidence collection exceeds the budget")
+        return evidence
 
     def _validated_token_count(self, text: str) -> int:
         count = self._token_counter.count(text)
         if isinstance(count, bool) or count < 0:
             raise FusionInvariantError("token counter returned an invalid count")
         return count
+
+    def _serialized_token_count(self, candidates: Sequence[_MergedCandidate]) -> int:
+        return self._validated_token_count(serialize_evidence_payload(_ranked_evidence(candidates)))
 
 
 def _symbolic_evidence(
@@ -220,6 +224,9 @@ def _expand_candidate(candidate: EvidenceCandidate) -> tuple[EvidenceCandidate, 
             "closure_for": candidate.candidate_id,
             "raw_source": True,
         }
+        embedding_document_id = candidate.metadata.get("embedding_document_id")
+        if isinstance(embedding_document_id, str) and embedding_document_id:
+            metadata["embedding_document_id"] = embedding_document_id
         closure.append(
             EvidenceCandidate(
                 candidate_id=f"{candidate.candidate_id}:raw:{fragment.fragment_id}",
@@ -309,77 +316,144 @@ def _merge_candidates(
 def _select_candidates(
     candidates: Sequence[_MergedCandidate],
     budget: int,
+    selection_token_count: Callable[[Sequence[_MergedCandidate]], int],
 ) -> tuple[_MergedCandidate, ...]:
     by_derived: dict[str, tuple[_MergedCandidate, ...]] = {}
     for item in candidates:
         if item.derived_record_id is not None:
             by_derived[item.derived_record_id] = tuple(
-                closure
-                for closure in candidates
-                if item.derived_record_id in closure.closure_for
+                closure for closure in candidates if item.derived_record_id in closure.closure_for
             )
-
-    selected: dict[tuple[str, ...], _MergedCandidate] = {}
-    used_tokens = 0
 
     def bundle(item: _MergedCandidate) -> tuple[_MergedCandidate, ...]:
         dependencies = (
-            by_derived.get(item.derived_record_id, ())
-            if item.derived_record_id is not None
-            else ()
+            by_derived.get(item.derived_record_id, ()) if item.derived_record_id is not None else ()
         )
         values = {candidate.key: candidate for candidate in (item, *dependencies)}
         return tuple(values[key] for key in sorted(values))
-
-    def add(item: _MergedCandidate) -> bool:
-        nonlocal used_tokens
-        additions = tuple(value for value in bundle(item) if value.key not in selected)
-        added_tokens = sum(value.token_count for value in additions)
-        if used_tokens + added_tokens > budget:
-            return False
-        for value in additions:
-            selected[value.key] = value
-        used_tokens += added_tokens
-        return True
 
     selectable = tuple(item for item in candidates if not item.pure_closure)
     required: set[str] = set()
     for item in selectable:
         required.update(_requirements(item))
-    while required:
-        options = [item for item in selectable if item.key not in selected]
-        options.sort(
-            key=lambda item: (
-                -len(_bundle_requirements(bundle(item)).intersection(required)),
-                sum(value.token_count for value in bundle(item) if value.key not in selected),
-                -item.score,
-                item.candidate_id,
-            )
-        )
-        chosen = next(
-            (
-                item
-                for item in options
-                if _bundle_requirements(bundle(item)).intersection(required)
-                and sum(
-                    value.token_count for value in bundle(item) if value.key not in selected
-                )
-                + used_tokens
-                <= budget
-            ),
-            None,
-        )
-        if chosen is None or not add(chosen):
-            raise EvidenceBudgetError(
-                "required conflict, temporal, or session evidence does not fit within the budget"
-            )
-        required.difference_update(_bundle_requirements(bundle(chosen)))
+    selected = _mandatory_selection(
+        selectable,
+        required,
+        bundle=bundle,
+        budget=budget,
+        selection_token_count=selection_token_count,
+    )
+
+    def add(item: _MergedCandidate) -> bool:
+        additions = tuple(value for value in bundle(item) if value.key not in selected)
+        proposed = (*selected.values(), *additions)
+        if selection_token_count(proposed) > budget:
+            return False
+        for value in additions:
+            selected[value.key] = value
+        return True
 
     for item in sorted(selectable, key=lambda value: (-value.score, value.candidate_id, value.key)):
         if item.key in selected:
             continue
         add(item)
     return tuple(selected[key] for key in sorted(selected))
+
+
+def _mandatory_selection(
+    selectable: Sequence[_MergedCandidate],
+    required: set[str],
+    *,
+    bundle: Callable[[_MergedCandidate], tuple[_MergedCandidate, ...]],
+    budget: int,
+    selection_token_count: Callable[[Sequence[_MergedCandidate]], int],
+) -> dict[tuple[str, ...], _MergedCandidate]:
+    options = tuple(
+        sorted(
+            selectable,
+            key=lambda item: (-item.score, item.candidate_id, item.key),
+        )
+    )
+    requirements_by_option = {item.key: _bundle_requirements(bundle(item)) for item in options}
+    states = 0
+
+    def search(
+        selected: dict[tuple[str, ...], _MergedCandidate],
+        remaining: frozenset[str],
+    ) -> dict[tuple[str, ...], _MergedCandidate] | None:
+        nonlocal states
+        states += 1
+        if states > MAX_MANDATORY_SEARCH_STATES:
+            raise FusionInvariantError(
+                "mandatory evidence search limit exhausted before feasibility was decided"
+            )
+        if not remaining:
+            return selected
+
+        covering = {
+            requirement: tuple(
+                item
+                for item in options
+                if item.key not in selected and requirement in requirements_by_option[item.key]
+            )
+            for requirement in remaining
+        }
+        if any(not candidates for candidates in covering.values()):
+            return None
+        requirement = min(
+            remaining,
+            key=lambda value: (len(covering[value]), value),
+        )
+        branches: list[
+            tuple[
+                int,
+                int,
+                float,
+                str,
+                _MergedCandidate,
+                dict[tuple[str, ...], _MergedCandidate],
+                frozenset[str],
+            ]
+        ] = []
+        for item in covering[requirement]:
+            proposed = dict(selected)
+            for value in bundle(item):
+                proposed[value.key] = value
+            cost = selection_token_count(tuple(proposed.values()))
+            if cost > budget:
+                continue
+            covered = requirements_by_option[item.key].intersection(remaining)
+            branches.append(
+                (
+                    -len(covered),
+                    cost,
+                    -item.score,
+                    item.candidate_id,
+                    item,
+                    proposed,
+                    remaining.difference(covered),
+                )
+            )
+        for *_priority, proposed, next_remaining in sorted(
+            branches,
+            key=lambda branch: branch[:4],
+        ):
+            result = search(proposed, next_remaining)
+            if result is not None:
+                return result
+        return None
+
+    result = search({}, frozenset(required))
+    if result is None:
+        raise EvidenceBudgetError(
+            "required conflict, temporal, or session evidence does not fit within the budget"
+        )
+    return result
+
+
+def _ranked_evidence(candidates: Sequence[_MergedCandidate]) -> tuple[Evidence, ...]:
+    ranked = sorted(candidates, key=lambda item: (-item.score, item.candidate_id, item.key))
+    return tuple(_to_evidence(item, rank) for rank, item in enumerate(ranked, start=1))
 
 
 def _requirements(item: _MergedCandidate) -> set[str]:

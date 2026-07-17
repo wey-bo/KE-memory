@@ -36,7 +36,15 @@ if TYPE_CHECKING:
 MAX_EVIDENCE_TOKENS = 8192
 _PROMPT_PATH = Path(__file__).resolve().parents[3] / "prompts/query_ke/system.md"
 NonEmptyString = Annotated[str, Field(min_length=1)]
+NonNegativeInt = Annotated[int, Field(ge=0)]
 ModelT = TypeVar("ModelT", bound=BaseModel)
+TemporalField = Literal["mentioned_at", "event_time", "valid_from", "valid_to"]
+_TEMPORAL_FIELDS: tuple[TemporalField, ...] = (
+    "mentioned_at",
+    "event_time",
+    "valid_from",
+    "valid_to",
+)
 
 
 class RetrievalInvariantError(ValueError):
@@ -51,19 +59,49 @@ class _QueryRecord(BaseModel):
     model_config = ConfigDict(frozen=True, extra="forbid")
 
 
+class QueryGroundingSpan(_QueryRecord):
+    start_char: NonNegativeInt
+    end_char: NonNegativeInt
+
+    @model_validator(mode="after")
+    def _validate_nonempty(self) -> QueryGroundingSpan:
+        if self.end_char <= self.start_char:
+            raise ValueError("query grounding span must be nonempty")
+        return self
+
+
+class QuerySurfaceGrounding(_QueryRecord):
+    surface_form: NonEmptyString
+    role: OntologyRole
+    grounding_span: QueryGroundingSpan
+
+
+class QueryLifecycleGrounding(_QueryRecord):
+    value: Lifecycle
+    grounding_span: QueryGroundingSpan
+
+
+class QueryTemporalGrounding(_QueryRecord):
+    field: TemporalField
+    grounding_span: QueryGroundingSpan
+
+
 class QueryConceptDraft(_QueryRecord):
     kind: Literal["concept"] = "concept"
     surface_form: NonEmptyString
+    grounding_span: QueryGroundingSpan
 
 
 class QueryIndividualDraft(_QueryRecord):
     kind: Literal["individual"] = "individual"
     surface_form: NonEmptyString
+    grounding_span: QueryGroundingSpan
 
 
 class QueryOperatorDraft(_QueryRecord):
     kind: Literal["operator"] = "operator"
     surface_form: NonEmptyString
+    grounding_span: QueryGroundingSpan
 
 
 class QueryOperatorApplicationDraft(_QueryRecord):
@@ -73,10 +111,7 @@ class QueryOperatorApplicationDraft(_QueryRecord):
 
 
 type QueryDraftExpression = Annotated[
-    QueryConceptDraft
-    | QueryIndividualDraft
-    | QueryOperatorDraft
-    | QueryOperatorApplicationDraft,
+    QueryConceptDraft | QueryIndividualDraft | QueryOperatorDraft | QueryOperatorApplicationDraft,
     Field(discriminator="kind"),
 ]
 
@@ -89,12 +124,23 @@ class QueryKEDraft(_QueryRecord):
     rhs: QueryDraftExpression
     gloss: NonEmptyString
     lifecycle: tuple[Lifecycle, ...] = ()
+    lifecycle_groundings: tuple[QueryLifecycleGrounding, ...] = ()
     temporal: TemporalMetadata = Field(default_factory=TemporalMetadata)
+    temporal_groundings: tuple[QueryTemporalGrounding, ...] = ()
 
     @model_validator(mode="after")
     def _validate_lifecycle(self) -> QueryKEDraft:
         if len(self.lifecycle) != len(set(self.lifecycle)):
             raise ValueError("duplicate query lifecycle filters are not allowed")
+        lifecycle_keys = tuple(
+            (item.value, item.grounding_span.start_char, item.grounding_span.end_char)
+            for item in self.lifecycle_groundings
+        )
+        if len(lifecycle_keys) != len(set(lifecycle_keys)):
+            raise ValueError("duplicate query lifecycle groundings are not allowed")
+        temporal_fields = tuple(item.field for item in self.temporal_groundings)
+        if len(temporal_fields) != len(set(temporal_fields)):
+            raise ValueError("duplicate query temporal groundings are not allowed")
         return self
 
 
@@ -105,6 +151,9 @@ class QueryKE(_QueryRecord):
     lifecycle: tuple[Lifecycle, ...] = ()
     temporal: TemporalMetadata = Field(default_factory=TemporalMetadata)
     ontology_bindings: tuple[OntologyBinding, ...] = ()
+    surface_groundings: tuple[QuerySurfaceGrounding, ...]
+    lifecycle_groundings: tuple[QueryLifecycleGrounding, ...] = ()
+    temporal_groundings: tuple[QueryTemporalGrounding, ...] = ()
 
     @model_validator(mode="after")
     def _validate_query(self) -> QueryKE:
@@ -121,6 +170,21 @@ class QueryKE(_QueryRecord):
         )
         if len(binding_keys) != len(set(binding_keys)):
             raise ValueError("duplicate query ontology bindings are not allowed")
+        expected_surfaces = tuple(
+            (item.label, _expression_role(item))
+            for expression in (self.lhs, self.rhs)
+            for item in _expression_atoms(expression)
+        )
+        actual_surfaces = tuple((item.surface_form, item.role) for item in self.surface_groundings)
+        if actual_surfaces != expected_surfaces:
+            raise ValueError("query surface groundings do not match its expression atoms")
+        if tuple(item.value for item in self.lifecycle_groundings) != self.lifecycle:
+            raise ValueError("query lifecycle filters do not match their groundings")
+        populated_temporal = tuple(
+            field for field in _TEMPORAL_FIELDS if getattr(self.temporal, field) is not None
+        )
+        if tuple(item.field for item in self.temporal_groundings) != populated_temporal:
+            raise ValueError("query temporal fields do not match their groundings")
         return self
 
 
@@ -214,15 +278,34 @@ class QueryKEExtractor:
             ),
         )
         draft = _revalidate(QueryKEDraft, response, "query KE draft")
+        _validate_draft_grounding(draft, question)
         bindings = await self._resolve_bindings(draft)
         used_bindings: list[OntologyBinding] = []
+        surface_groundings: list[QuerySurfaceGrounding] = []
         query_ke = QueryKE(
-            lhs=_bind_expression(draft.lhs, bindings, used_bindings),
-            rhs=_bind_expression(draft.rhs, bindings, used_bindings),
+            lhs=_bind_expression(draft.lhs, bindings, used_bindings, surface_groundings),
+            rhs=_bind_expression(draft.rhs, bindings, used_bindings, surface_groundings),
             gloss=draft.gloss,
             lifecycle=tuple(sorted(draft.lifecycle, key=lambda item: item.value)),
             temporal=draft.temporal,
             ontology_bindings=_unique_bindings(used_bindings),
+            surface_groundings=tuple(surface_groundings),
+            lifecycle_groundings=tuple(
+                sorted(
+                    draft.lifecycle_groundings,
+                    key=lambda item: (
+                        item.value.value,
+                        item.grounding_span.start_char,
+                        item.grounding_span.end_char,
+                    ),
+                )
+            ),
+            temporal_groundings=tuple(
+                sorted(
+                    draft.temporal_groundings,
+                    key=lambda item: _TEMPORAL_FIELDS.index(item.field),
+                )
+            ),
         )
         self._trace_recorder.record(
             QueryExtractionTrace(
@@ -239,11 +322,11 @@ class QueryKEExtractor:
     ) -> dict[str, OntologyBinding]:
         surfaces: dict[str, set[str]] = {}
         for expression in (draft.lhs, draft.rhs):
-            for surface_form, _role in _draft_atoms(expression):
-                normalized = normalize_surface(surface_form)
+            for atom in _draft_atoms(expression):
+                normalized = normalize_surface(atom.surface_form)
                 if not normalized:
                     raise QueryInvariantError("query expression contains an empty surface")
-                surfaces.setdefault(normalized, set()).add(surface_form)
+                surfaces.setdefault(normalized, set()).add(atom.surface_form)
         queries = tuple(min(surfaces[key]) for key in sorted(surfaces))
         returned = await self._vocabulary.resolve_terms(queries) if queries else []
         if len(returned) != len(queries):
@@ -298,38 +381,56 @@ class EmbeddingRetriever:
             hit = SearchHit.model_validate(raw_hit.model_dump(mode="python"))
             kind = hit.metadata.get("kind")
             derived = isinstance(kind, str) and kind in self._DERIVED_KINDS
-            fragments: tuple[SourceFragment, ...] = ()
-            if derived:
-                if self._closure_source is None:
-                    raise RetrievalInvariantError(
-                        f"derived embedding hit has no raw closure source: {hit.document_id}"
-                    )
-                fragments = tuple(
-                    SourceFragment.model_validate(item)
-                    for item in self._closure_source.source_fragments_for_hit(hit)
+            if self._closure_source is None:
+                raise RetrievalInvariantError(
+                    f"embedding hit has no source fragment resolver: {hit.document_id}"
                 )
-                if not fragments:
-                    raise RetrievalInvariantError(
-                        f"derived embedding hit has an empty raw closure: {hit.document_id}"
-                    )
-            record_ids = tuple(
-                sorted({*hit.source_ke_ids, *hit.source_aggregate_ids})
-            ) or (hit.document_id,)
-            candidates.append(
-                EvidenceCandidate(
-                    candidate_id=hit.document_id,
-                    text=hit.text,
-                    score=hit.score,
-                    channel="embedding",
-                    source_exchange_ids=tuple(sorted(set(hit.source_exchange_ids))),
-                    source_message_ids=tuple(sorted(set(hit.source_message_ids))),
-                    source_session_ids=tuple(sorted(set(hit.source_session_ids))),
-                    system_record_ids=record_ids,
-                    derived=derived,
-                    raw_closure=fragments,
-                    metadata=dict(hit.metadata),
-                )
+            fragments = tuple(
+                SourceFragment.model_validate(item)
+                for item in self._closure_source.source_fragments_for_hit(hit)
             )
+            if not fragments:
+                raise RetrievalInvariantError(
+                    f"embedding hit has no canonical source fragments: {hit.document_id}"
+                )
+            _authenticate_embedding_fragments(hit, fragments)
+            record_ids = tuple(sorted({*hit.source_ke_ids, *hit.source_aggregate_ids})) or (
+                hit.document_id,
+            )
+            metadata = dict(hit.metadata)
+            metadata["embedding_document_id"] = hit.document_id
+            if derived:
+                candidates.append(
+                    EvidenceCandidate(
+                        candidate_id=hit.document_id,
+                        text=hit.text,
+                        score=hit.score,
+                        channel="embedding",
+                        source_exchange_ids=tuple(sorted(set(hit.source_exchange_ids))),
+                        source_message_ids=tuple(sorted(set(hit.source_message_ids))),
+                        source_session_ids=tuple(sorted(set(hit.source_session_ids))),
+                        system_record_ids=record_ids,
+                        derived=True,
+                        raw_closure=fragments,
+                        metadata=metadata,
+                    )
+                )
+                continue
+            for fragment in fragments:
+                candidates.append(
+                    EvidenceCandidate(
+                        candidate_id=f"{hit.document_id}:raw:{fragment.fragment_id}",
+                        text=fragment.text,
+                        score=hit.score,
+                        channel="embedding",
+                        source_exchange_ids=(fragment.source_exchange_id,),
+                        source_message_ids=(fragment.span.message_id,),
+                        source_session_ids=(fragment.source_session_id,),
+                        system_record_ids=record_ids,
+                        message_span=fragment.span,
+                        metadata={**metadata, "raw_source": True},
+                    )
+                )
         return tuple(candidates)
 
 
@@ -407,6 +508,42 @@ class RetrievalCoordinator:
         )
 
 
+def _authenticate_embedding_fragments(
+    hit: SearchHit,
+    fragments: Sequence[object],
+) -> None:
+    from .symbolic import SourceFragment
+
+    validated = tuple(SourceFragment.model_validate(item) for item in fragments)
+    fragment_ids = tuple(item.fragment_id for item in validated)
+    if len(fragment_ids) != len(set(fragment_ids)):
+        raise RetrievalInvariantError(
+            f"embedding fragment IDs are duplicated for {hit.document_id}"
+        )
+    provenance = (
+        (
+            "message",
+            tuple(sorted(hit.source_message_ids)),
+            tuple(sorted({item.span.message_id for item in validated})),
+        ),
+        (
+            "exchange",
+            tuple(sorted(hit.source_exchange_ids)),
+            tuple(sorted({item.source_exchange_id for item in validated})),
+        ),
+        (
+            "session",
+            tuple(sorted(hit.source_session_ids)),
+            tuple(sorted({item.source_session_id for item in validated})),
+        ),
+    )
+    for label, expected, actual in provenance:
+        if actual != expected:
+            raise RetrievalInvariantError(
+                f"embedding fragment {label} provenance mismatch for {hit.document_id}"
+            )
+
+
 def _read_prompt() -> str:
     try:
         return _PROMPT_PATH.read_text(encoding="utf-8")
@@ -423,40 +560,109 @@ def _revalidate(model_type: type[ModelT], value: object, label: str) -> ModelT:
         raise QueryInvariantError(f"{label} failed local schema validation") from error
 
 
+def _validate_draft_grounding(draft: QueryKEDraft, question: str) -> None:
+    for expression in (draft.lhs, draft.rhs):
+        for atom in _draft_atoms(expression):
+            _validate_question_span(
+                question,
+                atom.grounding_span,
+                expected_surface=atom.surface_form,
+            )
+
+    lifecycle_values = tuple(sorted(draft.lifecycle, key=lambda item: item.value))
+    grounded_lifecycle = tuple(
+        sorted(
+            (item.value for item in draft.lifecycle_groundings),
+            key=lambda item: item.value,
+        )
+    )
+    if grounded_lifecycle != lifecycle_values:
+        raise QueryInvariantError("query lifecycle filters require exactly one grounding each")
+    for grounding in draft.lifecycle_groundings:
+        _validate_question_span(question, grounding.grounding_span)
+
+    temporal_fields = tuple(
+        field for field in _TEMPORAL_FIELDS if getattr(draft.temporal, field) is not None
+    )
+    grounded_temporal = tuple(
+        sorted(
+            (item.field for item in draft.temporal_groundings),
+            key=_TEMPORAL_FIELDS.index,
+        )
+    )
+    if grounded_temporal != temporal_fields:
+        raise QueryInvariantError(
+            "populated query temporal fields require exactly one grounding each"
+        )
+    for grounding in draft.temporal_groundings:
+        _validate_question_span(question, grounding.grounding_span)
+
+
+def _validate_question_span(
+    question: str,
+    span: QueryGroundingSpan,
+    *,
+    expected_surface: str | None = None,
+) -> None:
+    if span.end_char > len(question):
+        raise QueryInvariantError("query grounding span is outside question bounds")
+    excerpt = question[span.start_char : span.end_char]
+    if not excerpt.strip():
+        raise QueryInvariantError("query grounding span must cite nonempty question text")
+    if expected_surface is not None and excerpt != expected_surface:
+        raise QueryInvariantError("query atom surface form is not the exact question substring")
+
+
+def _expression_atoms(
+    expression: Expression,
+) -> tuple[ConceptRef | IndividualRef | OperatorRef, ...]:
+    if isinstance(expression, OperatorApplication):
+        return (
+            expression.operator,
+            *(item for argument in expression.arguments for item in _expression_atoms(argument)),
+        )
+    if isinstance(expression, ConceptRef | IndividualRef | OperatorRef):
+        return (expression,)
+    raise ValueError("query expressions cannot contain assertion references")
+
+
+def _expression_role(
+    expression: ConceptRef | IndividualRef | OperatorRef,
+) -> OntologyRole:
+    if isinstance(expression, ConceptRef):
+        return OntologyRole.CONCEPT
+    if isinstance(expression, IndividualRef):
+        return OntologyRole.INDIVIDUAL
+    return OntologyRole.OPERATOR
+
+
 def _draft_atoms(
     expression: QueryDraftExpression,
-) -> tuple[tuple[str, OntologyRole], ...]:
+) -> tuple[QueryConceptDraft | QueryIndividualDraft | QueryOperatorDraft, ...]:
     if isinstance(expression, QueryOperatorApplicationDraft):
         return (
-            (expression.operator.surface_form, OntologyRole.OPERATOR),
-            *(
-                item
-                for argument in expression.arguments
-                for item in _draft_atoms(argument)
-            ),
+            expression.operator,
+            *(item for argument in expression.arguments for item in _draft_atoms(argument)),
         )
-    if isinstance(expression, QueryConceptDraft):
-        role = OntologyRole.CONCEPT
-    elif isinstance(expression, QueryIndividualDraft):
-        role = OntologyRole.INDIVIDUAL
-    else:
-        role = OntologyRole.OPERATOR
-    return ((expression.surface_form, role),)
+    return (expression,)
 
 
 def _bind_expression(
     expression: QueryDraftExpression,
     bindings: Mapping[str, OntologyBinding],
     used_bindings: list[OntologyBinding],
+    surface_groundings: list[QuerySurfaceGrounding],
 ) -> Expression:
     if isinstance(expression, QueryOperatorApplicationDraft):
-        operator = _bind_expression(expression.operator, bindings, used_bindings)
+        operator = _bind_expression(
+            expression.operator, bindings, used_bindings, surface_groundings
+        )
         if not isinstance(operator, OperatorRef):
             raise QueryInvariantError("query application operator has the wrong role")
         return OperatorApplication(
             operator=operator,
             arguments=tuple(
-                _bind_expression(argument, bindings, used_bindings)
+                _bind_expression(argument, bindings, used_bindings, surface_groundings)
                 for argument in expression.arguments
             ),
         )
@@ -490,6 +696,13 @@ def _bind_expression(
         else:
             used = _binding_for_surface(binding, expression.surface_form, normalized)
     used_bindings.append(used)
+    surface_groundings.append(
+        QuerySurfaceGrounding(
+            surface_form=expression.surface_form,
+            role=role,
+            grounding_span=expression.grounding_span,
+        )
+    )
     return expression_type(term_id=term_id, label=expression.surface_form)
 
 

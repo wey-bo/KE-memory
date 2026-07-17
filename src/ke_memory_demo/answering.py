@@ -3,13 +3,18 @@ from __future__ import annotations
 from collections.abc import Mapping, Sequence
 import hashlib
 from pathlib import Path
-from typing import Annotated, Protocol, TypeVar, cast
+from typing import Annotated, Protocol, TypeVar
 
 from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_validator
 
-from ke_memory_demo.core.json import JsonObject, JsonValue, canonical_json
+from ke_memory_demo.core.json import JsonObject, canonical_json
 from ke_memory_demo.domain import Evidence
 from ke_memory_demo.infra.telemetry import TraceContext, UsageRecord
+from ke_memory_demo.retrieval.evidence_payload import (
+    model_evidence_payload,
+    serialize_evidence_payload,
+)
+from ke_memory_demo.retrieval.tokens import TokenCounter
 
 
 ANSWER_MODEL = "gpt-5.4"
@@ -71,6 +76,8 @@ class AnswerService:
         self,
         model: ConfiguredAnswerClient,
         usage_source: AnswerUsageSource,
+        *,
+        token_counter: TokenCounter,
     ) -> None:
         if model.model_name != ANSWER_MODEL:
             raise AnswerInvariantError(f"answer client must use {ANSWER_MODEL}")
@@ -80,6 +87,7 @@ class AnswerService:
             )
         self._model = model
         self._usage_source = usage_source
+        self._token_counter = token_counter
         self._prompt = _read_prompt()
         self.prompt_sha256 = hashlib.sha256(self._prompt.encode("utf-8")).hexdigest()
 
@@ -90,22 +98,20 @@ class AnswerService:
     ) -> AnswerResult:
         if not question.strip():
             raise AnswerInvariantError("question must not be empty")
-        packed = tuple(
-            Evidence.model_validate(item.model_dump(mode="python")) for item in evidence
-        )
+        packed = tuple(Evidence.model_validate(item.model_dump(mode="python")) for item in evidence)
         evidence_ids = tuple(item.evidence_id for item in packed)
         if len(evidence_ids) != len(set(evidence_ids)):
             raise AnswerInvariantError("packed evidence IDs must be unique")
-        evidence_tokens = sum(item.token_count for item in packed)
+        ordered = tuple(sorted(packed, key=lambda item: (item.rank, item.evidence_id)))
+        evidence_tokens = self._count_evidence_tokens(ordered)
         if evidence_tokens > MAX_EVIDENCE_TOKENS:
             raise AnswerInvariantError(
                 f"packed evidence exceeds the {MAX_EVIDENCE_TOKENS}-token hard limit"
             )
-        ordered = tuple(sorted(packed, key=lambda item: (item.rank, item.evidence_id)))
         payload: JsonObject = {
             "task": "answer_from_evidence",
             "question": question,
-            "evidence": [cast(JsonValue, item.model_dump(mode="json")) for item in ordered],
+            "evidence": list(model_evidence_payload(ordered)),
         }
         usage_start = len(self._usage_source.usage_records)
         response = await self._model.complete(
@@ -138,6 +144,12 @@ class AnswerService:
             citations=output.citations,
             usage=_aggregate_usage(new_usage),
         )
+
+    def _count_evidence_tokens(self, evidence: Sequence[Evidence]) -> int:
+        count = self._token_counter.count(serialize_evidence_payload(evidence))
+        if isinstance(count, bool) or count < 0:
+            raise AnswerInvariantError("token counter returned an invalid count")
+        return count
 
 
 def _read_prompt() -> str:

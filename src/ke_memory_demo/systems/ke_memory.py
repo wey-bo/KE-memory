@@ -20,6 +20,8 @@ from ke_memory_demo.domain import (
     UsageAndLatency,
 )
 from ke_memory_demo.infra.telemetry import UsageRecord
+from ke_memory_demo.retrieval.evidence_payload import serialize_evidence_payload
+from ke_memory_demo.retrieval.tokens import TokenCounter
 from ke_memory_demo.storage import ArtifactStore
 
 
@@ -82,14 +84,14 @@ class StagedKEOperations(Protocol):
 class RetrievalPort(Protocol):
     async def retrieve(
         self,
+        scope: RunScope,
         question: str,
         evidence_budget_tokens: int,
     ) -> Sequence[Evidence]: ...
 
 
 class UsageSource(Protocol):
-    @property
-    def usage_records(self) -> tuple[UsageRecord, ...]: ...
+    def usage_records(self, scope: RunScope) -> tuple[UsageRecord, ...]: ...
 
 
 class KEMemorySystem:
@@ -101,16 +103,18 @@ class KEMemorySystem:
         stages: StagedKEOperations,
         retrieval: RetrievalPort,
         usage_source: UsageSource,
+        *,
+        token_counter: TokenCounter,
     ) -> None:
         self._artifacts = artifacts
         self._stages = stages
         self._retrieval = retrieval
         self._usage_source = usage_source
+        self._token_counter = token_counter
         self._scope: RunScope | None = None
         self._identity: AdapterIdentity | None = None
         self._runtime_id: str | None = None
         self._runtime_cache: Path | None = None
-        self._usage_offset = 0
         self._ingested_exchange_ids: set[str] = set()
         self._ready = False
 
@@ -153,7 +157,6 @@ class KEMemorySystem:
         self._identity = identity
         self._runtime_id = runtime_id
         self._runtime_cache = runtime_cache
-        self._usage_offset = len(self._usage_source.usage_records)
         self._ingested_exchange_ids.clear()
         self._ready = False
         return identity
@@ -189,9 +192,7 @@ class KEMemorySystem:
         except (AttributeError, TypeError, ValueError, ValidationError) as error:
             raise KEMemorySystemError("staged readiness returned an invalid result") from error
         if status.stage != EMBEDDING_READY_STAGE:
-            raise KEMemorySystemError(
-                f"readiness must report the {EMBEDDING_READY_STAGE} stage"
-            )
+            raise KEMemorySystemError(f"readiness must report the {EMBEDDING_READY_STAGE} stage")
         self._ready = status.successful
         metadata = dict(status.metadata)
         metadata["required_stage"] = EMBEDDING_READY_STAGE
@@ -208,7 +209,7 @@ class KEMemorySystem:
         question: str,
         evidence_budget_tokens: int,
     ) -> Sequence[Evidence]:
-        self._prepared_identity()
+        scope, _namespace = self._prepared_identity()
         if not self._ready:
             raise KEMemorySystemError(
                 f"KE memory system is not ready; await successful {EMBEDDING_READY_STAGE}"
@@ -223,14 +224,21 @@ class KEMemorySystem:
             raise KEMemorySystemError(
                 f"evidence budget must be between 1 and {MAX_EVIDENCE_TOKENS} tokens"
             )
-        raw_evidence = await self._retrieval.retrieve(question, evidence_budget_tokens)
+        raw_evidence = await self._retrieval.retrieve(
+            scope,
+            question,
+            evidence_budget_tokens,
+        )
         try:
             evidence = tuple(
                 Evidence.model_validate(item.model_dump(mode="python")) for item in raw_evidence
             )
         except (AttributeError, TypeError, ValueError, ValidationError) as error:
             raise KEMemorySystemError("retrieval returned invalid evidence") from error
-        if sum(item.token_count for item in evidence) > evidence_budget_tokens:
+        serialized_tokens = self._token_counter.count(serialize_evidence_payload(evidence))
+        if isinstance(serialized_tokens, bool) or serialized_tokens < 0:
+            raise KEMemorySystemError("token counter returned an invalid count")
+        if serialized_tokens > evidence_budget_tokens:
             raise KEMemorySystemError("retrieval exceeded the requested evidence budget")
         evidence_ids = tuple(item.evidence_id for item in evidence)
         if len(evidence_ids) != len(set(evidence_ids)):
@@ -238,8 +246,8 @@ class KEMemorySystem:
         return evidence
 
     async def stats(self) -> UsageAndLatency:
-        _scope, namespace = self._prepared_identity()
-        usage = self._usage_source.usage_records[self._usage_offset :]
+        scope, namespace = self._prepared_identity()
+        usage = self._usage_source.usage_records(scope)
         costs = tuple(item.provider_cost for item in usage if item.provider_cost is not None)
         return UsageAndLatency(
             system_id=self.system_id,
@@ -269,7 +277,6 @@ class KEMemorySystem:
         self._identity = None
         self._runtime_id = None
         self._runtime_cache = None
-        self._usage_offset = len(self._usage_source.usage_records)
         self._ingested_exchange_ids.clear()
         self._ready = False
         return ResetReceipt(

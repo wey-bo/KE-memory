@@ -11,6 +11,7 @@ from ke_memory_demo.domain import (
     KnowledgeEquation,
     Lifecycle,
     Modality,
+    OntologyRole,
     Polarity,
     Speaker,
 )
@@ -21,7 +22,9 @@ from ke_memory_demo.retrieval import (
     LLMMatcher,
     MatchRelation,
     MatcherInvariantError,
+    QueryGroundingSpan,
     QueryKE,
+    QuerySurfaceGrounding,
     SymbolicCandidate,
 )
 
@@ -49,6 +52,18 @@ def _query() -> QueryKE:
         lhs=ConceptRef(term_id="term-project", label="project"),
         rhs=ConceptRef(term_id="term-status", label="status"),
         gloss="project status",
+        surface_groundings=(
+            QuerySurfaceGrounding(
+                surface_form="project",
+                role=OntologyRole.CONCEPT,
+                grounding_span=QueryGroundingSpan(start_char=0, end_char=7),
+            ),
+            QuerySurfaceGrounding(
+                surface_form="status",
+                role=OntologyRole.CONCEPT,
+                grounding_span=QueryGroundingSpan(start_char=8, end_char=14),
+            ),
+        ),
     )
 
 
@@ -105,7 +120,7 @@ async def test_matcher_receives_only_query_and_offered_symbolic_candidates() -> 
         matches=(
             KEMatchDecision(
                 candidate_id=equation.id,
-                    match_type=MatchRelation.EQUIVALENT,
+                match_type=MatchRelation.EQUIVALENT,
                 confidence=0.9,
                 reason="same project status assertion",
             ),

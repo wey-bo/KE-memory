@@ -2,9 +2,12 @@ from __future__ import annotations
 
 from datetime import UTC, datetime
 import hashlib
+import json
+from typing import cast
 
 import pytest
 
+import ke_memory_demo.retrieval.fusion as fusion_module
 import ke_memory_demo.retrieval.tokens as token_module
 from ke_memory_demo.domain import (
     ConceptRef,
@@ -17,6 +20,7 @@ from ke_memory_demo.domain import (
     TemporalMetadata,
 )
 from ke_memory_demo.retrieval import (
+    EvidenceBudgetError,
     EvidenceCandidate,
     EvidenceFusion,
     FusionInvariantError,
@@ -25,12 +29,31 @@ from ke_memory_demo.retrieval import (
     O200KTokenCounter,
     SourceFragment,
     SymbolicCandidate,
+    serialize_evidence_payload,
 )
 
 
 class _WordTokenCounter:
     def count(self, text: str) -> int:
         return len(text.split())
+
+
+class _CharacterTokenCounter:
+    def __init__(self) -> None:
+        self.inputs: list[str] = []
+
+    def count(self, text: str) -> int:
+        self.inputs.append(text)
+        return len(text)
+
+
+class _CollectionCostCounter:
+    def count(self, text: str) -> int:
+        if not text.startswith("["):
+            return 1
+        payload = cast(list[dict[str, object]], json.loads(text))
+        costs = {"greedy trap": 3, "alternative": 4, "complement": 1}
+        return sum(costs[str(item["text"])] for item in payload)
 
 
 def _candidate(
@@ -76,7 +99,87 @@ def test_fusion_keeps_both_conflict_sides_under_budget() -> None:
     conflict_sides = tuple(item.metadata["conflict_side"] for item in evidence)
     assert all(isinstance(item, str) for item in conflict_sides)
     assert set(conflict_sides) == {"first", "second"}
-    assert sum(item.token_count for item in evidence) <= 20
+    assert _WordTokenCounter().count(serialize_evidence_payload(evidence)) <= 20
+
+
+def test_fusion_rejects_required_evidence_when_serialized_metadata_exceeds_budget() -> None:
+    counter = _CharacterTokenCounter()
+    candidate = EvidenceCandidate(
+        candidate_id="candidate-1",
+        text="x",
+        score=1.0,
+        channel="symbolic",
+        source_exchange_ids=("exchange-1",),
+        source_message_ids=("message-1",),
+        system_record_ids=("ke-1",),
+        metadata={"conflict_side": "first", "provenance": "p" * 200},
+    )
+
+    with pytest.raises(EvidenceBudgetError, match="does not fit"):
+        EvidenceFusion(counter, budget=100).pack((candidate,))
+
+    assert any(value.startswith("[") and "provenance" in value for value in counter.inputs)
+
+
+def test_fuse_uses_constructor_budget_when_call_budget_is_omitted() -> None:
+    candidate = EvidenceCandidate(
+        candidate_id="candidate-1",
+        text="x",
+        score=1.0,
+        channel="embedding",
+        metadata={"conflict_side": "first", "provenance": "p" * 200},
+    )
+
+    with pytest.raises(EvidenceBudgetError, match="does not fit"):
+        EvidenceFusion(_CharacterTokenCounter(), budget=100).fuse(
+            symbolic_candidates=(),
+            matches=(),
+            embedding_candidates=(candidate,),
+        )
+
+
+def test_fusion_backtracks_when_greedy_mandatory_choice_blocks_a_feasible_pack() -> None:
+    candidates = (
+        EvidenceCandidate(
+            candidate_id="greedy-trap",
+            text="greedy trap",
+            score=0.9,
+            channel="symbolic",
+            metadata={"conflict_side": "first", "time_point": "old"},
+        ),
+        EvidenceCandidate(
+            candidate_id="alternative",
+            text="alternative",
+            score=0.8,
+            channel="symbolic",
+            metadata={"conflict_side": "first", "time_point": "new"},
+        ),
+        EvidenceCandidate(
+            candidate_id="complement",
+            text="complement",
+            score=0.7,
+            channel="symbolic",
+            metadata={"time_point": "old"},
+        ),
+    )
+
+    evidence = EvidenceFusion(_CollectionCostCounter(), budget=5).pack(candidates)
+
+    assert {item.text for item in evidence} == {"alternative", "complement"}
+    assert _CollectionCostCounter().count(serialize_evidence_payload(evidence)) == 5
+
+
+def test_fusion_reports_search_limit_exhaustion_as_an_invariant_error(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(fusion_module, "MAX_MANDATORY_SEARCH_STATES", 1)
+    candidates = (
+        _candidate("first", "first", score=0.9, conflict_side="first"),
+        _candidate("second", "second", score=0.8, conflict_side="second"),
+    )
+
+    with pytest.raises(FusionInvariantError, match="search limit exhausted"):
+        EvidenceFusion(_WordTokenCounter(), budget=20).pack(candidates)
 
 
 def _span(message_id: str, text: str) -> MessageSpan:
@@ -122,16 +225,14 @@ def test_fusion_deduplicates_spans_retains_channels_and_adds_raw_closure() -> No
         message_span=span,
     )
 
-    evidence = EvidenceFusion(_WordTokenCounter(), budget=20).pack(
-        (derived, embedding_duplicate)
-    )
+    evidence = EvidenceFusion(_WordTokenCounter(), budget=20).pack((derived, embedding_duplicate))
 
     assert [item.text for item in evidence].count(raw_text) == 1
     raw = next(item for item in evidence if item.text == raw_text)
     assert raw.metadata["channels"] == ["embedding", "symbolic"]
     assert raw.channel == "embedding|symbolic"
     assert any(item.metadata.get("closure_for") == "aggregate-1" for item in evidence)
-    assert sum(item.token_count for item in evidence) <= 20
+    assert _WordTokenCounter().count(serialize_evidence_payload(evidence)) <= 20
 
 
 def test_fusion_preserves_required_time_points_and_session_diversity_deterministically() -> None:
@@ -180,7 +281,7 @@ def test_fusion_preserves_required_time_points_and_session_diversity_determinist
         if isinstance(session, str)
     }
     assert sessions == {"session-1", "session-2"}
-    assert sum(item.token_count for item in first) <= 6
+    assert _WordTokenCounter().count(serialize_evidence_payload(first)) <= 6
 
 
 class _FakeEncoding:

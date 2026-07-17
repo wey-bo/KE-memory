@@ -78,7 +78,9 @@ class SymbolicCandidate(BaseModel):
         expected_spans = (
             self.knowledge_equation.evidence_refs
             if self.knowledge_equation is not None
-            else self.aggregate.evidence_closure if self.aggregate is not None else ()
+            else self.aggregate.evidence_closure
+            if self.aggregate is not None
+            else ()
         )
         actual_spans = tuple(item.span for item in self.source_fragments)
         if actual_spans != expected_spans:
@@ -95,9 +97,7 @@ class SymbolicIndex(Protocol):
 
     def lookup_lifecycle(self, lifecycle: Lifecycle | str) -> tuple[str, ...]: ...
 
-    def lookup_temporal(
-        self, start: datetime | None, end: datetime | None
-    ) -> tuple[str, ...]: ...
+    def lookup_temporal(self, start: datetime | None, end: datetime | None) -> tuple[str, ...]: ...
 
     def lookup_aggregate_membership(self, member_ref: str) -> tuple[str, ...]: ...
 
@@ -134,8 +134,11 @@ class SymbolicRetriever:
     async def retrieve(self, *, query_ke: QueryKE) -> tuple[SymbolicCandidate, ...]:
         query = QueryKE.model_validate(query_ke.model_dump(mode="python"))
         matched: dict[str, set[str]] = defaultdict(set)
+        temporal_interval: tuple[datetime | None, datetime | None] | None = None
         expressions = (*_expressions(query.lhs), *_expressions(query.rhs))
-        term_ids = sorted({item.term_id for item in expressions if not isinstance(item, AssertionRef)})
+        term_ids = sorted(
+            {item.term_id for item in expressions if not isinstance(item, AssertionRef)}
+        )
         for term_id in term_ids:
             _add_matches(matched, self._index.lookup_term_id(term_id), f"term:{term_id}")
         operator_ids = sorted(
@@ -168,6 +171,7 @@ class SymbolicRetriever:
             )
         if _has_temporal_constraint(query.temporal):
             start, end = _temporal_interval(query.temporal)
+            temporal_interval = (start, end)
             _add_matches(matched, self._index.lookup_temporal(start, end), "temporal")
 
         assertion_refs = {
@@ -187,7 +191,11 @@ class SymbolicRetriever:
                     frontier.append(aggregate_id)
 
         candidates = tuple(
-            self._candidate(candidate_id, tuple(sorted(fields)))
+            self._candidate(
+                candidate_id,
+                tuple(sorted(fields)),
+                temporal_interval=temporal_interval,
+            )
             for candidate_id, fields in matched.items()
         )
         ordered = sorted(
@@ -200,6 +208,8 @@ class SymbolicRetriever:
         self,
         candidate_id: str,
         matched_fields: tuple[str, ...],
+        *,
+        temporal_interval: tuple[datetime | None, datetime | None] | None,
     ) -> SymbolicCandidate:
         equation = self._records.get_knowledge_equation(candidate_id)
         aggregate = self._records.get_aggregate(candidate_id)
@@ -207,6 +217,13 @@ class SymbolicRetriever:
             raise SymbolicInvariantError(
                 f"symbolic candidate ID is ambiguous across record kinds: {candidate_id}"
             )
+        _authenticate_index_claims(
+            candidate_id,
+            matched_fields,
+            equation=equation,
+            aggregate=aggregate,
+            temporal_interval=temporal_interval,
+        )
         if equation is not None:
             return SymbolicCandidate(
                 candidate_id=candidate_id,
@@ -250,6 +267,59 @@ def _add_matches(
         destination[candidate_id].add(feature)
 
 
+def _authenticate_index_claims(
+    candidate_id: str,
+    matched_fields: Sequence[str],
+    *,
+    equation: KnowledgeEquation | None,
+    aggregate: AggregateNode | None,
+    temporal_interval: tuple[datetime | None, datetime | None] | None,
+) -> None:
+    expressions = (
+        (*_expressions(equation.lhs), *_expressions(equation.rhs)) if equation is not None else ()
+    )
+    for field in matched_fields:
+        authenticated = False
+        if field.startswith("term:"):
+            term_id = field.removeprefix("term:")
+            authenticated = equation is not None and (
+                any(
+                    not isinstance(item, AssertionRef) and item.term_id == term_id
+                    for item in expressions
+                )
+                or any(binding.document_id == term_id for binding in equation.ontology_bindings)
+            )
+        elif field.startswith("operator:"):
+            operator_id = field.removeprefix("operator:")
+            authenticated = equation is not None and any(
+                isinstance(item, OperatorRef) and item.term_id == operator_id
+                for item in expressions
+            )
+        elif field.startswith("unresolved:"):
+            normalized = field.removeprefix("unresolved:")
+            authenticated = equation is not None and any(
+                binding.normalized_surface == normalized
+                and binding.status is not OntologyBindingStatus.RESOLVED
+                for binding in equation.ontology_bindings
+            )
+        elif field.startswith("lifecycle:"):
+            lifecycle = field.removeprefix("lifecycle:")
+            authenticated = equation is not None and equation.lifecycle.value == lifecycle
+        elif field == "temporal":
+            authenticated = (
+                equation is not None
+                and temporal_interval is not None
+                and _temporal_overlaps(equation.temporal, temporal_interval)
+            )
+        elif field.startswith("aggregate_member:"):
+            member_ref = field.removeprefix("aggregate_member:")
+            authenticated = aggregate is not None and member_ref in aggregate.member_refs
+        if not authenticated:
+            raise SymbolicInvariantError(
+                f"symbolic index claim {field!r} is not authenticated by record {candidate_id}"
+            )
+
+
 def _expressions(expression: Expression) -> tuple[AtomicExpression, ...]:
     if isinstance(expression, OperatorApplication):
         return (
@@ -278,3 +348,24 @@ def _temporal_interval(
         return temporal.valid_from, temporal.valid_to
     point = temporal.event_time or temporal.mentioned_at
     return point, point
+
+
+def _temporal_overlaps(
+    temporal: TemporalMetadata,
+    query_interval: tuple[datetime | None, datetime | None],
+) -> bool:
+    if temporal.valid_from is not None or temporal.valid_to is not None:
+        record_start, record_end = temporal.valid_from, temporal.valid_to
+    elif temporal.event_time is not None:
+        record_start = record_end = temporal.event_time
+    else:
+        record_start = record_end = None
+    query_start, query_end = query_interval
+    return not (
+        query_end is not None
+        and record_start is not None
+        and record_start > query_end
+        or query_start is not None
+        and record_end is not None
+        and record_end < query_start
+    )

@@ -30,6 +30,11 @@ class _UsageSource:
         return self.values
 
 
+class _CharacterTokenCounter:
+    def count(self, text: str) -> int:
+        return len(text)
+
+
 class _AnswerClient:
     def __init__(
         self,
@@ -88,7 +93,7 @@ async def test_answer_service_uses_fixed_prompt_configuration_citations_and_usag
         AnswerModelOutput(answer="The project is active.", citations=("evidence-1",)),
         usage,
     )
-    service = AnswerService(client, usage)
+    service = AnswerService(client, usage, token_counter=_CharacterTokenCounter())
 
     result = await service.answer("What is the project status?", (_evidence(),))
 
@@ -104,6 +109,7 @@ async def test_answer_service_uses_fixed_prompt_configuration_citations_and_usag
     assert set(payload) == {"task", "question", "evidence"}
     assert payload["question"] == "What is the project status?"
     assert payload["evidence"][0]["evidence_id"] == "evidence-1"
+    assert "token_count" not in payload["evidence"][0]
     assert trace.operation == "common-answer"
     assert trace.metadata["model"] == "gpt-5.4"
     assert trace.metadata["max_output_tokens"] == 1024
@@ -130,7 +136,7 @@ def test_answer_service_rejects_nonfixed_client_configuration(
     )
 
     with pytest.raises(AnswerInvariantError, match="gpt-5.4|1024"):
-        AnswerService(client, usage)
+        AnswerService(client, usage, token_counter=_CharacterTokenCounter())
 
 
 async def test_answer_service_rejects_a_citation_not_in_packed_evidence() -> None:
@@ -141,4 +147,21 @@ async def test_answer_service_rejects_a_citation_not_in_packed_evidence() -> Non
     )
 
     with pytest.raises(AnswerInvariantError, match="unoffered citation"):
-        await AnswerService(client, usage).answer("question", (_evidence(),))
+        await AnswerService(client, usage, token_counter=_CharacterTokenCounter()).answer(
+            "question", (_evidence(),)
+        )
+
+
+async def test_answer_service_rejects_full_serialized_evidence_above_hard_limit() -> None:
+    usage = _UsageSource()
+    client = _AnswerClient(AnswerModelOutput(answer="unused"), usage)
+    oversized = _evidence().model_copy(
+        update={"metadata": {"provenance": "p" * 8192}, "token_count": 1}
+    )
+
+    with pytest.raises(AnswerInvariantError, match="8192-token hard limit"):
+        await AnswerService(client, usage, token_counter=_CharacterTokenCounter()).answer(
+            "question", (oversized,)
+        )
+
+    assert client.calls == []
