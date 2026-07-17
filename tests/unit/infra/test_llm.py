@@ -706,7 +706,9 @@ async def test_json_object_mode_keeps_validation_and_configured_temperature() ->
 
 
 @pytest.mark.asyncio
-async def test_complete_with_usage_keeps_concurrent_calls_separate(concurrent_client) -> None:
+async def test_complete_with_usage_keeps_concurrent_calls_separate(
+    concurrent_client: StructuredModelClient,
+) -> None:
     left, right = await asyncio.gather(
         concurrent_client.complete_with_usage(OutputRecord, messages("left"), trace("left")),
         concurrent_client.complete_with_usage(OutputRecord, messages("right"), trace("right")),

@@ -106,9 +106,7 @@ async def bounded_collect(
 
     return BatchOutcome(
         values=tuple(
-            cast(ResultT, value)
-            for index, value in enumerate(results)
-            if not failed[index]
+            cast(ResultT, value) for index, value in enumerate(results) if not failed[index]
         ),
         failures=tuple(sorted(failures, key=lambda failure: failure.input_ordinal)),
     )

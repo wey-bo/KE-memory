@@ -199,9 +199,7 @@ class GitSnapshotStore:
             env={**os.environ, "GIT_TERMINAL_PROMPT": "0"},
         )
         if completed.returncode != 0:
-            raise SnapshotError(
-                f"git {' '.join(arguments)} failed: {completed.stderr.strip()}"
-            )
+            raise SnapshotError(f"git {' '.join(arguments)} failed: {completed.stderr.strip()}")
         return completed.stdout.strip()
 
     def _resolve_commit(self, snapshot_id: str) -> str:
@@ -271,8 +269,7 @@ class GitSnapshotStore:
             for term in terms:
                 if term.document_id not in matched_document_ids:
                     raise SnapshotError(
-                        "ontology term is outside matched document IDs: "
-                        f"{term.document_id}"
+                        f"ontology term is outside matched document IDs: {term.document_id}"
                     )
                 for relation in term.relations:
                     GitSnapshotStore._validate_ontology_relation(
@@ -381,9 +378,7 @@ class GitSnapshotStore:
                 predecessor.value,
                 canonical=True,
             )
-            successor_by_name = {
-                artifact.name: artifact for artifact in stage_manifest.artifacts
-            }
+            successor_by_name = {artifact.name: artifact for artifact in stage_manifest.artifacts}
             for predecessor_artifact in predecessor_manifest.artifacts:
                 if predecessor_artifact.name == "pipeline_manifests":
                     continue

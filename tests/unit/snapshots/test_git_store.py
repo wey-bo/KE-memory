@@ -112,9 +112,7 @@ def only_pipeline_manifest(
     run_id: str,
     stage: str,
 ) -> PipelineRunManifest:
-    records = tuple(
-        artifacts.read_jsonl(run_id, stage, "pipeline_manifests", PipelineRunManifest)
-    )
+    records = tuple(artifacts.read_jsonl(run_id, stage, "pipeline_manifests", PipelineRunManifest))
     assert len(records) == 1
     return records[0]
 
@@ -186,9 +184,7 @@ def test_snapshot_excludes_cache_secrets_and_complete_vocabulary(tmp_path: Path)
     with pytest.raises(SnapshotError, match="matched document"):
         unbound_term_snapshots.commit_stage("run-1", PipelineStage.INGESTED)
 
-    invalid_artifacts, invalid_snapshots = initialized_state(
-        tmp_path / "unbound-relation-source"
-    )
+    invalid_artifacts, invalid_snapshots = initialized_state(tmp_path / "unbound-relation-source")
     write_ingested_stage(
         invalid_artifacts,
         parent_snapshot_id=None,
@@ -210,9 +206,9 @@ def test_verify_checks_out_and_revalidates_stage_bytes(tmp_path: Path) -> None:
     write_ingested_stage(artifacts, parent_snapshot_id=None)
     ingested = snapshots.commit_stage("run-1", PipelineStage.INGESTED)
     predecessor_manifest = only_pipeline_manifest(artifacts, "run-1", "ingested")
-    predecessor_exchange = tuple(
-        artifacts.read_jsonl("run-1", "ingested", "exchanges", Exchange)
-    )[0]
+    predecessor_exchange = tuple(artifacts.read_jsonl("run-1", "ingested", "exchanges", Exchange))[
+        0
+    ]
     successor_base = {
         **predecessor_manifest.model_dump(mode="python"),
         "stage": PipelineStage.TURN_KE_EXTRACTED,

@@ -45,17 +45,12 @@ async def test_collect_keeps_successes_and_typed_failures() -> None:
 
     outcome = await bounded_collect(range(4), key=str, worker=worker, limit=2)
     assert outcome.values == (0, 1, 3)
-    assert [(item.item_id, item.error_type) for item in outcome.failures] == [
-        ("2", "ValueError")
-    ]
+    assert [(item.item_id, item.error_type) for item in outcome.failures] == [("2", "ValueError")]
 
 
 def test_checkpoint_rejects_changed_input_and_model(tmp_path: Path) -> None:
     store = CheckpointStore(tmp_path / "state", run_id="run-1")
     store.save("turn-ke-extracted", "exchange-1", "a" * 64, TurnExtractionResult, result())
-    assert (
-        store.load("turn-ke-extracted", "exchange-1", "a" * 64, TurnExtractionResult)
-        == result()
-    )
+    assert store.load("turn-ke-extracted", "exchange-1", "a" * 64, TurnExtractionResult) == result()
     assert store.load("turn-ke-extracted", "exchange-1", "b" * 64, TurnExtractionResult) is None
     assert store.load("turn-ke-extracted", "exchange-1", "a" * 64, SessionMemory) is None
