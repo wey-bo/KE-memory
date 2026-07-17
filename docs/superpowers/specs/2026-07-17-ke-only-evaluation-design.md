@@ -159,20 +159,33 @@ baseline 报告是独立的资料表，不参与本 Demo 的 Judge、统计检�
 结果必须记录：来源 URL/本地冻结文件、发布日期或源码 SHA、dataset、split、metric、
 top-k、answer/Judge 模型、是否 vendor self-report、是否有逐题结果或复现脚本。
 
-状态字段固定为：
+状态标签固定如下，单条结果可以组合多个标签：
 
 - `公开结果`：找到来源和足够的协议说明；
 - `未复现`：只引用公开结果，本项目没有本地重跑；
 - `未找到`：在官方仓库、论文或官方报告中未找到相应结果；
 - `不可直接比较`：dataset、split、metric、模型、检索深度或 Judge 与本 Demo 不同。
 
-当前初查结果如下，正式报告还需保存准确来源链接和检索日期：
+初查日期为 2026-07-17，来源为本地冻结仓库及其对应官方页面：
+
+- Mem0：`memory-sota-study/repos/mem0@87276ef96879ee406690e640d34060de546560a5`
+  与 <https://github.com/mem0ai/mem0>；
+- Graphiti：`memory-sota-study/repos/graphiti@62ff03ac5662d288ebd9f6aafb70d6ae4070c632`
+  与 <https://github.com/getzep/graphiti>；
+- Hindsight：
+  `memory-sota-study/repos/hindsight@f00d3c7f666e560bb051c51fba3977b38885f46a`
+  与 <https://github.com/vectorize-io/hindsight>；
+- MemPalace：
+  `memory-sota-study/repos/mempalace@18a9788961afce013efc9e2da23ea2b17ab72381`
+  与 <https://github.com/MemPalace/mempalace>。
+
+当前初查结果如下：
 
 | 系统 | 找到的公开结果 | 本项目标记 |
 |---|---|---|
-| Mem0 | 官方 README 报告 LoCoMo 91.6、LongMemEval 94.8、BEAM 1M 64.1、BEAM 10M 48.6 | 未复现；BEAM 规模和协议与本 Demo 的 100K 子集不同，不可直接比较 |
+| Mem0 | 官方 README 报告 LoCoMo 91.6、LongMemEval 94.8、BEAM 1M 64.1、BEAM 10M 48.6 | 公开结果、vendor self-report、未复现；BEAM 规模和协议与本 Demo 的 100K 子集不同，不可直接比较 |
 | Hindsight | 官方 README 图表报告 LongMemEval overall 94.6%，并声明由外部研究合作者复现 | 未复现；不是 BEAM，不可直接比较 |
-| MemPalace | 官方仓库报告 LongMemEval R@5 96.6%，450 题 held-out R@5 98.4%，LoCoMo R@10 88.9% | 未复现；这是 retrieval recall，不是本 Demo 的端到端 Judge score，不可直接比较 |
+| MemPalace | 官方仓库报告 LongMemEval R@5 96.6%，450 题 held-out R@5 98.4%，LoCoMo R@10 88.9% | 公开结果、vendor self-report、未复现；这是 retrieval recall，不是本 Demo 的端到端 Judge score，不可直接比较 |
 | Graphiti/Zep | 冻结 Graphiti 仓库含 LongMemEval eval 脚本，但初查未见带完整协议的官方结果表 | 未找到；第三方图表中的数字不作为 Graphiti 官方结果 |
 
 禁止把上述不同 benchmark 的数字放在同一排序列中，也禁止据此声称 KE 优于或弱于某个
