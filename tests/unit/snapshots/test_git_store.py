@@ -126,33 +126,30 @@ def test_snapshot_excludes_cache_secrets_and_complete_vocabulary(tmp_path: Path)
     assert ".env.local" not in names
     assert not any("complete-es-vocabulary" in name for name in names)
 
-    relation = OntologyRelation(
+    nested_relation = OntologyRelation(
         source_document_id="term-1",
         relation_type="related-to",
-        target_id="term-2",
+        target_id="shape",
     )
-    matched_terms = (
-        OntologyTerm(
-            document_id="term-1",
-            canonical_term="Tea",
-            source_type="concept",
-            role=None,
-            relations=(relation,),
-        ),
-        OntologyTerm(
-            document_id="term-2",
-            canonical_term="Drink",
-            source_type="concept",
-            role=None,
-        ),
+    standalone_relation = OntologyRelation(
+        source_document_id="term-1",
+        relation_type="rooted-at",
+        target_id="root",
+    )
+    matched_term = OntologyTerm(
+        document_id="term-1",
+        canonical_term="Tea",
+        source_type="concept",
+        role=None,
+        relations=(nested_relation,),
     )
     matched_artifacts, matched_snapshots = initialized_state(tmp_path / "matched-ontology")
     write_ingested_stage(
         matched_artifacts,
         parent_snapshot_id=None,
-        matched_document_ids=("term-1", "term-2"),
-        ontology_terms=matched_terms,
-        ontology_relations=(relation,),
+        matched_document_ids=("term-1",),
+        ontology_terms=(matched_term,),
+        ontology_relations=(standalone_relation,),
     )
     matched_result = matched_snapshots.commit_stage("run-1", PipelineStage.INGESTED)
     assert matched_snapshots.verify(
@@ -165,65 +162,28 @@ def test_snapshot_excludes_cache_secrets_and_complete_vocabulary(tmp_path: Path)
     write_ingested_stage(
         unbound_term_artifacts,
         parent_snapshot_id=None,
-        ontology_terms=(matched_terms[0],),
+        ontology_terms=(matched_term,),
     )
     with pytest.raises(SnapshotError, match="matched document"):
         unbound_term_snapshots.commit_stage("run-1", PipelineStage.INGESTED)
 
-    invalid_relations = (
-        (
-            "unbound-relation-source",
-            (),
-            (
-                OntologyRelation(
-                    source_document_id="term-2",
-                    relation_type="related-to",
-                    target_id="term-1",
-                ),
+    invalid_artifacts, invalid_snapshots = initialized_state(
+        tmp_path / "unbound-relation-source"
+    )
+    write_ingested_stage(
+        invalid_artifacts,
+        parent_snapshot_id=None,
+        matched_document_ids=("term-1",),
+        ontology_relations=(
+            OntologyRelation(
+                source_document_id="term-2",
+                relation_type="related-to",
+                target_id="root",
             ),
-        ),
-        (
-            "unbound-relation-target",
-            (),
-            (
-                OntologyRelation(
-                    source_document_id="term-1",
-                    relation_type="related-to",
-                    target_id="term-2",
-                ),
-            ),
-        ),
-        (
-            "unbound-nested-relation-target",
-            (
-                OntologyTerm(
-                    document_id="term-1",
-                    canonical_term="Tea",
-                    source_type="concept",
-                    role=None,
-                    relations=(
-                        OntologyRelation(
-                            source_document_id="term-1",
-                            relation_type="related-to",
-                            target_id="term-2",
-                        ),
-                    ),
-                ),
-            ),
-            (),
         ),
     )
-    for label, terms, relations in invalid_relations:
-        invalid_artifacts, invalid_snapshots = initialized_state(tmp_path / label)
-        write_ingested_stage(
-            invalid_artifacts,
-            parent_snapshot_id=None,
-            matched_document_ids=("term-1",),
-            ontology_terms=terms,
-            ontology_relations=relations,
-        )
-        with pytest.raises(SnapshotError, match="matched document"):
-            invalid_snapshots.commit_stage("run-1", PipelineStage.INGESTED)
+    with pytest.raises(SnapshotError, match="matched document"):
+        invalid_snapshots.commit_stage("run-1", PipelineStage.INGESTED)
 
 
 def test_verify_checks_out_and_revalidates_stage_bytes(tmp_path: Path) -> None:

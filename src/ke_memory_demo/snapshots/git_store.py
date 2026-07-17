@@ -302,11 +302,6 @@ class GitSnapshotStore:
                 "ontology relation source is outside matched document IDs: "
                 f"{relation.source_document_id}"
             )
-        if relation.target_id not in matched_document_ids:
-            raise SnapshotError(
-                "ontology relation target is outside matched document IDs: "
-                f"{relation.target_id}"
-            )
 
     @staticmethod
     def _canonical_stage_manifest_bytes(
