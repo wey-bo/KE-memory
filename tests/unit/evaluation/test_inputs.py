@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 from datetime import UTC, datetime, timedelta
+import hashlib
 import os
 from pathlib import Path
 import shutil
@@ -171,6 +172,7 @@ async def test_state_repo_requires_writable_git_storage(
         "KE_MEMORY_WORK_API_KEY",
     ):
         monkeypatch.delenv(name, raising=False)
+    monkeypatch.delenv("GIT_OPTIONAL_LOCKS", raising=False)
 
     state_root = tmp_path / "state"
     state_root.mkdir()
@@ -183,13 +185,38 @@ async def test_state_repo_requires_writable_git_storage(
     _git(state_root, "commit", "--quiet", "-m", "initial")
     head = _git(state_root, "rev-parse", "HEAD")
 
+    tracked_path = state_root / "tracked.txt"
+    tracked_stat = tracked_path.stat()
+    os.utime(
+        tracked_path,
+        ns=(tracked_stat.st_atime_ns, tracked_stat.st_mtime_ns + 5_000_000_000),
+    )
+    assert tracked_path.read_text(encoding="utf-8") == "tracked\n"
+
+    active_ref = _git(state_root, "symbolic-ref", "-q", "HEAD")
+    index_path = _resolved_git_path(state_root, "index")
+    head_path = _resolved_git_path(state_root, "HEAD")
+    ref_path = _resolved_git_path(state_root, active_ref)
+    objects_directory = _resolved_git_path(state_root, "objects")
+    ref_directory = ref_path.parent
+    relevant_directories = tuple(
+        dict.fromkeys((state_root, head_path.parent, objects_directory, ref_directory))
+    )
+    index_before = index_path.read_bytes()
+    index_sha256_before = hashlib.sha256(index_before).hexdigest()
+    ls_files_debug_before = _git(state_root, "ls-files", "--debug")
+    head_file_before = head_path.read_bytes()
+    ref_file_before = ref_path.read_bytes()
+    directory_entries_before = {
+        directory: tuple(sorted(item.name for item in directory.iterdir()))
+        for directory in relevant_directories
+    }
+
     if git_target == "objects":
-        target_directory = _resolved_git_path(state_root, "objects")
+        target_directory = objects_directory
     else:
-        active_ref = _git(state_root, "symbolic-ref", "-q", "HEAD")
-        target_directory = _resolved_git_path(state_root, active_ref).parent
+        target_directory = ref_directory
     original_mode = stat.S_IMODE(target_directory.stat().st_mode)
-    original_entries = tuple(sorted(item.name for item in target_directory.iterdir()))
     target_directory.chmod(original_mode & ~0o222)
     try:
         assert os.access(state_root, os.W_OK)
@@ -206,7 +233,19 @@ async def test_state_repo_requires_writable_git_storage(
     state_check = next(item for item in report.checks if item.name == "state_repo")
     assert state_check.passed is False
     assert state_check.detail == failure_detail
-    assert tuple(sorted(item.name for item in target_directory.iterdir())) == original_entries
+    assert stat.S_IMODE(target_directory.stat().st_mode) == original_mode
+    index_after = index_path.read_bytes()
+    assert index_after == index_before
+    assert hashlib.sha256(index_after).hexdigest() == index_sha256_before
+    assert _git(state_root, "ls-files", "--debug") == ls_files_debug_before
+    assert _git(state_root, "rev-parse", "HEAD") == head
+    assert _git(state_root, "symbolic-ref", "-q", "HEAD") == active_ref
+    assert head_path.read_bytes() == head_file_before
+    assert ref_path.read_bytes() == ref_file_before
+    assert {
+        directory: tuple(sorted(item.name for item in directory.iterdir()))
+        for directory in relevant_directories
+    } == directory_entries_before
 
 
 @pytest.mark.asyncio

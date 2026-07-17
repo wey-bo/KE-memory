@@ -844,7 +844,11 @@ def _snapshot_records_from_git(
         ("git", "-C", str(state_root), "show", f"{snapshot_id}:{path}"),
         check=False,
         capture_output=True,
-        env={**os.environ, "GIT_TERMINAL_PROMPT": "0"},
+        env={
+            **os.environ,
+            "GIT_OPTIONAL_LOCKS": "0",
+            "GIT_TERMINAL_PROMPT": "0",
+        },
     )
     if completed.returncode != 0:
         raise RuntimeInvariantError(f"verified snapshot is missing artifact {artifact_name}")
@@ -869,7 +873,11 @@ def _git_text(root: Path, *arguments: str) -> str:
         check=False,
         capture_output=True,
         text=True,
-        env={**os.environ, "GIT_TERMINAL_PROMPT": "0"},
+        env={
+            **os.environ,
+            "GIT_OPTIONAL_LOCKS": "0",
+            "GIT_TERMINAL_PROMPT": "0",
+        },
     )
     if completed.returncode != 0:
         raise RuntimeInvariantError("Git preflight command failed")
@@ -882,7 +890,11 @@ def _git_optional_text(root: Path, *arguments: str) -> str | None:
         check=False,
         capture_output=True,
         text=True,
-        env={**os.environ, "GIT_TERMINAL_PROMPT": "0"},
+        env={
+            **os.environ,
+            "GIT_OPTIONAL_LOCKS": "0",
+            "GIT_TERMINAL_PROMPT": "0",
+        },
     )
     if completed.returncode == 0:
         return completed.stdout.strip()
