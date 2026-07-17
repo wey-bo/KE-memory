@@ -2,9 +2,11 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pytest
+
 from ke_memory_demo.core.json import canonical_json
 from ke_memory_demo.domain import Exchange, Message, MessageRole
-from ke_memory_demo.ontology import IndexIdentity
+from ke_memory_demo.ontology import IndexIdentity, OntologyRelation, OntologyTerm
 from ke_memory_demo.pipeline import (
     PIPELINE_ARTIFACT_REGISTRY,
     OntologyRunIdentity,
@@ -12,7 +14,7 @@ from ke_memory_demo.pipeline import (
     PipelineStage,
 )
 from ke_memory_demo.settings import EvaluationConcurrencySettings
-from ke_memory_demo.snapshots import GitSnapshotStore
+from ke_memory_demo.snapshots import GitSnapshotStore, SnapshotError
 from ke_memory_demo.storage import ArtifactStore
 
 
@@ -22,7 +24,14 @@ def initialized_state(tmp_path: Path) -> tuple[ArtifactStore, GitSnapshotStore]:
     return artifacts, snapshots
 
 
-def write_ingested_stage(artifacts: ArtifactStore, parent_snapshot_id: str | None) -> None:
+def write_ingested_stage(
+    artifacts: ArtifactStore,
+    parent_snapshot_id: str | None,
+    *,
+    matched_document_ids: tuple[str, ...] = (),
+    ontology_terms: tuple[OntologyTerm, ...] = (),
+    ontology_relations: tuple[OntologyRelation, ...] = (),
+) -> None:
     exchange = Exchange(
         id="exchange-1",
         session_id="session-1",
@@ -54,6 +63,7 @@ def write_ingested_stage(artifacts: ArtifactStore, parent_snapshot_id: str | Non
                 mapping_sha256="c" * 64,
             ),
             normalization_mode="bounded-best-effort",
+            matched_document_ids=matched_document_ids,
         ),
         embedding_enabled=False,
         concurrency=EvaluationConcurrencySettings(
@@ -62,10 +72,19 @@ def write_ingested_stage(artifacts: ArtifactStore, parent_snapshot_id: str | Non
             question_workers=1,
             judge_workers=1,
         ),
-        record_counts={"exchanges": 1, "pipeline_manifests": 1},
+        record_counts={
+            "exchanges": 1,
+            **({"ontology_relations": len(ontology_relations)} if ontology_relations else {}),
+            **({"ontology_terms": len(ontology_terms)} if ontology_terms else {}),
+            "pipeline_manifests": 1,
+        },
     )
     with artifacts.stage_writer("run-1", PipelineStage.INGESTED.value) as writer:
         writer.write("exchanges", [exchange])
+        if ontology_relations:
+            writer.write("ontology_relations", ontology_relations)
+        if ontology_terms:
+            writer.write("ontology_terms", ontology_terms)
         writer.write("pipeline_manifests", [manifest])
 
 
@@ -94,7 +113,7 @@ def test_snapshot_is_commit_sha_without_self_reference(tmp_path: Path) -> None:
 
 
 def test_snapshot_excludes_cache_secrets_and_complete_vocabulary(tmp_path: Path) -> None:
-    artifacts, snapshots = initialized_state(tmp_path)
+    artifacts, snapshots = initialized_state(tmp_path / "empty-ontology")
     write_ingested_stage(artifacts, parent_snapshot_id=None)
     artifacts.cache_path("run-1").parent.mkdir(parents=True, exist_ok=True)
     artifacts.cache_path("run-1").write_bytes(b"sqlite")
@@ -107,10 +126,170 @@ def test_snapshot_excludes_cache_secrets_and_complete_vocabulary(tmp_path: Path)
     assert ".env.local" not in names
     assert not any("complete-es-vocabulary" in name for name in names)
 
+    relation = OntologyRelation(
+        source_document_id="term-1",
+        relation_type="related-to",
+        target_id="term-2",
+    )
+    matched_terms = (
+        OntologyTerm(
+            document_id="term-1",
+            canonical_term="Tea",
+            source_type="concept",
+            role=None,
+            relations=(relation,),
+        ),
+        OntologyTerm(
+            document_id="term-2",
+            canonical_term="Drink",
+            source_type="concept",
+            role=None,
+        ),
+    )
+    matched_artifacts, matched_snapshots = initialized_state(tmp_path / "matched-ontology")
+    write_ingested_stage(
+        matched_artifacts,
+        parent_snapshot_id=None,
+        matched_document_ids=("term-1", "term-2"),
+        ontology_terms=matched_terms,
+        ontology_relations=(relation,),
+    )
+    matched_result = matched_snapshots.commit_stage("run-1", PipelineStage.INGESTED)
+    assert matched_snapshots.verify(
+        matched_result.snapshot_id,
+        "run-1",
+        PipelineStage.INGESTED,
+    ).verified
+
+    unbound_term_artifacts, unbound_term_snapshots = initialized_state(tmp_path / "unbound-term")
+    write_ingested_stage(
+        unbound_term_artifacts,
+        parent_snapshot_id=None,
+        ontology_terms=(matched_terms[0],),
+    )
+    with pytest.raises(SnapshotError, match="matched document"):
+        unbound_term_snapshots.commit_stage("run-1", PipelineStage.INGESTED)
+
+    invalid_relations = (
+        (
+            "unbound-relation-source",
+            (),
+            (
+                OntologyRelation(
+                    source_document_id="term-2",
+                    relation_type="related-to",
+                    target_id="term-1",
+                ),
+            ),
+        ),
+        (
+            "unbound-relation-target",
+            (),
+            (
+                OntologyRelation(
+                    source_document_id="term-1",
+                    relation_type="related-to",
+                    target_id="term-2",
+                ),
+            ),
+        ),
+        (
+            "unbound-nested-relation-target",
+            (
+                OntologyTerm(
+                    document_id="term-1",
+                    canonical_term="Tea",
+                    source_type="concept",
+                    role=None,
+                    relations=(
+                        OntologyRelation(
+                            source_document_id="term-1",
+                            relation_type="related-to",
+                            target_id="term-2",
+                        ),
+                    ),
+                ),
+            ),
+            (),
+        ),
+    )
+    for label, terms, relations in invalid_relations:
+        invalid_artifacts, invalid_snapshots = initialized_state(tmp_path / label)
+        write_ingested_stage(
+            invalid_artifacts,
+            parent_snapshot_id=None,
+            matched_document_ids=("term-1",),
+            ontology_terms=terms,
+            ontology_relations=relations,
+        )
+        with pytest.raises(SnapshotError, match="matched document"):
+            invalid_snapshots.commit_stage("run-1", PipelineStage.INGESTED)
+
 
 def test_verify_checks_out_and_revalidates_stage_bytes(tmp_path: Path) -> None:
     artifacts, snapshots = initialized_state(tmp_path)
     write_ingested_stage(artifacts, parent_snapshot_id=None)
-    result = snapshots.commit_stage("run-1", PipelineStage.INGESTED)
+    ingested = snapshots.commit_stage("run-1", PipelineStage.INGESTED)
+    predecessor_manifest = only_pipeline_manifest(artifacts, "run-1", "ingested")
+    predecessor_exchange = tuple(
+        artifacts.read_jsonl("run-1", "ingested", "exchanges", Exchange)
+    )[0]
+    successor_base = {
+        **predecessor_manifest.model_dump(mode="python"),
+        "stage": PipelineStage.TURN_KE_EXTRACTED,
+        "parent_snapshot_id": ingested.snapshot_id,
+    }
 
-    assert snapshots.verify(result.snapshot_id, "run-1", PipelineStage.INGESTED).verified
+    missing_manifest = PipelineRunManifest.model_validate(
+        {**successor_base, "record_counts": {"pipeline_manifests": 1}}
+    )
+    with artifacts.stage_writer("run-1", PipelineStage.TURN_KE_EXTRACTED.value) as writer:
+        writer.write("pipeline_manifests", [missing_manifest])
+    with pytest.raises(SnapshotError, match="cumulative stage"):
+        snapshots.commit_stage("run-1", PipelineStage.TURN_KE_EXTRACTED)
+
+    appended_exchange = Exchange(
+        id="exchange-2",
+        session_id="session-1",
+        user=Message(
+            id="message-user-2",
+            role=MessageRole.USER,
+            content="Remember coffee.",
+            source_order=2,
+        ),
+        assistant=Message(
+            id="message-assistant-2",
+            role=MessageRole.ASSISTANT,
+            content="Noted.",
+            source_order=3,
+        ),
+        global_ordinal=1,
+    )
+    replacement_manifest = PipelineRunManifest.model_validate(
+        {
+            **successor_base,
+            "record_counts": {"exchanges": 1, "pipeline_manifests": 1},
+        }
+    )
+    with artifacts.stage_writer("run-1", PipelineStage.TURN_KE_EXTRACTED.value) as writer:
+        writer.write("exchanges", [appended_exchange])
+        writer.write("pipeline_manifests", [replacement_manifest])
+    with pytest.raises(SnapshotError, match="cumulative stage"):
+        snapshots.commit_stage("run-1", PipelineStage.TURN_KE_EXTRACTED)
+
+    cumulative_manifest = PipelineRunManifest.model_validate(
+        {
+            **successor_base,
+            "record_counts": {"exchanges": 2, "pipeline_manifests": 1},
+        }
+    )
+    with artifacts.stage_writer("run-1", PipelineStage.TURN_KE_EXTRACTED.value) as writer:
+        writer.write("exchanges", [predecessor_exchange, appended_exchange])
+        writer.write("pipeline_manifests", [cumulative_manifest])
+    result = snapshots.commit_stage("run-1", PipelineStage.TURN_KE_EXTRACTED)
+
+    assert snapshots.verify(
+        result.snapshot_id,
+        "run-1",
+        PipelineStage.TURN_KE_EXTRACTED,
+    ).verified

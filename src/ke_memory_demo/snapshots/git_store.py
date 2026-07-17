@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections import Counter
 from collections.abc import Generator
 from contextlib import contextmanager
 import hashlib
@@ -20,6 +21,7 @@ from ke_memory_demo.pipeline import (
     SnapshotRef,
     SnapshotVerification,
 )
+from ke_memory_demo.ontology import OntologyRelation, OntologyTerm
 from ke_memory_demo.storage import ArtifactStore, StageManifest
 
 
@@ -86,6 +88,13 @@ class GitSnapshotStore:
                 "pipeline manifest parent snapshot does not match the state repository HEAD"
             )
         self._require_predecessor(run_id, stage, parent_snapshot_id)
+        self._validate_cumulative_stage(
+            self._artifacts,
+            stage_manifest,
+            run_id,
+            stage,
+            parent_snapshot_id,
+        )
 
         stage_manifest_bytes = self._canonical_stage_manifest_bytes(
             self._artifacts,
@@ -145,6 +154,13 @@ class GitSnapshotStore:
                     "pipeline manifest parent snapshot does not match the snapshot commit parent"
                 )
             self._require_predecessor(run_id, stage, parent_snapshot_id)
+            self._validate_cumulative_stage(
+                checked_artifacts,
+                stage_manifest,
+                run_id,
+                stage,
+                parent_snapshot_id,
+            )
             checked_manifest = self._canonical_stage_manifest_bytes(
                 checked_artifacts,
                 stage_manifest,
@@ -226,7 +242,71 @@ class GitSnapshotStore:
         }
         if manifest.record_counts != actual_counts:
             raise SnapshotError("pipeline manifest record counts do not match the stage manifest")
+        GitSnapshotStore._validate_ontology_scope(
+            artifacts,
+            stage_manifest,
+            manifest,
+            run_id,
+            stage,
+        )
         return manifest
+
+    @staticmethod
+    def _validate_ontology_scope(
+        artifacts: ArtifactStore,
+        stage_manifest: StageManifest,
+        manifest: PipelineRunManifest,
+        run_id: str,
+        stage: PipelineStage,
+    ) -> None:
+        matched_document_ids = set(manifest.ontology.matched_document_ids)
+        artifact_names = {artifact.name for artifact in stage_manifest.artifacts}
+        if "ontology_terms" in artifact_names:
+            terms = artifacts.read_jsonl(
+                run_id,
+                stage.value,
+                "ontology_terms",
+                OntologyTerm,
+            )
+            for term in terms:
+                if term.document_id not in matched_document_ids:
+                    raise SnapshotError(
+                        "ontology term is outside matched document IDs: "
+                        f"{term.document_id}"
+                    )
+                for relation in term.relations:
+                    GitSnapshotStore._validate_ontology_relation(
+                        relation,
+                        matched_document_ids,
+                    )
+        if "ontology_relations" in artifact_names:
+            relations = artifacts.read_jsonl(
+                run_id,
+                stage.value,
+                "ontology_relations",
+                OntologyRelation,
+            )
+            for relation in relations:
+                GitSnapshotStore._validate_ontology_relation(
+                    relation,
+                    matched_document_ids,
+                )
+
+    @staticmethod
+    def _validate_ontology_relation(
+        relation: OntologyRelation,
+        matched_document_ids: set[str],
+    ) -> None:
+        if relation.source_document_id not in matched_document_ids:
+            raise SnapshotError(
+                "ontology relation source is outside matched document IDs: "
+                f"{relation.source_document_id}"
+            )
+        if relation.target_id not in matched_document_ids:
+            raise SnapshotError(
+                "ontology relation target is outside matched document IDs: "
+                f"{relation.target_id}"
+            )
 
     @staticmethod
     def _canonical_stage_manifest_bytes(
@@ -281,6 +361,72 @@ class GitSnapshotStore:
                 f"stage {stage.value} requires predecessor {predecessor.value} "
                 f"for run {run_id} in its parent snapshot"
             ) from error
+
+    def _validate_cumulative_stage(
+        self,
+        artifacts: ArtifactStore,
+        stage_manifest: StageManifest,
+        run_id: str,
+        stage: PipelineStage,
+        parent_snapshot_id: str | None,
+    ) -> None:
+        predecessor = STAGE_PREDECESSOR[stage]
+        if predecessor is None:
+            return
+        if parent_snapshot_id is None:
+            raise SnapshotError(f"cumulative stage {stage.value} has no parent snapshot")
+
+        with self._detached_worktree(parent_snapshot_id) as checkout:
+            predecessor_artifacts = ArtifactStore(
+                checkout,
+                registry=PIPELINE_ARTIFACT_REGISTRY,
+            )
+            predecessor_manifest = predecessor_artifacts.validate_stage(
+                run_id,
+                predecessor.value,
+                canonical=True,
+            )
+            successor_by_name = {
+                artifact.name: artifact for artifact in stage_manifest.artifacts
+            }
+            for predecessor_artifact in predecessor_manifest.artifacts:
+                if predecessor_artifact.name == "pipeline_manifests":
+                    continue
+                successor_artifact = successor_by_name.get(predecessor_artifact.name)
+                if successor_artifact is None:
+                    raise SnapshotError(
+                        "cumulative stage is missing predecessor artifact: "
+                        f"{predecessor_artifact.name}"
+                    )
+                predecessor_records = self._canonical_artifact_records(
+                    predecessor_artifacts,
+                    run_id,
+                    predecessor,
+                    predecessor_artifact.path,
+                )
+                successor_records = self._canonical_artifact_records(
+                    artifacts,
+                    run_id,
+                    stage,
+                    successor_artifact.path,
+                )
+                if predecessor_records - successor_records:
+                    raise SnapshotError(
+                        "cumulative stage dropped predecessor records from artifact: "
+                        f"{predecessor_artifact.name}"
+                    )
+
+    @staticmethod
+    def _canonical_artifact_records(
+        artifacts: ArtifactStore,
+        run_id: str,
+        stage: PipelineStage,
+        artifact_path: str,
+    ) -> Counter[bytes]:
+        data = (artifacts.layout.canonical_stage(run_id, stage.value) / artifact_path).read_bytes()
+        if not data:
+            return Counter()
+        return Counter(data[:-1].split(b"\n"))
 
     def _reject_staged_paths_outside(self, run_id: str, stage: PipelineStage) -> None:
         output = self._git(
