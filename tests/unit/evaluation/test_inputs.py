@@ -2,7 +2,11 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 from datetime import UTC, datetime, timedelta
+import os
 from pathlib import Path
+import shutil
+import stat
+import subprocess
 
 import pytest
 from pydantic import ValidationError
@@ -26,6 +30,7 @@ from ke_memory_demo.pipeline import (
     PipelineStage,
 )
 from ke_memory_demo.pipeline.runtime import validate_evaluation_snapshot_contract
+from ke_memory_demo.pipeline.runtime import build_evaluation_preflight
 from ke_memory_demo.settings import EvaluationConcurrencySettings, load_settings
 
 
@@ -139,6 +144,69 @@ def test_snapshot_contract_pins_the_fixed_dataset_hash(project_root: Path) -> No
 
     with pytest.raises(PreflightCheckFailure, match="SnapshotContractMismatch"):
         validate_evaluation_snapshot_contract(manifest, (), settings)
+
+
+@pytest.mark.parametrize(
+    ("git_target", "failure_detail"),
+    [
+        ("objects", "state_repo:GitObjectStorageNotWritable"),
+        ("active_ref", "state_repo:GitRefMetadataNotWritable"),
+    ],
+)
+@pytest.mark.asyncio
+async def test_state_repo_requires_writable_git_storage(
+    tmp_path: Path,
+    project_root: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    git_target: str,
+    failure_detail: str,
+) -> None:
+    config_root = tmp_path / "config-root"
+    shutil.copytree(project_root / "config", config_root / "config")
+    for name in (
+        "KE_MEMORY_ES_API_KEY",
+        "KE_MEMORY_ES_INDEX",
+        "KE_MEMORY_ES_URL",
+        "KE_MEMORY_JUDGE_API_KEY",
+        "KE_MEMORY_WORK_API_KEY",
+    ):
+        monkeypatch.delenv(name, raising=False)
+
+    state_root = tmp_path / "state"
+    state_root.mkdir()
+    _git(state_root, "init", "--quiet", "--object-format=sha1")
+    _git(state_root, "config", "user.name", "Preflight Test")
+    _git(state_root, "config", "user.email", "preflight@example.invalid")
+    _git(state_root, "config", "commit.gpgsign", "false")
+    (state_root / "tracked.txt").write_text("tracked\n", encoding="utf-8")
+    _git(state_root, "add", "tracked.txt")
+    _git(state_root, "commit", "--quiet", "-m", "initial")
+    head = _git(state_root, "rev-parse", "HEAD")
+
+    if git_target == "objects":
+        target_directory = _resolved_git_path(state_root, "objects")
+    else:
+        active_ref = _git(state_root, "symbolic-ref", "-q", "HEAD")
+        target_directory = _resolved_git_path(state_root, active_ref).parent
+    original_mode = stat.S_IMODE(target_directory.stat().st_mode)
+    original_entries = tuple(sorted(item.name for item in target_directory.iterdir()))
+    target_directory.chmod(original_mode & ~0o222)
+    try:
+        assert os.access(state_root, os.W_OK)
+        assert not os.access(target_directory, os.W_OK)
+        report = await build_evaluation_preflight(
+            config_root,
+            state_root,
+            "run-1",
+            head,
+        ).run()
+    finally:
+        target_directory.chmod(original_mode)
+
+    state_check = next(item for item in report.checks if item.name == "state_repo")
+    assert state_check.passed is False
+    assert state_check.detail == failure_detail
+    assert tuple(sorted(item.name for item in target_directory.iterdir())) == original_entries
 
 
 @pytest.mark.asyncio
@@ -266,3 +334,20 @@ class _FakePreflightPorts:
                 raise PreflightCheckFailure("state_repo:PermissionError")
             raise RuntimeError("Authorization provider-secret-body")
         return f"{name}:ok"
+
+
+def _git(root: Path, *arguments: str) -> str:
+    completed = subprocess.run(
+        ("git", "-C", str(root), *arguments),
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    return completed.stdout.strip()
+
+
+def _resolved_git_path(root: Path, git_path: str) -> Path:
+    path = Path(_git(root, "rev-parse", "--git-path", git_path))
+    if not path.is_absolute():
+        path = root / path
+    return path.resolve(strict=True)

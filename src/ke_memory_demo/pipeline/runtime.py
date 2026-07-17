@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 from collections.abc import Awaitable, Callable, Iterable, Mapping, Sequence
+import errno
 import hashlib
 import os
 from pathlib import Path
@@ -665,27 +666,7 @@ class _LiveEvaluationPreflightPorts:
         )
 
     def _check_state_repo(self) -> str:
-        if not self._state_root.is_dir():
-            raise PreflightCheckFailure("state_repo:MissingDirectory")
-        head = _git_text(self._state_root, "rev-parse", "--verify", "HEAD^{commit}")
-        if head != self._snapshot_id:
-            raise PreflightCheckFailure("state_repo:HeadMismatch")
-        if _git_text(
-            self._state_root,
-            "status",
-            "--porcelain=v1",
-            "--untracked-files=no",
-        ):
-            raise PreflightCheckFailure("state_repo:DirtyTrackedState")
-        try:
-            with tempfile.NamedTemporaryFile(
-                prefix=".evaluation-preflight-",
-                dir=self._state_root,
-            ):
-                pass
-        except OSError as error:
-            raise RuntimeInvariantError("state repository is not writable") from error
-        return f"state_repo:head={head}:writable=true"
+        return probe_state_repository_writable(self._state_root, self._snapshot_id)
 
     def _load_snapshot(self) -> tuple[PipelineRunManifest, tuple[Conversation, ...]]:
         if self._snapshot_cache is not None:
@@ -814,6 +795,41 @@ def validate_evaluation_snapshot_contract(
         raise PreflightCheckFailure("ke_ready_snapshot:SnapshotContractMismatch")
 
 
+def probe_state_repository_writable(state_root: Path, expected_head: str) -> str:
+    if not state_root.is_dir():
+        raise PreflightCheckFailure("state_repo:MissingDirectory")
+    head = _git_text(state_root, "rev-parse", "--verify", "HEAD^{commit}")
+    if head != expected_head:
+        raise PreflightCheckFailure("state_repo:HeadMismatch")
+    if _git_text(
+        state_root,
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=no",
+    ):
+        raise PreflightCheckFailure("state_repo:DirtyTrackedState")
+
+    _probe_writable_directory(
+        state_root,
+        failure_detail="state_repo:WorktreeRootNotWritable",
+    )
+    objects_directory = _resolved_git_directory(
+        state_root,
+        "objects",
+        failure_detail="state_repo:GitObjectStorageNotWritable",
+    )
+    _probe_writable_directory(
+        objects_directory,
+        failure_detail="state_repo:GitObjectStorageNotWritable",
+    )
+    ref_directory = _active_ref_lock_directory(state_root)
+    _probe_writable_directory(
+        ref_directory,
+        failure_detail="state_repo:GitRefMetadataNotWritable",
+    )
+    return f"state_repo:head={head}:writable=true"
+
+
 def _snapshot_records_from_git(
     state_root: Path,
     snapshot_id: str,
@@ -858,6 +874,139 @@ def _git_text(root: Path, *arguments: str) -> str:
     if completed.returncode != 0:
         raise RuntimeInvariantError("Git preflight command failed")
     return completed.stdout.strip()
+
+
+def _git_optional_text(root: Path, *arguments: str) -> str | None:
+    completed = subprocess.run(
+        ("git", "-C", str(root), *arguments),
+        check=False,
+        capture_output=True,
+        text=True,
+        env={**os.environ, "GIT_TERMINAL_PROMPT": "0"},
+    )
+    if completed.returncode == 0:
+        return completed.stdout.strip()
+    if completed.returncode == 1:
+        return None
+    raise RuntimeInvariantError("Git preflight command failed")
+
+
+def _resolved_git_directory(
+    root: Path,
+    git_path: str,
+    *,
+    failure_detail: str,
+) -> Path:
+    raw_path = _git_text(root, "rev-parse", "--git-path", git_path)
+    path = Path(raw_path)
+    if not path.is_absolute():
+        path = root / path
+    return _require_probe_directory(path, failure_detail=failure_detail)
+
+
+def _active_ref_lock_directory(root: Path) -> Path:
+    active_ref = _git_optional_text(root, "symbolic-ref", "-q", "HEAD")
+    if active_ref is None:
+        raw_path = _git_text(root, "rev-parse", "--git-dir")
+        path = Path(raw_path)
+        if not path.is_absolute():
+            path = root / path
+        return _require_probe_directory(
+            path,
+            failure_detail="state_repo:GitRefMetadataNotWritable",
+        )
+
+    raw_path = _git_text(root, "rev-parse", "--git-path", active_ref)
+    ref_path = Path(raw_path)
+    if not ref_path.is_absolute():
+        ref_path = root / ref_path
+    return _require_probe_directory(
+        ref_path.parent,
+        failure_detail="state_repo:GitRefMetadataNotWritable",
+    )
+
+
+def _require_probe_directory(path: Path, *, failure_detail: str) -> Path:
+    try:
+        resolved = path.resolve(strict=True)
+        is_directory = resolved.is_dir()
+    except OSError:
+        raise PreflightCheckFailure(failure_detail) from None
+    if not is_directory:
+        raise PreflightCheckFailure(failure_detail)
+    return resolved
+
+
+def _probe_writable_directory(directory: Path, *, failure_detail: str) -> None:
+    descriptor: int | None = None
+    temporary_path: Path | None = None
+    failed = False
+    try:
+        descriptor, temporary_name = tempfile.mkstemp(
+            prefix=".ke-memory-preflight-",
+            suffix=".tmp",
+            dir=directory,
+        )
+        temporary_path = Path(temporary_name)
+        os.fchmod(descriptor, 0o600)
+        if stat.S_IMODE(os.fstat(descriptor).st_mode) != 0o600:
+            raise OSError("preflight probe mode mismatch")
+        _write_probe_payload(descriptor)
+        os.fsync(descriptor)
+    except OSError:
+        failed = True
+    finally:
+        if descriptor is not None:
+            try:
+                os.close(descriptor)
+            except OSError:
+                failed = True
+        if temporary_path is not None:
+            try:
+                temporary_path.unlink()
+            except OSError:
+                failed = True
+            try:
+                _fsync_directory_if_supported(directory)
+            except OSError:
+                failed = True
+    if failed:
+        raise PreflightCheckFailure(failure_detail)
+
+
+def _write_probe_payload(descriptor: int) -> None:
+    payload = memoryview(b"ke-memory-preflight\n")
+    written = 0
+    while written < len(payload):
+        count = os.write(descriptor, payload[written:])
+        if count <= 0:
+            raise OSError("preflight probe write failed")
+        written += count
+
+
+def _fsync_directory_if_supported(directory: Path) -> None:
+    unsupported = {
+        errno.EINVAL,
+        getattr(errno, "ENOTSUP", errno.EINVAL),
+        getattr(errno, "EOPNOTSUPP", errno.EINVAL),
+    }
+    try:
+        descriptor = os.open(
+            directory,
+            os.O_RDONLY | getattr(os, "O_DIRECTORY", 0),
+        )
+    except OSError as error:
+        if error.errno in unsupported:
+            return
+        raise
+    try:
+        try:
+            os.fsync(descriptor)
+        except OSError as error:
+            if error.errno not in unsupported:
+                raise
+    finally:
+        os.close(descriptor)
 
 
 def _sha256_file(path: Path) -> str:
