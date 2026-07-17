@@ -26,6 +26,7 @@ from ke_memory_demo.storage import ArtifactStore
 
 
 KE_MEMORY_SYSTEM_ID = "ke-memory"
+KE_READY_STAGE = "ke-ready"
 EMBEDDING_READY_STAGE = "embedding-ready"
 MAX_EVIDENCE_TOKENS = 8192
 
@@ -187,15 +188,15 @@ class KEMemorySystem:
     async def await_ready(self) -> ReadinessReceipt:
         scope, namespace = self._prepared_identity()
         try:
-            raw_status = await self._stages.await_ready(scope, EMBEDDING_READY_STAGE)
+            raw_status = await self._stages.await_ready(scope, KE_READY_STAGE)
             status = StageReadiness.model_validate(raw_status.model_dump(mode="python"))
         except (AttributeError, TypeError, ValueError, ValidationError) as error:
             raise KEMemorySystemError("staged readiness returned an invalid result") from error
-        if status.stage != EMBEDDING_READY_STAGE:
-            raise KEMemorySystemError(f"readiness must report the {EMBEDDING_READY_STAGE} stage")
+        if status.stage != KE_READY_STAGE:
+            raise KEMemorySystemError(f"readiness must report the {KE_READY_STAGE} stage")
         self._ready = status.successful
         metadata = dict(status.metadata)
-        metadata["required_stage"] = EMBEDDING_READY_STAGE
+        metadata["required_stage"] = KE_READY_STAGE
         return ReadinessReceipt(
             system_id=self.system_id,
             namespace=namespace,
@@ -212,7 +213,7 @@ class KEMemorySystem:
         scope, _namespace = self._prepared_identity()
         if not self._ready:
             raise KEMemorySystemError(
-                f"KE memory system is not ready; await successful {EMBEDDING_READY_STAGE}"
+                f"KE memory system is not ready; await successful {KE_READY_STAGE}"
             )
         if not question.strip():
             raise KEMemorySystemError("question must not be empty")
@@ -260,7 +261,7 @@ class KEMemorySystem:
             currency="USD" if costs else None,
             metadata={
                 "ingested_exchange_count": len(self._ingested_exchange_ids),
-                "embedding_ready": self._ready,
+                "ke_ready": self._ready,
             },
         )
 

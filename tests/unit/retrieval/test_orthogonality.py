@@ -96,6 +96,13 @@ async def test_candidate_paths_meet_only_in_evidence_fusion() -> None:
     assert fusion.received["embedding_candidates"] is embedding.candidates
 
 
+@pytest.mark.asyncio
+async def test_disabled_embedding_returns_no_candidates_without_a_backend() -> None:
+    from ke_memory_demo.retrieval import DisabledEmbeddingRetriever
+
+    assert await DisabledEmbeddingRetriever().retrieve(question="status?") == ()
+
+
 class _EmbeddingBackend:
     def __init__(self) -> None:
         self.questions: list[str] = []

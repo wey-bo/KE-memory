@@ -17,6 +17,61 @@ def test_write_env_local_is_private_and_complete(tmp_path: Path):
     ]
 
 
+def test_runtime_env_file_is_atomic_private_and_complete(tmp_path: Path) -> None:
+    target = tmp_path / ".env.local"
+    values = {
+        "KE_MEMORY_WORK_API_KEY": "work-value",
+        "KE_MEMORY_JUDGE_API_KEY": "judge-value",
+        "KE_MEMORY_ES_URL": "https://es.example.test",
+        "KE_MEMORY_ES_INDEX": "domain-terms",
+        "KE_MEMORY_ES_API_KEY": "es-value",
+    }
+    secrets.write_runtime_env_local(target, values)
+    assert stat.S_IMODE(target.stat().st_mode) == 0o600
+    assert target.read_text().splitlines() == [f"{name}={values[name]}" for name in sorted(values)]
+
+
+@pytest.mark.parametrize(
+    "values",
+    [
+        pytest.param({}, id="missing-allowlist"),
+        pytest.param(
+            {
+                "KE_MEMORY_WORK_API_KEY": "work-value",
+                "KE_MEMORY_JUDGE_API_KEY": "judge-value",
+                "KE_MEMORY_ES_URL": "https://es.example.test",
+                "KE_MEMORY_ES_INDEX": "domain-terms",
+                "KE_MEMORY_ES_API_KEY": "es-value",
+                "UNEXPECTED": "value",
+            },
+            id="extra-name",
+        ),
+        pytest.param(
+            {
+                "KE_MEMORY_WORK_API_KEY": "work-value\nsecond-line",
+                "KE_MEMORY_JUDGE_API_KEY": "judge-value",
+                "KE_MEMORY_ES_URL": "https://es.example.test",
+                "KE_MEMORY_ES_INDEX": "domain-terms",
+                "KE_MEMORY_ES_API_KEY": "es-value",
+            },
+            id="multiline-value",
+        ),
+    ],
+)
+def test_runtime_env_file_rejects_invalid_values_before_touching_destination(
+    tmp_path: Path,
+    values: dict[str, str],
+) -> None:
+    target = tmp_path / ".env.local"
+    original = b"existing-local-settings\n"
+    target.write_bytes(original)
+
+    with pytest.raises(ValueError, match="allowlist|non-empty single-line"):
+        secrets.write_runtime_env_local(target, values)
+
+    assert target.read_bytes() == original
+
+
 @pytest.mark.parametrize(
     ("work_key", "judge_key"),
     [

@@ -45,6 +45,7 @@ def test_settings_load_all_exact_model_values(project_root: Path):
         "max_output_tokens": 2048,
     }
     assert settings.embedding.model_dump() == {
+        "enabled": False,
         "model": "Qwen/Qwen3-Embedding-0.6B",
         "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
         "local_path_env": "KE_MEMORY_EMBEDDING_PATH",
@@ -71,6 +72,21 @@ def test_settings_load_all_exact_experiment_values(project_root: Path):
         "answer_max_output_tokens": 1024,
     }
     assert settings.aggregation.model_dump() == {"max_semantic_depth": 2}
+    assert settings.evaluation.concurrency.model_dump() == {
+        "turn_workers": 8,
+        "session_workers": 4,
+        "question_workers": 8,
+        "judge_workers": 8,
+    }
+
+
+def test_primary_demo_disables_embedding_and_bounds_concurrency(project_root: Path) -> None:
+    settings = load_settings(project_root)
+    assert settings.embedding.enabled is False
+    assert settings.evaluation.concurrency.turn_workers == 8
+    assert settings.evaluation.concurrency.session_workers == 4
+    assert settings.evaluation.concurrency.question_workers == 8
+    assert settings.evaluation.concurrency.judge_workers == 8
 
 
 def test_settings_load_all_exact_elasticsearch_values(project_root: Path):

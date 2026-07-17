@@ -2,12 +2,13 @@ from __future__ import annotations
 
 import asyncio
 from collections.abc import Awaitable, Callable, Iterable, Mapping, Sequence
+from dataclasses import dataclass
 import inspect
 import math
 import re
 import time
 from types import TracebackType
-from typing import Any, Protocol, TypeVar, cast
+from typing import Any, Generic, Protocol, TypeVar, cast
 
 from openai import AsyncOpenAI
 from pydantic import BaseModel, TypeAdapter, ValidationError
@@ -71,6 +72,12 @@ class StructuredOutputError(PermanentModelError):
     """The provider exhausted schema repair or the shared call budget."""
 
 
+@dataclass(frozen=True)
+class StructuredCompletion(Generic[ModelT]):
+    value: ModelT
+    usage: UsageRecord
+
+
 class _CompletionEndpoint(Protocol):
     def create(self, **kwargs: Any) -> Awaitable[object]: ...
 
@@ -131,17 +138,37 @@ class StructuredModelClient:
         clock: Clock = time.time,
     ) -> StructuredModelClient:
         secret = settings.require_work_api_key()
-        client = AsyncOpenAI(
-            base_url=settings.work.base_url,
+        return cls.from_model_settings(
+            settings.work,
             api_key=secret,
+            supports_json_schema=supports_json_schema,
+            trace_recorder=trace_recorder,
+            sleep=sleep,
+            clock=clock,
+        )
+
+    @classmethod
+    def from_model_settings(
+        cls,
+        model_settings: ModelSettings,
+        *,
+        api_key: str,
+        supports_json_schema: bool,
+        trace_recorder: TraceRecorder,
+        sleep: Sleep = asyncio.sleep,
+        clock: Clock = time.time,
+    ) -> StructuredModelClient:
+        client = AsyncOpenAI(
+            base_url=model_settings.base_url,
+            api_key=api_key,
             max_retries=0,
         )
         return cls(
-            settings.work,
+            model_settings,
             client=client,
             supports_json_schema=supports_json_schema,
             trace_recorder=trace_recorder,
-            known_secrets=(secret,),
+            known_secrets=(api_key,),
             sleep=sleep,
             clock=clock,
             _owns_client=True,
@@ -184,15 +211,15 @@ class StructuredModelClient:
         if terminal_error is not None:
             raise terminal_error
 
-    async def complete(
+    async def complete_with_usage(
         self,
         model_type: type[ModelT],
         messages: Sequence[Mapping[str, object]],
         trace_context: TraceContext | Mapping[str, object],
-    ) -> ModelT:
+    ) -> StructuredCompletion[ModelT]:
         terminal_error: ModelClientError | None = None
         try:
-            return await self._complete(model_type, messages, trace_context)
+            return await self._complete_with_usage(model_type, messages, trace_context)
         except ModelClientError as error:
             terminal_error = self._detached_error(error)
         except Exception:
@@ -200,12 +227,21 @@ class StructuredModelClient:
 
         raise terminal_error
 
-    async def _complete(
+    async def complete(
         self,
         model_type: type[ModelT],
         messages: Sequence[Mapping[str, object]],
         trace_context: TraceContext | Mapping[str, object],
     ) -> ModelT:
+        completion = await self.complete_with_usage(model_type, messages, trace_context)
+        return completion.value
+
+    async def _complete_with_usage(
+        self,
+        model_type: type[ModelT],
+        messages: Sequence[Mapping[str, object]],
+        trace_context: TraceContext | Mapping[str, object],
+    ) -> StructuredCompletion[ModelT]:
         if self._closed:
             raise InvariantModelError("structured model client is closed")
         request_messages = self._validated_messages(messages)
@@ -214,6 +250,7 @@ class StructuredModelClient:
         repair_count = 0
         transport_attempt = 0
         transient_retry_ordinal = 0
+        usage_records: list[UsageRecord] = []
 
         while transport_attempt < MAX_TRANSPORT_ATTEMPTS:
             transport_attempt += 1
@@ -270,6 +307,7 @@ class StructuredModelClient:
                     usage=None,
                 )
                 raise error from None
+            usage_records.append(usage)
 
             try:
                 content = self._response_content(response)
@@ -337,7 +375,10 @@ class StructuredModelClient:
                 error=None,
                 usage=usage,
             )
-            return result
+            return StructuredCompletion(
+                value=result,
+                usage=_aggregate_call_usage(usage_records),
+            )
 
         raise InvariantModelError("shared model transport budget ended unexpectedly")
 
@@ -542,6 +583,22 @@ class StructuredModelClient:
 def _schema_name(model_type: type[BaseModel]) -> str:
     candidate = _SCHEMA_NAME.sub("_", model_type.__name__).strip("_-")[:64]
     return candidate or "structured_output"
+
+
+def _aggregate_call_usage(records: Sequence[UsageRecord]) -> UsageRecord:
+    return UsageRecord(
+        request_id=records[-1].request_id,
+        model=records[-1].model,
+        latency_seconds=sum(item.latency_seconds for item in records),
+        input_tokens=sum(item.input_tokens for item in records),
+        output_tokens=sum(item.output_tokens for item in records),
+        total_tokens=sum(item.total_tokens for item in records),
+        provider_cost=(
+            sum(cast(float, item.provider_cost) for item in records)
+            if all(item.provider_cost is not None for item in records)
+            else None
+        ),
+    )
 
 
 def _required_token_count(value: object, *names: str) -> int:

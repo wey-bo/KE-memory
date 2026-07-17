@@ -13,6 +13,7 @@ temperature = 0.0
 max_output_tokens = 2048
 
 [embedding]
+enabled = false
 model = "Qwen/Qwen3-Embedding-0.6B"
 revision = "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3"
 local_path_env = "KE_MEMORY_EMBEDDING_PATH"

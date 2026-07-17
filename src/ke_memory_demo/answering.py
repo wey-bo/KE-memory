@@ -9,6 +9,7 @@ from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_valida
 
 from ke_memory_demo.core.json import JsonObject, canonical_json
 from ke_memory_demo.domain import Evidence
+from ke_memory_demo.infra.llm import StructuredCompletion
 from ke_memory_demo.infra.telemetry import TraceContext, UsageRecord
 from ke_memory_demo.retrieval.evidence_payload import (
     model_evidence_payload,
@@ -51,11 +52,6 @@ class AnswerResult(_AnswerRecord):
     usage: UsageRecord
 
 
-class AnswerUsageSource(Protocol):
-    @property
-    def usage_records(self) -> tuple[UsageRecord, ...]: ...
-
-
 class ConfiguredAnswerClient(Protocol):
     @property
     def model_name(self) -> str: ...
@@ -63,19 +59,18 @@ class ConfiguredAnswerClient(Protocol):
     @property
     def max_output_tokens(self) -> int: ...
 
-    async def complete(
+    async def complete_with_usage(
         self,
         model_type: type[ModelT],
         messages: Sequence[Mapping[str, object]],
         trace_context: TraceContext | Mapping[str, object],
-    ) -> ModelT: ...
+    ) -> StructuredCompletion[ModelT]: ...
 
 
 class AnswerService:
     def __init__(
         self,
         model: ConfiguredAnswerClient,
-        usage_source: AnswerUsageSource,
         *,
         token_counter: TokenCounter,
     ) -> None:
@@ -86,7 +81,6 @@ class AnswerService:
                 f"answer client max output tokens must be {ANSWER_MAX_OUTPUT_TOKENS}"
             )
         self._model = model
-        self._usage_source = usage_source
         self._token_counter = token_counter
         self._prompt = _read_prompt()
         self.prompt_sha256 = hashlib.sha256(self._prompt.encode("utf-8")).hexdigest()
@@ -113,13 +107,13 @@ class AnswerService:
             "question": question,
             "evidence": list(model_evidence_payload(ordered)),
         }
-        usage_start = len(self._usage_source.usage_records)
-        response = await self._model.complete(
+        messages = (
+            {"role": "system", "content": self._prompt},
+            {"role": "user", "content": canonical_json(payload).decode("utf-8")},
+        )
+        completion = await self._model.complete_with_usage(
             AnswerModelOutput,
-            (
-                {"role": "system", "content": self._prompt},
-                {"role": "user", "content": canonical_json(payload).decode("utf-8")},
-            ),
+            messages,
             TraceContext(
                 operation="common-answer",
                 metadata={
@@ -132,17 +126,14 @@ class AnswerService:
                 },
             ),
         )
-        output = _validated_output(response)
+        output = _validated_output(completion.value)
         unoffered = sorted(set(output.citations).difference(evidence_ids))
         if unoffered:
             raise AnswerInvariantError(f"answer returned unoffered citation: {unoffered[0]}")
-        new_usage = self._usage_source.usage_records[usage_start:]
-        if not new_usage:
-            raise AnswerInvariantError("answer model call produced no usage record")
         return AnswerResult(
             answer=output.answer,
             citations=output.citations,
-            usage=_aggregate_usage(new_usage),
+            usage=completion.usage,
         )
 
     def _count_evidence_tokens(self, evidence: Sequence[Evidence]) -> int:
@@ -166,19 +157,3 @@ def _validated_output(value: object) -> AnswerModelOutput:
         return AnswerModelOutput.model_validate(value.model_dump(mode="python"))
     except ValidationError as error:
         raise AnswerInvariantError("answer model output failed local schema validation") from error
-
-
-def _aggregate_usage(records: Sequence[UsageRecord]) -> UsageRecord:
-    invalid_model = next((item.model for item in records if item.model != ANSWER_MODEL), None)
-    if invalid_model is not None:
-        raise AnswerInvariantError(f"answer usage reported unexpected model: {invalid_model}")
-    costs = tuple(item.provider_cost for item in records if item.provider_cost is not None)
-    return UsageRecord(
-        request_id=records[-1].request_id,
-        model=ANSWER_MODEL,
-        latency_seconds=sum(item.latency_seconds for item in records),
-        input_tokens=sum(item.input_tokens for item in records),
-        output_tokens=sum(item.output_tokens for item in records),
-        total_tokens=sum(item.total_tokens for item in records),
-        provider_cost=sum(costs) if costs else None,
-    )

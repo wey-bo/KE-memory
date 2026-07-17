@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import asyncio
 from collections.abc import Callable, Sequence
 import copy
 from datetime import UTC, datetime
@@ -65,6 +66,10 @@ class ExampleOutput(BaseModel):
 
 
 class TextOutput(BaseModel):
+    value: str
+
+
+class OutputRecord(BaseModel):
     value: str
 
 
@@ -157,6 +162,37 @@ class _FakeClient:
         self.close_calls += 1
 
 
+class _ConcurrentCompletions:
+    def __init__(self) -> None:
+        self._started = 0
+        self._both_started = asyncio.Event()
+
+    async def create(self, **kwargs: object) -> object:
+        self._started += 1
+        if self._started == 2:
+            self._both_started.set()
+        await self._both_started.wait()
+        request_messages = cast(list[dict[str, object]], kwargs["messages"])
+        label = cast(str, request_messages[-1]["content"])
+        input_tokens, output_tokens = (10, 1) if label == "left" else (20, 2)
+        return _completion(
+            json.dumps({"value": label}),
+            request_id=f"request-{label}",
+            input_tokens=input_tokens,
+            output_tokens=output_tokens,
+        )
+
+
+class _ConcurrentChat:
+    def __init__(self) -> None:
+        self.completions = _ConcurrentCompletions()
+
+
+class _ConcurrentClient:
+    def __init__(self) -> None:
+        self.chat = _ConcurrentChat()
+
+
 class _Clock:
     def __init__(self, step: float = 0.25) -> None:
         self.current = 0.0
@@ -207,6 +243,25 @@ def _structured_client(
         clock=_Clock(),
     )
     return client, fake, recorder, delays
+
+
+@pytest.fixture
+def concurrent_client() -> StructuredModelClient:
+    return StructuredModelClient(
+        _model_settings(),
+        client=_ConcurrentClient(),
+        supports_json_schema=True,
+        trace_recorder=InMemoryTraceRecorder(),
+        clock=_Clock(),
+    )
+
+
+def messages(label: str) -> list[dict[str, object]]:
+    return [{"role": "user", "content": label}]
+
+
+def trace(label: str) -> TraceContext:
+    return TraceContext(operation=f"concurrent-{label}")
 
 
 def _exception_graph(error: BaseException) -> tuple[BaseException, ...]:
@@ -650,6 +705,20 @@ async def test_json_object_mode_keeps_validation_and_configured_temperature() ->
     assert len(recorder.usage_records) == 1
 
 
+@pytest.mark.asyncio
+async def test_complete_with_usage_keeps_concurrent_calls_separate(concurrent_client) -> None:
+    left, right = await asyncio.gather(
+        concurrent_client.complete_with_usage(OutputRecord, messages("left"), trace("left")),
+        concurrent_client.complete_with_usage(OutputRecord, messages("right"), trace("right")),
+    )
+    assert left.value.value == "left"
+    assert left.usage.request_id == "request-left"
+    assert left.usage.total_tokens == 11
+    assert right.value.value == "right"
+    assert right.usage.request_id == "request-right"
+    assert right.usage.total_tokens == 22
+
+
 @pytest.mark.parametrize(
     ("request_id", "completion_id", "expected_request_id"),
     [
@@ -715,19 +784,46 @@ async def test_reasoning_model_prefixes_omit_temperature(model: str) -> None:
 async def test_schema_error_gets_two_repairs_then_succeeds_and_accumulates_usage() -> None:
     client, fake, recorder, delays = _structured_client(
         [
-            _completion('{"wrong":1}', request_id="request-1", input_tokens=5, output_tokens=2),
-            _completion('{"value":"bad"}', request_id="request-2", input_tokens=7, output_tokens=3),
-            _completion('{"value":3}', request_id="request-3", input_tokens=9, output_tokens=4),
+            _completion(
+                '{"wrong":1}',
+                request_id="request-1",
+                input_tokens=5,
+                output_tokens=2,
+                cost=0.001,
+            ),
+            _completion(
+                '{"value":"bad"}',
+                request_id="request-2",
+                input_tokens=7,
+                output_tokens=3,
+                cost=0.002,
+            ),
+            _completion(
+                '{"value":3}',
+                request_id="request-3",
+                input_tokens=9,
+                output_tokens=4,
+                cost=0.003,
+            ),
         ]
     )
 
-    result = await client.complete(
+    completion = await client.complete_with_usage(
         ExampleOutput,
         [{"role": "user", "content": "return value"}],
         TraceContext(operation="extract"),
     )
 
-    assert result.value == 3
+    assert completion.value.value == 3
+    assert completion.usage == UsageRecord(
+        request_id="request-3",
+        model="provider-model",
+        latency_seconds=0.75,
+        input_tokens=21,
+        output_tokens=9,
+        total_tokens=30,
+        provider_cost=0.006,
+    )
     assert len(fake.completions.calls) == 3
     assert delays == []
     assert [len(cast(list[object], call["messages"])) for call in fake.completions.calls] == [
@@ -1128,6 +1224,37 @@ def test_production_constructor_uses_work_secret_without_exposing_it(
 
     assert captured == {
         "base_url": "https://api.penguinsaichat.dpdns.org/v1",
+        "api_key": secret,
+        "max_retries": 0,
+    }
+    assert secret not in repr(client)
+
+
+def test_model_settings_constructor_uses_supplied_endpoint_and_secret(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from ke_memory_demo.infra import llm
+
+    secret = "model-settings-constructor-test-secret"
+    captured: dict[str, object] = {}
+    fake = _FakeClient([])
+    settings = _model_settings(model="deepseek-v4-pro")
+
+    def fake_async_openai(**kwargs: object) -> _FakeClient:
+        captured.update(kwargs)
+        return fake
+
+    monkeypatch.setattr(llm, "AsyncOpenAI", fake_async_openai)
+
+    client = StructuredModelClient.from_model_settings(
+        settings,
+        api_key=secret,
+        supports_json_schema=False,
+        trace_recorder=InMemoryTraceRecorder(),
+    )
+
+    assert captured == {
+        "base_url": "https://model.test.invalid/v1",
         "api_key": secret,
         "max_retries": 0,
     }

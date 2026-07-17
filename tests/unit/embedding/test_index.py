@@ -147,6 +147,7 @@ class _FakeModelFactory:
 
 def _embedding_settings() -> EmbeddingSettings:
     return EmbeddingSettings(
+        enabled=True,
         model="Qwen/Qwen3-Embedding-0.6B",
         revision="97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
         local_path_env="KE_MEMORY_EMBEDDING_PATH",

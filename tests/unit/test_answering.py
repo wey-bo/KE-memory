@@ -15,19 +15,11 @@ from ke_memory_demo.answering import (
     AnswerService,
 )
 from ke_memory_demo.domain import Evidence
+from ke_memory_demo.infra.llm import StructuredCompletion
 from ke_memory_demo.infra.telemetry import TraceContext, UsageRecord
 
 
 ModelT = TypeVar("ModelT", bound=BaseModel)
-
-
-class _UsageSource:
-    def __init__(self) -> None:
-        self.values: tuple[UsageRecord, ...] = ()
-
-    @property
-    def usage_records(self) -> tuple[UsageRecord, ...]:
-        return self.values
 
 
 class _CharacterTokenCounter:
@@ -39,7 +31,6 @@ class _AnswerClient:
     def __init__(
         self,
         output: AnswerModelOutput,
-        usage_source: _UsageSource,
         *,
         model_name: str = "gpt-5.4",
         max_output_tokens: int = 1024,
@@ -47,29 +38,28 @@ class _AnswerClient:
         self.model_name = model_name
         self.max_output_tokens = max_output_tokens
         self.output = output
-        self.usage_source = usage_source
+        self.usage = UsageRecord(
+            request_id="request-answer-1",
+            model=self.model_name,
+            latency_seconds=0.25,
+            input_tokens=40,
+            output_tokens=12,
+            total_tokens=52,
+        )
         self.calls: list[tuple[type[BaseModel], Sequence[Mapping[str, object]], TraceContext]] = []
 
-    async def complete(
+    async def complete_with_usage(
         self,
         model_type: type[ModelT],
         messages: Sequence[Mapping[str, object]],
         trace_context: TraceContext | Mapping[str, object],
-    ) -> ModelT:
+    ) -> StructuredCompletion[ModelT]:
         assert isinstance(trace_context, TraceContext)
         self.calls.append((model_type, messages, trace_context))
-        self.usage_source.values = (
-            *self.usage_source.values,
-            UsageRecord(
-                request_id="request-answer-1",
-                model=self.model_name,
-                latency_seconds=0.25,
-                input_tokens=40,
-                output_tokens=12,
-                total_tokens=52,
-            ),
+        return StructuredCompletion(
+            value=model_type.model_validate(self.output.model_dump(mode="python")),
+            usage=self.usage,
         )
-        return model_type.model_validate(self.output.model_dump(mode="python"))
 
 
 def _evidence() -> Evidence:
@@ -88,12 +78,10 @@ def _evidence() -> Evidence:
 
 
 async def test_answer_service_uses_fixed_prompt_configuration_citations_and_usage() -> None:
-    usage = _UsageSource()
     client = _AnswerClient(
-        AnswerModelOutput(answer="The project is active.", citations=("evidence-1",)),
-        usage,
+        AnswerModelOutput(answer="The project is active.", citations=("evidence-1",))
     )
-    service = AnswerService(client, usage, token_counter=_CharacterTokenCounter())
+    service = AnswerService(client, token_counter=_CharacterTokenCounter())
 
     result = await service.answer("What is the project status?", (_evidence(),))
 
@@ -101,7 +89,7 @@ async def test_answer_service_uses_fixed_prompt_configuration_citations_and_usag
     assert ANSWER_MAX_OUTPUT_TOKENS == 1024
     assert result.answer == "The project is active."
     assert result.citations == ("evidence-1",)
-    assert result.usage == usage.usage_records[0]
+    assert result.usage == client.usage
     model_type, messages, trace = client.calls[0]
     assert model_type is AnswerModelOutput
     assert messages[0]["role"] == "system"
@@ -127,40 +115,33 @@ def test_answer_service_rejects_nonfixed_client_configuration(
     model_name: str,
     max_output_tokens: int,
 ) -> None:
-    usage = _UsageSource()
     client = _AnswerClient(
         AnswerModelOutput(answer="answer", citations=()),
-        usage,
         model_name=model_name,
         max_output_tokens=max_output_tokens,
     )
 
     with pytest.raises(AnswerInvariantError, match="gpt-5.4|1024"):
-        AnswerService(client, usage, token_counter=_CharacterTokenCounter())
+        AnswerService(client, token_counter=_CharacterTokenCounter())
 
 
 async def test_answer_service_rejects_a_citation_not_in_packed_evidence() -> None:
-    usage = _UsageSource()
-    client = _AnswerClient(
-        AnswerModelOutput(answer="unsupported", citations=("invented",)),
-        usage,
-    )
+    client = _AnswerClient(AnswerModelOutput(answer="unsupported", citations=("invented",)))
 
     with pytest.raises(AnswerInvariantError, match="unoffered citation"):
-        await AnswerService(client, usage, token_counter=_CharacterTokenCounter()).answer(
+        await AnswerService(client, token_counter=_CharacterTokenCounter()).answer(
             "question", (_evidence(),)
         )
 
 
 async def test_answer_service_rejects_full_serialized_evidence_above_hard_limit() -> None:
-    usage = _UsageSource()
-    client = _AnswerClient(AnswerModelOutput(answer="unused"), usage)
+    client = _AnswerClient(AnswerModelOutput(answer="unused"))
     oversized = _evidence().model_copy(
         update={"metadata": {"provenance": "p" * 8192}, "token_count": 1}
     )
 
     with pytest.raises(AnswerInvariantError, match="8192-token hard limit"):
-        await AnswerService(client, usage, token_counter=_CharacterTokenCounter()).answer(
+        await AnswerService(client, token_counter=_CharacterTokenCounter()).answer(
             "question", (oversized,)
         )
 

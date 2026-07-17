@@ -1,4 +1,5 @@
-from collections.abc import Callable
+from collections.abc import Callable, Mapping
+import builtins
 import getpass as getpass_module
 from importlib.util import module_from_spec, spec_from_file_location
 from pathlib import Path
@@ -24,17 +25,21 @@ def test_importing_initializer_has_no_side_effects(
     monkeypatch: pytest.MonkeyPatch,
 ):
     prompts: list[str] = []
-    writes: list[tuple[Path, str, str]] = []
+    writes: list[tuple[Path, Mapping[str, str]]] = []
 
     def fake_getpass(prompt: str) -> str:
         prompts.append(prompt)
         return "import-test-value"
 
-    def fake_write(path: Path, work_key: str, judge_key: str) -> None:
-        writes.append((path, work_key, judge_key))
+    def fake_runtime_write(path: Path, values: Mapping[str, str]) -> None:
+        writes.append((path, values))
+
+    def fake_legacy_write(path: Path, work_key: str, judge_key: str) -> None:
+        del path, work_key, judge_key
 
     monkeypatch.setattr(getpass_module, "getpass", fake_getpass)
-    monkeypatch.setattr(secrets, "write_env_local", fake_write)
+    monkeypatch.setattr(secrets, "write_runtime_env_local", fake_runtime_write, raising=False)
+    monkeypatch.setattr(secrets, "write_env_local", fake_legacy_write)
 
     module = _load_initializer(project_root / "scripts/init_local_secrets.py")
 
@@ -50,25 +55,66 @@ def test_initializer_main_writes_to_repository_root(
     def import_getpass(prompt: str) -> str:
         return "unused-import-value"
 
-    def discard_write(path: Path, work_key: str, judge_key: str) -> None:
-        return None
+    def discard_runtime_write(path: Path, values: Mapping[str, str]) -> None:
+        del path, values
+
+    def discard_legacy_write(path: Path, work_key: str, judge_key: str) -> None:
+        del path, work_key, judge_key
 
     monkeypatch.setattr(getpass_module, "getpass", import_getpass)
-    monkeypatch.setattr(secrets, "write_env_local", discard_write)
+    monkeypatch.setattr(
+        secrets,
+        "write_runtime_env_local",
+        discard_runtime_write,
+        raising=False,
+    )
+    monkeypatch.setattr(secrets, "write_env_local", discard_legacy_write)
     module = _load_initializer(project_root / "scripts/init_local_secrets.py")
-    responses = iter(("work-test-value", "judge-test-value"))
-    writes: list[tuple[Path, str, str]] = []
+    secret_responses = iter(("work-test-value", "judge-test-value", "es-api-test-value"))
+    visible_responses = iter(("https://es.example.test", "domain-terms"))
+    secret_prompts: list[str] = []
+    visible_prompts: list[str] = []
+    writes: list[tuple[Path, Mapping[str, str]]] = []
+    legacy_writes: list[tuple[Path, str, str]] = []
 
     def fake_getpass(prompt: str) -> str:
-        return next(responses)
+        secret_prompts.append(prompt)
+        return next(secret_responses)
 
-    def fake_write(path: Path, work_key: str, judge_key: str) -> None:
-        writes.append((path, work_key, judge_key))
+    def fake_input(prompt: str) -> str:
+        visible_prompts.append(prompt)
+        return next(visible_responses)
+
+    def fake_runtime_write(path: Path, values: Mapping[str, str]) -> None:
+        writes.append((path, dict(values)))
+
+    def fake_legacy_write(path: Path, work_key: str, judge_key: str) -> None:
+        legacy_writes.append((path, work_key, judge_key))
 
     monkeypatch.setattr(module, "getpass", fake_getpass)
-    monkeypatch.setattr(module, "write_env_local", fake_write)
+    monkeypatch.setattr(builtins, "input", fake_input)
+    monkeypatch.setattr(module, "write_runtime_env_local", fake_runtime_write, raising=False)
+    monkeypatch.setattr(module, "write_env_local", fake_legacy_write, raising=False)
 
     main = cast(Callable[[], None], getattr(module, "main"))
     main()
 
-    assert writes == [(project_root / ".env.local", "work-test-value", "judge-test-value")]
+    assert secret_prompts == [
+        "Work-model API key: ",
+        "Judge API key: ",
+        "Elasticsearch API key: ",
+    ]
+    assert visible_prompts == ["Elasticsearch URL: ", "Elasticsearch index: "]
+    assert writes == [
+        (
+            project_root / ".env.local",
+            {
+                "KE_MEMORY_WORK_API_KEY": "work-test-value",
+                "KE_MEMORY_JUDGE_API_KEY": "judge-test-value",
+                "KE_MEMORY_ES_URL": "https://es.example.test",
+                "KE_MEMORY_ES_INDEX": "domain-terms",
+                "KE_MEMORY_ES_API_KEY": "es-api-test-value",
+            },
+        )
+    ]
+    assert legacy_writes == []

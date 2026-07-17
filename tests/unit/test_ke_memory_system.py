@@ -19,6 +19,7 @@ from ke_memory_demo.infra.telemetry import UsageRecord
 from ke_memory_demo.storage import ArtifactStore
 from ke_memory_demo.systems import (
     EMBEDDING_READY_STAGE,
+    KE_READY_STAGE,
     KEMemorySystem,
     KEMemorySystemError,
     PreparedRunState,
@@ -65,7 +66,7 @@ def _evidence() -> Evidence:
 class _Stages:
     def __init__(self, readiness: StageReadiness | None = None) -> None:
         self.readiness = readiness or StageReadiness(
-            stage=EMBEDDING_READY_STAGE,
+            stage=KE_READY_STAGE,
             successful=True,
             pending_count=0,
         )
@@ -114,6 +115,16 @@ class _Usage:
 class _CharacterTokenCounter:
     def count(self, text: str) -> int:
         return len(text)
+
+
+def make_system(tmp_path: Path, stages: _Stages) -> KEMemorySystem:
+    return KEMemorySystem(
+        ArtifactStore(tmp_path / "state"),
+        stages,
+        _Retrieval(),
+        _Usage(),
+        token_counter=_CharacterTokenCounter(),
+    )
 
 
 def _scope() -> RunScope:
@@ -173,34 +184,28 @@ async def test_ke_memory_system_maps_staged_operations_to_the_common_protocol(
     assert ingest.source_content_hash == hashlib.sha256(canonical_json(exchange)).hexdigest()
     assert ingest.system_record_ids == ("exchange-1", "ke-1")
     assert readiness.ready
-    assert stages.ready_calls == [(_scope(), EMBEDDING_READY_STAGE)]
+    assert stages.ready_calls == [(_scope(), KE_READY_STAGE)]
     assert evidence == (_evidence(),)
     assert retrieval.calls == [(_scope(), "status?", 1000)]
     assert stats.call_count == 2
     assert stats.input_tokens == 30
     assert stats.output_tokens == 7
     assert math.isclose(stats.total_latency_seconds, 0.5)
+    assert stats.metadata["ke_ready"] is True
+    assert "embedding_ready" not in stats.metadata
     assert usage.calls == [_scope()]
 
 
 @pytest.mark.asyncio
-async def test_ke_memory_system_requires_successful_embedding_ready(
-    tmp_path: Path,
-) -> None:
-    stages = _Stages(StageReadiness(stage="turn-ke-extracted", successful=True, pending_count=0))
-    system = KEMemorySystem(
-        ArtifactStore(tmp_path / "state"),
-        stages,
-        _Retrieval(),
-        _Usage(),
-        token_counter=_CharacterTokenCounter(),
-    )
+async def test_ke_memory_system_requires_successful_ke_ready(tmp_path: Path) -> None:
+    stages = _Stages(StageReadiness(stage=KE_READY_STAGE, successful=True, pending_count=0))
+    system = make_system(tmp_path, stages)
     await system.prepare(_scope())
-
-    with pytest.raises(KEMemorySystemError, match="embedding-ready"):
-        await system.await_ready()
-    with pytest.raises(KEMemorySystemError, match="ready"):
-        await system.retrieve("status?", 100)
+    receipt = await system.await_ready()
+    assert receipt.ready
+    assert stages.ready_calls == [(_scope(), KE_READY_STAGE)]
+    assert KE_READY_STAGE == "ke-ready"
+    assert EMBEDDING_READY_STAGE == "embedding-ready"
 
 
 @pytest.mark.asyncio

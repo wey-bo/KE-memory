@@ -31,6 +31,7 @@ class ModelSettings(_FrozenModel):
 
 
 class EmbeddingSettings(_FrozenModel):
+    enabled: bool
     model: NonEmptyString
     revision: Annotated[str, Field(pattern=r"^[0-9a-f]{40}$")]
     local_path_env: NonEmptyString
@@ -56,6 +57,17 @@ class RetrievalSettings(_FrozenModel):
 
 class AggregationSettings(_FrozenModel):
     max_semantic_depth: PositiveInt
+
+
+class EvaluationConcurrencySettings(_FrozenModel):
+    turn_workers: PositiveInt
+    session_workers: PositiveInt
+    question_workers: PositiveInt
+    judge_workers: PositiveInt
+
+
+class EvaluationSettings(_FrozenModel):
+    concurrency: EvaluationConcurrencySettings
 
 
 class ElasticsearchFields(_FrozenModel):
@@ -92,6 +104,7 @@ class _ExperimentFile(_FrozenModel):
     dataset: DatasetSettings
     retrieval: RetrievalSettings
     aggregation: AggregationSettings
+    evaluation: EvaluationSettings
 
 
 class AppSettings(_FrozenModel):
@@ -102,6 +115,7 @@ class AppSettings(_FrozenModel):
     dataset: DatasetSettings
     retrieval: RetrievalSettings
     aggregation: AggregationSettings
+    evaluation: EvaluationSettings
     es: ElasticsearchSettings
 
     def require_work_api_key(self) -> str:
@@ -153,6 +167,7 @@ def load_settings(root: Path) -> AppSettings:
         dataset=experiment.dataset,
         retrieval=experiment.retrieval,
         aggregation=experiment.aggregation,
+        evaluation=experiment.evaluation,
         es=es,
     )
 

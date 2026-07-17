@@ -1,3 +1,4 @@
+from .disabled_embedding import DisabledEmbeddingRetriever
 from .evidence_payload import model_evidence_payload, serialize_evidence_payload
 from .fusion import EvidenceBudgetError, EvidenceCandidate, EvidenceFusion, FusionInvariantError
 from .matcher import (
@@ -27,6 +28,7 @@ from .tokens import O200K_BASE, O200KTokenCounter, TokenCounter
 
 
 __all__ = [
+    "DisabledEmbeddingRetriever",
     "EvidenceBudgetError",
     "EvidenceCandidate",
     "EvidenceFusion",
