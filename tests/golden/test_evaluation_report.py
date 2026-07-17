@@ -20,6 +20,7 @@ from ke_memory_demo.domain import (
 )
 from ke_memory_demo.evaluation import (
     AggregateMetrics,
+    EvaluationFailure,
     EvaluationRun,
     EvaluationStatus,
     ExperimentManifest,
@@ -90,6 +91,89 @@ def test_report_contains_ke_metrics_audits_and_comparison_warning(
     rows = list(csv.DictReader(io.StringIO(_document(first, "question_results.csv").content)))
     assert [row["question_id"] for row in rows] == sorted(row["question_id"] for row in rows)
     assert len(rows) == 60
+
+
+def test_incomplete_report_keeps_expected_scopes_and_denominators(
+    project_root: Path,
+) -> None:
+    complete = _report_input(project_root)
+    missing = next(
+        item for item in complete.questions if item.category is QuestionCategory.ABSTENTION
+    )
+    run = complete.run.model_copy(
+        update={
+            "status": EvaluationStatus.INCOMPLETE,
+            "answers": tuple(
+                item for item in complete.run.answers if item.question_id != missing.id
+            ),
+            "judgements": tuple(
+                item for item in complete.run.judgements if item.question_id != missing.id
+            ),
+            "failures": (
+                EvaluationFailure(
+                    question_id=missing.id,
+                    stage="judge",
+                    error_type="TimeoutError",
+                    message="judge failed",
+                ),
+            ),
+        }
+    )
+    non_abstention = next(
+        item
+        for item in complete.question_metrics
+        if item.category is not QuestionCategory.ABSTENTION
+    )
+    question_metrics = tuple(
+        item.model_copy(update={"abstention_correct": True})
+        if item.question_id == non_abstention.question_id
+        else item
+        for item in complete.question_metrics
+        if item.question_id != missing.id
+    )
+    partial_scopes = {
+        "overall",
+        "conversation:conversation-1",
+        "category:abstention",
+    }
+    aggregate_metrics = tuple(
+        item.model_copy(
+            update={
+                "completed_question_count": (
+                    item.question_count - 1 if item.scope in partial_scopes else item.question_count
+                ),
+                "scored_question_count": (
+                    item.question_count - 1 if item.scope in partial_scopes else item.question_count
+                ),
+                "answer_score_sum": (
+                    item.answer_score_sum - 1
+                    if item.scope in partial_scopes
+                    else item.answer_score_sum
+                ),
+                "answer_score_mean": (
+                    None if item.scope in partial_scopes else item.answer_score_mean
+                ),
+            }
+        )
+        for item in complete.aggregate_metrics
+    )
+    report_input = complete.model_copy(
+        update={
+            "run": run,
+            "question_metrics": question_metrics,
+            "aggregate_metrics": aggregate_metrics,
+        }
+    )
+
+    documents = ReportWriter.build(report_input)
+    markdown = _document(documents, "report.md").content
+    metrics = json.loads(_document(documents, "metrics.json").content)
+
+    assert "Answer rubric score: 59/60 = not available" in markdown
+    assert "Abstention correctness: 5/6" in markdown
+    assert len(metrics["aggregate_metrics"]) == 12
+    assert metrics["aggregate_metrics"][0]["question_count"] == 60
+    assert metrics["aggregate_metrics"][0]["scored_question_count"] == 59
 
 
 def _report_input(project_root: Path) -> ReportInput:
@@ -293,6 +377,8 @@ def _aggregate(scope: str, count: int, *, mapped: int) -> AggregateMetrics:
     return AggregateMetrics(
         scope=scope,
         question_count=count,
+        completed_question_count=count,
+        scored_question_count=count,
         answer_score_sum=float(count),
         answer_score_mean=1.0,
         mapped_source_count=mapped,

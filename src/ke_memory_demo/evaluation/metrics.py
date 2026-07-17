@@ -184,31 +184,49 @@ def compute_metrics(
         )
         for question_id in available_ids
     )
-    if run.status is EvaluationStatus.INCOMPLETE:
-        return ComputedMetrics(question_metrics=question_metrics, aggregate_metrics=())
-    if available_ids != expected:
+    if run.status is EvaluationStatus.COMPLETE and available_ids != expected:
         raise MetricsInvariantError("complete run lacks complete per-question metric inputs")
 
-    by_conversation: dict[str, list[QuestionMetrics]] = defaultdict(list)
-    by_category: dict[QuestionCategory, list[QuestionMetrics]] = defaultdict(list)
+    metrics_by_conversation: dict[str, list[QuestionMetrics]] = defaultdict(list)
+    metrics_by_category: dict[QuestionCategory, list[QuestionMetrics]] = defaultdict(list)
     for item in question_metrics:
-        by_conversation[item.conversation_id].append(item)
-        by_category[item.category].append(item)
-    aggregates_out: list[AggregateMetrics] = [_aggregate("overall", question_metrics)]
-    for conversation_id in sorted({item.conversation_id for item in questions}):
+        metrics_by_conversation[item.conversation_id].append(item)
+        metrics_by_category[item.category].append(item)
+    questions_by_conversation: dict[str, list[ProbeQuestion]] = defaultdict(list)
+    questions_by_category: dict[QuestionCategory, list[ProbeQuestion]] = defaultdict(list)
+    for item in questions:
+        questions_by_conversation[item.conversation_id].append(item)
+        questions_by_category[item.category].append(item)
+    completed_ids = frozenset(answer_by_id)
+    aggregates_out: list[AggregateMetrics] = [
+        _aggregate(
+            "overall",
+            tuple(questions),
+            question_metrics,
+            completed_ids=completed_ids,
+            mappings=mapping_by_id,
+        )
+    ]
+    for conversation_id in sorted(questions_by_conversation):
         aggregates_out.append(
             _aggregate(
                 f"conversation:{conversation_id}",
-                tuple(by_conversation[conversation_id]),
+                tuple(questions_by_conversation[conversation_id]),
+                tuple(metrics_by_conversation[conversation_id]),
+                completed_ids=completed_ids,
+                mappings=mapping_by_id,
             )
         )
     for category in QuestionCategory:
-        category_metrics = tuple(by_category[category])
-        if not category_metrics:
-            raise MetricsInvariantError(
-                f"complete evaluation has no questions for category {category.value}"
+        aggregates_out.append(
+            _aggregate(
+                f"category:{category.value}",
+                tuple(questions_by_category[category]),
+                tuple(metrics_by_category[category]),
+                completed_ids=completed_ids,
+                mappings=mapping_by_id,
             )
-        aggregates_out.append(_aggregate(f"category:{category.value}", category_metrics))
+        )
     return ComputedMetrics(
         question_metrics=question_metrics,
         aggregate_metrics=tuple(aggregates_out),
@@ -403,20 +421,40 @@ def select_turn_ke_audits(
     return tuple(cases)
 
 
-def _aggregate(scope: str, metrics: Sequence[QuestionMetrics]) -> AggregateMetrics:
-    count = len(metrics)
-    if not count:
-        raise MetricsInvariantError(f"aggregate scope has no completed questions: {scope}")
+def _aggregate(
+    scope: str,
+    questions: Sequence[ProbeQuestion],
+    metrics: Sequence[QuestionMetrics],
+    *,
+    completed_ids: frozenset[str],
+    mappings: Mapping[str, GoldSourceMapping],
+) -> AggregateMetrics:
+    expected_ids = frozenset(item.id for item in questions)
+    count = len(expected_ids)
+    if count != len(questions):
+        raise MetricsInvariantError(f"aggregate scope contains duplicate questions: {scope}")
+    completed_count = len(expected_ids.intersection(completed_ids))
+    scored_count = len(metrics)
+    mapped_source_count = sum(
+        mappings[question_id].status is GoldSourceStatus.MAPPED for question_id in expected_ids
+    )
     mapped = tuple(item for item in metrics if item.source_recall is not None)
     source_recall_sum = sum(cast(float, item.source_recall) for item in mapped)
+    answer_score_sum = sum(item.answer_score for item in metrics)
     return AggregateMetrics(
         scope=scope,
         question_count=count,
-        answer_score_sum=sum(item.answer_score for item in metrics),
-        answer_score_mean=sum(item.answer_score for item in metrics) / count,
-        mapped_source_count=len(mapped),
+        completed_question_count=completed_count,
+        scored_question_count=scored_count,
+        answer_score_sum=answer_score_sum,
+        answer_score_mean=(answer_score_sum / count if count and scored_count == count else None),
+        mapped_source_count=mapped_source_count,
         source_recall_sum=source_recall_sum,
-        source_recall_mean=source_recall_sum / len(mapped) if mapped else None,
+        source_recall_mean=(
+            source_recall_sum / mapped_source_count
+            if mapped_source_count and len(mapped) == mapped_source_count
+            else None
+        ),
         complete_evidence_count=sum(item.complete_evidence is True for item in mapped),
         citation_valid_count=sum(item.citation_valid for item in metrics),
         citation_traceable_count=sum(item.citation_traceable for item in metrics),

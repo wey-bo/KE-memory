@@ -15,9 +15,11 @@ import tempfile
 from pydantic import BaseModel
 
 from ke_memory_demo.core.json import canonical_json
+from ke_memory_demo.infra.telemetry import ModelTrace, validate_usage_context_only_trace
 from ke_memory_demo.pipeline import (
     EVALUATION_ARTIFACT_REGISTRY,
     PIPELINE_ARTIFACT_REGISTRY,
+    STAGE_ARTIFACT_ALLOWLIST,
     STAGE_PREDECESSOR,
     PipelineRunManifest,
     PipelineStage,
@@ -80,6 +82,8 @@ class GitSnapshotStore:
             stage.value,
             canonical=True,
         )
+        self._validate_stage_artifact_allowlist(stage_manifest, stage)
+        self._validate_model_traces(self._artifacts, stage_manifest, run_id, stage)
         manifest = self._validated_pipeline_manifest(
             self._artifacts,
             stage_manifest,
@@ -146,6 +150,13 @@ class GitSnapshotStore:
                 run_id,
                 stage.value,
                 canonical=True,
+            )
+            self._validate_stage_artifact_allowlist(stage_manifest, stage)
+            self._validate_model_traces(
+                checked_artifacts,
+                stage_manifest,
+                run_id,
+                stage,
             )
             manifest = self._validated_pipeline_manifest(
                 checked_artifacts,
@@ -218,6 +229,41 @@ class GitSnapshotStore:
         if _SHA1.fullmatch(value) is None:
             raise SnapshotError("snapshot ID must be a full 40-character lowercase Git SHA")
         return value
+
+    @staticmethod
+    def _validate_stage_artifact_allowlist(
+        stage_manifest: StageManifest,
+        stage: PipelineStage,
+    ) -> None:
+        allowed = STAGE_ARTIFACT_ALLOWLIST[stage]
+        forbidden = sorted(
+            artifact.name for artifact in stage_manifest.artifacts if artifact.name not in allowed
+        )
+        if forbidden:
+            raise SnapshotError(f"artifact {forbidden[0]} is not allowed in stage {stage.value}")
+
+    @staticmethod
+    def _validate_model_traces(
+        artifacts: ArtifactStore,
+        stage_manifest: StageManifest,
+        run_id: str,
+        stage: PipelineStage,
+    ) -> None:
+        if not any(artifact.name == "model_traces" for artifact in stage_manifest.artifacts):
+            return
+        try:
+            traces = artifacts.read_jsonl(
+                run_id,
+                stage.value,
+                "model_traces",
+                ModelTrace,
+            )
+            for trace in traces:
+                validate_usage_context_only_trace(trace)
+        except (TypeError, ValueError) as error:
+            raise SnapshotError(
+                "model trace artifact must contain usage/context-only records"
+            ) from error
 
     @staticmethod
     def _validated_pipeline_manifest(

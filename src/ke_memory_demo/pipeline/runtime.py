@@ -58,6 +58,8 @@ from ke_memory_demo.infra.telemetry import (
     TraceContext,
     TraceRecorder,
     UsageRecord,
+    usage_context_only_trace,
+    validate_usage_context_only_trace,
 )
 from ke_memory_demo.ontology import ElasticsearchVocabulary
 from ke_memory_demo.retrieval import (
@@ -74,7 +76,13 @@ from ke_memory_demo.retrieval import (
 )
 from ke_memory_demo.settings import AppSettings, ModelSettings, load_settings
 from ke_memory_demo.snapshots import GitSnapshotStore
-from ke_memory_demo.storage import ArtifactStore, MemoryIndex, validate_storage_name
+from ke_memory_demo.storage import (
+    ArtifactStore,
+    MemoryIndex,
+    StateLayout,
+    StageManifest,
+    validate_storage_name,
+)
 from ke_memory_demo.systems import (
     KE_MEMORY_SYSTEM_ID,
     KE_READY_STAGE,
@@ -145,7 +153,11 @@ def materialize_evaluation_report(
         ReportDocument,
         stage=PipelineStage.EVALUATION_COMPLETE,
     )
-    return materialize_report_documents(documents, artifacts.root / "exports" / run_id)
+    return materialize_report_documents(
+        documents,
+        artifacts.root / "exports" / run_id,
+        layout=artifacts.layout,
+    )
 
 
 def finalize_evaluation_outputs(
@@ -163,9 +175,11 @@ def finalize_evaluation_outputs(
     if smoke:
         return None
     if not evaluation_can_promote(validated_run, smoke=False):
+        layout = StateLayout(state_root)
         materialize_report_documents(
             validated_documents,
-            state_root / "exports" / run_id / "incomplete",
+            layout.root / "exports" / run_id / "incomplete",
+            layout=layout,
         )
         return None
     snapshot_id = promote_complete()
@@ -778,8 +792,19 @@ class RuntimeFactory:
                 "evaluation-complete promotion requires 54 mapped and 6 unmappable gold records"
             )
 
-        records = self._cumulative_evaluation_records(pipeline_manifest.run_id)
-        existing_traces = tuple(cast(ModelTrace, item) for item in records.get("model_traces", ()))
+        records = self._cumulative_evaluation_records(
+            pipeline_manifest.run_id,
+            run.ke_ready_snapshot_id,
+        )
+        try:
+            existing_traces = tuple(
+                validate_usage_context_only_trace(cast(ModelTrace, item))
+                for item in records.get("model_traces", ())
+            )
+        except (TypeError, ValueError) as error:
+            raise RuntimeInvariantError(
+                "ke-ready predecessor model traces are not usage/context-only"
+            ) from error
         answers = tuple(sorted(run.answers, key=lambda item: item.question_id))
         judgements = tuple(sorted(run.judgements, key=lambda item: item.question_id))
         failures = tuple(
@@ -813,7 +838,7 @@ class RuntimeFactory:
             "model_traces": _sorted_model_traces(
                 (
                     *existing_traces,
-                    *(_usage_only_trace(trace) for trace in evaluation_traces),
+                    *(usage_context_only_trace(trace) for trace in evaluation_traces),
                 )
             ),
         }
@@ -863,26 +888,39 @@ class RuntimeFactory:
     def _cumulative_evaluation_records(
         self,
         run_id: str,
+        snapshot_id: str,
     ) -> dict[str, tuple[BaseModel, ...]]:
-        manifest = self.artifacts.validate_stage(
+        manifest = _snapshot_stage_manifest_from_git(
+            self._state_root,
+            snapshot_id,
             run_id,
-            PipelineStage.KE_READY.value,
-            canonical=True,
+            PipelineStage.KE_READY,
         )
         records: dict[str, tuple[BaseModel, ...]] = {}
         for artifact in manifest.artifacts:
             if artifact.name == "pipeline_manifests":
                 continue
-            model = self.artifacts.registry[artifact.name]
-            records[artifact.name] = tuple(
-                self.artifacts.read_jsonl(
-                    run_id,
-                    PipelineStage.KE_READY.value,
-                    artifact.name,
-                    model,
-                    canonical=True,
-                )
+            try:
+                model = self.artifacts.registry[artifact.name]
+            except KeyError as error:
+                raise RuntimeInvariantError(
+                    f"verified snapshot contains an unknown artifact: {artifact.name}"
+                ) from error
+            records[artifact.name] = _snapshot_records_from_git(
+                self._state_root,
+                snapshot_id,
+                run_id,
+                artifact.name,
+                model,
+                stage=PipelineStage.KE_READY,
             )
+        try:
+            for trace in records.get("model_traces", ()):
+                validate_usage_context_only_trace(cast(ModelTrace, trace))
+        except (TypeError, ValueError) as error:
+            raise RuntimeInvariantError(
+                "ke-ready predecessor model traces are not usage/context-only"
+            ) from error
         return records
 
     def _evaluation_manifest(
@@ -1329,6 +1367,51 @@ def probe_state_repository_writable(state_root: Path, expected_head: str) -> str
     return f"state_repo:head={head}:writable=true"
 
 
+def _snapshot_stage_manifest_from_git(
+    state_root: Path,
+    snapshot_id: str,
+    run_id: str,
+    stage: PipelineStage,
+) -> StageManifest:
+    validate_storage_name(run_id, label="run ID")
+    path = f"runs/{run_id}/{stage.value}/manifest.json"
+    data = _snapshot_file_from_git(
+        state_root,
+        snapshot_id,
+        path,
+        description=f"{stage.value} manifest",
+    )
+    try:
+        manifest = StageManifest.model_validate_json(data)
+    except ValidationError as error:
+        raise RuntimeInvariantError("snapshot stage manifest failed validation") from error
+    if manifest.run_id != run_id or manifest.stage != stage.value:
+        raise RuntimeInvariantError("snapshot stage manifest identity does not match")
+    if canonical_json(manifest) != data:
+        raise RuntimeInvariantError("snapshot stage manifest is not canonical JSON")
+    return manifest
+
+
+def _snapshot_file_from_git(
+    state_root: Path,
+    snapshot_id: str,
+    path: str,
+    *,
+    description: str,
+) -> bytes:
+    if _GIT_SHA.fullmatch(snapshot_id) is None:
+        raise RuntimeInvariantError("snapshot ID must be a full Git SHA")
+    completed = subprocess.run(
+        ("git", "-C", str(state_root), "show", f"{snapshot_id}:{path}"),
+        check=False,
+        capture_output=True,
+        env=_read_only_git_env(),
+    )
+    if completed.returncode != 0:
+        raise RuntimeInvariantError(f"verified snapshot is missing {description}")
+    return completed.stdout
+
+
 def _snapshot_records_from_git(
     state_root: Path,
     snapshot_id: str,
@@ -1341,15 +1424,12 @@ def _snapshot_records_from_git(
     validate_storage_name(run_id, label="run ID")
     validate_storage_name(artifact_name, label="artifact name")
     path = f"runs/{run_id}/{stage.value}/{artifact_name}.jsonl"
-    completed = subprocess.run(
-        ("git", "-C", str(state_root), "show", f"{snapshot_id}:{path}"),
-        check=False,
-        capture_output=True,
-        env=_read_only_git_env(),
+    data = _snapshot_file_from_git(
+        state_root,
+        snapshot_id,
+        path,
+        description=f"artifact {artifact_name}",
     )
-    if completed.returncode != 0:
-        raise RuntimeInvariantError(f"verified snapshot is missing artifact {artifact_name}")
-    data = completed.stdout
     if data and not data.endswith(b"\n"):
         raise RuntimeInvariantError(f"snapshot artifact lacks final newline: {artifact_name}")
     lines = () if not data else tuple(data[:-1].split(b"\n"))
@@ -1377,25 +1457,6 @@ def _runtime_trace_records(model: object) -> tuple[ModelTrace, ...]:
 def _sorted_model_traces(traces: Iterable[ModelTrace]) -> tuple[ModelTrace, ...]:
     validated = tuple(ModelTrace.model_validate(item) for item in traces)
     return tuple(sorted(validated, key=canonical_json))
-
-
-def _usage_only_trace(trace: ModelTrace) -> ModelTrace:
-    trace = ModelTrace.model_validate(trace)
-    error_type = trace.error.get("type") if trace.error is not None else None
-    return trace.model_copy(
-        update={
-            "request": {"provider_body": "redacted"},
-            "response": ({"provider_body": "redacted"} if trace.response is not None else None),
-            "error": (
-                {
-                    "provider_body": "redacted",
-                    "type": error_type if isinstance(error_type, str) else "ModelError",
-                }
-                if trace.error is not None
-                else None
-            ),
-        }
-    )
 
 
 def _git_text(root: Path, *arguments: str) -> str:

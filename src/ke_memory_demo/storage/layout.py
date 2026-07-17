@@ -1,9 +1,12 @@
 from __future__ import annotations
 
+from collections.abc import Generator
+from contextlib import contextmanager
 import os
 from pathlib import Path
 import re
 import stat
+from uuid import uuid4
 
 
 _PORTABLE_NAME = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]*", flags=re.ASCII)
@@ -90,6 +93,80 @@ class StateLayout:
             if not stat.S_ISDIR(metadata.st_mode):
                 raise UnsafeStoragePathError(f"managed directory is not a directory: {current}")
 
+    @contextmanager
+    def pin_directory(self, path: Path, *, create: bool) -> Generator[int, None, None]:
+        self.assert_safe(path)
+        try:
+            relative = path.relative_to(self.root)
+        except ValueError as error:
+            raise UnsafeStoragePathError(f"managed path escapes state root: {path}") from error
+
+        flags = os.O_RDONLY | getattr(os, "O_DIRECTORY", 0) | getattr(os, "O_NOFOLLOW", 0)
+        descriptor = os.open(self.root, flags)
+        try:
+            for component in relative.parts:
+                try:
+                    child = os.open(component, flags, dir_fd=descriptor)
+                except FileNotFoundError:
+                    if not create:
+                        raise
+                    try:
+                        os.mkdir(component, mode=0o700, dir_fd=descriptor)
+                        os.fsync(descriptor)
+                    except FileExistsError:
+                        pass
+                    try:
+                        child = os.open(component, flags, dir_fd=descriptor)
+                    except OSError as error:
+                        raise UnsafeStoragePathError(
+                            f"managed directory is unsafe or a symlink: {component}"
+                        ) from error
+                except OSError as error:
+                    raise UnsafeStoragePathError(
+                        f"managed directory is unsafe or a symlink: {component}"
+                    ) from error
+                os.close(descriptor)
+                descriptor = child
+            yield descriptor
+        finally:
+            os.close(descriptor)
+
+    def write_bytes_atomic(self, path: Path, payload: bytes) -> None:
+        self.assert_safe(path)
+        with self.pin_directory(path.parent, create=True) as directory_fd:
+            try:
+                existing = os.stat(path.name, dir_fd=directory_fd, follow_symlinks=False)
+            except FileNotFoundError:
+                existing = None
+            if existing is not None and (
+                stat.S_ISLNK(existing.st_mode) or not stat.S_ISREG(existing.st_mode)
+            ):
+                raise UnsafeStoragePathError(f"managed export is not a regular file: {path.name}")
+
+            temporary = f".{path.name}.tmp-{uuid4().hex}"
+            flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_NOFOLLOW", 0)
+            descriptor = os.open(temporary, flags, 0o600, dir_fd=directory_fd)
+            try:
+                _write_all(descriptor, payload)
+                os.fsync(descriptor)
+            except BaseException:
+                os.close(descriptor)
+                _unlink_at_best_effort(directory_fd, temporary)
+                raise
+            else:
+                os.close(descriptor)
+            try:
+                os.replace(
+                    temporary,
+                    path.name,
+                    src_dir_fd=directory_fd,
+                    dst_dir_fd=directory_fd,
+                )
+                os.fsync(directory_fd)
+            except BaseException:
+                _unlink_at_best_effort(directory_fd, temporary)
+                raise
+
     def assert_safe(self, path: Path) -> None:
         try:
             relative = path.relative_to(self.root)
@@ -139,3 +216,23 @@ def fsync_directory(path: Path) -> None:
         os.fsync(descriptor)
     finally:
         os.close(descriptor)
+
+
+def _write_all(descriptor: int, payload: bytes) -> None:
+    view = memoryview(payload)
+    written = 0
+    while written < len(view):
+        try:
+            count = os.write(descriptor, view[written:])
+        except InterruptedError:
+            continue
+        if count <= 0:
+            raise OSError("write returned no progress")
+        written += count
+
+
+def _unlink_at_best_effort(directory_fd: int, name: str) -> None:
+    try:
+        os.unlink(name, dir_fd=directory_fd)
+    except FileNotFoundError:
+        pass

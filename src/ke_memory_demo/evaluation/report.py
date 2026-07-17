@@ -4,15 +4,14 @@ import csv
 import hashlib
 import io
 import json
-import os
 from pathlib import Path
-import tempfile
 from collections.abc import Sequence
 from typing import Literal, TypeAlias, cast
 
 from pydantic import BaseModel, ConfigDict, model_validator
 
 from ke_memory_demo.core.json import JsonObject, JsonValue
+from ke_memory_demo.storage import StateLayout, UnsafeStoragePathError
 
 from .manifest import ExperimentManifest
 from .models import (
@@ -77,8 +76,6 @@ class ReportInput(BaseModel):
             raise ValueError("report metrics contain an unexpected question")
         if self.run.status is EvaluationStatus.COMPLETE and metric_ids != expected:
             raise ValueError("complete report requires one metric for every question")
-        if self.run.status is EvaluationStatus.INCOMPLETE and self.aggregate_metrics:
-            raise ValueError("incomplete report cannot publish aggregate means")
         return self
 
 
@@ -105,36 +102,22 @@ class ReportWriter:
 def materialize_report_documents(
     documents: tuple[ReportDocument, ...],
     output_directory: Path,
+    *,
+    layout: StateLayout,
 ) -> tuple[Path, ...]:
     validated = tuple(ReportDocument.model_validate(item) for item in documents)
     names = tuple(item.name for item in validated)
     if names != tuple(sorted(_DOCUMENT_TYPES)):
         raise ReportInvariantError("canonical report must contain exactly three sorted documents")
-    output_directory.mkdir(parents=True, exist_ok=True)
-    if output_directory.is_symlink() or not output_directory.is_dir():
-        raise ReportInvariantError("report export path must be a real directory")
     paths: list[Path] = []
-    for document in validated:
-        destination = output_directory / document.name
-        if destination.is_symlink():
-            raise ReportInvariantError("report export destination must not be a symlink")
-        descriptor, temporary = tempfile.mkstemp(
-            dir=output_directory,
-            prefix=f".{document.name}.",
-        )
-        try:
-            with os.fdopen(descriptor, "w", encoding="utf-8", newline="") as stream:
-                stream.write(document.content)
-                stream.flush()
-                os.fsync(stream.fileno())
-            os.replace(temporary, destination)
-        except BaseException:
-            try:
-                os.unlink(temporary)
-            except FileNotFoundError:
-                pass
-            raise
-        paths.append(destination)
+    try:
+        layout.assert_safe(output_directory)
+        for document in validated:
+            destination = output_directory / document.name
+            layout.write_bytes_atomic(destination, document.content.encode("utf-8"))
+            paths.append(destination)
+    except UnsafeStoragePathError as error:
+        raise ReportInvariantError(str(error)) from error
     return tuple(paths)
 
 
@@ -196,26 +179,32 @@ def _markdown(data: ReportInput) -> str:
         ]
     )
     if overall is None:
-        lines.append(
-            "Aggregate answer means are withheld because the run is incomplete; missing results "
-            "are neither zero-filled nor removed from the expected denominator."
-        )
+        lines.append("Aggregate answer records are unavailable.")
     else:
         lines.extend(
             [
                 f"- Answer rubric score: {_format_float(overall.answer_score_sum)}/"
-                f"{overall.question_count} = {_format_float(overall.answer_score_mean)}",
+                f"{overall.question_count} = "
+                f"{_format_optional_float(overall.answer_score_mean)}",
+                f"- Completed questions: {overall.completed_question_count}/"
+                f"{overall.question_count}",
+                f"- Scored questions: {overall.scored_question_count}/{overall.question_count}",
                 f"- Factual errors: {overall.factual_error_count}/{overall.question_count}",
                 f"- Unsupported claims: {overall.unsupported_claim_count}/{overall.question_count}",
             ]
         )
     abstention_metrics = tuple(
-        item for item in data.question_metrics if item.abstention_correct is not None
+        item
+        for item in data.question_metrics
+        if item.category is QuestionCategory.ABSTENTION and item.abstention_correct is not None
+    )
+    abstention_question_count = sum(
+        item.category is QuestionCategory.ABSTENTION for item in data.questions
     )
     lines.append(
         f"- Abstention correctness: "
         f"{sum(item.abstention_correct is True for item in abstention_metrics)}/"
-        f"{len(abstention_metrics)}"
+        f"{abstention_question_count}"
     )
     lines.extend(["", "## Evidence and Citation Metrics", ""])
     if overall is None:
@@ -242,7 +231,7 @@ def _markdown(data: ReportInput) -> str:
         else:
             lines.append(
                 f"- `{category.value}`: {_format_float(metric.answer_score_sum)}/"
-                f"{metric.question_count} = {_format_float(metric.answer_score_mean)}"
+                f"{metric.question_count} = {_format_optional_float(metric.answer_score_mean)}"
             )
     lines.extend(["", "## Cross-Session Induction Cases", ""])
     cross_session = tuple(

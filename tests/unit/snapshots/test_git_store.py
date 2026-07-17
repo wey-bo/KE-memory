@@ -8,8 +8,11 @@ import pytest
 
 from ke_memory_demo.core.json import canonical_json
 from ke_memory_demo.domain import Exchange, Message, MessageRole
+from ke_memory_demo.evaluation import EvaluationFailure
+from ke_memory_demo.infra.telemetry import ModelTrace, TraceContext, UsageRecord
 from ke_memory_demo.ontology import IndexIdentity, OntologyRelation, OntologyTerm
 from ke_memory_demo.pipeline import (
+    EVALUATION_ARTIFACT_REGISTRY,
     PIPELINE_ARTIFACT_REGISTRY,
     OntologyRunIdentity,
     PipelineRunManifest,
@@ -50,6 +53,8 @@ def write_ingested_stage(
     matched_document_ids: tuple[str, ...] = (),
     ontology_terms: tuple[OntologyTerm, ...] = (),
     ontology_relations: tuple[OntologyRelation, ...] = (),
+    evaluation_failures: tuple[EvaluationFailure, ...] = (),
+    model_traces: tuple[ModelTrace, ...] = (),
 ) -> None:
     exchange = Exchange(
         id="exchange-1",
@@ -93,6 +98,8 @@ def write_ingested_stage(
         ),
         record_counts={
             "exchanges": 1,
+            **({"evaluation_failures": len(evaluation_failures)} if evaluation_failures else {}),
+            **({"model_traces": len(model_traces)} if model_traces else {}),
             **({"ontology_relations": len(ontology_relations)} if ontology_relations else {}),
             **({"ontology_terms": len(ontology_terms)} if ontology_terms else {}),
             "pipeline_manifests": 1,
@@ -100,11 +107,61 @@ def write_ingested_stage(
     )
     with artifacts.stage_writer("run-1", PipelineStage.INGESTED.value) as writer:
         writer.write("exchanges", [exchange])
+        if evaluation_failures:
+            writer.write("evaluation_failures", evaluation_failures)
+        if model_traces:
+            writer.write("model_traces", model_traces)
         if ontology_relations:
             writer.write("ontology_relations", ontology_relations)
         if ontology_terms:
             writer.write("ontology_terms", ontology_terms)
         writer.write("pipeline_manifests", [manifest])
+
+
+def direct_commit(artifacts: ArtifactStore, message: str) -> str:
+    subprocess.run(
+        (
+            "git",
+            "-C",
+            str(artifacts.root),
+            "add",
+            "--",
+            ".gitignore",
+            "runs/run-1/ingested",
+        ),
+        check=True,
+    )
+    subprocess.run(
+        ("git", "-C", str(artifacts.root), "commit", "--quiet", "-m", message),
+        check=True,
+    )
+    completed = subprocess.run(
+        ("git", "-C", str(artifacts.root), "rev-parse", "HEAD"),
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    return completed.stdout.strip()
+
+
+def unsafe_model_trace() -> ModelTrace:
+    return ModelTrace(
+        context=TraceContext(operation="pipeline-preflight", metadata={"run_id": "run-1"}),
+        transport_attempt=1,
+        structured_request=1,
+        latency_seconds=0.25,
+        request={"messages": [{"content": "private prompt"}]},
+        response={"choices": [{"content": "private response"}]},
+        error=None,
+        usage=UsageRecord(
+            request_id="request-1",
+            model="test-model",
+            latency_seconds=0.25,
+            input_tokens=4,
+            output_tokens=2,
+            total_tokens=6,
+        ),
+    )
 
 
 def only_pipeline_manifest(
@@ -127,6 +184,66 @@ def test_snapshot_is_commit_sha_without_self_reference(tmp_path: Path) -> None:
     assert len(result.snapshot_id) == 40
     manifest = only_pipeline_manifest(artifacts, "run-1", "ingested")
     assert result.snapshot_id not in canonical_json(manifest).decode()
+
+
+def test_stage_artifact_allowlist_rejects_evaluation_records_before_and_after_commit(
+    tmp_path: Path,
+) -> None:
+    registry = {
+        **PIPELINE_ARTIFACT_REGISTRY,
+        **dict(EVALUATION_ARTIFACT_REGISTRY),
+    }
+    failure = EvaluationFailure(
+        question_id="question-1",
+        stage="judge",
+        error_type="TimeoutError",
+        message="judge timed out",
+    )
+    artifacts = ArtifactStore(tmp_path / "commit" / "state", registry=registry)
+    snapshots = GitSnapshotStore.init(artifacts.root, artifacts)
+    write_ingested_stage(
+        artifacts,
+        parent_snapshot_id=None,
+        evaluation_failures=(failure,),
+    )
+
+    with pytest.raises(SnapshotError, match="evaluation_failures.*ingested"):
+        snapshots.commit_stage("run-1", PipelineStage.INGESTED)
+
+    bypass_artifacts = ArtifactStore(tmp_path / "verify" / "state", registry=registry)
+    bypass_snapshots = GitSnapshotStore.init(bypass_artifacts.root, bypass_artifacts)
+    write_ingested_stage(
+        bypass_artifacts,
+        parent_snapshot_id=None,
+        evaluation_failures=(failure,),
+    )
+    snapshot_id = direct_commit(bypass_artifacts, "legacy invalid stage")
+
+    with pytest.raises(SnapshotError, match="evaluation_failures.*ingested"):
+        bypass_snapshots.verify(snapshot_id, "run-1", PipelineStage.INGESTED)
+
+
+def test_model_trace_bodies_are_rejected_before_and_after_commit(tmp_path: Path) -> None:
+    artifacts, snapshots = initialized_state(tmp_path / "commit")
+    write_ingested_stage(
+        artifacts,
+        parent_snapshot_id=None,
+        model_traces=(unsafe_model_trace(),),
+    )
+
+    with pytest.raises(SnapshotError, match="model trace.*usage/context"):
+        snapshots.commit_stage("run-1", PipelineStage.INGESTED)
+
+    bypass_artifacts, bypass_snapshots = initialized_state(tmp_path / "verify")
+    write_ingested_stage(
+        bypass_artifacts,
+        parent_snapshot_id=None,
+        model_traces=(unsafe_model_trace(),),
+    )
+    snapshot_id = direct_commit(bypass_artifacts, "legacy unsafe trace")
+
+    with pytest.raises(SnapshotError, match="model trace.*usage/context"):
+        bypass_snapshots.verify(snapshot_id, "run-1", PipelineStage.INGESTED)
 
 
 def test_snapshot_excludes_cache_secrets_and_complete_vocabulary(tmp_path: Path) -> None:

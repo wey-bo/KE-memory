@@ -36,7 +36,12 @@ from ke_memory_demo.extraction import (
     TurnKEExtractor,
 )
 from ke_memory_demo.infra.llm import StructuredModelClient
-from ke_memory_demo.infra.telemetry import ModelTrace, TraceContext
+from ke_memory_demo.infra.telemetry import (
+    ModelTrace,
+    TraceContext,
+    usage_context_only_trace,
+    validate_usage_context_only_trace,
+)
 from ke_memory_demo.ingestion import load_beam_subset
 from ke_memory_demo.ontology import (
     ElasticsearchVocabulary,
@@ -786,9 +791,20 @@ class MemoryPipeline:
         identity = await self._recheck_ontology_identity()
         parent_snapshot_id = self._snapshots.head()
         materialized = {name: tuple(values) for name, values in records.items()}
+        try:
+            predecessor_traces = tuple(
+                validate_usage_context_only_trace(cast(ModelTrace, item))
+                for item in materialized.get("model_traces", ())
+            )
+        except (TypeError, ValueError) as error:
+            raise PipelineInvariantError(
+                "predecessor model traces are not usage/context-only"
+            ) from error
         materialized["model_traces"] = _merge_models(
-            materialized.get("model_traces", ()),
-            _model_trace_records(self._work_model),
+            predecessor_traces,
+            tuple(
+                usage_context_only_trace(trace) for trace in _model_trace_records(self._work_model)
+            ),
         )
         knowledge_equations = tuple(
             cast(KnowledgeEquation, item) for item in materialized.get("knowledge_equations", ())

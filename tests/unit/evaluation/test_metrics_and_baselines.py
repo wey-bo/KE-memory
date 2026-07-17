@@ -5,6 +5,8 @@ import hashlib
 from pathlib import Path
 from typing import Literal
 
+import pytest
+
 from ke_memory_demo.domain import (
     AggregateNode,
     AggregateNodeKind,
@@ -52,6 +54,7 @@ from ke_memory_demo.evaluation.metrics import (
     compute_question_metrics,
     select_turn_ke_audits,
 )
+from ke_memory_demo.evaluation.report import ReportInvariantError
 from ke_memory_demo.infra.telemetry import ModelTrace, TraceContext, UsageRecord
 from ke_memory_demo.pipeline.runtime import evaluation_can_promote, finalize_evaluation_outputs
 from ke_memory_demo.retrieval import (
@@ -157,7 +160,22 @@ def test_aggregates_cover_all_categories_and_incomplete_runs_withhold_means() ->
     )
 
     assert len(diagnostics.question_metrics) == 9
-    assert diagnostics.aggregate_metrics == ()
+    assert [item.scope for item in diagnostics.aggregate_metrics] == [
+        "overall",
+        "conversation:conversation-1",
+        *(f"category:{category.value}" for category in QuestionCategory),
+    ]
+    overall = diagnostics.aggregate_metrics[0]
+    assert overall.question_count == 10
+    assert overall.completed_question_count == 10
+    assert overall.scored_question_count == 9
+    assert overall.answer_score_sum == 9.0
+    assert overall.answer_score_mean is None
+    missing_category = diagnostics.aggregate_metrics[-1]
+    assert missing_category.question_count == 1
+    assert missing_category.completed_question_count == 1
+    assert missing_category.scored_question_count == 0
+    assert missing_category.answer_score_mean is None
 
 
 def test_operation_usage_groups_exact_operations_and_never_partially_sums_cost() -> None:
@@ -356,6 +374,45 @@ def test_incomplete_finalization_exports_diagnostics_without_promoting(tmp_path:
         "question_results.csv",
         "report.md",
     ]
+
+
+def test_incomplete_finalization_rejects_an_exports_symlink(tmp_path: Path) -> None:
+    fixture = _memory_fixture()
+    question = _question("q-00", QuestionCategory.ABSTENTION)
+    incomplete = EvaluationRun(
+        manifest_hash="a" * 64,
+        expected_question_ids=(question.id,),
+        question_manifest_sha256="b" * 64,
+        ke_ready_snapshot_id="c" * 40,
+        status=EvaluationStatus.INCOMPLETE,
+        answers=(_answer(question, fixture.first_ke, fixture.first_exchange),),
+        judgements=(),
+        failures=(
+            EvaluationFailure(
+                question_id=question.id,
+                stage="judge",
+                error_type="TimeoutError",
+                message="judge failed",
+            ),
+        ),
+    )
+    state_root = tmp_path / "state"
+    state_root.mkdir()
+    outside = tmp_path / "outside"
+    outside.mkdir()
+    (state_root / "exports").symlink_to(outside, target_is_directory=True)
+
+    with pytest.raises(ReportInvariantError, match="symlink"):
+        finalize_evaluation_outputs(
+            run=incomplete,
+            smoke=False,
+            state_root=state_root,
+            run_id="run-1",
+            documents=_report_documents(),
+            promote_complete=lambda: "d" * 40,
+        )
+
+    assert list(outside.iterdir()) == []
 
 
 def _report_documents() -> tuple[ReportDocument, ...]:

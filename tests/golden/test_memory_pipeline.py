@@ -63,7 +63,12 @@ from ke_memory_demo.ontology import (
     OntologyTerm,
 )
 from ke_memory_demo.infra.llm import StructuredModelClient
-from ke_memory_demo.infra.telemetry import InMemoryTraceRecorder
+from ke_memory_demo.infra.telemetry import (
+    InMemoryTraceRecorder,
+    ModelTrace,
+    TraceContext,
+    UsageRecord,
+)
 from ke_memory_demo.pipeline import (
     PIPELINE_ARTIFACT_REGISTRY,
     CheckpointStore,
@@ -336,6 +341,31 @@ class FakeWorkModel:
         self.peak_turn_calls = 0
         self.lifecycle_new_glosses: list[tuple[str, ...]] = []
         self.dag_depths: list[int] = []
+
+    @property
+    def trace_records(self) -> tuple[ModelTrace, ...]:
+        return (
+            ModelTrace(
+                context=TraceContext(
+                    operation="golden-work",
+                    metadata={"run_id": "golden-run"},
+                ),
+                transport_attempt=1,
+                structured_request=1,
+                latency_seconds=0.25,
+                request={"messages": [{"content": "private prompt"}]},
+                response={"choices": [{"content": "private response"}]},
+                error=None,
+                usage=UsageRecord(
+                    request_id="golden-request",
+                    model="golden-work",
+                    latency_seconds=0.25,
+                    input_tokens=4,
+                    output_tokens=2,
+                    total_tokens=6,
+                ),
+            ),
+        )
 
     async def complete(
         self,
@@ -903,6 +933,19 @@ async def test_golden_pipeline_is_ontology_first_ke_only_and_traceable(
         result.run_id,
         PipelineStage.KE_READY,
     ).verified
+    for stage in tuple(PipelineStage)[:-1]:
+        traces = tuple(
+            golden_runtime.artifacts.read_jsonl(
+                result.run_id,
+                stage.value,
+                "model_traces",
+                ModelTrace,
+            )
+        )
+        assert traces
+        assert all(trace.request == {"provider_body": "redacted"} for trace in traces)
+        assert all(trace.response in (None, {"provider_body": "redacted"}) for trace in traces)
+        assert all(trace.error in (None, {"provider_body": "redacted"}) for trace in traces)
 
 
 @pytest.mark.asyncio
@@ -928,6 +971,15 @@ async def test_runtime_factory_hydrates_isolated_conversations_from_exact_snapsh
         work_recorder=recorder,
         code_commit="c" * 40,
     )
+    cumulative = factory._cumulative_evaluation_records(  # pyright: ignore[reportPrivateUsage]
+        result.run_id,
+        result.snapshot_id,
+    )
+    snapshot_conversations = cast(tuple[Conversation, ...], cumulative["conversations"])
+    assert {item.id for item in snapshot_conversations} == {
+        "conversation-golden",
+        "conversation-empty",
+    }
 
     golden_runtime.ontology.identity = IDENTITY.model_copy(
         update={"index_uuid": "drifted-golden-uuid"}

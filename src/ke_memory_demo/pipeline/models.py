@@ -150,3 +150,54 @@ class _EvaluationArtifactRegistry(Mapping[str, type[BaseModel]]):
 
 
 EVALUATION_ARTIFACT_REGISTRY: Mapping[str, type[BaseModel]] = _EvaluationArtifactRegistry()
+
+
+_INGESTED_ARTIFACTS = frozenset(
+    {
+        "conversations",
+        "exchanges",
+        "messages",
+        "model_traces",
+        "ontology_relations",
+        "ontology_terms",
+        "pipeline_manifests",
+        "sessions",
+        "tool_events",
+    }
+)
+_TURN_KE_EXTRACTED_ARTIFACTS = _INGESTED_ARTIFACTS | {
+    "coverage",
+    "current_knowledge_equations",
+    "knowledge_equations",
+}
+_SESSION_AGGREGATED_ARTIFACTS = _TURN_KE_EXTRACTED_ARTIFACTS | {"session_memories"}
+_SEMANTIC_DAG_BUILT_ARTIFACTS = _SESSION_AGGREGATED_ARTIFACTS | {"aggregates"}
+_KE_READY_ARTIFACTS = _SEMANTIC_DAG_BUILT_ARTIFACTS | {"index_stats"}
+_EVALUATION_ARTIFACTS = frozenset(
+    {
+        "aggregate_metrics",
+        "baseline_public_results",
+        "evaluation_failures",
+        "evaluation_runs",
+        "experiment_manifests",
+        "gold_source_mappings",
+        "judge_results",
+        "operation_usage_metrics",
+        "probe_questions",
+        "query_traces",
+        "question_answers",
+        "question_metrics",
+        "report_documents",
+        "retrieval_traces",
+        "turn_ke_audits",
+    }
+)
+
+STAGE_ARTIFACT_ALLOWLIST: Mapping[PipelineStage, frozenset[str]] = {
+    PipelineStage.INGESTED: _INGESTED_ARTIFACTS,
+    PipelineStage.TURN_KE_EXTRACTED: _TURN_KE_EXTRACTED_ARTIFACTS,
+    PipelineStage.SESSION_AGGREGATED: _SESSION_AGGREGATED_ARTIFACTS,
+    PipelineStage.SEMANTIC_DAG_BUILT: _SEMANTIC_DAG_BUILT_ARTIFACTS,
+    PipelineStage.KE_READY: _KE_READY_ARTIFACTS,
+    PipelineStage.EVALUATION_COMPLETE: _KE_READY_ARTIFACTS | _EVALUATION_ARTIFACTS,
+}

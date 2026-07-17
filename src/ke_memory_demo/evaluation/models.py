@@ -269,8 +269,10 @@ class AggregateMetrics(BaseModel):
 
     scope: str
     question_count: NonNegativeInt
+    completed_question_count: NonNegativeInt
+    scored_question_count: NonNegativeInt
     answer_score_sum: FiniteFloat
-    answer_score_mean: FiniteFloat
+    answer_score_mean: FiniteFloat | None
     mapped_source_count: NonNegativeInt
     source_recall_sum: FiniteFloat
     source_recall_mean: FiniteFloat | None
@@ -279,6 +281,16 @@ class AggregateMetrics(BaseModel):
     citation_traceable_count: NonNegativeInt
     factual_error_count: NonNegativeInt
     unsupported_claim_count: NonNegativeInt
+
+    @model_validator(mode="after")
+    def _validate_completeness(self) -> AggregateMetrics:
+        if not (self.scored_question_count <= self.completed_question_count <= self.question_count):
+            raise ValueError("aggregate scored/completed counts exceed the expected denominator")
+        if self.answer_score_mean is not None and (
+            self.question_count == 0 or self.scored_question_count != self.question_count
+        ):
+            raise ValueError("aggregate answer mean requires the full expected denominator")
+        return self
 
 
 class OperationUsageMetrics(BaseModel):

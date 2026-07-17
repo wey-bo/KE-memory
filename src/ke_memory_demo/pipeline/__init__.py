@@ -6,6 +6,7 @@ from .concurrency import BatchFailure, BatchOutcome, bounded_collect, bounded_or
 from .models import (
     EVALUATION_ARTIFACT_REGISTRY,
     PIPELINE_ARTIFACT_REGISTRY,
+    STAGE_ARTIFACT_ALLOWLIST,
     STAGE_PREDECESSOR,
     OntologyRunIdentity,
     PipelineRunManifest,
@@ -49,6 +50,7 @@ def __getattr__(name: str) -> object:
 __all__ = [
     "EVALUATION_ARTIFACT_REGISTRY",
     "PIPELINE_ARTIFACT_REGISTRY",
+    "STAGE_ARTIFACT_ALLOWLIST",
     "STAGE_PREDECESSOR",
     "BatchFailure",
     "BatchOutcome",

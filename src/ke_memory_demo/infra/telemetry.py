@@ -54,6 +54,25 @@ class ModelTrace(_TelemetryRecord):
         return self
 
 
+def usage_context_only_trace(trace: ModelTrace) -> ModelTrace:
+    """Strip provider request, response, and error bodies before persistence."""
+    validated = ModelTrace.model_validate(trace)
+    return validated.model_copy(
+        update={
+            "request": {"provider_body": "redacted"},
+            "response": ({"provider_body": "redacted"} if validated.response is not None else None),
+            "error": ({"provider_body": "redacted"} if validated.error is not None else None),
+        }
+    )
+
+
+def validate_usage_context_only_trace(trace: ModelTrace) -> ModelTrace:
+    validated = ModelTrace.model_validate(trace)
+    if validated != usage_context_only_trace(validated):
+        raise ValueError("model trace must be usage/context-only before persistence")
+    return validated
+
+
 @runtime_checkable
 class TraceRecorder(Protocol):
     def record(self, trace: ModelTrace) -> None: ...
