@@ -1,3 +1,10 @@
+from .coordinator import (
+    InMemoryRetrievalTraceRecorder,
+    RetrievalCoordinator,
+    RetrievalTrace,
+    RetrievalTraceRecorder,
+    TracedRetrieval,
+)
 from .disabled_embedding import DisabledEmbeddingRetriever
 from .evidence_payload import model_evidence_payload, serialize_evidence_payload
 from .fusion import EvidenceBudgetError, EvidenceCandidate, EvidenceFusion, FusionInvariantError
@@ -18,7 +25,6 @@ from .query import (
     QueryKEDraft,
     QueryKEExtractor,
     QueryLifecycleGrounding,
-    RetrievalCoordinator,
     RetrievalInvariantError,
     QuerySurfaceGrounding,
     QueryTemporalGrounding,
@@ -37,6 +43,7 @@ __all__ = [
     "EmbeddingRetriever",
     "FusionInvariantError",
     "InMemoryQueryTraceRecorder",
+    "InMemoryRetrievalTraceRecorder",
     "KEMatchDecision",
     "KEMatchOutput",
     "LLMMatcher",
@@ -53,6 +60,8 @@ __all__ = [
     "QueryLifecycleGrounding",
     "RetrievalCoordinator",
     "RetrievalInvariantError",
+    "RetrievalTrace",
+    "RetrievalTraceRecorder",
     "QuerySurfaceGrounding",
     "QueryTemporalGrounding",
     "SourceFragment",
@@ -60,6 +69,7 @@ __all__ = [
     "SymbolicInvariantError",
     "SymbolicRetriever",
     "TokenCounter",
+    "TracedRetrieval",
     "model_evidence_payload",
     "serialize_evidence_payload",
 ]

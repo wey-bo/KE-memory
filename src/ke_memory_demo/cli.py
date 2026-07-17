@@ -9,7 +9,7 @@ from typing import Annotated, cast
 import typer
 
 from ke_memory_demo.core.json import JsonObject, JsonValue, canonical_json
-from ke_memory_demo.evaluation import PreflightReport
+from ke_memory_demo.evaluation import EvaluationRun, EvaluationStatus, PreflightReport
 from ke_memory_demo.infra.redaction import redact_text
 from ke_memory_demo.pipeline import (
     PIPELINE_ARTIFACT_REGISTRY,
@@ -67,6 +67,13 @@ StateRoot = Annotated[
     typer.Option("--state-root", help="Git-backed pipeline state root."),
 ]
 RunId = Annotated[str, typer.Option("--run-id", help="Portable pipeline run identifier.")]
+EvaluationSnapshotId = Annotated[
+    str | None,
+    typer.Option(
+        "--snapshot-id",
+        help="Exact full ke-ready snapshot SHA; defaults to state HEAD.",
+    ),
+]
 
 
 @evaluate_app.command("preflight")
@@ -109,6 +116,40 @@ def evaluation_preflight_command(
     typer.echo(canonical_json(payload).decode("utf-8"))
     if not report.ready:
         raise typer.Exit(code=2)
+
+
+@evaluate_app.command("smoke")
+def evaluation_smoke_command(
+    run_id: RunId,
+    snapshot_id: EvaluationSnapshotId = None,
+    config_root: ConfigRoot = Path("."),
+    state_root: StateRoot = Path("state"),
+) -> None:
+    """Run one deterministic Conversation/question as a non-formal evaluation smoke."""
+    _execute_evaluation_command(
+        config_root,
+        state_root,
+        run_id,
+        snapshot_id,
+        smoke=True,
+    )
+
+
+@evaluate_app.command("run")
+def evaluation_run_command(
+    run_id: RunId,
+    snapshot_id: EvaluationSnapshotId = None,
+    config_root: ConfigRoot = Path("."),
+    state_root: StateRoot = Path("state"),
+) -> None:
+    """Run the exact full KE-only question set with the independent Judge."""
+    _execute_evaluation_command(
+        config_root,
+        state_root,
+        run_id,
+        snapshot_id,
+        smoke=False,
+    )
 
 
 @app.command("preflight")
@@ -336,6 +377,52 @@ def _execute_stage(
         }
 
     _execute_factory(config_root, state_root, operation)
+
+
+def _execute_evaluation_command(
+    config_root: Path,
+    state_root: Path,
+    run_id: str,
+    snapshot_id: str | None,
+    *,
+    smoke: bool,
+) -> None:
+    async def invoke() -> EvaluationRun:
+        factory = RuntimeFactory.from_paths(config_root, state_root)
+        try:
+            return await factory.run_evaluation(run_id, snapshot_id, smoke=smoke)
+        finally:
+            await factory.aclose()
+
+    try:
+        run = asyncio.run(invoke())
+    except Exception as error:
+        failure: JsonObject = {
+            "error": {
+                "type": type(error).__name__,
+                "message": redact_text(str(error)),
+            }
+        }
+        typer.echo(canonical_json(failure).decode("utf-8"), err=True)
+        raise typer.Exit(code=1) from None
+
+    mode = "smoke" if smoke else "run"
+    payload: JsonObject = {
+        "run_id": run_id,
+        "snapshot_id": snapshot_id,
+        "mode": mode,
+        "formal": not smoke and run.status is EvaluationStatus.COMPLETE,
+        "manifest_hash": run.manifest_hash,
+        "status": run.status.value,
+        "counts": {
+            "answers": len(run.answers),
+            "judgements": len(run.judgements),
+            "failures": len(run.failures),
+        },
+    }
+    typer.echo(canonical_json(payload).decode("utf-8"))
+    if run.status is EvaluationStatus.INCOMPLETE:
+        raise typer.Exit(code=2)
 
 
 def _execute_factory(

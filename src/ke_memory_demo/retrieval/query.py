@@ -12,7 +12,6 @@ from ke_memory_demo.core.ids import content_id
 from ke_memory_demo.core.json import JsonObject, JsonValue, canonical_json
 from ke_memory_demo.domain import (
     ConceptRef,
-    Evidence,
     Expression,
     IndividualRef,
     Lifecycle,
@@ -30,11 +29,8 @@ from ke_memory_demo.embedding import SearchHit
 
 if TYPE_CHECKING:
     from .fusion import EvidenceCandidate
-    from .matcher import KEMatchDecision
-    from .symbolic import SymbolicCandidate
 
 
-MAX_EVIDENCE_TOKENS = 8192
 _PROMPT_PATH = Path(__file__).resolve().parents[3] / "prompts/query_ke/system.md"
 NonEmptyString = Annotated[str, Field(min_length=1)]
 NonNegativeInt = Annotated[int, Field(ge=0)]
@@ -440,80 +436,6 @@ class EmbeddingRetriever:
                     )
                 )
         return tuple(candidates)
-
-
-class _SymbolicPath(Protocol):
-    async def extract_query(self, question: str) -> QueryKE: ...
-
-    async def retrieve(self, *, query_ke: QueryKE) -> Sequence[SymbolicCandidate]: ...
-
-
-class _EmbeddingPath(Protocol):
-    async def retrieve(self, *, question: str) -> Sequence[EvidenceCandidate]: ...
-
-
-class _Matcher(Protocol):
-    async def match(
-        self,
-        *,
-        query_ke: QueryKE,
-        symbolic_candidates: Sequence[SymbolicCandidate],
-    ) -> Sequence[KEMatchDecision]: ...
-
-
-class _Fusion(Protocol):
-    def fuse(
-        self,
-        *,
-        symbolic_candidates: Sequence[SymbolicCandidate],
-        matches: Sequence[KEMatchDecision],
-        embedding_candidates: Sequence[EvidenceCandidate],
-        budget: int,
-    ) -> Sequence[Evidence]: ...
-
-
-class RetrievalCoordinator:
-    def __init__(
-        self,
-        symbolic: object,
-        embedding: object,
-        matcher: object,
-        fusion: object,
-    ) -> None:
-        self._symbolic = cast(_SymbolicPath, symbolic)
-        self._embedding = cast(_EmbeddingPath, embedding)
-        self._matcher = cast(_Matcher, matcher)
-        self._fusion = cast(_Fusion, fusion)
-
-    async def retrieve(
-        self,
-        question: str,
-        evidence_budget_tokens: int = MAX_EVIDENCE_TOKENS,
-    ) -> Sequence[Evidence]:
-        if not question.strip():
-            raise RetrievalInvariantError("question must not be empty")
-        if (
-            isinstance(evidence_budget_tokens, bool)
-            or evidence_budget_tokens <= 0
-            or evidence_budget_tokens > MAX_EVIDENCE_TOKENS
-        ):
-            raise RetrievalInvariantError(
-                f"evidence budget must be between 1 and {MAX_EVIDENCE_TOKENS} tokens"
-            )
-
-        query_ke = await self._symbolic.extract_query(question)
-        symbolic_candidates = await self._symbolic.retrieve(query_ke=query_ke)
-        matches = await self._matcher.match(
-            query_ke=query_ke,
-            symbolic_candidates=symbolic_candidates,
-        )
-        embedding_candidates = await self._embedding.retrieve(question=question)
-        return self._fusion.fuse(
-            symbolic_candidates=symbolic_candidates,
-            matches=matches,
-            embedding_candidates=embedding_candidates,
-            budget=evidence_budget_tokens,
-        )
 
 
 def _authenticate_embedding_fragments(

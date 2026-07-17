@@ -85,28 +85,30 @@ class AnswerService:
         self._prompt = _read_prompt()
         self.prompt_sha256 = hashlib.sha256(self._prompt.encode("utf-8")).hexdigest()
 
+    @property
+    def model_name(self) -> str:
+        return self._model.model_name
+
+    def request_payload(
+        self,
+        question: str,
+        evidence: Sequence[Evidence],
+    ) -> JsonObject:
+        ordered, _evidence_tokens = self._prepare_evidence(question, evidence)
+        return {
+            "task": "answer_from_evidence",
+            "question": question,
+            "evidence": list(model_evidence_payload(ordered)),
+        }
+
     async def answer(
         self,
         question: str,
         evidence: Sequence[Evidence],
     ) -> AnswerResult:
-        if not question.strip():
-            raise AnswerInvariantError("question must not be empty")
-        packed = tuple(Evidence.model_validate(item.model_dump(mode="python")) for item in evidence)
-        evidence_ids = tuple(item.evidence_id for item in packed)
-        if len(evidence_ids) != len(set(evidence_ids)):
-            raise AnswerInvariantError("packed evidence IDs must be unique")
-        ordered = tuple(sorted(packed, key=lambda item: (item.rank, item.evidence_id)))
-        evidence_tokens = self._count_evidence_tokens(ordered)
-        if evidence_tokens > MAX_EVIDENCE_TOKENS:
-            raise AnswerInvariantError(
-                f"packed evidence exceeds the {MAX_EVIDENCE_TOKENS}-token hard limit"
-            )
-        payload: JsonObject = {
-            "task": "answer_from_evidence",
-            "question": question,
-            "evidence": list(model_evidence_payload(ordered)),
-        }
+        ordered, evidence_tokens = self._prepare_evidence(question, evidence)
+        evidence_ids = tuple(item.evidence_id for item in ordered)
+        payload = self.request_payload(question, ordered)
         messages = (
             {"role": "system", "content": self._prompt},
             {"role": "user", "content": canonical_json(payload).decode("utf-8")},
@@ -135,6 +137,25 @@ class AnswerService:
             citations=output.citations,
             usage=completion.usage,
         )
+
+    def _prepare_evidence(
+        self,
+        question: str,
+        evidence: Sequence[Evidence],
+    ) -> tuple[tuple[Evidence, ...], int]:
+        if not question.strip():
+            raise AnswerInvariantError("question must not be empty")
+        packed = tuple(Evidence.model_validate(item.model_dump(mode="python")) for item in evidence)
+        evidence_ids = tuple(item.evidence_id for item in packed)
+        if len(evidence_ids) != len(set(evidence_ids)):
+            raise AnswerInvariantError("packed evidence IDs must be unique")
+        ordered = tuple(sorted(packed, key=lambda item: (item.rank, item.evidence_id)))
+        evidence_tokens = self._count_evidence_tokens(ordered)
+        if evidence_tokens > MAX_EVIDENCE_TOKENS:
+            raise AnswerInvariantError(
+                f"packed evidence exceeds the {MAX_EVIDENCE_TOKENS}-token hard limit"
+            )
+        return ordered, evidence_tokens
 
     def _count_evidence_tokens(self, evidence: Sequence[Evidence]) -> int:
         count = self._token_counter.count(serialize_evidence_payload(evidence))

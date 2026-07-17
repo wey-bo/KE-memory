@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 from collections.abc import Awaitable, Callable, Iterable, Mapping, Sequence
+from datetime import UTC, datetime
 import errno
 import hashlib
 import os
@@ -16,7 +17,8 @@ from urllib.parse import urlsplit
 
 from pydantic import BaseModel, ConfigDict, ValidationError
 
-from ke_memory_demo.core.json import canonical_json
+from ke_memory_demo.answering import AnswerService
+from ke_memory_demo.core.json import JsonValue, canonical_json
 from ke_memory_demo.domain import (
     AggregateNode,
     Conversation,
@@ -25,8 +27,13 @@ from ke_memory_demo.domain import (
     KnowledgeEquation,
     RunScope,
 )
+from ke_memory_demo.evaluation.gold_sources import SourceCatalog, build_gold_source_mapping
+from ke_memory_demo.evaluation.judge import JudgeService
+from ke_memory_demo.evaluation.manifest import ExperimentManifest
+from ke_memory_demo.evaluation.models import EvaluationRun, ProbeQuestion
 from ke_memory_demo.evaluation.preflight import EvaluationPreflight, PreflightCheckFailure
 from ke_memory_demo.evaluation.questions import normalize_questions
+from ke_memory_demo.evaluation.runner import EvaluationRunner
 from ke_memory_demo.infra.llm import StructuredModelClient
 from ke_memory_demo.infra.telemetry import (
     InMemoryTraceRecorder,
@@ -44,6 +51,7 @@ from ke_memory_demo.retrieval import (
     O200KTokenCounter,
     QueryKEExtractor,
     RetrievalCoordinator,
+    TracedRetrieval,
     SymbolicRetriever,
     TokenCounter,
 )
@@ -60,7 +68,12 @@ from ke_memory_demo.systems import (
 )
 
 from .checkpoints import CheckpointStore
-from .models import PIPELINE_ARTIFACT_REGISTRY, PipelineRunManifest, PipelineStage
+from .models import (
+    EVALUATION_ARTIFACT_REGISTRY,
+    PIPELINE_ARTIFACT_REGISTRY,
+    PipelineRunManifest,
+    PipelineStage,
+)
 from .runner import MemoryPipeline, PipelineInvariantError
 
 
@@ -254,6 +267,17 @@ class _ConversationRuntimePort:
             raise RuntimeInvariantError("Conversation retrieval runtime is not prepared")
         return await self._coordinator.retrieve(question, evidence_budget_tokens)
 
+    async def retrieve_with_trace(
+        self,
+        scope: RunScope,
+        question: str,
+        evidence_budget_tokens: int,
+    ) -> TracedRetrieval:
+        self._validate_scope(scope)
+        if self._coordinator is None:
+            raise RuntimeInvariantError("Conversation retrieval runtime is not prepared")
+        return await self._coordinator.retrieve_with_trace(question, evidence_budget_tokens)
+
     def _validate_scope(self, scope: RunScope) -> None:
         if (
             scope.run_id != self._run_id
@@ -289,7 +313,13 @@ class RuntimeFactory:
     @classmethod
     def from_paths(cls, config_root: Path, state_root: Path) -> RuntimeFactory:
         settings = load_settings(config_root)
-        artifacts = ArtifactStore(state_root, registry=PIPELINE_ARTIFACT_REGISTRY)
+        artifacts = ArtifactStore(
+            state_root,
+            registry={
+                **PIPELINE_ARTIFACT_REGISTRY,
+                **dict(EVALUATION_ARTIFACT_REGISTRY),
+            },
+        )
         snapshots = GitSnapshotStore.init(artifacts.root, artifacts)
         ontology = ElasticsearchVocabulary.from_app_settings(settings)
         work_secret = settings.require_work_api_key()
@@ -353,6 +383,8 @@ class RuntimeFactory:
         self,
         run_id: str,
         snapshot_id: str,
+        *,
+        conversation_ids: frozenset[str] | None = None,
     ) -> Mapping[str, KEMemorySystem]:
         validate_storage_name(run_id, label="run ID")
         self.snapshots.verify(snapshot_id, run_id, PipelineStage.KE_READY)
@@ -378,6 +410,16 @@ class RuntimeFactory:
             "conversations",
             Conversation,
         )
+        available_conversation_ids = {item.id for item in conversations}
+        if conversation_ids is not None:
+            missing = sorted(conversation_ids.difference(available_conversation_ids))
+            if missing:
+                raise RuntimeInvariantError(
+                    f"requested Conversation is absent from the snapshot: {missing[0]}"
+                )
+            conversations = tuple(
+                item for item in conversations if item.id in conversation_ids
+            )
         current = self._snapshot_records(
             snapshot_id,
             run_id,
@@ -432,6 +474,129 @@ class RuntimeFactory:
                 )
             systems[conversation.id] = system
         return systems
+
+    async def run_evaluation(
+        self,
+        run_id: str,
+        snapshot_id: str | None,
+        *,
+        smoke: bool,
+    ) -> EvaluationRun:
+        validate_storage_name(run_id, label="run ID")
+        selected_snapshot = snapshot_id or self.snapshots.head()
+        if selected_snapshot is None:
+            raise RuntimeInvariantError("evaluation requires an existing ke-ready snapshot")
+        verification = self.snapshots.verify(
+            selected_snapshot,
+            run_id,
+            PipelineStage.KE_READY,
+        )
+        selected_snapshot = verification.snapshot_id
+        manifests = self._snapshot_records(
+            selected_snapshot,
+            run_id,
+            "pipeline_manifests",
+            PipelineRunManifest,
+        )
+        conversations = self._snapshot_records(
+            selected_snapshot,
+            run_id,
+            "conversations",
+            Conversation,
+        )
+        if len(manifests) != 1:
+            raise RuntimeInvariantError(
+                "verified ke-ready snapshot must contain exactly one pipeline manifest"
+            )
+        questions = tuple(sorted(normalize_questions(conversations), key=lambda item: item.id))
+        if len(questions) != self.settings.dataset.expected_questions:
+            raise RuntimeInvariantError("verified snapshot question count does not match settings")
+        selected_questions = questions[:1] if smoke else questions
+        if not selected_questions:
+            raise RuntimeInvariantError("evaluation snapshot contains no questions")
+        selected_conversation_ids = frozenset(
+            item.conversation_id for item in selected_questions
+        )
+        systems = await self.build_ke_systems(
+            run_id,
+            selected_snapshot,
+            conversation_ids=selected_conversation_ids,
+        )
+
+        conversation_by_id = {item.id: item for item in conversations}
+        gold_mappings = tuple(
+            build_gold_source_mapping(
+                question.raw_metadata,
+                SourceCatalog.from_conversation(conversation_by_id[question.conversation_id]),
+                question_id=question.id,
+            )
+            for question in selected_questions
+        )
+        answer_client, judge_client = self.build_evaluation_clients()
+        answer_services = {
+            conversation_id: AnswerService(answer_client, token_counter=self._token_counter)
+            for conversation_id in systems
+        }
+        judge = JudgeService(judge_client)
+        manifest = self._evaluation_manifest(
+            pipeline_manifest=manifests[0],
+            snapshot_id=selected_snapshot,
+            questions=selected_questions,
+            gold_mappings=gold_mappings,
+            answer_service=next(iter(answer_services.values())),
+            judge=judge,
+        )
+        runner = EvaluationRunner(
+            systems=systems,
+            answer_services=answer_services,
+            judge=judge,
+            checkpoints=CheckpointStore(self._state_root, run_id),
+            manifest=manifest,
+        )
+        return await runner.run(selected_questions)
+
+    def _evaluation_manifest(
+        self,
+        *,
+        pipeline_manifest: PipelineRunManifest,
+        snapshot_id: str,
+        questions: Sequence[ProbeQuestion],
+        gold_mappings: Sequence[BaseModel],
+        answer_service: AnswerService,
+        judge: JudgeService,
+    ) -> ExperimentManifest:
+        question_payload = cast(
+            JsonValue,
+            [item.model_dump(mode="json") for item in questions],
+        )
+        gold_payload = cast(
+            JsonValue,
+            [item.model_dump(mode="json") for item in gold_mappings],
+        )
+        return ExperimentManifest(
+            run_id=pipeline_manifest.run_id,
+            code_commit=self._code_commit,
+            spec_sha256=_APPROVED_SPEC_SHA256,
+            plan_sha256=_APPROVED_PLAN_SHA256,
+            ke_ready_snapshot_id=snapshot_id,
+            dataset_sha256=pipeline_manifest.dataset_sha256,
+            selected_directories=pipeline_manifest.selected_directories,
+            expected_sessions=self.settings.dataset.expected_sessions,
+            expected_exchanges=self.settings.dataset.expected_exchanges,
+            expected_questions=len(questions),
+            question_manifest_sha256=hashlib.sha256(canonical_json(question_payload)).hexdigest(),
+            gold_mapping_sha256=hashlib.sha256(canonical_json(gold_payload)).hexdigest(),
+            ontology=pipeline_manifest.ontology,
+            work_model=answer_service.model_name,
+            work_base_url=self.settings.work.base_url,
+            judge_model=judge.model_name,
+            judge_base_url=self.settings.judge.base_url,
+            answer_prompt_sha256=answer_service.prompt_sha256,
+            judge_prompt_sha256=judge.prompt_sha256,
+            embedding_enabled=False,
+            concurrency=pipeline_manifest.concurrency,
+            created_at=datetime.now(UTC),
+        )
 
     async def aclose(self) -> None:
         evaluation_clients = self._evaluation_clients or ()

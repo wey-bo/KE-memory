@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Iterator, Mapping
 from enum import StrEnum
 from typing import Annotated, Literal
 
@@ -98,3 +99,42 @@ PIPELINE_ARTIFACT_REGISTRY: dict[str, type[BaseModel]] = {
     "current_knowledge_equations": KnowledgeEquation,
     "model_traces": ModelTrace,
 }
+
+
+class _EvaluationArtifactRegistry(Mapping[str, type[BaseModel]]):
+    def __getitem__(self, key: str) -> type[BaseModel]:
+        return self._registry()[key]
+
+    def __iter__(self) -> Iterator[str]:
+        return iter(self._registry())
+
+    def __len__(self) -> int:
+        return len(self._registry())
+
+    @staticmethod
+    def _registry() -> dict[str, type[BaseModel]]:
+        from ke_memory_demo.evaluation.manifest import ExperimentManifest
+        from ke_memory_demo.evaluation.models import (
+            EvaluationFailure,
+            EvaluationRun,
+            GoldSourceMapping,
+            JudgeResult,
+            ProbeQuestion,
+            QuestionAnswer,
+        )
+        from ke_memory_demo.retrieval import QueryExtractionTrace, RetrievalTrace
+
+        return {
+            "probe_questions": ProbeQuestion,
+            "gold_source_mappings": GoldSourceMapping,
+            "experiment_manifests": ExperimentManifest,
+            "query_traces": QueryExtractionTrace,
+            "retrieval_traces": RetrievalTrace,
+            "question_answers": QuestionAnswer,
+            "judge_results": JudgeResult,
+            "evaluation_failures": EvaluationFailure,
+            "evaluation_runs": EvaluationRun,
+        }
+
+
+EVALUATION_ARTIFACT_REGISTRY: Mapping[str, type[BaseModel]] = _EvaluationArtifactRegistry()

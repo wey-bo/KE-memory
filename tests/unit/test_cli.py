@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 from typer.testing import CliRunner
@@ -49,13 +50,82 @@ def test_cli_lists_ke_only_stages() -> None:
     assert "run-baselines" not in result.stdout
 
 
-def test_cli_lists_evaluation_preflight() -> None:
+def test_cli_lists_evaluation_commands() -> None:
     from ke_memory_demo.cli import app
 
     result = runner.invoke(app, ["evaluate", "--help"])
 
     assert result.exit_code == 0
-    assert "preflight" in result.stdout
+    for command in ("preflight", "smoke", "run"):
+        assert command in result.stdout
+
+
+@pytest.mark.parametrize(
+    ("command", "answer_count", "formal"),
+    [("smoke", 1, False), ("run", 60, True)],
+)
+def test_evaluation_commands_run_fake_ke_only_evaluation(
+    monkeypatch: pytest.MonkeyPatch,
+    command: str,
+    answer_count: int,
+    formal: bool,
+) -> None:
+    import ke_memory_demo.cli as cli
+    from ke_memory_demo.evaluation import EvaluationStatus
+
+    calls: list[tuple[str, str | None, bool]] = []
+
+    class FakeFactory:
+        async def run_evaluation(
+            self,
+            run_id: str,
+            snapshot_id: str | None,
+            *,
+            smoke: bool,
+        ) -> SimpleNamespace:
+            calls.append((run_id, snapshot_id, smoke))
+            values = tuple(object() for _ in range(answer_count))
+            return SimpleNamespace(
+                manifest_hash="a" * 64,
+                status=EvaluationStatus.COMPLETE,
+                answers=values,
+                judgements=values,
+                failures=(),
+            )
+
+        async def aclose(self) -> None:
+            return None
+
+    def fake_from_paths(_config_root: Path, _state_root: Path) -> FakeFactory:
+        return FakeFactory()
+
+    monkeypatch.setattr(cli.RuntimeFactory, "from_paths", fake_from_paths)
+    result = runner.invoke(
+        cli.app,
+        [
+            "evaluate",
+            command,
+            "--run-id",
+            "run-1",
+            "--snapshot-id",
+            "d" * 40,
+            "--config-root",
+            ".",
+            "--state-root",
+            "state",
+        ],
+    )
+
+    assert result.exit_code == 0
+    payload = json.loads(result.stdout)
+    assert payload["mode"] == command
+    assert payload["formal"] is formal
+    assert payload["counts"] == {
+        "answers": answer_count,
+        "failures": 0,
+        "judgements": answer_count,
+    }
+    assert calls == [("run-1", "d" * 40, command == "smoke")]
 
 
 def test_evaluation_preflight_prints_canonical_json_and_exits_two_when_not_ready(

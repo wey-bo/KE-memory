@@ -4,6 +4,7 @@ from typing import TYPE_CHECKING, cast
 from .checkpoints import CheckpointStore
 from .concurrency import BatchFailure, BatchOutcome, bounded_collect, bounded_ordered_map
 from .models import (
+    EVALUATION_ARTIFACT_REGISTRY,
     PIPELINE_ARTIFACT_REGISTRY,
     STAGE_PREDECESSOR,
     OntologyRunIdentity,
@@ -46,6 +47,7 @@ def __getattr__(name: str) -> object:
 
 
 __all__ = [
+    "EVALUATION_ARTIFACT_REGISTRY",
     "PIPELINE_ARTIFACT_REGISTRY",
     "STAGE_PREDECESSOR",
     "BatchFailure",

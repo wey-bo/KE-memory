@@ -4,7 +4,7 @@ from collections.abc import Sequence
 import hashlib
 from pathlib import Path
 import shutil
-from typing import Annotated, Protocol
+from typing import TYPE_CHECKING, Annotated, Protocol, cast
 
 from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_validator
 
@@ -23,6 +23,10 @@ from ke_memory_demo.infra.telemetry import UsageRecord
 from ke_memory_demo.retrieval.evidence_payload import serialize_evidence_payload
 from ke_memory_demo.retrieval.tokens import TokenCounter
 from ke_memory_demo.storage import ArtifactStore
+
+
+if TYPE_CHECKING:
+    from ke_memory_demo.retrieval.coordinator import TracedRetrieval
 
 
 KE_MEMORY_SYSTEM_ID = "ke-memory"
@@ -89,6 +93,15 @@ class RetrievalPort(Protocol):
         question: str,
         evidence_budget_tokens: int,
     ) -> Sequence[Evidence]: ...
+
+
+class TracedRetrievalPort(RetrievalPort, Protocol):
+    async def retrieve_with_trace(
+        self,
+        scope: RunScope,
+        question: str,
+        evidence_budget_tokens: int,
+    ) -> TracedRetrieval: ...
 
 
 class UsageSource(Protocol):
@@ -210,6 +223,39 @@ class KEMemorySystem:
         question: str,
         evidence_budget_tokens: int,
     ) -> Sequence[Evidence]:
+        scope = self._retrieval_scope(question, evidence_budget_tokens)
+        raw_evidence = await self._retrieval.retrieve(
+            scope,
+            question,
+            evidence_budget_tokens,
+        )
+        return self._validated_retrieval_evidence(raw_evidence, evidence_budget_tokens)
+
+    async def retrieve_with_trace(
+        self,
+        question: str,
+        evidence_budget_tokens: int,
+    ) -> TracedRetrieval:
+        from ke_memory_demo.retrieval.coordinator import TracedRetrieval
+
+        scope = self._retrieval_scope(question, evidence_budget_tokens)
+        traced_port = cast(TracedRetrievalPort, self._retrieval)
+        raw_traced = await traced_port.retrieve_with_trace(
+            scope,
+            question,
+            evidence_budget_tokens,
+        )
+        try:
+            traced = TracedRetrieval.model_validate(raw_traced)
+        except (AttributeError, TypeError, ValueError, ValidationError) as error:
+            raise KEMemorySystemError("retrieval returned an invalid structured trace") from error
+        evidence = self._validated_retrieval_evidence(
+            traced.evidence,
+            evidence_budget_tokens,
+        )
+        return TracedRetrieval(evidence=evidence, trace=traced.trace)
+
+    def _retrieval_scope(self, question: str, evidence_budget_tokens: int) -> RunScope:
         scope, _namespace = self._prepared_identity()
         if not self._ready:
             raise KEMemorySystemError(
@@ -225,11 +271,13 @@ class KEMemorySystem:
             raise KEMemorySystemError(
                 f"evidence budget must be between 1 and {MAX_EVIDENCE_TOKENS} tokens"
             )
-        raw_evidence = await self._retrieval.retrieve(
-            scope,
-            question,
-            evidence_budget_tokens,
-        )
+        return scope
+
+    def _validated_retrieval_evidence(
+        self,
+        raw_evidence: Sequence[Evidence],
+        evidence_budget_tokens: int,
+    ) -> tuple[Evidence, ...]:
         try:
             evidence = tuple(
                 Evidence.model_validate(item.model_dump(mode="python")) for item in raw_evidence

@@ -1,16 +1,27 @@
 from __future__ import annotations
 
+import asyncio
 from collections.abc import Mapping
+import hashlib
+from types import SimpleNamespace
+from typing import cast
 
 import numpy as np
 import pytest
 
-from ke_memory_demo.domain import Evidence, MessageSpan
+from ke_memory_demo.domain import ConceptRef, Evidence, MessageSpan, OntologyRole
 from ke_memory_demo.embedding import SearchHit
 from ke_memory_demo.retrieval import (
+    DisabledEmbeddingRetriever,
     EmbeddingRetriever,
     EvidenceCandidate,
     EvidenceFusion,
+    InMemoryRetrievalTraceRecorder,
+    KEMatchDecision,
+    MatchRelation,
+    QueryGroundingSpan,
+    QueryKE,
+    QuerySurfaceGrounding,
     RetrievalCoordinator,
     RetrievalInvariantError,
     SourceFragment,
@@ -20,10 +31,10 @@ from ke_memory_demo.retrieval import (
 class _SymbolicSpy:
     def __init__(self) -> None:
         self.received_fields: set[str] = set()
-        self.query_ke = object()
-        self.candidates = (object(),)
+        self.query_ke = _query_ke("question")
+        self.candidates = (SimpleNamespace(candidate_id="candidate-1"),)
 
-    async def extract_query(self, question: str) -> object:
+    async def extract_query(self, question: str) -> QueryKE:
         assert question == "question"
         return self.query_ke
 
@@ -47,7 +58,14 @@ class _EmbeddingSpy:
 class _MatcherSpy:
     def __init__(self) -> None:
         self.received_fields: set[str] = set()
-        self.matches = (object(),)
+        self.matches = (
+            KEMatchDecision(
+                candidate_id="candidate-1",
+                match_type=MatchRelation.EXACT,
+                confidence=1.0,
+                reason="same status",
+            ),
+        )
 
     async def match(self, **inputs: object) -> tuple[object, ...]:
         self.received_fields = set(inputs)
@@ -72,6 +90,28 @@ class _FusionSpy:
         )
 
 
+def _query_ke(gloss: str) -> QueryKE:
+    lhs = ConceptRef(term_id="term-project", label="project")
+    rhs = ConceptRef(term_id="term-status", label="status")
+    return QueryKE(
+        lhs=lhs,
+        rhs=rhs,
+        gloss=gloss,
+        surface_groundings=(
+            QuerySurfaceGrounding(
+                surface_form=lhs.label,
+                role=OntologyRole.CONCEPT,
+                grounding_span=QueryGroundingSpan(start_char=0, end_char=1),
+            ),
+            QuerySurfaceGrounding(
+                surface_form=rhs.label,
+                role=OntologyRole.CONCEPT,
+                grounding_span=QueryGroundingSpan(start_char=1, end_char=2),
+            ),
+        ),
+    )
+
+
 @pytest.mark.asyncio
 async def test_candidate_paths_meet_only_in_evidence_fusion() -> None:
     symbolic = _SymbolicSpy()
@@ -94,6 +134,96 @@ async def test_candidate_paths_meet_only_in_evidence_fusion() -> None:
     assert fusion.received["symbolic_candidates"] is symbolic.candidates
     assert fusion.received["matches"] is matcher.matches
     assert fusion.received["embedding_candidates"] is embedding.candidates
+
+
+@pytest.mark.asyncio
+async def test_ke_only_coordinator_records_structured_trace() -> None:
+    recorder = InMemoryRetrievalTraceRecorder()
+    coordinator = RetrievalCoordinator(
+        _SymbolicSpy(),
+        DisabledEmbeddingRetriever(),
+        _MatcherSpy(),
+        _FusionSpy(),
+        trace_recorder=recorder,
+    )
+
+    traced = await coordinator.retrieve_with_trace("question")
+
+    [trace] = recorder.records
+    assert trace is traced.trace
+    assert trace.query_ke.gloss == "question"
+    assert trace.symbolic_candidate_ids == ("candidate-1",)
+    assert trace.matches[0].candidate_id == "candidate-1"
+    assert trace.evidence_ids == tuple(item.evidence_id for item in traced.evidence)
+    assert trace.embedding_candidate_count == 0
+
+
+@pytest.mark.asyncio
+async def test_concurrent_retrieval_keeps_each_trace_with_its_own_evidence() -> None:
+    class ConcurrentSymbolic:
+        async def extract_query(self, question: str) -> QueryKE:
+            if question == "slow question":
+                await asyncio.sleep(0.01)
+            return _query_ke(question)
+
+        async def retrieve(self, *, query_ke: QueryKE) -> tuple[SimpleNamespace, ...]:
+            return (SimpleNamespace(candidate_id=f"candidate:{query_ke.gloss}"),)
+
+    class ConcurrentMatcher:
+        async def match(
+            self,
+            *,
+            query_ke: QueryKE,
+            symbolic_candidates: tuple[SimpleNamespace, ...],
+        ) -> tuple[KEMatchDecision, ...]:
+            del query_ke
+            return (
+                KEMatchDecision(
+                    candidate_id=symbolic_candidates[0].candidate_id,
+                    match_type=MatchRelation.EXACT,
+                    confidence=1.0,
+                    reason="same question",
+                ),
+            )
+
+    class ConcurrentFusion:
+        def fuse(self, **inputs: object) -> tuple[Evidence, ...]:
+            symbolic = cast(tuple[object, ...], inputs["symbolic_candidates"])
+            candidate = symbolic[0]
+            assert isinstance(candidate, SimpleNamespace)
+            return (
+                Evidence(
+                    evidence_id=f"evidence:{candidate.candidate_id}",
+                    text="evidence",
+                    score=1.0,
+                    rank=1,
+                    channel="fusion",
+                    token_count=1,
+                ),
+            )
+
+    recorder = InMemoryRetrievalTraceRecorder()
+    coordinator = RetrievalCoordinator(
+        ConcurrentSymbolic(),
+        DisabledEmbeddingRetriever(),
+        ConcurrentMatcher(),
+        ConcurrentFusion(),
+        trace_recorder=recorder,
+    )
+
+    slow, fast = await asyncio.gather(
+        coordinator.retrieve_with_trace("slow question"),
+        coordinator.retrieve_with_trace("fast question"),
+    )
+
+    for question, traced in (("slow question", slow), ("fast question", fast)):
+        assert traced.trace.question_sha256 == hashlib.sha256(question.encode()).hexdigest()
+        assert traced.trace.query_ke.gloss == question
+        assert traced.trace.evidence_ids == tuple(item.evidence_id for item in traced.evidence)
+    assert {trace.query_ke.gloss for trace in recorder.records} == {
+        "slow question",
+        "fast question",
+    }
 
 
 @pytest.mark.asyncio
