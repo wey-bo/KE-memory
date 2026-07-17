@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
+from datetime import UTC, datetime
 import hashlib
 from pathlib import Path
 from typing import TYPE_CHECKING, Annotated, Literal, Protocol, TypeVar, cast
@@ -78,11 +79,13 @@ class QuerySurfaceGrounding(_QueryRecord):
 
 class QueryLifecycleGrounding(_QueryRecord):
     value: Lifecycle
+    surface_form: NonEmptyString
     grounding_span: QueryGroundingSpan
 
 
 class QueryTemporalGrounding(_QueryRecord):
     field: TemporalField
+    surface_form: NonEmptyString
     grounding_span: QueryGroundingSpan
 
 
@@ -133,7 +136,12 @@ class QueryKEDraft(_QueryRecord):
         if len(self.lifecycle) != len(set(self.lifecycle)):
             raise ValueError("duplicate query lifecycle filters are not allowed")
         lifecycle_keys = tuple(
-            (item.value, item.grounding_span.start_char, item.grounding_span.end_char)
+            (
+                item.value,
+                item.surface_form,
+                item.grounding_span.start_char,
+                item.grounding_span.end_char,
+            )
             for item in self.lifecycle_groundings
         )
         if len(lifecycle_keys) != len(set(lifecycle_keys)):
@@ -579,7 +587,15 @@ def _validate_draft_grounding(draft: QueryKEDraft, question: str) -> None:
     if grounded_lifecycle != lifecycle_values:
         raise QueryInvariantError("query lifecycle filters require exactly one grounding each")
     for grounding in draft.lifecycle_groundings:
-        _validate_question_span(question, grounding.grounding_span)
+        _validate_question_span(
+            question,
+            grounding.grounding_span,
+            expected_surface=grounding.surface_form,
+        )
+        if normalize_surface(grounding.surface_form) != normalize_surface(grounding.value.value):
+            raise QueryInvariantError(
+                "query lifecycle grounding surface does not match its canonical value"
+            )
 
     temporal_fields = tuple(
         field for field in _TEMPORAL_FIELDS if getattr(draft.temporal, field) is not None
@@ -595,7 +611,31 @@ def _validate_draft_grounding(draft: QueryKEDraft, question: str) -> None:
             "populated query temporal fields require exactly one grounding each"
         )
     for grounding in draft.temporal_groundings:
-        _validate_question_span(question, grounding.grounding_span)
+        _validate_question_span(
+            question,
+            grounding.grounding_span,
+            expected_surface=grounding.surface_form,
+        )
+        grounded_value = _parse_aware_iso_grounding(grounding.surface_form)
+        claimed_value = cast(datetime | None, getattr(draft.temporal, grounding.field))
+        if claimed_value is None or grounded_value != claimed_value.astimezone(UTC):
+            raise QueryInvariantError(
+                f"query temporal grounding surface does not match {grounding.field}"
+            )
+
+
+def _parse_aware_iso_grounding(surface_form: str) -> datetime:
+    try:
+        value = datetime.fromisoformat(surface_form)
+    except ValueError as error:
+        raise QueryInvariantError(
+            "query temporal grounding surface must be an aware ISO 8601 datetime"
+        ) from error
+    if value.utcoffset() is None:
+        raise QueryInvariantError(
+            "query temporal grounding surface must be an aware ISO 8601 datetime"
+        )
+    return value.astimezone(UTC)
 
 
 def _validate_question_span(
@@ -610,7 +650,9 @@ def _validate_question_span(
     if not excerpt.strip():
         raise QueryInvariantError("query grounding span must cite nonempty question text")
     if expected_surface is not None and excerpt != expected_surface:
-        raise QueryInvariantError("query atom surface form is not the exact question substring")
+        raise QueryInvariantError(
+            "query grounding surface form is not the exact question substring"
+        )
 
 
 def _expression_atoms(

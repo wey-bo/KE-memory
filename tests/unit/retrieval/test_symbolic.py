@@ -224,16 +224,19 @@ async def test_symbolic_retrieval_uses_every_index_family_and_recursive_membersh
         lifecycle_groundings=(
             QueryLifecycleGrounding(
                 value=Lifecycle.ACTIVE,
+                surface_form="active",
                 grounding_span=QueryGroundingSpan(start_char=19, end_char=25),
             ),
         ),
         temporal_groundings=(
             QueryTemporalGrounding(
                 field="valid_from",
+                surface_form="2025-01-01T00:00:00Z",
                 grounding_span=QueryGroundingSpan(start_char=26, end_char=30),
             ),
             QueryTemporalGrounding(
                 field="valid_to",
+                surface_form="2025-02-01T00:00:00Z",
                 grounding_span=QueryGroundingSpan(start_char=31, end_char=35),
             ),
         ),
@@ -353,6 +356,7 @@ def _claim_query(claim: str) -> QueryKE:
         (
             QueryLifecycleGrounding(
                 value=Lifecycle.ACTIVE,
+                surface_form="active",
                 grounding_span=QueryGroundingSpan(start_char=15, end_char=21),
             ),
         )
@@ -368,6 +372,7 @@ def _claim_query(claim: str) -> QueryKE:
         (
             QueryTemporalGrounding(
                 field="event_time",
+                surface_form="2025-01-01T00:00:00Z",
                 grounding_span=QueryGroundingSpan(start_char=22, end_char=32),
             ),
         )

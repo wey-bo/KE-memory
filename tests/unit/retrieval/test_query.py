@@ -24,7 +24,10 @@ from ke_memory_demo.retrieval import (
 
 
 ModelT = TypeVar("ModelT", bound=BaseModel)
-_QUESTION = "Did Alex plan before launch while active on 2025-01-02?"
+_QUESTION = (
+    "Did Alex plan before launch while active at 2025-01-02T00:00:00Z "
+    "rather than 2025-01-03T00:00:00Z?"
+)
 
 
 def _span(surface: str) -> dict[str, int]:
@@ -71,9 +74,21 @@ def _valid_draft() -> dict[str, object]:
         },
         "gloss": "Alex plans a launch before the active date",
         "lifecycle": ("active",),
-        "lifecycle_groundings": ({"value": "active", "grounding_span": _span("active")},),
+        "lifecycle_groundings": (
+            {
+                "value": "active",
+                "surface_form": "active",
+                "grounding_span": _span("active"),
+            },
+        ),
         "temporal": {"event_time": "2025-01-02T00:00:00Z"},
-        "temporal_groundings": ({"field": "event_time", "grounding_span": _span("2025-01-02")},),
+        "temporal_groundings": (
+            {
+                "field": "event_time",
+                "surface_form": "2025-01-02T00:00:00Z",
+                "grounding_span": _span("2025-01-02T00:00:00Z"),
+            },
+        ),
     }
 
 
@@ -218,7 +233,9 @@ async def test_query_ke_uses_domain_expressions_ontology_resolution_and_ephemera
         "active",
     ]
     assert query_ke.lifecycle_groundings[0].value is query_ke.lifecycle[0]
+    assert query_ke.lifecycle_groundings[0].surface_form == "active"
     assert query_ke.temporal_groundings[0].field == "event_time"
+    assert query_ke.temporal_groundings[0].surface_form == "2025-01-02T00:00:00Z"
     assert len(trace.records) == 1
     assert trace.records[0].query_ke == query_ke
     assert len(trace.records[0].question_sha256) == 64
@@ -262,6 +279,58 @@ async def test_query_ke_uses_domain_expressions_ontology_resolution_and_ephemera
     ],
 )
 async def test_query_ke_rejects_invalid_or_missing_question_grounding(
+    path: tuple[str | int, ...],
+    value: object,
+    message: str,
+) -> None:
+    with pytest.raises(QueryInvariantError, match=message):
+        await QueryKEExtractor(
+            _InvalidDraftModel(path, value), _Vocabulary(), run_id="run-1"
+        ).extract(_QUESTION)
+
+
+@pytest.mark.parametrize(
+    ("path", "value", "message"),
+    [
+        pytest.param(
+            ("lifecycle_groundings",),
+            (
+                {
+                    "value": "active",
+                    "surface_form": "Alex",
+                    "grounding_span": _span("Alex"),
+                },
+            ),
+            "lifecycle.*canonical",
+            id="unrelated-lifecycle-surface",
+        ),
+        pytest.param(
+            ("temporal_groundings",),
+            (
+                {
+                    "field": "event_time",
+                    "surface_form": "2025-01-03T00:00:00Z",
+                    "grounding_span": _span("2025-01-03T00:00:00Z"),
+                },
+            ),
+            "temporal.*does not match event_time",
+            id="mismatched-aware-temporal-surface",
+        ),
+        pytest.param(
+            ("temporal_groundings",),
+            (
+                {
+                    "field": "event_time",
+                    "surface_form": "2025-01-02",
+                    "grounding_span": _span("2025-01-02"),
+                },
+            ),
+            "aware ISO 8601",
+            id="unaware-temporal-surface",
+        ),
+    ],
+)
+async def test_query_ke_rejects_unauthenticated_lifecycle_or_temporal_surface(
     path: tuple[str | int, ...],
     value: object,
     message: str,
