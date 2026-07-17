@@ -9,6 +9,7 @@ from typing import Annotated, cast
 import typer
 
 from ke_memory_demo.core.json import JsonObject, JsonValue, canonical_json
+from ke_memory_demo.evaluation import PreflightReport
 from ke_memory_demo.infra.redaction import redact_text
 from ke_memory_demo.pipeline import (
     PIPELINE_ARTIFACT_REGISTRY,
@@ -18,6 +19,7 @@ from ke_memory_demo.pipeline import (
     PipelineStageResult,
     RuntimeFactory,
 )
+from ke_memory_demo.pipeline.runtime import build_evaluation_preflight
 from ke_memory_demo.snapshots import GitSnapshotStore
 from ke_memory_demo.storage import ArtifactStore
 
@@ -27,6 +29,12 @@ app = typer.Typer(
     help="KE memory research demo.",
     no_args_is_help=True,
 )
+evaluate_app = typer.Typer(
+    add_completion=False,
+    help="Verify and run the frozen KE-only evaluation.",
+    no_args_is_help=True,
+)
+app.add_typer(evaluate_app, name="evaluate")
 
 
 def _version_callback(value: bool) -> None:
@@ -59,6 +67,48 @@ StateRoot = Annotated[
     typer.Option("--state-root", help="Git-backed pipeline state root."),
 ]
 RunId = Annotated[str, typer.Option("--run-id", help="Portable pipeline run identifier.")]
+
+
+@evaluate_app.command("preflight")
+def evaluation_preflight_command(
+    run_id: RunId,
+    snapshot_id: Annotated[
+        str,
+        typer.Option("--snapshot-id", help="Exact full ke-ready snapshot SHA."),
+    ],
+    config_root: ConfigRoot = Path("."),
+    state_root: StateRoot = Path("state"),
+) -> None:
+    """Collect every live KE-only evaluation readiness failure without ingestion."""
+
+    async def invoke() -> PreflightReport:
+        preflight = build_evaluation_preflight(
+            config_root,
+            state_root,
+            run_id,
+            snapshot_id,
+        )
+        return await preflight.run()
+
+    try:
+        report = asyncio.run(invoke())
+    except Exception as error:
+        failure: JsonObject = {
+            "error": {
+                "type": type(error).__name__,
+                "message": redact_text(str(error)),
+            }
+        }
+        typer.echo(canonical_json(failure).decode("utf-8"), err=True)
+        raise typer.Exit(code=1) from None
+
+    payload: JsonObject = {
+        "checks": cast_json(report.model_dump(mode="json")["checks"]),
+        "ready": report.ready,
+    }
+    typer.echo(canonical_json(payload).decode("utf-8"))
+    if not report.ready:
+        raise typer.Exit(code=2)
 
 
 @app.command("preflight")
