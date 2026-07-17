@@ -23,12 +23,14 @@ from .query import (
     QuerySurfaceGrounding,
     QueryTemporalGrounding,
 )
+from .records import CanonicalSymbolicRecordSource
 from .symbolic import SourceFragment, SymbolicCandidate, SymbolicInvariantError, SymbolicRetriever
 from .tokens import O200K_BASE, O200KTokenCounter, TokenCounter
 
 
 __all__ = [
     "DisabledEmbeddingRetriever",
+    "CanonicalSymbolicRecordSource",
     "EvidenceBudgetError",
     "EvidenceCandidate",
     "EvidenceFusion",

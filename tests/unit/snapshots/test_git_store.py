@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 from pathlib import Path
+import subprocess
+import sys
 
 import pytest
 
@@ -16,6 +18,23 @@ from ke_memory_demo.pipeline import (
 from ke_memory_demo.settings import EvaluationConcurrencySettings
 from ke_memory_demo.snapshots import GitSnapshotStore, SnapshotError
 from ke_memory_demo.storage import ArtifactStore
+
+
+def test_snapshots_package_imports_in_a_fresh_interpreter() -> None:
+    completed = subprocess.run(
+        (
+            sys.executable,
+            "-c",
+            "from ke_memory_demo.snapshots import GitSnapshotStore; "
+            "print(GitSnapshotStore.__name__)",
+        ),
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    assert completed.returncode == 0, completed.stderr
+    assert completed.stdout.strip() == "GitSnapshotStore"
 
 
 def initialized_state(tmp_path: Path) -> tuple[ArtifactStore, GitSnapshotStore]:

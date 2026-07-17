@@ -1,0 +1,108 @@
+{
+  "id": "conversation-golden",
+  "sessions": [
+    {
+      "id": "session-golden-a",
+      "conversation_id": "conversation-golden",
+      "exchanges": [
+        {
+          "id": "exchange-golden-1",
+          "session_id": "session-golden-a",
+          "user": {
+            "id": "message-golden-user-1",
+            "role": "user",
+            "content": "I prefer tea, and the Orion project status is blocked by the mystery-flux dependency.",
+            "source_order": 0
+          },
+          "assistant": {
+            "id": "message-golden-assistant-1",
+            "role": "assistant",
+            "content": "I noted your tea preference and the Orion project blocker.",
+            "source_order": 1
+          },
+          "global_ordinal": 0
+        },
+        {
+          "id": "exchange-golden-2",
+          "session_id": "session-golden-a",
+          "user": {
+            "id": "message-golden-user-2",
+            "role": "user",
+            "content": "The blocked Orion claim is false; the Orion project status is now unblocked.",
+            "source_order": 2
+          },
+          "assistant": {
+            "id": "message-golden-assistant-2",
+            "role": "assistant",
+            "content": "Understood: Orion is now unblocked.",
+            "source_order": 3
+          },
+          "global_ordinal": 2
+        }
+      ]
+    },
+    {
+      "id": "session-golden-b",
+      "conversation_id": "conversation-golden",
+      "exchanges": [
+        {
+          "id": "exchange-golden-3",
+          "session_id": "session-golden-b",
+          "user": {
+            "id": "message-golden-user-3",
+            "role": "user",
+            "content": "For Orion, my next task is to prepare the launch checklist after the design review.",
+            "source_order": 4
+          },
+          "events": [
+            {
+              "id": "tool-golden-call-1",
+              "kind": "tool_call",
+              "content": "{\"name\":\"project_lookup\",\"project\":\"Orion\"}",
+              "source_order": 5
+            },
+            {
+              "id": "tool-golden-result-1",
+              "kind": "tool_result",
+              "content": "{\"design_review\":\"complete\",\"checklist\":\"open\"}",
+              "source_order": 6
+            }
+          ],
+          "assistant": {
+            "id": "message-golden-assistant-3",
+            "role": "assistant",
+            "content": "The launch checklist task follows the completed design review.",
+            "source_order": 7
+          },
+          "global_ordinal": 4
+        },
+        {
+          "id": "exchange-golden-4",
+          "session_id": "session-golden-b",
+          "user": {
+            "id": "message-golden-user-4",
+            "role": "user",
+            "content": "Update the Orion project status: the launch checklist is complete.",
+            "source_order": 8
+          },
+          "assistant": {
+            "id": "message-golden-assistant-4",
+            "role": "assistant",
+            "content": "Updated: the Orion launch checklist is complete.",
+            "source_order": 9
+          },
+          "global_ordinal": 8
+        }
+      ]
+    }
+  ],
+  "probing_questions": [
+    {
+      "question": "What is the current Orion project status?",
+      "rubric": ["The launch checklist is complete."],
+      "category": "knowledge_update",
+      "category_ordinal": 0
+    }
+  ],
+  "source_metadata": {}
+}

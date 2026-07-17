@@ -32,6 +32,10 @@ class CheckpointStore:
         self._run_id = validate_storage_name(run_id, label="run ID")
         self._layout = StateLayout(state_root)
 
+    @property
+    def run_id(self) -> str:
+        return self._run_id
+
     def save(
         self,
         stage: str,
