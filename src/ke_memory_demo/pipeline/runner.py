@@ -588,7 +588,7 @@ class MemoryPipeline:
             SessionMemory,
         )
         _validate_current_history(history, current)
-        _validate_raw_evidence(conversations, (*history, *aggregates))
+        _validate_raw_evidence(conversations, (*history, *current, *aggregates))
         _validate_dags_by_conversation(conversations, memories, aggregates)
         ontology_terms, ontology_relations = await self._fetch_bound_ontology(history)
 
@@ -739,10 +739,14 @@ class MemoryPipeline:
         relations = (
             tuple(await self._ontology.fetch_relations(document_ids)) if document_ids else ()
         )
-        if tuple(item.document_id for item in terms) != document_ids:
+        term_ids = tuple(item.document_id for item in terms)
+        if len(term_ids) != len(set(term_ids)):
+            raise PipelineInvariantError("ontology fetched duplicate bound terms")
+        if term_ids != document_ids:
             raise PipelineInvariantError(
                 "ontology fetched terms do not exactly match bound document IDs"
             )
+        _validate_ontology_bindings(equations, terms)
         unexpected_relation = next(
             (item for item in relations if item.source_document_id not in set(document_ids)),
             None,
@@ -750,6 +754,22 @@ class MemoryPipeline:
         if unexpected_relation is not None:
             raise PipelineInvariantError(
                 "ontology fetched a relation outside actually bound document IDs"
+            )
+        term_relation_keys = sorted(
+            (
+                relation.source_document_id,
+                relation.relation_type,
+                relation.target_id,
+            )
+            for term in terms
+            for relation in term.relations
+        )
+        fetched_relation_keys = sorted(
+            (item.source_document_id, item.relation_type, item.target_id) for item in relations
+        )
+        if fetched_relation_keys != term_relation_keys:
+            raise PipelineInvariantError(
+                "ontology fetched relations contradict fetched bound terms"
             )
         return terms, tuple(
             sorted(
@@ -955,6 +975,8 @@ def _validate_raw_evidence(
             if isinstance(record, KnowledgeEquation)
             else record.evidence_closure
         )
+        if not spans:
+            raise PipelineInvariantError(f"record has no raw evidence closure: {record.id}")
         for span in spans:
             message = messages.get(span.message_id)
             if message is None:
@@ -965,6 +987,41 @@ def _validate_raw_evidence(
                 message.validate_span(span)
             except ValueError as error:
                 raise PipelineInvariantError(str(error)) from error
+
+
+def _validate_ontology_bindings(
+    equations: Sequence[KnowledgeEquation],
+    terms: Sequence[OntologyTerm],
+) -> None:
+    terms_by_id = {item.document_id: item for item in terms}
+    for term in terms:
+        if any(relation.source_document_id != term.document_id for relation in term.relations):
+            raise PipelineInvariantError(
+                f"ontology term relations contradict their source document: {term.document_id}"
+            )
+    for equation in equations:
+        for binding in equation.ontology_bindings:
+            if binding.document_id is None:
+                continue
+            term = terms_by_id.get(binding.document_id)
+            if term is None:
+                raise PipelineInvariantError(
+                    f"ontology binding has no fetched term: {binding.document_id}"
+                )
+            binding_relations = tuple(
+                (item.relation_type, item.target_id) for item in binding.relations
+            )
+            term_relations = tuple((item.relation_type, item.target_id) for item in term.relations)
+            if (
+                binding.canonical_term != term.canonical_term
+                or binding.source_type != term.source_type
+                or binding.role != term.role
+                or binding.aliases != term.aliases
+                or binding_relations != term_relations
+            ):
+                raise PipelineInvariantError(
+                    f"ontology binding contradicts fetched term: {binding.document_id}"
+                )
 
 
 def _validate_dags_by_conversation(

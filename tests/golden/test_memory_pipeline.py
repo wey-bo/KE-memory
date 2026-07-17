@@ -11,6 +11,7 @@ from typing import Literal, TypeVar, cast
 import pytest
 from pydantic import BaseModel
 
+from ke_memory_demo.core.json import canonical_json
 from ke_memory_demo.aggregation import (
     AggregateAssertionProposal,
     AggregateNodeProposal,
@@ -19,15 +20,23 @@ from ke_memory_demo.aggregation import (
     SessionKEProposal,
 )
 from ke_memory_demo.domain import (
+    AggregateNode,
     AggregateNodeKind,
+    ConceptRef,
     Conversation,
     CoverageStatus,
+    IndividualRef,
     KnowledgeEquation,
+    KnowledgeLevel,
+    Lifecycle,
+    MessageSpan,
     Modality,
     OntologyBinding,
     OntologyBindingStatus,
+    OntologyRelationRef,
     OntologyRole,
     Polarity,
+    RunScope,
     Speaker,
 )
 from ke_memory_demo.extraction import (
@@ -54,11 +63,26 @@ from ke_memory_demo.ontology import (
     OntologyTerm,
 )
 from ke_memory_demo.infra.llm import StructuredModelClient
+from ke_memory_demo.infra.telemetry import InMemoryTraceRecorder
 from ke_memory_demo.pipeline import (
     PIPELINE_ARTIFACT_REGISTRY,
     CheckpointStore,
     MemoryPipeline,
+    PipelineInvariantError,
     PipelineStage,
+    RuntimeFactory,
+    RuntimeInvariantError,
+)
+from ke_memory_demo.pipeline.runner import (
+    _validate_raw_evidence,  # pyright: ignore[reportPrivateUsage]
+)
+from ke_memory_demo.retrieval import KEMatchDecision, KEMatchOutput, MatchRelation, QueryKEDraft
+from ke_memory_demo.retrieval.query import (
+    QueryConceptDraft,
+    QueryGroundingSpan,
+    QueryIndividualDraft,
+    QueryOperatorApplicationDraft,
+    QueryOperatorDraft,
 )
 from ke_memory_demo.settings import (
     AggregationSettings,
@@ -75,6 +99,7 @@ from ke_memory_demo.settings import (
 )
 from ke_memory_demo.snapshots import GitSnapshotStore
 from ke_memory_demo.storage import ArtifactStore
+from ke_memory_demo.systems import KE_MEMORY_SYSTEM_ID
 
 
 ModelT = TypeVar("ModelT", bound=BaseModel)
@@ -84,6 +109,7 @@ IDENTITY = IndexIdentity(
     index_uuid="golden-uuid",
     mapping_sha256="a" * 64,
 )
+RUNTIME_QUESTION = "Does user prefers tea?"
 
 
 def _normalized(value: str) -> str:
@@ -109,6 +135,53 @@ _ROLES = {
 }
 
 
+def _ontology_term(surface: str) -> OntologyTerm:
+    normalized = _normalized(surface)
+    relations = (
+        (
+            OntologyRelation(
+                source_document_id=_document_id(normalized),
+                relation_type="has-domain",
+                target_id="projects",
+            ),
+        )
+        if normalized == "orion"
+        else ()
+    )
+    return OntologyTerm(
+        document_id=_document_id(normalized),
+        canonical_term=normalized,
+        source_type=_ROLES[normalized].value,
+        role=_ROLES[normalized],
+        aliases=(f"{normalized} alias",),
+        relations=relations,
+    )
+
+
+def _binding_from_term(surface: str, term: OntologyTerm) -> OntologyBinding:
+    return OntologyBinding(
+        surface_form=surface,
+        normalized_surface=_normalized(surface),
+        status=(
+            OntologyBindingStatus.RESOLVED
+            if term.role is not None
+            else OntologyBindingStatus.UNRESOLVED_ROLE
+        ),
+        document_id=term.document_id,
+        canonical_term=term.canonical_term,
+        role=term.role,
+        source_type=term.source_type,
+        aliases=term.aliases,
+        relations=tuple(
+            OntologyRelationRef(
+                relation_type=relation.relation_type,
+                target_id=relation.target_id,
+            )
+            for relation in term.relations
+        ),
+    )
+
+
 class FakeOntology:
     normalization_mode = "bounded-best-effort"
 
@@ -117,6 +190,9 @@ class FakeOntology:
         self._clock = clock
         self.fetch_term_requests: list[tuple[str, ...]] = []
         self.fetch_relation_requests: list[tuple[str, ...]] = []
+        self.identity = IDENTITY
+        self.term_updates: dict[str, dict[str, object]] = {}
+        self.fetch_term_mode: Literal["normal", "missing", "duplicate"] = "normal"
 
     async def health(self) -> OntologyHealth:
         self.calls.append("health")
@@ -126,7 +202,7 @@ class FakeOntology:
     async def index_identity(self) -> IndexIdentity:
         self.calls.append("index_identity")
         self._clock.append("ontology:index_identity")
-        return IDENTITY
+        return self.identity
 
     async def resolve_terms(self, surface_terms: Sequence[str]) -> list[OntologyBinding]:
         self.calls.append("resolve_terms")
@@ -142,45 +218,35 @@ class FakeOntology:
                     )
                 )
                 continue
-            result.append(
-                OntologyBinding(
-                    surface_form=surface,
-                    normalized_surface=normalized,
-                    status=OntologyBindingStatus.RESOLVED,
-                    document_id=_document_id(surface),
-                    canonical_term=surface,
-                    role=_ROLES[normalized],
-                    source_type=_ROLES[normalized].value,
-                )
-            )
+            result.append(_binding_from_term(surface, _ontology_term(normalized)))
         return result
 
     async def fetch_terms(self, document_ids: Sequence[str]) -> list[OntologyTerm]:
         self.calls.append("fetch_terms")
         self.fetch_term_requests.append(tuple(document_ids))
-        by_id = {_document_id(surface): (surface, role) for surface, role in _ROLES.items()}
-        return [
-            OntologyTerm(
-                document_id=document_id,
-                canonical_term=by_id[document_id][0],
-                source_type=by_id[document_id][1].value,
-                role=by_id[document_id][1],
-            )
-            for document_id in document_ids
-        ]
+        terms = [self._fetched_term(document_id) for document_id in document_ids]
+        if self.fetch_term_mode == "missing":
+            return terms[:-1]
+        if self.fetch_term_mode == "duplicate" and terms:
+            return [*terms, terms[-1]]
+        return terms
 
     async def fetch_relations(self, document_ids: Sequence[str]) -> list[OntologyRelation]:
         self.calls.append("fetch_relations")
         self.fetch_relation_requests.append(tuple(document_ids))
-        if _document_id("orion") not in document_ids:
-            return []
         return [
-            OntologyRelation(
-                source_document_id=_document_id("orion"),
-                relation_type="has-domain",
-                target_id="projects",
-            )
+            relation
+            for document_id in document_ids
+            for relation in self._fetched_term(document_id).relations
         ]
+
+    def _fetched_term(self, document_id: str) -> OntologyTerm:
+        by_id = {_document_id(surface): surface for surface in _ROLES}
+        term = _ontology_term(by_id[document_id])
+        updates = self.term_updates.get(document_id)
+        if updates is None:
+            return term
+        return OntologyTerm.model_validate({**term.model_dump(mode="python"), **updates})
 
 
 @dataclass(frozen=True)
@@ -298,11 +364,59 @@ class FakeWorkModel:
             return cast(ModelT, self._session_output(payload))
         if model_type is AggregateSelectionOutput:
             return cast(ModelT, self._dag_output(payload))
+        if model_type is QueryKEDraft:
+            return cast(ModelT, self._query_draft(payload))
+        if model_type is KEMatchOutput:
+            return cast(ModelT, self._match_output(payload))
         raise AssertionError(f"unexpected model type: {model_type.__name__}")
 
     async def embed(self, _texts: Sequence[str]) -> Sequence[Sequence[float]]:
         self.embedding_calls += 1
         raise AssertionError("embedding must remain disabled")
+
+    @staticmethod
+    def _query_draft(payload: dict[str, object]) -> QueryKEDraft:
+        question = cast(str, payload["question"])
+        assert question == RUNTIME_QUESTION
+
+        def grounding(surface: str) -> QueryGroundingSpan:
+            start = question.index(surface)
+            return QueryGroundingSpan(start_char=start, end_char=start + len(surface))
+
+        return QueryKEDraft(
+            lhs=QueryIndividualDraft(
+                surface_form="user",
+                grounding_span=grounding("user"),
+            ),
+            rhs=QueryOperatorApplicationDraft(
+                operator=QueryOperatorDraft(
+                    surface_form="prefers",
+                    grounding_span=grounding("prefers"),
+                ),
+                arguments=(
+                    QueryConceptDraft(
+                        surface_form="tea",
+                        grounding_span=grounding("tea"),
+                    ),
+                ),
+            ),
+            gloss="User prefers tea.",
+        )
+
+    @staticmethod
+    def _match_output(payload: dict[str, object]) -> KEMatchOutput:
+        candidates = cast(list[dict[str, object]], payload["symbolic_candidates"])
+        return KEMatchOutput(
+            matches=tuple(
+                KEMatchDecision(
+                    candidate_id=cast(str, candidate["candidate_id"]),
+                    match_type=MatchRelation.EXACT,
+                    confidence=1,
+                    reason="golden symbolic match",
+                )
+                for candidate in candidates
+            )
+        )
 
     @staticmethod
     def _turn_draft(exchange: dict[str, object]) -> TurnKEDraft:
@@ -509,6 +623,7 @@ class GoldenRuntime:
     model: FakeWorkModel
     snapshots: GitSnapshotStore
     artifacts: ArtifactStore
+    settings: AppSettings
     clock: list[str]
 
     @property
@@ -601,7 +716,7 @@ def golden_runtime(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> GoldenRun
     model = FakeWorkModel(clock)
 
     def load_fixture(_path: Path) -> list[Conversation]:
-        return [conversation]
+        return [conversation, Conversation(id="conversation-empty")]
 
     monkeypatch.setattr("ke_memory_demo.pipeline.runner.load_beam_subset", load_fixture)
     pipeline = MemoryPipeline(
@@ -613,7 +728,111 @@ def golden_runtime(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> GoldenRun
         cast(StructuredModelClient, model),
         code_commit="c" * 40,
     )
-    return GoldenRuntime(pipeline, ontology, model, snapshots, artifacts, clock)
+    return GoldenRuntime(pipeline, ontology, model, snapshots, artifacts, settings, clock)
+
+
+def _sample_span(conversation: Conversation) -> MessageSpan:
+    message = conversation.sessions[0].exchanges[0].user
+    return MessageSpan(
+        message_id=message.id,
+        start_char=0,
+        end_char=len(message.content),
+        text_hash=hashlib.sha256(message.content.encode("utf-8")).hexdigest(),
+    )
+
+
+def _sample_ke(
+    conversation: Conversation,
+    *,
+    binding: OntologyBinding | None = None,
+    evidence: bool = True,
+) -> KnowledgeEquation:
+    return KnowledgeEquation.create(
+        level=KnowledgeLevel.TURN,
+        lhs=IndividualRef(term_id="person:user", label="user"),
+        rhs=ConceptRef(
+            term_id=binding.document_id if binding and binding.document_id else "concept:tea",
+            label="tea",
+        ),
+        gloss="User prefers tea.",
+        modality=Modality.PREFERENCE,
+        polarity=Polarity.POSITIVE,
+        lifecycle=Lifecycle.ACTIVE,
+        speaker=Speaker.USER,
+        ontology_bindings=(binding,) if binding is not None else (),
+        evidence_refs=(_sample_span(conversation),) if evidence else (),
+        confidence=1,
+        produced_in_run_id="golden-run",
+        produced_in_stage=PipelineStage.TURN_KE_EXTRACTED.value,
+    )
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    "corruption",
+    [
+        "canonical_term",
+        "source_type",
+        "role",
+        "aliases",
+        "relations",
+        "missing_term",
+        "duplicate_term",
+        "empty_ke_evidence",
+        "empty_aggregate_evidence",
+    ],
+)
+async def test_ke_ready_trust_gate_rejects_unauthenticated_records(
+    golden_runtime: GoldenRuntime,
+    corruption: str,
+) -> None:
+    conversation = Conversation.model_validate_json(FIXTURE_PATH.read_bytes())
+    if corruption.startswith("empty_"):
+        record: KnowledgeEquation | AggregateNode
+        if corruption == "empty_ke_evidence":
+            record = _sample_ke(conversation, evidence=False)
+        else:
+            record = AggregateNode(
+                id="aggregate:empty-evidence",
+                node_kind=AggregateNodeKind.TOPIC,
+                title="Empty evidence",
+                summary="This aggregate has no raw evidence closure.",
+                confidence=1,
+                revision="d" * 64,
+                depth=1,
+            )
+        with pytest.raises(PipelineInvariantError):
+            _validate_raw_evidence((conversation,), (record,))
+        return
+
+    binding = (await golden_runtime.ontology.resolve_terms(("tea",)))[0]
+    assert binding.document_id is not None
+    equation = _sample_ke(conversation, binding=binding)
+    if corruption == "missing_term":
+        golden_runtime.ontology.fetch_term_mode = "missing"
+    elif corruption == "duplicate_term":
+        golden_runtime.ontology.fetch_term_mode = "duplicate"
+    else:
+        updates: dict[str, object] = {
+            "canonical_term": "contradictory tea",
+            "source_type": "individual",
+            "role": OntologyRole.INDIVIDUAL,
+            "aliases": ("contradictory alias",),
+            "relations": (
+                OntologyRelation(
+                    source_document_id=binding.document_id,
+                    relation_type="contradicts",
+                    target_id="tea",
+                ),
+            ),
+        }
+        golden_runtime.ontology.term_updates[binding.document_id] = {
+            corruption: updates[corruption]
+        }
+    with pytest.raises(PipelineInvariantError):
+        await golden_runtime.pipeline._fetch_bound_ontology(  # pyright: ignore[reportPrivateUsage]
+            (equation,)
+        )
 
 
 @pytest.mark.asyncio
@@ -684,3 +903,76 @@ async def test_golden_pipeline_is_ontology_first_ke_only_and_traceable(
         result.run_id,
         PipelineStage.KE_READY,
     ).verified
+
+
+@pytest.mark.asyncio
+async def test_runtime_factory_hydrates_isolated_conversations_from_exact_snapshot(
+    golden_runtime: GoldenRuntime,
+) -> None:
+    result = await golden_runtime.pipeline.run_all()
+    mutable_conversations = golden_runtime.artifacts.canonical_path(
+        result.run_id,
+        PipelineStage.KE_READY.value,
+        "conversations",
+    )
+    mutable_conversations.write_bytes(
+        canonical_json(Conversation(id="conversation-mutable-only")) + b"\n"
+    )
+    recorder = InMemoryTraceRecorder()
+    factory = RuntimeFactory(
+        settings=golden_runtime.settings,
+        artifacts=golden_runtime.artifacts,
+        snapshots=golden_runtime.snapshots,
+        ontology=cast(ElasticsearchVocabulary, golden_runtime.ontology),
+        work_model=cast(StructuredModelClient, golden_runtime.model),
+        work_recorder=recorder,
+        code_commit="c" * 40,
+    )
+
+    golden_runtime.ontology.identity = IDENTITY.model_copy(
+        update={"index_uuid": "drifted-golden-uuid"}
+    )
+    with pytest.raises(RuntimeInvariantError, match="ontology identity"):
+        await factory.build_ke_systems(result.run_id, result.snapshot_id)
+    golden_runtime.ontology.identity = IDENTITY
+
+    systems = await factory.build_ke_systems(result.run_id, result.snapshot_id)
+    assert set(systems) == {"conversation-golden", "conversation-empty"}
+    assert systems["conversation-golden"] is not systems["conversation-empty"]
+
+    populated_scope = RunScope(
+        run_id=result.run_id,
+        conversation_id="conversation-golden",
+        system_id=KE_MEMORY_SYSTEM_ID,
+    )
+    empty_scope = RunScope(
+        run_id=result.run_id,
+        conversation_id="conversation-empty",
+        system_id=KE_MEMORY_SYSTEM_ID,
+    )
+    populated_identity = await systems["conversation-golden"].prepare(populated_scope)
+    empty_identity = await systems["conversation-empty"].prepare(empty_scope)
+    populated_cache_id = populated_identity.metadata["runtime_cache_id"]
+    empty_cache_id = empty_identity.metadata["runtime_cache_id"]
+    assert isinstance(populated_cache_id, str)
+    assert isinstance(empty_cache_id, str)
+    assert populated_cache_id != empty_cache_id
+    assert golden_runtime.artifacts.cache_path(populated_cache_id).is_file()
+    assert golden_runtime.artifacts.cache_path(empty_cache_id).is_file()
+
+    populated_evidence = await systems["conversation-golden"].retrieve(
+        RUNTIME_QUESTION,
+        512,
+    )
+    empty_evidence = await systems["conversation-empty"].retrieve(
+        RUNTIME_QUESTION,
+        512,
+    )
+    assert populated_evidence
+    assert all(
+        message_id.startswith("message-golden-")
+        for evidence in populated_evidence
+        for message_id in evidence.source_message_ids
+    )
+    assert empty_evidence == ()
+    assert golden_runtime.model.embedding_calls == 0

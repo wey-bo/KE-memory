@@ -237,7 +237,7 @@ class RuntimeFactory:
         artifacts: ArtifactStore,
         snapshots: GitSnapshotStore,
         ontology: ElasticsearchVocabulary,
-        work_model: _RuntimeStructuredModelClient,
+        work_model: StructuredModelClient,
         work_recorder: InMemoryTraceRecorder,
         code_commit: str,
     ) -> None:
