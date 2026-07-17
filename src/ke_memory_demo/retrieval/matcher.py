@@ -120,9 +120,7 @@ class LLMMatcher:
         offered = set(offered_ids)
         unoffered = sorted(returned.difference(offered))
         if unoffered:
-            raise MatcherInvariantError(
-                f"KE matcher returned unoffered candidate: {unoffered[0]}"
-            )
+            raise MatcherInvariantError(f"KE matcher returned unoffered candidate: {unoffered[0]}")
         missing = sorted(offered.difference(returned))
         if missing:
             raise MatcherInvariantError(f"KE matcher is missing candidate: {missing[0]}")
