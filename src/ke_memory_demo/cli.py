@@ -409,7 +409,7 @@ def _execute_evaluation_command(
     mode = "smoke" if smoke else "run"
     payload: JsonObject = {
         "run_id": run_id,
-        "snapshot_id": snapshot_id,
+        "snapshot_id": run.ke_ready_snapshot_id,
         "mode": mode,
         "formal": not smoke and run.status is EvaluationStatus.COMPLETE,
         "manifest_hash": run.manifest_hash,

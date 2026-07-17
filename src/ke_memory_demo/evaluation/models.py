@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from enum import StrEnum
-from typing import Literal, TypeAlias
+from typing import Annotated, Literal, TypeAlias
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
@@ -9,6 +9,11 @@ from ke_memory_demo.core.json import JsonObject
 from ke_memory_demo.domain import Evidence
 from ke_memory_demo.infra.telemetry import UsageRecord
 from ke_memory_demo.retrieval import RetrievalTrace
+
+
+NonEmptyString = Annotated[str, Field(min_length=1)]
+Sha256Hex = Annotated[str, Field(pattern=r"^[0-9a-f]{64}$")]
+GitSha = Annotated[str, Field(pattern=r"^[0-9a-f]{40}$")]
 
 
 class QuestionCategory(StrEnum):
@@ -148,7 +153,10 @@ class QuestionExecution(BaseModel):
 class EvaluationRun(BaseModel):
     model_config = ConfigDict(frozen=True, extra="forbid")
 
-    manifest_hash: str
+    manifest_hash: Sha256Hex
+    expected_question_ids: tuple[NonEmptyString, ...]
+    question_manifest_sha256: Sha256Hex
+    ke_ready_snapshot_id: GitSha
     status: EvaluationStatus
     answers: tuple[QuestionAnswer, ...]
     judgements: tuple[JudgeResult, ...]
@@ -156,14 +164,35 @@ class EvaluationRun(BaseModel):
 
     @model_validator(mode="after")
     def _validate_outcome_ids(self) -> EvaluationRun:
+        expected_ids = self.expected_question_ids
+        if not expected_ids:
+            raise ValueError("expected question IDs must be nonempty")
+        if expected_ids != tuple(sorted(expected_ids)):
+            raise ValueError("expected question IDs must be sorted")
+        if len(expected_ids) != len(set(expected_ids)):
+            raise ValueError("expected question IDs must be unique")
+
         answer_ids = tuple(item.question_id for item in self.answers)
         judgement_ids = tuple(item.question_id for item in self.judgements)
+        failure_ids = tuple(item.question_id for item in self.failures)
         if len(answer_ids) != len(set(answer_ids)):
             raise ValueError("evaluation answers contain duplicate question IDs")
         if len(judgement_ids) != len(set(judgement_ids)):
             raise ValueError("evaluation Judgements contain duplicate question IDs")
-        if self.status is EvaluationStatus.COMPLETE and (
-            self.failures or answer_ids != judgement_ids
+        if len(failure_ids) != len(set(failure_ids)):
+            raise ValueError("evaluation failures contain duplicate question IDs")
+        expected_set = set(expected_ids)
+        for label, identifiers in (
+            ("answers", answer_ids),
+            ("Judgements", judgement_ids),
+            ("failures", failure_ids),
         ):
-            raise ValueError("complete evaluation requires matching answers and Judgements")
+            unknown = sorted(set(identifiers).difference(expected_set))
+            if unknown:
+                raise ValueError(f"evaluation {label} contain unknown question ID: {unknown[0]}")
+        if self.status is EvaluationStatus.COMPLETE:
+            if self.failures or answer_ids != expected_ids or judgement_ids != expected_ids:
+                raise ValueError(
+                    "complete evaluation requires the exact expected answers and Judgements"
+                )
         return self

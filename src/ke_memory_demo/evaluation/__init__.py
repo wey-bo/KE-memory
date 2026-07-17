@@ -26,7 +26,12 @@ from .preflight import (
     PreflightCheckFailure,
     PreflightReport,
 )
-from .questions import QuestionNormalizationError, normalize_question, normalize_questions
+from .questions import (
+    QuestionNormalizationError,
+    normalize_question,
+    normalize_questions,
+    question_manifest_sha256,
+)
 from .runner import EvaluationInvariantError, EvaluationRunner
 
 
@@ -60,4 +65,5 @@ __all__ = [
     "build_gold_source_mapping",
     "normalize_question",
     "normalize_questions",
+    "question_manifest_sha256",
 ]

@@ -2,9 +2,11 @@ from __future__ import annotations
 
 from collections import Counter
 from collections.abc import Sequence
+import hashlib
+from typing import cast
 
 from ke_memory_demo.core.ids import content_id
-from ke_memory_demo.core.json import JsonObject
+from ke_memory_demo.core.json import JsonObject, JsonValue, canonical_json
 from ke_memory_demo.domain import Conversation
 
 from .models import OriginalAnswerField, ProbeQuestion, QuestionCategory
@@ -25,6 +27,17 @@ _CATEGORY_ORDER = {category: ordinal for ordinal, category in enumerate(Question
 
 class QuestionNormalizationError(ValueError):
     """A probing question cannot satisfy the frozen BEAM evaluation contract."""
+
+
+def question_manifest_sha256(questions: Sequence[ProbeQuestion]) -> str:
+    ordered = tuple(
+        sorted(
+            (ProbeQuestion.model_validate(item) for item in questions),
+            key=lambda item: item.id,
+        )
+    )
+    payload = cast(JsonValue, [item.model_dump(mode="json") for item in ordered])
+    return hashlib.sha256(canonical_json(payload)).hexdigest()
 
 
 def normalize_question(

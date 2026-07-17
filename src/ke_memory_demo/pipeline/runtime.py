@@ -32,7 +32,7 @@ from ke_memory_demo.evaluation.judge import JudgeService
 from ke_memory_demo.evaluation.manifest import ExperimentManifest
 from ke_memory_demo.evaluation.models import EvaluationRun, ProbeQuestion
 from ke_memory_demo.evaluation.preflight import EvaluationPreflight, PreflightCheckFailure
-from ke_memory_demo.evaluation.questions import normalize_questions
+from ke_memory_demo.evaluation.questions import normalize_questions, question_manifest_sha256
 from ke_memory_demo.evaluation.runner import EvaluationRunner
 from ke_memory_demo.infra.llm import StructuredModelClient
 from ke_memory_demo.infra.telemetry import (
@@ -565,10 +565,6 @@ class RuntimeFactory:
         answer_service: AnswerService,
         judge: JudgeService,
     ) -> ExperimentManifest:
-        question_payload = cast(
-            JsonValue,
-            [item.model_dump(mode="json") for item in questions],
-        )
         gold_payload = cast(
             JsonValue,
             [item.model_dump(mode="json") for item in gold_mappings],
@@ -584,7 +580,7 @@ class RuntimeFactory:
             expected_sessions=self.settings.dataset.expected_sessions,
             expected_exchanges=self.settings.dataset.expected_exchanges,
             expected_questions=len(questions),
-            question_manifest_sha256=hashlib.sha256(canonical_json(question_payload)).hexdigest(),
+            question_manifest_sha256=question_manifest_sha256(questions),
             gold_mapping_sha256=hashlib.sha256(canonical_json(gold_payload)).hexdigest(),
             ontology=pipeline_manifest.ontology,
             work_model=answer_service.model_name,

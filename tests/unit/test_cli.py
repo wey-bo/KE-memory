@@ -61,14 +61,19 @@ def test_cli_lists_evaluation_commands() -> None:
 
 
 @pytest.mark.parametrize(
-    ("command", "answer_count", "formal"),
-    [("smoke", 1, False), ("run", 60, True)],
+    ("command", "answer_count", "formal", "provided_snapshot", "resolved_snapshot"),
+    [
+        ("smoke", 1, False, None, "e" * 40),
+        ("run", 60, True, "d" * 40, "d" * 40),
+    ],
 )
 def test_evaluation_commands_run_fake_ke_only_evaluation(
     monkeypatch: pytest.MonkeyPatch,
     command: str,
     answer_count: int,
     formal: bool,
+    provided_snapshot: str | None,
+    resolved_snapshot: str,
 ) -> None:
     import ke_memory_demo.cli as cli
     from ke_memory_demo.evaluation import EvaluationStatus
@@ -87,6 +92,7 @@ def test_evaluation_commands_run_fake_ke_only_evaluation(
             values = tuple(object() for _ in range(answer_count))
             return SimpleNamespace(
                 manifest_hash="a" * 64,
+                ke_ready_snapshot_id=resolved_snapshot,
                 status=EvaluationStatus.COMPLETE,
                 answers=values,
                 judgements=values,
@@ -100,32 +106,31 @@ def test_evaluation_commands_run_fake_ke_only_evaluation(
         return FakeFactory()
 
     monkeypatch.setattr(cli.RuntimeFactory, "from_paths", fake_from_paths)
-    result = runner.invoke(
-        cli.app,
-        [
-            "evaluate",
-            command,
-            "--run-id",
-            "run-1",
-            "--snapshot-id",
-            "d" * 40,
-            "--config-root",
-            ".",
-            "--state-root",
-            "state",
-        ],
-    )
+    arguments = [
+        "evaluate",
+        command,
+        "--run-id",
+        "run-1",
+        "--config-root",
+        ".",
+        "--state-root",
+        "state",
+    ]
+    if provided_snapshot is not None:
+        arguments.extend(("--snapshot-id", provided_snapshot))
+    result = runner.invoke(cli.app, arguments)
 
     assert result.exit_code == 0
     payload = json.loads(result.stdout)
     assert payload["mode"] == command
     assert payload["formal"] is formal
+    assert payload["snapshot_id"] == resolved_snapshot
     assert payload["counts"] == {
         "answers": answer_count,
         "failures": 0,
         "judgements": answer_count,
     }
-    assert calls == [("run-1", "d" * 40, command == "smoke")]
+    assert calls == [("run-1", provided_snapshot, command == "smoke")]
 
 
 def test_evaluation_preflight_prints_canonical_json_and_exits_two_when_not_ready(

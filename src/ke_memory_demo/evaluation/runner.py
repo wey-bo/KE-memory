@@ -21,6 +21,7 @@ from .models import (
     QuestionAnswer,
     QuestionExecution,
 )
+from .questions import question_manifest_sha256
 
 
 EVIDENCE_BUDGET_TOKENS = 8192
@@ -67,10 +68,26 @@ class EvaluationRunner:
         self._judge_semaphore = asyncio.Semaphore(manifest.concurrency.judge_workers)
 
     async def run(self, questions: Sequence[ProbeQuestion]) -> EvaluationRun:
-        ordered = tuple(sorted(questions, key=lambda item: item.id))
+        try:
+            ordered = tuple(
+                sorted(
+                    (ProbeQuestion.model_validate(item) for item in questions),
+                    key=lambda item: item.id,
+                )
+            )
+        except (TypeError, ValueError) as error:
+            raise EvaluationInvariantError("evaluation questions failed validation") from error
+        if not ordered:
+            raise EvaluationInvariantError("evaluation question set must not be empty")
         question_ids = tuple(item.id for item in ordered)
         if len(question_ids) != len(set(question_ids)):
             raise EvaluationInvariantError("evaluation questions contain duplicate IDs")
+        if len(ordered) != self._manifest.expected_questions:
+            raise EvaluationInvariantError(
+                "evaluation question count does not match the manifest"
+            )
+        if question_manifest_sha256(ordered) != self._manifest.question_manifest_sha256:
+            raise EvaluationInvariantError("evaluation question manifest hash does not match")
         outcome = await bounded_collect(
             ordered,
             key=lambda item: item.id,
@@ -197,13 +214,15 @@ class EvaluationRunner:
         answer_ids = tuple(item.question_id for item in answers)
         judgement_ids = tuple(item.question_id for item in judgements)
         complete = (
-            len(expected_ids) == self._manifest.expected_questions
-            and answer_ids == expected_ids
+            answer_ids == expected_ids
             and judgement_ids == expected_ids
             and not failures
         )
         return EvaluationRun(
             manifest_hash=self._manifest.content_hash,
+            expected_question_ids=expected_ids,
+            question_manifest_sha256=self._manifest.question_manifest_sha256,
+            ke_ready_snapshot_id=self._manifest.ke_ready_snapshot_id,
             status=EvaluationStatus.COMPLETE if complete else EvaluationStatus.INCOMPLETE,
             answers=answers,
             judgements=judgements,

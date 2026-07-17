@@ -16,6 +16,9 @@ from ke_memory_demo.answering import AnswerModelOutput, AnswerService
 from ke_memory_demo.core.json import JsonObject, canonical_json
 from ke_memory_demo.domain import ConceptRef, Evidence, OntologyRole
 from ke_memory_demo.evaluation import (
+    EvaluationFailure,
+    EvaluationInvariantError,
+    EvaluationRun,
     EvaluationRunner,
     EvaluationStatus,
     ExperimentManifest,
@@ -27,6 +30,7 @@ from ke_memory_demo.evaluation import (
     QuestionAnswer,
     QuestionCategory,
     RubricJudgement,
+    question_manifest_sha256,
 )
 from ke_memory_demo.infra.llm import StructuredCompletion
 from ke_memory_demo.infra.telemetry import TraceContext, UsageRecord
@@ -279,11 +283,28 @@ def _answer(question: ProbeQuestion) -> QuestionAnswer:
     )
 
 
+def _judgement(question_id: str) -> JudgeResult:
+    rubric_items = (
+        RubricJudgement(rubric="accurate", satisfied=True, reason="yes"),
+    )
+    return JudgeResult(
+        question_id=question_id,
+        rubric_items=rubric_items,
+        answer_score=1.0,
+        factual_error=False,
+        unsupported_claim=False,
+        abstention_correct=None,
+        short_rationale="The rubric is satisfied.",
+        usage=_usage("deepseek-v4-pro", f"judge-{question_id}"),
+    )
+
+
 def _manifest(
     *,
+    questions: Sequence[ProbeQuestion],
     answer_prompt_sha256: str,
     judge_prompt_sha256: str,
-    expected_questions: int = 3,
+    question_hash: str | None = None,
 ) -> ExperimentManifest:
     return ExperimentManifest(
         run_id="run-1",
@@ -295,8 +316,8 @@ def _manifest(
         selected_directories=(4, 15, 17),
         expected_sessions=13,
         expected_exchanges=385,
-        expected_questions=expected_questions,
-        question_manifest_sha256="f" * 64,
+        expected_questions=len(questions),
+        question_manifest_sha256=question_hash or question_manifest_sha256(questions),
         gold_mapping_sha256="0" * 64,
         ontology=OntologyRunIdentity(
             index=IndexIdentity(
@@ -323,7 +344,11 @@ def _manifest(
     )
 
 
-def _fake_evaluation(tmp_path: Path) -> SimpleNamespace:
+def _fake_evaluation(
+    tmp_path: Path,
+    *,
+    question_hash: str | None = None,
+) -> SimpleNamespace:
     probe = _ConcurrencyProbe()
     questions = (
         _question("q-3", "conversation-3"),
@@ -339,8 +364,10 @@ def _fake_evaluation(tmp_path: Path) -> SimpleNamespace:
     judge_client = _JudgeClient(probe)
     judge = JudgeService(judge_client)
     manifest = _manifest(
+        questions=questions,
         answer_prompt_sha256=next(iter(answer_services.values())).prompt_sha256,
         judge_prompt_sha256=judge.prompt_sha256,
+        question_hash=question_hash,
     )
     runner = EvaluationRunner(
         systems=cast(Mapping[str, KEMemorySystem], systems),
@@ -403,6 +430,69 @@ def test_judge_result_rejects_a_forged_authoritative_score() -> None:
 
 
 @pytest.mark.asyncio
+async def test_question_manifest_mismatch_rejects_before_any_work(tmp_path: Path) -> None:
+    fake = _fake_evaluation(tmp_path, question_hash="f" * 64)
+
+    with pytest.raises(EvaluationInvariantError, match="question manifest"):
+        await fake.runner.run(fake.questions)
+
+    assert sum(system.calls for system in fake.systems.values()) == 0
+    assert sum(client.calls for client in fake.answer_clients.values()) == 0
+    assert fake.judge.calls == 0
+
+
+def test_complete_run_rejects_empty_or_unknown_result_sets() -> None:
+    with pytest.raises(ValidationError, match="expected question IDs"):
+        EvaluationRun(
+            manifest_hash="a" * 64,
+            expected_question_ids=(),
+            question_manifest_sha256="b" * 64,
+            ke_ready_snapshot_id="c" * 40,
+            status=EvaluationStatus.COMPLETE,
+            answers=(),
+            judgements=(),
+            failures=(),
+        )
+
+    unexpected = _question("q-2")
+    with pytest.raises(ValidationError, match="unknown"):
+        EvaluationRun(
+            manifest_hash="a" * 64,
+            expected_question_ids=("q-1",),
+            question_manifest_sha256="b" * 64,
+            ke_ready_snapshot_id="c" * 40,
+            status=EvaluationStatus.COMPLETE,
+            answers=(_answer(unexpected),),
+            judgements=(_judgement(unexpected.id),),
+            failures=(),
+        )
+
+
+def test_partial_incomplete_run_retains_verified_identity() -> None:
+    question = _question("q-1")
+    run = EvaluationRun(
+        manifest_hash="a" * 64,
+        expected_question_ids=("q-1", "q-2"),
+        question_manifest_sha256="b" * 64,
+        ke_ready_snapshot_id="c" * 40,
+        status=EvaluationStatus.INCOMPLETE,
+        answers=(_answer(question),),
+        judgements=(),
+        failures=(
+            EvaluationFailure(
+                question_id=question.id,
+                stage="judge",
+                error_type="RuntimeError",
+                message="judge failed",
+            ),
+        ),
+    )
+
+    assert run.expected_question_ids == ("q-1", "q-2")
+    assert run.ke_ready_snapshot_id == "c" * 40
+
+
+@pytest.mark.asyncio
 async def test_runner_bounds_work_and_judge_and_keeps_stable_order(tmp_path: Path) -> None:
     fake = _fake_evaluation(tmp_path)
 
@@ -414,6 +504,9 @@ async def test_runner_bounds_work_and_judge_and_keeps_stable_order(tmp_path: Pat
     assert fake.probe.judge_peak <= 2
     assert fake.probe.phases_overlapped
     assert run.status is EvaluationStatus.COMPLETE
+    assert run.expected_question_ids == ("q-1", "q-2", "q-3")
+    assert run.question_manifest_sha256 == question_manifest_sha256(fake.questions)
+    assert run.ke_ready_snapshot_id == "d" * 40
     assert all(
         item.retrieval_trace.evidence_ids
         == tuple(evidence.evidence_id for evidence in item.evidence)
