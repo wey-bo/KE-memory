@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Sequence
+from collections.abc import Mapping, Sequence
 from datetime import UTC, datetime, timedelta
 import hashlib
 import os
@@ -8,6 +8,7 @@ from pathlib import Path
 import shutil
 import stat
 import subprocess
+from typing import Any, cast
 
 import pytest
 from pydantic import ValidationError
@@ -218,18 +219,42 @@ async def test_state_repo_requires_writable_git_storage(
         target_directory = ref_directory
     original_mode = stat.S_IMODE(target_directory.stat().st_mode)
     target_directory.chmod(original_mode & ~0o222)
+    credential_git_environments: list[Mapping[str, str]] = []
+    credential_command = (
+        "git",
+        "-C",
+        str(config_root),
+        "ls-files",
+        "-z",
+        "--",
+        "src",
+        "config",
+        "tests",
+    )
+    real_subprocess_run = subprocess.run
+
+    def recording_run(*args: Any, **kwargs: Any) -> subprocess.CompletedProcess[Any]:
+        if args and args[0] == credential_command:
+            credential_git_environments.append(dict(cast(Mapping[str, str], kwargs["env"])))
+        return cast(subprocess.CompletedProcess[Any], real_subprocess_run(*args, **kwargs))
+
     try:
         assert os.access(state_root, os.W_OK)
         assert not os.access(target_directory, os.W_OK)
-        report = await build_evaluation_preflight(
-            config_root,
-            state_root,
-            "run-1",
-            head,
-        ).run()
+        with monkeypatch.context() as subprocess_patch:
+            subprocess_patch.setattr(subprocess, "run", recording_run)
+            report = await build_evaluation_preflight(
+                config_root,
+                state_root,
+                "run-1",
+                head,
+            ).run()
     finally:
         target_directory.chmod(original_mode)
 
+    [credential_git_environment] = credential_git_environments
+    assert credential_git_environment.get("GIT_OPTIONAL_LOCKS") == "0"
+    assert credential_git_environment.get("GIT_TERMINAL_PROMPT") == "0"
     state_check = next(item for item in report.checks if item.name == "state_repo")
     assert state_check.passed is False
     assert state_check.detail == failure_detail

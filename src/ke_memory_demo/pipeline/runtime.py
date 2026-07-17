@@ -80,6 +80,14 @@ _FIXED_EXCHANGES = 385
 _FIXED_QUESTIONS = 60
 
 
+def _read_only_git_env() -> dict[str, str]:
+    return {
+        **os.environ,
+        "GIT_OPTIONAL_LOCKS": "0",
+        "GIT_TERMINAL_PROMPT": "0",
+    }
+
+
 class RuntimeInvariantError(RuntimeError):
     """Real runtime composition or exact-snapshot hydration failed."""
 
@@ -554,7 +562,7 @@ class _LiveEvaluationPreflightPorts:
             ),
             check=False,
             capture_output=True,
-            env={**os.environ, "GIT_TERMINAL_PROMPT": "0"},
+            env=_read_only_git_env(),
         )
         if completed.returncode != 0:
             raise RuntimeInvariantError("unable to enumerate tracked preflight files")
@@ -844,11 +852,7 @@ def _snapshot_records_from_git(
         ("git", "-C", str(state_root), "show", f"{snapshot_id}:{path}"),
         check=False,
         capture_output=True,
-        env={
-            **os.environ,
-            "GIT_OPTIONAL_LOCKS": "0",
-            "GIT_TERMINAL_PROMPT": "0",
-        },
+        env=_read_only_git_env(),
     )
     if completed.returncode != 0:
         raise RuntimeInvariantError(f"verified snapshot is missing artifact {artifact_name}")
@@ -873,11 +877,7 @@ def _git_text(root: Path, *arguments: str) -> str:
         check=False,
         capture_output=True,
         text=True,
-        env={
-            **os.environ,
-            "GIT_OPTIONAL_LOCKS": "0",
-            "GIT_TERMINAL_PROMPT": "0",
-        },
+        env=_read_only_git_env(),
     )
     if completed.returncode != 0:
         raise RuntimeInvariantError("Git preflight command failed")
@@ -890,11 +890,7 @@ def _git_optional_text(root: Path, *arguments: str) -> str | None:
         check=False,
         capture_output=True,
         text=True,
-        env={
-            **os.environ,
-            "GIT_OPTIONAL_LOCKS": "0",
-            "GIT_TERMINAL_PROMPT": "0",
-        },
+        env=_read_only_git_env(),
     )
     if completed.returncode == 0:
         return completed.stdout.strip()
@@ -1086,7 +1082,7 @@ def _code_commit(project_root: Path) -> str:
         check=False,
         capture_output=True,
         text=True,
-        env={**os.environ, "GIT_TERMINAL_PROMPT": "0"},
+        env=_read_only_git_env(),
     )
     commit = completed.stdout.strip()
     if completed.returncode != 0 or len(commit) != 40:
