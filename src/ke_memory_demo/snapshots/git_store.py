@@ -12,8 +12,11 @@ import subprocess
 import sys
 import tempfile
 
+from pydantic import BaseModel
+
 from ke_memory_demo.core.json import canonical_json
 from ke_memory_demo.pipeline import (
+    EVALUATION_ARTIFACT_REGISTRY,
     PIPELINE_ARTIFACT_REGISTRY,
     STAGE_PREDECESSOR,
     PipelineRunManifest,
@@ -28,6 +31,7 @@ from ke_memory_demo.storage import ArtifactStore, StageManifest
 _GITIGNORE = """.staging/
 cache/
 checkpoints/
+exports/
 .env.local
 *.sqlite3
 """
@@ -136,7 +140,7 @@ class GitSnapshotStore:
         with self._detached_worktree(snapshot_id) as checkout:
             checked_artifacts = ArtifactStore(
                 checkout,
-                registry=PIPELINE_ARTIFACT_REGISTRY,
+                registry=_artifact_registry(),
             )
             stage_manifest = checked_artifacts.validate_stage(
                 run_id,
@@ -371,7 +375,7 @@ class GitSnapshotStore:
         with self._detached_worktree(parent_snapshot_id) as checkout:
             predecessor_artifacts = ArtifactStore(
                 checkout,
-                registry=PIPELINE_ARTIFACT_REGISTRY,
+                registry=_artifact_registry(),
             )
             predecessor_manifest = predecessor_artifacts.validate_stage(
                 run_id,
@@ -474,3 +478,10 @@ class GitSnapshotStore:
                 cleanup_error = cleanup_error or error
             if cleanup_error is not None and not active_error:
                 raise cleanup_error
+
+
+def _artifact_registry() -> dict[str, type[BaseModel]]:
+    return {
+        **PIPELINE_ARTIFACT_REGISTRY,
+        **dict(EVALUATION_ARTIFACT_REGISTRY),
+    }

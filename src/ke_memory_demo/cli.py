@@ -19,7 +19,10 @@ from ke_memory_demo.pipeline import (
     PipelineStageResult,
     RuntimeFactory,
 )
-from ke_memory_demo.pipeline.runtime import build_evaluation_preflight
+from ke_memory_demo.pipeline.runtime import (
+    build_evaluation_preflight,
+    materialize_evaluation_report,
+)
 from ke_memory_demo.snapshots import GitSnapshotStore
 from ke_memory_demo.storage import ArtifactStore
 
@@ -150,6 +153,30 @@ def evaluation_run_command(
         snapshot_id,
         smoke=False,
     )
+
+
+@evaluate_app.command("report")
+def evaluation_report_command(
+    run_id: RunId,
+    snapshot_id: Annotated[
+        str,
+        typer.Option("--snapshot-id", help="Exact evaluation-complete snapshot SHA."),
+    ],
+    state_root: StateRoot = Path("state"),
+) -> None:
+    """Materialize hash-verified canonical evaluation report documents."""
+
+    def operation() -> JsonObject:
+        paths = materialize_evaluation_report(state_root, run_id, snapshot_id)
+        return {
+            "run_id": run_id,
+            "stage": PipelineStage.EVALUATION_COMPLETE.value,
+            "snapshot_id": snapshot_id,
+            "counts": {"documents": len(paths)},
+            "documents": [str(path) for path in paths],
+        }
+
+    _execute(operation)
 
 
 @app.command("preflight")
@@ -387,15 +414,16 @@ def _execute_evaluation_command(
     *,
     smoke: bool,
 ) -> None:
-    async def invoke() -> EvaluationRun:
+    async def invoke() -> tuple[EvaluationRun, str | None]:
         factory = RuntimeFactory.from_paths(config_root, state_root)
         try:
-            return await factory.run_evaluation(run_id, snapshot_id, smoke=smoke)
+            run = await factory.run_evaluation(run_id, snapshot_id, smoke=smoke)
+            return run, factory.evaluation_snapshot_id
         finally:
             await factory.aclose()
 
     try:
-        run = asyncio.run(invoke())
+        run, evaluation_snapshot_id = asyncio.run(invoke())
     except Exception as error:
         failure: JsonObject = {
             "error": {
@@ -410,8 +438,13 @@ def _execute_evaluation_command(
     payload: JsonObject = {
         "run_id": run_id,
         "snapshot_id": run.ke_ready_snapshot_id,
+        "evaluation_snapshot_id": evaluation_snapshot_id,
         "mode": mode,
-        "formal": not smoke and run.status is EvaluationStatus.COMPLETE,
+        "formal": (
+            not smoke
+            and run.status is EvaluationStatus.COMPLETE
+            and evaluation_snapshot_id is not None
+        ),
         "manifest_hash": run.manifest_hash,
         "status": run.status.value,
         "counts": {

@@ -1,3 +1,4 @@
+from .baseline_results import BaselineResultError, load_public_baseline_results
 from .gold_sources import SourceCatalog, SourceMappingError, build_gold_source_mapping
 from .judge import (
     JUDGE_MAX_OUTPUT_TOKENS,
@@ -7,24 +8,45 @@ from .judge import (
     JudgeService,
 )
 from .manifest import ExperimentManifest
+from .metrics import (
+    ComputedMetrics,
+    MetricsInvariantError,
+    QuestionMetricInput,
+    aggregate_operation_usage,
+    compute_metrics,
+    compute_question_metrics,
+    select_turn_ke_audits,
+)
 from .models import (
+    AggregateMetrics,
+    BaselinePublicResult,
     EvaluationFailure,
     EvaluationRun,
     EvaluationStatus,
     GoldSourceMapping,
     GoldSourceStatus,
     JudgeResult,
+    OperationUsageMetrics,
     ProbeQuestion,
     QuestionAnswer,
     QuestionCategory,
     QuestionExecution,
+    QuestionMetrics,
+    ReportDocument,
     RubricJudgement,
+    TurnKEAuditCase,
 )
 from .preflight import (
     EvaluationPreflight,
     PreflightCheck,
     PreflightCheckFailure,
     PreflightReport,
+)
+from .report import (
+    ReportInput,
+    ReportInvariantError,
+    ReportWriter,
+    materialize_report_documents,
 )
 from .questions import (
     QuestionNormalizationError,
@@ -38,6 +60,10 @@ from .runner import EvaluationInvariantError, EvaluationRunner
 __all__ = [
     "JUDGE_MAX_OUTPUT_TOKENS",
     "JUDGE_MODEL",
+    "AggregateMetrics",
+    "BaselinePublicResult",
+    "BaselineResultError",
+    "ComputedMetrics",
     "EvaluationPreflight",
     "EvaluationFailure",
     "EvaluationInvariantError",
@@ -51,6 +77,8 @@ __all__ = [
     "JudgeModelOutput",
     "JudgeResult",
     "JudgeService",
+    "MetricsInvariantError",
+    "OperationUsageMetrics",
     "PreflightCheck",
     "PreflightCheckFailure",
     "PreflightReport",
@@ -58,12 +86,25 @@ __all__ = [
     "QuestionAnswer",
     "QuestionCategory",
     "QuestionExecution",
+    "QuestionMetrics",
+    "QuestionMetricInput",
     "QuestionNormalizationError",
     "RubricJudgement",
+    "ReportDocument",
+    "ReportInput",
+    "ReportInvariantError",
+    "ReportWriter",
     "SourceCatalog",
     "SourceMappingError",
+    "TurnKEAuditCase",
     "build_gold_source_mapping",
+    "aggregate_operation_usage",
+    "compute_metrics",
+    "compute_question_metrics",
+    "load_public_baseline_results",
+    "materialize_report_documents",
     "normalize_question",
     "normalize_questions",
     "question_manifest_sha256",
+    "select_turn_ke_audits",
 ]

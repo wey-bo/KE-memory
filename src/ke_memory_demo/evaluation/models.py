@@ -1,12 +1,14 @@
 from __future__ import annotations
 
+from datetime import date
 from enum import StrEnum
+import hashlib
 from typing import Annotated, Literal, TypeAlias
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from ke_memory_demo.core.json import JsonObject
-from ke_memory_demo.domain import Evidence
+from ke_memory_demo.domain import CoverageEntry, Evidence, KnowledgeEquation
 from ke_memory_demo.infra.telemetry import UsageRecord
 from ke_memory_demo.retrieval import RetrievalTrace
 
@@ -14,6 +16,8 @@ from ke_memory_demo.retrieval import RetrievalTrace
 NonEmptyString = Annotated[str, Field(min_length=1)]
 Sha256Hex = Annotated[str, Field(pattern=r"^[0-9a-f]{64}$")]
 GitSha = Annotated[str, Field(pattern=r"^[0-9a-f]{40}$")]
+NonNegativeInt = Annotated[int, Field(ge=0)]
+FiniteFloat = Annotated[float, Field(allow_inf_nan=False)]
 
 
 class QuestionCategory(StrEnum):
@@ -195,4 +199,128 @@ class EvaluationRun(BaseModel):
                 raise ValueError(
                     "complete evaluation requires the exact expected answers and Judgements"
                 )
+        return self
+
+
+BaselineStatus: TypeAlias = Literal[
+    "public_result",
+    "not_reproduced",
+    "not_found",
+    "not_directly_comparable",
+]
+
+
+class BaselinePublicResult(BaseModel):
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    system: Literal["mem0", "graphiti", "hindsight", "mempalace"]
+    source_url: str
+    source_commit: GitSha
+    retrieved_on: date
+    dataset: str
+    split: str
+    metric: str
+    score: FiniteFloat | None = None
+    statuses: tuple[BaselineStatus, ...]
+    vendor_self_report: bool
+    reproduction_artifacts: str
+    notes: str
+
+    @model_validator(mode="after")
+    def _validate_public_record(self) -> BaselinePublicResult:
+        if not self.source_url.startswith("https://"):
+            raise ValueError("public baseline source URL must use HTTPS")
+        if not self.statuses or len(self.statuses) != len(set(self.statuses)):
+            raise ValueError("public baseline statuses must be nonempty and duplicate-free")
+        if "not_found" in self.statuses and self.score is not None:
+            raise ValueError("a not-found public baseline record cannot carry a score")
+        if self.score is not None and "public_result" not in self.statuses:
+            raise ValueError("a scored public baseline record must be marked public_result")
+        if "not_found" not in self.statuses and "not_reproduced" not in self.statuses:
+            raise ValueError("public baseline claims must remain explicitly not reproduced")
+        return self
+
+
+class QuestionMetrics(BaseModel):
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    question_id: str
+    conversation_id: str
+    category: QuestionCategory
+    answer_score: FiniteFloat
+    satisfied_rubrics: NonNegativeInt
+    rubric_count: NonNegativeInt
+    factual_error: bool
+    unsupported_claim: bool
+    abstention_correct: bool | None
+    source_recall: FiniteFloat | None
+    complete_evidence: bool | None
+    citation_valid: bool
+    citation_traceable: bool
+    source_session_count: NonNegativeInt
+    used_aggregate: bool
+    evidence_tokens: NonNegativeInt
+    work_usage: UsageRecord
+    judge_usage: UsageRecord
+
+
+class AggregateMetrics(BaseModel):
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    scope: str
+    question_count: NonNegativeInt
+    answer_score_sum: FiniteFloat
+    answer_score_mean: FiniteFloat
+    mapped_source_count: NonNegativeInt
+    source_recall_sum: FiniteFloat
+    source_recall_mean: FiniteFloat | None
+    complete_evidence_count: NonNegativeInt
+    citation_valid_count: NonNegativeInt
+    citation_traceable_count: NonNegativeInt
+    factual_error_count: NonNegativeInt
+    unsupported_claim_count: NonNegativeInt
+
+
+class OperationUsageMetrics(BaseModel):
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    operation: str
+    call_count: NonNegativeInt
+    input_tokens: NonNegativeInt
+    output_tokens: NonNegativeInt
+    latency_seconds: FiniteFloat
+    provider_cost: FiniteFloat | None
+
+
+class TurnKEAuditCase(BaseModel):
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    audit_kind: Literal[
+        "conversation_first",
+        "tool_event",
+        "unresolved",
+        "lifecycle",
+        "cross_session",
+    ]
+    conversation_id: str
+    exchange_ids: tuple[str, ...]
+    raw_records: tuple[JsonObject, ...]
+    coverage: tuple[CoverageEntry, ...]
+    knowledge_equations: tuple[KnowledgeEquation, ...]
+    aggregate_ids: tuple[str, ...] = ()
+
+
+class ReportDocument(BaseModel):
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    name: Literal["report.md", "question_results.csv", "metrics.json"]
+    media_type: str
+    sha256: Sha256Hex
+    content: str
+
+    @model_validator(mode="after")
+    def _validate_content_hash(self) -> ReportDocument:
+        expected = hashlib.sha256(self.content.encode("utf-8")).hexdigest()
+        if self.sha256 != expected:
+            raise ValueError("report document SHA-256 does not match its UTF-8 content")
         return self

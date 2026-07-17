@@ -115,12 +115,18 @@ class _EvaluationArtifactRegistry(Mapping[str, type[BaseModel]]):
     def _registry() -> dict[str, type[BaseModel]]:
         from ke_memory_demo.evaluation.manifest import ExperimentManifest
         from ke_memory_demo.evaluation.models import (
+            AggregateMetrics,
+            BaselinePublicResult,
             EvaluationFailure,
             EvaluationRun,
             GoldSourceMapping,
             JudgeResult,
+            OperationUsageMetrics,
             ProbeQuestion,
             QuestionAnswer,
+            QuestionMetrics,
+            ReportDocument,
+            TurnKEAuditCase,
         )
         from ke_memory_demo.retrieval import QueryExtractionTrace, RetrievalTrace
 
@@ -134,6 +140,12 @@ class _EvaluationArtifactRegistry(Mapping[str, type[BaseModel]]):
             "judge_results": JudgeResult,
             "evaluation_failures": EvaluationFailure,
             "evaluation_runs": EvaluationRun,
+            "question_metrics": QuestionMetrics,
+            "aggregate_metrics": AggregateMetrics,
+            "operation_usage_metrics": OperationUsageMetrics,
+            "baseline_public_results": BaselinePublicResult,
+            "turn_ke_audits": TurnKEAuditCase,
+            "report_documents": ReportDocument,
         }
 
 

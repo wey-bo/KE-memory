@@ -56,15 +56,60 @@ def test_cli_lists_evaluation_commands() -> None:
     result = runner.invoke(app, ["evaluate", "--help"])
 
     assert result.exit_code == 0
-    for command in ("preflight", "smoke", "run"):
+    for command in ("preflight", "smoke", "run", "report"):
         assert command in result.stdout
 
 
+def test_evaluation_report_materializes_only_a_verified_canonical_snapshot(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    import ke_memory_demo.cli as cli
+
+    calls: list[tuple[Path, str, str]] = []
+
+    def fake_materialize(state_root: Path, run_id: str, snapshot_id: str) -> tuple[Path, ...]:
+        calls.append((state_root, run_id, snapshot_id))
+        output = state_root / "exports" / run_id
+        return tuple(
+            output / name for name in ("metrics.json", "question_results.csv", "report.md")
+        )
+
+    monkeypatch.setattr(cli, "materialize_evaluation_report", fake_materialize)
+    state_root = tmp_path / "state"
+    result = runner.invoke(
+        cli.app,
+        [
+            "evaluate",
+            "report",
+            "--run-id",
+            "run-1",
+            "--snapshot-id",
+            "a" * 40,
+            "--state-root",
+            str(state_root),
+        ],
+    )
+
+    assert result.exit_code == 0
+    payload = json.loads(result.stdout)
+    assert payload["snapshot_id"] == "a" * 40
+    assert payload["counts"] == {"documents": 3}
+    assert calls == [(state_root, "run-1", "a" * 40)]
+
+
 @pytest.mark.parametrize(
-    ("command", "answer_count", "formal", "provided_snapshot", "resolved_snapshot"),
+    (
+        "command",
+        "answer_count",
+        "formal",
+        "provided_snapshot",
+        "resolved_snapshot",
+        "evaluation_snapshot",
+    ),
     [
-        ("smoke", 1, False, None, "e" * 40),
-        ("run", 60, True, "d" * 40, "d" * 40),
+        ("smoke", 1, False, None, "e" * 40, None),
+        ("run", 60, True, "d" * 40, "d" * 40, "f" * 40),
     ],
 )
 def test_evaluation_commands_run_fake_ke_only_evaluation(
@@ -74,6 +119,7 @@ def test_evaluation_commands_run_fake_ke_only_evaluation(
     formal: bool,
     provided_snapshot: str | None,
     resolved_snapshot: str,
+    evaluation_snapshot: str | None,
 ) -> None:
     import ke_memory_demo.cli as cli
     from ke_memory_demo.evaluation import EvaluationStatus
@@ -81,6 +127,8 @@ def test_evaluation_commands_run_fake_ke_only_evaluation(
     calls: list[tuple[str, str | None, bool]] = []
 
     class FakeFactory:
+        evaluation_snapshot_id: str | None = None
+
         async def run_evaluation(
             self,
             run_id: str,
@@ -89,6 +137,7 @@ def test_evaluation_commands_run_fake_ke_only_evaluation(
             smoke: bool,
         ) -> SimpleNamespace:
             calls.append((run_id, snapshot_id, smoke))
+            self.evaluation_snapshot_id = evaluation_snapshot
             values = tuple(object() for _ in range(answer_count))
             return SimpleNamespace(
                 manifest_hash="a" * 64,
@@ -125,6 +174,7 @@ def test_evaluation_commands_run_fake_ke_only_evaluation(
     assert payload["mode"] == command
     assert payload["formal"] is formal
     assert payload["snapshot_id"] == resolved_snapshot
+    assert payload["evaluation_snapshot_id"] == evaluation_snapshot
     assert payload["counts"] == {
         "answers": answer_count,
         "failures": 0,

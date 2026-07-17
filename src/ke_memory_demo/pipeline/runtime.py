@@ -22,17 +22,34 @@ from ke_memory_demo.core.json import JsonValue, canonical_json
 from ke_memory_demo.domain import (
     AggregateNode,
     Conversation,
+    CoverageEntry,
     Evidence,
     Exchange,
     KnowledgeEquation,
     RunScope,
 )
+from ke_memory_demo.evaluation.baseline_results import load_public_baseline_results
 from ke_memory_demo.evaluation.gold_sources import SourceCatalog, build_gold_source_mapping
 from ke_memory_demo.evaluation.judge import JudgeService
 from ke_memory_demo.evaluation.manifest import ExperimentManifest
-from ke_memory_demo.evaluation.models import EvaluationRun, ProbeQuestion
+from ke_memory_demo.evaluation.metrics import (
+    aggregate_operation_usage,
+    compute_metrics,
+    select_turn_ke_audits,
+)
+from ke_memory_demo.evaluation.models import (
+    EvaluationRun,
+    GoldSourceStatus,
+    ProbeQuestion,
+    ReportDocument,
+)
 from ke_memory_demo.evaluation.preflight import EvaluationPreflight, PreflightCheckFailure
 from ke_memory_demo.evaluation.questions import normalize_questions, question_manifest_sha256
+from ke_memory_demo.evaluation.report import (
+    ReportInput,
+    ReportWriter,
+    materialize_report_documents,
+)
 from ke_memory_demo.evaluation.runner import EvaluationRunner
 from ke_memory_demo.infra.llm import StructuredModelClient
 from ke_memory_demo.infra.telemetry import (
@@ -91,6 +108,70 @@ _FIXED_DIRECTORIES = (4, 15, 17)
 _FIXED_SESSIONS = 13
 _FIXED_EXCHANGES = 385
 _FIXED_QUESTIONS = 60
+
+
+def evaluation_can_promote(run: EvaluationRun, *, smoke: bool) -> bool:
+    expected_ids = run.expected_question_ids
+    return (
+        not smoke
+        and run.status.value == "complete"
+        and len(expected_ids) == _FIXED_QUESTIONS
+        and tuple(item.question_id for item in run.answers) == expected_ids
+        and tuple(item.question_id for item in run.judgements) == expected_ids
+        and not run.failures
+    )
+
+
+def materialize_evaluation_report(
+    state_root: Path,
+    run_id: str,
+    snapshot_id: str,
+) -> tuple[Path, ...]:
+    validate_storage_name(run_id, label="run ID")
+    artifacts = ArtifactStore(
+        state_root,
+        registry={
+            **PIPELINE_ARTIFACT_REGISTRY,
+            **dict(EVALUATION_ARTIFACT_REGISTRY),
+        },
+    )
+    snapshots = GitSnapshotStore.init(artifacts.root, artifacts)
+    verified = snapshots.verify(snapshot_id, run_id, PipelineStage.EVALUATION_COMPLETE)
+    documents = _snapshot_records_from_git(
+        artifacts.root,
+        verified.snapshot_id,
+        run_id,
+        "report_documents",
+        ReportDocument,
+        stage=PipelineStage.EVALUATION_COMPLETE,
+    )
+    return materialize_report_documents(documents, artifacts.root / "exports" / run_id)
+
+
+def finalize_evaluation_outputs(
+    *,
+    run: EvaluationRun,
+    smoke: bool,
+    state_root: Path,
+    run_id: str,
+    documents: Sequence[ReportDocument],
+    promote_complete: Callable[[], str],
+) -> str | None:
+    validate_storage_name(run_id, label="run ID")
+    validated_run = EvaluationRun.model_validate(run)
+    validated_documents = tuple(ReportDocument.model_validate(item) for item in documents)
+    if smoke:
+        return None
+    if not evaluation_can_promote(validated_run, smoke=False):
+        materialize_report_documents(
+            validated_documents,
+            state_root / "exports" / run_id / "incomplete",
+        )
+        return None
+    snapshot_id = promote_complete()
+    if _GIT_SHA.fullmatch(snapshot_id) is None:
+        raise RuntimeInvariantError("evaluation promotion returned an invalid snapshot ID")
+    return snapshot_id
 
 
 def _read_only_git_env() -> dict[str, str]:
@@ -308,7 +389,10 @@ class RuntimeFactory:
         self._code_commit = code_commit
         self._state_root = artifacts.root
         self._token_counter = O200KTokenCounter()
-        self._evaluation_clients: tuple[StructuredModelClient, StructuredModelClient] | None = None
+        self._evaluation_clients: (
+            tuple[_RuntimeStructuredModelClient, _RuntimeStructuredModelClient] | None
+        ) = None
+        self._evaluation_snapshot_id: str | None = None
 
     @classmethod
     def from_paths(cls, config_root: Path, state_root: Path) -> RuntimeFactory:
@@ -356,7 +440,7 @@ class RuntimeFactory:
 
     def build_evaluation_clients(
         self,
-    ) -> tuple[StructuredModelClient, StructuredModelClient]:
+    ) -> tuple[_RuntimeStructuredModelClient, _RuntimeStructuredModelClient]:
         if self._evaluation_clients is not None:
             return self._evaluation_clients
         answer_settings = self.settings.work.model_copy(
@@ -364,20 +448,31 @@ class RuntimeFactory:
         )
         answer_recorder = InMemoryTraceRecorder()
         judge_recorder = InMemoryTraceRecorder()
-        answer = StructuredModelClient.from_model_settings(
-            answer_settings,
-            api_key=self.settings.require_work_api_key(),
-            supports_json_schema=True,
-            trace_recorder=answer_recorder,
+        answer = cast(
+            _RuntimeStructuredModelClient,
+            _RuntimeStructuredModelClient.from_model_settings(
+                answer_settings,
+                api_key=self.settings.require_work_api_key(),
+                supports_json_schema=True,
+                trace_recorder=answer_recorder,
+            ),
         )
-        judge = StructuredModelClient.from_model_settings(
-            self.settings.judge,
-            api_key=self.settings.require_judge_api_key(),
-            supports_json_schema=True,
-            trace_recorder=judge_recorder,
+        judge = cast(
+            _RuntimeStructuredModelClient,
+            _RuntimeStructuredModelClient.from_model_settings(
+                self.settings.judge,
+                api_key=self.settings.require_judge_api_key(),
+                supports_json_schema=True,
+                trace_recorder=judge_recorder,
+            ),
         )
-        self._evaluation_clients = (answer, judge)
-        return self._evaluation_clients
+        clients = (answer, judge)
+        self._evaluation_clients = clients
+        return clients
+
+    @property
+    def evaluation_snapshot_id(self) -> str | None:
+        return self._evaluation_snapshot_id
 
     async def build_ke_systems(
         self,
@@ -417,9 +512,7 @@ class RuntimeFactory:
                 raise RuntimeInvariantError(
                     f"requested Conversation is absent from the snapshot: {missing[0]}"
                 )
-            conversations = tuple(
-                item for item in conversations if item.id in conversation_ids
-            )
+            conversations = tuple(item for item in conversations if item.id in conversation_ids)
         current = self._snapshot_records(
             snapshot_id,
             run_id,
@@ -514,9 +607,7 @@ class RuntimeFactory:
         selected_questions = questions[:1] if smoke else questions
         if not selected_questions:
             raise RuntimeInvariantError("evaluation snapshot contains no questions")
-        selected_conversation_ids = frozenset(
-            item.conversation_id for item in selected_questions
-        )
+        selected_conversation_ids = frozenset(item.conversation_id for item in selected_questions)
         systems = await self.build_ke_systems(
             run_id,
             selected_snapshot,
@@ -553,7 +644,246 @@ class RuntimeFactory:
             checkpoints=CheckpointStore(self._state_root, run_id),
             manifest=manifest,
         )
-        return await runner.run(selected_questions)
+        run = await runner.run(selected_questions)
+        self._evaluation_snapshot_id = None
+        if smoke:
+            return run
+
+        knowledge_equations = self._snapshot_records(
+            selected_snapshot,
+            run_id,
+            "knowledge_equations",
+            KnowledgeEquation,
+        )
+        current_knowledge_equations = self._snapshot_records(
+            selected_snapshot,
+            run_id,
+            "current_knowledge_equations",
+            KnowledgeEquation,
+        )
+        coverage = self._snapshot_records(
+            selected_snapshot,
+            run_id,
+            "coverage",
+            CoverageEntry,
+        )
+        aggregates = self._snapshot_records(
+            selected_snapshot,
+            run_id,
+            "aggregates",
+            AggregateNode,
+        )
+        predecessor_traces = self._snapshot_records(
+            selected_snapshot,
+            run_id,
+            "model_traces",
+            ModelTrace,
+        )
+        evaluation_traces = _sorted_model_traces(
+            (
+                *_runtime_trace_records(self.work_model),
+                *answer_client.trace_records,
+                *judge_client.trace_records,
+            )
+        )
+        computed = compute_metrics(
+            run=run,
+            questions=selected_questions,
+            gold_mappings=gold_mappings,
+            conversations=conversations,
+            current_knowledge_equations=current_knowledge_equations,
+            aggregates=aggregates,
+        )
+        baseline_results = load_public_baseline_results(
+            self.settings.project_root / "data" / "baselines" / "public_results.toml"
+        )
+        audits = select_turn_ke_audits(
+            conversations,
+            coverage,
+            knowledge_equations,
+            aggregates,
+        )
+        report_input = ReportInput(
+            manifest=manifest,
+            run=run,
+            questions=selected_questions,
+            gold_mappings=gold_mappings,
+            question_metrics=computed.question_metrics,
+            aggregate_metrics=computed.aggregate_metrics,
+            operation_usage_metrics=aggregate_operation_usage(
+                (*predecessor_traces, *evaluation_traces),
+                authoritative_usage={
+                    "common-answer": tuple(item.usage for item in run.answers),
+                    "independent-judge": tuple(item.usage for item in run.judgements),
+                },
+            ),
+            baseline_public_results=baseline_results,
+            turn_ke_audits=audits,
+        )
+        documents = ReportWriter.build(report_input)
+        if evaluation_can_promote(run, smoke=False):
+            current_identity = await self.ontology.index_identity()
+            if current_identity != manifests[0].ontology.index:
+                raise RuntimeInvariantError(
+                    "ontology index identity changed before evaluation promotion"
+                )
+        self._evaluation_snapshot_id = finalize_evaluation_outputs(
+            run=run,
+            smoke=False,
+            state_root=self._state_root,
+            run_id=run_id,
+            documents=documents,
+            promote_complete=lambda: self._promote_evaluation_complete(
+                pipeline_manifest=manifests[0],
+                report_input=report_input,
+                report_documents=documents,
+                evaluation_traces=evaluation_traces,
+            ),
+        )
+        return run
+
+    def _promote_evaluation_complete(
+        self,
+        *,
+        pipeline_manifest: PipelineRunManifest,
+        report_input: ReportInput,
+        report_documents: Sequence[ReportDocument],
+        evaluation_traces: Sequence[ModelTrace],
+    ) -> str:
+        run = report_input.run
+        if (
+            pipeline_manifest.stage is not PipelineStage.KE_READY
+            or pipeline_manifest.run_id != report_input.manifest.run_id
+            or report_input.manifest.expected_questions != _FIXED_QUESTIONS
+        ):
+            raise RuntimeInvariantError(
+                "evaluation-complete inputs do not match the verified ke-ready run"
+            )
+        if not evaluation_can_promote(run, smoke=False):
+            raise RuntimeInvariantError(
+                "evaluation-complete promotion requires exact complete 60/60 results"
+            )
+        if self.snapshots.head() != run.ke_ready_snapshot_id:
+            raise RuntimeInvariantError(
+                "evaluation-complete promotion requires the verified ke-ready snapshot at HEAD"
+            )
+        mapped_count = sum(
+            item.status is GoldSourceStatus.MAPPED for item in report_input.gold_mappings
+        )
+        unmappable_count = sum(
+            item.status is GoldSourceStatus.UNMAPPABLE for item in report_input.gold_mappings
+        )
+        if (mapped_count, unmappable_count) != (54, 6):
+            raise RuntimeInvariantError(
+                "evaluation-complete promotion requires 54 mapped and 6 unmappable gold records"
+            )
+
+        records = self._cumulative_evaluation_records(pipeline_manifest.run_id)
+        existing_traces = tuple(cast(ModelTrace, item) for item in records.get("model_traces", ()))
+        answers = tuple(sorted(run.answers, key=lambda item: item.question_id))
+        judgements = tuple(sorted(run.judgements, key=lambda item: item.question_id))
+        failures = tuple(
+            sorted(
+                run.failures,
+                key=lambda item: (item.question_id, item.stage, item.error_type),
+            )
+        )
+        question_metrics = tuple(
+            sorted(report_input.question_metrics, key=lambda item: item.question_id)
+        )
+        operation_usage = tuple(
+            sorted(report_input.operation_usage_metrics, key=lambda item: item.operation)
+        )
+        documents = tuple(sorted(report_documents, key=lambda item: item.name))
+        new_records: dict[str, tuple[BaseModel, ...]] = {
+            "probe_questions": tuple(report_input.questions),
+            "gold_source_mappings": tuple(report_input.gold_mappings),
+            "experiment_manifests": (report_input.manifest,),
+            "retrieval_traces": tuple(item.retrieval_trace for item in answers),
+            "question_answers": answers,
+            "judge_results": judgements,
+            "evaluation_failures": failures,
+            "evaluation_runs": (run,),
+            "question_metrics": question_metrics,
+            "aggregate_metrics": tuple(report_input.aggregate_metrics),
+            "operation_usage_metrics": operation_usage,
+            "baseline_public_results": tuple(report_input.baseline_public_results),
+            "turn_ke_audits": tuple(report_input.turn_ke_audits),
+            "report_documents": documents,
+            "model_traces": _sorted_model_traces(
+                (
+                    *existing_traces,
+                    *(_usage_only_trace(trace) for trace in evaluation_traces),
+                )
+            ),
+        }
+        records.update(new_records)
+        record_counts = {name: len(values) for name, values in records.items()}
+        record_counts["pipeline_manifests"] = 1
+        manifest = PipelineRunManifest(
+            run_id=pipeline_manifest.run_id,
+            stage=PipelineStage.EVALUATION_COMPLETE,
+            parent_snapshot_id=run.ke_ready_snapshot_id,
+            code_commit=self._code_commit,
+            dataset_sha256=pipeline_manifest.dataset_sha256,
+            selected_directories=pipeline_manifest.selected_directories,
+            ontology=pipeline_manifest.ontology,
+            embedding_enabled=False,
+            concurrency=pipeline_manifest.concurrency,
+            record_counts=record_counts,
+        )
+        with self.artifacts.stage_writer(
+            pipeline_manifest.run_id,
+            PipelineStage.EVALUATION_COMPLETE.value,
+        ) as writer:
+            for name in sorted(records):
+                writer.write(name, records[name])
+            writer.write("pipeline_manifests", (manifest,))
+        validated = self.artifacts.validate_stage(
+            pipeline_manifest.run_id,
+            PipelineStage.EVALUATION_COMPLETE.value,
+            canonical=True,
+        )
+        actual_counts = {item.name: item.record_count for item in validated.artifacts}
+        if actual_counts != record_counts:
+            raise RuntimeInvariantError(
+                "evaluation-complete artifact counts changed before snapshot commit"
+            )
+        committed = self.snapshots.commit_stage(
+            pipeline_manifest.run_id,
+            PipelineStage.EVALUATION_COMPLETE,
+        )
+        verified = self.snapshots.verify(
+            committed.snapshot_id,
+            pipeline_manifest.run_id,
+            PipelineStage.EVALUATION_COMPLETE,
+        )
+        return verified.snapshot_id
+
+    def _cumulative_evaluation_records(
+        self,
+        run_id: str,
+    ) -> dict[str, tuple[BaseModel, ...]]:
+        manifest = self.artifacts.validate_stage(
+            run_id,
+            PipelineStage.KE_READY.value,
+            canonical=True,
+        )
+        records: dict[str, tuple[BaseModel, ...]] = {}
+        for artifact in manifest.artifacts:
+            if artifact.name == "pipeline_manifests":
+                continue
+            model = self.artifacts.registry[artifact.name]
+            records[artifact.name] = tuple(
+                self.artifacts.read_jsonl(
+                    run_id,
+                    PipelineStage.KE_READY.value,
+                    artifact.name,
+                    model,
+                    canonical=True,
+                )
+            )
+        return records
 
     def _evaluation_manifest(
         self,
@@ -1005,10 +1335,12 @@ def _snapshot_records_from_git(
     run_id: str,
     artifact_name: str,
     model: type[SnapshotModelT],
+    *,
+    stage: PipelineStage = PipelineStage.KE_READY,
 ) -> tuple[SnapshotModelT, ...]:
     validate_storage_name(run_id, label="run ID")
     validate_storage_name(artifact_name, label="artifact name")
-    path = f"runs/{run_id}/{PipelineStage.KE_READY.value}/{artifact_name}.jsonl"
+    path = f"runs/{run_id}/{stage.value}/{artifact_name}.jsonl"
     completed = subprocess.run(
         ("git", "-C", str(state_root), "show", f"{snapshot_id}:{path}"),
         check=False,
@@ -1030,6 +1362,40 @@ def _snapshot_records_from_git(
     if any(canonical_json(item) != line for item, line in zip(records, lines, strict=True)):
         raise RuntimeInvariantError(f"snapshot artifact is not canonical JSON: {artifact_name}")
     return records
+
+
+def _runtime_trace_records(model: object) -> tuple[ModelTrace, ...]:
+    raw = getattr(model, "trace_records", ())
+    if not isinstance(raw, Sequence):
+        raise RuntimeInvariantError("evaluation model exposed invalid trace records")
+    try:
+        return tuple(ModelTrace.model_validate(item) for item in cast(Sequence[object], raw))
+    except (TypeError, ValueError) as error:
+        raise RuntimeInvariantError("evaluation model exposed an invalid trace") from error
+
+
+def _sorted_model_traces(traces: Iterable[ModelTrace]) -> tuple[ModelTrace, ...]:
+    validated = tuple(ModelTrace.model_validate(item) for item in traces)
+    return tuple(sorted(validated, key=canonical_json))
+
+
+def _usage_only_trace(trace: ModelTrace) -> ModelTrace:
+    trace = ModelTrace.model_validate(trace)
+    error_type = trace.error.get("type") if trace.error is not None else None
+    return trace.model_copy(
+        update={
+            "request": {"provider_body": "redacted"},
+            "response": ({"provider_body": "redacted"} if trace.response is not None else None),
+            "error": (
+                {
+                    "provider_body": "redacted",
+                    "type": error_type if isinstance(error_type, str) else "ModelError",
+                }
+                if trace.error is not None
+                else None
+            ),
+        }
+    )
 
 
 def _git_text(root: Path, *arguments: str) -> str:

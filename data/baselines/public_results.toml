@@ -1,0 +1,124 @@
+[[results]]
+system = "mem0"
+source_url = "https://github.com/mem0ai/mem0"
+source_commit = "87276ef96879ee406690e640d34060de546560a5"
+retrieved_on = "2026-07-17"
+dataset = "BEAM"
+split = "1M"
+metric = "official README score; protocol differs from this demo"
+score = 64.1
+statuses = ["public_result", "not_reproduced", "not_directly_comparable"]
+vendor_self_report = true
+reproduction_artifacts = "official README links the open mem0ai/memory-benchmarks framework"
+notes = "This demo uses a fixed BEAM 100K subset and an independent DeepSeek Judge."
+
+[[results]]
+system = "mem0"
+source_url = "https://github.com/mem0ai/mem0"
+source_commit = "87276ef96879ee406690e640d34060de546560a5"
+retrieved_on = "2026-07-17"
+dataset = "BEAM"
+split = "10M"
+metric = "official README score; protocol differs from this demo"
+score = 48.6
+statuses = ["public_result", "not_reproduced", "not_directly_comparable"]
+vendor_self_report = true
+reproduction_artifacts = "official README links the open mem0ai/memory-benchmarks framework"
+notes = "The published context scale and evaluation protocol differ from the fixed 100K demo subset."
+
+[[results]]
+system = "mem0"
+source_url = "https://github.com/mem0ai/mem0"
+source_commit = "87276ef96879ee406690e640d34060de546560a5"
+retrieved_on = "2026-07-17"
+dataset = "LoCoMo"
+split = "official README benchmark"
+metric = "official README answer score"
+score = 91.6
+statuses = ["public_result", "not_reproduced", "not_directly_comparable"]
+vendor_self_report = true
+reproduction_artifacts = "official README links the open mem0ai/memory-benchmarks framework"
+notes = "LoCoMo, its answer model, and its scoring protocol are not the BEAM protocol used here."
+
+[[results]]
+system = "mem0"
+source_url = "https://github.com/mem0ai/mem0"
+source_commit = "87276ef96879ee406690e640d34060de546560a5"
+retrieved_on = "2026-07-17"
+dataset = "LongMemEval"
+split = "official README benchmark"
+metric = "official README answer score"
+score = 94.8
+statuses = ["public_result", "not_reproduced", "not_directly_comparable"]
+vendor_self_report = true
+reproduction_artifacts = "official README links the open mem0ai/memory-benchmarks framework"
+notes = "LongMemEval and its scoring protocol differ from this demo's BEAM questions and Judge."
+
+[[results]]
+system = "graphiti"
+source_url = "https://github.com/getzep/graphiti"
+source_commit = "62ff03ac5662d288ebd9f6aafb70d6ae4070c632"
+retrieved_on = "2026-07-17"
+dataset = "LongMemEval"
+split = "repository eval script"
+metric = "no complete official result table found in the frozen repository"
+statuses = ["not_found"]
+vendor_self_report = false
+reproduction_artifacts = "tests/evals/eval_e2e_graph_building.py"
+notes = "A third-party chart is not treated as an official Graphiti result."
+
+[[results]]
+system = "hindsight"
+source_url = "https://github.com/vectorize-io/hindsight"
+source_commit = "f00d3c7f666e560bb051c51fba3977b38885f46a"
+retrieved_on = "2026-07-17"
+dataset = "LongMemEval"
+split = "official overall result"
+metric = "overall accuracy (%) reported in official repository documentation"
+score = 94.6
+statuses = ["public_result", "not_reproduced", "not_directly_comparable"]
+vendor_self_report = false
+reproduction_artifacts = "official README states independent reproduction by Virginia Tech and The Washington Post"
+notes = "The public claim was not rerun here and does not use this demo's BEAM subset or Judge."
+
+[[results]]
+system = "mempalace"
+source_url = "https://github.com/MemPalace/mempalace"
+source_commit = "18a9788961afce013efc9e2da23ea2b17ab72381"
+retrieved_on = "2026-07-17"
+dataset = "LongMemEval"
+split = "500 questions, raw semantic search"
+metric = "retrieval recall R@5 (%)"
+score = 96.6
+statuses = ["public_result", "not_reproduced", "not_directly_comparable"]
+vendor_self_report = true
+reproduction_artifacts = "benchmarks/longmemeval_bench.py and results_raw_full500.jsonl"
+notes = "Retrieval recall is not an end-to-end answer or independent Judge score."
+
+[[results]]
+system = "mempalace"
+source_url = "https://github.com/MemPalace/mempalace"
+source_commit = "18a9788961afce013efc9e2da23ea2b17ab72381"
+retrieved_on = "2026-07-17"
+dataset = "LongMemEval"
+split = "held-out 450 questions, hybrid v4"
+metric = "retrieval recall R@5 (%)"
+score = 98.4
+statuses = ["public_result", "not_reproduced", "not_directly_comparable"]
+vendor_self_report = true
+reproduction_artifacts = "benchmarks/longmemeval_bench.py and results_lme_hybrid_v4_held_out_450_20260326_0010.json"
+notes = "The held-out retrieval result uses a different dataset, top-k, and metric from this demo."
+
+[[results]]
+system = "mempalace"
+source_url = "https://github.com/MemPalace/mempalace"
+source_commit = "18a9788961afce013efc9e2da23ea2b17ab72381"
+retrieved_on = "2026-07-17"
+dataset = "LoCoMo"
+split = "1,986 questions, hybrid v5 top-10 without rerank"
+metric = "retrieval recall R@10 (%)"
+score = 88.9
+statuses = ["public_result", "not_reproduced", "not_directly_comparable"]
+vendor_self_report = true
+reproduction_artifacts = "benchmarks/locomo_bench.py and results_locomo_hybrid_session_top10_*.json"
+notes = "Retrieval recall at top-10 is not this demo's end-to-end BEAM Judge score."
