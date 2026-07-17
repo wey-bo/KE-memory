@@ -137,9 +137,38 @@ class GitSnapshotStore:
         stage: PipelineStage,
     ) -> SnapshotVerification:
         snapshot_id = self._resolve_commit(snapshot_id)
-        parent_snapshot_id = self._commit_parent(snapshot_id)
         expected_manifest = self._manifest_bytes_from_commit(snapshot_id, run_id, stage)
         expected_sha256 = hashlib.sha256(expected_manifest).hexdigest()
+        parent_snapshot_id = self._validate_committed_stage(
+            snapshot_id,
+            run_id,
+            stage,
+            expected_manifest_sha256=expected_sha256,
+        )
+        self._validate_predecessor_chain(
+            parent_snapshot_id,
+            run_id,
+            STAGE_PREDECESSOR[stage],
+            seen={snapshot_id},
+        )
+
+        return SnapshotVerification(
+            snapshot_id=snapshot_id,
+            run_id=run_id,
+            stage=stage,
+            verified=True,
+            stage_manifest_sha256=expected_sha256,
+        )
+
+    def _validate_committed_stage(
+        self,
+        snapshot_id: str,
+        run_id: str,
+        stage: PipelineStage,
+        *,
+        expected_manifest_sha256: str | None = None,
+    ) -> str | None:
+        parent_snapshot_id = self._commit_parent(snapshot_id)
 
         with self._detached_worktree(snapshot_id) as checkout:
             checked_artifacts = ArtifactStore(
@@ -183,16 +212,26 @@ class GitSnapshotStore:
                 stage,
             )
             checked_sha256 = hashlib.sha256(checked_manifest).hexdigest()
-            if checked_sha256 != expected_sha256:
+            if expected_manifest_sha256 is not None and checked_sha256 != expected_manifest_sha256:
                 raise SnapshotError("checked-out stage manifest differs from the Git snapshot")
+        return parent_snapshot_id
 
-        return SnapshotVerification(
-            snapshot_id=snapshot_id,
-            run_id=run_id,
-            stage=stage,
-            verified=True,
-            stage_manifest_sha256=expected_sha256,
-        )
+    def _validate_predecessor_chain(
+        self,
+        snapshot_id: str | None,
+        run_id: str,
+        stage: PipelineStage | None,
+        *,
+        seen: set[str],
+    ) -> None:
+        while stage is not None:
+            if snapshot_id is None:
+                raise SnapshotError(f"snapshot ancestry ended before required stage {stage.value}")
+            if snapshot_id in seen:
+                raise SnapshotError("snapshot ancestry contains a cycle")
+            seen.add(snapshot_id)
+            snapshot_id = self._validate_committed_stage(snapshot_id, run_id, stage)
+            stage = STAGE_PREDECESSOR[stage]
 
     def tracked_files(self, snapshot_id: str) -> tuple[str, ...]:
         snapshot_id = self._resolve_commit(snapshot_id)
@@ -427,6 +466,13 @@ class GitSnapshotStore:
                 run_id,
                 predecessor.value,
                 canonical=True,
+            )
+            self._validate_stage_artifact_allowlist(predecessor_manifest, predecessor)
+            self._validate_model_traces(
+                predecessor_artifacts,
+                predecessor_manifest,
+                run_id,
+                predecessor,
             )
             successor_by_name = {artifact.name: artifact for artifact in stage_manifest.artifacts}
             for predecessor_artifact in predecessor_manifest.artifacts:

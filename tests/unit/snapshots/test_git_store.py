@@ -20,7 +20,7 @@ from ke_memory_demo.pipeline import (
 )
 from ke_memory_demo.settings import EvaluationConcurrencySettings
 from ke_memory_demo.snapshots import GitSnapshotStore, SnapshotError
-from ke_memory_demo.storage import ArtifactStore
+from ke_memory_demo.storage import ArtifactStore, IndexStats
 
 
 def test_snapshots_package_imports_in_a_fresh_interpreter() -> None:
@@ -42,6 +42,18 @@ def test_snapshots_package_imports_in_a_fresh_interpreter() -> None:
 
 def initialized_state(tmp_path: Path) -> tuple[ArtifactStore, GitSnapshotStore]:
     artifacts = ArtifactStore(tmp_path / "state", registry=PIPELINE_ARTIFACT_REGISTRY)
+    snapshots = GitSnapshotStore.init(artifacts.root, artifacts)
+    return artifacts, snapshots
+
+
+def initialized_combined_state(tmp_path: Path) -> tuple[ArtifactStore, GitSnapshotStore]:
+    artifacts = ArtifactStore(
+        tmp_path / "state",
+        registry={
+            **PIPELINE_ARTIFACT_REGISTRY,
+            **dict(EVALUATION_ARTIFACT_REGISTRY),
+        },
+    )
     snapshots = GitSnapshotStore.init(artifacts.root, artifacts)
     return artifacts, snapshots
 
@@ -118,7 +130,50 @@ def write_ingested_stage(
         writer.write("pipeline_manifests", [manifest])
 
 
-def direct_commit(artifacts: ArtifactStore, message: str) -> str:
+def write_minimal_stage(
+    artifacts: ArtifactStore,
+    snapshots: GitSnapshotStore,
+    stage: PipelineStage,
+    records: dict[str, tuple[object, ...]] | None = None,
+) -> None:
+    materialized = records or {}
+    record_counts = {name: len(values) for name, values in materialized.items()}
+    record_counts["pipeline_manifests"] = 1
+    manifest = PipelineRunManifest(
+        run_id="run-1",
+        stage=stage,
+        parent_snapshot_id=snapshots.head(),
+        code_commit="a" * 40,
+        dataset_sha256="b" * 64,
+        selected_directories=(1, 2, 3),
+        ontology=OntologyRunIdentity(
+            index=IndexIdentity(
+                index_name="test-ontology",
+                index_uuid="test-index-uuid",
+                mapping_sha256="c" * 64,
+            ),
+            normalization_mode="bounded-best-effort",
+        ),
+        embedding_enabled=False,
+        concurrency=EvaluationConcurrencySettings(
+            turn_workers=1,
+            session_workers=1,
+            question_workers=1,
+            judge_workers=1,
+        ),
+        record_counts=record_counts,
+    )
+    with artifacts.stage_writer("run-1", stage.value) as writer:
+        for name in sorted(materialized):
+            writer.write(name, materialized[name])
+        writer.write("pipeline_manifests", (manifest,))
+
+
+def direct_commit(
+    artifacts: ArtifactStore,
+    message: str,
+    stage: PipelineStage = PipelineStage.INGESTED,
+) -> str:
     subprocess.run(
         (
             "git",
@@ -127,7 +182,7 @@ def direct_commit(artifacts: ArtifactStore, message: str) -> str:
             "add",
             "--",
             ".gitignore",
-            "runs/run-1/ingested",
+            f"runs/run-1/{stage.value}",
         ),
         check=True,
     )
@@ -161,6 +216,24 @@ def unsafe_model_trace() -> ModelTrace:
             output_tokens=2,
             total_tokens=6,
         ),
+    )
+
+
+def empty_index_stats() -> IndexStats:
+    return IndexStats(
+        exchange_count=0,
+        message_count=0,
+        tool_event_count=0,
+        ke_count=0,
+        ke_revision_count=0,
+        ontology_binding_count=0,
+        expression_ref_count=0,
+        operator_ref_count=0,
+        ke_relation_count=0,
+        source_span_count=0,
+        aggregate_count=0,
+        aggregate_membership_count=0,
+        integrity_result="ok",
     )
 
 
@@ -221,6 +294,68 @@ def test_stage_artifact_allowlist_rejects_evaluation_records_before_and_after_co
 
     with pytest.raises(SnapshotError, match="evaluation_failures.*ingested"):
         bypass_snapshots.verify(snapshot_id, "run-1", PipelineStage.INGESTED)
+
+
+@pytest.mark.parametrize("boundary", ["commit", "verify"])
+def test_cumulative_child_rejects_an_illegal_ke_ready_parent(
+    tmp_path: Path,
+    boundary: str,
+) -> None:
+    artifacts, snapshots = initialized_combined_state(tmp_path / boundary)
+    for stage in tuple(PipelineStage)[:4]:
+        write_minimal_stage(artifacts, snapshots, stage)
+        snapshots.commit_stage("run-1", stage)
+
+    failure = EvaluationFailure(
+        question_id="question-1",
+        stage="judge",
+        error_type="TimeoutError",
+        message="judge timed out",
+    )
+    write_minimal_stage(
+        artifacts,
+        snapshots,
+        PipelineStage.KE_READY,
+        {"evaluation_failures": (failure,)},
+    )
+    direct_commit(artifacts, "unsafe ke-ready", PipelineStage.KE_READY)
+    write_minimal_stage(
+        artifacts,
+        snapshots,
+        PipelineStage.EVALUATION_COMPLETE,
+        {"evaluation_failures": (failure,)},
+    )
+
+    if boundary == "commit":
+        with pytest.raises(SnapshotError, match="evaluation_failures.*ke-ready"):
+            snapshots.commit_stage("run-1", PipelineStage.EVALUATION_COMPLETE)
+    else:
+        snapshot_id = direct_commit(
+            artifacts,
+            "laundered evaluation child",
+            PipelineStage.EVALUATION_COMPLETE,
+        )
+        with pytest.raises(SnapshotError, match="evaluation_failures.*ke-ready"):
+            snapshots.verify(snapshot_id, "run-1", PipelineStage.EVALUATION_COMPLETE)
+
+
+def test_verify_audits_artifact_contracts_across_the_full_stage_ancestry(
+    tmp_path: Path,
+) -> None:
+    artifacts, snapshots = initialized_combined_state(tmp_path)
+    stats = empty_index_stats()
+    snapshot_id = ""
+    for stage in PipelineStage:
+        write_minimal_stage(
+            artifacts,
+            snapshots,
+            stage,
+            {"index_stats": (stats,)},
+        )
+        snapshot_id = direct_commit(artifacts, f"direct {stage.value}", stage)
+
+    with pytest.raises(SnapshotError, match="index_stats.*semantic-dag-built"):
+        snapshots.verify(snapshot_id, "run-1", PipelineStage.EVALUATION_COMPLETE)
 
 
 def test_model_trace_bodies_are_rejected_before_and_after_commit(tmp_path: Path) -> None:
