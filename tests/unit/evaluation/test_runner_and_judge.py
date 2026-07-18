@@ -284,9 +284,7 @@ def _answer(question: ProbeQuestion) -> QuestionAnswer:
 
 
 def _judgement(question_id: str) -> JudgeResult:
-    rubric_items = (
-        RubricJudgement(rubric="accurate", satisfied=True, reason="yes"),
-    )
+    rubric_items = (RubricJudgement(rubric="accurate", satisfied=True, reason="yes"),)
     return JudgeResult(
         question_id=question_id,
         rubric_items=rubric_items,

@@ -3,6 +3,8 @@ from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
+from typer.core import TyperGroup
+from typer.main import get_command
 from typer.testing import CliRunner
 
 
@@ -34,7 +36,7 @@ def test_cli_lists_ke_only_stages() -> None:
     result = runner.invoke(app, ["--help"])
 
     assert result.exit_code == 0
-    for command in (
+    commands = (
         "preflight",
         "ingest",
         "extract-turn-ke",
@@ -45,9 +47,12 @@ def test_cli_lists_ke_only_stages() -> None:
         "retrieve",
         "verify-snapshot",
         "evaluate",
-    ):
+    )
+    for command in commands:
         assert command in result.stdout
-    assert "run-baselines" not in result.stdout
+    root_command = get_command(app)
+    assert isinstance(root_command, TyperGroup)
+    assert set(root_command.commands) == set(commands)
 
 
 def test_cli_lists_evaluation_commands() -> None:
@@ -58,6 +63,58 @@ def test_cli_lists_evaluation_commands() -> None:
     assert result.exit_code == 0
     for command in ("preflight", "smoke", "run", "report"):
         assert command in result.stdout
+
+
+def test_cli_normalizes_direct_config_directory_before_core_preflight(
+    monkeypatch: pytest.MonkeyPatch,
+    project_root: Path,
+    tmp_path: Path,
+) -> None:
+    import ke_memory_demo.cli as cli
+
+    config_roots: list[Path] = []
+
+    def ontology_identity(*, mode: str) -> dict[str, str]:
+        return {"mode": mode}
+
+    class FakePipeline:
+        async def preflight(self) -> SimpleNamespace:
+            return SimpleNamespace(
+                run_id="run-1",
+                session_count=13,
+                exchange_count=385,
+                question_count=60,
+                normalization_mode="ontology-bound",
+                ontology_identity=SimpleNamespace(model_dump=ontology_identity),
+            )
+
+    class FakeFactory:
+        def build_pipeline(self, _run_id: str) -> FakePipeline:
+            return FakePipeline()
+
+        async def aclose(self) -> None:
+            return None
+
+    def fake_from_paths(config_root: Path, _state_root: Path) -> FakeFactory:
+        config_roots.append(config_root)
+        return FakeFactory()
+
+    monkeypatch.setattr(cli.RuntimeFactory, "from_paths", fake_from_paths)
+    result = runner.invoke(
+        cli.app,
+        [
+            "preflight",
+            "--run-id",
+            "run-1",
+            "--config-root",
+            str(project_root / "config"),
+            "--state-root",
+            str(tmp_path / "state"),
+        ],
+    )
+
+    assert result.exit_code == 0
+    assert config_roots == [project_root.resolve()]
 
 
 def test_evaluation_report_materializes_only_a_verified_canonical_snapshot(

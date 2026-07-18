@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from dataclasses import dataclass
 import os
 from pathlib import Path
 import tomllib
@@ -12,10 +13,17 @@ from pydantic import BaseModel, ConfigDict, Field, ValidationError
 PositiveInt = Annotated[int, Field(gt=0)]
 NonNegativeFloat = Annotated[float, Field(ge=0)]
 NonEmptyString = Annotated[str, Field(min_length=1)]
+_CONFIG_FILENAMES = ("models.toml", "experiment.toml", "es_vocab.toml")
 
 
 class SettingsError(RuntimeError):
     """Raised when configuration cannot support a requested operation."""
+
+
+@dataclass(frozen=True)
+class ConfigLayout:
+    project_root: Path
+    config_root: Path
 
 
 class _FrozenModel(BaseModel):
@@ -144,23 +152,35 @@ class AppSettings(_FrozenModel):
         return endpoint, index, api_key
 
 
+def resolve_config_layout(root: Path) -> ConfigLayout:
+    candidate = root.expanduser().resolve()
+    direct_config = _contains_config_files(candidate)
+    nested_config_root = candidate / "config"
+    nested_config = _contains_config_files(nested_config_root)
+    if direct_config and nested_config:
+        raise SettingsError("Configuration layout is ambiguous")
+    if nested_config:
+        return ConfigLayout(project_root=candidate, config_root=nested_config_root)
+    if direct_config and candidate.name == "config":
+        return ConfigLayout(project_root=candidate.parent, config_root=candidate)
+    raise SettingsError("Configuration layout is missing or nested incorrectly")
+
+
 def load_settings(root: Path) -> AppSettings:
-    project_root = root.expanduser().resolve()
-    load_dotenv(project_root / ".env.local", override=False)
+    layout = resolve_config_layout(root)
+    load_dotenv(layout.project_root / ".env.local", override=False)
 
     try:
-        models = _ModelsFile.model_validate(_read_toml(project_root / "config/models.toml"))
+        models = _ModelsFile.model_validate(_read_toml(layout.config_root / "models.toml"))
         experiment = _ExperimentFile.model_validate(
-            _read_toml(project_root / "config/experiment.toml")
+            _read_toml(layout.config_root / "experiment.toml")
         )
-        es = ElasticsearchSettings.model_validate(_read_toml(project_root / "config/es_vocab.toml"))
+        es = ElasticsearchSettings.model_validate(_read_toml(layout.config_root / "es_vocab.toml"))
     except ValidationError as exc:
-        raise SettingsError(
-            f"Invalid configuration under {project_root / 'config'}: {exc}"
-        ) from exc
+        raise SettingsError(f"Invalid configuration under {layout.config_root}: {exc}") from exc
 
     return AppSettings(
-        project_root=project_root,
+        project_root=layout.project_root,
         work=models.work,
         judge=models.judge,
         embedding=models.embedding,
@@ -170,6 +190,10 @@ def load_settings(root: Path) -> AppSettings:
         evaluation=experiment.evaluation,
         es=es,
     )
+
+
+def _contains_config_files(root: Path) -> bool:
+    return all((root / name).is_file() for name in _CONFIG_FILENAMES)
 
 
 def _read_toml(path: Path) -> dict[str, object]:

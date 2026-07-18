@@ -74,7 +74,12 @@ from ke_memory_demo.retrieval import (
     SymbolicRetriever,
     TokenCounter,
 )
-from ke_memory_demo.settings import AppSettings, ModelSettings, load_settings
+from ke_memory_demo.settings import (
+    AppSettings,
+    ModelSettings,
+    load_settings,
+    resolve_config_layout,
+)
 from ke_memory_demo.snapshots import GitSnapshotStore
 from ke_memory_demo.storage import (
     ArtifactStore,
@@ -410,7 +415,8 @@ class RuntimeFactory:
 
     @classmethod
     def from_paths(cls, config_root: Path, state_root: Path) -> RuntimeFactory:
-        settings = load_settings(config_root)
+        layout = resolve_config_layout(config_root)
+        settings = load_settings(layout.project_root)
         artifacts = ArtifactStore(
             state_root,
             registry={
@@ -1003,15 +1009,24 @@ class _LiveEvaluationPreflightPorts:
         run_id: str,
         snapshot_id: str,
     ) -> None:
-        self._config_root = config_root.expanduser().resolve()
+        provided_root = config_root.expanduser().resolve()
+        self._config_root = provided_root
         self._state_root = state_root.expanduser().resolve()
         self._run_id = run_id
         self._snapshot_id = snapshot_id
-        self._dotenv_path = self._config_root / ".env.local"
-        self._dotenv_failure = self._dotenv_permission_failure()
+        self._dotenv_path = provided_root / ".env.local"
+        self._dotenv_failure: str | None = None
         self._settings: AppSettings | None = None
         self._settings_error = "SettingsUnavailable"
-        if self._dotenv_failure is None:
+        try:
+            layout = resolve_config_layout(provided_root)
+        except Exception as error:
+            self._settings_error = type(error).__name__
+        else:
+            self._config_root = layout.project_root
+            self._dotenv_path = layout.project_root / ".env.local"
+            self._dotenv_failure = self._dotenv_permission_failure()
+        if self._settings_error == "SettingsUnavailable" and self._dotenv_failure is None:
             try:
                 self._settings = load_settings(self._config_root)
             except Exception as error:

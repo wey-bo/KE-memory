@@ -83,9 +83,7 @@ class EvaluationRunner:
         if len(question_ids) != len(set(question_ids)):
             raise EvaluationInvariantError("evaluation questions contain duplicate IDs")
         if len(ordered) != self._manifest.expected_questions:
-            raise EvaluationInvariantError(
-                "evaluation question count does not match the manifest"
-            )
+            raise EvaluationInvariantError("evaluation question count does not match the manifest")
         if question_manifest_sha256(ordered) != self._manifest.question_manifest_sha256:
             raise EvaluationInvariantError("evaluation question manifest hash does not match")
         outcome = await bounded_collect(
@@ -193,11 +191,7 @@ class EvaluationRunner:
         answers = tuple(sorted((item.answer for item in outcome.values), key=_answer_key))
         judgements = tuple(
             sorted(
-                (
-                    item.judgement
-                    for item in outcome.values
-                    if item.judgement is not None
-                ),
+                (item.judgement for item in outcome.values if item.judgement is not None),
                 key=_judgement_key,
             )
         )
@@ -213,11 +207,7 @@ class EvaluationRunner:
         )
         answer_ids = tuple(item.question_id for item in answers)
         judgement_ids = tuple(item.question_id for item in judgements)
-        complete = (
-            answer_ids == expected_ids
-            and judgement_ids == expected_ids
-            and not failures
-        )
+        complete = answer_ids == expected_ids and judgement_ids == expected_ids and not failures
         return EvaluationRun(
             manifest_hash=self._manifest.content_hash,
             expected_question_ids=expected_ids,

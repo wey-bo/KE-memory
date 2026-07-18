@@ -23,6 +23,7 @@ from ke_memory_demo.pipeline.runtime import (
     build_evaluation_preflight,
     materialize_evaluation_report,
 )
+from ke_memory_demo.settings import resolve_config_layout
 from ke_memory_demo.snapshots import GitSnapshotStore
 from ke_memory_demo.storage import ArtifactStore
 
@@ -63,7 +64,10 @@ def main(
 
 ConfigRoot = Annotated[
     Path,
-    typer.Option("--config-root", help="Project root containing config/ and .env.local."),
+    typer.Option(
+        "--config-root",
+        help="Project root or its direct config/ directory.",
+    ),
 ]
 StateRoot = Annotated[
     Path,
@@ -93,7 +97,7 @@ def evaluation_preflight_command(
 
     async def invoke() -> PreflightReport:
         preflight = build_evaluation_preflight(
-            config_root,
+            resolve_config_layout(config_root).project_root,
             state_root,
             run_id,
             snapshot_id,
@@ -415,7 +419,8 @@ def _execute_evaluation_command(
     smoke: bool,
 ) -> None:
     async def invoke() -> tuple[EvaluationRun, str | None]:
-        factory = RuntimeFactory.from_paths(config_root, state_root)
+        project_root = resolve_config_layout(config_root).project_root
+        factory = RuntimeFactory.from_paths(project_root, state_root)
         try:
             run = await factory.run_evaluation(run_id, snapshot_id, smoke=smoke)
             return run, factory.evaluation_snapshot_id
@@ -464,7 +469,8 @@ def _execute_factory(
     operation: Callable[[RuntimeFactory], Awaitable[JsonObject]],
 ) -> None:
     async def invoke() -> JsonObject:
-        factory = RuntimeFactory.from_paths(config_root, state_root)
+        project_root = resolve_config_layout(config_root).project_root
+        factory = RuntimeFactory.from_paths(project_root, state_root)
         try:
             return await operation(factory)
         finally:

@@ -56,6 +56,43 @@ def test_settings_load_all_exact_model_values(project_root: Path):
     }
 
 
+def test_settings_accept_direct_config_directory(project_root: Path) -> None:
+    from_project_root = load_settings(project_root)
+
+    from_config_directory = load_settings(project_root / "config")
+
+    assert from_config_directory == from_project_root
+    assert from_config_directory.project_root == project_root.resolve()
+
+
+def test_settings_reject_ambiguous_config_layout(
+    project_root: Path,
+    tmp_path: Path,
+) -> None:
+    ambiguous_root = tmp_path / "ambiguous"
+    shutil.copytree(project_root / "config", ambiguous_root / "config")
+    for source in (project_root / "config").iterdir():
+        shutil.copy2(source, ambiguous_root / source.name)
+
+    with pytest.raises(SettingsError, match="^Configuration layout is ambiguous$"):
+        load_settings(ambiguous_root)
+
+
+@pytest.mark.parametrize("relative_root", ("missing", "project/src"))
+def test_settings_reject_missing_or_nested_config_layout_with_sanitized_error(
+    tmp_path: Path,
+    relative_root: str,
+) -> None:
+    candidate = tmp_path / relative_root
+    candidate.mkdir(parents=True)
+
+    with pytest.raises(
+        SettingsError,
+        match="^Configuration layout is missing or nested incorrectly$",
+    ):
+        load_settings(candidate)
+
+
 def test_settings_load_all_exact_experiment_values(project_root: Path):
     settings = load_settings(project_root)
 
