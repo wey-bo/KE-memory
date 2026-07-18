@@ -23,7 +23,7 @@ class SettingsError(RuntimeError):
 @dataclass(frozen=True)
 class ConfigLayout:
     project_root: Path
-    config_root: Path
+    config_dir: Path
 
 
 class _FrozenModel(BaseModel):
@@ -154,30 +154,31 @@ class AppSettings(_FrozenModel):
 
 def resolve_config_layout(root: Path) -> ConfigLayout:
     candidate = root.expanduser().resolve()
-    direct_config = _contains_config_files(candidate)
-    nested_config_root = candidate / "config"
-    nested_config = _contains_config_files(nested_config_root)
-    if direct_config and nested_config:
+    if candidate.name == "config":
+        layout = ConfigLayout(project_root=candidate.parent, config_dir=candidate)
+    else:
+        layout = ConfigLayout(project_root=candidate, config_dir=candidate / "config")
+    project_config = _contains_config_files(layout.project_root)
+    config_dir = _contains_config_files(layout.config_dir)
+    if project_config and config_dir:
         raise SettingsError("Configuration layout is ambiguous")
-    if nested_config:
-        return ConfigLayout(project_root=candidate, config_root=nested_config_root)
-    if direct_config and candidate.name == "config":
-        return ConfigLayout(project_root=candidate.parent, config_root=candidate)
-    raise SettingsError("Configuration layout is missing or nested incorrectly")
+    if not config_dir:
+        raise SettingsError("Configuration layout is missing or nested incorrectly")
+    return layout
 
 
-def load_settings(root: Path) -> AppSettings:
-    layout = resolve_config_layout(root)
+def load_settings(root: Path | ConfigLayout) -> AppSettings:
+    layout = root if isinstance(root, ConfigLayout) else resolve_config_layout(root)
     load_dotenv(layout.project_root / ".env.local", override=False)
 
     try:
-        models = _ModelsFile.model_validate(_read_toml(layout.config_root / "models.toml"))
+        models = _ModelsFile.model_validate(_read_toml(layout.config_dir / "models.toml"))
         experiment = _ExperimentFile.model_validate(
-            _read_toml(layout.config_root / "experiment.toml")
+            _read_toml(layout.config_dir / "experiment.toml")
         )
-        es = ElasticsearchSettings.model_validate(_read_toml(layout.config_root / "es_vocab.toml"))
+        es = ElasticsearchSettings.model_validate(_read_toml(layout.config_dir / "es_vocab.toml"))
     except ValidationError as exc:
-        raise SettingsError(f"Invalid configuration under {layout.config_root}: {exc}") from exc
+        raise SettingsError(f"Invalid configuration under {layout.config_dir}: {exc}") from exc
 
     return AppSettings(
         project_root=layout.project_root,

@@ -71,8 +71,9 @@ def test_cli_normalizes_direct_config_directory_before_core_preflight(
     tmp_path: Path,
 ) -> None:
     import ke_memory_demo.cli as cli
+    from ke_memory_demo.settings import ConfigLayout
 
-    config_roots: list[Path] = []
+    config_layouts: list[Path | ConfigLayout] = []
 
     def ontology_identity(*, mode: str) -> dict[str, str]:
         return {"mode": mode}
@@ -95,8 +96,8 @@ def test_cli_normalizes_direct_config_directory_before_core_preflight(
         async def aclose(self) -> None:
             return None
 
-    def fake_from_paths(config_root: Path, _state_root: Path) -> FakeFactory:
-        config_roots.append(config_root)
+    def fake_from_paths(config_root: Path | ConfigLayout, _state_root: Path) -> FakeFactory:
+        config_layouts.append(config_root)
         return FakeFactory()
 
     monkeypatch.setattr(cli.RuntimeFactory, "from_paths", fake_from_paths)
@@ -114,7 +115,12 @@ def test_cli_normalizes_direct_config_directory_before_core_preflight(
     )
 
     assert result.exit_code == 0
-    assert config_roots == [project_root.resolve()]
+    assert config_layouts == [
+        ConfigLayout(
+            project_root=project_root.resolve(),
+            config_dir=(project_root / "config").resolve(),
+        )
+    ]
 
 
 def test_evaluation_report_materializes_only_a_verified_canonical_snapshot(
@@ -287,6 +293,57 @@ def test_evaluation_preflight_prints_canonical_json_and_exits_two_when_not_ready
         separators=(",", ":"),
         sort_keys=True,
     )
+
+
+def test_evaluation_preflight_collects_invalid_layout_without_ingestion(
+    tmp_path: Path,
+) -> None:
+    import ke_memory_demo.cli as cli
+    from ke_memory_demo.evaluation.preflight import PREFLIGHT_CHECK_NAMES
+
+    config_root = tmp_path / "invalid-config-root"
+    config_root.mkdir()
+    state_root = tmp_path / "state"
+
+    result = runner.invoke(
+        cli.app,
+        [
+            "evaluate",
+            "preflight",
+            "--run-id",
+            "run-1",
+            "--snapshot-id",
+            "a" * 40,
+            "--config-root",
+            str(config_root),
+            "--state-root",
+            str(state_root),
+        ],
+    )
+
+    assert result.exit_code == 2
+    payload = json.loads(result.stdout)
+    assert payload["ready"] is False
+    assert [item["name"] for item in payload["checks"]] == sorted(PREFLIGHT_CHECK_NAMES)
+    assert all(item["passed"] is False for item in payload["checks"])
+    details = {item["name"]: item["detail"] for item in payload["checks"]}
+    for name in (
+        "concurrency",
+        "embedding",
+        "environment",
+        "judge_model",
+        "ontology_identity",
+        "work_model",
+    ):
+        assert details[name] == f"{name}:SettingsError"
+    assert result.stdout.strip() == json.dumps(
+        payload,
+        ensure_ascii=False,
+        separators=(",", ":"),
+        sort_keys=True,
+    )
+    assert result.stderr == ""
+    assert not state_root.exists()
 
 
 def test_stage_command_refuses_a_skipped_prerequisite(

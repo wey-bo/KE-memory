@@ -97,7 +97,7 @@ def evaluation_preflight_command(
 
     async def invoke() -> PreflightReport:
         preflight = build_evaluation_preflight(
-            resolve_config_layout(config_root).project_root,
+            config_root,
             state_root,
             run_id,
             snapshot_id,
@@ -419,8 +419,8 @@ def _execute_evaluation_command(
     smoke: bool,
 ) -> None:
     async def invoke() -> tuple[EvaluationRun, str | None]:
-        project_root = resolve_config_layout(config_root).project_root
-        factory = RuntimeFactory.from_paths(project_root, state_root)
+        layout = resolve_config_layout(config_root)
+        factory = RuntimeFactory.from_paths(layout, state_root)
         try:
             run = await factory.run_evaluation(run_id, snapshot_id, smoke=smoke)
             return run, factory.evaluation_snapshot_id
@@ -469,8 +469,8 @@ def _execute_factory(
     operation: Callable[[RuntimeFactory], Awaitable[JsonObject]],
 ) -> None:
     async def invoke() -> JsonObject:
-        project_root = resolve_config_layout(config_root).project_root
-        factory = RuntimeFactory.from_paths(project_root, state_root)
+        layout = resolve_config_layout(config_root)
+        factory = RuntimeFactory.from_paths(layout, state_root)
         try:
             return await operation(factory)
         finally:

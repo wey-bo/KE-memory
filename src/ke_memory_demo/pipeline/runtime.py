@@ -76,6 +76,7 @@ from ke_memory_demo.retrieval import (
 )
 from ke_memory_demo.settings import (
     AppSettings,
+    ConfigLayout,
     ModelSettings,
     load_settings,
     resolve_config_layout,
@@ -414,9 +415,12 @@ class RuntimeFactory:
         self._evaluation_snapshot_id: str | None = None
 
     @classmethod
-    def from_paths(cls, config_root: Path, state_root: Path) -> RuntimeFactory:
-        layout = resolve_config_layout(config_root)
-        settings = load_settings(layout.project_root)
+    def from_paths(
+        cls,
+        config_root: Path | ConfigLayout,
+        state_root: Path,
+    ) -> RuntimeFactory:
+        settings = load_settings(config_root)
         artifacts = ArtifactStore(
             state_root,
             registry={
@@ -1004,33 +1008,40 @@ class RuntimeFactory:
 class _LiveEvaluationPreflightPorts:
     def __init__(
         self,
-        config_root: Path,
+        config_root: Path | ConfigLayout,
         state_root: Path,
         run_id: str,
         snapshot_id: str,
     ) -> None:
-        provided_root = config_root.expanduser().resolve()
-        self._config_root = provided_root
+        self._config_root = (
+            config_root.project_root
+            if isinstance(config_root, ConfigLayout)
+            else config_root.expanduser()
+        )
         self._state_root = state_root.expanduser().resolve()
         self._run_id = run_id
         self._snapshot_id = snapshot_id
-        self._dotenv_path = provided_root / ".env.local"
+        self._dotenv_path = self._config_root / ".env.local"
         self._dotenv_failure: str | None = None
         self._settings: AppSettings | None = None
         self._settings_error = "SettingsUnavailable"
         try:
-            layout = resolve_config_layout(provided_root)
+            layout = (
+                config_root
+                if isinstance(config_root, ConfigLayout)
+                else resolve_config_layout(config_root)
+            )
         except Exception as error:
             self._settings_error = type(error).__name__
         else:
             self._config_root = layout.project_root
             self._dotenv_path = layout.project_root / ".env.local"
             self._dotenv_failure = self._dotenv_permission_failure()
-        if self._settings_error == "SettingsUnavailable" and self._dotenv_failure is None:
-            try:
-                self._settings = load_settings(self._config_root)
-            except Exception as error:
-                self._settings_error = type(error).__name__
+            if self._dotenv_failure is None:
+                try:
+                    self._settings = load_settings(layout)
+                except Exception as error:
+                    self._settings_error = type(error).__name__
         self._snapshot_cache: tuple[PipelineRunManifest, tuple[Conversation, ...]] | None = None
 
     async def check(self, name: str) -> str:
@@ -1273,7 +1284,7 @@ class _LiveEvaluationPreflightPorts:
 
 
 def build_evaluation_preflight(
-    config_root: Path,
+    config_root: Path | ConfigLayout,
     state_root: Path,
     run_id: str,
     snapshot_id: str,

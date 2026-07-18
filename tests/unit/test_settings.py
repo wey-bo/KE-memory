@@ -4,7 +4,7 @@ import shutil
 import pytest
 from pydantic import ValidationError
 
-from ke_memory_demo.settings import SettingsError, load_settings
+from ke_memory_demo.settings import SettingsError, load_settings, resolve_config_layout
 
 
 LIVE_ENV_VARS = (
@@ -60,22 +60,38 @@ def test_settings_accept_direct_config_directory(project_root: Path) -> None:
     from_project_root = load_settings(project_root)
 
     from_config_directory = load_settings(project_root / "config")
+    from_resolved_layout = load_settings(resolve_config_layout(project_root / "config"))
 
     assert from_config_directory == from_project_root
+    assert from_resolved_layout == from_project_root
     assert from_config_directory.project_root == project_root.resolve()
 
 
+@pytest.mark.parametrize("provided_root", (Path("."), Path("config")))
 def test_settings_reject_ambiguous_config_layout(
     project_root: Path,
     tmp_path: Path,
+    provided_root: Path,
 ) -> None:
-    ambiguous_root = tmp_path / "ambiguous"
-    shutil.copytree(project_root / "config", ambiguous_root / "config")
-    for source in (project_root / "config").iterdir():
-        shutil.copy2(source, ambiguous_root / source.name)
+    ambiguous_root = _make_ambiguous_config_root(project_root, tmp_path)
 
     with pytest.raises(SettingsError, match="^Configuration layout is ambiguous$"):
-        load_settings(ambiguous_root)
+        load_settings(ambiguous_root / provided_root)
+
+
+def test_runtime_factory_rejects_ambiguous_direct_config_directory(
+    project_root: Path,
+    tmp_path: Path,
+) -> None:
+    from ke_memory_demo.pipeline import RuntimeFactory
+
+    ambiguous_root = _make_ambiguous_config_root(project_root, tmp_path)
+    state_root = tmp_path / "state"
+
+    with pytest.raises(SettingsError, match="^Configuration layout is ambiguous$"):
+        RuntimeFactory.from_paths(ambiguous_root / "config", state_root)
+
+    assert not state_root.exists()
 
 
 @pytest.mark.parametrize("relative_root", ("missing", "project/src"))
@@ -275,3 +291,10 @@ def test_dotenv_values_are_loaded_without_overriding_process_environment(
 
     assert settings.require_work_api_key() == "process-test-value"
     assert settings.require_judge_api_key() == "dotenv-judge-test-value"
+
+
+def _make_ambiguous_config_root(project_root: Path, tmp_path: Path) -> Path:
+    ambiguous_root = tmp_path / "ambiguous"
+    shutil.copytree(project_root / "config", ambiguous_root)
+    shutil.copytree(project_root / "config", ambiguous_root / "config")
+    return ambiguous_root
