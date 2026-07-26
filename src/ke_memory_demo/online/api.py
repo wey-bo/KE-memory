@@ -1,6 +1,8 @@
 from __future__ import annotations
 
-from collections.abc import AsyncIterator
+# pyright: reportUnusedFunction=false
+
+from collections.abc import AsyncGenerator
 from contextlib import asynccontextmanager
 from datetime import datetime
 import os
@@ -57,7 +59,7 @@ class CorrectionRequest(_ApiRecord):
 
 def create_app(runtime: OnlineRuntime) -> FastAPI:
     @asynccontextmanager
-    async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
+    async def lifespan(_app: FastAPI) -> AsyncGenerator[None]:
         try:
             yield
         finally:

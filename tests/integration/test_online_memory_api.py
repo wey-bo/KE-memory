@@ -4,7 +4,8 @@ from datetime import UTC, datetime
 import hashlib
 from pathlib import Path
 
-from fastapi.testclient import TestClient
+import httpx
+import pytest
 
 from ke_memory_demo.domain import (
     Exchange,
@@ -43,7 +44,8 @@ class PreferenceExtractor:
         )
 
 
-def test_http_api_supports_add_search_context_correction_get_delete_and_isolation(
+@pytest.mark.asyncio
+async def test_http_api_supports_add_search_context_correction_get_delete_and_isolation(
     tmp_path: Path,
 ) -> None:
     repository = SQLiteOnlineMemoryRepository(tmp_path / "online-memory.sqlite3")
@@ -60,8 +62,9 @@ def test_http_api_supports_add_search_context_correction_get_delete_and_isolatio
     namespace = _namespace()
     exchange = _exchange()
 
-    with TestClient(create_app(runtime)) as client:
-        health = client.get("/healthz")
+    transport = httpx.ASGITransport(app=create_app(runtime))
+    async with httpx.AsyncClient(transport=transport, base_url="http://test") as client:
+        health = await client.get("/healthz")
         assert health.status_code == 200
         assert health.json() == {
             "status": "ok",
@@ -70,7 +73,7 @@ def test_http_api_supports_add_search_context_correction_get_delete_and_isolatio
             "database_integrity": "ok",
         }
 
-        added = client.post(
+        added = await client.post(
             "/v1/memory/turns",
             json={
                 "namespace": namespace.model_dump(mode="json"),
@@ -83,7 +86,7 @@ def test_http_api_supports_add_search_context_correction_get_delete_and_isolatio
         assert added.status_code == 200
         memory_id = added.json()["admitted_memory_ids"][0]
 
-        replay = client.post(
+        replay = await client.post(
             "/v1/memory/turns",
             json={
                 "namespace": namespace.model_dump(mode="json"),
@@ -96,7 +99,7 @@ def test_http_api_supports_add_search_context_correction_get_delete_and_isolatio
         assert replay.status_code == 200
         assert replay.json()["replayed"] is True
 
-        searched = client.post(
+        searched = await client.post(
             "/v1/memory/search",
             json={
                 "namespace": namespace.model_dump(mode="json"),
@@ -110,7 +113,7 @@ def test_http_api_supports_add_search_context_correction_get_delete_and_isolatio
         assert searched.status_code == 200
         assert searched.json()["hits"][0]["memory_id"] == memory_id
 
-        context = client.post(
+        context = await client.post(
             "/v1/memory/context",
             json={
                 "namespace": namespace.model_dump(mode="json"),
@@ -120,14 +123,14 @@ def test_http_api_supports_add_search_context_correction_get_delete_and_isolatio
         assert context.status_code == 200
         assert context.json()["preferences"][0]["memory_id"] == memory_id
 
-        fetched = client.get(
+        fetched = await client.get(
             f"/v1/memory/{memory_id}",
             params=namespace.model_dump(mode="json"),
         )
         assert fetched.status_code == 200
         assert fetched.json()["memory_id"] == memory_id
 
-        isolated = client.get(
+        isolated = await client.get(
             f"/v1/memory/{memory_id}",
             params={
                 "tenant_id": "tenant-a",
@@ -143,7 +146,7 @@ def test_http_api_supports_add_search_context_correction_get_delete_and_isolatio
             text=correction_text,
             value="detailed answers",
         )
-        corrected = client.post(
+        corrected = await client.post(
             "/v1/memory/corrections",
             json={
                 "namespace": namespace.model_dump(mode="json"),
@@ -158,7 +161,7 @@ def test_http_api_supports_add_search_context_correction_get_delete_and_isolatio
         assert replacement_id != memory_id
         assert corrected.json()["links"][0]["relation"] == "supersedes"
 
-        deleted = client.delete(
+        deleted = await client.delete(
             f"/v1/memory/{replacement_id}",
             params={
                 **namespace.model_dump(mode="json"),
@@ -168,13 +171,13 @@ def test_http_api_supports_add_search_context_correction_get_delete_and_isolatio
         assert deleted.status_code == 200
         assert deleted.json()["tombstoned"] is True
 
-        missing = client.get(
+        missing = await client.get(
             f"/v1/memory/{replacement_id}",
             params=namespace.model_dump(mode="json"),
         )
         assert missing.status_code == 404
 
-        invalid = client.post(
+        invalid = await client.post(
             "/v1/memory/turns",
             json={
                 "namespace": namespace.model_dump(mode="json"),
