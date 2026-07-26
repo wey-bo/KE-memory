@@ -110,6 +110,8 @@ def build_online_runtime(root: str | Path) -> OnlineRuntime:
         )
 
     settings = load_settings(project_root)
+    settings.require_work_api_key()
+    settings.require_es_connection()
     recorder = InMemoryTraceRecorder()
     model = StructuredModelClient.from_app_settings(
         settings,
