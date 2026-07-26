@@ -6,6 +6,42 @@ ingestion, Turn KE extraction, source-ordered lifecycle reconciliation, Session 
 Conversation-local semantic DAG construction, and `ke-ready` preparation. The ontology identity is
 re-read before every stage promotion.
 
+It also exposes an online ontology-led memory service for task/workflow agents and personal
+long-term assistants. The online path preserves raw turns, keeps extraction confidence,
+epistemic trust, and memory utility separate, compiles admitted records into closed KEOL bundles,
+stores revisions atomically, executes symbolic queries first, and invokes dense retrieval only
+for explicitly unresolved entity or predicate slots.
+
+## Online Agent Memory
+
+The default `config/online.toml` mode is `production`. It reuses the configured structured work
+model, Elasticsearch ontology vocabulary, Turn KE extractor, and lifecycle maintainer. Startup
+fails explicitly when required credentials are missing. To run without model or network calls,
+set `mode = "offline"`; offline mode preserves raw turns but deliberately extracts no durable KE.
+
+```bash
+uv sync --frozen
+uv run ke-memory-serve
+```
+
+The default service listens on `http://127.0.0.1:8787`. Its main endpoints are:
+
+- `GET /healthz`
+- `POST /v1/memory/turns`
+- `POST /v1/memory/search`
+- `POST /v1/memory/context`
+- `POST /v1/memory/corrections`
+- `GET /v1/memory/{memory_id}`
+- `DELETE /v1/memory/{memory_id}`
+
+SQLite/WAL is the authoritative single-host store. Every operation is scoped by
+`tenant_id + user_id + agent_id`; normal reads expose only current, non-tombstoned records.
+Corrections append a replacement and supersede the previous memory. Forgetting appends a
+retracted revision and tombstones the head without editing raw turns or prior revisions.
+
+See `docs/online-memory-api.md` for request examples and the complete trust, lifecycle, and
+fallback contract.
+
 ## Local Configuration
 
 Create `.env.local` with mode `0600` and these variable names:
