@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 from datetime import UTC, datetime
+import os
 from pathlib import Path
 import tomllib
 from typing import Annotated, Literal, Protocol, cast
@@ -89,6 +90,13 @@ class OnlineRuntime:
 def build_online_runtime(root: str | Path) -> OnlineRuntime:
     project_root = _project_root(Path(root))
     config = _load_online_config(project_root)
+    mode_override = os.environ.get("KE_MEMORY_ONLINE_MODE", "").strip()
+    if mode_override:
+        if mode_override not in {"offline", "production"}:
+            raise SettingsError(
+                "KE_MEMORY_ONLINE_MODE must be either offline or production"
+            )
+        config = config.model_copy(update={"mode": mode_override})
     database_path = config.database_path
     if not database_path.is_absolute():
         database_path = project_root / database_path

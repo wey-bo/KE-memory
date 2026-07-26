@@ -10,13 +10,14 @@ from ke_memory_demo.online.factory import build_online_runtime
 @pytest.mark.asyncio
 async def test_offline_factory_needs_only_online_config_and_resolves_database_path(
     tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     config_dir = tmp_path / "config"
     config_dir.mkdir()
     (config_dir / "online.toml").write_text(
         """
 [online]
-mode = "offline"
+mode = "production"
 database_path = "state/test-memory.sqlite3"
 host = "127.0.0.1"
 port = 8899
@@ -25,6 +26,7 @@ keol_commit = "44631e64fd07c9b85f22e36035bf49c882dba592"
         + "\n",
         encoding="utf-8",
     )
+    monkeypatch.setenv("KE_MEMORY_ONLINE_MODE", "offline")
 
     runtime = build_online_runtime(tmp_path)
 

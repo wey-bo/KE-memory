@@ -19,6 +19,12 @@ uv run ke-memory-serve
 `config/es_vocab.toml`. `offline` performs no model or ontology network calls and intentionally
 returns no extracted KEs.
 
+For a one-off API/storage smoke without editing the config file:
+
+```bash
+KE_MEMORY_ONLINE_MODE=offline uv run ke-memory-serve
+```
+
 The service compiles JSON that is contract-tested against KEOL commit
 `44631e64fd07c9b85f22e36035bf49c882dba592`. It does not modify the shared KEOL checkout.
 
