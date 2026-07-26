@@ -5,7 +5,7 @@ from typing import Annotated
 
 from pydantic import BaseModel, ConfigDict, Field
 
-from ke_memory_demo.domain import Exchange, KnowledgeEquation, Lifecycle
+from ke_memory_demo.domain import Exchange, KnowledgeEquation
 
 from .admission import AdmissionPolicy
 from .extractor import NoOpLifecycle, OnlineLifecycle, OnlineTurnExtractor
