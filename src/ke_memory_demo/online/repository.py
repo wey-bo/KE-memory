@@ -60,6 +60,22 @@ class MemoryWrite(_RepositoryRecord):
         return self
 
 
+class AssessedEquation(_RepositoryRecord):
+    equation: KnowledgeEquation
+    assessment: AdmissionAssessment
+
+
+class ExistingMemoryRevision(_RepositoryRecord):
+    memory_id: NonEmptyString
+    equation: KnowledgeEquation
+
+
+class MemoryLinkWrite(_RepositoryRecord):
+    source_memory_id: NonEmptyString
+    target_memory_id: NonEmptyString
+    relation: NonEmptyString
+
+
 class TurnWriteReceipt(_RepositoryRecord):
     transaction_id: NonEmptyString
     replayed: bool = False
@@ -104,6 +120,9 @@ class SQLiteOnlineMemoryRepository:
         exchange: Exchange,
         memories: Sequence[MemoryWrite],
         recorded_at: datetime,
+        extractions: Sequence[AssessedEquation] = (),
+        transitions: Sequence[ExistingMemoryRevision] = (),
+        links: Sequence[MemoryLinkWrite] = (),
     ) -> TurnWriteReceipt:
         _require_non_empty(conversation_id, "conversation_id")
         _require_non_empty(idempotency_key, "idempotency_key")
@@ -119,6 +138,15 @@ class SQLiteOnlineMemoryRepository:
             "memories": [
                 cast(JsonValue, memory.model_dump(mode="json")) for memory in memories
             ],
+            "extractions": [
+                cast(JsonValue, extraction.model_dump(mode="json"))
+                for extraction in extractions
+            ],
+            "transitions": [
+                cast(JsonValue, transition.model_dump(mode="json"))
+                for transition in transitions
+            ],
+            "links": [cast(JsonValue, link.model_dump(mode="json")) for link in links],
         }
         payload_hash = _digest(payload)
         namespace_id = _namespace_id(namespace)
@@ -186,6 +214,26 @@ class SQLiteOnlineMemoryRepository:
             )
             for record in (exchange.user, *exchange.events, exchange.assistant):
                 self._insert_raw_record(connection, namespace_id, exchange.id, record)
+            for extraction in extractions:
+                connection.execute(
+                    """
+                    INSERT INTO extracted_equations (
+                        namespace_id, exchange_id, transaction_id, equation_id, revision,
+                        admission_status, equation_json, assessment_json, created_at
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    """,
+                    (
+                        namespace_id,
+                        exchange.id,
+                        transaction_id,
+                        extraction.equation.id,
+                        extraction.equation.revision,
+                        extraction.assessment.status.value,
+                        extraction.equation.model_dump_json(),
+                        extraction.assessment.model_dump_json(),
+                        recorded_at.isoformat(),
+                    ),
+                )
 
             memory_ids: list[str] = []
             for memory in memories:
@@ -202,6 +250,70 @@ class SQLiteOnlineMemoryRepository:
                     recorded_at=recorded_at,
                 )
                 memory_ids.append(memory_id)
+
+            for transition in transitions:
+                stored = self._select_stored(
+                    connection,
+                    namespace,
+                    transition.memory_id,
+                    include_deleted=True,
+                )
+                if stored is None:
+                    raise MemoryNotFound(transition.memory_id)
+                if not stored.current or stored.tombstoned:
+                    raise MemoryStateConflict(
+                        "only a current non-tombstoned memory can receive a lifecycle revision"
+                    )
+                if stored.equation.id != transition.equation.id:
+                    raise ValueError("lifecycle transition changed the logical equation ID")
+                transitioned = MemoryWrite(
+                    equation=transition.equation,
+                    assessment=stored.assessment,
+                    bundle=_transition_bundle(stored.bundle, transition.equation),
+                )
+                self._insert_memory_revision(
+                    connection,
+                    namespace_id=namespace_id,
+                    memory_id=transition.memory_id,
+                    memory=transitioned,
+                    transaction_id=transaction_id,
+                    source_turn_id=None,
+                    recorded_at=recorded_at,
+                )
+                is_current = transition.equation.lifecycle not in {
+                    Lifecycle.SUPERSEDED,
+                    Lifecycle.RETRACTED,
+                }
+                connection.execute(
+                    """
+                    UPDATE memory_heads
+                    SET is_current = ?, updated_at = ?
+                    WHERE namespace_id = ? AND memory_id = ?
+                    """,
+                    (
+                        int(is_current),
+                        recorded_at.isoformat(),
+                        namespace_id,
+                        transition.memory_id,
+                    ),
+                )
+
+            for link in links:
+                connection.execute(
+                    """
+                    INSERT INTO memory_links (
+                        namespace_id, source_memory_id, target_memory_id,
+                        relation, created_at
+                    ) VALUES (?, ?, ?, ?, ?)
+                    """,
+                    (
+                        namespace_id,
+                        link.source_memory_id,
+                        link.target_memory_id,
+                        link.relation,
+                        recorded_at.isoformat(),
+                    ),
+                )
 
             receipt = TurnWriteReceipt(
                 transaction_id=transaction_id,
@@ -384,6 +496,86 @@ class SQLiteOnlineMemoryRepository:
                 include_deleted=include_deleted,
             )
 
+    def memory_id_for(self, namespace: MemoryNamespace, equation_id: str) -> str:
+        return _memory_id(namespace, equation_id)
+
+    def get_turn_receipt(
+        self,
+        namespace: MemoryNamespace,
+        idempotency_key: str,
+    ) -> TurnWriteReceipt | None:
+        with self._connect() as connection:
+            row = connection.execute(
+                """
+                SELECT receipt_json
+                FROM transactions
+                WHERE namespace_id = ? AND idempotency_key = ?
+                """,
+                (_namespace_id(namespace), idempotency_key),
+            ).fetchone()
+        if row is None:
+            return None
+        receipt = TurnWriteReceipt.model_validate_json(cast(str, row["receipt_json"]))
+        return receipt.model_copy(update={"replayed": True})
+
+    def get_raw_turn(
+        self,
+        namespace: MemoryNamespace,
+        exchange_id: str,
+    ) -> tuple[JsonObject, ...]:
+        with self._connect() as connection:
+            rows = connection.execute(
+                """
+                SELECT
+                    record_id, record_kind, content, content_hash,
+                    source_order, source_metadata_json
+                FROM raw_records
+                WHERE namespace_id = ? AND exchange_id = ?
+                ORDER BY source_order, record_id
+                """,
+                (_namespace_id(namespace), exchange_id),
+            ).fetchall()
+        return tuple(
+            {
+                "record_id": cast(str, row["record_id"]),
+                "record_kind": cast(str, row["record_kind"]),
+                "content": cast(str, row["content"]),
+                "content_hash": cast(str, row["content_hash"]),
+                "source_order": cast(int, row["source_order"]),
+                "source_metadata": _parse_json_object(
+                    cast(str, row["source_metadata_json"])
+                ),
+            }
+            for row in rows
+        )
+
+    def get_extractions(
+        self,
+        namespace: MemoryNamespace,
+        exchange_id: str,
+    ) -> tuple[AssessedEquation, ...]:
+        with self._connect() as connection:
+            rows = connection.execute(
+                """
+                SELECT equation_json, assessment_json
+                FROM extracted_equations
+                WHERE namespace_id = ? AND exchange_id = ?
+                ORDER BY rowid
+                """,
+                (_namespace_id(namespace), exchange_id),
+            ).fetchall()
+        return tuple(
+            AssessedEquation(
+                equation=KnowledgeEquation.model_validate_json(
+                    cast(str, row["equation_json"])
+                ),
+                assessment=AdmissionAssessment.model_validate_json(
+                    cast(str, row["assessment_json"])
+                ),
+            )
+            for row in rows
+        )
+
     def list_current(self, namespace: MemoryNamespace) -> tuple[StoredMemory, ...]:
         namespace_id = _namespace_id(namespace)
         with self._connect() as connection:
@@ -474,6 +666,7 @@ class SQLiteOnlineMemoryRepository:
             "transactions",
             "turns",
             "raw_records",
+            "extracted_equations",
             "memory_heads",
             "memory_revisions",
             "memory_evidence",
@@ -537,6 +730,21 @@ class SQLiteOnlineMemoryRepository:
                     source_order INTEGER NOT NULL CHECK (source_order >= 0),
                     source_metadata_json TEXT NOT NULL,
                     PRIMARY KEY (namespace_id, record_id),
+                    FOREIGN KEY (namespace_id, exchange_id)
+                        REFERENCES turns(namespace_id, exchange_id)
+                );
+
+                CREATE TABLE IF NOT EXISTS extracted_equations (
+                    namespace_id TEXT NOT NULL,
+                    exchange_id TEXT NOT NULL,
+                    transaction_id TEXT NOT NULL REFERENCES transactions(transaction_id),
+                    equation_id TEXT NOT NULL,
+                    revision TEXT NOT NULL,
+                    admission_status TEXT NOT NULL,
+                    equation_json TEXT NOT NULL,
+                    assessment_json TEXT NOT NULL,
+                    created_at TEXT NOT NULL,
+                    PRIMARY KEY (namespace_id, exchange_id, revision),
                     FOREIGN KEY (namespace_id, exchange_id)
                         REFERENCES turns(namespace_id, exchange_id)
                 );
