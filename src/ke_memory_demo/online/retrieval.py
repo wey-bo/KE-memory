@@ -2,13 +2,12 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 from datetime import datetime
-from typing import Annotated, Literal, Protocol, runtime_checkable
+from typing import Annotated, Literal, Protocol, cast, runtime_checkable
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 from ke_memory_demo.core.json import JsonObject
 from ke_memory_demo.domain import (
-    AssertionRef,
     ConceptRef,
     Expression,
     IndividualRef,
@@ -57,7 +56,11 @@ class SymbolicMemoryQuery(_RetrievalRecord):
     def _normalize_terms(cls, value: object) -> object:
         if not isinstance(value, list | tuple):
             return value
-        return tuple(term.strip() if isinstance(term, str) else term for term in value)
+        sequence = cast(Sequence[object], value)
+        normalized: list[object] = [
+            term.strip() if isinstance(term, str) else term for term in sequence
+        ]
+        return tuple(normalized)
 
     @model_validator(mode="after")
     def _validate_query(self) -> SymbolicMemoryQuery:
@@ -403,8 +406,7 @@ def _collect_terms(
     if isinstance(expression, ConceptRef | IndividualRef):
         entities.update({_normalize(expression.term_id), _normalize(expression.label)})
         return
-    if isinstance(expression, AssertionRef):
-        entities.add(_normalize(expression.assertion_id))
+    entities.add(_normalize(expression.assertion_id))
 
 
 def _contains_all(available: set[str], requested: tuple[str, ...]) -> bool:
