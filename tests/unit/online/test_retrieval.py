@@ -5,6 +5,7 @@ from datetime import UTC, datetime
 import hashlib
 from pathlib import Path
 
+import numpy as np
 import pytest
 from pydantic import ValidationError
 
@@ -31,6 +32,7 @@ from ke_memory_demo.online.repository import (
     StoredMemory,
 )
 from ke_memory_demo.online.retrieval import (
+    DenseCandidateFallback,
     EmbeddingFallbackCandidate,
     OntologyMemoryRetriever,
     SymbolicMemoryQuery,
@@ -58,6 +60,23 @@ class StubFallback:
             for memory_id in self.memory_ids[:limit]
             if memory_id in available
         )
+
+
+class StubEmbeddingBackend:
+    dimension = 2
+
+    def embed_documents(self, texts: Sequence[str]) -> np.ndarray:
+        return np.asarray(
+            [
+                [1.0, 0.0] if "concise answers" in text else [0.0, 1.0]
+                for text in texts
+            ],
+            dtype=np.float32,
+        )
+
+    def embed_query(self, question: str) -> np.ndarray:
+        del question
+        return np.asarray([1.0, 0.0], dtype=np.float32)
 
 
 @pytest.mark.asyncio
@@ -203,6 +222,42 @@ async def test_embedding_runs_only_for_declared_lexical_slot_and_keeps_structura
 
     with pytest.raises(ValidationError):
         SymbolicMemoryQuery(text="bad gap", unresolved_slots=("time",))  # type: ignore[arg-type]
+
+
+@pytest.mark.asyncio
+async def test_dense_candidate_fallback_ranks_only_supplied_namespace_candidates(
+    tmp_path: Path,
+) -> None:
+    repository = _repository(tmp_path)
+    namespace = _namespace()
+    preference_id = _seed(
+        repository,
+        namespace,
+        exchange_id="exchange-pref",
+        text="I prefer concise answers.",
+        modality=Modality.PREFERENCE,
+        operator="prefers",
+        value="concise answers",
+    )
+    _seed(
+        repository,
+        namespace,
+        exchange_id="exchange-task",
+        text="Deploy service alpha.",
+        modality=Modality.PLAN,
+        operator="deploys",
+        value="service alpha",
+    )
+    candidates = repository.list_current(namespace)
+
+    ranked = await DenseCandidateFallback(StubEmbeddingBackend()).search(
+        "preferred response style",
+        candidates,
+        limit=1,
+    )
+
+    assert [item.memory_id for item in ranked] == [preference_id]
+    assert ranked[0].score == 1.0
 
 
 @pytest.mark.asyncio
