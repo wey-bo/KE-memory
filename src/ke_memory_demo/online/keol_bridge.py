@@ -16,7 +16,6 @@ from ke_memory_demo.domain import (
     Expression,
     IndividualRef,
     KnowledgeEquation,
-    OperatorApplication,
     OperatorRef,
 )
 
