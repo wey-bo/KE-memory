@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Iterator, Sequence
+from collections.abc import Generator, Sequence
 from contextlib import contextmanager
 from datetime import datetime
 import hashlib
@@ -180,7 +180,7 @@ class SQLiteOnlineMemoryRepository:
                     conversation_id,
                     exchange.session_id,
                     exchange.global_ordinal,
-                    _json_text(cast(JsonObject, exchange.source_metadata)),
+                    _json_text(exchange.source_metadata),
                     recorded_at.isoformat(),
                 ),
             )
@@ -666,7 +666,7 @@ class SQLiteOnlineMemoryRepository:
                 record.content,
                 record.content_hash,
                 record.source_order,
-                _json_text(cast(JsonObject, record.source_metadata)),
+                _json_text(record.source_metadata),
             ),
         )
 
@@ -858,7 +858,7 @@ class SQLiteOnlineMemoryRepository:
 
 
 @contextmanager
-def _transaction(connection: sqlite3.Connection) -> Iterator[None]:
+def _transaction(connection: sqlite3.Connection) -> Generator[None]:
     connection.execute("BEGIN IMMEDIATE")
     try:
         yield
@@ -874,13 +874,13 @@ def _transition_bundle(bundle: KEOLBundle, equation: KnowledgeEquation) -> KEOLB
     metadata_value = assertion.get("metadata")
     if not isinstance(metadata_value, dict):
         raise ValueError("KEOL assertion metadata must be an object")
-    metadata = cast(JsonObject, dict(metadata_value))
+    metadata = dict(metadata_value)
     metadata["source_equation_revision"] = equation.revision
     assertion["status"] = equation.lifecycle.value
     assertion["metadata"] = metadata
     assertion.pop("hash", None)
-    assertion["hash"] = _digest(cast(JsonObject, assertion))
-    transitioned = bundle.model_copy(update={"assertions": (cast(JsonObject, assertion),)})
+    assertion["hash"] = _digest(assertion)
+    transitioned = bundle.model_copy(update={"assertions": (assertion,)})
     transitioned.validate_closed()
     return transitioned
 
