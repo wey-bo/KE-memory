@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Mapping
 from datetime import datetime
 from typing import Annotated
 
@@ -157,7 +158,7 @@ class OntologyMemoryService:
         namespace: MemoryNamespace,
         adjusted_new: tuple[KnowledgeEquation, ...],
         transitions: tuple[ExistingMemoryRevision, ...],
-        existing_by_equation_id: dict[str, object],
+        existing_by_equation_id: Mapping[str, object],
     ) -> tuple[MemoryLinkWrite, ...]:
         existing_ids = set(existing_by_equation_id)
         new_ids = {equation.id for equation in adjusted_new}
