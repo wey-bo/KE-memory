@@ -9,6 +9,7 @@ from typing import Annotated, Literal, Protocol, cast
 from pydantic import BaseModel, ConfigDict, Field, ValidationError
 
 from ke_memory_demo.domain import Exchange
+from ke_memory_demo.embedding import QwenEmbeddingBackend
 from ke_memory_demo.extraction import LifecycleMaintainer, TurnExtractionResult, TurnKEExtractor
 from ke_memory_demo.infra.llm import StructuredModelClient
 from ke_memory_demo.infra.telemetry import InMemoryTraceRecorder
@@ -17,7 +18,7 @@ from ke_memory_demo.settings import SettingsError, load_settings
 
 from .extractor import LifecycleMaintainerAdapter, TurnKEExtractorAdapter
 from .repository import SQLiteOnlineMemoryRepository
-from .retrieval import OntologyMemoryRetriever
+from .retrieval import DenseCandidateFallback, OntologyMemoryRetriever
 from .service import OntologyMemoryService
 
 
@@ -131,11 +132,16 @@ def build_online_runtime(root: str | Path) -> OnlineRuntime:
         extractor=extractor,
         lifecycle=lifecycle,
     )
+    fallback = (
+        DenseCandidateFallback(QwenEmbeddingBackend(settings))
+        if settings.embedding.enabled
+        else None
+    )
     return OnlineRuntime(
         mode=config.mode,
         repository=repository,
         service=service,
-        retriever=OntologyMemoryRetriever(repository=repository),
+        retriever=OntologyMemoryRetriever(repository=repository, fallback=fallback),
         extraction_ready=True,
         host=config.host,
         port=config.port,

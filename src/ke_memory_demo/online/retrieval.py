@@ -1,9 +1,11 @@
 from __future__ import annotations
 
+import asyncio
 from collections.abc import Sequence
 from datetime import datetime
 from typing import Annotated, Literal, Protocol, cast, runtime_checkable
 
+import numpy as np
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 from ke_memory_demo.core.json import JsonObject
@@ -142,6 +144,72 @@ class EmbeddingFallback(Protocol):
         candidates: Sequence[StoredMemory],
         limit: int,
     ) -> Sequence[EmbeddingFallbackCandidate]: ...
+
+
+class DenseEmbeddingBackend(Protocol):
+    @property
+    def dimension(self) -> int: ...
+
+    def embed_documents(self, texts: Sequence[str]) -> np.ndarray: ...
+
+    def embed_query(self, question: str) -> np.ndarray: ...
+
+
+class DenseCandidateFallback:
+    """Dense ranker over the already-authorized symbolic candidate set."""
+
+    def __init__(self, backend: DenseEmbeddingBackend) -> None:
+        if backend.dimension <= 0:
+            raise ValueError("embedding backend dimension must be positive")
+        self._backend = backend
+
+    async def search(
+        self,
+        query_text: str,
+        candidates: Sequence[StoredMemory],
+        limit: int,
+    ) -> Sequence[EmbeddingFallbackCandidate]:
+        return await asyncio.to_thread(self._search, query_text, tuple(candidates), limit)
+
+    def _search(
+        self,
+        query_text: str,
+        candidates: tuple[StoredMemory, ...],
+        limit: int,
+    ) -> tuple[EmbeddingFallbackCandidate, ...]:
+        if not query_text.strip():
+            raise ValueError("embedding fallback query must not be blank")
+        if limit <= 0:
+            raise ValueError("embedding fallback limit must be positive")
+        if not candidates:
+            return ()
+
+        texts = tuple(_fallback_text(memory) for memory in candidates)
+        matrix = np.asarray(self._backend.embed_documents(texts), dtype=np.float32)
+        query = np.asarray(self._backend.embed_query(query_text), dtype=np.float32)
+        expected = (len(candidates), self._backend.dimension)
+        if matrix.shape != expected or query.shape != (self._backend.dimension,):
+            raise ValueError("embedding fallback returned vectors with an invalid shape")
+        if not np.isfinite(matrix).all() or not np.isfinite(query).all():
+            raise ValueError("embedding fallback returned non-finite vectors")
+        matrix_norms = np.linalg.norm(matrix.astype(np.float64), axis=1)
+        query_norm = float(np.linalg.norm(query.astype(np.float64)))
+        if query_norm == 0.0 or np.any(matrix_norms == 0.0):
+            raise ValueError("embedding fallback returned a zero vector")
+        normalized_matrix = matrix / matrix_norms[:, None]
+        normalized_query = query / query_norm
+        cosine_scores = normalized_matrix @ normalized_query
+        ranked = sorted(
+            zip(candidates, cosine_scores, strict=True),
+            key=lambda item: (-float(item[1]), item[0].memory_id),
+        )[:limit]
+        return tuple(
+            EmbeddingFallbackCandidate(
+                memory_id=memory.memory_id,
+                score=max(0.0, min(1.0, (float(score) + 1.0) / 2.0)),
+            )
+            for memory, score in ranked
+        )
 
 
 class OntologyMemoryRetriever:
@@ -425,6 +493,15 @@ def _conflict_ids(memory: StoredMemory) -> tuple[str, ...]:
             if link.relation == "conflicts_with"
         )
     )
+
+
+def _fallback_text(memory: StoredMemory) -> str:
+    quotes = tuple(
+        quote
+        for evidence in memory.bundle.evidence
+        if isinstance((quote := evidence.get("quote")), str) and quote
+    )
+    return "\n".join((memory.equation.gloss, *quotes))
 
 
 def _reject_duplicates(values: tuple[object, ...], label: str) -> None:
