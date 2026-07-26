@@ -173,20 +173,20 @@ class KEOLBundleCompiler:
             if isinstance(expression, AssertionRef):
                 raise ValueError(f"dangling assertion term: {expression.assertion_id}")
 
-            if isinstance(expression, OperatorApplication):
-                operator_term = compile_expression(expression.operator)
-                operator_id = cast(str, operator_term["id"])
-                arguments = [
-                    {"role": f"arg{index}", "term": compile_expression(argument)}
-                    for index, argument in enumerate(expression.arguments)
-                ]
-                return {
-                    "term_type": "operator_application",
-                    "operator_id": operator_id,
-                    "arguments": arguments,
-                }
-
-            raise TypeError(f"unsupported KE expression: {type(expression).__name__}")
+            operator_term = compile_expression(expression.operator)
+            operator_id = cast(str, operator_term["id"])
+            arguments = [
+                cast(
+                    JsonValue,
+                    {"role": f"arg{index}", "term": compile_expression(argument)},
+                )
+                for index, argument in enumerate(expression.arguments)
+            ]
+            return {
+                "term_type": "operator_application",
+                "operator_id": operator_id,
+                "arguments": arguments,
+            }
 
         lhs = compile_expression(equation.lhs)
         rhs = compile_expression(equation.rhs)
@@ -323,7 +323,7 @@ class KEOLBundleCompiler:
             "rhs": rhs,
             "confidence": assessment.extraction_confidence,
             "status": equation.lifecycle.value,
-            "evidence_ids": evidence_ids,
+            "evidence_ids": _json_strings(evidence_ids),
             "derived_from_assertion_ids": [],
             "workflow_run_id": workflow_run_id,
             "temporal_scope": temporal_scope,
@@ -338,14 +338,14 @@ class KEOLBundleCompiler:
                 "extraction_confidence": assessment.extraction_confidence,
                 "epistemic_trust": assessment.epistemic_trust,
                 "memory_utility": assessment.memory_utility,
-                "admission_reasons": list(assessment.reasons),
+                "admission_reasons": _json_strings(assessment.reasons),
                 "modality": equation.modality.value,
                 "polarity": equation.polarity.value,
                 "speaker": equation.speaker.value,
                 "gloss": equation.gloss,
-                "source_derived_from": list(equation.derived_from),
-                "source_contradicts": list(equation.contradicts),
-                "source_supersedes": list(equation.supersedes),
+                "source_derived_from": _json_strings(equation.derived_from),
+                "source_contradicts": _json_strings(equation.contradicts),
+                "source_supersedes": _json_strings(equation.supersedes),
             },
         }
         return {**payload, "hash": _digest(payload)}
@@ -370,7 +370,7 @@ def _concept_record(
         "parent_concept_ids": [],
         "individuals": [],
         "same_as": [],
-        "created_from_evidence_ids": evidence_ids,
+        "created_from_evidence_ids": _json_strings(evidence_ids),
         "workflow_run_id": workflow_run_id,
         "source_kind": "extracted",
         "created_at": created_at,
@@ -394,7 +394,7 @@ def _individual_record(
         "individual_type": "entity_mention",
         "concept_ids": [],
         "source_entity_id": source_term_id,
-        "evidence_ids": evidence_ids,
+        "evidence_ids": _json_strings(evidence_ids),
         "metadata": {**namespace_payload, "source_term_id": source_term_id},
     }
     return {**payload, "hash": _digest(payload)}
@@ -420,7 +420,7 @@ def _operator_record(
         "output_schema": {"role": "output"},
         "parent_operator_id": "",
         "inverse_operator_id": "",
-        "created_from_evidence_ids": evidence_ids,
+        "created_from_evidence_ids": _json_strings(evidence_ids),
         "workflow_run_id": workflow_run_id,
         "source_kind": "extracted",
         "properties": {},
@@ -443,6 +443,15 @@ def _term_record_id(kind: str, namespace_payload: JsonObject, source_term_id: st
 
 def _digest(payload: JsonObject) -> str:
     return hashlib.sha256(canonical_json(payload)).hexdigest()
+
+
+def _json_strings(values: object) -> list[JsonValue]:
+    if not isinstance(values, list | tuple):
+        raise TypeError("JSON string sequence must be a list or tuple")
+    sequence = cast(list[object] | tuple[object, ...], values)
+    if any(not isinstance(value, str) for value in sequence):
+        raise TypeError("JSON string sequence contains a non-string value")
+    return [cast(JsonValue, value) for value in sequence]
 
 
 def _slug(label: str, digest: str) -> str:
@@ -508,7 +517,7 @@ def _validate_term(
         "operator": operator_ids,
         "assertion": assertion_ids,
     }
-    if term_type in expected_ids:
+    if isinstance(term_type, str) and term_type in expected_ids:
         term_id = term.get("id")
         if not isinstance(term_id, str) or term_id not in expected_ids[term_type]:
             raise ValueError(f"dangling {term_type} term: {term_id}")

@@ -5,7 +5,14 @@ import hashlib
 
 import pytest
 
-from onto.models import Assertion, Concept, Evidence, Individual, Operator, WorkflowRun
+from onto.models import (  # pyright: ignore[reportMissingTypeStubs]
+    Assertion,
+    Concept,
+    Evidence,
+    Individual,
+    Operator,
+    WorkflowRun,
+)
 
 from ke_memory_demo.domain import (
     AssertionRef,
@@ -30,20 +37,27 @@ def test_compiler_emits_deterministic_closed_bundle_validated_by_fixed_keol_mode
     text = "I prefer concise answers with exact evidence."
     equation = _equation(text)
     compiler = KEOLBundleCompiler()
-    kwargs = {
-        "namespace": MemoryNamespace(
-            tenant_id="tenant-a",
-            user_id="user-1",
-            agent_id="assistant",
-        ),
-        "equation": equation,
-        "assessment": AdmissionPolicy().assess(equation),
-        "source_messages": {"message:user-1": text},
-        "recorded_at": RECORDED_AT,
-    }
+    namespace = MemoryNamespace(
+        tenant_id="tenant-a",
+        user_id="user-1",
+        agent_id="assistant",
+    )
+    assessment = AdmissionPolicy().assess(equation)
 
-    first = compiler.compile(**kwargs)
-    second = compiler.compile(**kwargs)
+    first = compiler.compile(
+        namespace=namespace,
+        equation=equation,
+        assessment=assessment,
+        source_messages={"message:user-1": text},
+        recorded_at=RECORDED_AT,
+    )
+    second = compiler.compile(
+        namespace=namespace,
+        equation=equation,
+        assessment=assessment,
+        source_messages={"message:user-1": text},
+        recorded_at=RECORDED_AT,
+    )
 
     assert first == second
     assert len(first.concepts) == 1
@@ -78,22 +92,30 @@ def test_compiler_rejects_missing_or_changed_exact_evidence() -> None:
     text = "I prefer concise answers with exact evidence."
     equation = _equation(text)
     compiler = KEOLBundleCompiler()
-    common = {
-        "namespace": MemoryNamespace(
-            tenant_id="tenant-a",
-            user_id="user-1",
-            agent_id="assistant",
-        ),
-        "equation": equation,
-        "assessment": AdmissionPolicy().assess(equation),
-        "recorded_at": RECORDED_AT,
-    }
+    namespace = MemoryNamespace(
+        tenant_id="tenant-a",
+        user_id="user-1",
+        agent_id="assistant",
+    )
+    assessment = AdmissionPolicy().assess(equation)
 
     with pytest.raises(ValueError, match="missing source message"):
-        compiler.compile(source_messages={}, **common)
+        compiler.compile(
+            namespace=namespace,
+            equation=equation,
+            assessment=assessment,
+            source_messages={},
+            recorded_at=RECORDED_AT,
+        )
 
     with pytest.raises(ValueError, match="span text_hash does not match"):
-        compiler.compile(source_messages={"message:user-1": text.replace("concise", "long")}, **common)
+        compiler.compile(
+            namespace=namespace,
+            equation=equation,
+            assessment=assessment,
+            source_messages={"message:user-1": text.replace("concise", "long")},
+            recorded_at=RECORDED_AT,
+        )
 
 
 def test_compiler_rejects_dangling_assertion_terms() -> None:
