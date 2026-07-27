@@ -1,6 +1,8 @@
-from .elasticsearch import ElasticsearchVocabulary
-from .models import (
+"""Compatibility facade for the external ontology package."""
+
+from ke_memory_ontology import (
     ElasticsearchConnection,
+    ElasticsearchVocabulary,
     IndexIdentity,
     OntologyAuthenticationError,
     OntologyDriftError,
@@ -11,8 +13,8 @@ from .models import (
     OntologySchemaError,
     OntologyTerm,
     OntologyUnavailableError,
+    OntologyVocabulary,
 )
-from .protocol import OntologyVocabulary
 
 
 __all__ = [
