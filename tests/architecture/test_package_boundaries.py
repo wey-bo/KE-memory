@@ -7,6 +7,10 @@ import tomllib
 
 
 ROOT = Path(__file__).resolve().parents[2]
+SERVICE_COMPATIBILITY_FACADES = {
+    "src/ke_memory_demo/online/api.py",
+    "src/ke_memory_demo/online/factory.py",
+}
 
 
 def test_layer_packages_are_importable() -> None:
@@ -32,6 +36,7 @@ def test_core_and_ontology_do_not_depend_on_service_layer() -> None:
         for root in (ROOT / "src", ROOT / "ontology")
         if root.exists()
         for path in root.rglob("*.py")
+        if path.relative_to(ROOT).as_posix() not in SERVICE_COMPATIBILITY_FACADES
         if _service_imports(path)
     }
     assert offenders == {}

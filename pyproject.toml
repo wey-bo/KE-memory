@@ -11,7 +11,7 @@ dependencies = [
 
 [project.scripts]
 ke-memory = "ke_memory_demo.cli:app"
-ke-memory-serve = "ke_memory_demo.online.api:main"
+ke-memory-serve = "ke_memory_service.api:main"
 
 [dependency-groups]
 dev = ["pyright>=1.1.403,<2", "pytest>=8.4,<9", "pytest-asyncio>=1,<2", "respx>=0.22,<1", "ruff>=0.12,<1"]
@@ -33,7 +33,7 @@ markers = ["live_embedding", "live_es", "live_model", "live_baseline", "live_eva
 pythonpath = ["src", "service", "ontology"]
 
 [tool.pyright]
-include = ["src", "tests"]
+include = ["src", "service", "ontology", "tests"]
 extraPaths = ["service", "ontology"]
 pythonVersion = "3.12"
 typeCheckingMode = "strict"
