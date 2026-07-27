@@ -18,3 +18,4 @@ uv run pytest -q
 uv run ruff check src service ontology tests scripts
 uv run pyright
 uv build
+uv run python scripts/ci/verify_wheel.py
