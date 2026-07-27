@@ -12,6 +12,7 @@ def test_cicd_foundation_files_are_present() -> None:
         "Makefile",
         "scripts/ci/check.sh",
         "scripts/ci/verify_layout.py",
+        "scripts/ci/verify_wheel.py",
     )
     assert [path for path in required if not (ROOT / path).is_file()] == []
 
@@ -22,10 +23,12 @@ def test_workflow_delegates_to_vendor_neutral_check_script() -> None:
     assert "genuineknowledge/KEOL" in workflow
     assert "44631e64fd07c9b85f22e36035bf49c882dba592" in workflow
 
+    check_script = (ROOT / "scripts/ci/check.sh").read_text(encoding="utf-8")
+    assert "scripts/ci/verify_wheel.py" in check_script
+
 
 def test_container_is_non_root_and_persists_state() -> None:
     dockerfile = (ROOT / "Dockerfile").read_text(encoding="utf-8")
     assert "USER ke-memory" in dockerfile
     assert 'VOLUME ["/app/state"]' in dockerfile
     assert "HEALTHCHECK" in dockerfile
-
