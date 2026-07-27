@@ -1,0 +1,45 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: genuineknowledge/KEOL
+          ref: 44631e64fd07c9b85f22e36035bf49c882dba592
+          path: .deps/KEOL
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.11.26"
+          enable-cache: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run repository checks
+        env:
+          KEOL_SOURCE: ${{ github.workspace }}/.deps/KEOL/src
+        run: scripts/ci/check.sh
+
+  container:
+    needs: quality
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: false
+          tags: ke-memory:ci
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

@@ -1,5 +1,45 @@
 # KE Memory Demo
 
+## Repository Architecture
+
+The repository is split into three installable package roots:
+
+```text
+src/ke_memory_demo/             memory core: extraction, lifecycle, storage, retrieval
+service/ke_memory_service/      HTTP/MCP delivery, runtime composition, identity boundaries
+ontology/ke_memory_ontology/    ontology contracts, Elasticsearch and KEOL profile adapters
+```
+
+Existing `ke_memory_demo.online.api`, `ke_memory_demo.online.factory`, and
+`ke_memory_demo.ontology` imports are compatibility facades. New delivery integrations should use
+`ke_memory_service`; new ontology/profile integrations should use `ke_memory_ontology`.
+
+The service package includes an SDK-neutral `MCPMemoryFacade` for `memory_add`, `memory_search`,
+`memory_answer_context`, `memory_get`, and `memory_forget`. It also defines a `PrincipalRegistry`
+contract and deterministic reference implementation for future tenant/user/agent registration.
+
+## CI/CD
+
+All CI providers should invoke the same entry point:
+
+```bash
+KEOL_SOURCE=/path/to/KEOL/src scripts/ci/check.sh
+```
+
+The script verifies the locked environment, repository boundaries, full tests, Ruff, Pyright, and
+the wheel build. GitHub Actions checks out KEOL at commit
+`44631e64fd07c9b85f22e36035bf49c882dba592` before invoking it.
+
+Build and smoke the persistent container in offline mode:
+
+```bash
+docker build -t ke-memory:local .
+docker run --rm -p 8787:8787 -e KE_MEMORY_ONLINE_MODE=offline \
+  -v ke-memory-state:/app/state ke-memory:local
+```
+
+Production mode remains fail-closed and requires the configured model and Elasticsearch secrets.
+
 This repository runs a KE-only memory pipeline over the fixed BEAM subset. The primary order is
 strict: Elasticsearch health, exact index identity pinning, input and structured-model preflight,
 ingestion, Turn KE extraction, source-ordered lifecycle reconciliation, Session aggregation,

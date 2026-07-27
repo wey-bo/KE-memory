@@ -90,13 +90,7 @@ class OnlineRuntime:
 def build_online_runtime(root: str | Path) -> OnlineRuntime:
     project_root = _project_root(Path(root))
     config = _load_online_config(project_root)
-    mode_override = os.environ.get("KE_MEMORY_ONLINE_MODE", "").strip()
-    if mode_override:
-        if mode_override not in {"offline", "production"}:
-            raise SettingsError(
-                "KE_MEMORY_ONLINE_MODE must be either offline or production"
-            )
-        config = config.model_copy(update={"mode": mode_override})
+    config = _apply_environment_overrides(config)
     database_path = config.database_path
     if not database_path.is_absolute():
         database_path = project_root / database_path
@@ -171,3 +165,23 @@ def _load_online_config(project_root: Path) -> _OnlineConfig:
         return _OnlineConfigFile.model_validate(payload).online
     except (OSError, tomllib.TOMLDecodeError, ValidationError) as error:
         raise SettingsError(f"Invalid online configuration {path}: {error}") from error
+
+
+def _apply_environment_overrides(config: _OnlineConfig) -> _OnlineConfig:
+    updates: dict[str, object] = {}
+    environment_fields = {
+        "KE_MEMORY_ONLINE_MODE": "mode",
+        "KE_MEMORY_DATABASE_PATH": "database_path",
+        "KE_MEMORY_HOST": "host",
+        "KE_MEMORY_PORT": "port",
+    }
+    for environment_name, field_name in environment_fields.items():
+        value = os.environ.get(environment_name, "").strip()
+        if value:
+            updates[field_name] = value
+    if not updates:
+        return config
+    try:
+        return _OnlineConfig.model_validate({**config.model_dump(), **updates})
+    except ValidationError as error:
+        raise SettingsError(f"Invalid online environment override: {error}") from error
