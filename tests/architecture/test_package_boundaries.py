@@ -45,5 +45,8 @@ def _service_imports(path: Path) -> set[str]:
             imports.update(alias.name for alias in node.names)
         elif isinstance(node, ast.ImportFrom) and node.module:
             imports.add(node.module)
-    return {name for name in imports if name == "ke_memory_service" or name.startswith("ke_memory_service.")}
-
+    return {
+        name
+        for name in imports
+        if name == "ke_memory_service" or name.startswith("ke_memory_service.")
+    }

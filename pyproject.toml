@@ -21,14 +21,20 @@ requires = ["hatchling>=1.27,<2"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/ke_memory_demo"]
+packages = [
+  "src/ke_memory_demo",
+  "service/ke_memory_service",
+  "ontology/ke_memory_ontology",
+]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 markers = ["live_embedding", "live_es", "live_model", "live_baseline", "live_evaluation"]
+pythonpath = ["src", "service", "ontology"]
 
 [tool.pyright]
 include = ["src", "tests"]
+extraPaths = ["service", "ontology"]
 pythonVersion = "3.12"
 typeCheckingMode = "strict"
 
