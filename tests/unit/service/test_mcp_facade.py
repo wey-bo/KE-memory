@@ -29,17 +29,20 @@ class _Service:
 class _Retriever:
     async def search(
         self,
-        _namespace: MemoryNamespace,
-        _query: SymbolicMemoryQuery,
+        namespace: MemoryNamespace,
+        query: SymbolicMemoryQuery,
     ) -> MemorySearchResponse:
+        assert namespace.tenant_id == "tenant-a"
+        assert query.text == "preference"
         return MemorySearchResponse(slot_complete=False, fallback_triggered=False)
 
     def context(
         self,
-        _namespace: MemoryNamespace,
+        namespace: MemoryNamespace,
         *,
         limit_per_section: int = 10,
     ) -> WarmupContext:
+        assert namespace.tenant_id == "tenant-a"
         assert limit_per_section == 3
         return WarmupContext()
 
@@ -47,11 +50,13 @@ class _Retriever:
 class _Repository:
     def get_memory(
         self,
-        _namespace: MemoryNamespace,
-        _memory_id: str,
+        namespace: MemoryNamespace,
+        memory_id: str,
         *,
         include_deleted: bool = False,
     ) -> StoredMemory | None:
+        assert namespace.tenant_id == "tenant-a"
+        assert memory_id == "missing"
         assert not include_deleted
         return None
 
@@ -88,4 +93,3 @@ async def test_mcp_facade_delegates_without_bypassing_namespace() -> None:
     assert not search.hits
     assert not context.all_items()
     assert facade.memory_get(namespace=namespace, memory_id="missing") is None
-

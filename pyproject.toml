@@ -34,7 +34,7 @@ pythonpath = ["src", "service", "ontology"]
 
 [tool.pyright]
 include = ["src", "service", "ontology", "tests"]
-extraPaths = ["service", "ontology"]
+extraPaths = ["src", "service", "ontology"]
 pythonVersion = "3.12"
 typeCheckingMode = "strict"
 
