@@ -1,8 +1,13 @@
 from __future__ import annotations
 
+import ctypes
+import errno
 import hashlib
+import json
 import os
+import shutil
 import stat
+import tempfile
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Literal
@@ -11,6 +16,7 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator, model_valida
 
 from . import typed_extractor_fresh_v3_authoring as authoring
 from . import typed_extractor_fresh_v3_snapshot_receipt as relocation
+from .io import canonical_json_bytes, write_json_immutable
 from .typed_extractor_fresh_v3_prereg import L1_FAMILIES, L2_FAMILIES
 
 
@@ -54,6 +60,8 @@ ZERO_WRITES = {
     "snapshot": 0,
     "source_revision": 0,
 }
+_AT_FDCWD = -100
+_RENAME_NOREPLACE = 1
 
 
 class StrictModel(BaseModel):
@@ -442,4 +450,287 @@ def _build_materialization_receipt(
             "l1": layers["l1"]["manifest-l1.json"].sha256,
             "l2": layers["l2"]["manifest-l2.json"].sha256,
         },
+    )
+
+
+def _require_directory(path: Path, *, mode: int, label: str) -> None:
+    try:
+        opened = path.lstat()
+    except FileNotFoundError as exc:
+        raise FileNotFoundError(f"{label} missing: {path}") from exc
+    if not stat.S_ISDIR(opened.st_mode):
+        raise ValueError(f"{label} must be a directory")
+    actual_mode = stat.S_IMODE(opened.st_mode)
+    if actual_mode != mode:
+        raise ValueError(
+            f"{label} mode drift: expected {mode:04o}, got {actual_mode:04o}"
+        )
+
+
+def _write_layer_payloads(
+    artifact_root: Path,
+    payloads: dict[str, dict[str, Any]],
+) -> None:
+    for layer, values in payloads.items():
+        layer_root = artifact_root / layer
+        layer_root.mkdir()
+        for name, value in values.items():
+            path = layer_root / name
+            write_json_immutable(path, value)
+            path.chmod(0o444)
+        layer_root.chmod(0o775)
+
+
+def _validate_materialized_root(
+    *,
+    repository_root: Path,
+    workspace_root: Path,
+    artifact_root: Path,
+    logical_evaluation_root: Path,
+) -> dict[str, Any]:
+    repository_root = relocation._require_repository_root(repository_root)
+    workspace_root = relocation._require_workspace_root(
+        repository_root,
+        workspace_root,
+    )
+    artifact_root = relocation._absolute_lexical_path(artifact_root)
+    logical_evaluation_root = relocation._absolute_lexical_path(
+        logical_evaluation_root
+    )
+    official_evaluation_root = repository_root / relocation.NORMALIZED_EVALUATION_ROOT
+    if logical_evaluation_root != official_evaluation_root:
+        raise ValueError("logical fresh v3 evaluation root path mismatch")
+
+    _require_directory(
+        artifact_root,
+        mode=0o775,
+        label="fresh v3 materialization root",
+    )
+    if any(path.name == "model-runs" for path in artifact_root.rglob("model-runs")):
+        raise ValueError("model runs must be absent from fresh v3 materialization")
+    if {path.name for path in artifact_root.iterdir()} != {
+        "chronology-receipt.json",
+        "l1",
+        "l2",
+    }:
+        raise ValueError("materialization root artifact set drift")
+
+    transition = _validate_active_receipt_transition(
+        repository_root,
+        workspace_root,
+        require_evaluation_absent=False,
+    )
+    preregistration_path = repository_root / relocation.NORMALIZED_PREREGISTRATION_PATH
+    bundle = authoring.build_fresh_v3_authoring_bundle(preregistration_path)
+    bundle_validation = authoring.validate_fresh_v3_authoring_bundle(
+        bundle,
+        preregistration_path,
+    )
+    if (
+        bundle_validation["l1_case_count"] != 24
+        or bundle_validation["l2_case_count"] != 18
+        or bundle_validation["l1_family_counts"] != dict(L1_FAMILIES)
+        or bundle_validation["l2_family_counts"] != dict(L2_FAMILIES)
+    ):
+        raise ValueError("materialization authored bundle count drift")
+
+    expected_payloads = _layer_payloads(bundle)
+    for layer, values in expected_payloads.items():
+        layer_root = artifact_root / layer
+        _require_directory(
+            layer_root,
+            mode=0o775,
+            label=f"fresh v3 {layer} directory",
+        )
+        if {path.name for path in layer_root.iterdir()} != set(values):
+            raise ValueError(f"materialization artifact set drift: {layer}")
+        for name, expected in values.items():
+            path = layer_root / name
+            content, opened = authoring._read_regular_path(
+                path,
+                label=f"fresh v3 {layer} {name}",
+            )
+            if stat.S_IMODE(opened.st_mode) != 0o444:
+                raise ValueError(f"fresh v3 {layer} {name} mode drift")
+            if content != canonical_json_bytes(expected):
+                raise ValueError(f"materialization payload drift: {layer}/{name}")
+
+    chronology_path = artifact_root / "chronology-receipt.json"
+    chronology_bytes, chronology_stat = authoring._read_regular_path(
+        chronology_path,
+        label="fresh v3 chronology receipt",
+    )
+    if stat.S_IMODE(chronology_stat.st_mode) != 0o444:
+        raise ValueError("fresh v3 chronology receipt mode drift")
+    chronology = FreshV3MaterializationReceipt.model_validate(
+        json.loads(chronology_bytes),
+        strict=True,
+    )
+    expected_chronology = _build_materialization_receipt(
+        preregistration_path=preregistration_path,
+        artifact_root=artifact_root,
+        transition=transition,
+        materialization_time=chronology.materialization_time,
+    )
+    if chronology_bytes != canonical_json_bytes(expected_chronology):
+        raise ValueError("fresh v3 materialization chronology drift")
+    return {
+        "status": "valid",
+        "evaluation_id": relocation.EVALUATION_ID,
+        "l1_case_count": 24,
+        "l2_case_count": 18,
+        "model_runs_present_at_freeze": False,
+        "model_request_count": 0,
+    }
+
+
+def _publish_noreplace(source: Path, target: Path) -> None:
+    libc = ctypes.CDLL(None, use_errno=True)
+    renameat2 = getattr(libc, "renameat2", None)
+    if renameat2 is None:
+        raise RuntimeError("renameat2 is required for no-clobber publication")
+    renameat2.argtypes = [
+        ctypes.c_int,
+        ctypes.c_char_p,
+        ctypes.c_int,
+        ctypes.c_char_p,
+        ctypes.c_uint,
+    ]
+    renameat2.restype = ctypes.c_int
+    result = renameat2(
+        _AT_FDCWD,
+        os.fsencode(source),
+        _AT_FDCWD,
+        os.fsencode(target),
+        _RENAME_NOREPLACE,
+    )
+    if result == 0:
+        return
+    error_number = ctypes.get_errno()
+    if error_number in {errno.EEXIST, errno.ENOTEMPTY}:
+        raise FileExistsError(
+            error_number,
+            f"fresh v3 evaluation root already exists: {target}",
+            str(target),
+        )
+    raise OSError(
+        error_number,
+        os.strerror(error_number),
+        f"{source} -> {target}",
+    )
+
+
+def _remove_exact_staging_root(staging_root: Path) -> None:
+    try:
+        opened = staging_root.lstat()
+    except FileNotFoundError:
+        return
+    if stat.S_ISLNK(opened.st_mode):
+        staging_root.unlink()
+        return
+    shutil.rmtree(staging_root)
+
+
+def materialize_fresh_v3_hidden(
+    repository_root: Path,
+    workspace_root: Path,
+    evaluation_root: Path,
+    materialization_time: str,
+) -> dict[str, Any]:
+    repository_root = relocation._require_repository_root(repository_root)
+    workspace_root = relocation._require_workspace_root(
+        repository_root,
+        workspace_root,
+    )
+    evaluation_root = relocation._absolute_lexical_path(evaluation_root)
+    logical_evaluation_root = repository_root / relocation.NORMALIZED_EVALUATION_ROOT
+    MaterializationTimeLabel(value=materialization_time)
+    if relocation._entry_exists(evaluation_root):
+        raise ValueError(f"fresh v3 evaluation root must be absent: {evaluation_root}")
+    if not evaluation_root.parent.is_dir():
+        raise FileNotFoundError(
+            f"fresh v3 evaluation parent missing: {evaluation_root.parent}"
+        )
+
+    transition = _validate_active_receipt_transition(
+        repository_root,
+        workspace_root,
+        require_evaluation_absent=True,
+    )
+    preregistration_path = repository_root / relocation.NORMALIZED_PREREGISTRATION_PATH
+    bundle = authoring.build_fresh_v3_authoring_bundle(preregistration_path)
+    validation = authoring.validate_fresh_v3_authoring_bundle(
+        bundle,
+        preregistration_path,
+    )
+    if validation["l1_case_count"] != 24 or validation["l2_case_count"] != 18:
+        raise ValueError("fresh v3 authoring bundle count drift")
+
+    staging_root = Path(
+        tempfile.mkdtemp(
+            prefix=f".{evaluation_root.name}.staging-",
+            dir=evaluation_root.parent,
+        )
+    )
+    try:
+        _write_layer_payloads(staging_root, _layer_payloads(bundle))
+        staging_root.chmod(0o775)
+        chronology = _build_materialization_receipt(
+            preregistration_path=preregistration_path,
+            artifact_root=staging_root,
+            transition=transition,
+            materialization_time=materialization_time,
+        )
+        chronology_path = staging_root / "chronology-receipt.json"
+        write_json_immutable(chronology_path, chronology)
+        chronology_path.chmod(0o444)
+
+        result = _validate_materialized_root(
+            repository_root=repository_root,
+            workspace_root=workspace_root,
+            artifact_root=staging_root,
+            logical_evaluation_root=logical_evaluation_root,
+        )
+        _validate_active_receipt_transition(
+            repository_root,
+            workspace_root,
+            require_evaluation_absent=True,
+        )
+        revalidated = _validate_materialized_root(
+            repository_root=repository_root,
+            workspace_root=workspace_root,
+            artifact_root=staging_root,
+            logical_evaluation_root=logical_evaluation_root,
+        )
+        if revalidated != result:
+            raise ValueError("fresh v3 materialization validation result drift")
+        if relocation._entry_exists(evaluation_root):
+            raise ValueError(
+                f"fresh v3 evaluation root must be absent: {evaluation_root}"
+            )
+        _publish_noreplace(staging_root, evaluation_root)
+        return revalidated
+    except Exception:
+        _remove_exact_staging_root(staging_root)
+        raise
+
+
+def validate_fresh_v3_hidden_materialization(
+    repository_root: Path,
+    workspace_root: Path,
+    evaluation_root: Path,
+) -> dict[str, Any]:
+    repository_root = relocation._require_repository_root(repository_root)
+    workspace_root = relocation._require_workspace_root(
+        repository_root,
+        workspace_root,
+    )
+    evaluation_root = relocation._absolute_lexical_path(evaluation_root)
+    return _validate_materialized_root(
+        repository_root=repository_root,
+        workspace_root=workspace_root,
+        artifact_root=evaluation_root,
+        logical_evaluation_root=(
+            repository_root / relocation.NORMALIZED_EVALUATION_ROOT
+        ),
     )

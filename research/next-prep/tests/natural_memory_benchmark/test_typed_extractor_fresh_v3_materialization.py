@@ -14,6 +14,7 @@ from tools.natural_memory_benchmark import (
 )
 from tools.natural_memory_benchmark.io import (
     canonical_json_bytes,
+    load_json,
     sha256_file,
     write_json_immutable,
 )
@@ -256,3 +257,328 @@ def test_chronology_model_rejects_unknown_and_coercive_fields(
     payload["l1_case_count"] = "24"
     with pytest.raises(ValidationError):
         materialization.FreshV3MaterializationReceipt.model_validate(payload)
+
+
+def _temporary_evaluation_root(tmp_path: Path) -> Path:
+    return tmp_path / "typed-extractor-v3-fresh-hidden-v1"
+
+
+def _staging_roots(evaluation_root: Path) -> list[Path]:
+    return list(evaluation_root.parent.glob(f".{evaluation_root.name}.staging-*"))
+
+
+def test_materializes_exact_read_only_bundle_and_hash_chronology(
+    tmp_path: Path,
+) -> None:
+    evaluation_root = _temporary_evaluation_root(tmp_path)
+    bundle = build_fresh_v3_authoring_bundle(PREREGISTRATION)
+
+    result = materialization.materialize_fresh_v3_hidden(
+        REPOSITORY,
+        WORKSPACE,
+        evaluation_root,
+        MATERIALIZATION_TIME,
+    )
+
+    assert result == {
+        "status": "valid",
+        "evaluation_id": "typed-extractor-v3-fresh-hidden-v1",
+        "l1_case_count": 24,
+        "l2_case_count": 18,
+        "model_runs_present_at_freeze": False,
+        "model_request_count": 0,
+    }
+    assert {path.name for path in evaluation_root.iterdir()} == {
+        "chronology-receipt.json",
+        "l1",
+        "l2",
+    }
+    assert evaluation_root.stat().st_mode & 0o777 == 0o775
+    payloads = materialization._layer_payloads(bundle)
+    for layer, values in payloads.items():
+        layer_root = evaluation_root / layer
+        assert layer_root.stat().st_mode & 0o777 == 0o775
+        assert {path.name for path in layer_root.iterdir()} == set(values)
+        assert not (layer_root / "model-runs").exists()
+        for name, expected in values.items():
+            path = layer_root / name
+            assert path.read_bytes() == canonical_json_bytes(expected)
+            assert path.stat().st_mode & 0o777 == 0o444
+
+    chronology_path = evaluation_root / "chronology-receipt.json"
+    chronology = load_json(chronology_path)
+    assert chronology_path.stat().st_mode & 0o777 == 0o444
+    assert chronology["materialization_time"] == MATERIALIZATION_TIME
+    assert chronology["l1_case_count"] == 24
+    assert chronology["l2_case_count"] == 18
+    assert chronology["model_request_count"] == 0
+    assert chronology["evaluation_result_write_count"] == 0
+    assert set(chronology["automatic_write_counts"].values()) == {0}
+    assert materialization.validate_fresh_v3_hidden_materialization(
+        REPOSITORY,
+        WORKSPACE,
+        evaluation_root,
+    ) == result
+
+
+def test_materialization_refuses_existing_root_and_second_publish(
+    tmp_path: Path,
+) -> None:
+    evaluation_root = _temporary_evaluation_root(tmp_path)
+    evaluation_root.mkdir()
+
+    with pytest.raises(ValueError, match="evaluation root must be absent"):
+        materialization.materialize_fresh_v3_hidden(
+            REPOSITORY,
+            WORKSPACE,
+            evaluation_root,
+            MATERIALIZATION_TIME,
+        )
+
+    evaluation_root.rmdir()
+    materialization.materialize_fresh_v3_hidden(
+        REPOSITORY,
+        WORKSPACE,
+        evaluation_root,
+        MATERIALIZATION_TIME,
+    )
+    with pytest.raises(ValueError, match="evaluation root must be absent"):
+        materialization.materialize_fresh_v3_hidden(
+            REPOSITORY,
+            WORKSPACE,
+            evaluation_root,
+            MATERIALIZATION_TIME,
+        )
+
+
+@pytest.mark.parametrize(
+    "materialization_time",
+    ["2026-07-29T25:00:00Z", "2026-07-29T15:00:00+08:00"],
+)
+def test_materialization_rejects_invalid_utc_before_staging(
+    tmp_path: Path,
+    materialization_time: str,
+) -> None:
+    evaluation_root = _temporary_evaluation_root(tmp_path)
+
+    with pytest.raises(ValidationError, match="valid UTC timestamp"):
+        materialization.materialize_fresh_v3_hidden(
+            REPOSITORY,
+            WORKSPACE,
+            evaluation_root,
+            materialization_time,
+        )
+
+    assert not evaluation_root.exists()
+    assert not _staging_roots(evaluation_root)
+
+
+def test_atomic_publish_failure_cleans_only_current_staging_root(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    evaluation_root = _temporary_evaluation_root(tmp_path)
+    stale_staging = tmp_path / f".{evaluation_root.name}.staging-stale"
+    stale_staging.mkdir()
+    marker = stale_staging / "preserve.txt"
+    marker.write_text("preserve\n", encoding="utf-8")
+
+    def fail_publish(source: Path, target: Path) -> None:
+        raise OSError(f"injected publish failure: {source} -> {target}")
+
+    monkeypatch.setattr(materialization, "_publish_noreplace", fail_publish)
+    with pytest.raises(OSError, match="injected publish failure"):
+        materialization.materialize_fresh_v3_hidden(
+            REPOSITORY,
+            WORKSPACE,
+            evaluation_root,
+            MATERIALIZATION_TIME,
+        )
+
+    assert not evaluation_root.exists()
+    assert marker.read_text(encoding="utf-8") == "preserve\n"
+    assert _staging_roots(evaluation_root) == [stale_staging]
+
+
+def test_atomic_publish_refuses_concurrently_created_empty_root(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    evaluation_root = _temporary_evaluation_root(tmp_path)
+    current_publish = materialization._publish_noreplace
+
+    def create_target_then_publish(source: Path, target: Path) -> None:
+        target.mkdir()
+        current_publish(source, target)
+
+    monkeypatch.setattr(
+        materialization,
+        "_publish_noreplace",
+        create_target_then_publish,
+    )
+
+    with pytest.raises(FileExistsError, match="evaluation root already exists"):
+        materialization.materialize_fresh_v3_hidden(
+            REPOSITORY,
+            WORKSPACE,
+            evaluation_root,
+            MATERIALIZATION_TIME,
+        )
+
+    assert evaluation_root.is_dir()
+    assert not list(evaluation_root.iterdir())
+    assert not _staging_roots(evaluation_root)
+
+
+def test_materialization_revalidates_protected_state_after_staging(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    evaluation_root = _temporary_evaluation_root(tmp_path)
+    original = materialization.relocation._protected_state
+    calls = 0
+
+    def drift_after_initial_validation(workspace_root: Path) -> dict[str, Any]:
+        nonlocal calls
+        calls += 1
+        state = original(workspace_root)
+        if calls > 1:
+            return {**state, "guard_results_sha256": "0" * 64}
+        return state
+
+    monkeypatch.setattr(
+        materialization.relocation,
+        "_protected_state",
+        drift_after_initial_validation,
+    )
+
+    with pytest.raises(ValueError, match="protected state drift"):
+        materialization.materialize_fresh_v3_hidden(
+            REPOSITORY,
+            WORKSPACE,
+            evaluation_root,
+            MATERIALIZATION_TIME,
+        )
+
+    assert calls > 1
+    assert not evaluation_root.exists()
+    assert not _staging_roots(evaluation_root)
+
+
+def test_materialization_replays_transition_and_tree_immediately_before_publish(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    evaluation_root = _temporary_evaluation_root(tmp_path)
+    original = materialization._validate_active_receipt_transition
+    requirements: list[bool] = []
+
+    def record_transition(
+        repository_root: Path,
+        workspace_root: Path,
+        *,
+        require_evaluation_absent: bool,
+    ) -> materialization.ActiveTransition:
+        requirements.append(require_evaluation_absent)
+        return original(
+            repository_root,
+            workspace_root,
+            require_evaluation_absent=require_evaluation_absent,
+        )
+
+    monkeypatch.setattr(
+        materialization,
+        "_validate_active_receipt_transition",
+        record_transition,
+    )
+
+    materialization.materialize_fresh_v3_hidden(
+        REPOSITORY,
+        WORKSPACE,
+        evaluation_root,
+        MATERIALIZATION_TIME,
+    )
+
+    assert requirements == [True, False, True, False]
+
+
+@pytest.mark.parametrize("drift", ["mode", "payload", "chronology"])
+def test_validation_rejects_materialized_artifact_drift(
+    tmp_path: Path,
+    drift: str,
+) -> None:
+    evaluation_root = _temporary_evaluation_root(tmp_path)
+    materialization.materialize_fresh_v3_hidden(
+        REPOSITORY,
+        WORKSPACE,
+        evaluation_root,
+        MATERIALIZATION_TIME,
+    )
+
+    if drift == "mode":
+        (evaluation_root / "l1" / "public-l1.json").chmod(0o644)
+    elif drift == "payload":
+        path = evaluation_root / "l2" / "manifest-l2.json"
+        payload = load_json(path)
+        payload["case_count"] = 0
+        _rewrite_json(path, payload, canonical=True)
+    else:
+        path = evaluation_root / "chronology-receipt.json"
+        payload = load_json(path)
+        payload["materializer_sha256"][
+            "typed_extractor_fresh_v3_materialization.py"
+        ] = "f" * 64
+        _rewrite_json(path, payload, canonical=True)
+
+    with pytest.raises((ValueError, ValidationError), match="drift|mode"):
+        materialization.validate_fresh_v3_hidden_materialization(
+            REPOSITORY,
+            WORKSPACE,
+            evaluation_root,
+        )
+
+
+@pytest.mark.parametrize("location", ["root", "l1", "l2"])
+def test_validation_rejects_unregistered_artifact(
+    tmp_path: Path,
+    location: str,
+) -> None:
+    evaluation_root = _temporary_evaluation_root(tmp_path)
+    materialization.materialize_fresh_v3_hidden(
+        REPOSITORY,
+        WORKSPACE,
+        evaluation_root,
+        MATERIALIZATION_TIME,
+    )
+    parent = evaluation_root if location == "root" else evaluation_root / location
+    (parent / "unexpected.json").write_text("{}\n", encoding="utf-8")
+
+    with pytest.raises(ValueError, match="artifact.*drift"):
+        materialization.validate_fresh_v3_hidden_materialization(
+            REPOSITORY,
+            WORKSPACE,
+            evaluation_root,
+        )
+
+
+@pytest.mark.parametrize("location", ["root", "l1", "l2"])
+def test_validation_rejects_any_model_runs_path(
+    tmp_path: Path,
+    location: str,
+) -> None:
+    evaluation_root = _temporary_evaluation_root(tmp_path)
+    materialization.materialize_fresh_v3_hidden(
+        REPOSITORY,
+        WORKSPACE,
+        evaluation_root,
+        MATERIALIZATION_TIME,
+    )
+    parent = evaluation_root if location == "root" else evaluation_root / location
+    (parent / "model-runs").mkdir()
+
+    with pytest.raises(ValueError, match="model runs|artifact.*drift"):
+        materialization.validate_fresh_v3_hidden_materialization(
+            REPOSITORY,
+            WORKSPACE,
+            evaluation_root,
+        )

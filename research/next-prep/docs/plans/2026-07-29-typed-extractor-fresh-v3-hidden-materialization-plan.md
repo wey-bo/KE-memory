@@ -219,7 +219,7 @@ Git plumbing, `tempfile`, and Linux `renameat2(RENAME_NOREPLACE)`.
 - Completes both public functions fixed by the design.
 - Produces one exact staged tree and no-replace directory publication.
 
-- [ ] **Step 1: Write publication, atomicity, and drift tests**
+- [x] **Step 1: Write publication, atomicity, and drift tests**
 
   Add an exact-layout success test that calls
   `materialize_fresh_v3_hidden` in a temporary evaluation root and asserts:
@@ -245,12 +245,12 @@ Git plumbing, `tempfile`, and Linux `renameat2(RENAME_NOREPLACE)`.
   payload/mode/chronology drift, unregistered root/layer artifacts, and any
   `model-runs` path. Each failure removes only its exact staging root.
 
-- [ ] **Step 2: Run the new nodes and verify RED**
+- [x] **Step 2: Run the new nodes and verify RED**
 
   Expected: failures identify missing writer, validator, or publication helpers;
   all Task 2 transition/chronology tests remain green.
 
-- [ ] **Step 3: Implement canonical staging writes**
+- [x] **Step 3: Implement canonical staging writes**
 
   Create a unique sibling directory with prefix
   `.<evaluation-name>.staging-`. Write `l1` and `l2` payloads with
@@ -258,7 +258,7 @@ Git plumbing, `tempfile`, and Linux `renameat2(RENAME_NOREPLACE)`.
   directories to `0775`. Write `chronology-receipt.json` only after all ten
   payload bindings are available.
 
-- [ ] **Step 4: Implement complete-tree validation**
+- [x] **Step 4: Implement complete-tree validation**
 
   `_validate_materialized_root` takes separate `artifact_root` and logical
   `evaluation_root`. It replays the active transition with evaluation absence
@@ -278,13 +278,13 @@ Git plumbing, `tempfile`, and Linux `renameat2(RENAME_NOREPLACE)`.
   }
   ```
 
-- [ ] **Step 5: Implement no-replace directory publication**
+- [x] **Step 5: Implement no-replace directory publication**
 
   Call libc `renameat2` with `_AT_FDCWD=-100` and
   `_RENAME_NOREPLACE=1`. Convert `EEXIST`/`ENOTEMPTY` to `FileExistsError` and
   all other errno values to `OSError`. Never fall back to `os.replace`.
 
-- [ ] **Step 6: Implement the public writer**
+- [x] **Step 6: Implement the public writer**
 
   Validate UTC, target absence, parent directory, and active transition before
   staging. Build/validate the bundle, stage all outputs, validate staging, then
@@ -292,26 +292,28 @@ Git plumbing, `tempfile`, and Linux `renameat2(RENAME_NOREPLACE)`.
   Publish once. On exception, remove only the exact staging directory if it
   still exists. Return the validation result without calling a model.
 
-- [ ] **Step 7: Implement the public read-only validator**
+- [x] **Step 7: Implement the public read-only validator**
 
   Resolve roots lexically and delegate to `_validate_materialized_root` with
   the official evaluation root as both artifact and logical root. It must not
   chmod, rewrite, delete, or create any path.
 
-- [ ] **Step 8: Run the full focused file to GREEN**
+- [x] **Step 8: Run the full focused file to GREEN**
 
   Run the Task 1 command with a new basetemp. Expected: every materialization
   test passes and the official evaluation root remains absent.
 
-- [ ] **Step 9: Run adjacent phase tests and static checks**
+- [x] **Step 9: Run adjacent phase tests and static checks**
 
-  Run authoring `77 passed`, relocation phase-aware nodes, v3 prereg
-  phase-aware nodes, tracked typed tests, Ruff, compileall, tabnanny, and
-  `git diff --check`. Revalidate fixed receipt/Git/protected hashes and confirm
-  candidate queue, official root, model paths, staging paths, credentials, and
-  all automatic writes remain unchanged.
+  Run phase-aware authoring, relocation, and v3 prereg nodes, tracked typed
+  tests, Ruff, compileall, tabnanny, and `git diff --check`. Receipt-authoring
+  nodes that bind materialization-code absence are historical phase tests and
+  must be deselected after the declared implementation files exist. Revalidate
+  fixed receipt/Git/protected hashes and confirm candidate queue, official
+  root, model paths, staging paths, credentials, and all automatic writes
+  remain unchanged.
 
-- [ ] **Step 10: Commit the atomic materializer**
+- [x] **Step 10: Commit the atomic materializer**
 
   ```bash
   git add \
