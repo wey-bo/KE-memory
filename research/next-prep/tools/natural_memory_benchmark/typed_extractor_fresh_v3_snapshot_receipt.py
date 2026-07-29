@@ -1,12 +1,13 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import os
 import stat
 import subprocess
 from datetime import datetime
 from pathlib import Path, PurePosixPath
-from typing import Any, Literal
+from typing import Any, Callable, Literal
 
 from pydantic import (
     BaseModel,
@@ -550,3 +551,128 @@ def build_fresh_v3_snapshot_relocation_receipt(
         guard_results_sha256=protected_state["guard_results_sha256"],
         guard_counts=protected_state["guard_counts"],
     )
+
+
+def _write_snapshot_receipt_no_clobber(
+    receipt_path: Path,
+    receipt: FreshV3SnapshotRelocationReceipt,
+    *,
+    before_publish: Callable[[], None] | None = None,
+) -> None:
+    authoring._write_receipt_no_clobber(
+        receipt_path,
+        receipt,
+        before_publish=before_publish,
+    )
+
+
+def _read_snapshot_receipt(
+    receipt_path: Path,
+) -> tuple[FreshV3SnapshotRelocationReceipt, bytes, os.stat_result]:
+    existing = authoring._read_existing_receipt(receipt_path)
+    if existing is None:
+        raise FileNotFoundError(f"fresh v3 relocation receipt missing: {receipt_path}")
+    receipt_bytes, opened = existing
+    payload = json.loads(receipt_bytes)
+    receipt = FreshV3SnapshotRelocationReceipt.model_validate(
+        payload,
+        strict=True,
+    )
+    if receipt_bytes != authoring.canonical_json_bytes(receipt):
+        raise ValueError("fresh v3 relocation receipt must use canonical JSON bytes")
+    return receipt, receipt_bytes, opened
+
+
+def freeze_fresh_v3_snapshot_relocation_receipt(
+    repository_root: Path,
+    workspace_root: Path,
+    evaluation_root: Path,
+    receipt_time: str,
+) -> dict[str, Any]:
+    repository_root = _require_repository_root(repository_root)
+    workspace_root = _require_workspace_root(repository_root, workspace_root)
+    evaluation_root = _absolute_lexical_path(evaluation_root)
+    preregistration_path = repository_root / NORMALIZED_PREREGISTRATION_PATH
+    receipt_path = preregistration_path.parent / RECEIPT_NAME
+
+    with authoring.fresh_v3_chronology_lock(
+        preregistration_path
+    ) as locked_preregistration:
+        receipt = build_fresh_v3_snapshot_relocation_receipt(
+            repository_root,
+            workspace_root,
+            evaluation_root,
+            receipt_time,
+        )
+
+        def recheck_before_publication() -> None:
+            authoring._assert_path_matches_opened(
+                preregistration_path,
+                locked_preregistration,
+                label="normalized fresh v3 preregistration",
+            )
+            rechecked = build_fresh_v3_snapshot_relocation_receipt(
+                repository_root,
+                workspace_root,
+                evaluation_root,
+                receipt_time,
+            )
+            if authoring.canonical_json_bytes(rechecked) != authoring.canonical_json_bytes(
+                receipt
+            ):
+                raise ValueError(
+                    "fresh v3 relocation inputs changed during receipt freeze"
+                )
+            _require_future_absent(evaluation_root, workspace_root)
+            _protected_state(workspace_root)
+            authoring._assert_path_matches_opened(
+                preregistration_path,
+                locked_preregistration,
+                label="normalized fresh v3 preregistration",
+            )
+
+        recheck_before_publication()
+        _write_snapshot_receipt_no_clobber(
+            receipt_path,
+            receipt,
+            before_publish=recheck_before_publication,
+        )
+    return receipt.model_dump(mode="json")
+
+
+def validate_fresh_v3_snapshot_relocation_receipt(
+    repository_root: Path,
+    workspace_root: Path,
+    evaluation_root: Path,
+) -> dict[str, Any]:
+    repository_root = _require_repository_root(repository_root)
+    workspace_root = _require_workspace_root(repository_root, workspace_root)
+    evaluation_root = _absolute_lexical_path(evaluation_root)
+    preregistration_path = repository_root / NORMALIZED_PREREGISTRATION_PATH
+    receipt_path = preregistration_path.parent / RECEIPT_NAME
+    actual, receipt_bytes, opened_receipt = _read_snapshot_receipt(receipt_path)
+    expected = build_fresh_v3_snapshot_relocation_receipt(
+        repository_root,
+        workspace_root,
+        evaluation_root,
+        actual.receipt_time,
+    )
+    if actual != expected:
+        raise ValueError("fresh v3 snapshot relocation receipt drift")
+    authoring._assert_path_matches_opened(
+        receipt_path,
+        opened_receipt,
+        label="fresh v3 snapshot relocation receipt",
+    )
+    return {
+        "status": "valid",
+        "active_receipt": RECEIPT_NAME,
+        "schema_version": actual.schema_version,
+        "l1_case_count": actual.authoring_binding.l1_case_count,
+        "l2_case_count": actual.authoring_binding.l2_case_count,
+        "evaluation_root_absent": True,
+        "materialization_implementation_absent": True,
+        "hidden_artifacts_created": False,
+        "model_request_count": actual.model_request_count,
+        "receipt_sha256": hashlib.sha256(receipt_bytes).hexdigest(),
+    }

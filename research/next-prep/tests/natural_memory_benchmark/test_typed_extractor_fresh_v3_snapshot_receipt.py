@@ -347,3 +347,163 @@ def test_receipt_builder_fails_closed_on_live_protected_state_drift(
             FORMAL_EVALUATION,
             RECEIPT_TIME,
         )
+
+
+def test_receipt_writer_publishes_canonical_readonly_and_is_idempotent(
+    tmp_path: Path,
+) -> None:
+    receipt = relocation.build_fresh_v3_snapshot_relocation_receipt(
+        REPOSITORY,
+        WORKSPACE,
+        FORMAL_EVALUATION,
+        RECEIPT_TIME,
+    )
+    target = tmp_path / "authoring-implementation-receipt.json"
+    callbacks: list[str] = []
+
+    relocation._write_snapshot_receipt_no_clobber(
+        target,
+        receipt,
+        before_publish=lambda: callbacks.append("checked"),
+    )
+    first = target.stat()
+    relocation._write_snapshot_receipt_no_clobber(
+        target,
+        receipt,
+        before_publish=lambda: callbacks.append("checked"),
+    )
+    second = target.stat()
+
+    assert target.read_bytes() == canonical_json_bytes(receipt)
+    assert target.stat().st_mode & 0o777 == 0o444
+    assert (first.st_dev, first.st_ino) == (second.st_dev, second.st_ino)
+    assert callbacks == ["checked", "checked"]
+
+
+def test_receipt_writer_rejects_different_existing_target(tmp_path: Path) -> None:
+    first = relocation.build_fresh_v3_snapshot_relocation_receipt(
+        REPOSITORY,
+        WORKSPACE,
+        FORMAL_EVALUATION,
+        RECEIPT_TIME,
+    )
+    second = first.model_copy(update={"receipt_time": "2026-07-29T07:30:01Z"})
+    target = tmp_path / "authoring-implementation-receipt.json"
+    relocation._write_snapshot_receipt_no_clobber(target, first)
+
+    with pytest.raises(ValueError, match="already differs"):
+        relocation._write_snapshot_receipt_no_clobber(target, second)
+
+
+def test_receipt_reader_rejects_mode_symlink_noncanonical_and_unknown_fields(
+    tmp_path: Path,
+) -> None:
+    receipt = relocation.build_fresh_v3_snapshot_relocation_receipt(
+        REPOSITORY,
+        WORKSPACE,
+        FORMAL_EVALUATION,
+        RECEIPT_TIME,
+    )
+    canonical = canonical_json_bytes(receipt)
+    target = tmp_path / "receipt.json"
+    target.write_bytes(canonical)
+
+    with pytest.raises(ValueError, match="mode 0444"):
+        relocation._read_snapshot_receipt(target)
+
+    target.chmod(0o444)
+    parsed, parsed_bytes, _ = relocation._read_snapshot_receipt(target)
+    assert parsed == receipt
+    assert parsed_bytes == canonical
+
+    target.chmod(0o644)
+    target.write_text(
+        json.dumps(receipt.model_dump(mode="json"), indent=2) + "\n",
+        encoding="utf-8",
+    )
+    target.chmod(0o444)
+    with pytest.raises(ValueError, match="canonical JSON bytes"):
+        relocation._read_snapshot_receipt(target)
+
+    payload = receipt.model_dump(mode="json")
+    payload["unexpected"] = "not allowed"
+    target.chmod(0o644)
+    target.write_bytes(
+        json.dumps(payload, sort_keys=True, separators=(",", ":")).encode() + b"\n"
+    )
+    target.chmod(0o444)
+    with pytest.raises(ValidationError, match="extra_forbidden"):
+        relocation._read_snapshot_receipt(target)
+
+    target.unlink()
+    os.symlink(tmp_path / "missing-target", target)
+    with pytest.raises(ValueError, match="regular non-symlink"):
+        relocation._read_snapshot_receipt(target)
+
+
+def test_freeze_rechecks_under_lock_without_writing_formal_receipt(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    captured: dict[str, object] = {}
+
+    def capture_only(
+        receipt_path: Path,
+        receipt: relocation.FreshV3SnapshotRelocationReceipt,
+        *,
+        before_publish: object,
+    ) -> None:
+        assert callable(before_publish)
+        before_publish()
+        captured["path"] = receipt_path
+        captured["receipt"] = receipt
+
+    monkeypatch.setattr(
+        relocation,
+        "_write_snapshot_receipt_no_clobber",
+        capture_only,
+    )
+
+    result = relocation.freeze_fresh_v3_snapshot_relocation_receipt(
+        REPOSITORY,
+        WORKSPACE,
+        FORMAL_EVALUATION,
+        RECEIPT_TIME,
+    )
+
+    assert captured["path"] == FORMAL_RECEIPT
+    assert result["schema_version"] == (
+        "typed-extractor-fresh-v3-authoring-receipt-v2"
+    )
+    if not FORMAL_RECEIPT.exists():
+        assert set(FORMAL_PREREGISTRATION.parent.iterdir()) == {
+            FORMAL_PREREGISTRATION
+        }
+
+
+def test_formal_validator_is_phase_aware_and_reports_exact_sha() -> None:
+    if not FORMAL_RECEIPT.exists():
+        with pytest.raises(FileNotFoundError, match="receipt missing"):
+            relocation.validate_fresh_v3_snapshot_relocation_receipt(
+                REPOSITORY,
+                WORKSPACE,
+                FORMAL_EVALUATION,
+            )
+        return
+
+    result = relocation.validate_fresh_v3_snapshot_relocation_receipt(
+        REPOSITORY,
+        WORKSPACE,
+        FORMAL_EVALUATION,
+    )
+    assert result == {
+        "status": "valid",
+        "active_receipt": "authoring-implementation-receipt.json",
+        "schema_version": "typed-extractor-fresh-v3-authoring-receipt-v2",
+        "l1_case_count": 24,
+        "l2_case_count": 18,
+        "evaluation_root_absent": True,
+        "materialization_implementation_absent": True,
+        "hidden_artifacts_created": False,
+        "model_request_count": 0,
+        "receipt_sha256": hashlib.sha256(FORMAL_RECEIPT.read_bytes()).hexdigest(),
+    }
