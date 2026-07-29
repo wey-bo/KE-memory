@@ -564,6 +564,7 @@ def _write_snapshot_receipt_no_clobber(
     *,
     before_publish: Callable[[], None] | None = None,
 ) -> None:
+    _require_no_stale_named_staging(receipt_path)
     content = authoring.canonical_json_bytes(receipt)
     matching_receipt = authoring._require_matching_existing_receipt(
         receipt_path,
@@ -572,11 +573,10 @@ def _write_snapshot_receipt_no_clobber(
     if matching_receipt is not None:
         if before_publish is not None:
             before_publish()
-        authoring._fsync_directory(receipt_path.parent)
-        authoring._assert_path_matches_opened(
+        _validate_matching_receipt_after_barrier(
             receipt_path,
-            matching_receipt,
-            label="fresh v3 relocation receipt",
+            content,
+            missing_message="fresh v3 relocation receipt disappeared",
         )
         return
 
@@ -610,11 +610,12 @@ def _write_snapshot_receipt_no_clobber(
                 raise ValueError(
                     "fresh v3 relocation receipt disappeared during publication"
                 )
-            authoring._fsync_directory(receipt_path.parent)
-            authoring._assert_path_matches_opened(
+            _validate_matching_receipt_after_barrier(
                 receipt_path,
-                matching_receipt,
-                label="fresh v3 relocation receipt",
+                content,
+                missing_message=(
+                    "fresh v3 relocation receipt disappeared during publication"
+                ),
             )
             return
         authoring._fsync_directory(receipt_path.parent)
@@ -633,6 +634,37 @@ def _write_snapshot_receipt_no_clobber(
     )
     if matching_receipt is None:
         raise ValueError("fresh v3 relocation receipt missing after publication")
+    authoring._assert_path_matches_opened(
+        receipt_path,
+        matching_receipt,
+        label="fresh v3 relocation receipt",
+    )
+
+
+def _require_no_stale_named_staging(receipt_path: Path) -> None:
+    prefix = f".{receipt_path.name}.staging-"
+    stale = sorted(
+        path.name
+        for path in receipt_path.parent.iterdir()
+        if path.name.startswith(prefix) and path.name.endswith(".tmp")
+    )
+    if stale:
+        raise ValueError(f"fresh v3 relocation receipt stale staging file exists: {stale}")
+
+
+def _validate_matching_receipt_after_barrier(
+    receipt_path: Path,
+    content: bytes,
+    *,
+    missing_message: str,
+) -> None:
+    authoring._fsync_directory(receipt_path.parent)
+    matching_receipt = authoring._require_matching_existing_receipt(
+        receipt_path,
+        content,
+    )
+    if matching_receipt is None:
+        raise ValueError(missing_message)
     authoring._assert_path_matches_opened(
         receipt_path,
         matching_receipt,

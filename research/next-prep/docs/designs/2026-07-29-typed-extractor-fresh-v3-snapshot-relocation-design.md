@@ -122,7 +122,9 @@ target decayed after descriptor close into an unreadable zero-byte ghost entry
 with link count and mode both zero. A 30-file same-mount reproduction failed
 30/30 after a one-second delayed read. The named-staging/no-replace design
 retains no-clobber atomicity while avoiding that filesystem-specific false
-success mode.
+success mode. Any receipt-specific named staging residue from an interrupted
+publisher causes later publication to fail closed for manual inspection; the
+publisher never deletes an unknown stale staging entry automatically.
 
 Validation rejects symlinks, noncanonical JSON, unknown/coercive fields,
 wrong Git ancestry/blob identity, dirty bound implementation files, changed

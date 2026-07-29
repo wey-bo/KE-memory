@@ -380,6 +380,31 @@ def test_receipt_writer_publishes_canonical_readonly_and_is_idempotent(
     assert callbacks == ["checked", "checked"]
 
 
+def test_snapshot_writer_revalidates_existing_target_after_callback(
+    tmp_path: Path,
+) -> None:
+    receipt = relocation.build_fresh_v3_snapshot_relocation_receipt(
+        REPOSITORY,
+        WORKSPACE,
+        FORMAL_EVALUATION,
+        RECEIPT_TIME,
+    )
+    target = tmp_path / "authoring-implementation-receipt.json"
+    relocation._write_snapshot_receipt_no_clobber(target, receipt)
+
+    def replace_existing_bytes_in_place() -> None:
+        target.chmod(0o600)
+        target.write_bytes(b'{"tampered":true}\n')
+        target.chmod(0o444)
+
+    with pytest.raises(ValueError, match="receipt already differs"):
+        relocation._write_snapshot_receipt_no_clobber(
+            target,
+            receipt,
+            before_publish=replace_existing_bytes_in_place,
+        )
+
+
 def test_snapshot_writer_does_not_require_anonymous_inode_publication(
     monkeypatch: pytest.MonkeyPatch,
     tmp_path: Path,
@@ -434,6 +459,78 @@ def test_snapshot_writer_rejects_staging_bytes_changed_by_callback(
         )
 
     assert not target.exists()
+    assert list(tmp_path.iterdir()) == []
+
+
+def test_snapshot_writer_fails_closed_on_stale_named_staging(tmp_path: Path) -> None:
+    receipt = relocation.build_fresh_v3_snapshot_relocation_receipt(
+        REPOSITORY,
+        WORKSPACE,
+        FORMAL_EVALUATION,
+        RECEIPT_TIME,
+    )
+    target = tmp_path / "authoring-implementation-receipt.json"
+    stale = tmp_path / f".{target.name}.staging-orphan.tmp"
+    stale.write_text("incomplete\n", encoding="utf-8")
+
+    with pytest.raises(ValueError, match="stale staging file exists"):
+        relocation._write_snapshot_receipt_no_clobber(target, receipt)
+
+    assert not target.exists()
+    assert stale.read_text(encoding="utf-8") == "incomplete\n"
+
+
+def test_snapshot_writer_converges_when_matching_target_appears(
+    tmp_path: Path,
+) -> None:
+    receipt = relocation.build_fresh_v3_snapshot_relocation_receipt(
+        REPOSITORY,
+        WORKSPACE,
+        FORMAL_EVALUATION,
+        RECEIPT_TIME,
+    )
+    target = tmp_path / "authoring-implementation-receipt.json"
+    content = canonical_json_bytes(receipt)
+
+    def publish_matching_target() -> None:
+        target.write_bytes(content)
+        target.chmod(0o444)
+
+    relocation._write_snapshot_receipt_no_clobber(
+        target,
+        receipt,
+        before_publish=publish_matching_target,
+    )
+
+    assert target.read_bytes() == content
+    assert target.stat().st_mode & 0o777 == 0o444
+    assert {path.name for path in tmp_path.iterdir()} == {target.name}
+
+
+def test_snapshot_writer_rejects_target_that_disappears_after_collision(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    receipt = relocation.build_fresh_v3_snapshot_relocation_receipt(
+        REPOSITORY,
+        WORKSPACE,
+        FORMAL_EVALUATION,
+        RECEIPT_TIME,
+    )
+    target = tmp_path / "authoring-implementation-receipt.json"
+
+    def report_disappeared_collision(_: Path, __: Path) -> None:
+        raise FileExistsError("simulated target collision")
+
+    monkeypatch.setattr(
+        relocation,
+        "_publish_named_receipt_noreplace",
+        report_disappeared_collision,
+    )
+
+    with pytest.raises(ValueError, match="disappeared during publication"):
+        relocation._write_snapshot_receipt_no_clobber(target, receipt)
+
     assert list(tmp_path.iterdir()) == []
 
 
@@ -535,6 +632,56 @@ def test_freeze_rechecks_under_lock_without_writing_formal_receipt(
         assert set(FORMAL_PREREGISTRATION.parent.iterdir()) == {
             FORMAL_PREREGISTRATION
         }
+
+
+@pytest.mark.parametrize(
+    ("helper_name", "message"),
+    [
+        ("_require_future_absent", "future state changed in callback"),
+        ("_protected_state", "protected state changed in callback"),
+    ],
+)
+def test_freeze_rechecks_live_state_inside_publication_callback(
+    monkeypatch: pytest.MonkeyPatch,
+    helper_name: str,
+    message: str,
+) -> None:
+    original = getattr(relocation, helper_name)
+    call_count = 0
+
+    def fail_on_callback(*args: object, **kwargs: object) -> object:
+        nonlocal call_count
+        call_count += 1
+        if call_count == 4:
+            raise ValueError(message)
+        return original(*args, **kwargs)
+
+    def invoke_callback_only(
+        _: Path,
+        __: relocation.FreshV3SnapshotRelocationReceipt,
+        *,
+        before_publish: object,
+    ) -> None:
+        assert callable(before_publish)
+        before_publish()
+
+    monkeypatch.setattr(relocation, helper_name, fail_on_callback)
+    monkeypatch.setattr(
+        relocation,
+        "_write_snapshot_receipt_no_clobber",
+        invoke_callback_only,
+    )
+
+    with pytest.raises(ValueError, match=message):
+        relocation.freeze_fresh_v3_snapshot_relocation_receipt(
+            REPOSITORY,
+            WORKSPACE,
+            FORMAL_EVALUATION,
+            RECEIPT_TIME,
+        )
+
+    assert call_count == 4
+    assert not FORMAL_RECEIPT.exists()
 
 
 def test_formal_validator_is_phase_aware_and_reports_exact_sha() -> None:
