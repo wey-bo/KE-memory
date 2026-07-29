@@ -404,7 +404,7 @@ def test_materialization_rejects_invalid_utc_before_staging(
     assert not _staging_roots(evaluation_root)
 
 
-def test_atomic_publish_failure_cleans_only_current_staging_root(
+def test_atomic_publish_failure_preserves_only_current_and_stale_staging_roots(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
@@ -423,53 +423,77 @@ def test_atomic_publish_failure_cleans_only_current_staging_root(
 
     assert not evaluation_root.exists()
     assert marker.read_text(encoding="utf-8") == "preserve\n"
-    assert _staging_roots(evaluation_root) == [stale_staging]
+    staging_roots = _staging_roots(evaluation_root)
+    current = [path for path in staging_roots if path != stale_staging]
+    assert len(current) == 1
+    assert {path.name for path in current[0].iterdir()} == {
+        "chronology-receipt.json",
+        "l1",
+        "l2",
+    }
+    assert stale_staging in staging_roots
 
 
-def test_cleanup_does_not_delete_a_root_replacement_through_path_rmtree(
+def test_cleanup_never_path_rmdirs_a_replaceable_staging_directory(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     evaluation_root = _temporary_evaluation_root(tmp_path)
-    replacement = tmp_path / "replacement-root"
-    replacement.mkdir()
-    marker = replacement / "preserve.txt"
-    marker.write_text("preserve\n", encoding="utf-8")
-    original_rmtree = shutil.rmtree
+    original_rmdir = os.rmdir
+    original_unlink = os.unlink
+    staging_rmdir_calls = 0
+    staging_unlink_calls = 0
 
-    def exchange_then_rmtree(
+    def exchange_at_staging_rmdir(
         path: str,
         *args: Any,
         dir_fd: int | None = None,
         **kwargs: Any,
     ) -> None:
-        assert dir_fd is not None
-        moved_name = f"{path}.original"
-        os.rename(
-            path,
-            moved_name,
-            src_dir_fd=dir_fd,
-            dst_dir_fd=dir_fd,
-        )
-        os.rename(
-            replacement.name,
-            path,
-            src_dir_fd=dir_fd,
-            dst_dir_fd=dir_fd,
-        )
-        original_rmtree(path, *args, dir_fd=dir_fd, **kwargs)
+        nonlocal staging_rmdir_calls
+        if str(path) == "l1":
+            assert dir_fd is not None
+            staging_rmdir_calls += 1
+            os.rename(
+                path,
+                "l1.original",
+                src_dir_fd=dir_fd,
+                dst_dir_fd=dir_fd,
+            )
+            os.mkdir(path, dir_fd=dir_fd)
+        original_rmdir(path, *args, dir_fd=dir_fd, **kwargs)
+
+    def observe_staging_unlink(
+        path: str,
+        *args: Any,
+        dir_fd: int | None = None,
+        **kwargs: Any,
+    ) -> None:
+        nonlocal staging_unlink_calls
+        if dir_fd is not None:
+            staging_unlink_calls += 1
+        original_unlink(path, *args, dir_fd=dir_fd, **kwargs)
 
     def fail_publish(*args: Any, **kwargs: Any) -> None:
         raise OSError(f"injected publish failure: {args} {kwargs}")
 
-    monkeypatch.setattr(shutil, "rmtree", exchange_then_rmtree)
+    monkeypatch.setattr(os, "rmdir", exchange_at_staging_rmdir)
+    monkeypatch.setattr(os, "unlink", observe_staging_unlink)
     monkeypatch.setattr(materialization, "_publish_noreplace", fail_publish)
 
     with pytest.raises(OSError, match="injected publish failure"):
         _materialize_temporary(evaluation_root)
 
-    assert marker.read_text(encoding="utf-8") == "preserve\n"
+    assert staging_rmdir_calls == 0
+    assert staging_unlink_calls == 0
     assert not evaluation_root.exists()
+    staging_roots = _staging_roots(evaluation_root)
+    assert len(staging_roots) == 1
+    assert {path.name for path in staging_roots[0].iterdir()} == {
+        "chronology-receipt.json",
+        "l1",
+        "l2",
+    }
 
 
 def test_atomic_publish_refuses_concurrently_created_empty_root(
@@ -506,7 +530,13 @@ def test_atomic_publish_refuses_concurrently_created_empty_root(
 
     assert evaluation_root.is_dir()
     assert not list(evaluation_root.iterdir())
-    assert not _staging_roots(evaluation_root)
+    staging_roots = _staging_roots(evaluation_root)
+    assert len(staging_roots) == 1
+    assert {path.name for path in staging_roots[0].iterdir()} == {
+        "chronology-receipt.json",
+        "l1",
+        "l2",
+    }
 
 
 def test_materialization_revalidates_protected_state_after_staging(
@@ -536,7 +566,13 @@ def test_materialization_revalidates_protected_state_after_staging(
 
     assert calls > 1
     assert not evaluation_root.exists()
-    assert not _staging_roots(evaluation_root)
+    staging_roots = _staging_roots(evaluation_root)
+    assert len(staging_roots) == 1
+    assert {path.name for path in staging_roots[0].iterdir()} == {
+        "chronology-receipt.json",
+        "l1",
+        "l2",
+    }
 
 
 def test_materialization_replays_transition_and_tree_immediately_before_publish(

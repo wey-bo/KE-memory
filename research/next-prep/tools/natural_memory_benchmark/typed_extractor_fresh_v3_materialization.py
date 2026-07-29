@@ -901,7 +901,7 @@ def _publish_noreplace(
     )
 
 
-def _remove_exact_staging_root(
+def _preserve_failed_staging_root(
     parent_descriptor: int,
     staging_name: str,
     expected: os.stat_result,
@@ -914,70 +914,10 @@ def _remove_exact_staging_root(
         opened = os.fstat(root_descriptor)
         if not _same_identity(opened, expected):
             return
-        if not _remove_directory_contents(root_descriptor):
-            return
-        try:
-            current = os.stat(
-                staging_name,
-                dir_fd=parent_descriptor,
-                follow_symlinks=False,
-            )
-        except FileNotFoundError:
-            return
-        if not _same_identity(current, opened):
-            return
-        os.rmdir(staging_name, dir_fd=parent_descriptor)
+        # Linux has no conditional unlink/rmdir-by-fd primitive. Preserve the
+        # failed staging tree for audit rather than deleting replaceable names.
     finally:
         os.close(root_descriptor)
-
-
-def _remove_directory_contents(directory_descriptor: int) -> bool:
-    for name in os.listdir(directory_descriptor):
-        try:
-            opened = os.stat(
-                name,
-                dir_fd=directory_descriptor,
-                follow_symlinks=False,
-            )
-        except FileNotFoundError:
-            continue
-        if stat.S_ISDIR(opened.st_mode):
-            try:
-                child_descriptor = _open_directory_at(directory_descriptor, name)
-            except (FileNotFoundError, NotADirectoryError):
-                return False
-            try:
-                child_opened = os.fstat(child_descriptor)
-                if not _same_identity(child_opened, opened):
-                    return False
-                if not _remove_directory_contents(child_descriptor):
-                    return False
-                try:
-                    current = os.stat(
-                        name,
-                        dir_fd=directory_descriptor,
-                        follow_symlinks=False,
-                    )
-                except FileNotFoundError:
-                    return False
-                if not _same_identity(current, child_opened):
-                    return False
-                os.rmdir(name, dir_fd=directory_descriptor)
-            finally:
-                os.close(child_descriptor)
-            continue
-        try:
-            current = os.stat(
-                name,
-                dir_fd=directory_descriptor,
-                follow_symlinks=False,
-            )
-        except FileNotFoundError:
-            continue
-        if not _same_identity(current, opened):
-            return False
-        os.unlink(name, dir_fd=directory_descriptor)
-    return True
 
 
 def _materialize_fresh_v3_hidden_to_root(
@@ -1104,7 +1044,7 @@ def _materialize_fresh_v3_hidden_to_root(
             bound_tree.close()
     except Exception:
         if staging_root is not None and staging_opened is not None:
-            _remove_exact_staging_root(
+            _preserve_failed_staging_root(
                 parent_descriptor,
                 staging_root.name,
                 staging_opened,
