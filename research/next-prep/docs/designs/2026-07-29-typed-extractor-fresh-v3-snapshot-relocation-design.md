@@ -107,11 +107,22 @@ permission bits.
 
 ## Publication And Validation
 
-Publication uses an anonymous inode and no-replace link while holding the
-existing preregistration chronology lock. Immediately before linking, the
-adapter rebuilds the Git relocation binding, implementation binding, live
-guard, candidate queue, and future-absence checks. It then verifies canonical
-receipt bytes, target inode identity, and directory durability.
+Publication uses a private named staging file in the receipt directory and
+`renameat2(RENAME_NOREPLACE)` while holding the existing preregistration
+chronology lock. Immediately before renaming, the adapter rebuilds the Git
+relocation binding, implementation binding, live guard, candidate queue, and
+future-absence checks and verifies the staging pathname against its open inode.
+It then fsyncs the directory, closes the staging descriptor, reopens the
+canonical mode-`0444` receipt, and verifies its bytes and inode identity.
+
+The initial anonymous-inode design was rejected during execution. On the H100
+JuiceFS mount, `O_TMPFILE` plus `linkat(AT_EMPTY_PATH)` returned success and the
+target was readable while the anonymous descriptor remained open, but the
+target decayed after descriptor close into an unreadable zero-byte ghost entry
+with link count and mode both zero. A 30-file same-mount reproduction failed
+30/30 after a one-second delayed read. The named-staging/no-replace design
+retains no-clobber atomicity while avoiding that filesystem-specific false
+success mode.
 
 Validation rejects symlinks, noncanonical JSON, unknown/coercive fields,
 wrong Git ancestry/blob identity, dirty bound implementation files, changed

@@ -380,6 +380,33 @@ def test_receipt_writer_publishes_canonical_readonly_and_is_idempotent(
     assert callbacks == ["checked", "checked"]
 
 
+def test_snapshot_writer_does_not_require_anonymous_inode_publication(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    receipt = relocation.build_fresh_v3_snapshot_relocation_receipt(
+        REPOSITORY,
+        WORKSPACE,
+        FORMAL_EVALUATION,
+        RECEIPT_TIME,
+    )
+    target = tmp_path / "authoring-implementation-receipt.json"
+
+    def reject_anonymous_inode(_: Path) -> int:
+        raise AssertionError("snapshot receipt publication used O_TMPFILE")
+
+    monkeypatch.setattr(
+        relocation.authoring,
+        "_open_anonymous_receipt",
+        reject_anonymous_inode,
+    )
+
+    relocation._write_snapshot_receipt_no_clobber(target, receipt)
+
+    assert target.read_bytes() == canonical_json_bytes(receipt)
+    assert target.stat().st_mode & 0o777 == 0o444
+
+
 def test_receipt_writer_rejects_different_existing_target(tmp_path: Path) -> None:
     first = relocation.build_fresh_v3_snapshot_relocation_receipt(
         REPOSITORY,

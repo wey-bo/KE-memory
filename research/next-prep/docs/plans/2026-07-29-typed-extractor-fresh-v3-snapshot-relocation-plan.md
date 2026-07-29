@@ -14,11 +14,12 @@ chronology and all zero-write boundaries.
 authoring files with a fixed ancestor commit plus exact Git blobs. The adapter
 maps the historical absolute chronology to repository-relative normalized
 paths, rebuilds the existing path-neutral authoring/protected-state bindings,
-and publishes a strict receipt v2 through the existing chronology lock and
-anonymous-inode no-replace writer.
+and publishes a strict receipt v2 through the existing chronology lock and a
+named-staging no-replace writer.
 
 **Tech Stack:** Python 3.12, Pydantic v2, Git plumbing commands, pytest,
-canonical JSON/SHA-256 helpers, Linux `flock`/`O_TMPFILE`/`linkat` publication.
+canonical JSON/SHA-256 helpers, Linux `flock`, same-directory staging, and
+`renameat2(RENAME_NOREPLACE)` publication.
 
 ## Global Constraints
 
@@ -68,7 +69,7 @@ canonical JSON/SHA-256 helpers, Linux `flock`/`O_TMPFILE`/`linkat` publication.
   `_validate_relocation_paths(preregistration, repository_root, workspace_root,
   evaluation_root) -> RelocationPathBinding`.
 
-- [ ] **Step 1: Write failing Git-binding tests**
+- [x] **Step 1: Write failing Git-binding tests**
 
   Add tests that first exercise a small real temporary Git repository, then the
   actual imported snapshot. The temporary repository test must initialize a
@@ -91,7 +92,7 @@ canonical JSON/SHA-256 helpers, Linux `flock`/`O_TMPFILE`/`linkat` publication.
   } == EXPECTED_BLOBS
   ```
 
-- [ ] **Step 2: Run the focused file and verify RED**
+- [x] **Step 2: Run the focused file and verify RED**
 
   Run from `research/next-prep`:
 
@@ -103,7 +104,7 @@ canonical JSON/SHA-256 helpers, Linux `flock`/`O_TMPFILE`/`linkat` publication.
   Expected: collection fails because
   `typed_extractor_fresh_v3_snapshot_receipt` does not exist.
 
-- [ ] **Step 3: Implement minimal Git and path proof**
+- [x] **Step 3: Implement minimal Git and path proof**
 
   Define strict frozen Pydantic models and Git helpers with these shapes:
 
@@ -141,12 +142,12 @@ canonical JSON/SHA-256 helpers, Linux `flock`/`O_TMPFILE`/`linkat` publication.
   exactly, but store only repository-relative normalized paths for the new
   location.
 
-- [ ] **Step 4: Run the focused Git tests to GREEN**
+- [x] **Step 4: Run the focused Git tests to GREEN**
 
   Run the same focused command. Expected: all Git-binding and mapping tests
   pass, with no formal receipt or evaluation artifact created.
 
-- [ ] **Step 5: Commit the Git proof**
+- [x] **Step 5: Commit the Git proof**
 
   ```bash
   git add \
@@ -173,7 +174,7 @@ canonical JSON/SHA-256 helpers, Linux `flock`/`O_TMPFILE`/`linkat` publication.
   `build_fresh_v3_snapshot_relocation_receipt(repository_root, workspace_root,
   evaluation_root, receipt_time) -> FreshV3SnapshotRelocationReceipt`.
 
-- [ ] **Step 1: Add failing strict-model and builder tests**
+- [x] **Step 1: Add failing strict-model and builder tests**
 
   Tests must assert schema
   `typed-extractor-fresh-v3-authoring-receipt-v2`, exact canonical JSON,
@@ -197,12 +198,12 @@ canonical JSON/SHA-256 helpers, Linux `flock`/`O_TMPFILE`/`linkat` publication.
   assert receipt.model_request_count == 0
   ```
 
-- [ ] **Step 2: Run the new nodes and verify RED**
+- [x] **Step 2: Run the new nodes and verify RED**
 
   Expected: failures name the absent v2 receipt model/builder, not fixture or
   import errors.
 
-- [ ] **Step 3: Implement the minimal receipt model and builder**
+- [x] **Step 3: Implement the minimal receipt model and builder**
 
   Add a strict nested `PathNeutralAuthoringBinding` containing the full v1
   implementation contract except absolute current paths: preregistration
@@ -217,7 +218,7 @@ canonical JSON/SHA-256 helpers, Linux `flock`/`O_TMPFILE`/`linkat` publication.
   calling the v1 `_validate_chronology_paths`. Parse `receipt_time` as the
   existing exact 2026 UTC label and reject all coercion or extra fields.
 
-- [ ] **Step 4: Run builder tests to GREEN and re-run authoring tests**
+- [x] **Step 4: Run builder tests to GREEN and re-run authoring tests**
 
   ```bash
   PYTHONPATH=. ../../.venv/bin/python -m pytest -q \
@@ -228,7 +229,7 @@ canonical JSON/SHA-256 helpers, Linux `flock`/`O_TMPFILE`/`linkat` publication.
   Expected before formal freeze: new focused tests pass; existing authoring
   suite retains its phase-aware pre-receipt result.
 
-- [ ] **Step 5: Commit the strict receipt builder**
+- [x] **Step 5: Commit the strict receipt builder**
 
   ```bash
   git add \
@@ -255,9 +256,9 @@ canonical JSON/SHA-256 helpers, Linux `flock`/`O_TMPFILE`/`linkat` publication.
   `validate_fresh_v3_snapshot_relocation_receipt(repository_root,
   workspace_root, evaluation_root) -> dict[str, Any]`.
 
-- [ ] **Step 1: Write failing publication and validation tests**
+- [x] **Step 1: Write failing publication and validation tests**
 
-  Cover anonymous-inode canonical publication in a temporary directory,
+  Cover canonical no-replace publication in a temporary directory,
   identical idempotence, differing-target rejection, concurrent target
   appearance, symlink/noncanonical/unknown-field rejection, target inode
   replacement during validation, exact SHA reporting, Git-bound file drift,
@@ -265,15 +266,16 @@ canonical JSON/SHA-256 helpers, Linux `flock`/`O_TMPFILE`/`linkat` publication.
   files and assert tests do not write any hidden/model/authority/gold,
   identity/membership/closure/snapshot/aggregate output.
 
-- [ ] **Step 2: Run the publication nodes and verify RED**
+- [x] **Step 2: Run the publication nodes and verify RED**
 
   Expected: failures identify the missing freeze/validate functions or the
   missing validation checks.
 
-- [ ] **Step 3: Implement freeze and validation**
+- [x] **Step 3: Implement freeze and validation**
 
-  Use `fresh_v3_chronology_lock(preregistration_path)` and the existing
-  `_write_receipt_no_clobber` anonymous-inode writer. Before the final link,
+  Use `fresh_v3_chronology_lock(preregistration_path)` and a private named
+  staging file published with `renameat2(RENAME_NOREPLACE)`. Before the final
+  rename,
   recheck preregistration inode, Git ancestry/blobs/current bytes, old/new path
   mapping, path-neutral implementation binding, relocation code hashes,
   candidate queue, live guard, and future absence; compare canonical bytes to
@@ -299,13 +301,13 @@ canonical JSON/SHA-256 helpers, Linux `flock`/`O_TMPFILE`/`linkat` publication.
   }
   ```
 
-- [ ] **Step 4: Run focused and adjacent tests to GREEN**
+- [x] **Step 4: Run focused and adjacent tests to GREEN**
 
   Run the new test, existing v3 authoring test, all fresh-v3 prereg tests, and
   the typed-extractor phase-aware subset. Expected: no failures, and no formal
   receipt has been produced by tests.
 
-- [ ] **Step 5: Commit the freeze/validation implementation**
+- [x] **Step 5: Commit the freeze/validation implementation**
 
   ```bash
   git add \
@@ -345,9 +347,21 @@ canonical JSON/SHA-256 helpers, Linux `flock`/`O_TMPFILE`/`linkat` publication.
   tests, phase-aware typed/natural/knowledge tests, `compileall`, `tabnanny`,
   `git diff --check`, fixed hash/blob checks, candidate queue/live guard
   reconstruction, credential scan, and explicit absence/zero-write checks.
-  Stop on any failure; do not publish the receipt.
+  Stop on any target, bound-input, or newly introduced failure. Broad-suite
+  failures caused solely by documented normalization dependency gaps or frozen
+  old absolute paths must be listed by category and must not be disguised as a
+  pass; they do not authorize modifying historical files in this stage.
 
 - [ ] **Step 2: Freeze exactly once**
+
+  The first publication attempt used receipt label `2026-07-29T13:42:32Z` and
+  is recorded as failed. The anonymous-inode publisher returned a v2 payload,
+  but the formal target became an unreadable JuiceFS ghost entry after the
+  staging descriptor closed; the immediate validator therefore reported the
+  receipt missing. No formal receipt was accepted or frozen from that attempt.
+  A same-mount diagnostic reproduced the false-success behavior for 30/30
+  files. The publisher must pass the named-staging regression and the complete
+  pre-freeze gate before a new freeze invocation is permitted.
 
   Invoke `freeze_fresh_v3_snapshot_relocation_receipt` directly with the
   current repository root, exact `research/next-prep` workspace, normalized

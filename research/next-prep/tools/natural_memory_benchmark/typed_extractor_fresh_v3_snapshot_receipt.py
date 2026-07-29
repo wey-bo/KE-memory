@@ -1,10 +1,13 @@
 from __future__ import annotations
 
+import ctypes
+import errno
 import hashlib
 import json
 import os
 import stat
 import subprocess
+import tempfile
 from datetime import datetime
 from pathlib import Path, PurePosixPath
 from typing import Any, Callable, Literal
@@ -56,6 +59,8 @@ GUARD_RESULTS_SHA256 = authoring.GUARD_RESULTS_SHA256
 GUARD_COUNTS = dict(authoring.GUARD_COUNTS)
 AUTOMATIC_WRITE_COUNTS = dict(authoring.AUTOMATIC_WRITE_COUNTS)
 MATERIALIZATION_WORKSPACE_PATHS = tuple(authoring.MATERIALIZATION_WORKSPACE_PATHS)
+_AT_FDCWD = -100
+_RENAME_NOREPLACE = 1
 
 _SNAPSHOT_FILES = {
     "preregistration": {
@@ -559,11 +564,113 @@ def _write_snapshot_receipt_no_clobber(
     *,
     before_publish: Callable[[], None] | None = None,
 ) -> None:
-    authoring._write_receipt_no_clobber(
+    content = authoring.canonical_json_bytes(receipt)
+    matching_receipt = authoring._require_matching_existing_receipt(
         receipt_path,
-        receipt,
-        before_publish=before_publish,
+        content,
     )
+    if matching_receipt is not None:
+        if before_publish is not None:
+            before_publish()
+        authoring._fsync_directory(receipt_path.parent)
+        authoring._assert_path_matches_opened(
+            receipt_path,
+            matching_receipt,
+            label="fresh v3 relocation receipt",
+        )
+        return
+
+    descriptor, temporary_name = tempfile.mkstemp(
+        prefix=f".{receipt_path.name}.staging-",
+        suffix=".tmp",
+        dir=receipt_path.parent,
+    )
+    temporary_path = Path(temporary_name)
+    try:
+        authoring._write_all(descriptor, content)
+        os.fsync(descriptor)
+        os.fchmod(descriptor, 0o444)
+        os.fsync(descriptor)
+        if before_publish is not None:
+            before_publish()
+        authoring._assert_path_matches_opened(
+            temporary_path,
+            os.fstat(descriptor),
+            label="fresh v3 relocation receipt staging file",
+        )
+        try:
+            _publish_named_receipt_noreplace(temporary_path, receipt_path)
+        except FileExistsError:
+            matching_receipt = authoring._require_matching_existing_receipt(
+                receipt_path,
+                content,
+            )
+            if matching_receipt is None:
+                raise ValueError(
+                    "fresh v3 relocation receipt disappeared during publication"
+                )
+            authoring._fsync_directory(receipt_path.parent)
+            authoring._assert_path_matches_opened(
+                receipt_path,
+                matching_receipt,
+                label="fresh v3 relocation receipt",
+            )
+            return
+        authoring._fsync_directory(receipt_path.parent)
+        authoring._assert_path_matches_opened(
+            receipt_path,
+            os.fstat(descriptor),
+            label="fresh v3 relocation receipt",
+        )
+    finally:
+        os.close(descriptor)
+        temporary_path.unlink(missing_ok=True)
+
+    matching_receipt = authoring._require_matching_existing_receipt(
+        receipt_path,
+        content,
+    )
+    if matching_receipt is None:
+        raise ValueError("fresh v3 relocation receipt missing after publication")
+    authoring._assert_path_matches_opened(
+        receipt_path,
+        matching_receipt,
+        label="fresh v3 relocation receipt",
+    )
+
+
+def _publish_named_receipt_noreplace(source: Path, target: Path) -> None:
+    libc = ctypes.CDLL(None, use_errno=True)
+    renameat2 = getattr(libc, "renameat2", None)
+    if renameat2 is None:
+        raise RuntimeError(
+            "renameat2 is required for relocation receipt publication"
+        )
+    renameat2.argtypes = [
+        ctypes.c_int,
+        ctypes.c_char_p,
+        ctypes.c_int,
+        ctypes.c_char_p,
+        ctypes.c_uint,
+    ]
+    renameat2.restype = ctypes.c_int
+    result = renameat2(
+        _AT_FDCWD,
+        os.fsencode(source),
+        _AT_FDCWD,
+        os.fsencode(target),
+        _RENAME_NOREPLACE,
+    )
+    if result == 0:
+        return
+    error_number = ctypes.get_errno()
+    if error_number == errno.EEXIST:
+        raise FileExistsError(
+            error_number,
+            f"fresh v3 relocation receipt already exists: {target}",
+            str(target),
+        )
+    raise OSError(error_number, os.strerror(error_number), f"{source} -> {target}")
 
 
 def _read_snapshot_receipt(
