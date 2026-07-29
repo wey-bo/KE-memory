@@ -112,6 +112,11 @@
   guard fingerprint remains
   `e184b6caf2998acf1c8700bc84d24bbafd49ab9c8f15738d1af8cc484ee5ebcc`.
   Credential pattern and every automatic write count are `0`.
-- The next stage may implement deterministic v3 authoring and freeze its
-  implementation receipt. Hidden materialization, proposer calls, scoring,
-  pipeline integration, and authoritative writes remain unauthorized.
+- Deterministic v3 authoring and its normalized-snapshot relocation receipt are
+  complete. The active receipt froze at `2026-07-29T14:35:02Z` with schema
+  `typed-extractor-fresh-v3-authoring-receipt-v2`, SHA-256
+  `c810f421d5a3b0726b862ec2f12c89e0d638e0747892637e2a32977587b7ef8c`,
+  size `9370`, and mode `0444`.
+- The next separately designed stage may perform one-time fresh-v3 hidden
+  materialization. Proposer calls, scoring, pipeline integration, and
+  authoritative writes remain unauthorized until their own later gates.

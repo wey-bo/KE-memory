@@ -46,13 +46,39 @@ artifacts/automatic-extraction-assessment/typed-extractor-v3-fresh-hidden-prereg
 
 At migration time this source file appeared as root-owned, 0-byte, mode `----------`, mtime 1970, and caused `rsync` code 24. It was excluded and should not be treated as an accepted receipt. Do not delete or repair it from this branch; let the active fresh-v3 authoring session finish and hand off a reviewed receipt.
 
+That old source ghost was not repaired or modified by this branch. The normalized
+target instead recovered the reviewed implementation through fixed Git commit/blob
+bindings and froze a new relocation receipt at `2026-07-29T14:35:02Z`:
+
+```text
+research/next-prep/artifacts/automatic-extraction-assessment/typed-extractor-v3-fresh-hidden-prereg-v1/authoring-implementation-receipt.json
+```
+
+The normalized receipt has schema
+`typed-extractor-fresh-v3-authoring-receipt-v2`, SHA-256
+`c810f421d5a3b0726b862ec2f12c89e0d638e0747892637e2a32977587b7ef8c`,
+size `9370`, mode `0444`, and `nlink=1`. Its durable recovery authority is import
+commit `00fa803ee44bcef5a299babb9a8e2b7ba9f994e4`, exact Git blobs, and canonical
+receipt bytes. The failed `2026-07-29T13:42:32Z` anonymous-inode attempt is retained
+as a JuiceFS publication failure, not a formal freeze.
+
 ## Parallel-session boundaries
 
 Do not overwrite the active source-workspace tracks until their owning sessions hand off reviewed output:
 
-- fresh-v3 authoring/receipt
 - QuerySlotPlan/query compiler v2 work
 - L1 ontology linking/admission work
+
+The fresh-v3 authoring/receipt handoff is complete in the normalized target. It
+authorizes only a separately designed one-time hidden materialization; it does not
+authorize proposer, scoring, pipeline integration, or authoritative writes.
+
+Post-freeze validation re-opened the exact canonical receipt and returned `valid`.
+The phase-aware typed checks are `389 passed, 15 deselected`; runtime checks are
+`773 passed, 1 skipped`. The correctly rooted tracked natural suite is
+`832 passed, 24 failed, 15 deselected`; the 24 failures remain dependency/frozen
+path migration gaps. Knowledge collection remains blocked in six files because the
+normalized root `.venv` does not include `nltk`.
 
 This branch can continue with integration scaffolding, documentation, migration validation, and isolated development against the copied snapshot.
 

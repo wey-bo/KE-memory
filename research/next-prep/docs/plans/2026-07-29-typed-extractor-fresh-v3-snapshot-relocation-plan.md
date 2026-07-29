@@ -352,7 +352,7 @@ canonical JSON/SHA-256 helpers, Linux `flock`, same-directory staging, and
   old absolute paths must be listed by category and must not be disguised as a
   pass; they do not authorize modifying historical files in this stage.
 
-- [ ] **Step 2: Freeze exactly once**
+- [x] **Step 2: Freeze exactly once**
 
   The first publication attempt used receipt label `2026-07-29T13:42:32Z` and
   is recorded as failed. The anonymous-inode publisher returned a v2 payload,
@@ -368,7 +368,7 @@ canonical JSON/SHA-256 helpers, Linux `flock`, same-directory staging, and
   future evaluation root, and one valid caller-supplied UTC label. Do not run
   any materializer or model command.
 
-- [ ] **Step 3: Validate the exact formal artifact**
+- [x] **Step 3: Validate the exact formal artifact**
 
   Reopen and validate the receipt, record its SHA-256, byte size, mode, schema,
   commit/blob bindings, L1/L2 counts, and canonical-byte equality. Confirm the
@@ -376,7 +376,7 @@ canonical JSON/SHA-256 helpers, Linux `flock`, same-directory staging, and
   evaluation/materialization/model/proposal/score paths remain absent and all
   protected hashes/write counts remain unchanged.
 
-- [ ] **Step 4: Update fact sources and completion checkboxes**
+- [x] **Step 4: Update fact sources and completion checkboxes**
 
   Record the relocation rationale, exact receipt identity, Git recovery chain,
   verification counts, and remaining authorization boundary. Remove the stale
@@ -384,13 +384,13 @@ canonical JSON/SHA-256 helpers, Linux `flock`, same-directory staging, and
   designed step may be one-time fresh-v3 hidden materialization, not proposer,
   scoring, pipeline integration, or authoritative writes.
 
-- [ ] **Step 5: Run the complete post-freeze gate**
+- [x] **Step 5: Run the complete post-freeze gate**
 
   Re-run validation and the same regression/static/audit commands, accounting
   only for any explicitly phase-aware pre-receipt test deselection. Verify no
   credentials or user-provided API key occur in tracked or generated files.
 
-- [ ] **Step 6: Commit receipt and fact sources**
+- [x] **Step 6: Commit receipt and fact sources**
 
   ```bash
   git add \
@@ -403,6 +403,36 @@ canonical JSON/SHA-256 helpers, Linux `flock`, same-directory staging, and
     research/next-prep/docs/plans/2026-07-29-typed-extractor-fresh-v3-snapshot-relocation-plan.md
   git commit -m "Freeze fresh-v3 snapshot relocation receipt"
   ```
+
+## Task 4 Completion Record
+
+- The failed `2026-07-29T13:42:32Z` anonymous-inode attempt produced no
+  accepted receipt. JuiceFS reproduced descriptor-close ghosting 30/30 times;
+  named staging plus `renameat2(RENAME_NOREPLACE)` replaced that publisher.
+- The only formal freeze used label `2026-07-29T14:35:02Z`. Receipt schema is
+  `typed-extractor-fresh-v3-authoring-receipt-v2`; SHA-256/size/mode/nlink are
+  `c810f421d5a3b0726b862ec2f12c89e0d638e0747892637e2a32977587b7ef8c` /
+  `9370` / `0444` / `1`. The formal prereg root contains exactly the
+  preregistration and receipt.
+- Git recovery binds import commit
+  `00fa803ee44bcef5a299babb9a8e2b7ba9f994e4` and blobs
+  `6433fef43d7c2d68f064d900ff28172f94b4968e`,
+  `bbe36a908ce7210c2919bb66328d4d4275851fe9`, and
+  `d92a28b2dae92bc4ddeecaca05f7520b864f24c2`. Current relocation module/test
+  SHA-256 values are
+  `1a630625c84380fb910e5b8d62f3cfbd607ba8d33062ae244bb3a5f5cc0382f6` and
+  `7c0326560e23c54c8a34b46f300d11a43d3a4ab4728246a4f1711e209659a6a5`.
+- The final reviewer reported no remaining Critical, Important, or Minor
+  findings. Post-freeze validator/exact audit is valid; phase-aware typed is
+  `389 passed, 15 deselected`, and runtime is `773 passed, 1 skipped`.
+  Correctly rooted tracked natural is `832 passed, 24 failed, 15 deselected`;
+  the 24 failures remain missing-dependency or frozen-old-path gaps. Knowledge
+  collection remains blocked in six files by missing `nltk`.
+- Static checks, Git ancestry/blob checks, credential scan, exact formal-root
+  audit, candidate queue/live guard reconstruction, staging/future absence,
+  and zero-write audit pass. The receipt authorizes only a separately designed
+  one-time materialization, not proposer, scoring, pipeline integration, or
+  authoritative writes.
 
 ## Self-Review
 

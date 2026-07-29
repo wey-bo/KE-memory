@@ -395,7 +395,58 @@ guard fingerprint 保持
 `e184b6caf2998acf1c8700bc84d24bbafd49ab9c8f15738d1af8cc484ee5ebcc`；
 credential pattern 和 automatic write count 均为 `0`。
 
-下一步只授权实现 deterministic v3 authoring 并冻结 implementation receipt；尚不
-允许生成 hidden、调用 proposer、评分、接入 pipeline 或执行任何权威写入。人工
-identity 裁决未物化，embedding 不是权威，`LONGMEMEVAL-6d550036` 继续为
+## Typed extractor fresh-hidden v3 authoring relocation receipt
+
+deterministic v3 authoring 已在原工作区完成复审；normalized Git snapshot 因原
+preregistration chronology 中的绝对路径不再有效，使用独立 relocation adapter 将
+历史路径映射到 `research/next-prep`，并以固定 import commit
+`00fa803ee44bcef5a299babb9a8e2b7ba9f994e4` 和 preregistration/authoring
+module/authoring test blob
+`6433fef43d7c2d68f064d900ff28172f94b4968e` /
+`bbe36a908ce7210c2919bb66328d4d4275851fe9` /
+`d92a28b2dae92bc4ddeecaca05f7520b864f24c2` 建立可恢复绑定。最终 reviewer 对
+relocation publication hardening 无遗留 Critical、Important 或 Minor，允许正式冻结。
+
+首个 label `2026-07-29T13:42:32Z` 的匿名 inode 发布尝试不是正式 freeze：
+`O_TMPFILE + linkat(AT_EMPTY_PATH)` 在 JuiceFS 上会在 descriptor 关闭后退化为
+`nlink=0`、mode `000`、size `0` 的 ghost，同挂载 probe 为 30/30 失败；该无效 ghost
+已精确删除，没有可恢复的有效内容。publisher 随后改为 same-directory named staging
+加 `renameat2(RENAME_NOREPLACE)`，并在 rename 前通过已打开 fd 复核 bytes、size、
+mode 和 inode，同时关闭 idempotence、collision、callback 与 stale-staging 竞态。
+
+唯一正式 receipt 于 caller-supplied UTC label `2026-07-29T14:35:02Z` 冻结在
+`artifacts/automatic-extraction-assessment/typed-extractor-v3-fresh-hidden-prereg-v1/authoring-implementation-receipt.json`。
+schema 为 `typed-extractor-fresh-v3-authoring-receipt-v2`，SHA-256
+`c810f421d5a3b0726b862ec2f12c89e0d638e0747892637e2a32977587b7ef8c`，
+size `9370` bytes，mode `0444`，`nlink=1`；formal prereg root 精确包含
+`preregistration.json` 与该 receipt。receipt 绑定 L1/L2 `24/18`、39 个 prior input、
+relocation module/test SHA-256
+`1a630625c84380fb910e5b8d62f3cfbd607ba8d33062ae244bb3a5f5cc0382f6` /
+`7c0326560e23c54c8a34b46f300d11a43d3a4ab4728246a4f1711e209659a6a5`，
+并保留 model request、hidden artifact 和九类 automatic write count 全为 `0`。
+
+正式 freeze 前验证为 relocation focused `23 passed`、adjacent authoring `77 passed`、
+phase-aware typed `310 passed, 1 deselected`、v3 prereg phase
+`5 passed, 11 deselected`、runtime `773 passed, 1 skipped`；Ruff、`compileall`、
+`tabnanny`、`git diff --check`、credential scan、candidate queue/live guard 与
+zero-write audit 通过。knowledge suite 因 normalized root `.venv` 缺 `nltk` 有 6 个
+collection blocker；tracked natural broad suite 的既有 36 项 failure 中，12 项是阶段
+转换后的旧 authoring/materialization phase 测试，24 项来自缺 `duckdb` 或冻结旧绝对
+路径，均未伪装成通过，也未通过修改历史冻结文件处理。
+
+正式 freeze 后重新打开 receipt 的 validator 与 exact audit 均为 valid：formal root
+仍只有 2 个 JSON，receipt SHA/size/mode/nlink 未变，evaluation/materialization 路径
+缺失。phase-aware typed 合计 `389 passed, 15 deselected`：authoring
+`77 passed`、relocation `20 passed, 3 deselected`、v3 prereg
+`5 passed, 11 deselected`、其余 tracked typed `287 passed, 1 deselected`；所有
+deselection 都是冻结前 artifact-absence 节点。runtime 为 `773 passed, 1 skipped`。
+正确 prep cwd 下的 tracked natural 合计 `832 passed, 24 failed, 15 deselected`；24 个
+failure 仍仅是缺 `duckdb` 或冻结旧绝对路径，未出现新类别。knowledge tests 仍因
+normalized root `.venv` 缺 `nltk` 在 6 个文件 collection error。Ruff、`compileall`、
+`tabnanny`、`git diff --check`、Git ancestry/blob、credential token `0`、candidate queue、
+live guard、staging residue、future absence 和 zero-write audit 全部通过。
+
+该 receipt 只授权下一步另行设计 one-time fresh-v3 hidden materialization；仍不授权
+proposer、scoring、pipeline integration 或任何 authoritative write。人工 identity
+裁决未物化，embedding 不是权威，`LONGMEMEVAL-6d550036` 继续为
 `structured_l2_identity_unresolved`，外部 memory 系统仍不复跑。
