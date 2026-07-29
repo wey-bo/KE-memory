@@ -341,7 +341,7 @@ canonical JSON/SHA-256 helpers, Linux `flock`, same-directory staging, and
 - Produces: exactly one canonical mode-`0444` receipt v2; no other formal
   artifact.
 
-- [ ] **Step 1: Run the complete pre-freeze gate**
+- [x] **Step 1: Run the complete pre-freeze gate**
 
   Run new focused tests, existing fresh-v3 authoring tests, adjacent prereg
   tests, phase-aware typed/natural/knowledge tests, `compileall`, `tabnanny`,
