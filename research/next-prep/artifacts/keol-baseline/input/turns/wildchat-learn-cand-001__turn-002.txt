@@ -1,0 +1,5 @@
+用户：
+具体应该怎么改？
+
+Agent：
+在 Android Studio 中打开 app/build.gradle，找到 android 块里的 compileSdkVersion 33，改为 compileSdkVersion 34，然后点击 Sync Now。同步后重新构建项目，并根据设备兼容性决定是否同时调整 targetSdk 和 minSdk。

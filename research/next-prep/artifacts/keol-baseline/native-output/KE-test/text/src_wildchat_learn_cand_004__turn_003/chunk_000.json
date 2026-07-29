@@ -1,0 +1,138 @@
+{
+  "source": {
+    "source_id": "src_wildchat_learn_cand_004__turn_003",
+    "file": "keol-input/turns/wildchat-learn-cand-004__turn-003.txt",
+    "file_type": "txt",
+    "category": "text",
+    "metadata": {
+      "unit_id": "wildchat-learn-cand-004__turn-003",
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "turn_index": 3,
+      "json_pointer": "/candidates/6/turns/2",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=3ca76da0eae68a26604ef25b4bb54bef / model=gpt-3.5-turbo-0613 / user_ordinal=1..3 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "chunk": {
+    "id": "chunk_1509d04d5f82e2771ab7",
+    "index": 0,
+    "text": "用户：\n“记忆是成功学习的关键”呢？\n\nAgent：\n记忆有作用，但不是唯一关键。深层理解、批判性思维、知识应用、刻意练习和检索练习共同支持长期学习效果。",
+    "size": 77,
+    "metadata": {
+      "unit_id": "wildchat-learn-cand-004__turn-003",
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "turn_index": 3,
+      "json_pointer": "/candidates/6/turns/2",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=3ca76da0eae68a26604ef25b4bb54bef / model=gpt-3.5-turbo-0613 / user_ordinal=1..3 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "n_memory",
+      "name": "记忆",
+      "type": "LearningFactor",
+      "description": "长期学习中有作用但并非唯一关键的因素。",
+      "source_chunk_id": "chunk_1509d04d5f82e2771ab7"
+    },
+    {
+      "id": "n_success",
+      "name": "成功学习",
+      "type": "LearningOutcome",
+      "description": "用户询问记忆是否为其关键。",
+      "source_chunk_id": "chunk_1509d04d5f82e2771ab7"
+    },
+    {
+      "id": "n_long_term",
+      "name": "长期学习效果",
+      "type": "LearningOutcome",
+      "description": "多种认知和练习活动共同支持的结果。",
+      "source_chunk_id": "chunk_1509d04d5f82e2771ab7"
+    },
+    {
+      "id": "n_understanding",
+      "name": "深层理解",
+      "type": "LearningFactor",
+      "description": "支持长期学习效果的因素。",
+      "source_chunk_id": "chunk_1509d04d5f82e2771ab7"
+    },
+    {
+      "id": "n_critical",
+      "name": "批判性思维",
+      "type": "LearningFactor",
+      "description": "支持长期学习效果的因素。",
+      "source_chunk_id": "chunk_1509d04d5f82e2771ab7"
+    },
+    {
+      "id": "n_application",
+      "name": "知识应用",
+      "type": "LearningFactor",
+      "description": "支持长期学习效果的因素。",
+      "source_chunk_id": "chunk_1509d04d5f82e2771ab7"
+    },
+    {
+      "id": "n_deliberate",
+      "name": "刻意练习",
+      "type": "LearningFactor",
+      "description": "支持长期学习效果的练习方式。",
+      "source_chunk_id": "chunk_1509d04d5f82e2771ab7"
+    },
+    {
+      "id": "n_retrieval",
+      "name": "检索练习",
+      "type": "LearningFactor",
+      "description": "支持长期学习效果的练习方式。",
+      "source_chunk_id": "chunk_1509d04d5f82e2771ab7"
+    }
+  ],
+  "relations": [
+    {
+      "source_entity": "n_memory",
+      "target_entity": "n_success",
+      "relation_type": "contributes_to",
+      "description": "Agent 表示记忆对成功学习有作用。"
+    },
+    {
+      "source_entity": "n_memory",
+      "target_entity": "n_success",
+      "relation_type": "not_sole_determinant_of",
+      "description": "Agent 表示记忆并非成功学习的唯一关键。"
+    },
+    {
+      "source_entity": "n_understanding",
+      "target_entity": "n_long_term",
+      "relation_type": "supports",
+      "description": "深层理解支持长期学习效果。"
+    },
+    {
+      "source_entity": "n_critical",
+      "target_entity": "n_long_term",
+      "relation_type": "supports",
+      "description": "批判性思维支持长期学习效果。"
+    },
+    {
+      "source_entity": "n_application",
+      "target_entity": "n_long_term",
+      "relation_type": "supports",
+      "description": "知识应用支持长期学习效果。"
+    },
+    {
+      "source_entity": "n_deliberate",
+      "target_entity": "n_long_term",
+      "relation_type": "supports",
+      "description": "刻意练习支持长期学习效果。"
+    },
+    {
+      "source_entity": "n_retrieval",
+      "target_entity": "n_long_term",
+      "relation_type": "supports",
+      "description": "检索练习支持长期学习效果。"
+    }
+  ]
+}

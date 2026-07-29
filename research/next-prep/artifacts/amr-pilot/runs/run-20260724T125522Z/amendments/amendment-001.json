@@ -1,0 +1,12 @@
+{
+  "amends_run_manifest_sha256": "b96f78afcf931de09747a24fe1f17872295debbe1f18e3e1f1e40c0721ad2d1d",
+  "authorization_source": "user",
+  "authorization_summary": "Proceed with the quality and structure run although per-call latency telemetry is unavailable; the latency efficiency gate remains undecidable.",
+  "recorded_at": "2026-07-24T14:02:28Z",
+  "run_id": "run-20260724T125522Z",
+  "schema_version": "amr-pilot-run-amendment-v1",
+  "telemetry_policy_addition": {
+    "latency_gate": "undecidable",
+    "latency_status": "unavailable"
+  }
+}

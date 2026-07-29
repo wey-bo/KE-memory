@@ -1,0 +1,2119 @@
+{
+  "prompt_version": "knowledge-keyword-extraction-v2.1",
+  "candidate_id": "WILDCHAT-MGMT-CAND-002",
+  "candidate_namespace": "wildchat-mgmt-cand-002-e88f4bb1070d",
+  "final_knowledge_sha256": "641c88117c206e9901c332e93c4c77e91dc5df703667f441291679dec8c03f41",
+  "active_knowledge": [
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.85,
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 57,
+          "evidence_id": "evidence-b3ee2b596ea80515088ab63c40d9705b2eb009666d49ce97d7cd675acaceafa5",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "Stories 和 Reels 中的故事叙述",
+          "start": 35,
+          "turn_index": 1
+        },
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 32,
+          "evidence_id": "evidence-26e13f68a805ce2d151295126519591b0f8e86a4a71f7dcf3a4d3df51e11b75d",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "请基于这个主题，给我一个用故事叙述连续制作 Reels 的方案。",
+          "start": 0,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": "Turn 2's '这个主题' most locally and plausibly refers to the transformation/growth theme in the Instagram Stories and Reels storytelling discussed in turn 1, while the antecedent remains somewhat ambiguous.",
+      "knowledge_id": "D_wildchat-mgmt-cand-002-e88f4bb1070d_001",
+      "object": "基于前述 Instagram 故事叙述中的转变/成长主题的连续 Reels 故事叙述方案",
+      "predicate": "请求制定",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "requested",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户请求基于前述 Instagram 故事叙述中的转变/成长主题制定连续 Reels 故事叙述方案。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [
+          "K_wildchat-mgmt-cand-002-e88f4bb1070d_002_001"
+        ],
+        "source_turn": 1,
+        "stage": "dialogue",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 22,
+          "evidence_id": "evidence-801459bd7552f7159c7e6c574a77c08940ca76ae3d8fd14a174e25f3de64a614",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我负责一个转型导师、赋能与健康频道的内容运营",
+          "start": 0,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_001",
+      "object": "转型导师、赋能与健康频道的内容运营",
+      "predicate": "负责",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户负责一个转型导师、赋能与健康频道的内容运营。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 50,
+          "evidence_id": "evidence-fd69b645f116f39690fcea3ba29be9133ef1e4d17b7915ab041632f612ca3f99",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "制定一个 30 天计划",
+          "start": 39,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_002",
+      "object": "30 天内容计划",
+      "predicate": "请求",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "requested",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": [
+          "30 天"
+        ]
+      },
+      "source_status": "user_reported",
+      "statement": "用户请求制定一个 30 天内容计划。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 38,
+          "evidence_id": "evidence-3593c1c73bd7460452edcf898848609db71a218cb92a503538ff5a72ed3af7a4",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "围绕“制作有独占价值的内容”",
+          "start": 24,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_003",
+      "object": "制作有独占价值的内容",
+      "predicate": "应围绕",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "requested",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户要求计划围绕制作有独占价值的内容。",
+      "subject": "30 天内容计划",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 61,
+          "evidence_id": "evidence-20ca07a3cbe1688236d38f29ed5a0beb5806366a0411b4c35bfd8fda0e8b0519",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "每天至少安排一项活动",
+          "start": 51,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_004",
+      "object": "一项活动",
+      "predicate": "每天至少安排",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "requested",
+        "polarity": "positive",
+        "scope": [
+          "至少一项"
+        ],
+        "temporal": [
+          "每天"
+        ]
+      },
+      "source_status": "user_reported",
+      "statement": "用户要求 30 天计划每天至少安排一项活动。",
+      "subject": "30 天内容计划",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 42,
+          "evidence_id": "evidence-f576f6bb0e18a702b9facddedc6a08b8414b74bc5911a4d2a8daf759ffc47d19",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "介绍频道、深度文章、专家直播、教程、案例、冥想音频、书单、问答和自我反思练习",
+          "start": 4,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_006",
+      "object": "介绍频道",
+      "predicate": "可安排",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议在 30 天中安排频道介绍。",
+      "subject": "30 天内容计划",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 42,
+          "evidence_id": "evidence-f576f6bb0e18a702b9facddedc6a08b8414b74bc5911a4d2a8daf759ffc47d19",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "介绍频道、深度文章、专家直播、教程、案例、冥想音频、书单、问答和自我反思练习",
+          "start": 4,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_007",
+      "object": "深度文章",
+      "predicate": "可安排",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议在 30 天中安排深度文章。",
+      "subject": "30 天内容计划",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 42,
+          "evidence_id": "evidence-f576f6bb0e18a702b9facddedc6a08b8414b74bc5911a4d2a8daf759ffc47d19",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "介绍频道、深度文章、专家直播、教程、案例、冥想音频、书单、问答和自我反思练习",
+          "start": 4,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_008",
+      "object": "专家直播",
+      "predicate": "可安排",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议在 30 天中安排专家直播。",
+      "subject": "30 天内容计划",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 42,
+          "evidence_id": "evidence-f576f6bb0e18a702b9facddedc6a08b8414b74bc5911a4d2a8daf759ffc47d19",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "介绍频道、深度文章、专家直播、教程、案例、冥想音频、书单、问答和自我反思练习",
+          "start": 4,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_009",
+      "object": "教程",
+      "predicate": "可安排",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议在 30 天中安排教程。",
+      "subject": "30 天内容计划",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 42,
+          "evidence_id": "evidence-f576f6bb0e18a702b9facddedc6a08b8414b74bc5911a4d2a8daf759ffc47d19",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "介绍频道、深度文章、专家直播、教程、案例、冥想音频、书单、问答和自我反思练习",
+          "start": 4,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_010",
+      "object": "案例",
+      "predicate": "可安排",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议在 30 天中安排案例。",
+      "subject": "30 天内容计划",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 42,
+          "evidence_id": "evidence-f576f6bb0e18a702b9facddedc6a08b8414b74bc5911a4d2a8daf759ffc47d19",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "介绍频道、深度文章、专家直播、教程、案例、冥想音频、书单、问答和自我反思练习",
+          "start": 4,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_011",
+      "object": "冥想音频",
+      "predicate": "可安排",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议在 30 天中安排冥想音频。",
+      "subject": "30 天内容计划",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 42,
+          "evidence_id": "evidence-f576f6bb0e18a702b9facddedc6a08b8414b74bc5911a4d2a8daf759ffc47d19",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "介绍频道、深度文章、专家直播、教程、案例、冥想音频、书单、问答和自我反思练习",
+          "start": 4,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_012",
+      "object": "书单",
+      "predicate": "可安排",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议在 30 天中安排书单。",
+      "subject": "30 天内容计划",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 42,
+          "evidence_id": "evidence-f576f6bb0e18a702b9facddedc6a08b8414b74bc5911a4d2a8daf759ffc47d19",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "介绍频道、深度文章、专家直播、教程、案例、冥想音频、书单、问答和自我反思练习",
+          "start": 4,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_013",
+      "object": "问答",
+      "predicate": "可安排",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议在 30 天中安排问答。",
+      "subject": "30 天内容计划",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 42,
+          "evidence_id": "evidence-f576f6bb0e18a702b9facddedc6a08b8414b74bc5911a4d2a8daf759ffc47d19",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "介绍频道、深度文章、专家直播、教程、案例、冥想音频、书单、问答和自我反思练习",
+          "start": 4,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_014",
+      "object": "自我反思练习",
+      "predicate": "可安排",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议在 30 天中安排自我反思练习。",
+      "subject": "30 天内容计划",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 52,
+          "evidence_id": "evidence-58a30ac91e3953baea77fb28f601ac957f3c7f90740b1e98f0244331ac65ff4e",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "交替安排 30 天",
+          "start": 43,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_015",
+      "object": "交替安排",
+      "predicate": "应",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": [
+          "30 天"
+        ]
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议不同内容类型交替安排。",
+      "subject": "内容类型",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 61,
+          "evidence_id": "evidence-5ccd2ea515396eedadfbe2a881fb5666da2daf82b1e0b0d951269a4c0853eda5",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "确保内容持续更新",
+          "start": 53,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_016",
+      "object": "持续更新",
+      "predicate": "应",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议确保内容持续更新。",
+      "subject": "内容",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 76,
+          "evidence_id": "evidence-741f8bd7af68d4315478ecf33903e4e3dd3ffac3ce7abe0ef06d49da70b999b5",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "让订阅者有参与和反馈的入口",
+          "start": 63,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_017",
+      "object": "参与入口",
+      "predicate": "应有",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议为订阅者提供参与入口。",
+      "subject": "订阅者",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 76,
+          "evidence_id": "evidence-741f8bd7af68d4315478ecf33903e4e3dd3ffac3ce7abe0ef06d49da70b999b5",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "让订阅者有参与和反馈的入口",
+          "start": 63,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_018",
+      "object": "反馈入口",
+      "predicate": "应有",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议为订阅者提供反馈入口。",
+      "subject": "订阅者",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.99,
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 19,
+          "evidence_id": "evidence-abc0f0986abfea0faa3165c15bb6bc55f58cb46b18f23a34f0b636d3b8b45454",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "请改成 Instagram 版本",
+          "start": 3,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": "当前消息明确给出目标平台 Instagram，但未提供待转换的原始版本。",
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_001_001",
+      "object": "Instagram 版本",
+      "predicate": "请求",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "requested",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户请求制作 Instagram 版本。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": [
+          "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_005"
+        ]
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 31,
+          "evidence_id": "evidence-4d6506c07dfd22f558ad0be4423798bd7e251661988c548a8553ae470dee2239",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "加入博客、Reels",
+          "start": 21,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_001_002",
+      "object": "博客",
+      "predicate": "应加入",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "requested",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户要求 Instagram 版本加入博客。",
+      "subject": "Instagram 版本",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 31,
+          "evidence_id": "evidence-4d6506c07dfd22f558ad0be4423798bd7e251661988c548a8553ae470dee2239",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "加入博客、Reels",
+          "start": 21,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_001_003",
+      "object": "Reels",
+      "predicate": "应加入",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "requested",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户要求 Instagram 版本加入 Reels。",
+      "subject": "Instagram 版本",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 57,
+          "evidence_id": "evidence-b3ee2b596ea80515088ab63c40d9705b2eb009666d49ce97d7cd675acaceafa5",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "Stories 和 Reels 中的故事叙述",
+          "start": 35,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_001_004",
+      "object": "故事叙述",
+      "predicate": "应加入",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "requested",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户要求在 Stories 中加入故事叙述。",
+      "subject": "Stories",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 57,
+          "evidence_id": "evidence-b3ee2b596ea80515088ab63c40d9705b2eb009666d49ce97d7cd675acaceafa5",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "Stories 和 Reels 中的故事叙述",
+          "start": 35,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_001_005",
+      "object": "故事叙述",
+      "predicate": "应加入",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "requested",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户要求在 Reels 中加入故事叙述。",
+      "subject": "Reels",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 23,
+          "evidence_id": "evidence-69dfd8080965b561a8cff70ace713b57edadeed4302a402693303abe29ec18b1",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "将博客拆成轮播摘要",
+          "start": 14,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_001_006",
+      "object": "轮播摘要",
+      "predicate": "可拆成",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议将博客拆成轮播摘要。",
+      "subject": "博客",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 45,
+          "evidence_id": "evidence-820d84a7d9ad6256299ebd8da72ef08fc67f497040c10790e22265a3e0da6460",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "用 Reels 发布短教程、锻炼和目标设定",
+          "start": 24,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_001_007",
+      "object": "短教程",
+      "predicate": "可发布",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议用 Reels 发布短教程。",
+      "subject": "Reels",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 45,
+          "evidence_id": "evidence-820d84a7d9ad6256299ebd8da72ef08fc67f497040c10790e22265a3e0da6460",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "用 Reels 发布短教程、锻炼和目标设定",
+          "start": 24,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_001_008",
+      "object": "锻炼",
+      "predicate": "可发布",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议用 Reels 发布锻炼内容。",
+      "subject": "Reels",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 45,
+          "evidence_id": "evidence-820d84a7d9ad6256299ebd8da72ef08fc67f497040c10790e22265a3e0da6460",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "用 Reels 发布短教程、锻炼和目标设定",
+          "start": 24,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_001_009",
+      "object": "目标设定",
+      "predicate": "可发布",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议用 Reels 发布目标设定内容。",
+      "subject": "Reels",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 74,
+          "evidence_id": "evidence-4e97909558d2f92ba66a4c0fc15b1f4a5f750d87c26efc21fa40163d4aa5f420",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "用 Stories 做个人转变故事、投票、问答和幕后内容",
+          "start": 46,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_001_010",
+      "object": "个人转变故事",
+      "predicate": "可发布",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议用 Stories 发布个人转变故事。",
+      "subject": "Stories",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 74,
+          "evidence_id": "evidence-4e97909558d2f92ba66a4c0fc15b1f4a5f750d87c26efc21fa40163d4aa5f420",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "用 Stories 做个人转变故事、投票、问答和幕后内容",
+          "start": 46,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_001_011",
+      "object": "投票",
+      "predicate": "可开展",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议用 Stories 开展投票。",
+      "subject": "Stories",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 74,
+          "evidence_id": "evidence-4e97909558d2f92ba66a4c0fc15b1f4a5f750d87c26efc21fa40163d4aa5f420",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "用 Stories 做个人转变故事、投票、问答和幕后内容",
+          "start": 46,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_001_012",
+      "object": "问答",
+      "predicate": "可开展",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议用 Stories 开展问答。",
+      "subject": "Stories",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 74,
+          "evidence_id": "evidence-4e97909558d2f92ba66a4c0fc15b1f4a5f750d87c26efc21fa40163d4aa5f420",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "用 Stories 做个人转变故事、投票、问答和幕后内容",
+          "start": 46,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_001_013",
+      "object": "幕后内容",
+      "predicate": "可发布",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议用 Stories 发布幕后内容。",
+      "subject": "Stories",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 99,
+          "evidence_id": "evidence-88b2635bee6f415582514f4cee520f7f6901fa3437d1da30efe0ef3a2e1ab8ad",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "用 Instagram Live 做周期性问答",
+          "start": 76,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_001_014",
+      "object": "周期性问答",
+      "predicate": "可做",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议用 Instagram Live 做周期性问答。",
+      "subject": "Instagram Live",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 27,
+          "evidence_id": "evidence-9016f319c8115a1aa45ccb25c50a5e54241cb3fe93230790df6bae0ccbaf0a19",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "用故事叙述连续制作 Reels",
+          "start": 12,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_002_002",
+      "object": "故事叙述",
+      "predicate": "应使用",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "requested",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户要求连续 Reels 使用故事叙述。",
+      "subject": "连续 Reels",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 11,
+          "evidence_id": "evidence-af041e874a997a8ec0e9e5f90eac2c54bbffefa890894a79fa7a3e854bfa1033",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "可以做“转变故事”系列",
+          "start": 0,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_002_003",
+      "object": "转变故事",
+      "predicate": "可制作",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议制作“转变故事”系列。",
+      "subject": "Reels 系列",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 21,
+          "evidence_id": "evidence-ed70e725c9844bda4252e6a472e2fc12c7e894843d216b039bf1949261cbbb90",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "第一集讲迈出第一步",
+          "start": 12,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_002_004",
+      "object": "迈出第一步",
+      "predicate": "可讲",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议第一集讲迈出第一步。",
+      "subject": "第一集",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 31,
+          "evidence_id": "evidence-20a2c49bf6537d951a54080a30717aa891a35e9f29ae5487647970af767c0400",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "第二集讲接受不完美",
+          "start": 22,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_002_005",
+      "object": "接受不完美",
+      "predicate": "可讲",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议第二集讲接受不完美。",
+      "subject": "第二集",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 40,
+          "evidence_id": "evidence-274e5429ba890385cc455294d936dd0da70eb006ed7b460f4e85fa25086ad6fe",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "第三集讲自我照顾",
+          "start": 32,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_002_006",
+      "object": "自我照顾",
+      "predicate": "可讲",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议第三集讲自我照顾。",
+      "subject": "第三集",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 51,
+          "evidence_id": "evidence-de88fb52683c5ec56786b99061cc68a724fcf0bc7264761fa4c90d525faaec3b",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "每集用冲突或问题开场",
+          "start": 41,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_002_007",
+      "object": "冲突或问题开场",
+      "predicate": "应用",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议每集用冲突或问题开场。",
+      "subject": "每集",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 60,
+          "evidence_id": "evidence-b4d4a8842b31ff0a11a104ef81f962b2a5d27979e06bf88bf9aae9bcffe129bb",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "加入一个具体经历",
+          "start": 52,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_002_008",
+      "object": "一个具体经历",
+      "predicate": "应加入",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [
+          "一个"
+        ],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议每集加入一个具体经历。",
+      "subject": "每集",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 75,
+          "evidence_id": "evidence-8fc1508658113307aef94e3c2d30931da8be0f90a5051e62a15167b552c50731",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "用一句可执行的反思问题收尾",
+          "start": 62,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_002_009",
+      "object": "一句可执行的反思问题收尾",
+      "predicate": "应用",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [
+          "一句"
+        ],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议每集用一句可执行的反思问题收尾。",
+      "subject": "每集",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-002",
+          "end": 88,
+          "evidence_id": "evidence-caaa4a1889ddb4afa6d3066203e039479d0f1fad17e057fbca2c98ca29d5025a",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "让多集形成连续的成长路径",
+          "start": 76,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_002_010",
+      "object": "连续的成长路径",
+      "predicate": "应形成",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议多集形成连续的成长路径。",
+      "subject": "多集",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    }
+  ],
+  "keyword_id_prefix": "KW_wildchat-mgmt-cand-002-e88f4bb1070d_",
+  "output_contract": {
+    "$defs": {
+      "KeywordDraft": {
+        "additionalProperties": false,
+        "properties": {
+          "keyword_id": {
+            "minLength": 1,
+            "title": "Keyword Id",
+            "type": "string"
+          },
+          "knowledge_id": {
+            "minLength": 1,
+            "title": "Knowledge Id",
+            "type": "string"
+          },
+          "surface": {
+            "minLength": 1,
+            "title": "Surface",
+            "type": "string"
+          },
+          "normalized_zh": {
+            "minLength": 1,
+            "title": "Normalized Zh",
+            "type": "string"
+          },
+          "query_lemma": {
+            "minLength": 1,
+            "title": "Query Lemma",
+            "type": "string"
+          },
+          "keyword_kind": {
+            "enum": [
+              "lexical",
+              "literal",
+              "identifier",
+              "qualifier"
+            ],
+            "title": "Keyword Kind",
+            "type": "string"
+          },
+          "keyword_type": {
+            "enum": [
+              "entity",
+              "concept",
+              "action",
+              "event",
+              "property",
+              "relation",
+              "time",
+              "quantity",
+              "condition",
+              "modality",
+              "polarity"
+            ],
+            "title": "Keyword Type",
+            "type": "string"
+          },
+          "semantic_role": {
+            "enum": [
+              "subject",
+              "predicate",
+              "object",
+              "topic",
+              "participant",
+              "recipient",
+              "instrument",
+              "result",
+              "attribute",
+              "value",
+              "time",
+              "location",
+              "condition",
+              "modality",
+              "polarity",
+              "identifier",
+              "other"
+            ],
+            "title": "Semantic Role",
+            "type": "string"
+          },
+          "source_field": {
+            "enum": [
+              "statement",
+              "subject",
+              "predicate",
+              "object",
+              "qualifiers.temporal",
+              "qualifiers.conditions",
+              "qualifiers.scope",
+              "qualifiers.modality",
+              "qualifiers.polarity"
+            ],
+            "title": "Source Field",
+            "type": "string"
+          },
+          "part_of_speech": {
+            "enum": [
+              "noun",
+              "verb",
+              "adjective",
+              "adverb",
+              "proper_noun",
+              "other",
+              "none"
+            ],
+            "title": "Part Of Speech",
+            "type": "string"
+          },
+          "sense_key": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Sense Key"
+          },
+          "sense_hint": {
+            "minLength": 1,
+            "title": "Sense Hint",
+            "type": "string"
+          },
+          "lookup_targets": {
+            "items": {
+              "enum": [
+                "wordnet",
+                "schema_org",
+                "exact"
+              ],
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Lookup Targets",
+            "type": "array"
+          },
+          "normalized_value": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Normalized Value"
+          },
+          "datatype": {
+            "anyOf": [
+              {
+                "enum": [
+                  "date",
+                  "datetime",
+                  "time",
+                  "duration",
+                  "temporal_relation",
+                  "number",
+                  "currency",
+                  "percentage",
+                  "version",
+                  "code",
+                  "text",
+                  "identifier",
+                  "modality",
+                  "polarity",
+                  "condition",
+                  "other"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Datatype"
+          },
+          "unit": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Unit"
+          },
+          "translation_confidence": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Translation Confidence",
+            "type": "number"
+          }
+        },
+        "required": [
+          "keyword_id",
+          "knowledge_id",
+          "surface",
+          "normalized_zh",
+          "query_lemma",
+          "keyword_kind",
+          "keyword_type",
+          "semantic_role",
+          "source_field",
+          "part_of_speech",
+          "sense_hint",
+          "lookup_targets",
+          "translation_confidence"
+        ],
+        "title": "KeywordDraft",
+        "type": "object"
+      },
+      "KnowledgeKeywordOutput": {
+        "additionalProperties": false,
+        "properties": {
+          "knowledge_id": {
+            "minLength": 1,
+            "title": "Knowledge Id",
+            "type": "string"
+          },
+          "keywords": {
+            "items": {
+              "$ref": "#/$defs/KeywordDraft"
+            },
+            "title": "Keywords",
+            "type": "array"
+          },
+          "no_keyword_reason": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "No Keyword Reason"
+          }
+        },
+        "required": [
+          "knowledge_id"
+        ],
+        "title": "KnowledgeKeywordOutput",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "candidate_id": {
+        "minLength": 1,
+        "title": "Candidate Id",
+        "type": "string"
+      },
+      "items": {
+        "items": {
+          "$ref": "#/$defs/KnowledgeKeywordOutput"
+        },
+        "title": "Items",
+        "type": "array"
+      }
+    },
+    "required": [
+      "candidate_id"
+    ],
+    "title": "KeywordPassOutput",
+    "type": "object"
+  },
+  "prompt_sha256": "4080bc22eaf5b338ae2e7eaf8ee0aaaf3b88d8c6a816f444b21492a72455a538",
+  "output_contract_sha256": "611b5ff9c589612e7706f99d35e6cd97ddc2ec792ab2b44ea0ae5d35aeefbdd0"
+}

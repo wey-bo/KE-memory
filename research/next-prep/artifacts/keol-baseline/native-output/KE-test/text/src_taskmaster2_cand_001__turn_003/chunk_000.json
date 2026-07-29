@@ -1,0 +1,125 @@
+{
+  "source": {
+    "source_id": "src_taskmaster2_cand_001__turn_003",
+    "file": "keol-input/turns/taskmaster2-cand-001__turn-003.txt",
+    "file_type": "txt",
+    "category": "text",
+    "metadata": {
+      "unit_id": "taskmaster2-cand-001__turn-003",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "turn_index": 3,
+      "json_pointer": "/candidates/7/turns/2",
+      "source": "Taskmaster-2 flights/train-00000-of-00001.parquet / conversation=dlg-0486d642-4627-489a-a0f3-14d1c2b97068 / user_ordinal=1..6 / raw_utterance_index=0..15",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "chunk": {
+    "id": "chunk_a1715fe032c66f51c732",
+    "index": 0,
+    "text": "用户：\n如果可以，也请帮我找最便宜的航班。\n\nAgent：\n我查到最便宜的往返票：需要经停一次，凌晨 12:30 出发，次日 11:55 抵达，价格是 1,287 美元。要我帮你订吗？",
+    "size": 92,
+    "metadata": {
+      "unit_id": "taskmaster2-cand-001__turn-003",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "turn_index": 3,
+      "json_pointer": "/candidates/7/turns/2",
+      "source": "Taskmaster-2 flights/train-00000-of-00001.parquet / conversation=dlg-0486d642-4627-489a-a0f3-14d1c2b97068 / user_ordinal=1..6 / raw_utterance_index=0..15",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "n_user",
+      "name": "用户",
+      "type": "Person",
+      "description": "要求查找最低价航班的人。",
+      "source_chunk_id": "chunk_a1715fe032c66f51c732"
+    },
+    {
+      "id": "n_cheapest",
+      "name": "最便宜",
+      "type": "PricePreference",
+      "description": "用户提出的航班价格偏好。",
+      "source_chunk_id": "chunk_a1715fe032c66f51c732"
+    },
+    {
+      "id": "n_flight",
+      "name": "最低价往返票",
+      "type": "FlightOption",
+      "description": "Agent 查到的最低价往返航班方案。",
+      "source_chunk_id": "chunk_a1715fe032c66f51c732"
+    },
+    {
+      "id": "n_stop",
+      "name": "经停一次",
+      "type": "StopPattern",
+      "description": "最低价方案的经停数量。",
+      "source_chunk_id": "chunk_a1715fe032c66f51c732"
+    },
+    {
+      "id": "n_departure",
+      "name": "凌晨 12:30",
+      "type": "TimeOfDay",
+      "description": "最低价方案的出发时间。",
+      "source_chunk_id": "chunk_a1715fe032c66f51c732"
+    },
+    {
+      "id": "n_arrival",
+      "name": "次日 11:55",
+      "type": "RelativeDateTime",
+      "description": "最低价方案的抵达时间。",
+      "source_chunk_id": "chunk_a1715fe032c66f51c732"
+    },
+    {
+      "id": "n_price",
+      "name": "1,287 美元",
+      "type": "MonetaryAmount",
+      "description": "最低价往返票价格。",
+      "source_chunk_id": "chunk_a1715fe032c66f51c732"
+    }
+  ],
+  "relations": [
+    {
+      "source_entity": "n_user",
+      "target_entity": "n_cheapest",
+      "relation_type": "prefers",
+      "description": "用户希望找到最便宜的航班。"
+    },
+    {
+      "source_entity": "n_flight",
+      "target_entity": "n_cheapest",
+      "relation_type": "matches",
+      "description": "该方案是 Agent 查到的最低价方案。"
+    },
+    {
+      "source_entity": "n_flight",
+      "target_entity": "n_stop",
+      "relation_type": "has_stop",
+      "description": "该航班需要经停一次。"
+    },
+    {
+      "source_entity": "n_flight",
+      "target_entity": "n_departure",
+      "relation_type": "departs_at",
+      "description": "该航班凌晨 12:30 出发。"
+    },
+    {
+      "source_entity": "n_flight",
+      "target_entity": "n_arrival",
+      "relation_type": "arrives_at",
+      "description": "该航班次日 11:55 抵达。"
+    },
+    {
+      "source_entity": "n_flight",
+      "target_entity": "n_price",
+      "relation_type": "price",
+      "description": "该往返票价格为 1,287 美元。"
+    }
+  ]
+}

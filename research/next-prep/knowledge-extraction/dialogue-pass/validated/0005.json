@@ -1,0 +1,327 @@
+{
+  "candidate_id": "TASKMASTER2-CAND-001",
+  "new_knowledge": [
+    {
+      "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_001",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "statement": "用户认为代理所述价格为2,677美元的直飞航班有点贵。",
+      "subject": "用户",
+      "predicate": "认为有点贵",
+      "object": "价格为2,677美元的直飞航班",
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": [
+          "直飞航班",
+          "价格：2,677美元"
+        ]
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "这个价格有点贵",
+          "evidence_id": "evidence-00c73fab673919a9123f4907c30f8ac51a08426d0290ee61390c1d6b30c13d82",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 7
+        }
+      ],
+      "inference_basis": "turn 4 的“这个价格”直接回指紧邻的 turn 3 直飞方案报价2,677美元。",
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "statement": "用户选择了从纽约市到阿姆斯特丹的最便宜往返航班方案：计划当天出发、19号返回，去程和返程均希望尽可能早；该方案需要经停一次，代理给出的时间为凌晨12:30出发、次日11:55抵达，价格为1,287美元。",
+      "subject": "用户",
+      "predicate": "选择",
+      "object": "从纽约市到阿姆斯特丹的最便宜往返航班方案",
+      "qualifiers": {
+        "modality": "committed",
+        "polarity": "positive",
+        "temporal": [
+          "出发：今天（说话当日，具体日历日期未确定）",
+          "返回：19号（月份和年份未说明）",
+          "代理所述航班凌晨12:30出发",
+          "代理所述航班次日11:55抵达"
+        ],
+        "conditions": [
+          "去程和返程均希望尽可能早"
+        ],
+        "scope": [
+          "出发地：纽约市",
+          "目的地：阿姆斯特丹",
+          "行程类型：往返",
+          "经停次数：1",
+          "价格：1,287美元"
+        ]
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我想预订一趟从纽约市到阿姆斯特丹的往返航班",
+          "evidence_id": "evidence-d96bdad6ff9c8fc42ad686ec5fe881c40f4585d0d2aa8f2d244d951ee4609e96",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 3,
+          "end": 24
+        },
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我今天出发，19 号回来。两程都希望尽可能早",
+          "evidence_id": "evidence-3fa11d26ed4570b4dcc2aaef29c5aa4398ec9effe1d6ba6d3e42315c8a4ddf9e",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 22
+        },
+        {
+          "turn_index": 4,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "还是选你刚才说的第一班吧",
+          "evidence_id": "evidence-586b36a99fa7dfc8d054a63ba509ef4debdb136f4fd68fdcb74491c35bc70fa2",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 8,
+          "end": 20
+        }
+      ],
+      "inference_basis": "turn 0 和 turn 1 给出航线、往返类型、出发与返回时间及两程尽可能早的偏好；代理在 turn 2 首先给出最便宜的经停方案，随后在 turn 3 给出直飞方案；用户因直飞价格较贵而选择“第一班”，故其指代 turn 2 的完整方案。",
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "statement": "代理声称已将用户所选航班方案的全部信息发送到用户邮箱；该方案是从纽约市到阿姆斯特丹的往返行程，计划当天出发、19号返回且两程尽可能早，并由代理描述为需要经停一次、凌晨12:30出发、次日11:55抵达、价格1,287美元的最便宜往返票。",
+      "subject": "代理",
+      "predicate": "声称已发送",
+      "object": "用户所选的纽约市至阿姆斯特丹最便宜往返航班方案的全部信息",
+      "qualifiers": {
+        "modality": "claimed_completed",
+        "polarity": "positive",
+        "temporal": [
+          "已经发送",
+          "出发：今天（说话当日，具体日历日期未确定）",
+          "返回：19号（月份和年份未说明）",
+          "代理所述航班凌晨12:30出发",
+          "代理所述航班次日11:55抵达"
+        ],
+        "conditions": [
+          "去程和返程均希望尽可能早"
+        ],
+        "scope": [
+          "发送目的地：用户邮箱",
+          "出发地：纽约市",
+          "目的地：阿姆斯特丹",
+          "行程类型：往返",
+          "经停次数：1",
+          "价格：1,287美元"
+        ]
+      },
+      "source_status": "agent_generated",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "我查到最便宜的往返票：需要经停一次，凌晨 12:30 出发，次日 11:55 抵达，价格是 1,287 美元",
+          "evidence_id": "evidence-dc104b2b843c32db9b99607abf9dca0b18f22e422563ae74f94fa3d9be00f0f3",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 0,
+          "end": 54
+        },
+        {
+          "turn_index": 4,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "已经把全部信息发送到你的邮箱",
+          "evidence_id": "evidence-192dececef8d92de2b51121e6c77f6dbd13e7dbce7da15fea226d6d6a30a3a30",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 3,
+          "end": 17
+        }
+      ],
+      "inference_basis": "turn 0 和 turn 1 定义航线、往返类型、日期与时间偏好，turn 2 给出首个最便宜往返票的经停、时刻和价格，turn 4 用户选择该方案；代理紧接着声称发送“全部信息”，因此该对象是上述完整方案。",
+      "confidence": 0.99
+    }
+  ],
+  "operations": [
+    {
+      "operation_id": "R_taskmaster2-cand-001-5f5e1081bd0b_001",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "operation": "correct",
+      "targets": [
+        "K_taskmaster2-cand-001-5f5e1081bd0b_004_001"
+      ],
+      "replacement": "D_taskmaster2-cand-001-5f5e1081bd0b_001",
+      "reason": "完整对话消除了逐轮记录中“这个价格”的未解决指代：它是上一轮直飞方案的2,677美元报价。",
+      "confidence": 1.0,
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "有一班直飞航班，下午 6 点出发，次日早上 7:35 抵达，价格是 2,677 美元",
+          "evidence_id": "evidence-b7d185f89baaf4e3fc06d5d5fea37d4bef35b8af57e5466dcb6f8d07b85d190a",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 6,
+          "end": 48
+        },
+        {
+          "turn_index": 4,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "这个价格有点贵",
+          "evidence_id": "evidence-00c73fab673919a9123f4907c30f8ac51a08426d0290ee61390c1d6b30c13d82",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 7
+        }
+      ]
+    },
+    {
+      "operation_id": "R_taskmaster2-cand-001-5f5e1081bd0b_002",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "operation": "correct",
+      "targets": [
+        "K_taskmaster2-cand-001-5f5e1081bd0b_004_002"
+      ],
+      "replacement": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+      "reason": "完整对话明确“第一班”是在纽约市至阿姆斯特丹往返、当天出发、19号返回且两程尽可能早的约束下，代理最先给出的1,287美元经停方案，而不是随后给出的2,677美元直飞方案。",
+      "confidence": 1.0,
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我想预订一趟从纽约市到阿姆斯特丹的往返航班",
+          "evidence_id": "evidence-d96bdad6ff9c8fc42ad686ec5fe881c40f4585d0d2aa8f2d244d951ee4609e96",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 3,
+          "end": 24
+        },
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我今天出发，19 号回来。两程都希望尽可能早",
+          "evidence_id": "evidence-3fa11d26ed4570b4dcc2aaef29c5aa4398ec9effe1d6ba6d3e42315c8a4ddf9e",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 22
+        },
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "我查到最便宜的往返票：需要经停一次，凌晨 12:30 出发，次日 11:55 抵达，价格是 1,287 美元",
+          "evidence_id": "evidence-dc104b2b843c32db9b99607abf9dca0b18f22e422563ae74f94fa3d9be00f0f3",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 0,
+          "end": 54
+        },
+        {
+          "turn_index": 4,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "这个价格有点贵，还是选你刚才说的第一班吧",
+          "evidence_id": "evidence-5bd8ac18deb91884a30950d13b5c8c010bda28f6c58629864a800c90e27be290",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 20
+        }
+      ]
+    },
+    {
+      "operation_id": "R_taskmaster2-cand-001-5f5e1081bd0b_003",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "operation": "correct",
+      "targets": [
+        "K_taskmaster2-cand-001-5f5e1081bd0b_004_003"
+      ],
+      "replacement": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+      "reason": "完整轮次关系可将“全部信息”补全为用户刚选定的完整方案：纽约市至阿姆斯特丹往返、当天出发、19号返回、两程尽可能早，且所选票经停一次、凌晨12:30出发、次日11:55抵达、价格1,287美元。",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我想预订一趟从纽约市到阿姆斯特丹的往返航班",
+          "evidence_id": "evidence-d96bdad6ff9c8fc42ad686ec5fe881c40f4585d0d2aa8f2d244d951ee4609e96",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 3,
+          "end": 24
+        },
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我今天出发，19 号回来。两程都希望尽可能早",
+          "evidence_id": "evidence-3fa11d26ed4570b4dcc2aaef29c5aa4398ec9effe1d6ba6d3e42315c8a4ddf9e",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 22
+        },
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "我查到最便宜的往返票：需要经停一次，凌晨 12:30 出发，次日 11:55 抵达，价格是 1,287 美元",
+          "evidence_id": "evidence-dc104b2b843c32db9b99607abf9dca0b18f22e422563ae74f94fa3d9be00f0f3",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 0,
+          "end": 54
+        },
+        {
+          "turn_index": 4,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "还是选你刚才说的第一班吧",
+          "evidence_id": "evidence-586b36a99fa7dfc8d054a63ba509ef4debdb136f4fd68fdcb74491c35bc70fa2",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 8,
+          "end": 20
+        },
+        {
+          "turn_index": 4,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "已经把全部信息发送到你的邮箱",
+          "evidence_id": "evidence-192dececef8d92de2b51121e6c77f6dbd13e7dbce7da15fea226d6d6a30a3a30",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 3,
+          "end": 17
+        }
+      ]
+    }
+  ]
+}

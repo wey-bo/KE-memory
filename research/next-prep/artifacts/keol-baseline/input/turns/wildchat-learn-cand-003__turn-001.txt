@@ -1,0 +1,5 @@
+用户：
+请解释这个函数：def make_hyperlink(value): url = './{}'; return '=HYPERLINK("%s", "%s")' % (url.format(value), value)
+
+Agent：
+函数接收 value，用 './{}' 构造相对路径，再把路径和显示文本填入电子表格的 HYPERLINK 公式。传入 example 时，结果会是 =HYPERLINK("./example", "example")。

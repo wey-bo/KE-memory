@@ -1,0 +1,329 @@
+{
+  "prompt_version": "knowledge-extraction-turn-v1",
+  "candidate_id": "TASKMASTER2-CAND-001",
+  "turn_index": 3,
+  "source": "Taskmaster-2 flights/train-00000-of-00001.parquet / conversation=dlg-0486d642-4627-489a-a0f3-14d1c2b97068 / user_ordinal=1..6 / raw_utterance_index=0..15",
+  "user": "有没有直飞的？",
+  "agent": "我再查一下。有一班直飞航班，下午 6 点出发，次日早上 7:35 抵达，价格是 2,677 美元。这个方案更符合你的偏好吗？",
+  "source_coordinates": {
+    "user": "/candidates/5/turns/3/user",
+    "agent": "/candidates/5/turns/3/agent"
+  },
+  "output_contract": {
+    "$defs": {
+      "ContextCompletion": {
+        "additionalProperties": false,
+        "properties": {
+          "completion_id": {
+            "minLength": 1,
+            "title": "Completion Id",
+            "type": "string"
+          },
+          "candidate_id": {
+            "minLength": 1,
+            "title": "Candidate Id",
+            "type": "string"
+          },
+          "turn_index": {
+            "minimum": 0,
+            "title": "Turn Index",
+            "type": "integer"
+          },
+          "kind": {
+            "enum": [
+              "coreference",
+              "ellipsis",
+              "role_resolution",
+              "temporal_resolution",
+              "pragmatic_inference",
+              "unresolved"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "original_span": {
+            "minLength": 1,
+            "title": "Original Span",
+            "type": "string"
+          },
+          "interpretation": {
+            "minLength": 1,
+            "title": "Interpretation",
+            "type": "string"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/$defs/EvidenceDraft"
+            },
+            "minItems": 1,
+            "title": "Evidence",
+            "type": "array"
+          },
+          "confidence": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Confidence",
+            "type": "number"
+          },
+          "ambiguity": {
+            "title": "Ambiguity",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "completion_id",
+          "candidate_id",
+          "turn_index",
+          "kind",
+          "original_span",
+          "interpretation",
+          "evidence",
+          "confidence",
+          "ambiguity"
+        ],
+        "title": "ContextCompletion",
+        "type": "object"
+      },
+      "EvidenceDraft": {
+        "additionalProperties": false,
+        "description": "A quoted source occurrence before character spans have been resolved.",
+        "properties": {
+          "turn_index": {
+            "minimum": 0,
+            "title": "Turn Index",
+            "type": "integer"
+          },
+          "message": {
+            "enum": [
+              "user",
+              "agent"
+            ],
+            "title": "Message",
+            "type": "string"
+          },
+          "occurrence_index": {
+            "minimum": 0,
+            "title": "Occurrence Index",
+            "type": "integer"
+          },
+          "quote": {
+            "minLength": 1,
+            "title": "Quote",
+            "type": "string"
+          }
+        },
+        "required": [
+          "turn_index",
+          "message",
+          "occurrence_index",
+          "quote"
+        ],
+        "title": "EvidenceDraft",
+        "type": "object"
+      },
+      "KnowledgeDraft": {
+        "additionalProperties": false,
+        "properties": {
+          "knowledge_id": {
+            "minLength": 1,
+            "title": "Knowledge Id",
+            "type": "string"
+          },
+          "candidate_id": {
+            "minLength": 1,
+            "title": "Candidate Id",
+            "type": "string"
+          },
+          "statement": {
+            "minLength": 1,
+            "title": "Statement",
+            "type": "string"
+          },
+          "subject": {
+            "minLength": 1,
+            "title": "Subject",
+            "type": "string"
+          },
+          "predicate": {
+            "minLength": 1,
+            "title": "Predicate",
+            "type": "string"
+          },
+          "object": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Object"
+          },
+          "qualifiers": {
+            "$ref": "#/$defs/Qualifiers"
+          },
+          "source_status": {
+            "enum": [
+              "user_reported",
+              "agent_generated",
+              "tool_observed"
+            ],
+            "title": "Source Status",
+            "type": "string"
+          },
+          "derivation": {
+            "enum": [
+              "explicit",
+              "context_completed",
+              "inferred"
+            ],
+            "title": "Derivation",
+            "type": "string"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/$defs/EvidenceDraft"
+            },
+            "minItems": 1,
+            "title": "Evidence",
+            "type": "array"
+          },
+          "inference_basis": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Inference Basis"
+          },
+          "confidence": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Confidence",
+            "type": "number"
+          }
+        },
+        "required": [
+          "knowledge_id",
+          "candidate_id",
+          "statement",
+          "subject",
+          "predicate",
+          "qualifiers",
+          "source_status",
+          "derivation",
+          "evidence",
+          "confidence"
+        ],
+        "title": "KnowledgeDraft",
+        "type": "object"
+      },
+      "Qualifiers": {
+        "additionalProperties": false,
+        "properties": {
+          "modality": {
+            "enum": [
+              "asserted",
+              "questioned",
+              "requested",
+              "preferred",
+              "planned",
+              "hypothetical",
+              "possible",
+              "advised",
+              "committed",
+              "claimed_completed",
+              "observed"
+            ],
+            "title": "Modality",
+            "type": "string"
+          },
+          "polarity": {
+            "enum": [
+              "positive",
+              "negative"
+            ],
+            "title": "Polarity",
+            "type": "string"
+          },
+          "temporal": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Temporal",
+            "type": "array"
+          },
+          "conditions": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Conditions",
+            "type": "array"
+          },
+          "scope": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Scope",
+            "type": "array"
+          }
+        },
+        "required": [
+          "modality",
+          "polarity"
+        ],
+        "title": "Qualifiers",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "candidate_id": {
+        "minLength": 1,
+        "title": "Candidate Id",
+        "type": "string"
+      },
+      "turn_index": {
+        "minimum": 0,
+        "title": "Turn Index",
+        "type": "integer"
+      },
+      "context_completions": {
+        "items": {
+          "$ref": "#/$defs/ContextCompletion"
+        },
+        "title": "Context Completions",
+        "type": "array"
+      },
+      "knowledge": {
+        "items": {
+          "$ref": "#/$defs/KnowledgeDraft"
+        },
+        "title": "Knowledge",
+        "type": "array"
+      }
+    },
+    "required": [
+      "candidate_id",
+      "turn_index"
+    ],
+    "title": "TurnPassOutput",
+    "type": "object"
+  },
+  "candidate_namespace": "taskmaster2-cand-001-5f5e1081bd0b",
+  "knowledge_id_prefix": "K_taskmaster2-cand-001-5f5e1081bd0b_003_",
+  "context_completion_id_prefix": "C_taskmaster2-cand-001-5f5e1081bd0b_003_",
+  "source_segments_sha256": "678d74db62a9c6338f19d1a7d16910c3092c88b14f6eb201527e56eb82a3d726",
+  "tool_result_spans": []
+}

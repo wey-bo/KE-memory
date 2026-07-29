@@ -1,0 +1,171 @@
+{
+  "source": {
+    "source_id": "src_wildchat_mgmt_cand_001__turn_002",
+    "file": "keol-input/turns/wildchat-mgmt-cand-001__turn-002.txt",
+    "file_type": "txt",
+    "category": "text",
+    "metadata": {
+      "unit_id": "wildchat-mgmt-cand-001__turn-002",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "turn_index": 2,
+      "json_pointer": "/candidates/0/turns/1",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=f307c772ed4efbb74c3848c4b5debba6 / model=gpt-3.5-turbo-0613 / user_ordinal=1..5 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "chunk": {
+    "id": "chunk_420d72e136d414842509",
+    "index": 0,
+    "text": "用户：\n过去两个月事务所的工作不多，其他人也有类似问题。获得工作分派的最好方式是什么？主动联系事务所里的合伙人，还是联系以前的律所请他们转介？\n\nAgent：\n可以同时做几件事：主动联系会分派工作的合伙人，向其他业务组同事表示可提供支持，参加所内活动建立关系，使用内部工作机会平台，并在合规前提下做客户和业务拓展。关键是持续、明确地表达你的可用时间和愿意承担的工作。",
+    "size": 183,
+    "metadata": {
+      "unit_id": "wildchat-mgmt-cand-001__turn-002",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "turn_index": 2,
+      "json_pointer": "/candidates/0/turns/1",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=f307c772ed4efbb74c3848c4b5debba6 / model=gpt-3.5-turbo-0613 / user_ordinal=1..5 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "n1",
+      "name": "律师事务所",
+      "type": "Organization",
+      "description": "用户当前所在的律师事务所。",
+      "source_chunk_id": "chunk_420d72e136d414842509"
+    },
+    {
+      "id": "n2",
+      "name": "工作量较少",
+      "type": "Situation",
+      "description": "用户陈述事务所近期工作不多。",
+      "source_chunk_id": "chunk_420d72e136d414842509"
+    },
+    {
+      "id": "n3",
+      "name": "过去两个月",
+      "type": "TimeWindow",
+      "description": "工作量较少状态的持续时间。",
+      "source_chunk_id": "chunk_420d72e136d414842509"
+    },
+    {
+      "id": "n4",
+      "name": "事务所其他人",
+      "type": "Group",
+      "description": "同样遇到工作不足问题的同事。",
+      "source_chunk_id": "chunk_420d72e136d414842509"
+    },
+    {
+      "id": "n5",
+      "name": "获得工作分派",
+      "type": "Goal",
+      "description": "用户希望实现的目标。",
+      "source_chunk_id": "chunk_420d72e136d414842509"
+    },
+    {
+      "id": "n6",
+      "name": "联系事务所合伙人",
+      "type": "Action",
+      "description": "用户考虑的获取工作方式之一。",
+      "source_chunk_id": "chunk_420d72e136d414842509"
+    },
+    {
+      "id": "n7",
+      "name": "联系以前的律所转介",
+      "type": "Action",
+      "description": "用户考虑的另一种获取工作方式。",
+      "source_chunk_id": "chunk_420d72e136d414842509"
+    },
+    {
+      "id": "n8",
+      "name": "支持其他业务组",
+      "type": "Action",
+      "description": "Agent 建议向其他业务组表示可提供支持。",
+      "source_chunk_id": "chunk_420d72e136d414842509"
+    },
+    {
+      "id": "n9",
+      "name": "内部工作机会平台",
+      "type": "Platform",
+      "description": "Agent 建议使用的事务所内部平台。",
+      "source_chunk_id": "chunk_420d72e136d414842509"
+    },
+    {
+      "id": "n10",
+      "name": "客户和业务拓展",
+      "type": "Action",
+      "description": "Agent 建议在合规前提下开展的活动。",
+      "source_chunk_id": "chunk_420d72e136d414842509"
+    },
+    {
+      "id": "n11",
+      "name": "可用时间与工作意愿",
+      "type": "Information",
+      "description": "Agent 建议持续明确表达的信息。",
+      "source_chunk_id": "chunk_420d72e136d414842509"
+    }
+  ],
+  "relations": [
+    {
+      "source_entity": "n2",
+      "target_entity": "n1",
+      "relation_type": "AFFECTS",
+      "description": "工作不足发生在用户所在事务所。"
+    },
+    {
+      "source_entity": "n2",
+      "target_entity": "n3",
+      "relation_type": "HAS_DURATION",
+      "description": "该状态已持续过去两个月。"
+    },
+    {
+      "source_entity": "n2",
+      "target_entity": "n4",
+      "relation_type": "AFFECTS",
+      "description": "其他人也有类似问题。"
+    },
+    {
+      "source_entity": "n6",
+      "target_entity": "n5",
+      "relation_type": "SUPPORTS",
+      "description": "用户将其视为获取工作分派的方案。"
+    },
+    {
+      "source_entity": "n7",
+      "target_entity": "n5",
+      "relation_type": "SUPPORTS",
+      "description": "用户将转介视为备选方案。"
+    },
+    {
+      "source_entity": "n8",
+      "target_entity": "n5",
+      "relation_type": "SUPPORTS",
+      "description": "Agent 建议通过跨业务组支持争取工作。"
+    },
+    {
+      "source_entity": "n9",
+      "target_entity": "n5",
+      "relation_type": "SUPPORTS",
+      "description": "Agent 建议通过内部平台寻找机会。"
+    },
+    {
+      "source_entity": "n10",
+      "target_entity": "n5",
+      "relation_type": "SUPPORTS",
+      "description": "Agent 建议通过业务拓展增加机会。"
+    },
+    {
+      "source_entity": "n6",
+      "target_entity": "n11",
+      "relation_type": "COMMUNICATES",
+      "description": "联系合伙人时应表达可用时间和意愿。"
+    }
+  ]
+}

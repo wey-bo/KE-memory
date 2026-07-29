@@ -31,6 +31,7 @@ packages = [
 asyncio_mode = "auto"
 markers = ["live_embedding", "live_es", "live_model", "live_baseline", "live_evaluation"]
 pythonpath = ["src", "service", "ontology"]
+testpaths = ["tests"]
 
 [tool.pyright]
 include = ["src", "service", "ontology", "tests"]

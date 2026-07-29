@@ -1,0 +1,2494 @@
+{
+  "candidate_id": "TASKMASTER2-CAND-001",
+  "items": [
+    {
+      "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0001",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_001",
+          "surface": "贵",
+          "normalized_zh": "昂贵",
+          "query_lemma": "expensive",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "adjective",
+          "sense_key": "expensive_price_evaluation",
+          "sense_hint": "evaluated as having a high price",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0002",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_001",
+          "surface": "直飞航班",
+          "normalized_zh": "直飞航班",
+          "query_lemma": "direct flight",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "topic",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "noun",
+          "sense_key": "direct_nonstop_flight",
+          "sense_hint": "flight traveling without an intermediate stop",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0003",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_001",
+          "surface": "2,677美元",
+          "normalized_zh": "2,677 美元",
+          "query_lemma": "USD 2677",
+          "keyword_kind": "literal",
+          "keyword_type": "quantity",
+          "semantic_role": "value",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Typed literal value from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "2677",
+          "datatype": "currency",
+          "unit": "USD",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0004",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_001",
+          "surface": "asserted",
+          "normalized_zh": "断言",
+          "query_lemma": "asserted",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: asserted.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "asserted",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0005",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "选择",
+          "normalized_zh": "选择",
+          "query_lemma": "choose",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "choose_option",
+          "sense_hint": "select an option from alternatives",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0006",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "往返航班方案",
+          "normalized_zh": "往返航班方案",
+          "query_lemma": "round-trip flight itinerary",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "round_trip_flight_itinerary",
+          "sense_hint": "planned outbound and return air journey",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0007",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "去程和返程均希望尽可能早",
+          "normalized_zh": "去程和返程均尽可能早",
+          "query_lemma": "earliest outbound and return",
+          "keyword_kind": "qualifier",
+          "keyword_type": "condition",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Condition under which the knowledge applies.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "earliest_outbound_and_return",
+          "datatype": "condition",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0008",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "纽约市",
+          "normalized_zh": "纽约市",
+          "query_lemma": "New York City",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "location",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "proper_noun",
+          "sense_key": "new_york_city_place",
+          "sense_hint": "city serving as the trip origin",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0009",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "阿姆斯特丹",
+          "normalized_zh": "阿姆斯特丹",
+          "query_lemma": "Amsterdam",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "location",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "proper_noun",
+          "sense_key": "amsterdam_place",
+          "sense_hint": "city serving as the trip destination",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0010",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "往返",
+          "normalized_zh": "往返",
+          "query_lemma": "round trip",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "attribute",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "noun",
+          "sense_key": "round_trip_travel",
+          "sense_hint": "travel containing outbound and return legs",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0011",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "1",
+          "normalized_zh": "1 次经停",
+          "query_lemma": "stop count 1",
+          "keyword_kind": "literal",
+          "keyword_type": "quantity",
+          "semantic_role": "value",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Typed literal value from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "1",
+          "datatype": "number",
+          "unit": "stop",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0012",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "1,287美元",
+          "normalized_zh": "1,287 美元",
+          "query_lemma": "USD 1287",
+          "keyword_kind": "literal",
+          "keyword_type": "quantity",
+          "semantic_role": "value",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Typed literal value from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "1287",
+          "datatype": "currency",
+          "unit": "USD",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0013",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "出发：今天（说话当日，具体日历日期未确定）",
+          "normalized_zh": "今天出发，具体日期未确定",
+          "query_lemma": "reference-day departure",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Temporal retrieval qualifier from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "reference_date_unspecified",
+          "datatype": "other",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0014",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "返回：19号（月份和年份未说明）",
+          "normalized_zh": "19 日返回，月份和年份未说明",
+          "query_lemma": "day-19 return",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Temporal retrieval qualifier from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "day_of_month:19",
+          "datatype": "other",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0015",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "代理所述航班凌晨12:30出发",
+          "normalized_zh": "凌晨 12:30 出发",
+          "query_lemma": "departure 00:30",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Temporal retrieval qualifier from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "00:30:00",
+          "datatype": "time",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0016",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "代理所述航班次日11:55抵达",
+          "normalized_zh": "次日 11:55 抵达",
+          "query_lemma": "next-day arrival 11:55",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Temporal retrieval qualifier from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "next_dayT11:55:00",
+          "datatype": "other",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0017",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "committed",
+          "normalized_zh": "已承诺",
+          "query_lemma": "committed",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: committed.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "committed",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0018",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "已发送",
+          "normalized_zh": "发送",
+          "query_lemma": "send",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "send_information",
+          "sense_hint": "transmit information to a recipient",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0019",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "往返航班方案",
+          "normalized_zh": "往返航班方案",
+          "query_lemma": "round-trip itinerary",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "round_trip_travel_itinerary",
+          "sense_hint": "outbound and return travel plan",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0020",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "去程和返程均希望尽可能早",
+          "normalized_zh": "去程和返程均尽可能早",
+          "query_lemma": "earliest outbound and return",
+          "keyword_kind": "qualifier",
+          "keyword_type": "condition",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Condition under which the knowledge applies.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "earliest_outbound_and_return",
+          "datatype": "condition",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0021",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "用户邮箱",
+          "normalized_zh": "用户邮箱",
+          "query_lemma": "user email address",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "recipient",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "noun",
+          "sense_key": "user_email_destination",
+          "sense_hint": "email destination belonging to the user",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0022",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "纽约市",
+          "normalized_zh": "纽约市",
+          "query_lemma": "New York City",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "location",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "proper_noun",
+          "sense_key": "new_york_city_place",
+          "sense_hint": "city serving as the trip origin",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0023",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "阿姆斯特丹",
+          "normalized_zh": "阿姆斯特丹",
+          "query_lemma": "Amsterdam",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "location",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "proper_noun",
+          "sense_key": "amsterdam_place",
+          "sense_hint": "city serving as the trip destination",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0024",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "往返",
+          "normalized_zh": "往返",
+          "query_lemma": "round trip",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "attribute",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "noun",
+          "sense_key": "round_trip_travel",
+          "sense_hint": "travel containing outbound and return legs",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0025",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "1",
+          "normalized_zh": "1 次经停",
+          "query_lemma": "stop count 1",
+          "keyword_kind": "literal",
+          "keyword_type": "quantity",
+          "semantic_role": "value",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Typed literal value from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "1",
+          "datatype": "number",
+          "unit": "stop",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0026",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "1,287美元",
+          "normalized_zh": "1,287 美元",
+          "query_lemma": "USD 1287",
+          "keyword_kind": "literal",
+          "keyword_type": "quantity",
+          "semantic_role": "value",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Typed literal value from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "1287",
+          "datatype": "currency",
+          "unit": "USD",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0027",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "已经发送",
+          "normalized_zh": "已经发送",
+          "query_lemma": "already sent",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Temporal retrieval qualifier from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "completed_before_reference_time",
+          "datatype": "other",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0028",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "出发：今天（说话当日，具体日历日期未确定）",
+          "normalized_zh": "今天出发，具体日期未确定",
+          "query_lemma": "reference-day departure",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Temporal retrieval qualifier from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "reference_date_unspecified",
+          "datatype": "other",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0029",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "返回：19号（月份和年份未说明）",
+          "normalized_zh": "19 日返回，月份和年份未说明",
+          "query_lemma": "day-19 return",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Temporal retrieval qualifier from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "day_of_month:19",
+          "datatype": "other",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0030",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "代理所述航班凌晨12:30出发",
+          "normalized_zh": "凌晨 12:30 出发",
+          "query_lemma": "departure 00:30",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Temporal retrieval qualifier from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "00:30:00",
+          "datatype": "time",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0031",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "代理所述航班次日11:55抵达",
+          "normalized_zh": "次日 11:55 抵达",
+          "query_lemma": "next-day arrival 11:55",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Temporal retrieval qualifier from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "next_dayT11:55:00",
+          "datatype": "other",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0032",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "claimed_completed",
+          "normalized_zh": "声称已完成",
+          "query_lemma": "claimed_completed",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: claimed_completed.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "claimed_completed",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0033",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_001",
+          "surface": "预订",
+          "normalized_zh": "预订",
+          "query_lemma": "book",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "book_travel",
+          "sense_hint": "reserve travel for a passenger",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0034",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_001",
+          "surface": "往返航班",
+          "normalized_zh": "往返航班",
+          "query_lemma": "round-trip flight",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "round_trip_flight",
+          "sense_hint": "air journey with outbound and return legs",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0035",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_001",
+          "surface": "纽约市",
+          "normalized_zh": "纽约市",
+          "query_lemma": "New York City",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "location",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "proper_noun",
+          "sense_key": "new_york_city_place",
+          "sense_hint": "city serving as the trip origin",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0036",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_001",
+          "surface": "阿姆斯特丹",
+          "normalized_zh": "阿姆斯特丹",
+          "query_lemma": "Amsterdam",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "location",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "proper_noun",
+          "sense_key": "amsterdam_place",
+          "sense_hint": "city serving as the trip destination",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0037",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_001",
+          "surface": "往返",
+          "normalized_zh": "往返",
+          "query_lemma": "round trip",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "attribute",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "noun",
+          "sense_key": "round_trip_travel",
+          "sense_hint": "travel containing outbound and return legs",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0038",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_001",
+          "surface": "requested",
+          "normalized_zh": "请求",
+          "query_lemma": "requested",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: requested.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "requested",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0039",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_002",
+          "surface": "查询",
+          "normalized_zh": "查询",
+          "query_lemma": "search",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "search_flights",
+          "sense_hint": "look up available flights",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0040",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_002",
+          "surface": "航班",
+          "normalized_zh": "航班",
+          "query_lemma": "flight",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "airline_flight",
+          "sense_hint": "scheduled journey by aircraft",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0041",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_002",
+          "surface": "committed",
+          "normalized_zh": "已承诺",
+          "query_lemma": "committed",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: committed.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "committed",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0042",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_003",
+          "surface": "询问",
+          "normalized_zh": "询问",
+          "query_lemma": "ask",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "ask_question",
+          "sense_hint": "request information from another participant",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0043",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_003",
+          "surface": "偏好",
+          "normalized_zh": "偏好",
+          "query_lemma": "preference",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "travel_preference",
+          "sense_hint": "desired attribute of a travel option",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0044",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_003",
+          "surface": "questioned",
+          "normalized_zh": "询问",
+          "query_lemma": "questioned",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: questioned.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "questioned",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0045",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_001",
+          "surface": "出发",
+          "normalized_zh": "出发",
+          "query_lemma": "depart",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "trip_departure",
+          "sense_hint": "begin a journey",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0046",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_001",
+          "surface": "去程",
+          "normalized_zh": "去程",
+          "query_lemma": "outbound trip",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "topic",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "noun",
+          "sense_key": "outbound_trip_leg",
+          "sense_hint": "travel leg from origin to destination",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0047",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_001",
+          "surface": "今天（说话当日，具体日期未确定）",
+          "normalized_zh": "今天，具体日期未确定",
+          "query_lemma": "reference day",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Temporal retrieval qualifier from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "reference_date_unspecified",
+          "datatype": "other",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0048",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_001",
+          "surface": "planned",
+          "normalized_zh": "计划",
+          "query_lemma": "planned",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: planned.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "planned",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0049",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_002",
+          "surface": "返回",
+          "normalized_zh": "返回",
+          "query_lemma": "return",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "trip_return",
+          "sense_hint": "make the return leg of a journey",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0050",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_002",
+          "surface": "返程",
+          "normalized_zh": "返程",
+          "query_lemma": "return trip",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "topic",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "noun",
+          "sense_key": "return_trip_leg",
+          "sense_hint": "travel leg back to the origin",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0051",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_002",
+          "surface": "19号（月份和年份未说明）",
+          "normalized_zh": "19 日，月份和年份未说明",
+          "query_lemma": "day 19",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Temporal retrieval qualifier from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "day_of_month:19",
+          "datatype": "other",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0052",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_002",
+          "surface": "planned",
+          "normalized_zh": "计划",
+          "query_lemma": "planned",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: planned.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "planned",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0053",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_003",
+          "surface": "偏好",
+          "normalized_zh": "偏好",
+          "query_lemma": "prefer",
+          "keyword_kind": "lexical",
+          "keyword_type": "relation",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "prefer_option",
+          "sense_hint": "favor one travel option or attribute",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0054",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_003",
+          "surface": "去程",
+          "normalized_zh": "去程",
+          "query_lemma": "outbound trip",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "topic",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "noun",
+          "sense_key": "outbound_trip_leg",
+          "sense_hint": "travel leg from origin to destination",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0055",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_003",
+          "surface": "尽可能早",
+          "normalized_zh": "尽可能早",
+          "query_lemma": "earliest possible",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Temporal retrieval qualifier from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "earliest_possible",
+          "datatype": "other",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0056",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_003",
+          "surface": "preferred",
+          "normalized_zh": "偏好",
+          "query_lemma": "preferred",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: preferred.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "preferred",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0057",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_004",
+          "surface": "偏好",
+          "normalized_zh": "偏好",
+          "query_lemma": "prefer",
+          "keyword_kind": "lexical",
+          "keyword_type": "relation",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "prefer_option",
+          "sense_hint": "favor one travel option or attribute",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0058",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_004",
+          "surface": "返程",
+          "normalized_zh": "返程",
+          "query_lemma": "return trip",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "topic",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "noun",
+          "sense_key": "return_trip_leg",
+          "sense_hint": "travel leg back to the origin",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0059",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_004",
+          "surface": "尽可能早",
+          "normalized_zh": "尽可能早",
+          "query_lemma": "earliest possible",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Temporal retrieval qualifier from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "earliest_possible",
+          "datatype": "other",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0060",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_004",
+          "surface": "preferred",
+          "normalized_zh": "偏好",
+          "query_lemma": "preferred",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: preferred.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "preferred",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0061",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_001",
+          "surface": "寻找",
+          "normalized_zh": "寻找",
+          "query_lemma": "search",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "search_flights",
+          "sense_hint": "look for an available flight option",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0062",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_001",
+          "surface": "航班",
+          "normalized_zh": "航班",
+          "query_lemma": "flight",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "airline_flight",
+          "sense_hint": "scheduled journey by aircraft",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0063",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_001",
+          "surface": "如果可以",
+          "normalized_zh": "如果可行",
+          "query_lemma": "if feasible",
+          "keyword_kind": "qualifier",
+          "keyword_type": "condition",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Condition under which the knowledge applies.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "if_feasible",
+          "datatype": "condition",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0064",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_001",
+          "surface": "价格最低",
+          "normalized_zh": "最低价格",
+          "query_lemma": "minimum price",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "attribute",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "noun",
+          "sense_key": "minimum_price_constraint",
+          "sense_hint": "lowest available monetary cost",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0065",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_001",
+          "surface": "requested",
+          "normalized_zh": "请求",
+          "query_lemma": "requested",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: requested.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "requested",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0066",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_002",
+          "surface": "往返票",
+          "normalized_zh": "往返票",
+          "query_lemma": "round-trip ticket",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "round_trip_ticket",
+          "sense_hint": "ticket covering outbound and return travel",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0067",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_002",
+          "surface": "最便宜",
+          "normalized_zh": "最便宜",
+          "query_lemma": "cheapest",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "attribute",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "adjective",
+          "sense_key": "lowest_price_option",
+          "sense_hint": "having the lowest price among options",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0068",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_002",
+          "surface": "往返票",
+          "normalized_zh": "往返票",
+          "query_lemma": "round-trip ticket",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "topic",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "noun",
+          "sense_key": "round_trip_ticket",
+          "sense_hint": "ticket covering outbound and return travel",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0069",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_002",
+          "surface": "claimed_completed",
+          "normalized_zh": "声称已完成",
+          "query_lemma": "claimed_completed",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: claimed_completed.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "claimed_completed",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0070",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_003",
+          "surface": "往返票",
+          "normalized_zh": "往返票",
+          "query_lemma": "round-trip ticket",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "part_of_speech": "noun",
+          "sense_key": "round_trip_ticket",
+          "sense_hint": "ticket covering outbound and return travel",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0071",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_003",
+          "surface": "经停",
+          "normalized_zh": "经停",
+          "query_lemma": "stopover",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "noun",
+          "sense_key": "flight_stopover",
+          "sense_hint": "intermediate stop during air travel",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0072",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_003",
+          "surface": "1",
+          "normalized_zh": "1 次经停",
+          "query_lemma": "stop count 1",
+          "keyword_kind": "literal",
+          "keyword_type": "quantity",
+          "semantic_role": "value",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Typed literal value from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "1",
+          "datatype": "number",
+          "unit": "stop",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0073",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_003",
+          "surface": "asserted",
+          "normalized_zh": "断言",
+          "query_lemma": "asserted",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: asserted.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "asserted",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0074",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_004",
+          "surface": "出发时间",
+          "normalized_zh": "出发时间",
+          "query_lemma": "departure time",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "noun",
+          "sense_key": "flight_departure_time",
+          "sense_hint": "scheduled time when a flight departs",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0075",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_004",
+          "surface": "凌晨 12:30",
+          "normalized_zh": "凌晨 12:30",
+          "query_lemma": "departure 00:30",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Temporal retrieval qualifier from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "00:30:00",
+          "datatype": "time",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0076",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_004",
+          "surface": "asserted",
+          "normalized_zh": "断言",
+          "query_lemma": "asserted",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: asserted.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "asserted",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0077",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_005",
+          "surface": "抵达时间",
+          "normalized_zh": "抵达时间",
+          "query_lemma": "arrival time",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "noun",
+          "sense_key": "flight_arrival_time",
+          "sense_hint": "scheduled time when a flight arrives",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0078",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_005",
+          "surface": "次日 11:55",
+          "normalized_zh": "次日 11:55",
+          "query_lemma": "next-day arrival 11:55",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Temporal retrieval qualifier from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "next_dayT11:55:00",
+          "datatype": "other",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0079",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_005",
+          "surface": "asserted",
+          "normalized_zh": "断言",
+          "query_lemma": "asserted",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: asserted.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "asserted",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0080",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_006",
+          "surface": "价格",
+          "normalized_zh": "价格",
+          "query_lemma": "price",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "noun",
+          "sense_key": "ticket_price",
+          "sense_hint": "monetary cost of a travel ticket",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0081",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_006",
+          "surface": "1,287美元",
+          "normalized_zh": "1,287 美元",
+          "query_lemma": "USD 1287",
+          "keyword_kind": "literal",
+          "keyword_type": "quantity",
+          "semantic_role": "value",
+          "source_field": "object",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Typed literal value from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "1287",
+          "datatype": "currency",
+          "unit": "USD",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0082",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_006",
+          "surface": "往返票",
+          "normalized_zh": "往返票",
+          "query_lemma": "round-trip ticket",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "topic",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "noun",
+          "sense_key": "round_trip_ticket",
+          "sense_hint": "ticket covering outbound and return travel",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0083",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_006",
+          "surface": "asserted",
+          "normalized_zh": "断言",
+          "query_lemma": "asserted",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: asserted.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "asserted",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0084",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_007",
+          "surface": "预订",
+          "normalized_zh": "预订",
+          "query_lemma": "book",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "book_travel",
+          "sense_hint": "reserve travel for a passenger",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0085",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_007",
+          "surface": "往返票",
+          "normalized_zh": "往返票",
+          "query_lemma": "round-trip ticket",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "round_trip_ticket",
+          "sense_hint": "ticket covering outbound and return travel",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0086",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_007",
+          "surface": "questioned",
+          "normalized_zh": "询问",
+          "query_lemma": "questioned",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: questioned.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "questioned",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0087",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_001",
+          "surface": "直飞航班",
+          "normalized_zh": "直飞航班",
+          "query_lemma": "direct flight",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "direct_nonstop_flight",
+          "sense_hint": "flight traveling without an intermediate stop",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0088",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_001",
+          "surface": "存在",
+          "normalized_zh": "存在",
+          "query_lemma": "exist",
+          "keyword_kind": "lexical",
+          "keyword_type": "relation",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "existence_relation",
+          "sense_hint": "relation indicating that an option is available",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0089",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_001",
+          "surface": "questioned",
+          "normalized_zh": "询问",
+          "query_lemma": "questioned",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: questioned.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "questioned",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0090",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_002",
+          "surface": "查询",
+          "normalized_zh": "查询",
+          "query_lemma": "search",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "search_flights",
+          "sense_hint": "look up available flights",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0091",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_002",
+          "surface": "planned",
+          "normalized_zh": "计划",
+          "query_lemma": "planned",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: planned.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "planned",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0092",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_003",
+          "surface": "直飞航班",
+          "normalized_zh": "直飞航班",
+          "query_lemma": "direct flight",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "part_of_speech": "noun",
+          "sense_key": "direct_nonstop_flight",
+          "sense_hint": "flight traveling without an intermediate stop",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0093",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_003",
+          "surface": "1班",
+          "normalized_zh": "1 班",
+          "query_lemma": "flight count 1",
+          "keyword_kind": "literal",
+          "keyword_type": "quantity",
+          "semantic_role": "value",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Typed literal value from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "1",
+          "datatype": "number",
+          "unit": "flight",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0094",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_003",
+          "surface": "asserted",
+          "normalized_zh": "断言",
+          "query_lemma": "asserted",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: asserted.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "asserted",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0095",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_004",
+          "surface": "直飞航班",
+          "normalized_zh": "直飞航班",
+          "query_lemma": "direct flight",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "part_of_speech": "noun",
+          "sense_key": "direct_nonstop_flight",
+          "sense_hint": "flight traveling without an intermediate stop",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0096",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_004",
+          "surface": "出发时间",
+          "normalized_zh": "出发时间",
+          "query_lemma": "departure time",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "noun",
+          "sense_key": "flight_departure_time",
+          "sense_hint": "scheduled time when a flight departs",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0097",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_004",
+          "surface": "下午 6 点",
+          "normalized_zh": "下午 6 点",
+          "query_lemma": "departure 18:00",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Temporal retrieval qualifier from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "18:00:00",
+          "datatype": "time",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0098",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_004",
+          "surface": "asserted",
+          "normalized_zh": "断言",
+          "query_lemma": "asserted",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: asserted.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "asserted",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0099",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_005",
+          "surface": "直飞航班",
+          "normalized_zh": "直飞航班",
+          "query_lemma": "direct flight",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "part_of_speech": "noun",
+          "sense_key": "direct_nonstop_flight",
+          "sense_hint": "flight traveling without an intermediate stop",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0100",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_005",
+          "surface": "抵达时间",
+          "normalized_zh": "抵达时间",
+          "query_lemma": "arrival time",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "noun",
+          "sense_key": "flight_arrival_time",
+          "sense_hint": "scheduled time when a flight arrives",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0101",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_005",
+          "surface": "次日早上 7:35",
+          "normalized_zh": "次日早上 7:35",
+          "query_lemma": "next-day arrival 07:35",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Temporal retrieval qualifier from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "next_dayT07:35:00",
+          "datatype": "other",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0102",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_005",
+          "surface": "asserted",
+          "normalized_zh": "断言",
+          "query_lemma": "asserted",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: asserted.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "asserted",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0103",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_006",
+          "surface": "直飞航班",
+          "normalized_zh": "直飞航班",
+          "query_lemma": "direct flight",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "part_of_speech": "noun",
+          "sense_key": "direct_nonstop_flight",
+          "sense_hint": "flight traveling without an intermediate stop",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0104",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_006",
+          "surface": "价格",
+          "normalized_zh": "价格",
+          "query_lemma": "price",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "noun",
+          "sense_key": "ticket_price",
+          "sense_hint": "monetary cost of a travel ticket",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0105",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_006",
+          "surface": "2,677美元",
+          "normalized_zh": "2,677 美元",
+          "query_lemma": "USD 2677",
+          "keyword_kind": "literal",
+          "keyword_type": "quantity",
+          "semantic_role": "value",
+          "source_field": "object",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Typed literal value from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "2677",
+          "datatype": "currency",
+          "unit": "USD",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0106",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_006",
+          "surface": "asserted",
+          "normalized_zh": "断言",
+          "query_lemma": "asserted",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: asserted.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "asserted",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0107",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_007",
+          "surface": "偏好",
+          "normalized_zh": "偏好",
+          "query_lemma": "preference",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "travel_preference",
+          "sense_hint": "desired attribute of a travel option",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0108",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_007",
+          "surface": "直飞方案",
+          "normalized_zh": "直飞方案",
+          "query_lemma": "direct flight option",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "topic",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "noun",
+          "sense_key": "direct_flight_option",
+          "sense_hint": "travel option using a direct flight",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0109",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_007",
+          "surface": "questioned",
+          "normalized_zh": "询问",
+          "query_lemma": "questioned",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: questioned.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "questioned",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "schema_version": "identity-diagnostic-source-v1",
+  "dataset_id": "identity-diagnostic-v1",
+  "scenarios": [
+    {
+      "scenario_id": "ID-DEV-001-alias-shared-identifier",
+      "split": "dev",
+      "description": "Two aliases in separate sessions share one repository identifier.",
+      "mentions": [
+        {"mention_id": "m-atlas-1", "unit_id": "l1-atlas-1", "provisional_entity_id": "entity:atlas-name", "surface": "Project Atlas", "text": "I led Project Atlas during the migration.", "identifiers": [{"namespace": "repo_url", "value": "https://example.test/org/atlas"}], "qualifies_for_count": true},
+        {"mention_id": "m-atlas-2", "unit_id": "l1-atlas-2", "provisional_entity_id": "entity:atlas-alias", "surface": "the Atlas migration", "text": "I am still leading the Atlas migration.", "identifiers": [{"namespace": "repo_url", "value": "https://example.test/org/atlas"}], "qualifies_for_count": true}
+      ],
+      "decisions": [
+        {"decision_id": "decision:atlas-merge", "action": "merge", "status": "accepted", "subjects": ["entity:atlas-name", "entity:atlas-alias"], "canonical_entity_id": "entity:project-atlas", "reason_code": "shared_strong_identifier", "evidence_mentions": ["m-atlas-1", "m-atlas-2"], "supersedes_decision_id": null}
+      ]
+    },
+    {
+      "scenario_id": "ID-DEV-002-same-name-distinct",
+      "split": "dev",
+      "description": "Two projects share a label but have conflicting organization-scoped identifiers.",
+      "mentions": [
+        {"mention_id": "m-phoenix-a", "unit_id": "l1-phoenix-a", "provisional_entity_id": "entity:phoenix-a", "surface": "Phoenix", "text": "I led Phoenix for client A.", "identifiers": [{"namespace": "client_project_id", "value": "client-a:phoenix"}], "qualifies_for_count": true},
+        {"mention_id": "m-phoenix-b", "unit_id": "l1-phoenix-b", "provisional_entity_id": "entity:phoenix-b", "surface": "Phoenix", "text": "I also led Phoenix for client B.", "identifiers": [{"namespace": "client_project_id", "value": "client-b:phoenix"}], "qualifies_for_count": true}
+      ],
+      "decisions": [
+        {"decision_id": "decision:phoenix-distinct", "action": "keep_distinct", "status": "accepted", "subjects": ["entity:phoenix-a", "entity:phoenix-b"], "canonical_entity_id": null, "reason_code": "conflicting_scoped_identifier", "evidence_mentions": ["m-phoenix-a", "m-phoenix-b"], "supersedes_decision_id": null}
+      ]
+    },
+    {
+      "scenario_id": "ID-DEV-003-rename-stable-identity",
+      "split": "dev",
+      "description": "A project rename preserves a stable repository identity.",
+      "mentions": [
+        {"mention_id": "m-orion", "unit_id": "l1-orion", "provisional_entity_id": "entity:orion", "surface": "Orion", "text": "I led Orion before the rename.", "identifiers": [{"namespace": "repo_url", "value": "https://example.test/org/northstar"}], "qualifies_for_count": true},
+        {"mention_id": "m-northstar", "unit_id": "l1-northstar", "provisional_entity_id": "entity:northstar", "surface": "Northstar", "text": "Orion was renamed Northstar, which I still lead.", "identifiers": [{"namespace": "repo_url", "value": "https://example.test/org/northstar"}], "qualifies_for_count": true}
+      ],
+      "decisions": [
+        {"decision_id": "decision:orion-northstar-merge", "action": "merge", "status": "accepted", "subjects": ["entity:orion", "entity:northstar"], "canonical_entity_id": "entity:project-northstar", "reason_code": "explicit_rename_and_shared_identifier", "evidence_mentions": ["m-orion", "m-northstar"], "supersedes_decision_id": null}
+      ]
+    },
+    {
+      "scenario_id": "ID-DEV-004-unresolved-alias",
+      "split": "dev",
+      "description": "Similar names without scoped evidence remain unresolved.",
+      "mentions": [
+        {"mention_id": "m-apollo-initiative", "unit_id": "l1-apollo-initiative", "provisional_entity_id": "entity:apollo-initiative", "surface": "Apollo initiative", "text": "I led the Apollo initiative.", "identifiers": [], "qualifies_for_count": true},
+        {"mention_id": "m-apollo-project", "unit_id": "l1-apollo-project", "provisional_entity_id": "entity:apollo-project", "surface": "Apollo project", "text": "I am leading an Apollo project.", "identifiers": [], "qualifies_for_count": true}
+      ],
+      "decisions": [
+        {"decision_id": "decision:apollo-abstain", "action": "abstain", "status": "accepted", "subjects": ["entity:apollo-initiative", "entity:apollo-project"], "canonical_entity_id": null, "reason_code": "insufficient_identity_evidence", "evidence_mentions": ["m-apollo-initiative", "m-apollo-project"], "supersedes_decision_id": null}
+      ]
+    },
+    {
+      "scenario_id": "ID-HIDDEN-001-reject-erroneous-merge",
+      "split": "hidden",
+      "description": "A label-based merge candidate is rejected by different contract identifiers.",
+      "mentions": [
+        {"mention_id": "m-beacon-1", "unit_id": "l1-beacon-1", "provisional_entity_id": "entity:beacon-1", "surface": "Beacon", "text": "I led Beacon under contract C-100.", "identifiers": [{"namespace": "contract_id", "value": "C-100"}], "qualifies_for_count": true},
+        {"mention_id": "m-beacon-2", "unit_id": "l1-beacon-2", "provisional_entity_id": "entity:beacon-2", "surface": "Beacon", "text": "I am leading Beacon under contract C-200.", "identifiers": [{"namespace": "contract_id", "value": "C-200"}], "qualifies_for_count": true}
+      ],
+      "decisions": [
+        {"decision_id": "decision:beacon-reject", "action": "reject_merge", "status": "accepted", "subjects": ["entity:beacon-1", "entity:beacon-2"], "canonical_entity_id": null, "reason_code": "conflicting_strong_identifier", "evidence_mentions": ["m-beacon-1", "m-beacon-2"], "supersedes_decision_id": null}
+      ]
+    },
+    {
+      "scenario_id": "ID-HIDDEN-002-split-correction",
+      "split": "hidden",
+      "description": "A prior merge is superseded by a split after contradictory evidence.",
+      "mentions": [
+        {"mention_id": "m-harbor-east", "unit_id": "l1-harbor-east", "provisional_entity_id": "entity:harbor-east", "surface": "Harbor", "text": "I led Harbor East for account E-1.", "identifiers": [{"namespace": "account_project_id", "value": "E-1"}], "qualifies_for_count": true},
+        {"mention_id": "m-harbor-west", "unit_id": "l1-harbor-west", "provisional_entity_id": "entity:harbor-west", "surface": "Harbor", "text": "Harbor West is a separate project for account W-9 that I lead.", "identifiers": [{"namespace": "account_project_id", "value": "W-9"}], "qualifies_for_count": true}
+      ],
+      "decisions": [
+        {"decision_id": "decision:harbor-merge-v1", "action": "merge", "status": "superseded", "subjects": ["entity:harbor-east", "entity:harbor-west"], "canonical_entity_id": "entity:harbor", "reason_code": "name_only_candidate", "evidence_mentions": ["m-harbor-east"], "supersedes_decision_id": null},
+        {"decision_id": "decision:harbor-split-v2", "action": "split", "status": "accepted", "subjects": ["entity:harbor-east", "entity:harbor-west"], "canonical_entity_id": null, "reason_code": "later_conflicting_identifier", "evidence_mentions": ["m-harbor-east", "m-harbor-west"], "supersedes_decision_id": "decision:harbor-merge-v1"}
+      ]
+    },
+    {
+      "scenario_id": "ID-HIDDEN-003-four-mentions-two-entities",
+      "split": "hidden",
+      "description": "Four evidence units resolve into two canonical projects.",
+      "mentions": [
+        {"mention_id": "m-cedar-1", "unit_id": "l1-cedar-1", "provisional_entity_id": "entity:cedar-name", "surface": "Cedar", "text": "I led Cedar in the first session.", "identifiers": [{"namespace": "project_uuid", "value": "P-001"}], "qualifies_for_count": true},
+        {"mention_id": "m-cedar-2", "unit_id": "l1-cedar-2", "provisional_entity_id": "entity:cedar-alias", "surface": "Cedar rollout", "text": "I am still leading the Cedar rollout.", "identifiers": [{"namespace": "project_uuid", "value": "P-001"}], "qualifies_for_count": true},
+        {"mention_id": "m-maple-1", "unit_id": "l1-maple-1", "provisional_entity_id": "entity:maple-name", "surface": "Maple", "text": "I led Maple in another session.", "identifiers": [{"namespace": "project_uuid", "value": "P-002"}], "qualifies_for_count": true},
+        {"mention_id": "m-maple-2", "unit_id": "l1-maple-2", "provisional_entity_id": "entity:maple-alias", "surface": "Maple launch", "text": "I currently lead the Maple launch.", "identifiers": [{"namespace": "project_uuid", "value": "P-002"}], "qualifies_for_count": true}
+      ],
+      "decisions": [
+        {"decision_id": "decision:cedar-merge", "action": "merge", "status": "accepted", "subjects": ["entity:cedar-name", "entity:cedar-alias"], "canonical_entity_id": "entity:project-cedar", "reason_code": "shared_strong_identifier", "evidence_mentions": ["m-cedar-1", "m-cedar-2"], "supersedes_decision_id": null},
+        {"decision_id": "decision:maple-merge", "action": "merge", "status": "accepted", "subjects": ["entity:maple-name", "entity:maple-alias"], "canonical_entity_id": "entity:project-maple", "reason_code": "shared_strong_identifier", "evidence_mentions": ["m-maple-1", "m-maple-2"], "supersedes_decision_id": null},
+        {"decision_id": "decision:cedar-maple-distinct", "action": "keep_distinct", "status": "accepted", "subjects": ["entity:project-cedar", "entity:project-maple"], "canonical_entity_id": null, "reason_code": "different_strong_identifier", "evidence_mentions": ["m-cedar-1", "m-maple-1"], "supersedes_decision_id": null}
+      ]
+    },
+    {
+      "scenario_id": "ID-HIDDEN-004-outside-scope-stability",
+      "split": "hidden",
+      "description": "An unrelated identity decision does not change the scoped aggregate snapshot.",
+      "mentions": [
+        {"mention_id": "m-lumen-1", "unit_id": "l1-lumen-1", "provisional_entity_id": "entity:lumen-a", "surface": "Lumen", "text": "I led Lumen.", "identifiers": [{"namespace": "project_uuid", "value": "P-010"}], "qualifies_for_count": true},
+        {"mention_id": "m-lumen-2", "unit_id": "l1-lumen-2", "provisional_entity_id": "entity:lumen-b", "surface": "Lumen program", "text": "I still lead the Lumen program.", "identifiers": [{"namespace": "project_uuid", "value": "P-010"}], "qualifies_for_count": true},
+        {"mention_id": "m-unrelated", "unit_id": "l1-unrelated", "provisional_entity_id": "entity:unrelated", "surface": "Quartz", "text": "A colleague leads Quartz.", "identifiers": [{"namespace": "project_uuid", "value": "P-999"}], "qualifies_for_count": false}
+      ],
+      "decisions": [
+        {"decision_id": "decision:lumen-merge", "action": "merge", "status": "accepted", "subjects": ["entity:lumen-a", "entity:lumen-b"], "canonical_entity_id": "entity:project-lumen", "reason_code": "shared_strong_identifier", "evidence_mentions": ["m-lumen-1", "m-lumen-2"], "supersedes_decision_id": null},
+        {"decision_id": "decision:quartz-self", "action": "merge", "status": "accepted", "subjects": ["entity:unrelated"], "canonical_entity_id": "entity:project-quartz", "reason_code": "single_strong_identifier", "evidence_mentions": ["m-unrelated"], "supersedes_decision_id": null}
+      ]
+    }
+  ]
+}

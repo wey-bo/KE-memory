@@ -1,0 +1,5 @@
+用户：
+我找到了。那我应该先改 Activity 的主题，还是先改 styles.xml？
+
+Agent：
+先确认 styles.xml 中存在可用的 Theme.AppCompat 子主题，再在 Manifest 的 MainActivity 上引用它。两处名称必须一致，之后同步并重新构建，若仍崩溃再回到 Logcat 查看新的异常。

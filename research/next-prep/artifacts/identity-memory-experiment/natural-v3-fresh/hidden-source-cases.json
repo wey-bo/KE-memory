@@ -1,0 +1,291 @@
+{
+  "schema_version": "natural-identity-source-config-v1",
+  "dataset_id": "natural-identity-membership-fresh-v3-hidden-source",
+  "source_inputs": {
+    "gold_evidence": "artifacts/natural-benchmark-slices/slice-v1/gold-evidence.json",
+    "locomo_raw": "artifacts/natural-benchmark-slices/raw/locomo/locomo10.json"
+  },
+  "cases": [
+    {
+      "case_id": "fresh-hidden-identity-merge-caroline-cross-session",
+      "split": "hidden",
+      "relation_kind": "identity",
+      "question": "Do these two speaker mentions refer to the same person?",
+      "mentions": [
+        {
+          "mention_id": "fresh-mention-caroline-support-group",
+          "surface": "Caroline",
+          "concept_id": "memory:Person",
+          "source_item_id": "LOCOMO-S01-Q001",
+          "evidence_unit_id": "D1:3",
+          "quote": "I went to a LGBTQ support group yesterday",
+          "source_actor_id": "person:caroline",
+          "actor_locator": {
+            "kind": "locomo_dia_id",
+            "sample_id": "conv-26",
+            "dia_id": "D1:3"
+          }
+        },
+        {
+          "mention_id": "fresh-mention-caroline-safe-place",
+          "surface": "Caroline",
+          "concept_id": "memory:Person",
+          "source_item_id": "LOCOMO-S01-Q015",
+          "evidence_unit_id": "D4:15",
+          "quote": "Now I'm passionate about creating a safe, inviting place for people to grow.",
+          "source_actor_id": "person:caroline",
+          "actor_locator": {
+            "kind": "locomo_dia_id",
+            "sample_id": "conv-26",
+            "dia_id": "D4:15"
+          }
+        }
+      ],
+      "authority": {
+        "shared_trusted_identifiers": [
+          "locomo-speaker:conv-26:Caroline"
+        ],
+        "conflicting_trusted_identifiers": [],
+        "explicit_same_entity": false,
+        "explicit_distinct": false,
+        "actor_binding_authoritative": false,
+        "explicit_membership": false,
+        "explicit_non_membership": false,
+        "required_mention_ids": [
+          "fresh-mention-caroline-support-group",
+          "fresh-mention-caroline-safe-place"
+        ]
+      },
+      "gold": {
+        "expected_action": "merge",
+        "critical_false_merge": false,
+        "critical_false_membership": false
+      }
+    },
+    {
+      "case_id": "fresh-hidden-identity-distinct-caroline-melanie",
+      "split": "hidden",
+      "relation_kind": "identity",
+      "question": "Do these two speaker mentions refer to the same person?",
+      "mentions": [
+        {
+          "mention_id": "fresh-mention-caroline-community",
+          "surface": "Caroline",
+          "concept_id": "memory:Person",
+          "source_item_id": "LOCOMO-S01-Q015",
+          "evidence_unit_id": "D3:5",
+          "quote": "Sharing our experiences isn't always easy",
+          "source_actor_id": "person:caroline",
+          "actor_locator": {
+            "kind": "locomo_dia_id",
+            "sample_id": "conv-26",
+            "dia_id": "D3:5"
+          }
+        },
+        {
+          "mention_id": "fresh-mention-melanie-counselor",
+          "surface": "Melanie",
+          "concept_id": "memory:Person",
+          "source_item_id": "LOCOMO-S01-Q002",
+          "evidence_unit_id": "D1:12",
+          "quote": "You'd be a great counselor!",
+          "source_actor_id": "person:melanie",
+          "actor_locator": {
+            "kind": "locomo_dia_id",
+            "sample_id": "conv-26",
+            "dia_id": "D1:12"
+          }
+        }
+      ],
+      "authority": {
+        "shared_trusted_identifiers": [],
+        "conflicting_trusted_identifiers": [
+          "locomo-speaker:conv-26:Caroline",
+          "locomo-speaker:conv-26:Melanie"
+        ],
+        "explicit_same_entity": false,
+        "explicit_distinct": false,
+        "actor_binding_authoritative": false,
+        "explicit_membership": false,
+        "explicit_non_membership": false,
+        "required_mention_ids": [
+          "fresh-mention-caroline-community",
+          "fresh-mention-melanie-counselor"
+        ]
+      },
+      "gold": {
+        "expected_action": "keep_distinct",
+        "critical_false_merge": true,
+        "critical_false_membership": false
+      }
+    },
+    {
+      "case_id": "fresh-hidden-identity-abstain-flask-app",
+      "split": "hidden",
+      "relation_kind": "identity",
+      "question": "Do these two Flask application references identify one software application?",
+      "mentions": [
+        {
+          "mention_id": "fresh-mention-flask-registration-app",
+          "surface": "registration Flask application",
+          "concept_id": "memory:SoftwareApplication",
+          "source_item_id": "BEAM-100K-C001-contradiction_resolution-001",
+          "evidence_unit_id": "58",
+          "quote": "implement user registration with hashed passwords and session login",
+          "source_actor_id": null,
+          "actor_locator": null
+        },
+        {
+          "mention_id": "fresh-mention-flask-login-app",
+          "surface": "Flask-Login application",
+          "concept_id": "memory:SoftwareApplication",
+          "source_item_id": "BEAM-100K-C001-contradiction_resolution-002",
+          "evidence_unit_id": "66",
+          "quote": "integrate Flask-Login v0.6.2 for session management in my Flask app",
+          "source_actor_id": null,
+          "actor_locator": null
+        }
+      ],
+      "authority": {
+        "shared_trusted_identifiers": [],
+        "conflicting_trusted_identifiers": [],
+        "explicit_same_entity": false,
+        "explicit_distinct": false,
+        "actor_binding_authoritative": false,
+        "explicit_membership": false,
+        "explicit_non_membership": false,
+        "required_mention_ids": [
+          "fresh-mention-flask-registration-app",
+          "fresh-mention-flask-login-app"
+        ]
+      },
+      "gold": {
+        "expected_action": "abstain",
+        "critical_false_merge": true,
+        "critical_false_membership": false
+      }
+    },
+    {
+      "case_id": "fresh-hidden-membership-include-caroline-career",
+      "split": "hidden",
+      "relation_kind": "membership",
+      "question": "Does this education and career plan belong to Caroline's memory?",
+      "mentions": [
+        {
+          "mention_id": "fresh-mention-caroline-career-plan",
+          "surface": "education and career plan",
+          "concept_id": "memory:Activity",
+          "source_item_id": "LOCOMO-S01-Q003",
+          "evidence_unit_id": "D1:9",
+          "quote": "Gonna continue my edu and check out career options",
+          "source_actor_id": "person:caroline",
+          "actor_locator": {
+            "kind": "locomo_dia_id",
+            "sample_id": "conv-26",
+            "dia_id": "D1:9"
+          }
+        }
+      ],
+      "query_subject_id": "person:caroline",
+      "group_surface": "Caroline memories",
+      "member_surface": "education and career plan",
+      "authority": {
+        "shared_trusted_identifiers": [],
+        "conflicting_trusted_identifiers": [],
+        "explicit_same_entity": false,
+        "explicit_distinct": false,
+        "actor_binding_authoritative": true,
+        "explicit_membership": false,
+        "explicit_non_membership": false,
+        "required_mention_ids": [
+          "fresh-mention-caroline-career-plan"
+        ]
+      },
+      "gold": {
+        "expected_action": "include",
+        "critical_false_merge": false,
+        "critical_false_membership": false
+      }
+    },
+    {
+      "case_id": "fresh-hidden-membership-exclude-melanie-race",
+      "split": "hidden",
+      "relation_kind": "membership",
+      "question": "Does this charity-race encouragement belong to Melanie's memory?",
+      "mentions": [
+        {
+          "mention_id": "fresh-mention-caroline-race-encouragement",
+          "surface": "charity-race encouragement",
+          "concept_id": "memory:Activity",
+          "source_item_id": "LOCOMO-S01-Q083",
+          "evidence_unit_id": "D2:2",
+          "quote": "That charity race sounds great, Mel!",
+          "source_actor_id": "person:caroline",
+          "actor_locator": {
+            "kind": "locomo_dia_id",
+            "sample_id": "conv-26",
+            "dia_id": "D2:2"
+          }
+        }
+      ],
+      "query_subject_id": "person:melanie",
+      "group_surface": "Melanie memories",
+      "member_surface": "charity-race encouragement",
+      "authority": {
+        "shared_trusted_identifiers": [],
+        "conflicting_trusted_identifiers": [],
+        "explicit_same_entity": false,
+        "explicit_distinct": false,
+        "actor_binding_authoritative": true,
+        "explicit_membership": false,
+        "explicit_non_membership": false,
+        "required_mention_ids": [
+          "fresh-mention-caroline-race-encouragement"
+        ]
+      },
+      "gold": {
+        "expected_action": "exclude",
+        "critical_false_merge": false,
+        "critical_false_membership": true
+      }
+    },
+    {
+      "case_id": "fresh-hidden-membership-abstain-analytics-owner",
+      "split": "hidden",
+      "relation_kind": "membership",
+      "question": "Does this sprint-2 analytics work belong to the project manager's memory?",
+      "mentions": [
+        {
+          "mention_id": "fresh-mention-sprint-two-analytics",
+          "surface": "sprint-2 analytics work",
+          "concept_id": "memory:Activity",
+          "source_item_id": "BEAM-100K-C001-knowledge_update-001",
+          "evidence_unit_id": "86",
+          "quote": "sprint 2 which targets analytics by April 19",
+          "source_actor_id": null,
+          "actor_locator": null
+        }
+      ],
+      "query_subject_id": "person:project-manager",
+      "group_surface": "project manager memories",
+      "member_surface": "sprint-2 analytics work",
+      "authority": {
+        "shared_trusted_identifiers": [],
+        "conflicting_trusted_identifiers": [],
+        "explicit_same_entity": false,
+        "explicit_distinct": false,
+        "actor_binding_authoritative": false,
+        "explicit_membership": false,
+        "explicit_non_membership": false,
+        "required_mention_ids": [
+          "fresh-mention-sprint-two-analytics"
+        ]
+      },
+      "gold": {
+        "expected_action": "abstain",
+        "critical_false_merge": false,
+        "critical_false_membership": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,505 @@
+{
+  "schema_version": "amr-pilot-gold-draft-v1",
+  "status": "draft",
+  "checklists": [
+    {
+      "sample_id": "AMR-S001",
+      "source_text_sha256": "1b92ba87a9b8d9b5ca50286ba2464ca7a3d7f2937aa71e3698ddf5fb5b9e0fec",
+      "items": [
+        {
+          "item_id": "AMR-S001-G001",
+          "statement": "The speaker wants to book a flight.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["I'd like to book"],
+          "category": "modality"
+        },
+        {
+          "item_id": "AMR-S001-G002",
+          "statement": "The requested flight is round-trip.",
+          "importance": "ordinary",
+          "weight": 1,
+          "evidence_quotes": ["round-trip flight"],
+          "category": "other"
+        },
+        {
+          "item_id": "AMR-S001-G003",
+          "statement": "New York City is the flight origin.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["from New York City"],
+          "category": "role"
+        },
+        {
+          "item_id": "AMR-S001-G004",
+          "statement": "Amsterdam is the flight destination.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["to Amsterdam"],
+          "category": "role"
+        }
+      ],
+      "forbidden_inferences": [
+        "The flight has already been booked.",
+        "A travel date, fare, airline, or passenger identity is known."
+      ]
+    },
+    {
+      "sample_id": "AMR-S002",
+      "source_text_sha256": "eb050a7c46d165289a86c4deac75540566d15a6fff40e5ad0de7a6089aab2d48",
+      "items": [
+        {
+          "item_id": "AMR-S002-G001",
+          "statement": "The speaker requests that the proposed actions proceed.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["please proceed"],
+          "category": "modality"
+        },
+        {
+          "item_id": "AMR-S002-G002",
+          "statement": "One requested action is returning the tablet.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["return of the tablet"],
+          "category": "event"
+        },
+        {
+          "item_id": "AMR-S002-G003",
+          "statement": "A second requested action is cancelling the charger.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["cancellation of the charger"],
+          "category": "event"
+        },
+        {
+          "item_id": "AMR-S002-G004",
+          "statement": "The return and cancellation are coordinated requests, not alternatives.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["return of the tablet and cancellation of the charger"],
+          "category": "other"
+        }
+      ],
+      "forbidden_inferences": [
+        "The tablet return or charger cancellation has already completed.",
+        "The tablet and charger are the same item."
+      ]
+    },
+    {
+      "sample_id": "AMR-S003",
+      "source_text_sha256": "708b82e91170ae667726abe7f512d856e79bce2be339a6a20783f3e6b251b433",
+      "items": [
+        {
+          "item_id": "AMR-S003-G001",
+          "statement": "The guardian has responsibility for day-to-day care.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["responsible for the day-to-day care"],
+          "category": "role"
+        },
+        {
+          "item_id": "AMR-S003-G002",
+          "statement": "Francis and Michael are both recipients of that care.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["care of Francis and Michael"],
+          "category": "role"
+        },
+        {
+          "item_id": "AMR-S003-G003",
+          "statement": "The care includes physical, emotional, and educational needs.",
+          "importance": "ordinary",
+          "weight": 1,
+          "evidence_quotes": ["physical, emotional, and educational needs"],
+          "category": "other"
+        },
+        {
+          "item_id": "AMR-S003-G004",
+          "statement": "The responsibility is expressed prospectively.",
+          "importance": "ordinary",
+          "weight": 1,
+          "evidence_quotes": ["will be responsible"],
+          "category": "modality"
+        }
+      ],
+      "forbidden_inferences": [
+        "The guardian is identified by name.",
+        "The guardian is also necessarily the trustee or financial manager."
+      ]
+    },
+    {
+      "sample_id": "AMR-S004",
+      "source_text_sha256": "41c5605436aaf9d5e1216dad306572a761fc1677916ae387dd622881da7e8176",
+      "items": [
+        {
+          "item_id": "AMR-S004-G001",
+          "statement": "The speaker will leave.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["I'll be leaving"],
+          "category": "event"
+        },
+        {
+          "item_id": "AMR-S004-G002",
+          "statement": "The departure time is today relative to the utterance.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["leaving today"],
+          "category": "time"
+        },
+        {
+          "item_id": "AMR-S004-G003",
+          "statement": "The speaker will return.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["coming back"],
+          "category": "event"
+        },
+        {
+          "item_id": "AMR-S004-G004",
+          "statement": "The return time is the 19th.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["on the 19th"],
+          "category": "time"
+        }
+      ],
+      "forbidden_inferences": [
+        "The absolute calendar date denoted by today is known from this sentence alone.",
+        "The origin, destination, price, or flight number is stated."
+      ]
+    },
+    {
+      "sample_id": "AMR-S005",
+      "source_text_sha256": "1fb03418225d4024d3284b4f051125aee9fb692a03c13df25a336e8d3b437257",
+      "items": [
+        {
+          "item_id": "AMR-S005-G001",
+          "statement": "A refund is the thing to be credited.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["The refund"],
+          "category": "event"
+        },
+        {
+          "item_id": "AMR-S005-G002",
+          "statement": "The refund amount is 951.21 dollars.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["$951.21"],
+          "category": "quantity"
+        },
+        {
+          "item_id": "AMR-S005-G003",
+          "statement": "The destination of the credit is the addressee's gift card.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["to your gift card"],
+          "category": "role"
+        },
+        {
+          "item_id": "AMR-S005-G004",
+          "statement": "The crediting is future or prospective, not asserted as already complete.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["will be credited"],
+          "category": "modality"
+        }
+      ],
+      "forbidden_inferences": [
+        "The refund has already reached the gift card.",
+        "The refunded item, order ID, or reason is stated in this sentence."
+      ]
+    },
+    {
+      "sample_id": "AMR-S006",
+      "source_text_sha256": "3c9918ad63867050cf520bdc879362fabb079ebf46e86584ca78ec9cb5f9fff5",
+      "items": [
+        {
+          "item_id": "AMR-S006-G001",
+          "statement": "Following the steps and adhering to the timeline are conditions supporting the outcome.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["By following these steps and adhering to the timeline"],
+          "category": "condition"
+        },
+        {
+          "item_id": "AMR-S006-G002",
+          "statement": "The addressee is said to have an expected ability, not a guarantee.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["should be able to"],
+          "category": "modality"
+        },
+        {
+          "item_id": "AMR-S006-G003",
+          "statement": "The intended outcome is finalizing the addressee's will.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["finalize your will"],
+          "category": "event"
+        },
+        {
+          "item_id": "AMR-S006-G004",
+          "statement": "The deadline is May 15, 2024.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["deadline of May 15, 2024"],
+          "category": "time"
+        }
+      ],
+      "forbidden_inferences": [
+        "The will is already finalized.",
+        "Meeting the deadline is guaranteed regardless of whether the conditions are followed."
+      ]
+    },
+    {
+      "sample_id": "AMR-S007",
+      "source_text_sha256": "ce14617ad7567508e23091f3e1a3ce5095920bdff8d695dec4a6d4a55f629aba",
+      "items": [
+        {
+          "item_id": "AMR-S007-G001",
+          "statement": "The speaker expresses uncertainty rather than a settled decision.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["I don't know"],
+          "category": "modality"
+        },
+        {
+          "item_id": "AMR-S007-G002",
+          "statement": "The uncertain proposition concerns whether the speaker can accept an option at that expense level.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["if I can go that expensive"],
+          "category": "condition"
+        },
+        {
+          "item_id": "AMR-S007-G003",
+          "statement": "The negation scopes over knowing, not directly over taking the option.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["don't know if"],
+          "category": "polarity"
+        },
+        {
+          "item_id": "AMR-S007-G004",
+          "statement": "The concern is about the option being expensive.",
+          "importance": "ordinary",
+          "weight": 1,
+          "evidence_quotes": ["that expensive"],
+          "category": "other"
+        }
+      ],
+      "forbidden_inferences": [
+        "The speaker categorically rejects the expensive option.",
+        "The speaker cannot travel or cannot pay any amount."
+      ]
+    },
+    {
+      "sample_id": "AMR-S008",
+      "source_text_sha256": "d7bfa89deee5e6cbe9602ae6355c0ff0d1a7b5a928c648ea8cc665d6027b8a9c",
+      "items": [
+        {
+          "item_id": "AMR-S008-G001",
+          "statement": "The availability claim is presented with evidential uncertainty.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["It seems that"],
+          "category": "modality"
+        },
+        {
+          "item_id": "AMR-S008-G002",
+          "statement": "The affected object is the exact item the addressee wants as an exchange replacement.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["the exact item you want to exchange for"],
+          "category": "role"
+        },
+        {
+          "item_id": "AMR-S008-G003",
+          "statement": "That item is not available in the speaker's inventory.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["not available in our inventory"],
+          "category": "polarity"
+        },
+        {
+          "item_id": "AMR-S008-G004",
+          "statement": "The unavailability is scoped to the current time.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["currently not available"],
+          "category": "time"
+        }
+      ],
+      "forbidden_inferences": [
+        "The item will never become available.",
+        "Every similar item is unavailable.",
+        "The exchange request has been cancelled."
+      ]
+    },
+    {
+      "sample_id": "AMR-S009",
+      "source_text_sha256": "ff36d81ae2fa7fd06b4367d8771741a21583408f6a5f3becdbeadf111b0e5605",
+      "items": [
+        {
+          "item_id": "AMR-S009-G001",
+          "statement": "Stephanie is named as the guardian.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["Naming Stephanie as the guardian"],
+          "category": "role"
+        },
+        {
+          "item_id": "AMR-S009-G002",
+          "statement": "Naming her guardian does not by itself entail that she will manage the financial assets.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["does not necessarily mean she will also manage the financial assets"],
+          "category": "polarity"
+        },
+        {
+          "item_id": "AMR-S009-G003",
+          "statement": "The sentence leaves open whether Stephanie may separately manage the financial assets.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["not necessarily"],
+          "category": "modality"
+        }
+      ],
+      "forbidden_inferences": [
+        "Stephanie is categorically prohibited from managing the financial assets.",
+        "Stephanie is definitely the financial trustee."
+      ]
+    },
+    {
+      "sample_id": "AMR-S010",
+      "source_text_sha256": "e06fb556cc443f18d362730581b425059d4003e96206593b653f8b2f2ee977e1",
+      "items": [
+        {
+          "item_id": "AMR-S010-G001",
+          "statement": "A nonstop flight exists.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["There is a nonstop flight"],
+          "category": "state"
+        },
+        {
+          "item_id": "AMR-S010-G002",
+          "statement": "The flight departs at 6 PM.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["departing at 6 PM"],
+          "category": "time"
+        },
+        {
+          "item_id": "AMR-S010-G003",
+          "statement": "The flight arrives the next day at 7:35 AM.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["arriving the next day at 7:35 AM"],
+          "category": "time"
+        },
+        {
+          "item_id": "AMR-S010-G004",
+          "statement": "The departure and arrival descriptions apply to the same nonstop flight.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["flight that is departing", "and arriving"],
+          "category": "role"
+        }
+      ],
+      "forbidden_inferences": [
+        "The absolute departure date is known.",
+        "A fare, airline, origin, or destination is stated in this sentence."
+      ]
+    },
+    {
+      "sample_id": "AMR-S011",
+      "source_text_sha256": "2772cb2fb2d9ae32df1cf71559ce0f2b504c5c2ab7f22a55aab7ffccc55fd10f",
+      "items": [
+        {
+          "item_id": "AMR-S011-G001",
+          "statement": "The speaker asks the addressee to cancel the charger.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["could you cancel the charger"],
+          "category": "modality"
+        },
+        {
+          "item_id": "AMR-S011-G002",
+          "statement": "The speaker recently bought the charger.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["the charger I just bought"],
+          "category": "event"
+        },
+        {
+          "item_id": "AMR-S011-G003",
+          "statement": "The stated reason for the cancellation request is that the charger goes with the tablet.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["since it goes with the tablet"],
+          "category": "causality"
+        },
+        {
+          "item_id": "AMR-S011-G004",
+          "statement": "The pronoun it in the reason refers to the charger.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["the charger I just bought since it goes with the tablet"],
+          "category": "role"
+        }
+      ],
+      "forbidden_inferences": [
+        "The charger has already been cancelled.",
+        "The charger is physically part of the tablet.",
+        "The tablet return is stated in this sentence."
+      ]
+    },
+    {
+      "sample_id": "AMR-S012",
+      "source_text_sha256": "ed8a8c707ad646bd439c7b22e0beeb3b50095f80a590d78811f44fa47f808a15",
+      "items": [
+        {
+          "item_id": "AMR-S012-G001",
+          "statement": "Naming Stephanie in the will is presented as a concessive condition.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["Even if you name Stephanie in your will"],
+          "category": "condition"
+        },
+        {
+          "item_id": "AMR-S012-G002",
+          "statement": "The court will review the appointment.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["the court will review the appointment"],
+          "category": "event"
+        },
+        {
+          "item_id": "AMR-S012-G003",
+          "statement": "The object of the court's review is the appointment of Stephanie.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["name Stephanie", "review the appointment"],
+          "category": "role"
+        },
+        {
+          "item_id": "AMR-S012-G004",
+          "statement": "The review evaluates whether the appointment is in the children's best interest.",
+          "importance": "critical",
+          "weight": 2,
+          "evidence_quotes": ["to ensure it is in the best interest of the children"],
+          "category": "causality"
+        }
+      ],
+      "forbidden_inferences": [
+        "The court will approve Stephanie automatically.",
+        "Naming Stephanie in the will has no legal effect.",
+        "The children are identified by name in this sentence."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,3185 @@
+{
+  "candidate_id": "TAU-BENCH-CAND-001",
+  "items": [
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0001",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_001",
+          "surface": "退回",
+          "normalized_zh": "退回",
+          "query_lemma": "return",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "return_purchased_item",
+          "sense_hint": "send a purchased item back to a seller",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0002",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_001",
+          "surface": "平板",
+          "normalized_zh": "平板电脑",
+          "query_lemma": "tablet computer",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "tablet_computer_device",
+          "sense_hint": "portable touchscreen computing device",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0003",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_001",
+          "surface": "requested",
+          "normalized_zh": "请求",
+          "query_lemma": "requested",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: requested.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "requested",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0004",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_002",
+          "surface": "充电器",
+          "normalized_zh": "充电器",
+          "query_lemma": "charger",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "part_of_speech": "noun",
+          "sense_key": "electronic_device_charger",
+          "sense_hint": "device that supplies electrical charge",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0005",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_002",
+          "surface": "配套用于",
+          "normalized_zh": "配套使用",
+          "query_lemma": "compatible with",
+          "keyword_kind": "lexical",
+          "keyword_type": "relation",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "adjective",
+          "sense_key": "device_compatibility_relation",
+          "sense_hint": "designed to work with another device",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0006",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_002",
+          "surface": "平板",
+          "normalized_zh": "平板电脑",
+          "query_lemma": "tablet computer",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "tablet_computer_device",
+          "sense_hint": "portable touchscreen computing device",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0007",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_002",
+          "surface": "刚买",
+          "normalized_zh": "刚购买",
+          "query_lemma": "recently purchased",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Temporal relation from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "recent_past",
+          "datatype": "temporal_relation",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0008",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_002",
+          "surface": "asserted",
+          "normalized_zh": "断言",
+          "query_lemma": "asserted",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: asserted.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "asserted",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0009",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_003",
+          "surface": "取消",
+          "normalized_zh": "取消",
+          "query_lemma": "cancel",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "cancel_order",
+          "sense_hint": "stop a pending purchase order",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0010",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_003",
+          "surface": "充电器",
+          "normalized_zh": "充电器",
+          "query_lemma": "charger",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "electronic_device_charger",
+          "sense_hint": "device that supplies electrical charge",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0011",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_003",
+          "surface": "requested",
+          "normalized_zh": "请求",
+          "query_lemma": "requested",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: requested.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "requested",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_008",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0012",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_008",
+          "surface": "确认",
+          "normalized_zh": "确认",
+          "query_lemma": "confirm",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "confirm_action",
+          "sense_hint": "give approval to execute an action",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0013",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_008",
+          "surface": "计划",
+          "normalized_zh": "计划",
+          "query_lemma": "action plan",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "transaction_action_plan",
+          "sense_hint": "planned set of transactional actions",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0014",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_008",
+          "surface": "平板退货",
+          "normalized_zh": "平板退货",
+          "query_lemma": "tablet return",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "topic",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "noun",
+          "sense_key": "tablet_return_event",
+          "sense_hint": "return of a tablet purchase",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0015",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_008",
+          "surface": "充电器取消",
+          "normalized_zh": "充电器取消",
+          "query_lemma": "charger cancellation",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "topic",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "noun",
+          "sense_key": "charger_order_cancellation",
+          "sense_hint": "cancellation of a charger order",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0016",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_008",
+          "surface": "requested",
+          "normalized_zh": "请求",
+          "query_lemma": "requested",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: requested.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "requested",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0017",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_001",
+          "surface": "执行",
+          "normalized_zh": "执行",
+          "query_lemma": "execute",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "execute_transaction",
+          "sense_hint": "carry out an authorized transaction",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0018",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_001",
+          "surface": "平板退货",
+          "normalized_zh": "平板退货",
+          "query_lemma": "tablet return",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "tablet_return_event",
+          "sense_hint": "return of a tablet purchase",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0019",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_001",
+          "surface": "requested",
+          "normalized_zh": "请求",
+          "query_lemma": "requested",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: requested.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "requested",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0020",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_002",
+          "surface": "执行",
+          "normalized_zh": "执行",
+          "query_lemma": "execute",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "execute_transaction",
+          "sense_hint": "carry out an authorized transaction",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0021",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_002",
+          "surface": "充电器取消",
+          "normalized_zh": "充电器取消",
+          "query_lemma": "charger cancellation",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "charger_order_cancellation",
+          "sense_hint": "cancellation of a charger order",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0022",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_002",
+          "surface": "requested",
+          "normalized_zh": "请求",
+          "query_lemma": "requested",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: requested.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "requested",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0023",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_003",
+          "surface": "调用",
+          "normalized_zh": "调用",
+          "query_lemma": "invoke",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "invoke_software_tool",
+          "sense_hint": "execute a named software operation",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0024",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_003",
+          "surface": "return_delivered_order_items",
+          "normalized_zh": "退回已送达订单商品工具",
+          "query_lemma": "return_delivered_order_items",
+          "keyword_kind": "identifier",
+          "keyword_type": "entity",
+          "semantic_role": "identifier",
+          "source_field": "object",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Exact instance identifier from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "return_delivered_order_items",
+          "datatype": "identifier",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0025",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_003",
+          "surface": "#W2692684",
+          "normalized_zh": "订单 #W2692684",
+          "query_lemma": "#W2692684",
+          "keyword_kind": "identifier",
+          "keyword_type": "entity",
+          "semantic_role": "identifier",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Exact instance identifier from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "#W2692684",
+          "datatype": "identifier",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0026",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_003",
+          "surface": "3788616824",
+          "normalized_zh": "商品 3788616824",
+          "query_lemma": "3788616824",
+          "keyword_kind": "identifier",
+          "keyword_type": "entity",
+          "semantic_role": "identifier",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Exact instance identifier from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "3788616824",
+          "datatype": "identifier",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0027",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_003",
+          "surface": "gift_card_7711863",
+          "normalized_zh": "礼品卡 gift_card_7711863",
+          "query_lemma": "gift_card_7711863",
+          "keyword_kind": "identifier",
+          "keyword_type": "entity",
+          "semantic_role": "identifier",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Exact instance identifier from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "gift_card_7711863",
+          "datatype": "identifier",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0028",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_003",
+          "surface": "claimed_completed",
+          "normalized_zh": "声称已完成",
+          "query_lemma": "claimed_completed",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: claimed_completed.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "claimed_completed",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0029",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_003",
+          "surface": "退货",
+          "normalized_zh": "退货",
+          "query_lemma": "return",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "statement",
+          "part_of_speech": "verb",
+          "sense_key": "return_purchased_item",
+          "sense_hint": "send a purchased item back to a seller",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0030",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_003",
+          "surface": "退款方式",
+          "normalized_zh": "退款方式",
+          "query_lemma": "refund method",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "attribute",
+          "source_field": "statement",
+          "part_of_speech": "noun",
+          "sense_key": "refund_payment_method",
+          "sense_hint": "payment method designated to receive a refund",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0031",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_004",
+          "surface": "调用",
+          "normalized_zh": "调用",
+          "query_lemma": "invoke",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "invoke_software_tool",
+          "sense_hint": "execute a named software operation",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0032",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_004",
+          "surface": "cancel_pending_order",
+          "normalized_zh": "取消待处理订单工具",
+          "query_lemma": "cancel_pending_order",
+          "keyword_kind": "identifier",
+          "keyword_type": "entity",
+          "semantic_role": "identifier",
+          "source_field": "object",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Exact instance identifier from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "cancel_pending_order",
+          "datatype": "identifier",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0033",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_004",
+          "surface": "#W9373487",
+          "normalized_zh": "订单 #W9373487",
+          "query_lemma": "#W9373487",
+          "keyword_kind": "identifier",
+          "keyword_type": "entity",
+          "semantic_role": "identifier",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Exact instance identifier from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "#W9373487",
+          "datatype": "identifier",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0034",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_004",
+          "surface": "no longer needed",
+          "normalized_zh": "不再需要",
+          "query_lemma": "unneeded",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "attribute",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "adjective",
+          "sense_key": "unneeded_item_reason",
+          "sense_hint": "reason indicating an item is no longer required",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0035",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_004",
+          "surface": "claimed_completed",
+          "normalized_zh": "声称已完成",
+          "query_lemma": "claimed_completed",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: claimed_completed.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "claimed_completed",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0036",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_004",
+          "surface": "取消",
+          "normalized_zh": "取消",
+          "query_lemma": "cancel",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "statement",
+          "part_of_speech": "verb",
+          "sense_key": "cancel_order",
+          "sense_hint": "stop a pending purchase order",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0037",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_005",
+          "surface": "退货请求",
+          "normalized_zh": "退货请求",
+          "query_lemma": "return request",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "part_of_speech": "noun",
+          "sense_key": "merchandise_return_request",
+          "sense_hint": "request to return purchased merchandise",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0038",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_005",
+          "surface": "提交",
+          "normalized_zh": "提交",
+          "query_lemma": "submit",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "submit_request",
+          "sense_hint": "formally lodge a request for processing",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0039",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_005",
+          "surface": "已",
+          "normalized_zh": "已经",
+          "query_lemma": "already completed",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Temporal relation from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "completed_before_reference_time",
+          "datatype": "temporal_relation",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0040",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_005",
+          "surface": "observed",
+          "normalized_zh": "工具观察",
+          "query_lemma": "observed",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: observed.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "observed",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0041",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_006",
+          "surface": "平板退款",
+          "normalized_zh": "平板退款",
+          "query_lemma": "tablet refund",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "part_of_speech": "noun",
+          "sense_key": "tablet_purchase_refund",
+          "sense_hint": "repayment for a returned tablet",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0042",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_006",
+          "surface": "金额",
+          "normalized_zh": "金额",
+          "query_lemma": "monetary amount",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "noun",
+          "sense_key": "refund_amount",
+          "sense_hint": "quantity of money refunded",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0043",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_006",
+          "surface": "951.21美元",
+          "normalized_zh": "951.21 美元",
+          "query_lemma": "USD 951.21",
+          "keyword_kind": "literal",
+          "keyword_type": "quantity",
+          "semantic_role": "value",
+          "source_field": "object",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Typed literal value from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "951.21",
+          "datatype": "currency",
+          "unit": "USD",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0044",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_006",
+          "surface": "observed",
+          "normalized_zh": "工具观察",
+          "query_lemma": "observed",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: observed.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "observed",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0045",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_007",
+          "surface": "充电器订单",
+          "normalized_zh": "充电器订单",
+          "query_lemma": "charger order",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "part_of_speech": "noun",
+          "sense_key": "charger_purchase_order",
+          "sense_hint": "purchase order for a charger",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0046",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_007",
+          "surface": "取消",
+          "normalized_zh": "取消",
+          "query_lemma": "cancel",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "cancel_order",
+          "sense_hint": "stop a pending purchase order",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0047",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_007",
+          "surface": "已",
+          "normalized_zh": "已经",
+          "query_lemma": "already completed",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Temporal relation from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "completed_before_reference_time",
+          "datatype": "temporal_relation",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0048",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_007",
+          "surface": "observed",
+          "normalized_zh": "工具观察",
+          "query_lemma": "observed",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: observed.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "observed",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_008",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0049",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_008",
+          "surface": "109.27美元",
+          "normalized_zh": "109.27 美元",
+          "query_lemma": "USD 109.27",
+          "keyword_kind": "literal",
+          "keyword_type": "quantity",
+          "semantic_role": "value",
+          "source_field": "subject",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Typed literal value from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "109.27",
+          "datatype": "currency",
+          "unit": "USD",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0050",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_008",
+          "surface": "退回",
+          "normalized_zh": "退款退回",
+          "query_lemma": "refund",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "refund_payment_action",
+          "sense_hint": "return money to a payment method",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0051",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_008",
+          "surface": "礼品卡",
+          "normalized_zh": "礼品卡",
+          "query_lemma": "gift card",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "stored_value_gift_card",
+          "sense_hint": "stored-value card used as a refund destination",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0052",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_008",
+          "surface": "充电器订单退款",
+          "normalized_zh": "充电器订单退款",
+          "query_lemma": "charger order refund",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "topic",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "noun",
+          "sense_key": "charger_order_refund",
+          "sense_hint": "refund associated with the charger order",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0053",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_008",
+          "surface": "已",
+          "normalized_zh": "已经",
+          "query_lemma": "already completed",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Temporal relation from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "completed_before_reference_time",
+          "datatype": "temporal_relation",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0054",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_008",
+          "surface": "observed",
+          "normalized_zh": "工具观察",
+          "query_lemma": "observed",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: observed.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "observed",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0055",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_001",
+          "surface": "买了",
+          "normalized_zh": "购买",
+          "query_lemma": "buy",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "purchase_item",
+          "sense_hint": "acquire an item by payment",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0056",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_001",
+          "surface": "运动鞋",
+          "normalized_zh": "运动鞋",
+          "query_lemma": "sneaker",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "athletic_sneaker",
+          "sense_hint": "shoe designed for athletic or casual wear",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0057",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_001",
+          "surface": "asserted",
+          "normalized_zh": "断言",
+          "query_lemma": "asserted",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: asserted.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "asserted",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0058",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_002",
+          "surface": "退回",
+          "normalized_zh": "退回",
+          "query_lemma": "return",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "return_purchased_item",
+          "sense_hint": "send a purchased item back to a seller",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0059",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_002",
+          "surface": "运动鞋",
+          "normalized_zh": "运动鞋",
+          "query_lemma": "sneaker",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "athletic_sneaker",
+          "sense_hint": "shoe designed for athletic or casual wear",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0060",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_002",
+          "surface": "requested",
+          "normalized_zh": "请求",
+          "query_lemma": "requested",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: requested.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "requested",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0061",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_004",
+          "surface": "提供",
+          "normalized_zh": "提供",
+          "query_lemma": "provide",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "provide_information",
+          "sense_hint": "supply requested information",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0062",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_004",
+          "surface": "订单号",
+          "normalized_zh": "订单号",
+          "query_lemma": "order number",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "order_identifier_concept",
+          "sense_hint": "identifier assigned to a purchase order",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0063",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_004",
+          "surface": "requested",
+          "normalized_zh": "请求",
+          "query_lemma": "requested",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: requested.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "requested",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0064",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_005",
+          "surface": "确认",
+          "normalized_zh": "确认",
+          "query_lemma": "confirm",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "confirm_information",
+          "sense_hint": "verify whether supplied information is true",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0065",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_005",
+          "surface": "订单",
+          "normalized_zh": "订单",
+          "query_lemma": "purchase order",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "purchase_order",
+          "sense_hint": "commercial request to buy goods",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0066",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_005",
+          "surface": "不提供运动鞋订单号时的替代方式",
+          "normalized_zh": "未提供运动鞋订单号时采用替代方式",
+          "query_lemma": "missing order number alternative",
+          "keyword_kind": "qualifier",
+          "keyword_type": "condition",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Condition under which the knowledge applies.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "when_order_number_missing",
+          "datatype": "condition",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0067",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_005",
+          "surface": "最近",
+          "normalized_zh": "最近",
+          "query_lemma": "recent",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Temporal relation from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "recent",
+          "datatype": "temporal_relation",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0068",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_005",
+          "surface": "requested",
+          "normalized_zh": "请求",
+          "query_lemma": "requested",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: requested.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "requested",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0069",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_005",
+          "surface": "运动鞋",
+          "normalized_zh": "运动鞋",
+          "query_lemma": "sneaker",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "part_of_speech": "noun",
+          "sense_key": "athletic_sneaker",
+          "sense_hint": "shoe designed for athletic or casual wear",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0070",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_005",
+          "surface": "订单号",
+          "normalized_zh": "订单号",
+          "query_lemma": "order number",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "part_of_speech": "noun",
+          "sense_key": "order_identifier_concept",
+          "sense_hint": "identifier assigned to a purchase order",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0071",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_005",
+          "surface": "属于",
+          "normalized_zh": "属于",
+          "query_lemma": "belong to",
+          "keyword_kind": "lexical",
+          "keyword_type": "relation",
+          "semantic_role": "predicate",
+          "source_field": "object",
+          "part_of_speech": "verb",
+          "sense_key": "order_membership",
+          "sense_hint": "relation linking an item to a purchase order",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0072",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_001",
+          "surface": "记得",
+          "normalized_zh": "记得",
+          "query_lemma": "remember",
+          "keyword_kind": "lexical",
+          "keyword_type": "relation",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "remember_identifier",
+          "sense_hint": "recall a previously known identifier",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0073",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_001",
+          "surface": "订单号",
+          "normalized_zh": "订单号",
+          "query_lemma": "order number",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "order_identifier_concept",
+          "sense_hint": "identifier assigned to a purchase order",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0074",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_001",
+          "surface": "asserted",
+          "normalized_zh": "断言",
+          "query_lemma": "asserted",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: asserted.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "asserted",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0075",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_001",
+          "surface": "negative",
+          "normalized_zh": "否定",
+          "query_lemma": "negative",
+          "keyword_kind": "qualifier",
+          "keyword_type": "polarity",
+          "semantic_role": "polarity",
+          "source_field": "qualifiers.polarity",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Qualifier from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "negative",
+          "datatype": "polarity",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0076",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_002",
+          "surface": "运动鞋",
+          "normalized_zh": "运动鞋",
+          "query_lemma": "sneaker",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "part_of_speech": "noun",
+          "sense_key": "athletic_sneaker",
+          "sense_hint": "shoe designed for athletic or casual wear",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0077",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_002",
+          "surface": "属于",
+          "normalized_zh": "属于",
+          "query_lemma": "belong to",
+          "keyword_kind": "lexical",
+          "keyword_type": "relation",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "order_membership",
+          "sense_hint": "relation linking an item to a purchase order",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0078",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_002",
+          "surface": "订单",
+          "normalized_zh": "订单",
+          "query_lemma": "purchase order",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "purchase_order",
+          "sense_hint": "commercial request to buy goods",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0079",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_002",
+          "surface": "最近",
+          "normalized_zh": "最近",
+          "query_lemma": "recent",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Temporal relation from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "recent",
+          "datatype": "temporal_relation",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0080",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_002",
+          "surface": "asserted",
+          "normalized_zh": "断言",
+          "query_lemma": "asserted",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: asserted.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "asserted",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0081",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_003",
+          "surface": "调用",
+          "normalized_zh": "调用",
+          "query_lemma": "invoke",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "invoke_software_tool",
+          "sense_hint": "execute a named software operation",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0082",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_003",
+          "surface": "get_order_details",
+          "normalized_zh": "获取订单详情工具",
+          "query_lemma": "get_order_details",
+          "keyword_kind": "identifier",
+          "keyword_type": "entity",
+          "semantic_role": "identifier",
+          "source_field": "object",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Exact instance identifier from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "get_order_details",
+          "datatype": "identifier",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0083",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_003",
+          "surface": "#W7449508",
+          "normalized_zh": "订单 #W7449508",
+          "query_lemma": "#W7449508",
+          "keyword_kind": "identifier",
+          "keyword_type": "entity",
+          "semantic_role": "identifier",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Exact instance identifier from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "#W7449508",
+          "datatype": "identifier",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0084",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_003",
+          "surface": "claimed_completed",
+          "normalized_zh": "声称已完成",
+          "query_lemma": "claimed_completed",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: claimed_completed.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "claimed_completed",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0085",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_003",
+          "surface": "查询",
+          "normalized_zh": "查询",
+          "query_lemma": "query",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "statement",
+          "part_of_speech": "verb",
+          "sense_key": "query_order_details",
+          "sense_hint": "retrieve details for a purchase order",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0086",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_003",
+          "surface": "订单详情",
+          "normalized_zh": "订单详情",
+          "query_lemma": "order details",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "statement",
+          "part_of_speech": "noun",
+          "sense_key": "purchase_order_details",
+          "sense_hint": "detailed information about a purchase order",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0087",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_004",
+          "surface": "订单",
+          "normalized_zh": "订单",
+          "query_lemma": "purchase order",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "part_of_speech": "noun",
+          "sense_key": "purchase_order",
+          "sense_hint": "commercial request to buy goods",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0088",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_004",
+          "surface": "#W7449508",
+          "normalized_zh": "订单 #W7449508",
+          "query_lemma": "#W7449508",
+          "keyword_kind": "identifier",
+          "keyword_type": "entity",
+          "semantic_role": "identifier",
+          "source_field": "subject",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Exact instance identifier from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "#W7449508",
+          "datatype": "identifier",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0089",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_004",
+          "surface": "包含",
+          "normalized_zh": "包含",
+          "query_lemma": "contain",
+          "keyword_kind": "lexical",
+          "keyword_type": "relation",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "order_contains_item",
+          "sense_hint": "relation linking an order to an included item",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0090",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_004",
+          "surface": "运动鞋",
+          "normalized_zh": "运动鞋",
+          "query_lemma": "sneaker",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "athletic_sneaker",
+          "sense_hint": "shoe designed for athletic or casual wear",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0091",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_004",
+          "surface": "observed",
+          "normalized_zh": "工具观察",
+          "query_lemma": "observed",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: observed.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "observed",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0092",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_005",
+          "surface": "运动鞋",
+          "normalized_zh": "运动鞋",
+          "query_lemma": "sneaker",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "part_of_speech": "noun",
+          "sense_key": "athletic_sneaker",
+          "sense_hint": "shoe designed for athletic or casual wear",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0093",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_005",
+          "surface": "尺码",
+          "normalized_zh": "尺码",
+          "query_lemma": "shoe size",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "noun",
+          "sense_key": "shoe_size_property",
+          "sense_hint": "standardized size assigned to footwear",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0094",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_005",
+          "surface": "6码",
+          "normalized_zh": "6 码",
+          "query_lemma": "shoe size 6",
+          "keyword_kind": "literal",
+          "keyword_type": "quantity",
+          "semantic_role": "value",
+          "source_field": "object",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Numeric shoe-size value from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "6",
+          "datatype": "number",
+          "unit": "shoe_size",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0095",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_005",
+          "surface": "observed",
+          "normalized_zh": "工具观察",
+          "query_lemma": "observed",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: observed.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "observed",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0096",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_006",
+          "surface": "运动鞋",
+          "normalized_zh": "运动鞋",
+          "query_lemma": "sneaker",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "part_of_speech": "noun",
+          "sense_key": "athletic_sneaker",
+          "sense_hint": "shoe designed for athletic or casual wear",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0097",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_006",
+          "surface": "颜色",
+          "normalized_zh": "颜色",
+          "query_lemma": "color",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "noun",
+          "sense_key": "item_color_property",
+          "sense_hint": "visual color attribute of an item",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0098",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_006",
+          "surface": "黑色",
+          "normalized_zh": "黑色",
+          "query_lemma": "black",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "value",
+          "source_field": "object",
+          "part_of_speech": "adjective",
+          "sense_key": "black_color",
+          "sense_hint": "having the color black",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0099",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_006",
+          "surface": "observed",
+          "normalized_zh": "工具观察",
+          "query_lemma": "observed",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: observed.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "observed",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0100",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_007",
+          "surface": "运动鞋",
+          "normalized_zh": "运动鞋",
+          "query_lemma": "sneaker",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "part_of_speech": "noun",
+          "sense_key": "athletic_sneaker",
+          "sense_hint": "shoe designed for athletic or casual wear",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0101",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_007",
+          "surface": "材料",
+          "normalized_zh": "材料",
+          "query_lemma": "material",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "noun",
+          "sense_key": "item_material_property",
+          "sense_hint": "substance from which an item is made",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0102",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_007",
+          "surface": "合成材料",
+          "normalized_zh": "合成材料",
+          "query_lemma": "synthetic material",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "value",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "synthetic_material",
+          "sense_hint": "manufactured rather than naturally occurring material",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0103",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_007",
+          "surface": "observed",
+          "normalized_zh": "工具观察",
+          "query_lemma": "observed",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: observed.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "observed",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_008",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0104",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_008",
+          "surface": "运动鞋",
+          "normalized_zh": "运动鞋",
+          "query_lemma": "sneaker",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "part_of_speech": "noun",
+          "sense_key": "athletic_sneaker",
+          "sense_hint": "shoe designed for athletic or casual wear",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0105",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_008",
+          "surface": "状态",
+          "normalized_zh": "状态",
+          "query_lemma": "status",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "noun",
+          "sense_key": "delivery_status_property",
+          "sense_hint": "state of an order item in delivery processing",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0106",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_008",
+          "surface": "送达",
+          "normalized_zh": "送达",
+          "query_lemma": "deliver",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "result",
+          "source_field": "object",
+          "part_of_speech": "verb",
+          "sense_key": "deliver_item_action",
+          "sense_hint": "complete delivery of a purchased item",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0107",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_008",
+          "surface": "已",
+          "normalized_zh": "已经",
+          "query_lemma": "already completed",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Temporal relation from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "completed_before_reference_time",
+          "datatype": "temporal_relation",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0108",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_008",
+          "surface": "observed",
+          "normalized_zh": "工具观察",
+          "query_lemma": "observed",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: observed.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "observed",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_009",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0109",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_009",
+          "surface": "确认",
+          "normalized_zh": "确认",
+          "query_lemma": "confirm",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "confirm_action",
+          "sense_hint": "give approval to execute an action",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0110",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_009",
+          "surface": "退回",
+          "normalized_zh": "退回",
+          "query_lemma": "return",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "return_purchased_item",
+          "sense_hint": "send a purchased item back to a seller",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0111",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_009",
+          "surface": "运动鞋",
+          "normalized_zh": "运动鞋",
+          "query_lemma": "sneaker",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "athletic_sneaker",
+          "sense_hint": "shoe designed for athletic or casual wear",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0112",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_009",
+          "surface": "requested",
+          "normalized_zh": "请求",
+          "query_lemma": "requested",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: requested.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "requested",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0113",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_001",
+          "surface": "退回",
+          "normalized_zh": "退回",
+          "query_lemma": "return",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "return_purchased_item",
+          "sense_hint": "send a purchased item back to a seller",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0114",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_001",
+          "surface": "运动鞋",
+          "normalized_zh": "运动鞋",
+          "query_lemma": "sneaker",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "athletic_sneaker",
+          "sense_hint": "shoe designed for athletic or casual wear",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0115",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_001",
+          "surface": "requested",
+          "normalized_zh": "请求",
+          "query_lemma": "requested",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: requested.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "requested",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0116",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_002",
+          "surface": "退款",
+          "normalized_zh": "退款",
+          "query_lemma": "refund",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "refund_payment_action",
+          "sense_hint": "return money to a payment method",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0117",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_002",
+          "surface": "礼品卡",
+          "normalized_zh": "礼品卡",
+          "query_lemma": "gift card",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "stored_value_gift_card",
+          "sense_hint": "stored-value card used as a refund destination",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0118",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_002",
+          "surface": "运动鞋退货",
+          "normalized_zh": "运动鞋退货",
+          "query_lemma": "sneaker return",
+          "keyword_kind": "qualifier",
+          "keyword_type": "condition",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Condition under which the knowledge applies.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "sneaker_return",
+          "datatype": "condition",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0119",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_002",
+          "surface": "preferred",
+          "normalized_zh": "偏好",
+          "query_lemma": "preferred",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: preferred.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "preferred",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0120",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_002",
+          "surface": "运动鞋",
+          "normalized_zh": "运动鞋",
+          "query_lemma": "sneaker",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "part_of_speech": "noun",
+          "sense_key": "athletic_sneaker",
+          "sense_hint": "shoe designed for athletic or casual wear",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0121",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_002",
+          "surface": "退货",
+          "normalized_zh": "退货",
+          "query_lemma": "return",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "part_of_speech": "verb",
+          "sense_key": "return_purchased_item",
+          "sense_hint": "send a purchased item back to a seller",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0122",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_003",
+          "surface": "调用",
+          "normalized_zh": "调用",
+          "query_lemma": "invoke",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "invoke_software_tool",
+          "sense_hint": "execute a named software operation",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0123",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_003",
+          "surface": "return_delivered_order_items",
+          "normalized_zh": "退回已送达订单商品工具",
+          "query_lemma": "return_delivered_order_items",
+          "keyword_kind": "identifier",
+          "keyword_type": "entity",
+          "semantic_role": "identifier",
+          "source_field": "object",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Exact instance identifier from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "return_delivered_order_items",
+          "datatype": "identifier",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0124",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_003",
+          "surface": "#W7449508",
+          "normalized_zh": "订单 #W7449508",
+          "query_lemma": "#W7449508",
+          "keyword_kind": "identifier",
+          "keyword_type": "entity",
+          "semantic_role": "identifier",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Exact instance identifier from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "#W7449508",
+          "datatype": "identifier",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0125",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_003",
+          "surface": "6477915553",
+          "normalized_zh": "商品 6477915553",
+          "query_lemma": "6477915553",
+          "keyword_kind": "identifier",
+          "keyword_type": "entity",
+          "semantic_role": "identifier",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Exact instance identifier from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "6477915553",
+          "datatype": "identifier",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0126",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_003",
+          "surface": "gift_card_7711863",
+          "normalized_zh": "礼品卡 gift_card_7711863",
+          "query_lemma": "gift_card_7711863",
+          "keyword_kind": "identifier",
+          "keyword_type": "entity",
+          "semantic_role": "identifier",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Exact instance identifier from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "gift_card_7711863",
+          "datatype": "identifier",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0127",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_003",
+          "surface": "claimed_completed",
+          "normalized_zh": "声称已完成",
+          "query_lemma": "claimed_completed",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: claimed_completed.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "claimed_completed",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0128",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_003",
+          "surface": "退货",
+          "normalized_zh": "退货",
+          "query_lemma": "return",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "statement",
+          "part_of_speech": "verb",
+          "sense_key": "return_purchased_item",
+          "sense_hint": "send a purchased item back to a seller",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0129",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_003",
+          "surface": "退款方式",
+          "normalized_zh": "退款方式",
+          "query_lemma": "refund method",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "attribute",
+          "source_field": "statement",
+          "part_of_speech": "noun",
+          "sense_key": "refund_payment_method",
+          "sense_hint": "payment method designated to receive a refund",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0130",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_004",
+          "surface": "退货请求",
+          "normalized_zh": "退货请求",
+          "query_lemma": "return request",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "part_of_speech": "noun",
+          "sense_key": "merchandise_return_request",
+          "sense_hint": "request to return purchased merchandise",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0131",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_004",
+          "surface": "提交",
+          "normalized_zh": "提交",
+          "query_lemma": "submit",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "submit_request",
+          "sense_hint": "formally lodge a request for processing",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0132",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_004",
+          "surface": "已",
+          "normalized_zh": "已经",
+          "query_lemma": "already completed",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Temporal relation from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "completed_before_reference_time",
+          "datatype": "temporal_relation",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0133",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_004",
+          "surface": "observed",
+          "normalized_zh": "工具观察",
+          "query_lemma": "observed",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: observed.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "observed",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0134",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_005",
+          "surface": "186.45美元",
+          "normalized_zh": "186.45 美元",
+          "query_lemma": "USD 186.45",
+          "keyword_kind": "literal",
+          "keyword_type": "quantity",
+          "semantic_role": "value",
+          "source_field": "subject",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Typed literal value from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "186.45",
+          "datatype": "currency",
+          "unit": "USD",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0135",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_005",
+          "surface": "退回",
+          "normalized_zh": "退款退回",
+          "query_lemma": "refund",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "refund_payment_action",
+          "sense_hint": "return money to a payment method",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0136",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_005",
+          "surface": "礼品卡",
+          "normalized_zh": "礼品卡",
+          "query_lemma": "gift card",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "stored_value_gift_card",
+          "sense_hint": "stored-value card used as a refund destination",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0137",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_005",
+          "surface": "运动鞋退货",
+          "normalized_zh": "运动鞋退货",
+          "query_lemma": "sneaker return",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "topic",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "noun",
+          "sense_key": "sneaker_return_event",
+          "sense_hint": "return of a sneaker purchase",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0138",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_005",
+          "surface": "将",
+          "normalized_zh": "将来",
+          "query_lemma": "future",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Temporal relation from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "after_reference_time",
+          "datatype": "temporal_relation",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0139",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_005",
+          "surface": "planned",
+          "normalized_zh": "计划",
+          "query_lemma": "planned",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: planned.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "planned",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    }
+  ]
+}

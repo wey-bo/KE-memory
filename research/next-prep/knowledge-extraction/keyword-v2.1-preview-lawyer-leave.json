@@ -1,0 +1,868 @@
+{
+  "user": "我准备采用联系事务所合伙人和做业务拓展这两种方式。现在是 11 月，今天联系工作时要不要提 12 月 15 日到 12 月 26 日的休假？我担心现在说会影响分派。",
+  "agent": "应该现在说明。提前告知能让合伙人在安排工作时考虑你的可用时间；同时强调你在休假前后都可以工作，并愿意提前完成任务、安排交接。这样既保持透明，也不会把休假包装成无法承担工作的信号。",
+  "user_knowledge": [
+    {
+      "id": "K_wildchat-mgmt-cand-001-4d3900462107_002_001",
+      "statement": "用户准备采用联系事务所合伙人的方式争取工作。",
+      "subject": "用户",
+      "predicate": "准备采用",
+      "object": "联系事务所合伙人",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "planned",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      }
+    },
+    {
+      "id": "K_wildchat-mgmt-cand-001-4d3900462107_002_002",
+      "statement": "用户准备采用业务拓展的方式争取工作。",  
+      "subject": "用户",
+      "predicate": "准备采用",
+      "object": "做业务拓展",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "planned",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      }
+    },
+    {
+      "id": "K_wildchat-mgmt-cand-001-4d3900462107_002_003",
+      "statement": "当前月份是 11 月。",
+      "subject": "当前月份",
+      "predicate": "是",
+      "object": "11 月",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": [
+          "现在"
+        ]
+      }
+    },
+    {
+      "id": "K_wildchat-mgmt-cand-001-4d3900462107_002_004",
+      "statement": "用户计划于 12 月 15 日至 12 月 26 日休假。",
+      "subject": "用户",
+      "predicate": "计划休假",
+      "object": "12 月 15 日到 12 月 26 日",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "planned",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": [
+          "12 月 15 日到 12 月 26 日"
+        ]
+      }
+    },
+    {
+      "id": "K_wildchat-mgmt-cand-001-4d3900462107_002_005",
+      "statement": "用户询问今天联系工作时是否应提及休假。",
+      "subject": "用户",
+      "predicate": "询问是否提及",
+      "object": "休假",
+      "qualifiers": {
+        "conditions": [
+          "联系工作时"
+        ],
+        "modality": "questioned",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": [
+          "今天"
+        ]
+      }
+    },
+    {
+      "id": "K_wildchat-mgmt-cand-001-4d3900462107_002_006",
+      "statement": "用户担心现在说明休假会影响工作分派。",
+      "subject": "用户",
+      "predicate": "担心",
+      "object": "说明休假影响工作分派",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "possible",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": [
+          "现在"
+        ]
+      }
+    }
+  ],
+  "agent_knowledge": [
+    {
+      "id": "K_wildchat-mgmt-cand-001-4d3900462107_002_007",
+      "statement": "代理建议用户现在说明休假安排。",
+      "subject": "用户",
+      "predicate": "应说明",
+      "object": "休假安排",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": [
+          "现在"
+        ]
+      }
+    },
+    {
+      "id": "K_wildchat-mgmt-cand-001-4d3900462107_002_008",
+      "statement": "代理称提前告知能让合伙人安排工作时考虑用户的可用时间。",
+      "subject": "提前告知",
+      "predicate": "能让合伙人考虑",
+      "object": "用户的可用时间",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [
+          "安排工作时"
+        ],
+        "temporal": []
+      }
+    },
+    {
+      "id": "K_wildchat-mgmt-cand-001-4d3900462107_002_009",
+      "statement": "代理建议用户强调休假前可以工作。",
+      "subject": "用户",
+      "predicate": "应强调",
+      "object": "休假前可以工作",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": [
+          "休假前"
+        ]
+      }
+    },
+    {
+      "id": "K_wildchat-mgmt-cand-001-4d3900462107_002_010",
+      "statement": "代理建议用户强调休假后可以工作。",
+      "subject": "用户",
+      "predicate": "应强调",
+      "object": "休假后可以工作",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": [
+          "休假后"
+        ]
+      }
+    },
+    {
+      "id": "K_wildchat-mgmt-cand-001-4d3900462107_002_011",
+      "statement": "代理建议用户表示愿意提前完成任务。",
+      "subject": "用户",
+      "predicate": "应表示愿意",
+      "object": "提前完成任务",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      }
+    },
+    {
+      "id": "K_wildchat-mgmt-cand-001-4d3900462107_002_012",
+      "statement": "代理建议用户表示愿意安排交接。",
+      "subject": "用户",
+      "predicate": "应表示愿意",
+      "object": "安排交接",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      }
+    },
+    {
+      "id": "K_wildchat-mgmt-cand-001-4d3900462107_002_013",
+      "statement": "代理称这种表达方式保持透明。",
+      "subject": "这种表达方式",
+      "predicate": "保持",
+      "object": "透明",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      }
+    },
+    {
+      "id": "K_wildchat-mgmt-cand-001-4d3900462107_002_014",
+      "statement": "代理称这种表达方式不会把休假包装成无法承担工作的信号。",
+      "subject": "这种表达方式",
+      "predicate": "不会包装成",
+      "object": "无法承担工作的信号",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "negative",
+        "scope": [
+          "休假"
+        ],
+        "temporal": []
+      }
+    }
+  ],
+  "user_keywords": [
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_001",
+      "keywords": [
+        {
+          "surface": "事务所合伙人",
+          "normalized_zh": "事务所合伙人",
+          "lemma": "law firm partner",
+          "kind": "lexical",
+          "type": "entity",
+          "role": "object"
+        },
+        {
+          "surface": "planned",
+          "normalized_zh": "planned",
+          "lemma": "planned",
+          "kind": "qualifier",
+          "type": "modality",
+          "role": "modality",
+          "value": "planned",
+          "datatype": "modality"
+        },
+        {
+          "surface": "联系",
+          "normalized_zh": "联系",
+          "lemma": "contact partner",
+          "kind": "lexical",
+          "type": "action",
+          "role": "predicate"
+        },
+        {
+          "surface": "争取",
+          "normalized_zh": "争取",
+          "lemma": "seek work",
+          "kind": "lexical",
+          "type": "action",
+          "role": "predicate"
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_002",
+      "keywords": [
+        {
+          "surface": "业务拓展",
+          "normalized_zh": "业务拓展",
+          "lemma": "business development",
+          "kind": "lexical",
+          "type": "action",
+          "role": "object"
+        },
+        {
+          "surface": "planned",
+          "normalized_zh": "planned",
+          "lemma": "planned",
+          "kind": "qualifier",
+          "type": "modality",
+          "role": "modality",
+          "value": "planned",
+          "datatype": "modality"
+        },
+        {
+          "surface": "争取",
+          "normalized_zh": "争取",
+          "lemma": "seek work",
+          "kind": "lexical",
+          "type": "action",
+          "role": "predicate"
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_003",
+      "keywords": [
+        {
+          "surface": "当前月份",
+          "normalized_zh": "当前月份",
+          "lemma": "calendar month",
+          "kind": "lexical",
+          "type": "concept",
+          "role": "subject"
+        },
+        {
+          "surface": "11 月",
+          "normalized_zh": "11 月",
+          "lemma": "--11",
+          "kind": "literal",
+          "type": "time",
+          "role": "value",
+          "value": "--11",
+          "datatype": "date"
+        },
+        {
+          "surface": "现在",
+          "normalized_zh": "现在",
+          "lemma": "now",
+          "kind": "qualifier",
+          "type": "time",
+          "role": "time",
+          "value": "now",
+          "datatype": "time"
+        },
+        {
+          "surface": "asserted",
+          "normalized_zh": "asserted",
+          "lemma": "asserted",
+          "kind": "qualifier",
+          "type": "modality",
+          "role": "modality",
+          "value": "asserted",
+          "datatype": "modality"
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_004",
+      "keywords": [
+        {
+          "surface": "休假",
+          "normalized_zh": "休假",
+          "lemma": "leave",
+          "kind": "lexical",
+          "type": "event",
+          "role": "predicate"
+        },
+        {
+          "surface": "12 月 15 日到 12 月 26 日",
+          "normalized_zh": "12 月 15 日到 12 月 26 日",
+          "lemma": "--12-15/--12-26",
+          "kind": "literal",
+          "type": "time",
+          "role": "time",
+          "value": "--12-15/--12-26",
+          "datatype": "date"
+        },
+        {
+          "surface": "planned",
+          "normalized_zh": "planned",
+          "lemma": "planned",
+          "kind": "qualifier",
+          "type": "modality",
+          "role": "modality",
+          "value": "planned",
+          "datatype": "modality"
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_005",
+      "keywords": [
+        {
+          "surface": "休假",
+          "normalized_zh": "休假",
+          "lemma": "leave",
+          "kind": "lexical",
+          "type": "event",
+          "role": "object"
+        },
+        {
+          "surface": "联系工作时",
+          "normalized_zh": "联系工作时",
+          "lemma": "while_seeking_work",
+          "kind": "qualifier",
+          "type": "condition",
+          "role": "condition",
+          "value": "while_seeking_work",
+          "datatype": "condition"
+        },
+        {
+          "surface": "questioned",
+          "normalized_zh": "questioned",
+          "lemma": "questioned",
+          "kind": "qualifier",
+          "type": "modality",
+          "role": "modality",
+          "value": "questioned",
+          "datatype": "modality"
+        },
+        {
+          "surface": "今天",
+          "normalized_zh": "今天",
+          "lemma": "today",
+          "kind": "literal",
+          "type": "time",
+          "role": "time",
+          "value": "today",
+          "datatype": "date"
+        },
+        {
+          "surface": "提及",
+          "normalized_zh": "提及",
+          "lemma": "mention leave",
+          "kind": "lexical",
+          "type": "action",
+          "role": "predicate"
+        },
+        {
+          "surface": "联系工作",
+          "normalized_zh": "联系工作",
+          "lemma": "seek work",
+          "kind": "lexical",
+          "type": "action",
+          "role": "condition"
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_006",
+      "keywords": [
+        {
+          "surface": "工作分派",
+          "normalized_zh": "工作分派",
+          "lemma": "work assignment",
+          "kind": "lexical",
+          "type": "event",
+          "role": "object"
+        },
+        {
+          "surface": "现在",
+          "normalized_zh": "现在",
+          "lemma": "current",
+          "kind": "qualifier",
+          "type": "time",
+          "role": "time",
+          "value": "current",
+          "datatype": "temporal_relation"
+        },
+        {
+          "surface": "possible",
+          "normalized_zh": "possible",
+          "lemma": "possible",
+          "kind": "qualifier",
+          "type": "modality",
+          "role": "modality",
+          "value": "possible",
+          "datatype": "modality"
+        },
+        {
+          "surface": "担心",
+          "normalized_zh": "担心",
+          "lemma": "worry about",
+          "kind": "lexical",
+          "type": "relation",
+          "role": "predicate"
+        },
+        {
+          "surface": "说明休假",
+          "normalized_zh": "说明休假",
+          "lemma": "inform about leave",
+          "kind": "lexical",
+          "type": "action",
+          "role": "predicate"
+        },
+        {
+          "surface": "影响",
+          "normalized_zh": "影响",
+          "lemma": "affect work assignment",
+          "kind": "lexical",
+          "type": "relation",
+          "role": "predicate"
+        }
+      ]
+    }
+  ],
+  "agent_keywords": [
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_007",
+      "keywords": [
+        {
+          "surface": "休假安排",
+          "normalized_zh": "休假安排",
+          "lemma": "leave arrangement",
+          "kind": "lexical",
+          "type": "concept",
+          "role": "object"
+        },
+        {
+          "surface": "现在",
+          "normalized_zh": "现在",
+          "lemma": "current",
+          "kind": "qualifier",
+          "type": "time",
+          "role": "time",
+          "value": "current",
+          "datatype": "temporal_relation"
+        },
+        {
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "lemma": "advised",
+          "kind": "qualifier",
+          "type": "modality",
+          "role": "modality",
+          "value": "advised",
+          "datatype": "modality"
+        },
+        {
+          "surface": "说明",
+          "normalized_zh": "说明",
+          "lemma": "inform about leave",
+          "kind": "lexical",
+          "type": "action",
+          "role": "predicate"
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_008",
+      "keywords": [
+        {
+          "surface": "可用时间",
+          "normalized_zh": "可用时间",
+          "lemma": "availability",
+          "kind": "lexical",
+          "type": "property",
+          "role": "object"
+        },
+        {
+          "surface": "安排工作时",
+          "normalized_zh": "安排工作时",
+          "lemma": "during work scheduling",
+          "kind": "qualifier",
+          "type": "time",
+          "role": "time",
+          "value": "during_work_scheduling",
+          "datatype": "temporal_relation"
+        },
+        {
+          "surface": "asserted",
+          "normalized_zh": "asserted",
+          "lemma": "asserted",
+          "kind": "qualifier",
+          "type": "modality",
+          "role": "modality",
+          "value": "asserted",
+          "datatype": "modality"
+        },
+        {
+          "surface": "提前告知",
+          "normalized_zh": "提前告知",
+          "lemma": "give advance notice",
+          "kind": "lexical",
+          "type": "action",
+          "role": "subject"
+        },
+        {
+          "surface": "合伙人",
+          "normalized_zh": "合伙人",
+          "lemma": "law firm partner",
+          "kind": "lexical",
+          "type": "entity",
+          "role": "participant"
+        },
+        {
+          "surface": "考虑",
+          "normalized_zh": "考虑",
+          "lemma": "consider availability",
+          "kind": "lexical",
+          "type": "relation",
+          "role": "predicate"
+        },
+        {
+          "surface": "安排工作",
+          "normalized_zh": "安排工作",
+          "lemma": "schedule work",
+          "kind": "lexical",
+          "type": "action",
+          "role": "time"
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_009",
+      "keywords": [
+        {
+          "surface": "工作",
+          "normalized_zh": "工作",
+          "lemma": "work",
+          "kind": "lexical",
+          "type": "concept",
+          "role": "object"
+        },
+        {
+          "surface": "休假前",
+          "normalized_zh": "休假前",
+          "lemma": "before_leave",
+          "kind": "qualifier",
+          "type": "time",
+          "role": "time",
+          "value": "before_leave",
+          "datatype": "temporal_relation"
+        },
+        {
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "lemma": "advised",
+          "kind": "qualifier",
+          "type": "modality",
+          "role": "modality",
+          "value": "advised",
+          "datatype": "modality"
+        },
+        {
+          "surface": "强调",
+          "normalized_zh": "强调",
+          "lemma": "emphasize availability",
+          "kind": "lexical",
+          "type": "action",
+          "role": "predicate"
+        },
+        {
+          "surface": "可以工作",
+          "normalized_zh": "可以工作",
+          "lemma": "work-available",
+          "kind": "lexical",
+          "type": "property",
+          "role": "object"
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_010",
+      "keywords": [
+        {
+          "surface": "工作",
+          "normalized_zh": "工作",
+          "lemma": "work",
+          "kind": "lexical",
+          "type": "concept",
+          "role": "object"
+        },
+        {
+          "surface": "休假后",
+          "normalized_zh": "休假后",
+          "lemma": "after_leave",
+          "kind": "qualifier",
+          "type": "time",
+          "role": "time",
+          "value": "after_leave",
+          "datatype": "temporal_relation"
+        },
+        {
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "lemma": "advised",
+          "kind": "qualifier",
+          "type": "modality",
+          "role": "modality",
+          "value": "advised",
+          "datatype": "modality"
+        },
+        {
+          "surface": "强调",
+          "normalized_zh": "强调",
+          "lemma": "emphasize availability",
+          "kind": "lexical",
+          "type": "action",
+          "role": "predicate"
+        },
+        {
+          "surface": "可以工作",
+          "normalized_zh": "可以工作",
+          "lemma": "work-available",
+          "kind": "lexical",
+          "type": "property",
+          "role": "object"
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_011",
+      "keywords": [
+        {
+          "surface": "完成任务",
+          "normalized_zh": "完成任务",
+          "lemma": "complete task",
+          "kind": "lexical",
+          "type": "action",
+          "role": "object"
+        },
+        {
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "lemma": "advised",
+          "kind": "qualifier",
+          "type": "modality",
+          "role": "modality",
+          "value": "advised",
+          "datatype": "modality"
+        },
+        {
+          "surface": "愿意",
+          "normalized_zh": "愿意",
+          "lemma": "willing",
+          "kind": "lexical",
+          "type": "property",
+          "role": "attribute"
+        },
+        {
+          "surface": "提前",
+          "normalized_zh": "提前",
+          "lemma": "early completion",
+          "kind": "lexical",
+          "type": "property",
+          "role": "time"
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_012",
+      "keywords": [
+        {
+          "surface": "交接",
+          "normalized_zh": "交接",
+          "lemma": "work handover",
+          "kind": "lexical",
+          "type": "event",
+          "role": "object"
+        },
+        {
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "lemma": "advised",
+          "kind": "qualifier",
+          "type": "modality",
+          "role": "modality",
+          "value": "advised",
+          "datatype": "modality"
+        },
+        {
+          "surface": "安排",
+          "normalized_zh": "安排",
+          "lemma": "arrange handover",
+          "kind": "lexical",
+          "type": "action",
+          "role": "predicate"
+        },
+        {
+          "surface": "愿意",
+          "normalized_zh": "愿意",
+          "lemma": "willing",
+          "kind": "lexical",
+          "type": "property",
+          "role": "attribute"
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_013",
+      "keywords": [
+        {
+          "surface": "透明",
+          "normalized_zh": "透明",
+          "lemma": "transparency",
+          "kind": "lexical",
+          "type": "property",
+          "role": "object"
+        },
+        {
+          "surface": "asserted",
+          "normalized_zh": "asserted",
+          "lemma": "asserted",
+          "kind": "qualifier",
+          "type": "modality",
+          "role": "modality",
+          "value": "asserted",
+          "datatype": "modality"
+        },
+        {
+          "surface": "表达方式",
+          "normalized_zh": "表达方式",
+          "lemma": "communication approach",
+          "kind": "lexical",
+          "type": "concept",
+          "role": "subject"
+        },
+        {
+          "surface": "保持",
+          "normalized_zh": "保持",
+          "lemma": "maintain transparency",
+          "kind": "lexical",
+          "type": "relation",
+          "role": "predicate"
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_014",
+      "keywords": [
+        {
+          "surface": "信号",
+          "normalized_zh": "信号",
+          "lemma": "signal",
+          "kind": "lexical",
+          "type": "concept",
+          "role": "object"
+        },
+        {
+          "surface": "休假",
+          "normalized_zh": "休假",
+          "lemma": "leave",
+          "kind": "lexical",
+          "type": "event",
+          "role": "topic"
+        },
+        {
+          "surface": "asserted",
+          "normalized_zh": "asserted",
+          "lemma": "asserted",
+          "kind": "qualifier",
+          "type": "modality",
+          "role": "modality",
+          "value": "asserted",
+          "datatype": "modality"
+        },
+        {
+          "surface": "包装成",
+          "normalized_zh": "包装成",
+          "lemma": "frame as",
+          "kind": "lexical",
+          "type": "relation",
+          "role": "predicate"
+        },
+        {
+          "surface": "承担工作",
+          "normalized_zh": "承担工作",
+          "lemma": "work capacity",
+          "kind": "lexical",
+          "type": "property",
+          "role": "object"
+        },
+        {
+          "surface": "negative",
+          "normalized_zh": "negative",
+          "lemma": "negative",
+          "kind": "qualifier",
+          "type": "polarity",
+          "role": "polarity",
+          "value": "negative",
+          "datatype": "polarity"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,852 @@
+{
+  "candidate_id": "TASKMASTER2-CAND-001",
+  "items": [
+    {
+      "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0001",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_001",
+          "surface": "直飞航班",
+          "normalized_zh": "直飞航班",
+          "query_lemma": "direct flight",
+          "keyword_type": "concept",
+          "semantic_role": "评价对象",
+          "source_field": "object",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0002",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_001",
+          "surface": "2,677美元",
+          "normalized_zh": "2,677美元",
+          "query_lemma": "USD 2,677",
+          "keyword_type": "quantity",
+          "semantic_role": "价格",
+          "source_field": "object",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0003",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_001",
+          "surface": "有点贵",
+          "normalized_zh": "价格偏贵",
+          "query_lemma": "somewhat expensive",
+          "keyword_type": "property",
+          "semantic_role": "价格评价",
+          "source_field": "predicate",
+          "translation_confidence": 0.99
+        }
+      ]
+    },
+    {
+      "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0004",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "选择",
+          "normalized_zh": "选择航班方案",
+          "query_lemma": "select flight option",
+          "keyword_type": "action",
+          "semantic_role": "选择动作",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0005",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "从纽约市到阿姆斯特丹",
+          "normalized_zh": "纽约市至阿姆斯特丹",
+          "query_lemma": "New York City to Amsterdam",
+          "keyword_type": "relation",
+          "semantic_role": "航线",
+          "source_field": "object",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0006",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "最便宜往返航班方案",
+          "normalized_zh": "最便宜的往返航班方案",
+          "query_lemma": "cheapest round-trip flight option",
+          "keyword_type": "concept",
+          "semantic_role": "所选方案",
+          "source_field": "object",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0007",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "今天",
+          "normalized_zh": "今天出发",
+          "query_lemma": "depart today",
+          "keyword_type": "time",
+          "semantic_role": "出发日期",
+          "source_field": "qualifiers.temporal",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0008",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "19号",
+          "normalized_zh": "19号返回",
+          "query_lemma": "return on the 19th",
+          "keyword_type": "time",
+          "semantic_role": "返回日期",
+          "source_field": "qualifiers.temporal",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0009",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "去程和返程均希望尽可能早",
+          "normalized_zh": "去程和返程均尽可能早",
+          "query_lemma": "earliest outbound and return flights",
+          "keyword_type": "condition",
+          "semantic_role": "时间偏好",
+          "source_field": "qualifiers.conditions",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0010",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "经停次数：1",
+          "normalized_zh": "经停一次",
+          "query_lemma": "one stop",
+          "keyword_type": "quantity",
+          "semantic_role": "经停次数",
+          "source_field": "qualifiers.scope",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0011",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "凌晨12:30",
+          "normalized_zh": "凌晨12:30出发",
+          "query_lemma": "12:30 AM departure",
+          "keyword_type": "time",
+          "semantic_role": "出发时间",
+          "source_field": "qualifiers.temporal",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0012",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "次日11:55",
+          "normalized_zh": "次日11:55抵达",
+          "query_lemma": "next-day 11:55 arrival",
+          "keyword_type": "time",
+          "semantic_role": "抵达时间",
+          "source_field": "qualifiers.temporal",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0013",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "1,287美元",
+          "normalized_zh": "1,287美元",
+          "query_lemma": "USD 1,287",
+          "keyword_type": "quantity",
+          "semantic_role": "价格",
+          "source_field": "qualifiers.scope",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0014",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "声称已发送",
+          "normalized_zh": "声称已经发送",
+          "query_lemma": "claimed sent",
+          "keyword_type": "modality",
+          "semantic_role": "完成声明",
+          "source_field": "predicate",
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0015",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "用户邮箱",
+          "normalized_zh": "用户邮箱",
+          "query_lemma": "user email",
+          "keyword_type": "entity",
+          "semantic_role": "发送目的地",
+          "source_field": "qualifiers.scope",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0016",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "纽约市至阿姆斯特丹",
+          "normalized_zh": "纽约市至阿姆斯特丹",
+          "query_lemma": "New York City to Amsterdam",
+          "keyword_type": "relation",
+          "semantic_role": "航线",
+          "source_field": "object",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0017",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "最便宜往返航班方案",
+          "normalized_zh": "最便宜的往返航班方案",
+          "query_lemma": "cheapest round-trip flight option",
+          "keyword_type": "concept",
+          "semantic_role": "发送的方案",
+          "source_field": "object",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0018",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "今天",
+          "normalized_zh": "今天出发",
+          "query_lemma": "depart today",
+          "keyword_type": "time",
+          "semantic_role": "出发日期",
+          "source_field": "qualifiers.temporal",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0019",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "19号",
+          "normalized_zh": "19号返回",
+          "query_lemma": "return on the 19th",
+          "keyword_type": "time",
+          "semantic_role": "返回日期",
+          "source_field": "qualifiers.temporal",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0020",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "去程和返程均希望尽可能早",
+          "normalized_zh": "去程和返程均尽可能早",
+          "query_lemma": "earliest outbound and return flights",
+          "keyword_type": "condition",
+          "semantic_role": "时间偏好",
+          "source_field": "qualifiers.conditions",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0021",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "经停次数：1",
+          "normalized_zh": "经停一次",
+          "query_lemma": "one stop",
+          "keyword_type": "quantity",
+          "semantic_role": "经停次数",
+          "source_field": "qualifiers.scope",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0022",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "凌晨12:30",
+          "normalized_zh": "凌晨12:30出发",
+          "query_lemma": "12:30 AM departure",
+          "keyword_type": "time",
+          "semantic_role": "出发时间",
+          "source_field": "qualifiers.temporal",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0023",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "次日11:55",
+          "normalized_zh": "次日11:55抵达",
+          "query_lemma": "next-day 11:55 arrival",
+          "keyword_type": "time",
+          "semantic_role": "抵达时间",
+          "source_field": "qualifiers.temporal",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0024",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "1,287美元",
+          "normalized_zh": "1,287美元",
+          "query_lemma": "USD 1,287",
+          "keyword_type": "quantity",
+          "semantic_role": "价格",
+          "source_field": "qualifiers.scope",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0025",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_001",
+          "surface": "想预订",
+          "normalized_zh": "预订航班",
+          "query_lemma": "book flight",
+          "keyword_type": "action",
+          "semantic_role": "预订意图",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0026",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_001",
+          "surface": "从纽约市到阿姆斯特丹",
+          "normalized_zh": "纽约市至阿姆斯特丹",
+          "query_lemma": "New York City to Amsterdam",
+          "keyword_type": "relation",
+          "semantic_role": "航线",
+          "source_field": "object",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0027",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_001",
+          "surface": "往返航班",
+          "normalized_zh": "往返航班",
+          "query_lemma": "round-trip flight",
+          "keyword_type": "concept",
+          "semantic_role": "行程类型",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0028",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_002",
+          "surface": "帮助查询",
+          "normalized_zh": "帮助查询航班",
+          "query_lemma": "help search flights",
+          "keyword_type": "action",
+          "semantic_role": "代理承诺",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0029",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_002",
+          "surface": "航班",
+          "normalized_zh": "航班",
+          "query_lemma": "flight",
+          "keyword_type": "concept",
+          "semantic_role": "查询对象",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0030",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_003",
+          "surface": "询问",
+          "normalized_zh": "询问偏好",
+          "query_lemma": "ask preferences",
+          "keyword_type": "action",
+          "semantic_role": "询问动作",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0031",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_003",
+          "surface": "其他偏好",
+          "normalized_zh": "其他航班偏好",
+          "query_lemma": "additional flight preferences",
+          "keyword_type": "property",
+          "semantic_role": "偏好信息",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0032",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_001",
+          "surface": "计划出发",
+          "normalized_zh": "计划出发",
+          "query_lemma": "plan departure",
+          "keyword_type": "action",
+          "semantic_role": "出发计划",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0033",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_001",
+          "surface": "今天（说话当日，具体日期未确定）",
+          "normalized_zh": "今天出发（具体日期未确定）",
+          "query_lemma": "depart today unspecified date",
+          "keyword_type": "time",
+          "semantic_role": "出发日期",
+          "source_field": "qualifiers.temporal",
+          "translation_confidence": 0.99
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0034",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_002",
+          "surface": "计划返回",
+          "normalized_zh": "计划返回",
+          "query_lemma": "plan return",
+          "keyword_type": "action",
+          "semantic_role": "返回计划",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0035",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_002",
+          "surface": "19号（月份和年份未说明）",
+          "normalized_zh": "19号返回（月份和年份未说明）",
+          "query_lemma": "return on the 19th unspecified month",
+          "keyword_type": "time",
+          "semantic_role": "返回日期",
+          "source_field": "qualifiers.temporal",
+          "translation_confidence": 0.99
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0036",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_003",
+          "surface": "尽可能早的去程",
+          "normalized_zh": "尽可能早的去程",
+          "query_lemma": "earliest outbound flight",
+          "keyword_type": "property",
+          "semantic_role": "去程时间偏好",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0037",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_004",
+          "surface": "尽可能早的返程",
+          "normalized_zh": "尽可能早的返程",
+          "query_lemma": "earliest return flight",
+          "keyword_type": "property",
+          "semantic_role": "返程时间偏好",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0038",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_001",
+          "surface": "最便宜的航班",
+          "normalized_zh": "最便宜的航班",
+          "query_lemma": "cheapest flight",
+          "keyword_type": "property",
+          "semantic_role": "价格偏好",
+          "source_field": "object",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0039",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_001",
+          "surface": "如果可以",
+          "normalized_zh": "如果可行",
+          "query_lemma": "if possible",
+          "keyword_type": "condition",
+          "semantic_role": "可行性条件",
+          "source_field": "qualifiers.conditions",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0040",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_002",
+          "surface": "声称已查到",
+          "normalized_zh": "声称已经查到",
+          "query_lemma": "claimed found",
+          "keyword_type": "modality",
+          "semantic_role": "完成声明",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0041",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_002",
+          "surface": "最便宜的往返票",
+          "normalized_zh": "最便宜的往返票",
+          "query_lemma": "cheapest round-trip ticket",
+          "keyword_type": "concept",
+          "semantic_role": "查询结果",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0042",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_003",
+          "surface": "最便宜往返票",
+          "normalized_zh": "最便宜的往返票",
+          "query_lemma": "cheapest round-trip ticket",
+          "keyword_type": "concept",
+          "semantic_role": "航班方案",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0043",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_003",
+          "surface": "经停",
+          "normalized_zh": "经停",
+          "query_lemma": "stopover",
+          "keyword_type": "event",
+          "semantic_role": "经停事件",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0044",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_003",
+          "surface": "一次",
+          "normalized_zh": "一次经停",
+          "query_lemma": "one stop",
+          "keyword_type": "quantity",
+          "semantic_role": "经停次数",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0045",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_004",
+          "surface": "最便宜往返票",
+          "normalized_zh": "最便宜的往返票",
+          "query_lemma": "cheapest round-trip ticket",
+          "keyword_type": "concept",
+          "semantic_role": "航班方案",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0046",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_004",
+          "surface": "凌晨12:30",
+          "normalized_zh": "凌晨12:30",
+          "query_lemma": "12:30 AM",
+          "keyword_type": "time",
+          "semantic_role": "出发时间",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0047",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_005",
+          "surface": "最便宜往返票",
+          "normalized_zh": "最便宜的往返票",
+          "query_lemma": "cheapest round-trip ticket",
+          "keyword_type": "concept",
+          "semantic_role": "航班方案",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0048",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_005",
+          "surface": "次日11:55",
+          "normalized_zh": "次日11:55",
+          "query_lemma": "next-day 11:55",
+          "keyword_type": "time",
+          "semantic_role": "抵达时间",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0049",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_006",
+          "surface": "最便宜往返票",
+          "normalized_zh": "最便宜的往返票",
+          "query_lemma": "cheapest round-trip ticket",
+          "keyword_type": "concept",
+          "semantic_role": "航班方案",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0050",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_006",
+          "surface": "1,287美元",
+          "normalized_zh": "1,287美元",
+          "query_lemma": "USD 1,287",
+          "keyword_type": "quantity",
+          "semantic_role": "价格",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0051",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_007",
+          "surface": "询问是否预订",
+          "normalized_zh": "询问是否预订",
+          "query_lemma": "ask whether to book",
+          "keyword_type": "action",
+          "semantic_role": "预订确认",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0052",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_007",
+          "surface": "该往返票",
+          "normalized_zh": "该往返票",
+          "query_lemma": "round-trip ticket",
+          "keyword_type": "concept",
+          "semantic_role": "预订对象",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0053",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_001",
+          "surface": "询问是否存在",
+          "normalized_zh": "询问是否有航班",
+          "query_lemma": "ask flight availability",
+          "keyword_type": "action",
+          "semantic_role": "可用性询问",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0054",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_001",
+          "surface": "直飞航班",
+          "normalized_zh": "直飞航班",
+          "query_lemma": "direct flight",
+          "keyword_type": "concept",
+          "semantic_role": "查询对象",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0055",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_002",
+          "surface": "再次查询",
+          "normalized_zh": "再次查询航班",
+          "query_lemma": "search flights again",
+          "keyword_type": "action",
+          "semantic_role": "再次查询",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0056",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_003",
+          "surface": "直飞航班",
+          "normalized_zh": "直飞航班",
+          "query_lemma": "direct flight",
+          "keyword_type": "concept",
+          "semantic_role": "可用方案",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0057",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_003",
+          "surface": "一班",
+          "normalized_zh": "一班航班",
+          "query_lemma": "one flight",
+          "keyword_type": "quantity",
+          "semantic_role": "航班数量",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0058",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_004",
+          "surface": "直飞航班",
+          "normalized_zh": "直飞航班",
+          "query_lemma": "direct flight",
+          "keyword_type": "concept",
+          "semantic_role": "航班方案",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0059",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_004",
+          "surface": "下午6点",
+          "normalized_zh": "下午6点",
+          "query_lemma": "6 PM",
+          "keyword_type": "time",
+          "semantic_role": "出发时间",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0060",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_005",
+          "surface": "直飞航班",
+          "normalized_zh": "直飞航班",
+          "query_lemma": "direct flight",
+          "keyword_type": "concept",
+          "semantic_role": "航班方案",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0061",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_005",
+          "surface": "次日早上7:35",
+          "normalized_zh": "次日早上7:35",
+          "query_lemma": "next-day 7:35 AM",
+          "keyword_type": "time",
+          "semantic_role": "抵达时间",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0062",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_006",
+          "surface": "直飞航班",
+          "normalized_zh": "直飞航班",
+          "query_lemma": "direct flight",
+          "keyword_type": "concept",
+          "semantic_role": "航班方案",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0063",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_006",
+          "surface": "2,677美元",
+          "normalized_zh": "2,677美元",
+          "query_lemma": "USD 2,677",
+          "keyword_type": "quantity",
+          "semantic_role": "价格",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0064",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_007",
+          "surface": "直飞方案",
+          "normalized_zh": "直飞航班方案",
+          "query_lemma": "direct flight option",
+          "keyword_type": "concept",
+          "semantic_role": "比较方案",
+          "source_field": "qualifiers.scope",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0065",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_007",
+          "surface": "更符合",
+          "normalized_zh": "更符合偏好",
+          "query_lemma": "better matches",
+          "keyword_type": "relation",
+          "semantic_role": "偏好匹配",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0066",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_007",
+          "surface": "用户偏好",
+          "normalized_zh": "用户偏好",
+          "query_lemma": "user preferences",
+          "keyword_type": "property",
+          "semantic_role": "比较标准",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    }
+  ]
+}
+

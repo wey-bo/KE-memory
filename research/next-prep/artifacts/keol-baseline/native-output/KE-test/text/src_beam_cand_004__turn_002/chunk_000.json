@@ -1,0 +1,151 @@
+{
+  "source": {
+    "source_id": "src_beam_cand_004__turn_002",
+    "file": "keol-input/turns/beam-cand-004__turn-002.txt",
+    "file_type": "txt",
+    "category": "text",
+    "metadata": {
+      "unit_id": "beam-cand-004__turn-002",
+      "candidate_id": "BEAM-CAND-004",
+      "turn_index": 2,
+      "json_pointer": "/candidates/9/turns/1",
+      "source": "Mohammadta/BEAM / split=100K / conversation_id=19 / session_index=1 / message_index=0..9 / source_time_anchor=2024-05-02",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "chunk": {
+    "id": "chunk_d12806030cc1369bc771",
+    "index": 0,
+    "text": "用户：\n我觉得再安排一次家庭会议是个好主意。这样我们可以面对面把事情谈清楚，并处理他们可能有的任何顾虑。而且我们也有一阵子没聚在一起了。\n\nAgent：\n再安排一次家庭会议可以让每个人的意见都被听见。可以选一个大家方便的时间和地点，准备议程，讨论遗嘱执行人的职责、对 Douglas 的顾虑、共同执行人的可能性以及最终决定。",
+    "size": 162,
+    "metadata": {
+      "unit_id": "beam-cand-004__turn-002",
+      "candidate_id": "BEAM-CAND-004",
+      "turn_index": 2,
+      "json_pointer": "/candidates/9/turns/1",
+      "source": "Mohammadta/BEAM / split=100K / conversation_id=19 / session_index=1 / message_index=0..9 / source_time_anchor=2024-05-02",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "n_user",
+      "name": "用户",
+      "type": "Person",
+      "description": "决定再安排一次家庭会议的人。",
+      "source_chunk_id": "chunk_d12806030cc1369bc771"
+    },
+    {
+      "id": "n_meeting",
+      "name": "新的家庭会议",
+      "type": "PlannedEvent",
+      "description": "用户认为应再次安排的面对面家庭会议。",
+      "source_chunk_id": "chunk_d12806030cc1369bc771"
+    },
+    {
+      "id": "n_family",
+      "name": "家人",
+      "type": "Group",
+      "description": "计划参加会议并表达意见的人。",
+      "source_chunk_id": "chunk_d12806030cc1369bc771"
+    },
+    {
+      "id": "n_face_to_face",
+      "name": "面对面讨论",
+      "type": "InteractionMode",
+      "description": "用户希望用来谈清事情的沟通方式。",
+      "source_chunk_id": "chunk_d12806030cc1369bc771"
+    },
+    {
+      "id": "n_concerns",
+      "name": "家人的顾虑",
+      "type": "Concern",
+      "description": "用户希望会议处理的潜在顾虑。",
+      "source_chunk_id": "chunk_d12806030cc1369bc771"
+    },
+    {
+      "id": "n_executor",
+      "name": "遗嘱执行人选择",
+      "type": "Topic",
+      "description": "Agent 建议会议讨论的主题。",
+      "source_chunk_id": "chunk_d12806030cc1369bc771"
+    },
+    {
+      "id": "n_coexecutor",
+      "name": "共同遗嘱执行人",
+      "type": "Option",
+      "description": "Agent 建议会议讨论的可能方案。",
+      "source_chunk_id": "chunk_d12806030cc1369bc771"
+    },
+    {
+      "id": "n_no_recent_gathering",
+      "name": "一阵子没有聚会",
+      "type": "Situation",
+      "description": "用户给出的再次聚会动机。",
+      "source_chunk_id": "chunk_d12806030cc1369bc771"
+    },
+    {
+      "id": "n_agenda",
+      "name": "会议议程",
+      "type": "Plan",
+      "description": "Agent 建议为家庭会议准备的议程。",
+      "source_chunk_id": "chunk_d12806030cc1369bc771"
+    }
+  ],
+  "relations": [
+    {
+      "source_entity": "n_user",
+      "target_entity": "n_meeting",
+      "relation_type": "plans",
+      "description": "用户决定再安排一次家庭会议。"
+    },
+    {
+      "source_entity": "n_family",
+      "target_entity": "n_meeting",
+      "relation_type": "participates_in",
+      "description": "会议面向相关家人。"
+    },
+    {
+      "source_entity": "n_meeting",
+      "target_entity": "n_face_to_face",
+      "relation_type": "uses",
+      "description": "用户希望通过面对面方式沟通。"
+    },
+    {
+      "source_entity": "n_meeting",
+      "target_entity": "n_concerns",
+      "relation_type": "addresses",
+      "description": "会议用于处理家人可能的顾虑。"
+    },
+    {
+      "source_entity": "n_meeting",
+      "target_entity": "n_executor",
+      "relation_type": "topic",
+      "description": "会议讨论遗嘱执行人选择。"
+    },
+    {
+      "source_entity": "n_meeting",
+      "target_entity": "n_coexecutor",
+      "relation_type": "considers",
+      "description": "Agent 建议会议考虑共同执行人方案。"
+    },
+    {
+      "source_entity": "n_meeting",
+      "target_entity": "n_no_recent_gathering",
+      "relation_type": "motivated_by",
+      "description": "久未聚会也是用户安排会议的动机。"
+    },
+    {
+      "source_entity": "n_meeting",
+      "target_entity": "n_agenda",
+      "relation_type": "uses",
+      "description": "Agent 建议为会议准备议程。"
+    }
+  ]
+}

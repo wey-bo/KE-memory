@@ -1,0 +1,4961 @@
+{
+  "keol_commit": "44631e64fd07c9b85f22e36035bf49c882dba592",
+  "model_provider": "codex_subagent_batch_a+codex_subagent_batch_b",
+  "units": [
+    {
+      "unit_id": "wildchat-mgmt-cand-001__turn-001",
+      "nodes": [
+        {
+          "id": "n1",
+          "name": "用户",
+          "type": "Person",
+          "description": "在律师事务所工作的用户。"
+        },
+        {
+          "id": "n2",
+          "name": "律师事务所",
+          "type": "Organization",
+          "description": "用户当前任职的律师事务所。"
+        },
+        {
+          "id": "n3",
+          "name": "获得更多工作分派",
+          "type": "Goal",
+          "description": "用户希望争取更多工作的目标。"
+        },
+        {
+          "id": "n4",
+          "name": "分派工作的合伙人",
+          "type": "Role",
+          "description": "平时负责向用户分派工作的事务所合伙人。"
+        },
+        {
+          "id": "n5",
+          "name": "出国休假",
+          "type": "Event",
+          "description": "用户计划在未来两个月内进行的出国休假。"
+        },
+        {
+          "id": "n6",
+          "name": "一周",
+          "type": "Duration",
+          "description": "用户所述休假时长。"
+        },
+        {
+          "id": "n7",
+          "name": "未来两个月",
+          "type": "TimeWindow",
+          "description": "休假可能发生的时间范围。"
+        },
+        {
+          "id": "n8",
+          "name": "项目",
+          "type": "Task",
+          "description": "合伙人可能分派给用户的项目。"
+        },
+        {
+          "id": "n9",
+          "name": "休假告知时机",
+          "type": "Question",
+          "description": "用户询问何时告知合伙人休假计划。"
+        },
+        {
+          "id": "n10",
+          "name": "尽早透明沟通",
+          "type": "Recommendation",
+          "description": "Agent 建议用户尽早说明休假并沟通交付安排。"
+        },
+        {
+          "id": "n11",
+          "name": "工作交接",
+          "type": "Task",
+          "description": "Agent 建议用户在休假前完成的交接安排。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n2",
+          "relationship_name": "WORKS_AT",
+          "description": "用户陈述自己在该事务所工作。"
+        },
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n3",
+          "relationship_name": "HAS_GOAL",
+          "description": "用户需要争取更多工作。"
+        },
+        {
+          "source_node_id": "n4",
+          "target_node_id": "n2",
+          "relationship_name": "MEMBER_OF",
+          "description": "该合伙人属于用户所在事务所。"
+        },
+        {
+          "source_node_id": "n4",
+          "target_node_id": "n8",
+          "relationship_name": "ASSIGNS",
+          "description": "该角色负责分派项目。"
+        },
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n5",
+          "relationship_name": "PLANS",
+          "description": "用户计划出国休假。"
+        },
+        {
+          "source_node_id": "n5",
+          "target_node_id": "n6",
+          "relationship_name": "HAS_DURATION",
+          "description": "休假持续一周。"
+        },
+        {
+          "source_node_id": "n5",
+          "target_node_id": "n7",
+          "relationship_name": "WITHIN",
+          "description": "休假计划位于未来两个月内。"
+        },
+        {
+          "source_node_id": "n5",
+          "target_node_id": "n8",
+          "relationship_name": "MAY_OVERLAP",
+          "description": "用户担心休假可能与项目冲突。"
+        },
+        {
+          "source_node_id": "n9",
+          "target_node_id": "n5",
+          "relationship_name": "ABOUT",
+          "description": "问题针对休假告知时机。"
+        },
+        {
+          "source_node_id": "n10",
+          "target_node_id": "n9",
+          "relationship_name": "ANSWERS",
+          "description": "Agent 以尽早沟通回应用户问题。"
+        },
+        {
+          "source_node_id": "n10",
+          "target_node_id": "n11",
+          "relationship_name": "INCLUDES",
+          "description": "建议包含说明交接安排。"
+        },
+        {
+          "source_node_id": "n11",
+          "target_node_id": "n5",
+          "relationship_name": "BEFORE",
+          "description": "交接应在休假前完成。"
+        }
+      ]
+    },
+    {
+      "unit_id": "wildchat-mgmt-cand-001__turn-002",
+      "nodes": [
+        {
+          "id": "n1",
+          "name": "律师事务所",
+          "type": "Organization",
+          "description": "用户当前所在的律师事务所。"
+        },
+        {
+          "id": "n2",
+          "name": "工作量较少",
+          "type": "Situation",
+          "description": "用户陈述事务所近期工作不多。"
+        },
+        {
+          "id": "n3",
+          "name": "过去两个月",
+          "type": "TimeWindow",
+          "description": "工作量较少状态的持续时间。"
+        },
+        {
+          "id": "n4",
+          "name": "事务所其他人",
+          "type": "Group",
+          "description": "同样遇到工作不足问题的同事。"
+        },
+        {
+          "id": "n5",
+          "name": "获得工作分派",
+          "type": "Goal",
+          "description": "用户希望实现的目标。"
+        },
+        {
+          "id": "n6",
+          "name": "联系事务所合伙人",
+          "type": "Action",
+          "description": "用户考虑的获取工作方式之一。"
+        },
+        {
+          "id": "n7",
+          "name": "联系以前的律所转介",
+          "type": "Action",
+          "description": "用户考虑的另一种获取工作方式。"
+        },
+        {
+          "id": "n8",
+          "name": "支持其他业务组",
+          "type": "Action",
+          "description": "Agent 建议向其他业务组表示可提供支持。"
+        },
+        {
+          "id": "n9",
+          "name": "内部工作机会平台",
+          "type": "Platform",
+          "description": "Agent 建议使用的事务所内部平台。"
+        },
+        {
+          "id": "n10",
+          "name": "客户和业务拓展",
+          "type": "Action",
+          "description": "Agent 建议在合规前提下开展的活动。"
+        },
+        {
+          "id": "n11",
+          "name": "可用时间与工作意愿",
+          "type": "Information",
+          "description": "Agent 建议持续明确表达的信息。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n2",
+          "target_node_id": "n1",
+          "relationship_name": "AFFECTS",
+          "description": "工作不足发生在用户所在事务所。"
+        },
+        {
+          "source_node_id": "n2",
+          "target_node_id": "n3",
+          "relationship_name": "HAS_DURATION",
+          "description": "该状态已持续过去两个月。"
+        },
+        {
+          "source_node_id": "n2",
+          "target_node_id": "n4",
+          "relationship_name": "AFFECTS",
+          "description": "其他人也有类似问题。"
+        },
+        {
+          "source_node_id": "n6",
+          "target_node_id": "n5",
+          "relationship_name": "SUPPORTS",
+          "description": "用户将其视为获取工作分派的方案。"
+        },
+        {
+          "source_node_id": "n7",
+          "target_node_id": "n5",
+          "relationship_name": "SUPPORTS",
+          "description": "用户将转介视为备选方案。"
+        },
+        {
+          "source_node_id": "n8",
+          "target_node_id": "n5",
+          "relationship_name": "SUPPORTS",
+          "description": "Agent 建议通过跨业务组支持争取工作。"
+        },
+        {
+          "source_node_id": "n9",
+          "target_node_id": "n5",
+          "relationship_name": "SUPPORTS",
+          "description": "Agent 建议通过内部平台寻找机会。"
+        },
+        {
+          "source_node_id": "n10",
+          "target_node_id": "n5",
+          "relationship_name": "SUPPORTS",
+          "description": "Agent 建议通过业务拓展增加机会。"
+        },
+        {
+          "source_node_id": "n6",
+          "target_node_id": "n11",
+          "relationship_name": "COMMUNICATES",
+          "description": "联系合伙人时应表达可用时间和意愿。"
+        }
+      ]
+    },
+    {
+      "unit_id": "wildchat-mgmt-cand-001__turn-003",
+      "nodes": [
+        {
+          "id": "n1",
+          "name": "用户",
+          "type": "Person",
+          "description": "正在决定工作沟通方式的用户。"
+        },
+        {
+          "id": "n2",
+          "name": "联系事务所合伙人",
+          "type": "Action",
+          "description": "用户决定采用的方式之一。"
+        },
+        {
+          "id": "n3",
+          "name": "业务拓展",
+          "type": "Action",
+          "description": "用户决定采用的方式之一。"
+        },
+        {
+          "id": "n4",
+          "name": "11 月",
+          "type": "CalendarMonth",
+          "description": "用户所述当前月份，未给出年份。"
+        },
+        {
+          "id": "n5",
+          "name": "今天的工作联系",
+          "type": "Communication",
+          "description": "用户计划当天进行的工作沟通。"
+        },
+        {
+          "id": "n6",
+          "name": "12 月 15 日至 12 月 26 日",
+          "type": "DateRange",
+          "description": "用户计划休假的日期范围，未给出年份。"
+        },
+        {
+          "id": "n7",
+          "name": "出国休假",
+          "type": "Event",
+          "description": "用户计划在指定日期出国。"
+        },
+        {
+          "id": "n8",
+          "name": "工作分派",
+          "type": "Process",
+          "description": "用户担心会受休假告知影响的工作分派。"
+        },
+        {
+          "id": "n9",
+          "name": "现在告知休假",
+          "type": "Recommendation",
+          "description": "Agent 明确建议今天联系时说明休假。"
+        },
+        {
+          "id": "n10",
+          "name": "休假前后可工作",
+          "type": "Availability",
+          "description": "Agent 建议用户强调的可用性。"
+        },
+        {
+          "id": "n11",
+          "name": "提前完成任务",
+          "type": "Action",
+          "description": "Agent 建议用户承诺的安排。"
+        },
+        {
+          "id": "n12",
+          "name": "安排交接",
+          "type": "Action",
+          "description": "Agent 建议用户承诺的安排。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n2",
+          "relationship_name": "CHOOSES",
+          "description": "用户准备联系合伙人。"
+        },
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n3",
+          "relationship_name": "CHOOSES",
+          "description": "用户准备做业务拓展。"
+        },
+        {
+          "source_node_id": "n5",
+          "target_node_id": "n4",
+          "relationship_name": "OCCURS_IN",
+          "description": "工作联系发生在用户所述当前 11 月。"
+        },
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n7",
+          "relationship_name": "PLANS",
+          "description": "用户计划出国休假。"
+        },
+        {
+          "source_node_id": "n7",
+          "target_node_id": "n6",
+          "relationship_name": "HAS_TIME",
+          "description": "休假时间为 12 月 15 日至 26 日。"
+        },
+        {
+          "source_node_id": "n7",
+          "target_node_id": "n8",
+          "relationship_name": "MAY_AFFECT",
+          "description": "用户担心告知休假会影响工作分派。"
+        },
+        {
+          "source_node_id": "n9",
+          "target_node_id": "n5",
+          "relationship_name": "APPLIES_TO",
+          "description": "Agent 建议在今天联系时说明休假。"
+        },
+        {
+          "source_node_id": "n9",
+          "target_node_id": "n7",
+          "relationship_name": "COMMUNICATES",
+          "description": "建议沟通休假计划。"
+        },
+        {
+          "source_node_id": "n9",
+          "target_node_id": "n10",
+          "relationship_name": "INCLUDES",
+          "description": "建议同时说明休假前后均可工作。"
+        },
+        {
+          "source_node_id": "n9",
+          "target_node_id": "n11",
+          "relationship_name": "INCLUDES",
+          "description": "建议包含提前完成任务的承诺。"
+        },
+        {
+          "source_node_id": "n9",
+          "target_node_id": "n12",
+          "relationship_name": "INCLUDES",
+          "description": "建议包含交接安排。"
+        }
+      ]
+    },
+    {
+      "unit_id": "wildchat-mgmt-cand-001__turn-004",
+      "nodes": [
+        {
+          "id": "n1",
+          "name": "用户",
+          "type": "Person",
+          "description": "计划当天发送工作邮件的用户。"
+        },
+        {
+          "id": "n2",
+          "name": "工作邮件",
+          "type": "Communication",
+          "description": "用户计划今天发送的邮件。"
+        },
+        {
+          "id": "n3",
+          "name": "今天",
+          "type": "RelativeDate",
+          "description": "邮件计划发送时间。"
+        },
+        {
+          "id": "n4",
+          "name": "可承担工作",
+          "type": "Availability",
+          "description": "用户希望在邮件中说明的信息。"
+        },
+        {
+          "id": "n5",
+          "name": "客户 X",
+          "type": "Organization",
+          "description": "用户提到的客户。"
+        },
+        {
+          "id": "n6",
+          "name": "下一轮融资",
+          "type": "Event",
+          "description": "客户 X 的下一轮融资。"
+        },
+        {
+          "id": "n7",
+          "name": "融资时间",
+          "type": "Question",
+          "description": "用户希望在邮件中询问的大概时间。"
+        },
+        {
+          "id": "n8",
+          "name": "出国行程",
+          "type": "Event",
+          "description": "用户计划说明的出国安排。"
+        },
+        {
+          "id": "n9",
+          "name": "12 月 15 日至 12 月 26 日",
+          "type": "DateRange",
+          "description": "出国日期，未给出年份。"
+        },
+        {
+          "id": "n10",
+          "name": "近期工作安排和出行计划",
+          "type": "EmailSubject",
+          "description": "Agent 提议的邮件主题。"
+        },
+        {
+          "id": "n11",
+          "name": "完成出发前待办",
+          "type": "Commitment",
+          "description": "Agent 建议邮件包含的承诺。"
+        },
+        {
+          "id": "n12",
+          "name": "工作交接",
+          "type": "Task",
+          "description": "Agent 建议邮件说明的衔接安排。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n2",
+          "relationship_name": "PLANS",
+          "description": "用户计划发送邮件。"
+        },
+        {
+          "source_node_id": "n2",
+          "target_node_id": "n3",
+          "relationship_name": "HAS_TIME",
+          "description": "邮件计划今天发送。"
+        },
+        {
+          "source_node_id": "n2",
+          "target_node_id": "n4",
+          "relationship_name": "COMMUNICATES",
+          "description": "邮件说明用户有空并愿意接工作。"
+        },
+        {
+          "source_node_id": "n6",
+          "target_node_id": "n5",
+          "relationship_name": "FOR",
+          "description": "下一轮融资属于客户 X。"
+        },
+        {
+          "source_node_id": "n7",
+          "target_node_id": "n6",
+          "relationship_name": "ABOUT",
+          "description": "用户希望询问融资事件的时间。"
+        },
+        {
+          "source_node_id": "n2",
+          "target_node_id": "n7",
+          "relationship_name": "INCLUDES",
+          "description": "邮件将包含融资时间询问。"
+        },
+        {
+          "source_node_id": "n2",
+          "target_node_id": "n8",
+          "relationship_name": "COMMUNICATES",
+          "description": "邮件将说明出国行程。"
+        },
+        {
+          "source_node_id": "n8",
+          "target_node_id": "n9",
+          "relationship_name": "HAS_TIME",
+          "description": "出国日期为 12 月 15 日至 26 日。"
+        },
+        {
+          "source_node_id": "n2",
+          "target_node_id": "n10",
+          "relationship_name": "HAS_SUBJECT",
+          "description": "Agent 提议使用该主题。"
+        },
+        {
+          "source_node_id": "n2",
+          "target_node_id": "n11",
+          "relationship_name": "INCLUDES",
+          "description": "Agent 建议邮件承诺完成出发前待办。"
+        },
+        {
+          "source_node_id": "n2",
+          "target_node_id": "n12",
+          "relationship_name": "INCLUDES",
+          "description": "Agent 建议邮件说明交接安排。"
+        }
+      ]
+    },
+    {
+      "unit_id": "wildchat-mgmt-cand-001__turn-005",
+      "nodes": [
+        {
+          "id": "n1",
+          "name": "用户",
+          "type": "Person",
+          "description": "自述为资深律师的用户。"
+        },
+        {
+          "id": "n2",
+          "name": "资深律师",
+          "type": "ProfessionalRole",
+          "description": "用户明确陈述的职业资历。"
+        },
+        {
+          "id": "n3",
+          "name": "上一版邮件",
+          "type": "Communication",
+          "description": "用户正在评价的邮件版本。"
+        },
+        {
+          "id": "n4",
+          "name": "过于正式",
+          "type": "Evaluation",
+          "description": "用户对上一版邮件语气的评价。"
+        },
+        {
+          "id": "n5",
+          "name": "初级律师风格",
+          "type": "Style",
+          "description": "用户认为上一版邮件呈现的风格。"
+        },
+        {
+          "id": "n6",
+          "name": "简洁自信",
+          "type": "Style",
+          "description": "Agent 建议采用的邮件语气。"
+        },
+        {
+          "id": "n7",
+          "name": "当前可用",
+          "type": "Availability",
+          "description": "Agent 建议邮件说明的当前状态。"
+        },
+        {
+          "id": "n8",
+          "name": "客户 X 融资时间",
+          "type": "Question",
+          "description": "Agent 建议邮件询问的事项。"
+        },
+        {
+          "id": "n9",
+          "name": "12 月 15 日至 12 月 26 日",
+          "type": "DateRange",
+          "description": "Agent 重述的出行日期，未给出年份。"
+        },
+        {
+          "id": "n10",
+          "name": "工作交接",
+          "type": "Task",
+          "description": "Agent 建议邮件承诺协作处理的事项。"
+        },
+        {
+          "id": "n11",
+          "name": "修订版邮件",
+          "type": "Communication",
+          "description": "用户询问是否合适的新邮件版本。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n2",
+          "relationship_name": "HAS_ROLE",
+          "description": "用户自述是资深律师。"
+        },
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n3",
+          "relationship_name": "EVALUATES",
+          "description": "用户评价上一版邮件。"
+        },
+        {
+          "source_node_id": "n3",
+          "target_node_id": "n4",
+          "relationship_name": "HAS_EVALUATION",
+          "description": "上一版被认为太正式。"
+        },
+        {
+          "source_node_id": "n3",
+          "target_node_id": "n5",
+          "relationship_name": "HAS_STYLE",
+          "description": "上一版被认为像初级律师写作。"
+        },
+        {
+          "source_node_id": "n11",
+          "target_node_id": "n6",
+          "relationship_name": "HAS_STYLE",
+          "description": "Agent 建议修订版采用简洁自信的语气。"
+        },
+        {
+          "source_node_id": "n11",
+          "target_node_id": "n7",
+          "relationship_name": "COMMUNICATES",
+          "description": "修订版应说明用户目前有空。"
+        },
+        {
+          "source_node_id": "n11",
+          "target_node_id": "n8",
+          "relationship_name": "INCLUDES",
+          "description": "修订版应询问客户 X 的融资时间。"
+        },
+        {
+          "source_node_id": "n11",
+          "target_node_id": "n9",
+          "relationship_name": "COMMUNICATES",
+          "description": "修订版应说明出行日期。"
+        },
+        {
+          "source_node_id": "n11",
+          "target_node_id": "n10",
+          "relationship_name": "INCLUDES",
+          "description": "修订版应承诺处理交接。"
+        }
+      ]
+    },
+    {
+      "unit_id": "wildchat-learn-cand-001__turn-001",
+      "nodes": [
+        {
+          "id": "n1",
+          "name": "Android app",
+          "type": "SoftwareApplication",
+          "description": "用户正在修复的 Android 应用模块。"
+        },
+        {
+          "id": "n2",
+          "name": "androidx.activity 1.8.0",
+          "type": "SoftwareDependency",
+          "description": "AAR 元数据报告问题的依赖。"
+        },
+        {
+          "id": "n3",
+          "name": "activity-ktx 1.8.0",
+          "type": "SoftwareDependency",
+          "description": "AAR 元数据报告问题的依赖。"
+        },
+        {
+          "id": "n4",
+          "name": "activity-compose 1.8.0",
+          "type": "SoftwareDependency",
+          "description": "AAR 元数据报告问题的依赖。"
+        },
+        {
+          "id": "n5",
+          "name": "compileSdk 34",
+          "type": "SoftwareConfiguration",
+          "description": "三个依赖要求的最低 compileSdk。"
+        },
+        {
+          "id": "n6",
+          "name": "compileSdk 33",
+          "type": "SoftwareConfiguration",
+          "description": "app 当前使用的 compileSdk。"
+        },
+        {
+          "id": "n7",
+          "name": "3 个 AAR 元数据问题",
+          "type": "ErrorSet",
+          "description": "用户检查 AAR 元数据时发现的问题集合。"
+        },
+        {
+          "id": "n8",
+          "name": "app/build.gradle",
+          "type": "File",
+          "description": "Agent 指示修改的 app 模块 Gradle 配置文件。"
+        },
+        {
+          "id": "n9",
+          "name": "更新 compileSdk",
+          "type": "Action",
+          "description": "Agent 建议将项目 compileSdk 更新到至少 34。"
+        },
+        {
+          "id": "n10",
+          "name": "Gradle 同步",
+          "type": "Action",
+          "description": "修改配置后需要执行的同步操作。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n2",
+          "target_node_id": "n5",
+          "relationship_name": "REQUIRES",
+          "description": "该依赖要求 compileSdk 至少为 34。"
+        },
+        {
+          "source_node_id": "n3",
+          "target_node_id": "n5",
+          "relationship_name": "REQUIRES",
+          "description": "该依赖要求 compileSdk 至少为 34。"
+        },
+        {
+          "source_node_id": "n4",
+          "target_node_id": "n5",
+          "relationship_name": "REQUIRES",
+          "description": "该依赖要求 compileSdk 至少为 34。"
+        },
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n6",
+          "relationship_name": "USES",
+          "description": "app 当前是 android-33。"
+        },
+        {
+          "source_node_id": "n7",
+          "target_node_id": "n2",
+          "relationship_name": "INCLUDES",
+          "description": "问题集合包含 androidx.activity 的要求冲突。"
+        },
+        {
+          "source_node_id": "n7",
+          "target_node_id": "n3",
+          "relationship_name": "INCLUDES",
+          "description": "问题集合包含 activity-ktx 的要求冲突。"
+        },
+        {
+          "source_node_id": "n7",
+          "target_node_id": "n4",
+          "relationship_name": "INCLUDES",
+          "description": "问题集合包含 activity-compose 的要求冲突。"
+        },
+        {
+          "source_node_id": "n9",
+          "target_node_id": "n1",
+          "relationship_name": "MODIFIES",
+          "description": "建议更新 app 的 compileSdk。"
+        },
+        {
+          "source_node_id": "n9",
+          "target_node_id": "n5",
+          "relationship_name": "SETS",
+          "description": "目标值为至少 34。"
+        },
+        {
+          "source_node_id": "n9",
+          "target_node_id": "n8",
+          "relationship_name": "USES",
+          "description": "修改在 app/build.gradle 中完成。"
+        },
+        {
+          "source_node_id": "n9",
+          "target_node_id": "n10",
+          "relationship_name": "BEFORE",
+          "description": "配置更新后同步 Gradle。"
+        }
+      ]
+    },
+    {
+      "unit_id": "wildchat-learn-cand-001__turn-002",
+      "nodes": [
+        {
+          "id": "n1",
+          "name": "Android Studio",
+          "type": "SoftwareApplication",
+          "description": "Agent 指定用于修改项目的开发环境。"
+        },
+        {
+          "id": "n2",
+          "name": "app/build.gradle",
+          "type": "File",
+          "description": "需要打开的 app 模块配置文件。"
+        },
+        {
+          "id": "n3",
+          "name": "compileSdkVersion",
+          "type": "ConfigurationField",
+          "description": "android 块中需要修改的字段。"
+        },
+        {
+          "id": "n4",
+          "name": "33",
+          "type": "Integer",
+          "description": "字段当前值。"
+        },
+        {
+          "id": "n5",
+          "name": "34",
+          "type": "Integer",
+          "description": "Agent 指示设置的新值。"
+        },
+        {
+          "id": "n6",
+          "name": "Sync Now",
+          "type": "Action",
+          "description": "修改后在 Android Studio 中执行的同步操作。"
+        },
+        {
+          "id": "n7",
+          "name": "重新构建项目",
+          "type": "Action",
+          "description": "同步后需要执行的构建操作。"
+        },
+        {
+          "id": "n8",
+          "name": "设备兼容性",
+          "type": "Constraint",
+          "description": "是否调整 targetSdk 和 minSdk 时应考虑的约束。"
+        },
+        {
+          "id": "n9",
+          "name": "targetSdk 与 minSdk",
+          "type": "ConfigurationFieldSet",
+          "description": "可根据设备兼容性另行决定是否调整的配置。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n2",
+          "target_node_id": "n1",
+          "relationship_name": "OPENED_IN",
+          "description": "应在 Android Studio 中打开该文件。"
+        },
+        {
+          "source_node_id": "n3",
+          "target_node_id": "n2",
+          "relationship_name": "DEFINED_IN",
+          "description": "compileSdkVersion 位于该文件的 android 块。"
+        },
+        {
+          "source_node_id": "n3",
+          "target_node_id": "n4",
+          "relationship_name": "HAS_CURRENT_VALUE",
+          "description": "当前值为 33。"
+        },
+        {
+          "source_node_id": "n3",
+          "target_node_id": "n5",
+          "relationship_name": "HAS_TARGET_VALUE",
+          "description": "Agent 指示改为 34。"
+        },
+        {
+          "source_node_id": "n6",
+          "target_node_id": "n3",
+          "relationship_name": "AFTER",
+          "description": "修改字段后执行 Sync Now。"
+        },
+        {
+          "source_node_id": "n6",
+          "target_node_id": "n7",
+          "relationship_name": "BEFORE",
+          "description": "同步后重新构建项目。"
+        },
+        {
+          "source_node_id": "n9",
+          "target_node_id": "n8",
+          "relationship_name": "DEPENDS_ON",
+          "description": "是否调整这些字段取决于设备兼容性。"
+        }
+      ]
+    },
+    {
+      "unit_id": "wildchat-learn-cand-001__turn-003",
+      "nodes": [
+        {
+          "id": "n1",
+          "name": "Android app",
+          "type": "SoftwareApplication",
+          "description": "用户在手机上运行的应用。"
+        },
+        {
+          "id": "n2",
+          "name": "新增依赖",
+          "type": "Change",
+          "description": "用户已经添加的依赖变更。"
+        },
+        {
+          "id": "n3",
+          "name": "构建错误消失",
+          "type": "Status",
+          "description": "添加依赖后的构建状态。"
+        },
+        {
+          "id": "n4",
+          "name": "启动后立即关闭",
+          "type": "RuntimeFailure",
+          "description": "app 在手机上的当前故障。"
+        },
+        {
+          "id": "n5",
+          "name": "手机",
+          "type": "Device",
+          "description": "故障发生的运行设备。"
+        },
+        {
+          "id": "n6",
+          "name": "Logcat",
+          "type": "DiagnosticTool",
+          "description": "Agent 建议首先查看的 Android 日志。"
+        },
+        {
+          "id": "n7",
+          "name": "依赖兼容性",
+          "type": "PossibleCause",
+          "description": "Agent 提出的可能故障原因之一。"
+        },
+        {
+          "id": "n8",
+          "name": "Gradle 同步",
+          "type": "Action",
+          "description": "Agent 建议执行的排查动作。"
+        },
+        {
+          "id": "n9",
+          "name": "Clean/Rebuild",
+          "type": "Action",
+          "description": "Agent 建议执行的重新构建动作。"
+        },
+        {
+          "id": "n10",
+          "name": "AndroidManifest.xml",
+          "type": "File",
+          "description": "Agent 建议核对的应用清单。"
+        },
+        {
+          "id": "n11",
+          "name": "activity、主题和 intent-filter",
+          "type": "ConfigurationSet",
+          "description": "Agent 建议在 Manifest 中核对的配置。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n2",
+          "target_node_id": "n1",
+          "relationship_name": "MODIFIES",
+          "description": "用户给 app 添加了依赖。"
+        },
+        {
+          "source_node_id": "n2",
+          "target_node_id": "n3",
+          "relationship_name": "FOLLOWED_BY",
+          "description": "添加依赖后错误消失。"
+        },
+        {
+          "source_node_id": "n4",
+          "target_node_id": "n1",
+          "relationship_name": "AFFECTS",
+          "description": "app 启动后立即关闭。"
+        },
+        {
+          "source_node_id": "n4",
+          "target_node_id": "n5",
+          "relationship_name": "OCCURS_ON",
+          "description": "故障在手机上发生。"
+        },
+        {
+          "source_node_id": "n6",
+          "target_node_id": "n4",
+          "relationship_name": "DIAGNOSES",
+          "description": "Agent 建议通过 Logcat 查看运行时异常。"
+        },
+        {
+          "source_node_id": "n7",
+          "target_node_id": "n4",
+          "relationship_name": "MAY_CAUSE",
+          "description": "依赖兼容问题可能导致崩溃。"
+        },
+        {
+          "source_node_id": "n8",
+          "target_node_id": "n4",
+          "relationship_name": "ADDRESSES",
+          "description": "Agent 将 Gradle 同步列为排查动作。"
+        },
+        {
+          "source_node_id": "n9",
+          "target_node_id": "n4",
+          "relationship_name": "ADDRESSES",
+          "description": "Agent 将 Clean/Rebuild 列为排查动作。"
+        },
+        {
+          "source_node_id": "n11",
+          "target_node_id": "n10",
+          "relationship_name": "DEFINED_IN",
+          "description": "这些配置应在 Manifest 中核对。"
+        }
+      ]
+    },
+    {
+      "unit_id": "wildchat-learn-cand-001__turn-004",
+      "nodes": [
+        {
+          "id": "n1",
+          "name": "Unable to start activity",
+          "type": "RuntimeError",
+          "description": "用户从日志中看到的 Activity 启动错误。"
+        },
+        {
+          "id": "n2",
+          "name": "Activity",
+          "type": "SoftwareComponent",
+          "description": "无法启动的 Android Activity。"
+        },
+        {
+          "id": "n3",
+          "name": "Theme.AppCompat 或其子主题",
+          "type": "SoftwareRequirement",
+          "description": "异常消息要求 Activity 使用的主题类型。"
+        },
+        {
+          "id": "n4",
+          "name": "当前主题",
+          "type": "SoftwareConfiguration",
+          "description": "Activity 当前使用且不符合要求的主题。"
+        },
+        {
+          "id": "n5",
+          "name": "AndroidManifest.xml",
+          "type": "File",
+          "description": "Agent 建议检查 MainActivity theme 属性的文件。"
+        },
+        {
+          "id": "n6",
+          "name": "MainActivity",
+          "type": "SoftwareComponent",
+          "description": "Agent 指定需要核对主题属性的 Activity。"
+        },
+        {
+          "id": "n7",
+          "name": "theme 属性",
+          "type": "ConfigurationField",
+          "description": "MainActivity 在 Manifest 中的主题属性。"
+        },
+        {
+          "id": "n8",
+          "name": "styles.xml",
+          "type": "File",
+          "description": "Agent 建议确认 AppCompat 主题定义的文件。"
+        },
+        {
+          "id": "n9",
+          "name": "AppCompat 主题",
+          "type": "SoftwareConfiguration",
+          "description": "需要在 styles.xml 中定义并供 Activity 使用的主题。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n2",
+          "relationship_name": "AFFECTS",
+          "description": "错误表现为 Activity 无法启动。"
+        },
+        {
+          "source_node_id": "n4",
+          "target_node_id": "n3",
+          "relationship_name": "VIOLATES",
+          "description": "异常说明当前主题不是 AppCompat 或其子主题。"
+        },
+        {
+          "source_node_id": "n4",
+          "target_node_id": "n1",
+          "relationship_name": "CAUSES",
+          "description": "Agent 将主题不匹配解释为启动异常原因。"
+        },
+        {
+          "source_node_id": "n6",
+          "target_node_id": "n2",
+          "relationship_name": "IS_A",
+          "description": "MainActivity 是待检查的 Activity。"
+        },
+        {
+          "source_node_id": "n7",
+          "target_node_id": "n6",
+          "relationship_name": "CONFIGURES",
+          "description": "theme 属性配置 MainActivity 的主题。"
+        },
+        {
+          "source_node_id": "n7",
+          "target_node_id": "n5",
+          "relationship_name": "DEFINED_IN",
+          "description": "该属性位于 AndroidManifest.xml。"
+        },
+        {
+          "source_node_id": "n9",
+          "target_node_id": "n8",
+          "relationship_name": "DEFINED_IN",
+          "description": "Agent 建议确认 styles.xml 中定义了对应主题。"
+        },
+        {
+          "source_node_id": "n7",
+          "target_node_id": "n9",
+          "relationship_name": "REFERENCES",
+          "description": "MainActivity 的 theme 属性应引用 AppCompat 主题。"
+        }
+      ]
+    },
+    {
+      "unit_id": "wildchat-learn-cand-001__turn-005",
+      "nodes": [
+        {
+          "id": "n1",
+          "name": "AndroidManifest.xml",
+          "type": "File",
+          "description": "用户询问位置的 Android 清单文件。"
+        },
+        {
+          "id": "n2",
+          "name": "app/src/main/AndroidManifest.xml",
+          "type": "FilePath",
+          "description": "Agent 给出的项目路径。"
+        },
+        {
+          "id": "n3",
+          "name": "Android Studio Project 视图",
+          "type": "UserInterface",
+          "description": "Agent 指示用于定位文件的项目视图。"
+        },
+        {
+          "id": "n4",
+          "name": "app 模块 manifests 文件夹",
+          "type": "Directory",
+          "description": "Agent 给出的另一种界面位置。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n2",
+          "relationship_name": "LOCATED_AT",
+          "description": "Manifest 文件位于 app/src/main 路径。"
+        },
+        {
+          "source_node_id": "n2",
+          "target_node_id": "n3",
+          "relationship_name": "VISIBLE_IN",
+          "description": "可在 Android Studio Project 视图中展开该路径。"
+        },
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n4",
+          "relationship_name": "VISIBLE_IN",
+          "description": "也可以从 app 模块的 manifests 文件夹打开。"
+        }
+      ]
+    },
+    {
+      "unit_id": "wildchat-learn-cand-001__turn-006",
+      "nodes": [
+        {
+          "id": "n1",
+          "name": "AndroidManifest.xml",
+          "type": "File",
+          "description": "用户已找到的文件。"
+        },
+        {
+          "id": "n2",
+          "name": "文件已找到",
+          "type": "TaskStatus",
+          "description": "用户明确报告的当前任务状态。"
+        },
+        {
+          "id": "n3",
+          "name": "styles.xml",
+          "type": "File",
+          "description": "需要先检查主题定义的样式文件。"
+        },
+        {
+          "id": "n4",
+          "name": "Theme.AppCompat 子主题",
+          "type": "SoftwareConfiguration",
+          "description": "Agent 要求先确认存在的主题。"
+        },
+        {
+          "id": "n5",
+          "name": "MainActivity",
+          "type": "SoftwareComponent",
+          "description": "需要在 Manifest 中引用主题的 Activity。"
+        },
+        {
+          "id": "n6",
+          "name": "主题引用",
+          "type": "ConfigurationField",
+          "description": "Manifest 中 MainActivity 对主题的引用。"
+        },
+        {
+          "id": "n7",
+          "name": "主题名称一致",
+          "type": "Constraint",
+          "description": "styles.xml 定义名与 Manifest 引用名必须一致。"
+        },
+        {
+          "id": "n8",
+          "name": "同步并重新构建",
+          "type": "Action",
+          "description": "修改主题后执行的操作。"
+        },
+        {
+          "id": "n9",
+          "name": "Logcat",
+          "type": "DiagnosticTool",
+          "description": "若仍崩溃则继续查看的日志工具。"
+        },
+        {
+          "id": "n10",
+          "name": "应用崩溃",
+          "type": "RuntimeFailure",
+          "description": "修改后仍可能存在的故障。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n2",
+          "target_node_id": "n1",
+          "relationship_name": "ABOUT",
+          "description": "用户报告已经找到 Manifest。"
+        },
+        {
+          "source_node_id": "n4",
+          "target_node_id": "n3",
+          "relationship_name": "DEFINED_IN",
+          "description": "先确认 styles.xml 中有可用子主题。"
+        },
+        {
+          "source_node_id": "n6",
+          "target_node_id": "n5",
+          "relationship_name": "CONFIGURES",
+          "description": "主题引用配置 MainActivity。"
+        },
+        {
+          "source_node_id": "n6",
+          "target_node_id": "n1",
+          "relationship_name": "DEFINED_IN",
+          "description": "主题引用位于 Manifest。"
+        },
+        {
+          "source_node_id": "n6",
+          "target_node_id": "n4",
+          "relationship_name": "REFERENCES",
+          "description": "Manifest 应引用已定义的 AppCompat 子主题。"
+        },
+        {
+          "source_node_id": "n7",
+          "target_node_id": "n4",
+          "relationship_name": "CONSTRAINS",
+          "description": "主题定义名和引用名必须一致。"
+        },
+        {
+          "source_node_id": "n3",
+          "target_node_id": "n6",
+          "relationship_name": "BEFORE",
+          "description": "Agent 建议先确认样式定义，再修改 Activity 引用。"
+        },
+        {
+          "source_node_id": "n6",
+          "target_node_id": "n8",
+          "relationship_name": "BEFORE",
+          "description": "设置引用后同步并重建。"
+        },
+        {
+          "source_node_id": "n9",
+          "target_node_id": "n10",
+          "relationship_name": "DIAGNOSES",
+          "description": "若仍崩溃则查看新的 Logcat 异常。"
+        }
+      ]
+    },
+    {
+      "unit_id": "wildchat-mgmt-cand-002__turn-001",
+      "nodes": [
+        {
+          "id": "n1",
+          "name": "用户",
+          "type": "Person",
+          "description": "负责频道内容运营的用户。"
+        },
+        {
+          "id": "n2",
+          "name": "转型导师、赋能与健康频道",
+          "type": "MediaChannel",
+          "description": "用户负责运营的频道。"
+        },
+        {
+          "id": "n3",
+          "name": "内容运营",
+          "type": "Role",
+          "description": "用户承担的工作职责。"
+        },
+        {
+          "id": "n4",
+          "name": "有独占价值的内容",
+          "type": "ContentTheme",
+          "description": "30 天计划需要围绕的主题。"
+        },
+        {
+          "id": "n5",
+          "name": "内容计划",
+          "type": "Plan",
+          "description": "用户要求制定的发布计划。"
+        },
+        {
+          "id": "n6",
+          "name": "30 天",
+          "type": "Duration",
+          "description": "计划的总时长。"
+        },
+        {
+          "id": "n7",
+          "name": "每天至少一项活动",
+          "type": "FrequencyConstraint",
+          "description": "用户规定的最低活动频率。"
+        },
+        {
+          "id": "n8",
+          "name": "Telegram",
+          "type": "OnlinePlatform",
+          "description": "用户指定优先发布的平台。"
+        },
+        {
+          "id": "n9",
+          "name": "内容形式组合",
+          "type": "Collection",
+          "description": "Agent 建议交替使用介绍、深度文章、直播、教程、案例、冥想音频、书单、问答和反思练习。"
+        },
+        {
+          "id": "n10",
+          "name": "订阅者参与和反馈",
+          "type": "Goal",
+          "description": "Agent 建议计划保留的互动入口。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n2",
+          "relationship_name": "MANAGES",
+          "description": "用户负责该频道。"
+        },
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n3",
+          "relationship_name": "HAS_ROLE",
+          "description": "用户负责内容运营。"
+        },
+        {
+          "source_node_id": "n5",
+          "target_node_id": "n4",
+          "relationship_name": "HAS_THEME",
+          "description": "计划围绕独占价值内容制定。"
+        },
+        {
+          "source_node_id": "n5",
+          "target_node_id": "n6",
+          "relationship_name": "HAS_DURATION",
+          "description": "计划持续 30 天。"
+        },
+        {
+          "source_node_id": "n5",
+          "target_node_id": "n7",
+          "relationship_name": "HAS_CONSTRAINT",
+          "description": "每天至少安排一项活动。"
+        },
+        {
+          "source_node_id": "n5",
+          "target_node_id": "n8",
+          "relationship_name": "PUBLISHED_ON",
+          "description": "内容先发布到 Telegram。"
+        },
+        {
+          "source_node_id": "n5",
+          "target_node_id": "n9",
+          "relationship_name": "INCLUDES",
+          "description": "Agent 建议交替安排多种内容形式。"
+        },
+        {
+          "source_node_id": "n5",
+          "target_node_id": "n10",
+          "relationship_name": "SUPPORTS",
+          "description": "计划应让订阅者能够参与和反馈。"
+        }
+      ]
+    },
+    {
+      "unit_id": "wildchat-mgmt-cand-002__turn-002",
+      "nodes": [
+        {
+          "id": "n1",
+          "name": "Instagram 内容计划",
+          "type": "Plan",
+          "description": "用户要求从上一版改成的 Instagram 版本。"
+        },
+        {
+          "id": "n2",
+          "name": "Instagram",
+          "type": "OnlinePlatform",
+          "description": "用户指定的新发布平台。"
+        },
+        {
+          "id": "n3",
+          "name": "博客",
+          "type": "ContentFormat",
+          "description": "用户要求加入的内容形式。"
+        },
+        {
+          "id": "n4",
+          "name": "Reels",
+          "type": "ContentFormat",
+          "description": "用户要求加入的短视频形式。"
+        },
+        {
+          "id": "n5",
+          "name": "Stories",
+          "type": "ContentFormat",
+          "description": "用户要求加入的故事形式。"
+        },
+        {
+          "id": "n6",
+          "name": "故事叙述",
+          "type": "ContentTechnique",
+          "description": "用户要求用于 Stories 和 Reels 的叙述方法。"
+        },
+        {
+          "id": "n7",
+          "name": "轮播摘要",
+          "type": "ContentFormat",
+          "description": "Agent 建议将博客拆成的 Instagram 内容。"
+        },
+        {
+          "id": "n8",
+          "name": "短教程、锻炼和目标设定",
+          "type": "ContentSet",
+          "description": "Agent 建议由 Reels 承载的内容。"
+        },
+        {
+          "id": "n9",
+          "name": "个人转变故事、投票、问答和幕后内容",
+          "type": "ContentSet",
+          "description": "Agent 建议由 Stories 承载的内容。"
+        },
+        {
+          "id": "n10",
+          "name": "Instagram Live",
+          "type": "ContentFormat",
+          "description": "Agent 建议用于周期性问答的直播形式。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n2",
+          "relationship_name": "PUBLISHED_ON",
+          "description": "计划改为 Instagram 版本。"
+        },
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n3",
+          "relationship_name": "INCLUDES",
+          "description": "计划包括博客内容。"
+        },
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n4",
+          "relationship_name": "INCLUDES",
+          "description": "计划包括 Reels。"
+        },
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n5",
+          "relationship_name": "INCLUDES",
+          "description": "计划包括 Stories。"
+        },
+        {
+          "source_node_id": "n4",
+          "target_node_id": "n6",
+          "relationship_name": "USES",
+          "description": "用户要求 Reels 使用故事叙述。"
+        },
+        {
+          "source_node_id": "n5",
+          "target_node_id": "n6",
+          "relationship_name": "USES",
+          "description": "用户要求 Stories 使用故事叙述。"
+        },
+        {
+          "source_node_id": "n3",
+          "target_node_id": "n7",
+          "relationship_name": "ADAPTED_AS",
+          "description": "Agent 建议把博客拆成轮播摘要。"
+        },
+        {
+          "source_node_id": "n4",
+          "target_node_id": "n8",
+          "relationship_name": "PRESENTS",
+          "description": "Reels 用于发布短教程、锻炼和目标设定。"
+        },
+        {
+          "source_node_id": "n5",
+          "target_node_id": "n9",
+          "relationship_name": "PRESENTS",
+          "description": "Stories 用于个人故事和互动内容。"
+        },
+        {
+          "source_node_id": "n10",
+          "target_node_id": "n9",
+          "relationship_name": "EXTENDS",
+          "description": "Agent 另建议直播做周期性问答。"
+        }
+      ]
+    },
+    {
+      "unit_id": "wildchat-mgmt-cand-002__turn-003",
+      "nodes": [
+        {
+          "id": "n1",
+          "name": "连续 Reels 方案",
+          "type": "Plan",
+          "description": "用户要求基于既定主题设计的连续内容方案。"
+        },
+        {
+          "id": "n2",
+          "name": "故事叙述",
+          "type": "ContentTechnique",
+          "description": "用户指定的 Reels 制作方法。"
+        },
+        {
+          "id": "n3",
+          "name": "转变故事系列",
+          "type": "ContentSeries",
+          "description": "Agent 提议的系列主题。"
+        },
+        {
+          "id": "n4",
+          "name": "迈出第一步",
+          "type": "EpisodeTopic",
+          "description": "Agent 提议的第一集主题。"
+        },
+        {
+          "id": "n5",
+          "name": "接受不完美",
+          "type": "EpisodeTopic",
+          "description": "Agent 提议的第二集主题。"
+        },
+        {
+          "id": "n6",
+          "name": "自我照顾",
+          "type": "EpisodeTopic",
+          "description": "Agent 提议的第三集主题。"
+        },
+        {
+          "id": "n7",
+          "name": "冲突或问题开场",
+          "type": "StoryElement",
+          "description": "Agent 建议每集采用的开场结构。"
+        },
+        {
+          "id": "n8",
+          "name": "具体经历",
+          "type": "StoryElement",
+          "description": "Agent 建议每集加入的主体内容。"
+        },
+        {
+          "id": "n9",
+          "name": "可执行的反思问题",
+          "type": "StoryElement",
+          "description": "Agent 建议每集使用的收尾。"
+        },
+        {
+          "id": "n10",
+          "name": "连续成长路径",
+          "type": "NarrativeArc",
+          "description": "多集共同形成的叙事路径。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n2",
+          "relationship_name": "USES",
+          "description": "方案以故事叙述制作连续 Reels。"
+        },
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n3",
+          "relationship_name": "PROPOSES",
+          "description": "Agent 提议制作转变故事系列。"
+        },
+        {
+          "source_node_id": "n3",
+          "target_node_id": "n4",
+          "relationship_name": "HAS_EPISODE",
+          "description": "第一集讲迈出第一步。"
+        },
+        {
+          "source_node_id": "n3",
+          "target_node_id": "n5",
+          "relationship_name": "HAS_EPISODE",
+          "description": "第二集讲接受不完美。"
+        },
+        {
+          "source_node_id": "n3",
+          "target_node_id": "n6",
+          "relationship_name": "HAS_EPISODE",
+          "description": "第三集讲自我照顾。"
+        },
+        {
+          "source_node_id": "n4",
+          "target_node_id": "n5",
+          "relationship_name": "PRECEDES",
+          "description": "第一集位于第二集之前。"
+        },
+        {
+          "source_node_id": "n5",
+          "target_node_id": "n6",
+          "relationship_name": "PRECEDES",
+          "description": "第二集位于第三集之前。"
+        },
+        {
+          "source_node_id": "n3",
+          "target_node_id": "n7",
+          "relationship_name": "USES",
+          "description": "每集以冲突或问题开场。"
+        },
+        {
+          "source_node_id": "n3",
+          "target_node_id": "n8",
+          "relationship_name": "USES",
+          "description": "每集加入具体经历。"
+        },
+        {
+          "source_node_id": "n3",
+          "target_node_id": "n9",
+          "relationship_name": "USES",
+          "description": "每集以反思问题收尾。"
+        },
+        {
+          "source_node_id": "n3",
+          "target_node_id": "n10",
+          "relationship_name": "FORMS",
+          "description": "多集形成连续成长路径。"
+        }
+      ]
+    },
+    {
+      "unit_id": "wildchat-learn-cand-002__turn-001",
+      "nodes": [
+        {
+          "id": "n1",
+          "name": "用户",
+          "type": "Person",
+          "description": "希望制作普通话声调连续体的用户。"
+        },
+        {
+          "id": "n2",
+          "name": "普通话“居”",
+          "type": "SpeechSample",
+          "description": "用户要处理的普通话音节。"
+        },
+        {
+          "id": "n3",
+          "name": "二声",
+          "type": "ToneCategory",
+          "description": "连续体的起始声调。"
+        },
+        {
+          "id": "n4",
+          "name": "三声",
+          "type": "ToneCategory",
+          "description": "连续体的目标声调。"
+        },
+        {
+          "id": "n5",
+          "name": "9 步等距连续体",
+          "type": "ExperimentalStimulusSet",
+          "description": "用户希望生成的九级等距声调连续体。"
+        },
+        {
+          "id": "n6",
+          "name": "F0 曲线",
+          "type": "AcousticFeature",
+          "description": "两个声调都较弯、需要操控的基频曲线。"
+        },
+        {
+          "id": "n7",
+          "name": "Praat",
+          "type": "SoftwareApplication",
+          "description": "用户指定的语音分析软件。"
+        },
+        {
+          "id": "n8",
+          "name": "PSOLA",
+          "type": "SignalProcessingMethod",
+          "description": "用户希望使用的音高修改方法。"
+        },
+        {
+          "id": "n9",
+          "name": "二声录音",
+          "type": "AudioRecording",
+          "description": "Agent 建议先载入的起始录音。"
+        },
+        {
+          "id": "n10",
+          "name": "F0 文本数据",
+          "type": "DataArtifact",
+          "description": "Agent 建议导出的 F0 数据。"
+        },
+        {
+          "id": "n11",
+          "name": "9 组目标值",
+          "type": "DataSet",
+          "description": "Agent 建议按等距规则生成的目标 F0。"
+        },
+        {
+          "id": "n12",
+          "name": "Manipulation",
+          "type": "SoftwareObject",
+          "description": "Praat 中用于 PSOLA 音高处理的对象。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n5",
+          "target_node_id": "n2",
+          "relationship_name": "USES",
+          "description": "连续体以普通话“居”为语音材料。"
+        },
+        {
+          "source_node_id": "n5",
+          "target_node_id": "n3",
+          "relationship_name": "STARTS_FROM",
+          "description": "连续体从二声开始。"
+        },
+        {
+          "source_node_id": "n5",
+          "target_node_id": "n4",
+          "relationship_name": "ENDS_AT",
+          "description": "连续体逐渐变为三声。"
+        },
+        {
+          "source_node_id": "n3",
+          "target_node_id": "n6",
+          "relationship_name": "HAS_FEATURE",
+          "description": "二声具有弯曲 F0 曲线。"
+        },
+        {
+          "source_node_id": "n4",
+          "target_node_id": "n6",
+          "relationship_name": "HAS_FEATURE",
+          "description": "三声具有弯曲 F0 曲线。"
+        },
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n7",
+          "relationship_name": "USES",
+          "description": "用户希望在 Praat 中完成任务。"
+        },
+        {
+          "source_node_id": "n5",
+          "target_node_id": "n8",
+          "relationship_name": "USES",
+          "description": "用户要求使用 PSOLA 生成连续体。"
+        },
+        {
+          "source_node_id": "n9",
+          "target_node_id": "n3",
+          "relationship_name": "REPRESENTS",
+          "description": "Agent 建议载入代表二声的录音。"
+        },
+        {
+          "source_node_id": "n9",
+          "target_node_id": "n10",
+          "relationship_name": "PRODUCES",
+          "description": "从录音提取并导出 F0 数据。"
+        },
+        {
+          "source_node_id": "n10",
+          "target_node_id": "n11",
+          "relationship_name": "GENERATES",
+          "description": "按等距规则生成 9 组目标值。"
+        },
+        {
+          "source_node_id": "n12",
+          "target_node_id": "n8",
+          "relationship_name": "USES",
+          "description": "Manipulation 流程使用 PSOLA 调整音高。"
+        }
+      ]
+    },
+    {
+      "unit_id": "wildchat-learn-cand-002__turn-002",
+      "nodes": [
+        {
+          "id": "n1",
+          "name": "第 4 步",
+          "type": "ProcedureStep",
+          "description": "用户要求进一步解释的步骤。"
+        },
+        {
+          "id": "n2",
+          "name": "F0 数据",
+          "type": "DataArtifact",
+          "description": "需要从 Praat 提取的数据。"
+        },
+        {
+          "id": "n3",
+          "name": "文本文件",
+          "type": "File",
+          "description": "用户无法生成的目标文件。"
+        },
+        {
+          "id": "n4",
+          "name": "提取失败",
+          "type": "Problem",
+          "description": "用户报告无法把 F0 提取成文本文件。"
+        },
+        {
+          "id": "n5",
+          "name": "Praat",
+          "type": "SoftwareApplication",
+          "description": "显示 F0 数值的工具。"
+        },
+        {
+          "id": "n6",
+          "name": "文本编辑器",
+          "type": "SoftwareApplication",
+          "description": "Agent 建议粘贴 F0 数值的工具。"
+        },
+        {
+          "id": "n7",
+          "name": ".txt",
+          "type": "FileFormat",
+          "description": "Agent 建议保存的文件格式。"
+        },
+        {
+          "id": "n8",
+          "name": "音高范围",
+          "type": "ExtractionParameter",
+          "description": "Agent 建议确认的 F0 提取设置。"
+        },
+        {
+          "id": "n9",
+          "name": "提取算法",
+          "type": "ExtractionParameter",
+          "description": "Agent 建议确认的算法设置。"
+        },
+        {
+          "id": "n10",
+          "name": "连续体目标 F0",
+          "type": "DataSet",
+          "description": "导出文件后用于定义的目标数据。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n2",
+          "relationship_name": "PROCESSES",
+          "description": "第 4 步涉及提取 F0。"
+        },
+        {
+          "source_node_id": "n4",
+          "target_node_id": "n3",
+          "relationship_name": "AFFECTS",
+          "description": "用户无法得到文本文件。"
+        },
+        {
+          "source_node_id": "n2",
+          "target_node_id": "n5",
+          "relationship_name": "DISPLAYED_IN",
+          "description": "F0 数值在 Praat 中显示。"
+        },
+        {
+          "source_node_id": "n2",
+          "target_node_id": "n6",
+          "relationship_name": "COPIED_TO",
+          "description": "Agent 建议复制到文本编辑器。"
+        },
+        {
+          "source_node_id": "n3",
+          "target_node_id": "n7",
+          "relationship_name": "HAS_FORMAT",
+          "description": "文本文件保存为 .txt。"
+        },
+        {
+          "source_node_id": "n8",
+          "target_node_id": "n2",
+          "relationship_name": "CONFIGURES",
+          "description": "音高范围影响 F0 提取。"
+        },
+        {
+          "source_node_id": "n9",
+          "target_node_id": "n2",
+          "relationship_name": "CONFIGURES",
+          "description": "提取算法影响 F0 提取。"
+        },
+        {
+          "source_node_id": "n3",
+          "target_node_id": "n10",
+          "relationship_name": "DEFINES",
+          "description": "Agent 建议用该文件定义连续体目标 F0。"
+        }
+      ]
+    },
+    {
+      "unit_id": "wildchat-learn-cand-002__turn-003",
+      "nodes": [
+        {
+          "id": "n1",
+          "name": "二声",
+          "type": "ToneCategory",
+          "description": "用户要修改的起始声调。"
+        },
+        {
+          "id": "n2",
+          "name": "三声",
+          "type": "ToneCategory",
+          "description": "用户要逐渐逼近的目标声调。"
+        },
+        {
+          "id": "n3",
+          "name": "F0 转折点",
+          "type": "AcousticParameter",
+          "description": "用户明确要改变的音高参数。"
+        },
+        {
+          "id": "n4",
+          "name": "F0 offset",
+          "type": "AcousticParameter",
+          "description": "用户明确要改变的音高偏移参数。"
+        },
+        {
+          "id": "n5",
+          "name": "9 个等距级别",
+          "type": "ExperimentalConstraint",
+          "description": "用户要求每一步等距，Agent 重述为九个级别。"
+        },
+        {
+          "id": "n6",
+          "name": "PSOLA",
+          "type": "SignalProcessingMethod",
+          "description": "用户要求使用的处理方法。"
+        },
+        {
+          "id": "n7",
+          "name": "录音",
+          "type": "AudioRecording",
+          "description": "生成 Pitch 的输入录音。"
+        },
+        {
+          "id": "n8",
+          "name": "Pitch",
+          "type": "SoftwareObject",
+          "description": "Agent 建议从录音生成的 Praat 对象。"
+        },
+        {
+          "id": "n9",
+          "name": "Manipulation",
+          "type": "SoftwareObject",
+          "description": "Agent 建议由 Pitch 转换得到的对象。"
+        },
+        {
+          "id": "n10",
+          "name": "替换音高",
+          "type": "Action",
+          "description": "Agent 建议在 Manipulation 窗口中执行的功能。"
+        },
+        {
+          "id": "n11",
+          "name": "总变化范围",
+          "type": "NumericRange",
+          "description": "Agent 建议按九个级别分配的参数范围。"
+        },
+        {
+          "id": "n12",
+          "name": "时长",
+          "type": "AcousticParameter",
+          "description": "Agent 建议在各级别保持一致的参数。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n3",
+          "target_node_id": "n1",
+          "relationship_name": "MODIFIES",
+          "description": "用户要改变二声的 F0 转折点。"
+        },
+        {
+          "source_node_id": "n4",
+          "target_node_id": "n1",
+          "relationship_name": "MODIFIES",
+          "description": "用户要改变二声的 F0 offset。"
+        },
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n2",
+          "relationship_name": "TRANSFORMS_TO",
+          "description": "目标是让二声逐渐变成三声。"
+        },
+        {
+          "source_node_id": "n5",
+          "target_node_id": "n3",
+          "relationship_name": "CONSTRAINS",
+          "description": "F0 转折点变化需按等距级别设置。"
+        },
+        {
+          "source_node_id": "n5",
+          "target_node_id": "n4",
+          "relationship_name": "CONSTRAINS",
+          "description": "F0 offset 变化需按等距级别设置。"
+        },
+        {
+          "source_node_id": "n7",
+          "target_node_id": "n8",
+          "relationship_name": "GENERATES",
+          "description": "Agent 建议先从录音生成 Pitch。"
+        },
+        {
+          "source_node_id": "n8",
+          "target_node_id": "n9",
+          "relationship_name": "CONVERTS_TO",
+          "description": "Pitch 再转为 Manipulation 对象。"
+        },
+        {
+          "source_node_id": "n9",
+          "target_node_id": "n10",
+          "relationship_name": "SUPPORTS",
+          "description": "在 Manipulation 窗口中执行替换音高。"
+        },
+        {
+          "source_node_id": "n10",
+          "target_node_id": "n6",
+          "relationship_name": "USES",
+          "description": "替换音高以 PSOLA 为方法。"
+        },
+        {
+          "source_node_id": "n11",
+          "target_node_id": "n5",
+          "relationship_name": "DISTRIBUTED_ACROSS",
+          "description": "总变化范围分配到九个等距级别。"
+        },
+        {
+          "source_node_id": "n5",
+          "target_node_id": "n12",
+          "relationship_name": "KEEPS_CONSTANT",
+          "description": "各级别保持时长一致。"
+        }
+      ]
+    },
+    {
+      "unit_id": "wildchat-learn-cand-002__turn-004",
+      "nodes": [
+        {
+          "id": "n1",
+          "name": "第 8 步",
+          "type": "ProcedureStep",
+          "description": "用户当前执行的步骤。"
+        },
+        {
+          "id": "n2",
+          "name": "Scale pitch",
+          "type": "SoftwareCommand",
+          "description": "用户在当前 Praat 版本中没有看到的命令。"
+        },
+        {
+          "id": "n3",
+          "name": "当前 Praat 版本",
+          "type": "SoftwareVersion",
+          "description": "可能不提供 Scale pitch 的 Praat 版本，具体版本号未知。"
+        },
+        {
+          "id": "n4",
+          "name": "Manipulation",
+          "type": "SoftwareObject",
+          "description": "Agent 指定使用替代命令的 Praat 对象。"
+        },
+        {
+          "id": "n5",
+          "name": "Replace pitch",
+          "type": "SoftwareCommand",
+          "description": "Agent 提议替代 Scale pitch 的命令。"
+        },
+        {
+          "id": "n6",
+          "name": "PSOLA 音高替换",
+          "type": "SignalProcessingMethod",
+          "description": "Agent 提议的等效处理流程。"
+        },
+        {
+          "id": "n7",
+          "name": "起始音高",
+          "type": "AcousticParameter",
+          "description": "Agent 要求设定的参数。"
+        },
+        {
+          "id": "n8",
+          "name": "终止音高",
+          "type": "AcousticParameter",
+          "description": "Agent 要求设定的参数。"
+        },
+        {
+          "id": "n9",
+          "name": "平均音高",
+          "type": "AcousticParameter",
+          "description": "Agent 要求设定的参数。"
+        },
+        {
+          "id": "n10",
+          "name": "F0 转折点",
+          "type": "AcousticParameter",
+          "description": "每个级别需要检查的参数。"
+        },
+        {
+          "id": "n11",
+          "name": "F0 offset",
+          "type": "AcousticParameter",
+          "description": "每个级别需要检查的参数。"
+        },
+        {
+          "id": "n12",
+          "name": "导出的连续体",
+          "type": "ExperimentalStimulusSet",
+          "description": "最终需要试听的声调连续体。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n2",
+          "target_node_id": "n1",
+          "relationship_name": "EXPECTED_IN",
+          "description": "用户预期在第 8 步看到该命令。"
+        },
+        {
+          "source_node_id": "n2",
+          "target_node_id": "n3",
+          "relationship_name": "MAY_BE_UNAVAILABLE_IN",
+          "description": "Agent 说明当前版本可能没有该命令。"
+        },
+        {
+          "source_node_id": "n5",
+          "target_node_id": "n2",
+          "relationship_name": "ALTERNATIVE_TO",
+          "description": "Replace pitch 可替代 Scale pitch。"
+        },
+        {
+          "source_node_id": "n5",
+          "target_node_id": "n4",
+          "relationship_name": "AVAILABLE_IN",
+          "description": "Agent 指示在 Manipulation 中使用该功能。"
+        },
+        {
+          "source_node_id": "n5",
+          "target_node_id": "n6",
+          "relationship_name": "IMPLEMENTS",
+          "description": "Replace pitch 用于等效的 PSOLA 音高替换流程。"
+        },
+        {
+          "source_node_id": "n6",
+          "target_node_id": "n7",
+          "relationship_name": "CONFIGURED_BY",
+          "description": "流程需要设定起始音高。"
+        },
+        {
+          "source_node_id": "n6",
+          "target_node_id": "n8",
+          "relationship_name": "CONFIGURED_BY",
+          "description": "流程需要设定终止音高。"
+        },
+        {
+          "source_node_id": "n6",
+          "target_node_id": "n9",
+          "relationship_name": "CONFIGURED_BY",
+          "description": "流程需要设定平均音高。"
+        },
+        {
+          "source_node_id": "n12",
+          "target_node_id": "n10",
+          "relationship_name": "CHECKED_BY",
+          "description": "每级结果需检查 F0 转折点。"
+        },
+        {
+          "source_node_id": "n12",
+          "target_node_id": "n11",
+          "relationship_name": "CHECKED_BY",
+          "description": "每级结果需检查 F0 offset。"
+        }
+      ]
+    },
+    {
+      "unit_id": "wildchat-mgmt-cand-003__turn-001",
+      "nodes": [
+        {
+          "id": "n1",
+          "name": "公共住房机构",
+          "type": "Organization",
+          "description": "用户指定的工作组织。"
+        },
+        {
+          "id": "n2",
+          "name": "高级项目经理",
+          "type": "ProfessionalRole",
+          "description": "用户指定需要设定绩效目标的岗位。"
+        },
+        {
+          "id": "n3",
+          "name": "绩效目标集",
+          "type": "GoalSet",
+          "description": "用户要求编写的岗位绩效目标。"
+        },
+        {
+          "id": "n4",
+          "name": "10 个",
+          "type": "Cardinality",
+          "description": "用户要求的目标数量。"
+        },
+        {
+          "id": "n5",
+          "name": "绩效主题集合",
+          "type": "Collection",
+          "description": "Agent 提议的十个方面：项目效率、报告、指标、利益相关方、住房创新、居民满意度、协作、改进、培训和法规趋势。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n2",
+          "target_node_id": "n1",
+          "relationship_name": "ROLE_IN",
+          "description": "高级项目经理岗位属于公共住房机构。"
+        },
+        {
+          "source_node_id": "n3",
+          "target_node_id": "n2",
+          "relationship_name": "FOR",
+          "description": "绩效目标面向高级项目经理。"
+        },
+        {
+          "source_node_id": "n3",
+          "target_node_id": "n4",
+          "relationship_name": "HAS_COUNT",
+          "description": "用户要求编写 10 个目标。"
+        },
+        {
+          "source_node_id": "n3",
+          "target_node_id": "n5",
+          "relationship_name": "COVERS",
+          "description": "Agent 建议目标覆盖该绩效主题集合。"
+        }
+      ]
+    },
+    {
+      "unit_id": "wildchat-mgmt-cand-003__turn-002",
+      "nodes": [
+        {
+          "id": "n1",
+          "name": "追加绩效目标集",
+          "type": "GoalSet",
+          "description": "Agent 根据用户要求补充的绩效目标。"
+        },
+        {
+          "id": "n2",
+          "name": "资本改造项目按预算和进度完成",
+          "type": "Goal",
+          "description": "补充目标之一。"
+        },
+        {
+          "id": "n3",
+          "name": "提高公众对住房项目的了解",
+          "type": "Goal",
+          "description": "补充目标之一。"
+        },
+        {
+          "id": "n4",
+          "name": "争取更多资金",
+          "type": "Goal",
+          "description": "补充目标之一。"
+        },
+        {
+          "id": "n5",
+          "name": "公平住房和机会平等合规",
+          "type": "Goal",
+          "description": "补充目标之一。"
+        },
+        {
+          "id": "n6",
+          "name": "降低空置率",
+          "type": "Goal",
+          "description": "补充目标之一。"
+        },
+        {
+          "id": "n7",
+          "name": "改进维修响应",
+          "type": "Goal",
+          "description": "补充目标之一。"
+        },
+        {
+          "id": "n8",
+          "name": "加强灾害准备",
+          "type": "Goal",
+          "description": "补充目标之一。"
+        },
+        {
+          "id": "n9",
+          "name": "推进多元、公平与包容",
+          "type": "Goal",
+          "description": "补充目标之一。"
+        },
+        {
+          "id": "n10",
+          "name": "促进居民经济赋能",
+          "type": "Goal",
+          "description": "补充目标之一。"
+        },
+        {
+          "id": "n11",
+          "name": "与地方伙伴合作",
+          "type": "Goal",
+          "description": "补充目标之一。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n2",
+          "relationship_name": "INCLUDES",
+          "description": "追加目标集包含资本改造目标。"
+        },
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n3",
+          "relationship_name": "INCLUDES",
+          "description": "追加目标集包含公众认知目标。"
+        },
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n4",
+          "relationship_name": "INCLUDES",
+          "description": "追加目标集包含资金目标。"
+        },
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n5",
+          "relationship_name": "INCLUDES",
+          "description": "追加目标集包含合规目标。"
+        },
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n6",
+          "relationship_name": "INCLUDES",
+          "description": "追加目标集包含空置率目标。"
+        },
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n7",
+          "relationship_name": "INCLUDES",
+          "description": "追加目标集包含维修响应目标。"
+        },
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n8",
+          "relationship_name": "INCLUDES",
+          "description": "追加目标集包含灾害准备目标。"
+        },
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n9",
+          "relationship_name": "INCLUDES",
+          "description": "追加目标集包含多元公平包容目标。"
+        },
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n10",
+          "relationship_name": "INCLUDES",
+          "description": "追加目标集包含居民经济赋能目标。"
+        },
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n11",
+          "relationship_name": "INCLUDES",
+          "description": "追加目标集包含地方合作目标。"
+        }
+      ]
+    },
+    {
+      "unit_id": "wildchat-mgmt-cand-003__turn-003",
+      "nodes": [
+        {
+          "id": "n1",
+          "name": "SMART 绩效目标集",
+          "type": "GoalSet",
+          "description": "用户要求将之前目标改写成的 SMART 版本。"
+        },
+        {
+          "id": "n2",
+          "name": "提高入住率",
+          "type": "Goal",
+          "description": "Agent 给出的 SMART 目标示例。"
+        },
+        {
+          "id": "n3",
+          "name": "10%",
+          "type": "Percentage",
+          "description": "入住率目标的提高幅度。"
+        },
+        {
+          "id": "n4",
+          "name": "下一财年",
+          "type": "TimeWindow",
+          "description": "入住率目标的期限。"
+        },
+        {
+          "id": "n5",
+          "name": "定向宣传",
+          "type": "Method",
+          "description": "提高入住率所用的方法。"
+        },
+        {
+          "id": "n6",
+          "name": "缩短维修响应时间",
+          "type": "Goal",
+          "description": "Agent 给出的 SMART 目标示例。"
+        },
+        {
+          "id": "n7",
+          "name": "20%",
+          "type": "Percentage",
+          "description": "维修响应时间的缩短幅度。"
+        },
+        {
+          "id": "n8",
+          "name": "数字工单系统",
+          "type": "SoftwareSystem",
+          "description": "缩短维修响应时间所用的方法。"
+        },
+        {
+          "id": "n9",
+          "name": "增加可负担住房",
+          "type": "Goal",
+          "description": "Agent 给出的 SMART 目标示例。"
+        },
+        {
+          "id": "n10",
+          "name": "15%",
+          "type": "Percentage",
+          "description": "可负担住房的增加幅度。"
+        },
+        {
+          "id": "n11",
+          "name": "未来两年",
+          "type": "TimeWindow",
+          "description": "可负担住房目标的期限。"
+        },
+        {
+          "id": "n12",
+          "name": "拨款和开发商合作",
+          "type": "Method",
+          "description": "增加可负担住房所用的方法。"
+        },
+        {
+          "id": "n13",
+          "name": "完成员工培训计划",
+          "type": "Goal",
+          "description": "Agent 给出的 SMART 目标示例。"
+        },
+        {
+          "id": "n14",
+          "name": "六个月内",
+          "type": "TimeWindow",
+          "description": "培训计划的期限。"
+        },
+        {
+          "id": "n15",
+          "name": "客服、冲突解决和公平住房",
+          "type": "TrainingTopicSet",
+          "description": "培训计划覆盖的主题。"
+        },
+        {
+          "id": "n16",
+          "name": "具体指标、截止时间和可验证结果",
+          "type": "ConstraintSet",
+          "description": "Agent 对每项 SMART 目标提出的共同要求。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n2",
+          "relationship_name": "INCLUDES",
+          "description": "目标集包含入住率目标。"
+        },
+        {
+          "source_node_id": "n2",
+          "target_node_id": "n3",
+          "relationship_name": "HAS_TARGET",
+          "description": "入住率提高目标值为 10%。"
+        },
+        {
+          "source_node_id": "n2",
+          "target_node_id": "n4",
+          "relationship_name": "HAS_DEADLINE",
+          "description": "期限为下一财年。"
+        },
+        {
+          "source_node_id": "n2",
+          "target_node_id": "n5",
+          "relationship_name": "USES",
+          "description": "通过定向宣传提高入住率。"
+        },
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n6",
+          "relationship_name": "INCLUDES",
+          "description": "目标集包含维修响应目标。"
+        },
+        {
+          "source_node_id": "n6",
+          "target_node_id": "n7",
+          "relationship_name": "HAS_TARGET",
+          "description": "维修响应时间缩短 20%。"
+        },
+        {
+          "source_node_id": "n6",
+          "target_node_id": "n8",
+          "relationship_name": "USES",
+          "description": "通过数字工单系统实现。"
+        },
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n9",
+          "relationship_name": "INCLUDES",
+          "description": "目标集包含可负担住房目标。"
+        },
+        {
+          "source_node_id": "n9",
+          "target_node_id": "n10",
+          "relationship_name": "HAS_TARGET",
+          "description": "可负担住房增加 15%。"
+        },
+        {
+          "source_node_id": "n9",
+          "target_node_id": "n11",
+          "relationship_name": "HAS_DEADLINE",
+          "description": "期限为未来两年。"
+        },
+        {
+          "source_node_id": "n9",
+          "target_node_id": "n12",
+          "relationship_name": "USES",
+          "description": "通过拨款和开发商合作实现。"
+        },
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n13",
+          "relationship_name": "INCLUDES",
+          "description": "目标集包含员工培训目标。"
+        },
+        {
+          "source_node_id": "n13",
+          "target_node_id": "n14",
+          "relationship_name": "HAS_DEADLINE",
+          "description": "培训计划六个月内完成。"
+        },
+        {
+          "source_node_id": "n13",
+          "target_node_id": "n15",
+          "relationship_name": "COVERS",
+          "description": "培训覆盖客服、冲突解决和公平住房。"
+        },
+        {
+          "source_node_id": "n1",
+          "target_node_id": "n16",
+          "relationship_name": "HAS_CONSTRAINT",
+          "description": "所有目标都应有指标、期限和可验证结果。"
+        }
+      ]
+    },
+    {
+      "unit_id": "wildchat-learn-cand-003__turn-001",
+      "nodes": [
+        {
+          "id": "n_function",
+          "name": "make_hyperlink",
+          "type": "Function",
+          "description": "接收 value 并返回电子表格 HYPERLINK 公式的函数。"
+        },
+        {
+          "id": "n_value",
+          "name": "value",
+          "type": "Parameter",
+          "description": "函数的输入参数，同时用作路径片段和链接显示文本。"
+        },
+        {
+          "id": "n_relative_path",
+          "name": "./{}",
+          "type": "PathTemplate",
+          "description": "由 value 格式化得到相对路径的模板。"
+        },
+        {
+          "id": "n_formula",
+          "name": "HYPERLINK 公式",
+          "type": "SpreadsheetFormula",
+          "description": "以相对路径为目标、以 value 为显示文本的电子表格公式。"
+        },
+        {
+          "id": "n_example",
+          "name": "example",
+          "type": "ExampleValue",
+          "description": "Agent 用于说明函数行为的示例输入。"
+        },
+        {
+          "id": "n_output",
+          "name": "=HYPERLINK(\"./example\", \"example\")",
+          "type": "FormulaValue",
+          "description": "value 为 example 时函数生成的具体结果。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n_function",
+          "target_node_id": "n_value",
+          "relationship_name": "accepts",
+          "description": "make_hyperlink 接收 value 参数。"
+        },
+        {
+          "source_node_id": "n_function",
+          "target_node_id": "n_relative_path",
+          "relationship_name": "constructs",
+          "description": "函数用路径模板构造相对路径。"
+        },
+        {
+          "source_node_id": "n_relative_path",
+          "target_node_id": "n_value",
+          "relationship_name": "formats_with",
+          "description": "路径模板使用 value 进行格式化。"
+        },
+        {
+          "source_node_id": "n_function",
+          "target_node_id": "n_formula",
+          "relationship_name": "returns",
+          "description": "函数返回 HYPERLINK 公式。"
+        },
+        {
+          "source_node_id": "n_formula",
+          "target_node_id": "n_relative_path",
+          "relationship_name": "uses",
+          "description": "公式使用构造出的相对路径作为链接目标。"
+        },
+        {
+          "source_node_id": "n_formula",
+          "target_node_id": "n_value",
+          "relationship_name": "displays",
+          "description": "公式使用 value 作为显示文本。"
+        },
+        {
+          "source_node_id": "n_example",
+          "target_node_id": "n_function",
+          "relationship_name": "input_to",
+          "description": "example 是示例函数输入。"
+        },
+        {
+          "source_node_id": "n_function",
+          "target_node_id": "n_output",
+          "relationship_name": "produces",
+          "description": "传入 example 时产生该公式值。"
+        }
+      ]
+    },
+    {
+      "unit_id": "wildchat-learn-cand-003__turn-002",
+      "nodes": [
+        {
+          "id": "n_function",
+          "name": "make_hyperlink",
+          "type": "Function",
+          "description": "生成电子表格超链接公式的函数。"
+        },
+        {
+          "id": "n_value",
+          "name": "example",
+          "type": "ExampleValue",
+          "description": "演示中的 value 参数值。"
+        },
+        {
+          "id": "n_output",
+          "name": "=HYPERLINK(\"./example\", \"example\")",
+          "type": "FormulaValue",
+          "description": "示例代码打印的函数输出。"
+        },
+        {
+          "id": "n_spreadsheet",
+          "name": "电子表格",
+          "type": "Software",
+          "description": "能够识别 HYPERLINK 公式的表格应用。"
+        },
+        {
+          "id": "n_link",
+          "name": "可点击链接",
+          "type": "Hyperlink",
+          "description": "电子表格对公式的呈现结果。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n_value",
+          "target_node_id": "n_function",
+          "relationship_name": "input_to",
+          "description": "example 被传给 make_hyperlink。"
+        },
+        {
+          "source_node_id": "n_function",
+          "target_node_id": "n_output",
+          "relationship_name": "produces",
+          "description": "函数产生所示公式字符串。"
+        },
+        {
+          "source_node_id": "n_spreadsheet",
+          "target_node_id": "n_output",
+          "relationship_name": "recognizes",
+          "description": "电子表格把输出识别为公式。"
+        },
+        {
+          "source_node_id": "n_output",
+          "target_node_id": "n_link",
+          "relationship_name": "renders_as",
+          "description": "公式在电子表格中呈现为可点击链接。"
+        }
+      ]
+    },
+    {
+      "unit_id": "wildchat-learn-cand-003__turn-003",
+      "nodes": [
+        {
+          "id": "n_dataframe",
+          "name": "DataFrame",
+          "type": "DataStructure",
+          "description": "Pandas 中承载 Value 和 Hyperlink 列的数据表。"
+        },
+        {
+          "id": "n_value_column",
+          "name": "Value 列",
+          "type": "DataColumn",
+          "description": "包含待转换元素的 DataFrame 列。"
+        },
+        {
+          "id": "n_apply",
+          "name": "Pandas apply",
+          "type": "Method",
+          "description": "依次把列中每个元素传给函数的方法。"
+        },
+        {
+          "id": "n_function",
+          "name": "make_hyperlink",
+          "type": "Function",
+          "description": "把单个 Value 元素转换为超链接公式字符串的函数。"
+        },
+        {
+          "id": "n_hyperlink_column",
+          "name": "Hyperlink 列",
+          "type": "DataColumn",
+          "description": "保存 apply 返回的新字符串的列。"
+        },
+        {
+          "id": "n_string",
+          "name": "超链接公式字符串",
+          "type": "StringValue",
+          "description": "make_hyperlink 对每个元素返回的值。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n_dataframe",
+          "target_node_id": "n_value_column",
+          "relationship_name": "contains",
+          "description": "DataFrame 包含 Value 列。"
+        },
+        {
+          "source_node_id": "n_dataframe",
+          "target_node_id": "n_hyperlink_column",
+          "relationship_name": "contains",
+          "description": "DataFrame 包含新建的 Hyperlink 列。"
+        },
+        {
+          "source_node_id": "n_apply",
+          "target_node_id": "n_value_column",
+          "relationship_name": "iterates_over",
+          "description": "apply 依次处理 Value 列的每个元素。"
+        },
+        {
+          "source_node_id": "n_apply",
+          "target_node_id": "n_function",
+          "relationship_name": "invokes",
+          "description": "apply 为每个元素调用 make_hyperlink。"
+        },
+        {
+          "source_node_id": "n_function",
+          "target_node_id": "n_string",
+          "relationship_name": "returns",
+          "description": "函数返回新的公式字符串。"
+        },
+        {
+          "source_node_id": "n_string",
+          "target_node_id": "n_hyperlink_column",
+          "relationship_name": "stored_in",
+          "description": "返回字符串被保存到 Hyperlink 列。"
+        }
+      ]
+    },
+    {
+      "unit_id": "wildchat-learn-cand-004__turn-001",
+      "nodes": [
+        {
+          "id": "n_claim",
+          "name": "固定学习风格显著影响学习",
+          "type": "Claim",
+          "description": "把学生固定归为特定学习风格并认为其显著影响学习的说法。"
+        },
+        {
+          "id": "n_research",
+          "name": "研究证据",
+          "type": "Evidence",
+          "description": "Agent 用来评估固定学习风格分类的研究依据。"
+        },
+        {
+          "id": "n_auditory",
+          "name": "听觉学习者",
+          "type": "LearningStyleCategory",
+          "description": "固定学习风格分类之一。"
+        },
+        {
+          "id": "n_visual",
+          "name": "视觉学习者",
+          "type": "LearningStyleCategory",
+          "description": "固定学习风格分类之一。"
+        },
+        {
+          "id": "n_kinesthetic",
+          "name": "动觉学习者",
+          "type": "LearningStyleCategory",
+          "description": "固定学习风格分类之一。"
+        },
+        {
+          "id": "n_teaching",
+          "name": "教学",
+          "type": "Practice",
+          "description": "应依据证据和学生表现调整的教学实践。"
+        },
+        {
+          "id": "n_multimodal",
+          "name": "多模态教学",
+          "type": "TeachingMethod",
+          "description": "Agent 建议采用的教学方法。"
+        },
+        {
+          "id": "n_active",
+          "name": "主动学习",
+          "type": "TeachingMethod",
+          "description": "Agent 建议采用的学习方法。"
+        },
+        {
+          "id": "n_differentiated",
+          "name": "差异化支持",
+          "type": "TeachingMethod",
+          "description": "Agent 建议采用的支持方式。"
+        },
+        {
+          "id": "n_performance",
+          "name": "学生实际表现",
+          "type": "Observation",
+          "description": "调整教学方法时应依据的学生表现。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n_claim",
+          "target_node_id": "n_research",
+          "relationship_name": "unsupported_by",
+          "description": "Agent 表示研究不支持固定学习风格分类。"
+        },
+        {
+          "source_node_id": "n_claim",
+          "target_node_id": "n_auditory",
+          "relationship_name": "includes",
+          "description": "该分类说法包含听觉类型。"
+        },
+        {
+          "source_node_id": "n_claim",
+          "target_node_id": "n_visual",
+          "relationship_name": "includes",
+          "description": "该分类说法包含视觉类型。"
+        },
+        {
+          "source_node_id": "n_claim",
+          "target_node_id": "n_kinesthetic",
+          "relationship_name": "includes",
+          "description": "该分类说法包含动觉类型。"
+        },
+        {
+          "source_node_id": "n_teaching",
+          "target_node_id": "n_multimodal",
+          "relationship_name": "uses",
+          "description": "Agent 建议教学采用多模态方法。"
+        },
+        {
+          "source_node_id": "n_teaching",
+          "target_node_id": "n_active",
+          "relationship_name": "uses",
+          "description": "Agent 建议教学采用主动学习。"
+        },
+        {
+          "source_node_id": "n_teaching",
+          "target_node_id": "n_differentiated",
+          "relationship_name": "uses",
+          "description": "Agent 建议教学采用差异化支持。"
+        },
+        {
+          "source_node_id": "n_teaching",
+          "target_node_id": "n_performance",
+          "relationship_name": "adjusted_by",
+          "description": "教学方法应根据学生实际表现调整。"
+        }
+      ]
+    },
+    {
+      "unit_id": "wildchat-learn-cand-004__turn-002",
+      "nodes": [
+        {
+          "id": "n_claim",
+          "name": "学习困难学生能力固定且无法提高",
+          "type": "Claim",
+          "description": "用户要求按证据重新处理的说法。"
+        },
+        {
+          "id": "n_difficulty",
+          "name": "学习困难",
+          "type": "Condition",
+          "description": "会在特定领域带来挑战的学习状况。"
+        },
+        {
+          "id": "n_challenge",
+          "name": "特定领域挑战",
+          "type": "Challenge",
+          "description": "学习困难可能带来的领域性挑战。"
+        },
+        {
+          "id": "n_ability",
+          "name": "学生能力",
+          "type": "Capability",
+          "description": "Agent 表示可以发展的能力。"
+        },
+        {
+          "id": "n_early_identification",
+          "name": "早期识别",
+          "type": "Intervention",
+          "description": "支持能力发展的干预方式。"
+        },
+        {
+          "id": "n_iep",
+          "name": "个别化教育计划",
+          "type": "Intervention",
+          "description": "支持能力发展的教育计划。"
+        },
+        {
+          "id": "n_differentiated",
+          "name": "差异化教学",
+          "type": "Intervention",
+          "description": "支持能力发展的教学方式。"
+        },
+        {
+          "id": "n_assessment",
+          "name": "持续评估",
+          "type": "Intervention",
+          "description": "支持能力发展的持续评估方式。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n_difficulty",
+          "target_node_id": "n_challenge",
+          "relationship_name": "causes",
+          "description": "学习困难会带来特定领域挑战。"
+        },
+        {
+          "source_node_id": "n_claim",
+          "target_node_id": "n_ability",
+          "relationship_name": "contradicted_by",
+          "description": "Agent 的结论认为学生能力可以发展，否定能力固定说法。"
+        },
+        {
+          "source_node_id": "n_ability",
+          "target_node_id": "n_early_identification",
+          "relationship_name": "supported_by",
+          "description": "早期识别可支持能力发展。"
+        },
+        {
+          "source_node_id": "n_ability",
+          "target_node_id": "n_iep",
+          "relationship_name": "supported_by",
+          "description": "个别化教育计划可支持能力发展。"
+        },
+        {
+          "source_node_id": "n_ability",
+          "target_node_id": "n_differentiated",
+          "relationship_name": "supported_by",
+          "description": "差异化教学可支持能力发展。"
+        },
+        {
+          "source_node_id": "n_ability",
+          "target_node_id": "n_assessment",
+          "relationship_name": "supported_by",
+          "description": "持续评估可支持能力发展。"
+        }
+      ]
+    },
+    {
+      "unit_id": "wildchat-learn-cand-004__turn-003",
+      "nodes": [
+        {
+          "id": "n_memory",
+          "name": "记忆",
+          "type": "LearningFactor",
+          "description": "长期学习中有作用但并非唯一关键的因素。"
+        },
+        {
+          "id": "n_success",
+          "name": "成功学习",
+          "type": "LearningOutcome",
+          "description": "用户询问记忆是否为其关键。"
+        },
+        {
+          "id": "n_long_term",
+          "name": "长期学习效果",
+          "type": "LearningOutcome",
+          "description": "多种认知和练习活动共同支持的结果。"
+        },
+        {
+          "id": "n_understanding",
+          "name": "深层理解",
+          "type": "LearningFactor",
+          "description": "支持长期学习效果的因素。"
+        },
+        {
+          "id": "n_critical",
+          "name": "批判性思维",
+          "type": "LearningFactor",
+          "description": "支持长期学习效果的因素。"
+        },
+        {
+          "id": "n_application",
+          "name": "知识应用",
+          "type": "LearningFactor",
+          "description": "支持长期学习效果的因素。"
+        },
+        {
+          "id": "n_deliberate",
+          "name": "刻意练习",
+          "type": "LearningFactor",
+          "description": "支持长期学习效果的练习方式。"
+        },
+        {
+          "id": "n_retrieval",
+          "name": "检索练习",
+          "type": "LearningFactor",
+          "description": "支持长期学习效果的练习方式。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n_memory",
+          "target_node_id": "n_success",
+          "relationship_name": "contributes_to",
+          "description": "Agent 表示记忆对成功学习有作用。"
+        },
+        {
+          "source_node_id": "n_memory",
+          "target_node_id": "n_success",
+          "relationship_name": "not_sole_determinant_of",
+          "description": "Agent 表示记忆并非成功学习的唯一关键。"
+        },
+        {
+          "source_node_id": "n_understanding",
+          "target_node_id": "n_long_term",
+          "relationship_name": "supports",
+          "description": "深层理解支持长期学习效果。"
+        },
+        {
+          "source_node_id": "n_critical",
+          "target_node_id": "n_long_term",
+          "relationship_name": "supports",
+          "description": "批判性思维支持长期学习效果。"
+        },
+        {
+          "source_node_id": "n_application",
+          "target_node_id": "n_long_term",
+          "relationship_name": "supports",
+          "description": "知识应用支持长期学习效果。"
+        },
+        {
+          "source_node_id": "n_deliberate",
+          "target_node_id": "n_long_term",
+          "relationship_name": "supports",
+          "description": "刻意练习支持长期学习效果。"
+        },
+        {
+          "source_node_id": "n_retrieval",
+          "target_node_id": "n_long_term",
+          "relationship_name": "supports",
+          "description": "检索练习支持长期学习效果。"
+        }
+      ]
+    },
+    {
+      "unit_id": "taskmaster2-cand-001__turn-001",
+      "nodes": [
+        {
+          "id": "n_user",
+          "name": "用户",
+          "type": "Person",
+          "description": "请求预订往返航班的人。"
+        },
+        {
+          "id": "n_trip",
+          "name": "往返航班",
+          "type": "FlightTrip",
+          "description": "用户想要预订的航空行程。"
+        },
+        {
+          "id": "n_nyc",
+          "name": "纽约市",
+          "type": "City",
+          "description": "航班出发城市。"
+        },
+        {
+          "id": "n_amsterdam",
+          "name": "阿姆斯特丹",
+          "type": "City",
+          "description": "航班目的城市。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n_user",
+          "target_node_id": "n_trip",
+          "relationship_name": "requests",
+          "description": "用户请求预订一趟往返航班。"
+        },
+        {
+          "source_node_id": "n_trip",
+          "target_node_id": "n_nyc",
+          "relationship_name": "origin",
+          "description": "行程从纽约市出发。"
+        },
+        {
+          "source_node_id": "n_trip",
+          "target_node_id": "n_amsterdam",
+          "relationship_name": "destination",
+          "description": "行程目的地为阿姆斯特丹。"
+        }
+      ]
+    },
+    {
+      "unit_id": "taskmaster2-cand-001__turn-002",
+      "nodes": [
+        {
+          "id": "n_user",
+          "name": "用户",
+          "type": "Person",
+          "description": "说明出发、返回日期和时间偏好的人。"
+        },
+        {
+          "id": "n_trip",
+          "name": "往返行程",
+          "type": "FlightTrip",
+          "description": "当前正在规划的行程。"
+        },
+        {
+          "id": "n_today",
+          "name": "今天",
+          "type": "RelativeDate",
+          "description": "用户指定的出发日期。"
+        },
+        {
+          "id": "n_day19",
+          "name": "19 号",
+          "type": "CalendarDay",
+          "description": "用户指定的返回日期，月份未在本 turn 给出。"
+        },
+        {
+          "id": "n_outbound",
+          "name": "去程",
+          "type": "TripLeg",
+          "description": "往返行程的出发段。"
+        },
+        {
+          "id": "n_return",
+          "name": "返程",
+          "type": "TripLeg",
+          "description": "往返行程的返回段。"
+        },
+        {
+          "id": "n_early",
+          "name": "尽可能早",
+          "type": "TimePreference",
+          "description": "用户对去程和返程共同提出的时间偏好。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n_user",
+          "target_node_id": "n_trip",
+          "relationship_name": "plans",
+          "description": "用户正在规划该往返行程。"
+        },
+        {
+          "source_node_id": "n_trip",
+          "target_node_id": "n_outbound",
+          "relationship_name": "contains",
+          "description": "行程包含去程。"
+        },
+        {
+          "source_node_id": "n_trip",
+          "target_node_id": "n_return",
+          "relationship_name": "contains",
+          "description": "行程包含返程。"
+        },
+        {
+          "source_node_id": "n_outbound",
+          "target_node_id": "n_today",
+          "relationship_name": "departs_on",
+          "description": "去程在今天出发。"
+        },
+        {
+          "source_node_id": "n_return",
+          "target_node_id": "n_day19",
+          "relationship_name": "departs_on",
+          "description": "返程在 19 号出发。"
+        },
+        {
+          "source_node_id": "n_user",
+          "target_node_id": "n_early",
+          "relationship_name": "prefers",
+          "description": "用户偏好尽可能早的航班。"
+        },
+        {
+          "source_node_id": "n_early",
+          "target_node_id": "n_outbound",
+          "relationship_name": "applies_to",
+          "description": "时间偏好适用于去程。"
+        },
+        {
+          "source_node_id": "n_early",
+          "target_node_id": "n_return",
+          "relationship_name": "applies_to",
+          "description": "时间偏好适用于返程。"
+        }
+      ]
+    },
+    {
+      "unit_id": "taskmaster2-cand-001__turn-003",
+      "nodes": [
+        {
+          "id": "n_user",
+          "name": "用户",
+          "type": "Person",
+          "description": "要求查找最低价航班的人。"
+        },
+        {
+          "id": "n_cheapest",
+          "name": "最便宜",
+          "type": "PricePreference",
+          "description": "用户提出的航班价格偏好。"
+        },
+        {
+          "id": "n_flight",
+          "name": "最低价往返票",
+          "type": "FlightOption",
+          "description": "Agent 查到的最低价往返航班方案。"
+        },
+        {
+          "id": "n_stop",
+          "name": "经停一次",
+          "type": "StopPattern",
+          "description": "最低价方案的经停数量。"
+        },
+        {
+          "id": "n_departure",
+          "name": "凌晨 12:30",
+          "type": "TimeOfDay",
+          "description": "最低价方案的出发时间。"
+        },
+        {
+          "id": "n_arrival",
+          "name": "次日 11:55",
+          "type": "RelativeDateTime",
+          "description": "最低价方案的抵达时间。"
+        },
+        {
+          "id": "n_price",
+          "name": "1,287 美元",
+          "type": "MonetaryAmount",
+          "description": "最低价往返票价格。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n_user",
+          "target_node_id": "n_cheapest",
+          "relationship_name": "prefers",
+          "description": "用户希望找到最便宜的航班。"
+        },
+        {
+          "source_node_id": "n_flight",
+          "target_node_id": "n_cheapest",
+          "relationship_name": "matches",
+          "description": "该方案是 Agent 查到的最低价方案。"
+        },
+        {
+          "source_node_id": "n_flight",
+          "target_node_id": "n_stop",
+          "relationship_name": "has_stop",
+          "description": "该航班需要经停一次。"
+        },
+        {
+          "source_node_id": "n_flight",
+          "target_node_id": "n_departure",
+          "relationship_name": "departs_at",
+          "description": "该航班凌晨 12:30 出发。"
+        },
+        {
+          "source_node_id": "n_flight",
+          "target_node_id": "n_arrival",
+          "relationship_name": "arrives_at",
+          "description": "该航班次日 11:55 抵达。"
+        },
+        {
+          "source_node_id": "n_flight",
+          "target_node_id": "n_price",
+          "relationship_name": "price",
+          "description": "该往返票价格为 1,287 美元。"
+        }
+      ]
+    },
+    {
+      "unit_id": "taskmaster2-cand-001__turn-004",
+      "nodes": [
+        {
+          "id": "n_user",
+          "name": "用户",
+          "type": "Person",
+          "description": "询问直飞航班的人。"
+        },
+        {
+          "id": "n_direct",
+          "name": "直飞航班",
+          "type": "FlightOption",
+          "description": "Agent 查到的一班直飞方案。"
+        },
+        {
+          "id": "n_departure",
+          "name": "下午 6 点",
+          "type": "TimeOfDay",
+          "description": "直飞航班出发时间。"
+        },
+        {
+          "id": "n_arrival",
+          "name": "次日早上 7:35",
+          "type": "RelativeDateTime",
+          "description": "直飞航班抵达时间。"
+        },
+        {
+          "id": "n_price",
+          "name": "2,677 美元",
+          "type": "MonetaryAmount",
+          "description": "直飞航班价格。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n_user",
+          "target_node_id": "n_direct",
+          "relationship_name": "requests",
+          "description": "用户要求查找直飞航班。"
+        },
+        {
+          "source_node_id": "n_direct",
+          "target_node_id": "n_departure",
+          "relationship_name": "departs_at",
+          "description": "直飞方案下午 6 点出发。"
+        },
+        {
+          "source_node_id": "n_direct",
+          "target_node_id": "n_arrival",
+          "relationship_name": "arrives_at",
+          "description": "直飞方案次日早上 7:35 抵达。"
+        },
+        {
+          "source_node_id": "n_direct",
+          "target_node_id": "n_price",
+          "relationship_name": "price",
+          "description": "直飞方案价格为 2,677 美元。"
+        }
+      ]
+    },
+    {
+      "unit_id": "taskmaster2-cand-001__turn-005",
+      "nodes": [
+        {
+          "id": "n_user",
+          "name": "用户",
+          "type": "Person",
+          "description": "比较方案并选择第一班航班的人。"
+        },
+        {
+          "id": "n_current_option",
+          "name": "当前航班方案",
+          "type": "FlightOption",
+          "description": "用户认为价格较贵的方案。"
+        },
+        {
+          "id": "n_expensive",
+          "name": "价格有点贵",
+          "type": "PriceAssessment",
+          "description": "用户对当前方案价格的评价。"
+        },
+        {
+          "id": "n_first_option",
+          "name": "第一班航班",
+          "type": "FlightOption",
+          "description": "用户最终选择的先前航班方案。"
+        },
+        {
+          "id": "n_details",
+          "name": "航班全部信息",
+          "type": "Information",
+          "description": "Agent 表示已发送的航班信息。"
+        },
+        {
+          "id": "n_email",
+          "name": "用户邮箱",
+          "type": "CommunicationEndpoint",
+          "description": "Agent 发送航班信息的目的地。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n_user",
+          "target_node_id": "n_current_option",
+          "relationship_name": "rejects",
+          "description": "用户因价格较高放弃当前方案。"
+        },
+        {
+          "source_node_id": "n_current_option",
+          "target_node_id": "n_expensive",
+          "relationship_name": "assessed_as",
+          "description": "用户认为当前方案价格有点贵。"
+        },
+        {
+          "source_node_id": "n_user",
+          "target_node_id": "n_first_option",
+          "relationship_name": "selects",
+          "description": "用户选择先前提到的第一班航班。"
+        },
+        {
+          "source_node_id": "n_details",
+          "target_node_id": "n_email",
+          "relationship_name": "sent_to",
+          "description": "Agent 表示已把全部信息发送至用户邮箱。"
+        },
+        {
+          "source_node_id": "n_details",
+          "target_node_id": "n_first_option",
+          "relationship_name": "describes",
+          "description": "发送的信息对应用户选定的航班方案。"
+        }
+      ]
+    },
+    {
+      "unit_id": "taskmaster2-cand-001__turn-006",
+      "nodes": [],
+      "edges": []
+    },
+    {
+      "unit_id": "tau-bench-cand-001__turn-001",
+      "nodes": [
+        {
+          "id": "n_user",
+          "name": "用户",
+          "type": "Person",
+          "description": "请求退回平板并取消充电器订单的人。"
+        },
+        {
+          "id": "n_tablet",
+          "name": "平板",
+          "type": "Product",
+          "description": "用户要求退回的商品。"
+        },
+        {
+          "id": "n_charger",
+          "name": "便携式充电器",
+          "type": "Product",
+          "description": "为该平板购买、用户要求取消的商品。"
+        },
+        {
+          "id": "n_tablet_order",
+          "name": "订单 #W2692684",
+          "type": "Order",
+          "description": "Agent 计划从中退回平板的订单。"
+        },
+        {
+          "id": "n_charger_order",
+          "name": "订单 #W9373487",
+          "type": "Order",
+          "description": "Agent 计划取消的充电器订单。"
+        },
+        {
+          "id": "n_return",
+          "name": "平板退货",
+          "type": "ReturnRequest",
+          "description": "等待用户确认执行的退货计划。"
+        },
+        {
+          "id": "n_cancel",
+          "name": "充电器取消",
+          "type": "CancellationRequest",
+          "description": "等待用户确认执行的取消计划。"
+        },
+        {
+          "id": "n_card",
+          "name": "现有礼品卡",
+          "type": "PaymentMethod",
+          "description": "平板退款的计划退回方式。"
+        },
+        {
+          "id": "n_reason",
+          "name": "已不再需要",
+          "type": "CancellationReason",
+          "description": "Agent 计划记录的充电器取消原因。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n_user",
+          "target_node_id": "n_return",
+          "relationship_name": "requests",
+          "description": "用户请求退回平板。"
+        },
+        {
+          "source_node_id": "n_user",
+          "target_node_id": "n_cancel",
+          "relationship_name": "requests",
+          "description": "用户请求取消充电器。"
+        },
+        {
+          "source_node_id": "n_charger",
+          "target_node_id": "n_tablet",
+          "relationship_name": "compatible_with",
+          "description": "用户说明充电器是配该平板购买的。"
+        },
+        {
+          "source_node_id": "n_tablet_order",
+          "target_node_id": "n_tablet",
+          "relationship_name": "contains",
+          "description": "订单 #W2692684 包含待退平板。"
+        },
+        {
+          "source_node_id": "n_charger_order",
+          "target_node_id": "n_charger",
+          "relationship_name": "contains",
+          "description": "订单 #W9373487 包含待取消充电器。"
+        },
+        {
+          "source_node_id": "n_return",
+          "target_node_id": "n_tablet",
+          "relationship_name": "targets",
+          "description": "退货请求针对平板。"
+        },
+        {
+          "source_node_id": "n_return",
+          "target_node_id": "n_card",
+          "relationship_name": "refund_to",
+          "description": "Agent 计划把退款退回现有礼品卡。"
+        },
+        {
+          "source_node_id": "n_cancel",
+          "target_node_id": "n_charger",
+          "relationship_name": "targets",
+          "description": "取消请求针对便携式充电器。"
+        },
+        {
+          "source_node_id": "n_cancel",
+          "target_node_id": "n_reason",
+          "relationship_name": "reason",
+          "description": "计划记录的取消原因为已不再需要。"
+        }
+      ]
+    },
+    {
+      "unit_id": "tau-bench-cand-001__turn-002",
+      "nodes": [
+        {
+          "id": "n_user",
+          "name": "用户",
+          "type": "Person",
+          "description": "确认执行平板退货和充电器取消的人。"
+        },
+        {
+          "id": "n_return_action",
+          "name": "return_delivered_order_items",
+          "type": "ToolAction",
+          "description": "针对订单 #W2692684 中平板执行的退货工具调用。"
+        },
+        {
+          "id": "n_cancel_action",
+          "name": "cancel_pending_order",
+          "type": "ToolAction",
+          "description": "针对订单 #W9373487 执行的取消工具调用。"
+        },
+        {
+          "id": "n_tablet_order",
+          "name": "订单 #W2692684",
+          "type": "Order",
+          "description": "被执行平板退货的订单。"
+        },
+        {
+          "id": "n_tablet_item",
+          "name": "商品项 3788616824",
+          "type": "OrderItem",
+          "description": "退货工具调用中的平板商品项。"
+        },
+        {
+          "id": "n_charger_order",
+          "name": "订单 #W9373487",
+          "type": "Order",
+          "description": "被取消的待处理充电器订单。"
+        },
+        {
+          "id": "n_reason",
+          "name": "no longer needed",
+          "type": "CancellationReason",
+          "description": "工具调用使用的取消原因。"
+        },
+        {
+          "id": "n_card",
+          "name": "gift_card_7711863",
+          "type": "GiftCard",
+          "description": "退货工具调用指定的退款方式。"
+        },
+        {
+          "id": "n_tablet_refund",
+          "name": "951.21 美元",
+          "type": "MonetaryAmount",
+          "description": "工具结果报告的平板退款金额。"
+        },
+        {
+          "id": "n_charger_refund",
+          "name": "109.27 美元",
+          "type": "MonetaryAmount",
+          "description": "工具结果报告的充电器退款金额。"
+        },
+        {
+          "id": "n_return_status",
+          "name": "退货请求已提交",
+          "type": "ActionStatus",
+          "description": "工具结果确认的平板退货状态。"
+        },
+        {
+          "id": "n_cancel_status",
+          "name": "订单已取消",
+          "type": "ActionStatus",
+          "description": "工具结果确认的充电器订单状态。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n_user",
+          "target_node_id": "n_return_action",
+          "relationship_name": "authorizes",
+          "description": "用户确认执行平板退货。"
+        },
+        {
+          "source_node_id": "n_user",
+          "target_node_id": "n_cancel_action",
+          "relationship_name": "authorizes",
+          "description": "用户确认执行充电器取消。"
+        },
+        {
+          "source_node_id": "n_return_action",
+          "target_node_id": "n_tablet_order",
+          "relationship_name": "acts_on",
+          "description": "退货调用作用于订单 #W2692684。"
+        },
+        {
+          "source_node_id": "n_return_action",
+          "target_node_id": "n_tablet_item",
+          "relationship_name": "acts_on",
+          "description": "退货调用作用于商品项 3788616824。"
+        },
+        {
+          "source_node_id": "n_return_action",
+          "target_node_id": "n_card",
+          "relationship_name": "refund_to",
+          "description": "退货调用指定礼品卡为退款方式。"
+        },
+        {
+          "source_node_id": "n_return_action",
+          "target_node_id": "n_return_status",
+          "relationship_name": "has_status",
+          "description": "工具结果显示平板退货请求已提交。"
+        },
+        {
+          "source_node_id": "n_return_action",
+          "target_node_id": "n_tablet_refund",
+          "relationship_name": "refund",
+          "description": "工具结果报告平板退款 951.21 美元。"
+        },
+        {
+          "source_node_id": "n_cancel_action",
+          "target_node_id": "n_charger_order",
+          "relationship_name": "acts_on",
+          "description": "取消调用作用于订单 #W9373487。"
+        },
+        {
+          "source_node_id": "n_cancel_action",
+          "target_node_id": "n_reason",
+          "relationship_name": "reason",
+          "description": "取消调用使用 no longer needed 原因。"
+        },
+        {
+          "source_node_id": "n_cancel_action",
+          "target_node_id": "n_cancel_status",
+          "relationship_name": "has_status",
+          "description": "工具结果显示充电器订单已取消。"
+        },
+        {
+          "source_node_id": "n_cancel_action",
+          "target_node_id": "n_charger_refund",
+          "relationship_name": "refund",
+          "description": "工具结果报告充电器退款 109.27 美元。"
+        },
+        {
+          "source_node_id": "n_charger_refund",
+          "target_node_id": "n_card",
+          "relationship_name": "returned_to",
+          "description": "充电器退款已退回礼品卡。"
+        }
+      ]
+    },
+    {
+      "unit_id": "tau-bench-cand-001__turn-003",
+      "nodes": [
+        {
+          "id": "n_user",
+          "name": "用户",
+          "type": "Person",
+          "description": "请求退回运动鞋的人。"
+        },
+        {
+          "id": "n_shoes",
+          "name": "运动鞋",
+          "type": "Product",
+          "description": "用户购买并希望退回的商品。"
+        },
+        {
+          "id": "n_return",
+          "name": "运动鞋退货",
+          "type": "ReturnRequest",
+          "description": "用户提出的新退货请求。"
+        },
+        {
+          "id": "n_order_id",
+          "name": "订单号",
+          "type": "IdentifierType",
+          "description": "Agent 请求用户提供的商品定位信息。"
+        },
+        {
+          "id": "n_recent_order",
+          "name": "最近的订单",
+          "type": "Order",
+          "description": "Agent 提出的另一种商品定位范围。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n_user",
+          "target_node_id": "n_return",
+          "relationship_name": "requests",
+          "description": "用户请求退回运动鞋。"
+        },
+        {
+          "source_node_id": "n_return",
+          "target_node_id": "n_shoes",
+          "relationship_name": "targets",
+          "description": "退货请求针对运动鞋。"
+        },
+        {
+          "source_node_id": "n_return",
+          "target_node_id": "n_order_id",
+          "relationship_name": "identified_by",
+          "description": "Agent 请求用订单号定位待退商品。"
+        },
+        {
+          "source_node_id": "n_shoes",
+          "target_node_id": "n_recent_order",
+          "relationship_name": "may_belong_to",
+          "description": "Agent 请用户确认运动鞋是否属于最近某个订单。"
+        }
+      ]
+    },
+    {
+      "unit_id": "tau-bench-cand-001__turn-004",
+      "nodes": [
+        {
+          "id": "n_user",
+          "name": "用户",
+          "type": "Person",
+          "description": "不记得运动鞋订单号的用户。"
+        },
+        {
+          "id": "n_order_id",
+          "name": "运动鞋订单号",
+          "type": "Identifier",
+          "description": "用户表示不记得的订单标识。"
+        },
+        {
+          "id": "n_recent_order",
+          "name": "最近的某个订单",
+          "type": "Order",
+          "description": "用户确认运动鞋所属的订单范围。"
+        },
+        {
+          "id": "n_lookup",
+          "name": "get_order_details",
+          "type": "ToolAction",
+          "description": "查询订单 #W7449508 详情的工具调用。"
+        },
+        {
+          "id": "n_order",
+          "name": "订单 #W7449508",
+          "type": "Order",
+          "description": "工具找到的包含运动鞋的订单。"
+        },
+        {
+          "id": "n_shoes",
+          "name": "黑色合成材料运动鞋",
+          "type": "Product",
+          "description": "订单中的运动鞋商品。"
+        },
+        {
+          "id": "n_size",
+          "name": "6 码",
+          "type": "ProductSize",
+          "description": "运动鞋尺码。"
+        },
+        {
+          "id": "n_black",
+          "name": "黑色",
+          "type": "Color",
+          "description": "运动鞋颜色。"
+        },
+        {
+          "id": "n_synthetic",
+          "name": "合成材料",
+          "type": "Material",
+          "description": "运动鞋材料。"
+        },
+        {
+          "id": "n_delivered",
+          "name": "已送达",
+          "type": "OrderStatus",
+          "description": "工具结果报告的订单状态。"
+        },
+        {
+          "id": "n_card",
+          "name": "现有礼品卡",
+          "type": "PaymentMethod",
+          "description": "Agent 提议的退货退款方式。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n_user",
+          "target_node_id": "n_order_id",
+          "relationship_name": "does_not_remember",
+          "description": "用户明确表示不记得订单号。"
+        },
+        {
+          "source_node_id": "n_recent_order",
+          "target_node_id": "n_user",
+          "relationship_name": "belongs_to",
+          "description": "用户确认运动鞋属于自己的最近订单。"
+        },
+        {
+          "source_node_id": "n_lookup",
+          "target_node_id": "n_order",
+          "relationship_name": "acts_on",
+          "description": "工具调用查询订单 #W7449508。"
+        },
+        {
+          "source_node_id": "n_order",
+          "target_node_id": "n_shoes",
+          "relationship_name": "contains",
+          "description": "工具结果显示订单包含该运动鞋。"
+        },
+        {
+          "source_node_id": "n_order",
+          "target_node_id": "n_delivered",
+          "relationship_name": "has_status",
+          "description": "工具结果显示订单状态为已送达。"
+        },
+        {
+          "source_node_id": "n_shoes",
+          "target_node_id": "n_size",
+          "relationship_name": "size",
+          "description": "运动鞋尺码为 6 码。"
+        },
+        {
+          "source_node_id": "n_shoes",
+          "target_node_id": "n_black",
+          "relationship_name": "color",
+          "description": "运动鞋颜色为黑色。"
+        },
+        {
+          "source_node_id": "n_shoes",
+          "target_node_id": "n_synthetic",
+          "relationship_name": "material",
+          "description": "运动鞋使用合成材料。"
+        },
+        {
+          "source_node_id": "n_shoes",
+          "target_node_id": "n_card",
+          "relationship_name": "refund_to",
+          "description": "Agent 提议退货退款退回现有礼品卡，尚待用户确认。"
+        }
+      ]
+    },
+    {
+      "unit_id": "tau-bench-cand-001__turn-005",
+      "nodes": [
+        {
+          "id": "n_user",
+          "name": "用户",
+          "type": "Person",
+          "description": "确认退回运动鞋并指定退款方式的人。"
+        },
+        {
+          "id": "n_action",
+          "name": "return_delivered_order_items",
+          "type": "ToolAction",
+          "description": "针对已送达运动鞋执行的退货工具调用。"
+        },
+        {
+          "id": "n_order",
+          "name": "订单 #W7449508",
+          "type": "Order",
+          "description": "退货工具调用作用的订单。"
+        },
+        {
+          "id": "n_item",
+          "name": "商品项 6477915553",
+          "type": "OrderItem",
+          "description": "退货工具调用作用的运动鞋商品项。"
+        },
+        {
+          "id": "n_card",
+          "name": "gift_card_7711863",
+          "type": "GiftCard",
+          "description": "用户指定且工具调用使用的退款方式。"
+        },
+        {
+          "id": "n_status",
+          "name": "退货请求已提交",
+          "type": "ActionStatus",
+          "description": "工具结果确认的运动鞋退货状态。"
+        },
+        {
+          "id": "n_refund",
+          "name": "186.45 美元",
+          "type": "MonetaryAmount",
+          "description": "工具结果报告的运动鞋退款金额。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n_user",
+          "target_node_id": "n_action",
+          "relationship_name": "authorizes",
+          "description": "用户确认执行运动鞋退货。"
+        },
+        {
+          "source_node_id": "n_action",
+          "target_node_id": "n_order",
+          "relationship_name": "acts_on",
+          "description": "工具调用作用于订单 #W7449508。"
+        },
+        {
+          "source_node_id": "n_action",
+          "target_node_id": "n_item",
+          "relationship_name": "acts_on",
+          "description": "工具调用作用于商品项 6477915553。"
+        },
+        {
+          "source_node_id": "n_action",
+          "target_node_id": "n_card",
+          "relationship_name": "refund_to",
+          "description": "工具调用指定退款退回礼品卡。"
+        },
+        {
+          "source_node_id": "n_action",
+          "target_node_id": "n_status",
+          "relationship_name": "has_status",
+          "description": "工具结果显示退货请求已提交。"
+        },
+        {
+          "source_node_id": "n_action",
+          "target_node_id": "n_refund",
+          "relationship_name": "refund",
+          "description": "工具结果报告退款金额为 186.45 美元。"
+        },
+        {
+          "source_node_id": "n_refund",
+          "target_node_id": "n_card",
+          "relationship_name": "returned_to",
+          "description": "退款将退回用户的礼品卡。"
+        }
+      ]
+    },
+    {
+      "unit_id": "beam-cand-004__turn-001",
+      "nodes": [
+        {
+          "id": "n_user",
+          "name": "用户",
+          "type": "Person",
+          "description": "担心遗嘱执行人选择及家人反应的人。"
+        },
+        {
+          "id": "n_choice",
+          "name": "遗嘱执行人选择",
+          "type": "Decision",
+          "description": "用户选择 Douglas 为遗嘱执行人的决定。"
+        },
+        {
+          "id": "n_douglas",
+          "name": "Douglas",
+          "type": "Person",
+          "description": "用户选定且已接受安排的遗嘱执行人。"
+        },
+        {
+          "id": "n_acceptance",
+          "name": "执行人安排接受",
+          "type": "Event",
+          "description": "Douglas 接受遗嘱执行人安排的事件。"
+        },
+        {
+          "id": "n_apr15",
+          "name": "4 月 15 日",
+          "type": "CalendarDate",
+          "description": "Douglas 接受安排的日期，年份未在本 turn 给出。"
+        },
+        {
+          "id": "n_cafe",
+          "name": "珊瑚湾咖啡馆（Coral Bay Café）",
+          "type": "Place",
+          "description": "Douglas 接受安排的地点。"
+        },
+        {
+          "id": "n_meeting",
+          "name": "家庭会议",
+          "type": "Event",
+          "description": "3 月 25 日在用户家举行的会议。"
+        },
+        {
+          "id": "n_mar25",
+          "name": "3 月 25 日",
+          "type": "CalendarDate",
+          "description": "家庭会议日期，年份未在本 turn 给出。"
+        },
+        {
+          "id": "n_home",
+          "name": "用户家",
+          "type": "Place",
+          "description": "家庭会议地点。"
+        },
+        {
+          "id": "n_kimberly",
+          "name": "Kimberly",
+          "type": "Person",
+          "description": "参加家庭会议的家人。"
+        },
+        {
+          "id": "n_bradley",
+          "name": "Bradley",
+          "type": "Person",
+          "description": "参加家庭会议的家人。"
+        },
+        {
+          "id": "n_reaction",
+          "name": "家人对选择的看法",
+          "type": "Concern",
+          "description": "用户担心 Kimberly、Bradley 等人知道选择 Douglas 后的反应。"
+        },
+        {
+          "id": "n_stephanie",
+          "name": "Stephanie",
+          "type": "Person",
+          "description": "Agent 明确称为遗产规划律师的人。"
+        },
+        {
+          "id": "n_lawyer_role",
+          "name": "遗产规划律师",
+          "type": "ProfessionalRole",
+          "description": "Agent 为 Stephanie 指明的专业角色。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n_user",
+          "target_node_id": "n_choice",
+          "relationship_name": "concerned_about",
+          "description": "用户担心遗嘱执行人的选择。"
+        },
+        {
+          "source_node_id": "n_choice",
+          "target_node_id": "n_douglas",
+          "relationship_name": "selects",
+          "description": "用户的决定选择 Douglas 为执行人。"
+        },
+        {
+          "source_node_id": "n_douglas",
+          "target_node_id": "n_acceptance",
+          "relationship_name": "participates_in",
+          "description": "Douglas 接受执行人安排。"
+        },
+        {
+          "source_node_id": "n_acceptance",
+          "target_node_id": "n_apr15",
+          "relationship_name": "date",
+          "description": "接受事件发生于 4 月 15 日。"
+        },
+        {
+          "source_node_id": "n_acceptance",
+          "target_node_id": "n_cafe",
+          "relationship_name": "location",
+          "description": "接受事件发生在珊瑚湾咖啡馆。"
+        },
+        {
+          "source_node_id": "n_meeting",
+          "target_node_id": "n_mar25",
+          "relationship_name": "date",
+          "description": "家庭会议发生于 3 月 25 日。"
+        },
+        {
+          "source_node_id": "n_meeting",
+          "target_node_id": "n_home",
+          "relationship_name": "location",
+          "description": "家庭会议在用户家举行。"
+        },
+        {
+          "source_node_id": "n_kimberly",
+          "target_node_id": "n_meeting",
+          "relationship_name": "attends",
+          "description": "Kimberly 参加了家庭会议。"
+        },
+        {
+          "source_node_id": "n_bradley",
+          "target_node_id": "n_meeting",
+          "relationship_name": "attends",
+          "description": "Bradley 参加了家庭会议。"
+        },
+        {
+          "source_node_id": "n_user",
+          "target_node_id": "n_reaction",
+          "relationship_name": "concerned_about",
+          "description": "用户担心家人对选择 Douglas 的看法。"
+        },
+        {
+          "source_node_id": "n_reaction",
+          "target_node_id": "n_choice",
+          "relationship_name": "about",
+          "description": "家人反应的关注对象是执行人选择。"
+        },
+        {
+          "source_node_id": "n_stephanie",
+          "target_node_id": "n_lawyer_role",
+          "relationship_name": "has_role",
+          "description": "Agent 将 Stephanie 描述为遗产规划律师。"
+        }
+      ]
+    },
+    {
+      "unit_id": "beam-cand-004__turn-002",
+      "nodes": [
+        {
+          "id": "n_user",
+          "name": "用户",
+          "type": "Person",
+          "description": "决定再安排一次家庭会议的人。"
+        },
+        {
+          "id": "n_meeting",
+          "name": "新的家庭会议",
+          "type": "PlannedEvent",
+          "description": "用户认为应再次安排的面对面家庭会议。"
+        },
+        {
+          "id": "n_family",
+          "name": "家人",
+          "type": "Group",
+          "description": "计划参加会议并表达意见的人。"
+        },
+        {
+          "id": "n_face_to_face",
+          "name": "面对面讨论",
+          "type": "InteractionMode",
+          "description": "用户希望用来谈清事情的沟通方式。"
+        },
+        {
+          "id": "n_concerns",
+          "name": "家人的顾虑",
+          "type": "Concern",
+          "description": "用户希望会议处理的潜在顾虑。"
+        },
+        {
+          "id": "n_executor",
+          "name": "遗嘱执行人选择",
+          "type": "Topic",
+          "description": "Agent 建议会议讨论的主题。"
+        },
+        {
+          "id": "n_coexecutor",
+          "name": "共同遗嘱执行人",
+          "type": "Option",
+          "description": "Agent 建议会议讨论的可能方案。"
+        },
+        {
+          "id": "n_no_recent_gathering",
+          "name": "一阵子没有聚会",
+          "type": "Situation",
+          "description": "用户给出的再次聚会动机。"
+        },
+        {
+          "id": "n_agenda",
+          "name": "会议议程",
+          "type": "Plan",
+          "description": "Agent 建议为家庭会议准备的议程。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n_user",
+          "target_node_id": "n_meeting",
+          "relationship_name": "plans",
+          "description": "用户决定再安排一次家庭会议。"
+        },
+        {
+          "source_node_id": "n_family",
+          "target_node_id": "n_meeting",
+          "relationship_name": "participates_in",
+          "description": "会议面向相关家人。"
+        },
+        {
+          "source_node_id": "n_meeting",
+          "target_node_id": "n_face_to_face",
+          "relationship_name": "uses",
+          "description": "用户希望通过面对面方式沟通。"
+        },
+        {
+          "source_node_id": "n_meeting",
+          "target_node_id": "n_concerns",
+          "relationship_name": "addresses",
+          "description": "会议用于处理家人可能的顾虑。"
+        },
+        {
+          "source_node_id": "n_meeting",
+          "target_node_id": "n_executor",
+          "relationship_name": "topic",
+          "description": "会议讨论遗嘱执行人选择。"
+        },
+        {
+          "source_node_id": "n_meeting",
+          "target_node_id": "n_coexecutor",
+          "relationship_name": "considers",
+          "description": "Agent 建议会议考虑共同执行人方案。"
+        },
+        {
+          "source_node_id": "n_meeting",
+          "target_node_id": "n_no_recent_gathering",
+          "relationship_name": "motivated_by",
+          "description": "久未聚会也是用户安排会议的动机。"
+        },
+        {
+          "source_node_id": "n_meeting",
+          "target_node_id": "n_agenda",
+          "relationship_name": "uses",
+          "description": "Agent 建议为会议准备议程。"
+        }
+      ]
+    },
+    {
+      "unit_id": "beam-cand-004__turn-003",
+      "nodes": [
+        {
+          "id": "n_user",
+          "name": "用户",
+          "type": "Person",
+          "description": "要求帮助起草会议材料的人。"
+        },
+        {
+          "id": "n_request",
+          "name": "起草会议材料",
+          "type": "TaskRequest",
+          "description": "用户提出的起草邀请和议程任务。"
+        },
+        {
+          "id": "n_invitation",
+          "name": "会议邀请",
+          "type": "Document",
+          "description": "用户要求起草的邀请文本。"
+        },
+        {
+          "id": "n_agenda",
+          "name": "会议议程",
+          "type": "Document",
+          "description": "用户要求起草的议程。"
+        },
+        {
+          "id": "n_meeting",
+          "name": "家庭会议",
+          "type": "PlannedEvent",
+          "description": "邀请和议程对应的会议。"
+        },
+        {
+          "id": "n_executor_choice",
+          "name": "遗嘱执行人选择",
+          "type": "Topic",
+          "description": "Agent 指定的会议主题。"
+        },
+        {
+          "id": "n_schedule",
+          "name": "拟议日期、时间和地点",
+          "type": "Schedule",
+          "description": "Agent 建议邀请中列出的会议信息。"
+        },
+        {
+          "id": "n_duties",
+          "name": "执行人职责",
+          "type": "Topic",
+          "description": "Agent 建议的议程项目。"
+        },
+        {
+          "id": "n_kimberly",
+          "name": "Kimberly",
+          "type": "Person",
+          "description": "议程中拟听取顾虑的家人。"
+        },
+        {
+          "id": "n_bradley",
+          "name": "Bradley",
+          "type": "Person",
+          "description": "议程中拟听取顾虑的家人。"
+        },
+        {
+          "id": "n_concerns",
+          "name": "顾虑",
+          "type": "Concern",
+          "description": "会议拟听取和讨论的顾虑。"
+        },
+        {
+          "id": "n_coexecutor",
+          "name": "共同执行人方案",
+          "type": "Option",
+          "description": "Agent 建议的议程项目。"
+        },
+        {
+          "id": "n_decision",
+          "name": "最终决定",
+          "type": "Decision",
+          "description": "会议拟确认的决定。"
+        },
+        {
+          "id": "n_next_steps",
+          "name": "后续步骤",
+          "type": "Plan",
+          "description": "会议拟确认的后续安排。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n_user",
+          "target_node_id": "n_request",
+          "relationship_name": "requests",
+          "description": "用户请求起草会议材料。"
+        },
+        {
+          "source_node_id": "n_request",
+          "target_node_id": "n_invitation",
+          "relationship_name": "produces",
+          "description": "任务需要产出会议邀请。"
+        },
+        {
+          "source_node_id": "n_request",
+          "target_node_id": "n_agenda",
+          "relationship_name": "produces",
+          "description": "任务需要产出会议议程。"
+        },
+        {
+          "source_node_id": "n_invitation",
+          "target_node_id": "n_meeting",
+          "relationship_name": "for",
+          "description": "邀请用于家庭会议。"
+        },
+        {
+          "source_node_id": "n_agenda",
+          "target_node_id": "n_meeting",
+          "relationship_name": "for",
+          "description": "议程用于家庭会议。"
+        },
+        {
+          "source_node_id": "n_meeting",
+          "target_node_id": "n_executor_choice",
+          "relationship_name": "topic",
+          "description": "会议主题是遗嘱执行人选择。"
+        },
+        {
+          "source_node_id": "n_invitation",
+          "target_node_id": "n_schedule",
+          "relationship_name": "specifies",
+          "description": "Agent 建议邀请列出拟议日期、时间和地点。"
+        },
+        {
+          "source_node_id": "n_agenda",
+          "target_node_id": "n_duties",
+          "relationship_name": "includes",
+          "description": "议程包含讨论执行人职责。"
+        },
+        {
+          "source_node_id": "n_kimberly",
+          "target_node_id": "n_concerns",
+          "relationship_name": "may_have",
+          "description": "议程拟听取 Kimberly 的顾虑。"
+        },
+        {
+          "source_node_id": "n_bradley",
+          "target_node_id": "n_concerns",
+          "relationship_name": "may_have",
+          "description": "议程拟听取 Bradley 的顾虑。"
+        },
+        {
+          "source_node_id": "n_agenda",
+          "target_node_id": "n_concerns",
+          "relationship_name": "includes",
+          "description": "议程包含听取顾虑。"
+        },
+        {
+          "source_node_id": "n_agenda",
+          "target_node_id": "n_coexecutor",
+          "relationship_name": "includes",
+          "description": "议程包含讨论共同执行人方案。"
+        },
+        {
+          "source_node_id": "n_agenda",
+          "target_node_id": "n_decision",
+          "relationship_name": "includes",
+          "description": "议程包含确认决定。"
+        },
+        {
+          "source_node_id": "n_agenda",
+          "target_node_id": "n_next_steps",
+          "relationship_name": "includes",
+          "description": "议程包含确认后续步骤。"
+        }
+      ]
+    },
+    {
+      "unit_id": "beam-cand-004__turn-004",
+      "nodes": [
+        {
+          "id": "n_user",
+          "name": "用户",
+          "type": "Person",
+          "description": "需要在截止日前完成具有法律效力遗嘱的人。"
+        },
+        {
+          "id": "n_will",
+          "name": "用户的遗嘱",
+          "type": "LegalDocument",
+          "description": "用户需要完成并确保具有法律效力的遗嘱。"
+        },
+        {
+          "id": "n_deadline",
+          "name": "2024 年 5 月 15 日",
+          "type": "CalendarDate",
+          "description": "遗嘱完成截止日期。"
+        },
+        {
+          "id": "n_anchor",
+          "name": "2024 年 5 月 2 日",
+          "type": "CalendarDate",
+          "description": "对话给出的当前时间锚。"
+        },
+        {
+          "id": "n_pressure",
+          "name": "压力很大",
+          "type": "EmotionalState",
+          "description": "用户面对截止日期时表达的状态。"
+        },
+        {
+          "id": "n_family_meeting",
+          "name": "已举行的家庭会议",
+          "type": "Event",
+          "description": "用户说明已和家人开过的会议。"
+        },
+        {
+          "id": "n_douglas",
+          "name": "Douglas",
+          "type": "Person",
+          "description": "已经接受遗嘱执行人角色的人。"
+        },
+        {
+          "id": "n_executor_role",
+          "name": "遗嘱执行人角色",
+          "type": "Role",
+          "description": "Douglas 已接受的角色。"
+        },
+        {
+          "id": "n_validity",
+          "name": "遗嘱法律效力",
+          "type": "LegalStatus",
+          "description": "用户希望确保的遗嘱状态。"
+        },
+        {
+          "id": "n_plan",
+          "name": "遗嘱完成计划",
+          "type": "Plan",
+          "description": "Agent 按截止日期提出的办理步骤。"
+        },
+        {
+          "id": "n_assets",
+          "name": "资产清单",
+          "type": "Information",
+          "description": "Agent 提出的遗嘱准备内容。"
+        },
+        {
+          "id": "n_beneficiaries",
+          "name": "受益人清单",
+          "type": "Information",
+          "description": "Agent 提出的遗嘱准备内容。"
+        },
+        {
+          "id": "n_appointment",
+          "name": "Douglas 的执行人任命",
+          "type": "LegalProvision",
+          "description": "Agent 建议在遗嘱中明确的任命。"
+        },
+        {
+          "id": "n_draft",
+          "name": "遗嘱文本",
+          "type": "DocumentDraft",
+          "description": "Agent 建议准备的法律文本。"
+        },
+        {
+          "id": "n_law",
+          "name": "适用法律",
+          "type": "Law",
+          "description": "完成签名和见证时需要遵循的法律。"
+        },
+        {
+          "id": "n_signature",
+          "name": "签名",
+          "type": "LegalFormality",
+          "description": "Agent 提出的遗嘱办理手续。"
+        },
+        {
+          "id": "n_witnessing",
+          "name": "见证",
+          "type": "LegalFormality",
+          "description": "Agent 提出的遗嘱办理手续。"
+        },
+        {
+          "id": "n_lawyer",
+          "name": "遗产规划律师",
+          "type": "ProfessionalRole",
+          "description": "Agent 建议审核遗嘱的专业人员。"
+        },
+        {
+          "id": "n_review",
+          "name": "律师审核",
+          "type": "ReviewAction",
+          "description": "Agent 建议对遗嘱执行的审核。"
+        },
+        {
+          "id": "n_notarization",
+          "name": "公证",
+          "type": "LegalFormality",
+          "description": "Agent 表示可能需要预留时间处理的手续。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n_user",
+          "target_node_id": "n_will",
+          "relationship_name": "must_complete",
+          "description": "用户必须完成遗嘱。"
+        },
+        {
+          "source_node_id": "n_will",
+          "target_node_id": "n_deadline",
+          "relationship_name": "deadline",
+          "description": "遗嘱必须在 2024 年 5 月 15 日前完成。"
+        },
+        {
+          "source_node_id": "n_user",
+          "target_node_id": "n_anchor",
+          "relationship_name": "current_date",
+          "description": "用户给出的当前时间锚为 2024 年 5 月 2 日。"
+        },
+        {
+          "source_node_id": "n_user",
+          "target_node_id": "n_pressure",
+          "relationship_name": "experiences",
+          "description": "用户表示感到压力很大。"
+        },
+        {
+          "source_node_id": "n_user",
+          "target_node_id": "n_family_meeting",
+          "relationship_name": "has_completed",
+          "description": "用户说明已经和家人开过会。"
+        },
+        {
+          "source_node_id": "n_douglas",
+          "target_node_id": "n_executor_role",
+          "relationship_name": "accepts",
+          "description": "Douglas 已接受执行人角色。"
+        },
+        {
+          "source_node_id": "n_user",
+          "target_node_id": "n_validity",
+          "relationship_name": "seeks",
+          "description": "用户希望确保遗嘱具有法律效力。"
+        },
+        {
+          "source_node_id": "n_plan",
+          "target_node_id": "n_deadline",
+          "relationship_name": "scheduled_by",
+          "description": "Agent 建议按截止日期推进计划。"
+        },
+        {
+          "source_node_id": "n_plan",
+          "target_node_id": "n_assets",
+          "relationship_name": "includes",
+          "description": "计划包含列出资产。"
+        },
+        {
+          "source_node_id": "n_plan",
+          "target_node_id": "n_beneficiaries",
+          "relationship_name": "includes",
+          "description": "计划包含列出受益人。"
+        },
+        {
+          "source_node_id": "n_plan",
+          "target_node_id": "n_appointment",
+          "relationship_name": "includes",
+          "description": "计划包含明确 Douglas 的执行人任命。"
+        },
+        {
+          "source_node_id": "n_plan",
+          "target_node_id": "n_draft",
+          "relationship_name": "includes",
+          "description": "计划包含准备遗嘱文本。"
+        },
+        {
+          "source_node_id": "n_signature",
+          "target_node_id": "n_law",
+          "relationship_name": "governed_by",
+          "description": "签名需要按照适用法律完成。"
+        },
+        {
+          "source_node_id": "n_witnessing",
+          "target_node_id": "n_law",
+          "relationship_name": "governed_by",
+          "description": "见证需要按照适用法律完成。"
+        },
+        {
+          "source_node_id": "n_plan",
+          "target_node_id": "n_signature",
+          "relationship_name": "includes",
+          "description": "计划包含完成签名。"
+        },
+        {
+          "source_node_id": "n_plan",
+          "target_node_id": "n_witnessing",
+          "relationship_name": "includes",
+          "description": "计划包含完成见证。"
+        },
+        {
+          "source_node_id": "n_review",
+          "target_node_id": "n_will",
+          "relationship_name": "reviews",
+          "description": "律师审核针对遗嘱。"
+        },
+        {
+          "source_node_id": "n_lawyer",
+          "target_node_id": "n_review",
+          "relationship_name": "performs",
+          "description": "Agent 建议请遗产规划律师进行审核。"
+        },
+        {
+          "source_node_id": "n_plan",
+          "target_node_id": "n_notarization",
+          "relationship_name": "allows_time_for",
+          "description": "Agent 建议预留时间处理公证等手续。"
+        }
+      ]
+    },
+    {
+      "unit_id": "beam-cand-004__turn-005",
+      "nodes": [
+        {
+          "id": "n_user",
+          "name": "用户",
+          "type": "Person",
+          "description": "担心 Francis 和 Michael 监护安排的人。"
+        },
+        {
+          "id": "n_francis",
+          "name": "Francis",
+          "type": "Person",
+          "description": "用户关心其监护安排的人。"
+        },
+        {
+          "id": "n_michael",
+          "name": "Michael",
+          "type": "Person",
+          "description": "用户关心其监护安排的人。"
+        },
+        {
+          "id": "n_stephanie",
+          "name": "Stephanie",
+          "type": "Person",
+          "description": "用户已指定的监护人。"
+        },
+        {
+          "id": "n_designation",
+          "name": "监护人指定",
+          "type": "LegalDecision",
+          "description": "用户把 Stephanie 指定为监护人的决定。"
+        },
+        {
+          "id": "n_apr28",
+          "name": "4 月 28 日",
+          "type": "CalendarDate",
+          "description": "用户作出监护人指定的日期，年份未在本 turn 给出。"
+        },
+        {
+          "id": "n_estate_plan",
+          "name": "用户的遗产计划",
+          "type": "EstatePlan",
+          "description": "用户询问监护安排影响的计划。"
+        },
+        {
+          "id": "n_care",
+          "name": "未成年人照护",
+          "type": "CareArrangement",
+          "description": "Agent 表示监护人指定会影响的事项。"
+        },
+        {
+          "id": "n_asset_management",
+          "name": "相关资产管理",
+          "type": "FinancialArrangement",
+          "description": "Agent 表示监护人指定会影响的事项。"
+        },
+        {
+          "id": "n_suitability",
+          "name": "Stephanie 的意愿和适任性",
+          "type": "Assessment",
+          "description": "Agent 建议确认的条件，并非已确认事实。"
+        },
+        {
+          "id": "n_backup",
+          "name": "备用监护人",
+          "type": "Role",
+          "description": "Agent 建议考虑的备用安排。"
+        },
+        {
+          "id": "n_will",
+          "name": "遗嘱",
+          "type": "LegalDocument",
+          "description": "可写明监护和资金管理方式的文件。"
+        },
+        {
+          "id": "n_trust",
+          "name": "信托",
+          "type": "LegalArrangement",
+          "description": "可写明监护和资金管理方式的安排。"
+        },
+        {
+          "id": "n_funds",
+          "name": "继承资金管理方式",
+          "type": "FinancialArrangement",
+          "description": "Agent 建议在遗嘱或信托中写清的事项。"
+        }
+      ],
+      "edges": [
+        {
+          "source_node_id": "n_user",
+          "target_node_id": "n_designation",
+          "relationship_name": "makes",
+          "description": "用户作出监护人指定。"
+        },
+        {
+          "source_node_id": "n_designation",
+          "target_node_id": "n_stephanie",
+          "relationship_name": "selects",
+          "description": "监护人指定选择 Stephanie。"
+        },
+        {
+          "source_node_id": "n_designation",
+          "target_node_id": "n_francis",
+          "relationship_name": "for",
+          "description": "监护安排涉及 Francis。"
+        },
+        {
+          "source_node_id": "n_designation",
+          "target_node_id": "n_michael",
+          "relationship_name": "for",
+          "description": "监护安排涉及 Michael。"
+        },
+        {
+          "source_node_id": "n_designation",
+          "target_node_id": "n_apr28",
+          "relationship_name": "date",
+          "description": "指定发生于 4 月 28 日。"
+        },
+        {
+          "source_node_id": "n_user",
+          "target_node_id": "n_estate_plan",
+          "relationship_name": "concerned_about",
+          "description": "用户担心监护指定对遗产计划的影响。"
+        },
+        {
+          "source_node_id": "n_designation",
+          "target_node_id": "n_estate_plan",
+          "relationship_name": "affects",
+          "description": "Agent 表示监护人指定会影响遗产计划。"
+        },
+        {
+          "source_node_id": "n_designation",
+          "target_node_id": "n_care",
+          "relationship_name": "affects",
+          "description": "Agent 表示指定会影响未成年人照护。"
+        },
+        {
+          "source_node_id": "n_designation",
+          "target_node_id": "n_asset_management",
+          "relationship_name": "affects",
+          "description": "Agent 表示指定会影响相关资产管理。"
+        },
+        {
+          "source_node_id": "n_estate_plan",
+          "target_node_id": "n_suitability",
+          "relationship_name": "requires",
+          "description": "Agent 建议确认 Stephanie 的意愿和适任性。"
+        },
+        {
+          "source_node_id": "n_estate_plan",
+          "target_node_id": "n_backup",
+          "relationship_name": "considers",
+          "description": "Agent 建议考虑备用监护人。"
+        },
+        {
+          "source_node_id": "n_will",
+          "target_node_id": "n_funds",
+          "relationship_name": "specifies",
+          "description": "Agent 建议在遗嘱中写清继承资金管理方式。"
+        },
+        {
+          "source_node_id": "n_trust",
+          "target_node_id": "n_funds",
+          "relationship_name": "specifies",
+          "description": "Agent 建议在信托中写清继承资金管理方式。"
+        },
+        {
+          "source_node_id": "n_will",
+          "target_node_id": "n_designation",
+          "relationship_name": "documents",
+          "description": "Agent 建议在遗嘱中写清监护安排。"
+        },
+        {
+          "source_node_id": "n_trust",
+          "target_node_id": "n_designation",
+          "relationship_name": "documents",
+          "description": "Agent 建议在信托中写清监护安排。"
+        }
+      ]
+    }
+  ]
+}

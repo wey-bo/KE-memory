@@ -1,0 +1,47 @@
+{
+  "schema_version": "natural-benchmark-gold-evidence-v1",
+  "slice_id": "identity-actor-binding-dev-v4",
+  "item_count": 4,
+  "items": {
+    "IDENTITY-DIAG-V4-LOCOMO-CONV30-D1-4": [
+      {
+        "benchmark": "locomo",
+        "metadata": {"speaker": "Jon"},
+        "source_id": "locomo10",
+        "source_ref": "sample_id=conv-30;session=1;dia_id=D1:4",
+        "text": "Sorry to hear that! I'm starting a dance studio 'cause I'm passionate about dancing and it'd be great to share it with others.",
+        "unit_id": "D1:4"
+      }
+    ],
+    "IDENTITY-DIAG-V4-LOCOMO-CONV41-D1-3": [
+      {
+        "benchmark": "locomo",
+        "metadata": {"speaker": "Maria"},
+        "source_id": "locomo10",
+        "source_ref": "sample_id=conv-41;session=1;dia_id=D1:3",
+        "text": "Been busy volunteering at the homeless shelter and keeping fit. Just started doing aerial yoga, it's great. Have you tried any other cool workout classes?",
+        "unit_id": "D1:3"
+      }
+    ],
+    "BEAM-100K-C001-contradiction_resolution-001": [
+      {
+        "benchmark": "beam",
+        "metadata": {"index": "1,12", "question_type": "main_question", "role": "user", "time_anchor": null},
+        "source_id": "beam-100K",
+        "source_ref": "conversation_id=1;message_id=24;session_index=1;message_index=25",
+        "text": "I'm trying to implement the basic homepage route with Flask, and I've managed to return static HTML, but I'm not sure how to optimize it for better response times. I've tested the response time, and it's around 150ms, but I want to make sure it's as fast as possible. Here's my current code:\n```python\nfrom flask import Flask, render_template\n\napp = Flask(__name__)\n\n@app.route('/')\ndef homepage():\n    return render_template('homepage.html')\n\nif __name__ == '__main__':\n    app.run(port=5000)\n```\nI've heard that using a templating engine like Jinja2 can help with performance, but I'm not sure how to implement it. Can you help me optimize my code and reduce the response time? Maybe there's a way to use caching or async requests to improve performance? ->-> 1,12",
+        "unit_id": "24"
+      }
+    ],
+    "BEAM-100K-C001-knowledge_update-001": [
+      {
+        "benchmark": "beam",
+        "metadata": {"index": "2,25", "question_type": "main_question", "role": "user", "time_anchor": null},
+        "source_id": "beam-100K",
+        "source_ref": "conversation_id=1;message_id=114;session_index=2;message_index=55",
+        "text": "I'm trying to optimize the dashboard API response time, which has recently improved to 250ms after adding some caching tweaks, but I want to make sure I'm using the latest versions of my dependencies, like Flask-Login, which I've never actually integrated into this project, so I'm starting from scratch - can you help me implement user session management with Flask-Login 0.6.2, including login, logout, and session validation, using the latest best practices and ensuring compatibility with my existing Flask 2.3.1 app, and also considering the fact that I've already completed the user registration and login modules, now focusing on transaction CRUD and analytics integration, and I prefer server-side rendering for initial pages but use JS charts for dynamic analytics to balance performance and UX? ->-> 2,25",
+        "unit_id": "114"
+      }
+    ]
+  }
+}

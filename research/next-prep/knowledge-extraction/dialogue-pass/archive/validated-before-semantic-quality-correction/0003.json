@@ -1,0 +1,185 @@
+{
+  "candidate_id": "WILDCHAT-MGMT-CAND-003",
+  "new_knowledge": [
+    {
+      "knowledge_id": "D_wildchat-mgmt-cand-003-f877bc2fc8f5_001",
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "statement": "用户请求为公共住房机构的高级项目经理再编写一些绩效目标。",
+      "subject": "用户",
+      "predicate": "请求再编写",
+      "object": "公共住房机构高级项目经理的绩效目标",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "请为公共住房机构的高级项目经理写 10 个绩效目标",
+          "evidence_id": "evidence-5ed8318dde30308465e6134630a46a6cf0daa8c21ede8fff3d25b8ec39347eee",
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 25
+        },
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "再写一些目标",
+          "evidence_id": "evidence-5d44a0cbbfcd1734bc709f5646b85e8c43788db8e9db49a2224f5f665c81fa73",
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 6
+        }
+      ],
+      "inference_basis": "Turn 1's '目标' refers to the public-housing senior project manager performance goals requested in turn 0.",
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "D_wildchat-mgmt-cand-003-f877bc2fc8f5_002",
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "statement": "用户请求把此前为公共住房机构高级项目经理提出的绩效目标改成 SMART 绩效目标。",
+      "subject": "用户",
+      "predicate": "请求改成",
+      "object": "此前为公共住房机构高级项目经理提出的 SMART 绩效目标",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "请为公共住房机构的高级项目经理写 10 个绩效目标",
+          "evidence_id": "evidence-5ed8318dde30308465e6134630a46a6cf0daa8c21ede8fff3d25b8ec39347eee",
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 25
+        },
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "再写一些目标",
+          "evidence_id": "evidence-5d44a0cbbfcd1734bc709f5646b85e8c43788db8e9db49a2224f5f665c81fa73",
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 6
+        },
+        {
+          "turn_index": 2,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "请把它们改成 SMART 绩效目标",
+          "evidence_id": "evidence-8e6565ef8a630de55620fac7e5ce848faa10422f6d7049e515f8612141036c44",
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 17
+        }
+      ],
+      "inference_basis": "Turn 2's '它们' refers to the performance-goal sets requested in turns 0 and 1 for the public housing agency's senior project manager.",
+      "confidence": 0.99
+    }
+  ],
+  "operations": [
+    {
+      "operation_id": "R_wildchat-mgmt-cand-003-f877bc2fc8f5_001",
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "operation": "correct",
+      "targets": [
+        "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_001"
+      ],
+      "replacement": "D_wildchat-mgmt-cand-003-f877bc2fc8f5_001",
+      "reason": "The complete dialogue resolves the unspecified target category to additional performance goals for a public housing agency's senior project manager.",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "请为公共住房机构的高级项目经理写 10 个绩效目标",
+          "evidence_id": "evidence-5ed8318dde30308465e6134630a46a6cf0daa8c21ede8fff3d25b8ec39347eee",
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 25
+        },
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "再写一些目标",
+          "evidence_id": "evidence-5d44a0cbbfcd1734bc709f5646b85e8c43788db8e9db49a2224f5f665c81fa73",
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 6
+        }
+      ]
+    },
+    {
+      "operation_id": "R_wildchat-mgmt-cand-003-f877bc2fc8f5_002",
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "operation": "correct",
+      "targets": [
+        "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_001"
+      ],
+      "replacement": "D_wildchat-mgmt-cand-003-f877bc2fc8f5_002",
+      "reason": "The complete dialogue resolves '它们' to all previously requested performance goals for the public housing agency's senior project manager.",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "请为公共住房机构的高级项目经理写 10 个绩效目标",
+          "evidence_id": "evidence-5ed8318dde30308465e6134630a46a6cf0daa8c21ede8fff3d25b8ec39347eee",
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 25
+        },
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "再写一些目标",
+          "evidence_id": "evidence-5d44a0cbbfcd1734bc709f5646b85e8c43788db8e9db49a2224f5f665c81fa73",
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 6
+        },
+        {
+          "turn_index": 2,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "请把它们改成 SMART 绩效目标",
+          "evidence_id": "evidence-8e6565ef8a630de55620fac7e5ce848faa10422f6d7049e515f8612141036c44",
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 17
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "candidate_id": "WILDCHAT-LEARN-CAND-002",
+  "new_knowledge": [
+    {
+      "knowledge_id": "D_wildchat-learn-cand-002-1fa98728ac3e_001",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "statement": "用户请求具体解释先前把 F0 数据导出为文本的步骤。",
+      "subject": "用户",
+      "predicate": "请求具体解释",
+      "object": "把 F0 数据导出为文本的步骤",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "能具体解释一下第 4 步吗？"
+        }
+      ],
+      "inference_basis": "In the preceding turn, the relevant referenced step is the agent's instruction to export F0 data as text.",
+      "confidence": 0.94
+    },
+    {
+      "knowledge_id": "D_wildchat-learn-cand-002-1fa98728ac3e_002",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "statement": "用户无法把 F0 数据提取成文本文件。",
+      "subject": "用户",
+      "predicate": "无法提取",
+      "object": "F0 数据到文本文件",
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我没法把它提取成文本文件"
+        }
+      ],
+      "inference_basis": "The pronoun '它' refers to the F0 data that the preceding turn instructed the user to export as text.",
+      "confidence": 0.95
+    }
+  ],
+  "operations": [
+    {
+      "operation_id": "R_wildchat-learn-cand-002-1fa98728ac3e_001",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "operation": "correct",
+      "targets": [
+        "K_wildchat-learn-cand-002-1fa98728ac3e_001_001"
+      ],
+      "replacement": "D_wildchat-learn-cand-002-1fa98728ac3e_001",
+      "reason": "The complete dialogue resolves the referenced step to the prior instruction to export F0 data as text.",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "把 F0 数据导出为文本",
+          "evidence_role": "agent_generated"
+        },
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "能具体解释一下第 4 步吗？",
+          "evidence_role": "user_reported"
+        }
+      ],
+      "confidence": 0.94
+    },
+    {
+      "operation_id": "R_wildchat-learn-cand-002-1fa98728ac3e_002",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "operation": "correct",
+      "targets": [
+        "K_wildchat-learn-cand-002-1fa98728ac3e_001_002"
+      ],
+      "replacement": "D_wildchat-learn-cand-002-1fa98728ac3e_002",
+      "reason": "The complete dialogue resolves '它' to the F0 data that the preceding turn instructed the user to export as text.",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "把 F0 数据导出为文本",
+          "evidence_role": "agent_generated"
+        },
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我没法把它提取成文本文件",
+          "evidence_role": "user_reported"
+        }
+      ],
+      "confidence": 0.95
+    }
+  ]
+}

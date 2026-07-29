@@ -1,0 +1,3513 @@
+{
+  "task": "Normalize concept/operator semantics for the existing ontology draft.",
+  "batch": {
+    "concept_offset": 120,
+    "concept_limit": 40,
+    "operator_offset": 120,
+    "operator_limit": 40
+  },
+  "constraints": {
+    "allowed_operator_ids": [
+      "operator_3c1e074fb4f5",
+      "operator_cea78df3d69d",
+      "operator_fbc0774b0fc3",
+      "operator_c85615c6f212",
+      "operator_839838c4e65d",
+      "operator_2e53c30aa4c7",
+      "operator_823fc3275cc4",
+      "operator_76ca7f643167",
+      "operator_075625ced9ed",
+      "operator_0ab1c4ffc147",
+      "operator_ef8331cba2da",
+      "operator_326875f8fc67",
+      "operator_9cbec49f55a7",
+      "operator_ace967520eec",
+      "operator_e5309da50a54",
+      "operator_b39c25dccd08",
+      "operator_6ed60ff57eba",
+      "operator_8dcfe6f6f47f",
+      "operator_b14067726f06",
+      "operator_79834d562708",
+      "operator_7f4bad6b2b73",
+      "operator_7585ae983a36",
+      "operator_7a1534897bf1",
+      "operator_2b11809a43bc",
+      "operator_62336608654b",
+      "operator_9315206adfa7",
+      "operator_2797b9baf17f",
+      "operator_432895319c67",
+      "operator_e72e5aee85f7",
+      "operator_af963d568edd",
+      "operator_7628caa9e70d",
+      "operator_6a32421af8ec",
+      "operator_cbce2be666a0",
+      "operator_de225237685b",
+      "operator_7082a3aae791",
+      "operator_f8a47a534ba3",
+      "operator_be643e2aa207",
+      "operator_6f7605739873",
+      "operator_e8d2c704dd3b",
+      "operator_db426a683004"
+    ],
+    "do_not_invent_ids": true,
+    "operator_output_argument_type": "concept"
+  },
+  "schema": {
+    "$defs": {
+      "ConceptUpdate": {
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "canonical_name": {
+            "default": "",
+            "title": "Canonical Name",
+            "type": "string"
+          },
+          "kind": {
+            "default": "",
+            "title": "Kind",
+            "type": "string"
+          },
+          "description": {
+            "default": "",
+            "title": "Description",
+            "type": "string"
+          },
+          "aliases": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Aliases",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "ConceptUpdate",
+        "type": "object"
+      },
+      "OperatorUpdate": {
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "canonical_name": {
+            "default": "",
+            "title": "Canonical Name",
+            "type": "string"
+          },
+          "operator_type": {
+            "default": "",
+            "title": "Operator Type",
+            "type": "string"
+          },
+          "description": {
+            "default": "",
+            "title": "Description",
+            "type": "string"
+          },
+          "aliases": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Aliases",
+            "type": "array"
+          },
+          "semantic_status": {
+            "default": "",
+            "title": "Semantic Status",
+            "type": "string"
+          },
+          "input_concepts": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Input Concepts",
+            "type": "array"
+          },
+          "output_concepts": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Output Concepts",
+            "type": "array"
+          },
+          "schema_confidence": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Schema Confidence"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "OperatorUpdate",
+        "type": "object"
+      }
+    },
+    "properties": {
+      "concept_updates": {
+        "items": {
+          "$ref": "#/$defs/ConceptUpdate"
+        },
+        "title": "Concept Updates",
+        "type": "array"
+      },
+      "operator_updates": {
+        "items": {
+          "$ref": "#/$defs/OperatorUpdate"
+        },
+        "title": "Operator Updates",
+        "type": "array"
+      },
+      "notes": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Notes",
+        "type": "array"
+      }
+    },
+    "title": "NormalizationPlan",
+    "type": "object"
+  },
+  "concepts": [
+    {
+      "id": "concept_6bd7768a0eaa",
+      "name": "MonetaryAmount",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 5,
+      "individual_examples": [
+        "1,287 美元",
+        "109.27 美元",
+        "2,677 美元",
+        "951.21 美元",
+        "186.45 美元"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_4abf854a0439",
+      "name": "PriceAssessment",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "价格有点贵"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_fc120680c15c",
+      "name": "CommunicationEndpoint",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "用户邮箱"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_4cf00dad9a9d",
+      "name": "Product",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "平板"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_5913b680637e",
+      "name": "Order",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 4,
+      "individual_examples": [
+        "最近的订单",
+        "订单 #W2692684",
+        "订单 #W9373487",
+        "订单 #W7449508"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_abcf5fc60c66",
+      "name": "ReturnRequest",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "平板退货"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_dbf65cd01ce7",
+      "name": "CancellationRequest",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "充电器取消"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_0a0cc3f925aa",
+      "name": "PaymentMethod",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "现有礼品卡"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_c0285ebde4e7",
+      "name": "CancellationReason",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 2,
+      "individual_examples": [
+        "no longer needed",
+        "已不再需要"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_25d6c16a84d9",
+      "name": "ToolAction",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 3,
+      "individual_examples": [
+        "cancel_pending_order",
+        "get_order_details",
+        "return_delivered_order_items"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_09794ba23347",
+      "name": "OrderItem",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 2,
+      "individual_examples": [
+        "商品项 6477915553",
+        "商品项 3788616824"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_4ad108ccd01d",
+      "name": "GiftCard",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "gift_card_7711863"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_aef0ce482614",
+      "name": "ActionStatus",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "退货请求已提交"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_e1c401b85a77",
+      "name": "IdentifierType",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "订单号"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_d438d84e7a51",
+      "name": "Identifier",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "运动鞋订单号"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_ed9e444cad49",
+      "name": "ProductSize",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "6 码"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_947152b28ef2",
+      "name": "Color",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "黑色"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_add99f3abb9b",
+      "name": "Material",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "合成材料"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_c82034c93693",
+      "name": "OrderStatus",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "已送达"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_6d8725ac5971",
+      "name": "Decision",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "遗嘱执行人选择"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_5c0ceef3369a",
+      "name": "CalendarDate",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 5,
+      "individual_examples": [
+        "2024 年 5 月 15 日",
+        "4 月 28 日",
+        "2024 年 5 月 2 日",
+        "4 月 15 日",
+        "3 月 25 日"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_fe7553209ffe",
+      "name": "Place",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 2,
+      "individual_examples": [
+        "珊瑚湾咖啡馆（Coral Bay Café）",
+        "用户家"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_36369d841ecd",
+      "name": "Concern",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "家人对选择的看法"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_ffd6cfa0f39c",
+      "name": "PlannedEvent",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "新的家庭会议"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_de178a5fba56",
+      "name": "InteractionMode",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "面对面讨论"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_60725ff87a30",
+      "name": "Topic",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "遗嘱执行人选择"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_0e9774641fba",
+      "name": "Option",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "共同遗嘱执行人"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_9107e5594180",
+      "name": "TaskRequest",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "起草会议材料"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_98c13e0f7f3a",
+      "name": "Document",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "会议邀请"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_11e4ecf462b3",
+      "name": "Schedule",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "拟议日期、时间和地点"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_e5887b774067",
+      "name": "LegalDocument",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "用户的遗嘱"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_b63330904f7c",
+      "name": "EmotionalState",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "压力很大"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_0ce1f5661fed",
+      "name": "LegalStatus",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "遗嘱法律效力"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_4a5cc8c4ac5b",
+      "name": "LegalProvision",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "Douglas 的执行人任命"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_7f61ae0bacf5",
+      "name": "DocumentDraft",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "遗嘱文本"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_5c467c8750cf",
+      "name": "Law",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "适用法律"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_6a29f1dbded9",
+      "name": "LegalFormality",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "签名"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_40728291818e",
+      "name": "ReviewAction",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "律师审核"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_229ef35994ef",
+      "name": "LegalDecision",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "监护人指定"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_108eef18001b",
+      "name": "EstatePlan",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "用户的遗产计划"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    }
+  ],
+  "concept_catalog": [
+    {
+      "name": "Person",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Organization",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Goal",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Role",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Event",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Duration",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "TimeWindow",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Task",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Question",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Recommendation",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Situation",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Group",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Action",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Platform",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Information",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "CalendarMonth",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Communication",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "DateRange",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Process",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Availability",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "RelativeDate",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "EmailSubject",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Commitment",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ProfessionalRole",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Evaluation",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Style",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareApplication",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareDependency",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareConfiguration",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ErrorSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "File",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ConfigurationField",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Integer",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Constraint",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ConfigurationFieldSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Change",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Status",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "RuntimeFailure",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Device",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "DiagnosticTool",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "PossibleCause",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ConfigurationSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "RuntimeError",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareComponent",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareRequirement",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "FilePath",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "UserInterface",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Directory",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "TaskStatus",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "MediaChannel",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ContentTheme",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Plan",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "FrequencyConstraint",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "OnlinePlatform",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Collection",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ContentFormat",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ContentTechnique",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ContentSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ContentSeries",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "EpisodeTopic",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "StoryElement",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "NarrativeArc",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SpeechSample",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ToneCategory",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ExperimentalStimulusSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "AcousticFeature",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SignalProcessingMethod",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "AudioRecording",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "DataArtifact",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "DataSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareObject",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ProcedureStep",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Problem",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "FileFormat",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ExtractionParameter",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "AcousticParameter",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ExperimentalConstraint",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "NumericRange",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareCommand",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareVersion",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "GoalSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Cardinality",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Percentage",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Method",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareSystem",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "TrainingTopicSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ConstraintSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Function",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Parameter",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "PathTemplate",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SpreadsheetFormula",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ExampleValue",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "FormulaValue",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Software",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Hyperlink",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "DataStructure",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "DataColumn",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "StringValue",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Claim",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Evidence",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LearningStyleCategory",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Practice",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "TeachingMethod",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Observation",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Condition",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Challenge",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Capability",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Intervention",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LearningFactor",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LearningOutcome",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "FlightTrip",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "City",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "CalendarDay",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "TripLeg",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "TimePreference",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "PricePreference",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "FlightOption",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "StopPattern",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "TimeOfDay",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "RelativeDateTime",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "MonetaryAmount",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "PriceAssessment",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "CommunicationEndpoint",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Product",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Order",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ReturnRequest",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "CancellationRequest",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "PaymentMethod",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "CancellationReason",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ToolAction",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "OrderItem",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "GiftCard",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ActionStatus",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "IdentifierType",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Identifier",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ProductSize",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Color",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Material",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "OrderStatus",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Decision",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "CalendarDate",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Place",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Concern",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "PlannedEvent",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "InteractionMode",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Topic",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Option",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "TaskRequest",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Document",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Schedule",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LegalDocument",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "EmotionalState",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LegalStatus",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LegalProvision",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "DocumentDraft",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Law",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LegalFormality",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ReviewAction",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LegalDecision",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "EstatePlan",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "CareArrangement",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "FinancialArrangement",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Assessment",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LegalArrangement",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    }
+  ],
+  "operators": [
+    {
+      "id": "operator_3c1e074fb4f5",
+      "name": "sent_to",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "sent_to",
+          "quote": "Agent 表示已把全部信息发送至用户邮箱。",
+          "metadata": {
+            "source_entity": "n_details",
+            "target_entity": "n_email"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Information",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "CommunicationEndpoint",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_cea78df3d69d",
+      "name": "describes",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "describes",
+          "quote": "发送的信息对应用户选定的航班方案。",
+          "metadata": {
+            "source_entity": "n_details",
+            "target_entity": "n_first_option"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Information",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "FlightOption",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_fbc0774b0fc3",
+      "name": "compatible_with",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "compatible_with",
+          "quote": "用户说明充电器是配该平板购买的。",
+          "metadata": {
+            "source_entity": "n_charger",
+            "target_entity": "n_tablet"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Product",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Product",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_c85615c6f212",
+      "name": "targets",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "targets",
+          "quote": "退货请求针对平板。",
+          "metadata": {
+            "source_entity": "n_return",
+            "target_entity": "n_tablet"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "targets",
+          "quote": "取消请求针对便携式充电器。",
+          "metadata": {
+            "source_entity": "n_cancel",
+            "target_entity": "n_charger"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "targets",
+          "quote": "退货请求针对运动鞋。",
+          "metadata": {
+            "source_entity": "n_return",
+            "target_entity": "n_shoes"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "ReturnRequest",
+            "count": 1
+          },
+          {
+            "name": "CancellationRequest",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Product",
+            "count": 2
+          }
+        ],
+        "input_unique_count": 2,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_839838c4e65d",
+      "name": "refund_to",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "refund_to",
+          "quote": "Agent 计划把退款退回现有礼品卡。",
+          "metadata": {
+            "source_entity": "n_return",
+            "target_entity": "n_card"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "refund_to",
+          "quote": "退货调用指定礼品卡为退款方式。",
+          "metadata": {
+            "source_entity": "n_return_action",
+            "target_entity": "n_card"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "refund_to",
+          "quote": "Agent 提议退货退款退回现有礼品卡，尚待用户确认。",
+          "metadata": {
+            "source_entity": "n_shoes",
+            "target_entity": "n_card"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "refund_to",
+          "quote": "工具调用指定退款退回礼品卡。",
+          "metadata": {
+            "source_entity": "n_action",
+            "target_entity": "n_card"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "ReturnRequest",
+            "count": 1
+          },
+          {
+            "name": "ToolAction",
+            "count": 1
+          },
+          {
+            "name": "Product",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "PaymentMethod",
+            "count": 2
+          },
+          {
+            "name": "GiftCard",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 3,
+        "output_unique_count": 2
+      }
+    },
+    {
+      "id": "operator_2e53c30aa4c7",
+      "name": "reason",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "reason",
+          "quote": "计划记录的取消原因为已不再需要。",
+          "metadata": {
+            "source_entity": "n_cancel",
+            "target_entity": "n_reason"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "reason",
+          "quote": "取消调用使用 no longer needed 原因。",
+          "metadata": {
+            "source_entity": "n_cancel_action",
+            "target_entity": "n_reason"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "CancellationRequest",
+            "count": 1
+          },
+          {
+            "name": "ToolAction",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "CancellationReason",
+            "count": 2
+          }
+        ],
+        "input_unique_count": 2,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_823fc3275cc4",
+      "name": "authorizes",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "authorizes",
+          "quote": "用户确认执行平板退货。",
+          "metadata": {
+            "source_entity": "n_user",
+            "target_entity": "n_return_action"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "authorizes",
+          "quote": "用户确认执行充电器取消。",
+          "metadata": {
+            "source_entity": "n_user",
+            "target_entity": "n_cancel_action"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "authorizes",
+          "quote": "用户确认执行运动鞋退货。",
+          "metadata": {
+            "source_entity": "n_user",
+            "target_entity": "n_action"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Person",
+            "count": 2
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "ToolAction",
+            "count": 2
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_76ca7f643167",
+      "name": "acts_on",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "acts_on",
+          "quote": "退货调用作用于订单 #W2692684。",
+          "metadata": {
+            "source_entity": "n_return_action",
+            "target_entity": "n_tablet_order"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "acts_on",
+          "quote": "退货调用作用于商品项 3788616824。",
+          "metadata": {
+            "source_entity": "n_return_action",
+            "target_entity": "n_tablet_item"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "acts_on",
+          "quote": "取消调用作用于订单 #W9373487。",
+          "metadata": {
+            "source_entity": "n_cancel_action",
+            "target_entity": "n_charger_order"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "acts_on",
+          "quote": "工具调用查询订单 #W7449508。",
+          "metadata": {
+            "source_entity": "n_lookup",
+            "target_entity": "n_order"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "acts_on",
+          "quote": "工具调用作用于订单 #W7449508。",
+          "metadata": {
+            "source_entity": "n_action",
+            "target_entity": "n_order"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "acts_on",
+          "quote": "工具调用作用于商品项 6477915553。",
+          "metadata": {
+            "source_entity": "n_action",
+            "target_entity": "n_item"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "ToolAction",
+            "count": 6
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Order",
+            "count": 4
+          },
+          {
+            "name": "OrderItem",
+            "count": 2
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 2
+      }
+    },
+    {
+      "id": "operator_075625ced9ed",
+      "name": "has_status",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "has_status",
+          "quote": "工具结果显示平板退货请求已提交。",
+          "metadata": {
+            "source_entity": "n_return_action",
+            "target_entity": "n_return_status"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "has_status",
+          "quote": "工具结果显示充电器订单已取消。",
+          "metadata": {
+            "source_entity": "n_cancel_action",
+            "target_entity": "n_cancel_status"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "has_status",
+          "quote": "工具结果显示订单状态为已送达。",
+          "metadata": {
+            "source_entity": "n_order",
+            "target_entity": "n_delivered"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "has_status",
+          "quote": "工具结果显示退货请求已提交。",
+          "metadata": {
+            "source_entity": "n_action",
+            "target_entity": "n_status"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "ToolAction",
+            "count": 2
+          },
+          {
+            "name": "Order",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "ActionStatus",
+            "count": 2
+          },
+          {
+            "name": "OrderStatus",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 2,
+        "output_unique_count": 2
+      }
+    },
+    {
+      "id": "operator_0ab1c4ffc147",
+      "name": "refund",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "refund",
+          "quote": "工具结果报告平板退款 951.21 美元。",
+          "metadata": {
+            "source_entity": "n_return_action",
+            "target_entity": "n_tablet_refund"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "refund",
+          "quote": "工具结果报告充电器退款 109.27 美元。",
+          "metadata": {
+            "source_entity": "n_cancel_action",
+            "target_entity": "n_charger_refund"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "refund",
+          "quote": "工具结果报告退款金额为 186.45 美元。",
+          "metadata": {
+            "source_entity": "n_action",
+            "target_entity": "n_refund"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "ToolAction",
+            "count": 3
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "MonetaryAmount",
+            "count": 3
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_ef8331cba2da",
+      "name": "returned_to",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "returned_to",
+          "quote": "充电器退款已退回礼品卡。",
+          "metadata": {
+            "source_entity": "n_charger_refund",
+            "target_entity": "n_card"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "returned_to",
+          "quote": "退款将退回用户的礼品卡。",
+          "metadata": {
+            "source_entity": "n_refund",
+            "target_entity": "n_card"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "MonetaryAmount",
+            "count": 2
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "GiftCard",
+            "count": 2
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_326875f8fc67",
+      "name": "identified_by",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "identified_by",
+          "quote": "Agent 请求用订单号定位待退商品。",
+          "metadata": {
+            "source_entity": "n_return",
+            "target_entity": "n_order_id"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "ReturnRequest",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "IdentifierType",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_9cbec49f55a7",
+      "name": "may_belong_to",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "may_belong_to",
+          "quote": "Agent 请用户确认运动鞋是否属于最近某个订单。",
+          "metadata": {
+            "source_entity": "n_shoes",
+            "target_entity": "n_recent_order"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Product",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Order",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_ace967520eec",
+      "name": "does_not_remember",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "does_not_remember",
+          "quote": "用户明确表示不记得订单号。",
+          "metadata": {
+            "source_entity": "n_user",
+            "target_entity": "n_order_id"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Person",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Identifier",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_e5309da50a54",
+      "name": "belongs_to",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "belongs_to",
+          "quote": "用户确认运动鞋属于自己的最近订单。",
+          "metadata": {
+            "source_entity": "n_recent_order",
+            "target_entity": "n_user"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Order",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Person",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_b39c25dccd08",
+      "name": "size",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "size",
+          "quote": "运动鞋尺码为 6 码。",
+          "metadata": {
+            "source_entity": "n_shoes",
+            "target_entity": "n_size"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Product",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "ProductSize",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_6ed60ff57eba",
+      "name": "color",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "color",
+          "quote": "运动鞋颜色为黑色。",
+          "metadata": {
+            "source_entity": "n_shoes",
+            "target_entity": "n_black"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Product",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Color",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_8dcfe6f6f47f",
+      "name": "material",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "material",
+          "quote": "运动鞋使用合成材料。",
+          "metadata": {
+            "source_entity": "n_shoes",
+            "target_entity": "n_synthetic"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Product",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Material",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_b14067726f06",
+      "name": "concerned_about",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "concerned_about",
+          "quote": "用户担心遗嘱执行人的选择。",
+          "metadata": {
+            "source_entity": "n_user",
+            "target_entity": "n_choice"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "concerned_about",
+          "quote": "用户担心家人对选择 Douglas 的看法。",
+          "metadata": {
+            "source_entity": "n_user",
+            "target_entity": "n_reaction"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "concerned_about",
+          "quote": "用户担心监护指定对遗产计划的影响。",
+          "metadata": {
+            "source_entity": "n_user",
+            "target_entity": "n_estate_plan"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Person",
+            "count": 3
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Decision",
+            "count": 1
+          },
+          {
+            "name": "Concern",
+            "count": 1
+          },
+          {
+            "name": "EstatePlan",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 3
+      }
+    },
+    {
+      "id": "operator_79834d562708",
+      "name": "participates_in",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "participates_in",
+          "quote": "Douglas 接受执行人安排。",
+          "metadata": {
+            "source_entity": "n_douglas",
+            "target_entity": "n_acceptance"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "participates_in",
+          "quote": "会议面向相关家人。",
+          "metadata": {
+            "source_entity": "n_family",
+            "target_entity": "n_meeting"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Person",
+            "count": 1
+          },
+          {
+            "name": "Group",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Event",
+            "count": 1
+          },
+          {
+            "name": "PlannedEvent",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 2,
+        "output_unique_count": 2
+      }
+    },
+    {
+      "id": "operator_7f4bad6b2b73",
+      "name": "date",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "date",
+          "quote": "接受事件发生于 4 月 15 日。",
+          "metadata": {
+            "source_entity": "n_acceptance",
+            "target_entity": "n_apr15"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "date",
+          "quote": "家庭会议发生于 3 月 25 日。",
+          "metadata": {
+            "source_entity": "n_meeting",
+            "target_entity": "n_mar25"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "date",
+          "quote": "指定发生于 4 月 28 日。",
+          "metadata": {
+            "source_entity": "n_designation",
+            "target_entity": "n_apr28"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Event",
+            "count": 2
+          },
+          {
+            "name": "LegalDecision",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "CalendarDate",
+            "count": 3
+          }
+        ],
+        "input_unique_count": 2,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_7585ae983a36",
+      "name": "location",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "location",
+          "quote": "接受事件发生在珊瑚湾咖啡馆。",
+          "metadata": {
+            "source_entity": "n_acceptance",
+            "target_entity": "n_cafe"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "location",
+          "quote": "家庭会议在用户家举行。",
+          "metadata": {
+            "source_entity": "n_meeting",
+            "target_entity": "n_home"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Event",
+            "count": 2
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Place",
+            "count": 2
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_7a1534897bf1",
+      "name": "attends",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "attends",
+          "quote": "Kimberly 参加了家庭会议。",
+          "metadata": {
+            "source_entity": "n_kimberly",
+            "target_entity": "n_meeting"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "attends",
+          "quote": "Bradley 参加了家庭会议。",
+          "metadata": {
+            "source_entity": "n_bradley",
+            "target_entity": "n_meeting"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Person",
+            "count": 2
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Event",
+            "count": 2
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_2b11809a43bc",
+      "name": "topic",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "topic",
+          "quote": "会议讨论遗嘱执行人选择。",
+          "metadata": {
+            "source_entity": "n_meeting",
+            "target_entity": "n_executor"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "topic",
+          "quote": "会议主题是遗嘱执行人选择。",
+          "metadata": {
+            "source_entity": "n_meeting",
+            "target_entity": "n_executor_choice"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "PlannedEvent",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Topic",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_62336608654b",
+      "name": "considers",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "considers",
+          "quote": "Agent 建议会议考虑共同执行人方案。",
+          "metadata": {
+            "source_entity": "n_meeting",
+            "target_entity": "n_coexecutor"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "considers",
+          "quote": "Agent 建议考虑备用监护人。",
+          "metadata": {
+            "source_entity": "n_estate_plan",
+            "target_entity": "n_backup"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "PlannedEvent",
+            "count": 1
+          },
+          {
+            "name": "EstatePlan",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Option",
+            "count": 1
+          },
+          {
+            "name": "Role",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 2,
+        "output_unique_count": 2
+      }
+    },
+    {
+      "id": "operator_9315206adfa7",
+      "name": "motivated_by",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "motivated_by",
+          "quote": "久未聚会也是用户安排会议的动机。",
+          "metadata": {
+            "source_entity": "n_meeting",
+            "target_entity": "n_no_recent_gathering"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "PlannedEvent",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Situation",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_2797b9baf17f",
+      "name": "specifies",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "specifies",
+          "quote": "Agent 建议邀请列出拟议日期、时间和地点。",
+          "metadata": {
+            "source_entity": "n_invitation",
+            "target_entity": "n_schedule"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "specifies",
+          "quote": "Agent 建议在遗嘱中写清继承资金管理方式。",
+          "metadata": {
+            "source_entity": "n_will",
+            "target_entity": "n_funds"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "specifies",
+          "quote": "Agent 建议在信托中写清继承资金管理方式。",
+          "metadata": {
+            "source_entity": "n_trust",
+            "target_entity": "n_funds"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Document",
+            "count": 1
+          },
+          {
+            "name": "LegalDocument",
+            "count": 1
+          },
+          {
+            "name": "LegalArrangement",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "FinancialArrangement",
+            "count": 2
+          },
+          {
+            "name": "Schedule",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 3,
+        "output_unique_count": 2
+      }
+    },
+    {
+      "id": "operator_432895319c67",
+      "name": "may_have",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "may_have",
+          "quote": "议程拟听取 Kimberly 的顾虑。",
+          "metadata": {
+            "source_entity": "n_kimberly",
+            "target_entity": "n_concerns"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "may_have",
+          "quote": "议程拟听取 Bradley 的顾虑。",
+          "metadata": {
+            "source_entity": "n_bradley",
+            "target_entity": "n_concerns"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Person",
+            "count": 2
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Concern",
+            "count": 2
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_e72e5aee85f7",
+      "name": "must_complete",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "must_complete",
+          "quote": "用户必须完成遗嘱。",
+          "metadata": {
+            "source_entity": "n_user",
+            "target_entity": "n_will"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Person",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "LegalDocument",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_af963d568edd",
+      "name": "deadline",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "deadline",
+          "quote": "遗嘱必须在 2024 年 5 月 15 日前完成。",
+          "metadata": {
+            "source_entity": "n_will",
+            "target_entity": "n_deadline"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "LegalDocument",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "CalendarDate",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_7628caa9e70d",
+      "name": "current_date",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "current_date",
+          "quote": "用户给出的当前时间锚为 2024 年 5 月 2 日。",
+          "metadata": {
+            "source_entity": "n_user",
+            "target_entity": "n_anchor"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Person",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "CalendarDate",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_6a32421af8ec",
+      "name": "experiences",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "experiences",
+          "quote": "用户表示感到压力很大。",
+          "metadata": {
+            "source_entity": "n_user",
+            "target_entity": "n_pressure"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Person",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "EmotionalState",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_cbce2be666a0",
+      "name": "has_completed",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "has_completed",
+          "quote": "用户说明已经和家人开过会。",
+          "metadata": {
+            "source_entity": "n_user",
+            "target_entity": "n_family_meeting"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Person",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Event",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_de225237685b",
+      "name": "seeks",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "seeks",
+          "quote": "用户希望确保遗嘱具有法律效力。",
+          "metadata": {
+            "source_entity": "n_user",
+            "target_entity": "n_validity"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Person",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "LegalStatus",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_7082a3aae791",
+      "name": "scheduled_by",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "scheduled_by",
+          "quote": "Agent 建议按截止日期推进计划。",
+          "metadata": {
+            "source_entity": "n_plan",
+            "target_entity": "n_deadline"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Plan",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "CalendarDate",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_f8a47a534ba3",
+      "name": "governed_by",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "governed_by",
+          "quote": "签名需要按照适用法律完成。",
+          "metadata": {
+            "source_entity": "n_signature",
+            "target_entity": "n_law"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "governed_by",
+          "quote": "见证需要按照适用法律完成。",
+          "metadata": {
+            "source_entity": "n_witnessing",
+            "target_entity": "n_law"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "LegalFormality",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Law",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_be643e2aa207",
+      "name": "reviews",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "reviews",
+          "quote": "律师审核针对遗嘱。",
+          "metadata": {
+            "source_entity": "n_review",
+            "target_entity": "n_will"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "ReviewAction",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "LegalDocument",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_6f7605739873",
+      "name": "performs",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "performs",
+          "quote": "Agent 建议请遗产规划律师进行审核。",
+          "metadata": {
+            "source_entity": "n_lawyer",
+            "target_entity": "n_review"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "ProfessionalRole",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "ReviewAction",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_e8d2c704dd3b",
+      "name": "allows_time_for",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "allows_time_for",
+          "quote": "Agent 建议预留时间处理公证等手续。",
+          "metadata": {
+            "source_entity": "n_plan",
+            "target_entity": "n_notarization"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Plan",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "LegalFormality",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_db426a683004",
+      "name": "makes",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "makes",
+          "quote": "用户作出监护人指定。",
+          "metadata": {
+            "source_entity": "n_user",
+            "target_entity": "n_designation"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Person",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "LegalDecision",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    }
+  ],
+  "keol_commit": "44631e64fd07c9b85f22e36035bf49c882dba592",
+  "batch_index": 3
+}

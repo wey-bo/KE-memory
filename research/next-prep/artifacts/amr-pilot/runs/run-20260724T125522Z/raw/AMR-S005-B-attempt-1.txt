@@ -1,0 +1,8 @@
+(c / credit-01
+   :ARG1 (r / refund-01
+            :ARG1 (m / monetary-quantity
+                     :quant 951.21
+                     :unit (d / dollar)))
+   :ARG2 (c2 / card
+             :mod (g / gift))
+   :time (f / future))

@@ -1,0 +1,463 @@
+{
+  "candidate_id": "BEAM-CAND-004",
+  "turn_index": 1,
+  "context_completions": [
+    {
+      "completion_id": "C_beam-cand-004-4d648a026dc4_001_001",
+      "candidate_id": "BEAM-CAND-004",
+      "turn_index": 1,
+      "kind": "coreference",
+      "original_span": "这样",
+      "interpretation": "再安排一次家庭会议",
+      "confidence": 0.99,
+      "ambiguity": false,
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我觉得再安排一次家庭会议是个好主意。这样我们可以面对面把事情谈清楚",
+          "evidence_id": "evidence-4461a19f1b67b92e6d7caaf5b850bb4b764724de0e9e5badf23b65b9f2edac8b",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 33
+        }
+      ]
+    },
+    {
+      "completion_id": "C_beam-cand-004-4d648a026dc4_001_002",
+      "candidate_id": "BEAM-CAND-004",
+      "turn_index": 1,
+      "kind": "unresolved",
+      "original_span": "他们",
+      "interpretation": "指代一组可能有顾虑的人，但本轮未明确其身份",
+      "confidence": 1.0,
+      "ambiguity": true,
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "并处理他们可能有的任何顾虑",
+          "evidence_id": "evidence-f50fdf97168311099e032b88a5cbb720525eac406f315c7ea9c5e12f0c4a7bae",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "user_reported",
+          "start": 34,
+          "end": 47
+        }
+      ]
+    },
+    {
+      "completion_id": "C_beam-cand-004-4d648a026dc4_001_003",
+      "candidate_id": "BEAM-CAND-004",
+      "turn_index": 1,
+      "kind": "unresolved",
+      "original_span": "我们",
+      "interpretation": "用户与本轮未明确的其他人",
+      "confidence": 1.0,
+      "ambiguity": true,
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "而且我们也有一阵子没聚在一起了",
+          "evidence_id": "evidence-78f08cfa0aa170cdef25e14061ca0cded1d60d20cbc329017cb408a9f1d994b3",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "user_reported",
+          "start": 48,
+          "end": 63
+        }
+      ]
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_001",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "用户认为再安排一次家庭会议是个好主意。",
+      "subject": "用户",
+      "predicate": "认为是好主意",
+      "object": "再安排一次家庭会议",
+      "qualifiers": {
+        "modality": "preferred",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我觉得再安排一次家庭会议是个好主意",
+          "evidence_id": "evidence-b59a4278a482a46fd14ed3ca0ee51244fb61e1b21188c174ce9f1e4d2b580f2a",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 17
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_002",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "用户认为再次举行家庭会议可以让参与者面对面把事情谈清楚。",
+      "subject": "再次举行家庭会议",
+      "predicate": "可以促成",
+      "object": "面对面把事情谈清楚",
+      "qualifiers": {
+        "modality": "possible",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我觉得再安排一次家庭会议是个好主意。这样我们可以面对面把事情谈清楚",
+          "evidence_id": "evidence-4461a19f1b67b92e6d7caaf5b850bb4b764724de0e9e5badf23b65b9f2edac8b",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 33
+        }
+      ],
+      "inference_basis": "“这样”回指同一消息前句的“再安排一次家庭会议”。",
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_003",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "用户认为再次举行家庭会议可以处理身份未明确者可能有的顾虑。",
+      "subject": "再次举行家庭会议",
+      "predicate": "可以处理",
+      "object": "身份未明确者可能有的顾虑",
+      "qualifiers": {
+        "modality": "possible",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "并处理他们可能有的任何顾虑",
+          "evidence_id": "evidence-f50fdf97168311099e032b88a5cbb720525eac406f315c7ea9c5e12f0c4a7bae",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "user_reported",
+          "start": 34,
+          "end": 47
+        }
+      ],
+      "inference_basis": "“他们”在本轮没有可解析的明确先行词，因此保留为身份未明确者。",
+      "confidence": 0.96
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_004",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "用户与本轮未明确的其他人已有一阵子没有聚在一起。",
+      "subject": "用户与本轮未明确的其他人",
+      "predicate": "没有聚在一起",
+      "object": null,
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "negative",
+        "temporal": [
+          "有一阵子"
+        ],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我们也有一阵子没聚在一起了",
+          "evidence_id": "evidence-2fbb3b8b002ce76c51c06930a894687f82b07755c4a2efea58d70aa4eeeb58d3",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "user_reported",
+          "start": 50,
+          "end": 63
+        }
+      ],
+      "inference_basis": "“我们”包括说话者用户，但本轮未明确其他成员。",
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_005",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "再安排一次家庭会议可以让每个人的意见被听见。",
+      "subject": "再安排一次家庭会议",
+      "predicate": "可以让",
+      "object": "每个人的意见被听见",
+      "qualifiers": {
+        "modality": "possible",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "再安排一次家庭会议可以让每个人的意见都被听见",
+          "evidence_id": "evidence-92caab06b6aadfff4084e034a16173cdd156ae728b0abc64b6b44bf9d72e4eac",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 0,
+          "end": 22
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_006",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "家庭会议应选择大家方便的时间。",
+      "subject": "家庭会议",
+      "predicate": "选择",
+      "object": "大家方便的时间",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "可以选一个大家方便的时间和地点",
+          "evidence_id": "evidence-2a71d242c03fb73becae9f46f34f912931ba62a9e7aeab38630046e9a63833f8",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 23,
+          "end": 38
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_007",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "家庭会议应选择大家方便的地点。",
+      "subject": "家庭会议",
+      "predicate": "选择",
+      "object": "大家方便的地点",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "可以选一个大家方便的时间和地点",
+          "evidence_id": "evidence-2a71d242c03fb73becae9f46f34f912931ba62a9e7aeab38630046e9a63833f8",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 23,
+          "end": 38
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_008",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "应为家庭会议准备议程。",
+      "subject": "家庭会议组织者",
+      "predicate": "准备",
+      "object": "议程",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "准备议程",
+          "evidence_id": "evidence-1ab9ca8a757f67964b982451c81ef6c4da16d8d90664bae4c48871876819600c",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 39,
+          "end": 43
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_009",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "家庭会议应讨论遗嘱执行人的职责。",
+      "subject": "家庭会议",
+      "predicate": "讨论",
+      "object": "遗嘱执行人的职责",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "讨论遗嘱执行人的职责",
+          "evidence_id": "evidence-113ead19ba48e56fffa9f98eb5a3a72a5a0290b4e9acb5e6d924d18ec02eab72",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 44,
+          "end": 54
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_010",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "家庭会议应讨论对 Douglas 的顾虑。",
+      "subject": "家庭会议",
+      "predicate": "讨论",
+      "object": "对 Douglas 的顾虑",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "对 Douglas 的顾虑",
+          "evidence_id": "evidence-6af06e887984e6bb5534245068c32ba303cfd69e0433f983c93e3f91df0363da",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 55,
+          "end": 68
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_011",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "家庭会议应讨论共同执行人的可能性。",
+      "subject": "家庭会议",
+      "predicate": "讨论",
+      "object": "共同执行人的可能性",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "共同执行人的可能性",
+          "evidence_id": "evidence-be465672de30441c366aa3cd0fd82f8942c068a84b67783815e590cc4b8893e9",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 69,
+          "end": 78
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_012",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "家庭会议应讨论最终决定。",
+      "subject": "家庭会议",
+      "predicate": "讨论",
+      "object": "最终决定",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "以及最终决定",
+          "evidence_id": "evidence-fff562726a0fc50e42c37215fe5e04212dd3ec66d0a363f3c07d5f82c9895b0b",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 78,
+          "end": 84
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    }
+  ]
+}

@@ -1,0 +1,2221 @@
+{
+  "prompt_version": "dialogue-reconciliation-v1",
+  "candidate_id": "WILDCHAT-LEARN-CAND-001",
+  "candidate_index": 8,
+  "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=24456e5381c0c4891d80737fa4639f1d / model=gpt-3.5-turbo-0613 / user_ordinal=1..6 / toxic=false / redacted=false",
+  "candidate_namespace": "wildchat-learn-cand-001-8def27ce661d",
+  "conversation": [
+    {
+      "turn_index": 0,
+      "user": "检查 AAR 元数据时发现 3 个问题：androidx.activity、activity-ktx 和 activity-compose 1.8.0 都要求 compileSdk 至少为 34，而 app 目前是 android-33。怎么修复？",
+      "agent": "把项目的 compileSdk 更新到至少 34。打开 app 模块的 build.gradle，在 android 配置中把 compileSdkVersion 改为 34，然后同步 Gradle。compileSdk、targetSdk 和 minSdk 的更新可以分别处理。",
+      "source_coordinates": {
+        "user": "/candidates/8/turns/0/user",
+        "agent": "/candidates/8/turns/0/agent"
+      },
+      "tool_result_spans": []
+    },
+    {
+      "turn_index": 1,
+      "user": "具体应该怎么改？",
+      "agent": "在 Android Studio 中打开 app/build.gradle，找到 android 块里的 compileSdkVersion 33，改为 compileSdkVersion 34，然后点击 Sync Now。同步后重新构建项目，并根据设备兼容性决定是否同时调整 targetSdk 和 minSdk。",
+      "source_coordinates": {
+        "user": "/candidates/8/turns/1/user",
+        "agent": "/candidates/8/turns/1/agent"
+      },
+      "tool_result_spans": []
+    },
+    {
+      "turn_index": 2,
+      "user": "我加了依赖，错误都没了，但 app 在手机上会立刻关闭，怎么办？",
+      "agent": "这更像运行时错误或依赖兼容问题。先连接设备查看 Android Studio 的 Logcat，再检查新增依赖版本、执行 Gradle 同步、Clean/Rebuild，并核对 AndroidManifest.xml 的 activity、主题和 intent-filter 配置。",
+      "source_coordinates": {
+        "user": "/candidates/8/turns/2/user",
+        "agent": "/candidates/8/turns/2/agent"
+      },
+      "tool_result_spans": []
+    },
+    {
+      "turn_index": 3,
+      "user": "日志显示：Unable to start activity，原因是 You need to use a Theme.AppCompat theme or descendant with this activity。",
+      "agent": "这个异常说明该 Activity 使用的主题不是 Theme.AppCompat 或其子主题。检查 AndroidManifest.xml 中 MainActivity 的 theme 属性，并确认 styles.xml 中定义了对应的 AppCompat 主题；同步项目后重新运行。",
+      "source_coordinates": {
+        "user": "/candidates/8/turns/3/user",
+        "agent": "/candidates/8/turns/3/agent"
+      },
+      "tool_result_spans": []
+    },
+    {
+      "turn_index": 4,
+      "user": "AndroidManifest.xml 在哪里？",
+      "agent": "在 Android Studio 的 Project 视图中展开 app > src > main，里面有 AndroidManifest.xml；也可以展开 app 模块下的 manifests 文件夹直接打开它。",
+      "source_coordinates": {
+        "user": "/candidates/8/turns/4/user",
+        "agent": "/candidates/8/turns/4/agent"
+      },
+      "tool_result_spans": []
+    },
+    {
+      "turn_index": 5,
+      "user": "我找到了。那我应该先改 Activity 的主题，还是先改 styles.xml？",
+      "agent": "先确认 styles.xml 中存在可用的 Theme.AppCompat 子主题，再在 Manifest 的 MainActivity 上引用它。两处名称必须一致，之后同步并重新构建，若仍崩溃再回到 Logcat 查看新的异常。",
+      "source_coordinates": {
+        "user": "/candidates/8/turns/5/user",
+        "agent": "/candidates/8/turns/5/agent"
+      },
+      "tool_result_spans": []
+    }
+  ],
+  "first_pass_records": [
+    {
+      "turn_index": 0,
+      "canonical_filename": "0008-0000.json",
+      "sha256": "ba9436a385302b0eeff4f4b7069ffdefa79f41d92f34c50ea3a79044f4b33727",
+      "output": {
+        "candidate_id": "WILDCHAT-LEARN-CAND-001",
+        "turn_index": 0,
+        "context_completions": [],
+        "knowledge": [
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_000_001",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "用户在检查 AAR 元数据时发现了 3 个问题。",
+            "subject": "用户",
+            "predicate": "发现",
+            "object": "3 个问题",
+            "qualifiers": {
+              "modality": "observed",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [
+                "检查 AAR 元数据时"
+              ],
+              "scope": []
+            },
+            "source_status": "user_reported",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 0,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "检查 AAR 元数据时发现 3 个问题",
+                "evidence_id": "evidence-42db38b261d482f35c4b009cc8d940f0e1da52e1bec3bc58af558e635637a8bb",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "user_reported",
+                "start": 0,
+                "end": 19
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_000_002",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "androidx.activity 1.8.0 要求 compileSdk 至少为 34。",
+            "subject": "androidx.activity 1.8.0",
+            "predicate": "要求",
+            "object": "compileSdk 至少为 34",
+            "qualifiers": {
+              "modality": "asserted",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "user_reported",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 0,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "androidx.activity、activity-ktx 和 activity-compose 1.8.0 都要求 compileSdk 至少为 34",
+                "evidence_id": "evidence-38cf9992793348e92df3c9dd21c083a0c08b5b155531daabb540e6183b05003a",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "user_reported",
+                "start": 20,
+                "end": 97
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_000_003",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "activity-ktx 1.8.0 要求 compileSdk 至少为 34。",
+            "subject": "activity-ktx 1.8.0",
+            "predicate": "要求",
+            "object": "compileSdk 至少为 34",
+            "qualifiers": {
+              "modality": "asserted",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "user_reported",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 0,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "androidx.activity、activity-ktx 和 activity-compose 1.8.0 都要求 compileSdk 至少为 34",
+                "evidence_id": "evidence-38cf9992793348e92df3c9dd21c083a0c08b5b155531daabb540e6183b05003a",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "user_reported",
+                "start": 20,
+                "end": 97
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_000_004",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "activity-compose 1.8.0 要求 compileSdk 至少为 34。",
+            "subject": "activity-compose 1.8.0",
+            "predicate": "要求",
+            "object": "compileSdk 至少为 34",
+            "qualifiers": {
+              "modality": "asserted",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "user_reported",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 0,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "androidx.activity、activity-ktx 和 activity-compose 1.8.0 都要求 compileSdk 至少为 34",
+                "evidence_id": "evidence-38cf9992793348e92df3c9dd21c083a0c08b5b155531daabb540e6183b05003a",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "user_reported",
+                "start": 20,
+                "end": 97
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_000_005",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "app 当前的 compileSdk 是 android-33。",
+            "subject": "app 的 compileSdk",
+            "predicate": "是",
+            "object": "android-33",
+            "qualifiers": {
+              "modality": "asserted",
+              "polarity": "positive",
+              "temporal": [
+                "当前"
+              ],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "user_reported",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 0,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "app 目前是 android-33",
+                "evidence_id": "evidence-caa6ee11be3b9598510fe7b1da71fc69b3af8ea8239c10d356f22ee63f6fcab4",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "user_reported",
+                "start": 100,
+                "end": 118
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_000_006",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "用户请求修复 compileSdk 兼容问题的方法。",
+            "subject": "用户",
+            "predicate": "请求",
+            "object": "修复 compileSdk 兼容问题的方法",
+            "qualifiers": {
+              "modality": "requested",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "user_reported",
+            "derivation": "inferred",
+            "evidence": [
+              {
+                "turn_index": 0,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "怎么修复？",
+                "evidence_id": "evidence-6d2cbbbfddcc3fbd1e8bc60a9df8d3c13403dd59fdb3c3e055b383d203e46cc8",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "user_reported",
+                "start": 119,
+                "end": 124
+              }
+            ],
+            "inference_basis": "问题紧接在依赖要求 compileSdk 34 而 app 为 android-33 的描述之后。",
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_000_007",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "项目的 compileSdk 应更新到至少 34。",
+            "subject": "项目的 compileSdk",
+            "predicate": "更新到",
+            "object": "至少 34",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 0,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "把项目的 compileSdk 更新到至少 34",
+                "evidence_id": "evidence-c706feab3a8e3f3190914a148efea9cae1a9c2bf2111531f36cf25a7b5f4f2e6",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 0,
+                "end": 24
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_000_008",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "用户应打开 app 模块的 build.gradle。",
+            "subject": "用户",
+            "predicate": "打开",
+            "object": "app 模块的 build.gradle",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 0,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "打开 app 模块的 build.gradle",
+                "evidence_id": "evidence-8eed8b399dddba0997604b8a7402c88655d329465e84f0d2a6f5cd278b11a2a6",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 25,
+                "end": 48
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_000_009",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "应在 android 配置中把 compileSdkVersion 改为 34。",
+            "subject": "compileSdkVersion",
+            "predicate": "改为",
+            "object": "34",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": [
+                "android 配置"
+              ]
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 0,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "在 android 配置中把 compileSdkVersion 改为 34",
+                "evidence_id": "evidence-df3c3d83ae0d11fd792a1fdb7201cce4c67cacd1edd9031ef454cce175bd5877",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 49,
+                "end": 87
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_000_010",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "修改 compileSdkVersion 后应同步 Gradle。",
+            "subject": "用户",
+            "predicate": "同步",
+            "object": "Gradle",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [
+                "修改 compileSdkVersion 后"
+              ],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 0,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "然后同步 Gradle",
+                "evidence_id": "evidence-7eb9a2e9486499d0885a6d0410d1fd629c3eb4d4e37f13a9e7350102208fb2e5",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 88,
+                "end": 99
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_000_011",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "compileSdk、targetSdk 和 minSdk 的更新可以分别处理。",
+            "subject": "compileSdk、targetSdk 和 minSdk 的更新",
+            "predicate": "可以分别处理",
+            "object": null,
+            "qualifiers": {
+              "modality": "asserted",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 0,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "compileSdk、targetSdk 和 minSdk 的更新可以分别处理",
+                "evidence_id": "evidence-c67942794c6f6077bdca3d7c762d88b07fac8bf954fe9847228fe039d481c1b0",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 100,
+                "end": 139
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          }
+        ]
+      }
+    },
+    {
+      "turn_index": 1,
+      "canonical_filename": "0008-0001.json",
+      "sha256": "006d84a34f565291aaedb175349ab6f8008888a8a961ec986de91250b31734c1",
+      "output": {
+        "candidate_id": "WILDCHAT-LEARN-CAND-001",
+        "turn_index": 1,
+        "context_completions": [
+          {
+            "completion_id": "C_wildchat-learn-cand-001-8def27ce661d_001_001",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "turn_index": 1,
+            "kind": "unresolved",
+            "original_span": "改",
+            "interpretation": "用户请求修改某项配置，但本轮用户消息未明确要修改的对象",
+            "confidence": 1.0,
+            "ambiguity": true,
+            "evidence": [
+              {
+                "turn_index": 1,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "具体应该怎么改？",
+                "evidence_id": "evidence-5eaec6f6ef647e3f097d5888023afbc186cea9722e8f011f11a4246e23c41ade",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "user_reported",
+                "start": 0,
+                "end": 8
+              }
+            ]
+          }
+        ],
+        "knowledge": [
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_001_001",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "用户请求修改本轮未明确对象的具体方法。",
+            "subject": "用户",
+            "predicate": "请求",
+            "object": "修改未明确对象的具体方法",
+            "qualifiers": {
+              "modality": "requested",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "user_reported",
+            "derivation": "context_completed",
+            "evidence": [
+              {
+                "turn_index": 1,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "具体应该怎么改？",
+                "evidence_id": "evidence-5eaec6f6ef647e3f097d5888023afbc186cea9722e8f011f11a4246e23c41ade",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "user_reported",
+                "start": 0,
+                "end": 8
+              }
+            ],
+            "inference_basis": "本轮用户消息没有说明“改”的对象，不能使用其他轮次补全。",
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_001_002",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "用户应在 Android Studio 中打开 app/build.gradle。",
+            "subject": "用户",
+            "predicate": "打开",
+            "object": "app/build.gradle",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": [
+                "Android Studio"
+              ]
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 1,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "在 Android Studio 中打开 app/build.gradle",
+                "evidence_id": "evidence-807dc86e90c55f727a878d6d6c0a574a0c5d1b6fdcf8ca02067636e71763d0f5",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 0,
+                "end": 37
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_001_003",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "用户应在 android 块中找到 compileSdkVersion 33。",
+            "subject": "用户",
+            "predicate": "找到",
+            "object": "compileSdkVersion 33",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": [
+                "android 块"
+              ]
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 1,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "找到 android 块里的 compileSdkVersion 33",
+                "evidence_id": "evidence-ddf9192be75c351c3e1165ca22ba3029dbf6f666d3efb746d141c9982efebd0d",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 38,
+                "end": 73
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_001_004",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "用户应把 compileSdkVersion 33 改为 compileSdkVersion 34。",
+            "subject": "compileSdkVersion 33",
+            "predicate": "改为",
+            "object": "compileSdkVersion 34",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 1,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "找到 android 块里的 compileSdkVersion 33，改为 compileSdkVersion 34",
+                "evidence_id": "evidence-df02fad7ef952b6148b08a07961382f8ca9e8aa26dc9961cfdc3b253867231f8",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 38,
+                "end": 97
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_001_005",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "修改后用户应点击 Sync Now。",
+            "subject": "用户",
+            "predicate": "点击",
+            "object": "Sync Now",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [
+                "修改 compileSdkVersion 后"
+              ],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 1,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "然后点击 Sync Now",
+                "evidence_id": "evidence-db4eb7a4245d17ad605ed1ddf574555d4b0aa64693dd9b01300ebb9cc704be07",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 98,
+                "end": 111
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_001_006",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "同步后用户应重新构建项目。",
+            "subject": "用户",
+            "predicate": "重新构建",
+            "object": "项目",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [
+                "同步后"
+              ],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 1,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "同步后重新构建项目",
+                "evidence_id": "evidence-edddd339eea9b455b7d0c469b061af1a29d70fd3c2829190c992655c88f5cffb",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 112,
+                "end": 121
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_001_007",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "是否调整 targetSdk 应根据设备兼容性决定。",
+            "subject": "是否调整 targetSdk",
+            "predicate": "根据设备兼容性决定",
+            "object": null,
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 1,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "并根据设备兼容性决定是否同时调整 targetSdk 和 minSdk",
+                "evidence_id": "evidence-e4b3a6cb50d5c28ff23d08dc054704534b3904bbafb8c6ed9828fecaae1e2761",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 122,
+                "end": 157
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_001_008",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "是否调整 minSdk 应根据设备兼容性决定。",
+            "subject": "是否调整 minSdk",
+            "predicate": "根据设备兼容性决定",
+            "object": null,
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 1,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "并根据设备兼容性决定是否同时调整 targetSdk 和 minSdk",
+                "evidence_id": "evidence-e4b3a6cb50d5c28ff23d08dc054704534b3904bbafb8c6ed9828fecaae1e2761",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 122,
+                "end": 157
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          }
+        ]
+      }
+    },
+    {
+      "turn_index": 2,
+      "canonical_filename": "0008-0002.json",
+      "sha256": "197682afb27e06c447c784e7973e5d6df4cb7931d4f755142d48bedef43df6f4",
+      "output": {
+        "candidate_id": "WILDCHAT-LEARN-CAND-001",
+        "turn_index": 2,
+        "context_completions": [],
+        "knowledge": [
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_002_001",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "用户添加了依赖。",
+            "subject": "用户",
+            "predicate": "添加",
+            "object": "依赖",
+            "qualifiers": {
+              "modality": "claimed_completed",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "user_reported",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 2,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "我加了依赖",
+                "evidence_id": "evidence-f7574929c702749e8352c0b12a9990ef5dba2a55fb5f49298b4f83fe6760cd1d",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "user_reported",
+                "start": 0,
+                "end": 5
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_002_002",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "添加依赖后错误都消失了。",
+            "subject": "错误",
+            "predicate": "都消失",
+            "object": null,
+            "qualifiers": {
+              "modality": "observed",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [
+                "添加依赖后"
+              ],
+              "scope": []
+            },
+            "source_status": "user_reported",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 2,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "我加了依赖，错误都没了",
+                "evidence_id": "evidence-6a7b8cb867f145c61f7dd8ab318cd48dc57ccf794677c87d27a424d116e13748",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "user_reported",
+                "start": 0,
+                "end": 11
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_002_003",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "app 在手机上会立刻关闭。",
+            "subject": "app",
+            "predicate": "立刻关闭",
+            "object": null,
+            "qualifiers": {
+              "modality": "observed",
+              "polarity": "positive",
+              "temporal": [
+                "立刻"
+              ],
+              "conditions": [
+                "在手机上运行"
+              ],
+              "scope": [
+                "手机"
+              ]
+            },
+            "source_status": "user_reported",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 2,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "app 在手机上会立刻关闭",
+                "evidence_id": "evidence-5040a98bca5a190ed108f8aefab348dc55c228ba8a72a5435691ffa2abd7561a",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "user_reported",
+                "start": 14,
+                "end": 27
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_002_004",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "用户请求解决 app 在手机上立刻关闭的问题。",
+            "subject": "用户",
+            "predicate": "请求",
+            "object": "解决 app 在手机上立刻关闭的问题",
+            "qualifiers": {
+              "modality": "requested",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "user_reported",
+            "derivation": "inferred",
+            "evidence": [
+              {
+                "turn_index": 2,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "怎么办？",
+                "evidence_id": "evidence-d9fdd7e5d34deaa25c650439c3cecb821a764135aa09e2aff98954ac003c235e",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "user_reported",
+                "start": 28,
+                "end": 32
+              }
+            ],
+            "inference_basis": "问题紧接在 app 会立刻关闭的报告之后。",
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_002_005",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "app 立刻关闭更可能是运行时错误。",
+            "subject": "app 立刻关闭",
+            "predicate": "更像",
+            "object": "运行时错误",
+            "qualifiers": {
+              "modality": "possible",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 2,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "这更像运行时错误或依赖兼容问题",
+                "evidence_id": "evidence-cbf15aa12c3b740138f3baefbec94407d9937ade929d45f7bf0859bc5aee27b6",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 0,
+                "end": 15
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_002_006",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "app 立刻关闭更可能是依赖兼容问题。",
+            "subject": "app 立刻关闭",
+            "predicate": "更像",
+            "object": "依赖兼容问题",
+            "qualifiers": {
+              "modality": "possible",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 2,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "这更像运行时错误或依赖兼容问题",
+                "evidence_id": "evidence-cbf15aa12c3b740138f3baefbec94407d9937ade929d45f7bf0859bc5aee27b6",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 0,
+                "end": 15
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_002_007",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "用户应先连接设备并查看 Android Studio 的 Logcat。",
+            "subject": "用户",
+            "predicate": "查看",
+            "object": "Android Studio 的 Logcat",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [
+                "先"
+              ],
+              "conditions": [
+                "连接设备"
+              ],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 2,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "先连接设备查看 Android Studio 的 Logcat",
+                "evidence_id": "evidence-e21a7df7fb54bb45136b7aa51943f491af84a176167936f44fee71ce68b3a75a",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 16,
+                "end": 47
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_002_008",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "用户应检查新增依赖版本。",
+            "subject": "用户",
+            "predicate": "检查",
+            "object": "新增依赖版本",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 2,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "再检查新增依赖版本",
+                "evidence_id": "evidence-b01cbb47fd432c5938cff0888abbc7e06c1740e8b641bb192f8b619524b131ed",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 48,
+                "end": 57
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_002_009",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "用户应执行 Gradle 同步。",
+            "subject": "用户",
+            "predicate": "执行",
+            "object": "Gradle 同步",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 2,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "执行 Gradle 同步",
+                "evidence_id": "evidence-36c80d94c873c866aefe6c592b996552b25754f77dd514d05c9376ef7117f947",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 58,
+                "end": 70
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_002_010",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "用户应执行 Clean/Rebuild。",
+            "subject": "用户",
+            "predicate": "执行",
+            "object": "Clean/Rebuild",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 2,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "Clean/Rebuild",
+                "evidence_id": "evidence-37ddff78dfe5e8d94e06c2d3af5c2ff1c2b4cfac7a13d1a0c2c7a0beafa0bd93",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 71,
+                "end": 84
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_002_011",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "用户应核对 AndroidManifest.xml 的 activity 配置。",
+            "subject": "用户",
+            "predicate": "核对",
+            "object": "AndroidManifest.xml 的 activity 配置",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 2,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "核对 AndroidManifest.xml 的 activity、主题和 intent-filter 配置",
+                "evidence_id": "evidence-3b7c9b28716b2000cb1f37b31670d62796682fb8e41f34aa27859fb8de94aa79",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 86,
+                "end": 140
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_002_012",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "用户应核对 AndroidManifest.xml 的主题配置。",
+            "subject": "用户",
+            "predicate": "核对",
+            "object": "AndroidManifest.xml 的主题配置",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 2,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "核对 AndroidManifest.xml 的 activity、主题和 intent-filter 配置",
+                "evidence_id": "evidence-3b7c9b28716b2000cb1f37b31670d62796682fb8e41f34aa27859fb8de94aa79",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 86,
+                "end": 140
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_002_013",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "用户应核对 AndroidManifest.xml 的 intent-filter 配置。",
+            "subject": "用户",
+            "predicate": "核对",
+            "object": "AndroidManifest.xml 的 intent-filter 配置",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 2,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "核对 AndroidManifest.xml 的 activity、主题和 intent-filter 配置",
+                "evidence_id": "evidence-3b7c9b28716b2000cb1f37b31670d62796682fb8e41f34aa27859fb8de94aa79",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 86,
+                "end": 140
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          }
+        ]
+      }
+    },
+    {
+      "turn_index": 3,
+      "canonical_filename": "0008-0003.json",
+      "sha256": "923b8ec76f1de56d4687f291614bf0e7980cb3a7c5313ff158b7c5e108699fc6",
+      "output": {
+        "candidate_id": "WILDCHAT-LEARN-CAND-001",
+        "turn_index": 3,
+        "context_completions": [],
+        "knowledge": [
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_003_001",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "日志显示 Unable to start activity。",
+            "subject": "日志",
+            "predicate": "显示",
+            "object": "Unable to start activity",
+            "qualifiers": {
+              "modality": "observed",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "user_reported",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 3,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "日志显示：Unable to start activity",
+                "evidence_id": "evidence-4ba9ecd72ec0eeb82241103e4d5428e9e12b6017e119420936b6a2ebc7f1bda7",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "user_reported",
+                "start": 0,
+                "end": 29
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_003_002",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "日志给出的原因是该 activity 需要使用 Theme.AppCompat 主题或其子主题。",
+            "subject": "日志",
+            "predicate": "给出原因",
+            "object": "You need to use a Theme.AppCompat theme or descendant with this activity",
+            "qualifiers": {
+              "modality": "observed",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "user_reported",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 3,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "原因是 You need to use a Theme.AppCompat theme or descendant with this activity",
+                "evidence_id": "evidence-a1433f37cf4d9c7b5021449ba45048f0e478a16bd23cd28051a4eacc342a60de",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "user_reported",
+                "start": 30,
+                "end": 106
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_003_003",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "该异常说明 Activity 使用的主题不是 Theme.AppCompat 或其子主题。",
+            "subject": "该 Activity 使用的主题",
+            "predicate": "不是",
+            "object": "Theme.AppCompat 或其子主题",
+            "qualifiers": {
+              "modality": "asserted",
+              "polarity": "negative",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 3,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "这个异常说明该 Activity 使用的主题不是 Theme.AppCompat 或其子主题",
+                "evidence_id": "evidence-fabc9a79ec1a1f66a24b97128a9affa1c22cb784de16d981bc145dc4d1fed95f",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 0,
+                "end": 46
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_003_004",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "用户应检查 AndroidManifest.xml 中 MainActivity 的 theme 属性。",
+            "subject": "用户",
+            "predicate": "检查",
+            "object": "AndroidManifest.xml 中 MainActivity 的 theme 属性",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 3,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "检查 AndroidManifest.xml 中 MainActivity 的 theme 属性",
+                "evidence_id": "evidence-8872460e3df90a79a499d1a13d0013e5890e7bb62a32130fc414a17b719aee71",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 47,
+                "end": 95
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_003_005",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "用户应确认 styles.xml 中定义了对应的 AppCompat 主题。",
+            "subject": "用户",
+            "predicate": "确认",
+            "object": "styles.xml 中定义了对应的 AppCompat 主题",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 3,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "并确认 styles.xml 中定义了对应的 AppCompat 主题",
+                "evidence_id": "evidence-2f66eca41408545db8c02adfca37ddb0bd63e1793530dd1c2a5ef3b8c23bf7e9",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 96,
+                "end": 131
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_003_006",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "用户应同步项目。",
+            "subject": "用户",
+            "predicate": "同步",
+            "object": "项目",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 3,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "同步项目后重新运行",
+                "evidence_id": "evidence-8c28d6ac13419c5e3f92260e27cc4c2e5bb389dcef70a0cb4a532ca8f9412716",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 132,
+                "end": 141
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_003_007",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "同步项目后用户应重新运行 app。",
+            "subject": "用户",
+            "predicate": "重新运行",
+            "object": "app",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [
+                "同步项目后"
+              ],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 3,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "同步项目后重新运行",
+                "evidence_id": "evidence-8c28d6ac13419c5e3f92260e27cc4c2e5bb389dcef70a0cb4a532ca8f9412716",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 132,
+                "end": 141
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          }
+        ]
+      }
+    },
+    {
+      "turn_index": 4,
+      "canonical_filename": "0008-0004.json",
+      "sha256": "0e2ec8a704f03b4d999de895c5ad28849e2d79b8fd5cb5ca128b8895e98332c1",
+      "output": {
+        "candidate_id": "WILDCHAT-LEARN-CAND-001",
+        "turn_index": 4,
+        "context_completions": [],
+        "knowledge": [
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_004_001",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "用户询问 AndroidManifest.xml 的位置。",
+            "subject": "用户",
+            "predicate": "询问位置",
+            "object": "AndroidManifest.xml",
+            "qualifiers": {
+              "modality": "questioned",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "user_reported",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 4,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "AndroidManifest.xml 在哪里？",
+                "evidence_id": "evidence-1e49bb7bd0c0b8da95021a18cd6c2c4cb5201d1ded03e2970a183592a90b0c28",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "user_reported",
+                "start": 0,
+                "end": 24
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_004_002",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "AndroidManifest.xml 位于 Android Studio Project 视图的 app > src > main 下。",
+            "subject": "AndroidManifest.xml",
+            "predicate": "位于",
+            "object": "app > src > main",
+            "qualifiers": {
+              "modality": "asserted",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": [
+                "Android Studio 的 Project 视图"
+              ]
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 4,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "在 Android Studio 的 Project 视图中展开 app > src > main，里面有 AndroidManifest.xml",
+                "evidence_id": "evidence-c96f25de745281bc3e9397839103756cfac53139cf9d090fc3cb18f8244c7bb3",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 0,
+                "end": 73
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_004_003",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "AndroidManifest.xml 也可从 app 模块下的 manifests 文件夹打开。",
+            "subject": "AndroidManifest.xml",
+            "predicate": "可以打开自",
+            "object": "app 模块下的 manifests 文件夹",
+            "qualifiers": {
+              "modality": "asserted",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": [
+                "Android Studio"
+              ]
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 4,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "也可以展开 app 模块下的 manifests 文件夹直接打开它",
+                "evidence_id": "evidence-7f179add9dacfef792930b5c9963799a40159679774bacf7af8e5e5ebd27e3f4",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 74,
+                "end": 107
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          }
+        ]
+      }
+    },
+    {
+      "turn_index": 5,
+      "canonical_filename": "0008-0005.json",
+      "sha256": "e2984fa942636cb27d8758c5c13d13967772173cbafc8eaa98a9e28d1f75304a",
+      "output": {
+        "candidate_id": "WILDCHAT-LEARN-CAND-001",
+        "turn_index": 5,
+        "context_completions": [
+          {
+            "completion_id": "C_wildchat-learn-cand-001-8def27ce661d_005_001",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "turn_index": 5,
+            "kind": "unresolved",
+            "original_span": "找到了",
+            "interpretation": "用户找到了某个先前所寻对象，但本轮未说明该对象",
+            "confidence": 1.0,
+            "ambiguity": true,
+            "evidence": [
+              {
+                "turn_index": 5,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "我找到了",
+                "evidence_id": "evidence-6b9709e95964df47437c0544f6f2b15955aa45c843dd9c0109d972f4b0719cd0",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "user_reported",
+                "start": 0,
+                "end": 4
+              }
+            ]
+          },
+          {
+            "completion_id": "C_wildchat-learn-cand-001-8def27ce661d_005_002",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "turn_index": 5,
+            "kind": "coreference",
+            "original_span": "它",
+            "interpretation": "styles.xml 中可用的 Theme.AppCompat 子主题",
+            "confidence": 0.99,
+            "ambiguity": false,
+            "evidence": [
+              {
+                "turn_index": 5,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "先确认 styles.xml 中存在可用的 Theme.AppCompat 子主题，再在 Manifest 的 MainActivity 上引用它",
+                "evidence_id": "evidence-139c63b33afa33e6664938ddef7a00380f740301a6f8a6c715c9112ced575a82",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 0,
+                "end": 73
+              }
+            ]
+          }
+        ],
+        "knowledge": [
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_005_001",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "用户已找到本轮未明确的对象。",
+            "subject": "用户",
+            "predicate": "已找到",
+            "object": "本轮未明确的对象",
+            "qualifiers": {
+              "modality": "claimed_completed",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "user_reported",
+            "derivation": "context_completed",
+            "evidence": [
+              {
+                "turn_index": 5,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "我找到了",
+                "evidence_id": "evidence-6b9709e95964df47437c0544f6f2b15955aa45c843dd9c0109d972f4b0719cd0",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "user_reported",
+                "start": 0,
+                "end": 4
+              }
+            ],
+            "inference_basis": "“找到了”省略了宾语，且本轮未提供该宾语。",
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_005_002",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "用户询问应先修改 Activity 的主题还是先修改 styles.xml。",
+            "subject": "用户",
+            "predicate": "询问顺序",
+            "object": "先修改 Activity 的主题还是先修改 styles.xml",
+            "qualifiers": {
+              "modality": "questioned",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "user_reported",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 5,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "那我应该先改 Activity 的主题，还是先改 styles.xml？",
+                "evidence_id": "evidence-22379e63adfa72d7e7c329d8f6cff5b08047dc1af91d7d8aea1801f990a36987",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "user_reported",
+                "start": 5,
+                "end": 41
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_005_003",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "用户应先确认 styles.xml 中存在可用的 Theme.AppCompat 子主题。",
+            "subject": "用户",
+            "predicate": "确认",
+            "object": "styles.xml 中存在可用的 Theme.AppCompat 子主题",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [
+                "先"
+              ],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 5,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "先确认 styles.xml 中存在可用的 Theme.AppCompat 子主题",
+                "evidence_id": "evidence-32c960db350da30939751390ef300498f06c035a60fffa4cdcbcb9bac30b44f5",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 0,
+                "end": 41
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_005_004",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "确认主题后应在 Manifest 的 MainActivity 上引用该主题。",
+            "subject": "Manifest 的 MainActivity",
+            "predicate": "引用",
+            "object": "可用的 Theme.AppCompat 子主题",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [
+                "确认 styles.xml 中存在该主题后"
+              ],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "context_completed",
+            "evidence": [
+              {
+                "turn_index": 5,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "先确认 styles.xml 中存在可用的 Theme.AppCompat 子主题，再在 Manifest 的 MainActivity 上引用它",
+                "evidence_id": "evidence-139c63b33afa33e6664938ddef7a00380f740301a6f8a6c715c9112ced575a82",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 0,
+                "end": 73
+              }
+            ],
+            "inference_basis": "“它”回指同一句前半部分的“可用的 Theme.AppCompat 子主题”。",
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_005_005",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "styles.xml 与 Manifest 中的主题名称必须一致。",
+            "subject": "两处主题名称",
+            "predicate": "必须一致",
+            "object": null,
+            "qualifiers": {
+              "modality": "asserted",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": [
+                "styles.xml 和 Manifest"
+              ]
+            },
+            "source_status": "agent_generated",
+            "derivation": "inferred",
+            "evidence": [
+              {
+                "turn_index": 5,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "两处名称必须一致",
+                "evidence_id": "evidence-00464d65d891e9e888bbffbecc13a40ca80fe66905c8a3c36ed4edb83da39f94",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 74,
+                "end": 82
+              }
+            ],
+            "inference_basis": "前一句明确涉及 styles.xml 中的主题及 Manifest 中对它的引用。",
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_005_006",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "完成主题配置后应同步项目。",
+            "subject": "用户",
+            "predicate": "同步",
+            "object": "项目",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [
+                "完成主题配置后"
+              ],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 5,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "之后同步并重新构建",
+                "evidence_id": "evidence-a62873fa96e48ea937c38fe8ef675ad307e00165f7300ca47b115a940b19fdfa",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 83,
+                "end": 92
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_005_007",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "完成主题配置后应重新构建项目。",
+            "subject": "用户",
+            "predicate": "重新构建",
+            "object": "项目",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [
+                "完成主题配置后"
+              ],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 5,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "之后同步并重新构建",
+                "evidence_id": "evidence-a62873fa96e48ea937c38fe8ef675ad307e00165f7300ca47b115a940b19fdfa",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 83,
+                "end": 92
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_005_008",
+            "candidate_id": "WILDCHAT-LEARN-CAND-001",
+            "statement": "若 app 仍崩溃，应回到 Logcat 查看新的异常。",
+            "subject": "用户",
+            "predicate": "查看",
+            "object": "Logcat 中新的异常",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [
+                "若仍崩溃"
+              ],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 5,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "若仍崩溃再回到 Logcat 查看新的异常",
+                "evidence_id": "evidence-c2153dc65606f600827f51424c230bfcdb518396f28b6ee1fe58882b710de242",
+                "candidate_id": "WILDCHAT-LEARN-CAND-001",
+                "evidence_role": "agent_generated",
+                "start": 93,
+                "end": 114
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.99
+          }
+        ]
+      }
+    }
+  ],
+  "knowledge_id_prefix": "D_wildchat-learn-cand-001-8def27ce661d_",
+  "operation_id_prefix": "R_wildchat-learn-cand-001-8def27ce661d_",
+  "output_contract": {
+    "$defs": {
+      "EvidenceDraft": {
+        "additionalProperties": false,
+        "description": "A quoted source occurrence before character spans have been resolved.",
+        "properties": {
+          "turn_index": {
+            "minimum": 0,
+            "title": "Turn Index",
+            "type": "integer"
+          },
+          "message": {
+            "enum": [
+              "user",
+              "agent"
+            ],
+            "title": "Message",
+            "type": "string"
+          },
+          "occurrence_index": {
+            "minimum": 0,
+            "title": "Occurrence Index",
+            "type": "integer"
+          },
+          "quote": {
+            "minLength": 1,
+            "title": "Quote",
+            "type": "string"
+          }
+        },
+        "required": [
+          "turn_index",
+          "message",
+          "occurrence_index",
+          "quote"
+        ],
+        "title": "EvidenceDraft",
+        "type": "object"
+      },
+      "KnowledgeDraft": {
+        "additionalProperties": false,
+        "properties": {
+          "knowledge_id": {
+            "minLength": 1,
+            "title": "Knowledge Id",
+            "type": "string"
+          },
+          "candidate_id": {
+            "minLength": 1,
+            "title": "Candidate Id",
+            "type": "string"
+          },
+          "statement": {
+            "minLength": 1,
+            "title": "Statement",
+            "type": "string"
+          },
+          "subject": {
+            "minLength": 1,
+            "title": "Subject",
+            "type": "string"
+          },
+          "predicate": {
+            "minLength": 1,
+            "title": "Predicate",
+            "type": "string"
+          },
+          "object": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Object"
+          },
+          "qualifiers": {
+            "$ref": "#/$defs/Qualifiers"
+          },
+          "source_status": {
+            "enum": [
+              "user_reported",
+              "agent_generated",
+              "tool_observed"
+            ],
+            "title": "Source Status",
+            "type": "string"
+          },
+          "derivation": {
+            "enum": [
+              "explicit",
+              "context_completed",
+              "inferred"
+            ],
+            "title": "Derivation",
+            "type": "string"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/$defs/EvidenceDraft"
+            },
+            "minItems": 1,
+            "title": "Evidence",
+            "type": "array"
+          },
+          "inference_basis": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Inference Basis"
+          },
+          "confidence": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Confidence",
+            "type": "number"
+          }
+        },
+        "required": [
+          "knowledge_id",
+          "candidate_id",
+          "statement",
+          "subject",
+          "predicate",
+          "qualifiers",
+          "source_status",
+          "derivation",
+          "evidence",
+          "confidence"
+        ],
+        "title": "KnowledgeDraft",
+        "type": "object"
+      },
+      "OperationEvidenceDraft": {
+        "additionalProperties": false,
+        "description": "Operation evidence with an explicit epistemic provenance role.",
+        "properties": {
+          "turn_index": {
+            "minimum": 0,
+            "title": "Turn Index",
+            "type": "integer"
+          },
+          "message": {
+            "enum": [
+              "user",
+              "agent"
+            ],
+            "title": "Message",
+            "type": "string"
+          },
+          "occurrence_index": {
+            "minimum": 0,
+            "title": "Occurrence Index",
+            "type": "integer"
+          },
+          "quote": {
+            "minLength": 1,
+            "title": "Quote",
+            "type": "string"
+          },
+          "evidence_role": {
+            "enum": [
+              "user_reported",
+              "agent_generated",
+              "tool_observed"
+            ],
+            "title": "Evidence Role",
+            "type": "string"
+          }
+        },
+        "required": [
+          "turn_index",
+          "message",
+          "occurrence_index",
+          "quote",
+          "evidence_role"
+        ],
+        "title": "OperationEvidenceDraft",
+        "type": "object"
+      },
+      "Qualifiers": {
+        "additionalProperties": false,
+        "properties": {
+          "modality": {
+            "enum": [
+              "asserted",
+              "questioned",
+              "requested",
+              "preferred",
+              "planned",
+              "hypothetical",
+              "possible",
+              "advised",
+              "committed",
+              "claimed_completed",
+              "observed"
+            ],
+            "title": "Modality",
+            "type": "string"
+          },
+          "polarity": {
+            "enum": [
+              "positive",
+              "negative"
+            ],
+            "title": "Polarity",
+            "type": "string"
+          },
+          "temporal": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Temporal",
+            "type": "array"
+          },
+          "conditions": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Conditions",
+            "type": "array"
+          },
+          "scope": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Scope",
+            "type": "array"
+          }
+        },
+        "required": [
+          "modality",
+          "polarity"
+        ],
+        "title": "Qualifiers",
+        "type": "object"
+      },
+      "ReconciliationOperation": {
+        "additionalProperties": false,
+        "properties": {
+          "operation_id": {
+            "minLength": 1,
+            "title": "Operation Id",
+            "type": "string"
+          },
+          "candidate_id": {
+            "minLength": 1,
+            "title": "Candidate Id",
+            "type": "string"
+          },
+          "operation": {
+            "enum": [
+              "confirm",
+              "correct",
+              "supersede",
+              "conflict",
+              "add"
+            ],
+            "title": "Operation",
+            "type": "string"
+          },
+          "targets": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Targets",
+            "type": "array"
+          },
+          "replacement": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Replacement"
+          },
+          "reason": {
+            "minLength": 1,
+            "title": "Reason",
+            "type": "string"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/$defs/OperationEvidenceDraft"
+            },
+            "minItems": 1,
+            "title": "Evidence",
+            "type": "array"
+          },
+          "confidence": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Confidence",
+            "type": "number"
+          }
+        },
+        "required": [
+          "operation_id",
+          "candidate_id",
+          "operation",
+          "reason",
+          "evidence",
+          "confidence"
+        ],
+        "title": "ReconciliationOperation",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "candidate_id": {
+        "minLength": 1,
+        "title": "Candidate Id",
+        "type": "string"
+      },
+      "new_knowledge": {
+        "items": {
+          "$ref": "#/$defs/KnowledgeDraft"
+        },
+        "title": "New Knowledge",
+        "type": "array"
+      },
+      "operations": {
+        "items": {
+          "$ref": "#/$defs/ReconciliationOperation"
+        },
+        "title": "Operations",
+        "type": "array"
+      }
+    },
+    "required": [
+      "candidate_id"
+    ],
+    "title": "DialoguePassOutput",
+    "type": "object"
+  },
+  "prompt_sha256": "6f2cbc205076c080f535a89b74e224c65cef9bef3290f103466c7b10d1210b59",
+  "output_contract_sha256": "a395102dbfc7c6fa2378ca6546b99c82cdf70b0832f19660f0656763c3722085",
+  "source_segments_sha256": "8c51b78f31cc22541868f106381aeb973b95160072b80b0a8bbd72be19385553"
+}

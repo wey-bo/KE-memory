@@ -1,0 +1,313 @@
+{
+  "prompt_version": "dialogue-reconciliation-v1",
+  "prompt_sha256": "92e7e24bdcc5476ee32611e078dffee45ad33a5afc2034995bd6ce451264026b",
+  "output_contract_sha256": "a395102dbfc7c6fa2378ca6546b99c82cdf70b0832f19660f0656763c3722085",
+  "source_sha256": "33539344b8cc378efbbcd8b55e5be27864a993e13e48234225e57290bdeb9b1f",
+  "first_pass_manifest_sha256": "85fd62ddaabb9473db30d799dc3e0c668fc3cb50e73902286e1cd325ad96ff14",
+  "source_segments_file": "C:\\Users\\86137\\Desktop\\KE-memory\\knowledge-extraction\\source-segments.json",
+  "source_segments_sha256": "678d74db62a9c6338f19d1a7d16910c3092c88b14f6eb201527e56eb82a3d726",
+  "candidates": [
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "candidate_index": 0,
+      "candidate_namespace": "wildchat-mgmt-cand-001-4d3900462107",
+      "canonical_filename": "0000.json",
+      "turn_count": 5,
+      "payload_sha256": "20a9ce0977fe47cd60e6c17342c473b9348bdab6e79c2c5891cd39869a979bb2",
+      "first_pass_files": [
+        {
+          "canonical_filename": "0000-0000.json",
+          "sha256": "ec7673109378adaf3df9a2ca7188afb5f86a51cc80c0854ee189596d27596b8e"
+        },
+        {
+          "canonical_filename": "0000-0001.json",
+          "sha256": "864147aa697501644d5482df3fdff1b27d6c8584a5d0ef91d96f2efd8f4b9ce6"
+        },
+        {
+          "canonical_filename": "0000-0002.json",
+          "sha256": "39709e66cbdf17b0c76e03fb17d381bbd2d3cc49d42bc1290095a2248761f4be"
+        },
+        {
+          "canonical_filename": "0000-0003.json",
+          "sha256": "ec2dd49cd182e364b172e9043ecfdc921c02a4d9157c71dfc248fea4ab58a72d"
+        },
+        {
+          "canonical_filename": "0000-0004.json",
+          "sha256": "fe9282d071db008e4f22cb40c21e46813f14eae541d85386b3007a5447d1661b"
+        }
+      ],
+      "validated_file": "0000.json",
+      "raw_sha256_before": "3d0be99240369ae2142d2d9a0c877aa62ef9ad4cdc55a041f11f8d9255eada5a",
+      "raw_sha256_after": "3d0be99240369ae2142d2d9a0c877aa62ef9ad4cdc55a041f11f8d9255eada5a"
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "candidate_index": 1,
+      "candidate_namespace": "wildchat-mgmt-cand-002-e88f4bb1070d",
+      "canonical_filename": "0001.json",
+      "turn_count": 3,
+      "payload_sha256": "55d90378e87fec6ce92e9605cf9b483fd42679216dbfb507f971abfaf2fed590",
+      "first_pass_files": [
+        {
+          "canonical_filename": "0001-0000.json",
+          "sha256": "4d569225c1f833aa93b90d5dd555a1da72685afba2d8f950577f38393f238e22"
+        },
+        {
+          "canonical_filename": "0001-0001.json",
+          "sha256": "14eb9674d1151c6e4546d0841ef647dbee99af3ba39aa7f82997abc684053c86"
+        },
+        {
+          "canonical_filename": "0001-0002.json",
+          "sha256": "80d56453219b2a11b64c8876637b5c0e52ddb4992807dc4b027e26d0bc8d0844"
+        }
+      ],
+      "validated_file": "0001.json",
+      "raw_sha256_before": "0f15e02108bd789f1c9306a7e2423f9650bd15dc69384e85897a308ac0b3a88a",
+      "raw_sha256_after": "0f15e02108bd789f1c9306a7e2423f9650bd15dc69384e85897a308ac0b3a88a"
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "candidate_index": 2,
+      "candidate_namespace": "wildchat-learn-cand-002-1fa98728ac3e",
+      "canonical_filename": "0002.json",
+      "turn_count": 4,
+      "payload_sha256": "5ee2ae3316d6912cf563e6e5b069a28f239545be7b757a6a3a27c491e07c1292",
+      "first_pass_files": [
+        {
+          "canonical_filename": "0002-0000.json",
+          "sha256": "ded33c9e1c5d61ad1d246fb6249125b0af8ddb48221f41b0263e8e74f22a0e34"
+        },
+        {
+          "canonical_filename": "0002-0001.json",
+          "sha256": "4fbd38f5c2644a27f2e5425f1ffffcb61e0ad4475045d78b3d2d993e819edb2a"
+        },
+        {
+          "canonical_filename": "0002-0002.json",
+          "sha256": "bdfaa651c023d9880f468cf56246d5e189fe7e4576108975692e268a5fc2949b"
+        },
+        {
+          "canonical_filename": "0002-0003.json",
+          "sha256": "c98cf49bae1a4dc5f5c474e8fa4f70d8b2c1909921125c6b714ddb49ca02942c"
+        }
+      ],
+      "validated_file": "0002.json",
+      "raw_sha256_before": "efa9db99035301ab43b451f796bdc6e1e729147e01e6d488f783e03df13b4bf5",
+      "raw_sha256_after": "efa9db99035301ab43b451f796bdc6e1e729147e01e6d488f783e03df13b4bf5"
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "candidate_index": 3,
+      "candidate_namespace": "wildchat-mgmt-cand-003-f877bc2fc8f5",
+      "canonical_filename": "0003.json",
+      "turn_count": 3,
+      "payload_sha256": "0de83acfe4609b163d15331ec36418849df1f0a8973d772de8ecbeb1cef47395",
+      "first_pass_files": [
+        {
+          "canonical_filename": "0003-0000.json",
+          "sha256": "3d42110e1e30c58b55544240cb6d932691a301aae4ad5504bb0844ff3ce4447d"
+        },
+        {
+          "canonical_filename": "0003-0001.json",
+          "sha256": "2b8a113d46a2361b572cdb2a822672e04c833db3546a6e545243f23343a9538e"
+        },
+        {
+          "canonical_filename": "0003-0002.json",
+          "sha256": "da2bff6f6ef7c6b2d79581d9ecedcd146a175650d1726823c7228820f313ddeb"
+        }
+      ],
+      "validated_file": "0003.json",
+      "raw_sha256_before": "061811a2736fe27229c9cabfd5936f007f1a8dba425ae9e27caca4b4da1cef37",
+      "raw_sha256_after": "061811a2736fe27229c9cabfd5936f007f1a8dba425ae9e27caca4b4da1cef37"
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "candidate_index": 4,
+      "candidate_namespace": "wildchat-learn-cand-004-dc8956a5d265",
+      "canonical_filename": "0004.json",
+      "turn_count": 3,
+      "payload_sha256": "83b00596b6117d3f77a89ae386fc763611d9a88a253540353a4d6be6a766b264",
+      "first_pass_files": [
+        {
+          "canonical_filename": "0004-0000.json",
+          "sha256": "dcbf57f7df02129f0c94d514a44bb6855f9298c62e535981f19beb9030028aa5"
+        },
+        {
+          "canonical_filename": "0004-0001.json",
+          "sha256": "da05e9ec6d3db0911c47f014771ce37678478d79e0e2091530c663ac18068fe1"
+        },
+        {
+          "canonical_filename": "0004-0002.json",
+          "sha256": "3f2dd14fd13db93b4f8d761b34e7121cf46c9097f5f9326b72bc1e1d1d0339e6"
+        }
+      ],
+      "validated_file": "0004.json",
+      "raw_sha256_before": "37a34bd7b0b99dc16af503384e6a31f7e8e58459b5e75cd1647a4b312be748ec",
+      "raw_sha256_after": "37a34bd7b0b99dc16af503384e6a31f7e8e58459b5e75cd1647a4b312be748ec"
+    },
+    {
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "candidate_index": 5,
+      "candidate_namespace": "taskmaster2-cand-001-5f5e1081bd0b",
+      "canonical_filename": "0005.json",
+      "turn_count": 6,
+      "payload_sha256": "759d03f540112ad620a0e64fcf1a8610d5f484c977d685c167c3168b6632dc03",
+      "first_pass_files": [
+        {
+          "canonical_filename": "0005-0000.json",
+          "sha256": "549b4bc1810f7c0cbd00cffc7e6da05a4b0996163ad6f0b184f18610e6cc09f2"
+        },
+        {
+          "canonical_filename": "0005-0001.json",
+          "sha256": "1d87f121c5f8cb6891668057c3768a691dfe464cd23fd1f961af66e3da5b48f0"
+        },
+        {
+          "canonical_filename": "0005-0002.json",
+          "sha256": "c9bcb10cfa7168ff7b4d4b09325703531cf361edc2dac6ca4b597d2a462fc0f1"
+        },
+        {
+          "canonical_filename": "0005-0003.json",
+          "sha256": "f8b0c94ee5d12ac6bb2dd66b91dcec57f0f558a2673cf3bd71351baf20bb02d5"
+        },
+        {
+          "canonical_filename": "0005-0004.json",
+          "sha256": "f7a16664f7e2f19a6154d26248371a1ebf0bff5c21b1c9c6c778bd2d85c66e1b"
+        },
+        {
+          "canonical_filename": "0005-0005.json",
+          "sha256": "924047a028d2c57255e7dc6f56b183930f64a83d7f2fde835f39a717c6cdcfde"
+        }
+      ],
+      "validated_file": "0005.json",
+      "raw_sha256_before": "534145e998db05e4af7a4adac2140cb602afec11ab47e4894061d45d85327758",
+      "raw_sha256_after": "534145e998db05e4af7a4adac2140cb602afec11ab47e4894061d45d85327758"
+    },
+    {
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "candidate_index": 6,
+      "candidate_namespace": "tau-bench-cand-001-650fada2c0dc",
+      "canonical_filename": "0006.json",
+      "turn_count": 5,
+      "payload_sha256": "dc90a4aa45765d217c788e79408a83beb65a614403cb853628e5adf6212d148d",
+      "first_pass_files": [
+        {
+          "canonical_filename": "0006-0000.json",
+          "sha256": "8bcbf8f47d96a9f59d46865bfb2df35fe9ccb9eb956f20fd1ca91ccfeb28e6a2"
+        },
+        {
+          "canonical_filename": "0006-0001.json",
+          "sha256": "12de881ba47ed4db81f140121f1cc5728ea79da3d85180f8444ae0a99d98b765"
+        },
+        {
+          "canonical_filename": "0006-0002.json",
+          "sha256": "e366e9b79d5ce6144843af3401529d82ff7f2026dd45ba2d40cdfbda1b99800f"
+        },
+        {
+          "canonical_filename": "0006-0003.json",
+          "sha256": "519696d9b7a486b34f986d712c8498991af3730e6308e0c2d0df09d714a5ef3f"
+        },
+        {
+          "canonical_filename": "0006-0004.json",
+          "sha256": "9ba6ff44395dfd7a2b30a69709b78d3ffd2b64157ad99d29766851b414b7c3e3"
+        }
+      ],
+      "validated_file": "0006.json",
+      "raw_sha256_before": "c52570cc51b872e23171decf9866c84cf1d737fe1f6f0353b31101e05f41acd8",
+      "raw_sha256_after": "c52570cc51b872e23171decf9866c84cf1d737fe1f6f0353b31101e05f41acd8"
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "candidate_index": 7,
+      "candidate_namespace": "beam-cand-004-4d648a026dc4",
+      "canonical_filename": "0007.json",
+      "turn_count": 5,
+      "payload_sha256": "94ac390d74a0d797f5de11239c284445af775f570a29e8460966317c78715c7c",
+      "first_pass_files": [
+        {
+          "canonical_filename": "0007-0000.json",
+          "sha256": "ecbf262bb745cf01606df53d439196350c5f49eb7965ad5d64b8ee34098f3f73"
+        },
+        {
+          "canonical_filename": "0007-0001.json",
+          "sha256": "108c3b52530c456191e0ce3d36a04452d504b4f972824ac129f27e06933b7516"
+        },
+        {
+          "canonical_filename": "0007-0002.json",
+          "sha256": "08fcd86304755737e320256ba1ff59a4045e38832efb10b639ca98766c971e7d"
+        },
+        {
+          "canonical_filename": "0007-0003.json",
+          "sha256": "67d6201a10894b44966dfb693ee8a821395695291ef5ab1f5edc31f4e08fc3fe"
+        },
+        {
+          "canonical_filename": "0007-0004.json",
+          "sha256": "02d86b0863bc68e6a4cef94ea61b48bdf10ba095e7d9203554c9da34fb97501c"
+        }
+      ],
+      "validated_file": "0007.json",
+      "raw_sha256_before": "e6a445e866f1c856ced1a8c1a2cf96203f67dc61dbb6a4470e40aead4a62c08d",
+      "raw_sha256_after": "e6a445e866f1c856ced1a8c1a2cf96203f67dc61dbb6a4470e40aead4a62c08d"
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "candidate_index": 8,
+      "candidate_namespace": "wildchat-learn-cand-001-8def27ce661d",
+      "canonical_filename": "0008.json",
+      "turn_count": 6,
+      "payload_sha256": "d00a0a2e140ac49a6c6dec82d4a2336b163813aebdb5f90093c68fd81f834f4e",
+      "first_pass_files": [
+        {
+          "canonical_filename": "0008-0000.json",
+          "sha256": "ba9436a385302b0eeff4f4b7069ffdefa79f41d92f34c50ea3a79044f4b33727"
+        },
+        {
+          "canonical_filename": "0008-0001.json",
+          "sha256": "006d84a34f565291aaedb175349ab6f8008888a8a961ec986de91250b31734c1"
+        },
+        {
+          "canonical_filename": "0008-0002.json",
+          "sha256": "197682afb27e06c447c784e7973e5d6df4cb7931d4f755142d48bedef43df6f4"
+        },
+        {
+          "canonical_filename": "0008-0003.json",
+          "sha256": "923b8ec76f1de56d4687f291614bf0e7980cb3a7c5313ff158b7c5e108699fc6"
+        },
+        {
+          "canonical_filename": "0008-0004.json",
+          "sha256": "0e2ec8a704f03b4d999de895c5ad28849e2d79b8fd5cb5ca128b8895e98332c1"
+        },
+        {
+          "canonical_filename": "0008-0005.json",
+          "sha256": "e2984fa942636cb27d8758c5c13d13967772173cbafc8eaa98a9e28d1f75304a"
+        }
+      ],
+      "validated_file": "0008.json",
+      "raw_sha256_before": "8722e274fc3cd34cc887870123544a95e1c8eafa8a210188f9ef5dc6125bd5d1",
+      "raw_sha256_after": "8722e274fc3cd34cc887870123544a95e1c8eafa8a210188f9ef5dc6125bd5d1"
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "candidate_index": 9,
+      "candidate_namespace": "wildchat-learn-cand-003-b1871de6ef7c",
+      "canonical_filename": "0009.json",
+      "turn_count": 3,
+      "payload_sha256": "d5b0422733f5414331fc22488a4173ffe89420335d0a314d0faf14f5098ae5be",
+      "first_pass_files": [
+        {
+          "canonical_filename": "0009-0000.json",
+          "sha256": "e15353f4036d95bdda0864e7bdbb0f95e70e4a7cb03dc83872f475fb254b6dbd"
+        },
+        {
+          "canonical_filename": "0009-0001.json",
+          "sha256": "deb1eab3e76e7d7cda0a6ba2640d5175d1c7f9c25cd4c00c564dabb5e3963086"
+        },
+        {
+          "canonical_filename": "0009-0002.json",
+          "sha256": "152a8897d48db11fb7a92a637dac2f095082576a863683e82f2a9c0de4636f14"
+        }
+      ],
+      "validated_file": "0009.json",
+      "raw_sha256_before": "b9ce55121fec342ca172c255d44dd76dbf785148a0be85020a7b8303e07deed5",
+      "raw_sha256_after": "b9ce55121fec342ca172c255d44dd76dbf785148a0be85020a7b8303e07deed5"
+    }
+  ]
+}

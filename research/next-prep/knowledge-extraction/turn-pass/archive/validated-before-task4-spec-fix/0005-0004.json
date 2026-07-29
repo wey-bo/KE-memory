@@ -1,0 +1,160 @@
+{
+  "candidate_id": "TASKMASTER2-CAND-001",
+  "turn_index": 4,
+  "context_completions": [
+    {
+      "completion_id": "C_taskmaster2-cand-001-5f5e1081bd0b_004_001",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "turn_index": 4,
+      "kind": "unresolved",
+      "original_span": "这个价格",
+      "interpretation": "先前提到但本轮未给出具体金额或对应方案的价格。",
+      "confidence": 1.0,
+      "ambiguity": true,
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "这个价格有点贵",
+          "evidence_id": "evidence-00c73fab673919a9123f4907c30f8ac51a08426d0290ee61390c1d6b30c13d82",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 7
+        }
+      ]
+    },
+    {
+      "completion_id": "C_taskmaster2-cand-001-5f5e1081bd0b_004_002",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "turn_index": 4,
+      "kind": "unresolved",
+      "original_span": "你刚才说的第一班",
+      "interpretation": "代理在先前内容中提到的第一班航班；该航班的具体信息在本轮中未给出。",
+      "confidence": 1.0,
+      "ambiguity": true,
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "还是选你刚才说的第一班吧",
+          "evidence_id": "evidence-586b36a99fa7dfc8d054a63ba509ef4debdb136f4fd68fdcb74491c35bc70fa2",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 8,
+          "end": 20
+        }
+      ]
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_004_001",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "statement": "用户认为本轮未明确指代的价格有点贵。",
+      "subject": "用户",
+      "predicate": "认为有点贵",
+      "object": "本轮未明确指代的价格",
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": [
+          "价格指代未解决"
+        ]
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "这个价格有点贵",
+          "evidence_id": "evidence-00c73fab673919a9123f4907c30f8ac51a08426d0290ee61390c1d6b30c13d82",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 7
+        }
+      ],
+      "inference_basis": "“这个价格”依赖本轮之外的先行内容，具体金额和方案无法在本轮确定。",
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_004_002",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "statement": "用户选择代理先前提到但本轮未明确识别的第一班航班。",
+      "subject": "用户",
+      "predicate": "选择",
+      "object": "代理先前提到的第一班航班",
+      "qualifiers": {
+        "modality": "committed",
+        "polarity": "positive",
+        "temporal": [
+          "刚才"
+        ],
+        "conditions": [],
+        "scope": [
+          "具体航班在本轮未识别"
+        ]
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "还是选你刚才说的第一班吧",
+          "evidence_id": "evidence-586b36a99fa7dfc8d054a63ba509ef4debdb136f4fd68fdcb74491c35bc70fa2",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 8,
+          "end": 20
+        }
+      ],
+      "inference_basis": "“第一班”依赖先前对话，本轮没有足够信息确定其行程、时间或价格。",
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_004_003",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "statement": "代理声称已将全部信息发送到用户的邮箱。",
+      "subject": "代理",
+      "predicate": "声称已发送",
+      "object": "全部信息",
+      "qualifiers": {
+        "modality": "claimed_completed",
+        "polarity": "positive",
+        "temporal": [
+          "已经"
+        ],
+        "conditions": [],
+        "scope": [
+          "发送目的地：用户邮箱"
+        ]
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "已经把全部信息发送到你的邮箱",
+          "evidence_id": "evidence-192dececef8d92de2b51121e6c77f6dbd13e7dbce7da15fea226d6d6a30a3a30",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 3,
+          "end": 17
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 1.0
+    }
+  ]
+}

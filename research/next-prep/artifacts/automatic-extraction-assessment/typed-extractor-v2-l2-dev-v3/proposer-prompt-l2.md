@@ -1,0 +1,135 @@
+# Typed Extractor V2 L2 Dev Proposer Contract V3
+
+You are a fresh proposer with no inherited conversation history.
+
+## Allowed Input
+
+Read only the frozen `public-l2.json` supplied by the dispatch request. Do not
+read authority, gold, source cases, manifests, prior proposals, reports,
+scorer code/output, historical error analysis, or any other file.
+
+## Output Contract
+
+Return one JSON object with exactly these top-level keys:
+
+`schema_version`, `dataset_id`, `run_id`, `proposer_id`, `proposer_version`,
+`case_count`, `proposals`.
+
+`schema_version` is exactly `typed-extractor-l2-proposals-v1`. Copy dataset,
+run and proposer metadata exactly. Emit one proposal per public case using
+exactly:
+
+`case_id`, `candidate_ref`, `decision`, `confidence`, `typed_candidate`,
+`reason_code`.
+
+Decision is `emit_l2` only when the public typed L1 support pack completely
+supports a closed L2 candidate. Otherwise use `abstain`. Abstention requires
+`typed_candidate: null`. Confidence is from 0 through 1. Reason code is a
+concise snake_case description based only on public input.
+
+## Exact Typed L2 Candidate
+
+For `emit_l2`, use every key below and no others:
+
+```json
+{
+  "kind": "task",
+  "summary": "evidence-backed cross-turn summary",
+  "supporting_l1_refs": ["support-ref-copied-from-public"],
+  "structured_claims": [
+    {
+      "claim_ref": "claim-01",
+      "predicate": {
+        "surface": "public predicate surface",
+        "sense": "catalog predicate sense",
+        "canonical_operator": "catalog operator"
+      },
+      "local_entities": [
+        {"local_entity_id": "entity-01", "surface": "publicly supported surface"}
+      ],
+      "roles": [
+        {"role": "catalog role", "role_name": "catalog display name", "local_entity_id": "entity-01"}
+      ],
+      "modality": "actual",
+      "polarity": "positive",
+      "time": {"event_time": null, "valid_time": null},
+      "supporting_l1_refs": ["support-ref-copied-from-public"]
+    }
+  ],
+  "abstraction": {
+    "method": "coreference_resolution",
+    "basis": "concise public-only basis"
+  },
+  "closure": {
+    "pattern": "multi_evidence_set",
+    "required_support_refs": ["support-ref-copied-from-public"],
+    "optional_support_refs": []
+  },
+  "source_turn_refs": ["turn-ref-copied-from-public"],
+  "source_session_refs": ["session-ref-copied-from-public"],
+  "evidence_bindings": [
+    {"evidence_id": "evidence-id-copied-from-public", "speaker": "user"}
+  ],
+  "lifecycle": "candidate"
+}
+```
+
+## Rules
+
+- For every emission, copy `summary` exactly from
+  `untyped_candidate.statement`, including punctuation. In the primary
+  structured claim, copy `predicate.surface` exactly from
+  `untyped_candidate.predicate`; copy the subject and object entity surfaces
+  exactly from `untyped_candidate.subject` and `untyped_candidate.object`.
+  Preserve any additional role value as an exact phrase explicitly present in
+  the public statement or typed supports. Do not shorten, paraphrase or add a
+  second claim merely to restate an input support.
+- Copy support, turn, session and evidence references exactly from the same
+  public case. Do not invent global IDs, identity links, revisions or closure
+  evaluation IDs.
+- Top-level `supporting_l1_refs` must contain every public support exactly once.
+  Every top-level support must be consumed by at least one structured claim,
+  and `closure.required_support_refs` must equal the top-level support set.
+  When the candidate has one primary claim, that claim's
+  `supporting_l1_refs` must equal the top-level support set. Source turns,
+  sessions and evidence must cover all public supports exactly.
+- `kind`, abstraction method, closure pattern, predicate sense, canonical
+  operator, roles, modality and polarity must come from public catalogs and be
+  selected by meaning.
+- Entity numbering is local to each structured claim, not shared across
+  claims. Restart at `entity-01` inside every claim. A two-entity claim uses
+  exactly `entity-01` and `entity-02`, even when earlier claims used those
+  IDs. Claim-local IDs do not express cross-claim identity. Every role
+  references a local entity. Copy entity surfaces from public text or typed L1
+  supports; do not create global entity identity.
+- Preserve unresolved time as null. Do not guess calendar dates or identity.
+- Choose the dominant abstraction, not merely the presence of a pronoun.
+  Use `lifecycle_resolution` with `update_supersession` whenever later support
+  commits, schedules, transforms, replaces or otherwise advances an earlier
+  proposed/requested state. Use `task_composition` when multiple supports
+  jointly provide requirements, current state and the requested task. Use
+  `coreference_resolution` only when resolving the cross-turn referent is the
+  abstraction and no lifecycle transition or multi-support task composition
+  applies. Otherwise use `multi_evidence_set` for a complete multi-turn
+  evidence bundle.
+- Abstain when source modality has no exact typed meaning, when a selected
+  option or object lacks typed L1 support, when required evidence is absent,
+  or when closure/source coverage would be incomplete. Do not repair missing
+  support with agent text, lexical similarity, embedding, WordNet,
+  schema.org, Extended-AMR or KEOL.
+- In particular, if `untyped_candidate.qualifiers.modality` is `possible` and
+  `possible` is not an allowed output modality, abstain; never reinterpret it
+  as `planned` or `actual` from a related support. If a selection refers only
+  to a deictic option such as a numbered/relative choice and the public support
+  pack lacks the selected option's identifying details or evidence chain,
+  abstain even when a selection event support exists.
+- The support pack is non-authoritative input. Do not claim or execute L1/L2,
+  revision, closure, identity, membership, snapshot or aggregate writes.
+- `LONGMEMEVAL-6d550036` remains `structured_l2_identity_unresolved`.
+
+Before finishing, parse the JSON and verify exact metadata, exact case
+coverage, no extra keys, confidence bounds, closed local references, public
+vocabulary membership, exact public support/turn/session/evidence references,
+and null typed candidate for every abstention. Verify each structured claim
+independently restarts contiguous entity numbering at `entity-01`. Emit JSON
+only.

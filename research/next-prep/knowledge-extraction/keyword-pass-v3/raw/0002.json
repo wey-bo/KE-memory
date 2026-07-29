@@ -1,0 +1,1533 @@
+{
+    "candidate_id":  "TAU-BENCH-CAND-001",
+    "items":  [
+                  {
+                      "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_000_001",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0001",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_000_001",
+                                           "surface":  "请求",
+                                           "keyword":  "请求",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "request.v.01",
+                                           "wordnet_lemma":  "request",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0002",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_000_001",
+                                           "surface":  "退回",
+                                           "keyword":  "退回",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "return.v.05",
+                                           "wordnet_lemma":  "return",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.93
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0003",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_000_001",
+                                           "surface":  "平板",
+                                           "keyword":  "平板",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_000_002",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0004",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_000_002",
+                                           "surface":  "充电器",
+                                           "keyword":  "充电器",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "charger.n.02",
+                                           "wordnet_lemma":  "charger",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0005",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_000_002",
+                                           "surface":  "配套",
+                                           "keyword":  "配套",
+                                           "keyword_type":  "relation",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0006",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_000_002",
+                                           "surface":  "平板",
+                                           "keyword":  "平板",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0007",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_000_002",
+                                           "surface":  "刚",
+                                           "keyword":  "刚",
+                                           "keyword_type":  "time",
+                                           "semantic_role":  "time",
+                                           "source_field":  "qualifiers.temporal",
+                                           "wordnet_synset":  "recently.r.01",
+                                           "wordnet_lemma":  "recently",
+                                           "wordnet_pos":  "r",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0008",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_000_002",
+                                           "surface":  "买",
+                                           "keyword":  "购买",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "time",
+                                           "source_field":  "qualifiers.temporal",
+                                           "wordnet_synset":  "buy.v.01",
+                                           "wordnet_lemma":  "buy",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_000_003",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0009",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_000_003",
+                                           "surface":  "请求",
+                                           "keyword":  "请求",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "request.v.01",
+                                           "wordnet_lemma":  "request",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0010",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_000_003",
+                                           "surface":  "取消",
+                                           "keyword":  "取消",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "cancel.v.01",
+                                           "wordnet_lemma":  "cancel",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0011",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_000_003",
+                                           "surface":  "充电器",
+                                           "keyword":  "充电器",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "charger.n.02",
+                                           "wordnet_lemma":  "charger",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_000_008",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0012",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_000_008",
+                                           "surface":  "确认",
+                                           "keyword":  "确认",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "confirm.v.01",
+                                           "wordnet_lemma":  "confirm",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.9
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0013",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_000_008",
+                                           "surface":  "计划",
+                                           "keyword":  "计划",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "plan.n.01",
+                                           "wordnet_lemma":  "plan",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0014",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_000_008",
+                                           "surface":  "退货",
+                                           "keyword":  "退货",
+                                           "keyword_type":  "event",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "qualifiers.scope",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0015",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_000_008",
+                                           "surface":  "平板",
+                                           "keyword":  "平板",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "qualifiers.scope",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0016",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_000_008",
+                                           "surface":  "取消",
+                                           "keyword":  "取消",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "qualifiers.scope",
+                                           "wordnet_synset":  "cancel.v.01",
+                                           "wordnet_lemma":  "cancel",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0017",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_000_008",
+                                           "surface":  "充电器",
+                                           "keyword":  "充电器",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "qualifiers.scope",
+                                           "wordnet_synset":  "charger.n.02",
+                                           "wordnet_lemma":  "charger",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_001",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0018",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_001",
+                                           "surface":  "请求",
+                                           "keyword":  "请求",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "request.v.01",
+                                           "wordnet_lemma":  "request",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0019",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_001",
+                                           "surface":  "执行",
+                                           "keyword":  "执行",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "carry_through.v.01",
+                                           "wordnet_lemma":  "execute",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.96
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0020",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_001",
+                                           "surface":  "平板",
+                                           "keyword":  "平板",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0021",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_001",
+                                           "surface":  "退货",
+                                           "keyword":  "退货",
+                                           "keyword_type":  "event",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_002",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0022",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_002",
+                                           "surface":  "请求",
+                                           "keyword":  "请求",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "request.v.01",
+                                           "wordnet_lemma":  "request",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0023",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_002",
+                                           "surface":  "执行",
+                                           "keyword":  "执行",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "carry_through.v.01",
+                                           "wordnet_lemma":  "execute",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.96
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0024",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_002",
+                                           "surface":  "充电器",
+                                           "keyword":  "充电器",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "charger.n.02",
+                                           "wordnet_lemma":  "charger",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0025",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_002",
+                                           "surface":  "取消",
+                                           "keyword":  "取消",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "cancel.v.01",
+                                           "wordnet_lemma":  "cancel",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.98
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_003",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0026",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_003",
+                                           "surface":  "return_delivered_order_items",
+                                           "keyword":  "退货工具",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0027",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_003",
+                                           "surface":  "#W2692684",
+                                           "keyword":  "#W2692684",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "identifier",
+                                           "source_field":  "qualifiers.scope",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0028",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_003",
+                                           "surface":  "3788616824",
+                                           "keyword":  "3788616824",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "identifier",
+                                           "source_field":  "qualifiers.scope",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0029",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_003",
+                                           "surface":  "gift_card_7711863",
+                                           "keyword":  "gift_card_7711863",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "identifier",
+                                           "source_field":  "qualifiers.scope",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0030",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_003",
+                                           "surface":  "退款",
+                                           "keyword":  "退款",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "statement",
+                                           "wordnet_synset":  "refund.n.01",
+                                           "wordnet_lemma":  "refund",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_004",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0031",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_004",
+                                           "surface":  "cancel_pending_order",
+                                           "keyword":  "取消工具",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0032",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_004",
+                                           "surface":  "#W9373487",
+                                           "keyword":  "#W9373487",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "identifier",
+                                           "source_field":  "qualifiers.scope",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0033",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_004",
+                                           "surface":  "needed",
+                                           "keyword":  "需要",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "condition",
+                                           "source_field":  "qualifiers.scope",
+                                           "wordnet_synset":  "need.v.03",
+                                           "wordnet_lemma":  "need",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.9
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_005",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0034",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_005",
+                                           "surface":  "平板",
+                                           "keyword":  "平板",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0035",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_005",
+                                           "surface":  "退货",
+                                           "keyword":  "退货",
+                                           "keyword_type":  "event",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0036",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_005",
+                                           "surface":  "提交",
+                                           "keyword":  "提交",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "submit.v.01",
+                                           "wordnet_lemma":  "submit",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.93
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_006",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0037",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_006",
+                                           "surface":  "退款",
+                                           "keyword":  "退款",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "refund.n.01",
+                                           "wordnet_lemma":  "refund",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0038",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_006",
+                                           "surface":  "金额",
+                                           "keyword":  "金额",
+                                           "keyword_type":  "quantity",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "sum.n.01",
+                                           "wordnet_lemma":  "amount",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0039",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_006",
+                                           "surface":  "951.21美元",
+                                           "keyword":  "951.21美元",
+                                           "keyword_type":  "quantity",
+                                           "semantic_role":  "value",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_007",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0040",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_007",
+                                           "surface":  "充电器",
+                                           "keyword":  "充电器",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "charger.n.02",
+                                           "wordnet_lemma":  "charger",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0041",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_007",
+                                           "surface":  "订单",
+                                           "keyword":  "订单",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "order.n.07",
+                                           "wordnet_lemma":  "order",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0042",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_007",
+                                           "surface":  "取消",
+                                           "keyword":  "取消",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "cancel.v.01",
+                                           "wordnet_lemma":  "cancel",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.98
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_008",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0043",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_008",
+                                           "surface":  "109.27美元",
+                                           "keyword":  "109.27美元",
+                                           "keyword_type":  "quantity",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0044",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_008",
+                                           "surface":  "退回",
+                                           "keyword":  "退款",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "refund.v.01",
+                                           "wordnet_lemma":  "refund",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0045",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_008",
+                                           "surface":  "礼品卡",
+                                           "keyword":  "礼品卡",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "recipient",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0046",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_001_008",
+                                           "surface":  "退款",
+                                           "keyword":  "退款",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "qualifiers.scope",
+                                           "wordnet_synset":  "refund.n.01",
+                                           "wordnet_lemma":  "refund",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_002_001",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0047",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_002_001",
+                                           "surface":  "买",
+                                           "keyword":  "购买",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "buy.v.01",
+                                           "wordnet_lemma":  "buy",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0048",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_002_001",
+                                           "surface":  "运动鞋",
+                                           "keyword":  "运动鞋",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "gym_shoe.n.01",
+                                           "wordnet_lemma":  "sneaker",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_002_002",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0049",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_002_002",
+                                           "surface":  "请求",
+                                           "keyword":  "请求",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "request.v.01",
+                                           "wordnet_lemma":  "request",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0050",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_002_002",
+                                           "surface":  "帮助",
+                                           "keyword":  "帮助",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "aid.n.02",
+                                           "wordnet_lemma":  "help",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.96
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0051",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_002_002",
+                                           "surface":  "退回",
+                                           "keyword":  "退回",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "return.v.05",
+                                           "wordnet_lemma":  "return",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.93
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0052",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_002_002",
+                                           "surface":  "运动鞋",
+                                           "keyword":  "运动鞋",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "gym_shoe.n.01",
+                                           "wordnet_lemma":  "sneaker",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_002_004",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0053",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_002_004",
+                                           "surface":  "请求",
+                                           "keyword":  "请求",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "request.v.01",
+                                           "wordnet_lemma":  "request",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0054",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_002_004",
+                                           "surface":  "提供",
+                                           "keyword":  "提供",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "supply.v.01",
+                                           "wordnet_lemma":  "provide",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.97
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0055",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_002_004",
+                                           "surface":  "运动鞋",
+                                           "keyword":  "运动鞋",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "gym_shoe.n.01",
+                                           "wordnet_lemma":  "sneaker",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0056",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_002_004",
+                                           "surface":  "订单号",
+                                           "keyword":  "订单号",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "identifier",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_002_005",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0057",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_002_005",
+                                           "surface":  "确认",
+                                           "keyword":  "确认",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "confirm.v.01",
+                                           "wordnet_lemma":  "confirm",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.9
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0058",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_002_005",
+                                           "surface":  "运动鞋",
+                                           "keyword":  "运动鞋",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "gym_shoe.n.01",
+                                           "wordnet_lemma":  "sneaker",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0059",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_002_005",
+                                           "surface":  "订单",
+                                           "keyword":  "订单",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "order.n.07",
+                                           "wordnet_lemma":  "order",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0060",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_002_005",
+                                           "surface":  "最近",
+                                           "keyword":  "最近",
+                                           "keyword_type":  "time",
+                                           "semantic_role":  "time",
+                                           "source_field":  "qualifiers.temporal",
+                                           "wordnet_synset":  "recently.r.01",
+                                           "wordnet_lemma":  "recently",
+                                           "wordnet_pos":  "r",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_001",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0061",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_001",
+                                           "surface":  "不记得",
+                                           "keyword":  "记得",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "remember.v.01",
+                                           "wordnet_lemma":  "remember",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0062",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_001",
+                                           "surface":  "运动鞋",
+                                           "keyword":  "运动鞋",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "gym_shoe.n.01",
+                                           "wordnet_lemma":  "sneaker",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0063",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_001",
+                                           "surface":  "订单号",
+                                           "keyword":  "订单号",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "identifier",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_002",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0064",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_002",
+                                           "surface":  "运动鞋",
+                                           "keyword":  "运动鞋",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "gym_shoe.n.01",
+                                           "wordnet_lemma":  "sneaker",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0065",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_002",
+                                           "surface":  "属于",
+                                           "keyword":  "属于",
+                                           "keyword_type":  "relation",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "belong.v.01",
+                                           "wordnet_lemma":  "belong",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.96
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0066",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_002",
+                                           "surface":  "订单",
+                                           "keyword":  "订单",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0067",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_002",
+                                           "surface":  "最近",
+                                           "keyword":  "最近",
+                                           "keyword_type":  "time",
+                                           "semantic_role":  "time",
+                                           "source_field":  "qualifiers.temporal",
+                                           "wordnet_synset":  "recently.r.01",
+                                           "wordnet_lemma":  "recently",
+                                           "wordnet_pos":  "r",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_003",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0068",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_003",
+                                           "surface":  "order",
+                                           "keyword":  "订单",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "order.n.07",
+                                           "wordnet_lemma":  "order",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0069",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_003",
+                                           "surface":  "details",
+                                           "keyword":  "详情",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0070",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_003",
+                                           "surface":  "查询",
+                                           "keyword":  "查询",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "statement",
+                                           "wordnet_synset":  "question.v.03",
+                                           "wordnet_lemma":  "query",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.97
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0071",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_003",
+                                           "surface":  "#W7449508",
+                                           "keyword":  "#W7449508",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "identifier",
+                                           "source_field":  "qualifiers.scope",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_004",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0072",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_004",
+                                           "surface":  "#W7449508",
+                                           "keyword":  "#W7449508",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "identifier",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0073",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_004",
+                                           "surface":  "包含",
+                                           "keyword":  "包含",
+                                           "keyword_type":  "relation",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "incorporate.v.02",
+                                           "wordnet_lemma":  "contain",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.97
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0074",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_004",
+                                           "surface":  "运动鞋",
+                                           "keyword":  "运动鞋",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "gym_shoe.n.01",
+                                           "wordnet_lemma":  "sneaker",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_005",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0075",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_005",
+                                           "surface":  "运动鞋",
+                                           "keyword":  "运动鞋",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "gym_shoe.n.01",
+                                           "wordnet_lemma":  "sneaker",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0076",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_005",
+                                           "surface":  "尺码",
+                                           "keyword":  "尺码",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "size.n.02",
+                                           "wordnet_lemma":  "size",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0077",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_005",
+                                           "surface":  "6码",
+                                           "keyword":  "6码",
+                                           "keyword_type":  "quantity",
+                                           "semantic_role":  "value",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_006",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0078",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_006",
+                                           "surface":  "运动鞋",
+                                           "keyword":  "运动鞋",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "gym_shoe.n.01",
+                                           "wordnet_lemma":  "sneaker",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0079",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_006",
+                                           "surface":  "颜色",
+                                           "keyword":  "颜色",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "color.n.01",
+                                           "wordnet_lemma":  "color",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0080",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_006",
+                                           "surface":  "黑色",
+                                           "keyword":  "黑色",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "value",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "black.n.01",
+                                           "wordnet_lemma":  "black",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_007",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0081",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_007",
+                                           "surface":  "运动鞋",
+                                           "keyword":  "运动鞋",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "gym_shoe.n.01",
+                                           "wordnet_lemma":  "sneaker",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0082",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_007",
+                                           "surface":  "材料",
+                                           "keyword":  "材料",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "material.n.01",
+                                           "wordnet_lemma":  "material",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0083",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_007",
+                                           "surface":  "合成材料",
+                                           "keyword":  "合成材料",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "value",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_008",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0084",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_008",
+                                           "surface":  "运动鞋",
+                                           "keyword":  "运动鞋",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "gym_shoe.n.01",
+                                           "wordnet_lemma":  "sneaker",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0085",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_008",
+                                           "surface":  "状态",
+                                           "keyword":  "状态",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "condition.n.01",
+                                           "wordnet_lemma":  "status",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.97
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0086",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_008",
+                                           "surface":  "送达",
+                                           "keyword":  "送达",
+                                           "keyword_type":  "event",
+                                           "semantic_role":  "value",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "deliver.v.02",
+                                           "wordnet_lemma":  "deliver",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.98
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_009",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0087",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_009",
+                                           "surface":  "确认",
+                                           "keyword":  "确认",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "confirm.v.01",
+                                           "wordnet_lemma":  "confirm",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.9
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0088",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_009",
+                                           "surface":  "退回",
+                                           "keyword":  "退回",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "return.v.05",
+                                           "wordnet_lemma":  "return",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.93
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0089",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_003_009",
+                                           "surface":  "运动鞋",
+                                           "keyword":  "运动鞋",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "gym_shoe.n.01",
+                                           "wordnet_lemma":  "sneaker",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_004_001",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0090",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_004_001",
+                                           "surface":  "请求",
+                                           "keyword":  "请求",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "request.v.01",
+                                           "wordnet_lemma":  "request",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0091",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_004_001",
+                                           "surface":  "退回",
+                                           "keyword":  "退回",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "return.v.05",
+                                           "wordnet_lemma":  "return",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.93
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0092",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_004_001",
+                                           "surface":  "运动鞋",
+                                           "keyword":  "运动鞋",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "gym_shoe.n.01",
+                                           "wordnet_lemma":  "sneaker",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_004_002",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0093",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_004_002",
+                                           "surface":  "偏好",
+                                           "keyword":  "偏好",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "prefer.v.01",
+                                           "wordnet_lemma":  "prefer",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0094",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_004_002",
+                                           "surface":  "退款",
+                                           "keyword":  "退款",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "refund.n.01",
+                                           "wordnet_lemma":  "refund",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0095",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_004_002",
+                                           "surface":  "礼品卡",
+                                           "keyword":  "礼品卡",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "recipient",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_004_003",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0096",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_004_003",
+                                           "surface":  "return_delivered_order_items",
+                                           "keyword":  "退货工具",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0097",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_004_003",
+                                           "surface":  "#W7449508",
+                                           "keyword":  "#W7449508",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "identifier",
+                                           "source_field":  "qualifiers.scope",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0098",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_004_003",
+                                           "surface":  "6477915553",
+                                           "keyword":  "6477915553",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "identifier",
+                                           "source_field":  "qualifiers.scope",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0099",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_004_003",
+                                           "surface":  "gift_card_7711863",
+                                           "keyword":  "gift_card_7711863",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "identifier",
+                                           "source_field":  "qualifiers.scope",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0100",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_004_003",
+                                           "surface":  "退款",
+                                           "keyword":  "退款",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "statement",
+                                           "wordnet_synset":  "refund.n.01",
+                                           "wordnet_lemma":  "refund",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_004_004",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0101",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_004_004",
+                                           "surface":  "运动鞋",
+                                           "keyword":  "运动鞋",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "gym_shoe.n.01",
+                                           "wordnet_lemma":  "sneaker",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0102",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_004_004",
+                                           "surface":  "退货",
+                                           "keyword":  "退货",
+                                           "keyword_type":  "event",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0103",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_004_004",
+                                           "surface":  "提交",
+                                           "keyword":  "提交",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "submit.v.01",
+                                           "wordnet_lemma":  "submit",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.93
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_004_005",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0104",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_004_005",
+                                           "surface":  "186.45美元",
+                                           "keyword":  "186.45美元",
+                                           "keyword_type":  "quantity",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0105",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_004_005",
+                                           "surface":  "退回",
+                                           "keyword":  "退款",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "refund.v.01",
+                                           "wordnet_lemma":  "refund",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_tau-bench-cand-001-650fada2c0dc_0106",
+                                           "knowledge_id":  "K_tau-bench-cand-001-650fada2c0dc_004_005",
+                                           "surface":  "礼品卡",
+                                           "keyword":  "礼品卡",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "recipient",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       }
+                                   ]
+                  }
+              ]
+}

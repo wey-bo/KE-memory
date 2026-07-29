@@ -1,0 +1,199 @@
+{
+  "schema_version": "amr-pilot-selection-v1",
+  "sources": [
+    {
+      "source_id": "taskmaster2-flights",
+      "kind": "taskmaster_json",
+      "dataset": "Taskmaster-2 flights",
+      "source_url": "https://raw.githubusercontent.com/google-research-datasets/Taskmaster/master/TM-2-2020/data/flights.json",
+      "source_revision": "git-blob:21c0317c583f3533e517a4e500aea7979de9e513",
+      "source_artifact_sha256": "86b37b5ae25f530fd18ced78800d30c3b54f7b34bb208ecb51842718f04e760b"
+    },
+    {
+      "source_id": "tau-bench-gpt-4o-retail",
+      "kind": "tau_json",
+      "dataset": "tau-bench historical retail",
+      "source_url": "https://raw.githubusercontent.com/sierra-research/tau-bench/main/historical_trajectories/gpt-4o-retail.json",
+      "source_revision": "git-blob:27f588d9157513c3ad11de3db9e824021152d580",
+      "source_artifact_sha256": "df01707894836168ff0ec9616b0bf08f66c7e5afcf313e5fe4f7a2f5c2ec938b"
+    },
+    {
+      "source_id": "beam-100k",
+      "kind": "beam_parquet",
+      "dataset": "BEAM 100K",
+      "source_url": "https://huggingface.co/datasets/Mohammadta/BEAM/resolve/main/data/100K-00000-of-00001.parquet",
+      "source_revision": "lfs-oid:17baa414cb301b2c817f5f2869de3562a04287de",
+      "source_artifact_sha256": "c0519be25907005ba873c927c50877471d550873039d96c041554d0075a78ace"
+    }
+  ],
+  "samples": [
+    {
+      "sample_id": "AMR-S001",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "phenomenon": "event_roles",
+      "source_record_id": "SRC-001",
+      "source_id": "taskmaster2-flights",
+      "locator": {
+        "conversation_id": "dlg-0486d642-4627-489a-a0f3-14d1c2b97068",
+        "utterance_index": 0
+      },
+      "sentence": "Hi, I'd like to book a round-trip flight from New York City to Amsterdam.",
+      "sentence_occurrence_index": 0
+    },
+    {
+      "sample_id": "AMR-S002",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "phenomenon": "event_roles",
+      "source_record_id": "SRC-002",
+      "source_id": "tau-bench-gpt-4o-retail",
+      "locator": {
+        "record_index": 30,
+        "task_id": 30,
+        "trial": 0,
+        "traj_index": 29
+      },
+      "sentence": "Yes, please proceed with the return of the tablet and cancellation of the charger.",
+      "sentence_occurrence_index": 0
+    },
+    {
+      "sample_id": "AMR-S003",
+      "candidate_id": "BEAM-CAND-004",
+      "phenomenon": "event_roles",
+      "source_record_id": "SRC-003",
+      "source_id": "beam-100k",
+      "locator": {
+        "conversation_id": "19",
+        "session_index": 1,
+        "message_index": 9
+      },
+      "sentence": "The guardian will be responsible for the day-to-day care of Francis and Michael, including their physical, emotional, and educational needs.",
+      "sentence_occurrence_index": 0
+    },
+    {
+      "sample_id": "AMR-S004",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "phenomenon": "time_quantity_condition",
+      "source_record_id": "SRC-004",
+      "source_id": "taskmaster2-flights",
+      "locator": {
+        "conversation_id": "dlg-0486d642-4627-489a-a0f3-14d1c2b97068",
+        "utterance_index": 2
+      },
+      "sentence": "Well, I'll be leaving today and coming back on the 19th.",
+      "sentence_occurrence_index": 0
+    },
+    {
+      "sample_id": "AMR-S005",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "phenomenon": "time_quantity_condition",
+      "source_record_id": "SRC-005",
+      "source_id": "tau-bench-gpt-4o-retail",
+      "locator": {
+        "record_index": 30,
+        "task_id": 30,
+        "trial": 0,
+        "traj_index": 34
+      },
+      "sentence": "The refund of $951.21 will be credited to your gift card.",
+      "sentence_occurrence_index": 0
+    },
+    {
+      "sample_id": "AMR-S006",
+      "candidate_id": "BEAM-CAND-004",
+      "phenomenon": "time_quantity_condition",
+      "source_record_id": "SRC-006",
+      "source_id": "beam-100k",
+      "locator": {
+        "conversation_id": "19",
+        "session_index": 1,
+        "message_index": 7
+      },
+      "sentence": "By following these steps and adhering to the timeline, you should be able to finalize your will by the deadline of May 15, 2024.",
+      "sentence_occurrence_index": 0
+    },
+    {
+      "sample_id": "AMR-S007",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "phenomenon": "negation_modality_intent",
+      "source_record_id": "SRC-007",
+      "source_id": "taskmaster2-flights",
+      "locator": {
+        "conversation_id": "dlg-0486d642-4627-489a-a0f3-14d1c2b97068",
+        "utterance_index": 12
+      },
+      "sentence": "Oh, I don't know if I can go that expensive.",
+      "sentence_occurrence_index": 0
+    },
+    {
+      "sample_id": "AMR-S008",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "phenomenon": "negation_modality_intent",
+      "source_record_id": "SRC-008",
+      "source_id": "tau-bench-gpt-4o-retail",
+      "locator": {
+        "record_index": 30,
+        "task_id": 30,
+        "trial": 0,
+        "traj_index": 24
+      },
+      "sentence": "It seems that the exact item you want to exchange for is currently not available in our inventory.",
+      "sentence_occurrence_index": 0
+    },
+    {
+      "sample_id": "AMR-S009",
+      "candidate_id": "BEAM-CAND-004",
+      "phenomenon": "negation_modality_intent",
+      "source_record_id": "SRC-003",
+      "source_id": "beam-100k",
+      "locator": {
+        "conversation_id": "19",
+        "session_index": 1,
+        "message_index": 9
+      },
+      "sentence": "Naming Stephanie as the guardian does not necessarily mean she will also manage the financial assets.",
+      "sentence_occurrence_index": 0
+    },
+    {
+      "sample_id": "AMR-S010",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "phenomenon": "causality_comparison_multiclause",
+      "source_record_id": "SRC-009",
+      "source_id": "taskmaster2-flights",
+      "locator": {
+        "conversation_id": "dlg-0486d642-4627-489a-a0f3-14d1c2b97068",
+        "utterance_index": 9
+      },
+      "sentence": "There is a nonstop flight that is departing at 6 PM\u00a0and arriving the next day at 7:35 AM.",
+      "sentence_occurrence_index": 0
+    },
+    {
+      "sample_id": "AMR-S011",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "phenomenon": "causality_comparison_multiclause",
+      "source_record_id": "SRC-010",
+      "source_id": "tau-bench-gpt-4o-retail",
+      "locator": {
+        "record_index": 30,
+        "task_id": 30,
+        "trial": 0,
+        "traj_index": 25
+      },
+      "sentence": "Also, could you cancel the charger I just bought since it goes with the tablet?",
+      "sentence_occurrence_index": 0
+    },
+    {
+      "sample_id": "AMR-S012",
+      "candidate_id": "BEAM-CAND-004",
+      "phenomenon": "causality_comparison_multiclause",
+      "source_record_id": "SRC-003",
+      "source_id": "beam-100k",
+      "locator": {
+        "conversation_id": "19",
+        "session_index": 1,
+        "message_index": 9
+      },
+      "sentence": "Even if you name Stephanie in your will, the court will review the appointment to ensure it is in the best interest of the children.",
+      "sentence_occurrence_index": 0
+    }
+  ]
+}

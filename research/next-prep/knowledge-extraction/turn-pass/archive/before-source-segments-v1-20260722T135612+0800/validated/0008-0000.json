@@ -1,0 +1,367 @@
+{
+  "candidate_id": "WILDCHAT-LEARN-CAND-001",
+  "turn_index": 0,
+  "context_completions": [],
+  "knowledge": [
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_000_001",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "用户在检查 AAR 元数据时发现了 3 个问题。",
+      "subject": "用户",
+      "predicate": "发现",
+      "object": "3 个问题",
+      "qualifiers": {
+        "modality": "observed",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [
+          "检查 AAR 元数据时"
+        ],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "检查 AAR 元数据时发现 3 个问题",
+          "evidence_id": "evidence-42db38b261d482f35c4b009cc8d940f0e1da52e1bec3bc58af558e635637a8bb",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 19
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_000_002",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "androidx.activity 1.8.0 要求 compileSdk 至少为 34。",
+      "subject": "androidx.activity 1.8.0",
+      "predicate": "要求",
+      "object": "compileSdk 至少为 34",
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "androidx.activity、activity-ktx 和 activity-compose 1.8.0 都要求 compileSdk 至少为 34",
+          "evidence_id": "evidence-38cf9992793348e92df3c9dd21c083a0c08b5b155531daabb540e6183b05003a",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 20,
+          "end": 97
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_000_003",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "activity-ktx 1.8.0 要求 compileSdk 至少为 34。",
+      "subject": "activity-ktx 1.8.0",
+      "predicate": "要求",
+      "object": "compileSdk 至少为 34",
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "androidx.activity、activity-ktx 和 activity-compose 1.8.0 都要求 compileSdk 至少为 34",
+          "evidence_id": "evidence-38cf9992793348e92df3c9dd21c083a0c08b5b155531daabb540e6183b05003a",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 20,
+          "end": 97
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_000_004",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "activity-compose 1.8.0 要求 compileSdk 至少为 34。",
+      "subject": "activity-compose 1.8.0",
+      "predicate": "要求",
+      "object": "compileSdk 至少为 34",
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "androidx.activity、activity-ktx 和 activity-compose 1.8.0 都要求 compileSdk 至少为 34",
+          "evidence_id": "evidence-38cf9992793348e92df3c9dd21c083a0c08b5b155531daabb540e6183b05003a",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 20,
+          "end": 97
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_000_005",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "app 当前的 compileSdk 是 android-33。",
+      "subject": "app 的 compileSdk",
+      "predicate": "是",
+      "object": "android-33",
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "positive",
+        "temporal": [
+          "当前"
+        ],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "app 目前是 android-33",
+          "evidence_id": "evidence-caa6ee11be3b9598510fe7b1da71fc69b3af8ea8239c10d356f22ee63f6fcab4",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 100,
+          "end": 118
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_000_006",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "用户请求修复 compileSdk 兼容问题的方法。",
+      "subject": "用户",
+      "predicate": "请求",
+      "object": "修复 compileSdk 兼容问题的方法",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "inferred",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "怎么修复？",
+          "evidence_id": "evidence-6d2cbbbfddcc3fbd1e8bc60a9df8d3c13403dd59fdb3c3e055b383d203e46cc8",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 119,
+          "end": 124
+        }
+      ],
+      "inference_basis": "问题紧接在依赖要求 compileSdk 34 而 app 为 android-33 的描述之后。",
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_000_007",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "项目的 compileSdk 应更新到至少 34。",
+      "subject": "项目的 compileSdk",
+      "predicate": "更新到",
+      "object": "至少 34",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "把项目的 compileSdk 更新到至少 34",
+          "evidence_id": "evidence-c706feab3a8e3f3190914a148efea9cae1a9c2bf2111531f36cf25a7b5f4f2e6",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 0,
+          "end": 24
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_000_008",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "用户应打开 app 模块的 build.gradle。",
+      "subject": "用户",
+      "predicate": "打开",
+      "object": "app 模块的 build.gradle",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "打开 app 模块的 build.gradle",
+          "evidence_id": "evidence-8eed8b399dddba0997604b8a7402c88655d329465e84f0d2a6f5cd278b11a2a6",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 25,
+          "end": 48
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_000_009",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "应在 android 配置中把 compileSdkVersion 改为 34。",
+      "subject": "compileSdkVersion",
+      "predicate": "改为",
+      "object": "34",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": [
+          "android 配置"
+        ]
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "在 android 配置中把 compileSdkVersion 改为 34",
+          "evidence_id": "evidence-df3c3d83ae0d11fd792a1fdb7201cce4c67cacd1edd9031ef454cce175bd5877",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 49,
+          "end": 87
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_000_010",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "修改 compileSdkVersion 后应同步 Gradle。",
+      "subject": "用户",
+      "predicate": "同步",
+      "object": "Gradle",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [
+          "修改 compileSdkVersion 后"
+        ],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "然后同步 Gradle",
+          "evidence_id": "evidence-7eb9a2e9486499d0885a6d0410d1fd629c3eb4d4e37f13a9e7350102208fb2e5",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 88,
+          "end": 99
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_000_011",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "compileSdk、targetSdk 和 minSdk 的更新可以分别处理。",
+      "subject": "compileSdk、targetSdk 和 minSdk 的更新",
+      "predicate": "可以分别处理",
+      "object": null,
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "compileSdk、targetSdk 和 minSdk 的更新可以分别处理",
+          "evidence_id": "evidence-c67942794c6f6077bdca3d7c762d88b07fac8bf954fe9847228fe039d481c1b0",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 100,
+          "end": 139
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    }
+  ]
+}

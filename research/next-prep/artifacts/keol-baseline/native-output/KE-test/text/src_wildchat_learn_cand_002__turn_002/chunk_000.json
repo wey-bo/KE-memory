@@ -1,0 +1,158 @@
+{
+  "source": {
+    "source_id": "src_wildchat_learn_cand_002__turn_002",
+    "file": "keol-input/turns/wildchat-learn-cand-002__turn-002.txt",
+    "file_type": "txt",
+    "category": "text",
+    "metadata": {
+      "unit_id": "wildchat-learn-cand-002__turn-002",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "turn_index": 2,
+      "json_pointer": "/candidates/3/turns/1",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=e0aeabf3573990b3b4fe5fd6dc87af3f / model=gpt-3.5-turbo-0613 / user_ordinal=1..4 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "chunk": {
+    "id": "chunk_59b8df24478b87305335",
+    "index": 0,
+    "text": "用户：\n能具体解释一下第 4 步吗？我没法把它提取成文本文件。\n\nAgent：\n提取 F0 后，在 Praat 中选中显示的数值并复制到文本编辑器，保存为 .txt；同时确认音高范围和提取算法设置合适，再用这个文件定义连续体的目标 F0。",
+    "size": 119,
+    "metadata": {
+      "unit_id": "wildchat-learn-cand-002__turn-002",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "turn_index": 2,
+      "json_pointer": "/candidates/3/turns/1",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=e0aeabf3573990b3b4fe5fd6dc87af3f / model=gpt-3.5-turbo-0613 / user_ordinal=1..4 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "n1",
+      "name": "第 4 步",
+      "type": "ProcedureStep",
+      "description": "用户要求进一步解释的步骤。",
+      "source_chunk_id": "chunk_59b8df24478b87305335"
+    },
+    {
+      "id": "n2",
+      "name": "F0 数据",
+      "type": "DataArtifact",
+      "description": "需要从 Praat 提取的数据。",
+      "source_chunk_id": "chunk_59b8df24478b87305335"
+    },
+    {
+      "id": "n3",
+      "name": "文本文件",
+      "type": "File",
+      "description": "用户无法生成的目标文件。",
+      "source_chunk_id": "chunk_59b8df24478b87305335"
+    },
+    {
+      "id": "n4",
+      "name": "提取失败",
+      "type": "Problem",
+      "description": "用户报告无法把 F0 提取成文本文件。",
+      "source_chunk_id": "chunk_59b8df24478b87305335"
+    },
+    {
+      "id": "n5",
+      "name": "Praat",
+      "type": "SoftwareApplication",
+      "description": "显示 F0 数值的工具。",
+      "source_chunk_id": "chunk_59b8df24478b87305335"
+    },
+    {
+      "id": "n6",
+      "name": "文本编辑器",
+      "type": "SoftwareApplication",
+      "description": "Agent 建议粘贴 F0 数值的工具。",
+      "source_chunk_id": "chunk_59b8df24478b87305335"
+    },
+    {
+      "id": "n7",
+      "name": ".txt",
+      "type": "FileFormat",
+      "description": "Agent 建议保存的文件格式。",
+      "source_chunk_id": "chunk_59b8df24478b87305335"
+    },
+    {
+      "id": "n8",
+      "name": "音高范围",
+      "type": "ExtractionParameter",
+      "description": "Agent 建议确认的 F0 提取设置。",
+      "source_chunk_id": "chunk_59b8df24478b87305335"
+    },
+    {
+      "id": "n9",
+      "name": "提取算法",
+      "type": "ExtractionParameter",
+      "description": "Agent 建议确认的算法设置。",
+      "source_chunk_id": "chunk_59b8df24478b87305335"
+    },
+    {
+      "id": "n10",
+      "name": "连续体目标 F0",
+      "type": "DataSet",
+      "description": "导出文件后用于定义的目标数据。",
+      "source_chunk_id": "chunk_59b8df24478b87305335"
+    }
+  ],
+  "relations": [
+    {
+      "source_entity": "n1",
+      "target_entity": "n2",
+      "relation_type": "PROCESSES",
+      "description": "第 4 步涉及提取 F0。"
+    },
+    {
+      "source_entity": "n4",
+      "target_entity": "n3",
+      "relation_type": "AFFECTS",
+      "description": "用户无法得到文本文件。"
+    },
+    {
+      "source_entity": "n2",
+      "target_entity": "n5",
+      "relation_type": "DISPLAYED_IN",
+      "description": "F0 数值在 Praat 中显示。"
+    },
+    {
+      "source_entity": "n2",
+      "target_entity": "n6",
+      "relation_type": "COPIED_TO",
+      "description": "Agent 建议复制到文本编辑器。"
+    },
+    {
+      "source_entity": "n3",
+      "target_entity": "n7",
+      "relation_type": "HAS_FORMAT",
+      "description": "文本文件保存为 .txt。"
+    },
+    {
+      "source_entity": "n8",
+      "target_entity": "n2",
+      "relation_type": "CONFIGURES",
+      "description": "音高范围影响 F0 提取。"
+    },
+    {
+      "source_entity": "n9",
+      "target_entity": "n2",
+      "relation_type": "CONFIGURES",
+      "description": "提取算法影响 F0 提取。"
+    },
+    {
+      "source_entity": "n3",
+      "target_entity": "n10",
+      "relation_type": "DEFINES",
+      "description": "Agent 建议用该文件定义连续体目标 F0。"
+    }
+  ]
+}

@@ -1,0 +1,1166 @@
+{
+  "candidate_id": "WILDCHAT-MGMT-CAND-001",
+  "items": [
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0001",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_001",
+          "surface": "一家律师事务所",
+          "normalized_zh": "律师事务所",
+          "query_lemma": "law firm",
+          "keyword_type": "entity",
+          "semantic_role": "employer",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0002",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_002",
+          "surface": "争取更多工作",
+          "normalized_zh": "争取更多工作",
+          "query_lemma": "seek more work",
+          "keyword_type": "action",
+          "semantic_role": "work_acquisition_goal",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0003",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_003",
+          "surface": "会分派工作的合伙人",
+          "normalized_zh": "分派工作的合伙人",
+          "query_lemma": "work assigning partner",
+          "keyword_type": "entity",
+          "semantic_role": "work_assigner",
+          "source_field": "statement",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0004",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_005",
+          "surface": "休假安排",
+          "normalized_zh": "休假安排",
+          "query_lemma": "vacation arrangement",
+          "keyword_type": "concept",
+          "semantic_role": "disclosure_topic",
+          "source_field": "statement",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0005",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_006",
+          "surface": "合伙人不给其工作",
+          "normalized_zh": "合伙人不分派工作",
+          "query_lemma": "withhold work assignment",
+          "keyword_type": "event",
+          "semantic_role": "feared_outcome",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0006",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_007",
+          "surface": "尽早沟通",
+          "normalized_zh": "尽早沟通",
+          "query_lemma": "communicate early",
+          "keyword_type": "action",
+          "semantic_role": "recommended_action",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_008",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0007",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_008",
+          "surface": "透明地沟通",
+          "normalized_zh": "透明沟通",
+          "query_lemma": "transparent communication",
+          "keyword_type": "action",
+          "semantic_role": "recommended_action",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_009",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0008",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_009",
+          "surface": "如何安排交付",
+          "normalized_zh": "交付安排",
+          "query_lemma": "delivery planning",
+          "keyword_type": "concept",
+          "semantic_role": "communication_content",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_010",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0009",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_010",
+          "surface": "休假日期",
+          "normalized_zh": "休假日期",
+          "query_lemma": "vacation date",
+          "keyword_type": "time",
+          "semantic_role": "disclosure_time",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_011",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0010",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_011",
+          "surface": "工作范围",
+          "normalized_zh": "工作范围",
+          "query_lemma": "work scope",
+          "keyword_type": "concept",
+          "semantic_role": "clarification_target",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_012",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0011",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_012",
+          "surface": "说明休假并承诺完成交接",
+          "normalized_zh": "说明休假并承诺交接",
+          "query_lemma": "disclose vacation and commit handoff",
+          "keyword_type": "action",
+          "semantic_role": "recommended_action",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0012",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_001",
+          "surface": "事务所的工作不多",
+          "normalized_zh": "事务所工作量不足",
+          "query_lemma": "low firm workload",
+          "keyword_type": "property",
+          "semantic_role": "observed_workload",
+          "source_field": "statement",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0013",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_002",
+          "surface": "工作不多的类似问题",
+          "normalized_zh": "工作量不足问题",
+          "query_lemma": "low workload issue",
+          "keyword_type": "concept",
+          "semantic_role": "shared_problem",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0014",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_003",
+          "surface": "获得工作分派的最好方式",
+          "normalized_zh": "获得工作分派的最佳方式",
+          "query_lemma": "best way to obtain work assignment",
+          "keyword_type": "concept",
+          "semantic_role": "question_topic",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0015",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_004",
+          "surface": "事务所里的合伙人",
+          "normalized_zh": "事务所合伙人",
+          "query_lemma": "firm partner",
+          "keyword_type": "entity",
+          "semantic_role": "contact_candidate",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0016",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_005",
+          "surface": "联系以前的律所请求转介",
+          "normalized_zh": "联系前律所请求转介",
+          "query_lemma": "request referral from former firm",
+          "keyword_type": "action",
+          "semantic_role": "alternative_strategy",
+          "source_field": "statement",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0017",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_006",
+          "surface": "会分派工作的合伙人",
+          "normalized_zh": "分派工作的合伙人",
+          "query_lemma": "work assigning partner",
+          "keyword_type": "entity",
+          "semantic_role": "recommended_contact",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0018",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_007",
+          "surface": "其他业务组同事",
+          "normalized_zh": "其他业务组同事",
+          "query_lemma": "other practice group colleague",
+          "keyword_type": "entity",
+          "semantic_role": "support_recipient",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_008",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0019",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_008",
+          "surface": "所内活动",
+          "normalized_zh": "律所内部活动",
+          "query_lemma": "internal firm event",
+          "keyword_type": "event",
+          "semantic_role": "relationship_building_channel",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_009",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0020",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_009",
+          "surface": "内部工作机会平台",
+          "normalized_zh": "内部工作机会平台",
+          "query_lemma": "internal work opportunity platform",
+          "keyword_type": "entity",
+          "semantic_role": "work_opportunity_channel",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_010",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0021",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_010",
+          "surface": "客户拓展",
+          "normalized_zh": "客户拓展",
+          "query_lemma": "client development",
+          "keyword_type": "action",
+          "semantic_role": "recommended_strategy",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0022",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_010",
+          "surface": "合规前提下",
+          "normalized_zh": "合规前提",
+          "query_lemma": "compliance condition",
+          "keyword_type": "condition",
+          "semantic_role": "required_condition",
+          "source_field": "qualifiers.conditions",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_011",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0023",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_011",
+          "surface": "业务拓展",
+          "normalized_zh": "业务拓展",
+          "query_lemma": "business development",
+          "keyword_type": "action",
+          "semantic_role": "recommended_strategy",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0024",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_011",
+          "surface": "合规前提下",
+          "normalized_zh": "合规前提",
+          "query_lemma": "compliance condition",
+          "keyword_type": "condition",
+          "semantic_role": "required_condition",
+          "source_field": "qualifiers.conditions",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_012",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0025",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_012",
+          "surface": "可用时间",
+          "normalized_zh": "可用时间",
+          "query_lemma": "availability",
+          "keyword_type": "property",
+          "semantic_role": "availability_signal",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_013",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0026",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_013",
+          "surface": "愿意承担的工作",
+          "normalized_zh": "工作承担意愿",
+          "query_lemma": "willingness to take work",
+          "keyword_type": "property",
+          "semantic_role": "work_willingness",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0027",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_001",
+          "surface": "联系事务所合伙人",
+          "normalized_zh": "联系事务所合伙人",
+          "query_lemma": "contact firm partners",
+          "keyword_type": "action",
+          "semantic_role": "selected_strategy",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0028",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_002",
+          "surface": "做业务拓展",
+          "normalized_zh": "开展业务拓展",
+          "query_lemma": "do business development",
+          "keyword_type": "action",
+          "semantic_role": "selected_strategy",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0029",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_003",
+          "surface": "11 月",
+          "normalized_zh": "11月",
+          "query_lemma": "November",
+          "keyword_type": "time",
+          "semantic_role": "current_month",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0030",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_004",
+          "surface": "12 月 15 日至 12 月 26 日休假",
+          "normalized_zh": "12月15日至12月26日休假",
+          "query_lemma": "planned vacation",
+          "keyword_type": "event",
+          "semantic_role": "planned_absence",
+          "source_field": "statement",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0031",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_005",
+          "surface": "今天联系工作时是否应提及休假",
+          "normalized_zh": "今天联系工作时提及休假",
+          "query_lemma": "mention vacation when seeking work today",
+          "keyword_type": "action",
+          "semantic_role": "questioned_action",
+          "source_field": "statement",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0032",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_006",
+          "surface": "说明休假影响工作分派",
+          "normalized_zh": "说明休假影响工作分派",
+          "query_lemma": "vacation disclosure affects work assignment",
+          "keyword_type": "relation",
+          "semantic_role": "feared_causal_relation",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0033",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_007",
+          "surface": "休假安排",
+          "normalized_zh": "休假安排",
+          "query_lemma": "vacation arrangement",
+          "keyword_type": "concept",
+          "semantic_role": "recommended_disclosure",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_008",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0034",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_008",
+          "surface": "提前告知",
+          "normalized_zh": "提前告知",
+          "query_lemma": "advance notice",
+          "keyword_type": "action",
+          "semantic_role": "causal_action",
+          "source_field": "subject",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_009",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0035",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_009",
+          "surface": "休假前可以工作",
+          "normalized_zh": "休假前可工作",
+          "query_lemma": "available before vacation",
+          "keyword_type": "property",
+          "semantic_role": "availability_before_leave",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_010",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0036",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_010",
+          "surface": "休假后可以工作",
+          "normalized_zh": "休假后可工作",
+          "query_lemma": "available after vacation",
+          "keyword_type": "property",
+          "semantic_role": "availability_after_leave",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_011",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0037",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_011",
+          "surface": "提前完成任务",
+          "normalized_zh": "提前完成任务",
+          "query_lemma": "complete tasks early",
+          "keyword_type": "action",
+          "semantic_role": "offered_mitigation",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_012",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0038",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_012",
+          "surface": "安排交接",
+          "normalized_zh": "安排交接",
+          "query_lemma": "arrange handoff",
+          "keyword_type": "action",
+          "semantic_role": "offered_mitigation",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_013",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0039",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_013",
+          "surface": "保持透明",
+          "normalized_zh": "保持透明",
+          "query_lemma": "maintain transparency",
+          "keyword_type": "property",
+          "semantic_role": "communication_effect",
+          "source_field": "statement",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_014",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0040",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_014",
+          "surface": "无法承担工作的信号",
+          "normalized_zh": "无法承担工作的信号",
+          "query_lemma": "signal of inability to take work",
+          "keyword_type": "concept",
+          "semantic_role": "avoided_signal",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0041",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_001",
+          "surface": "今天发送一封邮件",
+          "normalized_zh": "今天发送邮件",
+          "query_lemma": "send email today",
+          "keyword_type": "event",
+          "semantic_role": "planned_communication",
+          "source_field": "statement",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0042",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_002",
+          "surface": "自己有空",
+          "normalized_zh": "当前有空",
+          "query_lemma": "currently available",
+          "keyword_type": "property",
+          "semantic_role": "email_message",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0043",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_003",
+          "surface": "愿意接工作",
+          "normalized_zh": "愿意接受工作",
+          "query_lemma": "willing to take work",
+          "keyword_type": "property",
+          "semantic_role": "email_message",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0044",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_004",
+          "surface": "未提供的邮件草稿",
+          "normalized_zh": "未提供的邮件草稿",
+          "query_lemma": "unprovided email draft",
+          "keyword_type": "entity",
+          "semantic_role": "evaluation_target",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0045",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_005",
+          "surface": "客户 X 下一轮融资的大概时间",
+          "normalized_zh": "客户X下一轮融资时间",
+          "query_lemma": "client X next financing timing",
+          "keyword_type": "time",
+          "semantic_role": "requested_business_timing",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0046",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_006",
+          "surface": "12 月 15 日到 26 日出国",
+          "normalized_zh": "12月15日至26日出国",
+          "query_lemma": "travel abroad December 15 to 26",
+          "keyword_type": "event",
+          "semantic_role": "planned_travel",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0047",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_007",
+          "surface": "邮件思路正确",
+          "normalized_zh": "邮件思路正确",
+          "query_lemma": "email approach is sound",
+          "keyword_type": "property",
+          "semantic_role": "evaluation",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_008",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0048",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_008",
+          "surface": "邮件更直接",
+          "normalized_zh": "邮件更直接",
+          "query_lemma": "more direct email",
+          "keyword_type": "property",
+          "semantic_role": "recommended_tone",
+          "source_field": "statement",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_009",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0049",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_009",
+          "surface": "可承担近期项目",
+          "normalized_zh": "可承担近期项目",
+          "query_lemma": "available for near-term projects",
+          "keyword_type": "property",
+          "semantic_role": "email_content",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_010",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0050",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_010",
+          "surface": "客户 X 的融资时间",
+          "normalized_zh": "客户X融资时间",
+          "query_lemma": "client X financing timing",
+          "keyword_type": "time",
+          "semantic_role": "email_question",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_011",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0051",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_011",
+          "surface": "休假日期",
+          "normalized_zh": "休假日期",
+          "query_lemma": "vacation date",
+          "keyword_type": "time",
+          "semantic_role": "email_content",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_012",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0052",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_012",
+          "surface": "交接安排",
+          "normalized_zh": "交接安排",
+          "query_lemma": "handoff arrangement",
+          "keyword_type": "concept",
+          "semantic_role": "email_content",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_013",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0053",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_013",
+          "surface": "近期工作安排和出行计划",
+          "normalized_zh": "近期工作安排和出行计划",
+          "query_lemma": "near-term work and travel plan",
+          "keyword_type": "concept",
+          "semantic_role": "email_subject",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_014",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0054",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_014",
+          "surface": "愿意接手项目",
+          "normalized_zh": "愿意接手项目",
+          "query_lemma": "willing to take projects",
+          "keyword_type": "property",
+          "semantic_role": "email_body_content",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_015",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0055",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_015",
+          "surface": "希望了解融资时间",
+          "normalized_zh": "希望了解融资时间",
+          "query_lemma": "request financing timing",
+          "keyword_type": "action",
+          "semantic_role": "email_body_content",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_016",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0056",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_016",
+          "surface": "在出发前完成待办",
+          "normalized_zh": "出发前完成待办",
+          "query_lemma": "complete tasks before departure",
+          "keyword_type": "action",
+          "semantic_role": "commitment",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_017",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0057",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_017",
+          "surface": "保证工作顺利衔接",
+          "normalized_zh": "保证工作顺利衔接",
+          "query_lemma": "ensure smooth work handoff",
+          "keyword_type": "action",
+          "semantic_role": "commitment",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0058",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_001",
+          "surface": "先前邮件太正式",
+          "normalized_zh": "先前邮件过于正式",
+          "query_lemma": "previous email too formal",
+          "keyword_type": "property",
+          "semantic_role": "user_evaluation",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0059",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_002",
+          "surface": "先前邮件像初级律师写的",
+          "normalized_zh": "先前邮件像初级律师撰写",
+          "query_lemma": "email sounds junior",
+          "keyword_type": "property",
+          "semantic_role": "user_evaluation",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0060",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_003",
+          "surface": "资深律师",
+          "normalized_zh": "资深律师",
+          "query_lemma": "senior lawyer",
+          "keyword_type": "entity",
+          "semantic_role": "professional_role",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0061",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_004",
+          "surface": "未提供的另一个邮件版本",
+          "normalized_zh": "未提供的另一邮件版本",
+          "query_lemma": "unprovided alternate email version",
+          "keyword_type": "entity",
+          "semantic_role": "evaluation_target",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0062",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_005",
+          "surface": "更简洁",
+          "normalized_zh": "更简洁",
+          "query_lemma": "more concise",
+          "keyword_type": "property",
+          "semantic_role": "recommended_tone",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0063",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_006",
+          "surface": "更自信",
+          "normalized_zh": "更自信",
+          "query_lemma": "more confident",
+          "keyword_type": "property",
+          "semantic_role": "recommended_tone",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0064",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_007",
+          "surface": "目前有空",
+          "normalized_zh": "目前有空",
+          "query_lemma": "currently available",
+          "keyword_type": "property",
+          "semantic_role": "email_content",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_008",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0065",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_008",
+          "surface": "愿意承担新的挑战",
+          "normalized_zh": "愿意承担新挑战",
+          "query_lemma": "willing to take new challenges",
+          "keyword_type": "property",
+          "semantic_role": "email_content",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_009",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0066",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_009",
+          "surface": "客户 X 融资轮次的预期时间",
+          "normalized_zh": "客户X融资轮次预期时间",
+          "query_lemma": "client X expected financing timing",
+          "keyword_type": "time",
+          "semantic_role": "priority_planning_input",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_010",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0067",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_010",
+          "surface": "12 月 15 日到 26 日出行",
+          "normalized_zh": "12月15日至26日出行",
+          "query_lemma": "travel December 15 to 26",
+          "keyword_type": "event",
+          "semantic_role": "email_content",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_011",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0068",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_011",
+          "surface": "会在出发前完成任务",
+          "normalized_zh": "出发前完成任务",
+          "query_lemma": "complete tasks before departure",
+          "keyword_type": "action",
+          "semantic_role": "commitment",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_012",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0069",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_012",
+          "surface": "会与团队协作处理交接",
+          "normalized_zh": "与团队协作交接",
+          "query_lemma": "coordinate handoff with team",
+          "keyword_type": "action",
+          "semantic_role": "commitment",
+          "source_field": "object",
+          "translation_confidence": 0.98
+        }
+      ],
+      "no_keyword_reason": null
+    }
+  ]
+}

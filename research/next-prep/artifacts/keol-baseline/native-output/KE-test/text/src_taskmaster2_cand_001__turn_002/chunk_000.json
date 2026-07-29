@@ -1,0 +1,137 @@
+{
+  "source": {
+    "source_id": "src_taskmaster2_cand_001__turn_002",
+    "file": "keol-input/turns/taskmaster2-cand-001__turn-002.txt",
+    "file_type": "txt",
+    "category": "text",
+    "metadata": {
+      "unit_id": "taskmaster2-cand-001__turn-002",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "turn_index": 2,
+      "json_pointer": "/candidates/7/turns/1",
+      "source": "Taskmaster-2 flights/train-00000-of-00001.parquet / conversation=dlg-0486d642-4627-489a-a0f3-14d1c2b97068 / user_ordinal=1..6 / raw_utterance_index=0..15",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "chunk": {
+    "id": "chunk_8f5f12d4bf41c6d62bc8",
+    "index": 0,
+    "text": "用户：\n我今天出发，19 号回来。两程都希望尽可能早。\n\nAgent：\n好的，听起来没问题。",
+    "size": 46,
+    "metadata": {
+      "unit_id": "taskmaster2-cand-001__turn-002",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "turn_index": 2,
+      "json_pointer": "/candidates/7/turns/1",
+      "source": "Taskmaster-2 flights/train-00000-of-00001.parquet / conversation=dlg-0486d642-4627-489a-a0f3-14d1c2b97068 / user_ordinal=1..6 / raw_utterance_index=0..15",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "n_user",
+      "name": "用户",
+      "type": "Person",
+      "description": "说明出发、返回日期和时间偏好的人。",
+      "source_chunk_id": "chunk_8f5f12d4bf41c6d62bc8"
+    },
+    {
+      "id": "n_trip",
+      "name": "往返行程",
+      "type": "FlightTrip",
+      "description": "当前正在规划的行程。",
+      "source_chunk_id": "chunk_8f5f12d4bf41c6d62bc8"
+    },
+    {
+      "id": "n_today",
+      "name": "今天",
+      "type": "RelativeDate",
+      "description": "用户指定的出发日期。",
+      "source_chunk_id": "chunk_8f5f12d4bf41c6d62bc8"
+    },
+    {
+      "id": "n_day19",
+      "name": "19 号",
+      "type": "CalendarDay",
+      "description": "用户指定的返回日期，月份未在本 turn 给出。",
+      "source_chunk_id": "chunk_8f5f12d4bf41c6d62bc8"
+    },
+    {
+      "id": "n_outbound",
+      "name": "去程",
+      "type": "TripLeg",
+      "description": "往返行程的出发段。",
+      "source_chunk_id": "chunk_8f5f12d4bf41c6d62bc8"
+    },
+    {
+      "id": "n_return",
+      "name": "返程",
+      "type": "TripLeg",
+      "description": "往返行程的返回段。",
+      "source_chunk_id": "chunk_8f5f12d4bf41c6d62bc8"
+    },
+    {
+      "id": "n_early",
+      "name": "尽可能早",
+      "type": "TimePreference",
+      "description": "用户对去程和返程共同提出的时间偏好。",
+      "source_chunk_id": "chunk_8f5f12d4bf41c6d62bc8"
+    }
+  ],
+  "relations": [
+    {
+      "source_entity": "n_user",
+      "target_entity": "n_trip",
+      "relation_type": "plans",
+      "description": "用户正在规划该往返行程。"
+    },
+    {
+      "source_entity": "n_trip",
+      "target_entity": "n_outbound",
+      "relation_type": "contains",
+      "description": "行程包含去程。"
+    },
+    {
+      "source_entity": "n_trip",
+      "target_entity": "n_return",
+      "relation_type": "contains",
+      "description": "行程包含返程。"
+    },
+    {
+      "source_entity": "n_outbound",
+      "target_entity": "n_today",
+      "relation_type": "departs_on",
+      "description": "去程在今天出发。"
+    },
+    {
+      "source_entity": "n_return",
+      "target_entity": "n_day19",
+      "relation_type": "departs_on",
+      "description": "返程在 19 号出发。"
+    },
+    {
+      "source_entity": "n_user",
+      "target_entity": "n_early",
+      "relation_type": "prefers",
+      "description": "用户偏好尽可能早的航班。"
+    },
+    {
+      "source_entity": "n_early",
+      "target_entity": "n_outbound",
+      "relation_type": "applies_to",
+      "description": "时间偏好适用于去程。"
+    },
+    {
+      "source_entity": "n_early",
+      "target_entity": "n_return",
+      "relation_type": "applies_to",
+      "description": "时间偏好适用于返程。"
+    }
+  ]
+}

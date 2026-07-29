@@ -1,0 +1,256 @@
+{
+  "candidate_id": "WILDCHAT-LEARN-CAND-002",
+  "turn_index": 1,
+  "context_completions": [
+    {
+      "completion_id": "C_wildchat-learn-cand-002-1fa98728ac3e_001_001",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "turn_index": 1,
+      "kind": "unresolved",
+      "original_span": "第 4 步",
+      "interpretation": "当前消息未提供的先前流程第 4 步",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "能具体解释一下第 4 步吗？"
+        }
+      ],
+      "confidence": 1,
+      "ambiguity": true
+    },
+    {
+      "completion_id": "C_wildchat-learn-cand-002-1fa98728ac3e_001_002",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "turn_index": 1,
+      "kind": "unresolved",
+      "original_span": "它",
+      "interpretation": "当前消息未明确说明要提取为文本文件的对象",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我没法把它提取成文本文件"
+        }
+      ],
+      "confidence": 0.75,
+      "ambiguity": true
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_001",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "statement": "用户请求具体解释当前消息未提供的第 4 步。",
+      "subject": "用户",
+      "predicate": "请求解释",
+      "object": "未提供的第 4 步",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "能具体解释一下第 4 步吗？"
+        }
+      ],
+      "confidence": 0.99,
+      "inference_basis": "当前消息未包含编号流程，因此只能将“第 4 步”保留为未提供的先前步骤。"
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_002",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "statement": "用户无法把当前消息未明确的对象提取成文本文件。",
+      "subject": "用户",
+      "predicate": "无法提取成",
+      "object": "文本文件",
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "negative",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我没法把它提取成文本文件"
+        }
+      ],
+      "confidence": 0.75,
+      "inference_basis": "代词“它”在当前消息中没有明确先行词。"
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_003",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "statement": "代理建议在提取 F0 后选中 Praat 中显示的数值。",
+      "subject": "用户",
+      "predicate": "应选中",
+      "object": "Praat 中显示的数值",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [
+          "提取 F0 后"
+        ],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "提取 F0 后，在 Praat 中选中显示的数值"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_004",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "statement": "代理建议把 Praat 中显示的数值复制到文本编辑器。",
+      "subject": "用户",
+      "predicate": "应复制到文本编辑器",
+      "object": "Praat 中显示的数值",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "提取 F0 后，在 Praat 中选中显示的数值并复制到文本编辑器"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_005",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "statement": "代理建议把复制的数值保存为 .txt 文件。",
+      "subject": "用户",
+      "predicate": "应保存为",
+      "object": ".txt",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "提取 F0 后，在 Praat 中选中显示的数值并复制到文本编辑器，保存为 .txt"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_006",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "statement": "代理建议确认音高范围设置合适。",
+      "subject": "用户",
+      "predicate": "应确认",
+      "object": "音高范围设置合适",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "确认音高范围和提取算法设置合适"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_007",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "statement": "代理建议确认提取算法设置合适。",
+      "subject": "用户",
+      "predicate": "应确认",
+      "object": "提取算法设置合适",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "确认音高范围和提取算法设置合适"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_008",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "statement": "代理建议用该文本文件定义连续体的目标 F0。",
+      "subject": "用户",
+      "predicate": "应用文本文件定义",
+      "object": "连续体的目标 F0",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "再用这个文件定义连续体的目标 F0"
+        }
+      ],
+      "confidence": 0.98
+    }
+  ]
+}

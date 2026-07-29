@@ -1,0 +1,395 @@
+{
+  "candidate_id": "WILDCHAT-MGMT-CAND-001",
+  "turn_index": 1,
+  "context_completions": [
+    {
+      "completion_id": "C_wildchat-mgmt-cand-001-4d3900462107_001_001",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "turn_index": 1,
+      "kind": "coreference",
+      "original_span": "类似问题",
+      "interpretation": "过去两个月事务所工作不多的问题",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "过去两个月事务所的工作不多"
+        },
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "其他人也有类似问题"
+        }
+      ],
+      "confidence": 0.99,
+      "ambiguity": false
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_001",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "statement": "过去两个月事务所的工作不多。",
+      "subject": "事务所",
+      "predicate": "工作量",
+      "object": "不多",
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "positive",
+        "temporal": [
+          "过去两个月"
+        ],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "过去两个月事务所的工作不多"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_002",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "statement": "事务所其他人也有工作不多的类似问题。",
+      "subject": "事务所其他人",
+      "predicate": "有",
+      "object": "工作不多的类似问题",
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "positive",
+        "temporal": [
+          "过去两个月"
+        ],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "过去两个月事务所的工作不多"
+        },
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "其他人也有类似问题"
+        }
+      ],
+      "confidence": 0.99,
+      "inference_basis": "“类似问题”由紧邻的前一分句解析为过去两个月事务所工作不多的问题。"
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_003",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "statement": "用户询问获得工作分派的最好方式。",
+      "subject": "用户",
+      "predicate": "询问",
+      "object": "获得工作分派的最好方式",
+      "qualifiers": {
+        "modality": "questioned",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "获得工作分派的最好方式是什么？"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_004",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "statement": "用户询问是否应主动联系事务所里的合伙人。",
+      "subject": "用户",
+      "predicate": "询问是否联系",
+      "object": "事务所里的合伙人",
+      "qualifiers": {
+        "modality": "questioned",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": [
+          "主动联系"
+        ]
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "主动联系事务所里的合伙人，还是联系以前的律所请他们转介？"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_005",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "statement": "用户询问是否应联系以前的律所请求转介。",
+      "subject": "用户",
+      "predicate": "询问是否联系",
+      "object": "以前的律所请他们转介",
+      "qualifiers": {
+        "modality": "questioned",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "主动联系事务所里的合伙人，还是联系以前的律所请他们转介？"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_006",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "statement": "代理建议主动联系会分派工作的合伙人。",
+      "subject": "用户",
+      "predicate": "应主动联系",
+      "object": "会分派工作的合伙人",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "主动联系会分派工作的合伙人"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_007",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "statement": "代理建议向其他业务组同事表示可提供支持。",
+      "subject": "用户",
+      "predicate": "应表示可提供支持",
+      "object": "其他业务组同事",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "向其他业务组同事表示可提供支持"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_008",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "statement": "代理建议参加所内活动以建立关系。",
+      "subject": "用户",
+      "predicate": "应参加",
+      "object": "所内活动",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": [
+          "建立关系"
+        ]
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "参加所内活动建立关系"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_009",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "statement": "代理建议使用内部工作机会平台。",
+      "subject": "用户",
+      "predicate": "应使用",
+      "object": "内部工作机会平台",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "使用内部工作机会平台"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_010",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "statement": "代理建议在合规前提下开展客户拓展。",
+      "subject": "用户",
+      "predicate": "应开展",
+      "object": "客户拓展",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [
+          "合规前提下"
+        ],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "在合规前提下做客户和业务拓展"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_011",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "statement": "代理建议在合规前提下开展业务拓展。",
+      "subject": "用户",
+      "predicate": "应开展",
+      "object": "业务拓展",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [
+          "合规前提下"
+        ],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "在合规前提下做客户和业务拓展"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_012",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "statement": "代理建议持续且明确地表达可用时间。",
+      "subject": "用户",
+      "predicate": "应表达",
+      "object": "可用时间",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": [
+          "持续",
+          "明确"
+        ]
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "持续、明确地表达你的可用时间"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_013",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "statement": "代理建议持续且明确地表达愿意承担工作。",
+      "subject": "用户",
+      "predicate": "应表达",
+      "object": "愿意承担的工作",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": [
+          "持续",
+          "明确"
+        ]
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "愿意承担的工作"
+        }
+      ],
+      "confidence": 0.98
+    }
+  ]
+}

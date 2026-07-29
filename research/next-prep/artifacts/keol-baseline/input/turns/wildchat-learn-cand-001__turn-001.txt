@@ -1,0 +1,5 @@
+用户：
+检查 AAR 元数据时发现 3 个问题：androidx.activity、activity-ktx 和 activity-compose 1.8.0 都要求 compileSdk 至少为 34，而 app 目前是 android-33。怎么修复？
+
+Agent：
+把项目的 compileSdk 更新到至少 34。打开 app 模块的 build.gradle，在 android 配置中把 compileSdkVersion 改为 34，然后同步 Gradle。compileSdk、targetSdk 和 minSdk 的更新可以分别处理。

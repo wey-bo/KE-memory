@@ -1,0 +1,86 @@
+{
+  "source": {
+    "source_id": "src_taskmaster2_cand_001__turn_001",
+    "file": "keol-input/turns/taskmaster2-cand-001__turn-001.txt",
+    "file_type": "txt",
+    "category": "text",
+    "metadata": {
+      "unit_id": "taskmaster2-cand-001__turn-001",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "turn_index": 1,
+      "json_pointer": "/candidates/7/turns/0",
+      "source": "Taskmaster-2 flights/train-00000-of-00001.parquet / conversation=dlg-0486d642-4627-489a-a0f3-14d1c2b97068 / user_ordinal=1..6 / raw_utterance_index=0..15",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "chunk": {
+    "id": "chunk_63191bdaa812f98faaee",
+    "index": 0,
+    "text": "用户：\n你好，我想预订一趟从纽约市到阿姆斯特丹的往返航班。\n\nAgent：\n好的，我可以帮你查航班。你还有其他偏好吗？",
+    "size": 59,
+    "metadata": {
+      "unit_id": "taskmaster2-cand-001__turn-001",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "turn_index": 1,
+      "json_pointer": "/candidates/7/turns/0",
+      "source": "Taskmaster-2 flights/train-00000-of-00001.parquet / conversation=dlg-0486d642-4627-489a-a0f3-14d1c2b97068 / user_ordinal=1..6 / raw_utterance_index=0..15",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "n_user",
+      "name": "用户",
+      "type": "Person",
+      "description": "请求预订往返航班的人。",
+      "source_chunk_id": "chunk_63191bdaa812f98faaee"
+    },
+    {
+      "id": "n_trip",
+      "name": "往返航班",
+      "type": "FlightTrip",
+      "description": "用户想要预订的航空行程。",
+      "source_chunk_id": "chunk_63191bdaa812f98faaee"
+    },
+    {
+      "id": "n_nyc",
+      "name": "纽约市",
+      "type": "City",
+      "description": "航班出发城市。",
+      "source_chunk_id": "chunk_63191bdaa812f98faaee"
+    },
+    {
+      "id": "n_amsterdam",
+      "name": "阿姆斯特丹",
+      "type": "City",
+      "description": "航班目的城市。",
+      "source_chunk_id": "chunk_63191bdaa812f98faaee"
+    }
+  ],
+  "relations": [
+    {
+      "source_entity": "n_user",
+      "target_entity": "n_trip",
+      "relation_type": "requests",
+      "description": "用户请求预订一趟往返航班。"
+    },
+    {
+      "source_entity": "n_trip",
+      "target_entity": "n_nyc",
+      "relation_type": "origin",
+      "description": "行程从纽约市出发。"
+    },
+    {
+      "source_entity": "n_trip",
+      "target_entity": "n_amsterdam",
+      "relation_type": "destination",
+      "description": "行程目的地为阿姆斯特丹。"
+    }
+  ]
+}

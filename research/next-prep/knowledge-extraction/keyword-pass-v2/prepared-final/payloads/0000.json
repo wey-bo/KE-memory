@@ -1,0 +1,3179 @@
+{
+  "prompt_version": "knowledge-keyword-extraction-v2",
+  "candidate_id": "BEAM-CAND-004",
+  "candidate_namespace": "beam-cand-004-4d648a026dc4",
+  "final_knowledge_sha256": "641c88117c206e9901c332e93c4c77e91dc5df703667f441291679dec8c03f41",
+  "active_knowledge": [
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.98,
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 110,
+          "evidence_id": "evidence-5c71be3d9c780b20602ff8ca9bccbb1ca404d29fc452948854a57499489bf43e",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "Kimberly 和 Bradley 等家人参加了 3 月 25 日在我家举行的那次会议",
+          "start": 66,
+          "turn_index": 0
+        },
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 47,
+          "evidence_id": "evidence-f50fdf97168311099e032b88a5cbb720525eac406f315c7ea9c5e12f0c4a7bae",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "并处理他们可能有的任何顾虑",
+          "start": 34,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": "Turn 1's '他们' refers to Kimberly, Bradley, and the family members identified in turn 0.",
+      "knowledge_id": "D_beam-cand-004-4d648a026dc4_001",
+      "object": "Kimberly、Bradley 等家人可能有的顾虑",
+      "predicate": "认为可以处理",
+      "qualifiers": {
+        "conditions": [
+          "再次举行家庭会议"
+        ],
+        "modality": "possible",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户认为再次举行家庭会议可以处理 Kimberly、Bradley 等家人可能有的顾虑。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [
+          "K_beam-cand-004-4d648a026dc4_001_003"
+        ],
+        "source_turn": 0,
+        "stage": "dialogue",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.96,
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 110,
+          "evidence_id": "evidence-5c71be3d9c780b20602ff8ca9bccbb1ca404d29fc452948854a57499489bf43e",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "Kimberly 和 Bradley 等家人参加了 3 月 25 日在我家举行的那次会议",
+          "start": 66,
+          "turn_index": 0
+        },
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 63,
+          "evidence_id": "evidence-2fbb3b8b002ce76c51c06930a894687f82b07755c4a2efea58d70aa4eeeb58d3",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我们也有一阵子没聚在一起了",
+          "start": 50,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": "Turn 1's '我们' refers to the user and the family group, including Kimberly and Bradley, discussed in turn 0.",
+      "knowledge_id": "D_beam-cand-004-4d648a026dc4_002",
+      "object": "一阵子",
+      "predicate": "没有聚在一起",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": [
+          "一阵子"
+        ]
+      },
+      "source_status": "user_reported",
+      "statement": "用户与 Kimberly、Bradley 等家人已有一阵子没有聚在一起。",
+      "subject": "用户与 Kimberly、Bradley 等家人",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [
+          "K_beam-cand-004-4d648a026dc4_001_004"
+        ],
+        "source_turn": 0,
+        "stage": "dialogue",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 17,
+          "evidence_id": "evidence-b59a4278a482a46fd14ed3ca0ee51244fb61e1b21188c174ce9f1e4d2b580f2a",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我觉得再安排一次家庭会议是个好主意",
+          "start": 0,
+          "turn_index": 1
+        },
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 11,
+          "evidence_id": "evidence-35ca3b6ced2b7dca1fa0f923c6c0c89519ef84fd011c0fc70902736adbcb3d61",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "好，那就安排一次会议吧",
+          "start": 0,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": "The meeting accepted in turn 2 is the additional family meeting about the executor choice proposed in turn 1.",
+      "knowledge_id": "D_beam-cand-004-4d648a026dc4_003",
+      "object": "讨论遗嘱执行人选择的家庭会议",
+      "predicate": "决定安排",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "committed",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户决定再安排一次讨论遗嘱执行人选择的家庭会议。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [
+          "K_beam-cand-004-4d648a026dc4_002_001"
+        ],
+        "source_turn": 1,
+        "stage": "dialogue",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 13,
+          "evidence_id": "evidence-c9c2243e8c0f9592f576c232c635580f17ff53c5f1c6273a57e3870ea7eea8a3",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我有点担心遗嘱执行人的选择",
+          "start": 0,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_001",
+      "object": "遗嘱执行人的选择",
+      "predicate": "担心",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户担心遗嘱执行人的选择。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.96,
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 63,
+          "evidence_id": "evidence-d56ecc05e2339a90c60212f03df19f0e7b7e4bf288e6e2f2b517b8ad5b867a83",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "Douglas 已于 4 月 15 日在珊瑚湾咖啡馆（Coral Bay Café）接受了这个安排",
+          "start": 14,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": "本轮先提出遗嘱执行人的选择，随后说明 Douglas 接受了该安排。",
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_002",
+      "object": "担任用户遗嘱执行人的安排",
+      "predicate": "接受",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [
+          "珊瑚湾咖啡馆（Coral Bay Café）"
+        ],
+        "temporal": [
+          "4 月 15 日"
+        ]
+      },
+      "source_status": "user_reported",
+      "statement": "Douglas 于 4 月 15 日在珊瑚湾咖啡馆接受了担任用户遗嘱执行人的安排。",
+      "subject": "Douglas",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 110,
+          "evidence_id": "evidence-5c71be3d9c780b20602ff8ca9bccbb1ca404d29fc452948854a57499489bf43e",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "Kimberly 和 Bradley 等家人参加了 3 月 25 日在我家举行的那次会议",
+          "start": 66,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_003",
+      "object": "在用户家举行的会议",
+      "predicate": "参加",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [
+          "用户家"
+        ],
+        "temporal": [
+          "3 月 25 日"
+        ]
+      },
+      "source_status": "user_reported",
+      "statement": "Kimberly 和 Bradley 等家人参加了 3 月 25 日在用户家举行的会议。",
+      "subject": "Kimberly 和 Bradley 等家人",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.98,
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 141,
+          "evidence_id": "evidence-7c654b61512cb33c643341a638cec0c96497428f1431cc70f0ced73521b71c43",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "如果他们知道我选的是 Douglas，会怎么看？",
+          "start": 117,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": "同一消息前句把 Kimberly、Bradley 等家人作为相关群体，随后用“他们”回指。",
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_004",
+      "object": "家人得知用户选择 Douglas 后的看法",
+      "predicate": "想知道",
+      "qualifiers": {
+        "conditions": [
+          "如果家人知道用户选的是 Douglas"
+        ],
+        "modality": "questioned",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户想知道家人若得知用户选择 Douglas 会如何看待。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 14,
+          "evidence_id": "evidence-a37cbd3ea193fd1a79263ef4a05258f72b61da78d237fa2c226140bf2c00f66d",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "选择遗嘱执行人可能是敏感决定",
+          "start": 0,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_005",
+      "object": "敏感决定",
+      "predicate": "可能是",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "possible",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "选择遗嘱执行人可能是敏感决定。",
+      "subject": "选择遗嘱执行人",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.94,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 24,
+          "evidence_id": "evidence-2cdf58ecbf8a42f7daa0d506351a4e6b7e8fd5e5e41c2516528a1e1911a023c0",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "选择遗嘱执行人可能是敏感决定，尤其牵涉家庭关系。",
+          "start": 0,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_006",
+      "object": "家庭关系",
+      "predicate": "尤其可能敏感",
+      "qualifiers": {
+        "conditions": [
+          "牵涉家庭关系"
+        ],
+        "modality": "possible",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "遗嘱执行人的选择尤其可能在牵涉家庭关系时敏感。",
+      "subject": "遗嘱执行人的选择",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 50,
+          "evidence_id": "evidence-85296521ec841811f52852fe0b6b6a81637907a987f726123cbf35c993515df8",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "你可以和 Kimberly、Bradley 坦诚沟通",
+          "start": 24,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_007",
+      "object": "Kimberly 和 Bradley",
+      "predicate": "坦诚沟通",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "用户可以与 Kimberly 和 Bradley 坦诚沟通。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 67,
+          "evidence_id": "evidence-9ef9e95ecc90e73b5ba6348b41aecdcb426230e81852a052f71ea2e138530e59",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "你可以和 Kimberly、Bradley 坦诚沟通，说明选择 Douglas 的原因",
+          "start": 24,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_008",
+      "object": "选择 Douglas 的原因",
+      "predicate": "说明",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [
+          "向 Kimberly 和 Bradley"
+        ],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "用户可以向 Kimberly 和 Bradley 说明选择 Douglas 的原因。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 87,
+          "evidence_id": "evidence-02472a238cd29e4c75fa4180818569389eb140917ecb581e356f317341c609a7",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "如果仍有顾虑，也可以讨论共同遗嘱执行人",
+          "start": 68,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_009",
+      "object": "共同遗嘱执行人",
+      "predicate": "讨论",
+      "qualifiers": {
+        "conditions": [
+          "如果仍有顾虑"
+        ],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "若仍有顾虑，用户可以讨论共同遗嘱执行人。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 111,
+          "evidence_id": "evidence-3382a80e934948ef2873e4236cab93d6b0a0ad2211d384ceb95e40b7d38fbdd7",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "或向遗产规划律师 Stephanie 征求意见",
+          "start": 88,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_010",
+      "object": "遗产规划律师 Stephanie",
+      "predicate": "征求意见",
+      "qualifiers": {
+        "conditions": [
+          "如果仍有顾虑"
+        ],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "若仍有顾虑，用户可以向遗产规划律师 Stephanie 征求意见。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 17,
+          "evidence_id": "evidence-b59a4278a482a46fd14ed3ca0ee51244fb61e1b21188c174ce9f1e4d2b580f2a",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我觉得再安排一次家庭会议是个好主意",
+          "start": 0,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_001",
+      "object": "再安排一次家庭会议",
+      "predicate": "认为是好主意",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "preferred",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户认为再安排一次家庭会议是个好主意。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.98,
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 33,
+          "evidence_id": "evidence-4461a19f1b67b92e6d7caaf5b850bb4b764724de0e9e5badf23b65b9f2edac8b",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我觉得再安排一次家庭会议是个好主意。这样我们可以面对面把事情谈清楚",
+          "start": 0,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": "“这样”回指同一消息前句的“再安排一次家庭会议”。",
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_002",
+      "object": "面对面把事情谈清楚",
+      "predicate": "可以促成",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "possible",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户认为再次举行家庭会议可以让参与者面对面把事情谈清楚。",
+      "subject": "再次举行家庭会议",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 22,
+          "evidence_id": "evidence-92caab06b6aadfff4084e034a16173cdd156ae728b0abc64b6b44bf9d72e4eac",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "再安排一次家庭会议可以让每个人的意见都被听见",
+          "start": 0,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_005",
+      "object": "每个人的意见被听见",
+      "predicate": "可以让",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "possible",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "再安排一次家庭会议可以让每个人的意见被听见。",
+      "subject": "再安排一次家庭会议",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 38,
+          "evidence_id": "evidence-2a71d242c03fb73becae9f46f34f912931ba62a9e7aeab38630046e9a63833f8",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "可以选一个大家方便的时间和地点",
+          "start": 23,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_006",
+      "object": "大家方便的时间",
+      "predicate": "选择",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "家庭会议应选择大家方便的时间。",
+      "subject": "家庭会议",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 38,
+          "evidence_id": "evidence-2a71d242c03fb73becae9f46f34f912931ba62a9e7aeab38630046e9a63833f8",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "可以选一个大家方便的时间和地点",
+          "start": 23,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_007",
+      "object": "大家方便的地点",
+      "predicate": "选择",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "家庭会议应选择大家方便的地点。",
+      "subject": "家庭会议",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 43,
+          "evidence_id": "evidence-1ab9ca8a757f67964b982451c81ef6c4da16d8d90664bae4c48871876819600c",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "准备议程",
+          "start": 39,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_008",
+      "object": "议程",
+      "predicate": "准备",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "应为家庭会议准备议程。",
+      "subject": "家庭会议组织者",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 54,
+          "evidence_id": "evidence-113ead19ba48e56fffa9f98eb5a3a72a5a0290b4e9acb5e6d924d18ec02eab72",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "讨论遗嘱执行人的职责",
+          "start": 44,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_009",
+      "object": "遗嘱执行人的职责",
+      "predicate": "讨论",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "家庭会议应讨论遗嘱执行人的职责。",
+      "subject": "家庭会议",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 68,
+          "evidence_id": "evidence-6af06e887984e6bb5534245068c32ba303cfd69e0433f983c93e3f91df0363da",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "对 Douglas 的顾虑",
+          "start": 55,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_010",
+      "object": "对 Douglas 的顾虑",
+      "predicate": "讨论",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "家庭会议应讨论对 Douglas 的顾虑。",
+      "subject": "家庭会议",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 78,
+          "evidence_id": "evidence-be465672de30441c366aa3cd0fd82f8942c068a84b67783815e590cc4b8893e9",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "共同执行人的可能性",
+          "start": 69,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_011",
+      "object": "共同执行人的可能性",
+      "predicate": "讨论",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "家庭会议应讨论共同执行人的可能性。",
+      "subject": "家庭会议",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 84,
+          "evidence_id": "evidence-fff562726a0fc50e42c37215fe5e04212dd3ec66d0a363f3c07d5f82c9895b0b",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "以及最终决定",
+          "start": 78,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_012",
+      "object": "最终决定",
+      "predicate": "讨论",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "家庭会议应讨论最终决定。",
+      "subject": "家庭会议",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 25,
+          "evidence_id": "evidence-ec32af4ccf323fd44893161de2c15786d1bcdc19ed777ec7953db79c36de072c",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "你能帮我起草邀请和议程吗？",
+          "start": 12,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_002",
+      "object": "会议邀请",
+      "predicate": "请求帮助起草",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "requested",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户请求代理帮助起草会议邀请。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 25,
+          "evidence_id": "evidence-ec32af4ccf323fd44893161de2c15786d1bcdc19ed777ec7953db79c36de072c",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "你能帮我起草邀请和议程吗？",
+          "start": 12,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_003",
+      "object": "会议议程",
+      "predicate": "请求帮助起草",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "requested",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户请求代理帮助起草会议议程。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 31,
+          "evidence_id": "evidence-753438fe3d3e4ebdd52eac4200a4aaf3b4b0bdc857ad72eb066c54fbccc6cae0",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "那会很有帮助",
+          "start": 25,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": "“那”紧接用户请求代理帮助起草邀请和议程。",
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_004",
+      "object": "用户",
+      "predicate": "会很有帮助",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "代理帮助起草邀请和议程会对用户很有帮助。",
+      "subject": "代理帮助起草邀请和议程",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.98,
+      "derivation": "inferred",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 4,
+          "evidence_id": "evidence-3fb9536acea07514ff17ce07dce9b78183345332f9e61cdebdcd9bbb6b61750a",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "当然可以",
+          "start": 0,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": "对用户关于帮助起草邀请和议程的请求作肯定答复。",
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_005",
+      "object": "邀请和议程",
+      "predicate": "表示可以帮助起草",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "committed",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理表示可以帮助起草邀请和议程。",
+      "subject": "代理",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 25,
+          "evidence_id": "evidence-e6cd3264e6d6afe03ba87226a337741d24668d561234aa434d3c3699170f791e",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "邀请可以说明会议主题是讨论遗嘱执行人选择",
+          "start": 5,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_006",
+      "object": "会议主题是讨论遗嘱执行人选择",
+      "predicate": "说明",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "邀请应说明会议主题是讨论遗嘱执行人选择。",
+      "subject": "会议邀请",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 39,
+          "evidence_id": "evidence-de4793226765513ef2a3c1b236339cebb67bc8168b53f50b64b1736f14c9c354",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "并列出拟议日期、时间和地点",
+          "start": 26,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_007",
+      "object": "拟议日期",
+      "predicate": "列出",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "邀请应列出拟议日期。",
+      "subject": "会议邀请",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 39,
+          "evidence_id": "evidence-de4793226765513ef2a3c1b236339cebb67bc8168b53f50b64b1736f14c9c354",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "并列出拟议日期、时间和地点",
+          "start": 26,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_008",
+      "object": "拟议时间",
+      "predicate": "列出",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "邀请应列出拟议时间。",
+      "subject": "会议邀请",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 39,
+          "evidence_id": "evidence-de4793226765513ef2a3c1b236339cebb67bc8168b53f50b64b1736f14c9c354",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "并列出拟议日期、时间和地点",
+          "start": 26,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_009",
+      "object": "拟议地点",
+      "predicate": "列出",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "邀请应列出拟议地点。",
+      "subject": "会议邀请",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 48,
+          "evidence_id": "evidence-2c6bbc6fb35b09f7be338cbefeabf764aca782f9b886ee3804c6ea2f47112cb2",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "议程包括介绍目的",
+          "start": 40,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_010",
+      "object": "介绍会议目的",
+      "predicate": "包括",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "议程应介绍会议目的。",
+      "subject": "会议议程",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.96,
+      "derivation": "inferred",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 53,
+          "evidence_id": "evidence-cd9cdf5ed13bbdfa7d939f661c34ea4b7e29fe376be13e35d8d6620efb7eac82",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "讨论职责",
+          "start": 49,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": "会议主题已明确为遗嘱执行人选择，因此此处职责指遗嘱执行人的职责。",
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_011",
+      "object": "讨论遗嘱执行人的职责",
+      "predicate": "包括",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "议程应讨论遗嘱执行人的职责。",
+      "subject": "会议议程",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 79,
+          "evidence_id": "evidence-417a59cb823a0490f388f86ee903298410c6988f5ba5db1fe77cb8e90c3657f0",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "听取 Kimberly 和 Bradley 的顾虑",
+          "start": 54,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_012",
+      "object": "听取 Kimberly 的顾虑",
+      "predicate": "包括",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "议程应听取 Kimberly 的顾虑。",
+      "subject": "会议议程",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 79,
+          "evidence_id": "evidence-417a59cb823a0490f388f86ee903298410c6988f5ba5db1fe77cb8e90c3657f0",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "听取 Kimberly 和 Bradley 的顾虑",
+          "start": 54,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_013",
+      "object": "听取 Bradley 的顾虑",
+      "predicate": "包括",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "议程应听取 Bradley 的顾虑。",
+      "subject": "会议议程",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 89,
+          "evidence_id": "evidence-0d2a31a0622ebed3358fbc6e4fec9b5c619bb3320ca6bab43293302c6120311f",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "讨论共同执行人方案",
+          "start": 80,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_014",
+      "object": "讨论共同执行人方案",
+      "predicate": "包括",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "议程应讨论共同执行人方案。",
+      "subject": "会议议程",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 99,
+          "evidence_id": "evidence-71cfc8044f9b9e64e1fadf6e279d989036f5d0ce3ccb097527076b3aacef3d40",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "确认决定和后续步骤",
+          "start": 90,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_015",
+      "object": "确认决定",
+      "predicate": "包括",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "议程应确认决定。",
+      "subject": "会议议程",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 99,
+          "evidence_id": "evidence-71cfc8044f9b9e64e1fadf6e279d989036f5d0ce3ccb097527076b3aacef3d40",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "确认决定和后续步骤",
+          "start": 90,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_016",
+      "object": "确认后续步骤",
+      "predicate": "包括",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "议程应确认后续步骤。",
+      "subject": "会议议程",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 25,
+          "evidence_id": "evidence-c9bce9deebb36714f9640d453b9a061eabd486cba6f56642ba60314931335972",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我必须在 2024 年 5 月 15 日前完成遗嘱",
+          "start": 0,
+          "turn_index": 3
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_001",
+      "object": "遗嘱",
+      "predicate": "必须完成",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": [
+          "2024 年 5 月 15 日前"
+        ]
+      },
+      "source_status": "user_reported",
+      "statement": "用户必须在 2024 年 5 月 15 日前完成遗嘱。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 3,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 48,
+          "evidence_id": "evidence-eaff1b21576852e9d9904d087733c28a457922de130b74177638e5fb396b473f",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "当前时间锚是 2024 年 5 月 2 日",
+          "start": 27,
+          "turn_index": 3
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_002",
+      "object": "2024 年 5 月 2 日",
+      "predicate": "是",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": [
+          "2024 年 5 月 2 日"
+        ]
+      },
+      "source_status": "user_reported",
+      "statement": "当前时间锚是 2024 年 5 月 2 日。",
+      "subject": "当前时间锚",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 3,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 56,
+          "evidence_id": "evidence-d109329ffef5f02f24a1576a8e47cbd4fee88b54579268716347e7bf44240c02",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我感到压力很大",
+          "start": 49,
+          "turn_index": 3
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_003",
+      "object": "压力很大",
+      "predicate": "感到",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户感到压力很大。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 3,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 69,
+          "evidence_id": "evidence-63c82f41ca8001f38d51d1ebf6c5cae2038d7a2814c46f987eea8a08cb9693ba",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我已经和家人开过会",
+          "start": 60,
+          "turn_index": 3
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_004",
+      "object": "家人",
+      "predicate": "已经开过会",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "claimed_completed",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户已经与家人开过会。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 3,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 87,
+          "evidence_id": "evidence-0ffdace54839c9d3585453548db00e22b77f8e3d11be8a81110f17a61a47aff3",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "Douglas 也接受了执行人角色",
+          "start": 70,
+          "turn_index": 3
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_005",
+      "object": "执行人角色",
+      "predicate": "已接受",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "claimed_completed",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "Douglas 已接受遗嘱执行人角色。",
+      "subject": "Douglas",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 3,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 104,
+          "evidence_id": "evidence-24ef3f14d9e4bcd954f6906541cba3a63f20498fef64664ede15ded74b85ade4",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "考虑到我已经和家人开过会、Douglas 也接受了执行人角色，我怎样才能确保遗嘱具有法律效力？",
+          "start": 57,
+          "turn_index": 3
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_006",
+      "object": "确保遗嘱具有法律效力的方法",
+      "predicate": "请求了解",
+      "qualifiers": {
+        "conditions": [
+          "用户已经与家人开过会",
+          "Douglas 已接受执行人角色"
+        ],
+        "modality": "requested",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户请求了解如何确保遗嘱具有法律效力。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 3,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 9,
+          "evidence_id": "evidence-230dd66ffbe0fd43c4326fcb26b208eaa311ec79a454c39ebc137ffd600a2ca9",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "可以按截止日期推进",
+          "start": 0,
+          "turn_index": 3
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_007",
+      "object": "遗嘱工作",
+      "predicate": "按截止日期推进",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "用户应按截止日期推进遗嘱工作。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 3,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 18,
+          "evidence_id": "evidence-6ba0d60e0405db34735a4c68652640710bd5bd32a45a652cc474b357533a68e3",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "列出资产和受益人",
+          "start": 10,
+          "turn_index": 3
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_008",
+      "object": "资产",
+      "predicate": "列出",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "用户应列出资产。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 3,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 18,
+          "evidence_id": "evidence-6ba0d60e0405db34735a4c68652640710bd5bd32a45a652cc474b357533a68e3",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "列出资产和受益人",
+          "start": 10,
+          "turn_index": 3
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_009",
+      "object": "受益人",
+      "predicate": "列出",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "用户应列出受益人。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 3,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 36,
+          "evidence_id": "evidence-be6e2297aadead005b55696c991fbb14cfb2c505be6d1be380a54abb26f6d919",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "明确 Douglas 的执行人任命",
+          "start": 19,
+          "turn_index": 3
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_010",
+      "object": "Douglas 为执行人",
+      "predicate": "明确任命",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "遗嘱应明确任命 Douglas 为执行人。",
+      "subject": "遗嘱",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 3,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 43,
+          "evidence_id": "evidence-b8c83e12a23a74eda21a050dba8ae925eaee583ac02d55565115745d54419b89",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "准备遗嘱文本",
+          "start": 37,
+          "turn_index": 3
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_011",
+      "object": "遗嘱文本",
+      "predicate": "准备",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "用户应准备遗嘱文本。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 3,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 57,
+          "evidence_id": "evidence-3c02fe068da917581920824f35112c0dc9de24641b006f2c26bc2b1991b05dd8",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "按照适用法律完成签名和见证",
+          "start": 44,
+          "turn_index": 3
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_012",
+      "object": null,
+      "predicate": "完成签名",
+      "qualifiers": {
+        "conditions": [
+          "按照适用法律"
+        ],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "遗嘱应按照适用法律完成签名。",
+      "subject": "遗嘱",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 3,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 57,
+          "evidence_id": "evidence-3c02fe068da917581920824f35112c0dc9de24641b006f2c26bc2b1991b05dd8",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "按照适用法律完成签名和见证",
+          "start": 44,
+          "turn_index": 3
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_013",
+      "object": null,
+      "predicate": "完成见证",
+      "qualifiers": {
+        "conditions": [
+          "按照适用法律"
+        ],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "遗嘱应按照适用法律完成见证。",
+      "subject": "遗嘱",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 3,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 68,
+          "evidence_id": "evidence-f6151c36b70d95110cce04a170ca593616c740922bac3874e0bda29d052522bc",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "并请遗产规划律师审核",
+          "start": 58,
+          "turn_index": 3
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_014",
+      "object": "遗产规划律师",
+      "predicate": "请审核",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [
+          "遗嘱"
+        ],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "用户应请遗产规划律师审核遗嘱。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 3,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 85,
+          "evidence_id": "evidence-aebb1134198e5fd176b4565d75f7813a41e01fffca591562368b043fd10f0486",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "还要留出时间处理见证和公证等手续",
+          "start": 69,
+          "turn_index": 3
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_015",
+      "object": "见证手续",
+      "predicate": "留出时间",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "用户应为见证手续留出时间。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 3,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 85,
+          "evidence_id": "evidence-aebb1134198e5fd176b4565d75f7813a41e01fffca591562368b043fd10f0486",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "还要留出时间处理见证和公证等手续",
+          "start": 69,
+          "turn_index": 3
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_016",
+      "object": "公证手续",
+      "predicate": "留出时间",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "用户应为公证手续留出时间。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 3,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 28,
+          "evidence_id": "evidence-300c55d683ab3626bcf8ce1214a73849f7accf862d8434f8c399b479827fcfd3",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我还担心 Francis 和 Michael 的监护安排",
+          "start": 0,
+          "turn_index": 4
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_001",
+      "object": "Francis 和 Michael 的监护安排",
+      "predicate": "担心",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户担心 Francis 和 Michael 的监护安排。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 4,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.97,
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 64,
+          "evidence_id": "evidence-24e8cb51f76fb2f06d92ed247ed05a5889193e1c3e43e48c9b8ace13f8b23eeb",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "像我在 4 月 28 日做的那样，把 Stephanie 指定为监护人",
+          "start": 29,
+          "turn_index": 4
+        }
+      ],
+      "inference_basis": "同一句先提出 Francis 和 Michael 的监护安排，随后说明 4 月 28 日已把 Stephanie 指定为监护人。",
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_002",
+      "object": "Stephanie 为 Francis 和 Michael 的监护人",
+      "predicate": "指定",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "claimed_completed",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": [
+          "4 月 28 日"
+        ]
+      },
+      "source_status": "user_reported",
+      "statement": "用户在 4 月 28 日把 Stephanie 指定为 Francis 和 Michael 的监护人。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 4,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 77,
+          "evidence_id": "evidence-fbac7c3c7766eea2927ae591d56c763cae5ba77eff68fafe23d5d1d01d6de607",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "把 Stephanie 指定为监护人，会怎样影响我的遗产计划？",
+          "start": 46,
+          "turn_index": 4
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_003",
+      "object": "指定 Stephanie 为监护人对遗产计划的影响",
+      "predicate": "询问影响",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "questioned",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户询问指定 Stephanie 为监护人会如何影响遗产计划。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 4,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 15,
+          "evidence_id": "evidence-8b64fb63a008a8d4b5df967c6fa2712c6224fb22bbea377ce9dc745ac17dd9db",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "指定监护人会影响未成年人的照护",
+          "start": 0,
+          "turn_index": 4
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_004",
+      "object": "未成年人的照护安排",
+      "predicate": "会影响",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "指定监护人会影响未成年人的照护安排。",
+      "subject": "指定监护人",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 4,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.97,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 25,
+          "evidence_id": "evidence-376c529e3975a385c396fa623915abe71df2c975acfb2dc5005d19afafd68317",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "指定监护人会影响未成年人的照护和相关资产管理安排。",
+          "start": 0,
+          "turn_index": 4
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_005",
+      "object": "相关资产管理安排",
+      "predicate": "会影响",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "指定监护人会影响相关资产管理安排。",
+      "subject": "指定监护人",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 4,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 51,
+          "evidence_id": "evidence-3e0f5afdee7bd773318e1efd951b137ad985d02c9ca663e9fa3615850381eafd",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "需要确认 Stephanie 是否愿意并适合承担职责",
+          "start": 25,
+          "turn_index": 4
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_006",
+      "object": "Stephanie 是否愿意承担监护职责",
+      "predicate": "确认",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "用户需要确认 Stephanie 是否愿意承担监护职责。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 4,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 51,
+          "evidence_id": "evidence-3e0f5afdee7bd773318e1efd951b137ad985d02c9ca663e9fa3615850381eafd",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "需要确认 Stephanie 是否愿意并适合承担职责",
+          "start": 25,
+          "turn_index": 4
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_007",
+      "object": "Stephanie 是否适合承担监护职责",
+      "predicate": "确认",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "用户需要确认 Stephanie 是否适合承担监护职责。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 4,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 59,
+          "evidence_id": "evidence-8fb0482f3c2a067b0961aecc67f1dad96e6fa87156764919f1a31a8c94da93c9",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "考虑备用监护人",
+          "start": 52,
+          "turn_index": 4
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_008",
+      "object": "备用监护人",
+      "predicate": "考虑",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "用户应考虑备用监护人。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 4,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 82,
+          "evidence_id": "evidence-2c41e1781c97aa0db4ea3dcddcfae326766be51b2865a94e2b876b5f0d90959d",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "并在遗嘱或信托中写清监护和继承资金的管理方式",
+          "start": 60,
+          "turn_index": 4
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_009",
+      "object": "监护安排",
+      "predicate": "写清",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [
+          "遗嘱或信托"
+        ],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "用户应在遗嘱或信托中写清监护安排。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 4,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "BEAM-CAND-004",
+          "end": 82,
+          "evidence_id": "evidence-2c41e1781c97aa0db4ea3dcddcfae326766be51b2865a94e2b876b5f0d90959d",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "并在遗嘱或信托中写清监护和继承资金的管理方式",
+          "start": 60,
+          "turn_index": 4
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_010",
+      "object": "继承资金的管理方式",
+      "predicate": "写清",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [
+          "遗嘱或信托"
+        ],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "用户应在遗嘱或信托中写清继承资金的管理方式。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 4,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    }
+  ],
+  "keyword_id_prefix": "KW_beam-cand-004-4d648a026dc4_",
+  "output_contract": {
+    "$defs": {
+      "KeywordDraft": {
+        "additionalProperties": false,
+        "properties": {
+          "keyword_id": {
+            "minLength": 1,
+            "title": "Keyword Id",
+            "type": "string"
+          },
+          "knowledge_id": {
+            "minLength": 1,
+            "title": "Knowledge Id",
+            "type": "string"
+          },
+          "surface": {
+            "minLength": 1,
+            "title": "Surface",
+            "type": "string"
+          },
+          "normalized_zh": {
+            "minLength": 1,
+            "title": "Normalized Zh",
+            "type": "string"
+          },
+          "query_lemma": {
+            "minLength": 1,
+            "title": "Query Lemma",
+            "type": "string"
+          },
+          "keyword_kind": {
+            "enum": [
+              "lexical",
+              "literal",
+              "identifier",
+              "qualifier"
+            ],
+            "title": "Keyword Kind",
+            "type": "string"
+          },
+          "keyword_type": {
+            "enum": [
+              "entity",
+              "concept",
+              "action",
+              "event",
+              "property",
+              "relation",
+              "time",
+              "quantity",
+              "condition",
+              "modality"
+            ],
+            "title": "Keyword Type",
+            "type": "string"
+          },
+          "semantic_role": {
+            "enum": [
+              "subject",
+              "predicate",
+              "object",
+              "topic",
+              "participant",
+              "recipient",
+              "instrument",
+              "result",
+              "attribute",
+              "value",
+              "time",
+              "location",
+              "condition",
+              "modality",
+              "identifier",
+              "other"
+            ],
+            "title": "Semantic Role",
+            "type": "string"
+          },
+          "source_field": {
+            "enum": [
+              "statement",
+              "subject",
+              "predicate",
+              "object",
+              "qualifiers.temporal",
+              "qualifiers.conditions",
+              "qualifiers.scope",
+              "qualifiers.modality"
+            ],
+            "title": "Source Field",
+            "type": "string"
+          },
+          "part_of_speech": {
+            "enum": [
+              "noun",
+              "verb",
+              "adjective",
+              "adverb",
+              "proper_noun",
+              "other",
+              "none"
+            ],
+            "title": "Part Of Speech",
+            "type": "string"
+          },
+          "sense_key": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Sense Key"
+          },
+          "sense_hint": {
+            "minLength": 1,
+            "title": "Sense Hint",
+            "type": "string"
+          },
+          "lookup_targets": {
+            "items": {
+              "enum": [
+                "wordnet",
+                "schema_org",
+                "exact"
+              ],
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Lookup Targets",
+            "type": "array"
+          },
+          "normalized_value": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Normalized Value"
+          },
+          "datatype": {
+            "anyOf": [
+              {
+                "enum": [
+                  "date",
+                  "datetime",
+                  "time",
+                  "duration",
+                  "number",
+                  "currency",
+                  "percentage",
+                  "version",
+                  "code",
+                  "text",
+                  "identifier",
+                  "modality",
+                  "condition",
+                  "other"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Datatype"
+          },
+          "unit": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Unit"
+          },
+          "translation_confidence": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Translation Confidence",
+            "type": "number"
+          }
+        },
+        "required": [
+          "keyword_id",
+          "knowledge_id",
+          "surface",
+          "normalized_zh",
+          "query_lemma",
+          "keyword_kind",
+          "keyword_type",
+          "semantic_role",
+          "source_field",
+          "part_of_speech",
+          "sense_hint",
+          "lookup_targets",
+          "translation_confidence"
+        ],
+        "title": "KeywordDraft",
+        "type": "object"
+      },
+      "KnowledgeKeywordOutput": {
+        "additionalProperties": false,
+        "properties": {
+          "knowledge_id": {
+            "minLength": 1,
+            "title": "Knowledge Id",
+            "type": "string"
+          },
+          "keywords": {
+            "items": {
+              "$ref": "#/$defs/KeywordDraft"
+            },
+            "title": "Keywords",
+            "type": "array"
+          },
+          "no_keyword_reason": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "No Keyword Reason"
+          }
+        },
+        "required": [
+          "knowledge_id"
+        ],
+        "title": "KnowledgeKeywordOutput",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "candidate_id": {
+        "minLength": 1,
+        "title": "Candidate Id",
+        "type": "string"
+      },
+      "items": {
+        "items": {
+          "$ref": "#/$defs/KnowledgeKeywordOutput"
+        },
+        "title": "Items",
+        "type": "array"
+      }
+    },
+    "required": [
+      "candidate_id"
+    ],
+    "title": "KeywordPassOutput",
+    "type": "object"
+  },
+  "prompt_sha256": "137ae34237c7fa1b427fa5b82781f65963e775f740bfae22a298b8f73bf148e5",
+  "output_contract_sha256": "572f636d835a2f9c009d1c5e9b2f68c6271b9f803ed6714f72ade442fa007419"
+}

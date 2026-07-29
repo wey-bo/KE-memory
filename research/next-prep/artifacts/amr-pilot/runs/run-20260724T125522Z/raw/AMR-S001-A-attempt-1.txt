@@ -1,0 +1,10 @@
+(w / want-01
+   :ARG0 (p / person)
+   :ARG1 (b / book-01
+      :ARG0 p
+      :ARG1 (f / flight
+         :mod (r / round-trip)
+         :source (c / city
+            :name (n / name :op1 "New" :op2 "York" :op3 "City"))
+         :destination (c2 / city
+            :name (n2 / name :op1 "Amsterdam")))))

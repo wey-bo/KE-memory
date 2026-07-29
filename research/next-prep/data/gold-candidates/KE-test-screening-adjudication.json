@@ -1,0 +1,200 @@
+{
+  "schema_version": "ke-test-screening-adjudication-v1",
+  "dataset_id": "KE-test",
+  "source_file": "data/gold-candidates/KE-test.json",
+  "source_sha256": "33539344b8cc378efbbcd8b55e5be27864a993e13e48234225e57290bdeb9b1f",
+  "status": "adjudicated",
+  "adjudication_authority": "user",
+  "adjudication_method": "interactive_human_review",
+  "adjudicated_at": "2026-07-28T23:36:07+08:00",
+  "summary": {
+    "candidate_count": 10,
+    "fully_retained_candidate_count": 7,
+    "partially_retained_candidate_count": 1,
+    "rejected_candidate_count": 2,
+    "retained_candidate_count": 8,
+    "source_turn_count": 43,
+    "retained_turn_count": 36,
+    "rejected_turn_count": 7
+  },
+  "decisions": [
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "decision": "retained",
+      "source_turn_count": 5,
+      "retained_turns": [1, 2, 3, 4, 5],
+      "rejected_turns": [],
+      "coverage_tags": [
+        "task_progression",
+        "temporal_constraint",
+        "user_role",
+        "communication_preference"
+      ],
+      "adjudication_notes": [
+        "The email is planned but not confirmed as sent.",
+        "Agent advice remains agent_generated and generated_unverified."
+      ]
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "decision": "retained",
+      "source_turn_count": 3,
+      "retained_turns": [1, 2, 3],
+      "rejected_turns": [],
+      "coverage_tags": [
+        "requirement_refinement",
+        "platform_supersession",
+        "content_format_narrowing"
+      ],
+      "adjudication_notes": [
+        "No content publication or 30-day plan execution is confirmed.",
+        "Agent-proposed content remains agent_generated."
+      ]
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "decision": "retained",
+      "source_turn_count": 4,
+      "retained_turns": [1, 2, 3, 4],
+      "rejected_turns": [],
+      "coverage_tags": [
+        "technical_task_refinement",
+        "parameter_constraints",
+        "failed_ui_lookup",
+        "incomplete_discourse_reference"
+      ],
+      "adjudication_notes": [
+        "References to step 4 and step 8 have no explicit numbered antecedent in the retained candidate.",
+        "Do not synthesize missing steps.",
+        "The suggested Praat procedure and its success are unverified."
+      ]
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "decision": "retained",
+      "source_turn_count": 3,
+      "retained_turns": [1, 2, 3],
+      "rejected_turns": [],
+      "coverage_tags": [
+        "task_refinement",
+        "role_binding_guard",
+        "quantified_agent_proposal"
+      ],
+      "adjudication_notes": [
+        "The target senior project manager role must not be bound to the user.",
+        "The proposed targets and metrics were not confirmed as adopted.",
+        "All quantified goals remain agent_generated and proposed."
+      ]
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "decision": "rejected",
+      "source_turn_count": 3,
+      "retained_turns": [],
+      "rejected_turns": [1, 2, 3],
+      "coverage_tags": [
+        "low_memory_value",
+        "parallel_knowledge_rewrite"
+      ],
+      "adjudication_notes": [
+        "The turns do not establish durable user state, task progression, a decision, or a correction.",
+        "The agent's research claims have no cited evidence and are not authoritative gold knowledge."
+      ]
+    },
+    {
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "decision": "partially_retained",
+      "source_turn_count": 6,
+      "retained_turns": [1, 2, 3, 4, 5],
+      "rejected_turns": [6],
+      "coverage_tags": [
+        "task_progression",
+        "preference_resolution",
+        "alternative_selection",
+        "underspecified_time"
+      ],
+      "adjudication_notes": [
+        "Turn 6 is a pleasantry with no new memory semantics.",
+        "Selecting the first itinerary and sending information by email do not prove booking or ticketing.",
+        "Today and the 19th must not be normalized to full dates without an external time anchor.",
+        "Flight availability and prices are agent_generated task-dialogue claims, not tool observations."
+      ]
+    },
+    {
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "decision": "retained",
+      "source_turn_count": 5,
+      "retained_turns": [1, 2, 3, 4, 5],
+      "rejected_turns": [],
+      "coverage_tags": [
+        "confirmation_before_action",
+        "tool_observation",
+        "transaction_state",
+        "multi_hop_order_lookup"
+      ],
+      "adjudication_notes": [
+        "The user is simulator-generated and must not be represented as a real customer.",
+        "Turn 1 has omitted prior context indicated by its opening phrase.",
+        "Tablet and shoe returns are submitted requests, while the charger cancellation and refund are reported complete.",
+        "Tool results are authoritative only within the simulated retail environment."
+      ]
+    },
+    {
+      "candidate_id": "BEAM-CAND-004",
+      "decision": "retained",
+      "source_turn_count": 5,
+      "retained_turns": [1, 2, 3, 4, 5],
+      "rejected_turns": [],
+      "coverage_tags": [
+        "identity_and_role_binding",
+        "temporal_reasoning",
+        "cross_turn_task",
+        "legal_status_guard"
+      ],
+      "adjudication_notes": [
+        "Douglas accepting the executor role does not prove that the will is signed or legally effective.",
+        "The additional family meeting is planned but not scheduled or completed.",
+        "Stephanie's willingness and the legal effect of the guardianship designation are unconfirmed.",
+        "Do not infer the exact family relationship of Francis or Michael.",
+        "Agent legal advice remains unverified and jurisdiction-unspecified.",
+        "Preserve source dates and any contradictions without silent correction."
+      ]
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "decision": "retained",
+      "source_turn_count": 6,
+      "retained_turns": [1, 2, 3, 4, 5, 6],
+      "rejected_turns": [],
+      "coverage_tags": [
+        "debugging_state_progression",
+        "user_observed_error",
+        "resolved_and_unresolved_state"
+      ],
+      "adjudication_notes": [
+        "The user did not confirm changing compileSdk to 34.",
+        "The AppCompat diagnosis is identified but the fix is not confirmed successful.",
+        "The exact Logcat exception is user_reported; suggested repair steps remain agent_generated."
+      ]
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "decision": "rejected",
+      "source_turn_count": 3,
+      "retained_turns": [],
+      "rejected_turns": [1, 2, 3],
+      "coverage_tags": [
+        "low_memory_value",
+        "generic_code_explanation"
+      ],
+      "adjudication_notes": [
+        "The turns do not establish project state, an execution result, a durable preference, or an error-recovery chain.",
+        "The candidate duplicates technical coverage provided by stronger retained samples."
+      ]
+    }
+  ],
+  "next_stage": {
+    "status": "pending",
+    "task": "Annotate L1 memory semantics, exact evidence spans, and expected queries for the 36 retained turns."
+  }
+}

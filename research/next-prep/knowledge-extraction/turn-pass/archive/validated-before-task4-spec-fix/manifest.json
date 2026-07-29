@@ -1,0 +1,867 @@
+{
+  "prompt_version": "knowledge-extraction-turn-v1",
+  "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+  "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+  "turns": [
+    {
+      "validated_file": "0000-0000.json",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "candidate_index": 0,
+      "candidate_namespace": "wildchat-mgmt-cand-001-4d3900462107",
+      "turn_index": 0,
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=f307c772ed4efbb74c3848c4b5debba6 / model=gpt-3.5-turbo-0613 / user_ordinal=1..5 / toxic=false / redacted=false",
+      "source_coordinates": {
+        "user": "/candidates/0/turns/0/user",
+        "agent": "/candidates/0/turns/0/agent"
+      },
+      "canonical_filename": "0000-0000.json",
+      "user_hash": "22509a5673f49137432291f9cdc4c3faae23306d769abeb8dedfa49b7fb7cd62",
+      "agent_hash": "112052254260096f80354f38363815c292e64b2ef85d72ab8a739549b217d887",
+      "payload_sha256": "5f7a61aea0376374dd954aad2cbd194e6a93a3e7fa8275dabbcf2e35ad3b9568",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "4d1534c52c7983e229888bc7feefae1fe3cc4df72304839875f94c5f6c5c16af",
+      "raw_sha256_after": "4d1534c52c7983e229888bc7feefae1fe3cc4df72304839875f94c5f6c5c16af"
+    },
+    {
+      "validated_file": "0000-0001.json",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "candidate_index": 0,
+      "candidate_namespace": "wildchat-mgmt-cand-001-4d3900462107",
+      "turn_index": 1,
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=f307c772ed4efbb74c3848c4b5debba6 / model=gpt-3.5-turbo-0613 / user_ordinal=1..5 / toxic=false / redacted=false",
+      "source_coordinates": {
+        "user": "/candidates/0/turns/1/user",
+        "agent": "/candidates/0/turns/1/agent"
+      },
+      "canonical_filename": "0000-0001.json",
+      "user_hash": "99a8899839927d132d49409a3795e646f33a812b91ed8fb15ef3316a75153fb4",
+      "agent_hash": "c649780bf21f8a1fe1211310e4f54f760a02dd5ce0ca179972d57d948f979847",
+      "payload_sha256": "00feedc3ae5343b0f809219c79fcd40a38a1452b28004e15d29764477f19dff9",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "4cb34c23286a1fff2a78bfbc947f7b47e66a5592d684aa6d33817f7afa1d368a",
+      "raw_sha256_after": "4cb34c23286a1fff2a78bfbc947f7b47e66a5592d684aa6d33817f7afa1d368a"
+    },
+    {
+      "validated_file": "0000-0002.json",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "candidate_index": 0,
+      "candidate_namespace": "wildchat-mgmt-cand-001-4d3900462107",
+      "turn_index": 2,
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=f307c772ed4efbb74c3848c4b5debba6 / model=gpt-3.5-turbo-0613 / user_ordinal=1..5 / toxic=false / redacted=false",
+      "source_coordinates": {
+        "user": "/candidates/0/turns/2/user",
+        "agent": "/candidates/0/turns/2/agent"
+      },
+      "canonical_filename": "0000-0002.json",
+      "user_hash": "6430c7bef5eaedf319d82083b91cb1bd9994a808a9b37d119a48df7acab329ff",
+      "agent_hash": "88f2abf0005f9c4085eb7d16d2e01d1b61b0efb2a22e2d9d92749019b1494079",
+      "payload_sha256": "aa83c446e10b1bcbae65a6eef8391ef53a52bb2d09c0578f9576b54b2b9cac74",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "e737b7f4896ca5ea171a1654b297b365a0065fb673ed5eb15dd20efb2d78ae41",
+      "raw_sha256_after": "e737b7f4896ca5ea171a1654b297b365a0065fb673ed5eb15dd20efb2d78ae41"
+    },
+    {
+      "validated_file": "0000-0003.json",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "candidate_index": 0,
+      "candidate_namespace": "wildchat-mgmt-cand-001-4d3900462107",
+      "turn_index": 3,
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=f307c772ed4efbb74c3848c4b5debba6 / model=gpt-3.5-turbo-0613 / user_ordinal=1..5 / toxic=false / redacted=false",
+      "source_coordinates": {
+        "user": "/candidates/0/turns/3/user",
+        "agent": "/candidates/0/turns/3/agent"
+      },
+      "canonical_filename": "0000-0003.json",
+      "user_hash": "bccf5ab1c8fca5478160e740a755bdda6a66b8cdbffdfda1d7850c6ed0cf6daf",
+      "agent_hash": "4450802ab251c78ff6da6c70957a160e70f8dc14ca01ae2b8ea3e308d32e7275",
+      "payload_sha256": "3cd482d69fe710f8439ac3ad93c58f2c1f65a8aa737302c3918c74b6a299b54a",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "caf6bc55952e039555b39679c718bc41d62ae72c3522c1a88e87673c30e188d2",
+      "raw_sha256_after": "caf6bc55952e039555b39679c718bc41d62ae72c3522c1a88e87673c30e188d2"
+    },
+    {
+      "validated_file": "0000-0004.json",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "candidate_index": 0,
+      "candidate_namespace": "wildchat-mgmt-cand-001-4d3900462107",
+      "turn_index": 4,
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=f307c772ed4efbb74c3848c4b5debba6 / model=gpt-3.5-turbo-0613 / user_ordinal=1..5 / toxic=false / redacted=false",
+      "source_coordinates": {
+        "user": "/candidates/0/turns/4/user",
+        "agent": "/candidates/0/turns/4/agent"
+      },
+      "canonical_filename": "0000-0004.json",
+      "user_hash": "752ba14a423dee185964b7619df48cd858480d2d1f80cb5f6c4100af03f9e85c",
+      "agent_hash": "685849aaa18887d26484a77606869426ea287fec1a039c6dfecf6be0f83f737c",
+      "payload_sha256": "6b211a6c5deb5c74e7b8da2a82a3bf3d5ef565ef3c1fb391231b238f10a4efce",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "93ee66472c124601e1f01434e1d75612bca7464d59c3cea066d9296f51720ec8",
+      "raw_sha256_after": "93ee66472c124601e1f01434e1d75612bca7464d59c3cea066d9296f51720ec8"
+    },
+    {
+      "validated_file": "0001-0000.json",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "candidate_index": 1,
+      "candidate_namespace": "wildchat-mgmt-cand-002-e88f4bb1070d",
+      "turn_index": 0,
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=4b457fcbf5d2231cf9cc4a762097fb51 / model=gpt-3.5-turbo-0613 / user_ordinal=1..3 / toxic=false / redacted=false",
+      "source_coordinates": {
+        "user": "/candidates/1/turns/0/user",
+        "agent": "/candidates/1/turns/0/agent"
+      },
+      "canonical_filename": "0001-0000.json",
+      "user_hash": "aa9836d5466feae163a943d05b7e6d2af86c421fd52c864e901362f58f4252c7",
+      "agent_hash": "360abfad97db95a33bb8bdc8423e76cd2bec0589bb96471c3373908feb9bc7e5",
+      "payload_sha256": "87901d601195d700c02734eb62ff8c92ee0529380364b46385c74fed94ca3fc6",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "5c8cd557368b59e7f9d8186ba0e436917cd82037f9d06e9a7de5b5b93ddf3760",
+      "raw_sha256_after": "5c8cd557368b59e7f9d8186ba0e436917cd82037f9d06e9a7de5b5b93ddf3760"
+    },
+    {
+      "validated_file": "0001-0001.json",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "candidate_index": 1,
+      "candidate_namespace": "wildchat-mgmt-cand-002-e88f4bb1070d",
+      "turn_index": 1,
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=4b457fcbf5d2231cf9cc4a762097fb51 / model=gpt-3.5-turbo-0613 / user_ordinal=1..3 / toxic=false / redacted=false",
+      "source_coordinates": {
+        "user": "/candidates/1/turns/1/user",
+        "agent": "/candidates/1/turns/1/agent"
+      },
+      "canonical_filename": "0001-0001.json",
+      "user_hash": "c4eb2a62a9e744ff0586c53d3a3c4b6039b4ffaea8de36bbc0a3b43f72620581",
+      "agent_hash": "56a6ac9da5cd366fceec479a74553fcce34cd3007818cf08d2a46d5e17994830",
+      "payload_sha256": "cf26c09e01ee93ec89a14ae2363e716a4ee54635ae8ae76a77d0ec3572923148",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "7ac787d14e7a4c42caf54b0cc83deee33808501c1465b7aef718e4ecba0255da",
+      "raw_sha256_after": "7ac787d14e7a4c42caf54b0cc83deee33808501c1465b7aef718e4ecba0255da"
+    },
+    {
+      "validated_file": "0001-0002.json",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "candidate_index": 1,
+      "candidate_namespace": "wildchat-mgmt-cand-002-e88f4bb1070d",
+      "turn_index": 2,
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=4b457fcbf5d2231cf9cc4a762097fb51 / model=gpt-3.5-turbo-0613 / user_ordinal=1..3 / toxic=false / redacted=false",
+      "source_coordinates": {
+        "user": "/candidates/1/turns/2/user",
+        "agent": "/candidates/1/turns/2/agent"
+      },
+      "canonical_filename": "0001-0002.json",
+      "user_hash": "4bf21c1122c5a197d6f190f6e60eb27d19e27025f4a37b73958dc8bee2b0f8da",
+      "agent_hash": "5b9bd95ffedcb94e96d5396db9d764d782f0ea6e96d74638bad82403f3ea0799",
+      "payload_sha256": "85aa7f96f32a8e50ad735e3da6d3a27c9e668329881f6e1e3c0afd14ada52c13",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "87b6dc94391f3ef6a5cdd9d6ad35eaeb5993e0c356728ae07957e5c8962a5852",
+      "raw_sha256_after": "87b6dc94391f3ef6a5cdd9d6ad35eaeb5993e0c356728ae07957e5c8962a5852"
+    },
+    {
+      "validated_file": "0002-0000.json",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "candidate_index": 2,
+      "candidate_namespace": "wildchat-learn-cand-002-1fa98728ac3e",
+      "turn_index": 0,
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=e0aeabf3573990b3b4fe5fd6dc87af3f / model=gpt-3.5-turbo-0613 / user_ordinal=1..4 / toxic=false / redacted=false",
+      "source_coordinates": {
+        "user": "/candidates/2/turns/0/user",
+        "agent": "/candidates/2/turns/0/agent"
+      },
+      "canonical_filename": "0002-0000.json",
+      "user_hash": "7897169f649d2ef11e4d2c53c104200186d7b4e113d9cb00a950a2d15c45a806",
+      "agent_hash": "701bc10a36e22d3a819a955e62f6fe846d7f7307ab707af0014ecad0ca4d7901",
+      "payload_sha256": "e87ca48f6cae280bcb036e82de3293f0240498340e2b6c4ccac818a828c5c10c",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "c404774b7b2162ef72932496425a6840275ca44a57e4178c8b6c3cf8160f3050",
+      "raw_sha256_after": "c404774b7b2162ef72932496425a6840275ca44a57e4178c8b6c3cf8160f3050"
+    },
+    {
+      "validated_file": "0002-0001.json",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "candidate_index": 2,
+      "candidate_namespace": "wildchat-learn-cand-002-1fa98728ac3e",
+      "turn_index": 1,
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=e0aeabf3573990b3b4fe5fd6dc87af3f / model=gpt-3.5-turbo-0613 / user_ordinal=1..4 / toxic=false / redacted=false",
+      "source_coordinates": {
+        "user": "/candidates/2/turns/1/user",
+        "agent": "/candidates/2/turns/1/agent"
+      },
+      "canonical_filename": "0002-0001.json",
+      "user_hash": "4dd30a93700ee059a267457753a7eeb39306b262a1b045b78ed06be45764525a",
+      "agent_hash": "7524ac1a51e1735faf7adf0fdf17773bbf12225789016fb1ab20a2b434701591",
+      "payload_sha256": "fe56fb67f9bb91e8f4d36f73349b50635bcb5bc3808757861b6bf9614c452d3f",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "59cb62489643111d5af693594d78e646e5307750e88626016dbc0f47a435fe57",
+      "raw_sha256_after": "59cb62489643111d5af693594d78e646e5307750e88626016dbc0f47a435fe57"
+    },
+    {
+      "validated_file": "0002-0002.json",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "candidate_index": 2,
+      "candidate_namespace": "wildchat-learn-cand-002-1fa98728ac3e",
+      "turn_index": 2,
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=e0aeabf3573990b3b4fe5fd6dc87af3f / model=gpt-3.5-turbo-0613 / user_ordinal=1..4 / toxic=false / redacted=false",
+      "source_coordinates": {
+        "user": "/candidates/2/turns/2/user",
+        "agent": "/candidates/2/turns/2/agent"
+      },
+      "canonical_filename": "0002-0002.json",
+      "user_hash": "b1f48dec4f1624c7bf8a6b04b40c72a85251ca66ef66b6e953f07e3aa57e66c9",
+      "agent_hash": "4008d8c21ab8ad0ed13a6e744632a31cc4daac5720ae912766bfe09725ea1f2b",
+      "payload_sha256": "503d60213689df1ed50d61878ed7e25f4a2027a96c477bd880ee44aa8419e5b3",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "e0184a7562a6f8b0e59a26ac5d3ec6c35d961d39df8b0c72e91e87c05ecd5dcc",
+      "raw_sha256_after": "e0184a7562a6f8b0e59a26ac5d3ec6c35d961d39df8b0c72e91e87c05ecd5dcc"
+    },
+    {
+      "validated_file": "0002-0003.json",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "candidate_index": 2,
+      "candidate_namespace": "wildchat-learn-cand-002-1fa98728ac3e",
+      "turn_index": 3,
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=e0aeabf3573990b3b4fe5fd6dc87af3f / model=gpt-3.5-turbo-0613 / user_ordinal=1..4 / toxic=false / redacted=false",
+      "source_coordinates": {
+        "user": "/candidates/2/turns/3/user",
+        "agent": "/candidates/2/turns/3/agent"
+      },
+      "canonical_filename": "0002-0003.json",
+      "user_hash": "e71376d593fa38b392890166b6cbfc0c2568df951e3254875c252bf44f4d356c",
+      "agent_hash": "bf48788898ba3050fae5b7759a0b45d955ca92a4dd407d66a6daaf021743516b",
+      "payload_sha256": "ab66109527852fc98b1380b9932192e686ba40cd26b9bb2ade516ebea9edc3e5",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "8e6f2cca5e5d4a1f84673644684b94b05973d6fc7eb658d7b50d1a4316922818",
+      "raw_sha256_after": "8e6f2cca5e5d4a1f84673644684b94b05973d6fc7eb658d7b50d1a4316922818"
+    },
+    {
+      "validated_file": "0003-0000.json",
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "candidate_index": 3,
+      "candidate_namespace": "wildchat-mgmt-cand-003-f877bc2fc8f5",
+      "turn_index": 0,
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=385239bfd15ddb106fca3768d3f845c3 / model=gpt-3.5-turbo-0613 / user_ordinal=1..3 / toxic=false / redacted=false",
+      "source_coordinates": {
+        "user": "/candidates/3/turns/0/user",
+        "agent": "/candidates/3/turns/0/agent"
+      },
+      "canonical_filename": "0003-0000.json",
+      "user_hash": "b53ee91cbdea692a8f32bf8d235563f38d2f4499f6f0f3e28b9f4c55a30a47a7",
+      "agent_hash": "771f0b3a74f8fa33ecb6ab5ee49379edafabca8f4a4028524aa0bf4a36ee55ce",
+      "payload_sha256": "2ef937d3e9bd4967d4e3610b586d2523d4f0f8ab1e331bdb5061852b05487317",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "31fe201dc5be0cfd936aac19327a5198f680401e9cf04b95761199076781227c",
+      "raw_sha256_after": "31fe201dc5be0cfd936aac19327a5198f680401e9cf04b95761199076781227c"
+    },
+    {
+      "validated_file": "0003-0001.json",
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "candidate_index": 3,
+      "candidate_namespace": "wildchat-mgmt-cand-003-f877bc2fc8f5",
+      "turn_index": 1,
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=385239bfd15ddb106fca3768d3f845c3 / model=gpt-3.5-turbo-0613 / user_ordinal=1..3 / toxic=false / redacted=false",
+      "source_coordinates": {
+        "user": "/candidates/3/turns/1/user",
+        "agent": "/candidates/3/turns/1/agent"
+      },
+      "canonical_filename": "0003-0001.json",
+      "user_hash": "eafc4864218b24a0dfb45f1f21130c4a13448769401038611fafac5864de1af5",
+      "agent_hash": "bbd9f572ff58980fef855f33b4976d05e9f181d4f3f5b293ec3aa9c41caf14b1",
+      "payload_sha256": "d1e1d704c30e665be45e1d83773bd65e86c4995370d4383e0983ae6557704bdc",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "1a6912a94ef4526e682860644c404a59ddbaf224ef529c7115515c04fe816c91",
+      "raw_sha256_after": "1a6912a94ef4526e682860644c404a59ddbaf224ef529c7115515c04fe816c91"
+    },
+    {
+      "validated_file": "0003-0002.json",
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "candidate_index": 3,
+      "candidate_namespace": "wildchat-mgmt-cand-003-f877bc2fc8f5",
+      "turn_index": 2,
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=385239bfd15ddb106fca3768d3f845c3 / model=gpt-3.5-turbo-0613 / user_ordinal=1..3 / toxic=false / redacted=false",
+      "source_coordinates": {
+        "user": "/candidates/3/turns/2/user",
+        "agent": "/candidates/3/turns/2/agent"
+      },
+      "canonical_filename": "0003-0002.json",
+      "user_hash": "6cc8c6bcb1472cead3011a0584e88e5fd52c7e6f171d692d6ebf037b26fdc34f",
+      "agent_hash": "7d2ac13c07a86c3a3794c65d7aa4b5bdd3726b5878d2a03da7f2b96aa5f2b4e4",
+      "payload_sha256": "a5385dc537e35fe90174b90060dc4da2ed5dc836ac95cceaa5ff2c759a6af5cb",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "70dabe8a2b89a2e3257edb5cf631a38dfc98c5c40dff55dc6c2432aeee007c57",
+      "raw_sha256_after": "70dabe8a2b89a2e3257edb5cf631a38dfc98c5c40dff55dc6c2432aeee007c57"
+    },
+    {
+      "validated_file": "0004-0000.json",
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "candidate_index": 4,
+      "candidate_namespace": "wildchat-learn-cand-004-dc8956a5d265",
+      "turn_index": 0,
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=3ca76da0eae68a26604ef25b4bb54bef / model=gpt-3.5-turbo-0613 / user_ordinal=1..3 / toxic=false / redacted=false",
+      "source_coordinates": {
+        "user": "/candidates/4/turns/0/user",
+        "agent": "/candidates/4/turns/0/agent"
+      },
+      "canonical_filename": "0004-0000.json",
+      "user_hash": "ba4886bac30ae31f5fa1aa1c3fe8d41813efb1a2de46ebc5ef4bde6a19be173a",
+      "agent_hash": "cab82d81537b49eb1cd5b75937cf6d6e0802e593df7340f417e7f364e11251dd",
+      "payload_sha256": "c6a50818fa4e8397626fb29104de3d632149f82d2f4a28431320077229186f7a",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "86119bc1a1315633e84ed87e8bf532d78f2b08cc3707ad995e4f0eaa84e62b3a",
+      "raw_sha256_after": "86119bc1a1315633e84ed87e8bf532d78f2b08cc3707ad995e4f0eaa84e62b3a"
+    },
+    {
+      "validated_file": "0004-0001.json",
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "candidate_index": 4,
+      "candidate_namespace": "wildchat-learn-cand-004-dc8956a5d265",
+      "turn_index": 1,
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=3ca76da0eae68a26604ef25b4bb54bef / model=gpt-3.5-turbo-0613 / user_ordinal=1..3 / toxic=false / redacted=false",
+      "source_coordinates": {
+        "user": "/candidates/4/turns/1/user",
+        "agent": "/candidates/4/turns/1/agent"
+      },
+      "canonical_filename": "0004-0001.json",
+      "user_hash": "f8dcfbf08f66adf84fbf4eebd089d20fc84331bac5297c3d6e1ad84872487840",
+      "agent_hash": "ba7c41842674a04d82f036bf8121af00126d8998d56a0328f890b1baaad23c21",
+      "payload_sha256": "2d51e6b1f7f35ccf6c53138c66ea2ec6e7d54a8db37d4b73c17fc54b896e1316",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "0fc6a4523890d73d95a6903373395f5de3759d5afceefa918a9f55292412390f",
+      "raw_sha256_after": "0fc6a4523890d73d95a6903373395f5de3759d5afceefa918a9f55292412390f"
+    },
+    {
+      "validated_file": "0004-0002.json",
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "candidate_index": 4,
+      "candidate_namespace": "wildchat-learn-cand-004-dc8956a5d265",
+      "turn_index": 2,
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=3ca76da0eae68a26604ef25b4bb54bef / model=gpt-3.5-turbo-0613 / user_ordinal=1..3 / toxic=false / redacted=false",
+      "source_coordinates": {
+        "user": "/candidates/4/turns/2/user",
+        "agent": "/candidates/4/turns/2/agent"
+      },
+      "canonical_filename": "0004-0002.json",
+      "user_hash": "216f0a740a000708882a067ac1501fee3581775061cf842d0c841d8c08086a1e",
+      "agent_hash": "d063d1e63259d7ddad4427eb46f80ad1fd54a95bb5739cd8c128a8a3ebff0261",
+      "payload_sha256": "8f03fc7ef97553b6b2ed5e9569b7f5a4200fc3a1991aeddbcae355f0cd9e0ff8",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "34c8721397bfed177488ebac87d3a961b9e8eecd7a07d627acea5d2800c69381",
+      "raw_sha256_after": "34c8721397bfed177488ebac87d3a961b9e8eecd7a07d627acea5d2800c69381"
+    },
+    {
+      "validated_file": "0005-0000.json",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "candidate_index": 5,
+      "candidate_namespace": "taskmaster2-cand-001-5f5e1081bd0b",
+      "turn_index": 0,
+      "source": "Taskmaster-2 flights/train-00000-of-00001.parquet / conversation=dlg-0486d642-4627-489a-a0f3-14d1c2b97068 / user_ordinal=1..6 / raw_utterance_index=0..15",
+      "source_coordinates": {
+        "user": "/candidates/5/turns/0/user",
+        "agent": "/candidates/5/turns/0/agent"
+      },
+      "canonical_filename": "0005-0000.json",
+      "user_hash": "d2abd237a04bab403fbb6c99d6bfa661bdf485b9b1b406206938e1f4f38c197f",
+      "agent_hash": "f4a6c5b8a431eb5e536c325a1cf01ae0e896a112d47dcf5122700bfe3a78da0b",
+      "payload_sha256": "777955656c2b2ca120027dbcb83e173ef5eb6bae6cb0ac9013eea22aac462521",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "77c7b7e3766b12e15b073d7df0d105673f088916a116b09e4c0eacb3d74842b3",
+      "raw_sha256_after": "77c7b7e3766b12e15b073d7df0d105673f088916a116b09e4c0eacb3d74842b3"
+    },
+    {
+      "validated_file": "0005-0001.json",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "candidate_index": 5,
+      "candidate_namespace": "taskmaster2-cand-001-5f5e1081bd0b",
+      "turn_index": 1,
+      "source": "Taskmaster-2 flights/train-00000-of-00001.parquet / conversation=dlg-0486d642-4627-489a-a0f3-14d1c2b97068 / user_ordinal=1..6 / raw_utterance_index=0..15",
+      "source_coordinates": {
+        "user": "/candidates/5/turns/1/user",
+        "agent": "/candidates/5/turns/1/agent"
+      },
+      "canonical_filename": "0005-0001.json",
+      "user_hash": "031c1d33733dd7deefc500ba247361f06a10de03ec70a0e7ecb28b88290dde05",
+      "agent_hash": "86c32203314bfe5dc8231c0233b6959c0ad55a7fb399042496a2aa587bc76527",
+      "payload_sha256": "a8c8f8a096ef5c0d66fd329da0219ff23290a8af32ac30597d90dd4f9807d6cb",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "bc5cebef3debdbb2ad77e8c32401864d35a449c79a3df24f3f630f5894e5ef31",
+      "raw_sha256_after": "bc5cebef3debdbb2ad77e8c32401864d35a449c79a3df24f3f630f5894e5ef31"
+    },
+    {
+      "validated_file": "0005-0002.json",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "candidate_index": 5,
+      "candidate_namespace": "taskmaster2-cand-001-5f5e1081bd0b",
+      "turn_index": 2,
+      "source": "Taskmaster-2 flights/train-00000-of-00001.parquet / conversation=dlg-0486d642-4627-489a-a0f3-14d1c2b97068 / user_ordinal=1..6 / raw_utterance_index=0..15",
+      "source_coordinates": {
+        "user": "/candidates/5/turns/2/user",
+        "agent": "/candidates/5/turns/2/agent"
+      },
+      "canonical_filename": "0005-0002.json",
+      "user_hash": "232fd44b6c50319c555d1b0d2576a6e81753dc898bf7ab4668917232d16eb73c",
+      "agent_hash": "7548916bd6e53c8c5bd74772e2ff68c6d3afdddda9867975d6a40865210c4e11",
+      "payload_sha256": "7b620b65f3fed4e1ee7b829cd67056f66deb2c90d39e4210937d3bf023c0d778",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "d89f0755fdcfd97aa6b79c22b2d41ad8a70f5ebecf9f648c621f3e961edffb32",
+      "raw_sha256_after": "d89f0755fdcfd97aa6b79c22b2d41ad8a70f5ebecf9f648c621f3e961edffb32"
+    },
+    {
+      "validated_file": "0005-0003.json",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "candidate_index": 5,
+      "candidate_namespace": "taskmaster2-cand-001-5f5e1081bd0b",
+      "turn_index": 3,
+      "source": "Taskmaster-2 flights/train-00000-of-00001.parquet / conversation=dlg-0486d642-4627-489a-a0f3-14d1c2b97068 / user_ordinal=1..6 / raw_utterance_index=0..15",
+      "source_coordinates": {
+        "user": "/candidates/5/turns/3/user",
+        "agent": "/candidates/5/turns/3/agent"
+      },
+      "canonical_filename": "0005-0003.json",
+      "user_hash": "1be25452d23c59a0b4a4b217ac3694553144aceeb1722f1657e1da52e27c00dd",
+      "agent_hash": "c7417162a5260520af7d0b840e6d6a653876323e38b4031581bb054bfe766b3d",
+      "payload_sha256": "95b807ca1a108a64381dbbead94c143c8151a4cda3a76c19eb0e41ea4e0bc0ff",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "33feb42dafc5e952bd487e223e8d7bb0ae52010dd474894f5567e9229da66d8d",
+      "raw_sha256_after": "33feb42dafc5e952bd487e223e8d7bb0ae52010dd474894f5567e9229da66d8d"
+    },
+    {
+      "validated_file": "0005-0004.json",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "candidate_index": 5,
+      "candidate_namespace": "taskmaster2-cand-001-5f5e1081bd0b",
+      "turn_index": 4,
+      "source": "Taskmaster-2 flights/train-00000-of-00001.parquet / conversation=dlg-0486d642-4627-489a-a0f3-14d1c2b97068 / user_ordinal=1..6 / raw_utterance_index=0..15",
+      "source_coordinates": {
+        "user": "/candidates/5/turns/4/user",
+        "agent": "/candidates/5/turns/4/agent"
+      },
+      "canonical_filename": "0005-0004.json",
+      "user_hash": "c863b3340bb62a38ac6e31724b05169f66150381d9ad4bbc15f310e1c838771d",
+      "agent_hash": "0b43f397efc86fe5804bae0cb2ae6cab45721ad967ae9aeb8025d3e98bd056ee",
+      "payload_sha256": "4d27b4b2043162f9d780482057fafc60d89dcfc726a995fb10fcad814427cc05",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "c5a296823f972c96ca6348db1ce3a4028addc2da94e0a2d0284b273b0234f667",
+      "raw_sha256_after": "c5a296823f972c96ca6348db1ce3a4028addc2da94e0a2d0284b273b0234f667"
+    },
+    {
+      "validated_file": "0005-0005.json",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "candidate_index": 5,
+      "candidate_namespace": "taskmaster2-cand-001-5f5e1081bd0b",
+      "turn_index": 5,
+      "source": "Taskmaster-2 flights/train-00000-of-00001.parquet / conversation=dlg-0486d642-4627-489a-a0f3-14d1c2b97068 / user_ordinal=1..6 / raw_utterance_index=0..15",
+      "source_coordinates": {
+        "user": "/candidates/5/turns/5/user",
+        "agent": "/candidates/5/turns/5/agent"
+      },
+      "canonical_filename": "0005-0005.json",
+      "user_hash": "43215eb3e2f4b96be28540ddf68c5dc84832caa924aa7c2f9359a8385156d764",
+      "agent_hash": "aee1e6e45e4389dfc6e8abc39af916d980aad46d58ce42a203d7fac9abdb0b87",
+      "payload_sha256": "a925da2970626825df41eb5d8877e27bfac40896024200caf265e0359e8213b8",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "924047a028d2c57255e7dc6f56b183930f64a83d7f2fde835f39a717c6cdcfde",
+      "raw_sha256_after": "924047a028d2c57255e7dc6f56b183930f64a83d7f2fde835f39a717c6cdcfde"
+    },
+    {
+      "validated_file": "0006-0000.json",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "candidate_index": 6,
+      "candidate_namespace": "tau-bench-cand-001-650fada2c0dc",
+      "turn_index": 0,
+      "source": "τ-bench historical retail / tau-bench-gpt-4o-retail.json / record_index=30 / task_id=30 / trial=0 / user_ordinal=6..10",
+      "source_coordinates": {
+        "user": "/candidates/6/turns/0/user",
+        "agent": "/candidates/6/turns/0/agent"
+      },
+      "canonical_filename": "0006-0000.json",
+      "user_hash": "fd260457be432663e955bf08ec9f606b93c0048df66579e60d4b5bc6ae939811",
+      "agent_hash": "f7077b10c4ffcf8e682334270a6a00b2ee74866623b50867d4a34d4a79a7eca7",
+      "payload_sha256": "85ebaba35414d8ee95f491fec0abf3a70b5e55387a8425eff6a2e57de9778b65",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "9b0c67757550bcb9e4feb33926920b09994a76cf200b9456484a52abdafbe195",
+      "raw_sha256_after": "9b0c67757550bcb9e4feb33926920b09994a76cf200b9456484a52abdafbe195"
+    },
+    {
+      "validated_file": "0006-0001.json",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "candidate_index": 6,
+      "candidate_namespace": "tau-bench-cand-001-650fada2c0dc",
+      "turn_index": 1,
+      "source": "τ-bench historical retail / tau-bench-gpt-4o-retail.json / record_index=30 / task_id=30 / trial=0 / user_ordinal=6..10",
+      "source_coordinates": {
+        "user": "/candidates/6/turns/1/user",
+        "agent": "/candidates/6/turns/1/agent"
+      },
+      "canonical_filename": "0006-0001.json",
+      "user_hash": "38513acb6fc2537eb69093b64e0dc5e21fa8d986eb940ccd1954bab639b96431",
+      "agent_hash": "fc21a93145b001286129cc15b8f6288db38eeb1b03fbc97cacced0faaeabd28f",
+      "payload_sha256": "a66bd80ef3a150618eefda86d23cc35d31c083783b5169e9ea55c02e0df13104",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "4267bbf58d136463013922abe08615e57148deb9202d0d8f0ac741c4d7ae203a",
+      "raw_sha256_after": "4267bbf58d136463013922abe08615e57148deb9202d0d8f0ac741c4d7ae203a"
+    },
+    {
+      "validated_file": "0006-0002.json",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "candidate_index": 6,
+      "candidate_namespace": "tau-bench-cand-001-650fada2c0dc",
+      "turn_index": 2,
+      "source": "τ-bench historical retail / tau-bench-gpt-4o-retail.json / record_index=30 / task_id=30 / trial=0 / user_ordinal=6..10",
+      "source_coordinates": {
+        "user": "/candidates/6/turns/2/user",
+        "agent": "/candidates/6/turns/2/agent"
+      },
+      "canonical_filename": "0006-0002.json",
+      "user_hash": "2055b53188a0d96af233711ddaba330122daa11ef5c6eae4095e4cfed25c1012",
+      "agent_hash": "41cb6fcfaadb3d09bd4ac881977b7980a8a674aa988726f8ff00ff2914d97b71",
+      "payload_sha256": "4fc120d1b3160b5faa7b687161ea886debca1271282044b2404cea3b7cab11bb",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "c4f8cdfe77271ae5912f4b30b2d57c1733a62eed14d023d94eefca596bcadde5",
+      "raw_sha256_after": "c4f8cdfe77271ae5912f4b30b2d57c1733a62eed14d023d94eefca596bcadde5"
+    },
+    {
+      "validated_file": "0006-0003.json",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "candidate_index": 6,
+      "candidate_namespace": "tau-bench-cand-001-650fada2c0dc",
+      "turn_index": 3,
+      "source": "τ-bench historical retail / tau-bench-gpt-4o-retail.json / record_index=30 / task_id=30 / trial=0 / user_ordinal=6..10",
+      "source_coordinates": {
+        "user": "/candidates/6/turns/3/user",
+        "agent": "/candidates/6/turns/3/agent"
+      },
+      "canonical_filename": "0006-0003.json",
+      "user_hash": "81a3896059ed9261ca775df409e6c4010a3ae6f2b30509b37eb0785063285295",
+      "agent_hash": "6b483ead37f67363afe8e07b22923cca7a7edec56925c29ebe5c60a9867c80a4",
+      "payload_sha256": "a1677d23b585344bd2cfac828bf6a5db738896bc3cd828df2da92ab2bec4ea62",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "7b90558d8a391845927f4a0606ecc2c58ac0de4cf31f15347352630cf584cd66",
+      "raw_sha256_after": "7b90558d8a391845927f4a0606ecc2c58ac0de4cf31f15347352630cf584cd66"
+    },
+    {
+      "validated_file": "0006-0004.json",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "candidate_index": 6,
+      "candidate_namespace": "tau-bench-cand-001-650fada2c0dc",
+      "turn_index": 4,
+      "source": "τ-bench historical retail / tau-bench-gpt-4o-retail.json / record_index=30 / task_id=30 / trial=0 / user_ordinal=6..10",
+      "source_coordinates": {
+        "user": "/candidates/6/turns/4/user",
+        "agent": "/candidates/6/turns/4/agent"
+      },
+      "canonical_filename": "0006-0004.json",
+      "user_hash": "96f29d7f12e0fb82ab7ec66e31806ba87f2e0d6a8e2f6d0095f220476b990582",
+      "agent_hash": "86de92795a6a0a23c6d1a23c73a1291e2eca9a0aa914917f6988e4849fc88b0d",
+      "payload_sha256": "36bca337e2f29118ac3cb8beea73d614fa4beb977f5f3a9b027683a7fdaf0787",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "7f194e4794fb27d60769b907fe71083906c1d99bc528c7d609b43a916051b6d4",
+      "raw_sha256_after": "7f194e4794fb27d60769b907fe71083906c1d99bc528c7d609b43a916051b6d4"
+    },
+    {
+      "validated_file": "0007-0000.json",
+      "candidate_id": "BEAM-CAND-004",
+      "candidate_index": 7,
+      "candidate_namespace": "beam-cand-004-4d648a026dc4",
+      "turn_index": 0,
+      "source": "Mohammadta/BEAM / split=100K / conversation_id=19 / session_index=1 / message_index=0..9 / source_time_anchor=2024-05-02",
+      "source_coordinates": {
+        "user": "/candidates/7/turns/0/user",
+        "agent": "/candidates/7/turns/0/agent"
+      },
+      "canonical_filename": "0007-0000.json",
+      "user_hash": "f0cd1e07e6af9059e48ec9f448f4eb40eb742fda00c5d5e4726c22b05c2b82ad",
+      "agent_hash": "937ef1991fab0dbe881dcf4739e27a91c7259206035610d4e8eea599eca3ea7a",
+      "payload_sha256": "213ba753076b386e2469d83c24f902a714386f033e49cfff3f8678fd75409527",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "4d98a54127087251fb2e6b0ff34dcf6ddfda163f83ee68c0bb4f9d2af83db938",
+      "raw_sha256_after": "4d98a54127087251fb2e6b0ff34dcf6ddfda163f83ee68c0bb4f9d2af83db938"
+    },
+    {
+      "validated_file": "0007-0001.json",
+      "candidate_id": "BEAM-CAND-004",
+      "candidate_index": 7,
+      "candidate_namespace": "beam-cand-004-4d648a026dc4",
+      "turn_index": 1,
+      "source": "Mohammadta/BEAM / split=100K / conversation_id=19 / session_index=1 / message_index=0..9 / source_time_anchor=2024-05-02",
+      "source_coordinates": {
+        "user": "/candidates/7/turns/1/user",
+        "agent": "/candidates/7/turns/1/agent"
+      },
+      "canonical_filename": "0007-0001.json",
+      "user_hash": "a02dfb65a2fa008f48d04ca0c59e1d7ede1c27af6b9e52b86cc4fd06e7e9c99b",
+      "agent_hash": "9162c43c6bb904d8ce0b2b26f52f3104d4a6aabde81b357aff1dcf80fc542cf8",
+      "payload_sha256": "c033a23d82a83923fb9a37392205a552f837e2ba63458e16d6e35c725aea2418",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "7b340816000b2c0810bea66d1b85c4213c3735b19490a05d85b4e283b863f1f1",
+      "raw_sha256_after": "7b340816000b2c0810bea66d1b85c4213c3735b19490a05d85b4e283b863f1f1"
+    },
+    {
+      "validated_file": "0007-0002.json",
+      "candidate_id": "BEAM-CAND-004",
+      "candidate_index": 7,
+      "candidate_namespace": "beam-cand-004-4d648a026dc4",
+      "turn_index": 2,
+      "source": "Mohammadta/BEAM / split=100K / conversation_id=19 / session_index=1 / message_index=0..9 / source_time_anchor=2024-05-02",
+      "source_coordinates": {
+        "user": "/candidates/7/turns/2/user",
+        "agent": "/candidates/7/turns/2/agent"
+      },
+      "canonical_filename": "0007-0002.json",
+      "user_hash": "bd406db96caa4d704043923dff831f63e13f37ebf87f5fed1b323661449679c5",
+      "agent_hash": "4c366179b582644da7950215d81f420a506a575b8f2b217381d39222c3a2f433",
+      "payload_sha256": "836e298b1eb825cb5e971eb3841e894f34f1a869088845a018a03b49e48b091d",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "6c2e5447baeef9fcf91221db9b6cb7c8eb95c4c3e8c4a54de62d6ba051aaf44e",
+      "raw_sha256_after": "6c2e5447baeef9fcf91221db9b6cb7c8eb95c4c3e8c4a54de62d6ba051aaf44e"
+    },
+    {
+      "validated_file": "0007-0003.json",
+      "candidate_id": "BEAM-CAND-004",
+      "candidate_index": 7,
+      "candidate_namespace": "beam-cand-004-4d648a026dc4",
+      "turn_index": 3,
+      "source": "Mohammadta/BEAM / split=100K / conversation_id=19 / session_index=1 / message_index=0..9 / source_time_anchor=2024-05-02",
+      "source_coordinates": {
+        "user": "/candidates/7/turns/3/user",
+        "agent": "/candidates/7/turns/3/agent"
+      },
+      "canonical_filename": "0007-0003.json",
+      "user_hash": "b427adf7f7d80d9bb6dda31ba28129779295d02b662d0f9a59019b7bcf0dae1b",
+      "agent_hash": "a971eeeb9bf6def9e1ea632ca8ebdbc1855ac7215eec0bf5c8ced647dffa285e",
+      "payload_sha256": "7a44bbae747496b79f4e07a76bfa0038089c36b6532eeb6bc86d2a6cffa1ab5f",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "c2a7031b82959ac18ebf684cc8f23002cb7b2e6dc00c094e2b8d17483085aaf4",
+      "raw_sha256_after": "c2a7031b82959ac18ebf684cc8f23002cb7b2e6dc00c094e2b8d17483085aaf4"
+    },
+    {
+      "validated_file": "0007-0004.json",
+      "candidate_id": "BEAM-CAND-004",
+      "candidate_index": 7,
+      "candidate_namespace": "beam-cand-004-4d648a026dc4",
+      "turn_index": 4,
+      "source": "Mohammadta/BEAM / split=100K / conversation_id=19 / session_index=1 / message_index=0..9 / source_time_anchor=2024-05-02",
+      "source_coordinates": {
+        "user": "/candidates/7/turns/4/user",
+        "agent": "/candidates/7/turns/4/agent"
+      },
+      "canonical_filename": "0007-0004.json",
+      "user_hash": "89b082bc5735118f4fe5adf04a7877ec66d313450fd2cf5d623bddb3c39440f1",
+      "agent_hash": "28af788c1ef7a4fa77c33a721c6009d5d17a36f8f2366b1878ba424294a58922",
+      "payload_sha256": "13d0f42655067f9f2c5fd953cf8b3c85f8535af01b16873497340d0ce526ac59",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "1f51fd23007522a967a258477cedf6d58e912f8aaf9f470e6bb0a707e39254da",
+      "raw_sha256_after": "1f51fd23007522a967a258477cedf6d58e912f8aaf9f470e6bb0a707e39254da"
+    },
+    {
+      "validated_file": "0008-0000.json",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "candidate_index": 8,
+      "candidate_namespace": "wildchat-learn-cand-001-8def27ce661d",
+      "turn_index": 0,
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=24456e5381c0c4891d80737fa4639f1d / model=gpt-3.5-turbo-0613 / user_ordinal=1..6 / toxic=false / redacted=false",
+      "source_coordinates": {
+        "user": "/candidates/8/turns/0/user",
+        "agent": "/candidates/8/turns/0/agent"
+      },
+      "canonical_filename": "0008-0000.json",
+      "user_hash": "7d96b3e86642aab8f11a0ab6737334699b7fcfa127613988e7f38e5e1620bdd5",
+      "agent_hash": "25c3dec41114600fa6630bad05a5b65cb3187a8b984568d9da8902717802f865",
+      "payload_sha256": "77dc26b2cd1aadbe90f7567a72a793a3b406ad1987e0c47a0fabea853d96a993",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "a7966ba75d89e0eddadb515c68d34f1456dd1a5ed603825ebb844da9400de9ab",
+      "raw_sha256_after": "a7966ba75d89e0eddadb515c68d34f1456dd1a5ed603825ebb844da9400de9ab"
+    },
+    {
+      "validated_file": "0008-0001.json",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "candidate_index": 8,
+      "candidate_namespace": "wildchat-learn-cand-001-8def27ce661d",
+      "turn_index": 1,
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=24456e5381c0c4891d80737fa4639f1d / model=gpt-3.5-turbo-0613 / user_ordinal=1..6 / toxic=false / redacted=false",
+      "source_coordinates": {
+        "user": "/candidates/8/turns/1/user",
+        "agent": "/candidates/8/turns/1/agent"
+      },
+      "canonical_filename": "0008-0001.json",
+      "user_hash": "7a05a1565d59eecf2d5048dd299d7829f81366cbd7bae5172f89493cc55a8d23",
+      "agent_hash": "ba490b3e68fd4bfd0cacdbdc1ef9cbab2362247823af27b27b3529d96f8a2417",
+      "payload_sha256": "45714e9bb51caf1c6b8b714e2233ef682fdf84f0db4a3cae218f9161b4d8ce24",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "1860b861b39dae8a14863ac260597409839ba1201ba9b5cffe87a4daa5435ca1",
+      "raw_sha256_after": "1860b861b39dae8a14863ac260597409839ba1201ba9b5cffe87a4daa5435ca1"
+    },
+    {
+      "validated_file": "0008-0002.json",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "candidate_index": 8,
+      "candidate_namespace": "wildchat-learn-cand-001-8def27ce661d",
+      "turn_index": 2,
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=24456e5381c0c4891d80737fa4639f1d / model=gpt-3.5-turbo-0613 / user_ordinal=1..6 / toxic=false / redacted=false",
+      "source_coordinates": {
+        "user": "/candidates/8/turns/2/user",
+        "agent": "/candidates/8/turns/2/agent"
+      },
+      "canonical_filename": "0008-0002.json",
+      "user_hash": "fb3824143f802ba61536efb3126ded014f900ad6830f01d92db07c3b00273037",
+      "agent_hash": "50c19cecf4a7bb81478d04818d817b917081e4ce81385a68857b166ad7372906",
+      "payload_sha256": "5b6899f90fcf867ca859278dd9c5f9552277b98efed9cd6dc7dc3410ca36c09d",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "66bdef287a0ea465cb9f11f4aef44d99a40517f75592bc1e36926c89eb326452",
+      "raw_sha256_after": "66bdef287a0ea465cb9f11f4aef44d99a40517f75592bc1e36926c89eb326452"
+    },
+    {
+      "validated_file": "0008-0003.json",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "candidate_index": 8,
+      "candidate_namespace": "wildchat-learn-cand-001-8def27ce661d",
+      "turn_index": 3,
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=24456e5381c0c4891d80737fa4639f1d / model=gpt-3.5-turbo-0613 / user_ordinal=1..6 / toxic=false / redacted=false",
+      "source_coordinates": {
+        "user": "/candidates/8/turns/3/user",
+        "agent": "/candidates/8/turns/3/agent"
+      },
+      "canonical_filename": "0008-0003.json",
+      "user_hash": "31644cddb2d83d61740375141bb9b12e31b49dcdc694f8df40c53cad2489c29b",
+      "agent_hash": "d168a52fce46798e531d4128c5c1fe01eb1c22bd0073d3359fdaa6a794451c54",
+      "payload_sha256": "49b4266234a84b29859b202d6235e3de60554eef7ce1ac60792505c5174bef5f",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "2861e66ad80ae1aa8d52c1e733949d42937fbcd6bed2e57cb741a6791f8f9798",
+      "raw_sha256_after": "2861e66ad80ae1aa8d52c1e733949d42937fbcd6bed2e57cb741a6791f8f9798"
+    },
+    {
+      "validated_file": "0008-0004.json",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "candidate_index": 8,
+      "candidate_namespace": "wildchat-learn-cand-001-8def27ce661d",
+      "turn_index": 4,
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=24456e5381c0c4891d80737fa4639f1d / model=gpt-3.5-turbo-0613 / user_ordinal=1..6 / toxic=false / redacted=false",
+      "source_coordinates": {
+        "user": "/candidates/8/turns/4/user",
+        "agent": "/candidates/8/turns/4/agent"
+      },
+      "canonical_filename": "0008-0004.json",
+      "user_hash": "a5413ca72ee441d0169543a6f168484fcecf32d4cec04fdd80ef6329a7fc9c6f",
+      "agent_hash": "573f6e7316ec5e65ebdffd58573b1748be15844a26628fc035ce0af8bb5497ba",
+      "payload_sha256": "e15c827764f513dccd1abfdac3f1f9e4545e1de2ccd9898baa4d4d9e9f101747",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "bf2f6d91a9469ef5ea206fc1e44fba66d0df0f21a2337d78237354899e6a2ed9",
+      "raw_sha256_after": "bf2f6d91a9469ef5ea206fc1e44fba66d0df0f21a2337d78237354899e6a2ed9"
+    },
+    {
+      "validated_file": "0008-0005.json",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "candidate_index": 8,
+      "candidate_namespace": "wildchat-learn-cand-001-8def27ce661d",
+      "turn_index": 5,
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=24456e5381c0c4891d80737fa4639f1d / model=gpt-3.5-turbo-0613 / user_ordinal=1..6 / toxic=false / redacted=false",
+      "source_coordinates": {
+        "user": "/candidates/8/turns/5/user",
+        "agent": "/candidates/8/turns/5/agent"
+      },
+      "canonical_filename": "0008-0005.json",
+      "user_hash": "91a48d560639f5b35764d8ef22afad7149e6b1a4c17eaa4661ef893f6230b7ba",
+      "agent_hash": "60fc724b9c4230ab514b111a4d818987a2ee3520dcc288763a31e34525982159",
+      "payload_sha256": "14520bb3c2e0922def8ad6fa69e31e01a0b5315e97b1d4df95e420d2c419f0a9",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "50f5f84066a7467d3121f18351fc7962760b77a1c55abc4080fdb758ecaba820",
+      "raw_sha256_after": "50f5f84066a7467d3121f18351fc7962760b77a1c55abc4080fdb758ecaba820"
+    },
+    {
+      "validated_file": "0009-0000.json",
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "candidate_index": 9,
+      "candidate_namespace": "wildchat-learn-cand-003-b1871de6ef7c",
+      "turn_index": 0,
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=8de48fb173aa6af13b8316f180782b33 / model=gpt-3.5-turbo-0613 / user_ordinal=1..3 / toxic=false / redacted=false",
+      "source_coordinates": {
+        "user": "/candidates/9/turns/0/user",
+        "agent": "/candidates/9/turns/0/agent"
+      },
+      "canonical_filename": "0009-0000.json",
+      "user_hash": "43fd283fc0c205528676d231a09962582ba4a33f4861451bcdab1124df45f8d9",
+      "agent_hash": "17fdc510effef1bd7dea25bc53a58e3ff75e5b540208824127c24c9b487253d6",
+      "payload_sha256": "ab805ff2cd6e6402618a9bc9bb0ca372c093b93ca7ab2939ee2a7dc03ffc84f3",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "e02f885c303b6dd5413b66c6c0b8c78c1198277ccd7c8275cb40a4c6c372d118",
+      "raw_sha256_after": "e02f885c303b6dd5413b66c6c0b8c78c1198277ccd7c8275cb40a4c6c372d118"
+    },
+    {
+      "validated_file": "0009-0001.json",
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "candidate_index": 9,
+      "candidate_namespace": "wildchat-learn-cand-003-b1871de6ef7c",
+      "turn_index": 1,
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=8de48fb173aa6af13b8316f180782b33 / model=gpt-3.5-turbo-0613 / user_ordinal=1..3 / toxic=false / redacted=false",
+      "source_coordinates": {
+        "user": "/candidates/9/turns/1/user",
+        "agent": "/candidates/9/turns/1/agent"
+      },
+      "canonical_filename": "0009-0001.json",
+      "user_hash": "f32f9872aa6b5a39719f73e6df43640bb695efe390ddfc09b935b0f8c704c75e",
+      "agent_hash": "a6f5d5922cb592f6da58b13636c7593098e4dc77ed1ab5fdbb89ea7393f43b02",
+      "payload_sha256": "567b80395ac7908480ce9a177b4ca18c083e47272fff7c1a7f7764e55ff06f09",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "cef575f9a7665ce833d330bbd8b7e9791bac050043fffd98654e30a97c0461e4",
+      "raw_sha256_after": "cef575f9a7665ce833d330bbd8b7e9791bac050043fffd98654e30a97c0461e4"
+    },
+    {
+      "validated_file": "0009-0002.json",
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "candidate_index": 9,
+      "candidate_namespace": "wildchat-learn-cand-003-b1871de6ef7c",
+      "turn_index": 2,
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=8de48fb173aa6af13b8316f180782b33 / model=gpt-3.5-turbo-0613 / user_ordinal=1..3 / toxic=false / redacted=false",
+      "source_coordinates": {
+        "user": "/candidates/9/turns/2/user",
+        "agent": "/candidates/9/turns/2/agent"
+      },
+      "canonical_filename": "0009-0002.json",
+      "user_hash": "5b582674ce06f367fcf44c6434bfe94f287808f1e1f1d21317a7e8f3b562852e",
+      "agent_hash": "d6b1d778cac4fbb82072c25afc85b879ee7efff67e111ada4d90f68a2c607440",
+      "payload_sha256": "8f292b8f6325ccb7d22e48d79c15c5fefe75a2b926686b12fe30e0a077fcf79b",
+      "prompt_sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e",
+      "output_contract_sha256": "5ba7a520394a9d73739a3d3448d32ce9e7d68e44776a0fb4158aab626d25c77b",
+      "raw_sha256_before": "c48a2643952ec5ebd5db03894d3a78c986515fdc7c94627171efe8f091923e1b",
+      "raw_sha256_after": "c48a2643952ec5ebd5db03894d3a78c986515fdc7c94627171efe8f091923e1b"
+    }
+  ]
+}

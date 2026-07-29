@@ -1,0 +1,172 @@
+{
+  "schema_version": "natural-identity-proposals-v1",
+  "dataset_id": "natural-identity-membership-v1",
+  "run_id": "run-20260727T104020Z-codex-gpt-5-6-sol-proposal-only-v1",
+  "proposer_id": "codex-gpt-5.6-sol",
+  "proposer_version": "2026-07-27",
+  "case_count": 12,
+  "proposals": [
+    {
+      "case_id": "NIM-DEV-001-caroline-cross-turn-identity",
+      "relation_kind": "identity",
+      "action": "merge",
+      "confidence": 0.99,
+      "evidence_mention_ids": [
+        "m-caroline-identity-1",
+        "m-caroline-identity-2"
+      ],
+      "reason_code": "same_source_actor",
+      "proposer_id": "codex-gpt-5.6-sol",
+      "proposer_version": "2026-07-27",
+      "run_id": "run-20260727T104020Z-codex-gpt-5-6-sol-proposal-only-v1"
+    },
+    {
+      "case_id": "NIM-DEV-002-caroline-melanie-distinct",
+      "relation_kind": "identity",
+      "action": "keep_distinct",
+      "confidence": 0.99,
+      "evidence_mention_ids": [
+        "m-caroline-distinct",
+        "m-melanie-distinct"
+      ],
+      "reason_code": "different_source_actors",
+      "proposer_id": "codex-gpt-5.6-sol",
+      "proposer_version": "2026-07-27",
+      "run_id": "run-20260727T104020Z-codex-gpt-5-6-sol-proposal-only-v1"
+    },
+    {
+      "case_id": "NIM-DEV-003-caroline-adoption-membership",
+      "relation_kind": "membership",
+      "action": "include",
+      "confidence": 0.99,
+      "evidence_mention_ids": [
+        "m-caroline-adoption-member"
+      ],
+      "reason_code": "actor_matches_subject",
+      "proposer_id": "codex-gpt-5.6-sol",
+      "proposer_version": "2026-07-27",
+      "run_id": "run-20260727T104020Z-codex-gpt-5-6-sol-proposal-only-v1"
+    },
+    {
+      "case_id": "NIM-DEV-004-melanie-adoption-mismatch",
+      "relation_kind": "membership",
+      "action": "exclude",
+      "confidence": 0.99,
+      "evidence_mention_ids": [
+        "m-melanie-adoption-mismatch"
+      ],
+      "reason_code": "actor_subject_mismatch",
+      "proposer_id": "codex-gpt-5.6-sol",
+      "proposer_version": "2026-07-27",
+      "run_id": "run-20260727T104020Z-codex-gpt-5-6-sol-proposal-only-v1"
+    },
+    {
+      "case_id": "NIM-DEV-005-category-column-membership",
+      "relation_kind": "membership",
+      "action": "include",
+      "confidence": 0.98,
+      "evidence_mention_ids": [
+        "m-category-column"
+      ],
+      "reason_code": "explicit_schema_member",
+      "proposer_id": "codex-gpt-5.6-sol",
+      "proposer_version": "2026-07-27",
+      "run_id": "run-20260727T104020Z-codex-gpt-5-6-sol-proposal-only-v1"
+    },
+    {
+      "case_id": "NIM-DEV-006-budget-repository-alias-unresolved",
+      "relation_kind": "identity",
+      "action": "abstain",
+      "confidence": 0.96,
+      "evidence_mention_ids": [
+        "m-budget-repository",
+        "m-application-main-branch"
+      ],
+      "reason_code": "repository_link_unresolved",
+      "proposer_id": "codex-gpt-5.6-sol",
+      "proposer_version": "2026-07-27",
+      "run_id": "run-20260727T104020Z-codex-gpt-5-6-sol-proposal-only-v1"
+    },
+    {
+      "case_id": "NIM-HIDDEN-001-honda-civic-cross-session",
+      "relation_kind": "identity",
+      "action": "merge",
+      "confidence": 0.78,
+      "evidence_mention_ids": [
+        "m-honda-new-car",
+        "m-honda-gps-car"
+      ],
+      "reason_code": "vehicle_context_continuity",
+      "proposer_id": "codex-gpt-5.6-sol",
+      "proposer_version": "2026-07-27",
+      "run_id": "run-20260727T104020Z-codex-gpt-5-6-sol-proposal-only-v1"
+    },
+    {
+      "case_id": "NIM-HIDDEN-002-distinct-learning-events",
+      "relation_kind": "identity",
+      "action": "keep_distinct",
+      "confidence": 0.99,
+      "evidence_mention_ids": [
+        "m-time-management-workshop",
+        "m-python-webinar"
+      ],
+      "reason_code": "different_event_details",
+      "proposer_id": "codex-gpt-5.6-sol",
+      "proposer_version": "2026-07-27",
+      "run_id": "run-20260727T104020Z-codex-gpt-5-6-sol-proposal-only-v1"
+    },
+    {
+      "case_id": "NIM-HIDDEN-003-longmemeval-project-identity-unresolved",
+      "relation_kind": "identity",
+      "action": "abstain",
+      "confidence": 0.9,
+      "evidence_mention_ids": [
+        "m-marketing-research-project",
+        "m-data-mining-project"
+      ],
+      "reason_code": "project_link_unresolved",
+      "proposer_id": "codex-gpt-5.6-sol",
+      "proposer_version": "2026-07-27",
+      "run_id": "run-20260727T104020Z-codex-gpt-5-6-sol-proposal-only-v1"
+    },
+    {
+      "case_id": "NIM-HIDDEN-004-melanie-self-care-membership",
+      "relation_kind": "membership",
+      "action": "include",
+      "confidence": 0.99,
+      "evidence_mention_ids": [
+        "m-melanie-self-care-member"
+      ],
+      "reason_code": "actor_matches_subject",
+      "proposer_id": "codex-gpt-5.6-sol",
+      "proposer_version": "2026-07-27",
+      "run_id": "run-20260727T104020Z-codex-gpt-5-6-sol-proposal-only-v1"
+    },
+    {
+      "case_id": "NIM-HIDDEN-005-caroline-self-care-mismatch",
+      "relation_kind": "membership",
+      "action": "exclude",
+      "confidence": 0.99,
+      "evidence_mention_ids": [
+        "m-caroline-self-care-mismatch"
+      ],
+      "reason_code": "actor_subject_mismatch",
+      "proposer_id": "codex-gpt-5.6-sol",
+      "proposer_version": "2026-07-27",
+      "run_id": "run-20260727T104020Z-codex-gpt-5-6-sol-proposal-only-v1"
+    },
+    {
+      "case_id": "NIM-HIDDEN-006-notes-column-membership",
+      "relation_kind": "membership",
+      "action": "include",
+      "confidence": 0.99,
+      "evidence_mention_ids": [
+        "m-notes-column"
+      ],
+      "reason_code": "explicit_schema_member",
+      "proposer_id": "codex-gpt-5.6-sol",
+      "proposer_version": "2026-07-27",
+      "run_id": "run-20260727T104020Z-codex-gpt-5-6-sol-proposal-only-v1"
+    }
+  ]
+}

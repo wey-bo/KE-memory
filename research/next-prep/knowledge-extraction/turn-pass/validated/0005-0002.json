@@ -1,0 +1,246 @@
+{
+  "candidate_id": "TASKMASTER2-CAND-001",
+  "turn_index": 2,
+  "context_completions": [],
+  "knowledge": [
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_001",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "statement": "用户请求在可行的情况下寻找最便宜的航班。",
+      "subject": "用户",
+      "predicate": "请求寻找",
+      "object": "最便宜的航班",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [
+          "如果可以"
+        ],
+        "scope": [
+          "价格最低"
+        ]
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "如果可以，也请帮我找最便宜的航班",
+          "evidence_id": "evidence-d43d0554e251277e40dd5fcff6f991b2ff8ed07f370d5a4d0995e9f9dfb72b52",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 16
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_002",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "statement": "代理声称查到了最便宜的往返票。",
+      "subject": "代理",
+      "predicate": "声称已查到",
+      "object": "最便宜的往返票",
+      "qualifiers": {
+        "modality": "claimed_completed",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": [
+          "最便宜",
+          "往返票"
+        ]
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "我查到最便宜的往返票",
+          "evidence_id": "evidence-680cdb784f601b7ebb19702177933b70bd8edb70f26739cbc392305fde84aff9",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 0,
+          "end": 10
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_003",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "statement": "代理所述最便宜往返票需要经停一次。",
+      "subject": "代理所述最便宜往返票",
+      "predicate": "需要经停",
+      "object": "一次",
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": [
+          "经停次数：1"
+        ]
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "需要经停一次",
+          "evidence_id": "evidence-c979d4d254216de86f06e1696ddb4de40161233b6609d78c96ccd08278286828",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 11,
+          "end": 17
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_004",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "statement": "代理所述最便宜往返票的出发时间是凌晨12:30。",
+      "subject": "代理所述最便宜往返票",
+      "predicate": "出发时间是",
+      "object": "凌晨12:30",
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "positive",
+        "temporal": [
+          "凌晨 12:30"
+        ],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "凌晨 12:30 出发",
+          "evidence_id": "evidence-584e5d9119fb1f48a7bdddb0b00c3f175811cde8c25844ee1a7c90993e2ef790",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 18,
+          "end": 29
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_005",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "statement": "代理所述最便宜往返票的抵达时间是次日11:55。",
+      "subject": "代理所述最便宜往返票",
+      "predicate": "抵达时间是",
+      "object": "次日11:55",
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "positive",
+        "temporal": [
+          "次日 11:55"
+        ],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "次日 11:55 抵达",
+          "evidence_id": "evidence-35bafb30e6eec4cb545dba9765d07a5d46b5508aefaa6366d806dea9385f50ab",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 30,
+          "end": 41
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_006",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "statement": "代理所述最便宜往返票的价格是1,287美元。",
+      "subject": "代理所述最便宜往返票",
+      "predicate": "价格是",
+      "object": "1,287美元",
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": [
+          "往返票"
+        ]
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "价格是 1,287 美元",
+          "evidence_id": "evidence-afab7601e321c4f2af8087bc4cc1d14891c81a8f95039bc7ebaa2c74ff78f411",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 42,
+          "end": 54
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_007",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "statement": "代理询问用户是否要预订该往返票。",
+      "subject": "代理",
+      "predicate": "询问是否预订",
+      "object": "该往返票",
+      "qualifiers": {
+        "modality": "questioned",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "要我帮你订吗？",
+          "evidence_id": "evidence-223511c6059eeadd36289cebf7c0bd47432f81cc827b03e942b25feec239814d",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 55,
+          "end": 62
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 1.0
+    }
+  ]
+}

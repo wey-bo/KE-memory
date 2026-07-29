@@ -1,0 +1,99 @@
+{
+  "source": {
+    "source_id": "src_tau_bench_cand_001__turn_003",
+    "file": "keol-input/turns/tau-bench-cand-001__turn-003.txt",
+    "file_type": "txt",
+    "category": "text",
+    "metadata": {
+      "unit_id": "tau-bench-cand-001__turn-003",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "turn_index": 3,
+      "json_pointer": "/candidates/8/turns/2",
+      "source": "τ-bench historical retail / tau-bench-gpt-4o-retail.json / record_index=30 / task_id=30 / trial=0 / user_ordinal=6..10",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "chunk": {
+    "id": "chunk_5928a047504dcdb67f13",
+    "index": 0,
+    "text": "用户：\n谢谢。你也能帮我退回买的运动鞋吗？\n\nAgent：\n可以。请提供运动鞋的订单号，或者确认它是否属于你最近的某个订单。",
+    "size": 62,
+    "metadata": {
+      "unit_id": "tau-bench-cand-001__turn-003",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "turn_index": 3,
+      "json_pointer": "/candidates/8/turns/2",
+      "source": "τ-bench historical retail / tau-bench-gpt-4o-retail.json / record_index=30 / task_id=30 / trial=0 / user_ordinal=6..10",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "n_user",
+      "name": "用户",
+      "type": "Person",
+      "description": "请求退回运动鞋的人。",
+      "source_chunk_id": "chunk_5928a047504dcdb67f13"
+    },
+    {
+      "id": "n_shoes",
+      "name": "运动鞋",
+      "type": "Product",
+      "description": "用户购买并希望退回的商品。",
+      "source_chunk_id": "chunk_5928a047504dcdb67f13"
+    },
+    {
+      "id": "n_return",
+      "name": "运动鞋退货",
+      "type": "ReturnRequest",
+      "description": "用户提出的新退货请求。",
+      "source_chunk_id": "chunk_5928a047504dcdb67f13"
+    },
+    {
+      "id": "n_order_id",
+      "name": "订单号",
+      "type": "IdentifierType",
+      "description": "Agent 请求用户提供的商品定位信息。",
+      "source_chunk_id": "chunk_5928a047504dcdb67f13"
+    },
+    {
+      "id": "n_recent_order",
+      "name": "最近的订单",
+      "type": "Order",
+      "description": "Agent 提出的另一种商品定位范围。",
+      "source_chunk_id": "chunk_5928a047504dcdb67f13"
+    }
+  ],
+  "relations": [
+    {
+      "source_entity": "n_user",
+      "target_entity": "n_return",
+      "relation_type": "requests",
+      "description": "用户请求退回运动鞋。"
+    },
+    {
+      "source_entity": "n_return",
+      "target_entity": "n_shoes",
+      "relation_type": "targets",
+      "description": "退货请求针对运动鞋。"
+    },
+    {
+      "source_entity": "n_return",
+      "target_entity": "n_order_id",
+      "relation_type": "identified_by",
+      "description": "Agent 请求用订单号定位待退商品。"
+    },
+    {
+      "source_entity": "n_shoes",
+      "target_entity": "n_recent_order",
+      "relation_type": "may_belong_to",
+      "description": "Agent 请用户确认运动鞋是否属于最近某个订单。"
+    }
+  ]
+}

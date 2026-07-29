@@ -1,0 +1,1239 @@
+{
+  "task": "Normalize concept/operator semantics for the existing ontology draft.",
+  "batch": {
+    "concept_offset": 160,
+    "concept_limit": 40,
+    "operator_offset": 160,
+    "operator_limit": 40
+  },
+  "constraints": {
+    "allowed_operator_ids": [
+      "operator_b031c7994ac1"
+    ],
+    "do_not_invent_ids": true,
+    "operator_output_argument_type": "concept"
+  },
+  "schema": {
+    "$defs": {
+      "ConceptUpdate": {
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "canonical_name": {
+            "default": "",
+            "title": "Canonical Name",
+            "type": "string"
+          },
+          "kind": {
+            "default": "",
+            "title": "Kind",
+            "type": "string"
+          },
+          "description": {
+            "default": "",
+            "title": "Description",
+            "type": "string"
+          },
+          "aliases": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Aliases",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "ConceptUpdate",
+        "type": "object"
+      },
+      "OperatorUpdate": {
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "canonical_name": {
+            "default": "",
+            "title": "Canonical Name",
+            "type": "string"
+          },
+          "operator_type": {
+            "default": "",
+            "title": "Operator Type",
+            "type": "string"
+          },
+          "description": {
+            "default": "",
+            "title": "Description",
+            "type": "string"
+          },
+          "aliases": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Aliases",
+            "type": "array"
+          },
+          "semantic_status": {
+            "default": "",
+            "title": "Semantic Status",
+            "type": "string"
+          },
+          "input_concepts": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Input Concepts",
+            "type": "array"
+          },
+          "output_concepts": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Output Concepts",
+            "type": "array"
+          },
+          "schema_confidence": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Schema Confidence"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "OperatorUpdate",
+        "type": "object"
+      }
+    },
+    "properties": {
+      "concept_updates": {
+        "items": {
+          "$ref": "#/$defs/ConceptUpdate"
+        },
+        "title": "Concept Updates",
+        "type": "array"
+      },
+      "operator_updates": {
+        "items": {
+          "$ref": "#/$defs/OperatorUpdate"
+        },
+        "title": "Operator Updates",
+        "type": "array"
+      },
+      "notes": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Notes",
+        "type": "array"
+      }
+    },
+    "title": "NormalizationPlan",
+    "type": "object"
+  },
+  "concepts": [
+    {
+      "id": "concept_943fdf58321d",
+      "name": "CareArrangement",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "未成年人照护"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_3666fb86ffd8",
+      "name": "FinancialArrangement",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "相关资产管理"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_fd53bfd7939e",
+      "name": "Assessment",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "Stephanie 的意愿和适任性"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_57ec50e90f87",
+      "name": "LegalArrangement",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "信托"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    }
+  ],
+  "concept_catalog": [
+    {
+      "name": "Person",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Organization",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Goal",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Role",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Event",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Duration",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "TimeWindow",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Task",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Question",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Recommendation",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Situation",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Group",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Action",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Platform",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Information",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "CalendarMonth",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Communication",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "DateRange",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Process",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Availability",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "RelativeDate",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "EmailSubject",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Commitment",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ProfessionalRole",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Evaluation",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Style",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareApplication",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareDependency",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareConfiguration",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ErrorSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "File",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ConfigurationField",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Integer",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Constraint",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ConfigurationFieldSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Change",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Status",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "RuntimeFailure",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Device",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "DiagnosticTool",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "PossibleCause",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ConfigurationSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "RuntimeError",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareComponent",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareRequirement",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "FilePath",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "UserInterface",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Directory",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "TaskStatus",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "MediaChannel",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ContentTheme",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Plan",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "FrequencyConstraint",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "OnlinePlatform",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Collection",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ContentFormat",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ContentTechnique",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ContentSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ContentSeries",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "EpisodeTopic",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "StoryElement",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "NarrativeArc",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SpeechSample",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ToneCategory",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ExperimentalStimulusSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "AcousticFeature",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SignalProcessingMethod",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "AudioRecording",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "DataArtifact",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "DataSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareObject",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ProcedureStep",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Problem",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "FileFormat",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ExtractionParameter",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "AcousticParameter",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ExperimentalConstraint",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "NumericRange",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareCommand",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareVersion",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "GoalSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Cardinality",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Percentage",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Method",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareSystem",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "TrainingTopicSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ConstraintSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Function",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Parameter",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "PathTemplate",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SpreadsheetFormula",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ExampleValue",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "FormulaValue",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Software",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Hyperlink",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "DataStructure",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "DataColumn",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "StringValue",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Claim",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Evidence",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LearningStyleCategory",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Practice",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "TeachingMethod",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Observation",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Condition",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Challenge",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Capability",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Intervention",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LearningFactor",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LearningOutcome",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "FlightTrip",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "City",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "CalendarDay",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "TripLeg",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "TimePreference",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "PricePreference",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "FlightOption",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "StopPattern",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "TimeOfDay",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "RelativeDateTime",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "MonetaryAmount",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "PriceAssessment",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "CommunicationEndpoint",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Product",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Order",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ReturnRequest",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "CancellationRequest",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "PaymentMethod",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "CancellationReason",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ToolAction",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "OrderItem",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "GiftCard",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ActionStatus",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "IdentifierType",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Identifier",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ProductSize",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Color",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Material",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "OrderStatus",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Decision",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "CalendarDate",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Place",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Concern",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "PlannedEvent",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "InteractionMode",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Topic",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Option",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "TaskRequest",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Document",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Schedule",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LegalDocument",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "EmotionalState",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LegalStatus",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LegalProvision",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "DocumentDraft",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Law",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LegalFormality",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ReviewAction",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LegalDecision",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "EstatePlan",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "CareArrangement",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "FinancialArrangement",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Assessment",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LegalArrangement",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    }
+  ],
+  "operators": [
+    {
+      "id": "operator_b031c7994ac1",
+      "name": "documents",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "documents",
+          "quote": "Agent 建议在遗嘱中写清监护安排。",
+          "metadata": {
+            "source_entity": "n_will",
+            "target_entity": "n_designation"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "documents",
+          "quote": "Agent 建议在信托中写清监护安排。",
+          "metadata": {
+            "source_entity": "n_trust",
+            "target_entity": "n_designation"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "LegalDocument",
+            "count": 1
+          },
+          {
+            "name": "LegalArrangement",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "LegalDecision",
+            "count": 2
+          }
+        ],
+        "input_unique_count": 2,
+        "output_unique_count": 1
+      }
+    }
+  ],
+  "keol_commit": "44631e64fd07c9b85f22e36035bf49c882dba592",
+  "batch_index": 4
+}

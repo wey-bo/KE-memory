@@ -1,0 +1,5 @@
+用户：
+能给我一个例子吗？
+
+Agent：
+可以：value = 'example'; hyperlink = make_hyperlink(value); print(hyperlink)。输出是 =HYPERLINK("./example", "example")，电子表格会把它识别为可点击链接。

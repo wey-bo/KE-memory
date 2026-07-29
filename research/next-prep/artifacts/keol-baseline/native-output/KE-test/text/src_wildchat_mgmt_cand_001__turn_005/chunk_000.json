@@ -1,0 +1,171 @@
+{
+  "source": {
+    "source_id": "src_wildchat_mgmt_cand_001__turn_005",
+    "file": "keol-input/turns/wildchat-mgmt-cand-001__turn-005.txt",
+    "file_type": "txt",
+    "category": "text",
+    "metadata": {
+      "unit_id": "wildchat-mgmt-cand-001__turn-005",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "turn_index": 5,
+      "json_pointer": "/candidates/0/turns/4",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=f307c772ed4efbb74c3848c4b5debba6 / model=gpt-3.5-turbo-0613 / user_ordinal=1..5 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "chunk": {
+    "id": "chunk_6f8887bb0b8ab531850f",
+    "index": 0,
+    "text": "用户：\n谢谢。上面的邮件看起来太正式了，像初级律师写的。我是资深律师，下面这个版本怎么样？\n\nAgent：\n可以把语气改得更简洁、自信：说明你目前有空、愿意承担新的挑战；询问客户 X 融资轮次的预期时间以便安排优先级；说明 12 月 15 日到 26 日出行，并表示会在出发前完成任务、与团队协作处理交接。",
+    "size": 153,
+    "metadata": {
+      "unit_id": "wildchat-mgmt-cand-001__turn-005",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "turn_index": 5,
+      "json_pointer": "/candidates/0/turns/4",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=f307c772ed4efbb74c3848c4b5debba6 / model=gpt-3.5-turbo-0613 / user_ordinal=1..5 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "n1",
+      "name": "用户",
+      "type": "Person",
+      "description": "自述为资深律师的用户。",
+      "source_chunk_id": "chunk_6f8887bb0b8ab531850f"
+    },
+    {
+      "id": "n2",
+      "name": "资深律师",
+      "type": "ProfessionalRole",
+      "description": "用户明确陈述的职业资历。",
+      "source_chunk_id": "chunk_6f8887bb0b8ab531850f"
+    },
+    {
+      "id": "n3",
+      "name": "上一版邮件",
+      "type": "Communication",
+      "description": "用户正在评价的邮件版本。",
+      "source_chunk_id": "chunk_6f8887bb0b8ab531850f"
+    },
+    {
+      "id": "n4",
+      "name": "过于正式",
+      "type": "Evaluation",
+      "description": "用户对上一版邮件语气的评价。",
+      "source_chunk_id": "chunk_6f8887bb0b8ab531850f"
+    },
+    {
+      "id": "n5",
+      "name": "初级律师风格",
+      "type": "Style",
+      "description": "用户认为上一版邮件呈现的风格。",
+      "source_chunk_id": "chunk_6f8887bb0b8ab531850f"
+    },
+    {
+      "id": "n6",
+      "name": "简洁自信",
+      "type": "Style",
+      "description": "Agent 建议采用的邮件语气。",
+      "source_chunk_id": "chunk_6f8887bb0b8ab531850f"
+    },
+    {
+      "id": "n7",
+      "name": "当前可用",
+      "type": "Availability",
+      "description": "Agent 建议邮件说明的当前状态。",
+      "source_chunk_id": "chunk_6f8887bb0b8ab531850f"
+    },
+    {
+      "id": "n8",
+      "name": "客户 X 融资时间",
+      "type": "Question",
+      "description": "Agent 建议邮件询问的事项。",
+      "source_chunk_id": "chunk_6f8887bb0b8ab531850f"
+    },
+    {
+      "id": "n9",
+      "name": "12 月 15 日至 12 月 26 日",
+      "type": "DateRange",
+      "description": "Agent 重述的出行日期，未给出年份。",
+      "source_chunk_id": "chunk_6f8887bb0b8ab531850f"
+    },
+    {
+      "id": "n10",
+      "name": "工作交接",
+      "type": "Task",
+      "description": "Agent 建议邮件承诺协作处理的事项。",
+      "source_chunk_id": "chunk_6f8887bb0b8ab531850f"
+    },
+    {
+      "id": "n11",
+      "name": "修订版邮件",
+      "type": "Communication",
+      "description": "用户询问是否合适的新邮件版本。",
+      "source_chunk_id": "chunk_6f8887bb0b8ab531850f"
+    }
+  ],
+  "relations": [
+    {
+      "source_entity": "n1",
+      "target_entity": "n2",
+      "relation_type": "HAS_ROLE",
+      "description": "用户自述是资深律师。"
+    },
+    {
+      "source_entity": "n1",
+      "target_entity": "n3",
+      "relation_type": "EVALUATES",
+      "description": "用户评价上一版邮件。"
+    },
+    {
+      "source_entity": "n3",
+      "target_entity": "n4",
+      "relation_type": "HAS_EVALUATION",
+      "description": "上一版被认为太正式。"
+    },
+    {
+      "source_entity": "n3",
+      "target_entity": "n5",
+      "relation_type": "HAS_STYLE",
+      "description": "上一版被认为像初级律师写作。"
+    },
+    {
+      "source_entity": "n11",
+      "target_entity": "n6",
+      "relation_type": "HAS_STYLE",
+      "description": "Agent 建议修订版采用简洁自信的语气。"
+    },
+    {
+      "source_entity": "n11",
+      "target_entity": "n7",
+      "relation_type": "COMMUNICATES",
+      "description": "修订版应说明用户目前有空。"
+    },
+    {
+      "source_entity": "n11",
+      "target_entity": "n8",
+      "relation_type": "INCLUDES",
+      "description": "修订版应询问客户 X 的融资时间。"
+    },
+    {
+      "source_entity": "n11",
+      "target_entity": "n9",
+      "relation_type": "COMMUNICATES",
+      "description": "修订版应说明出行日期。"
+    },
+    {
+      "source_entity": "n11",
+      "target_entity": "n10",
+      "relation_type": "INCLUDES",
+      "description": "修订版应承诺处理交接。"
+    }
+  ]
+}

@@ -1,0 +1,367 @@
+{
+  "candidate_id": "WILDCHAT-MGMT-CAND-001",
+  "turn_index": 4,
+  "context_completions": [
+    {
+      "completion_id": "C_wildchat-mgmt-cand-001-4d3900462107_004_001",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "turn_index": 4,
+      "kind": "unresolved",
+      "original_span": "上面的邮件",
+      "interpretation": "当前消息未包含的先前邮件版本",
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "上面的邮件看起来太正式了"
+        }
+      ],
+      "confidence": 1,
+      "ambiguity": true
+    },
+    {
+      "completion_id": "C_wildchat-mgmt-cand-001-4d3900462107_004_002",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "turn_index": 4,
+      "kind": "unresolved",
+      "original_span": "下面这个版本",
+      "interpretation": "当前消息未包含的另一个邮件版本",
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "下面这个版本怎么样？"
+        }
+      ],
+      "confidence": 1,
+      "ambiguity": true
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_001",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "statement": "用户认为先前邮件看起来太正式。",
+      "subject": "用户",
+      "predicate": "认为",
+      "object": "先前邮件太正式",
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "上面的邮件看起来太正式了"
+        }
+      ],
+      "confidence": 0.99,
+      "inference_basis": "“上面的邮件”未包含在当前消息中，只能解析为当前消息之外的先前邮件版本。"
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_002",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "statement": "用户认为先前邮件像初级律师写的。",
+      "subject": "用户",
+      "predicate": "认为",
+      "object": "先前邮件像初级律师写的",
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "像初级律师写的"
+        }
+      ],
+      "confidence": 0.99,
+      "inference_basis": "评价对象由同一句中的“上面的邮件”解析，但邮件内容未提供。"
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_003",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "statement": "用户是资深律师。",
+      "subject": "用户",
+      "predicate": "是",
+      "object": "资深律师",
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我是资深律师"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_004",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "statement": "用户询问未提供的另一个邮件版本怎么样。",
+      "subject": "用户",
+      "predicate": "询问评价",
+      "object": "未提供的另一个邮件版本",
+      "qualifiers": {
+        "modality": "questioned",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "下面这个版本怎么样？"
+        }
+      ],
+      "confidence": 0.99,
+      "inference_basis": "“下面这个版本”未包含在当前消息中，因此仅能标记为未提供的邮件版本。"
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_005",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "statement": "代理建议将邮件语气改得更简洁。",
+      "subject": "邮件语气",
+      "predicate": "应改得",
+      "object": "更简洁",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "可以把语气改得更简洁、自信"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_006",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "statement": "代理建议将邮件语气改得更自信。",
+      "subject": "邮件语气",
+      "predicate": "应改得",
+      "object": "更自信",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "可以把语气改得更简洁、自信"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_007",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "statement": "代理建议说明用户目前有空。",
+      "subject": "用户",
+      "predicate": "应说明",
+      "object": "目前有空",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [
+          "目前"
+        ],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "说明你目前有空"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_008",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "statement": "代理建议说明用户愿意承担新的挑战。",
+      "subject": "用户",
+      "predicate": "应说明",
+      "object": "愿意承担新的挑战",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "愿意承担新的挑战"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_009",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "statement": "代理建议询问客户 X 融资轮次的预期时间。",
+      "subject": "用户",
+      "predicate": "应询问",
+      "object": "客户 X 融资轮次的预期时间",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": [
+          "以便安排优先级"
+        ]
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "询问客户 X 融资轮次的预期时间以便安排优先级"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_010",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "statement": "代理建议说明 12 月 15 日至 26 日出行。",
+      "subject": "用户",
+      "predicate": "应说明",
+      "object": "12 月 15 日到 26 日出行",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [
+          "12 月 15 日到 26 日"
+        ],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "说明 12 月 15 日到 26 日出行"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_011",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "statement": "代理建议表示会在出发前完成任务。",
+      "subject": "用户",
+      "predicate": "应表示",
+      "object": "会在出发前完成任务",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [
+          "在出发前"
+        ],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "会在出发前完成任务"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_012",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "statement": "代理建议表示会与团队协作处理交接。",
+      "subject": "用户",
+      "predicate": "应表示",
+      "object": "会与团队协作处理交接",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "与团队协作处理交接"
+        }
+      ],
+      "confidence": 0.98
+    }
+  ]
+}

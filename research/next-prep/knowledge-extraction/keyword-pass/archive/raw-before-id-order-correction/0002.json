@@ -1,0 +1,669 @@
+{
+  "candidate_id": "TAU-BENCH-CAND-001",
+  "items": [
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0001",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_001",
+          "surface": "请求退回平板",
+          "normalized_zh": "请求退回平板",
+          "query_lemma": "request return tablet",
+          "keyword_type": "action",
+          "semantic_role": "requested_tablet_return",
+          "source_field": "statement",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0002",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_002",
+          "surface": "是配所述平板使用的",
+          "normalized_zh": "充电器与平板配套",
+          "query_lemma": "charger tablet compatibility",
+          "keyword_type": "relation",
+          "semantic_role": "product_compatibility",
+          "source_field": "statement",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0003",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_003",
+          "surface": "请求取消充电器",
+          "normalized_zh": "请求取消充电器",
+          "query_lemma": "request cancel charger",
+          "keyword_type": "action",
+          "semantic_role": "requested_charger_cancellation",
+          "source_field": "statement",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_008",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0004",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_008",
+          "surface": "平板退货",
+          "normalized_zh": "平板退货",
+          "query_lemma": "tablet return",
+          "keyword_type": "action",
+          "semantic_role": "confirmation_scope",
+          "source_field": "qualifiers.scope",
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0005",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_008",
+          "surface": "充电器取消",
+          "normalized_zh": "充电器取消",
+          "query_lemma": "charger cancellation",
+          "keyword_type": "action",
+          "semantic_role": "confirmation_scope",
+          "source_field": "qualifiers.scope",
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0042",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_008",
+          "surface": "确认是否执行平板退货和充电器取消计划",
+          "normalized_zh": "确认是否执行平板退货和充电器取消",
+          "query_lemma": "confirm executing tablet return and charger cancellation",
+          "keyword_type": "action",
+          "semantic_role": "combined_execution_confirmation_request",
+          "source_field": "statement",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0006",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_001",
+          "surface": "平板退货",
+          "normalized_zh": "平板退货",
+          "query_lemma": "tablet return",
+          "keyword_type": "action",
+          "semantic_role": "requested_execution",
+          "source_field": "object",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0007",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_002",
+          "surface": "充电器取消",
+          "normalized_zh": "充电器取消",
+          "query_lemma": "charger cancellation",
+          "keyword_type": "action",
+          "semantic_role": "requested_execution",
+          "source_field": "object",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0008",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_003",
+          "surface": "return_delivered_order_items",
+          "normalized_zh": "退回已送达订单商品",
+          "query_lemma": "return delivered order item",
+          "keyword_type": "action",
+          "semantic_role": "tool_action",
+          "source_field": "object",
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0009",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_003",
+          "surface": "order_id=#W2692684",
+          "normalized_zh": "订单W2692684",
+          "query_lemma": "order W2692684",
+          "keyword_type": "entity",
+          "semantic_role": "order_identifier",
+          "source_field": "qualifiers.scope",
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0010",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_003",
+          "surface": "item_id=3788616824",
+          "normalized_zh": "商品3788616824",
+          "query_lemma": "item 3788616824",
+          "keyword_type": "entity",
+          "semantic_role": "item_identifier",
+          "source_field": "qualifiers.scope",
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0011",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_003",
+          "surface": "payment_method=gift_card_7711863",
+          "normalized_zh": "礼品卡gift_card_7711863退款方式",
+          "query_lemma": "gift card refund method",
+          "keyword_type": "property",
+          "semantic_role": "payment_method",
+          "source_field": "qualifiers.scope",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0012",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_004",
+          "surface": "cancel_pending_order",
+          "normalized_zh": "取消待处理订单",
+          "query_lemma": "cancel pending order",
+          "keyword_type": "action",
+          "semantic_role": "tool_action",
+          "source_field": "object",
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0013",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_004",
+          "surface": "order_id=#W9373487",
+          "normalized_zh": "订单W9373487",
+          "query_lemma": "order W9373487",
+          "keyword_type": "entity",
+          "semantic_role": "order_identifier",
+          "source_field": "qualifiers.scope",
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0014",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_004",
+          "surface": "reason=no longer needed",
+          "normalized_zh": "取消原因：不再需要",
+          "query_lemma": "no longer needed",
+          "keyword_type": "condition",
+          "semantic_role": "cancellation_reason",
+          "source_field": "qualifiers.scope",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0015",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_005",
+          "surface": "平板退货请求已提交",
+          "normalized_zh": "平板退货请求已提交",
+          "query_lemma": "tablet return submitted",
+          "keyword_type": "event",
+          "semantic_role": "observed_result",
+          "source_field": "statement",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0016",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_006",
+          "surface": "平板退款金额为951.21美元",
+          "normalized_zh": "平板退款金额为951.21美元",
+          "query_lemma": "tablet refund amount 951.21 USD",
+          "keyword_type": "quantity",
+          "semantic_role": "tablet_refund_amount",
+          "source_field": "statement",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0017",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_007",
+          "surface": "充电器订单已取消",
+          "normalized_zh": "充电器订单已取消",
+          "query_lemma": "charger order canceled",
+          "keyword_type": "event",
+          "semantic_role": "observed_result",
+          "source_field": "statement",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_008",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0018",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_008",
+          "surface": "109.27美元已退回礼品卡",
+          "normalized_zh": "109.27美元退回礼品卡",
+          "query_lemma": "109.27 USD refunded to gift card",
+          "keyword_type": "event",
+          "semantic_role": "observed_refund",
+          "source_field": "statement",
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0043",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_008",
+          "surface": "充电器订单退款",
+          "normalized_zh": "充电器订单退款",
+          "query_lemma": "charger order refund",
+          "keyword_type": "concept",
+          "semantic_role": "refund_entity_context",
+          "source_field": "qualifiers.scope",
+          "translation_confidence": 1.0
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0019",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_001",
+          "surface": "运动鞋",
+          "normalized_zh": "运动鞋",
+          "query_lemma": "sneakers",
+          "keyword_type": "entity",
+          "semantic_role": "purchased_item",
+          "source_field": "object",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0020",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_002",
+          "surface": "请求代理帮助退回其购买的运动鞋",
+          "normalized_zh": "请求帮助退回购买的运动鞋",
+          "query_lemma": "request help returning purchased sneakers",
+          "keyword_type": "action",
+          "semantic_role": "requested_sneaker_return_assistance",
+          "source_field": "statement",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0021",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_004",
+          "surface": "运动鞋的订单号",
+          "normalized_zh": "运动鞋订单号",
+          "query_lemma": "sneaker order number",
+          "keyword_type": "property",
+          "semantic_role": "requested_identifier",
+          "source_field": "object",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0022",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_005",
+          "surface": "运动鞋是否属于用户最近的某个订单",
+          "normalized_zh": "运动鞋与最近订单的归属关系",
+          "query_lemma": "sneakers in recent order",
+          "keyword_type": "relation",
+          "semantic_role": "alternative_lookup",
+          "source_field": "object",
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0023",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_005",
+          "surface": "不提供运动鞋订单号时的替代方式",
+          "normalized_zh": "未提供订单号时的替代方式",
+          "query_lemma": "alternative when order number unavailable",
+          "keyword_type": "condition",
+          "semantic_role": "alternative_condition",
+          "source_field": "qualifiers.conditions",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0024",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_001",
+          "surface": "不记得运动鞋的订单号",
+          "normalized_zh": "不记得运动鞋订单号",
+          "query_lemma": "unknown sneaker order number",
+          "keyword_type": "property",
+          "semantic_role": "missing_identifier",
+          "source_field": "statement",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0025",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_002",
+          "surface": "运动鞋属于其最近的某个订单",
+          "normalized_zh": "运动鞋属于最近订单",
+          "query_lemma": "sneakers belong to recent order",
+          "keyword_type": "relation",
+          "semantic_role": "reported_order_membership",
+          "source_field": "statement",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0026",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_003",
+          "surface": "get_order_details",
+          "normalized_zh": "获取订单详情",
+          "query_lemma": "get order details",
+          "keyword_type": "action",
+          "semantic_role": "tool_action",
+          "source_field": "object",
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0027",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_003",
+          "surface": "order_id=#W7449508",
+          "normalized_zh": "订单W7449508",
+          "query_lemma": "order W7449508",
+          "keyword_type": "entity",
+          "semantic_role": "order_identifier",
+          "source_field": "qualifiers.scope",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0028",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_004",
+          "surface": "订单 #W7449508 包含运动鞋",
+          "normalized_zh": "订单W7449508包含运动鞋",
+          "query_lemma": "order W7449508 contains sneakers",
+          "keyword_type": "relation",
+          "semantic_role": "observed_order_membership",
+          "source_field": "statement",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0029",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_005",
+          "surface": "该运动鞋的尺码为6码",
+          "normalized_zh": "该运动鞋尺码为6码",
+          "query_lemma": "sneaker size 6",
+          "keyword_type": "quantity",
+          "semantic_role": "shoe_size",
+          "source_field": "statement",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0030",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_006",
+          "surface": "该运动鞋为黑色",
+          "normalized_zh": "该运动鞋颜色为黑色",
+          "query_lemma": "black sneaker color",
+          "keyword_type": "property",
+          "semantic_role": "shoe_color",
+          "source_field": "statement",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0031",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_007",
+          "surface": "该运动鞋由合成材料制成",
+          "normalized_zh": "该运动鞋由合成材料制成",
+          "query_lemma": "sneaker synthetic material",
+          "keyword_type": "property",
+          "semantic_role": "shoe_material",
+          "source_field": "statement",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_008",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0032",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_008",
+          "surface": "该运动鞋已送达",
+          "normalized_zh": "该运动鞋状态为已送达",
+          "query_lemma": "sneaker delivered status",
+          "keyword_type": "property",
+          "semantic_role": "delivery_status",
+          "source_field": "statement",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_009",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0033",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_009",
+          "surface": "确认是否退回运动鞋",
+          "normalized_zh": "确认是否退回运动鞋",
+          "query_lemma": "confirm sneaker return",
+          "keyword_type": "action",
+          "semantic_role": "confirmation_request",
+          "source_field": "statement",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0034",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_001",
+          "surface": "请求退回运动鞋",
+          "normalized_zh": "请求退回运动鞋",
+          "query_lemma": "request return sneakers",
+          "keyword_type": "action",
+          "semantic_role": "confirmed_sneaker_return_request",
+          "source_field": "statement",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0035",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_002",
+          "surface": "运动鞋退款退到自己的礼品卡",
+          "normalized_zh": "运动鞋退款退至用户礼品卡",
+          "query_lemma": "sneaker refund to own gift card",
+          "keyword_type": "relation",
+          "semantic_role": "refund_preference",
+          "source_field": "statement",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0036",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_003",
+          "surface": "return_delivered_order_items",
+          "normalized_zh": "退回已送达订单商品",
+          "query_lemma": "return delivered order item",
+          "keyword_type": "action",
+          "semantic_role": "tool_action",
+          "source_field": "object",
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0037",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_003",
+          "surface": "order_id=#W7449508",
+          "normalized_zh": "订单W7449508",
+          "query_lemma": "order W7449508",
+          "keyword_type": "entity",
+          "semantic_role": "order_identifier",
+          "source_field": "qualifiers.scope",
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0038",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_003",
+          "surface": "item_id=6477915553",
+          "normalized_zh": "商品6477915553",
+          "query_lemma": "item 6477915553",
+          "keyword_type": "entity",
+          "semantic_role": "item_identifier",
+          "source_field": "qualifiers.scope",
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0039",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_003",
+          "surface": "payment_method=gift_card_7711863",
+          "normalized_zh": "礼品卡gift_card_7711863退款方式",
+          "query_lemma": "gift card refund method",
+          "keyword_type": "property",
+          "semantic_role": "payment_method",
+          "source_field": "qualifiers.scope",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0040",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_004",
+          "surface": "运动鞋退货请求已提交",
+          "normalized_zh": "运动鞋退货请求已提交",
+          "query_lemma": "sneaker return submitted",
+          "keyword_type": "event",
+          "semantic_role": "observed_result",
+          "source_field": "statement",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0041",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_005",
+          "surface": "186.45美元将退回礼品卡",
+          "normalized_zh": "186.45美元将退回礼品卡",
+          "query_lemma": "186.45 USD refund to gift card",
+          "keyword_type": "event",
+          "semantic_role": "planned_refund",
+          "source_field": "statement",
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_tau-bench-cand-001-650fada2c0dc_0044",
+          "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_005",
+          "surface": "运动鞋退货",
+          "normalized_zh": "运动鞋退货",
+          "query_lemma": "sneaker return refund",
+          "keyword_type": "concept",
+          "semantic_role": "refund_entity_context",
+          "source_field": "qualifiers.scope",
+          "translation_confidence": 1.0
+        }
+      ],
+      "no_keyword_reason": null
+    }
+  ]
+}

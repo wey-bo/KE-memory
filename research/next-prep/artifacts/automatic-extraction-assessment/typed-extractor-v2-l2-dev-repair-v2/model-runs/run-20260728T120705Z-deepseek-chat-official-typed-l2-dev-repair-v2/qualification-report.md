@@ -1,0 +1,33 @@
+# Typed Extractor Dev-Repair Qualification
+
+- Layer: `l2`
+- Dataset: `typed-extractor-l2-dev-repair-v2`
+- Run: `run-20260728T120705Z-deepseek-chat-official-typed-l2-dev-repair-v2`
+- Raw proposer quality: `fail`
+- Deterministic gate safety: `fail`
+- Dev repair ready: `fail`
+
+This result is diagnostic-only and is not natural benchmark evidence. Even on pass, fresh-v2 remains unauthorized until both layers pass and a separate preregistration is frozen.
+
+## Exact metrics
+
+- `abstraction_accuracy`: fail
+- `closure_accuracy`: pass
+- `exact_evidence_rate`: pass
+- `kind_accuracy`: pass
+- `proposal_coverage`: pass
+- `raw_abstention_f1`: pass
+- `raw_decision_accuracy`: pass
+- `schema_valid_rate`: pass
+- `source_coverage_accuracy`: pass
+- `structured_claim_accuracy`: fail
+- `summary_accuracy`: pass
+- `support_id_accuracy`: pass
+
+## Zero-count safety checks
+
+- `raw_critical_false_emission_count`: pass
+- `gate_intervention_count`: fail
+- `deterministic_critical_false_materialization_count`: pass
+
+Raw proposer quality and deterministic gate safety are reported separately. No pipeline integration or authoritative write is authorized.

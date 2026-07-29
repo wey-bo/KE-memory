@@ -1,0 +1,111 @@
+{
+  "candidate_id": "TAU-BENCH-CAND-001",
+  "turn_index": 1,
+  "context_completions": [],
+  "knowledge": [
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_001",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "statement": "用户请求执行平板退货。",
+      "subject": "用户",
+      "predicate": "请求执行",
+      "object": "平板退货",
+      "qualifiers": {"modality": "requested", "polarity": "positive", "temporal": [], "conditions": [], "scope": []},
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [{"turn_index": 1, "message": "user", "occurrence_index": 0, "quote": "请执行平板退货"}],
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_002",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "statement": "用户请求执行充电器取消。",
+      "subject": "用户",
+      "predicate": "请求执行",
+      "object": "充电器取消",
+      "qualifiers": {"modality": "requested", "polarity": "positive", "temporal": [], "conditions": [], "scope": []},
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [{"turn_index": 1, "message": "user", "occurrence_index": 0, "quote": "充电器取消"}],
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_003",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "statement": "代理声称调用退货工具处理订单 #W2692684 中商品 3788616824，并指定礼品卡 gift_card_7711863 为退款方式。",
+      "subject": "代理",
+      "predicate": "声称调用",
+      "object": "return_delivered_order_items",
+      "qualifiers": {"modality": "claimed_completed", "polarity": "positive", "temporal": [], "conditions": [], "scope": ["order_id=#W2692684", "item_id=3788616824", "payment_method=gift_card_7711863"]},
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [{"turn_index": 1, "message": "agent", "occurrence_index": 0, "quote": "return_delivered_order_items(order_id=#W2692684, item_id=3788616824, payment_method=gift_card_7711863)"}],
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_004",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "statement": "代理声称调用取消工具处理订单 #W9373487，原因为不再需要。",
+      "subject": "代理",
+      "predicate": "声称调用",
+      "object": "cancel_pending_order",
+      "qualifiers": {"modality": "claimed_completed", "polarity": "positive", "temporal": [], "conditions": [], "scope": ["order_id=#W9373487", "reason=no longer needed"]},
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [{"turn_index": 1, "message": "agent", "occurrence_index": 0, "quote": "cancel_pending_order(order_id=#W9373487, reason=no longer needed)"}],
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_005",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "statement": "工具结果显示平板退货请求已提交。",
+      "subject": "平板退货请求",
+      "predicate": "已提交",
+      "object": null,
+      "qualifiers": {"modality": "observed", "polarity": "positive", "temporal": ["已"], "conditions": [], "scope": []},
+      "source_status": "tool_observed",
+      "derivation": "explicit",
+      "evidence": [{"turn_index": 1, "message": "agent", "occurrence_index": 0, "quote": "平板退货请求已提交"}],
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_006",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "statement": "工具结果给出的平板退款金额为951.21美元。",
+      "subject": "平板退款",
+      "predicate": "金额为",
+      "object": "951.21美元",
+      "qualifiers": {"modality": "observed", "polarity": "positive", "temporal": [], "conditions": [], "scope": []},
+      "source_status": "tool_observed",
+      "derivation": "explicit",
+      "evidence": [{"turn_index": 1, "message": "agent", "occurrence_index": 0, "quote": "平板退货请求已提交，退款 951.21 美元"}],
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_007",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "statement": "工具结果显示充电器订单已取消。",
+      "subject": "充电器订单",
+      "predicate": "已取消",
+      "object": null,
+      "qualifiers": {"modality": "observed", "polarity": "positive", "temporal": ["已"], "conditions": [], "scope": []},
+      "source_status": "tool_observed",
+      "derivation": "explicit",
+      "evidence": [{"turn_index": 1, "message": "agent", "occurrence_index": 0, "quote": "充电器订单已取消"}],
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_008",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "statement": "工具结果显示109.27美元已退回礼品卡。",
+      "subject": "109.27美元",
+      "predicate": "已退回",
+      "object": "礼品卡",
+      "qualifiers": {"modality": "observed", "polarity": "positive", "temporal": ["已"], "conditions": [], "scope": ["充电器订单退款"]},
+      "source_status": "tool_observed",
+      "derivation": "explicit",
+      "evidence": [{"turn_index": 1, "message": "agent", "occurrence_index": 0, "quote": "充电器订单已取消，109.27 美元已退回礼品卡"}],
+      "confidence": 1.0
+    }
+  ]
+}

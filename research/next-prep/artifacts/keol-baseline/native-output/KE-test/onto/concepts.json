@@ -1,0 +1,3851 @@
+[
+  {
+    "id": "concept_bbd46ef0eee4",
+    "slug": "person",
+    "hash": "bbd46ef0eee4",
+    "name": "Person",
+    "kind": "class",
+    "aliases": [
+      "Person"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_d416d5b9212f",
+      "evidence_bbb02c964bbb",
+      "evidence_ab3684149193",
+      "evidence_5a40cda04ca8",
+      "evidence_02a6ca1883b5",
+      "evidence_71da5872db4d",
+      "evidence_2a7a0cd8eaa9",
+      "evidence_54f7e7dfbabb",
+      "evidence_1a02ea520dcf",
+      "evidence_510c9fd3e2f4",
+      "evidence_76a2f1406aac",
+      "evidence_69ec68310027",
+      "evidence_5a8f0882b841",
+      "evidence_f5df23a35c86",
+      "evidence_a894abf1f5cf",
+      "evidence_9abf2087313e",
+      "evidence_03ed61728d88",
+      "evidence_dadcab721961",
+      "evidence_003cf02ea58a",
+      "evidence_96f2350d8001",
+      "evidence_d99db85b9264",
+      "evidence_5c7d9daa0f17",
+      "evidence_a4e63f1d337b",
+      "evidence_2c113e46d4f2",
+      "evidence_d8393a6b30bd",
+      "evidence_6446870a81b1",
+      "evidence_c7e335fb7be3",
+      "evidence_5a8600540d29",
+      "evidence_104d8a9e62ab",
+      "evidence_12e3932f2b29",
+      "evidence_346ab3aeb172"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.530160+00:00",
+    "metadata": {
+      "description": "表示对话中出现的自然人，如用户、Douglas、Francis、Bradley、Michael、Stephanie 和 Kimberly。"
+    }
+  },
+  {
+    "id": "concept_e39fed9fc66e",
+    "slug": "organization",
+    "hash": "e39fed9fc66e",
+    "name": "Organization",
+    "kind": "class",
+    "aliases": [
+      "Organization"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_e3500db915df",
+      "evidence_8fdac8dd3270",
+      "evidence_de58797f1ed8",
+      "evidence_ea87c2eda160"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.531296+00:00",
+    "metadata": {
+      "description": "表示客户 X、律师事务所等组织实体。"
+    }
+  },
+  {
+    "id": "concept_910c9b7669d4",
+    "slug": "goal",
+    "hash": "910c9b7669d4",
+    "name": "Goal",
+    "kind": "class",
+    "aliases": [
+      "Goal"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_97b34e267d8c",
+      "evidence_a8bfaae25998",
+      "evidence_927e4fdb08ee",
+      "evidence_05890b290d39",
+      "evidence_d2f36ae34447",
+      "evidence_ac9af98f6de5",
+      "evidence_074f398f5f30",
+      "evidence_a845c5820388",
+      "evidence_c5d20c496efc",
+      "evidence_feec204dcf0d",
+      "evidence_abcf5689dabe",
+      "evidence_bed0d67e8538",
+      "evidence_3006f6ad5002",
+      "evidence_37e46b64fc27",
+      "evidence_1d9268d49b5e",
+      "evidence_2231b2c6f91e",
+      "evidence_8c9ad0b13d69"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.531376+00:00",
+    "metadata": {
+      "description": "表示主体希望实现的目标，如获得更多工作分派。"
+    }
+  },
+  {
+    "id": "concept_d1639724ae2f",
+    "slug": "role",
+    "hash": "d1639724ae2f",
+    "name": "Role",
+    "kind": "class",
+    "aliases": [
+      "Role"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_8eaf399cd5b0",
+      "evidence_2567cd1f7be7",
+      "evidence_7817ee6c0a1e",
+      "evidence_7fd896dbe0ef"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.531441+00:00",
+    "metadata": {
+      "description": "表示组织或任务中的角色，如负责分派工作的合伙人。"
+    }
+  },
+  {
+    "id": "concept_edad65594977",
+    "slug": "event",
+    "hash": "edad65594977",
+    "name": "Event",
+    "kind": "class",
+    "aliases": [
+      "Event"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_4821b96eca22",
+      "evidence_fe93c2fad14f",
+      "evidence_f25651069201",
+      "evidence_99fcf8526f0b",
+      "evidence_2bb76ff80154",
+      "evidence_2c3b2ace12e3",
+      "evidence_93e944c2b013"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.531508+00:00",
+    "metadata": {
+      "description": "表示具有发生语义的事件，如出国休假。"
+    }
+  },
+  {
+    "id": "concept_ef12a3c001c8",
+    "slug": "duration",
+    "hash": "ef12a3c001c8",
+    "name": "Duration",
+    "kind": "class",
+    "aliases": [
+      "Duration"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_7778d46ec964",
+      "evidence_4fab4b59b2fc"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.531576+00:00",
+    "metadata": {
+      "description": "表示事件或状态持续的时长，如一周或 30 天。"
+    }
+  },
+  {
+    "id": "concept_b9d3f28092fb",
+    "slug": "timewindow",
+    "hash": "b9d3f28092fb",
+    "name": "TimeWindow",
+    "kind": "class",
+    "aliases": [
+      "TimeWindow"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_21af4d582a6d",
+      "evidence_0a7ebf5530f2",
+      "evidence_0d94a65b0dfd",
+      "evidence_85d2bacc57d6",
+      "evidence_007ab9d75431"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.531648+00:00",
+    "metadata": {
+      "description": "表示相对当前时点的一段时间范围，如未来两个月。"
+    }
+  },
+  {
+    "id": "concept_9b339f5748c0",
+    "slug": "task",
+    "hash": "9b339f5748c0",
+    "name": "Task",
+    "kind": "class",
+    "aliases": [
+      "Task"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_9d0fb6ec5f08",
+      "evidence_fd3b1b45289e",
+      "evidence_524d245237d9",
+      "evidence_08da88f2b69b"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.531708+00:00",
+    "metadata": {
+      "description": "表示可被分派或完成的任务，如项目。"
+    }
+  },
+  {
+    "id": "concept_4c98dac18b7a",
+    "slug": "question",
+    "hash": "4c98dac18b7a",
+    "name": "Question",
+    "kind": "class",
+    "aliases": [
+      "Question"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_a6cb03dbb29c",
+      "evidence_42647a82715f",
+      "evidence_eb45b64ac470"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.531770+00:00",
+    "metadata": {
+      "description": "表示待回答的问题，如休假告知时机或客户融资时间。"
+    }
+  },
+  {
+    "id": "concept_3ce9d3a0c446",
+    "slug": "recommendation",
+    "hash": "3ce9d3a0c446",
+    "name": "Recommendation",
+    "kind": "class",
+    "aliases": [
+      "Recommendation"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_38660cd8e591",
+      "evidence_3860f505b929"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.531833+00:00",
+    "metadata": {
+      "description": "表示针对问题给出的建议，如尽早透明沟通。"
+    }
+  },
+  {
+    "id": "concept_ef53334ace16",
+    "slug": "situation",
+    "hash": "ef53334ace16",
+    "name": "Situation",
+    "kind": "class",
+    "aliases": [
+      "Situation"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_4e0555fce1f4",
+      "evidence_020efe050ff3"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.533235+00:00",
+    "metadata": {
+      "description": "表示对话中描述的情形，如工作量较少。"
+    }
+  },
+  {
+    "id": "concept_150b240efc1f",
+    "slug": "group",
+    "hash": "150b240efc1f",
+    "name": "Group",
+    "kind": "class",
+    "aliases": [
+      "Group"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_33251825e820",
+      "evidence_751daa87f8cb"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.533347+00:00",
+    "metadata": {
+      "description": "表示多个相关主体组成的群体，如事务所其他人。"
+    }
+  },
+  {
+    "id": "concept_dfc33257e444",
+    "slug": "action",
+    "hash": "dfc33257e444",
+    "name": "Action",
+    "kind": "class",
+    "aliases": [
+      "Action"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_6e40962c5a4e",
+      "evidence_008e1a909dd5",
+      "evidence_b4878d0c94c1",
+      "evidence_863fc2a87bb2",
+      "evidence_ea9200581798",
+      "evidence_4df596a20e00",
+      "evidence_e65a02a7c4df",
+      "evidence_b5bc1b0756cc",
+      "evidence_9a3cf1c21f34",
+      "evidence_c2f08e6d11cf",
+      "evidence_a428f5231261",
+      "evidence_c8050614ddd1",
+      "evidence_99b008b09b22",
+      "evidence_51fb0df23493",
+      "evidence_cba0d4404d90",
+      "evidence_e699ac58b517"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.533450+00:00",
+    "metadata": {
+      "description": "表示可执行动作，如联系合伙人、更新 compileSdk、同步或重建。"
+    }
+  },
+  {
+    "id": "concept_2416f09a7a51",
+    "slug": "platform",
+    "hash": "2416f09a7a51",
+    "name": "Platform",
+    "kind": "class",
+    "aliases": [
+      "Platform"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_a5268a04f23a"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.533601+00:00",
+    "metadata": {
+      "description": "表示提供活动或机会的平台，如内部工作机会平台。"
+    }
+  },
+  {
+    "id": "concept_1f20ccf3151b",
+    "slug": "information",
+    "hash": "1f20ccf3151b",
+    "name": "Information",
+    "kind": "class",
+    "aliases": [
+      "Information"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_43959c96211a",
+      "evidence_7e2f1651e00e",
+      "evidence_54850163dcad",
+      "evidence_b079683f4a99"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.533707+00:00",
+    "metadata": {
+      "description": "表示可传达的信息，如可用时间与工作意愿。"
+    }
+  },
+  {
+    "id": "concept_ba3e1d19aeed",
+    "slug": "calendarmonth",
+    "hash": "ba3e1d19aeed",
+    "name": "CalendarMonth",
+    "kind": "class",
+    "aliases": [
+      "CalendarMonth"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_163a91320365"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.534858+00:00",
+    "metadata": {
+      "description": "表示日历月份，如 11 月。"
+    }
+  },
+  {
+    "id": "concept_1c1974ae1ee3",
+    "slug": "communication",
+    "hash": "1c1974ae1ee3",
+    "name": "Communication",
+    "kind": "class",
+    "aliases": [
+      "Communication"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_4ccd81db4dc5",
+      "evidence_52b9637adbc3",
+      "evidence_05d6a26b7dc9",
+      "evidence_af807a30fa91"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.534927+00:00",
+    "metadata": {
+      "description": "表示一次沟通活动，如今天的工作联系。"
+    }
+  },
+  {
+    "id": "concept_13b0806dfd78",
+    "slug": "daterange",
+    "hash": "13b0806dfd78",
+    "name": "DateRange",
+    "kind": "class",
+    "aliases": [
+      "DateRange"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_b5306e1ab6c3",
+      "evidence_06ec641fbd92",
+      "evidence_1275692375ed"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.534992+00:00",
+    "metadata": {
+      "description": "表示由起止日期界定的范围，如 12 月 15 日至 12 月 26 日。"
+    }
+  },
+  {
+    "id": "concept_fa6b0c75a560",
+    "slug": "process",
+    "hash": "fa6b0c75a560",
+    "name": "Process",
+    "kind": "class",
+    "aliases": [
+      "Process"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_ea4f651259b7"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.535103+00:00",
+    "metadata": {
+      "description": "表示持续或分阶段进行的过程，如工作分派。"
+    }
+  },
+  {
+    "id": "concept_cc4dbbd38373",
+    "slug": "availability",
+    "hash": "cc4dbbd38373",
+    "name": "Availability",
+    "kind": "class",
+    "aliases": [
+      "Availability"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_eaba97a504aa",
+      "evidence_2fe162481e73",
+      "evidence_86dc264b2ca5"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.535206+00:00",
+    "metadata": {
+      "description": "表示主体可参与工作的状态，如休假前后可工作。"
+    }
+  },
+  {
+    "id": "concept_ac213fc990d2",
+    "slug": "relativedate",
+    "hash": "ac213fc990d2",
+    "name": "RelativeDate",
+    "kind": "class",
+    "aliases": [
+      "RelativeDate"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_6112b5f8005c",
+      "evidence_c621fc933cce"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.536336+00:00",
+    "metadata": {
+      "description": "表示相对表达的日期，如今天。"
+    }
+  },
+  {
+    "id": "concept_348b3b09240d",
+    "slug": "emailsubject",
+    "hash": "348b3b09240d",
+    "name": "EmailSubject",
+    "kind": "class",
+    "aliases": [
+      "EmailSubject"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_a81a964ea6fe"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.536677+00:00",
+    "metadata": {
+      "description": "表示电子邮件主题，如近期工作安排和出行计划。"
+    }
+  },
+  {
+    "id": "concept_24f44cb67350",
+    "slug": "commitment",
+    "hash": "24f44cb67350",
+    "name": "Commitment",
+    "kind": "class",
+    "aliases": [
+      "Commitment"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_1d1bfd99687e"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.536739+00:00",
+    "metadata": {
+      "description": "表示主体承诺完成的事项，如完成出发前待办。"
+    }
+  },
+  {
+    "id": "concept_6969a406bd15",
+    "slug": "professionalrole",
+    "hash": "6969a406bd15",
+    "name": "ProfessionalRole",
+    "kind": "class",
+    "aliases": [
+      "ProfessionalRole"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_00efa690aaf4",
+      "evidence_da53772d712f",
+      "evidence_09adfa3d424e",
+      "evidence_70db800e511f"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.537772+00:00",
+    "metadata": {
+      "description": "表示职业身份或职级，如资深律师。"
+    }
+  },
+  {
+    "id": "concept_8391f479d746",
+    "slug": "evaluation",
+    "hash": "8391f479d746",
+    "name": "Evaluation",
+    "kind": "class",
+    "aliases": [
+      "Evaluation"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_503361505e60"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.537878+00:00",
+    "metadata": {
+      "description": "表示对对象作出的评价，如认为邮件过于正式。"
+    }
+  },
+  {
+    "id": "concept_e50acd508018",
+    "slug": "style",
+    "hash": "e50acd508018",
+    "name": "Style",
+    "kind": "class",
+    "aliases": [
+      "Style"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_394906b2397f",
+      "evidence_be38524cedb8"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.537940+00:00",
+    "metadata": {
+      "description": "表示表达或写作风格，如初级律师风格。"
+    }
+  },
+  {
+    "id": "concept_84886163b92c",
+    "slug": "softwareapplication",
+    "hash": "84886163b92c",
+    "name": "SoftwareApplication",
+    "kind": "class",
+    "aliases": [
+      "SoftwareApplication"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_0410fcc417d0",
+      "evidence_c65efd73eee3",
+      "evidence_78bb6cecba7b",
+      "evidence_1930e37c6afa",
+      "evidence_02cd68d7df72",
+      "evidence_c061d4c9f5dc"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.538988+00:00",
+    "metadata": {
+      "description": "表示可运行的软件应用，如 Android app、Praat、文本编辑器和 Android Studio。"
+    }
+  },
+  {
+    "id": "concept_b92e045c2acf",
+    "slug": "softwaredependency",
+    "hash": "b92e045c2acf",
+    "name": "SoftwareDependency",
+    "kind": "class",
+    "aliases": [
+      "SoftwareDependency"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_f39c615f64fa",
+      "evidence_3413a8a61bf2",
+      "evidence_09d7409d805b"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.539050+00:00",
+    "metadata": {
+      "description": "表示软件依赖项，如 activity-ktx、androidx.activity 或 activity-compose 1.8.0。"
+    }
+  },
+  {
+    "id": "concept_39cef1682f76",
+    "slug": "softwareconfiguration",
+    "hash": "39cef1682f76",
+    "name": "SoftwareConfiguration",
+    "kind": "class",
+    "aliases": [
+      "SoftwareConfiguration"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_e1b8b7f84682",
+      "evidence_abd8d5d41791",
+      "evidence_d3ab4da54308",
+      "evidence_cc4cdaa321cf",
+      "evidence_3bc7d26f268b"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.539210+00:00",
+    "metadata": {
+      "description": "表示软件配置，如主题配置或 compileSdk 版本配置。"
+    }
+  },
+  {
+    "id": "concept_e3b38784a453",
+    "slug": "errorset",
+    "hash": "e3b38784a453",
+    "name": "ErrorSet",
+    "kind": "class",
+    "aliases": [
+      "ErrorSet"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_05f7218cb688"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.539317+00:00",
+    "metadata": {
+      "description": "表示一组相关错误，如三个 AAR 元数据问题。"
+    }
+  },
+  {
+    "id": "concept_05443df929d6",
+    "slug": "file",
+    "hash": "05443df929d6",
+    "name": "File",
+    "kind": "class",
+    "aliases": [
+      "File"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_4e9e81698a6c",
+      "evidence_9c9258eaf75b",
+      "evidence_cccebd5ca2a2",
+      "evidence_d91a8d95749a",
+      "evidence_44561b96b130",
+      "evidence_ca051df8c628",
+      "evidence_3c26842623d6",
+      "evidence_31916dac7b57",
+      "evidence_66b253d1fc59"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.539380+00:00",
+    "metadata": {
+      "description": "表示文件实体，如文本文件、AndroidManifest.xml、app/build.gradle 和 styles.xml。"
+    }
+  },
+  {
+    "id": "concept_36d1603352d4",
+    "slug": "configurationfield",
+    "hash": "36d1603352d4",
+    "name": "ConfigurationField",
+    "kind": "class",
+    "aliases": [
+      "ConfigurationField"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_c72905c88ff9",
+      "evidence_d604c43238b6",
+      "evidence_e46f801d2168"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.540530+00:00",
+    "metadata": {
+      "description": "表示单个配置字段，如 theme 属性、compileSdkVersion 或主题引用。"
+    }
+  },
+  {
+    "id": "concept_35d372fec200",
+    "slug": "integer",
+    "hash": "35d372fec200",
+    "name": "Integer",
+    "kind": "class",
+    "aliases": [
+      "Integer"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_3de1ece37df4",
+      "evidence_17d121f99700"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.540589+00:00",
+    "metadata": {
+      "description": "表示整数值，如 33 和 34。"
+    }
+  },
+  {
+    "id": "concept_e44e0e46bf06",
+    "slug": "constraint",
+    "hash": "e44e0e46bf06",
+    "name": "Constraint",
+    "kind": "class",
+    "aliases": [
+      "Constraint"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_ee6b6bf0d516",
+      "evidence_22fdb2340a64"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.540794+00:00",
+    "metadata": {
+      "description": "表示对选择或配置施加的约束，如设备兼容性。"
+    }
+  },
+  {
+    "id": "concept_99d6caf4e400",
+    "slug": "configurationfieldset",
+    "hash": "99d6caf4e400",
+    "name": "ConfigurationFieldSet",
+    "kind": "class",
+    "aliases": [
+      "ConfigurationFieldSet"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_9fd23d7e6d1a"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.540861+00:00",
+    "metadata": {
+      "description": "表示一组相关配置字段，如 targetSdk 与 minSdk。"
+    }
+  },
+  {
+    "id": "concept_f502ecaad82f",
+    "slug": "change",
+    "hash": "f502ecaad82f",
+    "name": "Change",
+    "kind": "class",
+    "aliases": [
+      "Change"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_0bc6d7b9e9fe"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.541738+00:00",
+    "metadata": {
+      "description": "表示系统中发生的变更，如新增依赖。"
+    }
+  },
+  {
+    "id": "concept_cfbcf93220b6",
+    "slug": "status",
+    "hash": "cfbcf93220b6",
+    "name": "Status",
+    "kind": "class",
+    "aliases": [
+      "Status"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_d44dd7d24dee"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.541807+00:00",
+    "metadata": {
+      "description": "表示对象或过程的状态，如构建错误消失。"
+    }
+  },
+  {
+    "id": "concept_34dca514b762",
+    "slug": "runtimefailure",
+    "hash": "34dca514b762",
+    "name": "RuntimeFailure",
+    "kind": "class",
+    "aliases": [
+      "RuntimeFailure"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_01f3b3497244",
+      "evidence_34cfee52e8f3"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.542079+00:00",
+    "metadata": {
+      "description": "表示运行阶段的失败现象，如应用启动后立即关闭。"
+    }
+  },
+  {
+    "id": "concept_4cbf8375ca2f",
+    "slug": "device",
+    "hash": "4cbf8375ca2f",
+    "name": "Device",
+    "kind": "class",
+    "aliases": [
+      "Device"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_3bdba4200df9"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.542143+00:00",
+    "metadata": {
+      "description": "表示运行软件的设备，如手机。"
+    }
+  },
+  {
+    "id": "concept_b410af5baadd",
+    "slug": "diagnostictool",
+    "hash": "b410af5baadd",
+    "name": "DiagnosticTool",
+    "kind": "class",
+    "aliases": [
+      "DiagnosticTool"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_37b1ef9ebce9",
+      "evidence_6da39b0cb6f9"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.542203+00:00",
+    "metadata": {
+      "description": "表示用于诊断问题的工具，如 Logcat。"
+    }
+  },
+  {
+    "id": "concept_4c77d0cc48d8",
+    "slug": "possiblecause",
+    "hash": "4c77d0cc48d8",
+    "name": "PossibleCause",
+    "kind": "class",
+    "aliases": [
+      "PossibleCause"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_01b3cbf8f248"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.542268+00:00",
+    "metadata": {
+      "description": "表示可能导致运行时故障的原因，如依赖兼容性。"
+    }
+  },
+  {
+    "id": "concept_2dde63249023",
+    "slug": "configurationset",
+    "hash": "2dde63249023",
+    "name": "ConfigurationSet",
+    "kind": "class",
+    "aliases": [
+      "ConfigurationSet"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_fdd44965aeb7"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.542481+00:00",
+    "metadata": {
+      "description": "表示一组相关软件配置，如 activity、主题和 intent-filter。"
+    }
+  },
+  {
+    "id": "concept_9aa225100e19",
+    "slug": "runtimeerror",
+    "hash": "9aa225100e19",
+    "name": "RuntimeError",
+    "kind": "class",
+    "aliases": [
+      "RuntimeError"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_fff6ed358b31"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.543356+00:00",
+    "metadata": {
+      "description": "表示运行时错误，如 Unable to start activity。"
+    }
+  },
+  {
+    "id": "concept_640f7adf481b",
+    "slug": "softwarecomponent",
+    "hash": "640f7adf481b",
+    "name": "SoftwareComponent",
+    "kind": "class",
+    "aliases": [
+      "SoftwareComponent"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_88634ceb59d9",
+      "evidence_9f49b87a4d2e",
+      "evidence_49d26ef0650c"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.543426+00:00",
+    "metadata": {
+      "description": "表示软件中的组件，如 Activity 或 MainActivity。"
+    }
+  },
+  {
+    "id": "concept_2b35a0e2c758",
+    "slug": "softwarerequirement",
+    "hash": "2b35a0e2c758",
+    "name": "SoftwareRequirement",
+    "kind": "class",
+    "aliases": [
+      "SoftwareRequirement"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_57ae8e93e847"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.543492+00:00",
+    "metadata": {
+      "description": "表示软件配置必须满足的要求，如使用 Theme.AppCompat 或其子主题。"
+    }
+  },
+  {
+    "id": "concept_364fac17c1b7",
+    "slug": "filepath",
+    "hash": "364fac17c1b7",
+    "name": "FilePath",
+    "kind": "class",
+    "aliases": [
+      "FilePath"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_d8b3c0f6d658"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.544655+00:00",
+    "metadata": {
+      "description": "表示文件在项目中的路径，如 app/src/main/AndroidManifest.xml。"
+    }
+  },
+  {
+    "id": "concept_9326acea83ed",
+    "slug": "userinterface",
+    "hash": "9326acea83ed",
+    "name": "UserInterface",
+    "kind": "class",
+    "aliases": [
+      "UserInterface"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_4f9f3ac44b43"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.544725+00:00",
+    "metadata": {
+      "description": "表示用户界面中的查看位置，如 Android Studio Project 视图。"
+    }
+  },
+  {
+    "id": "concept_6e01a322d228",
+    "slug": "directory",
+    "hash": "6e01a322d228",
+    "name": "Directory",
+    "kind": "class",
+    "aliases": [
+      "Directory"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_89576283f838"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.544788+00:00",
+    "metadata": {
+      "description": "表示文件所在目录，如 app 模块的 manifests 文件夹。"
+    }
+  },
+  {
+    "id": "concept_65bdcba1ae10",
+    "slug": "taskstatus",
+    "hash": "65bdcba1ae10",
+    "name": "TaskStatus",
+    "kind": "class",
+    "aliases": [
+      "TaskStatus"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_7827b501853b"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.545182+00:00",
+    "metadata": {
+      "description": "表示任务或检查的状态，如文件已找到。"
+    }
+  },
+  {
+    "id": "concept_439bad723c6b",
+    "slug": "mediachannel",
+    "hash": "439bad723c6b",
+    "name": "MediaChannel",
+    "kind": "class",
+    "aliases": [
+      "MediaChannel"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_af7c8995d967"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.546398+00:00",
+    "metadata": {
+      "description": "表示内容或媒体运营频道，如转型导师、赋能与健康频道。"
+    }
+  },
+  {
+    "id": "concept_3cb64c63067f",
+    "slug": "contenttheme",
+    "hash": "3cb64c63067f",
+    "name": "ContentTheme",
+    "kind": "class",
+    "aliases": [
+      "ContentTheme"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_7b0009278da9"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.546506+00:00",
+    "metadata": {
+      "description": "表示内容计划围绕的主题，如有独占价值的内容。"
+    }
+  },
+  {
+    "id": "concept_fc9b1c95c7e1",
+    "slug": "plan",
+    "hash": "fc9b1c95c7e1",
+    "name": "Plan",
+    "kind": "class",
+    "aliases": [
+      "Plan"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_aa283e3f6c1e",
+      "evidence_dbeb3cb1df4a",
+      "evidence_442d0868aa89",
+      "evidence_6db7498e1fdc",
+      "evidence_e567671dbd19",
+      "evidence_2170cc284fa7"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.546569+00:00",
+    "metadata": {
+      "description": "表示一组内容或活动安排，如连续 Reels 方案和 Instagram 内容计划。"
+    }
+  },
+  {
+    "id": "concept_7353c80c700f",
+    "slug": "frequencyconstraint",
+    "hash": "7353c80c700f",
+    "name": "FrequencyConstraint",
+    "kind": "class",
+    "aliases": [
+      "FrequencyConstraint"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_6af89db08d6d"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.546685+00:00",
+    "metadata": {
+      "description": "表示对活动频率的约束，如每天至少一项活动。"
+    }
+  },
+  {
+    "id": "concept_524d615edb91",
+    "slug": "onlineplatform",
+    "hash": "524d615edb91",
+    "name": "OnlinePlatform",
+    "kind": "class",
+    "aliases": [
+      "OnlinePlatform"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_c1ec62b849a0",
+      "evidence_854aa5d3b011"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.546750+00:00",
+    "metadata": {
+      "description": "表示在线发布平台，如 Telegram 或 Instagram。"
+    }
+  },
+  {
+    "id": "concept_48566fe775fb",
+    "slug": "collection",
+    "hash": "48566fe775fb",
+    "name": "Collection",
+    "kind": "class",
+    "aliases": [
+      "Collection"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_4bbcd5014e49",
+      "evidence_bccf0bd1100c"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.546813+00:00",
+    "metadata": {
+      "description": "表示由多种内容形式组成的集合。"
+    }
+  },
+  {
+    "id": "concept_e26b4b4fdd2b",
+    "slug": "contentformat",
+    "hash": "e26b4b4fdd2b",
+    "name": "ContentFormat",
+    "kind": "class",
+    "aliases": [
+      "ContentFormat"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_c2dc54f53a48",
+      "evidence_fad7e4c2363a",
+      "evidence_260e9fdc939a",
+      "evidence_755e63d57074",
+      "evidence_b16cd5f4e206"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.547728+00:00",
+    "metadata": {
+      "description": "表示内容呈现形式，如博客、Instagram Live、Stories 或 Reels。"
+    }
+  },
+  {
+    "id": "concept_bdde83783f16",
+    "slug": "contenttechnique",
+    "hash": "bdde83783f16",
+    "name": "ContentTechnique",
+    "kind": "class",
+    "aliases": [
+      "ContentTechnique"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_39513a8a7d18",
+      "evidence_2f837170abf0"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.547890+00:00",
+    "metadata": {
+      "description": "表示内容制作技法，如故事叙述。"
+    }
+  },
+  {
+    "id": "concept_bb171a55ba08",
+    "slug": "contentset",
+    "hash": "bb171a55ba08",
+    "name": "ContentSet",
+    "kind": "class",
+    "aliases": [
+      "ContentSet"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_6979c9fbb1d5",
+      "evidence_01e07a464265"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.547998+00:00",
+    "metadata": {
+      "description": "表示一组内容主题或形式，如短教程、锻炼和目标设定。"
+    }
+  },
+  {
+    "id": "concept_3d5748fc06a8",
+    "slug": "contentseries",
+    "hash": "3d5748fc06a8",
+    "name": "ContentSeries",
+    "kind": "class",
+    "aliases": [
+      "ContentSeries"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_23c57a61f9f8"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.549376+00:00",
+    "metadata": {
+      "description": "表示有多个单集的内容系列，如转变故事系列。"
+    }
+  },
+  {
+    "id": "concept_38cb5091dbb0",
+    "slug": "episodetopic",
+    "hash": "38cb5091dbb0",
+    "name": "EpisodeTopic",
+    "kind": "class",
+    "aliases": [
+      "EpisodeTopic"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_5b8d2df015a4",
+      "evidence_81067a3b99c0",
+      "evidence_92ce89f245e0"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.549446+00:00",
+    "metadata": {
+      "description": "表示系列中某一集的主题，如迈出第一步。"
+    }
+  },
+  {
+    "id": "concept_2cdaf103bc5c",
+    "slug": "storyelement",
+    "hash": "2cdaf103bc5c",
+    "name": "StoryElement",
+    "kind": "class",
+    "aliases": [
+      "StoryElement"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_dd2a4cfe0128",
+      "evidence_8654d2744a49",
+      "evidence_f68252736b82"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.549611+00:00",
+    "metadata": {
+      "description": "表示故事中的结构元素，如以冲突或问题开场。"
+    }
+  },
+  {
+    "id": "concept_22c978c52212",
+    "slug": "narrativearc",
+    "hash": "22c978c52212",
+    "name": "NarrativeArc",
+    "kind": "class",
+    "aliases": [
+      "NarrativeArc"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_1c796483439f"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.549768+00:00",
+    "metadata": {
+      "description": "表示多集内容形成的叙事发展路径，如连续成长路径。"
+    }
+  },
+  {
+    "id": "concept_8ed315e73edc",
+    "slug": "speechsample",
+    "hash": "8ed315e73edc",
+    "name": "SpeechSample",
+    "kind": "class",
+    "aliases": [
+      "SpeechSample"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_dffcc41a3024"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.550729+00:00",
+    "metadata": {
+      "description": "表示语音样本，如普通话“居”。"
+    }
+  },
+  {
+    "id": "concept_b68a7e8affd8",
+    "slug": "tonecategory",
+    "hash": "b68a7e8affd8",
+    "name": "ToneCategory",
+    "kind": "class",
+    "aliases": [
+      "ToneCategory"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_7b77c881ddc2",
+      "evidence_5d51bd1b99d9",
+      "evidence_64bd7f8c4ade",
+      "evidence_4da75a33bc57"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.550802+00:00",
+    "metadata": {
+      "description": "表示声调类别，如二声。"
+    }
+  },
+  {
+    "id": "concept_0526acd5a83b",
+    "slug": "experimentalstimulusset",
+    "hash": "0526acd5a83b",
+    "name": "ExperimentalStimulusSet",
+    "kind": "class",
+    "aliases": [
+      "ExperimentalStimulusSet"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_f8ae57bce26a",
+      "evidence_d062275c996f"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.550922+00:00",
+    "metadata": {
+      "description": "表示实验刺激集合，如九步等距连续体或导出的连续体。"
+    }
+  },
+  {
+    "id": "concept_db698d9436a5",
+    "slug": "acousticfeature",
+    "hash": "db698d9436a5",
+    "name": "AcousticFeature",
+    "kind": "class",
+    "aliases": [
+      "AcousticFeature"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_bd19f3d52fcf"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.550987+00:00",
+    "metadata": {
+      "description": "表示语音的声学特征，如 F0 曲线。"
+    }
+  },
+  {
+    "id": "concept_4253df359c73",
+    "slug": "signalprocessingmethod",
+    "hash": "4253df359c73",
+    "name": "SignalProcessingMethod",
+    "kind": "class",
+    "aliases": [
+      "SignalProcessingMethod"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_74d40e18591c",
+      "evidence_317490b37e7a",
+      "evidence_f6f539489670"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.551105+00:00",
+    "metadata": {
+      "description": "表示信号处理方法，如 PSOLA。"
+    }
+  },
+  {
+    "id": "concept_effe8106c8d6",
+    "slug": "audiorecording",
+    "hash": "effe8106c8d6",
+    "name": "AudioRecording",
+    "kind": "class",
+    "aliases": [
+      "AudioRecording"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_4675f361f20a",
+      "evidence_ad3de5ce52dd"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.551166+00:00",
+    "metadata": {
+      "description": "表示录音材料，如二声录音。"
+    }
+  },
+  {
+    "id": "concept_3d38ba8a74ba",
+    "slug": "dataartifact",
+    "hash": "3d38ba8a74ba",
+    "name": "DataArtifact",
+    "kind": "class",
+    "aliases": [
+      "DataArtifact"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_572aa0d18703",
+      "evidence_44a0922ffb94"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.551231+00:00",
+    "metadata": {
+      "description": "表示处理过程产生的数据文件或数据对象，如 F0 文本数据。"
+    }
+  },
+  {
+    "id": "concept_bab347a50527",
+    "slug": "dataset",
+    "hash": "bab347a50527",
+    "name": "DataSet",
+    "kind": "class",
+    "aliases": [
+      "DataSet"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_891d7889ced2",
+      "evidence_09c00429995f"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.551290+00:00",
+    "metadata": {
+      "description": "表示一组结构化数据，如连续体目标 F0 或九组目标值。"
+    }
+  },
+  {
+    "id": "concept_1bb6a256e5e7",
+    "slug": "softwareobject",
+    "hash": "1bb6a256e5e7",
+    "name": "SoftwareObject",
+    "kind": "class",
+    "aliases": [
+      "SoftwareObject"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_c679d986c369",
+      "evidence_38fbb3a791bb",
+      "evidence_9ffb062c730d",
+      "evidence_defaac525e5d"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.551353+00:00",
+    "metadata": {
+      "description": "表示软件中的对象，如 Manipulation 或 Pitch。"
+    }
+  },
+  {
+    "id": "concept_5cab94fd096e",
+    "slug": "procedurestep",
+    "hash": "5cab94fd096e",
+    "name": "ProcedureStep",
+    "kind": "class",
+    "aliases": [
+      "ProcedureStep"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_dc2b9b506a2f",
+      "evidence_a54e52e6837d"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.552376+00:00",
+    "metadata": {
+      "description": "表示操作流程中的步骤，如第 8 步或第 4 步。"
+    }
+  },
+  {
+    "id": "concept_75b03a8fed1d",
+    "slug": "problem",
+    "hash": "75b03a8fed1d",
+    "name": "Problem",
+    "kind": "class",
+    "aliases": [
+      "Problem"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_b69da3330e9c"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.552617+00:00",
+    "metadata": {
+      "description": "表示处理过程中遇到的问题，如提取失败。"
+    }
+  },
+  {
+    "id": "concept_35ad20ff9aae",
+    "slug": "fileformat",
+    "hash": "35ad20ff9aae",
+    "name": "FileFormat",
+    "kind": "class",
+    "aliases": [
+      "FileFormat"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_01789011fc42"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.552792+00:00",
+    "metadata": {
+      "description": "表示文件格式，如 .txt。"
+    }
+  },
+  {
+    "id": "concept_6cc4df097f89",
+    "slug": "extractionparameter",
+    "hash": "6cc4df097f89",
+    "name": "ExtractionParameter",
+    "kind": "class",
+    "aliases": [
+      "ExtractionParameter"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_055a4ffb1468",
+      "evidence_d2694cc0eaca"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.552862+00:00",
+    "metadata": {
+      "description": "表示提取数据时使用的参数，如音高范围。"
+    }
+  },
+  {
+    "id": "concept_66624a964df9",
+    "slug": "acousticparameter",
+    "hash": "66624a964df9",
+    "name": "AcousticParameter",
+    "kind": "class",
+    "aliases": [
+      "AcousticParameter"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_be79eb19fe37",
+      "evidence_60043df17e0f",
+      "evidence_a89e7bdd24ee",
+      "evidence_eabba4dfb1a3",
+      "evidence_f9f926f3037b",
+      "evidence_44c534142e56",
+      "evidence_bed152e4aa72",
+      "evidence_c23877b22f50"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.553842+00:00",
+    "metadata": {
+      "description": "表示声学参数，如时长、F0 offset 或 F0 转折点。"
+    }
+  },
+  {
+    "id": "concept_ea3419a71230",
+    "slug": "experimentalconstraint",
+    "hash": "ea3419a71230",
+    "name": "ExperimentalConstraint",
+    "kind": "class",
+    "aliases": [
+      "ExperimentalConstraint"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_db2a880e3b8b"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.553957+00:00",
+    "metadata": {
+      "description": "表示实验设计约束，如九个等距级别。"
+    }
+  },
+  {
+    "id": "concept_711ae69ecf2f",
+    "slug": "numericrange",
+    "hash": "711ae69ecf2f",
+    "name": "NumericRange",
+    "kind": "class",
+    "aliases": [
+      "NumericRange"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_86b8872450c2"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.554250+00:00",
+    "metadata": {
+      "description": "表示数值变化范围，如总变化范围。"
+    }
+  },
+  {
+    "id": "concept_e9a05ac0ffb3",
+    "slug": "softwarecommand",
+    "hash": "e9a05ac0ffb3",
+    "name": "SoftwareCommand",
+    "kind": "class",
+    "aliases": [
+      "SoftwareCommand"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_ef0bfe55572b",
+      "evidence_6aaa80ba9c3e"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.555472+00:00",
+    "metadata": {
+      "description": "表示软件命令，如 Replace pitch 或 Scale pitch。"
+    }
+  },
+  {
+    "id": "concept_5355e2e91626",
+    "slug": "softwareversion",
+    "hash": "5355e2e91626",
+    "name": "SoftwareVersion",
+    "kind": "class",
+    "aliases": [
+      "SoftwareVersion"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_1f167dc5e1d2"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.555579+00:00",
+    "metadata": {
+      "description": "表示软件版本，如当前 Praat 版本。"
+    }
+  },
+  {
+    "id": "concept_96e98e260df7",
+    "slug": "goalset",
+    "hash": "96e98e260df7",
+    "name": "GoalSet",
+    "kind": "class",
+    "aliases": [
+      "GoalSet"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_baee6b6f83df",
+      "evidence_3c26b311e669",
+      "evidence_eab3d199a874"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.557409+00:00",
+    "metadata": {
+      "description": "A collection of performance goals, including a SMART performance goal set."
+    }
+  },
+  {
+    "id": "concept_e04f0db9fb05",
+    "slug": "cardinality",
+    "hash": "e04f0db9fb05",
+    "name": "Cardinality",
+    "kind": "class",
+    "aliases": [
+      "Cardinality"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_2ba9c3ece92b"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.557478+00:00",
+    "metadata": {
+      "description": "A count used to specify how many members a collection contains, such as ten goals."
+    }
+  },
+  {
+    "id": "concept_e7db22f5ff16",
+    "slug": "percentage",
+    "hash": "e7db22f5ff16",
+    "name": "Percentage",
+    "kind": "class",
+    "aliases": [
+      "Percentage"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_33c884dfd043",
+      "evidence_5008ff3083c2",
+      "evidence_cb33d8633c61"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.559196+00:00",
+    "metadata": {
+      "description": "A proportional numeric value expressed as a percentage, such as 10%, 15%, or 20%."
+    }
+  },
+  {
+    "id": "concept_107318cf8a81",
+    "slug": "method",
+    "hash": "107318cf8a81",
+    "name": "Method",
+    "kind": "class",
+    "aliases": [
+      "Method"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_a340fb3e0954",
+      "evidence_00be05c8e7cd",
+      "evidence_a92e60cfd808"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.559310+00:00",
+    "metadata": {
+      "description": "A method used to carry out work, with observed examples including Pandas apply and targeted outreach."
+    }
+  },
+  {
+    "id": "concept_f22a0ef4b51f",
+    "slug": "softwaresystem",
+    "hash": "f22a0ef4b51f",
+    "name": "SoftwareSystem",
+    "kind": "class",
+    "aliases": [
+      "SoftwareSystem"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_c12593b8b198"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.559476+00:00",
+    "metadata": {
+      "description": "A software-based operational system, exemplified by a digital work-order system."
+    }
+  },
+  {
+    "id": "concept_1f89a07a50dc",
+    "slug": "trainingtopicset",
+    "hash": "1f89a07a50dc",
+    "name": "TrainingTopicSet",
+    "kind": "class",
+    "aliases": [
+      "TrainingTopicSet"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_4dd044617393"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.559822+00:00",
+    "metadata": {
+      "description": "A collection of training subjects, such as customer service, conflict resolution, and fair housing."
+    }
+  },
+  {
+    "id": "concept_b20739253fc8",
+    "slug": "constraintset",
+    "hash": "b20739253fc8",
+    "name": "ConstraintSet",
+    "kind": "class",
+    "aliases": [
+      "ConstraintSet"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_c0254a681cb4"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.559899+00:00",
+    "metadata": {
+      "description": "A collection of goal constraints such as concrete metrics, deadlines, and verifiable outcomes."
+    }
+  },
+  {
+    "id": "concept_88cbe93e64f7",
+    "slug": "function",
+    "hash": "88cbe93e64f7",
+    "name": "Function",
+    "kind": "class",
+    "aliases": [
+      "Function"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_094cbf28d012",
+      "evidence_29f504b7ea5d",
+      "evidence_000bfd3184b4"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.561073+00:00",
+    "metadata": {
+      "description": "A callable software function, exemplified by make_hyperlink."
+    }
+  },
+  {
+    "id": "concept_fbf79483f18f",
+    "slug": "parameter",
+    "hash": "fbf79483f18f",
+    "name": "Parameter",
+    "kind": "class",
+    "aliases": [
+      "Parameter"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_f6c9ac50decc"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.561140+00:00",
+    "metadata": {
+      "description": "A named function input parameter, exemplified by value."
+    }
+  },
+  {
+    "id": "concept_b09b725b10c1",
+    "slug": "pathtemplate",
+    "hash": "b09b725b10c1",
+    "name": "PathTemplate",
+    "kind": "class",
+    "aliases": [
+      "PathTemplate"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_f5a214d1ce75"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.561201+00:00",
+    "metadata": {
+      "description": "A string template used to construct a relative path, exemplified by ./{}."
+    }
+  },
+  {
+    "id": "concept_47e2c1ba1aa0",
+    "slug": "spreadsheetformula",
+    "hash": "47e2c1ba1aa0",
+    "name": "SpreadsheetFormula",
+    "kind": "class",
+    "aliases": [
+      "SpreadsheetFormula"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_bcb851101016"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.561265+00:00",
+    "metadata": {
+      "description": "A formula interpreted by spreadsheet software, exemplified by the HYPERLINK formula."
+    }
+  },
+  {
+    "id": "concept_2b2a4a8686ae",
+    "slug": "examplevalue",
+    "hash": "2b2a4a8686ae",
+    "name": "ExampleValue",
+    "kind": "class",
+    "aliases": [
+      "ExampleValue"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_1bc259f60474",
+      "evidence_17d99166a0bd"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.561330+00:00",
+    "metadata": {
+      "description": "A value used as an illustrative function input, exemplified by example."
+    }
+  },
+  {
+    "id": "concept_38d2c3def507",
+    "slug": "formulavalue",
+    "hash": "38d2c3def507",
+    "name": "FormulaValue",
+    "kind": "class",
+    "aliases": [
+      "FormulaValue"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_89d2b6476ccb",
+      "evidence_86aff67e3320"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.561391+00:00",
+    "metadata": {
+      "description": "A concrete formula expression value, exemplified by a HYPERLINK expression."
+    }
+  },
+  {
+    "id": "concept_af12cd800cb1",
+    "slug": "software",
+    "hash": "af12cd800cb1",
+    "name": "Software",
+    "kind": "class",
+    "aliases": [
+      "Software"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_fa25a8d25588"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.562429+00:00",
+    "metadata": {
+      "description": "Software that interprets formulas in the observed usage, specifically spreadsheet software."
+    }
+  },
+  {
+    "id": "concept_557b65b848d7",
+    "slug": "hyperlink",
+    "hash": "557b65b848d7",
+    "name": "Hyperlink",
+    "kind": "class",
+    "aliases": [
+      "Hyperlink"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_e003eedc504a"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.562498+00:00",
+    "metadata": {
+      "description": "A link rendered as a clickable object in spreadsheet software."
+    }
+  },
+  {
+    "id": "concept_377bff18a6e2",
+    "slug": "datastructure",
+    "hash": "377bff18a6e2",
+    "name": "DataStructure",
+    "kind": "class",
+    "aliases": [
+      "DataStructure"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_ba8025cd87eb"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.562928+00:00",
+    "metadata": {
+      "description": "A structured data container, exemplified by a DataFrame."
+    }
+  },
+  {
+    "id": "concept_ff170fe44484",
+    "slug": "datacolumn",
+    "hash": "ff170fe44484",
+    "name": "DataColumn",
+    "kind": "class",
+    "aliases": [
+      "DataColumn"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_884a1a02c34f",
+      "evidence_fef933ff1451"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.562995+00:00",
+    "metadata": {
+      "description": "A named column in a tabular data structure, such as Value or Hyperlink."
+    }
+  },
+  {
+    "id": "concept_3f848ce31c71",
+    "slug": "stringvalue",
+    "hash": "3f848ce31c71",
+    "name": "StringValue",
+    "kind": "class",
+    "aliases": [
+      "StringValue"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_1b4a75deba75"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.563209+00:00",
+    "metadata": {
+      "description": "A string-valued software result, exemplified by a hyperlink formula string."
+    }
+  },
+  {
+    "id": "concept_851645389832",
+    "slug": "claim",
+    "hash": "851645389832",
+    "name": "Claim",
+    "kind": "class",
+    "aliases": [
+      "Claim"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_9ff2ac65b855",
+      "evidence_fe8e5b81f7a1"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.563836+00:00",
+    "metadata": {
+      "description": "A proposition subject to support or contradiction, such as the claim that fixed learning styles strongly affect learning."
+    }
+  },
+  {
+    "id": "concept_cf66f4af1f66",
+    "slug": "evidence",
+    "hash": "cf66f4af1f66",
+    "name": "Evidence",
+    "kind": "class",
+    "aliases": [
+      "Evidence"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_265cbe971972"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.563903+00:00",
+    "metadata": {
+      "description": "Information used to evaluate a claim, exemplified by research evidence."
+    }
+  },
+  {
+    "id": "concept_bedc8c644997",
+    "slug": "learningstylecategory",
+    "hash": "bedc8c644997",
+    "name": "LearningStyleCategory",
+    "kind": "class",
+    "aliases": [
+      "LearningStyleCategory"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_fbe971f77282",
+      "evidence_6467679a5cb7",
+      "evidence_97b51026b2b0"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.563968+00:00",
+    "metadata": {
+      "description": "A proposed category of learner preference, exemplified by auditory learner."
+    }
+  },
+  {
+    "id": "concept_d5b6e2af2e84",
+    "slug": "practice",
+    "hash": "d5b6e2af2e84",
+    "name": "Practice",
+    "kind": "class",
+    "aliases": [
+      "Practice"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_6dfb7c69b2f7"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.564130+00:00",
+    "metadata": {
+      "description": "An educational practice, with teaching as the observed example."
+    }
+  },
+  {
+    "id": "concept_c5123a58b8a3",
+    "slug": "teachingmethod",
+    "hash": "c5123a58b8a3",
+    "name": "TeachingMethod",
+    "kind": "class",
+    "aliases": [
+      "TeachingMethod"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_573084770c62",
+      "evidence_61fb26dbe647",
+      "evidence_28d6059fccbc"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.564190+00:00",
+    "metadata": {
+      "description": "A method of instruction, exemplified by multimodal teaching."
+    }
+  },
+  {
+    "id": "concept_f176cd89ecdd",
+    "slug": "observation",
+    "hash": "f176cd89ecdd",
+    "name": "Observation",
+    "kind": "class",
+    "aliases": [
+      "Observation"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_0c31f02b5eff"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.564347+00:00",
+    "metadata": {
+      "description": "An observed learner outcome or behavior, exemplified by actual student performance."
+    }
+  },
+  {
+    "id": "concept_d6948d2bc524",
+    "slug": "condition",
+    "hash": "d6948d2bc524",
+    "name": "Condition",
+    "kind": "class",
+    "aliases": [
+      "Condition"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_771ee9b37689"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.565072+00:00",
+    "metadata": {
+      "description": "A condition affecting a learner, exemplified by learning difficulty."
+    }
+  },
+  {
+    "id": "concept_e2e15a4a7232",
+    "slug": "challenge",
+    "hash": "e2e15a4a7232",
+    "name": "Challenge",
+    "kind": "class",
+    "aliases": [
+      "Challenge"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_55af3b0acb59"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.565136+00:00",
+    "metadata": {
+      "description": "A difficulty associated with a particular domain of learning."
+    }
+  },
+  {
+    "id": "concept_57820f84ae77",
+    "slug": "capability",
+    "hash": "57820f84ae77",
+    "name": "Capability",
+    "kind": "class",
+    "aliases": [
+      "Capability"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_bd8723240317"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.565200+00:00",
+    "metadata": {
+      "description": "A learner capability discussed as something that can develop."
+    }
+  },
+  {
+    "id": "concept_6ad1ef8ca327",
+    "slug": "intervention",
+    "hash": "6ad1ef8ca327",
+    "name": "Intervention",
+    "kind": "class",
+    "aliases": [
+      "Intervention"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_c7f6f4774dbd",
+      "evidence_1b9fa8ffe65d",
+      "evidence_2cbafa805a61",
+      "evidence_3d59321f189c"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.565261+00:00",
+    "metadata": {
+      "description": "An educational support intervention, exemplified by early identification."
+    }
+  },
+  {
+    "id": "concept_3310a50d65b8",
+    "slug": "learningfactor",
+    "hash": "3310a50d65b8",
+    "name": "LearningFactor",
+    "kind": "class",
+    "aliases": [
+      "LearningFactor"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_0ba384256819",
+      "evidence_03c13c0871b9",
+      "evidence_169a952e7212",
+      "evidence_074f0122f36b",
+      "evidence_d920955892f9",
+      "evidence_e93fdd17dfef"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.571522+00:00",
+    "metadata": {
+      "description": "A factor that contributes to learning, exemplified by memory."
+    }
+  },
+  {
+    "id": "concept_a2d1662fc1da",
+    "slug": "learningoutcome",
+    "hash": "a2d1662fc1da",
+    "name": "LearningOutcome",
+    "kind": "class",
+    "aliases": [
+      "LearningOutcome"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_9a66572b6172",
+      "evidence_c2b111921b8c"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.571593+00:00",
+    "metadata": {
+      "description": "An outcome of learning activity, exemplified by successful learning."
+    }
+  },
+  {
+    "id": "concept_565f903f723b",
+    "slug": "flighttrip",
+    "hash": "565f903f723b",
+    "name": "FlightTrip",
+    "kind": "class",
+    "aliases": [
+      "FlightTrip"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_d2fa96ea587e",
+      "evidence_375e2f7b0084"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.572466+00:00",
+    "metadata": {
+      "description": "An air-travel itinerary, with a round trip as the observed example."
+    }
+  },
+  {
+    "id": "concept_c08e882acfc6",
+    "slug": "city",
+    "hash": "c08e882acfc6",
+    "name": "City",
+    "kind": "class",
+    "aliases": [
+      "City"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_9b5d57b1c1a8",
+      "evidence_851abbc02592"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.572526+00:00",
+    "metadata": {
+      "description": "A city used as a flight origin or destination, exemplified by New York City."
+    }
+  },
+  {
+    "id": "concept_a7fe1b8a30f7",
+    "slug": "calendarday",
+    "hash": "a7fe1b8a30f7",
+    "name": "CalendarDay",
+    "kind": "class",
+    "aliases": [
+      "CalendarDay"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_ca910a852e40"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.573061+00:00",
+    "metadata": {
+      "description": "A day number within a calendar month, exemplified by the nineteenth."
+    }
+  },
+  {
+    "id": "concept_6440ec9c890e",
+    "slug": "tripleg",
+    "hash": "6440ec9c890e",
+    "name": "TripLeg",
+    "kind": "class",
+    "aliases": [
+      "TripLeg"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_8bf1eae36fef",
+      "evidence_dc03dafc827b"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.573121+00:00",
+    "metadata": {
+      "description": "A directional segment of a trip, exemplified by the outbound leg."
+    }
+  },
+  {
+    "id": "concept_1c28d47405d4",
+    "slug": "timepreference",
+    "hash": "1c28d47405d4",
+    "name": "TimePreference",
+    "kind": "class",
+    "aliases": [
+      "TimePreference"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_a2e03ddc5585"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.573230+00:00",
+    "metadata": {
+      "description": "A preference over travel timing, exemplified by departing as early as possible."
+    }
+  },
+  {
+    "id": "concept_7e0cb6cb5e29",
+    "slug": "pricepreference",
+    "hash": "7e0cb6cb5e29",
+    "name": "PricePreference",
+    "kind": "class",
+    "aliases": [
+      "PricePreference"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_84bae3a0d180"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.573940+00:00",
+    "metadata": {
+      "description": "A preference over price, exemplified by choosing the cheapest option."
+    }
+  },
+  {
+    "id": "concept_ea7da49864e6",
+    "slug": "flightoption",
+    "hash": "ea7da49864e6",
+    "name": "FlightOption",
+    "kind": "class",
+    "aliases": [
+      "FlightOption"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_6e642a03085c",
+      "evidence_f64adfd35f01",
+      "evidence_f3d9159ed297",
+      "evidence_22e9203cc2b4"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.574000+00:00",
+    "metadata": {
+      "description": "A candidate flight itinerary, exemplified by a lowest-price round-trip option."
+    }
+  },
+  {
+    "id": "concept_a919d49a7ae2",
+    "slug": "stoppattern",
+    "hash": "a919d49a7ae2",
+    "name": "StopPattern",
+    "kind": "class",
+    "aliases": [
+      "StopPattern"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_ac5eaade44db"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.574065+00:00",
+    "metadata": {
+      "description": "A pattern describing flight stops, exemplified by one stop."
+    }
+  },
+  {
+    "id": "concept_64c789bfa13a",
+    "slug": "timeofday",
+    "hash": "64c789bfa13a",
+    "name": "TimeOfDay",
+    "kind": "class",
+    "aliases": [
+      "TimeOfDay"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_407dd2e21855",
+      "evidence_fea9dba02094"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.574127+00:00",
+    "metadata": {
+      "description": "A clock time without a full calendar date, such as 00:30 or 18:00."
+    }
+  },
+  {
+    "id": "concept_97970aca9074",
+    "slug": "relativedatetime",
+    "hash": "97970aca9074",
+    "name": "RelativeDateTime",
+    "kind": "class",
+    "aliases": [
+      "RelativeDateTime"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_c9cd6323b4e3",
+      "evidence_cecd42c00bd6"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.574188+00:00",
+    "metadata": {
+      "description": "A date-time expressed relative to another date, such as 07:35 the next morning."
+    }
+  },
+  {
+    "id": "concept_6bd7768a0eaa",
+    "slug": "monetaryamount",
+    "hash": "6bd7768a0eaa",
+    "name": "MonetaryAmount",
+    "kind": "class",
+    "aliases": [
+      "MonetaryAmount"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_95610567678d",
+      "evidence_e60ce940ceb5",
+      "evidence_b39b700ed612",
+      "evidence_ab60b0d933f9",
+      "evidence_ca478be94381"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.574246+00:00",
+    "metadata": {
+      "description": "A monetary amount, with observed values expressed in US dollars."
+    }
+  },
+  {
+    "id": "concept_4abf854a0439",
+    "slug": "priceassessment",
+    "hash": "4abf854a0439",
+    "name": "PriceAssessment",
+    "kind": "class",
+    "aliases": [
+      "PriceAssessment"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_c5e72570c0d9"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.575506+00:00",
+    "metadata": {
+      "description": "An assessment of a price, exemplified by describing a flight option as somewhat expensive."
+    }
+  },
+  {
+    "id": "concept_fc120680c15c",
+    "slug": "communicationendpoint",
+    "hash": "fc120680c15c",
+    "name": "CommunicationEndpoint",
+    "kind": "class",
+    "aliases": [
+      "CommunicationEndpoint"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_b877979e021b"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.575660+00:00",
+    "metadata": {
+      "description": "An endpoint for sending information, exemplified by the user's email address."
+    }
+  },
+  {
+    "id": "concept_4cf00dad9a9d",
+    "slug": "product",
+    "hash": "4cf00dad9a9d",
+    "name": "Product",
+    "kind": "class",
+    "aliases": [
+      "Product"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_ca1111d21621",
+      "evidence_457f7a3b54f0",
+      "evidence_74bef3b6c71e",
+      "evidence_a583f35cd464"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.576337+00:00",
+    "metadata": {
+      "description": "A merchandise item, exemplified by a tablet."
+    }
+  },
+  {
+    "id": "concept_5913b680637e",
+    "slug": "order",
+    "hash": "5913b680637e",
+    "name": "Order",
+    "kind": "class",
+    "aliases": [
+      "Order"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_729d262fb222",
+      "evidence_ad3e085d655c",
+      "evidence_fe06c39d5567",
+      "evidence_c103886caf59",
+      "evidence_7ab93732cffa",
+      "evidence_a44b70f401d4",
+      "evidence_346c4b9d7d58",
+      "evidence_2817b6617013"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.576452+00:00",
+    "metadata": {
+      "description": "A commerce order, including recent and numbered orders in the observed examples."
+    }
+  },
+  {
+    "id": "concept_abcf5fc60c66",
+    "slug": "returnrequest",
+    "hash": "abcf5fc60c66",
+    "name": "ReturnRequest",
+    "kind": "class",
+    "aliases": [
+      "ReturnRequest"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_de59b3c610ca",
+      "evidence_d2f6320514c0"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.576573+00:00",
+    "metadata": {
+      "description": "A request to return a product, exemplified by a tablet return."
+    }
+  },
+  {
+    "id": "concept_dbf65cd01ce7",
+    "slug": "cancellationrequest",
+    "hash": "dbf65cd01ce7",
+    "name": "CancellationRequest",
+    "kind": "class",
+    "aliases": [
+      "CancellationRequest"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_638fc62b7f80"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.576643+00:00",
+    "metadata": {
+      "description": "A request to cancel a product order, exemplified by a charger cancellation."
+    }
+  },
+  {
+    "id": "concept_0a0cc3f925aa",
+    "slug": "paymentmethod",
+    "hash": "0a0cc3f925aa",
+    "name": "PaymentMethod",
+    "kind": "class",
+    "aliases": [
+      "PaymentMethod"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_e2a3f21ff876",
+      "evidence_94ed74323143"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.576706+00:00",
+    "metadata": {
+      "description": "A method used to receive or make a payment, exemplified by an existing gift card."
+    }
+  },
+  {
+    "id": "concept_c0285ebde4e7",
+    "slug": "cancellationreason",
+    "hash": "c0285ebde4e7",
+    "name": "CancellationReason",
+    "kind": "class",
+    "aliases": [
+      "CancellationReason"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_31fc546faeb7",
+      "evidence_4e7fa6073dc7"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.576767+00:00",
+    "metadata": {
+      "description": "A stated reason for cancelling an order, exemplified by no longer being needed."
+    }
+  },
+  {
+    "id": "concept_25d6c16a84d9",
+    "slug": "toolaction",
+    "hash": "25d6c16a84d9",
+    "name": "ToolAction",
+    "kind": "class",
+    "aliases": [
+      "ToolAction"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_211b0dd7335f",
+      "evidence_e859a2c1e3c0",
+      "evidence_67efeeafd268",
+      "evidence_b787f40274bf"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.577690+00:00",
+    "metadata": {
+      "description": "An action executed through a commerce tool, such as cancelling an order or returning delivered items."
+    }
+  },
+  {
+    "id": "concept_09794ba23347",
+    "slug": "orderitem",
+    "hash": "09794ba23347",
+    "name": "OrderItem",
+    "kind": "class",
+    "aliases": [
+      "OrderItem"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_0b43d5d3a832",
+      "evidence_25c84526d3c4"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.577861+00:00",
+    "metadata": {
+      "description": "A specific item within an order, identified by an item number in the examples."
+    }
+  },
+  {
+    "id": "concept_4ad108ccd01d",
+    "slug": "giftcard",
+    "hash": "4ad108ccd01d",
+    "name": "GiftCard",
+    "kind": "class",
+    "aliases": [
+      "GiftCard"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_dcb61c8a730d",
+      "evidence_123e075caf09"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.578019+00:00",
+    "metadata": {
+      "description": "A gift card used as a refund destination."
+    }
+  },
+  {
+    "id": "concept_aef0ce482614",
+    "slug": "actionstatus",
+    "hash": "aef0ce482614",
+    "name": "ActionStatus",
+    "kind": "class",
+    "aliases": [
+      "ActionStatus"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_95e7e4d0c7ff",
+      "evidence_ba9ff8724eed",
+      "evidence_7bf694b519bd"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.578193+00:00",
+    "metadata": {
+      "description": "A status describing an executed tool action, such as a submitted return request."
+    }
+  },
+  {
+    "id": "concept_e1c401b85a77",
+    "slug": "identifiertype",
+    "hash": "e1c401b85a77",
+    "name": "IdentifierType",
+    "kind": "class",
+    "aliases": [
+      "IdentifierType"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_045ada5d2c98"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.579711+00:00",
+    "metadata": {
+      "description": "A category of identifier, exemplified by an order number."
+    }
+  },
+  {
+    "id": "concept_d438d84e7a51",
+    "slug": "identifier",
+    "hash": "d438d84e7a51",
+    "name": "Identifier",
+    "kind": "class",
+    "aliases": [
+      "Identifier"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_47f0640dfc89"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.580192+00:00",
+    "metadata": {
+      "description": "A concrete identifier used to locate an order, exemplified by a shoe order number."
+    }
+  },
+  {
+    "id": "concept_ed9e444cad49",
+    "slug": "productsize",
+    "hash": "ed9e444cad49",
+    "name": "ProductSize",
+    "kind": "class",
+    "aliases": [
+      "ProductSize"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_5c2b71d263ca"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.580452+00:00",
+    "metadata": {
+      "description": "A product size, exemplified by shoe size 6."
+    }
+  },
+  {
+    "id": "concept_947152b28ef2",
+    "slug": "color",
+    "hash": "947152b28ef2",
+    "name": "Color",
+    "kind": "class",
+    "aliases": [
+      "Color"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_b632c05abff8"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.580517+00:00",
+    "metadata": {
+      "description": "A product color, exemplified by black."
+    }
+  },
+  {
+    "id": "concept_add99f3abb9b",
+    "slug": "material",
+    "hash": "add99f3abb9b",
+    "name": "Material",
+    "kind": "class",
+    "aliases": [
+      "Material"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_ee6e1b9fe66f"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.580581+00:00",
+    "metadata": {
+      "description": "A material from which a product is made, exemplified by synthetic material."
+    }
+  },
+  {
+    "id": "concept_c82034c93693",
+    "slug": "orderstatus",
+    "hash": "c82034c93693",
+    "name": "OrderStatus",
+    "kind": "class",
+    "aliases": [
+      "OrderStatus"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_eae1fcaa3e7e"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.580653+00:00",
+    "metadata": {
+      "description": "A status of an order, exemplified by delivered."
+    }
+  },
+  {
+    "id": "concept_6d8725ac5971",
+    "slug": "decision",
+    "hash": "6d8725ac5971",
+    "name": "Decision",
+    "kind": "class",
+    "aliases": [
+      "Decision"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_96745bcc5bd2",
+      "evidence_f6584aa747c3"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.582438+00:00",
+    "metadata": {
+      "description": "A decision under discussion, exemplified by choosing an executor for a will."
+    }
+  },
+  {
+    "id": "concept_5c0ceef3369a",
+    "slug": "calendardate",
+    "hash": "5c0ceef3369a",
+    "name": "CalendarDate",
+    "kind": "class",
+    "aliases": [
+      "CalendarDate"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_3dd029f3fef9",
+      "evidence_64ee17fa1c39",
+      "evidence_67f4f9ba4c9f",
+      "evidence_870e5e9fae33",
+      "evidence_fae57a846232"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.582596+00:00",
+    "metadata": {
+      "description": "A calendar date associated with a legal event or a user-provided time anchor."
+    }
+  },
+  {
+    "id": "concept_fe7553209ffe",
+    "slug": "place",
+    "hash": "fe7553209ffe",
+    "name": "Place",
+    "kind": "class",
+    "aliases": [
+      "Place"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_41ab63bf1ab8",
+      "evidence_5dd6e7371fcd"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.582664+00:00",
+    "metadata": {
+      "description": "A physical place where an event occurs, such as a cafe or the user's home."
+    }
+  },
+  {
+    "id": "concept_36369d841ecd",
+    "slug": "concern",
+    "hash": "36369d841ecd",
+    "name": "Concern",
+    "kind": "class",
+    "aliases": [
+      "Concern"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_f4852ad0c5a9",
+      "evidence_468fd5ecea52",
+      "evidence_8ecc512c6f96"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.583034+00:00",
+    "metadata": {
+      "description": "A concern about a decision or its effect on family members."
+    }
+  },
+  {
+    "id": "concept_ffd6cfa0f39c",
+    "slug": "plannedevent",
+    "hash": "ffd6cfa0f39c",
+    "name": "PlannedEvent",
+    "kind": "class",
+    "aliases": [
+      "PlannedEvent"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_5d11bbf37b18",
+      "evidence_f29f5850048a"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.584535+00:00",
+    "metadata": {
+      "description": "An event intended to occur in the future, exemplified by a new family meeting."
+    }
+  },
+  {
+    "id": "concept_de178a5fba56",
+    "slug": "interactionmode",
+    "hash": "de178a5fba56",
+    "name": "InteractionMode",
+    "kind": "class",
+    "aliases": [
+      "InteractionMode"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_d508952131f5"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.584652+00:00",
+    "metadata": {
+      "description": "A mode of interaction, exemplified by face-to-face discussion."
+    }
+  },
+  {
+    "id": "concept_60725ff87a30",
+    "slug": "topic",
+    "hash": "60725ff87a30",
+    "name": "Topic",
+    "kind": "class",
+    "aliases": [
+      "Topic"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_0e304b72fc6a",
+      "evidence_1782db2d5cac",
+      "evidence_a92e6667b54c"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.584762+00:00",
+    "metadata": {
+      "description": "The subject discussed in an event, exemplified by executor selection."
+    }
+  },
+  {
+    "id": "concept_0e9774641fba",
+    "slug": "option",
+    "hash": "0e9774641fba",
+    "name": "Option",
+    "kind": "class",
+    "aliases": [
+      "Option"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_9f99d635cc1a",
+      "evidence_811c0bc93fed"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.584829+00:00",
+    "metadata": {
+      "description": "An option considered in planning, exemplified by a co-executor arrangement."
+    }
+  },
+  {
+    "id": "concept_9107e5594180",
+    "slug": "taskrequest",
+    "hash": "9107e5594180",
+    "name": "TaskRequest",
+    "kind": "class",
+    "aliases": [
+      "TaskRequest"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_e9299d2dad03"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.585749+00:00",
+    "metadata": {
+      "description": "A request for a task to be performed, exemplified by drafting meeting materials."
+    }
+  },
+  {
+    "id": "concept_98c13e0f7f3a",
+    "slug": "document",
+    "hash": "98c13e0f7f3a",
+    "name": "Document",
+    "kind": "class",
+    "aliases": [
+      "Document"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_88dbfc929988",
+      "evidence_e0249ead0776"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.585813+00:00",
+    "metadata": {
+      "description": "A general document, exemplified by a meeting invitation."
+    }
+  },
+  {
+    "id": "concept_11e4ecf462b3",
+    "slug": "schedule",
+    "hash": "11e4ecf462b3",
+    "name": "Schedule",
+    "kind": "class",
+    "aliases": [
+      "Schedule"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_b61c2a33f5d6"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.586066+00:00",
+    "metadata": {
+      "description": "A proposed schedule containing dates, times, and places."
+    }
+  },
+  {
+    "id": "concept_e5887b774067",
+    "slug": "legaldocument",
+    "hash": "e5887b774067",
+    "name": "LegalDocument",
+    "kind": "class",
+    "aliases": [
+      "LegalDocument"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_af30dd4207a0",
+      "evidence_73b78be93cf5"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.587708+00:00",
+    "metadata": {
+      "description": "A document with legal significance, exemplified by the user's will."
+    }
+  },
+  {
+    "id": "concept_b63330904f7c",
+    "slug": "emotionalstate",
+    "hash": "b63330904f7c",
+    "name": "EmotionalState",
+    "kind": "class",
+    "aliases": [
+      "EmotionalState"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_f9c526feb3fc"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.587874+00:00",
+    "metadata": {
+      "description": "A person's emotional state, exemplified by feeling substantial pressure."
+    }
+  },
+  {
+    "id": "concept_0ce1f5661fed",
+    "slug": "legalstatus",
+    "hash": "0ce1f5661fed",
+    "name": "LegalStatus",
+    "kind": "class",
+    "aliases": [
+      "LegalStatus"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_668bcc9acfb2"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.588064+00:00",
+    "metadata": {
+      "description": "A legal status, exemplified by whether a will has legal effect."
+    }
+  },
+  {
+    "id": "concept_4a5cc8c4ac5b",
+    "slug": "legalprovision",
+    "hash": "4a5cc8c4ac5b",
+    "name": "LegalProvision",
+    "kind": "class",
+    "aliases": [
+      "LegalProvision"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_a4aaaeb60017"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.588254+00:00",
+    "metadata": {
+      "description": "A provision in a legal document, exemplified by appointing Douglas as executor."
+    }
+  },
+  {
+    "id": "concept_7f61ae0bacf5",
+    "slug": "documentdraft",
+    "hash": "7f61ae0bacf5",
+    "name": "DocumentDraft",
+    "kind": "class",
+    "aliases": [
+      "DocumentDraft"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_13c727840ed9"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.588312+00:00",
+    "metadata": {
+      "description": "A draft legal text, exemplified by the text of a will."
+    }
+  },
+  {
+    "id": "concept_5c467c8750cf",
+    "slug": "law",
+    "hash": "5c467c8750cf",
+    "name": "Law",
+    "kind": "class",
+    "aliases": [
+      "Law"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_c3009a25056d"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.588374+00:00",
+    "metadata": {
+      "description": "A law applicable to a legal formality such as signing or witnessing."
+    }
+  },
+  {
+    "id": "concept_6a29f1dbded9",
+    "slug": "legalformality",
+    "hash": "6a29f1dbded9",
+    "name": "LegalFormality",
+    "kind": "class",
+    "aliases": [
+      "LegalFormality"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_c4acea2bc69e",
+      "evidence_dc444d38073b",
+      "evidence_ba4a2a80ecc7"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.588433+00:00",
+    "metadata": {
+      "description": "A formal legal procedure, exemplified by signing."
+    }
+  },
+  {
+    "id": "concept_40728291818e",
+    "slug": "reviewaction",
+    "hash": "40728291818e",
+    "name": "ReviewAction",
+    "kind": "class",
+    "aliases": [
+      "ReviewAction"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_de3c6cab23cf"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.588574+00:00",
+    "metadata": {
+      "description": "An action of reviewing a legal document, exemplified by lawyer review."
+    }
+  },
+  {
+    "id": "concept_229ef35994ef",
+    "slug": "legaldecision",
+    "hash": "229ef35994ef",
+    "name": "LegalDecision",
+    "kind": "class",
+    "aliases": [
+      "LegalDecision"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_fcaddc41f2a2"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.590466+00:00",
+    "metadata": {
+      "description": "A decision with legal significance, exemplified by appointing a guardian."
+    }
+  },
+  {
+    "id": "concept_108eef18001b",
+    "slug": "estateplan",
+    "hash": "108eef18001b",
+    "name": "EstatePlan",
+    "kind": "class",
+    "aliases": [
+      "EstatePlan"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_03c05d881acd"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.590583+00:00",
+    "metadata": {
+      "description": "A plan for managing an estate, including the effects of a guardianship designation."
+    }
+  },
+  {
+    "id": "concept_943fdf58321d",
+    "slug": "carearrangement",
+    "hash": "943fdf58321d",
+    "name": "CareArrangement",
+    "kind": "class",
+    "aliases": [
+      "CareArrangement"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_7e950803005f"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.590639+00:00",
+    "metadata": {
+      "description": "An arrangement that specifies care or guardianship responsibilities for a dependent, such as a minor."
+    }
+  },
+  {
+    "id": "concept_3666fb86ffd8",
+    "slug": "financialarrangement",
+    "hash": "3666fb86ffd8",
+    "name": "FinancialArrangement",
+    "kind": "class",
+    "aliases": [
+      "FinancialArrangement"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_79049753ecad",
+      "evidence_e2fc050d2ce6"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.590699+00:00",
+    "metadata": {
+      "description": "An arrangement that specifies how relevant assets are to be managed."
+    }
+  },
+  {
+    "id": "concept_fd53bfd7939e",
+    "slug": "assessment",
+    "hash": "fd53bfd7939e",
+    "name": "Assessment",
+    "kind": "class",
+    "aliases": [
+      "Assessment"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_10f8dd797c66"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.590756+00:00",
+    "metadata": {
+      "description": "An evaluation of a person's willingness and suitability for a responsibility."
+    }
+  },
+  {
+    "id": "concept_57ec50e90f87",
+    "slug": "legalarrangement",
+    "hash": "57ec50e90f87",
+    "name": "LegalArrangement",
+    "kind": "class",
+    "aliases": [
+      "LegalArrangement"
+    ],
+    "parent_concept_ids": [],
+    "individuals": [],
+    "same_as": [],
+    "created_from_evidence_ids": [
+      "evidence_5181a5cf498f"
+    ],
+    "workflow_run_id": "workflow_run_6d31483af581",
+    "source_kind": "normalized",
+    "created_at": "2026-07-21T06:03:24.590899+00:00",
+    "metadata": {
+      "description": "A legally structured arrangement, such as a trust, used to organize rights or responsibilities."
+    }
+  }
+]

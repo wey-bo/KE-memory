@@ -1,0 +1,894 @@
+﻿{
+    "schema_version":  "project_structure_move_v1",
+    "moved_at":  "2026-07-24T15:13:14.4069621+08:00",
+    "verified_at":  "2026-07-24T15:29:37.4209607+08:00",
+    "move_method":  "PowerShell Move-Item within the same workspace",
+    "entry_count":  24,
+    "file_count":  146,
+    "pre_move_hashes_captured":  false,
+    "pre_move_hash_note":  "The initial hash manifest failed before persistence because Windows PowerShell lacks System.IO.Path.GetRelativePath. The exact moves completed; this manifest records final post-move paths, sizes, and SHA-256 values.",
+    "verification":  {
+                         "layout_tests":  "3 passed",
+                         "full_tests":  "241 passed",
+                         "display_export_sha256":  "234129ee31cf698d5913ee3e8f8e2b43247f71693ad5e173d9a1787d95c4b25f",
+                         "display_export_replay_byte_identical":  true
+                     },
+    "records":  [
+                    {
+                        "source":  "KE-test.json",
+                        "destination":  "data/gold-candidates/KE-test.json",
+                        "size_bytes":  19198,
+                        "sha256":  "33539344b8cc378efbbcd8b55e5be27864a993e13e48234225e57290bdeb9b1f"
+                    },
+                    {
+                        "source":  "KE-test-config.md",
+                        "destination":  "data/gold-candidates/KE-test-config.md",
+                        "size_bytes":  5817,
+                        "sha256":  "45ca7458fe3b45b2535bb936557c777e6417904a308db4623c0e48bcdf3b58cf"
+                    },
+                    {
+                        "source":  "memory实现方案汇报.pdf",
+                        "destination":  "docs/reference/memory实现方案汇报.pdf",
+                        "size_bytes":  631537,
+                        "sha256":  "b747f80817d07141b200c8c6a6d6c06e0c5ab322254ae4355cd1efea601b7d95"
+                    },
+                    {
+                        "source":  "keol_ke_test_adapter.py",
+                        "destination":  "tools/keol_baseline/keol_ke_test_adapter.py",
+                        "size_bytes":  10086,
+                        "sha256":  "b30526864b8853bd0948a5ef7a9c3ef76bfe9e1971a88b56f31e76c4a25434cd"
+                    },
+                    {
+                        "source":  "run_keol_pipeline.py",
+                        "destination":  "tools/keol_baseline/run_keol_pipeline.py",
+                        "size_bytes":  10809,
+                        "sha256":  "c493034be9d38cf4d6f81fb20b8d7618141aad6beb1fef0fe9e9a2c888a8560b"
+                    },
+                    {
+                        "source":  "export_keol_views.py",
+                        "destination":  "tools/keol_baseline/export_keol_views.py",
+                        "size_bytes":  8040,
+                        "sha256":  "b6f85edc2d21926879360ed2cb0289468f9c76f08b8124a86a2478cc11e81bdd"
+                    },
+                    {
+                        "source":  "KE.txt",
+                        "destination":  "artifacts/keol-baseline/views/KE.txt",
+                        "size_bytes":  24667,
+                        "sha256":  "08178418da94f5e9be2b9aafbe80e89b2792172bd702caec53860c4e07a2bdca"
+                    },
+                    {
+                        "source":  "KE-extraction.json",
+                        "destination":  "artifacts/keol-baseline/views/KE-extraction.json",
+                        "size_bytes":  728290,
+                        "sha256":  "fe373eb75470848d31bfd5c72d2c698d3d738e0fe47e5c21fd8525c9d24b7770"
+                    },
+                    {
+                        "source":  "KE-ontology.json",
+                        "destination":  "artifacts/keol-baseline/views/KE-ontology.json",
+                        "size_bytes":  3374970,
+                        "sha256":  "34fe9e5848635147e00f1517a57a6798e184c94d19f61ae6152d5cc28ef06616"
+                    },
+                    {
+                        "source":  "KEOL-run.json",
+                        "destination":  "artifacts/keol-baseline/run/KEOL-run.json",
+                        "size_bytes":  4333,
+                        "sha256":  "479ec2673f6a1b44600e284a13214298436478433e4de4bf99fc6780f34480f1"
+                    },
+                    {
+                        "source":  "KE-experiment-config.md",
+                        "destination":  "artifacts/keol-baseline/config/KE-experiment-config.md",
+                        "size_bytes":  2807,
+                        "sha256":  "fd8f5e5e32b23537db452d3ed929b6815698e774ab2034a47c8bab60a9870bda"
+                    },
+                    {
+                        "source":  "KE-experiment-report.md",
+                        "destination":  "artifacts/keol-baseline/reports/KE-experiment-report.md",
+                        "size_bytes":  3169,
+                        "sha256":  "7ed4fc3301dd988ddd5fd60830b08084ecfd48ef2859404b7976a9c8c664a214"
+                    },
+                    {
+                        "source":  "keol-input/manifest.json",
+                        "destination":  "artifacts/keol-baseline/input/manifest.json",
+                        "size_bytes":  35363,
+                        "sha256":  "bc4c99f787571baa12264cd525964c1dce833ecf97d96eb1ae9c308cd71244d7"
+                    },
+                    {
+                        "source":  "keol-input/turns/beam-cand-004__turn-001.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/beam-cand-004__turn-001.txt",
+                        "size_bytes":  585,
+                        "sha256":  "8058527418ebe06d30ebbe998e9bb4ef976d7a17574e84e7249723c107be8e24"
+                    },
+                    {
+                        "source":  "keol-input/turns/beam-cand-004__turn-002.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/beam-cand-004__turn-002.txt",
+                        "size_bytes":  454,
+                        "sha256":  "d4ad48397588cee67bbe603eac3b12881ca33254c62cee0bb0cd95e0705f0747"
+                    },
+                    {
+                        "source":  "keol-input/turns/beam-cand-004__turn-003.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/beam-cand-004__turn-003.txt",
+                        "size_bytes":  383,
+                        "sha256":  "c5885c1802189b86a42bc775fb93ccf9270ff94a23d29611ef692d9d3ec8c2ac"
+                    },
+                    {
+                        "source":  "keol-input/turns/beam-cand-004__turn-004.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/beam-cand-004__turn-004.txt",
+                        "size_bytes":  511,
+                        "sha256":  "9474e8392609b424e7657e715c2ca397845936cc247f8b0e6ba217836888de18"
+                    },
+                    {
+                        "source":  "keol-input/turns/beam-cand-004__turn-005.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/beam-cand-004__turn-005.txt",
+                        "size_bytes":  411,
+                        "sha256":  "317e7606e21b085a60a6bb629b4a1835415b55ae2bd7d284843cb591c4bdb24e"
+                    },
+                    {
+                        "source":  "keol-input/turns/taskmaster2-cand-001__turn-001.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/taskmaster2-cand-001__turn-001.txt",
+                        "size_bytes":  163,
+                        "sha256":  "9796638724d0d2eecf319a43b2e4340e0f1cb6483b607fead120905852d94994"
+                    },
+                    {
+                        "source":  "keol-input/turns/taskmaster2-cand-001__turn-002.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/taskmaster2-cand-001__turn-002.txt",
+                        "size_bytes":  118,
+                        "sha256":  "af1013faab032bb9b73fe448b39906146e0f66090e287a14028657f091406064"
+                    },
+                    {
+                        "source":  "keol-input/turns/taskmaster2-cand-001__turn-003.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/taskmaster2-cand-001__turn-003.txt",
+                        "size_bytes":  220,
+                        "sha256":  "40ccbc0fb176a34c2e927e019d380e6637d3afc31639acfdba136b93bff42d94"
+                    },
+                    {
+                        "source":  "keol-input/turns/taskmaster2-cand-001__turn-004.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/taskmaster2-cand-001__turn-004.txt",
+                        "size_bytes":  200,
+                        "sha256":  "14832d39349262762604b66f56049724fdd8e3fe474e433fc873f3dfc7a78bb9"
+                    },
+                    {
+                        "source":  "keol-input/turns/taskmaster2-cand-001__turn-005.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/taskmaster2-cand-001__turn-005.txt",
+                        "size_bytes":  142,
+                        "sha256":  "bdac5642c76986d368db9beb40a86def780e5182f65f5de24b83292df6d5812d"
+                    },
+                    {
+                        "source":  "keol-input/turns/taskmaster2-cand-001__turn-006.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/taskmaster2-cand-001__turn-006.txt",
+                        "size_bytes":  85,
+                        "sha256":  "c5bc2c161c6a6069b3b740d3e3d43d5c79c3368dace17e59eb3cd30b21c7a150"
+                    },
+                    {
+                        "source":  "keol-input/turns/tau-bench-cand-001__turn-001.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/tau-bench-cand-001__turn-001.txt",
+                        "size_bytes":  344,
+                        "sha256":  "c05a113a9a9e2b9a5d4ac725ac9ed6c6f60c2998f77216e824e9966f8e3b5eed"
+                    },
+                    {
+                        "source":  "keol-input/turns/tau-bench-cand-001__turn-002.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/tau-bench-cand-001__turn-002.txt",
+                        "size_bytes":  399,
+                        "sha256":  "508ae7758c4775aa21ba4e89f1b03dcb2857f307544f70bef5bc9ca8e7a01599"
+                    },
+                    {
+                        "source":  "keol-input/turns/tau-bench-cand-001__turn-003.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/tau-bench-cand-001__turn-003.txt",
+                        "size_bytes":  172,
+                        "sha256":  "4c98832ed7dc78d5ee183405dcc116ffa18c9a5d5a1a03fd8248c54bfe1df43e"
+                    },
+                    {
+                        "source":  "keol-input/turns/tau-bench-cand-001__turn-004.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/tau-bench-cand-001__turn-004.txt",
+                        "size_bytes":  324,
+                        "sha256":  "5e03966b018cf23d9cf3f737b1200e4be6b244c5cf4eebbfb0c956169eb46a86"
+                    },
+                    {
+                        "source":  "keol-input/turns/tau-bench-cand-001__turn-005.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/tau-bench-cand-001__turn-005.txt",
+                        "size_bytes":  294,
+                        "sha256":  "a73501687d51a106ce39a38c6d80ef3a75704f0b50f2f35154aa1cc25985d4ad"
+                    },
+                    {
+                        "source":  "keol-input/turns/wildchat-learn-cand-001__turn-001.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/wildchat-learn-cand-001__turn-001.txt",
+                        "size_bytes":  433,
+                        "sha256":  "b13b4d6ac2e056a7968f2b5f14a8f489ff817fe40b8f671f6a29d0c5fd13a061"
+                    },
+                    {
+                        "source":  "keol-input/turns/wildchat-learn-cand-001__turn-002.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/wildchat-learn-cand-001__turn-002.txt",
+                        "size_bytes":  301,
+                        "sha256":  "43260f3a47b83a05084fb53d340c283e153de2163c88961a50ffc12c771c4d48"
+                    },
+                    {
+                        "source":  "keol-input/turns/wildchat-learn-cand-001__turn-003.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/wildchat-learn-cand-001__turn-003.txt",
+                        "size_bytes":  356,
+                        "sha256":  "c42c8c4923330e6186fe1cff64e5e6434da8edd44d47222c62180f48a3250213"
+                    },
+                    {
+                        "source":  "keol-input/turns/wildchat-learn-cand-001__turn-004.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/wildchat-learn-cand-001__turn-004.txt",
+                        "size_bytes":  394,
+                        "sha256":  "47b794e84946d707538e798f6590b1d934fdcba798cd9dfd57852cd038710e08"
+                    },
+                    {
+                        "source":  "keol-input/turns/wildchat-learn-cand-001__turn-005.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/wildchat-learn-cand-001__turn-005.txt",
+                        "size_bytes":  225,
+                        "sha256":  "ae75ee017cd69b73d8d4c2a948ff8252ad844eded9765c525a6db82b373741e7"
+                    },
+                    {
+                        "source":  "keol-input/turns/wildchat-learn-cand-001__turn-006.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/wildchat-learn-cand-001__turn-006.txt",
+                        "size_bytes":  329,
+                        "sha256":  "c99bc306450cc52dd3651f9331a8a6fe54f80386603a0287e6498d5ee700532d"
+                    },
+                    {
+                        "source":  "keol-input/turns/wildchat-learn-cand-002__turn-001.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/wildchat-learn-cand-002__turn-001.txt",
+                        "size_bytes":  454,
+                        "sha256":  "7a28a105038f203d8a0a24563beb53d01707db44fce27e307a2dad39d9713ebf"
+                    },
+                    {
+                        "source":  "keol-input/turns/wildchat-learn-cand-002__turn-002.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/wildchat-learn-cand-002__turn-002.txt",
+                        "size_bytes":  299,
+                        "sha256":  "df8d184f775e92662170e69ffbc85de2c1963c1f648b445733da39e6bb4ad554"
+                    },
+                    {
+                        "source":  "keol-input/turns/wildchat-learn-cand-002__turn-003.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/wildchat-learn-cand-002__turn-003.txt",
+                        "size_bytes":  428,
+                        "sha256":  "c4089c2dbaa70f3727d1c24fb0b02a1aaec732e8dfcf4af6e10abaf6fc2ed5c4"
+                    },
+                    {
+                        "source":  "keol-input/turns/wildchat-learn-cand-002__turn-004.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/wildchat-learn-cand-002__turn-004.txt",
+                        "size_bytes":  349,
+                        "sha256":  "b18785471f78903d53b1be9424fe9404bda134c7053dfdc3ac511a29e7e6dd40"
+                    },
+                    {
+                        "source":  "keol-input/turns/wildchat-learn-cand-003__turn-001.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/wildchat-learn-cand-003__turn-001.txt",
+                        "size_bytes":  342,
+                        "sha256":  "1e0200f63a7f5fff13f2861bbed598efb09a447f71547f4e2f8494e403cff0de"
+                    },
+                    {
+                        "source":  "keol-input/turns/wildchat-learn-cand-003__turn-002.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/wildchat-learn-cand-003__turn-002.txt",
+                        "size_bytes":  229,
+                        "sha256":  "d60bb7970c46fee15189dfa3aec6510bf6137aed07d73ca0738e4e7b7d073338"
+                    },
+                    {
+                        "source":  "keol-input/turns/wildchat-learn-cand-003__turn-003.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/wildchat-learn-cand-003__turn-003.txt",
+                        "size_bytes":  293,
+                        "sha256":  "26e45a53d0ffad413045151b22c84339ad80e32fffd77fbd36413de3a1e98aa6"
+                    },
+                    {
+                        "source":  "keol-input/turns/wildchat-learn-cand-004__turn-001.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/wildchat-learn-cand-004__turn-001.txt",
+                        "size_bytes":  373,
+                        "sha256":  "728bc8d185c9e290b2347cf62d08dc4f04dc83270968f650e7a387ad25ab29aa"
+                    },
+                    {
+                        "source":  "keol-input/turns/wildchat-learn-cand-004__turn-002.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/wildchat-learn-cand-004__turn-002.txt",
+                        "size_bytes":  298,
+                        "sha256":  "a5e1f50af53cd39bd28bbbcd6036cb44cd6ba696bb32583ee1a31f6fbabce791"
+                    },
+                    {
+                        "source":  "keol-input/turns/wildchat-learn-cand-004__turn-003.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/wildchat-learn-cand-004__turn-003.txt",
+                        "size_bytes":  217,
+                        "sha256":  "ed25c0af03b649912172c62dc643e99339d9e81a0bc248bad4b6e4e6f1fe558b"
+                    },
+                    {
+                        "source":  "keol-input/turns/wildchat-mgmt-cand-001__turn-001.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/wildchat-mgmt-cand-001__turn-001.txt",
+                        "size_bytes":  550,
+                        "sha256":  "4f95324e2e0241f507b06b8adacc08c6633fa0ebfada1528c5d2e79cf20badcf"
+                    },
+                    {
+                        "source":  "keol-input/turns/wildchat-mgmt-cand-001__turn-002.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/wildchat-mgmt-cand-001__turn-002.txt",
+                        "size_bytes":  535,
+                        "sha256":  "60ca9278791345d0085afeb6fcbe9d25695d06b3550772df21b6d13b96b52a48"
+                    },
+                    {
+                        "source":  "keol-input/turns/wildchat-mgmt-cand-001__turn-003.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/wildchat-mgmt-cand-001__turn-003.txt",
+                        "size_bytes":  498,
+                        "sha256":  "1e9328e03dccbbeac7357775248bab6233530ca2515fc31109f4b97ddb908115"
+                    },
+                    {
+                        "source":  "keol-input/turns/wildchat-mgmt-cand-001__turn-004.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/wildchat-mgmt-cand-001__turn-004.txt",
+                        "size_bytes":  541,
+                        "sha256":  "d0be65ab0df3b9c6e2313e5879a1d176ed1c6e9e5a5f9921f1730a748eb18fbd"
+                    },
+                    {
+                        "source":  "keol-input/turns/wildchat-mgmt-cand-001__turn-005.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/wildchat-mgmt-cand-001__turn-005.txt",
+                        "size_bytes":  415,
+                        "sha256":  "944c05990ef2549e2f68913527a5ab1aea373f0847f84e9350dfdb6798cf8b33"
+                    },
+                    {
+                        "source":  "keol-input/turns/wildchat-mgmt-cand-002__turn-001.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/wildchat-mgmt-cand-002__turn-001.txt",
+                        "size_bytes":  450,
+                        "sha256":  "b51e8aa21e2cc5d47599f43b96ea633b99ec6f7cd2044f44931df4407dda09ec"
+                    },
+                    {
+                        "source":  "keol-input/turns/wildchat-mgmt-cand-002__turn-002.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/wildchat-mgmt-cand-002__turn-002.txt",
+                        "size_bytes":  351,
+                        "sha256":  "ccafbf8834b95536882ef276084249109b31787fac7e4f3df4f7080ec21850a0"
+                    },
+                    {
+                        "source":  "keol-input/turns/wildchat-mgmt-cand-002__turn-003.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/wildchat-mgmt-cand-002__turn-003.txt",
+                        "size_bytes":  374,
+                        "sha256":  "ac08f09db4c520683e38df3ef49a3a381361c206c39ae49f5bc10f8ace8888ad"
+                    },
+                    {
+                        "source":  "keol-input/turns/wildchat-mgmt-cand-003__turn-001.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/wildchat-mgmt-cand-003__turn-001.txt",
+                        "size_bytes":  308,
+                        "sha256":  "63eaee168c59404147c9a8367a629f658ada7bdb443bbbb310a73bfe9a89383f"
+                    },
+                    {
+                        "source":  "keol-input/turns/wildchat-mgmt-cand-003__turn-002.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/wildchat-mgmt-cand-003__turn-002.txt",
+                        "size_bytes":  355,
+                        "sha256":  "914cd381a387cd660ad731d1c1768cbde43f193c177adfdd7f4627ba3e636a36"
+                    },
+                    {
+                        "source":  "keol-input/turns/wildchat-mgmt-cand-003__turn-003.txt",
+                        "destination":  "artifacts/keol-baseline/input/turns/wildchat-mgmt-cand-003__turn-003.txt",
+                        "size_bytes":  405,
+                        "sha256":  "8371624fcc87370d02ff7cce43dd3dd0d5e0d84f0067aac649629e14d187f8b6"
+                    },
+                    {
+                        "source":  "keol-model-extraction/batch-a.json",
+                        "destination":  "artifacts/keol-baseline/model-extraction/batch-a.json",
+                        "size_bytes":  60823,
+                        "sha256":  "4235a5e1b1586aaff15d51780a2c9512dbc92a66da705aad2400bec9d78fc758"
+                    },
+                    {
+                        "source":  "keol-model-extraction/batch-b.json",
+                        "destination":  "artifacts/keol-baseline/model-extraction/batch-b.json",
+                        "size_bytes":  57146,
+                        "sha256":  "a38f344405fc6aae0e47890b8be7c5e124caf3feda3556bf032a3230ade4e25d"
+                    },
+                    {
+                        "source":  "keol-model-extraction/combined.json",
+                        "destination":  "artifacts/keol-baseline/model-extraction/combined.json",
+                        "size_bytes":  161626,
+                        "sha256":  "892e5ed915e4d3f36ca8f1f70e52f5d4cb8dcdc5cfe9ab12b1801078584dae91"
+                    },
+                    {
+                        "source":  "keol-model-normalization/payload-000.json",
+                        "destination":  "artifacts/keol-baseline/model-normalization/payload-000.json",
+                        "size_bytes":  98410,
+                        "sha256":  "f37a762011f2814b393b183bde4b8823f9b154f9a41b36871898902287d07c6b"
+                    },
+                    {
+                        "source":  "keol-model-normalization/payload-001.json",
+                        "destination":  "artifacts/keol-baseline/model-normalization/payload-001.json",
+                        "size_bytes":  81886,
+                        "sha256":  "be596e8275f7dc7da7b3f82820507408a95fa4287df2b87a88ad516159307fa1"
+                    },
+                    {
+                        "source":  "keol-model-normalization/payload-002.json",
+                        "destination":  "artifacts/keol-baseline/model-normalization/payload-002.json",
+                        "size_bytes":  84415,
+                        "sha256":  "908b4ea8e407e1017e6147d12252bcb2cddb60154185ca6477f14e7a407077f1"
+                    },
+                    {
+                        "source":  "keol-model-normalization/payload-003.json",
+                        "destination":  "artifacts/keol-baseline/model-normalization/payload-003.json",
+                        "size_bytes":  85104,
+                        "sha256":  "6af166481eb79032157a8da962d35b6388972058deb27424a0a4ee89d108a893"
+                    },
+                    {
+                        "source":  "keol-model-normalization/payload-004.json",
+                        "destination":  "artifacts/keol-baseline/model-normalization/payload-004.json",
+                        "size_bytes":  25413,
+                        "sha256":  "0b1e244754bf31d9fab5ad3135b33308812a521a693ed2db52b6f83d8f991189"
+                    },
+                    {
+                        "source":  "keol-model-normalization/plan-000.json",
+                        "destination":  "artifacts/keol-baseline/model-normalization/plan-000.json",
+                        "size_bytes":  20572,
+                        "sha256":  "fa6d9fedaeac5bd29895fef2081f1f2da32698b3198aa73326a7d42a0574d93d"
+                    },
+                    {
+                        "source":  "keol-model-normalization/plan-001.json",
+                        "destination":  "artifacts/keol-baseline/model-normalization/plan-001.json",
+                        "size_bytes":  21138,
+                        "sha256":  "ebe20e35cfcf4e2a81b79cd7fb2f43f534087f247197b2d2b135867a48c712de"
+                    },
+                    {
+                        "source":  "keol-model-normalization/plan-002.json",
+                        "destination":  "artifacts/keol-baseline/model-normalization/plan-002.json",
+                        "size_bytes":  20364,
+                        "sha256":  "a3e8d96d615d130bb10c46459c273fdf5098d47305b8d007ddeb4fd4461679a9"
+                    },
+                    {
+                        "source":  "keol-model-normalization/plan-003.json",
+                        "destination":  "artifacts/keol-baseline/model-normalization/plan-003.json",
+                        "size_bytes":  19792,
+                        "sha256":  "10f06da2bbdf2e467b582d8c374cc67c6e67d4466e138915bfaddec1e316a748"
+                    },
+                    {
+                        "source":  "keol-model-normalization/plan-004.json",
+                        "destination":  "artifacts/keol-baseline/model-normalization/plan-004.json",
+                        "size_bytes":  1683,
+                        "sha256":  "1157f5119188ba147f45f63489efda9ffd23800db34696732741b4dc00df7717"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/_metadata.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/_metadata.json",
+                        "size_bytes":  35748,
+                        "sha256":  "b31e4622a5d63c299d9d9c2887adc2183c7904c9af36bbf88e08f685a317ea38"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/onto/assertions.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/onto/assertions.json",
+                        "size_bytes":  386155,
+                        "sha256":  "532b46dd7ab85438669d01fb8e53e8793816b198a602c6914fac52606421b497"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/onto/concepts.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/onto/concepts.json",
+                        "size_bytes":  107987,
+                        "sha256":  "dce264d9eab2810a0d882c5b7ffe5dea9555884d56e0f948cc0dd7d8ec62e119"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/onto/evidence.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/onto/evidence.json",
+                        "size_bytes":  539332,
+                        "sha256":  "70b1e46b7dea2954cae9db65660cc1b0a6facaa3a10b09dadf434349372a881d"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/onto/individuals.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/onto/individuals.json",
+                        "size_bytes":  86599,
+                        "sha256":  "05d6fc91a545315aaef6fe521dca38b40b29ad42ba601ff2e844f9870d55be22"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/onto/operators.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/onto/operators.json",
+                        "size_bytes":  351071,
+                        "sha256":  "1d03b38a63d456f1d2258058fd292041aa3697c8d45de56ffeda9500f3fa00a1"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/onto/validation_report.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/onto/validation_report.json",
+                        "size_bytes":  525,
+                        "sha256":  "e620c93cee365e3f3f7c9fa4c0c7c9d388a674d581324df233a90182f8b3766b"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/onto/workflow_runs.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/onto/workflow_runs.json",
+                        "size_bytes":  4837,
+                        "sha256":  "29b7323dfe8698b378b0f19d7ec03a7afeb3cc5c1bb85679cbb6a90aa0d621bb"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/onto/action/actions.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/onto/action/actions.json",
+                        "size_bytes":  2,
+                        "sha256":  "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/onto/action/action_concepts.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/onto/action/action_concepts.json",
+                        "size_bytes":  2,
+                        "sha256":  "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/onto/action/action_operators.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/onto/action/action_operators.json",
+                        "size_bytes":  2,
+                        "sha256":  "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/onto/action/metadata.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/onto/action/metadata.json",
+                        "size_bytes":  2,
+                        "sha256":  "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/onto/action/skills.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/onto/action/skills.json",
+                        "size_bytes":  2,
+                        "sha256":  "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/onto/action/tools.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/onto/action/tools.json",
+                        "size_bytes":  2,
+                        "sha256":  "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/onto/agent/concepts.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/onto/agent/concepts.json",
+                        "size_bytes":  120925,
+                        "sha256":  "0636d747128d4e190525e537338dde5656493671ac41874534c7fb3212606740"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/onto/agent/constants.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/onto/agent/constants.json",
+                        "size_bytes":  125280,
+                        "sha256":  "64b6430cd25e27a5c231e3d171930c1efeefa44772fcb635783314d8f8ab701b"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/onto/agent/evidence.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/onto/agent/evidence.json",
+                        "size_bytes":  539332,
+                        "sha256":  "70b1e46b7dea2954cae9db65660cc1b0a6facaa3a10b09dadf434349372a881d"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/onto/agent/facts.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/onto/agent/facts.json",
+                        "size_bytes":  405956,
+                        "sha256":  "4408c42dfeb113939b5a764f51536b0117e824d004941561bb5fa095ce51c651"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/onto/agent/metadata.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/onto/agent/metadata.json",
+                        "size_bytes":  111,
+                        "sha256":  "5376b1ae2a999fb3662220f1a1f1f82b00e40e1ba0767917271f279b878f4949"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/onto/agent/operators.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/onto/agent/operators.json",
+                        "size_bytes":  308833,
+                        "sha256":  "6ed8a4b5cc6cb22e0ac2e91da62c1d84b92098ad21a3c2f9fd4589d29e1bf776"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/onto/agent/requests.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/onto/agent/requests.json",
+                        "size_bytes":  2,
+                        "sha256":  "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/onto/agent/rules.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/onto/agent/rules.json",
+                        "size_bytes":  2,
+                        "sha256":  "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/onto/agent/symbol_map.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/onto/agent/symbol_map.json",
+                        "size_bytes":  82808,
+                        "sha256":  "521da011f847ec4520bbdebd56410a4fc5cad7ce6c113c28e04799ab2d082d86"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/onto/agent/workflow_runs.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/onto/agent/workflow_runs.json",
+                        "size_bytes":  4837,
+                        "sha256":  "29b7323dfe8698b378b0f19d7ec03a7afeb3cc5c1bb85679cbb6a90aa0d621bb"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/onto/downstream/annotations.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/onto/downstream/annotations.json",
+                        "size_bytes":  283159,
+                        "sha256":  "6bb5af18895d9def8e5c967e4434cb12deb77adbe0c34ef37005e692b8a93aba"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/onto/downstream/program.alog",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/onto/downstream/program.alog",
+                        "size_bytes":  29636,
+                        "sha256":  "0eebda943d42a72ffbed794744020a508ebf2ed0051c0c32807b4cd24a8bad99"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_beam_cand_004__turn_001/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_beam_cand_004__turn_001/chunk_000.json",
+                        "size_bytes":  7175,
+                        "sha256":  "cfd932a8c68f6a9660b228fca2369220751f37f416b8900a178f7370249289ac"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_beam_cand_004__turn_002/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_beam_cand_004__turn_002/chunk_000.json",
+                        "size_bytes":  5169,
+                        "sha256":  "fdd88d21aaf98a75a44155ef43a5ba24cf727a4d8b2ba4d41baa693b486c5178"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_beam_cand_004__turn_003/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_beam_cand_004__turn_003/chunk_000.json",
+                        "size_bytes":  7140,
+                        "sha256":  "9fc00e33da9adb5a70a6e528f1adc774ec7c2bc050bd79925ba6b01a80f20d1a"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_beam_cand_004__turn_004/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_beam_cand_004__turn_004/chunk_000.json",
+                        "size_bytes":  9753,
+                        "sha256":  "6bf1610d64c34911adf3be41a55fb04ed2060cdfc5259b7ba79381d3f9290ba3"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_beam_cand_004__turn_005/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_beam_cand_004__turn_005/chunk_000.json",
+                        "size_bytes":  7714,
+                        "sha256":  "ae8011692f784e3732fe0a98719d0cb74f469e1311c4aa8e922b2e69269bb5f8"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_taskmaster2_cand_001__turn_001/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_taskmaster2_cand_001__turn_001/chunk_000.json",
+                        "size_bytes":  2748,
+                        "sha256":  "38ef5f916b7902b192a2ec180d62ef8da2329429c3355993b7677eacec527a6e"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_taskmaster2_cand_001__turn_002/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_taskmaster2_cand_001__turn_002/chunk_000.json",
+                        "size_bytes":  4265,
+                        "sha256":  "4ccf30e54876b366fba18e2ae63bd2d83b9e1634a5e87ba140b2199d2c1dd521"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_taskmaster2_cand_001__turn_003/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_taskmaster2_cand_001__turn_003/chunk_000.json",
+                        "size_bytes":  4082,
+                        "sha256":  "ef12661e15c766fa0e318a5b64224b13d984173deeae8416f0428655d2f5629e"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_taskmaster2_cand_001__turn_004/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_taskmaster2_cand_001__turn_004/chunk_000.json",
+                        "size_bytes":  3223,
+                        "sha256":  "bf08a5eed431cba02bd43217de84b4343e7f08f358837dd975b896c92895732f"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_taskmaster2_cand_001__turn_005/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_taskmaster2_cand_001__turn_005/chunk_000.json",
+                        "size_bytes":  3752,
+                        "sha256":  "2b6bb5d621e34423d336ac2594b1050e36de78c9502bd6e547293892fa6c1aca"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_taskmaster2_cand_001__turn_006/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_taskmaster2_cand_001__turn_006/chunk_000.json",
+                        "size_bytes":  1316,
+                        "sha256":  "3ccffcb21253d7a54035d5df7d144f31d16979a4ad6fdd0e8a333297a2803445"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_tau_bench_cand_001__turn_001/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_tau_bench_cand_001__turn_001/chunk_000.json",
+                        "size_bytes":  5225,
+                        "sha256":  "7a6e7b2740e4c0b6751955ef498f73f2dc688675fae0fd5ac18e1fb1dba1ee30"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_tau_bench_cand_001__turn_002/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_tau_bench_cand_001__turn_002/chunk_000.json",
+                        "size_bytes":  6790,
+                        "sha256":  "040bde38d589838e3225f7b31fd36e992ff65eac3838c0724eef2c41bf2b498f"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_tau_bench_cand_001__turn_003/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_tau_bench_cand_001__turn_003/chunk_000.json",
+                        "size_bytes":  3196,
+                        "sha256":  "3568dedcc612ae49b5e3d0134066c1e82e402bf608153cf157d57da7d3dad03d"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_tau_bench_cand_001__turn_004/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_tau_bench_cand_001__turn_004/chunk_000.json",
+                        "size_bytes":  5552,
+                        "sha256":  "587de810caf954530ed37b05a043b85fa443f76a66440bbb5a945220eb3b168e"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_tau_bench_cand_001__turn_005/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_tau_bench_cand_001__turn_005/chunk_000.json",
+                        "size_bytes":  4394,
+                        "sha256":  "84c282accaeef08794d37a87570cefed2ec0a5818d0f6bc548f62729263e3875"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_wildchat_learn_cand_001__turn_001/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_wildchat_learn_cand_001__turn_001/chunk_000.json",
+                        "size_bytes":  5926,
+                        "sha256":  "db1539257ba7f70774409b926a8ea99d0ce3b21b2effed2ad746351e8cf19a6a"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_wildchat_learn_cand_001__turn_002/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_wildchat_learn_cand_001__turn_002/chunk_000.json",
+                        "size_bytes":  4786,
+                        "sha256":  "41162a61acfc4e2b8b691c7fba7466bd53ba9bf7934423df89ee3ff69260ee8c"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_wildchat_learn_cand_001__turn_003/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_wildchat_learn_cand_001__turn_003/chunk_000.json",
+                        "size_bytes":  5597,
+                        "sha256":  "722d54fe674938ac4b4a2365ed20d5fd455b61d9cef4b2d3243a5540d032f38c"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_wildchat_learn_cand_001__turn_004/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_wildchat_learn_cand_001__turn_004/chunk_000.json",
+                        "size_bytes":  5280,
+                        "sha256":  "6c817f0fcd29a4b166081b942eb7d423d2351a2fa5026323587e0a6e942d5f90"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_wildchat_learn_cand_001__turn_005/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_wildchat_learn_cand_001__turn_005/chunk_000.json",
+                        "size_bytes":  3005,
+                        "sha256":  "b17560ded22272aac88bdb4abc042c2c5661cd4e0aa946f302d1ad54f097ef14"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_wildchat_learn_cand_001__turn_006/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_wildchat_learn_cand_001__turn_006/chunk_000.json",
+                        "size_bytes":  5450,
+                        "sha256":  "be61c01bad51c2c5e0188f34938690d6e570739d4d4330bf588aa04161801240"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_wildchat_learn_cand_002__turn_001/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_wildchat_learn_cand_002__turn_001/chunk_000.json",
+                        "size_bytes":  6279,
+                        "sha256":  "ec3d41a4fb093bfb82c64a375f536523ff2e111f34957cfa865eff3d6279f729"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_wildchat_learn_cand_002__turn_002/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_wildchat_learn_cand_002__turn_002/chunk_000.json",
+                        "size_bytes":  5113,
+                        "sha256":  "aa6aabda07440b207f63a65b51d55f185ae536ec1c4171763dacf06efd8c67a5"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_wildchat_learn_cand_002__turn_003/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_wildchat_learn_cand_002__turn_003/chunk_000.json",
+                        "size_bytes":  6341,
+                        "sha256":  "608f46594397f4e2d63ff5fc1134e5d98b226d1d397b42465247d41492a0d96e"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_wildchat_learn_cand_002__turn_004/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_wildchat_learn_cand_002__turn_004/chunk_000.json",
+                        "size_bytes":  6140,
+                        "sha256":  "101ec46c9f56c3a4d1bccbc0ee9e7772b863eddf6148eaa77c9d2cf9efd1c5ad"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_wildchat_learn_cand_003__turn_001/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_wildchat_learn_cand_003__turn_001/chunk_000.json",
+                        "size_bytes":  4658,
+                        "sha256":  "c97e8e8d4645a7f6adb3d61162d3380974befa76282a574d7fa7918255c106cd"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_wildchat_learn_cand_003__turn_002/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_wildchat_learn_cand_003__turn_002/chunk_000.json",
+                        "size_bytes":  3420,
+                        "sha256":  "b65a096a6aa9f58f3d1493b5bc4ee838c087d31b47612354848ecd56696ca5fe"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_wildchat_learn_cand_003__turn_003/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_wildchat_learn_cand_003__turn_003/chunk_000.json",
+                        "size_bytes":  4174,
+                        "sha256":  "38542f36adf4b30a312359886a00d9802018d413d04642af0cb1b13616b1a4a3"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_wildchat_learn_cand_004__turn_001/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_wildchat_learn_cand_004__turn_001/chunk_000.json",
+                        "size_bytes":  5572,
+                        "sha256":  "3f986362b79cd5c9fdf27b55303eba4c6dc2128b645139d70bfbd0ef6c36cbdf"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_wildchat_learn_cand_004__turn_002/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_wildchat_learn_cand_004__turn_002/chunk_000.json",
+                        "size_bytes":  4660,
+                        "sha256":  "24e2cad9717ece593d06fff8e56817ee6f17d2156aad596bf59317f486b2eee6"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_wildchat_learn_cand_004__turn_003/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_wildchat_learn_cand_004__turn_003/chunk_000.json",
+                        "size_bytes":  4749,
+                        "sha256":  "a5b9fbc512ec99b7eae575e669919cd97472491b172ed5171d0468c585722cb1"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_wildchat_mgmt_cand_001__turn_001/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_wildchat_mgmt_cand_001__turn_001/chunk_000.json",
+                        "size_bytes":  6300,
+                        "sha256":  "9ea2d7a2ffc9fd99fb00f9af87ef3e81b9e78c86c3f5bcdebb9b42c46a38a649"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_wildchat_mgmt_cand_001__turn_002/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_wildchat_mgmt_cand_001__turn_002/chunk_000.json",
+                        "size_bytes":  5901,
+                        "sha256":  "e423009e6c0d1f73c3debff36a2efdceef401ff91d53168a331a4321c2522a7d"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_wildchat_mgmt_cand_001__turn_003/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_wildchat_mgmt_cand_001__turn_003/chunk_000.json",
+                        "size_bytes":  6337,
+                        "sha256":  "74c1fad25863372f9dd611a8bffaea8f654aefb2c40425a7a050ef0d1d1c6430"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_wildchat_mgmt_cand_001__turn_004/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_wildchat_mgmt_cand_001__turn_004/chunk_000.json",
+                        "size_bytes":  6279,
+                        "sha256":  "9ddea1cd6f1709da6e074c6a41aa6e54d11aa421f3cec7ada3790f9bd4a05bb3"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_wildchat_mgmt_cand_001__turn_005/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_wildchat_mgmt_cand_001__turn_005/chunk_000.json",
+                        "size_bytes":  5679,
+                        "sha256":  "d219aa1e5793441a1b799ac385402bfdff1eb2c4e2962eb656deec6ee1bbe4e1"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_wildchat_mgmt_cand_002__turn_001/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_wildchat_mgmt_cand_002__turn_001/chunk_000.json",
+                        "size_bytes":  5324,
+                        "sha256":  "78aaabdb53e6b41fd00ee5257c26823826a4752ecba6626d5a0525b57bd897e7"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_wildchat_mgmt_cand_002__turn_002/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_wildchat_mgmt_cand_002__turn_002/chunk_000.json",
+                        "size_bytes":  5618,
+                        "sha256":  "15cfea6f52f4c2cfda5b15d298f2f94b59ab01941143d059249c44ef2dc7020a"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_wildchat_mgmt_cand_002__turn_003/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_wildchat_mgmt_cand_002__turn_003/chunk_000.json",
+                        "size_bytes":  5700,
+                        "sha256":  "c787e46d0d46b8f5154d8fd59cce405346de992e3fe48a021eb3609988e6e873"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_wildchat_mgmt_cand_003__turn_001/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_wildchat_mgmt_cand_003__turn_001/chunk_000.json",
+                        "size_bytes":  3505,
+                        "sha256":  "8881e0730812524c063ee12922968b1ec3473438d59867bb5e7da4197df404b1"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_wildchat_mgmt_cand_003__turn_002/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_wildchat_mgmt_cand_003__turn_002/chunk_000.json",
+                        "size_bytes":  5686,
+                        "sha256":  "8e0e5ef9a41a2209da56a44dd4ddc32d004c3b2af915cd6b33402a29a911478f"
+                    },
+                    {
+                        "source":  "keol-output/KE-test/text/src_wildchat_mgmt_cand_003__turn_003/chunk_000.json",
+                        "destination":  "artifacts/keol-baseline/native-output/KE-test/text/src_wildchat_mgmt_cand_003__turn_003/chunk_000.json",
+                        "size_bytes":  7747,
+                        "sha256":  "329335a1c274f0e83b4ba27f5f6196560a4cd79ee6afb0100ef21391b7e25809"
+                    },
+                    {
+                        "source":  "build_ke_experiment.mjs",
+                        "destination":  "archive/legacy-ke-v0.2/build_ke_experiment.mjs",
+                        "size_bytes":  20229,
+                        "sha256":  "1a19950d0ddc88a6b0c50ce6e5a20c576b5f1a0e84d0923ed5a9e24ec8317f96"
+                    },
+                    {
+                        "source":  "validate_ke_experiment.mjs",
+                        "destination":  "archive/legacy-ke-v0.2/validate_ke_experiment.mjs",
+                        "size_bytes":  7861,
+                        "sha256":  "3555942442af81f16a97c07e6e550a8c38fdb46445266ba33e02c46ae143da3c"
+                    },
+                    {
+                        "source":  "ke-runtime.mjs",
+                        "destination":  "archive/legacy-ke-v0.2/ke-runtime.mjs",
+                        "size_bytes":  10598,
+                        "sha256":  "142e0d8aee2d1a712fd2a60c9822871c4cc92ad60fa054ad29a674db0d628cea"
+                    },
+                    {
+                        "source":  "ke-specs.mjs",
+                        "destination":  "archive/legacy-ke-v0.2/ke-specs.mjs",
+                        "size_bytes":  21817,
+                        "sha256":  "da2e9ca4365a78bea69a5dd887205e476d06e6ee87e5f126da32d5fa47478622"
+                    },
+                    {
+                        "source":  "KE-ontology-extraction-design.md",
+                        "destination":  "docs/designs/2026-07-21-ke-ontology-extraction-design.md",
+                        "size_bytes":  2386,
+                        "sha256":  "ef4253c27aeffee05949a291094bc270619311304d1985dab328091fd7034e3e"
+                    },
+                    {
+                        "source":  "KE-ontology-extraction-plan.md",
+                        "destination":  "docs/plans/2026-07-21-ke-ontology-extraction-plan.md",
+                        "size_bytes":  1064,
+                        "sha256":  "b074463902d39292085ef5f841f0b88fde7bb16f12122f88da11f10aaad9acb8"
+                    },
+                    {
+                        "source":  "docs/superpowers/specs/2026-07-21-knowledge-first-extraction-design.md",
+                        "destination":  "docs/designs/2026-07-21-knowledge-first-extraction-design.md",
+                        "size_bytes":  12831,
+                        "sha256":  "70dca97c8c38969181088c4f00dc7d6de61dbe828a1a7ec4c863d243af1d1dfb"
+                    },
+                    {
+                        "source":  "docs/superpowers/plans/2026-07-21-knowledge-first-extraction.md",
+                        "destination":  "docs/plans/2026-07-21-knowledge-first-extraction.md",
+                        "size_bytes":  35468,
+                        "sha256":  "b97a606c365daed009285e45eabddf004279df3295545f7c1a385c1dec20123c"
+                    }
+                ]
+}

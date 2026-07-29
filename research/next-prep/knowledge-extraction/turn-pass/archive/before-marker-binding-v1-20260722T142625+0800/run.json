@@ -1,0 +1,129 @@
+{
+  "schema_version": "knowledge_extraction_run_v1",
+  "source": "KE-test.json",
+  "active_method": "knowledge_first_two_pass",
+  "semantic_authoring": "codex_subagents_only",
+  "root_authored_semantic_records": false,
+  "old_keol_or_custom_ke_used_as_model_input": false,
+  "source_segments": {
+    "path": "knowledge-extraction/source-segments.json",
+    "version": "source-segments-v1",
+    "sha256": "8c51b78f31cc22541868f106381aeb973b95160072b80b0a8bbd72be19385553"
+  },
+  "turn_pass": {
+    "status": "validated",
+    "prompt": {
+      "path": "knowledge-extraction/prompts/turn_knowledge_extraction.md",
+      "version": "knowledge-extraction-turn-v1",
+      "sha256": "a231c38fe9d4598389ec7ccb998ea9888fd2d067b863cc67614fc1474e408add"
+    },
+    "prepared_manifest": {
+      "path": "knowledge-extraction/turn-pass/prepared/manifest.json",
+      "sha256": "a7a2408a7d6942155f6ffcef9b5445fb854351f580f09223616bcfedb6d46389"
+    },
+    "validated_manifest": {
+      "path": "knowledge-extraction/turn-pass/validated/manifest.json",
+      "sha256": "4c2e57ad181c0d159ac5545c1248c2a276ccd454dd66da3beea350374839aeaf"
+    },
+    "assignments": [
+      {
+        "subagent_task": "turn_extract_a",
+        "candidates": [
+          "WILDCHAT-MGMT-CAND-001",
+          "WILDCHAT-MGMT-CAND-002",
+          "WILDCHAT-LEARN-CAND-002",
+          "WILDCHAT-MGMT-CAND-003"
+        ],
+        "turn_count": 15,
+        "knowledge_count": 189,
+        "context_completion_count": 15,
+        "status": "validated"
+      },
+      {
+        "subagent_task": "turn_extract_b",
+        "candidates": [
+          "WILDCHAT-LEARN-CAND-004",
+          "TASKMASTER2-CAND-001",
+          "TAU-BENCH-CAND-001"
+        ],
+        "turn_count": 14,
+        "knowledge_count": 78,
+        "context_completion_count": 16,
+        "status": "validated"
+      },
+      {
+        "subagent_task": "turn_extract_c",
+        "candidates": [
+          "BEAM-CAND-004",
+          "WILDCHAT-LEARN-CAND-001",
+          "WILDCHAT-LEARN-CAND-003"
+        ],
+        "turn_count": 14,
+        "knowledge_count": 132,
+        "context_completion_count": 13,
+        "status": "validated"
+      }
+    ],
+    "source_segment_correction": {
+      "subagent_task": "tau_turn_source_segment_correction",
+      "completed_at": "2026-07-22T13:56:12.0062356+08:00",
+      "archive_path": "knowledge-extraction/turn-pass/archive/raw-before-source-segment-correction",
+      "files": [
+        {
+          "file": "0006-0001.json",
+          "old_raw_sha256": "4267bbf58d136463013922abe08615e57148deb9202d0d8f0ac741c4d7ae203a",
+          "new_raw_sha256": "e9574544de4f3fc190a9067778357148b307514649c2c6a6b59ddbca9aba2410"
+        },
+        {
+          "file": "0006-0003.json",
+          "old_raw_sha256": "e19d85fd5b6918070ad626cfdc93b0d75d689cd6eb732b20dbfdfc38ee86be6f",
+          "new_raw_sha256": "d51eaa6be73554dc8a7fed23ff136df727cc7d03809bce6e458e397ab28dfd98"
+        },
+        {
+          "file": "0006-0004.json",
+          "old_raw_sha256": "7f194e4794fb27d60769b907fe71083906c1d99bc528c7d609b43a916051b6d4",
+          "new_raw_sha256": "90ca2c76c84c1d2b10fb11dc46ba0520ded826cf1b6166b21a306769647e3fc6"
+        }
+      ]
+    },
+    "publication_archive": "knowledge-extraction/turn-pass/archive/before-source-segments-v1-20260722T135612+0800",
+    "totals": {
+      "candidate_count": 10,
+      "turn_count": 43,
+      "speaker_slot_count": 86,
+      "raw_output_count": 43,
+      "validated_output_count": 43,
+      "knowledge_count": 399,
+      "context_completion_count": 44,
+      "tool_observed_count": 11,
+      "zero_knowledge_turns": [
+        "0005-0005.json"
+      ],
+      "validation_errors": 0,
+      "raw_hashes_stable_during_validation": true
+    },
+    "raw_hashes_location": "knowledge-extraction/turn-pass/validated/manifest.json"
+  },
+  "dialogue_pass": {
+    "status": "prepared",
+    "prompt": {
+      "path": "knowledge-extraction/prompts/dialogue_reconciliation.md",
+      "version": "dialogue-reconciliation-v1",
+      "sha256": "6f2cbc205076c080f535a89b74e224c65cef9bef3290f103466c7b10d1210b59"
+    },
+    "prepared_manifest": {
+      "path": "knowledge-extraction/dialogue-pass/prepared/manifest.json",
+      "sha256": "07e9c86adbdf12225a11c1e91d71b1dce49e555c18cad3088ab30fdb30c1d4c8"
+    },
+    "candidate_count": 10,
+    "payload_count": 10,
+    "semantic_raw_generated": false
+  },
+  "validation": {
+    "completed_at": "2026-07-22T14:05:18.0248918+08:00",
+    "turn_raw_files": 43,
+    "turn_validated_files": 43,
+    "dialogue_payload_files": 10,
+    "result": "passed"
+  }
+}

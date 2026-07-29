@@ -1,0 +1,291 @@
+{
+  "schema_version": "natural-identity-source-config-v1",
+  "dataset_id": "natural-identity-membership-fresh-v4-hidden-source",
+  "source_inputs": {
+    "gold_evidence": "artifacts/natural-benchmark-slices/slice-v1/gold-evidence.json",
+    "locomo_raw": "artifacts/natural-benchmark-slices/raw/locomo/locomo10.json"
+  },
+  "cases": [
+    {
+      "case_id": "fresh-v4-hidden-identity-merge-joanna-cross-session",
+      "split": "hidden",
+      "relation_kind": "identity",
+      "question": "Do these two speaker mentions refer to the same person?",
+      "mentions": [
+        {
+          "mention_id": "fresh-v4-mention-joanna-writing-interests",
+          "surface": "Joanna",
+          "concept_id": "memory:Person",
+          "source_item_id": "IDENTITY-FRESH-V4-LOCOMO-CONV42-D1-10",
+          "evidence_unit_id": "D1:10",
+          "quote": "Besides writing, I also enjoy reading, watching movies, and exploring nature.",
+          "source_actor_id": "person:joanna",
+          "actor_locator": {
+            "kind": "locomo_dia_id",
+            "sample_id": "conv-42",
+            "dia_id": "D1:10"
+          }
+        },
+        {
+          "mention_id": "fresh-v4-mention-joanna-second-screenplay",
+          "surface": "Joanna",
+          "concept_id": "memory:Person",
+          "source_item_id": "IDENTITY-FRESH-V4-LOCOMO-CONV42-D4-10",
+          "evidence_unit_id": "D4:10",
+          "quote": "I just started writing another one while I wait to hear back about how the first one did.",
+          "source_actor_id": "person:joanna",
+          "actor_locator": {
+            "kind": "locomo_dia_id",
+            "sample_id": "conv-42",
+            "dia_id": "D4:10"
+          }
+        }
+      ],
+      "authority": {
+        "shared_trusted_identifiers": [
+          "locomo-speaker:conv-42:Joanna"
+        ],
+        "conflicting_trusted_identifiers": [],
+        "explicit_same_entity": false,
+        "explicit_distinct": false,
+        "actor_binding_authoritative": false,
+        "explicit_membership": false,
+        "explicit_non_membership": false,
+        "required_mention_ids": [
+          "fresh-v4-mention-joanna-writing-interests",
+          "fresh-v4-mention-joanna-second-screenplay"
+        ]
+      },
+      "gold": {
+        "expected_action": "merge",
+        "critical_false_merge": false,
+        "critical_false_membership": false
+      }
+    },
+    {
+      "case_id": "fresh-v4-hidden-identity-distinct-nate-joanna-cross-session",
+      "split": "hidden",
+      "relation_kind": "identity",
+      "question": "Do these two speaker mentions refer to the same person?",
+      "mentions": [
+        {
+          "mention_id": "fresh-v4-mention-nate-tournament-friends",
+          "surface": "Nate",
+          "concept_id": "memory:Person",
+          "source_item_id": "IDENTITY-FRESH-V4-LOCOMO-CONV42-D2-16",
+          "evidence_unit_id": "D2:16",
+          "quote": "I start to hang out with some people outside of my circle at the tournament.",
+          "source_actor_id": "person:nate",
+          "actor_locator": {
+            "kind": "locomo_dia_id",
+            "sample_id": "conv-42",
+            "dia_id": "D2:16"
+          }
+        },
+        {
+          "mention_id": "fresh-v4-mention-joanna-screenplay-networking",
+          "surface": "Joanna",
+          "concept_id": "memory:Person",
+          "source_item_id": "IDENTITY-FRESH-V4-LOCOMO-CONV42-D5-15",
+          "evidence_unit_id": "D5:15",
+          "quote": "I've been doing my fair share of research and networking non-stop for it.",
+          "source_actor_id": "person:joanna",
+          "actor_locator": {
+            "kind": "locomo_dia_id",
+            "sample_id": "conv-42",
+            "dia_id": "D5:15"
+          }
+        }
+      ],
+      "authority": {
+        "shared_trusted_identifiers": [],
+        "conflicting_trusted_identifiers": [
+          "locomo-speaker:conv-42:Nate",
+          "locomo-speaker:conv-42:Joanna"
+        ],
+        "explicit_same_entity": false,
+        "explicit_distinct": false,
+        "actor_binding_authoritative": false,
+        "explicit_membership": false,
+        "explicit_non_membership": false,
+        "required_mention_ids": [
+          "fresh-v4-mention-nate-tournament-friends",
+          "fresh-v4-mention-joanna-screenplay-networking"
+        ]
+      },
+      "gold": {
+        "expected_action": "keep_distinct",
+        "critical_false_merge": true,
+        "critical_false_membership": false
+      }
+    },
+    {
+      "case_id": "fresh-v4-hidden-identity-abstain-auth-app-cross-session",
+      "split": "hidden",
+      "relation_kind": "identity",
+      "question": "Do these two authentication-related application references identify one software application?",
+      "mentions": [
+        {
+          "mention_id": "fresh-v4-mention-rbac-application",
+          "surface": "role-based access control application",
+          "concept_id": "memory:SoftwareApplication",
+          "source_item_id": "BEAM-100K-C001-multi_session_reasoning-002",
+          "evidence_unit_id": "84",
+          "quote": "implement role-based access control for my application",
+          "source_actor_id": null,
+          "actor_locator": null
+        },
+        {
+          "mention_id": "fresh-v4-mention-password-hashing-application",
+          "surface": "password-hashing application",
+          "concept_id": "memory:SoftwareApplication",
+          "source_item_id": "BEAM-100K-C001-multi_session_reasoning-002",
+          "evidence_unit_id": "16",
+          "quote": "implement basic password hashing for my personal budget tracker",
+          "source_actor_id": null,
+          "actor_locator": null
+        }
+      ],
+      "authority": {
+        "shared_trusted_identifiers": [],
+        "conflicting_trusted_identifiers": [],
+        "explicit_same_entity": false,
+        "explicit_distinct": false,
+        "actor_binding_authoritative": false,
+        "explicit_membership": false,
+        "explicit_non_membership": false,
+        "required_mention_ids": [
+          "fresh-v4-mention-rbac-application",
+          "fresh-v4-mention-password-hashing-application"
+        ]
+      },
+      "gold": {
+        "expected_action": "abstain",
+        "critical_false_merge": true,
+        "critical_false_membership": false
+      }
+    },
+    {
+      "case_id": "fresh-v4-hidden-membership-include-nate-icecream",
+      "split": "hidden",
+      "relation_kind": "membership",
+      "question": "Does making coconut-milk ice cream belong to Nate's memory?",
+      "mentions": [
+        {
+          "mention_id": "fresh-v4-mention-nate-coconut-icecream",
+          "surface": "making coconut-milk ice cream",
+          "concept_id": "memory:Activity",
+          "source_item_id": "IDENTITY-FRESH-V4-LOCOMO-CONV42-D3-4",
+          "evidence_unit_id": "D3:4",
+          "quote": "I just discovered that I can make coconut milk icecream and gave it a try.",
+          "source_actor_id": "person:nate",
+          "actor_locator": {
+            "kind": "locomo_dia_id",
+            "sample_id": "conv-42",
+            "dia_id": "D3:4"
+          }
+        }
+      ],
+      "query_subject_id": "person:nate",
+      "group_surface": "Nate memories",
+      "member_surface": "making coconut-milk ice cream",
+      "authority": {
+        "shared_trusted_identifiers": [],
+        "conflicting_trusted_identifiers": [],
+        "explicit_same_entity": false,
+        "explicit_distinct": false,
+        "actor_binding_authoritative": true,
+        "explicit_membership": false,
+        "explicit_non_membership": false,
+        "required_mention_ids": [
+          "fresh-v4-mention-nate-coconut-icecream"
+        ]
+      },
+      "gold": {
+        "expected_action": "include",
+        "critical_false_merge": false,
+        "critical_false_membership": false
+      }
+    },
+    {
+      "case_id": "fresh-v4-hidden-membership-exclude-joanna-movie",
+      "split": "hidden",
+      "relation_kind": "membership",
+      "question": "Does watching Little Women belong to Nate's memory?",
+      "mentions": [
+        {
+          "mention_id": "fresh-v4-mention-joanna-little-women",
+          "surface": "watching Little Women",
+          "concept_id": "memory:Activity",
+          "source_item_id": "IDENTITY-FRESH-V4-LOCOMO-CONV42-D3-17",
+          "evidence_unit_id": "D3:17",
+          "quote": "I just watched \"Little Women\" and it was amazing!",
+          "source_actor_id": "person:joanna",
+          "actor_locator": {
+            "kind": "locomo_dia_id",
+            "sample_id": "conv-42",
+            "dia_id": "D3:17"
+          }
+        }
+      ],
+      "query_subject_id": "person:nate",
+      "group_surface": "Nate memories",
+      "member_surface": "watching Little Women",
+      "authority": {
+        "shared_trusted_identifiers": [],
+        "conflicting_trusted_identifiers": [],
+        "explicit_same_entity": false,
+        "explicit_distinct": false,
+        "actor_binding_authoritative": true,
+        "explicit_membership": false,
+        "explicit_non_membership": false,
+        "required_mention_ids": [
+          "fresh-v4-mention-joanna-little-women"
+        ]
+      },
+      "gold": {
+        "expected_action": "exclude",
+        "critical_false_merge": false,
+        "critical_false_membership": true
+      }
+    },
+    {
+      "case_id": "fresh-v4-hidden-membership-abstain-lockout-owner",
+      "split": "hidden",
+      "relation_kind": "membership",
+      "question": "Does the account-lockout implementation belong to the security lead's memory?",
+      "mentions": [
+        {
+          "mention_id": "fresh-v4-mention-account-lockout",
+          "surface": "account-lockout implementation",
+          "concept_id": "memory:SoftwareTask",
+          "source_item_id": "BEAM-100K-C001-multi_session_reasoning-002",
+          "evidence_unit_id": "150",
+          "quote": "implement the account lockout feature after 5 failed login attempts",
+          "source_actor_id": null,
+          "actor_locator": null
+        }
+      ],
+      "query_subject_id": "person:security-lead",
+      "group_surface": "security lead memories",
+      "member_surface": "account-lockout implementation",
+      "authority": {
+        "shared_trusted_identifiers": [],
+        "conflicting_trusted_identifiers": [],
+        "explicit_same_entity": false,
+        "explicit_distinct": false,
+        "actor_binding_authoritative": false,
+        "explicit_membership": false,
+        "explicit_non_membership": false,
+        "required_mention_ids": [
+          "fresh-v4-mention-account-lockout"
+        ]
+      },
+      "gold": {
+        "expected_action": "abstain",
+        "critical_false_merge": false,
+        "critical_false_membership": true
+      }
+    }
+  ]
+}

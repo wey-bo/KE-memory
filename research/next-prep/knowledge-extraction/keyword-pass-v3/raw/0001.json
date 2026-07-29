@@ -1,0 +1,1295 @@
+{
+  "candidate_id": "TASKMASTER2-CAND-001",
+  "items": [
+    {
+      "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0001",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_001",
+          "surface": "贵",
+          "keyword": "贵",
+          "keyword_type": "property",
+          "semantic_role": "attribute",
+          "source_field": "predicate",
+          "wordnet_synset": "expensive.a.01",
+          "wordnet_lemma": "expensive",
+          "wordnet_pos": "a",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0002",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_001",
+          "surface": "直飞航班",
+          "keyword": "直飞航班",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0003",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_001",
+          "surface": "价格",
+          "keyword": "价格",
+          "keyword_type": "property",
+          "semantic_role": "attribute",
+          "source_field": "object",
+          "wordnet_synset": "price.n.02",
+          "wordnet_lemma": "price",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0004",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_001",
+          "surface": "2,677美元",
+          "keyword": "2677美元",
+          "keyword_type": "quantity",
+          "semantic_role": "value",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        }
+      ]
+    },
+    {
+      "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0005",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "选择",
+          "keyword": "选择",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "choose.v.01",
+          "wordnet_lemma": "choose",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0006",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "纽约市",
+          "keyword": "纽约市",
+          "keyword_type": "entity",
+          "semantic_role": "location",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0007",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "阿姆斯特丹",
+          "keyword": "阿姆斯特丹",
+          "keyword_type": "entity",
+          "semantic_role": "location",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0008",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "往返",
+          "keyword": "往返",
+          "keyword_type": "concept",
+          "semantic_role": "attribute",
+          "source_field": "object",
+          "wordnet_synset": "round_trip.n.01",
+          "wordnet_lemma": "round_trip",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0009",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "最便宜",
+          "keyword": "便宜",
+          "keyword_type": "property",
+          "semantic_role": "attribute",
+          "source_field": "object",
+          "wordnet_synset": "cheap.a.01",
+          "wordnet_lemma": "cheap",
+          "wordnet_pos": "a",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0010",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "航班",
+          "keyword": "航班",
+          "keyword_type": "event",
+          "semantic_role": "topic",
+          "source_field": "object",
+          "wordnet_synset": "flight.n.02",
+          "wordnet_lemma": "flight",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0011",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "经停",
+          "keyword": "经停",
+          "keyword_type": "event",
+          "semantic_role": "attribute",
+          "source_field": "statement",
+          "wordnet_synset": "stop.n.03",
+          "wordnet_lemma": "stopover",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0012",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "今天",
+          "keyword": "今天",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "wordnet_synset": "today.n.02",
+          "wordnet_lemma": "today",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0013",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "19号",
+          "keyword": "19号",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0014",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "凌晨12:30",
+          "keyword": "凌晨12:30",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0015",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "次日11:55",
+          "keyword": "次日11:55",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0016",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+          "surface": "1,287美元",
+          "keyword": "1287美元",
+          "keyword_type": "quantity",
+          "semantic_role": "value",
+          "source_field": "qualifiers.scope",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        }
+      ]
+    },
+    {
+      "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0017",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "发送",
+          "keyword": "发送",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "send.v.02",
+          "wordnet_lemma": "send",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.97
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0018",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "邮箱",
+          "keyword": "邮箱",
+          "keyword_type": "concept",
+          "semantic_role": "recipient",
+          "source_field": "qualifiers.scope",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0019",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "往返",
+          "keyword": "往返",
+          "keyword_type": "concept",
+          "semantic_role": "attribute",
+          "source_field": "statement",
+          "wordnet_synset": "round_trip.n.01",
+          "wordnet_lemma": "round_trip",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0020",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "经停",
+          "keyword": "经停",
+          "keyword_type": "event",
+          "semantic_role": "attribute",
+          "source_field": "statement",
+          "wordnet_synset": "stop.n.03",
+          "wordnet_lemma": "stopover",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0021",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "1,287美元",
+          "keyword": "1287美元",
+          "keyword_type": "quantity",
+          "semantic_role": "value",
+          "source_field": "qualifiers.scope",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0022",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "纽约市",
+          "keyword": "纽约市",
+          "keyword_type": "entity",
+          "semantic_role": "location",
+          "source_field": "qualifiers.scope",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0023",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "阿姆斯特丹",
+          "keyword": "阿姆斯特丹",
+          "keyword_type": "entity",
+          "semantic_role": "location",
+          "source_field": "qualifiers.scope",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0024",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "航班",
+          "keyword": "航班",
+          "keyword_type": "event",
+          "semantic_role": "topic",
+          "source_field": "statement",
+          "wordnet_synset": "flight.n.02",
+          "wordnet_lemma": "flight",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0025",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "最便宜",
+          "keyword": "便宜",
+          "keyword_type": "property",
+          "semantic_role": "attribute",
+          "source_field": "statement",
+          "wordnet_synset": "cheap.a.01",
+          "wordnet_lemma": "cheap",
+          "wordnet_pos": "a",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0026",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "今天",
+          "keyword": "今天",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "wordnet_synset": "today.n.02",
+          "wordnet_lemma": "today",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0027",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "19号",
+          "keyword": "19号",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0028",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "凌晨12:30",
+          "keyword": "凌晨12:30",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0029",
+          "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+          "surface": "次日11:55",
+          "keyword": "次日11:55",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0030",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_001",
+          "surface": "预订",
+          "keyword": "预订",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "reserve.v.03",
+          "wordnet_lemma": "reserve",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0031",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_001",
+          "surface": "纽约市",
+          "keyword": "纽约市",
+          "keyword_type": "entity",
+          "semantic_role": "location",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0032",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_001",
+          "surface": "阿姆斯特丹",
+          "keyword": "阿姆斯特丹",
+          "keyword_type": "entity",
+          "semantic_role": "location",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0033",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_001",
+          "surface": "往返",
+          "keyword": "往返",
+          "keyword_type": "concept",
+          "semantic_role": "attribute",
+          "source_field": "object",
+          "wordnet_synset": "round_trip.n.01",
+          "wordnet_lemma": "round_trip",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0034",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_001",
+          "surface": "航班",
+          "keyword": "航班",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "flight.n.02",
+          "wordnet_lemma": "flight",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0035",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_002",
+          "surface": "查询",
+          "keyword": "查询",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "search.v.01",
+          "wordnet_lemma": "search",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0036",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_002",
+          "surface": "航班",
+          "keyword": "航班",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "flight.n.02",
+          "wordnet_lemma": "flight",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0037",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_003",
+          "surface": "询问",
+          "keyword": "询问",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "ask.v.01",
+          "wordnet_lemma": "ask",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.97
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0038",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_003",
+          "surface": "偏好",
+          "keyword": "偏好",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "preference.n.01",
+          "wordnet_lemma": "preference",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.96
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0039",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_001",
+          "surface": "计划",
+          "keyword": "计划",
+          "keyword_type": "action",
+          "semantic_role": "modality",
+          "source_field": "predicate",
+          "wordnet_synset": "plan.v.01",
+          "wordnet_lemma": "plan",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0040",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_001",
+          "surface": "出发",
+          "keyword": "出发",
+          "keyword_type": "event",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "depart.v.03",
+          "wordnet_lemma": "depart",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0041",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_001",
+          "surface": "今天",
+          "keyword": "今天",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0042",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_002",
+          "surface": "计划",
+          "keyword": "计划",
+          "keyword_type": "action",
+          "semantic_role": "modality",
+          "source_field": "predicate",
+          "wordnet_synset": "plan.v.01",
+          "wordnet_lemma": "plan",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0043",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_002",
+          "surface": "返回",
+          "keyword": "返回",
+          "keyword_type": "event",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "return.v.01",
+          "wordnet_lemma": "return",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0044",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_002",
+          "surface": "19号",
+          "keyword": "19号",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0045",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_003",
+          "surface": "偏好",
+          "keyword": "偏好",
+          "keyword_type": "property",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "preference.n.01",
+          "wordnet_lemma": "preference",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0046",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_003",
+          "surface": "去程",
+          "keyword": "去程",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0047",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_003",
+          "surface": "尽可能早",
+          "keyword": "早",
+          "keyword_type": "property",
+          "semantic_role": "time",
+          "source_field": "object",
+          "wordnet_synset": "early.a.01",
+          "wordnet_lemma": "early",
+          "wordnet_pos": "a",
+          "mapping_confidence": 0.97
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0048",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_004",
+          "surface": "偏好",
+          "keyword": "偏好",
+          "keyword_type": "property",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "preference.n.01",
+          "wordnet_lemma": "preference",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0049",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_004",
+          "surface": "返程",
+          "keyword": "返程",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0050",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_004",
+          "surface": "尽可能早",
+          "keyword": "早",
+          "keyword_type": "property",
+          "semantic_role": "time",
+          "source_field": "object",
+          "wordnet_synset": "early.a.01",
+          "wordnet_lemma": "early",
+          "wordnet_pos": "a",
+          "mapping_confidence": 0.97
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0051",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_001",
+          "surface": "寻找",
+          "keyword": "寻找",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "search.v.01",
+          "wordnet_lemma": "search",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0052",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_001",
+          "surface": "最便宜",
+          "keyword": "便宜",
+          "keyword_type": "property",
+          "semantic_role": "attribute",
+          "source_field": "object",
+          "wordnet_synset": "cheap.a.01",
+          "wordnet_lemma": "cheap",
+          "wordnet_pos": "a",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0053",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_001",
+          "surface": "航班",
+          "keyword": "航班",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "flight.n.02",
+          "wordnet_lemma": "flight",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0054",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_002",
+          "surface": "查到",
+          "keyword": "查到",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "find.v.03",
+          "wordnet_lemma": "find",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.95
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0055",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_002",
+          "surface": "最便宜",
+          "keyword": "便宜",
+          "keyword_type": "property",
+          "semantic_role": "attribute",
+          "source_field": "object",
+          "wordnet_synset": "cheap.a.01",
+          "wordnet_lemma": "cheap",
+          "wordnet_pos": "a",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0056",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_002",
+          "surface": "往返",
+          "keyword": "往返",
+          "keyword_type": "concept",
+          "semantic_role": "attribute",
+          "source_field": "object",
+          "wordnet_synset": "round_trip.n.01",
+          "wordnet_lemma": "round_trip",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0057",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_003",
+          "surface": "经停",
+          "keyword": "经停",
+          "keyword_type": "event",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "stop.n.03",
+          "wordnet_lemma": "stopover",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0058",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_003",
+          "surface": "一次",
+          "keyword": "一次",
+          "keyword_type": "quantity",
+          "semantic_role": "value",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0059",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_003",
+          "surface": "往返",
+          "keyword": "往返",
+          "keyword_type": "concept",
+          "semantic_role": "attribute",
+          "source_field": "subject",
+          "wordnet_synset": "round_trip.n.01",
+          "wordnet_lemma": "round_trip",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0060",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_004",
+          "surface": "出发",
+          "keyword": "出发",
+          "keyword_type": "event",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "depart.v.03",
+          "wordnet_lemma": "depart",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0061",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_004",
+          "surface": "凌晨12:30",
+          "keyword": "凌晨12:30",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0062",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_004",
+          "surface": "往返",
+          "keyword": "往返",
+          "keyword_type": "concept",
+          "semantic_role": "attribute",
+          "source_field": "subject",
+          "wordnet_synset": "round_trip.n.01",
+          "wordnet_lemma": "round_trip",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0063",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_005",
+          "surface": "抵达",
+          "keyword": "抵达",
+          "keyword_type": "event",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "arrive.v.01",
+          "wordnet_lemma": "arrive",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0064",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_005",
+          "surface": "次日11:55",
+          "keyword": "次日11:55",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0065",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_005",
+          "surface": "往返",
+          "keyword": "往返",
+          "keyword_type": "concept",
+          "semantic_role": "attribute",
+          "source_field": "subject",
+          "wordnet_synset": "round_trip.n.01",
+          "wordnet_lemma": "round_trip",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0066",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_006",
+          "surface": "价格",
+          "keyword": "价格",
+          "keyword_type": "property",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "price.n.02",
+          "wordnet_lemma": "price",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0067",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_006",
+          "surface": "1,287美元",
+          "keyword": "1287美元",
+          "keyword_type": "quantity",
+          "semantic_role": "value",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0068",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_006",
+          "surface": "往返",
+          "keyword": "往返",
+          "keyword_type": "concept",
+          "semantic_role": "attribute",
+          "source_field": "subject",
+          "wordnet_synset": "round_trip.n.01",
+          "wordnet_lemma": "round_trip",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0069",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_007",
+          "surface": "询问",
+          "keyword": "询问",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "ask.v.01",
+          "wordnet_lemma": "ask",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.97
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0070",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_007",
+          "surface": "预订",
+          "keyword": "预订",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "predicate",
+          "wordnet_synset": "reserve.v.03",
+          "wordnet_lemma": "reserve",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0071",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_007",
+          "surface": "往返",
+          "keyword": "往返",
+          "keyword_type": "concept",
+          "semantic_role": "attribute",
+          "source_field": "object",
+          "wordnet_synset": "round_trip.n.01",
+          "wordnet_lemma": "round_trip",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0072",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_001",
+          "surface": "询问",
+          "keyword": "询问",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "ask.v.01",
+          "wordnet_lemma": "ask",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.97
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0073",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_001",
+          "surface": "直飞航班",
+          "keyword": "直飞航班",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0074",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_002",
+          "surface": "查询",
+          "keyword": "查询",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "search.v.01",
+          "wordnet_lemma": "search",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0075",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_002",
+          "surface": "再次",
+          "keyword": "再次",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "statement",
+          "wordnet_synset": "again.r.01",
+          "wordnet_lemma": "again",
+          "wordnet_pos": "r",
+          "mapping_confidence": 0.99
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0076",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_003",
+          "surface": "直飞航班",
+          "keyword": "直飞航班",
+          "keyword_type": "concept",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0077",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_003",
+          "surface": "存在",
+          "keyword": "存在",
+          "keyword_type": "relation",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "exist.v.01",
+          "wordnet_lemma": "exist",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0078",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_003",
+          "surface": "一班",
+          "keyword": "一班",
+          "keyword_type": "quantity",
+          "semantic_role": "value",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0079",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_004",
+          "surface": "直飞航班",
+          "keyword": "直飞航班",
+          "keyword_type": "concept",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0080",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_004",
+          "surface": "出发",
+          "keyword": "出发",
+          "keyword_type": "event",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "depart.v.03",
+          "wordnet_lemma": "depart",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0081",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_004",
+          "surface": "下午6点",
+          "keyword": "下午6点",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0082",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_005",
+          "surface": "直飞航班",
+          "keyword": "直飞航班",
+          "keyword_type": "concept",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0083",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_005",
+          "surface": "抵达",
+          "keyword": "抵达",
+          "keyword_type": "event",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "arrive.v.01",
+          "wordnet_lemma": "arrive",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0084",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_005",
+          "surface": "次日早上7:35",
+          "keyword": "次日早上7:35",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0085",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_006",
+          "surface": "直飞航班",
+          "keyword": "直飞航班",
+          "keyword_type": "concept",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0086",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_006",
+          "surface": "价格",
+          "keyword": "价格",
+          "keyword_type": "property",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "price.n.02",
+          "wordnet_lemma": "price",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0087",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_006",
+          "surface": "2,677美元",
+          "keyword": "2677美元",
+          "keyword_type": "quantity",
+          "semantic_role": "value",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0088",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_007",
+          "surface": "直飞方案",
+          "keyword": "直飞方案",
+          "keyword_type": "concept",
+          "semantic_role": "topic",
+          "source_field": "qualifiers.scope",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0089",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_007",
+          "surface": "符合",
+          "keyword": "符合",
+          "keyword_type": "relation",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "match.v.01",
+          "wordnet_lemma": "match",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.95
+        },
+        {
+          "keyword_id": "KW_taskmaster2-cand-001-5f5e1081bd0b_0090",
+          "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_007",
+          "surface": "偏好",
+          "keyword": "偏好",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "preference.n.01",
+          "wordnet_lemma": "preference",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.96
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,351 @@
+{
+  "schema_version": "typed-extractor-l1-source-v1",
+  "dataset_id": "typed-extractor-l1-dev-v1",
+  "cases": [
+    {
+      "private_case_id": "user-pressure-state",
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_003",
+      "expected_decision": "emit_l1",
+      "expected_typed_candidate": {
+        "kind": "state",
+        "predicate": {"surface": "感到", "sense": "person.feels_state", "canonical_operator": "feel_state"},
+        "local_entities": [
+          {"local_entity_id": "entity-01", "surface": "用户"},
+          {"local_entity_id": "entity-02", "surface": "压力很大"}
+        ],
+        "roles": [
+          {"role": "experiencer", "role_name": "体验者", "local_entity_id": "entity-01"},
+          {"role": "state", "role_name": "状态", "local_entity_id": "entity-02"}
+        ],
+        "modality": "actual",
+        "polarity": "positive",
+        "time": {"event_time": null, "valid_time": null},
+        "condition_bindings": [],
+        "scope_bindings": [],
+        "derivation": {"method": "explicit", "basis": null, "evidence_ids": ["evidence-d109329ffef5f02f24a1576a8e47cbd4fee88b54579268716347e7bf44240c02"]},
+        "evidence_bindings": [{"evidence_id": "evidence-d109329ffef5f02f24a1576a8e47cbd4fee88b54579268716347e7bf44240c02", "speaker": "user"}],
+        "lifecycle": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []}
+      },
+      "emission_allowed": true,
+      "allowed_modalities": ["actual"],
+      "allowed_event_times": [],
+      "event_time_may_be_null": true,
+      "allowed_valid_times": [],
+      "valid_time_may_be_null": true,
+      "unresolved_required_fields": [],
+      "time_case": "none"
+    },
+    {
+      "private_case_id": "departure-time-preference",
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_003",
+      "expected_decision": "emit_l1",
+      "expected_typed_candidate": {
+        "kind": "preference",
+        "predicate": {"surface": "偏好", "sense": "travel.departure_time_preference", "canonical_operator": "prefer_departure_time"},
+        "local_entities": [
+          {"local_entity_id": "entity-01", "surface": "用户"},
+          {"local_entity_id": "entity-02", "surface": "去程"},
+          {"local_entity_id": "entity-03", "surface": "尽可能早"}
+        ],
+        "roles": [
+          {"role": "holder", "role_name": "偏好持有者", "local_entity_id": "entity-01"},
+          {"role": "journey_leg", "role_name": "行程段", "local_entity_id": "entity-02"},
+          {"role": "preferred_value", "role_name": "偏好值", "local_entity_id": "entity-03"}
+        ],
+        "modality": "actual",
+        "polarity": "positive",
+        "time": {"event_time": null, "valid_time": null},
+        "condition_bindings": [],
+        "scope_bindings": [{"operator": "applies_to", "value": "去程", "local_entity_ids": ["entity-02"]}],
+        "derivation": {"method": "context_completed", "basis": "“两程”明确涵盖去程和返程，因此该共同偏好可原子化到去程。", "evidence_ids": ["evidence-87a6dabe02b796a4305270982b1ad9d7fe0fa7ad63fcba51ba8e7e88e181f33c"]},
+        "evidence_bindings": [{"evidence_id": "evidence-87a6dabe02b796a4305270982b1ad9d7fe0fa7ad63fcba51ba8e7e88e181f33c", "speaker": "user"}],
+        "lifecycle": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []}
+      },
+      "emission_allowed": true,
+      "allowed_modalities": ["actual"],
+      "allowed_event_times": [],
+      "event_time_may_be_null": true,
+      "allowed_valid_times": [],
+      "valid_time_may_be_null": true,
+      "unresolved_required_fields": [],
+      "time_case": "none"
+    },
+    {
+      "private_case_id": "tablet-return-request",
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_001",
+      "expected_decision": "emit_l1",
+      "expected_typed_candidate": {
+        "kind": "task",
+        "predicate": {"surface": "请求退回", "sense": "commerce.return_request", "canonical_operator": "request_return"},
+        "local_entities": [
+          {"local_entity_id": "entity-01", "surface": "用户"},
+          {"local_entity_id": "entity-02", "surface": "平板"}
+        ],
+        "roles": [
+          {"role": "requester", "role_name": "请求者", "local_entity_id": "entity-01"},
+          {"role": "theme", "role_name": "退回对象", "local_entity_id": "entity-02"}
+        ],
+        "modality": "requested",
+        "polarity": "positive",
+        "time": {"event_time": null, "valid_time": null},
+        "condition_bindings": [],
+        "scope_bindings": [],
+        "derivation": {"method": "explicit", "basis": null, "evidence_ids": ["evidence-6fc32b73fceca3d9bf6c43c0dd9a3815200e1d24bb96d3df3ea922008b47bbaa"]},
+        "evidence_bindings": [{"evidence_id": "evidence-6fc32b73fceca3d9bf6c43c0dd9a3815200e1d24bb96d3df3ea922008b47bbaa", "speaker": "user"}],
+        "lifecycle": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []}
+      },
+      "emission_allowed": true,
+      "allowed_modalities": ["requested"],
+      "allowed_event_times": [],
+      "event_time_may_be_null": true,
+      "allowed_valid_times": [],
+      "valid_time_may_be_null": true,
+      "unresolved_required_fields": [],
+      "time_case": "none"
+    },
+    {
+      "private_case_id": "shoe-size-attribute",
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_003_005",
+      "expected_decision": "emit_l1",
+      "expected_typed_candidate": {
+        "kind": "attribute",
+        "predicate": {"surface": "尺码为", "sense": "product.shoe_size", "canonical_operator": "has_shoe_size"},
+        "local_entities": [
+          {"local_entity_id": "entity-01", "surface": "该运动鞋"},
+          {"local_entity_id": "entity-02", "surface": "6码"}
+        ],
+        "roles": [
+          {"role": "item", "role_name": "商品", "local_entity_id": "entity-01"},
+          {"role": "value", "role_name": "尺码", "local_entity_id": "entity-02"}
+        ],
+        "modality": "actual",
+        "polarity": "positive",
+        "time": {"event_time": null, "valid_time": null},
+        "condition_bindings": [],
+        "scope_bindings": [],
+        "derivation": {"method": "explicit", "basis": null, "evidence_ids": ["evidence-35cc97213b9f1ac5ecaabde17f283066dbe5e67a87f3c63a6a0b73f940bd8b3d"]},
+        "evidence_bindings": [{"evidence_id": "evidence-35cc97213b9f1ac5ecaabde17f283066dbe5e67a87f3c63a6a0b73f940bd8b3d", "speaker": "tool"}],
+        "lifecycle": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []}
+      },
+      "emission_allowed": true,
+      "allowed_modalities": ["actual"],
+      "allowed_event_times": [],
+      "event_time_may_be_null": true,
+      "allowed_valid_times": [],
+      "valid_time_may_be_null": true,
+      "unresolved_required_fields": [],
+      "time_case": "none"
+    },
+    {
+      "private_case_id": "return-request-submitted",
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_001_005",
+      "expected_decision": "emit_l1",
+      "expected_typed_candidate": {
+        "kind": "event",
+        "predicate": {"surface": "已提交", "sense": "commerce.return_submission", "canonical_operator": "submit_return_request"},
+        "local_entities": [{"local_entity_id": "entity-01", "surface": "平板退货请求"}],
+        "roles": [{"role": "theme", "role_name": "退货请求", "local_entity_id": "entity-01"}],
+        "modality": "actual",
+        "polarity": "positive",
+        "time": {"event_time": null, "valid_time": null},
+        "condition_bindings": [],
+        "scope_bindings": [],
+        "derivation": {"method": "explicit", "basis": null, "evidence_ids": ["evidence-ad00e0b28b83f97874abf0846749ac4543b03b9e7c4b034ef4a37961c0e5c188"]},
+        "evidence_bindings": [{"evidence_id": "evidence-ad00e0b28b83f97874abf0846749ac4543b03b9e7c4b034ef4a37961c0e5c188", "speaker": "tool"}],
+        "lifecycle": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": ["K_tau-bench-cand-001-650fada2c0dc_000_004"], "conflicts_with_candidate_refs": []},
+        "operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []}
+      },
+      "emission_allowed": true,
+      "allowed_modalities": ["actual"],
+      "allowed_event_times": [],
+      "event_time_may_be_null": true,
+      "allowed_valid_times": [],
+      "valid_time_may_be_null": true,
+      "unresolved_required_fields": [],
+      "time_case": "unresolved"
+    },
+    {
+      "private_case_id": "superseded-tablet-return-plan",
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_004",
+      "expected_decision": "emit_l1",
+      "expected_typed_candidate": {
+        "kind": "task",
+        "predicate": {"surface": "计划退回", "sense": "commerce.planned_return", "canonical_operator": "plan_return"},
+        "local_entities": [
+          {"local_entity_id": "entity-01", "surface": "代理"},
+          {"local_entity_id": "entity-02", "surface": "订单 #W2692684 中的平板"},
+          {"local_entity_id": "entity-03", "surface": "用户"}
+        ],
+        "roles": [
+          {"role": "planner", "role_name": "计划执行者", "local_entity_id": "entity-01"},
+          {"role": "theme", "role_name": "退回对象", "local_entity_id": "entity-02"}
+        ],
+        "modality": "planned",
+        "polarity": "positive",
+        "time": {"event_time": null, "valid_time": null},
+        "condition_bindings": [{"operator": "when", "value": "用户确认执行", "local_entity_ids": ["entity-03"]}],
+        "scope_bindings": [],
+        "derivation": {"method": "explicit", "basis": null, "evidence_ids": ["evidence-ef659c440dfbeaa5d572d60ce18d7e129269484af610aca508c108e84599a544"]},
+        "evidence_bindings": [{"evidence_id": "evidence-ef659c440dfbeaa5d572d60ce18d7e129269484af610aca508c108e84599a544", "speaker": "assistant"}],
+        "lifecycle": {"lifecycle": "superseded", "replacement_candidate_ref": "K_tau-bench-cand-001-650fada2c0dc_001_005", "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []}
+      },
+      "emission_allowed": true,
+      "allowed_modalities": ["planned"],
+      "allowed_event_times": [],
+      "event_time_may_be_null": true,
+      "allowed_valid_times": [],
+      "valid_time_may_be_null": true,
+      "unresolved_required_fields": [],
+      "time_case": "none"
+    },
+    {
+      "private_case_id": "resolved-conversation-time-anchor",
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_002",
+      "expected_decision": "emit_l1",
+      "expected_typed_candidate": {
+        "kind": "attribute",
+        "predicate": {"surface": "是", "sense": "conversation.time_anchor", "canonical_operator": "has_time_anchor"},
+        "local_entities": [
+          {"local_entity_id": "entity-01", "surface": "当前时间锚"},
+          {"local_entity_id": "entity-02", "surface": "2024 年 5 月 2 日"}
+        ],
+        "roles": [
+          {"role": "anchor", "role_name": "时间锚", "local_entity_id": "entity-01"},
+          {"role": "value", "role_name": "日期", "local_entity_id": "entity-02"}
+        ],
+        "modality": "actual",
+        "polarity": "positive",
+        "time": {"event_time": null, "valid_time": "2024-05-02"},
+        "condition_bindings": [],
+        "scope_bindings": [],
+        "derivation": {"method": "explicit", "basis": null, "evidence_ids": ["evidence-eaff1b21576852e9d9904d087733c28a457922de130b74177638e5fb396b473f"]},
+        "evidence_bindings": [{"evidence_id": "evidence-eaff1b21576852e9d9904d087733c28a457922de130b74177638e5fb396b473f", "speaker": "user"}],
+        "lifecycle": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []}
+      },
+      "emission_allowed": true,
+      "allowed_modalities": ["actual"],
+      "allowed_event_times": [],
+      "event_time_may_be_null": true,
+      "allowed_valid_times": ["2024-05-02"],
+      "valid_time_may_be_null": false,
+      "unresolved_required_fields": [],
+      "time_case": "resolved"
+    },
+    {
+      "private_case_id": "unresolved-relative-departure-time",
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_001",
+      "expected_decision": "emit_l1",
+      "expected_typed_candidate": {
+        "kind": "event",
+        "predicate": {"surface": "计划出发", "sense": "travel.departure_plan", "canonical_operator": "plan_departure"},
+        "local_entities": [
+          {"local_entity_id": "entity-01", "surface": "用户"},
+          {"local_entity_id": "entity-02", "surface": "去程"}
+        ],
+        "roles": [
+          {"role": "traveler", "role_name": "出行者", "local_entity_id": "entity-01"},
+          {"role": "journey_leg", "role_name": "行程段", "local_entity_id": "entity-02"}
+        ],
+        "modality": "planned",
+        "polarity": "positive",
+        "time": {"event_time": null, "valid_time": null},
+        "condition_bindings": [],
+        "scope_bindings": [{"operator": "applies_to", "value": "去程", "local_entity_ids": ["entity-02"]}],
+        "derivation": {"method": "context_completed", "basis": "“今天”可解析为说话当日，但本轮没有可用于确定日历日期的时间锚点。", "evidence_ids": ["evidence-412aa5494228af3db85850b650be132bcb295bd2e35809384aa13db8661a4029"]},
+        "evidence_bindings": [{"evidence_id": "evidence-412aa5494228af3db85850b650be132bcb295bd2e35809384aa13db8661a4029", "speaker": "user"}],
+        "lifecycle": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []}
+      },
+      "emission_allowed": true,
+      "allowed_modalities": ["planned"],
+      "allowed_event_times": [],
+      "event_time_may_be_null": true,
+      "allowed_valid_times": [],
+      "valid_time_may_be_null": true,
+      "unresolved_required_fields": [],
+      "time_case": "unresolved"
+    },
+    {
+      "private_case_id": "corrected-unresolved-price-reference",
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_004_001",
+      "expected_decision": "abstain",
+      "expected_typed_candidate": null,
+      "emission_allowed": false,
+      "allowed_modalities": [],
+      "allowed_event_times": [],
+      "event_time_may_be_null": true,
+      "allowed_valid_times": [],
+      "valid_time_may_be_null": true,
+      "unresolved_required_fields": ["cross_turn_referent"],
+      "time_case": "none"
+    },
+    {
+      "private_case_id": "unsupported-possible-generalization",
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_005",
+      "expected_decision": "abstain",
+      "expected_typed_candidate": null,
+      "emission_allowed": false,
+      "allowed_modalities": [],
+      "allowed_event_times": [],
+      "event_time_may_be_null": true,
+      "allowed_valid_times": [],
+      "valid_time_may_be_null": true,
+      "unresolved_required_fields": ["unsupported_modality"],
+      "time_case": "none"
+    },
+    {
+      "private_case_id": "question-only-no-memory",
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_003",
+      "expected_decision": "no_memory",
+      "expected_typed_candidate": null,
+      "emission_allowed": false,
+      "allowed_modalities": [],
+      "allowed_event_times": [],
+      "event_time_may_be_null": true,
+      "allowed_valid_times": [],
+      "valid_time_may_be_null": true,
+      "unresolved_required_fields": [],
+      "time_case": "none"
+    },
+    {
+      "private_case_id": "confirmed-runtime-error-hypothesis",
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_002_005",
+      "expected_decision": "emit_l1",
+      "expected_typed_candidate": {
+        "kind": "state",
+        "predicate": {"surface": "更像", "sense": "software.failure_likely_cause", "canonical_operator": "likely_caused_by"},
+        "local_entities": [
+          {"local_entity_id": "entity-01", "surface": "app 立刻关闭"},
+          {"local_entity_id": "entity-02", "surface": "运行时错误"}
+        ],
+        "roles": [
+          {"role": "symptom", "role_name": "症状", "local_entity_id": "entity-01"},
+          {"role": "likely_cause", "role_name": "可能原因", "local_entity_id": "entity-02"}
+        ],
+        "modality": "hypothetical",
+        "polarity": "positive",
+        "time": {"event_time": null, "valid_time": null},
+        "condition_bindings": [],
+        "scope_bindings": [],
+        "derivation": {"method": "explicit", "basis": null, "evidence_ids": ["evidence-cbf15aa12c3b740138f3baefbec94407d9937ade929d45f7bf0859bc5aee27b6"]},
+        "evidence_bindings": [{"evidence_id": "evidence-cbf15aa12c3b740138f3baefbec94407d9937ade929d45f7bf0859bc5aee27b6", "speaker": "assistant"}],
+        "lifecycle": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "operation_provenance": {"confirmed_by_operation_refs": ["R_wildchat-learn-cand-001-8def27ce661d_003"], "added_by_operation_refs": []}
+      },
+      "emission_allowed": true,
+      "allowed_modalities": ["hypothetical"],
+      "allowed_event_times": [],
+      "event_time_may_be_null": true,
+      "allowed_valid_times": [],
+      "valid_time_may_be_null": true,
+      "unresolved_required_fields": [],
+      "time_case": "none"
+    }
+  ]
+}

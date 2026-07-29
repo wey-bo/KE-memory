@@ -18,6 +18,15 @@ The service package includes an SDK-neutral `MCPMemoryFacade` for `memory_add`, 
 `memory_answer_context`, `memory_get`, and `memory_forget`. It also defines a `PrincipalRegistry`
 contract and deterministic reference implementation for future tenant/user/agent registration.
 
+
+## Research and Next-prep Snapshot
+
+`research/next-prep/` contains a branch-local snapshot of the H100 KE-memory next-prep workspace used for representation-neutral contracts, evidence-closure diagnostics, identity/membership gates, QuerySlotPlan work, and L1 ontology linking/admission prototypes. It is preserved for handoff and isolated follow-up development; it is not an installable runtime package root.
+
+Do not place migrated research snapshots under `eval/`. `eval/` is reserved for future automatic evaluation logic, runners, scorers, and stable fixtures after the end-to-end memory flow is ready.
+
+See `research/next-prep/NORMALIZATION.md` for copy policy, omitted heavy run directories, and parallel-session boundaries.
+
 ## CI/CD
 
 All CI providers should invoke the same entry point:

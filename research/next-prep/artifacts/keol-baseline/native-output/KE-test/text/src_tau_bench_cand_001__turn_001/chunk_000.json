@@ -1,0 +1,157 @@
+{
+  "source": {
+    "source_id": "src_tau_bench_cand_001__turn_001",
+    "file": "keol-input/turns/tau-bench-cand-001__turn-001.txt",
+    "file_type": "txt",
+    "category": "text",
+    "metadata": {
+      "unit_id": "tau-bench-cand-001__turn-001",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "turn_index": 1,
+      "json_pointer": "/candidates/8/turns/0",
+      "source": "τ-bench historical retail / tau-bench-gpt-4o-retail.json / record_index=30 / task_id=30 / trial=0 / user_ordinal=6..10",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "chunk": {
+    "id": "chunk_f979d2009c95b798da03",
+    "index": 0,
+    "text": "用户：\n那就退回平板吧。另外，我刚买的充电器是配这个平板的，你能把充电器也取消吗？\n\nAgent：\n可以，计划如下：1. 退回订单 #W2692684 中的平板，退款退回现有礼品卡；2. 取消订单 #W9373487 中的便携式充电器，原因记为“已不再需要”。请确认是否执行。",
+    "size": 138,
+    "metadata": {
+      "unit_id": "tau-bench-cand-001__turn-001",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "turn_index": 1,
+      "json_pointer": "/candidates/8/turns/0",
+      "source": "τ-bench historical retail / tau-bench-gpt-4o-retail.json / record_index=30 / task_id=30 / trial=0 / user_ordinal=6..10",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "n_user",
+      "name": "用户",
+      "type": "Person",
+      "description": "请求退回平板并取消充电器订单的人。",
+      "source_chunk_id": "chunk_f979d2009c95b798da03"
+    },
+    {
+      "id": "n_tablet",
+      "name": "平板",
+      "type": "Product",
+      "description": "用户要求退回的商品。",
+      "source_chunk_id": "chunk_f979d2009c95b798da03"
+    },
+    {
+      "id": "n_charger",
+      "name": "便携式充电器",
+      "type": "Product",
+      "description": "为该平板购买、用户要求取消的商品。",
+      "source_chunk_id": "chunk_f979d2009c95b798da03"
+    },
+    {
+      "id": "n_tablet_order",
+      "name": "订单 #W2692684",
+      "type": "Order",
+      "description": "Agent 计划从中退回平板的订单。",
+      "source_chunk_id": "chunk_f979d2009c95b798da03"
+    },
+    {
+      "id": "n_charger_order",
+      "name": "订单 #W9373487",
+      "type": "Order",
+      "description": "Agent 计划取消的充电器订单。",
+      "source_chunk_id": "chunk_f979d2009c95b798da03"
+    },
+    {
+      "id": "n_return",
+      "name": "平板退货",
+      "type": "ReturnRequest",
+      "description": "等待用户确认执行的退货计划。",
+      "source_chunk_id": "chunk_f979d2009c95b798da03"
+    },
+    {
+      "id": "n_cancel",
+      "name": "充电器取消",
+      "type": "CancellationRequest",
+      "description": "等待用户确认执行的取消计划。",
+      "source_chunk_id": "chunk_f979d2009c95b798da03"
+    },
+    {
+      "id": "n_card",
+      "name": "现有礼品卡",
+      "type": "PaymentMethod",
+      "description": "平板退款的计划退回方式。",
+      "source_chunk_id": "chunk_f979d2009c95b798da03"
+    },
+    {
+      "id": "n_reason",
+      "name": "已不再需要",
+      "type": "CancellationReason",
+      "description": "Agent 计划记录的充电器取消原因。",
+      "source_chunk_id": "chunk_f979d2009c95b798da03"
+    }
+  ],
+  "relations": [
+    {
+      "source_entity": "n_user",
+      "target_entity": "n_return",
+      "relation_type": "requests",
+      "description": "用户请求退回平板。"
+    },
+    {
+      "source_entity": "n_user",
+      "target_entity": "n_cancel",
+      "relation_type": "requests",
+      "description": "用户请求取消充电器。"
+    },
+    {
+      "source_entity": "n_charger",
+      "target_entity": "n_tablet",
+      "relation_type": "compatible_with",
+      "description": "用户说明充电器是配该平板购买的。"
+    },
+    {
+      "source_entity": "n_tablet_order",
+      "target_entity": "n_tablet",
+      "relation_type": "contains",
+      "description": "订单 #W2692684 包含待退平板。"
+    },
+    {
+      "source_entity": "n_charger_order",
+      "target_entity": "n_charger",
+      "relation_type": "contains",
+      "description": "订单 #W9373487 包含待取消充电器。"
+    },
+    {
+      "source_entity": "n_return",
+      "target_entity": "n_tablet",
+      "relation_type": "targets",
+      "description": "退货请求针对平板。"
+    },
+    {
+      "source_entity": "n_return",
+      "target_entity": "n_card",
+      "relation_type": "refund_to",
+      "description": "Agent 计划把退款退回现有礼品卡。"
+    },
+    {
+      "source_entity": "n_cancel",
+      "target_entity": "n_charger",
+      "relation_type": "targets",
+      "description": "取消请求针对便携式充电器。"
+    },
+    {
+      "source_entity": "n_cancel",
+      "target_entity": "n_reason",
+      "relation_type": "reason",
+      "description": "计划记录的取消原因为已不再需要。"
+    }
+  ]
+}

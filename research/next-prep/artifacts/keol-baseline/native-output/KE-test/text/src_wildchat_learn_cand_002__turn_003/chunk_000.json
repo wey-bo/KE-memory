@@ -1,0 +1,190 @@
+{
+  "source": {
+    "source_id": "src_wildchat_learn_cand_002__turn_003",
+    "file": "keol-input/turns/wildchat-learn-cand-002__turn-003.txt",
+    "file_type": "txt",
+    "category": "text",
+    "metadata": {
+      "unit_id": "wildchat-learn-cand-002__turn-003",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "turn_index": 3,
+      "json_pointer": "/candidates/3/turns/2",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=e0aeabf3573990b3b4fe5fd6dc87af3f / model=gpt-3.5-turbo-0613 / user_ordinal=1..4 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "chunk": {
+    "id": "chunk_e868fa53751fe4f753f8",
+    "index": 0,
+    "text": "用户：\n我说得更具体一点：我要改变二声的 F0 转折点和 offset，让它逐渐变成三声，而且每一步都要等距。PSOLA 应该怎么用？\n\nAgent：\n可以先从录音生成 Pitch，再转为 Manipulation 对象，在 Manipulation 窗口中使用替换音高的功能，以 PSOLA 为方法调整目标音高。把总变化范围按 9 个等距级别分配，并保持时长和其他参数一致。",
+    "size": 188,
+    "metadata": {
+      "unit_id": "wildchat-learn-cand-002__turn-003",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "turn_index": 3,
+      "json_pointer": "/candidates/3/turns/2",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=e0aeabf3573990b3b4fe5fd6dc87af3f / model=gpt-3.5-turbo-0613 / user_ordinal=1..4 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "n1",
+      "name": "二声",
+      "type": "ToneCategory",
+      "description": "用户要修改的起始声调。",
+      "source_chunk_id": "chunk_e868fa53751fe4f753f8"
+    },
+    {
+      "id": "n2",
+      "name": "三声",
+      "type": "ToneCategory",
+      "description": "用户要逐渐逼近的目标声调。",
+      "source_chunk_id": "chunk_e868fa53751fe4f753f8"
+    },
+    {
+      "id": "n3",
+      "name": "F0 转折点",
+      "type": "AcousticParameter",
+      "description": "用户明确要改变的音高参数。",
+      "source_chunk_id": "chunk_e868fa53751fe4f753f8"
+    },
+    {
+      "id": "n4",
+      "name": "F0 offset",
+      "type": "AcousticParameter",
+      "description": "用户明确要改变的音高偏移参数。",
+      "source_chunk_id": "chunk_e868fa53751fe4f753f8"
+    },
+    {
+      "id": "n5",
+      "name": "9 个等距级别",
+      "type": "ExperimentalConstraint",
+      "description": "用户要求每一步等距，Agent 重述为九个级别。",
+      "source_chunk_id": "chunk_e868fa53751fe4f753f8"
+    },
+    {
+      "id": "n6",
+      "name": "PSOLA",
+      "type": "SignalProcessingMethod",
+      "description": "用户要求使用的处理方法。",
+      "source_chunk_id": "chunk_e868fa53751fe4f753f8"
+    },
+    {
+      "id": "n7",
+      "name": "录音",
+      "type": "AudioRecording",
+      "description": "生成 Pitch 的输入录音。",
+      "source_chunk_id": "chunk_e868fa53751fe4f753f8"
+    },
+    {
+      "id": "n8",
+      "name": "Pitch",
+      "type": "SoftwareObject",
+      "description": "Agent 建议从录音生成的 Praat 对象。",
+      "source_chunk_id": "chunk_e868fa53751fe4f753f8"
+    },
+    {
+      "id": "n9",
+      "name": "Manipulation",
+      "type": "SoftwareObject",
+      "description": "Agent 建议由 Pitch 转换得到的对象。",
+      "source_chunk_id": "chunk_e868fa53751fe4f753f8"
+    },
+    {
+      "id": "n10",
+      "name": "替换音高",
+      "type": "Action",
+      "description": "Agent 建议在 Manipulation 窗口中执行的功能。",
+      "source_chunk_id": "chunk_e868fa53751fe4f753f8"
+    },
+    {
+      "id": "n11",
+      "name": "总变化范围",
+      "type": "NumericRange",
+      "description": "Agent 建议按九个级别分配的参数范围。",
+      "source_chunk_id": "chunk_e868fa53751fe4f753f8"
+    },
+    {
+      "id": "n12",
+      "name": "时长",
+      "type": "AcousticParameter",
+      "description": "Agent 建议在各级别保持一致的参数。",
+      "source_chunk_id": "chunk_e868fa53751fe4f753f8"
+    }
+  ],
+  "relations": [
+    {
+      "source_entity": "n3",
+      "target_entity": "n1",
+      "relation_type": "MODIFIES",
+      "description": "用户要改变二声的 F0 转折点。"
+    },
+    {
+      "source_entity": "n4",
+      "target_entity": "n1",
+      "relation_type": "MODIFIES",
+      "description": "用户要改变二声的 F0 offset。"
+    },
+    {
+      "source_entity": "n1",
+      "target_entity": "n2",
+      "relation_type": "TRANSFORMS_TO",
+      "description": "目标是让二声逐渐变成三声。"
+    },
+    {
+      "source_entity": "n5",
+      "target_entity": "n3",
+      "relation_type": "CONSTRAINS",
+      "description": "F0 转折点变化需按等距级别设置。"
+    },
+    {
+      "source_entity": "n5",
+      "target_entity": "n4",
+      "relation_type": "CONSTRAINS",
+      "description": "F0 offset 变化需按等距级别设置。"
+    },
+    {
+      "source_entity": "n7",
+      "target_entity": "n8",
+      "relation_type": "GENERATES",
+      "description": "Agent 建议先从录音生成 Pitch。"
+    },
+    {
+      "source_entity": "n8",
+      "target_entity": "n9",
+      "relation_type": "CONVERTS_TO",
+      "description": "Pitch 再转为 Manipulation 对象。"
+    },
+    {
+      "source_entity": "n9",
+      "target_entity": "n10",
+      "relation_type": "SUPPORTS",
+      "description": "在 Manipulation 窗口中执行替换音高。"
+    },
+    {
+      "source_entity": "n10",
+      "target_entity": "n6",
+      "relation_type": "USES",
+      "description": "替换音高以 PSOLA 为方法。"
+    },
+    {
+      "source_entity": "n11",
+      "target_entity": "n5",
+      "relation_type": "DISTRIBUTED_ACROSS",
+      "description": "总变化范围分配到九个等距级别。"
+    },
+    {
+      "source_entity": "n5",
+      "target_entity": "n12",
+      "relation_type": "KEEPS_CONSTANT",
+      "description": "各级别保持时长一致。"
+    }
+  ]
+}

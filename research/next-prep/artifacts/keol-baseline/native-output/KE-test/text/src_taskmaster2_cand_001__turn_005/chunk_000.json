@@ -1,0 +1,112 @@
+{
+  "source": {
+    "source_id": "src_taskmaster2_cand_001__turn_005",
+    "file": "keol-input/turns/taskmaster2-cand-001__turn-005.txt",
+    "file_type": "txt",
+    "category": "text",
+    "metadata": {
+      "unit_id": "taskmaster2-cand-001__turn-005",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "turn_index": 5,
+      "json_pointer": "/candidates/7/turns/4",
+      "source": "Taskmaster-2 flights/train-00000-of-00001.parquet / conversation=dlg-0486d642-4627-489a-a0f3-14d1c2b97068 / user_ordinal=1..6 / raw_utterance_index=0..15",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "chunk": {
+    "id": "chunk_3d25865af53e6bb24cb3",
+    "index": 0,
+    "text": "用户：\n这个价格有点贵，还是选你刚才说的第一班吧。\n\nAgent：\n好的，已经把全部信息发送到你的邮箱。",
+    "size": 52,
+    "metadata": {
+      "unit_id": "taskmaster2-cand-001__turn-005",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "turn_index": 5,
+      "json_pointer": "/candidates/7/turns/4",
+      "source": "Taskmaster-2 flights/train-00000-of-00001.parquet / conversation=dlg-0486d642-4627-489a-a0f3-14d1c2b97068 / user_ordinal=1..6 / raw_utterance_index=0..15",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "n_user",
+      "name": "用户",
+      "type": "Person",
+      "description": "比较方案并选择第一班航班的人。",
+      "source_chunk_id": "chunk_3d25865af53e6bb24cb3"
+    },
+    {
+      "id": "n_current_option",
+      "name": "当前航班方案",
+      "type": "FlightOption",
+      "description": "用户认为价格较贵的方案。",
+      "source_chunk_id": "chunk_3d25865af53e6bb24cb3"
+    },
+    {
+      "id": "n_expensive",
+      "name": "价格有点贵",
+      "type": "PriceAssessment",
+      "description": "用户对当前方案价格的评价。",
+      "source_chunk_id": "chunk_3d25865af53e6bb24cb3"
+    },
+    {
+      "id": "n_first_option",
+      "name": "第一班航班",
+      "type": "FlightOption",
+      "description": "用户最终选择的先前航班方案。",
+      "source_chunk_id": "chunk_3d25865af53e6bb24cb3"
+    },
+    {
+      "id": "n_details",
+      "name": "航班全部信息",
+      "type": "Information",
+      "description": "Agent 表示已发送的航班信息。",
+      "source_chunk_id": "chunk_3d25865af53e6bb24cb3"
+    },
+    {
+      "id": "n_email",
+      "name": "用户邮箱",
+      "type": "CommunicationEndpoint",
+      "description": "Agent 发送航班信息的目的地。",
+      "source_chunk_id": "chunk_3d25865af53e6bb24cb3"
+    }
+  ],
+  "relations": [
+    {
+      "source_entity": "n_user",
+      "target_entity": "n_current_option",
+      "relation_type": "rejects",
+      "description": "用户因价格较高放弃当前方案。"
+    },
+    {
+      "source_entity": "n_current_option",
+      "target_entity": "n_expensive",
+      "relation_type": "assessed_as",
+      "description": "用户认为当前方案价格有点贵。"
+    },
+    {
+      "source_entity": "n_user",
+      "target_entity": "n_first_option",
+      "relation_type": "selects",
+      "description": "用户选择先前提到的第一班航班。"
+    },
+    {
+      "source_entity": "n_details",
+      "target_entity": "n_email",
+      "relation_type": "sent_to",
+      "description": "Agent 表示已把全部信息发送至用户邮箱。"
+    },
+    {
+      "source_entity": "n_details",
+      "target_entity": "n_first_option",
+      "relation_type": "describes",
+      "description": "发送的信息对应用户选定的航班方案。"
+    }
+  ]
+}

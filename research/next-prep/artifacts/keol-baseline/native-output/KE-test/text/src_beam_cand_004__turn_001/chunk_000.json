@@ -1,0 +1,210 @@
+{
+  "source": {
+    "source_id": "src_beam_cand_004__turn_001",
+    "file": "keol-input/turns/beam-cand-004__turn-001.txt",
+    "file_type": "txt",
+    "category": "text",
+    "metadata": {
+      "unit_id": "beam-cand-004__turn-001",
+      "candidate_id": "BEAM-CAND-004",
+      "turn_index": 1,
+      "json_pointer": "/candidates/9/turns/0",
+      "source": "Mohammadta/BEAM / split=100K / conversation_id=19 / session_index=1 / message_index=0..9 / source_time_anchor=2024-05-02",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "chunk": {
+    "id": "chunk_1a9cf27928f323e5bf9a",
+    "index": 0,
+    "text": "用户：\n我有点担心遗嘱执行人的选择。Douglas 已于 4 月 15 日在珊瑚湾咖啡馆（Coral Bay Café）接受了这个安排，而 Kimberly 和 Bradley 等家人参加了 3 月 25 日在我家举行的那次会议。我一直在想，如果他们知道我选的是 Douglas，会怎么看？\n\nAgent：\n选择遗嘱执行人可能是敏感决定，尤其牵涉家庭关系。你可以和 Kimberly、Bradley 坦诚沟通，说明选择 Douglas 的原因；如果仍有顾虑，也可以讨论共同遗嘱执行人，或向遗产规划律师 Stephanie 征求意见。",
+    "size": 266,
+    "metadata": {
+      "unit_id": "beam-cand-004__turn-001",
+      "candidate_id": "BEAM-CAND-004",
+      "turn_index": 1,
+      "json_pointer": "/candidates/9/turns/0",
+      "source": "Mohammadta/BEAM / split=100K / conversation_id=19 / session_index=1 / message_index=0..9 / source_time_anchor=2024-05-02",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "n_user",
+      "name": "用户",
+      "type": "Person",
+      "description": "担心遗嘱执行人选择及家人反应的人。",
+      "source_chunk_id": "chunk_1a9cf27928f323e5bf9a"
+    },
+    {
+      "id": "n_choice",
+      "name": "遗嘱执行人选择",
+      "type": "Decision",
+      "description": "用户选择 Douglas 为遗嘱执行人的决定。",
+      "source_chunk_id": "chunk_1a9cf27928f323e5bf9a"
+    },
+    {
+      "id": "n_douglas",
+      "name": "Douglas",
+      "type": "Person",
+      "description": "用户选定且已接受安排的遗嘱执行人。",
+      "source_chunk_id": "chunk_1a9cf27928f323e5bf9a"
+    },
+    {
+      "id": "n_acceptance",
+      "name": "执行人安排接受",
+      "type": "Event",
+      "description": "Douglas 接受遗嘱执行人安排的事件。",
+      "source_chunk_id": "chunk_1a9cf27928f323e5bf9a"
+    },
+    {
+      "id": "n_apr15",
+      "name": "4 月 15 日",
+      "type": "CalendarDate",
+      "description": "Douglas 接受安排的日期，年份未在本 turn 给出。",
+      "source_chunk_id": "chunk_1a9cf27928f323e5bf9a"
+    },
+    {
+      "id": "n_cafe",
+      "name": "珊瑚湾咖啡馆（Coral Bay Café）",
+      "type": "Place",
+      "description": "Douglas 接受安排的地点。",
+      "source_chunk_id": "chunk_1a9cf27928f323e5bf9a"
+    },
+    {
+      "id": "n_meeting",
+      "name": "家庭会议",
+      "type": "Event",
+      "description": "3 月 25 日在用户家举行的会议。",
+      "source_chunk_id": "chunk_1a9cf27928f323e5bf9a"
+    },
+    {
+      "id": "n_mar25",
+      "name": "3 月 25 日",
+      "type": "CalendarDate",
+      "description": "家庭会议日期，年份未在本 turn 给出。",
+      "source_chunk_id": "chunk_1a9cf27928f323e5bf9a"
+    },
+    {
+      "id": "n_home",
+      "name": "用户家",
+      "type": "Place",
+      "description": "家庭会议地点。",
+      "source_chunk_id": "chunk_1a9cf27928f323e5bf9a"
+    },
+    {
+      "id": "n_kimberly",
+      "name": "Kimberly",
+      "type": "Person",
+      "description": "参加家庭会议的家人。",
+      "source_chunk_id": "chunk_1a9cf27928f323e5bf9a"
+    },
+    {
+      "id": "n_bradley",
+      "name": "Bradley",
+      "type": "Person",
+      "description": "参加家庭会议的家人。",
+      "source_chunk_id": "chunk_1a9cf27928f323e5bf9a"
+    },
+    {
+      "id": "n_reaction",
+      "name": "家人对选择的看法",
+      "type": "Concern",
+      "description": "用户担心 Kimberly、Bradley 等人知道选择 Douglas 后的反应。",
+      "source_chunk_id": "chunk_1a9cf27928f323e5bf9a"
+    },
+    {
+      "id": "n_stephanie",
+      "name": "Stephanie",
+      "type": "Person",
+      "description": "Agent 明确称为遗产规划律师的人。",
+      "source_chunk_id": "chunk_1a9cf27928f323e5bf9a"
+    },
+    {
+      "id": "n_lawyer_role",
+      "name": "遗产规划律师",
+      "type": "ProfessionalRole",
+      "description": "Agent 为 Stephanie 指明的专业角色。",
+      "source_chunk_id": "chunk_1a9cf27928f323e5bf9a"
+    }
+  ],
+  "relations": [
+    {
+      "source_entity": "n_user",
+      "target_entity": "n_choice",
+      "relation_type": "concerned_about",
+      "description": "用户担心遗嘱执行人的选择。"
+    },
+    {
+      "source_entity": "n_choice",
+      "target_entity": "n_douglas",
+      "relation_type": "selects",
+      "description": "用户的决定选择 Douglas 为执行人。"
+    },
+    {
+      "source_entity": "n_douglas",
+      "target_entity": "n_acceptance",
+      "relation_type": "participates_in",
+      "description": "Douglas 接受执行人安排。"
+    },
+    {
+      "source_entity": "n_acceptance",
+      "target_entity": "n_apr15",
+      "relation_type": "date",
+      "description": "接受事件发生于 4 月 15 日。"
+    },
+    {
+      "source_entity": "n_acceptance",
+      "target_entity": "n_cafe",
+      "relation_type": "location",
+      "description": "接受事件发生在珊瑚湾咖啡馆。"
+    },
+    {
+      "source_entity": "n_meeting",
+      "target_entity": "n_mar25",
+      "relation_type": "date",
+      "description": "家庭会议发生于 3 月 25 日。"
+    },
+    {
+      "source_entity": "n_meeting",
+      "target_entity": "n_home",
+      "relation_type": "location",
+      "description": "家庭会议在用户家举行。"
+    },
+    {
+      "source_entity": "n_kimberly",
+      "target_entity": "n_meeting",
+      "relation_type": "attends",
+      "description": "Kimberly 参加了家庭会议。"
+    },
+    {
+      "source_entity": "n_bradley",
+      "target_entity": "n_meeting",
+      "relation_type": "attends",
+      "description": "Bradley 参加了家庭会议。"
+    },
+    {
+      "source_entity": "n_user",
+      "target_entity": "n_reaction",
+      "relation_type": "concerned_about",
+      "description": "用户担心家人对选择 Douglas 的看法。"
+    },
+    {
+      "source_entity": "n_reaction",
+      "target_entity": "n_choice",
+      "relation_type": "about",
+      "description": "家人反应的关注对象是执行人选择。"
+    },
+    {
+      "source_entity": "n_stephanie",
+      "target_entity": "n_lawyer_role",
+      "relation_type": "has_role",
+      "description": "Agent 将 Stephanie 描述为遗产规划律师。"
+    }
+  ]
+}

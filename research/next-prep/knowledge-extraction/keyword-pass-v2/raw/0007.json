@@ -1,0 +1,3864 @@
+{
+  "candidate_id": "WILDCHAT-MGMT-CAND-001",
+  "items": [
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0001",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_001",
+          "surface": "律师事务所",
+          "normalized_zh": "律师事务所",
+          "query_lemma": "law firm",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "law_firm",
+          "sense_hint": "The intended professional-workplace sense of law firm.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0002",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_001",
+          "surface": "asserted",
+          "normalized_zh": "asserted",
+          "query_lemma": "asserted",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as an assertion.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "asserted",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0003",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_002",
+          "surface": "更多工作",
+          "normalized_zh": "更多工作",
+          "query_lemma": "additional work",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "additional_work_assignment",
+          "sense_hint": "The intended professional-workplace sense of additional work.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0004",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_002",
+          "surface": "asserted",
+          "normalized_zh": "asserted",
+          "query_lemma": "asserted",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as an assertion.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "asserted",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0005",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_003",
+          "surface": "更多工作",
+          "normalized_zh": "更多工作",
+          "query_lemma": "additional work",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "additional_work_assignment",
+          "sense_hint": "The intended professional-workplace sense of additional work.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0006",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_003",
+          "surface": "planned",
+          "normalized_zh": "planned",
+          "query_lemma": "planned",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge records an intended future action.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "planned",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0007",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_005",
+          "surface": "休假安排",
+          "normalized_zh": "休假安排",
+          "query_lemma": "leave arrangement",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "employee_leave_arrangement",
+          "sense_hint": "The intended professional-workplace sense of leave arrangement.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0008",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_005",
+          "surface": "questioned",
+          "normalized_zh": "questioned",
+          "query_lemma": "questioned",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge records a question.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "questioned",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0009",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_006",
+          "surface": "工作",
+          "normalized_zh": "工作",
+          "query_lemma": "work assignment",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "professional_work_assignment",
+          "sense_hint": "The intended professional-workplace sense of work assignment.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0010",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_006",
+          "surface": "现在",
+          "normalized_zh": "现在",
+          "query_lemma": "now",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge applies at the present time.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "now",
+          "datatype": "time",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0011",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_006",
+          "surface": "项目可能和休假冲突",
+          "normalized_zh": "项目可能和休假冲突",
+          "query_lemma": "possible_project_leave_conflict",
+          "keyword_kind": "qualifier",
+          "keyword_type": "condition",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "A possible conflict between the project and leave.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "possible_project_leave_conflict",
+          "datatype": "condition",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0012",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_006",
+          "surface": "possible",
+          "normalized_zh": "possible",
+          "query_lemma": "possible",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge expresses a possibility.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "possible",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0013",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_007",
+          "surface": "沟通",
+          "normalized_zh": "沟通",
+          "query_lemma": "communicate",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "verb",
+          "sense_key": "workplace_communication",
+          "sense_hint": "The intended professional-workplace sense of communicate.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0014",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_007",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_008",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0015",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_008",
+          "surface": "沟通",
+          "normalized_zh": "沟通",
+          "query_lemma": "communicate",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "verb",
+          "sense_key": "transparent_workplace_communication",
+          "sense_hint": "The intended professional-workplace sense of communicate.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0016",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_008",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_009",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0017",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_009",
+          "surface": "交付",
+          "normalized_zh": "交付",
+          "query_lemma": "work delivery",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "work_delivery",
+          "sense_hint": "The intended professional-workplace sense of work delivery.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0018",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_009",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_010",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0019",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_010",
+          "surface": "休假日期",
+          "normalized_zh": "休假日期",
+          "query_lemma": "leave date",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "employee_leave_date",
+          "sense_hint": "The intended professional-workplace sense of leave date.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0020",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_010",
+          "surface": "项目很紧急",
+          "normalized_zh": "项目很紧急",
+          "query_lemma": "project_is_urgent",
+          "keyword_kind": "qualifier",
+          "keyword_type": "condition",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The project is urgent.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "project_is_urgent",
+          "datatype": "condition",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0021",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_010",
+          "surface": "在分派前",
+          "normalized_zh": "在分派前",
+          "query_lemma": "before_assignment",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The disclosure occurs before work assignment.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "before_assignment",
+          "datatype": "other",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0022",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_010",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_011",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0023",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_011",
+          "surface": "工作范围",
+          "normalized_zh": "工作范围",
+          "query_lemma": "work scope",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "work_scope",
+          "sense_hint": "The intended professional-workplace sense of work scope.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0024",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_011",
+          "surface": "任务可调整或委派",
+          "normalized_zh": "任务可调整或委派",
+          "query_lemma": "task_adjustable_or_delegable",
+          "keyword_kind": "qualifier",
+          "keyword_type": "condition",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The task can be adjusted or delegated.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "task_adjustable_or_delegable",
+          "datatype": "condition",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0025",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_011",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_012",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0026",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_012",
+          "surface": "交接",
+          "normalized_zh": "交接",
+          "query_lemma": "work handover",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "work_handover",
+          "sense_hint": "The intended professional-workplace sense of work handover.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0027",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_012",
+          "surface": "在离开前",
+          "normalized_zh": "在离开前",
+          "query_lemma": "在离开前",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied temporal qualifier.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "在离开前",
+          "datatype": "other",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0028",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_012",
+          "surface": "任务可调整或委派",
+          "normalized_zh": "任务可调整或委派",
+          "query_lemma": "task_adjustable_or_delegable",
+          "keyword_kind": "qualifier",
+          "keyword_type": "condition",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The task can be adjusted or delegated.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "task_adjustable_or_delegable",
+          "datatype": "condition",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0029",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_012",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0030",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_001",
+          "surface": "工作量",
+          "normalized_zh": "工作量",
+          "query_lemma": "workload",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "noun",
+          "sense_key": "professional_workload",
+          "sense_hint": "The intended professional-workplace sense of workload.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0031",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_001",
+          "surface": "过去两个月",
+          "normalized_zh": "过去两个月",
+          "query_lemma": "P2M",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge covers the preceding two months.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "P2M",
+          "datatype": "duration",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0032",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_001",
+          "surface": "asserted",
+          "normalized_zh": "asserted",
+          "query_lemma": "asserted",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as an assertion.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "asserted",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0033",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_002",
+          "surface": "工作不多",
+          "normalized_zh": "工作不多",
+          "query_lemma": "low workload",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "low_workload",
+          "sense_hint": "The intended professional-workplace sense of low workload.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0034",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_002",
+          "surface": "过去两个月",
+          "normalized_zh": "过去两个月",
+          "query_lemma": "P2M",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge covers the preceding two months.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "P2M",
+          "datatype": "duration",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0035",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_002",
+          "surface": "asserted",
+          "normalized_zh": "asserted",
+          "query_lemma": "asserted",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as an assertion.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "asserted",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0036",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_003",
+          "surface": "工作分派",
+          "normalized_zh": "工作分派",
+          "query_lemma": "work assignment",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "work_assignment",
+          "sense_hint": "The intended professional-workplace sense of work assignment.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0037",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_003",
+          "surface": "questioned",
+          "normalized_zh": "questioned",
+          "query_lemma": "questioned",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge records a question.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "questioned",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0038",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_004",
+          "surface": "合伙人",
+          "normalized_zh": "合伙人",
+          "query_lemma": "law firm partner",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "law_firm_partner",
+          "sense_hint": "The intended professional-workplace sense of law firm partner.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0039",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_004",
+          "surface": "主动联系",
+          "normalized_zh": "主动联系",
+          "query_lemma": "proactive contact",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "other",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "noun",
+          "sense_key": "proactive_contact",
+          "sense_hint": "The intended professional-workplace sense of proactive contact.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0040",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_004",
+          "surface": "questioned",
+          "normalized_zh": "questioned",
+          "query_lemma": "questioned",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge records a question.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "questioned",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0041",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_005",
+          "surface": "转介",
+          "normalized_zh": "转介",
+          "query_lemma": "professional referral",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "professional_referral",
+          "sense_hint": "The intended professional-workplace sense of professional referral.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0042",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_005",
+          "surface": "questioned",
+          "normalized_zh": "questioned",
+          "query_lemma": "questioned",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge records a question.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "questioned",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0043",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_006",
+          "surface": "合伙人",
+          "normalized_zh": "合伙人",
+          "query_lemma": "law firm partner",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "law_firm_partner",
+          "sense_hint": "The intended professional-workplace sense of law firm partner.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0044",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_006",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0045",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_007",
+          "surface": "支持",
+          "normalized_zh": "支持",
+          "query_lemma": "provide support",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "provide_colleague_support",
+          "sense_hint": "The intended professional-workplace sense of provide support.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0046",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_007",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_008",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0047",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_008",
+          "surface": "所内活动",
+          "normalized_zh": "所内活动",
+          "query_lemma": "internal firm event",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "internal_firm_event",
+          "sense_hint": "The intended professional-workplace sense of internal firm event.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0048",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_008",
+          "surface": "建立关系",
+          "normalized_zh": "建立关系",
+          "query_lemma": "relationship building",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "result",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "noun",
+          "sense_key": "professional_relationship_building",
+          "sense_hint": "The intended professional-workplace sense of relationship building.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0049",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_008",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_009",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0050",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_009",
+          "surface": "内部工作机会平台",
+          "normalized_zh": "内部工作机会平台",
+          "query_lemma": "internal work platform",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "internal_work_opportunity_platform",
+          "sense_hint": "The intended professional-workplace sense of internal work platform.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0051",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_009",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_010",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0052",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_010",
+          "surface": "客户拓展",
+          "normalized_zh": "客户拓展",
+          "query_lemma": "client development",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "client_development",
+          "sense_hint": "The intended professional-workplace sense of client development.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0053",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_010",
+          "surface": "合规前提下",
+          "normalized_zh": "合规前提下",
+          "query_lemma": "subject_to_compliance",
+          "keyword_kind": "qualifier",
+          "keyword_type": "condition",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The activity must remain compliant.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "subject_to_compliance",
+          "datatype": "condition",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0054",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_010",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_011",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0055",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_011",
+          "surface": "业务拓展",
+          "normalized_zh": "业务拓展",
+          "query_lemma": "business development",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "business_development",
+          "sense_hint": "The intended professional-workplace sense of business development.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0056",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_011",
+          "surface": "合规前提下",
+          "normalized_zh": "合规前提下",
+          "query_lemma": "subject_to_compliance",
+          "keyword_kind": "qualifier",
+          "keyword_type": "condition",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The activity must remain compliant.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "subject_to_compliance",
+          "datatype": "condition",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0057",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_011",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_012",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0058",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_012",
+          "surface": "可用时间",
+          "normalized_zh": "可用时间",
+          "query_lemma": "availability",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "work_availability",
+          "sense_hint": "The intended professional-workplace sense of availability.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0059",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_012",
+          "surface": "持续",
+          "normalized_zh": "持续",
+          "query_lemma": "continuous",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "attribute",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "adjective",
+          "sense_key": "continuous_communication",
+          "sense_hint": "The intended professional-workplace sense of continuous.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0060",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_012",
+          "surface": "明确",
+          "normalized_zh": "明确",
+          "query_lemma": "explicit",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "attribute",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "adjective",
+          "sense_key": "explicit_communication",
+          "sense_hint": "The intended professional-workplace sense of explicit.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0061",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_012",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_013",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0062",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_013",
+          "surface": "承担的工作",
+          "normalized_zh": "承担的工作",
+          "query_lemma": "work responsibility",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "work_responsibility",
+          "sense_hint": "The intended professional-workplace sense of work responsibility.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0063",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_013",
+          "surface": "持续",
+          "normalized_zh": "持续",
+          "query_lemma": "continuous",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "attribute",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "adjective",
+          "sense_key": "continuous_communication",
+          "sense_hint": "The intended professional-workplace sense of continuous.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0064",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_013",
+          "surface": "明确",
+          "normalized_zh": "明确",
+          "query_lemma": "explicit",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "attribute",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "adjective",
+          "sense_key": "explicit_communication",
+          "sense_hint": "The intended professional-workplace sense of explicit.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0065",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_013",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0066",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_001",
+          "surface": "事务所合伙人",
+          "normalized_zh": "事务所合伙人",
+          "query_lemma": "law firm partner",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "law_firm_partner",
+          "sense_hint": "The intended professional-workplace sense of law firm partner.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0067",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_001",
+          "surface": "planned",
+          "normalized_zh": "planned",
+          "query_lemma": "planned",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge records an intended future action.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "planned",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0068",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_002",
+          "surface": "业务拓展",
+          "normalized_zh": "业务拓展",
+          "query_lemma": "business development",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "business_development",
+          "sense_hint": "The intended professional-workplace sense of business development.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0069",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_002",
+          "surface": "planned",
+          "normalized_zh": "planned",
+          "query_lemma": "planned",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge records an intended future action.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "planned",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0070",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_003",
+          "surface": "当前月份",
+          "normalized_zh": "当前月份",
+          "query_lemma": "calendar month",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "part_of_speech": "noun",
+          "sense_key": "current_calendar_month",
+          "sense_hint": "The intended professional-workplace sense of calendar month.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0071",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_003",
+          "surface": "11 月",
+          "normalized_zh": "11 月",
+          "query_lemma": "--11",
+          "keyword_kind": "literal",
+          "keyword_type": "time",
+          "semantic_role": "value",
+          "source_field": "object",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The current calendar month is November.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "--11",
+          "datatype": "date",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0072",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_003",
+          "surface": "现在",
+          "normalized_zh": "现在",
+          "query_lemma": "now",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge applies at the present time.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "now",
+          "datatype": "time",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0073",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_003",
+          "surface": "asserted",
+          "normalized_zh": "asserted",
+          "query_lemma": "asserted",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as an assertion.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "asserted",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0074",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_004",
+          "surface": "休假",
+          "normalized_zh": "休假",
+          "query_lemma": "leave",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "noun",
+          "sense_key": "employee_leave",
+          "sense_hint": "The intended professional-workplace sense of leave.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0075",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_004",
+          "surface": "12 月 15 日到 12 月 26 日",
+          "normalized_zh": "12 月 15 日到 12 月 26 日",
+          "query_lemma": "--12-15/--12-26",
+          "keyword_kind": "literal",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Annual date range from December 15 through December 26.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "--12-15/--12-26",
+          "datatype": "date",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0076",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_004",
+          "surface": "planned",
+          "normalized_zh": "planned",
+          "query_lemma": "planned",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge records an intended future action.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "planned",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0077",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_005",
+          "surface": "休假",
+          "normalized_zh": "休假",
+          "query_lemma": "leave",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "employee_leave",
+          "sense_hint": "The intended professional-workplace sense of leave.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0078",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_005",
+          "surface": "今天",
+          "normalized_zh": "今天",
+          "query_lemma": "today",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The action is situated on the current day.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "today",
+          "datatype": "date",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0079",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_005",
+          "surface": "联系工作时",
+          "normalized_zh": "联系工作时",
+          "query_lemma": "while_seeking_work",
+          "keyword_kind": "qualifier",
+          "keyword_type": "condition",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "While contacting others to seek work assignments.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "while_seeking_work",
+          "datatype": "condition",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0080",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_005",
+          "surface": "questioned",
+          "normalized_zh": "questioned",
+          "query_lemma": "questioned",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge records a question.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "questioned",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0081",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_006",
+          "surface": "工作分派",
+          "normalized_zh": "工作分派",
+          "query_lemma": "work assignment",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "work_assignment",
+          "sense_hint": "The intended professional-workplace sense of work assignment.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0082",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_006",
+          "surface": "现在",
+          "normalized_zh": "现在",
+          "query_lemma": "now",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge applies at the present time.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "now",
+          "datatype": "time",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0083",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_006",
+          "surface": "possible",
+          "normalized_zh": "possible",
+          "query_lemma": "possible",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge expresses a possibility.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "possible",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0084",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_007",
+          "surface": "休假安排",
+          "normalized_zh": "休假安排",
+          "query_lemma": "leave arrangement",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "employee_leave_arrangement",
+          "sense_hint": "The intended professional-workplace sense of leave arrangement.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0085",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_007",
+          "surface": "现在",
+          "normalized_zh": "现在",
+          "query_lemma": "now",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge applies at the present time.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "now",
+          "datatype": "time",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0086",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_007",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_008",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0087",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_008",
+          "surface": "可用时间",
+          "normalized_zh": "可用时间",
+          "query_lemma": "availability",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "work_availability",
+          "sense_hint": "The intended professional-workplace sense of availability.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0088",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_008",
+          "surface": "安排工作时",
+          "normalized_zh": "安排工作时",
+          "query_lemma": "during_work_scheduling",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The availability is considered while scheduling work.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "during_work_scheduling",
+          "datatype": "other",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0089",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_008",
+          "surface": "asserted",
+          "normalized_zh": "asserted",
+          "query_lemma": "asserted",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as an assertion.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "asserted",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_009",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0090",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_009",
+          "surface": "工作",
+          "normalized_zh": "工作",
+          "query_lemma": "work",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "professional_work",
+          "sense_hint": "The intended professional-workplace sense of work.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0091",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_009",
+          "surface": "休假前",
+          "normalized_zh": "休假前",
+          "query_lemma": "before_leave",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The work availability is before the leave period.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "before_leave",
+          "datatype": "other",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0092",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_009",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_010",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0093",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_010",
+          "surface": "工作",
+          "normalized_zh": "工作",
+          "query_lemma": "work",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "professional_work",
+          "sense_hint": "The intended professional-workplace sense of work.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0094",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_010",
+          "surface": "休假后",
+          "normalized_zh": "休假后",
+          "query_lemma": "after_leave",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The work availability is after the leave period.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "after_leave",
+          "datatype": "other",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0095",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_010",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_011",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0096",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_011",
+          "surface": "完成任务",
+          "normalized_zh": "完成任务",
+          "query_lemma": "complete task",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "verb",
+          "sense_key": "complete_work_task",
+          "sense_hint": "The intended professional-workplace sense of complete task.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0097",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_011",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_012",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0098",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_012",
+          "surface": "交接",
+          "normalized_zh": "交接",
+          "query_lemma": "work handover",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "work_handover",
+          "sense_hint": "The intended professional-workplace sense of work handover.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0099",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_012",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_013",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0100",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_013",
+          "surface": "透明",
+          "normalized_zh": "透明",
+          "query_lemma": "transparency",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "communication_transparency",
+          "sense_hint": "The intended professional-workplace sense of transparency.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0101",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_013",
+          "surface": "asserted",
+          "normalized_zh": "asserted",
+          "query_lemma": "asserted",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as an assertion.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "asserted",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_014",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0102",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_014",
+          "surface": "信号",
+          "normalized_zh": "信号",
+          "query_lemma": "signal",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "work_capacity_signal",
+          "sense_hint": "The intended professional-workplace sense of signal.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0103",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_014",
+          "surface": "休假",
+          "normalized_zh": "休假",
+          "query_lemma": "leave",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "topic",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "noun",
+          "sense_key": "employee_leave",
+          "sense_hint": "The intended professional-workplace sense of leave.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0104",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_014",
+          "surface": "asserted",
+          "normalized_zh": "asserted",
+          "query_lemma": "asserted",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as an assertion.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "asserted",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0105",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_001",
+          "surface": "邮件",
+          "normalized_zh": "邮件",
+          "query_lemma": "email message",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "email_message",
+          "sense_hint": "The intended professional-workplace sense of email message.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0106",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_001",
+          "surface": "今天",
+          "normalized_zh": "今天",
+          "query_lemma": "today",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The action is situated on the current day.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "today",
+          "datatype": "date",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0107",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_001",
+          "surface": "planned",
+          "normalized_zh": "planned",
+          "query_lemma": "planned",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge records an intended future action.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "planned",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0108",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_002",
+          "surface": "有空",
+          "normalized_zh": "有空",
+          "query_lemma": "available",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "adjective",
+          "sense_key": "work_available",
+          "sense_hint": "The intended professional-workplace sense of available.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0109",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_002",
+          "surface": "今天",
+          "normalized_zh": "今天",
+          "query_lemma": "today",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The action is situated on the current day.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "today",
+          "datatype": "date",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0110",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_002",
+          "surface": "邮件中",
+          "normalized_zh": "邮件中",
+          "query_lemma": "email message",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "location",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "noun",
+          "sense_key": "email_message_context",
+          "sense_hint": "The intended professional-workplace sense of email message.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0111",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_002",
+          "surface": "planned",
+          "normalized_zh": "planned",
+          "query_lemma": "planned",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge records an intended future action.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "planned",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0112",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_003",
+          "surface": "接工作",
+          "normalized_zh": "接工作",
+          "query_lemma": "accept work",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "verb",
+          "sense_key": "accept_work_assignment",
+          "sense_hint": "The intended professional-workplace sense of accept work.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0113",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_003",
+          "surface": "今天",
+          "normalized_zh": "今天",
+          "query_lemma": "today",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The action is situated on the current day.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "today",
+          "datatype": "date",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0114",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_003",
+          "surface": "邮件中",
+          "normalized_zh": "邮件中",
+          "query_lemma": "email message",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "location",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "noun",
+          "sense_key": "email_message_context",
+          "sense_hint": "The intended professional-workplace sense of email message.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0115",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_003",
+          "surface": "planned",
+          "normalized_zh": "planned",
+          "query_lemma": "planned",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge records an intended future action.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "planned",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0116",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_004",
+          "surface": "邮件草稿",
+          "normalized_zh": "邮件草稿",
+          "query_lemma": "email draft",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "email_draft",
+          "sense_hint": "The intended professional-workplace sense of email draft.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0117",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_004",
+          "surface": "questioned",
+          "normalized_zh": "questioned",
+          "query_lemma": "questioned",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge records a question.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "questioned",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0118",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_005",
+          "surface": "融资",
+          "normalized_zh": "融资",
+          "query_lemma": "financing round",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "client_financing_round",
+          "sense_hint": "The intended professional-workplace sense of financing round.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0119",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_005",
+          "surface": "客户 X",
+          "normalized_zh": "客户 X",
+          "query_lemma": "client_x",
+          "keyword_kind": "identifier",
+          "keyword_type": "entity",
+          "semantic_role": "identifier",
+          "source_field": "object",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Pseudonymous client identifier.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "client_x",
+          "datatype": "identifier",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0120",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_005",
+          "surface": "planned",
+          "normalized_zh": "planned",
+          "query_lemma": "planned",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge records an intended future action.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "planned",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0121",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_006",
+          "surface": "出国",
+          "normalized_zh": "出国",
+          "query_lemma": "international travel",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "international_travel",
+          "sense_hint": "The intended professional-workplace sense of international travel.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0122",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_006",
+          "surface": "12 月 15 日到 26 日",
+          "normalized_zh": "12 月 15 日到 26 日",
+          "query_lemma": "--12-15/--12-26",
+          "keyword_kind": "literal",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Annual date range from December 15 through December 26.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "--12-15/--12-26",
+          "datatype": "date",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0123",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_006",
+          "surface": "planned",
+          "normalized_zh": "planned",
+          "query_lemma": "planned",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge records an intended future action.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "planned",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0124",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_007",
+          "surface": "邮件思路",
+          "normalized_zh": "邮件思路",
+          "query_lemma": "email approach",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "email_communication_approach",
+          "sense_hint": "The intended professional-workplace sense of email approach.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0125",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_007",
+          "surface": "asserted",
+          "normalized_zh": "asserted",
+          "query_lemma": "asserted",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as an assertion.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "asserted",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_008",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0126",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_008",
+          "surface": "直接",
+          "normalized_zh": "直接",
+          "query_lemma": "direct",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "adjective",
+          "sense_key": "direct_communication_style",
+          "sense_hint": "The intended professional-workplace sense of direct.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0127",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_008",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_009",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0128",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_009",
+          "surface": "近期项目",
+          "normalized_zh": "近期项目",
+          "query_lemma": "upcoming project",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "upcoming_work_project",
+          "sense_hint": "The intended professional-workplace sense of upcoming project.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0129",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_009",
+          "surface": "第一项",
+          "normalized_zh": "第一项",
+          "query_lemma": "first_item",
+          "keyword_kind": "qualifier",
+          "keyword_type": "condition",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The content appears as the first item.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "first_item",
+          "datatype": "other",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0130",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_009",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_010",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0131",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_010",
+          "surface": "融资时间",
+          "normalized_zh": "融资时间",
+          "query_lemma": "financing timing",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "financing_round_timing",
+          "sense_hint": "The intended professional-workplace sense of financing timing.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0132",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_010",
+          "surface": "客户 X",
+          "normalized_zh": "客户 X",
+          "query_lemma": "client_x",
+          "keyword_kind": "identifier",
+          "keyword_type": "entity",
+          "semantic_role": "identifier",
+          "source_field": "object",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Pseudonymous client identifier.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "client_x",
+          "datatype": "identifier",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0133",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_010",
+          "surface": "第二项",
+          "normalized_zh": "第二项",
+          "query_lemma": "second_item",
+          "keyword_kind": "qualifier",
+          "keyword_type": "condition",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The content appears as the second item.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "second_item",
+          "datatype": "other",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0134",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_010",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_011",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0135",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_011",
+          "surface": "休假日期",
+          "normalized_zh": "休假日期",
+          "query_lemma": "leave date",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "employee_leave_date",
+          "sense_hint": "The intended professional-workplace sense of leave date.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0136",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_011",
+          "surface": "最后",
+          "normalized_zh": "最后",
+          "query_lemma": "final_item",
+          "keyword_kind": "qualifier",
+          "keyword_type": "condition",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The content appears last.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "final_item",
+          "datatype": "other",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0137",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_011",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_012",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0138",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_012",
+          "surface": "交接安排",
+          "normalized_zh": "交接安排",
+          "query_lemma": "handover arrangement",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "work_handover_arrangement",
+          "sense_hint": "The intended professional-workplace sense of handover arrangement.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0139",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_012",
+          "surface": "最后",
+          "normalized_zh": "最后",
+          "query_lemma": "final_item",
+          "keyword_kind": "qualifier",
+          "keyword_type": "condition",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The content appears last.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "final_item",
+          "datatype": "other",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0140",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_012",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_013",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0141",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_013",
+          "surface": "邮件主题",
+          "normalized_zh": "邮件主题",
+          "query_lemma": "email subject",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "part_of_speech": "noun",
+          "sense_key": "email_subject_line",
+          "sense_hint": "The intended professional-workplace sense of email subject.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0142",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_013",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_014",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0143",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_014",
+          "surface": "接手项目",
+          "normalized_zh": "接手项目",
+          "query_lemma": "take over project",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "verb",
+          "sense_key": "take_over_project",
+          "sense_hint": "The intended professional-workplace sense of take over project.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0144",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_014",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_015",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0145",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_015",
+          "surface": "融资时间",
+          "normalized_zh": "融资时间",
+          "query_lemma": "financing timing",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "financing_round_timing",
+          "sense_hint": "The intended professional-workplace sense of financing timing.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0146",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_015",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_016",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0147",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_016",
+          "surface": "待办",
+          "normalized_zh": "待办",
+          "query_lemma": "pending task",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "pending_work_task",
+          "sense_hint": "The intended professional-workplace sense of pending task.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0148",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_016",
+          "surface": "在出发前",
+          "normalized_zh": "在出发前",
+          "query_lemma": "before_departure",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The task is to be completed before departure.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "before_departure",
+          "datatype": "other",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0149",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_016",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_017",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0150",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_017",
+          "surface": "工作顺利衔接",
+          "normalized_zh": "工作顺利衔接",
+          "query_lemma": "work continuity",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "result",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "work_continuity",
+          "sense_hint": "The intended professional-workplace sense of work continuity.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0151",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_017",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0152",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_001",
+          "surface": "正式",
+          "normalized_zh": "正式",
+          "query_lemma": "formal",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "adjective",
+          "sense_key": "formal_email_tone",
+          "sense_hint": "The intended professional-workplace sense of formal.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0153",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_001",
+          "surface": "asserted",
+          "normalized_zh": "asserted",
+          "query_lemma": "asserted",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as an assertion.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "asserted",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0154",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_002",
+          "surface": "初级律师",
+          "normalized_zh": "初级律师",
+          "query_lemma": "junior lawyer",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "junior_lawyer",
+          "sense_hint": "The intended professional-workplace sense of junior lawyer.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0155",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_002",
+          "surface": "asserted",
+          "normalized_zh": "asserted",
+          "query_lemma": "asserted",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as an assertion.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "asserted",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0156",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_003",
+          "surface": "资深律师",
+          "normalized_zh": "资深律师",
+          "query_lemma": "senior lawyer",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "senior_lawyer",
+          "sense_hint": "The intended professional-workplace sense of senior lawyer.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0157",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_003",
+          "surface": "asserted",
+          "normalized_zh": "asserted",
+          "query_lemma": "asserted",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as an assertion.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "asserted",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0158",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_004",
+          "surface": "邮件版本",
+          "normalized_zh": "邮件版本",
+          "query_lemma": "email version",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "email_draft_version",
+          "sense_hint": "The intended professional-workplace sense of email version.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0159",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_004",
+          "surface": "questioned",
+          "normalized_zh": "questioned",
+          "query_lemma": "questioned",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge records a question.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "questioned",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0160",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_005",
+          "surface": "简洁",
+          "normalized_zh": "简洁",
+          "query_lemma": "concise",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "adjective",
+          "sense_key": "concise_email_tone",
+          "sense_hint": "The intended professional-workplace sense of concise.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0161",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_005",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0162",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_006",
+          "surface": "自信",
+          "normalized_zh": "自信",
+          "query_lemma": "confident",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "adjective",
+          "sense_key": "confident_email_tone",
+          "sense_hint": "The intended professional-workplace sense of confident.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0163",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_006",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0164",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_007",
+          "surface": "有空",
+          "normalized_zh": "有空",
+          "query_lemma": "available",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "adjective",
+          "sense_key": "work_available",
+          "sense_hint": "The intended professional-workplace sense of available.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0165",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_007",
+          "surface": "目前",
+          "normalized_zh": "目前",
+          "query_lemma": "now",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The availability applies at the present time.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "now",
+          "datatype": "time",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0166",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_007",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_008",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0167",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_008",
+          "surface": "新的挑战",
+          "normalized_zh": "新的挑战",
+          "query_lemma": "new challenge",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "new_professional_challenge",
+          "sense_hint": "The intended professional-workplace sense of new challenge.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0168",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_008",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_009",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0169",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_009",
+          "surface": "融资轮次",
+          "normalized_zh": "融资轮次",
+          "query_lemma": "financing round",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "client_financing_round",
+          "sense_hint": "The intended professional-workplace sense of financing round.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0170",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_009",
+          "surface": "客户 X",
+          "normalized_zh": "客户 X",
+          "query_lemma": "client_x",
+          "keyword_kind": "identifier",
+          "keyword_type": "entity",
+          "semantic_role": "identifier",
+          "source_field": "object",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Pseudonymous client identifier.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "client_x",
+          "datatype": "identifier",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0171",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_009",
+          "surface": "以便安排优先级",
+          "normalized_zh": "以便安排优先级",
+          "query_lemma": "for_priority_planning",
+          "keyword_kind": "qualifier",
+          "keyword_type": "condition",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The timing is requested to support priority planning.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "for_priority_planning",
+          "datatype": "condition",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0172",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_009",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_010",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0173",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_010",
+          "surface": "出行",
+          "normalized_zh": "出行",
+          "query_lemma": "travel",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "planned_travel",
+          "sense_hint": "The intended professional-workplace sense of travel.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0174",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_010",
+          "surface": "12 月 15 日到 26 日",
+          "normalized_zh": "12 月 15 日到 26 日",
+          "query_lemma": "--12-15/--12-26",
+          "keyword_kind": "literal",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Annual date range from December 15 through December 26.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "--12-15/--12-26",
+          "datatype": "date",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0175",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_010",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_011",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0176",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_011",
+          "surface": "完成任务",
+          "normalized_zh": "完成任务",
+          "query_lemma": "complete task",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "verb",
+          "sense_key": "complete_work_task",
+          "sense_hint": "The intended professional-workplace sense of complete task.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0177",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_011",
+          "surface": "在出发前",
+          "normalized_zh": "在出发前",
+          "query_lemma": "before_departure",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The task is to be completed before departure.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "before_departure",
+          "datatype": "other",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0178",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_011",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_012",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0179",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_012",
+          "surface": "团队协作",
+          "normalized_zh": "团队协作",
+          "query_lemma": "team collaboration",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "team_collaboration",
+          "sense_hint": "The intended professional-workplace sense of team collaboration.",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0180",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_012",
+          "surface": "advised",
+          "normalized_zh": "advised",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "The knowledge is presented as advice.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "translation_confidence": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "source": {
+    "source_id": "src_wildchat_learn_cand_003__turn_002",
+    "file": "keol-input/turns/wildchat-learn-cand-003__turn-002.txt",
+    "file_type": "txt",
+    "category": "text",
+    "metadata": {
+      "unit_id": "wildchat-learn-cand-003__turn-002",
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "turn_index": 2,
+      "json_pointer": "/candidates/5/turns/1",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=8de48fb173aa6af13b8316f180782b33 / model=gpt-3.5-turbo-0613 / user_ordinal=1..3 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "chunk": {
+    "id": "chunk_9f9f22d0c4146e8638cf",
+    "index": 0,
+    "text": "用户：\n能给我一个例子吗？\n\nAgent：\n可以：value = 'example'; hyperlink = make_hyperlink(value); print(hyperlink)。输出是 =HYPERLINK(\"./example\", \"example\")，电子表格会把它识别为可点击链接。",
+    "size": 151,
+    "metadata": {
+      "unit_id": "wildchat-learn-cand-003__turn-002",
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "turn_index": 2,
+      "json_pointer": "/candidates/5/turns/1",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=8de48fb173aa6af13b8316f180782b33 / model=gpt-3.5-turbo-0613 / user_ordinal=1..3 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "n_function",
+      "name": "make_hyperlink",
+      "type": "Function",
+      "description": "生成电子表格超链接公式的函数。",
+      "source_chunk_id": "chunk_9f9f22d0c4146e8638cf"
+    },
+    {
+      "id": "n_value",
+      "name": "example",
+      "type": "ExampleValue",
+      "description": "演示中的 value 参数值。",
+      "source_chunk_id": "chunk_9f9f22d0c4146e8638cf"
+    },
+    {
+      "id": "n_output",
+      "name": "=HYPERLINK(\"./example\", \"example\")",
+      "type": "FormulaValue",
+      "description": "示例代码打印的函数输出。",
+      "source_chunk_id": "chunk_9f9f22d0c4146e8638cf"
+    },
+    {
+      "id": "n_spreadsheet",
+      "name": "电子表格",
+      "type": "Software",
+      "description": "能够识别 HYPERLINK 公式的表格应用。",
+      "source_chunk_id": "chunk_9f9f22d0c4146e8638cf"
+    },
+    {
+      "id": "n_link",
+      "name": "可点击链接",
+      "type": "Hyperlink",
+      "description": "电子表格对公式的呈现结果。",
+      "source_chunk_id": "chunk_9f9f22d0c4146e8638cf"
+    }
+  ],
+  "relations": [
+    {
+      "source_entity": "n_value",
+      "target_entity": "n_function",
+      "relation_type": "input_to",
+      "description": "example 被传给 make_hyperlink。"
+    },
+    {
+      "source_entity": "n_function",
+      "target_entity": "n_output",
+      "relation_type": "produces",
+      "description": "函数产生所示公式字符串。"
+    },
+    {
+      "source_entity": "n_spreadsheet",
+      "target_entity": "n_output",
+      "relation_type": "recognizes",
+      "description": "电子表格把输出识别为公式。"
+    },
+    {
+      "source_entity": "n_output",
+      "target_entity": "n_link",
+      "relation_type": "renders_as",
+      "description": "公式在电子表格中呈现为可点击链接。"
+    }
+  ]
+}

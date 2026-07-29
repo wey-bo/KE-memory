@@ -1,0 +1,220 @@
+{
+  "candidates": [
+    {
+      "output": "(w / want-01\n   :ARG0 (p / person)\n   :ARG1 (b / book-01\n      :ARG0 p\n      :ARG1 (f / flight\n         :mod (r / round-trip)\n         :source (c / city\n            :name (n / name :op1 \"New\" :op2 \"York\" :op3 \"City\"))\n         :destination (c2 / city\n            :name (n2 / name :op1 \"Amsterdam\")))))\n",
+      "output_sha256": "b6e7baa7523188498c59ab2fb572f34d8e485f5c5d7f629c9fbddcb7979a7cc4",
+      "route": "A",
+      "sample_id": "AMR-S001"
+    },
+    {
+      "output": "(w / want-01\n   :ARG0 (s / speaker)\n   :ARG1 (b / book-01\n      :ARG1 (f / flight\n         :mod (r / round-trip)\n         :source (c / city\n            :name (n / name\n               :op1 \"New\"\n               :op2 \"York\"\n               :op3 \"City\"))\n         :destination (a / city\n            :name (n2 / name\n               :op1 \"Amsterdam\")))))\n",
+      "output_sha256": "c2ce52c4fc197336c95f6b9545053835664d4267e0987ff077c0ad807b49ff20",
+      "route": "B",
+      "sample_id": "AMR-S001"
+    },
+    {
+      "output": "{\"schema_version\":\"amr-pilot-atomic-knowledge-v1\",\"items\":[{\"knowledge_id\":\"K001\",\"statement\":\"The speaker would like to book a round-trip flight from New York City to Amsterdam.\",\"evidence_quote\":\"I'd like to book a round-trip flight from New York City to Amsterdam.\"}],\"representation_gaps\":[]}\n",
+      "output_sha256": "7452fa380329d1fc2124e2cafe975d4cd8ebc3c780b40a21c01e0981ec917315",
+      "route": "C",
+      "sample_id": "AMR-S001"
+    },
+    {
+      "output": "(p / proceed-01\n   :polite +\n   :ARG1 (a / and\n            :op1 (r / return-01\n                     :ARG1 (t / tablet))\n            :op2 (c / cancel-01\n                     :ARG1 (c2 / charger))))\n",
+      "output_sha256": "4893b9a5532880f37595ee6c586fc802daa3223ae3f3e8dd6f646d45a6ddd26d",
+      "route": "A",
+      "sample_id": "AMR-S002"
+    },
+    {
+      "output": "(a / and\n   :op1 (r / request-01\n            :ARG0 (s / speaker)\n            :ARG1 (r2 / return-01\n                     :ARG1 (t / tablet)))\n   :op2 (r3 / request-01\n            :ARG0 s\n            :ARG1 (c / cancel-01\n                     :ARG1 (c2 / charger))))\n",
+      "output_sha256": "9f2b01631070b4511e49a8ca8a3a1641ca4bbb2439717876d7871bf1a4f8df5d",
+      "route": "B",
+      "sample_id": "AMR-S002"
+    },
+    {
+      "output": "{\"schema_version\":\"amr-pilot-atomic-knowledge-v1\",\"items\":[{\"knowledge_id\":\"K001\",\"statement\":\"The speaker requests that the tablet be returned.\",\"evidence_quote\":\"please proceed with the return of the tablet\"},{\"knowledge_id\":\"K002\",\"statement\":\"The speaker requests that the charger be cancelled.\",\"evidence_quote\":\"cancellation of the charger\"}],\"representation_gaps\":[]}\n",
+      "output_sha256": "d9f75308a4e8d5d540d091d514580101914634d1744065539f07d4f763259e42",
+      "route": "C",
+      "sample_id": "AMR-S002"
+    },
+    {
+      "output": "(r / responsible-01\n   :ARG0 (g / guardian)\n   :ARG1 (c / care-01\n      :ARG0 g\n      :ARG1 (p / and\n         :op1 (p2 / person\n            :name (n / name\n               :op1 \"Francis\"))\n         :op2 (p3 / person\n            :name (n2 / name\n               :op1 \"Michael\")))\n      :frequency (d / day\n         :quant 1)\n      :mod (i / include-91\n         :ARG1 (n3 / need-01\n            :ARG0 p\n            :mod (a / and\n               :op1 (p4 / physical)\n               :op2 (e / emotional)\n               :op3 (e2 / educational)))))\n   :time (f / future))\n",
+      "output_sha256": "d6306a79b631eec965c29d9c12c096e46735109de15aa95d2d526434778c4931",
+      "route": "A",
+      "sample_id": "AMR-S003"
+    },
+    {
+      "output": "(i / include-91\n   :ARG1 (r / responsible-01\n      :ARG0 (g / guardian)\n      :ARG1 (c / care-01\n         :ARG1 (a / and\n            :op1 (p / person\n               :name (n / name :op1 \"Francis\"))\n            :op2 (m / person\n               :name (n2 / name :op1 \"Michael\")))\n         :mod (d / day\n            :mod (d2 / day)))\n      :time (f / future))\n   :ARG2 (n3 / need\n      :mod (p2 / physical)\n      :poss a)\n   :ARG2 (n4 / need\n      :mod (e / emotional)\n      :poss a)\n   :ARG2 (n5 / need\n      :mod (e2 / educational)\n      :poss a))\n",
+      "output_sha256": "11a0e7d60e6dbc872d8f6e7f12d5b9a1b8806b1862713879549105d2cbd21475",
+      "route": "B",
+      "sample_id": "AMR-S003"
+    },
+    {
+      "output": "{\"schema_version\":\"amr-pilot-atomic-knowledge-v1\",\"items\":[{\"knowledge_id\":\"K001\",\"statement\":\"The guardian will be responsible for the day-to-day care of Francis and Michael.\",\"evidence_quote\":\"The guardian will be responsible for the day-to-day care of Francis and Michael\"},{\"knowledge_id\":\"K002\",\"statement\":\"The guardian's responsibility for the day-to-day care of Francis and Michael includes their physical needs.\",\"evidence_quote\":\"including their physical, emotional, and educational needs\"},{\"knowledge_id\":\"K003\",\"statement\":\"The guardian's responsibility for the day-to-day care of Francis and Michael includes their emotional needs.\",\"evidence_quote\":\"including their physical, emotional, and educational needs\"},{\"knowledge_id\":\"K004\",\"statement\":\"The guardian's responsibility for the day-to-day care of Francis and Michael includes their educational needs.\",\"evidence_quote\":\"including their physical, emotional, and educational needs\"}],\"representation_gaps\":[]}\n",
+      "output_sha256": "d2ee5b220f9b0aa6fa57669b25b5d565bd0b883dd752be2fa1c541baf7ccb3e6",
+      "route": "C",
+      "sample_id": "AMR-S003"
+    },
+    {
+      "output": "(a / and\n   :op1 (l / leave-01\n            :ARG0 (i / i)\n            :time (t / today))\n   :op2 (r / return-01\n            :ARG0 i\n            :time (d / date-entity\n                     :day 19)))\n",
+      "output_sha256": "fb021cf607b271846d452b31ee36331e4d011a72fa700f84a10ffa55c66c286b",
+      "route": "A",
+      "sample_id": "AMR-S004"
+    },
+    {
+      "output": "(a / and\n   :op1 (l / leave-01\n            :ARG0 (s / person)\n            :time (t / today))\n   :op2 (r / return-01\n            :ARG1 s\n            :time (d / date-entity\n                     :day 19)))\n",
+      "output_sha256": "8ad53d3459b880c550898dd41ccd036f303d7d817242d7fc31b3c9cf2a6eb60b",
+      "route": "B",
+      "sample_id": "AMR-S004"
+    },
+    {
+      "output": "{\"schema_version\":\"amr-pilot-atomic-knowledge-v1\",\"items\":[{\"knowledge_id\":\"K001\",\"statement\":\"The speaker will leave today.\",\"evidence_quote\":\"I'll be leaving today\"},{\"knowledge_id\":\"K002\",\"statement\":\"The speaker will return on the 19th.\",\"evidence_quote\":\"coming back on the 19th\"}],\"representation_gaps\":[]}\n",
+      "output_sha256": "e2f907b39f89888c08cfc0ce5e4f9573c4235a33f4d7fc93a5e351a7ecb07bb5",
+      "route": "C",
+      "sample_id": "AMR-S004"
+    },
+    {
+      "output": "(c / credit-01\n   :ARG1 (r / refund-01\n      :ARG1 (m / monetary-quantity\n         :quant 951.21\n         :unit (d / dollar)))\n   :ARG2 (c2 / card\n      :mod (g / gift)\n      :poss (y / you))\n   :time (f / future))\n",
+      "output_sha256": "9d3627106b8e7f47c199397c21f702efadeda97f0934c886630aed5465b02d4b",
+      "route": "A",
+      "sample_id": "AMR-S005"
+    },
+    {
+      "output": "(c / credit-01\n   :ARG1 (r / refund-01\n            :ARG1 (m / monetary-quantity\n                     :quant 951.21\n                     :unit (d / dollar)))\n   :ARG2 (c2 / card\n             :mod (g / gift))\n   :time (f / future))\n",
+      "output_sha256": "1e05ebd936197b3e2facd4a4dd8541137377e8a38524207b7810667a0547a7d5",
+      "route": "B",
+      "sample_id": "AMR-S005"
+    },
+    {
+      "output": "{\"schema_version\":\"amr-pilot-atomic-knowledge-v1\",\"items\":[{\"knowledge_id\":\"K001\",\"statement\":\"The refund of $951.21 will be credited to your gift card.\",\"evidence_quote\":\"The refund of $951.21 will be credited to your gift card.\"}],\"representation_gaps\":[]}\n",
+      "output_sha256": "54ba3dc8391e9995269133cc6bad69bcdc67f56ff92788341acb93d0d58de61e",
+      "route": "C",
+      "sample_id": "AMR-S005"
+    },
+    {
+      "output": "(a / able-01\n   :ARG1 (y / you)\n   :ARG2 (f / finalize-01\n      :ARG0 y\n      :ARG1 (w / will\n         :poss y)\n      :time (d / deadline\n         :time (d2 / date-entity\n            :month 5\n            :day 15\n            :year 2024)))\n   :mod (s / should)\n   :manner (a2 / and\n      :op1 (f2 / follow-01\n         :ARG0 y\n         :ARG1 (s2 / step\n            :mod (t / this)))\n      :op2 (a3 / adhere-01\n         :ARG0 y\n         :ARG1 (t2 / timeline))))\n",
+      "output_sha256": "23346239de4d1c4cfdb480bcb4311359a6e49c575491581c7cc9a486aedad5fd",
+      "route": "A",
+      "sample_id": "AMR-S006"
+    },
+    {
+      "output": "(e / enable-01\n   :ARG0 (a / and\n            :op1 (f / follow-01\n                    :ARG0 (y / you)\n                    :ARG1 (s / step))\n            :op2 (a2 / adhere-01\n                     :ARG0 y\n                     :ARG1 (t / timeline)))\n   :ARG1 (f2 / finalize-01\n             :ARG0 y\n             :ARG1 (w / will\n                       :poss y)\n             :time (d / date-entity\n                      :year 2024\n                      :month 5\n                      :day 15))\n   :mod (s2 / should))\n",
+      "output_sha256": "1ba5ea35d90544a3b558ab9cf25b5a2ce907b3cc65337d70f378ccf931d04933",
+      "route": "B",
+      "sample_id": "AMR-S006"
+    },
+    {
+      "output": "{\"schema_version\":\"amr-pilot-atomic-knowledge-v1\",\"items\":[{\"knowledge_id\":\"K001\",\"statement\":\"Following these steps and adhering to the timeline should enable the addressee to finalize the addressee's will by May 15, 2024.\",\"evidence_quote\":\"By following these steps and adhering to the timeline, you should be able to finalize your will by the deadline of May 15, 2024.\"}],\"representation_gaps\":[]}\n",
+      "output_sha256": "b9ac31742fd18cfa09919f5d575a655fb242ffae7bcbe4e046b55ed18bed3ce8",
+      "route": "C",
+      "sample_id": "AMR-S006"
+    },
+    {
+      "output": "(k / know-01\n   :ARG0 (i / i)\n   :polarity -\n   :ARG1 (p / possible-01\n      :ARG1 (g / go-01\n         :ARG0 i\n         :degree (e / expensive-01\n            :degree (t / that)))))\n",
+      "output_sha256": "97d4f7b616ea87a1949770221822502c99baa9dfdf443267ec60298b473fcd3f",
+      "route": "A",
+      "sample_id": "AMR-S007"
+    },
+    {
+      "output": "(u / uncertain\n   :ARG1 (p / possible-01\n      :ARG1 (c / choose-01\n         :ARG0 (s / speaker)\n         :ARG1 (o / option\n            :ARG1-of (e / expensive-01\n               :degree (t / that))))))\n",
+      "output_sha256": "bd43565b4c1bd33b29422cfb1c262f96ec71937b974bbec8cb021f65bac2bb47",
+      "route": "B",
+      "sample_id": "AMR-S007"
+    },
+    {
+      "output": "{\"schema_version\":\"amr-pilot-atomic-knowledge-v1\",\"items\":[{\"knowledge_id\":\"K001\",\"statement\":\"The speaker is uncertain whether they can choose an option that expensive.\",\"evidence_quote\":\"I don't know if I can go that expensive.\"}],\"representation_gaps\":[]}\n",
+      "output_sha256": "c2ff625a4388d47e9eed35475aa9fc1e17c38227711d0ee419a9dd036515cbd8",
+      "route": "C",
+      "sample_id": "AMR-S007"
+    },
+    {
+      "output": "(s / seem-01\n   :ARG1 (a / available-02\n            :ARG1 (i / item\n                     :mod (e / exact)\n                     :ARG1-of (w / want-01\n                                 :ARG0 (y / you))\n                     :ARG2-of (x / exchange-01\n                                  :ARG0 y))\n            :location (v / inventory\n                         :poss (w2 / we))\n            :time (n / now)\n            :polarity -))\n",
+      "output_sha256": "ffd3baf49cf2d777a5c37945044e796a49edcdc9ba1e62023616219c73c89c46",
+      "route": "A",
+      "sample_id": "AMR-S008"
+    },
+    {
+      "output": "(s / seem-01\n   :ARG1 (a / available-02\n            :polarity -\n            :ARG1 (i / item\n                     :mod (e / exact)\n                     :ARG2-of (x / exchange-01\n                                  :ARG0 (y / you)\n                                  :ARG1-of (w / want-01\n                                               :ARG0 y)))\n            :time (n / now)\n            :location (v / inventory\n                         :poss (w2 / we))))\n",
+      "output_sha256": "5e63481c6d6c07f2959c00c85656c4fbb8896bfd0dd122a19650f73e20841d9a",
+      "route": "B",
+      "sample_id": "AMR-S008"
+    },
+    {
+      "output": "{\"schema_version\":\"amr-pilot-atomic-knowledge-v1\",\"items\":[{\"knowledge_id\":\"K001\",\"statement\":\"It seems that the exact item you want to exchange for is currently not available in our inventory.\",\"evidence_quote\":\"It seems that the exact item you want to exchange for is currently not available in our inventory.\"}],\"representation_gaps\":[]}\n",
+      "output_sha256": "bf838dd04873164344bac81ca5f1a9e458cfeaec27a3986477c6331728e35a10",
+      "route": "C",
+      "sample_id": "AMR-S008"
+    },
+    {
+      "output": "(m / mean-01\n   :ARG1 (n / name-01\n            :ARG1 (p / person\n                     :name (n2 / name\n                               :op1 \"Stephanie\"))\n            :ARG2 (g / guardian))\n   :ARG2 (m2 / manage-01\n            :ARG0 p\n            :ARG1 (a / asset\n                     :mod (f / finance))\n            :time (f2 / future)\n            :mod (a2 / also))\n   :mod (n3 / necessary\n           :polarity -))\n",
+      "output_sha256": "05f041607dd88ac537a05b02dc38bd671edf9ce0aa9cc49b119ecb5616547f27",
+      "route": "A",
+      "sample_id": "AMR-S009"
+    },
+    {
+      "output": "(m / mean-01\n   :ARG1 (n / name-01\n            :ARG1 (p / person\n                     :name (s / name :op1 \"Stephanie\"))\n            :ARG2 (g / guardian))\n   :ARG2 (m2 / manage-01\n            :ARG0 p\n            :ARG1 (a / asset\n                     :mod (f / finance)))\n   :polarity -\n   :mod (n2 / necessary))\n",
+      "output_sha256": "93483e855af9cdb3da730cafe257138f9f56c5b46e6905928f1b1ed0a7bf7a18",
+      "route": "B",
+      "sample_id": "AMR-S009"
+    },
+    {
+      "output": "{\"schema_version\":\"amr-pilot-atomic-knowledge-v1\",\"items\":[{\"knowledge_id\":\"K001\",\"statement\":\"Naming Stephanie as the guardian does not necessarily mean that Stephanie will also manage the financial assets.\",\"evidence_quote\":\"Naming Stephanie as the guardian does not necessarily mean she will also manage the financial assets.\"}],\"representation_gaps\":[]}\n",
+      "output_sha256": "176fafe9ee8b60bc0b27d1d636ad0869fd9d00a75071f68a4aefae990e1b81ae",
+      "route": "C",
+      "sample_id": "AMR-S009"
+    },
+    {
+      "output": "(f / flight-01\n      :ARG1 (a / and\n            :op1 (d / depart-01\n                  :ARG1 f\n                  :time (t1 / time\n                         :hour 18))\n            :op2 (a2 / arrive-01\n                  :ARG1 f\n                  :time (t2 / time\n                         :day (d2 / next)\n                         :hour 7\n                         :minute 35)))\n      :mod (n / nonstop))\n",
+      "output_sha256": "1da78a2a67458dae9e6131ea5cab5e1e9dbbbec6b20e59c5c1733eff86e584f7",
+      "route": "A",
+      "sample_id": "AMR-S010"
+    },
+    {
+      "output": "(a / and\n   :op1 (f / flight\n            :mod (n / nonstop))\n   :op2 (d / depart-01\n            :ARG1 f\n            :time (t / time\n                     :hour 18))\n   :op3 (r / arrive-01\n            :ARG1 f\n            :time (t2 / time\n                      :hour 7\n                      :minute 35\n                      :day (n2 / next))))\n",
+      "output_sha256": "7afc63dc08db4cc45b8f512e22d3552bd5515e4434edc9134a906a81fdba15a5",
+      "route": "B",
+      "sample_id": "AMR-S010"
+    },
+    {
+      "output": "{\"schema_version\":\"amr-pilot-atomic-knowledge-v1\",\"items\":[{\"knowledge_id\":\"K001\",\"statement\":\"There is a nonstop flight.\",\"evidence_quote\":\"There is a nonstop flight\"},{\"knowledge_id\":\"K002\",\"statement\":\"The nonstop flight departs at 6 PM.\",\"evidence_quote\":\"departing at 6 PM\"},{\"knowledge_id\":\"K003\",\"statement\":\"The nonstop flight arrives the next day at 7:35 AM.\",\"evidence_quote\":\"arriving the next day at 7:35 AM\"}],\"representation_gaps\":[]}\n",
+      "output_sha256": "f4b1dce042f195d5239ba37dbaa5d9358de05d21d0ce31e5f53738a5064ab32d",
+      "route": "C",
+      "sample_id": "AMR-S010"
+    },
+    {
+      "output": "(r / request-01\n   :ARG0 (i / i)\n   :ARG1 (p / possible-01\n      :ARG1 (c / cancel-01\n         :ARG0 (y / you)\n         :ARG1 (c2 / charger\n            :ARG0-of (b / buy-01\n               :ARG0 i\n               :time (j / just)))\n         :cause (g / go-with-01\n            :ARG1 c2\n            :ARG2 (t / tablet)))))\n",
+      "output_sha256": "40d4abc113acd1908f2d711774ebddb4a95e53fa41d45cf4c3979390b5acbc77",
+      "route": "A",
+      "sample_id": "AMR-S011"
+    },
+    {
+      "output": "(r / request-01\n   :ARG0 (s / speaker)\n   :ARG1 (c / cancel-01\n      :ARG0 (a / addressee)\n      :ARG1 (ch / charger\n         :ARG1-of (b / buy-01\n            :ARG0 s\n            :time (j / just))))\n   :cause (g / go-with-91\n      :ARG1 ch\n      :ARG2 (t / tablet)))\n",
+      "output_sha256": "e44e7c4a4e3f3fc425398628e3d707a509e0bb67a81b43e4ac23032f94114d09",
+      "route": "B",
+      "sample_id": "AMR-S011"
+    },
+    {
+      "output": "{\"schema_version\":\"amr-pilot-atomic-knowledge-v1\",\"items\":[{\"knowledge_id\":\"K001\",\"statement\":\"The speaker requests that the addressee cancel the charger the speaker just bought.\",\"evidence_quote\":\"could you cancel the charger I just bought\"},{\"knowledge_id\":\"K002\",\"statement\":\"The speaker just bought the charger.\",\"evidence_quote\":\"charger I just bought\"},{\"knowledge_id\":\"K003\",\"statement\":\"The charger goes with the tablet.\",\"evidence_quote\":\"it goes with the tablet\"},{\"knowledge_id\":\"K004\",\"statement\":\"The charger going with the tablet is given as the reason for the speaker's cancellation request.\",\"evidence_quote\":\"since it goes with the tablet\"}],\"representation_gaps\":[]}\n",
+      "output_sha256": "d473fbd218225eb897495867e47f5b6b969bb90082a3ff27db8d9717fd1142fa",
+      "route": "C",
+      "sample_id": "AMR-S011"
+    },
+    {
+      "output": "(r / review-01\n   :ARG0 (c / court)\n   :ARG1 (a / appoint-01\n            :ARG1 (p / person\n                     :name (n / name\n                              :op1 \"Stephanie\")))\n   :condition (n2 / name-01\n                  :ARG0 (y / you)\n                  :ARG1 p\n                  :location (w / will\n                               :poss y))\n   :purpose (e / ensure-01\n                :ARG1 (i / interest-01\n                           :domain a\n                           :mod (b / best)\n                           :ARG1 (c2 / child))))\n",
+      "output_sha256": "8e43e16facdeafb9773d3ac8620364aee40a72938409aa02fcba6761f726ca89",
+      "route": "A",
+      "sample_id": "AMR-S012"
+    },
+    {
+      "output": "(p / prevent-01\n   :polarity -\n   :ARG0 (n / name-01\n            :ARG0 (y / you)\n            :ARG1 (s / person\n                     :name (sn / name\n                               :op1 \"Stephanie\"))\n            :location (w / will))\n   :ARG1 (r / review-01\n            :ARG0 (c / court)\n            :ARG1 (a / appoint-01)\n            :purpose (e / ensure-01\n                      :ARG1 (h / have-condition-91\n                               :ARG1 a\n                               :ARG2 (i / interest\n                                        :mod (b / best)\n                                        :poss (ch / child))))))\n",
+      "output_sha256": "fd7b1fdf5ee260e546f7cfbcddf17a15bac3a4fdc31a7345dfce6ebc9a4303a4",
+      "route": "B",
+      "sample_id": "AMR-S012"
+    },
+    {
+      "output": "{\"schema_version\":\"amr-pilot-atomic-knowledge-v1\",\"items\":[{\"knowledge_id\":\"K001\",\"statement\":\"Naming Stephanie in your will does not prevent the court from reviewing the appointment.\",\"evidence_quote\":\"Even if you name Stephanie in your will, the court will review the appointment\"},{\"knowledge_id\":\"K002\",\"statement\":\"The court will review the appointment.\",\"evidence_quote\":\"the court will review the appointment\"},{\"knowledge_id\":\"K003\",\"statement\":\"The purpose of the court's review of the appointment is to ensure that the appointment is in the best interest of the children.\",\"evidence_quote\":\"to ensure it is in the best interest of the children\"}],\"representation_gaps\":[]}\n",
+      "output_sha256": "276dd0657eca499288b1f22fb3e37a4c1699b502e37cf3acd205251c6c5ba7b1",
+      "route": "C",
+      "sample_id": "AMR-S012"
+    }
+  ]
+}

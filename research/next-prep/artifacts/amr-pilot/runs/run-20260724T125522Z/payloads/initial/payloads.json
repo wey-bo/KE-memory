@@ -1,0 +1,533 @@
+{
+  "payloads": [
+    {
+      "input_sha256": "1b92ba87a9b8d9b5ca50286ba2464ca7a3d7f2937aa71e3698ddf5fb5b9e0fec",
+      "max_output_tokens": 1000,
+      "messages": [
+        {
+          "content": "Extract atomic semantic propositions from one English sentence.\n\nReturn exactly one JSON object with this shape and no Markdown or commentary:\n\n{\"schema_version\":\"amr-pilot-atomic-knowledge-v1\",\"items\":[{\"knowledge_id\":\"K001\",\"statement\":\"...\",\"evidence_quote\":\"...\"}],\"representation_gaps\":[]}\n\nUse consecutive knowledge IDs starting at K001. Each item must state one complete proposition and include a verbatim non-empty evidence quote from the sentence. Preserve participant direction, polarity, modality, intent, time, quantity, conditions, causality, comparison, and clause relations. Keep names, dates, amounts, products, and places faithful to the sentence.\n\nDo not infer unstated facts. Put any meaning that cannot be expressed as a complete atomic proposition in representation_gaps instead of silently discarding or inventing it.\n",
+          "role": "system"
+        },
+        {
+          "content": "Hi, I'd like to book a round-trip flight from New York City to Amsterdam.",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "1bcb9ef175bb9ed94996b0d490afdff5ef32e7afca46e69afe7833f8024e34da",
+      "prompt_sha256": "99f29817d29a01a91a50bdcc6747c5df7c6fcd2c73510646588125d8fc22951b",
+      "prompt_version": "atomic-knowledge-v1",
+      "route": "C",
+      "sample_id": "AMR-S001",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    },
+    {
+      "input_sha256": "1b92ba87a9b8d9b5ca50286ba2464ca7a3d7f2937aa71e3698ddf5fb5b9e0fec",
+      "max_output_tokens": 1200,
+      "messages": [
+        {
+          "content": "Convert one English sentence into one standard Abstract Meaning Representation graph.\n\nReturn exactly one PENMAN graph and nothing else. Do not use Markdown fences, commentary, JSON, or multiple top-level graphs.\n\nUse standard AMR conventions, PropBank frames when available, and standard roles. Preserve every meaning licensed by the sentence that affects events, states, participant roles, polarity, modality, intent, time, quantity, conditions, causality, comparison, or clause relations. Preserve names, dates, amounts, products, and places exactly enough to recover their meaning.\n\nDo not add background assumptions or information from outside the sentence. Do not encode provenance, confidence, evidence, lifecycle state, project fields, or evaluator metadata in the graph.\n",
+          "role": "system"
+        },
+        {
+          "content": "Hi, I'd like to book a round-trip flight from New York City to Amsterdam.",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "5b03c24dc15e12a3d198d2ab134ac05a0d841217c56ebf3d6fee4710a033d8f9",
+      "prompt_sha256": "bad0c1847798ed97ae5c7e90ab28e4a53e7d920fec6dfdb3a098bf437ebfb88b",
+      "prompt_version": "direct-amr-v1",
+      "route": "A",
+      "sample_id": "AMR-S001",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    },
+    {
+      "input_sha256": "eb050a7c46d165289a86c4deac75540566d15a6fff40e5ad0de7a6089aab2d48",
+      "max_output_tokens": 1000,
+      "messages": [
+        {
+          "content": "Extract atomic semantic propositions from one English sentence.\n\nReturn exactly one JSON object with this shape and no Markdown or commentary:\n\n{\"schema_version\":\"amr-pilot-atomic-knowledge-v1\",\"items\":[{\"knowledge_id\":\"K001\",\"statement\":\"...\",\"evidence_quote\":\"...\"}],\"representation_gaps\":[]}\n\nUse consecutive knowledge IDs starting at K001. Each item must state one complete proposition and include a verbatim non-empty evidence quote from the sentence. Preserve participant direction, polarity, modality, intent, time, quantity, conditions, causality, comparison, and clause relations. Keep names, dates, amounts, products, and places faithful to the sentence.\n\nDo not infer unstated facts. Put any meaning that cannot be expressed as a complete atomic proposition in representation_gaps instead of silently discarding or inventing it.\n",
+          "role": "system"
+        },
+        {
+          "content": "Yes, please proceed with the return of the tablet and cancellation of the charger.",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "06bf5d85c7ae635d6efc75b3abc1eb987a84db0081a3a186a0cb201cc371b92c",
+      "prompt_sha256": "99f29817d29a01a91a50bdcc6747c5df7c6fcd2c73510646588125d8fc22951b",
+      "prompt_version": "atomic-knowledge-v1",
+      "route": "C",
+      "sample_id": "AMR-S002",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    },
+    {
+      "input_sha256": "eb050a7c46d165289a86c4deac75540566d15a6fff40e5ad0de7a6089aab2d48",
+      "max_output_tokens": 1200,
+      "messages": [
+        {
+          "content": "Convert one English sentence into one standard Abstract Meaning Representation graph.\n\nReturn exactly one PENMAN graph and nothing else. Do not use Markdown fences, commentary, JSON, or multiple top-level graphs.\n\nUse standard AMR conventions, PropBank frames when available, and standard roles. Preserve every meaning licensed by the sentence that affects events, states, participant roles, polarity, modality, intent, time, quantity, conditions, causality, comparison, or clause relations. Preserve names, dates, amounts, products, and places exactly enough to recover their meaning.\n\nDo not add background assumptions or information from outside the sentence. Do not encode provenance, confidence, evidence, lifecycle state, project fields, or evaluator metadata in the graph.\n",
+          "role": "system"
+        },
+        {
+          "content": "Yes, please proceed with the return of the tablet and cancellation of the charger.",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "90e43cf675d1b053ab01ae9b035e71c9e205c9739579e0ac05203dc4e6d0cd51",
+      "prompt_sha256": "bad0c1847798ed97ae5c7e90ab28e4a53e7d920fec6dfdb3a098bf437ebfb88b",
+      "prompt_version": "direct-amr-v1",
+      "route": "A",
+      "sample_id": "AMR-S002",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    },
+    {
+      "input_sha256": "708b82e91170ae667726abe7f512d856e79bce2be339a6a20783f3e6b251b433",
+      "max_output_tokens": 1000,
+      "messages": [
+        {
+          "content": "Extract atomic semantic propositions from one English sentence.\n\nReturn exactly one JSON object with this shape and no Markdown or commentary:\n\n{\"schema_version\":\"amr-pilot-atomic-knowledge-v1\",\"items\":[{\"knowledge_id\":\"K001\",\"statement\":\"...\",\"evidence_quote\":\"...\"}],\"representation_gaps\":[]}\n\nUse consecutive knowledge IDs starting at K001. Each item must state one complete proposition and include a verbatim non-empty evidence quote from the sentence. Preserve participant direction, polarity, modality, intent, time, quantity, conditions, causality, comparison, and clause relations. Keep names, dates, amounts, products, and places faithful to the sentence.\n\nDo not infer unstated facts. Put any meaning that cannot be expressed as a complete atomic proposition in representation_gaps instead of silently discarding or inventing it.\n",
+          "role": "system"
+        },
+        {
+          "content": "The guardian will be responsible for the day-to-day care of Francis and Michael, including their physical, emotional, and educational needs.",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "9e4f37000e4befe23504110944bc9b8ef7328714600ee502c38e85f81a82bfc1",
+      "prompt_sha256": "99f29817d29a01a91a50bdcc6747c5df7c6fcd2c73510646588125d8fc22951b",
+      "prompt_version": "atomic-knowledge-v1",
+      "route": "C",
+      "sample_id": "AMR-S003",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    },
+    {
+      "input_sha256": "708b82e91170ae667726abe7f512d856e79bce2be339a6a20783f3e6b251b433",
+      "max_output_tokens": 1200,
+      "messages": [
+        {
+          "content": "Convert one English sentence into one standard Abstract Meaning Representation graph.\n\nReturn exactly one PENMAN graph and nothing else. Do not use Markdown fences, commentary, JSON, or multiple top-level graphs.\n\nUse standard AMR conventions, PropBank frames when available, and standard roles. Preserve every meaning licensed by the sentence that affects events, states, participant roles, polarity, modality, intent, time, quantity, conditions, causality, comparison, or clause relations. Preserve names, dates, amounts, products, and places exactly enough to recover their meaning.\n\nDo not add background assumptions or information from outside the sentence. Do not encode provenance, confidence, evidence, lifecycle state, project fields, or evaluator metadata in the graph.\n",
+          "role": "system"
+        },
+        {
+          "content": "The guardian will be responsible for the day-to-day care of Francis and Michael, including their physical, emotional, and educational needs.",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "54e67a63667433e26091a281465e2e123905900e8878f957c4c9420b684835d3",
+      "prompt_sha256": "bad0c1847798ed97ae5c7e90ab28e4a53e7d920fec6dfdb3a098bf437ebfb88b",
+      "prompt_version": "direct-amr-v1",
+      "route": "A",
+      "sample_id": "AMR-S003",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    },
+    {
+      "input_sha256": "41c5605436aaf9d5e1216dad306572a761fc1677916ae387dd622881da7e8176",
+      "max_output_tokens": 1000,
+      "messages": [
+        {
+          "content": "Extract atomic semantic propositions from one English sentence.\n\nReturn exactly one JSON object with this shape and no Markdown or commentary:\n\n{\"schema_version\":\"amr-pilot-atomic-knowledge-v1\",\"items\":[{\"knowledge_id\":\"K001\",\"statement\":\"...\",\"evidence_quote\":\"...\"}],\"representation_gaps\":[]}\n\nUse consecutive knowledge IDs starting at K001. Each item must state one complete proposition and include a verbatim non-empty evidence quote from the sentence. Preserve participant direction, polarity, modality, intent, time, quantity, conditions, causality, comparison, and clause relations. Keep names, dates, amounts, products, and places faithful to the sentence.\n\nDo not infer unstated facts. Put any meaning that cannot be expressed as a complete atomic proposition in representation_gaps instead of silently discarding or inventing it.\n",
+          "role": "system"
+        },
+        {
+          "content": "Well, I'll be leaving today and coming back on the 19th.",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "6f33223ddf89b21dc076871c9d54b710251599c332959c8d9975ab6da6af717c",
+      "prompt_sha256": "99f29817d29a01a91a50bdcc6747c5df7c6fcd2c73510646588125d8fc22951b",
+      "prompt_version": "atomic-knowledge-v1",
+      "route": "C",
+      "sample_id": "AMR-S004",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    },
+    {
+      "input_sha256": "41c5605436aaf9d5e1216dad306572a761fc1677916ae387dd622881da7e8176",
+      "max_output_tokens": 1200,
+      "messages": [
+        {
+          "content": "Convert one English sentence into one standard Abstract Meaning Representation graph.\n\nReturn exactly one PENMAN graph and nothing else. Do not use Markdown fences, commentary, JSON, or multiple top-level graphs.\n\nUse standard AMR conventions, PropBank frames when available, and standard roles. Preserve every meaning licensed by the sentence that affects events, states, participant roles, polarity, modality, intent, time, quantity, conditions, causality, comparison, or clause relations. Preserve names, dates, amounts, products, and places exactly enough to recover their meaning.\n\nDo not add background assumptions or information from outside the sentence. Do not encode provenance, confidence, evidence, lifecycle state, project fields, or evaluator metadata in the graph.\n",
+          "role": "system"
+        },
+        {
+          "content": "Well, I'll be leaving today and coming back on the 19th.",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "4620b13554901eb3042156c2535ee69e65a1b9c8c286e54995fb2721fc2ebae7",
+      "prompt_sha256": "bad0c1847798ed97ae5c7e90ab28e4a53e7d920fec6dfdb3a098bf437ebfb88b",
+      "prompt_version": "direct-amr-v1",
+      "route": "A",
+      "sample_id": "AMR-S004",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    },
+    {
+      "input_sha256": "1fb03418225d4024d3284b4f051125aee9fb692a03c13df25a336e8d3b437257",
+      "max_output_tokens": 1000,
+      "messages": [
+        {
+          "content": "Extract atomic semantic propositions from one English sentence.\n\nReturn exactly one JSON object with this shape and no Markdown or commentary:\n\n{\"schema_version\":\"amr-pilot-atomic-knowledge-v1\",\"items\":[{\"knowledge_id\":\"K001\",\"statement\":\"...\",\"evidence_quote\":\"...\"}],\"representation_gaps\":[]}\n\nUse consecutive knowledge IDs starting at K001. Each item must state one complete proposition and include a verbatim non-empty evidence quote from the sentence. Preserve participant direction, polarity, modality, intent, time, quantity, conditions, causality, comparison, and clause relations. Keep names, dates, amounts, products, and places faithful to the sentence.\n\nDo not infer unstated facts. Put any meaning that cannot be expressed as a complete atomic proposition in representation_gaps instead of silently discarding or inventing it.\n",
+          "role": "system"
+        },
+        {
+          "content": "The refund of $951.21 will be credited to your gift card.",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "b6412bd07136e6522ba3f07fd53f23e773135b21c648b44807e0865dbeafdc8c",
+      "prompt_sha256": "99f29817d29a01a91a50bdcc6747c5df7c6fcd2c73510646588125d8fc22951b",
+      "prompt_version": "atomic-knowledge-v1",
+      "route": "C",
+      "sample_id": "AMR-S005",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    },
+    {
+      "input_sha256": "1fb03418225d4024d3284b4f051125aee9fb692a03c13df25a336e8d3b437257",
+      "max_output_tokens": 1200,
+      "messages": [
+        {
+          "content": "Convert one English sentence into one standard Abstract Meaning Representation graph.\n\nReturn exactly one PENMAN graph and nothing else. Do not use Markdown fences, commentary, JSON, or multiple top-level graphs.\n\nUse standard AMR conventions, PropBank frames when available, and standard roles. Preserve every meaning licensed by the sentence that affects events, states, participant roles, polarity, modality, intent, time, quantity, conditions, causality, comparison, or clause relations. Preserve names, dates, amounts, products, and places exactly enough to recover their meaning.\n\nDo not add background assumptions or information from outside the sentence. Do not encode provenance, confidence, evidence, lifecycle state, project fields, or evaluator metadata in the graph.\n",
+          "role": "system"
+        },
+        {
+          "content": "The refund of $951.21 will be credited to your gift card.",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "8325308d78912168eec11e3a587f5ee486c5db560f7e8380f5c62489603f6a97",
+      "prompt_sha256": "bad0c1847798ed97ae5c7e90ab28e4a53e7d920fec6dfdb3a098bf437ebfb88b",
+      "prompt_version": "direct-amr-v1",
+      "route": "A",
+      "sample_id": "AMR-S005",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    },
+    {
+      "input_sha256": "3c9918ad63867050cf520bdc879362fabb079ebf46e86584ca78ec9cb5f9fff5",
+      "max_output_tokens": 1000,
+      "messages": [
+        {
+          "content": "Extract atomic semantic propositions from one English sentence.\n\nReturn exactly one JSON object with this shape and no Markdown or commentary:\n\n{\"schema_version\":\"amr-pilot-atomic-knowledge-v1\",\"items\":[{\"knowledge_id\":\"K001\",\"statement\":\"...\",\"evidence_quote\":\"...\"}],\"representation_gaps\":[]}\n\nUse consecutive knowledge IDs starting at K001. Each item must state one complete proposition and include a verbatim non-empty evidence quote from the sentence. Preserve participant direction, polarity, modality, intent, time, quantity, conditions, causality, comparison, and clause relations. Keep names, dates, amounts, products, and places faithful to the sentence.\n\nDo not infer unstated facts. Put any meaning that cannot be expressed as a complete atomic proposition in representation_gaps instead of silently discarding or inventing it.\n",
+          "role": "system"
+        },
+        {
+          "content": "By following these steps and adhering to the timeline, you should be able to finalize your will by the deadline of May 15, 2024.",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "000726d3cc38d1a730062361e58b981ca54a0ea0b92b91e65f93e09c9a8b983d",
+      "prompt_sha256": "99f29817d29a01a91a50bdcc6747c5df7c6fcd2c73510646588125d8fc22951b",
+      "prompt_version": "atomic-knowledge-v1",
+      "route": "C",
+      "sample_id": "AMR-S006",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    },
+    {
+      "input_sha256": "3c9918ad63867050cf520bdc879362fabb079ebf46e86584ca78ec9cb5f9fff5",
+      "max_output_tokens": 1200,
+      "messages": [
+        {
+          "content": "Convert one English sentence into one standard Abstract Meaning Representation graph.\n\nReturn exactly one PENMAN graph and nothing else. Do not use Markdown fences, commentary, JSON, or multiple top-level graphs.\n\nUse standard AMR conventions, PropBank frames when available, and standard roles. Preserve every meaning licensed by the sentence that affects events, states, participant roles, polarity, modality, intent, time, quantity, conditions, causality, comparison, or clause relations. Preserve names, dates, amounts, products, and places exactly enough to recover their meaning.\n\nDo not add background assumptions or information from outside the sentence. Do not encode provenance, confidence, evidence, lifecycle state, project fields, or evaluator metadata in the graph.\n",
+          "role": "system"
+        },
+        {
+          "content": "By following these steps and adhering to the timeline, you should be able to finalize your will by the deadline of May 15, 2024.",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "e842ea420d0ffa71d811fc78a3d5d930e1c7c2f362765ec3ae93a97069a80e6e",
+      "prompt_sha256": "bad0c1847798ed97ae5c7e90ab28e4a53e7d920fec6dfdb3a098bf437ebfb88b",
+      "prompt_version": "direct-amr-v1",
+      "route": "A",
+      "sample_id": "AMR-S006",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    },
+    {
+      "input_sha256": "ce14617ad7567508e23091f3e1a3ce5095920bdff8d695dec4a6d4a55f629aba",
+      "max_output_tokens": 1000,
+      "messages": [
+        {
+          "content": "Extract atomic semantic propositions from one English sentence.\n\nReturn exactly one JSON object with this shape and no Markdown or commentary:\n\n{\"schema_version\":\"amr-pilot-atomic-knowledge-v1\",\"items\":[{\"knowledge_id\":\"K001\",\"statement\":\"...\",\"evidence_quote\":\"...\"}],\"representation_gaps\":[]}\n\nUse consecutive knowledge IDs starting at K001. Each item must state one complete proposition and include a verbatim non-empty evidence quote from the sentence. Preserve participant direction, polarity, modality, intent, time, quantity, conditions, causality, comparison, and clause relations. Keep names, dates, amounts, products, and places faithful to the sentence.\n\nDo not infer unstated facts. Put any meaning that cannot be expressed as a complete atomic proposition in representation_gaps instead of silently discarding or inventing it.\n",
+          "role": "system"
+        },
+        {
+          "content": "Oh, I don't know if I can go that expensive.",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "d0cedaeae51279f3d4fecee180b9618886082f7c2acf1cc088dad8c30876f700",
+      "prompt_sha256": "99f29817d29a01a91a50bdcc6747c5df7c6fcd2c73510646588125d8fc22951b",
+      "prompt_version": "atomic-knowledge-v1",
+      "route": "C",
+      "sample_id": "AMR-S007",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    },
+    {
+      "input_sha256": "ce14617ad7567508e23091f3e1a3ce5095920bdff8d695dec4a6d4a55f629aba",
+      "max_output_tokens": 1200,
+      "messages": [
+        {
+          "content": "Convert one English sentence into one standard Abstract Meaning Representation graph.\n\nReturn exactly one PENMAN graph and nothing else. Do not use Markdown fences, commentary, JSON, or multiple top-level graphs.\n\nUse standard AMR conventions, PropBank frames when available, and standard roles. Preserve every meaning licensed by the sentence that affects events, states, participant roles, polarity, modality, intent, time, quantity, conditions, causality, comparison, or clause relations. Preserve names, dates, amounts, products, and places exactly enough to recover their meaning.\n\nDo not add background assumptions or information from outside the sentence. Do not encode provenance, confidence, evidence, lifecycle state, project fields, or evaluator metadata in the graph.\n",
+          "role": "system"
+        },
+        {
+          "content": "Oh, I don't know if I can go that expensive.",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "bf00c3ed88aba695c2e9ee15caf78cf7699fec8611390f547cd68cb3c936d79a",
+      "prompt_sha256": "bad0c1847798ed97ae5c7e90ab28e4a53e7d920fec6dfdb3a098bf437ebfb88b",
+      "prompt_version": "direct-amr-v1",
+      "route": "A",
+      "sample_id": "AMR-S007",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    },
+    {
+      "input_sha256": "d7bfa89deee5e6cbe9602ae6355c0ff0d1a7b5a928c648ea8cc665d6027b8a9c",
+      "max_output_tokens": 1000,
+      "messages": [
+        {
+          "content": "Extract atomic semantic propositions from one English sentence.\n\nReturn exactly one JSON object with this shape and no Markdown or commentary:\n\n{\"schema_version\":\"amr-pilot-atomic-knowledge-v1\",\"items\":[{\"knowledge_id\":\"K001\",\"statement\":\"...\",\"evidence_quote\":\"...\"}],\"representation_gaps\":[]}\n\nUse consecutive knowledge IDs starting at K001. Each item must state one complete proposition and include a verbatim non-empty evidence quote from the sentence. Preserve participant direction, polarity, modality, intent, time, quantity, conditions, causality, comparison, and clause relations. Keep names, dates, amounts, products, and places faithful to the sentence.\n\nDo not infer unstated facts. Put any meaning that cannot be expressed as a complete atomic proposition in representation_gaps instead of silently discarding or inventing it.\n",
+          "role": "system"
+        },
+        {
+          "content": "It seems that the exact item you want to exchange for is currently not available in our inventory.",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "969ef9be703e692ff096cc042477f2b3de1d516ab070f022c65d98a8bd3b32a7",
+      "prompt_sha256": "99f29817d29a01a91a50bdcc6747c5df7c6fcd2c73510646588125d8fc22951b",
+      "prompt_version": "atomic-knowledge-v1",
+      "route": "C",
+      "sample_id": "AMR-S008",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    },
+    {
+      "input_sha256": "d7bfa89deee5e6cbe9602ae6355c0ff0d1a7b5a928c648ea8cc665d6027b8a9c",
+      "max_output_tokens": 1200,
+      "messages": [
+        {
+          "content": "Convert one English sentence into one standard Abstract Meaning Representation graph.\n\nReturn exactly one PENMAN graph and nothing else. Do not use Markdown fences, commentary, JSON, or multiple top-level graphs.\n\nUse standard AMR conventions, PropBank frames when available, and standard roles. Preserve every meaning licensed by the sentence that affects events, states, participant roles, polarity, modality, intent, time, quantity, conditions, causality, comparison, or clause relations. Preserve names, dates, amounts, products, and places exactly enough to recover their meaning.\n\nDo not add background assumptions or information from outside the sentence. Do not encode provenance, confidence, evidence, lifecycle state, project fields, or evaluator metadata in the graph.\n",
+          "role": "system"
+        },
+        {
+          "content": "It seems that the exact item you want to exchange for is currently not available in our inventory.",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "9bce93b7182c70e9c3dc0c22c282708e24f6a8c2bea8c32a78657f7bd3b12e64",
+      "prompt_sha256": "bad0c1847798ed97ae5c7e90ab28e4a53e7d920fec6dfdb3a098bf437ebfb88b",
+      "prompt_version": "direct-amr-v1",
+      "route": "A",
+      "sample_id": "AMR-S008",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    },
+    {
+      "input_sha256": "ff36d81ae2fa7fd06b4367d8771741a21583408f6a5f3becdbeadf111b0e5605",
+      "max_output_tokens": 1000,
+      "messages": [
+        {
+          "content": "Extract atomic semantic propositions from one English sentence.\n\nReturn exactly one JSON object with this shape and no Markdown or commentary:\n\n{\"schema_version\":\"amr-pilot-atomic-knowledge-v1\",\"items\":[{\"knowledge_id\":\"K001\",\"statement\":\"...\",\"evidence_quote\":\"...\"}],\"representation_gaps\":[]}\n\nUse consecutive knowledge IDs starting at K001. Each item must state one complete proposition and include a verbatim non-empty evidence quote from the sentence. Preserve participant direction, polarity, modality, intent, time, quantity, conditions, causality, comparison, and clause relations. Keep names, dates, amounts, products, and places faithful to the sentence.\n\nDo not infer unstated facts. Put any meaning that cannot be expressed as a complete atomic proposition in representation_gaps instead of silently discarding or inventing it.\n",
+          "role": "system"
+        },
+        {
+          "content": "Naming Stephanie as the guardian does not necessarily mean she will also manage the financial assets.",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "d486f445c6f24f4bcbdb5eb7909d0a24141473f4d4c4954ee531edcee38dbf3e",
+      "prompt_sha256": "99f29817d29a01a91a50bdcc6747c5df7c6fcd2c73510646588125d8fc22951b",
+      "prompt_version": "atomic-knowledge-v1",
+      "route": "C",
+      "sample_id": "AMR-S009",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    },
+    {
+      "input_sha256": "ff36d81ae2fa7fd06b4367d8771741a21583408f6a5f3becdbeadf111b0e5605",
+      "max_output_tokens": 1200,
+      "messages": [
+        {
+          "content": "Convert one English sentence into one standard Abstract Meaning Representation graph.\n\nReturn exactly one PENMAN graph and nothing else. Do not use Markdown fences, commentary, JSON, or multiple top-level graphs.\n\nUse standard AMR conventions, PropBank frames when available, and standard roles. Preserve every meaning licensed by the sentence that affects events, states, participant roles, polarity, modality, intent, time, quantity, conditions, causality, comparison, or clause relations. Preserve names, dates, amounts, products, and places exactly enough to recover their meaning.\n\nDo not add background assumptions or information from outside the sentence. Do not encode provenance, confidence, evidence, lifecycle state, project fields, or evaluator metadata in the graph.\n",
+          "role": "system"
+        },
+        {
+          "content": "Naming Stephanie as the guardian does not necessarily mean she will also manage the financial assets.",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "a630b5fb66b15ba7a92763f004acf83cd379eeb81ae2512cc910ae8fab3ad6f9",
+      "prompt_sha256": "bad0c1847798ed97ae5c7e90ab28e4a53e7d920fec6dfdb3a098bf437ebfb88b",
+      "prompt_version": "direct-amr-v1",
+      "route": "A",
+      "sample_id": "AMR-S009",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    },
+    {
+      "input_sha256": "e06fb556cc443f18d362730581b425059d4003e96206593b653f8b2f2ee977e1",
+      "max_output_tokens": 1000,
+      "messages": [
+        {
+          "content": "Extract atomic semantic propositions from one English sentence.\n\nReturn exactly one JSON object with this shape and no Markdown or commentary:\n\n{\"schema_version\":\"amr-pilot-atomic-knowledge-v1\",\"items\":[{\"knowledge_id\":\"K001\",\"statement\":\"...\",\"evidence_quote\":\"...\"}],\"representation_gaps\":[]}\n\nUse consecutive knowledge IDs starting at K001. Each item must state one complete proposition and include a verbatim non-empty evidence quote from the sentence. Preserve participant direction, polarity, modality, intent, time, quantity, conditions, causality, comparison, and clause relations. Keep names, dates, amounts, products, and places faithful to the sentence.\n\nDo not infer unstated facts. Put any meaning that cannot be expressed as a complete atomic proposition in representation_gaps instead of silently discarding or inventing it.\n",
+          "role": "system"
+        },
+        {
+          "content": "There is a nonstop flight that is departing at 6 PM and arriving the next day at 7:35 AM.",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "cf714d39ea29a059cb1ef5f02448606bc693b94d7c1b26fb5d7995e585d4c2ef",
+      "prompt_sha256": "99f29817d29a01a91a50bdcc6747c5df7c6fcd2c73510646588125d8fc22951b",
+      "prompt_version": "atomic-knowledge-v1",
+      "route": "C",
+      "sample_id": "AMR-S010",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    },
+    {
+      "input_sha256": "e06fb556cc443f18d362730581b425059d4003e96206593b653f8b2f2ee977e1",
+      "max_output_tokens": 1200,
+      "messages": [
+        {
+          "content": "Convert one English sentence into one standard Abstract Meaning Representation graph.\n\nReturn exactly one PENMAN graph and nothing else. Do not use Markdown fences, commentary, JSON, or multiple top-level graphs.\n\nUse standard AMR conventions, PropBank frames when available, and standard roles. Preserve every meaning licensed by the sentence that affects events, states, participant roles, polarity, modality, intent, time, quantity, conditions, causality, comparison, or clause relations. Preserve names, dates, amounts, products, and places exactly enough to recover their meaning.\n\nDo not add background assumptions or information from outside the sentence. Do not encode provenance, confidence, evidence, lifecycle state, project fields, or evaluator metadata in the graph.\n",
+          "role": "system"
+        },
+        {
+          "content": "There is a nonstop flight that is departing at 6 PM and arriving the next day at 7:35 AM.",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "050f371059004f016a06be4b8100775a223fd45e0ec9ea9ad7847321820fec2e",
+      "prompt_sha256": "bad0c1847798ed97ae5c7e90ab28e4a53e7d920fec6dfdb3a098bf437ebfb88b",
+      "prompt_version": "direct-amr-v1",
+      "route": "A",
+      "sample_id": "AMR-S010",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    },
+    {
+      "input_sha256": "2772cb2fb2d9ae32df1cf71559ce0f2b504c5c2ab7f22a55aab7ffccc55fd10f",
+      "max_output_tokens": 1000,
+      "messages": [
+        {
+          "content": "Extract atomic semantic propositions from one English sentence.\n\nReturn exactly one JSON object with this shape and no Markdown or commentary:\n\n{\"schema_version\":\"amr-pilot-atomic-knowledge-v1\",\"items\":[{\"knowledge_id\":\"K001\",\"statement\":\"...\",\"evidence_quote\":\"...\"}],\"representation_gaps\":[]}\n\nUse consecutive knowledge IDs starting at K001. Each item must state one complete proposition and include a verbatim non-empty evidence quote from the sentence. Preserve participant direction, polarity, modality, intent, time, quantity, conditions, causality, comparison, and clause relations. Keep names, dates, amounts, products, and places faithful to the sentence.\n\nDo not infer unstated facts. Put any meaning that cannot be expressed as a complete atomic proposition in representation_gaps instead of silently discarding or inventing it.\n",
+          "role": "system"
+        },
+        {
+          "content": "Also, could you cancel the charger I just bought since it goes with the tablet?",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "94c2ec315058be12db37a51745b360a568b5f28717d8de8f4edb3e19581ffdc3",
+      "prompt_sha256": "99f29817d29a01a91a50bdcc6747c5df7c6fcd2c73510646588125d8fc22951b",
+      "prompt_version": "atomic-knowledge-v1",
+      "route": "C",
+      "sample_id": "AMR-S011",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    },
+    {
+      "input_sha256": "2772cb2fb2d9ae32df1cf71559ce0f2b504c5c2ab7f22a55aab7ffccc55fd10f",
+      "max_output_tokens": 1200,
+      "messages": [
+        {
+          "content": "Convert one English sentence into one standard Abstract Meaning Representation graph.\n\nReturn exactly one PENMAN graph and nothing else. Do not use Markdown fences, commentary, JSON, or multiple top-level graphs.\n\nUse standard AMR conventions, PropBank frames when available, and standard roles. Preserve every meaning licensed by the sentence that affects events, states, participant roles, polarity, modality, intent, time, quantity, conditions, causality, comparison, or clause relations. Preserve names, dates, amounts, products, and places exactly enough to recover their meaning.\n\nDo not add background assumptions or information from outside the sentence. Do not encode provenance, confidence, evidence, lifecycle state, project fields, or evaluator metadata in the graph.\n",
+          "role": "system"
+        },
+        {
+          "content": "Also, could you cancel the charger I just bought since it goes with the tablet?",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "c1fddf5cf8bec32f5330e22ad4b995d74281d2fad8cdf4db9f0d8b3aae58dff4",
+      "prompt_sha256": "bad0c1847798ed97ae5c7e90ab28e4a53e7d920fec6dfdb3a098bf437ebfb88b",
+      "prompt_version": "direct-amr-v1",
+      "route": "A",
+      "sample_id": "AMR-S011",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    },
+    {
+      "input_sha256": "ed8a8c707ad646bd439c7b22e0beeb3b50095f80a590d78811f44fa47f808a15",
+      "max_output_tokens": 1000,
+      "messages": [
+        {
+          "content": "Extract atomic semantic propositions from one English sentence.\n\nReturn exactly one JSON object with this shape and no Markdown or commentary:\n\n{\"schema_version\":\"amr-pilot-atomic-knowledge-v1\",\"items\":[{\"knowledge_id\":\"K001\",\"statement\":\"...\",\"evidence_quote\":\"...\"}],\"representation_gaps\":[]}\n\nUse consecutive knowledge IDs starting at K001. Each item must state one complete proposition and include a verbatim non-empty evidence quote from the sentence. Preserve participant direction, polarity, modality, intent, time, quantity, conditions, causality, comparison, and clause relations. Keep names, dates, amounts, products, and places faithful to the sentence.\n\nDo not infer unstated facts. Put any meaning that cannot be expressed as a complete atomic proposition in representation_gaps instead of silently discarding or inventing it.\n",
+          "role": "system"
+        },
+        {
+          "content": "Even if you name Stephanie in your will, the court will review the appointment to ensure it is in the best interest of the children.",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "b16c73873ee068c6d5d2ed65368562a3ab2a83cbacf82cfe025ba8112245bb7e",
+      "prompt_sha256": "99f29817d29a01a91a50bdcc6747c5df7c6fcd2c73510646588125d8fc22951b",
+      "prompt_version": "atomic-knowledge-v1",
+      "route": "C",
+      "sample_id": "AMR-S012",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    },
+    {
+      "input_sha256": "ed8a8c707ad646bd439c7b22e0beeb3b50095f80a590d78811f44fa47f808a15",
+      "max_output_tokens": 1200,
+      "messages": [
+        {
+          "content": "Convert one English sentence into one standard Abstract Meaning Representation graph.\n\nReturn exactly one PENMAN graph and nothing else. Do not use Markdown fences, commentary, JSON, or multiple top-level graphs.\n\nUse standard AMR conventions, PropBank frames when available, and standard roles. Preserve every meaning licensed by the sentence that affects events, states, participant roles, polarity, modality, intent, time, quantity, conditions, causality, comparison, or clause relations. Preserve names, dates, amounts, products, and places exactly enough to recover their meaning.\n\nDo not add background assumptions or information from outside the sentence. Do not encode provenance, confidence, evidence, lifecycle state, project fields, or evaluator metadata in the graph.\n",
+          "role": "system"
+        },
+        {
+          "content": "Even if you name Stephanie in your will, the court will review the appointment to ensure it is in the best interest of the children.",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "b2e40f656da170daa9a2ce6fe54c6f10021f6850511b8307da88b3dbf5b41532",
+      "prompt_sha256": "bad0c1847798ed97ae5c7e90ab28e4a53e7d920fec6dfdb3a098bf437ebfb88b",
+      "prompt_version": "direct-amr-v1",
+      "route": "A",
+      "sample_id": "AMR-S012",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    }
+  ],
+  "schema_version": "amr-pilot-payload-set-v1"
+}

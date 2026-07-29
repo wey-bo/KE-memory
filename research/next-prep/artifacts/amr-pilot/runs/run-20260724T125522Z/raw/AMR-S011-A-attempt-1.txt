@@ -1,0 +1,12 @@
+(r / request-01
+   :ARG0 (i / i)
+   :ARG1 (p / possible-01
+      :ARG1 (c / cancel-01
+         :ARG0 (y / you)
+         :ARG1 (c2 / charger
+            :ARG0-of (b / buy-01
+               :ARG0 i
+               :time (j / just)))
+         :cause (g / go-with-01
+            :ARG1 c2
+            :ARG2 (t / tablet)))))

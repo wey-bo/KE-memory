@@ -1,0 +1,12 @@
+(s / seem-01
+   :ARG1 (a / available-02
+            :polarity -
+            :ARG1 (i / item
+                     :mod (e / exact)
+                     :ARG2-of (x / exchange-01
+                                  :ARG0 (y / you)
+                                  :ARG1-of (w / want-01
+                                               :ARG0 y)))
+            :time (n / now)
+            :location (v / inventory
+                         :poss (w2 / we))))

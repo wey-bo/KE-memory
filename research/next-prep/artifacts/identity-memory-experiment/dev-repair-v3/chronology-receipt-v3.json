@@ -1,0 +1,51 @@
+{
+  "schema_version": "natural-identity-chronology-receipt-v1",
+  "status": "frozen-posthoc-audit",
+  "evidence_kind": "filesystem-mtime-plus-sha256",
+  "trusted_timestamp_authority": false,
+  "dev_run_id": "run-20260727T154000Z-claude-sonnet-4-6-dev-policy-v3",
+  "policy_freeze": {
+    "path": "artifacts/identity-memory-experiment/dev-repair-v3/policy-freeze-v3.json",
+    "sha256": "a66e728a74f6db13caed7110f0d729cbe6f807a6cbb81c39d5c5c17e2974a02b",
+    "mtime_ns": 1785166760711691354
+  },
+  "dev_run_files": {
+    "dispatch.json": {
+      "path": "artifacts/identity-memory-experiment/dev-repair-v3/model-runs/run-20260727T154000Z-claude-sonnet-4-6-dev-policy-v3/dispatch.json",
+      "sha256": "838ce1b5ef833531dbbede29c9c47fa5f0a51d36e5e41c8b424b1d8b86e8dfb8",
+      "mtime_ns": 1785166780337751497
+    },
+    "api-transport.json": {
+      "path": "artifacts/identity-memory-experiment/dev-repair-v3/model-runs/run-20260727T154000Z-claude-sonnet-4-6-dev-policy-v3/api-transport.json",
+      "sha256": "09f774161ad1981e2a72678946678383da3165223b3f74016cff61e8e6813076",
+      "mtime_ns": 1785166795788286346
+    },
+    "proposals.json": {
+      "path": "artifacts/identity-memory-experiment/dev-repair-v3/model-runs/run-20260727T154000Z-claude-sonnet-4-6-dev-policy-v3/proposals.json",
+      "sha256": "01aedacb4ff30e7aea0fa2f1d58186f93a4ba35cde3b2c8b80e509b839c160ff",
+      "mtime_ns": 1785166904687741414
+    },
+    "provenance.json": {
+      "path": "artifacts/identity-memory-experiment/dev-repair-v3/model-runs/run-20260727T154000Z-claude-sonnet-4-6-dev-policy-v3/provenance.json",
+      "sha256": "cb04c7a72135c6ca6e6af947ff9a5e1f0f598e3f93d24b36f3521bbf231bb747",
+      "mtime_ns": 1785166904702068873
+    },
+    "score.json": {
+      "path": "artifacts/identity-memory-experiment/dev-repair-v3/model-runs/run-20260727T154000Z-claude-sonnet-4-6-dev-policy-v3/score.json",
+      "sha256": "a2bfbaabdc86e44b76e987ee672f7b1b2d94236380a1a8c1672ba9521a67bd48",
+      "mtime_ns": 1785166919178940485
+    },
+    "report.md": {
+      "path": "artifacts/identity-memory-experiment/dev-repair-v3/model-runs/run-20260727T154000Z-claude-sonnet-4-6-dev-policy-v3/report.md",
+      "sha256": "924349ed9c501ca71343e96f93d3fc20953d2f9f5f40c5ec1f24c4b80856261c",
+      "mtime_ns": 1785166919199311782
+    }
+  },
+  "hidden_source": {
+    "path": "artifacts/identity-memory-experiment/natural-v3-fresh/hidden-source-cases.json",
+    "sha256": "c1bfe7044002e4eb775db6bbfc0f9bae0e8fc1e0099d18ee5163e52de056ca4d",
+    "mtime_ns": 1785167343556030107
+  },
+  "policy_freeze_precedes_dev_run": true,
+  "dev_run_complete_precedes_hidden_source": true
+}

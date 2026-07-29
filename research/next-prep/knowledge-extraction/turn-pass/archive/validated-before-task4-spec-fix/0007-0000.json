@@ -1,0 +1,392 @@
+{
+  "candidate_id": "BEAM-CAND-004",
+  "turn_index": 0,
+  "context_completions": [
+    {
+      "completion_id": "C_beam-cand-004-4d648a026dc4_000_001",
+      "candidate_id": "BEAM-CAND-004",
+      "turn_index": 0,
+      "kind": "role_resolution",
+      "original_span": "这个安排",
+      "interpretation": "由 Douglas 担任用户遗嘱执行人的安排",
+      "confidence": 0.96,
+      "ambiguity": false,
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "Douglas 已于 4 月 15 日在珊瑚湾咖啡馆（Coral Bay Café）接受了这个安排",
+          "evidence_id": "evidence-d56ecc05e2339a90c60212f03df19f0e7b7e4bf288e6e2f2b517b8ad5b867a83",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "user_reported",
+          "start": 14,
+          "end": 63
+        }
+      ]
+    },
+    {
+      "completion_id": "C_beam-cand-004-4d648a026dc4_000_002",
+      "candidate_id": "BEAM-CAND-004",
+      "turn_index": 0,
+      "kind": "coreference",
+      "original_span": "他们",
+      "interpretation": "Kimberly、Bradley 等参加过家庭会议的家人",
+      "confidence": 0.98,
+      "ambiguity": false,
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "Kimberly 和 Bradley 等家人参加了 3 月 25 日在我家举行的那次会议。我一直在想，如果他们知道我选的是 Douglas，会怎么看？",
+          "evidence_id": "evidence-c6c39e4873ec94782430ae99e9e7c55df9433ef6fb99be21e9f42f863b66384d",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "user_reported",
+          "start": 66,
+          "end": 141
+        }
+      ]
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_001",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "用户担心遗嘱执行人的选择。",
+      "subject": "用户",
+      "predicate": "担心",
+      "object": "遗嘱执行人的选择",
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我有点担心遗嘱执行人的选择",
+          "evidence_id": "evidence-c9c2243e8c0f9592f576c232c635580f17ff53c5f1c6273a57e3870ea7eea8a3",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 13
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_002",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "Douglas 于 4 月 15 日在珊瑚湾咖啡馆接受了担任用户遗嘱执行人的安排。",
+      "subject": "Douglas",
+      "predicate": "接受",
+      "object": "担任用户遗嘱执行人的安排",
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "positive",
+        "temporal": [
+          "4 月 15 日"
+        ],
+        "conditions": [],
+        "scope": [
+          "珊瑚湾咖啡馆（Coral Bay Café）"
+        ]
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "Douglas 已于 4 月 15 日在珊瑚湾咖啡馆（Coral Bay Café）接受了这个安排",
+          "evidence_id": "evidence-d56ecc05e2339a90c60212f03df19f0e7b7e4bf288e6e2f2b517b8ad5b867a83",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "user_reported",
+          "start": 14,
+          "end": 63
+        }
+      ],
+      "inference_basis": "本轮先提出遗嘱执行人的选择，随后说明 Douglas 接受了该安排。",
+      "confidence": 0.96
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_003",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "Kimberly 和 Bradley 等家人参加了 3 月 25 日在用户家举行的会议。",
+      "subject": "Kimberly 和 Bradley 等家人",
+      "predicate": "参加",
+      "object": "在用户家举行的会议",
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "positive",
+        "temporal": [
+          "3 月 25 日"
+        ],
+        "conditions": [],
+        "scope": [
+          "用户家"
+        ]
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "Kimberly 和 Bradley 等家人参加了 3 月 25 日在我家举行的那次会议",
+          "evidence_id": "evidence-5c71be3d9c780b20602ff8ca9bccbb1ca404d29fc452948854a57499489bf43e",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "user_reported",
+          "start": 66,
+          "end": 110
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_004",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "用户想知道家人若得知用户选择 Douglas 会如何看待。",
+      "subject": "用户",
+      "predicate": "想知道",
+      "object": "家人得知用户选择 Douglas 后的看法",
+      "qualifiers": {
+        "modality": "questioned",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [
+          "如果家人知道用户选的是 Douglas"
+        ],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "如果他们知道我选的是 Douglas，会怎么看？",
+          "evidence_id": "evidence-7c654b61512cb33c643341a638cec0c96497428f1431cc70f0ced73521b71c43",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "user_reported",
+          "start": 117,
+          "end": 141
+        }
+      ],
+      "inference_basis": "同一消息前句把 Kimberly、Bradley 等家人作为相关群体，随后用“他们”回指。",
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_005",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "选择遗嘱执行人可能是敏感决定。",
+      "subject": "选择遗嘱执行人",
+      "predicate": "可能是",
+      "object": "敏感决定",
+      "qualifiers": {
+        "modality": "possible",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "选择遗嘱执行人可能是敏感决定",
+          "evidence_id": "evidence-a37cbd3ea193fd1a79263ef4a05258f72b61da78d237fa2c226140bf2c00f66d",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 0,
+          "end": 14
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_006",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "遗嘱执行人的选择尤其可能在牵涉家庭关系时敏感。",
+      "subject": "遗嘱执行人的选择",
+      "predicate": "尤其可能敏感",
+      "object": "家庭关系",
+      "qualifiers": {
+        "modality": "possible",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [
+          "牵涉家庭关系"
+        ],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "尤其牵涉家庭关系",
+          "evidence_id": "evidence-c2399559ed5891089d3d6ee450fd12eb018361a31b44c4e1f0968c8867f714af",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 15,
+          "end": 23
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.94
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_007",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "用户可以与 Kimberly 和 Bradley 坦诚沟通。",
+      "subject": "用户",
+      "predicate": "坦诚沟通",
+      "object": "Kimberly 和 Bradley",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "你可以和 Kimberly、Bradley 坦诚沟通",
+          "evidence_id": "evidence-85296521ec841811f52852fe0b6b6a81637907a987f726123cbf35c993515df8",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 24,
+          "end": 50
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_008",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "用户可以向 Kimberly 和 Bradley 说明选择 Douglas 的原因。",
+      "subject": "用户",
+      "predicate": "说明",
+      "object": "选择 Douglas 的原因",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": [
+          "向 Kimberly 和 Bradley"
+        ]
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "说明选择 Douglas 的原因",
+          "evidence_id": "evidence-8d4fbfb0b83ae55603745a4e52829d660df7e28ca2fd34f4ecdd45b7d60ea9d6",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 51,
+          "end": 67
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_009",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "若仍有顾虑，用户可以讨论共同遗嘱执行人。",
+      "subject": "用户",
+      "predicate": "讨论",
+      "object": "共同遗嘱执行人",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [
+          "如果仍有顾虑"
+        ],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "如果仍有顾虑，也可以讨论共同遗嘱执行人",
+          "evidence_id": "evidence-02472a238cd29e4c75fa4180818569389eb140917ecb581e356f317341c609a7",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 68,
+          "end": 87
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_010",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "若仍有顾虑，用户可以向遗产规划律师 Stephanie 征求意见。",
+      "subject": "用户",
+      "predicate": "征求意见",
+      "object": "遗产规划律师 Stephanie",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [
+          "如果仍有顾虑"
+        ],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "或向遗产规划律师 Stephanie 征求意见",
+          "evidence_id": "evidence-3382a80e934948ef2873e4236cab93d6b0a0ad2211d384ceb95e40b7d38fbdd7",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 88,
+          "end": 111
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    }
+  ]
+}

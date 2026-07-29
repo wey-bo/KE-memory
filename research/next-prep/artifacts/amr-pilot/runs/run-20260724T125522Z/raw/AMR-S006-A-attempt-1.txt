@@ -1,0 +1,20 @@
+(a / able-01
+   :ARG1 (y / you)
+   :ARG2 (f / finalize-01
+      :ARG0 y
+      :ARG1 (w / will
+         :poss y)
+      :time (d / deadline
+         :time (d2 / date-entity
+            :month 5
+            :day 15
+            :year 2024)))
+   :mod (s / should)
+   :manner (a2 / and
+      :op1 (f2 / follow-01
+         :ARG0 y
+         :ARG1 (s2 / step
+            :mod (t / this)))
+      :op2 (a3 / adhere-01
+         :ARG0 y
+         :ARG1 (t2 / timeline))))

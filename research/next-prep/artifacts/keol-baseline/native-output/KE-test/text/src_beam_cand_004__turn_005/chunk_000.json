@@ -1,0 +1,228 @@
+{
+  "source": {
+    "source_id": "src_beam_cand_004__turn_005",
+    "file": "keol-input/turns/beam-cand-004__turn-005.txt",
+    "file_type": "txt",
+    "category": "text",
+    "metadata": {
+      "unit_id": "beam-cand-004__turn-005",
+      "candidate_id": "BEAM-CAND-004",
+      "turn_index": 5,
+      "json_pointer": "/candidates/9/turns/4",
+      "source": "Mohammadta/BEAM / split=100K / conversation_id=19 / session_index=1 / message_index=0..9 / source_time_anchor=2024-05-02",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "chunk": {
+    "id": "chunk_d5a5c4208188b9541cd5",
+    "index": 0,
+    "text": "用户：\n我还担心 Francis 和 Michael 的监护安排。像我在 4 月 28 日做的那样，把 Stephanie 指定为监护人，会怎样影响我的遗产计划？\n\nAgent：\n指定监护人会影响未成年人的照护和相关资产管理安排。需要确认 Stephanie 是否愿意并适合承担职责，考虑备用监护人，并在遗嘱或信托中写清监护和继承资金的管理方式。",
+    "size": 173,
+    "metadata": {
+      "unit_id": "beam-cand-004__turn-005",
+      "candidate_id": "BEAM-CAND-004",
+      "turn_index": 5,
+      "json_pointer": "/candidates/9/turns/4",
+      "source": "Mohammadta/BEAM / split=100K / conversation_id=19 / session_index=1 / message_index=0..9 / source_time_anchor=2024-05-02",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "n_user",
+      "name": "用户",
+      "type": "Person",
+      "description": "担心 Francis 和 Michael 监护安排的人。",
+      "source_chunk_id": "chunk_d5a5c4208188b9541cd5"
+    },
+    {
+      "id": "n_francis",
+      "name": "Francis",
+      "type": "Person",
+      "description": "用户关心其监护安排的人。",
+      "source_chunk_id": "chunk_d5a5c4208188b9541cd5"
+    },
+    {
+      "id": "n_michael",
+      "name": "Michael",
+      "type": "Person",
+      "description": "用户关心其监护安排的人。",
+      "source_chunk_id": "chunk_d5a5c4208188b9541cd5"
+    },
+    {
+      "id": "n_stephanie",
+      "name": "Stephanie",
+      "type": "Person",
+      "description": "用户已指定的监护人。",
+      "source_chunk_id": "chunk_d5a5c4208188b9541cd5"
+    },
+    {
+      "id": "n_designation",
+      "name": "监护人指定",
+      "type": "LegalDecision",
+      "description": "用户把 Stephanie 指定为监护人的决定。",
+      "source_chunk_id": "chunk_d5a5c4208188b9541cd5"
+    },
+    {
+      "id": "n_apr28",
+      "name": "4 月 28 日",
+      "type": "CalendarDate",
+      "description": "用户作出监护人指定的日期，年份未在本 turn 给出。",
+      "source_chunk_id": "chunk_d5a5c4208188b9541cd5"
+    },
+    {
+      "id": "n_estate_plan",
+      "name": "用户的遗产计划",
+      "type": "EstatePlan",
+      "description": "用户询问监护安排影响的计划。",
+      "source_chunk_id": "chunk_d5a5c4208188b9541cd5"
+    },
+    {
+      "id": "n_care",
+      "name": "未成年人照护",
+      "type": "CareArrangement",
+      "description": "Agent 表示监护人指定会影响的事项。",
+      "source_chunk_id": "chunk_d5a5c4208188b9541cd5"
+    },
+    {
+      "id": "n_asset_management",
+      "name": "相关资产管理",
+      "type": "FinancialArrangement",
+      "description": "Agent 表示监护人指定会影响的事项。",
+      "source_chunk_id": "chunk_d5a5c4208188b9541cd5"
+    },
+    {
+      "id": "n_suitability",
+      "name": "Stephanie 的意愿和适任性",
+      "type": "Assessment",
+      "description": "Agent 建议确认的条件，并非已确认事实。",
+      "source_chunk_id": "chunk_d5a5c4208188b9541cd5"
+    },
+    {
+      "id": "n_backup",
+      "name": "备用监护人",
+      "type": "Role",
+      "description": "Agent 建议考虑的备用安排。",
+      "source_chunk_id": "chunk_d5a5c4208188b9541cd5"
+    },
+    {
+      "id": "n_will",
+      "name": "遗嘱",
+      "type": "LegalDocument",
+      "description": "可写明监护和资金管理方式的文件。",
+      "source_chunk_id": "chunk_d5a5c4208188b9541cd5"
+    },
+    {
+      "id": "n_trust",
+      "name": "信托",
+      "type": "LegalArrangement",
+      "description": "可写明监护和资金管理方式的安排。",
+      "source_chunk_id": "chunk_d5a5c4208188b9541cd5"
+    },
+    {
+      "id": "n_funds",
+      "name": "继承资金管理方式",
+      "type": "FinancialArrangement",
+      "description": "Agent 建议在遗嘱或信托中写清的事项。",
+      "source_chunk_id": "chunk_d5a5c4208188b9541cd5"
+    }
+  ],
+  "relations": [
+    {
+      "source_entity": "n_user",
+      "target_entity": "n_designation",
+      "relation_type": "makes",
+      "description": "用户作出监护人指定。"
+    },
+    {
+      "source_entity": "n_designation",
+      "target_entity": "n_stephanie",
+      "relation_type": "selects",
+      "description": "监护人指定选择 Stephanie。"
+    },
+    {
+      "source_entity": "n_designation",
+      "target_entity": "n_francis",
+      "relation_type": "for",
+      "description": "监护安排涉及 Francis。"
+    },
+    {
+      "source_entity": "n_designation",
+      "target_entity": "n_michael",
+      "relation_type": "for",
+      "description": "监护安排涉及 Michael。"
+    },
+    {
+      "source_entity": "n_designation",
+      "target_entity": "n_apr28",
+      "relation_type": "date",
+      "description": "指定发生于 4 月 28 日。"
+    },
+    {
+      "source_entity": "n_user",
+      "target_entity": "n_estate_plan",
+      "relation_type": "concerned_about",
+      "description": "用户担心监护指定对遗产计划的影响。"
+    },
+    {
+      "source_entity": "n_designation",
+      "target_entity": "n_estate_plan",
+      "relation_type": "affects",
+      "description": "Agent 表示监护人指定会影响遗产计划。"
+    },
+    {
+      "source_entity": "n_designation",
+      "target_entity": "n_care",
+      "relation_type": "affects",
+      "description": "Agent 表示指定会影响未成年人照护。"
+    },
+    {
+      "source_entity": "n_designation",
+      "target_entity": "n_asset_management",
+      "relation_type": "affects",
+      "description": "Agent 表示指定会影响相关资产管理。"
+    },
+    {
+      "source_entity": "n_estate_plan",
+      "target_entity": "n_suitability",
+      "relation_type": "requires",
+      "description": "Agent 建议确认 Stephanie 的意愿和适任性。"
+    },
+    {
+      "source_entity": "n_estate_plan",
+      "target_entity": "n_backup",
+      "relation_type": "considers",
+      "description": "Agent 建议考虑备用监护人。"
+    },
+    {
+      "source_entity": "n_will",
+      "target_entity": "n_funds",
+      "relation_type": "specifies",
+      "description": "Agent 建议在遗嘱中写清继承资金管理方式。"
+    },
+    {
+      "source_entity": "n_trust",
+      "target_entity": "n_funds",
+      "relation_type": "specifies",
+      "description": "Agent 建议在信托中写清继承资金管理方式。"
+    },
+    {
+      "source_entity": "n_will",
+      "target_entity": "n_designation",
+      "relation_type": "documents",
+      "description": "Agent 建议在遗嘱中写清监护安排。"
+    },
+    {
+      "source_entity": "n_trust",
+      "target_entity": "n_designation",
+      "relation_type": "documents",
+      "description": "Agent 建议在信托中写清监护安排。"
+    }
+  ]
+}

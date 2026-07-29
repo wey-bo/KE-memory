@@ -1,0 +1,2388 @@
+{
+    "candidate_id":  "WILDCHAT-LEARN-CAND-002",
+    "items":  [
+                  {
+                      "knowledge_id":  "D_wildchat-learn-cand-002-1fa98728ac3e_001",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0001",
+                                           "knowledge_id":  "D_wildchat-learn-cand-002-1fa98728ac3e_001",
+                                           "surface":  "请求",
+                                           "keyword":  "请求",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "request.v.03",
+                                           "wordnet_lemma":  "request",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.96
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0002",
+                                           "knowledge_id":  "D_wildchat-learn-cand-002-1fa98728ac3e_001",
+                                           "surface":  "导出",
+                                           "keyword":  "导出",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "export.v.02",
+                                           "wordnet_lemma":  "export",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0003",
+                                           "knowledge_id":  "D_wildchat-learn-cand-002-1fa98728ac3e_001",
+                                           "surface":  "数据",
+                                           "keyword":  "数据",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "data.n.01",
+                                           "wordnet_lemma":  "data",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0004",
+                                           "knowledge_id":  "D_wildchat-learn-cand-002-1fa98728ac3e_001",
+                                           "surface":  "文本",
+                                           "keyword":  "文本",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "result",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "text.n.01",
+                                           "wordnet_lemma":  "text",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.97
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0005",
+                                           "knowledge_id":  "D_wildchat-learn-cand-002-1fa98728ac3e_001",
+                                           "surface":  "步骤",
+                                           "keyword":  "步骤",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "step.n.01",
+                                           "wordnet_lemma":  "step",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.95
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0006",
+                                           "knowledge_id":  "D_wildchat-learn-cand-002-1fa98728ac3e_001",
+                                           "surface":  "F0",
+                                           "keyword":  "F0",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "D_wildchat-learn-cand-002-1fa98728ac3e_002",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0007",
+                                           "knowledge_id":  "D_wildchat-learn-cand-002-1fa98728ac3e_002",
+                                           "surface":  "提取",
+                                           "keyword":  "提取",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "extract.v.01",
+                                           "wordnet_lemma":  "extract",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.94
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0008",
+                                           "knowledge_id":  "D_wildchat-learn-cand-002-1fa98728ac3e_002",
+                                           "surface":  "F0",
+                                           "keyword":  "F0",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0009",
+                                           "knowledge_id":  "D_wildchat-learn-cand-002-1fa98728ac3e_002",
+                                           "surface":  "数据",
+                                           "keyword":  "数据",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "data.n.01",
+                                           "wordnet_lemma":  "data",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0010",
+                                           "knowledge_id":  "D_wildchat-learn-cand-002-1fa98728ac3e_002",
+                                           "surface":  "文本文件",
+                                           "keyword":  "文本文件",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "result",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "text_file.n.01",
+                                           "wordnet_lemma":  "text_file",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_001",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0011",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_001",
+                                           "surface":  "Praat",
+                                           "keyword":  "Praat",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "instrument",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0012",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_001",
+                                           "surface":  "普通话",
+                                           "keyword":  "普通话",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "qualifiers.scope",
+                                           "wordnet_synset":  "mandarin.n.06",
+                                           "wordnet_lemma":  "Mandarin_Chinese",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0013",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_001",
+                                           "surface":  "居",
+                                           "keyword":  "居",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "qualifiers.scope",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0014",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_001",
+                                           "surface":  "声调",
+                                           "keyword":  "声调",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "qualifiers.scope",
+                                           "wordnet_synset":  "tone.n.02",
+                                           "wordnet_lemma":  "tone",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0015",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_001",
+                                           "surface":  "连续体",
+                                           "keyword":  "连续体",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "result",
+                                           "source_field":  "qualifiers.scope",
+                                           "wordnet_synset":  "continuum.n.01",
+                                           "wordnet_lemma":  "continuum",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_002",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0016",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_002",
+                                           "surface":  "制作",
+                                           "keyword":  "制作",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "create.v.02",
+                                           "wordnet_lemma":  "create",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.95
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0017",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_002",
+                                           "surface":  "二声",
+                                           "keyword":  "二声",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0018",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_002",
+                                           "surface":  "三声",
+                                           "keyword":  "三声",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0019",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_002",
+                                           "surface":  "连续体",
+                                           "keyword":  "连续体",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "result",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "continuum.n.01",
+                                           "wordnet_lemma":  "continuum",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_003",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0020",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_003",
+                                           "surface":  "连续体",
+                                           "keyword":  "连续体",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "continuum.n.01",
+                                           "wordnet_lemma":  "continuum",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0021",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_003",
+                                           "surface":  "9 步",
+                                           "keyword":  "9步",
+                                           "keyword_type":  "quantity",
+                                           "semantic_role":  "value",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0022",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_003",
+                                           "surface":  "步",
+                                           "keyword":  "步级",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "attribute",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "step.n.01",
+                                           "wordnet_lemma":  "step",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.95
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_004",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0023",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_004",
+                                           "surface":  "步",
+                                           "keyword":  "步级",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "step.n.01",
+                                           "wordnet_lemma":  "step",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.95
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0024",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_004",
+                                           "surface":  "等距",
+                                           "keyword":  "等距",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "equidistant.s.01",
+                                           "wordnet_lemma":  "equidistant",
+                                           "wordnet_pos":  "s",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0025",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_004",
+                                           "surface":  "连续体",
+                                           "keyword":  "连续体",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "continuum.n.01",
+                                           "wordnet_lemma":  "continuum",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_005",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0026",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_005",
+                                           "surface":  "二声",
+                                           "keyword":  "二声",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "statement",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0027",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_005",
+                                           "surface":  "三声",
+                                           "keyword":  "三声",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "statement",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0028",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_005",
+                                           "surface":  "F0",
+                                           "keyword":  "F0",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "attribute",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0029",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_005",
+                                           "surface":  "曲线",
+                                           "keyword":  "曲线",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "curve.n.02",
+                                           "wordnet_lemma":  "curve",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0030",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_005",
+                                           "surface":  "弯",
+                                           "keyword":  "弯",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "curved.a.01",
+                                           "wordnet_lemma":  "curved",
+                                           "wordnet_pos":  "a",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_006",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0031",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_006",
+                                           "surface":  "连续体",
+                                           "keyword":  "连续体",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "continuum.n.01",
+                                           "wordnet_lemma":  "continuum",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0032",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_006",
+                                           "surface":  "操作",
+                                           "keyword":  "操作",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0033",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_006",
+                                           "surface":  "难",
+                                           "keyword":  "困难",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "difficult.a.01",
+                                           "wordnet_lemma":  "difficult",
+                                           "wordnet_pos":  "a",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_007",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0034",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_007",
+                                           "surface":  "学习",
+                                           "keyword":  "学习",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "learn.v.01",
+                                           "wordnet_lemma":  "learn",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0035",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_007",
+                                           "surface":  "PSOLA",
+                                           "keyword":  "PSOLA",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "instrument",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0036",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_007",
+                                           "surface":  "Praat",
+                                           "keyword":  "Praat",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "location",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0037",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_007",
+                                           "surface":  "连续体",
+                                           "keyword":  "连续体",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "result",
+                                           "source_field":  "statement",
+                                           "wordnet_synset":  "continuum.n.01",
+                                           "wordnet_lemma":  "continuum",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_008",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0038",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_008",
+                                           "surface":  "载入",
+                                           "keyword":  "载入",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "load.v.03",
+                                           "wordnet_lemma":  "load",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.96
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0039",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_008",
+                                           "surface":  "二声",
+                                           "keyword":  "二声",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "attribute",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0040",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_008",
+                                           "surface":  "录音",
+                                           "keyword":  "录音",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "sound_recording.n.01",
+                                           "wordnet_lemma":  "audio_recording",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_009",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0041",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_009",
+                                           "surface":  "提取",
+                                           "keyword":  "提取",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "extract.v.01",
+                                           "wordnet_lemma":  "extract",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.94
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0042",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_009",
+                                           "surface":  "目标",
+                                           "keyword":  "目标",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "attribute",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0043",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_009",
+                                           "surface":  "片段",
+                                           "keyword":  "片段",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "segment.n.02",
+                                           "wordnet_lemma":  "segment",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.97
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_010",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0044",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_010",
+                                           "surface":  "提取",
+                                           "keyword":  "提取",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "extract.v.01",
+                                           "wordnet_lemma":  "extract",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.94
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0045",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_010",
+                                           "surface":  "F0",
+                                           "keyword":  "F0",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "attribute",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0046",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_010",
+                                           "surface":  "曲线",
+                                           "keyword":  "曲线",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "curve.n.02",
+                                           "wordnet_lemma":  "curve",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_011",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0047",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_011",
+                                           "surface":  "导出",
+                                           "keyword":  "导出",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "export.v.02",
+                                           "wordnet_lemma":  "export",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0048",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_011",
+                                           "surface":  "F0",
+                                           "keyword":  "F0",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "attribute",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0049",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_011",
+                                           "surface":  "数据",
+                                           "keyword":  "数据",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "data.n.01",
+                                           "wordnet_lemma":  "data",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0050",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_011",
+                                           "surface":  "文本",
+                                           "keyword":  "文本",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "result",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "text.n.01",
+                                           "wordnet_lemma":  "text",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.97
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_012",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0051",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_012",
+                                           "surface":  "生成",
+                                           "keyword":  "生成",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "generate.v.01",
+                                           "wordnet_lemma":  "generate",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0052",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_012",
+                                           "surface":  "目标值",
+                                           "keyword":  "目标值",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0053",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_012",
+                                           "surface":  "9 组",
+                                           "keyword":  "9组",
+                                           "keyword_type":  "quantity",
+                                           "semantic_role":  "value",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0054",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_012",
+                                           "surface":  "等距",
+                                           "keyword":  "等距",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "condition",
+                                           "source_field":  "qualifiers.conditions",
+                                           "wordnet_synset":  "equidistant.s.01",
+                                           "wordnet_lemma":  "equidistant",
+                                           "wordnet_pos":  "s",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_013",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0055",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_013",
+                                           "surface":  "替换",
+                                           "keyword":  "替换",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "replace.v.01",
+                                           "wordnet_lemma":  "replace",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.97
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0056",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_013",
+                                           "surface":  "调整",
+                                           "keyword":  "调整",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "adjust.v.01",
+                                           "wordnet_lemma":  "adjust",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0057",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_013",
+                                           "surface":  "音高",
+                                           "keyword":  "音高",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "pitch.n.01",
+                                           "wordnet_lemma":  "pitch",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0058",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_013",
+                                           "surface":  "Praat",
+                                           "keyword":  "Praat",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "instrument",
+                                           "source_field":  "qualifiers.scope",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0059",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_013",
+                                           "surface":  "PSOLA",
+                                           "keyword":  "PSOLA",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "instrument",
+                                           "source_field":  "qualifiers.scope",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_014",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0060",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_014",
+                                           "surface":  "试听",
+                                           "keyword":  "试听",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "listen.v.01",
+                                           "wordnet_lemma":  "listen",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0061",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_014",
+                                           "surface":  "结果",
+                                           "keyword":  "结果",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "result.n.03",
+                                           "wordnet_lemma":  "result",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.97
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_015",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0062",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_015",
+                                           "surface":  "检查",
+                                           "keyword":  "检查",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "check.v.01",
+                                           "wordnet_lemma":  "check",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.96
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0063",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_000_015",
+                                           "surface":  "结果",
+                                           "keyword":  "结果",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "result.n.03",
+                                           "wordnet_lemma":  "result",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.97
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_001_003",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0064",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_001_003",
+                                           "surface":  "选中",
+                                           "keyword":  "选中",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "choose.v.01",
+                                           "wordnet_lemma":  "select",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0065",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_001_003",
+                                           "surface":  "Praat",
+                                           "keyword":  "Praat",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "location",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0066",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_001_003",
+                                           "surface":  "数值",
+                                           "keyword":  "数值",
+                                           "keyword_type":  "quantity",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "value.n.01",
+                                           "wordnet_lemma":  "value",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0067",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_001_003",
+                                           "surface":  "F0",
+                                           "keyword":  "F0",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "condition",
+                                           "source_field":  "qualifiers.conditions",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_001_004",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0068",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_001_004",
+                                           "surface":  "复制",
+                                           "keyword":  "复制",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "copy.v.01",
+                                           "wordnet_lemma":  "copy",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.97
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0069",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_001_004",
+                                           "surface":  "Praat",
+                                           "keyword":  "Praat",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "location",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0070",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_001_004",
+                                           "surface":  "数值",
+                                           "keyword":  "数值",
+                                           "keyword_type":  "quantity",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "value.n.01",
+                                           "wordnet_lemma":  "value",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0071",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_001_004",
+                                           "surface":  "文本编辑器",
+                                           "keyword":  "文本编辑器",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "recipient",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_001_005",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0072",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_001_005",
+                                           "surface":  "保存",
+                                           "keyword":  "保存",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "write.v.08",
+                                           "wordnet_lemma":  "save",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0073",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_001_005",
+                                           "surface":  ".txt",
+                                           "keyword":  ".txt",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "result",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0074",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_001_005",
+                                           "surface":  "数值",
+                                           "keyword":  "数值",
+                                           "keyword_type":  "quantity",
+                                           "semantic_role":  "object",
+                                           "source_field":  "statement",
+                                           "wordnet_synset":  "value.n.01",
+                                           "wordnet_lemma":  "value",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_001_006",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0075",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_001_006",
+                                           "surface":  "确认",
+                                           "keyword":  "确认",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "confirm.v.01",
+                                           "wordnet_lemma":  "confirm",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.94
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0076",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_001_006",
+                                           "surface":  "音高",
+                                           "keyword":  "音高",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "pitch.n.01",
+                                           "wordnet_lemma":  "pitch",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0077",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_001_006",
+                                           "surface":  "范围",
+                                           "keyword":  "范围",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "range.n.02",
+                                           "wordnet_lemma":  "range",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.96
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0078",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_001_006",
+                                           "surface":  "合适",
+                                           "keyword":  "合适",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "attribute",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "suitable.a.01",
+                                           "wordnet_lemma":  "suitable",
+                                           "wordnet_pos":  "s",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_001_007",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0079",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_001_007",
+                                           "surface":  "确认",
+                                           "keyword":  "确认",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "confirm.v.01",
+                                           "wordnet_lemma":  "confirm",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.94
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0080",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_001_007",
+                                           "surface":  "提取",
+                                           "keyword":  "提取",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "extract.v.01",
+                                           "wordnet_lemma":  "extract",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.94
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0081",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_001_007",
+                                           "surface":  "算法",
+                                           "keyword":  "算法",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "algorithm.n.01",
+                                           "wordnet_lemma":  "algorithm",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0082",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_001_007",
+                                           "surface":  "合适",
+                                           "keyword":  "合适",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "attribute",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "suitable.a.01",
+                                           "wordnet_lemma":  "suitable",
+                                           "wordnet_pos":  "s",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_001_008",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0083",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_001_008",
+                                           "surface":  "文本文件",
+                                           "keyword":  "文本文件",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "instrument",
+                                           "source_field":  "statement",
+                                           "wordnet_synset":  "text_file.n.01",
+                                           "wordnet_lemma":  "text_file",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0084",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_001_008",
+                                           "surface":  "定义",
+                                           "keyword":  "定义",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "specify.v.02",
+                                           "wordnet_lemma":  "define",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0085",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_001_008",
+                                           "surface":  "连续体",
+                                           "keyword":  "连续体",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "continuum.n.01",
+                                           "wordnet_lemma":  "continuum",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0086",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_001_008",
+                                           "surface":  "目标",
+                                           "keyword":  "目标",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "attribute",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0087",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_001_008",
+                                           "surface":  "F0",
+                                           "keyword":  "F0",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_001",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0088",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_001",
+                                           "surface":  "改变",
+                                           "keyword":  "改变",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "change.v.01",
+                                           "wordnet_lemma":  "change",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0089",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_001",
+                                           "surface":  "二声",
+                                           "keyword":  "二声",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "attribute",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0090",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_001",
+                                           "surface":  "F0",
+                                           "keyword":  "F0",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0091",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_001",
+                                           "surface":  "转折点",
+                                           "keyword":  "转折点",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_002",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0092",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_002",
+                                           "surface":  "改变",
+                                           "keyword":  "改变",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "change.v.01",
+                                           "wordnet_lemma":  "change",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0093",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_002",
+                                           "surface":  "二声",
+                                           "keyword":  "二声",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "attribute",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0094",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_002",
+                                           "surface":  "F0",
+                                           "keyword":  "F0",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0095",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_002",
+                                           "surface":  "offset",
+                                           "keyword":  "offset",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_003",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0096",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_003",
+                                           "surface":  "二声",
+                                           "keyword":  "二声",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0097",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_003",
+                                           "surface":  "三声",
+                                           "keyword":  "三声",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "result",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0098",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_003",
+                                           "surface":  "F0",
+                                           "keyword":  "F0",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0099",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_003",
+                                           "surface":  "逐渐",
+                                           "keyword":  "逐渐",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "attribute",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "gradually.r.01",
+                                           "wordnet_lemma":  "gradually",
+                                           "wordnet_pos":  "r",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_004",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0100",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_004",
+                                           "surface":  "步",
+                                           "keyword":  "步级",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "step.n.01",
+                                           "wordnet_lemma":  "step",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.95
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0101",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_004",
+                                           "surface":  "等距",
+                                           "keyword":  "等距",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "equidistant.s.01",
+                                           "wordnet_lemma":  "equidistant",
+                                           "wordnet_pos":  "s",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_005",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0102",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_005",
+                                           "surface":  "询问",
+                                           "keyword":  "询问",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "request.v.03",
+                                           "wordnet_lemma":  "request",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.96
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0103",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_005",
+                                           "surface":  "PSOLA",
+                                           "keyword":  "PSOLA",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0104",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_005",
+                                           "surface":  "使用",
+                                           "keyword":  "使用",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "object",
+                                           "source_field":  "statement",
+                                           "wordnet_synset":  "use.v.01",
+                                           "wordnet_lemma":  "use",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_006",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0105",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_006",
+                                           "surface":  "生成",
+                                           "keyword":  "生成",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "generate.v.01",
+                                           "wordnet_lemma":  "generate",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0106",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_006",
+                                           "surface":  "Pitch",
+                                           "keyword":  "Pitch",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "result",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0107",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_006",
+                                           "surface":  "录音",
+                                           "keyword":  "录音",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "instrument",
+                                           "source_field":  "qualifiers.scope",
+                                           "wordnet_synset":  "sound_recording.n.01",
+                                           "wordnet_lemma":  "audio_recording",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_007",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0108",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_007",
+                                           "surface":  "转为",
+                                           "keyword":  "转换",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "convert.v.02",
+                                           "wordnet_lemma":  "convert",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.97
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0109",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_007",
+                                           "surface":  "Pitch",
+                                           "keyword":  "Pitch",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "qualifiers.scope",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0110",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_007",
+                                           "surface":  "Manipulation",
+                                           "keyword":  "Manipulation",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "attribute",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0111",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_007",
+                                           "surface":  "对象",
+                                           "keyword":  "对象",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "object.n.05",
+                                           "wordnet_lemma":  "object",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_008",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0112",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_008",
+                                           "surface":  "使用",
+                                           "keyword":  "使用",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "use.v.01",
+                                           "wordnet_lemma":  "use",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0113",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_008",
+                                           "surface":  "Manipulation",
+                                           "keyword":  "Manipulation",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "location",
+                                           "source_field":  "qualifiers.scope",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0114",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_008",
+                                           "surface":  "窗口",
+                                           "keyword":  "窗口",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "location",
+                                           "source_field":  "qualifiers.scope",
+                                           "wordnet_synset":  "window.n.08",
+                                           "wordnet_lemma":  "window",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0115",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_008",
+                                           "surface":  "替换",
+                                           "keyword":  "替换",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "replace.v.01",
+                                           "wordnet_lemma":  "replace",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.97
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0116",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_008",
+                                           "surface":  "音高",
+                                           "keyword":  "音高",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "pitch.n.01",
+                                           "wordnet_lemma":  "pitch",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_009",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0117",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_009",
+                                           "surface":  "调整",
+                                           "keyword":  "调整",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "adjust.v.01",
+                                           "wordnet_lemma":  "adjust",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0118",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_009",
+                                           "surface":  "目标",
+                                           "keyword":  "目标",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "attribute",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0119",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_009",
+                                           "surface":  "音高",
+                                           "keyword":  "音高",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "pitch.n.01",
+                                           "wordnet_lemma":  "pitch",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0120",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_009",
+                                           "surface":  "PSOLA",
+                                           "keyword":  "PSOLA",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "instrument",
+                                           "source_field":  "qualifiers.scope",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_010",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0121",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_010",
+                                           "surface":  "总",
+                                           "keyword":  "总量",
+                                           "keyword_type":  "quantity",
+                                           "semantic_role":  "attribute",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "sum.n.05",
+                                           "wordnet_lemma":  "total",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.97
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0122",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_010",
+                                           "surface":  "变化",
+                                           "keyword":  "变化",
+                                           "keyword_type":  "event",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "change.n.01",
+                                           "wordnet_lemma":  "change",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.97
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0123",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_010",
+                                           "surface":  "范围",
+                                           "keyword":  "范围",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "range.n.02",
+                                           "wordnet_lemma":  "range",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.96
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0124",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_010",
+                                           "surface":  "9 个",
+                                           "keyword":  "9个",
+                                           "keyword_type":  "quantity",
+                                           "semantic_role":  "value",
+                                           "source_field":  "qualifiers.scope",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0125",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_010",
+                                           "surface":  "级别",
+                                           "keyword":  "级别",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "result",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "degree.n.02",
+                                           "wordnet_lemma":  "level",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0126",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_010",
+                                           "surface":  "等距",
+                                           "keyword":  "等距",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "attribute",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "equidistant.s.01",
+                                           "wordnet_lemma":  "equidistant",
+                                           "wordnet_pos":  "s",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_011",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0127",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_011",
+                                           "surface":  "级别",
+                                           "keyword":  "级别",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "participant",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "degree.n.02",
+                                           "wordnet_lemma":  "level",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0128",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_011",
+                                           "surface":  "时长",
+                                           "keyword":  "时长",
+                                           "keyword_type":  "time",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "duration.n.01",
+                                           "wordnet_lemma":  "duration",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0129",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_011",
+                                           "surface":  "一致",
+                                           "keyword":  "一致",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "same.a.01",
+                                           "wordnet_lemma":  "same",
+                                           "wordnet_pos":  "a",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_012",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0130",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_012",
+                                           "surface":  "级别",
+                                           "keyword":  "级别",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "participant",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "degree.n.02",
+                                           "wordnet_lemma":  "level",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0131",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_012",
+                                           "surface":  "参数",
+                                           "keyword":  "参数",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "parameter.n.02",
+                                           "wordnet_lemma":  "parameter",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0132",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_002_012",
+                                           "surface":  "一致",
+                                           "keyword":  "一致",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "same.a.01",
+                                           "wordnet_lemma":  "same",
+                                           "wordnet_pos":  "a",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_001",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0133",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_001",
+                                           "surface":  "第 8 步",
+                                           "keyword":  "第8步",
+                                           "keyword_type":  "quantity",
+                                           "semantic_role":  "location",
+                                           "source_field":  "qualifiers.scope",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0134",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_001",
+                                           "surface":  "Scale pitch",
+                                           "keyword":  "Scale pitch",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_002",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0135",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_002",
+                                           "surface":  "请求",
+                                           "keyword":  "请求",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "request.v.03",
+                                           "wordnet_lemma":  "request",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.96
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0136",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_002",
+                                           "surface":  "详细",
+                                           "keyword":  "详细",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "attribute",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "detailed.s.01",
+                                           "wordnet_lemma":  "detailed",
+                                           "wordnet_pos":  "s",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0137",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_002",
+                                           "surface":  "说明",
+                                           "keyword":  "解释",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "explain.v.01",
+                                           "wordnet_lemma":  "explain",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.98
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_003",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0138",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_003",
+                                           "surface":  "版本",
+                                           "keyword":  "版本",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "condition",
+                                           "source_field":  "qualifiers.conditions",
+                                           "wordnet_synset":  "version.n.02",
+                                           "wordnet_lemma":  "version",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.97
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0139",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_003",
+                                           "surface":  "Praat",
+                                           "keyword":  "Praat",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "qualifiers.conditions",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0140",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_003",
+                                           "surface":  "Scale pitch",
+                                           "keyword":  "Scale pitch",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "condition",
+                                           "source_field":  "qualifiers.conditions",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0141",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_003",
+                                           "surface":  "Manipulation",
+                                           "keyword":  "Manipulation",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "location",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0142",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_003",
+                                           "surface":  "Replace pitch",
+                                           "keyword":  "Replace pitch",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_004",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0143",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_004",
+                                           "surface":  "Praat",
+                                           "keyword":  "Praat",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "qualifiers.conditions",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0144",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_004",
+                                           "surface":  "Scale pitch",
+                                           "keyword":  "Scale pitch",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "condition",
+                                           "source_field":  "qualifiers.conditions",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0145",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_004",
+                                           "surface":  "PSOLA",
+                                           "keyword":  "PSOLA",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "instrument",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0146",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_004",
+                                           "surface":  "音高",
+                                           "keyword":  "音高",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "pitch.n.01",
+                                           "wordnet_lemma":  "pitch",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0147",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_004",
+                                           "surface":  "流程",
+                                           "keyword":  "流程",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "procedure.n.01",
+                                           "wordnet_lemma":  "process",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.97
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_005",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0148",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_005",
+                                           "surface":  "设定",
+                                           "keyword":  "设定",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "specify.v.02",
+                                           "wordnet_lemma":  "set",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.95
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0149",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_005",
+                                           "surface":  "起始",
+                                           "keyword":  "起始",
+                                           "keyword_type":  "time",
+                                           "semantic_role":  "attribute",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "start.n.01",
+                                           "wordnet_lemma":  "start",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.95
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0150",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_005",
+                                           "surface":  "音高",
+                                           "keyword":  "音高",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "pitch.n.01",
+                                           "wordnet_lemma":  "pitch",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_006",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0151",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_006",
+                                           "surface":  "设定",
+                                           "keyword":  "设定",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "specify.v.02",
+                                           "wordnet_lemma":  "set",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.95
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0152",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_006",
+                                           "surface":  "终止",
+                                           "keyword":  "终止",
+                                           "keyword_type":  "time",
+                                           "semantic_role":  "attribute",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "end.n.01",
+                                           "wordnet_lemma":  "end",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.95
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0153",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_006",
+                                           "surface":  "音高",
+                                           "keyword":  "音高",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "pitch.n.01",
+                                           "wordnet_lemma":  "pitch",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_007",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0154",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_007",
+                                           "surface":  "设定",
+                                           "keyword":  "设定",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "specify.v.02",
+                                           "wordnet_lemma":  "set",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.95
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0155",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_007",
+                                           "surface":  "平均",
+                                           "keyword":  "平均",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "attribute",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "mean.n.01",
+                                           "wordnet_lemma":  "mean",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0156",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_007",
+                                           "surface":  "音高",
+                                           "keyword":  "音高",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "pitch.n.01",
+                                           "wordnet_lemma":  "pitch",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_008",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0157",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_008",
+                                           "surface":  "检查",
+                                           "keyword":  "检查",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "check.v.01",
+                                           "wordnet_lemma":  "check",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.96
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0158",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_008",
+                                           "surface":  "级别",
+                                           "keyword":  "级别",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "participant",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "degree.n.02",
+                                           "wordnet_lemma":  "level",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0159",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_008",
+                                           "surface":  "F0",
+                                           "keyword":  "F0",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0160",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_008",
+                                           "surface":  "转折点",
+                                           "keyword":  "转折点",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_009",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0161",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_009",
+                                           "surface":  "检查",
+                                           "keyword":  "检查",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "check.v.01",
+                                           "wordnet_lemma":  "check",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.96
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0162",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_009",
+                                           "surface":  "级别",
+                                           "keyword":  "级别",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "participant",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "degree.n.02",
+                                           "wordnet_lemma":  "level",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0163",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_009",
+                                           "surface":  "offset",
+                                           "keyword":  "offset",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_010",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0164",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_010",
+                                           "surface":  "试听",
+                                           "keyword":  "试听",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "listen.v.01",
+                                           "wordnet_lemma":  "listen",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0165",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_010",
+                                           "surface":  "导出",
+                                           "keyword":  "导出",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "attribute",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "export.v.02",
+                                           "wordnet_lemma":  "export",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-learn-cand-002-1fa98728ac3e_0166",
+                                           "knowledge_id":  "K_wildchat-learn-cand-002-1fa98728ac3e_003_010",
+                                           "surface":  "连续体",
+                                           "keyword":  "连续体",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "continuum.n.01",
+                                           "wordnet_lemma":  "continuum",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  }
+              ]
+}

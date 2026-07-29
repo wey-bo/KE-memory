@@ -1,0 +1,295 @@
+{
+  "candidate_id": "WILDCHAT-MGMT-CAND-003",
+  "turn_index": 0,
+  "context_completions": [],
+  "knowledge": [
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_001",
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "statement": "用户请求为公共住房机构的高级项目经理编写 10 个绩效目标。",
+      "subject": "用户",
+      "predicate": "请求",
+      "object": "10 个绩效目标",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": [
+          "公共住房机构的高级项目经理"
+        ]
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "请为公共住房机构的高级项目经理写 10 个绩效目标"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_002",
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "statement": "代理建议设定项目执行效率方面的目标。",
+      "subject": "绩效目标",
+      "predicate": "可涵盖",
+      "object": "项目执行效率",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "项目执行效率、报告及时性、绩效指标、利益相关方参与、可负担住房创新、居民满意度、跨部门协作、持续改进、员工培训和法规趋势"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_003",
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "statement": "代理建议设定报告及时性方面的目标。",
+      "subject": "绩效目标",
+      "predicate": "可涵盖",
+      "object": "报告及时性",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "项目执行效率、报告及时性、绩效指标、利益相关方参与、可负担住房创新、居民满意度、跨部门协作、持续改进、员工培训和法规趋势"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_004",
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "statement": "代理建议设定绩效指标方面的目标。",
+      "subject": "绩效目标",
+      "predicate": "可涵盖",
+      "object": "绩效指标",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "项目执行效率、报告及时性、绩效指标、利益相关方参与、可负担住房创新、居民满意度、跨部门协作、持续改进、员工培训和法规趋势"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_005",
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "statement": "代理建议设定利益相关方参与方面的目标。",
+      "subject": "绩效目标",
+      "predicate": "可涵盖",
+      "object": "利益相关方参与",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "项目执行效率、报告及时性、绩效指标、利益相关方参与、可负担住房创新、居民满意度、跨部门协作、持续改进、员工培训和法规趋势"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_006",
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "statement": "代理建议设定可负担住房创新方面的目标。",
+      "subject": "绩效目标",
+      "predicate": "可涵盖",
+      "object": "可负担住房创新",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "项目执行效率、报告及时性、绩效指标、利益相关方参与、可负担住房创新、居民满意度、跨部门协作、持续改进、员工培训和法规趋势"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_007",
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "statement": "代理建议设定居民满意度方面的目标。",
+      "subject": "绩效目标",
+      "predicate": "可涵盖",
+      "object": "居民满意度",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "项目执行效率、报告及时性、绩效指标、利益相关方参与、可负担住房创新、居民满意度、跨部门协作、持续改进、员工培训和法规趋势"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_008",
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "statement": "代理建议设定跨部门协作方面的目标。",
+      "subject": "绩效目标",
+      "predicate": "可涵盖",
+      "object": "跨部门协作",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "项目执行效率、报告及时性、绩效指标、利益相关方参与、可负担住房创新、居民满意度、跨部门协作、持续改进、员工培训和法规趋势"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_009",
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "statement": "代理建议设定持续改进方面的目标。",
+      "subject": "绩效目标",
+      "predicate": "可涵盖",
+      "object": "持续改进",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "项目执行效率、报告及时性、绩效指标、利益相关方参与、可负担住房创新、居民满意度、跨部门协作、持续改进、员工培训和法规趋势"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_010",
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "statement": "代理建议设定员工培训方面的目标。",
+      "subject": "绩效目标",
+      "predicate": "可涵盖",
+      "object": "员工培训",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "项目执行效率、报告及时性、绩效指标、利益相关方参与、可负担住房创新、居民满意度、跨部门协作、持续改进、员工培训和法规趋势"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_011",
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "statement": "代理建议设定法规趋势方面的目标。",
+      "subject": "绩效目标",
+      "predicate": "可涵盖",
+      "object": "法规趋势",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "项目执行效率、报告及时性、绩效指标、利益相关方参与、可负担住房创新、居民满意度、跨部门协作、持续改进、员工培训和法规趋势"
+        }
+      ],
+      "confidence": 0.98
+    }
+  ]
+}

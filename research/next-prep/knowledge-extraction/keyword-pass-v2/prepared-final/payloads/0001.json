@@ -1,0 +1,1452 @@
+{
+  "prompt_version": "knowledge-keyword-extraction-v2",
+  "candidate_id": "TASKMASTER2-CAND-001",
+  "candidate_namespace": "taskmaster2-cand-001-5f5e1081bd0b",
+  "final_knowledge_sha256": "641c88117c206e9901c332e93c4c77e91dc5df703667f441291679dec8c03f41",
+  "active_knowledge": [
+    {
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "confidence": 1.0,
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "end": 7,
+          "evidence_id": "evidence-00c73fab673919a9123f4907c30f8ac51a08426d0290ee61390c1d6b30c13d82",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "这个价格有点贵",
+          "start": 0,
+          "turn_index": 4
+        }
+      ],
+      "inference_basis": "turn 4 的“这个价格”直接回指紧邻的 turn 3 直飞方案报价2,677美元。",
+      "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_001",
+      "object": "价格为2,677美元的直飞航班",
+      "predicate": "认为有点贵",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [
+          "直飞航班",
+          "价格：2,677美元"
+        ],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户认为代理所述价格为2,677美元的直飞航班有点贵。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [
+          "K_taskmaster2-cand-001-5f5e1081bd0b_004_001"
+        ],
+        "source_turn": 4,
+        "stage": "dialogue",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "confidence": 1.0,
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "end": 24,
+          "evidence_id": "evidence-d96bdad6ff9c8fc42ad686ec5fe881c40f4585d0d2aa8f2d244d951ee4609e96",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我想预订一趟从纽约市到阿姆斯特丹的往返航班",
+          "start": 3,
+          "turn_index": 0
+        },
+        {
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "end": 22,
+          "evidence_id": "evidence-3fa11d26ed4570b4dcc2aaef29c5aa4398ec9effe1d6ba6d3e42315c8a4ddf9e",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我今天出发，19 号回来。两程都希望尽可能早",
+          "start": 0,
+          "turn_index": 1
+        },
+        {
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "end": 20,
+          "evidence_id": "evidence-586b36a99fa7dfc8d054a63ba509ef4debdb136f4fd68fdcb74491c35bc70fa2",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "还是选你刚才说的第一班吧",
+          "start": 8,
+          "turn_index": 4
+        }
+      ],
+      "inference_basis": "turn 0 和 turn 1 给出航线、往返类型、出发与返回时间及两程尽可能早的偏好；代理在 turn 2 首先给出最便宜的经停方案，随后在 turn 3 给出直飞方案；用户因直飞价格较贵而选择“第一班”，故其指代 turn 2 的完整方案。",
+      "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+      "object": "从纽约市到阿姆斯特丹的最便宜往返航班方案",
+      "predicate": "选择",
+      "qualifiers": {
+        "conditions": [
+          "去程和返程均希望尽可能早"
+        ],
+        "modality": "committed",
+        "polarity": "positive",
+        "scope": [
+          "出发地：纽约市",
+          "目的地：阿姆斯特丹",
+          "行程类型：往返",
+          "经停次数：1",
+          "价格：1,287美元"
+        ],
+        "temporal": [
+          "出发：今天（说话当日，具体日历日期未确定）",
+          "返回：19号（月份和年份未说明）",
+          "代理所述航班凌晨12:30出发",
+          "代理所述航班次日11:55抵达"
+        ]
+      },
+      "source_status": "user_reported",
+      "statement": "用户选择了从纽约市到阿姆斯特丹的最便宜往返航班方案：计划当天出发、19号返回，去程和返程均希望尽可能早；该方案需要经停一次，代理给出的时间为凌晨12:30出发、次日11:55抵达，价格为1,287美元。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [
+          "K_taskmaster2-cand-001-5f5e1081bd0b_004_002"
+        ],
+        "source_turn": 0,
+        "stage": "dialogue",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "confidence": 0.99,
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "end": 54,
+          "evidence_id": "evidence-dc104b2b843c32db9b99607abf9dca0b18f22e422563ae74f94fa3d9be00f0f3",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "我查到最便宜的往返票：需要经停一次，凌晨 12:30 出发，次日 11:55 抵达，价格是 1,287 美元",
+          "start": 0,
+          "turn_index": 2
+        },
+        {
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "end": 17,
+          "evidence_id": "evidence-192dececef8d92de2b51121e6c77f6dbd13e7dbce7da15fea226d6d6a30a3a30",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "已经把全部信息发送到你的邮箱",
+          "start": 3,
+          "turn_index": 4
+        }
+      ],
+      "inference_basis": "turn 0 和 turn 1 定义航线、往返类型、日期与时间偏好，turn 2 给出首个最便宜往返票的经停、时刻和价格，turn 4 用户选择该方案；代理紧接着声称发送“全部信息”，因此该对象是上述完整方案。",
+      "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+      "object": "用户所选的纽约市至阿姆斯特丹最便宜往返航班方案的全部信息",
+      "predicate": "声称已发送",
+      "qualifiers": {
+        "conditions": [
+          "去程和返程均希望尽可能早"
+        ],
+        "modality": "claimed_completed",
+        "polarity": "positive",
+        "scope": [
+          "发送目的地：用户邮箱",
+          "出发地：纽约市",
+          "目的地：阿姆斯特丹",
+          "行程类型：往返",
+          "经停次数：1",
+          "价格：1,287美元"
+        ],
+        "temporal": [
+          "已经发送",
+          "出发：今天（说话当日，具体日历日期未确定）",
+          "返回：19号（月份和年份未说明）",
+          "代理所述航班凌晨12:30出发",
+          "代理所述航班次日11:55抵达"
+        ]
+      },
+      "source_status": "agent_generated",
+      "statement": "代理声称已将用户所选航班方案的全部信息发送到用户邮箱；该方案是从纽约市到阿姆斯特丹的往返行程，计划当天出发、19号返回且两程尽可能早，并由代理描述为需要经停一次、凌晨12:30出发、次日11:55抵达、价格1,287美元的最便宜往返票。",
+      "subject": "代理",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [
+          "K_taskmaster2-cand-001-5f5e1081bd0b_004_003"
+        ],
+        "source_turn": 2,
+        "stage": "dialogue",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "confidence": 1.0,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "end": 24,
+          "evidence_id": "evidence-d96bdad6ff9c8fc42ad686ec5fe881c40f4585d0d2aa8f2d244d951ee4609e96",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我想预订一趟从纽约市到阿姆斯特丹的往返航班",
+          "start": 3,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_001",
+      "object": "从纽约市到阿姆斯特丹的往返航班",
+      "predicate": "想预订",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "requested",
+        "polarity": "positive",
+        "scope": [
+          "出发地：纽约市",
+          "目的地：阿姆斯特丹",
+          "行程类型：往返"
+        ],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户想预订一趟从纽约市到阿姆斯特丹的往返航班。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "confidence": 1.0,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "end": 11,
+          "evidence_id": "evidence-49342e714517c10f36f6071c7797d5e1d13d5440c8a2314f9b09aad7d4adef7d",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "我可以帮你查航班",
+          "start": 3,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_002",
+      "object": "航班",
+      "predicate": "可以帮助查询",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "committed",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理表示可以帮助用户查询航班。",
+      "subject": "代理",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "confidence": 1.0,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "end": 21,
+          "evidence_id": "evidence-8f9a6ea213dc53d025e4ac508a873ae6d2d1b93e134d350c3d37220d30fab5f5",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "你还有其他偏好吗？",
+          "start": 12,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_003",
+      "object": "用户是否还有其他偏好",
+      "predicate": "询问",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "questioned",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理询问用户是否还有其他偏好。",
+      "subject": "代理",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "confidence": 1.0,
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "end": 5,
+          "evidence_id": "evidence-412aa5494228af3db85850b650be132bcb295bd2e35809384aa13db8661a4029",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我今天出发",
+          "start": 0,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": "“今天”可解析为说话当日，但本轮没有可用于确定日历日期的时间锚点。",
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_001",
+      "object": null,
+      "predicate": "计划出发",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "planned",
+        "polarity": "positive",
+        "scope": [
+          "去程"
+        ],
+        "temporal": [
+          "今天（说话当日，具体日期未确定）"
+        ]
+      },
+      "source_status": "user_reported",
+      "statement": "用户计划在说话当日出发，具体日历日期在本轮中无法确定。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "confidence": 1.0,
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "end": 12,
+          "evidence_id": "evidence-8a2b26e7fba00a0925c6ae2bf90080862ac0f103097cec08dc0d3a3f7257a8bc",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "19 号回来",
+          "start": 6,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": "本轮只给出日号“19号”，没有给出月份或年份。",
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_002",
+      "object": null,
+      "predicate": "计划返回",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "planned",
+        "polarity": "positive",
+        "scope": [
+          "返程"
+        ],
+        "temporal": [
+          "19号（月份和年份未说明）"
+        ]
+      },
+      "source_status": "user_reported",
+      "statement": "用户计划在某月19日返回，月份和年份在本轮中未说明。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "confidence": 1.0,
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "end": 22,
+          "evidence_id": "evidence-87a6dabe02b796a4305270982b1ad9d7fe0fa7ad63fcba51ba8e7e88e181f33c",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "两程都希望尽可能早",
+          "start": 13,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": "“两程”明确涵盖去程和返程，因此该共同偏好可原子化到去程。",
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_003",
+      "object": "尽可能早的去程",
+      "predicate": "偏好",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "preferred",
+        "polarity": "positive",
+        "scope": [
+          "去程"
+        ],
+        "temporal": [
+          "尽可能早"
+        ]
+      },
+      "source_status": "user_reported",
+      "statement": "用户希望去程时间尽可能早。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "confidence": 1.0,
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "end": 22,
+          "evidence_id": "evidence-87a6dabe02b796a4305270982b1ad9d7fe0fa7ad63fcba51ba8e7e88e181f33c",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "两程都希望尽可能早",
+          "start": 13,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": "“两程”明确涵盖去程和返程，因此该共同偏好可原子化到返程。",
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_004",
+      "object": "尽可能早的返程",
+      "predicate": "偏好",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "preferred",
+        "polarity": "positive",
+        "scope": [
+          "返程"
+        ],
+        "temporal": [
+          "尽可能早"
+        ]
+      },
+      "source_status": "user_reported",
+      "statement": "用户希望返程时间尽可能早。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "confidence": 1.0,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "end": 16,
+          "evidence_id": "evidence-d43d0554e251277e40dd5fcff6f991b2ff8ed07f370d5a4d0995e9f9dfb72b52",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "如果可以，也请帮我找最便宜的航班",
+          "start": 0,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_001",
+      "object": "最便宜的航班",
+      "predicate": "请求寻找",
+      "qualifiers": {
+        "conditions": [
+          "如果可以"
+        ],
+        "modality": "requested",
+        "polarity": "positive",
+        "scope": [
+          "价格最低"
+        ],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户请求在可行的情况下寻找最便宜的航班。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "confidence": 1.0,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "end": 10,
+          "evidence_id": "evidence-680cdb784f601b7ebb19702177933b70bd8edb70f26739cbc392305fde84aff9",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "我查到最便宜的往返票",
+          "start": 0,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_002",
+      "object": "最便宜的往返票",
+      "predicate": "声称已查到",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "claimed_completed",
+        "polarity": "positive",
+        "scope": [
+          "最便宜",
+          "往返票"
+        ],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理声称查到了最便宜的往返票。",
+      "subject": "代理",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "confidence": 1.0,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "end": 17,
+          "evidence_id": "evidence-c979d4d254216de86f06e1696ddb4de40161233b6609d78c96ccd08278286828",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "需要经停一次",
+          "start": 11,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_003",
+      "object": "一次",
+      "predicate": "需要经停",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [
+          "经停次数：1"
+        ],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理所述最便宜往返票需要经停一次。",
+      "subject": "代理所述最便宜往返票",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "confidence": 1.0,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "end": 29,
+          "evidence_id": "evidence-584e5d9119fb1f48a7bdddb0b00c3f175811cde8c25844ee1a7c90993e2ef790",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "凌晨 12:30 出发",
+          "start": 18,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_004",
+      "object": "凌晨12:30",
+      "predicate": "出发时间是",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": [
+          "凌晨 12:30"
+        ]
+      },
+      "source_status": "agent_generated",
+      "statement": "代理所述最便宜往返票的出发时间是凌晨12:30。",
+      "subject": "代理所述最便宜往返票",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "confidence": 1.0,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "end": 41,
+          "evidence_id": "evidence-35bafb30e6eec4cb545dba9765d07a5d46b5508aefaa6366d806dea9385f50ab",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "次日 11:55 抵达",
+          "start": 30,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_005",
+      "object": "次日11:55",
+      "predicate": "抵达时间是",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": [
+          "次日 11:55"
+        ]
+      },
+      "source_status": "agent_generated",
+      "statement": "代理所述最便宜往返票的抵达时间是次日11:55。",
+      "subject": "代理所述最便宜往返票",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "confidence": 1.0,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "end": 54,
+          "evidence_id": "evidence-afab7601e321c4f2af8087bc4cc1d14891c81a8f95039bc7ebaa2c74ff78f411",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "价格是 1,287 美元",
+          "start": 42,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_006",
+      "object": "1,287美元",
+      "predicate": "价格是",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [
+          "往返票"
+        ],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理所述最便宜往返票的价格是1,287美元。",
+      "subject": "代理所述最便宜往返票",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "confidence": 1.0,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "end": 62,
+          "evidence_id": "evidence-223511c6059eeadd36289cebf7c0bd47432f81cc827b03e942b25feec239814d",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "要我帮你订吗？",
+          "start": 55,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_002_007",
+      "object": "该往返票",
+      "predicate": "询问是否预订",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "questioned",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理询问用户是否要预订该往返票。",
+      "subject": "代理",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "confidence": 1.0,
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "end": 7,
+          "evidence_id": "evidence-474c9b6b5f1e3d3ecc90fb95514467cb236dc7ffc03cd6c9bb1fdcbcad0d0857",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "有没有直飞的？",
+          "start": 0,
+          "turn_index": 3
+        }
+      ],
+      "inference_basis": "代理回答中的“直飞航班”补全了用户省略的中心词。",
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_001",
+      "object": "直飞航班",
+      "predicate": "询问是否存在",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "questioned",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户询问是否有直飞航班。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 3,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "confidence": 1.0,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "end": 5,
+          "evidence_id": "evidence-12f0dc00ac4482618e731c497624a438480e2d38d993649d07eb7f16d39fdfec",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "我再查一下",
+          "start": 0,
+          "turn_index": 3
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_002",
+      "object": null,
+      "predicate": "计划再次查询",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "planned",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理表示将再次查询。",
+      "subject": "代理",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 3,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "confidence": 1.0,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "end": 13,
+          "evidence_id": "evidence-031e1e0bd52df2fa704e5e50d8cab2eefd237d7e6021773435a2f7d342084592",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "有一班直飞航班",
+          "start": 6,
+          "turn_index": 3
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_003",
+      "object": "一班",
+      "predicate": "存在",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [
+          "数量：1班"
+        ],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理声称有一班直飞航班。",
+      "subject": "直飞航班",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 3,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "confidence": 1.0,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "end": 22,
+          "evidence_id": "evidence-8b8ac566ae027e8585ad9f6b6e5d730f0761b863478e1fa17d007946867ecd1b",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "下午 6 点出发",
+          "start": 14,
+          "turn_index": 3
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_004",
+      "object": "下午6点",
+      "predicate": "出发时间是",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": [
+          "下午 6 点"
+        ]
+      },
+      "source_status": "agent_generated",
+      "statement": "代理所述直飞航班在下午6点出发。",
+      "subject": "代理所述直飞航班",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 3,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "confidence": 1.0,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "end": 35,
+          "evidence_id": "evidence-1bdae0a53b72723974f0b571284f1633c9c80017ea68f7ffefa620e068654101",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "次日早上 7:35 抵达",
+          "start": 23,
+          "turn_index": 3
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_005",
+      "object": "次日早上7:35",
+      "predicate": "抵达时间是",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": [
+          "次日早上 7:35"
+        ]
+      },
+      "source_status": "agent_generated",
+      "statement": "代理所述直飞航班在次日早上7:35抵达。",
+      "subject": "代理所述直飞航班",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 3,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "confidence": 1.0,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "end": 48,
+          "evidence_id": "evidence-8e740ec2f88f6b979839c92678899770867eb4d9ff47079c71e8664b5aab4fde",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "价格是 2,677 美元",
+          "start": 36,
+          "turn_index": 3
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_006",
+      "object": "2,677美元",
+      "predicate": "价格是",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理所述直飞航班的价格是2,677美元。",
+      "subject": "代理所述直飞航班",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 3,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "confidence": 1.0,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "end": 62,
+          "evidence_id": "evidence-1ce2c99cdfb5dd302b5fe454e7752dedbebcc6ee5bf350a4c88edc386620b417",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "这个方案更符合你的偏好吗？",
+          "start": 49,
+          "turn_index": 3
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_003_007",
+      "object": "用户偏好",
+      "predicate": "询问是否更符合",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "questioned",
+        "polarity": "positive",
+        "scope": [
+          "该直飞方案"
+        ],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理询问该直飞方案是否更符合用户偏好。",
+      "subject": "代理",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 3,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    }
+  ],
+  "keyword_id_prefix": "KW_taskmaster2-cand-001-5f5e1081bd0b_",
+  "output_contract": {
+    "$defs": {
+      "KeywordDraft": {
+        "additionalProperties": false,
+        "properties": {
+          "keyword_id": {
+            "minLength": 1,
+            "title": "Keyword Id",
+            "type": "string"
+          },
+          "knowledge_id": {
+            "minLength": 1,
+            "title": "Knowledge Id",
+            "type": "string"
+          },
+          "surface": {
+            "minLength": 1,
+            "title": "Surface",
+            "type": "string"
+          },
+          "normalized_zh": {
+            "minLength": 1,
+            "title": "Normalized Zh",
+            "type": "string"
+          },
+          "query_lemma": {
+            "minLength": 1,
+            "title": "Query Lemma",
+            "type": "string"
+          },
+          "keyword_kind": {
+            "enum": [
+              "lexical",
+              "literal",
+              "identifier",
+              "qualifier"
+            ],
+            "title": "Keyword Kind",
+            "type": "string"
+          },
+          "keyword_type": {
+            "enum": [
+              "entity",
+              "concept",
+              "action",
+              "event",
+              "property",
+              "relation",
+              "time",
+              "quantity",
+              "condition",
+              "modality"
+            ],
+            "title": "Keyword Type",
+            "type": "string"
+          },
+          "semantic_role": {
+            "enum": [
+              "subject",
+              "predicate",
+              "object",
+              "topic",
+              "participant",
+              "recipient",
+              "instrument",
+              "result",
+              "attribute",
+              "value",
+              "time",
+              "location",
+              "condition",
+              "modality",
+              "identifier",
+              "other"
+            ],
+            "title": "Semantic Role",
+            "type": "string"
+          },
+          "source_field": {
+            "enum": [
+              "statement",
+              "subject",
+              "predicate",
+              "object",
+              "qualifiers.temporal",
+              "qualifiers.conditions",
+              "qualifiers.scope",
+              "qualifiers.modality"
+            ],
+            "title": "Source Field",
+            "type": "string"
+          },
+          "part_of_speech": {
+            "enum": [
+              "noun",
+              "verb",
+              "adjective",
+              "adverb",
+              "proper_noun",
+              "other",
+              "none"
+            ],
+            "title": "Part Of Speech",
+            "type": "string"
+          },
+          "sense_key": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Sense Key"
+          },
+          "sense_hint": {
+            "minLength": 1,
+            "title": "Sense Hint",
+            "type": "string"
+          },
+          "lookup_targets": {
+            "items": {
+              "enum": [
+                "wordnet",
+                "schema_org",
+                "exact"
+              ],
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Lookup Targets",
+            "type": "array"
+          },
+          "normalized_value": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Normalized Value"
+          },
+          "datatype": {
+            "anyOf": [
+              {
+                "enum": [
+                  "date",
+                  "datetime",
+                  "time",
+                  "duration",
+                  "number",
+                  "currency",
+                  "percentage",
+                  "version",
+                  "code",
+                  "text",
+                  "identifier",
+                  "modality",
+                  "condition",
+                  "other"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Datatype"
+          },
+          "unit": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Unit"
+          },
+          "translation_confidence": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Translation Confidence",
+            "type": "number"
+          }
+        },
+        "required": [
+          "keyword_id",
+          "knowledge_id",
+          "surface",
+          "normalized_zh",
+          "query_lemma",
+          "keyword_kind",
+          "keyword_type",
+          "semantic_role",
+          "source_field",
+          "part_of_speech",
+          "sense_hint",
+          "lookup_targets",
+          "translation_confidence"
+        ],
+        "title": "KeywordDraft",
+        "type": "object"
+      },
+      "KnowledgeKeywordOutput": {
+        "additionalProperties": false,
+        "properties": {
+          "knowledge_id": {
+            "minLength": 1,
+            "title": "Knowledge Id",
+            "type": "string"
+          },
+          "keywords": {
+            "items": {
+              "$ref": "#/$defs/KeywordDraft"
+            },
+            "title": "Keywords",
+            "type": "array"
+          },
+          "no_keyword_reason": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "No Keyword Reason"
+          }
+        },
+        "required": [
+          "knowledge_id"
+        ],
+        "title": "KnowledgeKeywordOutput",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "candidate_id": {
+        "minLength": 1,
+        "title": "Candidate Id",
+        "type": "string"
+      },
+      "items": {
+        "items": {
+          "$ref": "#/$defs/KnowledgeKeywordOutput"
+        },
+        "title": "Items",
+        "type": "array"
+      }
+    },
+    "required": [
+      "candidate_id"
+    ],
+    "title": "KeywordPassOutput",
+    "type": "object"
+  },
+  "prompt_sha256": "137ae34237c7fa1b427fa5b82781f65963e775f740bfae22a298b8f73bf148e5",
+  "output_contract_sha256": "572f636d835a2f9c009d1c5e9b2f68c6271b9f803ed6714f72ade442fa007419"
+}

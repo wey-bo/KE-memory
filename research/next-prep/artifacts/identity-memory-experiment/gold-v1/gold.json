@@ -1,0 +1,14 @@
+{
+  "schema_version": "identity-diagnostic-gold-v1",
+  "dataset_id": "identity-diagnostic-v1",
+  "items": [
+    {"scenario_id": "ID-DEV-001-alias-shared-identifier", "split": "dev", "expected_count": 1, "expected_abstained": false, "expected_canonical_groups": [["entity:atlas-alias", "entity:atlas-name"]], "expected_evidence_ids": ["evidence:m-atlas-1", "evidence:m-atlas-2"], "critical_false_merge": false},
+    {"scenario_id": "ID-DEV-002-same-name-distinct", "split": "dev", "expected_count": 2, "expected_abstained": false, "expected_canonical_groups": [["entity:phoenix-a"], ["entity:phoenix-b"]], "expected_evidence_ids": ["evidence:m-phoenix-a", "evidence:m-phoenix-b"], "critical_false_merge": false},
+    {"scenario_id": "ID-DEV-003-rename-stable-identity", "split": "dev", "expected_count": 1, "expected_abstained": false, "expected_canonical_groups": [["entity:northstar", "entity:orion"]], "expected_evidence_ids": ["evidence:m-orion", "evidence:m-northstar"], "critical_false_merge": false},
+    {"scenario_id": "ID-DEV-004-unresolved-alias", "split": "dev", "expected_count": null, "expected_abstained": true, "expected_reason": "identity_unresolved", "expected_canonical_groups": [], "expected_evidence_ids": ["evidence:m-apollo-initiative", "evidence:m-apollo-project"], "critical_false_merge": false},
+    {"scenario_id": "ID-HIDDEN-001-reject-erroneous-merge", "split": "hidden", "expected_count": 2, "expected_abstained": false, "expected_canonical_groups": [["entity:beacon-1"], ["entity:beacon-2"]], "expected_evidence_ids": ["evidence:m-beacon-1", "evidence:m-beacon-2"], "critical_false_merge": false},
+    {"scenario_id": "ID-HIDDEN-002-split-correction", "split": "hidden", "expected_count": 2, "expected_abstained": false, "expected_canonical_groups": [["entity:harbor-east"], ["entity:harbor-west"]], "expected_evidence_ids": ["evidence:m-harbor-east", "evidence:m-harbor-west"], "critical_false_merge": false, "expected_superseded_decision": "decision:harbor-merge-v1"},
+    {"scenario_id": "ID-HIDDEN-003-four-mentions-two-entities", "split": "hidden", "expected_count": 2, "expected_abstained": false, "expected_canonical_groups": [["entity:cedar-alias", "entity:cedar-name"], ["entity:maple-alias", "entity:maple-name"]], "expected_evidence_ids": ["evidence:m-cedar-1", "evidence:m-cedar-2", "evidence:m-maple-1", "evidence:m-maple-2"], "critical_false_merge": false},
+    {"scenario_id": "ID-HIDDEN-004-outside-scope-stability", "split": "hidden", "expected_count": 1, "expected_abstained": false, "expected_canonical_groups": [["entity:lumen-a", "entity:lumen-b"]], "expected_evidence_ids": ["evidence:m-lumen-1", "evidence:m-lumen-2"], "critical_false_merge": false}
+  ]
+}

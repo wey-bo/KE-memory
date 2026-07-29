@@ -1,0 +1,5 @@
+用户：
+如果和 Pandas 的 apply 一起用，能演示并解释参数吗？
+
+Agent：
+先建立 DataFrame，再执行 df['Hyperlink'] = df['Value'].apply(make_hyperlink)。apply 会把 Value 列的每个元素依次传给 make_hyperlink，返回的新字符串列保存为 Hyperlink。

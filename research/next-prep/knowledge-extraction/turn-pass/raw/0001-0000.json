@@ -1,0 +1,485 @@
+{
+  "candidate_id": "WILDCHAT-MGMT-CAND-002",
+  "turn_index": 0,
+  "context_completions": [],
+  "knowledge": [
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_001",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "用户负责一个转型导师、赋能与健康频道的内容运营。",
+      "subject": "用户",
+      "predicate": "负责",
+      "object": "转型导师、赋能与健康频道的内容运营",
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我负责一个转型导师、赋能与健康频道的内容运营"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_002",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "用户请求制定一个 30 天内容计划。",
+      "subject": "用户",
+      "predicate": "请求",
+      "object": "30 天内容计划",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [
+          "30 天"
+        ],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "制定一个 30 天计划"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_003",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "用户要求计划围绕制作有独占价值的内容。",
+      "subject": "30 天内容计划",
+      "predicate": "应围绕",
+      "object": "制作有独占价值的内容",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "围绕“制作有独占价值的内容”"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_004",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "用户要求 30 天计划每天至少安排一项活动。",
+      "subject": "30 天内容计划",
+      "predicate": "每天至少安排",
+      "object": "一项活动",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [
+          "每天"
+        ],
+        "conditions": [],
+        "scope": [
+          "至少一项"
+        ]
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "每天至少安排一项活动"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_005",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "用户要求内容先发布到 Telegram。",
+      "subject": "内容",
+      "predicate": "应先发布到",
+      "object": "Telegram",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": [
+          "先"
+        ]
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "先发布到 Telegram"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_006",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "代理建议在 30 天中安排频道介绍。",
+      "subject": "30 天内容计划",
+      "predicate": "可安排",
+      "object": "介绍频道",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "介绍频道、深度文章、专家直播、教程、案例、冥想音频、书单、问答和自我反思练习"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_007",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "代理建议在 30 天中安排深度文章。",
+      "subject": "30 天内容计划",
+      "predicate": "可安排",
+      "object": "深度文章",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "介绍频道、深度文章、专家直播、教程、案例、冥想音频、书单、问答和自我反思练习"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_008",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "代理建议在 30 天中安排专家直播。",
+      "subject": "30 天内容计划",
+      "predicate": "可安排",
+      "object": "专家直播",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "介绍频道、深度文章、专家直播、教程、案例、冥想音频、书单、问答和自我反思练习"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_009",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "代理建议在 30 天中安排教程。",
+      "subject": "30 天内容计划",
+      "predicate": "可安排",
+      "object": "教程",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "介绍频道、深度文章、专家直播、教程、案例、冥想音频、书单、问答和自我反思练习"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_010",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "代理建议在 30 天中安排案例。",
+      "subject": "30 天内容计划",
+      "predicate": "可安排",
+      "object": "案例",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "介绍频道、深度文章、专家直播、教程、案例、冥想音频、书单、问答和自我反思练习"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_011",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "代理建议在 30 天中安排冥想音频。",
+      "subject": "30 天内容计划",
+      "predicate": "可安排",
+      "object": "冥想音频",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "介绍频道、深度文章、专家直播、教程、案例、冥想音频、书单、问答和自我反思练习"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_012",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "代理建议在 30 天中安排书单。",
+      "subject": "30 天内容计划",
+      "predicate": "可安排",
+      "object": "书单",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "介绍频道、深度文章、专家直播、教程、案例、冥想音频、书单、问答和自我反思练习"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_013",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "代理建议在 30 天中安排问答。",
+      "subject": "30 天内容计划",
+      "predicate": "可安排",
+      "object": "问答",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "介绍频道、深度文章、专家直播、教程、案例、冥想音频、书单、问答和自我反思练习"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_014",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "代理建议在 30 天中安排自我反思练习。",
+      "subject": "30 天内容计划",
+      "predicate": "可安排",
+      "object": "自我反思练习",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "介绍频道、深度文章、专家直播、教程、案例、冥想音频、书单、问答和自我反思练习"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_015",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "代理建议不同内容类型交替安排。",
+      "subject": "内容类型",
+      "predicate": "应",
+      "object": "交替安排",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [
+          "30 天"
+        ],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "交替安排 30 天"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_016",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "代理建议确保内容持续更新。",
+      "subject": "内容",
+      "predicate": "应",
+      "object": "持续更新",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "确保内容持续更新"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_017",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "代理建议为订阅者提供参与入口。",
+      "subject": "订阅者",
+      "predicate": "应有",
+      "object": "参与入口",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "让订阅者有参与和反馈的入口"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_018",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "代理建议为订阅者提供反馈入口。",
+      "subject": "订阅者",
+      "predicate": "应有",
+      "object": "反馈入口",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "让订阅者有参与和反馈的入口"
+        }
+      ],
+      "confidence": 0.98
+    }
+  ]
+}

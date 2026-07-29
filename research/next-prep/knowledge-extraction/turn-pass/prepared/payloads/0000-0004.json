@@ -1,0 +1,329 @@
+{
+  "prompt_version": "knowledge-extraction-turn-v1",
+  "candidate_id": "WILDCHAT-MGMT-CAND-001",
+  "turn_index": 4,
+  "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=f307c772ed4efbb74c3848c4b5debba6 / model=gpt-3.5-turbo-0613 / user_ordinal=1..5 / toxic=false / redacted=false",
+  "user": "谢谢。上面的邮件看起来太正式了，像初级律师写的。我是资深律师，下面这个版本怎么样？",
+  "agent": "可以把语气改得更简洁、自信：说明你目前有空、愿意承担新的挑战；询问客户 X 融资轮次的预期时间以便安排优先级；说明 12 月 15 日到 26 日出行，并表示会在出发前完成任务、与团队协作处理交接。",
+  "source_coordinates": {
+    "user": "/candidates/0/turns/4/user",
+    "agent": "/candidates/0/turns/4/agent"
+  },
+  "output_contract": {
+    "$defs": {
+      "ContextCompletion": {
+        "additionalProperties": false,
+        "properties": {
+          "completion_id": {
+            "minLength": 1,
+            "title": "Completion Id",
+            "type": "string"
+          },
+          "candidate_id": {
+            "minLength": 1,
+            "title": "Candidate Id",
+            "type": "string"
+          },
+          "turn_index": {
+            "minimum": 0,
+            "title": "Turn Index",
+            "type": "integer"
+          },
+          "kind": {
+            "enum": [
+              "coreference",
+              "ellipsis",
+              "role_resolution",
+              "temporal_resolution",
+              "pragmatic_inference",
+              "unresolved"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "original_span": {
+            "minLength": 1,
+            "title": "Original Span",
+            "type": "string"
+          },
+          "interpretation": {
+            "minLength": 1,
+            "title": "Interpretation",
+            "type": "string"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/$defs/EvidenceDraft"
+            },
+            "minItems": 1,
+            "title": "Evidence",
+            "type": "array"
+          },
+          "confidence": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Confidence",
+            "type": "number"
+          },
+          "ambiguity": {
+            "title": "Ambiguity",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "completion_id",
+          "candidate_id",
+          "turn_index",
+          "kind",
+          "original_span",
+          "interpretation",
+          "evidence",
+          "confidence",
+          "ambiguity"
+        ],
+        "title": "ContextCompletion",
+        "type": "object"
+      },
+      "EvidenceDraft": {
+        "additionalProperties": false,
+        "description": "A quoted source occurrence before character spans have been resolved.",
+        "properties": {
+          "turn_index": {
+            "minimum": 0,
+            "title": "Turn Index",
+            "type": "integer"
+          },
+          "message": {
+            "enum": [
+              "user",
+              "agent"
+            ],
+            "title": "Message",
+            "type": "string"
+          },
+          "occurrence_index": {
+            "minimum": 0,
+            "title": "Occurrence Index",
+            "type": "integer"
+          },
+          "quote": {
+            "minLength": 1,
+            "title": "Quote",
+            "type": "string"
+          }
+        },
+        "required": [
+          "turn_index",
+          "message",
+          "occurrence_index",
+          "quote"
+        ],
+        "title": "EvidenceDraft",
+        "type": "object"
+      },
+      "KnowledgeDraft": {
+        "additionalProperties": false,
+        "properties": {
+          "knowledge_id": {
+            "minLength": 1,
+            "title": "Knowledge Id",
+            "type": "string"
+          },
+          "candidate_id": {
+            "minLength": 1,
+            "title": "Candidate Id",
+            "type": "string"
+          },
+          "statement": {
+            "minLength": 1,
+            "title": "Statement",
+            "type": "string"
+          },
+          "subject": {
+            "minLength": 1,
+            "title": "Subject",
+            "type": "string"
+          },
+          "predicate": {
+            "minLength": 1,
+            "title": "Predicate",
+            "type": "string"
+          },
+          "object": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Object"
+          },
+          "qualifiers": {
+            "$ref": "#/$defs/Qualifiers"
+          },
+          "source_status": {
+            "enum": [
+              "user_reported",
+              "agent_generated",
+              "tool_observed"
+            ],
+            "title": "Source Status",
+            "type": "string"
+          },
+          "derivation": {
+            "enum": [
+              "explicit",
+              "context_completed",
+              "inferred"
+            ],
+            "title": "Derivation",
+            "type": "string"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/$defs/EvidenceDraft"
+            },
+            "minItems": 1,
+            "title": "Evidence",
+            "type": "array"
+          },
+          "inference_basis": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Inference Basis"
+          },
+          "confidence": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Confidence",
+            "type": "number"
+          }
+        },
+        "required": [
+          "knowledge_id",
+          "candidate_id",
+          "statement",
+          "subject",
+          "predicate",
+          "qualifiers",
+          "source_status",
+          "derivation",
+          "evidence",
+          "confidence"
+        ],
+        "title": "KnowledgeDraft",
+        "type": "object"
+      },
+      "Qualifiers": {
+        "additionalProperties": false,
+        "properties": {
+          "modality": {
+            "enum": [
+              "asserted",
+              "questioned",
+              "requested",
+              "preferred",
+              "planned",
+              "hypothetical",
+              "possible",
+              "advised",
+              "committed",
+              "claimed_completed",
+              "observed"
+            ],
+            "title": "Modality",
+            "type": "string"
+          },
+          "polarity": {
+            "enum": [
+              "positive",
+              "negative"
+            ],
+            "title": "Polarity",
+            "type": "string"
+          },
+          "temporal": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Temporal",
+            "type": "array"
+          },
+          "conditions": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Conditions",
+            "type": "array"
+          },
+          "scope": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Scope",
+            "type": "array"
+          }
+        },
+        "required": [
+          "modality",
+          "polarity"
+        ],
+        "title": "Qualifiers",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "candidate_id": {
+        "minLength": 1,
+        "title": "Candidate Id",
+        "type": "string"
+      },
+      "turn_index": {
+        "minimum": 0,
+        "title": "Turn Index",
+        "type": "integer"
+      },
+      "context_completions": {
+        "items": {
+          "$ref": "#/$defs/ContextCompletion"
+        },
+        "title": "Context Completions",
+        "type": "array"
+      },
+      "knowledge": {
+        "items": {
+          "$ref": "#/$defs/KnowledgeDraft"
+        },
+        "title": "Knowledge",
+        "type": "array"
+      }
+    },
+    "required": [
+      "candidate_id",
+      "turn_index"
+    ],
+    "title": "TurnPassOutput",
+    "type": "object"
+  },
+  "candidate_namespace": "wildchat-mgmt-cand-001-4d3900462107",
+  "knowledge_id_prefix": "K_wildchat-mgmt-cand-001-4d3900462107_004_",
+  "context_completion_id_prefix": "C_wildchat-mgmt-cand-001-4d3900462107_004_",
+  "source_segments_sha256": "678d74db62a9c6338f19d1a7d16910c3092c88b14f6eb201527e56eb82a3d726",
+  "tool_result_spans": []
+}

@@ -1,0 +1,176 @@
+{
+  "source": {
+    "source_id": "src_wildchat_learn_cand_001__turn_001",
+    "file": "keol-input/turns/wildchat-learn-cand-001__turn-001.txt",
+    "file_type": "txt",
+    "category": "text",
+    "metadata": {
+      "unit_id": "wildchat-learn-cand-001__turn-001",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "turn_index": 1,
+      "json_pointer": "/candidates/1/turns/0",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=24456e5381c0c4891d80737fa4639f1d / model=gpt-3.5-turbo-0613 / user_ordinal=1..6 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "chunk": {
+    "id": "chunk_ee740cd47caa425c9cdb",
+    "index": 0,
+    "text": "用户：\n检查 AAR 元数据时发现 3 个问题：androidx.activity、activity-ktx 和 activity-compose 1.8.0 都要求 compileSdk 至少为 34，而 app 目前是 android-33。怎么修复？\n\nAgent：\n把项目的 compileSdk 更新到至少 34。打开 app 模块的 build.gradle，在 android 配置中把 compileSdkVersion 改为 34，然后同步 Gradle。compileSdk、targetSdk 和 minSdk 的更新可以分别处理。",
+    "size": 277,
+    "metadata": {
+      "unit_id": "wildchat-learn-cand-001__turn-001",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "turn_index": 1,
+      "json_pointer": "/candidates/1/turns/0",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=24456e5381c0c4891d80737fa4639f1d / model=gpt-3.5-turbo-0613 / user_ordinal=1..6 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "n1",
+      "name": "Android app",
+      "type": "SoftwareApplication",
+      "description": "用户正在修复的 Android 应用模块。",
+      "source_chunk_id": "chunk_ee740cd47caa425c9cdb"
+    },
+    {
+      "id": "n2",
+      "name": "androidx.activity 1.8.0",
+      "type": "SoftwareDependency",
+      "description": "AAR 元数据报告问题的依赖。",
+      "source_chunk_id": "chunk_ee740cd47caa425c9cdb"
+    },
+    {
+      "id": "n3",
+      "name": "activity-ktx 1.8.0",
+      "type": "SoftwareDependency",
+      "description": "AAR 元数据报告问题的依赖。",
+      "source_chunk_id": "chunk_ee740cd47caa425c9cdb"
+    },
+    {
+      "id": "n4",
+      "name": "activity-compose 1.8.0",
+      "type": "SoftwareDependency",
+      "description": "AAR 元数据报告问题的依赖。",
+      "source_chunk_id": "chunk_ee740cd47caa425c9cdb"
+    },
+    {
+      "id": "n5",
+      "name": "compileSdk 34",
+      "type": "SoftwareConfiguration",
+      "description": "三个依赖要求的最低 compileSdk。",
+      "source_chunk_id": "chunk_ee740cd47caa425c9cdb"
+    },
+    {
+      "id": "n6",
+      "name": "compileSdk 33",
+      "type": "SoftwareConfiguration",
+      "description": "app 当前使用的 compileSdk。",
+      "source_chunk_id": "chunk_ee740cd47caa425c9cdb"
+    },
+    {
+      "id": "n7",
+      "name": "3 个 AAR 元数据问题",
+      "type": "ErrorSet",
+      "description": "用户检查 AAR 元数据时发现的问题集合。",
+      "source_chunk_id": "chunk_ee740cd47caa425c9cdb"
+    },
+    {
+      "id": "n8",
+      "name": "app/build.gradle",
+      "type": "File",
+      "description": "Agent 指示修改的 app 模块 Gradle 配置文件。",
+      "source_chunk_id": "chunk_ee740cd47caa425c9cdb"
+    },
+    {
+      "id": "n9",
+      "name": "更新 compileSdk",
+      "type": "Action",
+      "description": "Agent 建议将项目 compileSdk 更新到至少 34。",
+      "source_chunk_id": "chunk_ee740cd47caa425c9cdb"
+    },
+    {
+      "id": "n10",
+      "name": "Gradle 同步",
+      "type": "Action",
+      "description": "修改配置后需要执行的同步操作。",
+      "source_chunk_id": "chunk_ee740cd47caa425c9cdb"
+    }
+  ],
+  "relations": [
+    {
+      "source_entity": "n2",
+      "target_entity": "n5",
+      "relation_type": "REQUIRES",
+      "description": "该依赖要求 compileSdk 至少为 34。"
+    },
+    {
+      "source_entity": "n3",
+      "target_entity": "n5",
+      "relation_type": "REQUIRES",
+      "description": "该依赖要求 compileSdk 至少为 34。"
+    },
+    {
+      "source_entity": "n4",
+      "target_entity": "n5",
+      "relation_type": "REQUIRES",
+      "description": "该依赖要求 compileSdk 至少为 34。"
+    },
+    {
+      "source_entity": "n1",
+      "target_entity": "n6",
+      "relation_type": "USES",
+      "description": "app 当前是 android-33。"
+    },
+    {
+      "source_entity": "n7",
+      "target_entity": "n2",
+      "relation_type": "INCLUDES",
+      "description": "问题集合包含 androidx.activity 的要求冲突。"
+    },
+    {
+      "source_entity": "n7",
+      "target_entity": "n3",
+      "relation_type": "INCLUDES",
+      "description": "问题集合包含 activity-ktx 的要求冲突。"
+    },
+    {
+      "source_entity": "n7",
+      "target_entity": "n4",
+      "relation_type": "INCLUDES",
+      "description": "问题集合包含 activity-compose 的要求冲突。"
+    },
+    {
+      "source_entity": "n9",
+      "target_entity": "n1",
+      "relation_type": "MODIFIES",
+      "description": "建议更新 app 的 compileSdk。"
+    },
+    {
+      "source_entity": "n9",
+      "target_entity": "n5",
+      "relation_type": "SETS",
+      "description": "目标值为至少 34。"
+    },
+    {
+      "source_entity": "n9",
+      "target_entity": "n8",
+      "relation_type": "USES",
+      "description": "修改在 app/build.gradle 中完成。"
+    },
+    {
+      "source_entity": "n9",
+      "target_entity": "n10",
+      "relation_type": "BEFORE",
+      "description": "配置更新后同步 Gradle。"
+    }
+  ]
+}

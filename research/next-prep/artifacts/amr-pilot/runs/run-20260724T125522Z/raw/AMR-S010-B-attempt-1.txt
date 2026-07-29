@@ -1,0 +1,13 @@
+(a / and
+   :op1 (f / flight
+            :mod (n / nonstop))
+   :op2 (d / depart-01
+            :ARG1 f
+            :time (t / time
+                     :hour 18))
+   :op3 (r / arrive-01
+            :ARG1 f
+            :time (t2 / time
+                      :hour 7
+                      :minute 35
+                      :day (n2 / next))))

@@ -1,0 +1,2778 @@
+{
+  "concepts": {
+    "concept_bbd46ef0eee4": {
+      "id": "concept_bbd46ef0eee4",
+      "symbol": "Person",
+      "display_name": "Person"
+    },
+    "concept_e39fed9fc66e": {
+      "id": "concept_e39fed9fc66e",
+      "symbol": "Organization",
+      "display_name": "Organization"
+    },
+    "concept_910c9b7669d4": {
+      "id": "concept_910c9b7669d4",
+      "symbol": "Goal",
+      "display_name": "Goal"
+    },
+    "concept_d1639724ae2f": {
+      "id": "concept_d1639724ae2f",
+      "symbol": "Role",
+      "display_name": "Role"
+    },
+    "concept_edad65594977": {
+      "id": "concept_edad65594977",
+      "symbol": "Event",
+      "display_name": "Event"
+    },
+    "concept_ef12a3c001c8": {
+      "id": "concept_ef12a3c001c8",
+      "symbol": "Duration",
+      "display_name": "Duration"
+    },
+    "concept_b9d3f28092fb": {
+      "id": "concept_b9d3f28092fb",
+      "symbol": "TimeWindow",
+      "display_name": "TimeWindow"
+    },
+    "concept_9b339f5748c0": {
+      "id": "concept_9b339f5748c0",
+      "symbol": "Task",
+      "display_name": "Task"
+    },
+    "concept_4c98dac18b7a": {
+      "id": "concept_4c98dac18b7a",
+      "symbol": "Question",
+      "display_name": "Question"
+    },
+    "concept_3ce9d3a0c446": {
+      "id": "concept_3ce9d3a0c446",
+      "symbol": "Recommendation",
+      "display_name": "Recommendation"
+    },
+    "concept_ef53334ace16": {
+      "id": "concept_ef53334ace16",
+      "symbol": "Situation",
+      "display_name": "Situation"
+    },
+    "concept_150b240efc1f": {
+      "id": "concept_150b240efc1f",
+      "symbol": "Group",
+      "display_name": "Group"
+    },
+    "concept_dfc33257e444": {
+      "id": "concept_dfc33257e444",
+      "symbol": "Action",
+      "display_name": "Action"
+    },
+    "concept_2416f09a7a51": {
+      "id": "concept_2416f09a7a51",
+      "symbol": "Platform",
+      "display_name": "Platform"
+    },
+    "concept_1f20ccf3151b": {
+      "id": "concept_1f20ccf3151b",
+      "symbol": "Information",
+      "display_name": "Information"
+    },
+    "concept_ba3e1d19aeed": {
+      "id": "concept_ba3e1d19aeed",
+      "symbol": "CalendarMonth",
+      "display_name": "CalendarMonth"
+    },
+    "concept_1c1974ae1ee3": {
+      "id": "concept_1c1974ae1ee3",
+      "symbol": "Communication",
+      "display_name": "Communication"
+    },
+    "concept_13b0806dfd78": {
+      "id": "concept_13b0806dfd78",
+      "symbol": "DateRange",
+      "display_name": "DateRange"
+    },
+    "concept_fa6b0c75a560": {
+      "id": "concept_fa6b0c75a560",
+      "symbol": "Process",
+      "display_name": "Process"
+    },
+    "concept_cc4dbbd38373": {
+      "id": "concept_cc4dbbd38373",
+      "symbol": "Availability",
+      "display_name": "Availability"
+    },
+    "concept_ac213fc990d2": {
+      "id": "concept_ac213fc990d2",
+      "symbol": "RelativeDate",
+      "display_name": "RelativeDate"
+    },
+    "concept_348b3b09240d": {
+      "id": "concept_348b3b09240d",
+      "symbol": "EmailSubject",
+      "display_name": "EmailSubject"
+    },
+    "concept_24f44cb67350": {
+      "id": "concept_24f44cb67350",
+      "symbol": "Commitment",
+      "display_name": "Commitment"
+    },
+    "concept_6969a406bd15": {
+      "id": "concept_6969a406bd15",
+      "symbol": "ProfessionalRole",
+      "display_name": "ProfessionalRole"
+    },
+    "concept_8391f479d746": {
+      "id": "concept_8391f479d746",
+      "symbol": "Evaluation",
+      "display_name": "Evaluation"
+    },
+    "concept_e50acd508018": {
+      "id": "concept_e50acd508018",
+      "symbol": "Style",
+      "display_name": "Style"
+    },
+    "concept_84886163b92c": {
+      "id": "concept_84886163b92c",
+      "symbol": "SoftwareApplication",
+      "display_name": "SoftwareApplication"
+    },
+    "concept_b92e045c2acf": {
+      "id": "concept_b92e045c2acf",
+      "symbol": "SoftwareDependency",
+      "display_name": "SoftwareDependency"
+    },
+    "concept_39cef1682f76": {
+      "id": "concept_39cef1682f76",
+      "symbol": "SoftwareConfiguration",
+      "display_name": "SoftwareConfiguration"
+    },
+    "concept_e3b38784a453": {
+      "id": "concept_e3b38784a453",
+      "symbol": "ErrorSet",
+      "display_name": "ErrorSet"
+    },
+    "concept_05443df929d6": {
+      "id": "concept_05443df929d6",
+      "symbol": "File",
+      "display_name": "File"
+    },
+    "concept_36d1603352d4": {
+      "id": "concept_36d1603352d4",
+      "symbol": "ConfigurationField",
+      "display_name": "ConfigurationField"
+    },
+    "concept_35d372fec200": {
+      "id": "concept_35d372fec200",
+      "symbol": "Integer",
+      "display_name": "Integer"
+    },
+    "concept_e44e0e46bf06": {
+      "id": "concept_e44e0e46bf06",
+      "symbol": "Constraint",
+      "display_name": "Constraint"
+    },
+    "concept_99d6caf4e400": {
+      "id": "concept_99d6caf4e400",
+      "symbol": "ConfigurationFieldSet",
+      "display_name": "ConfigurationFieldSet"
+    },
+    "concept_f502ecaad82f": {
+      "id": "concept_f502ecaad82f",
+      "symbol": "Change",
+      "display_name": "Change"
+    },
+    "concept_cfbcf93220b6": {
+      "id": "concept_cfbcf93220b6",
+      "symbol": "Status",
+      "display_name": "Status"
+    },
+    "concept_34dca514b762": {
+      "id": "concept_34dca514b762",
+      "symbol": "RuntimeFailure",
+      "display_name": "RuntimeFailure"
+    },
+    "concept_4cbf8375ca2f": {
+      "id": "concept_4cbf8375ca2f",
+      "symbol": "Device",
+      "display_name": "Device"
+    },
+    "concept_b410af5baadd": {
+      "id": "concept_b410af5baadd",
+      "symbol": "DiagnosticTool",
+      "display_name": "DiagnosticTool"
+    },
+    "concept_4c77d0cc48d8": {
+      "id": "concept_4c77d0cc48d8",
+      "symbol": "PossibleCause",
+      "display_name": "PossibleCause"
+    },
+    "concept_2dde63249023": {
+      "id": "concept_2dde63249023",
+      "symbol": "ConfigurationSet",
+      "display_name": "ConfigurationSet"
+    },
+    "concept_9aa225100e19": {
+      "id": "concept_9aa225100e19",
+      "symbol": "RuntimeError",
+      "display_name": "RuntimeError"
+    },
+    "concept_640f7adf481b": {
+      "id": "concept_640f7adf481b",
+      "symbol": "SoftwareComponent",
+      "display_name": "SoftwareComponent"
+    },
+    "concept_2b35a0e2c758": {
+      "id": "concept_2b35a0e2c758",
+      "symbol": "SoftwareRequirement",
+      "display_name": "SoftwareRequirement"
+    },
+    "concept_364fac17c1b7": {
+      "id": "concept_364fac17c1b7",
+      "symbol": "FilePath",
+      "display_name": "FilePath"
+    },
+    "concept_9326acea83ed": {
+      "id": "concept_9326acea83ed",
+      "symbol": "UserInterface",
+      "display_name": "UserInterface"
+    },
+    "concept_6e01a322d228": {
+      "id": "concept_6e01a322d228",
+      "symbol": "Directory",
+      "display_name": "Directory"
+    },
+    "concept_65bdcba1ae10": {
+      "id": "concept_65bdcba1ae10",
+      "symbol": "TaskStatus",
+      "display_name": "TaskStatus"
+    },
+    "concept_439bad723c6b": {
+      "id": "concept_439bad723c6b",
+      "symbol": "MediaChannel",
+      "display_name": "MediaChannel"
+    },
+    "concept_3cb64c63067f": {
+      "id": "concept_3cb64c63067f",
+      "symbol": "ContentTheme",
+      "display_name": "ContentTheme"
+    },
+    "concept_fc9b1c95c7e1": {
+      "id": "concept_fc9b1c95c7e1",
+      "symbol": "Plan",
+      "display_name": "Plan"
+    },
+    "concept_7353c80c700f": {
+      "id": "concept_7353c80c700f",
+      "symbol": "FrequencyConstraint",
+      "display_name": "FrequencyConstraint"
+    },
+    "concept_524d615edb91": {
+      "id": "concept_524d615edb91",
+      "symbol": "OnlinePlatform",
+      "display_name": "OnlinePlatform"
+    },
+    "concept_48566fe775fb": {
+      "id": "concept_48566fe775fb",
+      "symbol": "Collection",
+      "display_name": "Collection"
+    },
+    "concept_e26b4b4fdd2b": {
+      "id": "concept_e26b4b4fdd2b",
+      "symbol": "ContentFormat",
+      "display_name": "ContentFormat"
+    },
+    "concept_bdde83783f16": {
+      "id": "concept_bdde83783f16",
+      "symbol": "ContentTechnique",
+      "display_name": "ContentTechnique"
+    },
+    "concept_bb171a55ba08": {
+      "id": "concept_bb171a55ba08",
+      "symbol": "ContentSet",
+      "display_name": "ContentSet"
+    },
+    "concept_3d5748fc06a8": {
+      "id": "concept_3d5748fc06a8",
+      "symbol": "ContentSeries",
+      "display_name": "ContentSeries"
+    },
+    "concept_38cb5091dbb0": {
+      "id": "concept_38cb5091dbb0",
+      "symbol": "EpisodeTopic",
+      "display_name": "EpisodeTopic"
+    },
+    "concept_2cdaf103bc5c": {
+      "id": "concept_2cdaf103bc5c",
+      "symbol": "StoryElement",
+      "display_name": "StoryElement"
+    },
+    "concept_22c978c52212": {
+      "id": "concept_22c978c52212",
+      "symbol": "NarrativeArc",
+      "display_name": "NarrativeArc"
+    },
+    "concept_8ed315e73edc": {
+      "id": "concept_8ed315e73edc",
+      "symbol": "SpeechSample",
+      "display_name": "SpeechSample"
+    },
+    "concept_b68a7e8affd8": {
+      "id": "concept_b68a7e8affd8",
+      "symbol": "ToneCategory",
+      "display_name": "ToneCategory"
+    },
+    "concept_0526acd5a83b": {
+      "id": "concept_0526acd5a83b",
+      "symbol": "ExperimentalStimulusSet",
+      "display_name": "ExperimentalStimulusSet"
+    },
+    "concept_db698d9436a5": {
+      "id": "concept_db698d9436a5",
+      "symbol": "AcousticFeature",
+      "display_name": "AcousticFeature"
+    },
+    "concept_4253df359c73": {
+      "id": "concept_4253df359c73",
+      "symbol": "SignalProcessingMethod",
+      "display_name": "SignalProcessingMethod"
+    },
+    "concept_effe8106c8d6": {
+      "id": "concept_effe8106c8d6",
+      "symbol": "AudioRecording",
+      "display_name": "AudioRecording"
+    },
+    "concept_3d38ba8a74ba": {
+      "id": "concept_3d38ba8a74ba",
+      "symbol": "DataArtifact",
+      "display_name": "DataArtifact"
+    },
+    "concept_bab347a50527": {
+      "id": "concept_bab347a50527",
+      "symbol": "DataSet",
+      "display_name": "DataSet"
+    },
+    "concept_1bb6a256e5e7": {
+      "id": "concept_1bb6a256e5e7",
+      "symbol": "SoftwareObject",
+      "display_name": "SoftwareObject"
+    },
+    "concept_5cab94fd096e": {
+      "id": "concept_5cab94fd096e",
+      "symbol": "ProcedureStep",
+      "display_name": "ProcedureStep"
+    },
+    "concept_75b03a8fed1d": {
+      "id": "concept_75b03a8fed1d",
+      "symbol": "Problem",
+      "display_name": "Problem"
+    },
+    "concept_35ad20ff9aae": {
+      "id": "concept_35ad20ff9aae",
+      "symbol": "FileFormat",
+      "display_name": "FileFormat"
+    },
+    "concept_6cc4df097f89": {
+      "id": "concept_6cc4df097f89",
+      "symbol": "ExtractionParameter",
+      "display_name": "ExtractionParameter"
+    },
+    "concept_66624a964df9": {
+      "id": "concept_66624a964df9",
+      "symbol": "AcousticParameter",
+      "display_name": "AcousticParameter"
+    },
+    "concept_ea3419a71230": {
+      "id": "concept_ea3419a71230",
+      "symbol": "ExperimentalConstraint",
+      "display_name": "ExperimentalConstraint"
+    },
+    "concept_711ae69ecf2f": {
+      "id": "concept_711ae69ecf2f",
+      "symbol": "NumericRange",
+      "display_name": "NumericRange"
+    },
+    "concept_e9a05ac0ffb3": {
+      "id": "concept_e9a05ac0ffb3",
+      "symbol": "SoftwareCommand",
+      "display_name": "SoftwareCommand"
+    },
+    "concept_5355e2e91626": {
+      "id": "concept_5355e2e91626",
+      "symbol": "SoftwareVersion",
+      "display_name": "SoftwareVersion"
+    },
+    "concept_96e98e260df7": {
+      "id": "concept_96e98e260df7",
+      "symbol": "GoalSet",
+      "display_name": "GoalSet"
+    },
+    "concept_e04f0db9fb05": {
+      "id": "concept_e04f0db9fb05",
+      "symbol": "Cardinality",
+      "display_name": "Cardinality"
+    },
+    "concept_e7db22f5ff16": {
+      "id": "concept_e7db22f5ff16",
+      "symbol": "Percentage",
+      "display_name": "Percentage"
+    },
+    "concept_107318cf8a81": {
+      "id": "concept_107318cf8a81",
+      "symbol": "Method",
+      "display_name": "Method"
+    },
+    "concept_f22a0ef4b51f": {
+      "id": "concept_f22a0ef4b51f",
+      "symbol": "SoftwareSystem",
+      "display_name": "SoftwareSystem"
+    },
+    "concept_1f89a07a50dc": {
+      "id": "concept_1f89a07a50dc",
+      "symbol": "TrainingTopicSet",
+      "display_name": "TrainingTopicSet"
+    },
+    "concept_b20739253fc8": {
+      "id": "concept_b20739253fc8",
+      "symbol": "ConstraintSet",
+      "display_name": "ConstraintSet"
+    },
+    "concept_88cbe93e64f7": {
+      "id": "concept_88cbe93e64f7",
+      "symbol": "Function",
+      "display_name": "Function"
+    },
+    "concept_fbf79483f18f": {
+      "id": "concept_fbf79483f18f",
+      "symbol": "Parameter",
+      "display_name": "Parameter"
+    },
+    "concept_b09b725b10c1": {
+      "id": "concept_b09b725b10c1",
+      "symbol": "PathTemplate",
+      "display_name": "PathTemplate"
+    },
+    "concept_47e2c1ba1aa0": {
+      "id": "concept_47e2c1ba1aa0",
+      "symbol": "SpreadsheetFormula",
+      "display_name": "SpreadsheetFormula"
+    },
+    "concept_2b2a4a8686ae": {
+      "id": "concept_2b2a4a8686ae",
+      "symbol": "ExampleValue",
+      "display_name": "ExampleValue"
+    },
+    "concept_38d2c3def507": {
+      "id": "concept_38d2c3def507",
+      "symbol": "FormulaValue",
+      "display_name": "FormulaValue"
+    },
+    "concept_af12cd800cb1": {
+      "id": "concept_af12cd800cb1",
+      "symbol": "Software",
+      "display_name": "Software"
+    },
+    "concept_557b65b848d7": {
+      "id": "concept_557b65b848d7",
+      "symbol": "Hyperlink",
+      "display_name": "Hyperlink"
+    },
+    "concept_377bff18a6e2": {
+      "id": "concept_377bff18a6e2",
+      "symbol": "DataStructure",
+      "display_name": "DataStructure"
+    },
+    "concept_ff170fe44484": {
+      "id": "concept_ff170fe44484",
+      "symbol": "DataColumn",
+      "display_name": "DataColumn"
+    },
+    "concept_3f848ce31c71": {
+      "id": "concept_3f848ce31c71",
+      "symbol": "StringValue",
+      "display_name": "StringValue"
+    },
+    "concept_851645389832": {
+      "id": "concept_851645389832",
+      "symbol": "Claim",
+      "display_name": "Claim"
+    },
+    "concept_cf66f4af1f66": {
+      "id": "concept_cf66f4af1f66",
+      "symbol": "Evidence",
+      "display_name": "Evidence"
+    },
+    "concept_bedc8c644997": {
+      "id": "concept_bedc8c644997",
+      "symbol": "LearningStyleCategory",
+      "display_name": "LearningStyleCategory"
+    },
+    "concept_d5b6e2af2e84": {
+      "id": "concept_d5b6e2af2e84",
+      "symbol": "Practice",
+      "display_name": "Practice"
+    },
+    "concept_c5123a58b8a3": {
+      "id": "concept_c5123a58b8a3",
+      "symbol": "TeachingMethod",
+      "display_name": "TeachingMethod"
+    },
+    "concept_f176cd89ecdd": {
+      "id": "concept_f176cd89ecdd",
+      "symbol": "Observation",
+      "display_name": "Observation"
+    },
+    "concept_d6948d2bc524": {
+      "id": "concept_d6948d2bc524",
+      "symbol": "Condition",
+      "display_name": "Condition"
+    },
+    "concept_e2e15a4a7232": {
+      "id": "concept_e2e15a4a7232",
+      "symbol": "Challenge",
+      "display_name": "Challenge"
+    },
+    "concept_57820f84ae77": {
+      "id": "concept_57820f84ae77",
+      "symbol": "Capability",
+      "display_name": "Capability"
+    },
+    "concept_6ad1ef8ca327": {
+      "id": "concept_6ad1ef8ca327",
+      "symbol": "Intervention",
+      "display_name": "Intervention"
+    },
+    "concept_3310a50d65b8": {
+      "id": "concept_3310a50d65b8",
+      "symbol": "LearningFactor",
+      "display_name": "LearningFactor"
+    },
+    "concept_a2d1662fc1da": {
+      "id": "concept_a2d1662fc1da",
+      "symbol": "LearningOutcome",
+      "display_name": "LearningOutcome"
+    },
+    "concept_565f903f723b": {
+      "id": "concept_565f903f723b",
+      "symbol": "FlightTrip",
+      "display_name": "FlightTrip"
+    },
+    "concept_c08e882acfc6": {
+      "id": "concept_c08e882acfc6",
+      "symbol": "City",
+      "display_name": "City"
+    },
+    "concept_a7fe1b8a30f7": {
+      "id": "concept_a7fe1b8a30f7",
+      "symbol": "CalendarDay",
+      "display_name": "CalendarDay"
+    },
+    "concept_6440ec9c890e": {
+      "id": "concept_6440ec9c890e",
+      "symbol": "TripLeg",
+      "display_name": "TripLeg"
+    },
+    "concept_1c28d47405d4": {
+      "id": "concept_1c28d47405d4",
+      "symbol": "TimePreference",
+      "display_name": "TimePreference"
+    },
+    "concept_7e0cb6cb5e29": {
+      "id": "concept_7e0cb6cb5e29",
+      "symbol": "PricePreference",
+      "display_name": "PricePreference"
+    },
+    "concept_ea7da49864e6": {
+      "id": "concept_ea7da49864e6",
+      "symbol": "FlightOption",
+      "display_name": "FlightOption"
+    },
+    "concept_a919d49a7ae2": {
+      "id": "concept_a919d49a7ae2",
+      "symbol": "StopPattern",
+      "display_name": "StopPattern"
+    },
+    "concept_64c789bfa13a": {
+      "id": "concept_64c789bfa13a",
+      "symbol": "TimeOfDay",
+      "display_name": "TimeOfDay"
+    },
+    "concept_97970aca9074": {
+      "id": "concept_97970aca9074",
+      "symbol": "RelativeDateTime",
+      "display_name": "RelativeDateTime"
+    },
+    "concept_6bd7768a0eaa": {
+      "id": "concept_6bd7768a0eaa",
+      "symbol": "MonetaryAmount",
+      "display_name": "MonetaryAmount"
+    },
+    "concept_4abf854a0439": {
+      "id": "concept_4abf854a0439",
+      "symbol": "PriceAssessment",
+      "display_name": "PriceAssessment"
+    },
+    "concept_fc120680c15c": {
+      "id": "concept_fc120680c15c",
+      "symbol": "CommunicationEndpoint",
+      "display_name": "CommunicationEndpoint"
+    },
+    "concept_4cf00dad9a9d": {
+      "id": "concept_4cf00dad9a9d",
+      "symbol": "Product",
+      "display_name": "Product"
+    },
+    "concept_5913b680637e": {
+      "id": "concept_5913b680637e",
+      "symbol": "Order",
+      "display_name": "Order"
+    },
+    "concept_abcf5fc60c66": {
+      "id": "concept_abcf5fc60c66",
+      "symbol": "ReturnRequest",
+      "display_name": "ReturnRequest"
+    },
+    "concept_dbf65cd01ce7": {
+      "id": "concept_dbf65cd01ce7",
+      "symbol": "CancellationRequest",
+      "display_name": "CancellationRequest"
+    },
+    "concept_0a0cc3f925aa": {
+      "id": "concept_0a0cc3f925aa",
+      "symbol": "PaymentMethod",
+      "display_name": "PaymentMethod"
+    },
+    "concept_c0285ebde4e7": {
+      "id": "concept_c0285ebde4e7",
+      "symbol": "CancellationReason",
+      "display_name": "CancellationReason"
+    },
+    "concept_25d6c16a84d9": {
+      "id": "concept_25d6c16a84d9",
+      "symbol": "ToolAction",
+      "display_name": "ToolAction"
+    },
+    "concept_09794ba23347": {
+      "id": "concept_09794ba23347",
+      "symbol": "OrderItem",
+      "display_name": "OrderItem"
+    },
+    "concept_4ad108ccd01d": {
+      "id": "concept_4ad108ccd01d",
+      "symbol": "GiftCard",
+      "display_name": "GiftCard"
+    },
+    "concept_aef0ce482614": {
+      "id": "concept_aef0ce482614",
+      "symbol": "ActionStatus",
+      "display_name": "ActionStatus"
+    },
+    "concept_e1c401b85a77": {
+      "id": "concept_e1c401b85a77",
+      "symbol": "IdentifierType",
+      "display_name": "IdentifierType"
+    },
+    "concept_d438d84e7a51": {
+      "id": "concept_d438d84e7a51",
+      "symbol": "Identifier",
+      "display_name": "Identifier"
+    },
+    "concept_ed9e444cad49": {
+      "id": "concept_ed9e444cad49",
+      "symbol": "ProductSize",
+      "display_name": "ProductSize"
+    },
+    "concept_947152b28ef2": {
+      "id": "concept_947152b28ef2",
+      "symbol": "Color",
+      "display_name": "Color"
+    },
+    "concept_add99f3abb9b": {
+      "id": "concept_add99f3abb9b",
+      "symbol": "Material",
+      "display_name": "Material"
+    },
+    "concept_c82034c93693": {
+      "id": "concept_c82034c93693",
+      "symbol": "OrderStatus",
+      "display_name": "OrderStatus"
+    },
+    "concept_6d8725ac5971": {
+      "id": "concept_6d8725ac5971",
+      "symbol": "Decision",
+      "display_name": "Decision"
+    },
+    "concept_5c0ceef3369a": {
+      "id": "concept_5c0ceef3369a",
+      "symbol": "CalendarDate",
+      "display_name": "CalendarDate"
+    },
+    "concept_fe7553209ffe": {
+      "id": "concept_fe7553209ffe",
+      "symbol": "Place",
+      "display_name": "Place"
+    },
+    "concept_36369d841ecd": {
+      "id": "concept_36369d841ecd",
+      "symbol": "Concern",
+      "display_name": "Concern"
+    },
+    "concept_ffd6cfa0f39c": {
+      "id": "concept_ffd6cfa0f39c",
+      "symbol": "PlannedEvent",
+      "display_name": "PlannedEvent"
+    },
+    "concept_de178a5fba56": {
+      "id": "concept_de178a5fba56",
+      "symbol": "InteractionMode",
+      "display_name": "InteractionMode"
+    },
+    "concept_60725ff87a30": {
+      "id": "concept_60725ff87a30",
+      "symbol": "Topic",
+      "display_name": "Topic"
+    },
+    "concept_0e9774641fba": {
+      "id": "concept_0e9774641fba",
+      "symbol": "Option",
+      "display_name": "Option"
+    },
+    "concept_9107e5594180": {
+      "id": "concept_9107e5594180",
+      "symbol": "TaskRequest",
+      "display_name": "TaskRequest"
+    },
+    "concept_98c13e0f7f3a": {
+      "id": "concept_98c13e0f7f3a",
+      "symbol": "Document",
+      "display_name": "Document"
+    },
+    "concept_11e4ecf462b3": {
+      "id": "concept_11e4ecf462b3",
+      "symbol": "Schedule",
+      "display_name": "Schedule"
+    },
+    "concept_e5887b774067": {
+      "id": "concept_e5887b774067",
+      "symbol": "LegalDocument",
+      "display_name": "LegalDocument"
+    },
+    "concept_b63330904f7c": {
+      "id": "concept_b63330904f7c",
+      "symbol": "EmotionalState",
+      "display_name": "EmotionalState"
+    },
+    "concept_0ce1f5661fed": {
+      "id": "concept_0ce1f5661fed",
+      "symbol": "LegalStatus",
+      "display_name": "LegalStatus"
+    },
+    "concept_4a5cc8c4ac5b": {
+      "id": "concept_4a5cc8c4ac5b",
+      "symbol": "LegalProvision",
+      "display_name": "LegalProvision"
+    },
+    "concept_7f61ae0bacf5": {
+      "id": "concept_7f61ae0bacf5",
+      "symbol": "DocumentDraft",
+      "display_name": "DocumentDraft"
+    },
+    "concept_5c467c8750cf": {
+      "id": "concept_5c467c8750cf",
+      "symbol": "Law",
+      "display_name": "Law"
+    },
+    "concept_6a29f1dbded9": {
+      "id": "concept_6a29f1dbded9",
+      "symbol": "LegalFormality",
+      "display_name": "LegalFormality"
+    },
+    "concept_40728291818e": {
+      "id": "concept_40728291818e",
+      "symbol": "ReviewAction",
+      "display_name": "ReviewAction"
+    },
+    "concept_229ef35994ef": {
+      "id": "concept_229ef35994ef",
+      "symbol": "LegalDecision",
+      "display_name": "LegalDecision"
+    },
+    "concept_108eef18001b": {
+      "id": "concept_108eef18001b",
+      "symbol": "EstatePlan",
+      "display_name": "EstatePlan"
+    },
+    "concept_943fdf58321d": {
+      "id": "concept_943fdf58321d",
+      "symbol": "CareArrangement",
+      "display_name": "CareArrangement"
+    },
+    "concept_3666fb86ffd8": {
+      "id": "concept_3666fb86ffd8",
+      "symbol": "FinancialArrangement",
+      "display_name": "FinancialArrangement"
+    },
+    "concept_fd53bfd7939e": {
+      "id": "concept_fd53bfd7939e",
+      "symbol": "Assessment",
+      "display_name": "Assessment"
+    },
+    "concept_57ec50e90f87": {
+      "id": "concept_57ec50e90f87",
+      "symbol": "LegalArrangement",
+      "display_name": "LegalArrangement"
+    }
+  },
+  "constants": {
+    "individual_00d3db86808c": {
+      "id": "individual_00d3db86808c",
+      "symbol": "value",
+      "display_name": "博客"
+    },
+    "individual_014b9dd07562": {
+      "id": "individual_014b9dd07562",
+      "symbol": "activity",
+      "display_name": "Activity"
+    },
+    "individual_0189d9b08495": {
+      "id": "individual_0189d9b08495",
+      "symbol": "value_08fbb7",
+      "display_name": "家人对选择的看法"
+    },
+    "individual_0215ea22f566": {
+      "id": "individual_0215ea22f566",
+      "symbol": "value_801fc2",
+      "display_name": "听觉学习者"
+    },
+    "individual_035991e8c1d1": {
+      "id": "individual_035991e8c1d1",
+      "symbol": "reels",
+      "display_name": "连续 Reels 方案"
+    },
+    "individual_0390805ed291": {
+      "id": "individual_0390805ed291",
+      "symbol": "stephanie",
+      "display_name": "Stephanie 的意愿和适任性"
+    },
+    "individual_0483a89e465c": {
+      "id": "individual_0483a89e465c",
+      "symbol": "praat",
+      "display_name": "当前 Praat 版本"
+    },
+    "individual_049a1107426e": {
+      "id": "individual_049a1107426e",
+      "symbol": "app_src_main_androidmanifest_xml",
+      "display_name": "app/src/main/AndroidManifest.xml"
+    },
+    "individual_061ee42c99c1": {
+      "id": "individual_061ee42c99c1",
+      "symbol": "v_2024_5_15",
+      "display_name": "2024 年 5 月 15 日"
+    },
+    "individual_0667a4848f0c": {
+      "id": "individual_0667a4848f0c",
+      "symbol": "v_8",
+      "display_name": "第 8 步"
+    },
+    "individual_079dcc40c3e6": {
+      "id": "individual_079dcc40c3e6",
+      "symbol": "value_349db9",
+      "display_name": "设备兼容性"
+    },
+    "individual_0855983ceebf": {
+      "id": "individual_0855983ceebf",
+      "symbol": "v_1_287",
+      "display_name": "1,287 美元"
+    },
+    "individual_097d236821fb": {
+      "id": "individual_097d236821fb",
+      "symbol": "value_a16c24",
+      "display_name": "过于正式"
+    },
+    "individual_09aaa2121940": {
+      "id": "individual_09aaa2121940",
+      "symbol": "value_fb9f00",
+      "display_name": "内容计划"
+    },
+    "individual_0bd4fd4ef1b5": {
+      "id": "individual_0bd4fd4ef1b5",
+      "symbol": "replace_pitch",
+      "display_name": "Replace pitch"
+    },
+    "individual_0c7fedeca123": {
+      "id": "individual_0c7fedeca123",
+      "symbol": "telegram",
+      "display_name": "Telegram"
+    },
+    "individual_0cc1efa6648e": {
+      "id": "individual_0cc1efa6648e",
+      "symbol": "v_10",
+      "display_name": "10 个"
+    },
+    "individual_0cda4bbd2f59": {
+      "id": "individual_0cda4bbd2f59",
+      "symbol": "value_ed9ea7",
+      "display_name": "用户的遗产计划"
+    },
+    "individual_0df567ed3b6a": {
+      "id": "individual_0df567ed3b6a",
+      "symbol": "theme_appcompat",
+      "display_name": "Theme.AppCompat 子主题"
+    },
+    "individual_0e358d8b8c2e": {
+      "id": "individual_0e358d8b8c2e",
+      "symbol": "make_hyperlink",
+      "display_name": "make_hyperlink"
+    },
+    "individual_0f604e1530bf": {
+      "id": "individual_0f604e1530bf",
+      "symbol": "v_4_28",
+      "display_name": "4 月 28 日"
+    },
+    "individual_120e756c737f": {
+      "id": "individual_120e756c737f",
+      "symbol": "v_109_27",
+      "display_name": "109.27 美元"
+    },
+    "individual_12262eee9b90": {
+      "id": "individual_12262eee9b90",
+      "symbol": "value_13d3c2",
+      "display_name": "提取失败"
+    },
+    "individual_137218bb668c": {
+      "id": "individual_137218bb668c",
+      "symbol": "value_833de4",
+      "display_name": "遗嘱文本"
+    },
+    "individual_13811bd85de7": {
+      "id": "individual_13811bd85de7",
+      "symbol": "gift_card_7711863",
+      "display_name": "gift_card_7711863"
+    },
+    "individual_16605b32a940": {
+      "id": "individual_16605b32a940",
+      "symbol": "theme",
+      "display_name": "theme 属性"
+    },
+    "individual_167e32430bfa": {
+      "id": "individual_167e32430bfa",
+      "symbol": "value_3b3946",
+      "display_name": "最便宜"
+    },
+    "individual_168aaebc8bf3": {
+      "id": "individual_168aaebc8bf3",
+      "symbol": "v_2_677",
+      "display_name": "2,677 美元"
+    },
+    "individual_18b75cdd6d58": {
+      "id": "individual_18b75cdd6d58",
+      "symbol": "v_2024_5_2",
+      "display_name": "2024 年 5 月 2 日"
+    },
+    "individual_1a299486f0a1": {
+      "id": "individual_1a299486f0a1",
+      "symbol": "value_9ffac5",
+      "display_name": "具体指标、截止时间和可验证结果"
+    },
+    "individual_1aadc5f1e283": {
+      "id": "individual_1aadc5f1e283",
+      "symbol": "v_10_59c143",
+      "display_name": "10%"
+    },
+    "individual_1fad7acc2066": {
+      "id": "individual_1fad7acc2066",
+      "symbol": "value_ad9e33",
+      "display_name": "充电器取消"
+    },
+    "individual_21b3391d49f5": {
+      "id": "individual_21b3391d49f5",
+      "symbol": "value_c458d1",
+      "display_name": "新增依赖"
+    },
+    "individual_2227ea7ab915": {
+      "id": "individual_2227ea7ab915",
+      "symbol": "value_43142b",
+      "display_name": "订单号"
+    },
+    "individual_23a2b22a618e": {
+      "id": "individual_23a2b22a618e",
+      "symbol": "value_2a569a",
+      "display_name": "当前主题"
+    },
+    "individual_243268ce92d0": {
+      "id": "individual_243268ce92d0",
+      "symbol": "value_8450ac",
+      "display_name": "平板"
+    },
+    "individual_24a7568a066b": {
+      "id": "individual_24a7568a066b",
+      "symbol": "mainactivity",
+      "display_name": "MainActivity"
+    },
+    "individual_262c27ab14e3": {
+      "id": "individual_262c27ab14e3",
+      "symbol": "value_fb6e18",
+      "display_name": "研究证据"
+    },
+    "individual_2815850642b9": {
+      "id": "individual_2815850642b9",
+      "symbol": "douglas",
+      "display_name": "Douglas"
+    },
+    "individual_281e8bec68f1": {
+      "id": "individual_281e8bec68f1",
+      "symbol": "cancel_pending_order",
+      "display_name": "cancel_pending_order"
+    },
+    "individual_2b52fd6fdf0b": {
+      "id": "individual_2b52fd6fdf0b",
+      "symbol": "value_1e347f",
+      "display_name": "休假告知时机"
+    },
+    "individual_2b944be3aa58": {
+      "id": "individual_2b944be3aa58",
+      "symbol": "value_171b2d",
+      "display_name": "最低价往返票"
+    },
+    "individual_2d329bb9d5aa": {
+      "id": "individual_2d329bb9d5aa",
+      "symbol": "instagram",
+      "display_name": "Instagram 内容计划"
+    },
+    "individual_2d3490a61fbd": {
+      "id": "individual_2d3490a61fbd",
+      "symbol": "value_a82195",
+      "display_name": "转型导师、赋能与健康频道"
+    },
+    "individual_2e61ab20e65a": {
+      "id": "individual_2e61ab20e65a",
+      "symbol": "value_8e2f1d",
+      "display_name": "可用时间与工作意愿"
+    },
+    "individual_2fba296eb87d": {
+      "id": "individual_2fba296eb87d",
+      "symbol": "v_4",
+      "display_name": "第 4 步"
+    },
+    "individual_3053b0b91d93": {
+      "id": "individual_3053b0b91d93",
+      "symbol": "value_d0b1fa",
+      "display_name": "数字工单系统"
+    },
+    "individual_30d8cd70da98": {
+      "id": "individual_30d8cd70da98",
+      "symbol": "v_6477915553",
+      "display_name": "商品项 6477915553"
+    },
+    "individual_3135770cbbd4": {
+      "id": "individual_3135770cbbd4",
+      "symbol": "appcompat",
+      "display_name": "AppCompat 主题"
+    },
+    "individual_324961f1d87e": {
+      "id": "individual_324961f1d87e",
+      "symbol": "value_a3fc40",
+      "display_name": "故事叙述"
+    },
+    "individual_32597f6da175": {
+      "id": "individual_32597f6da175",
+      "symbol": "manipulation",
+      "display_name": "Manipulation"
+    },
+    "individual_34fc16ae57c8": {
+      "id": "individual_34fc16ae57c8",
+      "symbol": "value_d62f0c",
+      "display_name": "特定领域挑战"
+    },
+    "individual_363c8f987cfe": {
+      "id": "individual_363c8f987cfe",
+      "symbol": "instagram_live",
+      "display_name": "Instagram Live"
+    },
+    "individual_363ca1c35a34": {
+      "id": "individual_363ca1c35a34",
+      "symbol": "value_3db6ea",
+      "display_name": "信托"
+    },
+    "individual_36ff97174d81": {
+      "id": "individual_36ff97174d81",
+      "symbol": "hyperlink",
+      "display_name": "HYPERLINK 公式"
+    },
+    "individual_387a462e079c": {
+      "id": "individual_387a462e079c",
+      "symbol": "value_818b15",
+      "display_name": "Value 列"
+    },
+    "individual_38b6ac919c94": {
+      "id": "individual_38b6ac919c94",
+      "symbol": "value_c548f6",
+      "display_name": "超链接公式字符串"
+    },
+    "individual_3992ed94cd59": {
+      "id": "individual_3992ed94cd59",
+      "symbol": "value_9f8b8d",
+      "display_name": "记忆"
+    },
+    "individual_3aacc593ad4b": {
+      "id": "individual_3aacc593ad4b",
+      "symbol": "targetsdk_minsdk",
+      "display_name": "targetSdk 与 minSdk"
+    },
+    "individual_3b9aa8422f4a": {
+      "id": "individual_3b9aa8422f4a",
+      "symbol": "value_a13799",
+      "display_name": "连续成长路径"
+    },
+    "individual_3d5af4e1e472": {
+      "id": "individual_3d5af4e1e472",
+      "symbol": "value_1b474e",
+      "display_name": "纽约市"
+    },
+    "individual_3ebab7631b59": {
+      "id": "individual_3ebab7631b59",
+      "symbol": "v_951_21",
+      "display_name": "951.21 美元"
+    },
+    "individual_4147929c95c9": {
+      "id": "individual_4147929c95c9",
+      "symbol": "value_13f70d",
+      "display_name": "绩效目标集"
+    },
+    "individual_41e04da1bb13": {
+      "id": "individual_41e04da1bb13",
+      "symbol": "value_d386c2",
+      "display_name": "短教程、锻炼和目标设定"
+    },
+    "individual_479cf593ea02": {
+      "id": "individual_479cf593ea02",
+      "symbol": "value_64f581",
+      "display_name": "事务所其他人"
+    },
+    "individual_482cfbdbbcc5": {
+      "id": "individual_482cfbdbbcc5",
+      "symbol": "value_a7d6ef",
+      "display_name": "固定学习风格显著影响学习"
+    },
+    "individual_49960088f55d": {
+      "id": "individual_49960088f55d",
+      "symbol": "douglas_8ca19c",
+      "display_name": "Douglas 的执行人任命"
+    },
+    "individual_49e0138e1697": {
+      "id": "individual_49e0138e1697",
+      "symbol": "stories",
+      "display_name": "Stories"
+    },
+    "individual_4b02bc2771d1": {
+      "id": "individual_4b02bc2771d1",
+      "symbol": "value_49eccb",
+      "display_name": "文本文件"
+    },
+    "individual_4b4dd237214e": {
+      "id": "individual_4b4dd237214e",
+      "symbol": "value_deed2a",
+      "display_name": "音高范围"
+    },
+    "individual_4e657336be27": {
+      "id": "individual_4e657336be27",
+      "symbol": "txt",
+      "display_name": ".txt"
+    },
+    "individual_4e8ccbe15c4c": {
+      "id": "individual_4e8ccbe15c4c",
+      "symbol": "value_f7acc3",
+      "display_name": "项目"
+    },
+    "individual_4ed854565b7c": {
+      "id": "individual_4ed854565b7c",
+      "symbol": "logcat",
+      "display_name": "Logcat"
+    },
+    "individual_50c8a360973b": {
+      "id": "individual_50c8a360973b",
+      "symbol": "v_15",
+      "display_name": "15%"
+    },
+    "individual_50e7da8541a8": {
+      "id": "individual_50e7da8541a8",
+      "symbol": "android_app",
+      "display_name": "Android app"
+    },
+    "individual_513084d20360": {
+      "id": "individual_513084d20360",
+      "symbol": "value_01fb42",
+      "display_name": "资深律师"
+    },
+    "individual_520cbd5e89ad": {
+      "id": "individual_520cbd5e89ad",
+      "symbol": "value_efa3c1",
+      "display_name": "起草会议材料"
+    },
+    "individual_532e3556499b": {
+      "id": "individual_532e3556499b",
+      "symbol": "pandas_apply",
+      "display_name": "Pandas apply"
+    },
+    "individual_54cbd12d9932": {
+      "id": "individual_54cbd12d9932",
+      "symbol": "value_03374c",
+      "display_name": "多模态教学"
+    },
+    "individual_55a2f3515a43": {
+      "id": "individual_55a2f3515a43",
+      "symbol": "value_1a7e95",
+      "display_name": "成功学习"
+    },
+    "individual_571ab10bc474": {
+      "id": "individual_571ab10bc474",
+      "symbol": "value_10ff78",
+      "display_name": "共同遗嘱执行人"
+    },
+    "individual_5a89cbab5451": {
+      "id": "individual_5a89cbab5451",
+      "symbol": "get_order_details",
+      "display_name": "get_order_details"
+    },
+    "individual_5bfeaf66314d": {
+      "id": "individual_5bfeaf66314d",
+      "symbol": "compilesdk_33",
+      "display_name": "compileSdk 33"
+    },
+    "individual_5d2716dde46d": {
+      "id": "individual_5d2716dde46d",
+      "symbol": "example",
+      "display_name": "example"
+    },
+    "individual_5e3dfa131bc4": {
+      "id": "individual_5e3dfa131bc4",
+      "symbol": "value_acc890",
+      "display_name": "用户"
+    },
+    "individual_5f78f5420a22": {
+      "id": "individual_5f78f5420a22",
+      "symbol": "x",
+      "display_name": "客户 X"
+    },
+    "individual_610393ade95a": {
+      "id": "individual_610393ade95a",
+      "symbol": "activity_ktx_1_8_0",
+      "display_name": "activity-ktx 1.8.0"
+    },
+    "individual_616edcbce7ee": {
+      "id": "individual_616edcbce7ee",
+      "symbol": "coral_bay_caf",
+      "display_name": "珊瑚湾咖啡馆（Coral Bay Café）"
+    },
+    "individual_62eb1d7735f9": {
+      "id": "individual_62eb1d7735f9",
+      "symbol": "v_19",
+      "display_name": "19 号"
+    },
+    "individual_6318a184ab07": {
+      "id": "individual_6318a184ab07",
+      "symbol": "value_4c4647",
+      "display_name": "律师事务所"
+    },
+    "individual_6390ff359089": {
+      "id": "individual_6390ff359089",
+      "symbol": "value_60abbb",
+      "display_name": "联系事务所合伙人"
+    },
+    "individual_64e8fb4ba428": {
+      "id": "individual_64e8fb4ba428",
+      "symbol": "value_a271b7",
+      "display_name": "最近的订单"
+    },
+    "individual_665b8da3f60a": {
+      "id": "individual_665b8da3f60a",
+      "symbol": "francis",
+      "display_name": "Francis"
+    },
+    "individual_678c5aeda215": {
+      "id": "individual_678c5aeda215",
+      "symbol": "value_b8bd45",
+      "display_name": "手机"
+    },
+    "individual_68ead9b5e2e3": {
+      "id": "individual_68ead9b5e2e3",
+      "symbol": "value_f33052",
+      "display_name": "每天至少一项活动"
+    },
+    "individual_6afbd0beecf9": {
+      "id": "individual_6afbd0beecf9",
+      "symbol": "praat_56c71a",
+      "display_name": "Praat"
+    },
+    "individual_6b4177321c68": {
+      "id": "individual_6b4177321c68",
+      "symbol": "value_608f7c",
+      "display_name": "去程"
+    },
+    "individual_6c36b994bb76": {
+      "id": "individual_6c36b994bb76",
+      "symbol": "value_e1616d",
+      "display_name": "价格有点贵"
+    },
+    "individual_711b22d42e33": {
+      "id": "individual_711b22d42e33",
+      "symbol": "scale_pitch",
+      "display_name": "Scale pitch"
+    },
+    "individual_73333d67aedc": {
+      "id": "individual_73333d67aedc",
+      "symbol": "value_02d75d",
+      "display_name": "学生能力"
+    },
+    "individual_75c718802800": {
+      "id": "individual_75c718802800",
+      "symbol": "value_bd8ba6",
+      "display_name": "总变化范围"
+    },
+    "individual_766e66bf1a75": {
+      "id": "individual_766e66bf1a75",
+      "symbol": "value_170160",
+      "display_name": "可点击链接"
+    },
+    "individual_7703b7d3ecec": {
+      "id": "individual_7703b7d3ecec",
+      "symbol": "hyperlink_f840ab",
+      "display_name": "Hyperlink 列"
+    },
+    "individual_778c16a51cf3": {
+      "id": "individual_778c16a51cf3",
+      "symbol": "bradley",
+      "display_name": "Bradley"
+    },
+    "individual_786c8f8e8845": {
+      "id": "individual_786c8f8e8845",
+      "symbol": "value_f08e03",
+      "display_name": "早期识别"
+    },
+    "individual_78edf6087ff6": {
+      "id": "individual_78edf6087ff6",
+      "symbol": "value_c3e0cf",
+      "display_name": "往返航班"
+    },
+    "individual_7b890e055453": {
+      "id": "individual_7b890e055453",
+      "symbol": "value_ced07f",
+      "display_name": "一周"
+    },
+    "individual_7c4ad9bdac2e": {
+      "id": "individual_7c4ad9bdac2e",
+      "symbol": "v_9",
+      "display_name": "9 步等距连续体"
+    },
+    "individual_7efe5415d488": {
+      "id": "individual_7efe5415d488",
+      "symbol": "compilesdk_34",
+      "display_name": "compileSdk 34"
+    },
+    "individual_80a97363f69f": {
+      "id": "individual_80a97363f69f",
+      "symbol": "v_30",
+      "display_name": "30 天"
+    },
+    "individual_827402a4ffaa": {
+      "id": "individual_827402a4ffaa",
+      "symbol": "hyperlink_example_example",
+      "display_name": "=HYPERLINK(\"./example\", \"example\")"
+    },
+    "individual_829f226d9443": {
+      "id": "individual_829f226d9443",
+      "symbol": "v_3788616824",
+      "display_name": "商品项 3788616824"
+    },
+    "individual_8761dbf2e2dc": {
+      "id": "individual_8761dbf2e2dc",
+      "symbol": "value_23263c",
+      "display_name": "学生实际表现"
+    },
+    "individual_88d33c13a175": {
+      "id": "individual_88d33c13a175",
+      "symbol": "psola",
+      "display_name": "PSOLA"
+    },
+    "individual_8a2ad48cf76f": {
+      "id": "individual_8a2ad48cf76f",
+      "symbol": "michael",
+      "display_name": "Michael"
+    },
+    "individual_8b39b37862eb": {
+      "id": "individual_8b39b37862eb",
+      "symbol": "theme_appcompat_7f546c",
+      "display_name": "Theme.AppCompat 或其子主题"
+    },
+    "individual_8b5356a6cd92": {
+      "id": "individual_8b5356a6cd92",
+      "symbol": "value_857cdd",
+      "display_name": "工作分派"
+    },
+    "individual_8b5bac2492f7": {
+      "id": "individual_8b5bac2492f7",
+      "symbol": "x_98ca59",
+      "display_name": "客户 X 融资时间"
+    },
+    "individual_8b6c181ed013": {
+      "id": "individual_8b6c181ed013",
+      "symbol": "androidx_activity_1_8_0",
+      "display_name": "androidx.activity 1.8.0"
+    },
+    "individual_8b735e706dfe": {
+      "id": "individual_8b735e706dfe",
+      "symbol": "value_2f712d",
+      "display_name": "尽早透明沟通"
+    },
+    "individual_8bc0a51c11a3": {
+      "id": "individual_8bc0a51c11a3",
+      "symbol": "value_b016e2",
+      "display_name": "未成年人照护"
+    },
+    "individual_8beda42f2fe5": {
+      "id": "individual_8beda42f2fe5",
+      "symbol": "no_longer_needed",
+      "display_name": "no longer needed"
+    },
+    "individual_8d164e33e67a": {
+      "id": "individual_8d164e33e67a",
+      "symbol": "value_8e3508",
+      "display_name": "用户的遗嘱"
+    },
+    "individual_8e95ba00319b": {
+      "id": "individual_8e95ba00319b",
+      "symbol": "value_1b52ab",
+      "display_name": "定向宣传"
+    },
+    "individual_8ee127ab5d65": {
+      "id": "individual_8ee127ab5d65",
+      "symbol": "v_7_35",
+      "display_name": "次日早上 7:35"
+    },
+    "individual_90934ca0912a": {
+      "id": "individual_90934ca0912a",
+      "symbol": "f0",
+      "display_name": "F0 文本数据"
+    },
+    "individual_90a4fa086a38": {
+      "id": "individual_90a4fa086a38",
+      "symbol": "value_1b5fda",
+      "display_name": "电子表格"
+    },
+    "individual_920b08a12442": {
+      "id": "individual_920b08a12442",
+      "symbol": "value_565a92",
+      "display_name": "初级律师风格"
+    },
+    "individual_923a3eecd2d0": {
+      "id": "individual_923a3eecd2d0",
+      "symbol": "android_studio_project",
+      "display_name": "Android Studio Project 视图"
+    },
+    "individual_933f63ce529e": {
+      "id": "individual_933f63ce529e",
+      "symbol": "compilesdkversion",
+      "display_name": "compileSdkVersion"
+    },
+    "individual_94dc0dc6545a": {
+      "id": "individual_94dc0dc6545a",
+      "symbol": "value_3e6878",
+      "display_name": "现有礼品卡"
+    },
+    "individual_95890c6637a9": {
+      "id": "individual_95890c6637a9",
+      "symbol": "value_049714",
+      "display_name": "文本编辑器"
+    },
+    "individual_9658841055c6": {
+      "id": "individual_9658841055c6",
+      "symbol": "value_23a65f",
+      "display_name": "休假前后可工作"
+    },
+    "individual_96872b1c3936": {
+      "id": "individual_96872b1c3936",
+      "symbol": "v_11_55",
+      "display_name": "次日 11:55"
+    },
+    "individual_9b50989fd974": {
+      "id": "individual_9b50989fd974",
+      "symbol": "v_33",
+      "display_name": "33"
+    },
+    "individual_9c9273351290": {
+      "id": "individual_9c9273351290",
+      "symbol": "v_4_15",
+      "display_name": "4 月 15 日"
+    },
+    "individual_9ce6098a5066": {
+      "id": "individual_9ce6098a5066",
+      "symbol": "f0_b086ef",
+      "display_name": "连续体目标 F0"
+    },
+    "individual_9d21f569da74": {
+      "id": "individual_9d21f569da74",
+      "symbol": "value_d52149",
+      "display_name": "工作量较少"
+    },
+    "individual_a11db5acb86e": {
+      "id": "individual_a11db5acb86e",
+      "symbol": "value_92f037",
+      "display_name": "退货请求已提交"
+    },
+    "individual_a151a896ad68": {
+      "id": "individual_a151a896ad68",
+      "symbol": "pitch",
+      "display_name": "Pitch"
+    },
+    "individual_a4549c9dd8c5": {
+      "id": "individual_a4549c9dd8c5",
+      "symbol": "value_62b852",
+      "display_name": "适用法律"
+    },
+    "individual_a48c50f3febd": {
+      "id": "individual_a48c50f3febd",
+      "symbol": "dataframe",
+      "display_name": "DataFrame"
+    },
+    "individual_a65fb0e3b23a": {
+      "id": "individual_a65fb0e3b23a",
+      "symbol": "value_f37d93",
+      "display_name": "内容形式组合"
+    },
+    "individual_a894a355d188": {
+      "id": "individual_a894a355d188",
+      "symbol": "compilesdk",
+      "display_name": "更新 compileSdk"
+    },
+    "individual_a97365433b71": {
+      "id": "individual_a97365433b71",
+      "symbol": "value_e8dfdd",
+      "display_name": "时长"
+    },
+    "individual_aadafd373393": {
+      "id": "individual_aadafd373393",
+      "symbol": "value_c314bd",
+      "display_name": "转变故事系列"
+    },
+    "individual_ac0de21e175d": {
+      "id": "individual_ac0de21e175d",
+      "symbol": "value_e54503",
+      "display_name": "教学"
+    },
+    "individual_aef4e695d441": {
+      "id": "individual_aef4e695d441",
+      "symbol": "value_22214a",
+      "display_name": "迈出第一步"
+    },
+    "individual_afbb0d4c2e4a": {
+      "id": "individual_afbb0d4c2e4a",
+      "symbol": "activity_compose_1_8_0",
+      "display_name": "activity-compose 1.8.0"
+    },
+    "individual_afd8c34cd802": {
+      "id": "individual_afd8c34cd802",
+      "symbol": "value_573bac",
+      "display_name": "出国休假"
+    },
+    "individual_afe6466dbc1b": {
+      "id": "individual_afe6466dbc1b",
+      "symbol": "return_delivered_order_items",
+      "display_name": "return_delivered_order_items"
+    },
+    "individual_b16f424b2888": {
+      "id": "individual_b16f424b2888",
+      "symbol": "value_80fab2",
+      "display_name": "有独占价值的内容"
+    },
+    "individual_b177784ee149": {
+      "id": "individual_b177784ee149",
+      "symbol": "value_5752ae",
+      "display_name": "用户家"
+    },
+    "individual_b21b08e9cf50": {
+      "id": "individual_b21b08e9cf50",
+      "symbol": "value_a0793a",
+      "display_name": "面对面讨论"
+    },
+    "individual_b290c279bb8f": {
+      "id": "individual_b290c279bb8f",
+      "symbol": "value_e1990d",
+      "display_name": "依赖兼容性"
+    },
+    "individual_b2d062061e4e": {
+      "id": "individual_b2d062061e4e",
+      "symbol": "androidmanifest_xml",
+      "display_name": "AndroidManifest.xml"
+    },
+    "individual_b33be3e34f4f": {
+      "id": "individual_b33be3e34f4f",
+      "symbol": "reels_80d9d7",
+      "display_name": "Reels"
+    },
+    "individual_b52df80ecb6a": {
+      "id": "individual_b52df80ecb6a",
+      "symbol": "value_9f42d8",
+      "display_name": "律师审核"
+    },
+    "individual_b564e358eb89": {
+      "id": "individual_b564e358eb89",
+      "symbol": "v_20",
+      "display_name": "20%"
+    },
+    "individual_b62c7f473360": {
+      "id": "individual_b62c7f473360",
+      "symbol": "v_3_aar",
+      "display_name": "3 个 AAR 元数据问题"
+    },
+    "individual_b7d7a4694fca": {
+      "id": "individual_b7d7a4694fca",
+      "symbol": "v_34",
+      "display_name": "34"
+    },
+    "individual_b9ad3d1f1a96": {
+      "id": "individual_b9ad3d1f1a96",
+      "symbol": "unable_to_start_activity",
+      "display_name": "Unable to start activity"
+    },
+    "individual_ba15cf31d762": {
+      "id": "individual_ba15cf31d762",
+      "symbol": "value_49aa24",
+      "display_name": "会议邀请"
+    },
+    "individual_ba900ca61ac4": {
+      "id": "individual_ba900ca61ac4",
+      "symbol": "value_7989a0",
+      "display_name": "获得更多工作分派"
+    },
+    "individual_ba99af45fa68": {
+      "id": "individual_ba99af45fa68",
+      "symbol": "v_3_25",
+      "display_name": "3 月 25 日"
+    },
+    "individual_bc670bcd8d81": {
+      "id": "individual_bc670bcd8d81",
+      "symbol": "value_1005b5",
+      "display_name": "签名"
+    },
+    "individual_bc84d6a3fa58": {
+      "id": "individual_bc84d6a3fa58",
+      "symbol": "value_b636f3",
+      "display_name": "普通话“居”"
+    },
+    "individual_be00eec5417c": {
+      "id": "individual_be00eec5417c",
+      "symbol": "value_bf5368",
+      "display_name": "压力很大"
+    },
+    "individual_bebf85f1c9ae": {
+      "id": "individual_bebf85f1c9ae",
+      "symbol": "value_f9881d",
+      "display_name": "value"
+    },
+    "individual_bed37527ae91": {
+      "id": "individual_bed37527ae91",
+      "symbol": "value_037acf",
+      "display_name": "主题引用"
+    },
+    "individual_bf99ffc58797": {
+      "id": "individual_bf99ffc58797",
+      "symbol": "sync_now",
+      "display_name": "Sync Now"
+    },
+    "individual_bfae048a43e9": {
+      "id": "individual_bfae048a43e9",
+      "symbol": "w2692684",
+      "display_name": "订单 #W2692684"
+    },
+    "individual_c1371273232b": {
+      "id": "individual_c1371273232b",
+      "symbol": "app_build_gradle",
+      "display_name": "app/build.gradle"
+    },
+    "individual_c1539f192d61": {
+      "id": "individual_c1539f192d61",
+      "symbol": "value_3b6cba",
+      "display_name": "未来两个月"
+    },
+    "individual_c536b511a408": {
+      "id": "individual_c536b511a408",
+      "symbol": "value_48f074",
+      "display_name": "完成出发前待办"
+    },
+    "individual_c57fe5f50699": {
+      "id": "individual_c57fe5f50699",
+      "symbol": "w9373487",
+      "display_name": "订单 #W9373487"
+    },
+    "individual_c62dfa8d90f3": {
+      "id": "individual_c62dfa8d90f3",
+      "symbol": "value_568456",
+      "display_name": "冲突或问题开场"
+    },
+    "individual_c6dfd25a4a27": {
+      "id": "individual_c6dfd25a4a27",
+      "symbol": "v_9_a761ad",
+      "display_name": "9 个等距级别"
+    },
+    "individual_c6f7eae5509a": {
+      "id": "individual_c6f7eae5509a",
+      "symbol": "activity_intent_filter",
+      "display_name": "activity、主题和 intent-filter"
+    },
+    "individual_c7b16702afe0": {
+      "id": "individual_c7b16702afe0",
+      "symbol": "stephanie_9b9376",
+      "display_name": "Stephanie"
+    },
+    "individual_cb5e0697cba7": {
+      "id": "individual_cb5e0697cba7",
+      "symbol": "value_b90e12",
+      "display_name": "今天的工作联系"
+    },
+    "individual_cd2c12073246": {
+      "id": "individual_cd2c12073246",
+      "symbol": "android_studio",
+      "display_name": "Android Studio"
+    },
+    "individual_cd79c7ac5905": {
+      "id": "individual_cd79c7ac5905",
+      "symbol": "value_f43238",
+      "display_name": "平板退货"
+    },
+    "individual_cfce9eabb721": {
+      "id": "individual_cfce9eabb721",
+      "symbol": "clean_rebuild",
+      "display_name": "Clean/Rebuild"
+    },
+    "individual_d04a4697e2b2": {
+      "id": "individual_d04a4697e2b2",
+      "symbol": "value_df9779",
+      "display_name": "运动鞋订单号"
+    },
+    "individual_d094e5ac27d5": {
+      "id": "individual_d094e5ac27d5",
+      "symbol": "smart",
+      "display_name": "SMART 绩效目标集"
+    },
+    "individual_d0e486341970": {
+      "id": "individual_d0e486341970",
+      "symbol": "value_a71f21",
+      "display_name": "二声录音"
+    },
+    "individual_d26561c14dc7": {
+      "id": "individual_d26561c14dc7",
+      "symbol": "value_0a178f",
+      "display_name": "构建错误消失"
+    },
+    "individual_d350e0e45d2d": {
+      "id": "individual_d350e0e45d2d",
+      "symbol": "v_12_30",
+      "display_name": "凌晨 12:30"
+    },
+    "individual_d50a79f25325": {
+      "id": "individual_d50a79f25325",
+      "symbol": "value_898bad",
+      "display_name": "客服、冲突解决和公平住房"
+    },
+    "individual_d68aa91dc407": {
+      "id": "individual_d68aa91dc407",
+      "symbol": "gradle",
+      "display_name": "Gradle 同步"
+    },
+    "individual_d7af7800032c": {
+      "id": "individual_d7af7800032c",
+      "symbol": "value_905741",
+      "display_name": "用户邮箱"
+    },
+    "individual_d828b7cbcf64": {
+      "id": "individual_d828b7cbcf64",
+      "symbol": "v_9_6bcc9e",
+      "display_name": "9 组目标值"
+    },
+    "individual_d9639ea19d03": {
+      "id": "individual_d9639ea19d03",
+      "symbol": "value_34f74e",
+      "display_name": "二声"
+    },
+    "individual_d9bf0f962e45": {
+      "id": "individual_d9bf0f962e45",
+      "symbol": "value_8c35e8",
+      "display_name": "分派工作的合伙人"
+    },
+    "individual_dbf7a7b29c7a": {
+      "id": "individual_dbf7a7b29c7a",
+      "symbol": "w7449508",
+      "display_name": "订单 #W7449508"
+    },
+    "individual_dc5672df3fc9": {
+      "id": "individual_dc5672df3fc9",
+      "symbol": "value_4b68d1",
+      "display_name": "已不再需要"
+    },
+    "individual_dd093b3c074e": {
+      "id": "individual_dd093b3c074e",
+      "symbol": "f0_offset",
+      "display_name": "F0 offset"
+    },
+    "individual_dd2adcdb1c90": {
+      "id": "individual_dd2adcdb1c90",
+      "symbol": "styles_xml",
+      "display_name": "styles.xml"
+    },
+    "individual_ddc832f2c0ef": {
+      "id": "individual_ddc832f2c0ef",
+      "symbol": "v_12_15_12_26",
+      "display_name": "12 月 15 日至 12 月 26 日"
+    },
+    "individual_de504825a8da": {
+      "id": "individual_de504825a8da",
+      "symbol": "f0_b572e3",
+      "display_name": "F0 曲线"
+    },
+    "individual_dec84ef922a0": {
+      "id": "individual_dec84ef922a0",
+      "symbol": "value_f8eac0",
+      "display_name": "新的家庭会议"
+    },
+    "individual_df175e15d77a": {
+      "id": "individual_df175e15d77a",
+      "symbol": "instagram_f79284",
+      "display_name": "Instagram"
+    },
+    "individual_df5b87e879e7": {
+      "id": "individual_df5b87e879e7",
+      "symbol": "f0_98b459",
+      "display_name": "F0 转折点"
+    },
+    "individual_e0dd1251d781": {
+      "id": "individual_e0dd1251d781",
+      "symbol": "value_4031bc",
+      "display_name": "拟议日期、时间和地点"
+    },
+    "individual_e401e8a7f592": {
+      "id": "individual_e401e8a7f592",
+      "symbol": "value_400f9d",
+      "display_name": "./{}"
+    },
+    "individual_e83dcf2e7f5c": {
+      "id": "individual_e83dcf2e7f5c",
+      "symbol": "value_7a0279",
+      "display_name": "黑色"
+    },
+    "individual_e90b664e3db3": {
+      "id": "individual_e90b664e3db3",
+      "symbol": "value_faa393",
+      "display_name": "遗嘱执行人选择"
+    },
+    "individual_eba1f616d495": {
+      "id": "individual_eba1f616d495",
+      "symbol": "value_880241",
+      "display_name": "合成材料"
+    },
+    "individual_ebf732c0bba7": {
+      "id": "individual_ebf732c0bba7",
+      "symbol": "value_63fe9b",
+      "display_name": "启动后立即关闭"
+    },
+    "individual_ec78a0f21b3b": {
+      "id": "individual_ec78a0f21b3b",
+      "symbol": "value_461e39",
+      "display_name": "导出的连续体"
+    },
+    "individual_ecbc444d358d": {
+      "id": "individual_ecbc444d358d",
+      "symbol": "value_043c84",
+      "display_name": "遗嘱法律效力"
+    },
+    "individual_ecfdf88e7c30": {
+      "id": "individual_ecfdf88e7c30",
+      "symbol": "value_571f8f",
+      "display_name": "经停一次"
+    },
+    "individual_ed39de876065": {
+      "id": "individual_ed39de876065",
+      "symbol": "value_2b9af5",
+      "display_name": "今天"
+    },
+    "individual_edf6e51b870d": {
+      "id": "individual_edf6e51b870d",
+      "symbol": "value_5bec77",
+      "display_name": "学习困难"
+    },
+    "individual_f26c9ca529f9": {
+      "id": "individual_f26c9ca529f9",
+      "symbol": "v_186_45",
+      "display_name": "186.45 美元"
+    },
+    "individual_f3cbb1c94993": {
+      "id": "individual_f3cbb1c94993",
+      "symbol": "kimberly",
+      "display_name": "Kimberly"
+    },
+    "individual_f616e39d3d1a": {
+      "id": "individual_f616e39d3d1a",
+      "symbol": "value_086e4b",
+      "display_name": "文件已找到"
+    },
+    "individual_f673979049e8": {
+      "id": "individual_f673979049e8",
+      "symbol": "value_de87fe",
+      "display_name": "遗嘱执行人选择"
+    },
+    "individual_f735911abfa8": {
+      "id": "individual_f735911abfa8",
+      "symbol": "value_7926c7",
+      "display_name": "相关资产管理"
+    },
+    "individual_f7666a690198": {
+      "id": "individual_f7666a690198",
+      "symbol": "app_manifests",
+      "display_name": "app 模块 manifests 文件夹"
+    },
+    "individual_f8fbbbaf522f": {
+      "id": "individual_f8fbbbaf522f",
+      "symbol": "value_972e85",
+      "display_name": "内部工作机会平台"
+    },
+    "individual_f9006ee83f50": {
+      "id": "individual_f9006ee83f50",
+      "symbol": "value_0bb570",
+      "display_name": "监护人指定"
+    },
+    "individual_f9cd3d61c5f8": {
+      "id": "individual_f9cd3d61c5f8",
+      "symbol": "v_11",
+      "display_name": "11 月"
+    },
+    "individual_fbfb71b27a9e": {
+      "id": "individual_fbfb71b27a9e",
+      "symbol": "v_6",
+      "display_name": "下午 6 点"
+    },
+    "individual_fd815f87ab29": {
+      "id": "individual_fd815f87ab29",
+      "symbol": "value_c7687a",
+      "display_name": "近期工作安排和出行计划"
+    },
+    "individual_fdbc6295a378": {
+      "id": "individual_fdbc6295a378",
+      "symbol": "value_8590fb",
+      "display_name": "尽可能早"
+    },
+    "individual_feae70909a7c": {
+      "id": "individual_feae70909a7c",
+      "symbol": "value_26ca7c",
+      "display_name": "已送达"
+    },
+    "individual_ffe27da12dd4": {
+      "id": "individual_ffe27da12dd4",
+      "symbol": "v_6_c6c204",
+      "display_name": "6 码"
+    }
+  },
+  "operators": {
+    "operator_14212dc41f5f": {
+      "id": "operator_14212dc41f5f",
+      "symbol": "instance_of",
+      "display_name": "instance_of"
+    },
+    "operator_4ca314c13c5b": {
+      "id": "operator_4ca314c13c5b",
+      "symbol": "build_ontology",
+      "display_name": "build_ontology"
+    },
+    "operator_599615361f50": {
+      "id": "operator_599615361f50",
+      "symbol": "works_at",
+      "display_name": "works_at"
+    },
+    "operator_1c210f5d380d": {
+      "id": "operator_1c210f5d380d",
+      "symbol": "has_goal",
+      "display_name": "has_goal"
+    },
+    "operator_dd4d8c22f312": {
+      "id": "operator_dd4d8c22f312",
+      "symbol": "member_of",
+      "display_name": "member_of"
+    },
+    "operator_80ddd8707c6e": {
+      "id": "operator_80ddd8707c6e",
+      "symbol": "assigns",
+      "display_name": "assigns"
+    },
+    "operator_c1b0334d804b": {
+      "id": "operator_c1b0334d804b",
+      "symbol": "plans",
+      "display_name": "plans"
+    },
+    "operator_9511d2fd5246": {
+      "id": "operator_9511d2fd5246",
+      "symbol": "has_duration",
+      "display_name": "has_duration"
+    },
+    "operator_d0ad3e58ad24": {
+      "id": "operator_d0ad3e58ad24",
+      "symbol": "within",
+      "display_name": "within"
+    },
+    "operator_c82237890ba1": {
+      "id": "operator_c82237890ba1",
+      "symbol": "may_overlap",
+      "display_name": "may_overlap"
+    },
+    "operator_790915c22e76": {
+      "id": "operator_790915c22e76",
+      "symbol": "about",
+      "display_name": "about"
+    },
+    "operator_c646689b496f": {
+      "id": "operator_c646689b496f",
+      "symbol": "answers",
+      "display_name": "answers"
+    },
+    "operator_7d27da6372c7": {
+      "id": "operator_7d27da6372c7",
+      "symbol": "includes",
+      "display_name": "includes"
+    },
+    "operator_5934c243049c": {
+      "id": "operator_5934c243049c",
+      "symbol": "before",
+      "display_name": "before"
+    },
+    "operator_a4eb463a8bfe": {
+      "id": "operator_a4eb463a8bfe",
+      "symbol": "affects",
+      "display_name": "affects"
+    },
+    "operator_e28795f01682": {
+      "id": "operator_e28795f01682",
+      "symbol": "supports",
+      "display_name": "supports"
+    },
+    "operator_16824d264945": {
+      "id": "operator_16824d264945",
+      "symbol": "communicates",
+      "display_name": "communicates"
+    },
+    "operator_13dbe039771f": {
+      "id": "operator_13dbe039771f",
+      "symbol": "chooses",
+      "display_name": "chooses"
+    },
+    "operator_f2bceb77ace4": {
+      "id": "operator_f2bceb77ace4",
+      "symbol": "occurs_in",
+      "display_name": "occurs_in"
+    },
+    "operator_6714f129839b": {
+      "id": "operator_6714f129839b",
+      "symbol": "has_time",
+      "display_name": "has_time"
+    },
+    "operator_12a2e4df247c": {
+      "id": "operator_12a2e4df247c",
+      "symbol": "may_affect",
+      "display_name": "may_affect"
+    },
+    "operator_14e2a6c852b7": {
+      "id": "operator_14e2a6c852b7",
+      "symbol": "applies_to",
+      "display_name": "applies_to"
+    },
+    "operator_400c66cbea70": {
+      "id": "operator_400c66cbea70",
+      "symbol": "for",
+      "display_name": "for"
+    },
+    "operator_676c1119b93b": {
+      "id": "operator_676c1119b93b",
+      "symbol": "has_subject",
+      "display_name": "has_subject"
+    },
+    "operator_4dfb01b416c5": {
+      "id": "operator_4dfb01b416c5",
+      "symbol": "has_role",
+      "display_name": "has_role"
+    },
+    "operator_0f0c29c97456": {
+      "id": "operator_0f0c29c97456",
+      "symbol": "evaluates",
+      "display_name": "evaluates"
+    },
+    "operator_6a91717b2c31": {
+      "id": "operator_6a91717b2c31",
+      "symbol": "has_evaluation",
+      "display_name": "has_evaluation"
+    },
+    "operator_4a3257bb7ae6": {
+      "id": "operator_4a3257bb7ae6",
+      "symbol": "has_style",
+      "display_name": "has_style"
+    },
+    "operator_b1b09c7436ff": {
+      "id": "operator_b1b09c7436ff",
+      "symbol": "requires",
+      "display_name": "requires"
+    },
+    "operator_6a7ed8a4c1f3": {
+      "id": "operator_6a7ed8a4c1f3",
+      "symbol": "uses",
+      "display_name": "uses"
+    },
+    "operator_dbebc63935f8": {
+      "id": "operator_dbebc63935f8",
+      "symbol": "modifies",
+      "display_name": "modifies"
+    },
+    "operator_77f94bb097ce": {
+      "id": "operator_77f94bb097ce",
+      "symbol": "sets",
+      "display_name": "sets"
+    },
+    "operator_0052d3315db2": {
+      "id": "operator_0052d3315db2",
+      "symbol": "opened_in",
+      "display_name": "opened_in"
+    },
+    "operator_cc3e668bdc54": {
+      "id": "operator_cc3e668bdc54",
+      "symbol": "defined_in",
+      "display_name": "defined_in"
+    },
+    "operator_4dac30738f5b": {
+      "id": "operator_4dac30738f5b",
+      "symbol": "has_current_value",
+      "display_name": "has_current_value"
+    },
+    "operator_36fe46f7ee3c": {
+      "id": "operator_36fe46f7ee3c",
+      "symbol": "has_target_value",
+      "display_name": "has_target_value"
+    },
+    "operator_71707ad63942": {
+      "id": "operator_71707ad63942",
+      "symbol": "after",
+      "display_name": "after"
+    },
+    "operator_2824730e6749": {
+      "id": "operator_2824730e6749",
+      "symbol": "depends_on",
+      "display_name": "depends_on"
+    },
+    "operator_de65139a92ff": {
+      "id": "operator_de65139a92ff",
+      "symbol": "followed_by",
+      "display_name": "followed_by"
+    },
+    "operator_3f08976e9b4a": {
+      "id": "operator_3f08976e9b4a",
+      "symbol": "occurs_on",
+      "display_name": "occurs_on"
+    },
+    "operator_f60ca475b932": {
+      "id": "operator_f60ca475b932",
+      "symbol": "diagnoses",
+      "display_name": "diagnoses"
+    },
+    "operator_fbc16028c0e4": {
+      "id": "operator_fbc16028c0e4",
+      "symbol": "may_cause",
+      "display_name": "may_cause"
+    },
+    "operator_c5cb4e8e1f46": {
+      "id": "operator_c5cb4e8e1f46",
+      "symbol": "addresses",
+      "display_name": "addresses"
+    },
+    "operator_73716c3a1b95": {
+      "id": "operator_73716c3a1b95",
+      "symbol": "violates",
+      "display_name": "violates"
+    },
+    "operator_bc627ede5a2f": {
+      "id": "operator_bc627ede5a2f",
+      "symbol": "causes",
+      "display_name": "causes"
+    },
+    "operator_3ddd5c378fe0": {
+      "id": "operator_3ddd5c378fe0",
+      "symbol": "is_a",
+      "display_name": "is_a"
+    },
+    "operator_758c23b243cc": {
+      "id": "operator_758c23b243cc",
+      "symbol": "configures",
+      "display_name": "configures"
+    },
+    "operator_bcb610f27f03": {
+      "id": "operator_bcb610f27f03",
+      "symbol": "references",
+      "display_name": "references"
+    },
+    "operator_988334bd3df8": {
+      "id": "operator_988334bd3df8",
+      "symbol": "located_at",
+      "display_name": "located_at"
+    },
+    "operator_b97bcbaf6d13": {
+      "id": "operator_b97bcbaf6d13",
+      "symbol": "visible_in",
+      "display_name": "visible_in"
+    },
+    "operator_22c4fa5a7843": {
+      "id": "operator_22c4fa5a7843",
+      "symbol": "constrains",
+      "display_name": "constrains"
+    },
+    "operator_0914f4d25636": {
+      "id": "operator_0914f4d25636",
+      "symbol": "manages",
+      "display_name": "manages"
+    },
+    "operator_bd36e360b186": {
+      "id": "operator_bd36e360b186",
+      "symbol": "has_theme",
+      "display_name": "has_theme"
+    },
+    "operator_a162665ab190": {
+      "id": "operator_a162665ab190",
+      "symbol": "has_constraint",
+      "display_name": "has_constraint"
+    },
+    "operator_e08dc10b6e11": {
+      "id": "operator_e08dc10b6e11",
+      "symbol": "published_on",
+      "display_name": "published_on"
+    },
+    "operator_5015c8ba54cd": {
+      "id": "operator_5015c8ba54cd",
+      "symbol": "adapted_as",
+      "display_name": "adapted_as"
+    },
+    "operator_f65639c63453": {
+      "id": "operator_f65639c63453",
+      "symbol": "presents",
+      "display_name": "presents"
+    },
+    "operator_0d31698c5c09": {
+      "id": "operator_0d31698c5c09",
+      "symbol": "extends",
+      "display_name": "extends"
+    },
+    "operator_a3975fad2aa4": {
+      "id": "operator_a3975fad2aa4",
+      "symbol": "proposes",
+      "display_name": "proposes"
+    },
+    "operator_97072969a7f0": {
+      "id": "operator_97072969a7f0",
+      "symbol": "has_episode",
+      "display_name": "has_episode"
+    },
+    "operator_23faaf079de7": {
+      "id": "operator_23faaf079de7",
+      "symbol": "precedes",
+      "display_name": "precedes"
+    },
+    "operator_b38789c18015": {
+      "id": "operator_b38789c18015",
+      "symbol": "forms",
+      "display_name": "forms"
+    },
+    "operator_4e657b5c7578": {
+      "id": "operator_4e657b5c7578",
+      "symbol": "starts_from",
+      "display_name": "starts_from"
+    },
+    "operator_90758e51bd74": {
+      "id": "operator_90758e51bd74",
+      "symbol": "ends_at",
+      "display_name": "ends_at"
+    },
+    "operator_1059e3bb4660": {
+      "id": "operator_1059e3bb4660",
+      "symbol": "has_feature",
+      "display_name": "has_feature"
+    },
+    "operator_142548050c29": {
+      "id": "operator_142548050c29",
+      "symbol": "represents",
+      "display_name": "represents"
+    },
+    "operator_05b8197392b2": {
+      "id": "operator_05b8197392b2",
+      "symbol": "produces",
+      "display_name": "produces"
+    },
+    "operator_f21541487f35": {
+      "id": "operator_f21541487f35",
+      "symbol": "generates",
+      "display_name": "generates"
+    },
+    "operator_966b967d661b": {
+      "id": "operator_966b967d661b",
+      "symbol": "processes",
+      "display_name": "processes"
+    },
+    "operator_33e6367b0666": {
+      "id": "operator_33e6367b0666",
+      "symbol": "displayed_in",
+      "display_name": "displayed_in"
+    },
+    "operator_44c181796390": {
+      "id": "operator_44c181796390",
+      "symbol": "copied_to",
+      "display_name": "copied_to"
+    },
+    "operator_97b637351094": {
+      "id": "operator_97b637351094",
+      "symbol": "has_format",
+      "display_name": "has_format"
+    },
+    "operator_77da28c6256e": {
+      "id": "operator_77da28c6256e",
+      "symbol": "defines",
+      "display_name": "defines"
+    },
+    "operator_af7be582ef99": {
+      "id": "operator_af7be582ef99",
+      "symbol": "transforms_to",
+      "display_name": "transforms_to"
+    },
+    "operator_bf88f2f4374a": {
+      "id": "operator_bf88f2f4374a",
+      "symbol": "converts_to",
+      "display_name": "converts_to"
+    },
+    "operator_16910443358c": {
+      "id": "operator_16910443358c",
+      "symbol": "distributed_across",
+      "display_name": "distributed_across"
+    },
+    "operator_8f6835a13277": {
+      "id": "operator_8f6835a13277",
+      "symbol": "keeps_constant",
+      "display_name": "keeps_constant"
+    },
+    "operator_8e8eee4c9d72": {
+      "id": "operator_8e8eee4c9d72",
+      "symbol": "expected_in",
+      "display_name": "expected_in"
+    },
+    "operator_0434310958ae": {
+      "id": "operator_0434310958ae",
+      "symbol": "may_be_unavailable_in",
+      "display_name": "may_be_unavailable_in"
+    },
+    "operator_fe58e0299e92": {
+      "id": "operator_fe58e0299e92",
+      "symbol": "alternative_to",
+      "display_name": "alternative_to"
+    },
+    "operator_d4c464dd382a": {
+      "id": "operator_d4c464dd382a",
+      "symbol": "available_in",
+      "display_name": "available_in"
+    },
+    "operator_12ca60b826ea": {
+      "id": "operator_12ca60b826ea",
+      "symbol": "implements",
+      "display_name": "implements"
+    },
+    "operator_060b22b30da3": {
+      "id": "operator_060b22b30da3",
+      "symbol": "configured_by",
+      "display_name": "configured_by"
+    },
+    "operator_47af1213e16f": {
+      "id": "operator_47af1213e16f",
+      "symbol": "checked_by",
+      "display_name": "checked_by"
+    },
+    "operator_34e8c39705e2": {
+      "id": "operator_34e8c39705e2",
+      "symbol": "role_in",
+      "display_name": "role_in"
+    },
+    "operator_c77850100542": {
+      "id": "operator_c77850100542",
+      "symbol": "has_count",
+      "display_name": "has_count"
+    },
+    "operator_d30e8b910649": {
+      "id": "operator_d30e8b910649",
+      "symbol": "covers",
+      "display_name": "covers"
+    },
+    "operator_291351149215": {
+      "id": "operator_291351149215",
+      "symbol": "has_target",
+      "display_name": "has_target"
+    },
+    "operator_d1871ca5630b": {
+      "id": "operator_d1871ca5630b",
+      "symbol": "has_deadline",
+      "display_name": "has_deadline"
+    },
+    "operator_bcc538dade76": {
+      "id": "operator_bcc538dade76",
+      "symbol": "accepts",
+      "display_name": "accepts"
+    },
+    "operator_d086b3af52c6": {
+      "id": "operator_d086b3af52c6",
+      "symbol": "constructs",
+      "display_name": "constructs"
+    },
+    "operator_71b74efedf71": {
+      "id": "operator_71b74efedf71",
+      "symbol": "formats_with",
+      "display_name": "formats_with"
+    },
+    "operator_3566e54a5770": {
+      "id": "operator_3566e54a5770",
+      "symbol": "returns",
+      "display_name": "returns"
+    },
+    "operator_809d39901bf3": {
+      "id": "operator_809d39901bf3",
+      "symbol": "displays",
+      "display_name": "displays"
+    },
+    "operator_1ced8bdf5e5f": {
+      "id": "operator_1ced8bdf5e5f",
+      "symbol": "input_to",
+      "display_name": "input_to"
+    },
+    "operator_1a72020e9239": {
+      "id": "operator_1a72020e9239",
+      "symbol": "recognizes",
+      "display_name": "recognizes"
+    },
+    "operator_b647e4c77683": {
+      "id": "operator_b647e4c77683",
+      "symbol": "renders_as",
+      "display_name": "renders_as"
+    },
+    "operator_91df7fe6735a": {
+      "id": "operator_91df7fe6735a",
+      "symbol": "contains",
+      "display_name": "contains"
+    },
+    "operator_be9f03f82cb9": {
+      "id": "operator_be9f03f82cb9",
+      "symbol": "iterates_over",
+      "display_name": "iterates_over"
+    },
+    "operator_34aa4f696f09": {
+      "id": "operator_34aa4f696f09",
+      "symbol": "invokes",
+      "display_name": "invokes"
+    },
+    "operator_b4508bd719c5": {
+      "id": "operator_b4508bd719c5",
+      "symbol": "stored_in",
+      "display_name": "stored_in"
+    },
+    "operator_06245c209e07": {
+      "id": "operator_06245c209e07",
+      "symbol": "unsupported_by",
+      "display_name": "unsupported_by"
+    },
+    "operator_c64a02452ea3": {
+      "id": "operator_c64a02452ea3",
+      "symbol": "adjusted_by",
+      "display_name": "adjusted_by"
+    },
+    "operator_20604ab14799": {
+      "id": "operator_20604ab14799",
+      "symbol": "contradicted_by",
+      "display_name": "contradicted_by"
+    },
+    "operator_721634f9797b": {
+      "id": "operator_721634f9797b",
+      "symbol": "supported_by",
+      "display_name": "supported_by"
+    },
+    "operator_5c00788db6ec": {
+      "id": "operator_5c00788db6ec",
+      "symbol": "contributes_to",
+      "display_name": "contributes_to"
+    },
+    "operator_8c1ff23e5700": {
+      "id": "operator_8c1ff23e5700",
+      "symbol": "not_sole_determinant_of",
+      "display_name": "not_sole_determinant_of"
+    },
+    "operator_9e81544b6a4a": {
+      "id": "operator_9e81544b6a4a",
+      "symbol": "requests",
+      "display_name": "requests"
+    },
+    "operator_64874d48ee93": {
+      "id": "operator_64874d48ee93",
+      "symbol": "origin",
+      "display_name": "origin"
+    },
+    "operator_1c64cc1622b5": {
+      "id": "operator_1c64cc1622b5",
+      "symbol": "destination",
+      "display_name": "destination"
+    },
+    "operator_980af6292a51": {
+      "id": "operator_980af6292a51",
+      "symbol": "departs_on",
+      "display_name": "departs_on"
+    },
+    "operator_450a1675b8e0": {
+      "id": "operator_450a1675b8e0",
+      "symbol": "prefers",
+      "display_name": "prefers"
+    },
+    "operator_78a60b159742": {
+      "id": "operator_78a60b159742",
+      "symbol": "matches",
+      "display_name": "matches"
+    },
+    "operator_fc47463d101b": {
+      "id": "operator_fc47463d101b",
+      "symbol": "has_stop",
+      "display_name": "has_stop"
+    },
+    "operator_bd8591128169": {
+      "id": "operator_bd8591128169",
+      "symbol": "departs_at",
+      "display_name": "departs_at"
+    },
+    "operator_b7dcca153b8e": {
+      "id": "operator_b7dcca153b8e",
+      "symbol": "arrives_at",
+      "display_name": "arrives_at"
+    },
+    "operator_8ca2e88fb015": {
+      "id": "operator_8ca2e88fb015",
+      "symbol": "price",
+      "display_name": "price"
+    },
+    "operator_61372bf73538": {
+      "id": "operator_61372bf73538",
+      "symbol": "rejects",
+      "display_name": "rejects"
+    },
+    "operator_337f26d31afe": {
+      "id": "operator_337f26d31afe",
+      "symbol": "assessed_as",
+      "display_name": "assessed_as"
+    },
+    "operator_78bcbf85badc": {
+      "id": "operator_78bcbf85badc",
+      "symbol": "selects",
+      "display_name": "selects"
+    },
+    "operator_3c1e074fb4f5": {
+      "id": "operator_3c1e074fb4f5",
+      "symbol": "sent_to",
+      "display_name": "sent_to"
+    },
+    "operator_cea78df3d69d": {
+      "id": "operator_cea78df3d69d",
+      "symbol": "describes",
+      "display_name": "describes"
+    },
+    "operator_fbc0774b0fc3": {
+      "id": "operator_fbc0774b0fc3",
+      "symbol": "compatible_with",
+      "display_name": "compatible_with"
+    },
+    "operator_c85615c6f212": {
+      "id": "operator_c85615c6f212",
+      "symbol": "targets",
+      "display_name": "targets"
+    },
+    "operator_839838c4e65d": {
+      "id": "operator_839838c4e65d",
+      "symbol": "refund_to",
+      "display_name": "refund_to"
+    },
+    "operator_2e53c30aa4c7": {
+      "id": "operator_2e53c30aa4c7",
+      "symbol": "reason",
+      "display_name": "reason"
+    },
+    "operator_823fc3275cc4": {
+      "id": "operator_823fc3275cc4",
+      "symbol": "authorizes",
+      "display_name": "authorizes"
+    },
+    "operator_76ca7f643167": {
+      "id": "operator_76ca7f643167",
+      "symbol": "acts_on",
+      "display_name": "acts_on"
+    },
+    "operator_075625ced9ed": {
+      "id": "operator_075625ced9ed",
+      "symbol": "has_status",
+      "display_name": "has_status"
+    },
+    "operator_0ab1c4ffc147": {
+      "id": "operator_0ab1c4ffc147",
+      "symbol": "refund_amount",
+      "display_name": "refund_amount"
+    },
+    "operator_ef8331cba2da": {
+      "id": "operator_ef8331cba2da",
+      "symbol": "returned_to",
+      "display_name": "returned_to"
+    },
+    "operator_326875f8fc67": {
+      "id": "operator_326875f8fc67",
+      "symbol": "identified_by",
+      "display_name": "identified_by"
+    },
+    "operator_9cbec49f55a7": {
+      "id": "operator_9cbec49f55a7",
+      "symbol": "may_belong_to",
+      "display_name": "may_belong_to"
+    },
+    "operator_ace967520eec": {
+      "id": "operator_ace967520eec",
+      "symbol": "does_not_remember",
+      "display_name": "does_not_remember"
+    },
+    "operator_e5309da50a54": {
+      "id": "operator_e5309da50a54",
+      "symbol": "belongs_to",
+      "display_name": "belongs_to"
+    },
+    "operator_b39c25dccd08": {
+      "id": "operator_b39c25dccd08",
+      "symbol": "size",
+      "display_name": "size"
+    },
+    "operator_6ed60ff57eba": {
+      "id": "operator_6ed60ff57eba",
+      "symbol": "color",
+      "display_name": "color"
+    },
+    "operator_8dcfe6f6f47f": {
+      "id": "operator_8dcfe6f6f47f",
+      "symbol": "material",
+      "display_name": "material"
+    },
+    "operator_b14067726f06": {
+      "id": "operator_b14067726f06",
+      "symbol": "concerned_about",
+      "display_name": "concerned_about"
+    },
+    "operator_79834d562708": {
+      "id": "operator_79834d562708",
+      "symbol": "participates_in",
+      "display_name": "participates_in"
+    },
+    "operator_7f4bad6b2b73": {
+      "id": "operator_7f4bad6b2b73",
+      "symbol": "date",
+      "display_name": "date"
+    },
+    "operator_7585ae983a36": {
+      "id": "operator_7585ae983a36",
+      "symbol": "location",
+      "display_name": "location"
+    },
+    "operator_7a1534897bf1": {
+      "id": "operator_7a1534897bf1",
+      "symbol": "attends",
+      "display_name": "attends"
+    },
+    "operator_2b11809a43bc": {
+      "id": "operator_2b11809a43bc",
+      "symbol": "topic",
+      "display_name": "topic"
+    },
+    "operator_62336608654b": {
+      "id": "operator_62336608654b",
+      "symbol": "considers",
+      "display_name": "considers"
+    },
+    "operator_9315206adfa7": {
+      "id": "operator_9315206adfa7",
+      "symbol": "motivated_by",
+      "display_name": "motivated_by"
+    },
+    "operator_2797b9baf17f": {
+      "id": "operator_2797b9baf17f",
+      "symbol": "specifies",
+      "display_name": "specifies"
+    },
+    "operator_432895319c67": {
+      "id": "operator_432895319c67",
+      "symbol": "may_have",
+      "display_name": "may_have"
+    },
+    "operator_e72e5aee85f7": {
+      "id": "operator_e72e5aee85f7",
+      "symbol": "must_complete",
+      "display_name": "must_complete"
+    },
+    "operator_af963d568edd": {
+      "id": "operator_af963d568edd",
+      "symbol": "deadline",
+      "display_name": "deadline"
+    },
+    "operator_7628caa9e70d": {
+      "id": "operator_7628caa9e70d",
+      "symbol": "current_date",
+      "display_name": "current_date"
+    },
+    "operator_6a32421af8ec": {
+      "id": "operator_6a32421af8ec",
+      "symbol": "experiences",
+      "display_name": "experiences"
+    },
+    "operator_cbce2be666a0": {
+      "id": "operator_cbce2be666a0",
+      "symbol": "has_completed",
+      "display_name": "has_completed"
+    },
+    "operator_de225237685b": {
+      "id": "operator_de225237685b",
+      "symbol": "seeks",
+      "display_name": "seeks"
+    },
+    "operator_7082a3aae791": {
+      "id": "operator_7082a3aae791",
+      "symbol": "scheduled_by",
+      "display_name": "scheduled_by"
+    },
+    "operator_f8a47a534ba3": {
+      "id": "operator_f8a47a534ba3",
+      "symbol": "governed_by",
+      "display_name": "governed_by"
+    },
+    "operator_be643e2aa207": {
+      "id": "operator_be643e2aa207",
+      "symbol": "reviews",
+      "display_name": "reviews"
+    },
+    "operator_6f7605739873": {
+      "id": "operator_6f7605739873",
+      "symbol": "performs",
+      "display_name": "performs"
+    },
+    "operator_e8d2c704dd3b": {
+      "id": "operator_e8d2c704dd3b",
+      "symbol": "allows_time_for",
+      "display_name": "allows_time_for"
+    },
+    "operator_db426a683004": {
+      "id": "operator_db426a683004",
+      "symbol": "makes_decision",
+      "display_name": "makes_decision"
+    },
+    "operator_b031c7994ac1": {
+      "id": "operator_b031c7994ac1",
+      "symbol": "documents",
+      "display_name": "documents"
+    }
+  }
+}

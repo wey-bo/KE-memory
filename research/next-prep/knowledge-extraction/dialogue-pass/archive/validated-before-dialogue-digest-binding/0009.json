@@ -1,0 +1,163 @@
+{
+  "candidate_id": "WILDCHAT-LEARN-CAND-003",
+  "new_knowledge": [
+    {
+      "knowledge_id": "D_wildchat-learn-cand-003-b1871de6ef7c_001",
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "statement": "用户请求一个 make_hyperlink 函数的使用例子。",
+      "subject": "用户",
+      "predicate": "请求",
+      "object": "make_hyperlink 函数的使用例子",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "def make_hyperlink(value)",
+          "evidence_id": "evidence-1a1b027e6f6db30233735050f444e9caadbd6f6f5ce2dabf2116acfbc6f4b1ab",
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "evidence_role": "user_reported",
+          "start": 8,
+          "end": 33
+        },
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "能给我一个例子吗？",
+          "evidence_id": "evidence-374341ff559d86a1d53010d8b04afb84b7381e67d3669d1042fefdf681ea94b4",
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 9
+        }
+      ],
+      "inference_basis": "Turn 1's request for an example refers to the make_hyperlink function introduced in turn 0.",
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "D_wildchat-learn-cand-003-b1871de6ef7c_002",
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "statement": "用户请求演示 make_hyperlink 函数与 Pandas apply 一起使用并解释参数。",
+      "subject": "用户",
+      "predicate": "请求演示并解释",
+      "object": "make_hyperlink 函数与 Pandas apply 一起使用及其参数",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "def make_hyperlink(value)",
+          "evidence_id": "evidence-1a1b027e6f6db30233735050f444e9caadbd6f6f5ce2dabf2116acfbc6f4b1ab",
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "evidence_role": "user_reported",
+          "start": 8,
+          "end": 33
+        },
+        {
+          "turn_index": 2,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "如果和 Pandas 的 apply 一起用，能演示并解释参数吗？",
+          "evidence_id": "evidence-809bcb8a71ff7d01ae086110dcb6b14e54a5499513e7f78504bd269964ff3b99",
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 33
+        }
+      ],
+      "inference_basis": "The omitted object in turn 2 is the make_hyperlink function introduced and exemplified in the preceding turns.",
+      "confidence": 0.99
+    }
+  ],
+  "operations": [
+    {
+      "operation_id": "R_wildchat-learn-cand-003-b1871de6ef7c_001",
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "operation": "correct",
+      "targets": [
+        "K_wildchat-learn-cand-003-b1871de6ef7c_001_001"
+      ],
+      "replacement": "D_wildchat-learn-cand-003-b1871de6ef7c_001",
+      "reason": "The complete dialogue resolves the unspecified example topic to the make_hyperlink function.",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "def make_hyperlink(value)",
+          "evidence_id": "evidence-1a1b027e6f6db30233735050f444e9caadbd6f6f5ce2dabf2116acfbc6f4b1ab",
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "evidence_role": "user_reported",
+          "start": 8,
+          "end": 33
+        },
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "能给我一个例子吗？",
+          "evidence_id": "evidence-374341ff559d86a1d53010d8b04afb84b7381e67d3669d1042fefdf681ea94b4",
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 9
+        }
+      ]
+    },
+    {
+      "operation_id": "R_wildchat-learn-cand-003-b1871de6ef7c_002",
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "operation": "correct",
+      "targets": [
+        "K_wildchat-learn-cand-003-b1871de6ef7c_002_001"
+      ],
+      "replacement": "D_wildchat-learn-cand-003-b1871de6ef7c_002",
+      "reason": "The complete dialogue resolves the omitted object used with Pandas apply to make_hyperlink.",
+      "confidence": 0.99,
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "def make_hyperlink(value)",
+          "evidence_id": "evidence-1a1b027e6f6db30233735050f444e9caadbd6f6f5ce2dabf2116acfbc6f4b1ab",
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "evidence_role": "user_reported",
+          "start": 8,
+          "end": 33
+        },
+        {
+          "turn_index": 2,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "如果和 Pandas 的 apply 一起用，能演示并解释参数吗？",
+          "evidence_id": "evidence-809bcb8a71ff7d01ae086110dcb6b14e54a5499513e7f78504bd269964ff3b99",
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 33
+        }
+      ]
+    }
+  ]
+}

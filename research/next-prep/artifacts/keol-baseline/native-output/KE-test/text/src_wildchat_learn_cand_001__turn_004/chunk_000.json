@@ -1,0 +1,151 @@
+{
+  "source": {
+    "source_id": "src_wildchat_learn_cand_001__turn_004",
+    "file": "keol-input/turns/wildchat-learn-cand-001__turn-004.txt",
+    "file_type": "txt",
+    "category": "text",
+    "metadata": {
+      "unit_id": "wildchat-learn-cand-001__turn-004",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "turn_index": 4,
+      "json_pointer": "/candidates/1/turns/3",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=24456e5381c0c4891d80737fa4639f1d / model=gpt-3.5-turbo-0613 / user_ordinal=1..6 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "chunk": {
+    "id": "chunk_5706c404d07537a32412",
+    "index": 0,
+    "text": "用户：\n日志显示：Unable to start activity，原因是 You need to use a Theme.AppCompat theme or descendant with this activity。\n\nAgent：\n这个异常说明该 Activity 使用的主题不是 Theme.AppCompat 或其子主题。检查 AndroidManifest.xml 中 MainActivity 的 theme 属性，并确认 styles.xml 中定义了对应的 AppCompat 主题；同步项目后重新运行。",
+    "size": 262,
+    "metadata": {
+      "unit_id": "wildchat-learn-cand-001__turn-004",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "turn_index": 4,
+      "json_pointer": "/candidates/1/turns/3",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=24456e5381c0c4891d80737fa4639f1d / model=gpt-3.5-turbo-0613 / user_ordinal=1..6 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "n1",
+      "name": "Unable to start activity",
+      "type": "RuntimeError",
+      "description": "用户从日志中看到的 Activity 启动错误。",
+      "source_chunk_id": "chunk_5706c404d07537a32412"
+    },
+    {
+      "id": "n2",
+      "name": "Activity",
+      "type": "SoftwareComponent",
+      "description": "无法启动的 Android Activity。",
+      "source_chunk_id": "chunk_5706c404d07537a32412"
+    },
+    {
+      "id": "n3",
+      "name": "Theme.AppCompat 或其子主题",
+      "type": "SoftwareRequirement",
+      "description": "异常消息要求 Activity 使用的主题类型。",
+      "source_chunk_id": "chunk_5706c404d07537a32412"
+    },
+    {
+      "id": "n4",
+      "name": "当前主题",
+      "type": "SoftwareConfiguration",
+      "description": "Activity 当前使用且不符合要求的主题。",
+      "source_chunk_id": "chunk_5706c404d07537a32412"
+    },
+    {
+      "id": "n5",
+      "name": "AndroidManifest.xml",
+      "type": "File",
+      "description": "Agent 建议检查 MainActivity theme 属性的文件。",
+      "source_chunk_id": "chunk_5706c404d07537a32412"
+    },
+    {
+      "id": "n6",
+      "name": "MainActivity",
+      "type": "SoftwareComponent",
+      "description": "Agent 指定需要核对主题属性的 Activity。",
+      "source_chunk_id": "chunk_5706c404d07537a32412"
+    },
+    {
+      "id": "n7",
+      "name": "theme 属性",
+      "type": "ConfigurationField",
+      "description": "MainActivity 在 Manifest 中的主题属性。",
+      "source_chunk_id": "chunk_5706c404d07537a32412"
+    },
+    {
+      "id": "n8",
+      "name": "styles.xml",
+      "type": "File",
+      "description": "Agent 建议确认 AppCompat 主题定义的文件。",
+      "source_chunk_id": "chunk_5706c404d07537a32412"
+    },
+    {
+      "id": "n9",
+      "name": "AppCompat 主题",
+      "type": "SoftwareConfiguration",
+      "description": "需要在 styles.xml 中定义并供 Activity 使用的主题。",
+      "source_chunk_id": "chunk_5706c404d07537a32412"
+    }
+  ],
+  "relations": [
+    {
+      "source_entity": "n1",
+      "target_entity": "n2",
+      "relation_type": "AFFECTS",
+      "description": "错误表现为 Activity 无法启动。"
+    },
+    {
+      "source_entity": "n4",
+      "target_entity": "n3",
+      "relation_type": "VIOLATES",
+      "description": "异常说明当前主题不是 AppCompat 或其子主题。"
+    },
+    {
+      "source_entity": "n4",
+      "target_entity": "n1",
+      "relation_type": "CAUSES",
+      "description": "Agent 将主题不匹配解释为启动异常原因。"
+    },
+    {
+      "source_entity": "n6",
+      "target_entity": "n2",
+      "relation_type": "IS_A",
+      "description": "MainActivity 是待检查的 Activity。"
+    },
+    {
+      "source_entity": "n7",
+      "target_entity": "n6",
+      "relation_type": "CONFIGURES",
+      "description": "theme 属性配置 MainActivity 的主题。"
+    },
+    {
+      "source_entity": "n7",
+      "target_entity": "n5",
+      "relation_type": "DEFINED_IN",
+      "description": "该属性位于 AndroidManifest.xml。"
+    },
+    {
+      "source_entity": "n9",
+      "target_entity": "n8",
+      "relation_type": "DEFINED_IN",
+      "description": "Agent 建议确认 styles.xml 中定义了对应主题。"
+    },
+    {
+      "source_entity": "n7",
+      "target_entity": "n9",
+      "relation_type": "REFERENCES",
+      "description": "MainActivity 的 theme 属性应引用 AppCompat 主题。"
+    }
+  ]
+}

@@ -1,0 +1,532 @@
+{
+  "candidate_id": "BEAM-CAND-004",
+  "turn_index": 3,
+  "context_completions": [],
+  "knowledge": [
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_001",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "用户必须在 2024 年 5 月 15 日前完成遗嘱。",
+      "subject": "用户",
+      "predicate": "必须完成",
+      "object": "遗嘱",
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "positive",
+        "temporal": [
+          "2024 年 5 月 15 日前"
+        ],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我必须在 2024 年 5 月 15 日前完成遗嘱",
+          "evidence_id": "evidence-c9bce9deebb36714f9640d453b9a061eabd486cba6f56642ba60314931335972",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 25
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_002",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "当前时间锚是 2024 年 5 月 2 日。",
+      "subject": "当前时间锚",
+      "predicate": "是",
+      "object": "2024 年 5 月 2 日",
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "positive",
+        "temporal": [
+          "2024 年 5 月 2 日"
+        ],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "当前时间锚是 2024 年 5 月 2 日",
+          "evidence_id": "evidence-eaff1b21576852e9d9904d087733c28a457922de130b74177638e5fb396b473f",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "user_reported",
+          "start": 27,
+          "end": 48
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_003",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "用户感到压力很大。",
+      "subject": "用户",
+      "predicate": "感到",
+      "object": "压力很大",
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我感到压力很大",
+          "evidence_id": "evidence-d109329ffef5f02f24a1576a8e47cbd4fee88b54579268716347e7bf44240c02",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "user_reported",
+          "start": 49,
+          "end": 56
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_004",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "用户已经与家人开过会。",
+      "subject": "用户",
+      "predicate": "已经开过会",
+      "object": "家人",
+      "qualifiers": {
+        "modality": "claimed_completed",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我已经和家人开过会",
+          "evidence_id": "evidence-63c82f41ca8001f38d51d1ebf6c5cae2038d7a2814c46f987eea8a08cb9693ba",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "user_reported",
+          "start": 60,
+          "end": 69
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_005",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "Douglas 已接受遗嘱执行人角色。",
+      "subject": "Douglas",
+      "predicate": "已接受",
+      "object": "执行人角色",
+      "qualifiers": {
+        "modality": "claimed_completed",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "Douglas 也接受了执行人角色",
+          "evidence_id": "evidence-0ffdace54839c9d3585453548db00e22b77f8e3d11be8a81110f17a61a47aff3",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "user_reported",
+          "start": 70,
+          "end": 87
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_006",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "用户请求了解如何确保遗嘱具有法律效力。",
+      "subject": "用户",
+      "predicate": "请求了解",
+      "object": "确保遗嘱具有法律效力的方法",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [
+          "用户已经与家人开过会",
+          "Douglas 已接受执行人角色"
+        ],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我怎样才能确保遗嘱具有法律效力？",
+          "evidence_id": "evidence-f458e22e5d538b49579da23d88745cfbf0762b5c1bfde51b2a4fe9254b8b19ca",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "user_reported",
+          "start": 88,
+          "end": 104
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_007",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "用户应按截止日期推进遗嘱工作。",
+      "subject": "用户",
+      "predicate": "按截止日期推进",
+      "object": "遗嘱工作",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "可以按截止日期推进",
+          "evidence_id": "evidence-230dd66ffbe0fd43c4326fcb26b208eaa311ec79a454c39ebc137ffd600a2ca9",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 0,
+          "end": 9
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_008",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "用户应列出资产。",
+      "subject": "用户",
+      "predicate": "列出",
+      "object": "资产",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "列出资产和受益人",
+          "evidence_id": "evidence-6ba0d60e0405db34735a4c68652640710bd5bd32a45a652cc474b357533a68e3",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 10,
+          "end": 18
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_009",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "用户应列出受益人。",
+      "subject": "用户",
+      "predicate": "列出",
+      "object": "受益人",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "列出资产和受益人",
+          "evidence_id": "evidence-6ba0d60e0405db34735a4c68652640710bd5bd32a45a652cc474b357533a68e3",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 10,
+          "end": 18
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_010",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "遗嘱应明确任命 Douglas 为执行人。",
+      "subject": "遗嘱",
+      "predicate": "明确任命",
+      "object": "Douglas 为执行人",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "明确 Douglas 的执行人任命",
+          "evidence_id": "evidence-be6e2297aadead005b55696c991fbb14cfb2c505be6d1be380a54abb26f6d919",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 19,
+          "end": 36
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_011",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "用户应准备遗嘱文本。",
+      "subject": "用户",
+      "predicate": "准备",
+      "object": "遗嘱文本",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "准备遗嘱文本",
+          "evidence_id": "evidence-b8c83e12a23a74eda21a050dba8ae925eaee583ac02d55565115745d54419b89",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 37,
+          "end": 43
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_012",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "遗嘱应按照适用法律完成签名。",
+      "subject": "遗嘱",
+      "predicate": "完成签名",
+      "object": null,
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [
+          "按照适用法律"
+        ],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "按照适用法律完成签名和见证",
+          "evidence_id": "evidence-3c02fe068da917581920824f35112c0dc9de24641b006f2c26bc2b1991b05dd8",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 44,
+          "end": 57
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_013",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "遗嘱应按照适用法律完成见证。",
+      "subject": "遗嘱",
+      "predicate": "完成见证",
+      "object": null,
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [
+          "按照适用法律"
+        ],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "按照适用法律完成签名和见证",
+          "evidence_id": "evidence-3c02fe068da917581920824f35112c0dc9de24641b006f2c26bc2b1991b05dd8",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 44,
+          "end": 57
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_014",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "用户应请遗产规划律师审核遗嘱。",
+      "subject": "用户",
+      "predicate": "请审核",
+      "object": "遗产规划律师",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": [
+          "遗嘱"
+        ]
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "并请遗产规划律师审核",
+          "evidence_id": "evidence-f6151c36b70d95110cce04a170ca593616c740922bac3874e0bda29d052522bc",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 58,
+          "end": 68
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_015",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "用户应为见证手续留出时间。",
+      "subject": "用户",
+      "predicate": "留出时间",
+      "object": "见证手续",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "还要留出时间处理见证和公证等手续",
+          "evidence_id": "evidence-aebb1134198e5fd176b4565d75f7813a41e01fffca591562368b043fd10f0486",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 69,
+          "end": 85
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_016",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "用户应为公证手续留出时间。",
+      "subject": "用户",
+      "predicate": "留出时间",
+      "object": "公证手续",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "还要留出时间处理见证和公证等手续",
+          "evidence_id": "evidence-aebb1134198e5fd176b4565d75f7813a41e01fffca591562368b043fd10f0486",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 69,
+          "end": 85
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    }
+  ]
+}

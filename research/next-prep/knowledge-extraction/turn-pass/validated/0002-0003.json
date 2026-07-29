@@ -1,0 +1,357 @@
+{
+  "candidate_id": "WILDCHAT-LEARN-CAND-002",
+  "turn_index": 3,
+  "context_completions": [
+    {
+      "completion_id": "C_wildchat-learn-cand-002-1fa98728ac3e_003_001",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "turn_index": 3,
+      "kind": "unresolved",
+      "original_span": "第 8 步",
+      "interpretation": "当前消息未提供的先前流程第 8 步",
+      "confidence": 1.0,
+      "ambiguity": true,
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "第 8 步里没有看到 Scale pitch",
+          "evidence_id": "evidence-913db7db422267ea0e3984fcee3f49e9fd2257b922f6bd1780a7fe069b88251e",
+          "candidate_id": "WILDCHAT-LEARN-CAND-002",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 22
+        }
+      ]
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_001",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "statement": "用户在当前消息未提供的第 8 步中没有看到 Scale pitch。",
+      "subject": "用户",
+      "predicate": "没有看到",
+      "object": "Scale pitch",
+      "qualifiers": {
+        "modality": "observed",
+        "polarity": "negative",
+        "temporal": [],
+        "conditions": [],
+        "scope": [
+          "第 8 步中"
+        ]
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "第 8 步里没有看到 Scale pitch",
+          "evidence_id": "evidence-913db7db422267ea0e3984fcee3f49e9fd2257b922f6bd1780a7fe069b88251e",
+          "candidate_id": "WILDCHAT-LEARN-CAND-002",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 22
+        }
+      ],
+      "inference_basis": "当前消息未包含编号流程，因此“第 8 步”只能保留为未提供的先前步骤。",
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_002",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "statement": "用户请求更详细的说明。",
+      "subject": "用户",
+      "predicate": "请求",
+      "object": "更详细的说明",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "你能再详细一点吗？",
+          "evidence_id": "evidence-8cf5f5793967ce35b171752422ef5eebd13de4769a3ddae3acd022efa5ff58c3",
+          "candidate_id": "WILDCHAT-LEARN-CAND-002",
+          "evidence_role": "user_reported",
+          "start": 23,
+          "end": 32
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_003",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "statement": "如果当前 Praat 版本没有 Scale pitch，代理建议改用 Manipulation 中的 Replace pitch。",
+      "subject": "用户",
+      "predicate": "可改用",
+      "object": "Manipulation 中的 Replace pitch",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [
+          "当前 Praat 版本没有 Scale pitch"
+        ],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "如果当前 Praat 版本没有 Scale pitch，可以改用 Manipulation 中的 Replace pitch",
+          "evidence_id": "evidence-ebcf5f2601981ac6e2d71d784272402ea56842c7fbb5443181d3ef094ef12305",
+          "candidate_id": "WILDCHAT-LEARN-CAND-002",
+          "evidence_role": "agent_generated",
+          "start": 0,
+          "end": 62
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_004",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "statement": "如果当前 Praat 版本没有 Scale pitch，代理建议改用等效的 PSOLA 音高替换流程。",
+      "subject": "用户",
+      "predicate": "可改用",
+      "object": "等效的 PSOLA 音高替换流程",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [
+          "当前 Praat 版本没有 Scale pitch"
+        ],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "如果当前 Praat 版本没有 Scale pitch，可以改用 Manipulation 中的 Replace pitch 或等效的 PSOLA 音高替换流程",
+          "evidence_id": "evidence-32633f78546dda6c8738bbb70148200ea85ed1610ecfb02a17c0e40a440efcf7",
+          "candidate_id": "WILDCHAT-LEARN-CAND-002",
+          "evidence_role": "agent_generated",
+          "start": 0,
+          "end": 80
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_005",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "statement": "代理建议设定起始音高。",
+      "subject": "用户",
+      "predicate": "应设定",
+      "object": "起始音高",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "设定起始、终止和平均音高",
+          "evidence_id": "evidence-d0709a15a7a645ef511863213416dceeccd76e01ff8547819ba92c953876e351",
+          "candidate_id": "WILDCHAT-LEARN-CAND-002",
+          "evidence_role": "agent_generated",
+          "start": 84,
+          "end": 96
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_006",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "statement": "代理建议设定终止音高。",
+      "subject": "用户",
+      "predicate": "应设定",
+      "object": "终止音高",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "设定起始、终止和平均音高",
+          "evidence_id": "evidence-d0709a15a7a645ef511863213416dceeccd76e01ff8547819ba92c953876e351",
+          "candidate_id": "WILDCHAT-LEARN-CAND-002",
+          "evidence_role": "agent_generated",
+          "start": 84,
+          "end": 96
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_007",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "statement": "代理建议设定平均音高。",
+      "subject": "用户",
+      "predicate": "应设定",
+      "object": "平均音高",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "设定起始、终止和平均音高",
+          "evidence_id": "evidence-d0709a15a7a645ef511863213416dceeccd76e01ff8547819ba92c953876e351",
+          "candidate_id": "WILDCHAT-LEARN-CAND-002",
+          "evidence_role": "agent_generated",
+          "start": 84,
+          "end": 96
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_008",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "statement": "代理建议检查每个级别的 F0 转折点。",
+      "subject": "用户",
+      "predicate": "应检查",
+      "object": "每个级别的 F0 转折点",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "检查每个级别的 F0 转折点与 offset",
+          "evidence_id": "evidence-970a51f38706f218c7af1c966208dd789e2eca471476a2298e67e35b789f9d87",
+          "candidate_id": "WILDCHAT-LEARN-CAND-002",
+          "evidence_role": "agent_generated",
+          "start": 97,
+          "end": 119
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_009",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "statement": "代理建议检查每个级别的 offset。",
+      "subject": "用户",
+      "predicate": "应检查",
+      "object": "每个级别的 offset",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "检查每个级别的 F0 转折点与 offset",
+          "evidence_id": "evidence-970a51f38706f218c7af1c966208dd789e2eca471476a2298e67e35b789f9d87",
+          "candidate_id": "WILDCHAT-LEARN-CAND-002",
+          "evidence_role": "agent_generated",
+          "start": 97,
+          "end": 119
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_010",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "statement": "代理建议试听导出的连续体。",
+      "subject": "用户",
+      "predicate": "应试听",
+      "object": "导出的连续体",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "试听导出的连续体",
+          "evidence_id": "evidence-2f202088ab1d92d141d475aacbf9a69040dcde18b74207dc6c48293dda12cbbe",
+          "candidate_id": "WILDCHAT-LEARN-CAND-002",
+          "evidence_role": "agent_generated",
+          "start": 121,
+          "end": 129
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.98
+    }
+  ]
+}

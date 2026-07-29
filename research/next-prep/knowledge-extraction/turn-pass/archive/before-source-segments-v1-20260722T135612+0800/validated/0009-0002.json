@@ -1,0 +1,233 @@
+{
+  "candidate_id": "WILDCHAT-LEARN-CAND-003",
+  "turn_index": 2,
+  "context_completions": [
+    {
+      "completion_id": "C_wildchat-learn-cand-003-b1871de6ef7c_002_001",
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "turn_index": 2,
+      "kind": "unresolved",
+      "original_span": "和 Pandas 的 apply 一起用",
+      "interpretation": "某个本轮未明确的函数或操作与 Pandas apply 一起使用",
+      "confidence": 1.0,
+      "ambiguity": true,
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "如果和 Pandas 的 apply 一起用",
+          "evidence_id": "evidence-8827a9550726ea9744b7c6c1dc57c49f7be1c908b9c646cfe0eb8a24af7eaace",
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 22
+        }
+      ]
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_002_001",
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "statement": "用户请求演示某个本轮未明确对象与 Pandas apply 一起使用。",
+      "subject": "用户",
+      "predicate": "请求演示",
+      "object": "未明确对象与 Pandas apply 一起使用",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [
+          "如果与 Pandas 的 apply 一起用"
+        ],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "如果和 Pandas 的 apply 一起用，能演示并解释参数吗？",
+          "evidence_id": "evidence-809bcb8a71ff7d01ae086110dcb6b14e54a5499513e7f78504bd269964ff3b99",
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 33
+        }
+      ],
+      "inference_basis": "本轮省略了与 Pandas apply 一起使用的对象，不能从其他轮次补全。",
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_002_002",
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "statement": "用户请求解释该 Pandas apply 用法中的参数。",
+      "subject": "用户",
+      "predicate": "请求解释",
+      "object": "参数",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [
+          "与 Pandas 的 apply 一起使用"
+        ],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "如果和 Pandas 的 apply 一起用，能演示并解释参数吗？",
+          "evidence_id": "evidence-809bcb8a71ff7d01ae086110dcb6b14e54a5499513e7f78504bd269964ff3b99",
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 33
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_002_003",
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "statement": "应先建立 DataFrame。",
+      "subject": "用户",
+      "predicate": "建立",
+      "object": "DataFrame",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [
+          "先"
+        ],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "先建立 DataFrame",
+          "evidence_id": "evidence-82b16ffd1e1ba02e5b41ec32f942aee44ab9d6f6609882ea246cba83fe10e021",
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "evidence_role": "agent_generated",
+          "start": 0,
+          "end": 13
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_002_004",
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "statement": "建立 DataFrame 后应执行 df['Hyperlink'] = df['Value'].apply(make_hyperlink)。",
+      "subject": "用户",
+      "predicate": "执行",
+      "object": "df['Hyperlink'] = df['Value'].apply(make_hyperlink)",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [
+          "建立 DataFrame 后"
+        ],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "再执行 df['Hyperlink'] = df['Value'].apply(make_hyperlink)",
+          "evidence_id": "evidence-fa99f1cbc66ed87b5102ccd0ea1265fdd8d127d4bdcec0a8132705e3a86a787e",
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "evidence_role": "agent_generated",
+          "start": 14,
+          "end": 69
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_002_005",
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "statement": "apply 会把 Value 列的每个元素依次传给 make_hyperlink。",
+      "subject": "apply",
+      "predicate": "依次传给",
+      "object": "make_hyperlink",
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": [
+          "Value 列的每个元素"
+        ]
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "apply 会把 Value 列的每个元素依次传给 make_hyperlink",
+          "evidence_id": "evidence-5db0a5bcc39a99b0121a23dc466f62d33ed1a35073ceb6bbd682124164cb3913",
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "evidence_role": "agent_generated",
+          "start": 70,
+          "end": 110
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_002_006",
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "statement": "make_hyperlink 返回的新字符串列保存为 Hyperlink。",
+      "subject": "make_hyperlink 返回的新字符串列",
+      "predicate": "保存为",
+      "object": "Hyperlink",
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "返回的新字符串列保存为 Hyperlink",
+          "evidence_id": "evidence-8163a08799d23be16f78cdb2ff57f4d150fe816284e8cc58dd5014614cf14c59",
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "evidence_role": "agent_generated",
+          "start": 111,
+          "end": 132
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    }
+  ]
+}

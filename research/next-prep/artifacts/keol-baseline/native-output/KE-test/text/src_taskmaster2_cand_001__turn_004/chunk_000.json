@@ -1,0 +1,99 @@
+{
+  "source": {
+    "source_id": "src_taskmaster2_cand_001__turn_004",
+    "file": "keol-input/turns/taskmaster2-cand-001__turn-004.txt",
+    "file_type": "txt",
+    "category": "text",
+    "metadata": {
+      "unit_id": "taskmaster2-cand-001__turn-004",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "turn_index": 4,
+      "json_pointer": "/candidates/7/turns/3",
+      "source": "Taskmaster-2 flights/train-00000-of-00001.parquet / conversation=dlg-0486d642-4627-489a-a0f3-14d1c2b97068 / user_ordinal=1..6 / raw_utterance_index=0..15",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "chunk": {
+    "id": "chunk_de1957f674ed6544ade2",
+    "index": 0,
+    "text": "用户：\n有没有直飞的？\n\nAgent：\n我再查一下。有一班直飞航班，下午 6 点出发，次日早上 7:35 抵达，价格是 2,677 美元。这个方案更符合你的偏好吗？",
+    "size": 82,
+    "metadata": {
+      "unit_id": "taskmaster2-cand-001__turn-004",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "turn_index": 4,
+      "json_pointer": "/candidates/7/turns/3",
+      "source": "Taskmaster-2 flights/train-00000-of-00001.parquet / conversation=dlg-0486d642-4627-489a-a0f3-14d1c2b97068 / user_ordinal=1..6 / raw_utterance_index=0..15",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "n_user",
+      "name": "用户",
+      "type": "Person",
+      "description": "询问直飞航班的人。",
+      "source_chunk_id": "chunk_de1957f674ed6544ade2"
+    },
+    {
+      "id": "n_direct",
+      "name": "直飞航班",
+      "type": "FlightOption",
+      "description": "Agent 查到的一班直飞方案。",
+      "source_chunk_id": "chunk_de1957f674ed6544ade2"
+    },
+    {
+      "id": "n_departure",
+      "name": "下午 6 点",
+      "type": "TimeOfDay",
+      "description": "直飞航班出发时间。",
+      "source_chunk_id": "chunk_de1957f674ed6544ade2"
+    },
+    {
+      "id": "n_arrival",
+      "name": "次日早上 7:35",
+      "type": "RelativeDateTime",
+      "description": "直飞航班抵达时间。",
+      "source_chunk_id": "chunk_de1957f674ed6544ade2"
+    },
+    {
+      "id": "n_price",
+      "name": "2,677 美元",
+      "type": "MonetaryAmount",
+      "description": "直飞航班价格。",
+      "source_chunk_id": "chunk_de1957f674ed6544ade2"
+    }
+  ],
+  "relations": [
+    {
+      "source_entity": "n_user",
+      "target_entity": "n_direct",
+      "relation_type": "requests",
+      "description": "用户要求查找直飞航班。"
+    },
+    {
+      "source_entity": "n_direct",
+      "target_entity": "n_departure",
+      "relation_type": "departs_at",
+      "description": "直飞方案下午 6 点出发。"
+    },
+    {
+      "source_entity": "n_direct",
+      "target_entity": "n_arrival",
+      "relation_type": "arrives_at",
+      "description": "直飞方案次日早上 7:35 抵达。"
+    },
+    {
+      "source_entity": "n_direct",
+      "target_entity": "n_price",
+      "relation_type": "price",
+      "description": "直飞方案价格为 2,677 美元。"
+    }
+  ]
+}

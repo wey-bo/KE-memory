@@ -1,0 +1,3694 @@
+{
+  "candidate_id": "WILDCHAT-MGMT-CAND-001",
+  "items": [
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0001",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_001",
+          "surface": "工作",
+          "keyword": "工作",
+          "keyword_type": "concept",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "work.v.02",
+          "wordnet_lemma": "work",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0002",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_001",
+          "surface": "律师事务所",
+          "keyword": "律师事务所",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "law_firm.n.01",
+          "wordnet_lemma": "law_firm",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0003",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_001",
+          "surface": "律师",
+          "keyword": "律师",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "lawyer.n.01",
+          "wordnet_lemma": "lawyer",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0004",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_002",
+          "surface": "工作",
+          "keyword": "工作",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "work.n.01",
+          "wordnet_lemma": "work",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.91
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0005",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_002",
+          "surface": "争取",
+          "keyword": "争取",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "seek.v.01",
+          "wordnet_lemma": "seek",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.94
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0006",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_003",
+          "surface": "工作",
+          "keyword": "工作",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "work.n.01",
+          "wordnet_lemma": "work",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.91
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0007",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_003",
+          "surface": "合伙人",
+          "keyword": "合伙人",
+          "keyword_type": "concept",
+          "semantic_role": "topic",
+          "source_field": "statement",
+          "wordnet_synset": "partner.n.03",
+          "wordnet_lemma": "partner",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0008",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_003",
+          "surface": "分派",
+          "keyword": "分派",
+          "keyword_type": "action",
+          "semantic_role": "topic",
+          "source_field": "statement",
+          "wordnet_synset": "delegate.v.02",
+          "wordnet_lemma": "assign",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.98
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0009",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_005",
+          "surface": "告知",
+          "keyword": "告知",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "inform.v.01",
+          "wordnet_lemma": "inform",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0010",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_005",
+          "surface": "休假安排",
+          "keyword": "休假安排",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0011",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_005",
+          "surface": "合伙人",
+          "keyword": "合伙人",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "partner.n.03",
+          "wordnet_lemma": "partner",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0012",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_005",
+          "surface": "休假",
+          "keyword": "休假",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "leave.n.01",
+          "wordnet_lemma": "leave",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0013",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_005",
+          "surface": "安排",
+          "keyword": "安排",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "arrange.v.02",
+          "wordnet_lemma": "arrange",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.94
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0014",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_006",
+          "surface": "现在",
+          "keyword": "现在",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "wordnet_synset": "now.r.04",
+          "wordnet_lemma": "now",
+          "wordnet_pos": "r",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0015",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_006",
+          "surface": "担心",
+          "keyword": "担心",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "worry.v.01",
+          "wordnet_lemma": "worry",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0016",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_006",
+          "surface": "休假",
+          "keyword": "休假",
+          "keyword_type": "event",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "wordnet_synset": "leave.n.01",
+          "wordnet_lemma": "leave",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0017",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_006",
+          "surface": "项目",
+          "keyword": "项目",
+          "keyword_type": "concept",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "wordnet_synset": "undertaking.n.01",
+          "wordnet_lemma": "project",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.94
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0018",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_006",
+          "surface": "冲突",
+          "keyword": "冲突",
+          "keyword_type": "relation",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "wordnet_synset": "conflict.n.05",
+          "wordnet_lemma": "conflict",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0019",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_006",
+          "surface": "合伙人",
+          "keyword": "合伙人",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "partner.n.03",
+          "wordnet_lemma": "partner",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0020",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_006",
+          "surface": "不给",
+          "keyword": "不给",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "deny.v.04",
+          "wordnet_lemma": "deny",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.97
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0021",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_006",
+          "surface": "工作",
+          "keyword": "工作",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "work.n.01",
+          "wordnet_lemma": "work",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.96
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0022",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_007",
+          "surface": "尽早",
+          "keyword": "尽早",
+          "keyword_type": "time",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "early.r.03",
+          "wordnet_lemma": "early",
+          "wordnet_pos": "r",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0023",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_007",
+          "surface": "沟通",
+          "keyword": "沟通",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "communicate.v.02",
+          "wordnet_lemma": "communicate",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.98
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_008",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0024",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_008",
+          "surface": "沟通",
+          "keyword": "沟通",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "communicate.v.02",
+          "wordnet_lemma": "communicate",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0025",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_008",
+          "surface": "透明",
+          "keyword": "透明",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "candid.s.03",
+          "wordnet_lemma": "open",
+          "wordnet_pos": "s",
+          "mapping_confidence": 0.96
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_009",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0026",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_009",
+          "surface": "说明",
+          "keyword": "说明",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "explain.v.01",
+          "wordnet_lemma": "explain",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0027",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_009",
+          "surface": "交付",
+          "keyword": "交付",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "delivery.n.01",
+          "wordnet_lemma": "delivery",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.97
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0028",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_009",
+          "surface": "安排",
+          "keyword": "安排",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "arrange.v.02",
+          "wordnet_lemma": "arrange",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.94
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_010",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0029",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_010",
+          "surface": "说明",
+          "keyword": "说明",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "explain.v.01",
+          "wordnet_lemma": "explain",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0030",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_010",
+          "surface": "分派",
+          "keyword": "分派",
+          "keyword_type": "action",
+          "semantic_role": "other",
+          "source_field": "qualifiers.scope",
+          "wordnet_synset": "delegate.v.02",
+          "wordnet_lemma": "assign",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0031",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_010",
+          "surface": "休假日期",
+          "keyword": "休假日期",
+          "keyword_type": "time",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0032",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_010",
+          "surface": "项目",
+          "keyword": "项目",
+          "keyword_type": "concept",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "wordnet_synset": "undertaking.n.01",
+          "wordnet_lemma": "project",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.94
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0033",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_010",
+          "surface": "日期",
+          "keyword": "日期",
+          "keyword_type": "time",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "date.n.01",
+          "wordnet_lemma": "date",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.98
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_011",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0034",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_011",
+          "surface": "确认",
+          "keyword": "确认",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "confirm.v.01",
+          "wordnet_lemma": "confirm",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.97
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0035",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_011",
+          "surface": "任务",
+          "keyword": "任务",
+          "keyword_type": "concept",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "wordnet_synset": "job.n.02",
+          "wordnet_lemma": "task",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0036",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_011",
+          "surface": "调整",
+          "keyword": "调整",
+          "keyword_type": "action",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "wordnet_synset": "adjust.v.01",
+          "wordnet_lemma": "adjust",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.94
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0037",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_011",
+          "surface": "委派",
+          "keyword": "委派",
+          "keyword_type": "action",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "wordnet_synset": "delegate.v.02",
+          "wordnet_lemma": "delegate",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0038",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_011",
+          "surface": "工作",
+          "keyword": "工作",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "work.n.01",
+          "wordnet_lemma": "work",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.91
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_012",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0039",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_012",
+          "surface": "在离开前",
+          "keyword": "离开前",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0040",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_012",
+          "surface": "任务",
+          "keyword": "任务",
+          "keyword_type": "concept",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "wordnet_synset": "job.n.02",
+          "wordnet_lemma": "task",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0041",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_012",
+          "surface": "调整",
+          "keyword": "调整",
+          "keyword_type": "action",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "wordnet_synset": "adjust.v.01",
+          "wordnet_lemma": "adjust",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.94
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0042",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_012",
+          "surface": "委派",
+          "keyword": "委派",
+          "keyword_type": "action",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "wordnet_synset": "delegate.v.02",
+          "wordnet_lemma": "delegate",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0043",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_012",
+          "surface": "休假",
+          "keyword": "休假",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "leave.n.01",
+          "wordnet_lemma": "leave",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0044",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_012",
+          "surface": "说明",
+          "keyword": "说明",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "explain.v.01",
+          "wordnet_lemma": "explain",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0045",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_012",
+          "surface": "承诺",
+          "keyword": "承诺",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "promise.v.01",
+          "wordnet_lemma": "promise",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0046",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_012",
+          "surface": "完成",
+          "keyword": "完成",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "complete.v.01",
+          "wordnet_lemma": "complete",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0047",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_000_012",
+          "surface": "交接",
+          "keyword": "交接",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "handover.n.01",
+          "wordnet_lemma": "handover",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.98
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0048",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_001",
+          "surface": "过去两个月",
+          "keyword": "过去两个月",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0049",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_001",
+          "surface": "工作量",
+          "keyword": "工作量",
+          "keyword_type": "quantity",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "workload.n.01",
+          "wordnet_lemma": "workload",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0050",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_001",
+          "surface": "工作",
+          "keyword": "工作",
+          "keyword_type": "concept",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "work.n.01",
+          "wordnet_lemma": "work",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.91
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0051",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_001",
+          "surface": "不多",
+          "keyword": "不足",
+          "keyword_type": "quantity",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "insufficient.a.01",
+          "wordnet_lemma": "insufficient",
+          "wordnet_pos": "a",
+          "mapping_confidence": 0.96
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0052",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_002",
+          "surface": "过去两个月",
+          "keyword": "过去两个月",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0053",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_002",
+          "surface": "工作",
+          "keyword": "工作",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "work.n.01",
+          "wordnet_lemma": "work",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.91
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0054",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_002",
+          "surface": "不多",
+          "keyword": "不足",
+          "keyword_type": "quantity",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "insufficient.a.01",
+          "wordnet_lemma": "insufficient",
+          "wordnet_pos": "a",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0055",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_002",
+          "surface": "类似",
+          "keyword": "类似",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "similar.a.01",
+          "wordnet_lemma": "similar",
+          "wordnet_pos": "a",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0056",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_002",
+          "surface": "问题",
+          "keyword": "问题",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "problem.n.01",
+          "wordnet_lemma": "problem",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.98
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0057",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_003",
+          "surface": "工作分派",
+          "keyword": "工作分派",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0058",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_003",
+          "surface": "工作",
+          "keyword": "工作",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "work.n.01",
+          "wordnet_lemma": "work",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.91
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0059",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_003",
+          "surface": "分派",
+          "keyword": "分派",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "delegate.v.02",
+          "wordnet_lemma": "assign",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0060",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_003",
+          "surface": "方式",
+          "keyword": "方式",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "manner.n.01",
+          "wordnet_lemma": "manner",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.92
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0061",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_004",
+          "surface": "联系",
+          "keyword": "联系",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "reach.v.04",
+          "wordnet_lemma": "contact",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.94
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0062",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_004",
+          "surface": "合伙人",
+          "keyword": "合伙人",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "partner.n.03",
+          "wordnet_lemma": "partner",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.98
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0063",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_005",
+          "surface": "联系",
+          "keyword": "联系",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "reach.v.04",
+          "wordnet_lemma": "contact",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.94
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0064",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_005",
+          "surface": "转介",
+          "keyword": "转介",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "referral.n.03",
+          "wordnet_lemma": "referral",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0065",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_005",
+          "surface": "请求",
+          "keyword": "请求",
+          "keyword_type": "action",
+          "semantic_role": "topic",
+          "source_field": "statement",
+          "wordnet_synset": "request.v.01",
+          "wordnet_lemma": "request",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.98
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0066",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_006",
+          "surface": "联系",
+          "keyword": "联系",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "reach.v.04",
+          "wordnet_lemma": "contact",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.94
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0067",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_006",
+          "surface": "合伙人",
+          "keyword": "合伙人",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "partner.n.03",
+          "wordnet_lemma": "partner",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0068",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_006",
+          "surface": "工作",
+          "keyword": "工作",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "work.n.01",
+          "wordnet_lemma": "work",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.91
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0069",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_006",
+          "surface": "分派",
+          "keyword": "分派",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "delegate.v.02",
+          "wordnet_lemma": "assign",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.98
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0070",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_007",
+          "surface": "支持",
+          "keyword": "支持",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "support.n.03",
+          "wordnet_lemma": "support",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.92
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0071",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_007",
+          "surface": "同事",
+          "keyword": "同事",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "colleague.n.01",
+          "wordnet_lemma": "colleague",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.98
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_008",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0072",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_008",
+          "surface": "参加",
+          "keyword": "参加",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "attend.v.01",
+          "wordnet_lemma": "attend",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0073",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_008",
+          "surface": "关系",
+          "keyword": "关系",
+          "keyword_type": "relation",
+          "semantic_role": "other",
+          "source_field": "qualifiers.scope",
+          "wordnet_synset": "relationship.n.01",
+          "wordnet_lemma": "relationship",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.94
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0074",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_008",
+          "surface": "建立",
+          "keyword": "建立",
+          "keyword_type": "action",
+          "semantic_role": "other",
+          "source_field": "qualifiers.scope",
+          "wordnet_synset": "establish.v.01",
+          "wordnet_lemma": "establish",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.94
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0075",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_008",
+          "surface": "所内活动",
+          "keyword": "所内活动",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0076",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_008",
+          "surface": "活动",
+          "keyword": "活动",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "event.n.01",
+          "wordnet_lemma": "event",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.91
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_009",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0077",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_009",
+          "surface": "内部工作机会平台",
+          "keyword": "工作机会平台",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0078",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_009",
+          "surface": "工作",
+          "keyword": "工作",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "work.n.01",
+          "wordnet_lemma": "work",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.91
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0079",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_009",
+          "surface": "平台",
+          "keyword": "平台",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_010",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0080",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_010",
+          "surface": "合规",
+          "keyword": "合规",
+          "keyword_type": "property",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "wordnet_synset": "conformity.n.02",
+          "wordnet_lemma": "compliance",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.94
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0081",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_010",
+          "surface": "客户拓展",
+          "keyword": "客户拓展",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0082",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_010",
+          "surface": "客户",
+          "keyword": "客户",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "client.n.01",
+          "wordnet_lemma": "client",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.98
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_011",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0083",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_011",
+          "surface": "合规",
+          "keyword": "合规",
+          "keyword_type": "property",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "wordnet_synset": "conformity.n.02",
+          "wordnet_lemma": "compliance",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.94
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0084",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_011",
+          "surface": "业务拓展",
+          "keyword": "业务拓展",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_012",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0085",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_012",
+          "surface": "表达",
+          "keyword": "表达",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "express.v.01",
+          "wordnet_lemma": "express",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.97
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0086",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_012",
+          "surface": "可用时间",
+          "keyword": "可用时间",
+          "keyword_type": "time",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0087",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_012",
+          "surface": "时间",
+          "keyword": "时间",
+          "keyword_type": "time",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "time.n.02",
+          "wordnet_lemma": "time",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_013",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0088",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_013",
+          "surface": "表达",
+          "keyword": "表达",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "express.v.01",
+          "wordnet_lemma": "express",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.97
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0089",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_013",
+          "surface": "工作",
+          "keyword": "工作",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "work.n.01",
+          "wordnet_lemma": "work",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.91
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0090",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_013",
+          "surface": "愿意",
+          "keyword": "愿意",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "willing.a.01",
+          "wordnet_lemma": "willing",
+          "wordnet_pos": "a",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0091",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_001_013",
+          "surface": "承担",
+          "keyword": "承担",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "undertake.v.01",
+          "wordnet_lemma": "undertake",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.96
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0092",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_001",
+          "surface": "准备",
+          "keyword": "准备",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "fix.v.12",
+          "wordnet_lemma": "prepare",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.97
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0093",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_001",
+          "surface": "合伙人",
+          "keyword": "合伙人",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "partner.n.03",
+          "wordnet_lemma": "partner",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0094",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_001",
+          "surface": "联系",
+          "keyword": "联系",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "reach.v.04",
+          "wordnet_lemma": "contact",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.94
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0095",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_001",
+          "surface": "工作",
+          "keyword": "工作",
+          "keyword_type": "concept",
+          "semantic_role": "topic",
+          "source_field": "statement",
+          "wordnet_synset": "work.n.01",
+          "wordnet_lemma": "work",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.91
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0096",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_001",
+          "surface": "争取",
+          "keyword": "争取",
+          "keyword_type": "action",
+          "semantic_role": "topic",
+          "source_field": "statement",
+          "wordnet_synset": "seek.v.01",
+          "wordnet_lemma": "seek",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.94
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0097",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_002",
+          "surface": "准备",
+          "keyword": "准备",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "fix.v.12",
+          "wordnet_lemma": "prepare",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.97
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0098",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_002",
+          "surface": "业务拓展",
+          "keyword": "业务拓展",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0099",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_002",
+          "surface": "工作",
+          "keyword": "工作",
+          "keyword_type": "concept",
+          "semantic_role": "topic",
+          "source_field": "statement",
+          "wordnet_synset": "work.n.01",
+          "wordnet_lemma": "work",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.91
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0100",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_002",
+          "surface": "争取",
+          "keyword": "争取",
+          "keyword_type": "action",
+          "semantic_role": "topic",
+          "source_field": "statement",
+          "wordnet_synset": "seek.v.01",
+          "wordnet_lemma": "seek",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.94
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0101",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_002",
+          "surface": "方式",
+          "keyword": "方式",
+          "keyword_type": "concept",
+          "semantic_role": "topic",
+          "source_field": "statement",
+          "wordnet_synset": "manner.n.01",
+          "wordnet_lemma": "manner",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.92
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0102",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_003",
+          "surface": "现在",
+          "keyword": "现在",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "wordnet_synset": "now.r.04",
+          "wordnet_lemma": "now",
+          "wordnet_pos": "r",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0103",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_003",
+          "surface": "11 月",
+          "keyword": "11月",
+          "keyword_type": "time",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0104",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_004",
+          "surface": "休假",
+          "keyword": "休假",
+          "keyword_type": "event",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "leave.n.01",
+          "wordnet_lemma": "leave",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0105",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_004",
+          "surface": "计划",
+          "keyword": "计划",
+          "keyword_type": "concept",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "plan.n.01",
+          "wordnet_lemma": "plan",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.97
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0106",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_004",
+          "surface": "12 月 15 日到 12 月 26 日",
+          "keyword": "12月15日至12月26日",
+          "keyword_type": "time",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0107",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_005",
+          "surface": "今天",
+          "keyword": "今天",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "wordnet_synset": "today.n.02",
+          "wordnet_lemma": "today",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0108",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_005",
+          "surface": "提及",
+          "keyword": "提及",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "mention.v.01",
+          "wordnet_lemma": "mention",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.97
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0109",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_005",
+          "surface": "工作",
+          "keyword": "工作",
+          "keyword_type": "concept",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "wordnet_synset": "work.n.01",
+          "wordnet_lemma": "work",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.91
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0110",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_005",
+          "surface": "联系",
+          "keyword": "联系",
+          "keyword_type": "action",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "wordnet_synset": "reach.v.04",
+          "wordnet_lemma": "contact",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.94
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0111",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_005",
+          "surface": "休假",
+          "keyword": "休假",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "leave.n.01",
+          "wordnet_lemma": "leave",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0112",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_006",
+          "surface": "现在",
+          "keyword": "现在",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "wordnet_synset": "now.r.04",
+          "wordnet_lemma": "now",
+          "wordnet_pos": "r",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0113",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_006",
+          "surface": "担心",
+          "keyword": "担心",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "worry.v.01",
+          "wordnet_lemma": "worry",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0114",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_006",
+          "surface": "工作分派",
+          "keyword": "工作分派",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0115",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_006",
+          "surface": "休假",
+          "keyword": "休假",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "leave.n.01",
+          "wordnet_lemma": "leave",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0116",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_006",
+          "surface": "工作",
+          "keyword": "工作",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "work.n.01",
+          "wordnet_lemma": "work",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.91
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0117",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_007",
+          "surface": "现在",
+          "keyword": "现在",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "wordnet_synset": "now.r.04",
+          "wordnet_lemma": "now",
+          "wordnet_pos": "r",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0118",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_007",
+          "surface": "说明",
+          "keyword": "说明",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "explain.v.01",
+          "wordnet_lemma": "explain",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0119",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_007",
+          "surface": "休假安排",
+          "keyword": "休假安排",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0120",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_007",
+          "surface": "休假",
+          "keyword": "休假",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "leave.n.01",
+          "wordnet_lemma": "leave",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0121",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_007",
+          "surface": "安排",
+          "keyword": "安排",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "arrange.v.02",
+          "wordnet_lemma": "arrange",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.94
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_008",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0122",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_008",
+          "surface": "合伙人",
+          "keyword": "合伙人",
+          "keyword_type": "concept",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "partner.n.03",
+          "wordnet_lemma": "partner",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0123",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_008",
+          "surface": "考虑",
+          "keyword": "考虑",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "consider.v.05",
+          "wordnet_lemma": "consider",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0124",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_008",
+          "surface": "工作",
+          "keyword": "工作",
+          "keyword_type": "concept",
+          "semantic_role": "other",
+          "source_field": "qualifiers.scope",
+          "wordnet_synset": "work.n.01",
+          "wordnet_lemma": "work",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.91
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0125",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_008",
+          "surface": "安排",
+          "keyword": "安排",
+          "keyword_type": "action",
+          "semantic_role": "other",
+          "source_field": "qualifiers.scope",
+          "wordnet_synset": "arrange.v.02",
+          "wordnet_lemma": "arrange",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.94
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0126",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_008",
+          "surface": "可用时间",
+          "keyword": "可用时间",
+          "keyword_type": "time",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0127",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_008",
+          "surface": "提前",
+          "keyword": "提前",
+          "keyword_type": "time",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "wordnet_synset": "early.r.02",
+          "wordnet_lemma": "early",
+          "wordnet_pos": "r",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0128",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_008",
+          "surface": "告知",
+          "keyword": "告知",
+          "keyword_type": "action",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "wordnet_synset": "inform.v.01",
+          "wordnet_lemma": "inform",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.99
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_009",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0129",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_009",
+          "surface": "强调",
+          "keyword": "强调",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "stress.v.01",
+          "wordnet_lemma": "emphasize",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0130",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_009",
+          "surface": "休假前",
+          "keyword": "休假前",
+          "keyword_type": "time",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0131",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_009",
+          "surface": "休假",
+          "keyword": "休假",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "leave.n.01",
+          "wordnet_lemma": "leave",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0132",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_009",
+          "surface": "工作",
+          "keyword": "工作",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "work.n.01",
+          "wordnet_lemma": "work",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.91
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_010",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0133",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_010",
+          "surface": "强调",
+          "keyword": "强调",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "stress.v.01",
+          "wordnet_lemma": "emphasize",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0134",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_010",
+          "surface": "休假后",
+          "keyword": "休假后",
+          "keyword_type": "time",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0135",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_010",
+          "surface": "休假",
+          "keyword": "休假",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "leave.n.01",
+          "wordnet_lemma": "leave",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0136",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_010",
+          "surface": "工作",
+          "keyword": "工作",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "work.n.01",
+          "wordnet_lemma": "work",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.91
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_011",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0137",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_011",
+          "surface": "愿意",
+          "keyword": "愿意",
+          "keyword_type": "property",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "willing.a.01",
+          "wordnet_lemma": "willing",
+          "wordnet_pos": "a",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0138",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_011",
+          "surface": "提前",
+          "keyword": "提前",
+          "keyword_type": "time",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "early.r.02",
+          "wordnet_lemma": "early",
+          "wordnet_pos": "r",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0139",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_011",
+          "surface": "任务",
+          "keyword": "任务",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "job.n.02",
+          "wordnet_lemma": "task",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0140",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_011",
+          "surface": "完成",
+          "keyword": "完成",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "complete.v.01",
+          "wordnet_lemma": "complete",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.98
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_012",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0141",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_012",
+          "surface": "愿意",
+          "keyword": "愿意",
+          "keyword_type": "property",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "willing.a.01",
+          "wordnet_lemma": "willing",
+          "wordnet_pos": "a",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0142",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_012",
+          "surface": "交接",
+          "keyword": "交接",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "handover.n.01",
+          "wordnet_lemma": "handover",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.88
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0143",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_012",
+          "surface": "安排",
+          "keyword": "安排",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "arrange.v.02",
+          "wordnet_lemma": "arrange",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.94
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_013",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0144",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_013",
+          "surface": "透明",
+          "keyword": "透明",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "candid.s.03",
+          "wordnet_lemma": "open",
+          "wordnet_pos": "s",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0145",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_013",
+          "surface": "表达",
+          "keyword": "表达",
+          "keyword_type": "action",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "wordnet_synset": "express.v.01",
+          "wordnet_lemma": "express",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.97
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0146",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_013",
+          "surface": "方式",
+          "keyword": "方式",
+          "keyword_type": "concept",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "wordnet_synset": "manner.n.01",
+          "wordnet_lemma": "manner",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.92
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_014",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0147",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_014",
+          "surface": "休假",
+          "keyword": "休假",
+          "keyword_type": "event",
+          "semantic_role": "other",
+          "source_field": "qualifiers.scope",
+          "wordnet_synset": "leave.n.01",
+          "wordnet_lemma": "leave",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0148",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_014",
+          "surface": "工作",
+          "keyword": "工作",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "work.n.01",
+          "wordnet_lemma": "work",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.91
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0149",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_014",
+          "surface": "信号",
+          "keyword": "信号",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "indication.n.01",
+          "wordnet_lemma": "indication",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0150",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_014",
+          "surface": "承担",
+          "keyword": "承担",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "undertake.v.01",
+          "wordnet_lemma": "undertake",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0151",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_002_014",
+          "surface": "表达",
+          "keyword": "表达",
+          "keyword_type": "action",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "wordnet_synset": "express.v.01",
+          "wordnet_lemma": "express",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.97
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0152",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_001",
+          "surface": "今天",
+          "keyword": "今天",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "wordnet_synset": "today.n.02",
+          "wordnet_lemma": "today",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0153",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_001",
+          "surface": "发送",
+          "keyword": "发送",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "send.v.01",
+          "wordnet_lemma": "send",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.97
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0154",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_001",
+          "surface": "邮件",
+          "keyword": "邮件",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "electronic_mail.n.01",
+          "wordnet_lemma": "email",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0155",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_002",
+          "surface": "今天",
+          "keyword": "今天",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "wordnet_synset": "today.n.02",
+          "wordnet_lemma": "today",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0156",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_002",
+          "surface": "说明",
+          "keyword": "说明",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "explain.v.01",
+          "wordnet_lemma": "explain",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0157",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_002",
+          "surface": "邮件",
+          "keyword": "邮件",
+          "keyword_type": "concept",
+          "semantic_role": "other",
+          "source_field": "qualifiers.scope",
+          "wordnet_synset": "electronic_mail.n.01",
+          "wordnet_lemma": "email",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0158",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_002",
+          "surface": "有空",
+          "keyword": "有空",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "available.s.02",
+          "wordnet_lemma": "available",
+          "wordnet_pos": "s",
+          "mapping_confidence": 0.98
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0159",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_003",
+          "surface": "今天",
+          "keyword": "今天",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "wordnet_synset": "today.n.02",
+          "wordnet_lemma": "today",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0160",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_003",
+          "surface": "说明",
+          "keyword": "说明",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "explain.v.01",
+          "wordnet_lemma": "explain",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0161",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_003",
+          "surface": "邮件",
+          "keyword": "邮件",
+          "keyword_type": "concept",
+          "semantic_role": "other",
+          "source_field": "qualifiers.scope",
+          "wordnet_synset": "electronic_mail.n.01",
+          "wordnet_lemma": "email",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0162",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_003",
+          "surface": "工作",
+          "keyword": "工作",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "work.n.01",
+          "wordnet_lemma": "work",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.91
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0163",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_003",
+          "surface": "愿意",
+          "keyword": "愿意",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "willing.a.01",
+          "wordnet_lemma": "willing",
+          "wordnet_pos": "a",
+          "mapping_confidence": 0.96
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0164",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_004",
+          "surface": "邮件草稿",
+          "keyword": "邮件草稿",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "draft.n.05",
+          "wordnet_lemma": "draft",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0165",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_004",
+          "surface": "邮件",
+          "keyword": "邮件",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "electronic_mail.n.01",
+          "wordnet_lemma": "email",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0166",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_005",
+          "surface": "客户 X",
+          "keyword": "客户 X",
+          "keyword_type": "entity",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0167",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_005",
+          "surface": "时间",
+          "keyword": "时间",
+          "keyword_type": "time",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0168",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_005",
+          "surface": "客户",
+          "keyword": "客户",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "client.n.01",
+          "wordnet_lemma": "client",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0169",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_005",
+          "surface": "融资",
+          "keyword": "融资",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "financing.n.01",
+          "wordnet_lemma": "financing",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.98
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0170",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_006",
+          "surface": "说明",
+          "keyword": "说明",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "explain.v.01",
+          "wordnet_lemma": "explain",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0171",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_006",
+          "surface": "12 月 15 日到 26 日",
+          "keyword": "12月15日至26日",
+          "keyword_type": "time",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0172",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_006",
+          "surface": "出国",
+          "keyword": "出国",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0173",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_007",
+          "surface": "评价",
+          "keyword": "评价",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "evaluate.v.02",
+          "wordnet_lemma": "evaluate",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0174",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_007",
+          "surface": "邮件",
+          "keyword": "邮件",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "electronic_mail.n.01",
+          "wordnet_lemma": "email",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0175",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_007",
+          "surface": "正确",
+          "keyword": "正确",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "correct.a.01",
+          "wordnet_lemma": "correct",
+          "wordnet_pos": "a",
+          "mapping_confidence": 0.97
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_008",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0176",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_008",
+          "surface": "直接",
+          "keyword": "直接",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "direct.a.03",
+          "wordnet_lemma": "direct",
+          "wordnet_pos": "a",
+          "mapping_confidence": 0.95
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0177",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_008",
+          "surface": "邮件",
+          "keyword": "邮件",
+          "keyword_type": "concept",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "wordnet_synset": "electronic_mail.n.01",
+          "wordnet_lemma": "email",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_009",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0178",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_009",
+          "surface": "表达",
+          "keyword": "表达",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "express.v.01",
+          "wordnet_lemma": "express",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.97
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0179",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_009",
+          "surface": "近期",
+          "keyword": "近期",
+          "keyword_type": "time",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "soon.r.01",
+          "wordnet_lemma": "soon",
+          "wordnet_pos": "r",
+          "mapping_confidence": 0.97
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0180",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_009",
+          "surface": "项目",
+          "keyword": "项目",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "undertaking.n.01",
+          "wordnet_lemma": "project",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.94
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0181",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_009",
+          "surface": "承担",
+          "keyword": "承担",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "undertake.v.01",
+          "wordnet_lemma": "undertake",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0182",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_009",
+          "surface": "邮件",
+          "keyword": "邮件",
+          "keyword_type": "concept",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "wordnet_synset": "electronic_mail.n.01",
+          "wordnet_lemma": "email",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_010",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0183",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_010",
+          "surface": "客户 X",
+          "keyword": "客户 X",
+          "keyword_type": "entity",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0184",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_010",
+          "surface": "融资时间",
+          "keyword": "融资时间",
+          "keyword_type": "time",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0185",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_010",
+          "surface": "时间",
+          "keyword": "时间",
+          "keyword_type": "time",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0186",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_010",
+          "surface": "客户",
+          "keyword": "客户",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "client.n.01",
+          "wordnet_lemma": "client",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0187",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_010",
+          "surface": "融资",
+          "keyword": "融资",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "financing.n.01",
+          "wordnet_lemma": "financing",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.98
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_011",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0188",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_011",
+          "surface": "说明",
+          "keyword": "说明",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "explain.v.01",
+          "wordnet_lemma": "explain",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0189",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_011",
+          "surface": "休假日期",
+          "keyword": "休假日期",
+          "keyword_type": "time",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0190",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_011",
+          "surface": "日期",
+          "keyword": "日期",
+          "keyword_type": "time",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "date.n.01",
+          "wordnet_lemma": "date",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0191",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_011",
+          "surface": "休假",
+          "keyword": "休假",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "leave.n.01",
+          "wordnet_lemma": "leave",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0192",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_011",
+          "surface": "邮件",
+          "keyword": "邮件",
+          "keyword_type": "concept",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "wordnet_synset": "electronic_mail.n.01",
+          "wordnet_lemma": "email",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_012",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0193",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_012",
+          "surface": "说明",
+          "keyword": "说明",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "explain.v.01",
+          "wordnet_lemma": "explain",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0194",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_012",
+          "surface": "交接安排",
+          "keyword": "交接安排",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0195",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_012",
+          "surface": "交接",
+          "keyword": "交接",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "handover.n.01",
+          "wordnet_lemma": "handover",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.88
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0196",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_012",
+          "surface": "安排",
+          "keyword": "安排",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "arrange.v.02",
+          "wordnet_lemma": "arrange",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.94
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0197",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_012",
+          "surface": "邮件",
+          "keyword": "邮件",
+          "keyword_type": "concept",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "wordnet_synset": "electronic_mail.n.01",
+          "wordnet_lemma": "email",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_013",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0198",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_013",
+          "surface": "近期",
+          "keyword": "近期",
+          "keyword_type": "time",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "soon.r.01",
+          "wordnet_lemma": "soon",
+          "wordnet_pos": "r",
+          "mapping_confidence": 0.95
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0199",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_013",
+          "surface": "工作",
+          "keyword": "工作",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "work.n.01",
+          "wordnet_lemma": "work",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.91
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0200",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_013",
+          "surface": "安排",
+          "keyword": "安排",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "arrange.v.02",
+          "wordnet_lemma": "arrange",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.94
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0201",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_013",
+          "surface": "出行",
+          "keyword": "出行",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "trip.n.01",
+          "wordnet_lemma": "trip",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0202",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_013",
+          "surface": "计划",
+          "keyword": "计划",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "plan.n.01",
+          "wordnet_lemma": "plan",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.97
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_014",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0203",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_014",
+          "surface": "说明",
+          "keyword": "说明",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "explain.v.01",
+          "wordnet_lemma": "explain",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0204",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_014",
+          "surface": "项目",
+          "keyword": "项目",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "undertaking.n.01",
+          "wordnet_lemma": "project",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.94
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0205",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_014",
+          "surface": "愿意",
+          "keyword": "愿意",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "willing.a.01",
+          "wordnet_lemma": "willing",
+          "wordnet_pos": "a",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0206",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_014",
+          "surface": "接手",
+          "keyword": "接手",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "assume.v.02",
+          "wordnet_lemma": "take_over",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.94
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0207",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_014",
+          "surface": "邮件正文",
+          "keyword": "邮件正文",
+          "keyword_type": "concept",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_015",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0208",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_015",
+          "surface": "说明",
+          "keyword": "说明",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "explain.v.01",
+          "wordnet_lemma": "explain",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0209",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_015",
+          "surface": "融资时间",
+          "keyword": "融资时间",
+          "keyword_type": "time",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0210",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_015",
+          "surface": "时间",
+          "keyword": "时间",
+          "keyword_type": "time",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0211",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_015",
+          "surface": "融资",
+          "keyword": "融资",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "financing.n.01",
+          "wordnet_lemma": "financing",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0212",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_015",
+          "surface": "了解",
+          "keyword": "了解",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "understand.v.01",
+          "wordnet_lemma": "understand",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.94
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_016",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0213",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_016",
+          "surface": "承诺",
+          "keyword": "承诺",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "promise.v.01",
+          "wordnet_lemma": "promise",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0214",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_016",
+          "surface": "在出发前",
+          "keyword": "出发前",
+          "keyword_type": "time",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0215",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_016",
+          "surface": "完成",
+          "keyword": "完成",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "complete.v.01",
+          "wordnet_lemma": "complete",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0216",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_016",
+          "surface": "出发",
+          "keyword": "出发",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "departure.n.01",
+          "wordnet_lemma": "departure",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0217",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_016",
+          "surface": "待办",
+          "keyword": "待办",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "job.n.02",
+          "wordnet_lemma": "task",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.9
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_017",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0218",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_017",
+          "surface": "承诺",
+          "keyword": "承诺",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "promise.v.01",
+          "wordnet_lemma": "promise",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0219",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_017",
+          "surface": "工作",
+          "keyword": "工作",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "work.n.01",
+          "wordnet_lemma": "work",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.91
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0220",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_003_017",
+          "surface": "衔接",
+          "keyword": "衔接",
+          "keyword_type": "relation",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "continuity.n.01",
+          "wordnet_lemma": "continuity",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.9
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0221",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_001",
+          "surface": "邮件",
+          "keyword": "邮件",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "electronic_mail.n.01",
+          "wordnet_lemma": "email",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0222",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_001",
+          "surface": "正式",
+          "keyword": "正式",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "formal.a.03",
+          "wordnet_lemma": "formal",
+          "wordnet_pos": "a",
+          "mapping_confidence": 0.97
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0223",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_002",
+          "surface": "律师",
+          "keyword": "律师",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "lawyer.n.01",
+          "wordnet_lemma": "lawyer",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0224",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_002",
+          "surface": "邮件",
+          "keyword": "邮件",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "electronic_mail.n.01",
+          "wordnet_lemma": "email",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0225",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_002",
+          "surface": "初级",
+          "keyword": "初级",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "junior.a.01",
+          "wordnet_lemma": "junior",
+          "wordnet_pos": "a",
+          "mapping_confidence": 0.96
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0226",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_003",
+          "surface": "律师",
+          "keyword": "律师",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "lawyer.n.01",
+          "wordnet_lemma": "lawyer",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0227",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_003",
+          "surface": "资深",
+          "keyword": "资深",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "senior.a.01",
+          "wordnet_lemma": "senior",
+          "wordnet_pos": "a",
+          "mapping_confidence": 0.97
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0228",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_004",
+          "surface": "评价",
+          "keyword": "评价",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "evaluate.v.02",
+          "wordnet_lemma": "evaluate",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0229",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_004",
+          "surface": "邮件",
+          "keyword": "邮件",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "electronic_mail.n.01",
+          "wordnet_lemma": "email",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0230",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_004",
+          "surface": "版本",
+          "keyword": "版本",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "version.n.02",
+          "wordnet_lemma": "version",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.97
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0231",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_005",
+          "surface": "简洁",
+          "keyword": "简洁",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "concise.a.01",
+          "wordnet_lemma": "concise",
+          "wordnet_pos": "a",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0232",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_005",
+          "surface": "邮件",
+          "keyword": "邮件",
+          "keyword_type": "concept",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "wordnet_synset": "electronic_mail.n.01",
+          "wordnet_lemma": "email",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0233",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_005",
+          "surface": "语气",
+          "keyword": "语气",
+          "keyword_type": "property",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "wordnet_synset": "tone.n.10",
+          "wordnet_lemma": "tone",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.98
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0234",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_006",
+          "surface": "自信",
+          "keyword": "自信",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "confident.a.01",
+          "wordnet_lemma": "confident",
+          "wordnet_pos": "a",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0235",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_006",
+          "surface": "邮件",
+          "keyword": "邮件",
+          "keyword_type": "concept",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "wordnet_synset": "electronic_mail.n.01",
+          "wordnet_lemma": "email",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0236",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_006",
+          "surface": "语气",
+          "keyword": "语气",
+          "keyword_type": "property",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "wordnet_synset": "tone.n.10",
+          "wordnet_lemma": "tone",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.98
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0237",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_007",
+          "surface": "说明",
+          "keyword": "说明",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "explain.v.01",
+          "wordnet_lemma": "explain",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0238",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_007",
+          "surface": "目前",
+          "keyword": "目前",
+          "keyword_type": "time",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "now.r.04",
+          "wordnet_lemma": "now",
+          "wordnet_pos": "r",
+          "mapping_confidence": 0.94
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0239",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_007",
+          "surface": "有空",
+          "keyword": "有空",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "available.s.02",
+          "wordnet_lemma": "available",
+          "wordnet_pos": "s",
+          "mapping_confidence": 0.98
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_008",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0240",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_008",
+          "surface": "说明",
+          "keyword": "说明",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "explain.v.01",
+          "wordnet_lemma": "explain",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0241",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_008",
+          "surface": "挑战",
+          "keyword": "挑战",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "challenge.n.01",
+          "wordnet_lemma": "challenge",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.97
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0242",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_008",
+          "surface": "愿意",
+          "keyword": "愿意",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "willing.a.01",
+          "wordnet_lemma": "willing",
+          "wordnet_pos": "a",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0243",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_008",
+          "surface": "承担",
+          "keyword": "承担",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "undertake.v.01",
+          "wordnet_lemma": "undertake",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.96
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_009",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0244",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_009",
+          "surface": "优先级",
+          "keyword": "优先级",
+          "keyword_type": "property",
+          "semantic_role": "other",
+          "source_field": "qualifiers.scope",
+          "wordnet_synset": "precedence.n.01",
+          "wordnet_lemma": "priority",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0245",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_009",
+          "surface": "安排",
+          "keyword": "安排",
+          "keyword_type": "action",
+          "semantic_role": "other",
+          "source_field": "qualifiers.scope",
+          "wordnet_synset": "arrange.v.02",
+          "wordnet_lemma": "arrange",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.94
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0246",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_009",
+          "surface": "客户 X",
+          "keyword": "客户 X",
+          "keyword_type": "entity",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0247",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_009",
+          "surface": "时间",
+          "keyword": "时间",
+          "keyword_type": "time",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0248",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_009",
+          "surface": "融资轮次",
+          "keyword": "融资轮次",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_010",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0249",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_010",
+          "surface": "说明",
+          "keyword": "说明",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "wordnet_synset": "explain.v.01",
+          "wordnet_lemma": "explain",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0250",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_010",
+          "surface": "12 月 15 日到 26 日",
+          "keyword": "12月15日至26日",
+          "keyword_type": "time",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0251",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_010",
+          "surface": "出行",
+          "keyword": "出行",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "trip.n.01",
+          "wordnet_lemma": "trip",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.96
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_011",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0252",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_011",
+          "surface": "在出发前",
+          "keyword": "出发前",
+          "keyword_type": "time",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": null,
+          "wordnet_lemma": null,
+          "wordnet_pos": null,
+          "mapping_confidence": null
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0253",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_011",
+          "surface": "任务",
+          "keyword": "任务",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "job.n.02",
+          "wordnet_lemma": "task",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0254",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_011",
+          "surface": "完成",
+          "keyword": "完成",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "complete.v.01",
+          "wordnet_lemma": "complete",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.98
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0255",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_011",
+          "surface": "出发",
+          "keyword": "出发",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "departure.n.01",
+          "wordnet_lemma": "departure",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.96
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_012",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0256",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_012",
+          "surface": "团队",
+          "keyword": "团队",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "team.n.01",
+          "wordnet_lemma": "team",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.96
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0257",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_012",
+          "surface": "交接",
+          "keyword": "交接",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "handover.n.01",
+          "wordnet_lemma": "handover",
+          "wordnet_pos": "n",
+          "mapping_confidence": 0.88
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-001-4d3900462107_0258",
+          "knowledge_id": "K_wildchat-mgmt-cand-001-4d3900462107_004_012",
+          "surface": "协作",
+          "keyword": "协作",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "wordnet_synset": "collaborate.v.01",
+          "wordnet_lemma": "collaborate",
+          "wordnet_pos": "v",
+          "mapping_confidence": 0.98
+        }
+      ]
+    }
+  ]
+}

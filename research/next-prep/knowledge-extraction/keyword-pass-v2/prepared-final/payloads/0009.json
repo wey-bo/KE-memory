@@ -1,0 +1,1830 @@
+{
+  "prompt_version": "knowledge-keyword-extraction-v2",
+  "candidate_id": "WILDCHAT-MGMT-CAND-003",
+  "candidate_namespace": "wildchat-mgmt-cand-003-f877bc2fc8f5",
+  "final_knowledge_sha256": "641c88117c206e9901c332e93c4c77e91dc5df703667f441291679dec8c03f41",
+  "active_knowledge": [
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "confidence": 0.99,
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 25,
+          "evidence_id": "evidence-5ed8318dde30308465e6134630a46a6cf0daa8c21ede8fff3d25b8ec39347eee",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "请为公共住房机构的高级项目经理写 10 个绩效目标",
+          "start": 0,
+          "turn_index": 0
+        },
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 6,
+          "evidence_id": "evidence-5d44a0cbbfcd1734bc709f5646b85e8c43788db8e9db49a2224f5f665c81fa73",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "再写一些目标",
+          "start": 0,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": "Turn 1's '目标' refers to the public-housing senior project manager performance goals requested in turn 0.",
+      "knowledge_id": "D_wildchat-mgmt-cand-003-f877bc2fc8f5_001",
+      "object": "公共住房机构高级项目经理的绩效目标",
+      "predicate": "请求再编写",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "requested",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户请求为公共住房机构的高级项目经理再编写一些绩效目标。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [
+          "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_001"
+        ],
+        "source_turn": 0,
+        "stage": "dialogue",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "confidence": 0.99,
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 25,
+          "evidence_id": "evidence-5ed8318dde30308465e6134630a46a6cf0daa8c21ede8fff3d25b8ec39347eee",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "请为公共住房机构的高级项目经理写 10 个绩效目标",
+          "start": 0,
+          "turn_index": 0
+        },
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 6,
+          "evidence_id": "evidence-5d44a0cbbfcd1734bc709f5646b85e8c43788db8e9db49a2224f5f665c81fa73",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "再写一些目标",
+          "start": 0,
+          "turn_index": 1
+        },
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 17,
+          "evidence_id": "evidence-8e6565ef8a630de55620fac7e5ce848faa10422f6d7049e515f8612141036c44",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "请把它们改成 SMART 绩效目标",
+          "start": 0,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": "Turn 2's '它们' refers to the performance-goal sets requested in turns 0 and 1 for the public housing agency's senior project manager.",
+      "knowledge_id": "D_wildchat-mgmt-cand-003-f877bc2fc8f5_002",
+      "object": "此前提出的绩效目标",
+      "predicate": "请求改成",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "requested",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户请求把此前为公共住房机构高级项目经理提出的绩效目标改成 SMART 绩效目标。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [
+          "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_001"
+        ],
+        "source_turn": 0,
+        "stage": "dialogue",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 25,
+          "evidence_id": "evidence-5ed8318dde30308465e6134630a46a6cf0daa8c21ede8fff3d25b8ec39347eee",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "请为公共住房机构的高级项目经理写 10 个绩效目标",
+          "start": 0,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_001",
+      "object": "10 个绩效目标",
+      "predicate": "请求",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "requested",
+        "polarity": "positive",
+        "scope": [
+          "公共住房机构的高级项目经理"
+        ],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户请求为公共住房机构的高级项目经理编写 10 个绩效目标。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 63,
+          "evidence_id": "evidence-d5f9dd4a66877c8b02f7e20e1fc3eb2fb4d6eec3c82b44252286e0c43bb86fde",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "项目执行效率、报告及时性、绩效指标、利益相关方参与、可负担住房创新、居民满意度、跨部门协作、持续改进、员工培训和法规趋势",
+          "start": 3,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_002",
+      "object": "项目执行效率",
+      "predicate": "可涵盖",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议设定项目执行效率方面的目标。",
+      "subject": "绩效目标",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 63,
+          "evidence_id": "evidence-d5f9dd4a66877c8b02f7e20e1fc3eb2fb4d6eec3c82b44252286e0c43bb86fde",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "项目执行效率、报告及时性、绩效指标、利益相关方参与、可负担住房创新、居民满意度、跨部门协作、持续改进、员工培训和法规趋势",
+          "start": 3,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_003",
+      "object": "报告及时性",
+      "predicate": "可涵盖",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议设定报告及时性方面的目标。",
+      "subject": "绩效目标",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 63,
+          "evidence_id": "evidence-d5f9dd4a66877c8b02f7e20e1fc3eb2fb4d6eec3c82b44252286e0c43bb86fde",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "项目执行效率、报告及时性、绩效指标、利益相关方参与、可负担住房创新、居民满意度、跨部门协作、持续改进、员工培训和法规趋势",
+          "start": 3,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_004",
+      "object": "绩效指标",
+      "predicate": "可涵盖",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议设定绩效指标方面的目标。",
+      "subject": "绩效目标",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 63,
+          "evidence_id": "evidence-d5f9dd4a66877c8b02f7e20e1fc3eb2fb4d6eec3c82b44252286e0c43bb86fde",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "项目执行效率、报告及时性、绩效指标、利益相关方参与、可负担住房创新、居民满意度、跨部门协作、持续改进、员工培训和法规趋势",
+          "start": 3,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_005",
+      "object": "利益相关方参与",
+      "predicate": "可涵盖",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议设定利益相关方参与方面的目标。",
+      "subject": "绩效目标",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 63,
+          "evidence_id": "evidence-d5f9dd4a66877c8b02f7e20e1fc3eb2fb4d6eec3c82b44252286e0c43bb86fde",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "项目执行效率、报告及时性、绩效指标、利益相关方参与、可负担住房创新、居民满意度、跨部门协作、持续改进、员工培训和法规趋势",
+          "start": 3,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_006",
+      "object": "可负担住房创新",
+      "predicate": "可涵盖",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议设定可负担住房创新方面的目标。",
+      "subject": "绩效目标",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 63,
+          "evidence_id": "evidence-d5f9dd4a66877c8b02f7e20e1fc3eb2fb4d6eec3c82b44252286e0c43bb86fde",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "项目执行效率、报告及时性、绩效指标、利益相关方参与、可负担住房创新、居民满意度、跨部门协作、持续改进、员工培训和法规趋势",
+          "start": 3,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_007",
+      "object": "居民满意度",
+      "predicate": "可涵盖",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议设定居民满意度方面的目标。",
+      "subject": "绩效目标",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 63,
+          "evidence_id": "evidence-d5f9dd4a66877c8b02f7e20e1fc3eb2fb4d6eec3c82b44252286e0c43bb86fde",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "项目执行效率、报告及时性、绩效指标、利益相关方参与、可负担住房创新、居民满意度、跨部门协作、持续改进、员工培训和法规趋势",
+          "start": 3,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_008",
+      "object": "跨部门协作",
+      "predicate": "可涵盖",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议设定跨部门协作方面的目标。",
+      "subject": "绩效目标",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 63,
+          "evidence_id": "evidence-d5f9dd4a66877c8b02f7e20e1fc3eb2fb4d6eec3c82b44252286e0c43bb86fde",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "项目执行效率、报告及时性、绩效指标、利益相关方参与、可负担住房创新、居民满意度、跨部门协作、持续改进、员工培训和法规趋势",
+          "start": 3,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_009",
+      "object": "持续改进",
+      "predicate": "可涵盖",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议设定持续改进方面的目标。",
+      "subject": "绩效目标",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 63,
+          "evidence_id": "evidence-d5f9dd4a66877c8b02f7e20e1fc3eb2fb4d6eec3c82b44252286e0c43bb86fde",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "项目执行效率、报告及时性、绩效指标、利益相关方参与、可负担住房创新、居民满意度、跨部门协作、持续改进、员工培训和法规趋势",
+          "start": 3,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_010",
+      "object": "员工培训",
+      "predicate": "可涵盖",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议设定员工培训方面的目标。",
+      "subject": "绩效目标",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 63,
+          "evidence_id": "evidence-d5f9dd4a66877c8b02f7e20e1fc3eb2fb4d6eec3c82b44252286e0c43bb86fde",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "项目执行效率、报告及时性、绩效指标、利益相关方参与、可负担住房创新、居民满意度、跨部门协作、持续改进、员工培训和法规趋势",
+          "start": 3,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_011",
+      "object": "法规趋势",
+      "predicate": "可涵盖",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议设定法规趋势方面的目标。",
+      "subject": "绩效目标",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 20,
+          "evidence_id": "evidence-3730665b21385e8a9c438376be5ffaab278148b275ce1da3299084b6497da2d9",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "按预算和进度完成资本改造项目",
+          "start": 6,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_002",
+      "object": "按预算完成资本改造项目",
+      "predicate": "可设为",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议按预算完成资本改造项目。",
+      "subject": "绩效目标",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 20,
+          "evidence_id": "evidence-3730665b21385e8a9c438376be5ffaab278148b275ce1da3299084b6497da2d9",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "按预算和进度完成资本改造项目",
+          "start": 6,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_003",
+      "object": "按进度完成资本改造项目",
+      "predicate": "可设为",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议按进度完成资本改造项目。",
+      "subject": "绩效目标",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 33,
+          "evidence_id": "evidence-2b0d741408c4148db5601d2e3440b538b2cf0b3f876c88176d40e65e856a713a",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "提高公众对住房项目的了解",
+          "start": 21,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_004",
+      "object": "提高公众对住房项目的了解",
+      "predicate": "可设为",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议提高公众对住房项目的了解。",
+      "subject": "绩效目标",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 40,
+          "evidence_id": "evidence-06381423b5a561d3d58418fe5059d86e95765e79f1779f6490ae0b53800c491f",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "争取更多资金",
+          "start": 34,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_005",
+      "object": "争取更多资金",
+      "predicate": "可设为",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议争取更多资金。",
+      "subject": "绩效目标",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 54,
+          "evidence_id": "evidence-4fbc0ae4d5c0d8e70bba39a42ed39269d3e51be55099790020790e229f6227dd",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "确保公平住房和机会平等合规",
+          "start": 41,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_006",
+      "object": "确保公平住房合规",
+      "predicate": "可设为",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议确保公平住房合规。",
+      "subject": "绩效目标",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 54,
+          "evidence_id": "evidence-4fbc0ae4d5c0d8e70bba39a42ed39269d3e51be55099790020790e229f6227dd",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "确保公平住房和机会平等合规",
+          "start": 41,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_007",
+      "object": "确保机会平等合规",
+      "predicate": "可设为",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议确保机会平等合规。",
+      "subject": "绩效目标",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 60,
+          "evidence_id": "evidence-f1b42fe5cba035537980b3a25218ac3f769f37a1eba6337f1c3da83305c4d3a8",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "降低空置率",
+          "start": 55,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_008",
+      "object": "降低空置率",
+      "predicate": "可设为",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议降低空置率。",
+      "subject": "绩效目标",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 67,
+          "evidence_id": "evidence-6edfa4d6c0e501710d8702df727d41f4544c36b7577daf57d2e62b42cc1ed1af",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "改进维修响应",
+          "start": 61,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_009",
+      "object": "改进维修响应",
+      "predicate": "可设为",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议改进维修响应。",
+      "subject": "绩效目标",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 74,
+          "evidence_id": "evidence-73522cefb9fd993c3c9dc01393e124e2357c5c79f0f3a487ea013f8697426493",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "加强灾害准备",
+          "start": 68,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_010",
+      "object": "加强灾害准备",
+      "predicate": "可设为",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议加强灾害准备。",
+      "subject": "绩效目标",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 85,
+          "evidence_id": "evidence-cbd94fc9c1d274b3415952c80744635e9044e5dedd111c0bf0f3ab8848d26423",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "推进多元、公平与包容",
+          "start": 75,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_011",
+      "object": "推进多元",
+      "predicate": "可设为",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议推进多元。",
+      "subject": "绩效目标",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 85,
+          "evidence_id": "evidence-cbd94fc9c1d274b3415952c80744635e9044e5dedd111c0bf0f3ab8848d26423",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "推进多元、公平与包容",
+          "start": 75,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_012",
+      "object": "推进公平",
+      "predicate": "可设为",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议推进公平。",
+      "subject": "绩效目标",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 85,
+          "evidence_id": "evidence-cbd94fc9c1d274b3415952c80744635e9044e5dedd111c0bf0f3ab8848d26423",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "推进多元、公平与包容",
+          "start": 75,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_013",
+      "object": "推进包容",
+      "predicate": "可设为",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议推进包容。",
+      "subject": "绩效目标",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 94,
+          "evidence_id": "evidence-a8b4076d73d171a06f4d9c3bef34c44e4029a094a1a7e11787058b998a7ff058",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "促进居民经济赋能",
+          "start": 86,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_014",
+      "object": "促进居民经济赋能",
+      "predicate": "可设为",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议促进居民经济赋能。",
+      "subject": "绩效目标",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 102,
+          "evidence_id": "evidence-fe2cc761f7f7598574dffffd2cd17376db15d184b28aa46a6a154801a727fb35",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "与地方伙伴合作",
+          "start": 95,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_015",
+      "object": "与地方伙伴合作",
+      "predicate": "可设为",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议与地方伙伴合作。",
+      "subject": "绩效目标",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 23,
+          "evidence_id": "evidence-937d312f9666367f512ccdd5b6662201d763a97c8e0aa891500842ddfd175253",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "下一财年通过定向宣传将入住率提高 10%",
+          "start": 3,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_002",
+      "object": "通过定向宣传将入住率提高 10%",
+      "predicate": "可设为",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [
+          "10%"
+        ],
+        "temporal": [
+          "下一财年"
+        ]
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议下一财年通过定向宣传将入住率提高 10%。",
+      "subject": "绩效目标",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 45,
+          "evidence_id": "evidence-6a9ba69a9de54e136036a726ffceac9a3413e1179354de6d60d0993f6fa4ccc5",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "通过数字工单系统把维修响应时间缩短 20%",
+          "start": 24,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_003",
+      "object": "通过数字工单系统把维修响应时间缩短 20%",
+      "predicate": "可设为",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [
+          "20%"
+        ],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议通过数字工单系统把维修响应时间缩短 20%。",
+      "subject": "绩效目标",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 73,
+          "evidence_id": "evidence-64ebabbbaef5f711e82527944a8ab8d59bf4ff266e7d35a83655d6400c504644",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "未来两年通过拨款和开发商合作增加 15% 的可负担住房",
+          "start": 46,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_004",
+      "object": "通过拨款和开发商合作增加 15% 的可负担住房",
+      "predicate": "可设为",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [
+          "15%"
+        ],
+        "temporal": [
+          "未来两年"
+        ]
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议未来两年通过拨款和开发商合作增加 15% 的可负担住房。",
+      "subject": "绩效目标",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 98,
+          "evidence_id": "evidence-3722ba2a5ae49fde5e32d5a0bccea9d0567eea128d1f476fe52d985e03395b96",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "六个月内完成员工客服、冲突解决和公平住房培训计划",
+          "start": 74,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_005",
+      "object": "完成一项涵盖员工客服、冲突解决和公平住房的培训计划",
+      "predicate": "可设为",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": [
+          "六个月内"
+        ]
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议六个月内完成一项涵盖员工客服、冲突解决和公平住房的培训计划。",
+      "subject": "绩效目标",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 121,
+          "evidence_id": "evidence-ebb87f32d9a802a28c4370b1bd89c7a4e2b95ea36e63bc20d46ab8f9dc86e279",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "每项目标都应有具体指标、截止时间和可验证结果",
+          "start": 99,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_006",
+      "object": "具体指标",
+      "predicate": "应有",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议每项 SMART 绩效目标都有具体指标。",
+      "subject": "每项绩效目标",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 121,
+          "evidence_id": "evidence-ebb87f32d9a802a28c4370b1bd89c7a4e2b95ea36e63bc20d46ab8f9dc86e279",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "每项目标都应有具体指标、截止时间和可验证结果",
+          "start": 99,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_007",
+      "object": "截止时间",
+      "predicate": "应有",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议每项 SMART 绩效目标都有截止时间。",
+      "subject": "每项绩效目标",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "confidence": 0.98,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-MGMT-CAND-003",
+          "end": 121,
+          "evidence_id": "evidence-ebb87f32d9a802a28c4370b1bd89c7a4e2b95ea36e63bc20d46ab8f9dc86e279",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "每项目标都应有具体指标、截止时间和可验证结果",
+          "start": 99,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_008",
+      "object": "可验证结果",
+      "predicate": "应有",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "代理建议每项 SMART 绩效目标都有可验证结果。",
+      "subject": "每项绩效目标",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    }
+  ],
+  "keyword_id_prefix": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_",
+  "output_contract": {
+    "$defs": {
+      "KeywordDraft": {
+        "additionalProperties": false,
+        "properties": {
+          "keyword_id": {
+            "minLength": 1,
+            "title": "Keyword Id",
+            "type": "string"
+          },
+          "knowledge_id": {
+            "minLength": 1,
+            "title": "Knowledge Id",
+            "type": "string"
+          },
+          "surface": {
+            "minLength": 1,
+            "title": "Surface",
+            "type": "string"
+          },
+          "normalized_zh": {
+            "minLength": 1,
+            "title": "Normalized Zh",
+            "type": "string"
+          },
+          "query_lemma": {
+            "minLength": 1,
+            "title": "Query Lemma",
+            "type": "string"
+          },
+          "keyword_kind": {
+            "enum": [
+              "lexical",
+              "literal",
+              "identifier",
+              "qualifier"
+            ],
+            "title": "Keyword Kind",
+            "type": "string"
+          },
+          "keyword_type": {
+            "enum": [
+              "entity",
+              "concept",
+              "action",
+              "event",
+              "property",
+              "relation",
+              "time",
+              "quantity",
+              "condition",
+              "modality"
+            ],
+            "title": "Keyword Type",
+            "type": "string"
+          },
+          "semantic_role": {
+            "enum": [
+              "subject",
+              "predicate",
+              "object",
+              "topic",
+              "participant",
+              "recipient",
+              "instrument",
+              "result",
+              "attribute",
+              "value",
+              "time",
+              "location",
+              "condition",
+              "modality",
+              "identifier",
+              "other"
+            ],
+            "title": "Semantic Role",
+            "type": "string"
+          },
+          "source_field": {
+            "enum": [
+              "statement",
+              "subject",
+              "predicate",
+              "object",
+              "qualifiers.temporal",
+              "qualifiers.conditions",
+              "qualifiers.scope",
+              "qualifiers.modality"
+            ],
+            "title": "Source Field",
+            "type": "string"
+          },
+          "part_of_speech": {
+            "enum": [
+              "noun",
+              "verb",
+              "adjective",
+              "adverb",
+              "proper_noun",
+              "other",
+              "none"
+            ],
+            "title": "Part Of Speech",
+            "type": "string"
+          },
+          "sense_key": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Sense Key"
+          },
+          "sense_hint": {
+            "minLength": 1,
+            "title": "Sense Hint",
+            "type": "string"
+          },
+          "lookup_targets": {
+            "items": {
+              "enum": [
+                "wordnet",
+                "schema_org",
+                "exact"
+              ],
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Lookup Targets",
+            "type": "array"
+          },
+          "normalized_value": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Normalized Value"
+          },
+          "datatype": {
+            "anyOf": [
+              {
+                "enum": [
+                  "date",
+                  "datetime",
+                  "time",
+                  "duration",
+                  "number",
+                  "currency",
+                  "percentage",
+                  "version",
+                  "code",
+                  "text",
+                  "identifier",
+                  "modality",
+                  "condition",
+                  "other"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Datatype"
+          },
+          "unit": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Unit"
+          },
+          "translation_confidence": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Translation Confidence",
+            "type": "number"
+          }
+        },
+        "required": [
+          "keyword_id",
+          "knowledge_id",
+          "surface",
+          "normalized_zh",
+          "query_lemma",
+          "keyword_kind",
+          "keyword_type",
+          "semantic_role",
+          "source_field",
+          "part_of_speech",
+          "sense_hint",
+          "lookup_targets",
+          "translation_confidence"
+        ],
+        "title": "KeywordDraft",
+        "type": "object"
+      },
+      "KnowledgeKeywordOutput": {
+        "additionalProperties": false,
+        "properties": {
+          "knowledge_id": {
+            "minLength": 1,
+            "title": "Knowledge Id",
+            "type": "string"
+          },
+          "keywords": {
+            "items": {
+              "$ref": "#/$defs/KeywordDraft"
+            },
+            "title": "Keywords",
+            "type": "array"
+          },
+          "no_keyword_reason": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "No Keyword Reason"
+          }
+        },
+        "required": [
+          "knowledge_id"
+        ],
+        "title": "KnowledgeKeywordOutput",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "candidate_id": {
+        "minLength": 1,
+        "title": "Candidate Id",
+        "type": "string"
+      },
+      "items": {
+        "items": {
+          "$ref": "#/$defs/KnowledgeKeywordOutput"
+        },
+        "title": "Items",
+        "type": "array"
+      }
+    },
+    "required": [
+      "candidate_id"
+    ],
+    "title": "KeywordPassOutput",
+    "type": "object"
+  },
+  "prompt_sha256": "137ae34237c7fa1b427fa5b82781f65963e775f740bfae22a298b8f73bf148e5",
+  "output_contract_sha256": "572f636d835a2f9c009d1c5e9b2f68c6271b9f803ed6714f72ade442fa007419"
+}

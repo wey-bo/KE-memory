@@ -1,0 +1,4161 @@
+{
+  "candidate_id": "WILDCHAT-LEARN-CAND-002",
+  "items": [
+    {
+      "knowledge_id": "D_wildchat-learn-cand-002-1fa98728ac3e_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0001",
+          "knowledge_id": "D_wildchat-learn-cand-002-1fa98728ac3e_001",
+          "surface": "F0 数据",
+          "normalized_zh": "F0 数据",
+          "query_lemma": "fundamental frequency data",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "topic",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "fundamental_frequency_data",
+          "sense_hint": "measurements of acoustic fundamental frequency over time",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0002",
+          "knowledge_id": "D_wildchat-learn-cand-002-1fa98728ac3e_001",
+          "surface": "requested",
+          "normalized_zh": "请求",
+          "query_lemma": "requested",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge records a user request",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "requested",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0003",
+          "knowledge_id": "D_wildchat-learn-cand-002-1fa98728ac3e_001",
+          "surface": "导出",
+          "normalized_zh": "导出",
+          "query_lemma": "export",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "object",
+          "part_of_speech": "verb",
+          "sense_key": "export_data",
+          "sense_hint": "write data into an external representation",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0004",
+          "knowledge_id": "D_wildchat-learn-cand-002-1fa98728ac3e_001",
+          "surface": "文本",
+          "normalized_zh": "文本文件",
+          "query_lemma": "text file",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "result",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "plain_text_file",
+          "sense_hint": "a file containing plain text data",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0005",
+          "knowledge_id": "D_wildchat-learn-cand-002-1fa98728ac3e_001",
+          "surface": "步骤",
+          "normalized_zh": "操作步骤",
+          "query_lemma": "procedure",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "technical_procedure",
+          "sense_hint": "an ordered set of steps for completing a technical task",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "D_wildchat-learn-cand-002-1fa98728ac3e_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0006",
+          "knowledge_id": "D_wildchat-learn-cand-002-1fa98728ac3e_002",
+          "surface": "F0 数据",
+          "normalized_zh": "F0 数据",
+          "query_lemma": "fundamental frequency data",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "fundamental_frequency_data",
+          "sense_hint": "measurements of acoustic fundamental frequency over time",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0007",
+          "knowledge_id": "D_wildchat-learn-cand-002-1fa98728ac3e_002",
+          "surface": "asserted",
+          "normalized_zh": "陈述",
+          "query_lemma": "asserted",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge presents the relation as asserted",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "asserted",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0008",
+          "knowledge_id": "D_wildchat-learn-cand-002-1fa98728ac3e_002",
+          "surface": "无法提取",
+          "normalized_zh": "提取失败",
+          "query_lemma": "extraction failure",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "noun",
+          "sense_key": "data_extraction_failure",
+          "sense_hint": "failure to extract data into the required form",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0009",
+          "knowledge_id": "D_wildchat-learn-cand-002-1fa98728ac3e_002",
+          "surface": "文本文件",
+          "normalized_zh": "文本文件",
+          "query_lemma": "text file",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "result",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "plain_text_file",
+          "sense_hint": "a file containing plain text data",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0010",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_001",
+          "surface": "Praat",
+          "normalized_zh": "Praat 语音分析软件",
+          "query_lemma": "Praat",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "proper_noun",
+          "sense_key": "praat_phonetics_software",
+          "sense_hint": "phonetics software used for speech analysis and manipulation",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0011",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_001",
+          "surface": "声调连续体",
+          "normalized_zh": "声调连续体",
+          "query_lemma": "tone continuum",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "result",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "noun",
+          "sense_key": "phonetic_tone_continuum",
+          "sense_hint": "a graded sequence of speech stimuli between tones",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0012",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_001",
+          "surface": "planned",
+          "normalized_zh": "计划",
+          "query_lemma": "planned",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge records an intended action",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "planned",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0013",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_001",
+          "surface": "使用",
+          "normalized_zh": "使用",
+          "query_lemma": "use",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "use_software_tool",
+          "sense_hint": "use a software tool for a task",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0014",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_002",
+          "surface": "二声到三声连续体",
+          "normalized_zh": "二声到三声的声调连续体",
+          "query_lemma": "tone continuum",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "phonetic_tone_continuum",
+          "sense_hint": "a graded sequence of speech stimuli between tones",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0015",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_002",
+          "surface": "planned",
+          "normalized_zh": "计划",
+          "query_lemma": "planned",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge records an intended action",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "planned",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0016",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_002",
+          "surface": "二声",
+          "normalized_zh": "普通话二声",
+          "query_lemma": "Mandarin second tone",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "participant",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "mandarin_second_tone",
+          "sense_hint": "the rising lexical tone in Mandarin",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0017",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_002",
+          "surface": "三声",
+          "normalized_zh": "普通话三声",
+          "query_lemma": "Mandarin third tone",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "result",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "mandarin_third_tone",
+          "sense_hint": "the low or dipping lexical tone in Mandarin",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0018",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_002",
+          "surface": "制作",
+          "normalized_zh": "制作",
+          "query_lemma": "construct",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "construct_tone_continuum",
+          "sense_hint": "create a phonetic tone continuum",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0019",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_003",
+          "surface": "连续体",
+          "normalized_zh": "声调连续体",
+          "query_lemma": "tone continuum",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "part_of_speech": "noun",
+          "sense_key": "phonetic_tone_continuum",
+          "sense_hint": "a graded sequence of speech stimuli between tones",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0020",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_003",
+          "surface": "9 步",
+          "normalized_zh": "9 步",
+          "query_lemma": "9",
+          "keyword_kind": "literal",
+          "keyword_type": "quantity",
+          "semantic_role": "value",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the required number of continuum steps",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "9",
+          "datatype": "number",
+          "unit": "step",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0021",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_003",
+          "surface": "planned",
+          "normalized_zh": "计划",
+          "query_lemma": "planned",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge records an intended specification",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "planned",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0022",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_003",
+          "surface": "包含",
+          "normalized_zh": "包含",
+          "query_lemma": "contain",
+          "keyword_kind": "lexical",
+          "keyword_type": "relation",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "contain_stimulus_steps",
+          "sense_hint": "contain a specified number of continuum steps",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0023",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_004",
+          "surface": "等距",
+          "normalized_zh": "等距",
+          "query_lemma": "equidistant",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "adjective",
+          "sense_key": "equally_spaced",
+          "sense_hint": "separated by equal intervals along a scale",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0024",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_004",
+          "surface": "planned",
+          "normalized_zh": "计划",
+          "query_lemma": "planned",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge records an intended specification",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "planned",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0025",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_004",
+          "surface": "连续体各步",
+          "normalized_zh": "连续体步骤",
+          "query_lemma": "continuum step",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "part_of_speech": "noun",
+          "sense_key": "tone_continuum_step",
+          "sense_hint": "one level in a phonetic continuum",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0026",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_005",
+          "surface": "F0 曲线",
+          "normalized_zh": "F0 曲线",
+          "query_lemma": "fundamental frequency contour",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "part_of_speech": "noun",
+          "sense_key": "fundamental_frequency_contour",
+          "sense_hint": "the time-varying contour of acoustic fundamental frequency",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0027",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_005",
+          "surface": "asserted",
+          "normalized_zh": "陈述",
+          "query_lemma": "asserted",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge presents the property as asserted",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "asserted",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0028",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_005",
+          "surface": "弯",
+          "normalized_zh": "弯曲",
+          "query_lemma": "curved",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "attribute",
+          "source_field": "object",
+          "part_of_speech": "adjective",
+          "sense_key": "curved_f0_contour",
+          "sense_hint": "having a non-linear fundamental-frequency shape",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0029",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_006",
+          "surface": "声调连续体",
+          "normalized_zh": "声调连续体",
+          "query_lemma": "tone continuum",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "part_of_speech": "noun",
+          "sense_key": "phonetic_tone_continuum",
+          "sense_hint": "a graded sequence of speech stimuli between tones",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0030",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_006",
+          "surface": "asserted",
+          "normalized_zh": "陈述",
+          "query_lemma": "asserted",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge presents the difficulty as asserted",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "asserted",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0031",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_006",
+          "surface": "难",
+          "normalized_zh": "困难",
+          "query_lemma": "difficult",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "attribute",
+          "source_field": "object",
+          "part_of_speech": "adjective",
+          "sense_key": "technically_difficult",
+          "sense_hint": "requiring substantial technical effort or skill",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0032",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_007",
+          "surface": "PSOLA",
+          "normalized_zh": "PSOLA 音高同步叠加方法",
+          "query_lemma": "PSOLA",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "instrument",
+          "source_field": "object",
+          "part_of_speech": "proper_noun",
+          "sense_key": "pitch_synchronous_overlap_add",
+          "sense_hint": "pitch-synchronous overlap-add speech modification method",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0033",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_007",
+          "surface": "requested",
+          "normalized_zh": "请求",
+          "query_lemma": "requested",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge records a learning request",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "requested",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0034",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_007",
+          "surface": "Praat",
+          "normalized_zh": "Praat",
+          "query_lemma": "Praat",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "location",
+          "source_field": "object",
+          "part_of_speech": "proper_noun",
+          "sense_key": "praat_phonetics_software",
+          "sense_hint": "phonetics software used for speech analysis and manipulation",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0035",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_007",
+          "surface": "完成",
+          "normalized_zh": "完成",
+          "query_lemma": "complete",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "object",
+          "part_of_speech": "verb",
+          "sense_key": "complete_tone_continuum",
+          "sense_hint": "finish constructing a tone continuum",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_008",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0036",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_008",
+          "surface": "录音",
+          "normalized_zh": "录音",
+          "query_lemma": "audio recording",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "speech_audio_recording",
+          "sense_hint": "a recorded speech signal used as the source",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0037",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_008",
+          "surface": "先",
+          "normalized_zh": "先",
+          "query_lemma": "first",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the loading step precedes subsequent processing",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "first",
+          "datatype": "temporal_relation",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0038",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_008",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge is procedural advice",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0039",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_008",
+          "surface": "载入",
+          "normalized_zh": "载入",
+          "query_lemma": "load",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "load_audio_recording",
+          "sense_hint": "open an audio recording in software",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0040",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_008",
+          "surface": "二声",
+          "normalized_zh": "普通话二声",
+          "query_lemma": "Mandarin second tone",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "attribute",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "mandarin_second_tone",
+          "sense_hint": "the rising lexical tone in Mandarin",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_009",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0041",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_009",
+          "surface": "目标片段",
+          "normalized_zh": "目标片段",
+          "query_lemma": "target audio segment",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "target_audio_segment",
+          "sense_hint": "the selected portion of an audio recording for analysis",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0042",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_009",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge is procedural advice",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0043",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_009",
+          "surface": "提取",
+          "normalized_zh": "提取",
+          "query_lemma": "extract",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "extract_audio_segment",
+          "sense_hint": "isolate a target segment from audio",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_010",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0044",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_010",
+          "surface": "F0 曲线",
+          "normalized_zh": "F0 曲线",
+          "query_lemma": "fundamental frequency contour",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "fundamental_frequency_contour",
+          "sense_hint": "the time-varying contour of acoustic fundamental frequency",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0045",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_010",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge is procedural advice",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0046",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_010",
+          "surface": "提取",
+          "normalized_zh": "提取",
+          "query_lemma": "extract",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "extract_f0_contour",
+          "sense_hint": "derive a fundamental-frequency contour from audio",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_011",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0047",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_011",
+          "surface": "F0 数据",
+          "normalized_zh": "F0 数据",
+          "query_lemma": "fundamental frequency data",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "fundamental_frequency_data",
+          "sense_hint": "measurements of acoustic fundamental frequency over time",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0048",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_011",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge is procedural advice",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0049",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_011",
+          "surface": "导出",
+          "normalized_zh": "导出",
+          "query_lemma": "export",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "export_data",
+          "sense_hint": "write data into an external representation",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0050",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_011",
+          "surface": "文本",
+          "normalized_zh": "文本",
+          "query_lemma": "text",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "result",
+          "source_field": "predicate",
+          "part_of_speech": "noun",
+          "sense_key": "plain_text_representation",
+          "sense_hint": "a plain-text representation of data",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_012",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0051",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_012",
+          "surface": "目标值",
+          "normalized_zh": "目标值",
+          "query_lemma": "target value",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "acoustic_target_value",
+          "sense_hint": "a specified acoustic value used to generate a stimulus level",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0052",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_012",
+          "surface": "按等距规则",
+          "normalized_zh": "按等距规则",
+          "query_lemma": "spacing:equal_intervals",
+          "keyword_kind": "qualifier",
+          "keyword_type": "condition",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "target values are generated under an equal-interval rule",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "spacing:equal_intervals",
+          "datatype": "condition",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0053",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_012",
+          "surface": "9 组",
+          "normalized_zh": "9 组",
+          "query_lemma": "9",
+          "keyword_kind": "literal",
+          "keyword_type": "quantity",
+          "semantic_role": "value",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the required number of target-value groups",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "9",
+          "datatype": "number",
+          "unit": "group",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0054",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_012",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge is procedural advice",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0055",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_012",
+          "surface": "生成",
+          "normalized_zh": "生成",
+          "query_lemma": "generate",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "generate_target_values",
+          "sense_hint": "create target values for continuum levels",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0056",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_012",
+          "surface": "等距",
+          "normalized_zh": "等距",
+          "query_lemma": "equidistant",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "part_of_speech": "adjective",
+          "sense_key": "equally_spaced",
+          "sense_hint": "separated by equal intervals along a scale",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_013",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0057",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_013",
+          "surface": "音高",
+          "normalized_zh": "音高",
+          "query_lemma": "pitch",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "acoustic_pitch",
+          "sense_hint": "the perceived or measured highness of a sound",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0058",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_013",
+          "surface": "Praat 的 Manipulation/PSOLA 流程中",
+          "normalized_zh": "Praat Manipulation/PSOLA 流程",
+          "query_lemma": "Praat Manipulation PSOLA workflow",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "instrument",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "noun",
+          "sense_key": "praat_psola_workflow",
+          "sense_hint": "the Praat manipulation workflow that uses PSOLA for pitch modification",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0059",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_013",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge is procedural advice",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0060",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_013",
+          "surface": "替换",
+          "normalized_zh": "替换",
+          "query_lemma": "replace pitch",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "replace_pitch_contour",
+          "sense_hint": "replace an existing pitch contour",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0061",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_013",
+          "surface": "调整",
+          "normalized_zh": "调整",
+          "query_lemma": "adjust",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "adjust_acoustic_pitch",
+          "sense_hint": "modify acoustic pitch values",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_014",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0062",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_014",
+          "surface": "试听结果",
+          "normalized_zh": "试听结果",
+          "query_lemma": "audition result",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "audio_audition_result",
+          "sense_hint": "the perceived result obtained by listening to generated audio",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0063",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_014",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge is procedural advice",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0064",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_014",
+          "surface": "试听",
+          "normalized_zh": "试听",
+          "query_lemma": "audition",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "object",
+          "part_of_speech": "verb",
+          "sense_key": "audition_audio_result",
+          "sense_hint": "listen to an audio result for evaluation",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_015",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0065",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_015",
+          "surface": "检查结果",
+          "normalized_zh": "检查结果",
+          "query_lemma": "inspection result",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "stimulus_inspection_result",
+          "sense_hint": "the result of checking generated speech stimuli",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0066",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_015",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge is procedural advice",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0067",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_015",
+          "surface": "检查",
+          "normalized_zh": "检查",
+          "query_lemma": "inspect",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "object",
+          "part_of_speech": "verb",
+          "sense_key": "inspect_stimulus_result",
+          "sense_hint": "examine a generated stimulus result",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0068",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_003",
+          "surface": "数值",
+          "normalized_zh": "数值",
+          "query_lemma": "displayed numeric value",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "displayed_numeric_value",
+          "sense_hint": "a numeric value shown in a software interface",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0069",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_003",
+          "surface": "提取 F0 后",
+          "normalized_zh": "提取 F0 后",
+          "query_lemma": "after:f0_extraction",
+          "keyword_kind": "qualifier",
+          "keyword_type": "condition",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "select the displayed values after F0 extraction",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "after:f0_extraction",
+          "datatype": "condition",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0070",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_003",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge is procedural advice",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0071",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_003",
+          "surface": "选中",
+          "normalized_zh": "选中",
+          "query_lemma": "select",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "select_displayed_value",
+          "sense_hint": "select values shown in a software interface",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0072",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_003",
+          "surface": "Praat",
+          "normalized_zh": "Praat",
+          "query_lemma": "Praat",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "location",
+          "source_field": "object",
+          "part_of_speech": "proper_noun",
+          "sense_key": "praat_phonetics_software",
+          "sense_hint": "phonetics software used for speech analysis and manipulation",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0073",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_003",
+          "surface": "提取 F0",
+          "normalized_zh": "提取 F0",
+          "query_lemma": "extract F0",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "part_of_speech": "verb",
+          "sense_key": "extract_fundamental_frequency",
+          "sense_hint": "extract fundamental-frequency data from audio",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0074",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_004",
+          "surface": "文本编辑器",
+          "normalized_zh": "文本编辑器",
+          "query_lemma": "text editor",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "recipient",
+          "source_field": "predicate",
+          "part_of_speech": "noun",
+          "sense_key": "plain_text_editor",
+          "sense_hint": "software used to edit plain text content",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0075",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_004",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge is procedural advice",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0076",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_004",
+          "surface": "复制",
+          "normalized_zh": "复制",
+          "query_lemma": "copy",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "copy_displayed_value",
+          "sense_hint": "copy displayed values to another application",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0077",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_004",
+          "surface": "显示的数值",
+          "normalized_zh": "显示数值",
+          "query_lemma": "displayed numeric value",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "displayed_numeric_value",
+          "sense_hint": "a numeric value shown in a software interface",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0078",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_005",
+          "surface": "保存",
+          "normalized_zh": "保存",
+          "query_lemma": "save",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "save_file",
+          "sense_hint": "store content persistently in a file",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0079",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_005",
+          "surface": ".txt",
+          "normalized_zh": ".txt 文本文件扩展名",
+          "query_lemma": ".txt",
+          "keyword_kind": "literal",
+          "keyword_type": "property",
+          "semantic_role": "value",
+          "source_field": "object",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the exact requested file extension",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": ".txt",
+          "datatype": "code",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0080",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_005",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge is procedural advice",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0081",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_005",
+          "surface": "复制的数值",
+          "normalized_zh": "复制数值",
+          "query_lemma": "copied value",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "statement",
+          "part_of_speech": "noun",
+          "sense_key": "copied_numeric_value",
+          "sense_hint": "numeric values copied from the software display",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0082",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_006",
+          "surface": "音高范围",
+          "normalized_zh": "音高范围",
+          "query_lemma": "pitch range",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "acoustic_pitch_range",
+          "sense_hint": "the lower and upper pitch limits used for analysis",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0083",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_006",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge is procedural advice",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0084",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_006",
+          "surface": "确认",
+          "normalized_zh": "确认",
+          "query_lemma": "verify",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "verify_software_setting",
+          "sense_hint": "check that a software setting is appropriate",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0085",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_006",
+          "surface": "合适",
+          "normalized_zh": "合适",
+          "query_lemma": "appropriate",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "attribute",
+          "source_field": "object",
+          "part_of_speech": "adjective",
+          "sense_key": "appropriate_software_setting",
+          "sense_hint": "suitable for the intended extraction task",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0086",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_007",
+          "surface": "提取算法",
+          "normalized_zh": "提取算法",
+          "query_lemma": "extraction algorithm",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "pitch_extraction_algorithm",
+          "sense_hint": "an algorithm used to estimate acoustic pitch values",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0087",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_007",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge is procedural advice",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0088",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_007",
+          "surface": "确认",
+          "normalized_zh": "确认",
+          "query_lemma": "verify",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "verify_software_setting",
+          "sense_hint": "check that a software setting is appropriate",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0089",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_007",
+          "surface": "合适",
+          "normalized_zh": "合适",
+          "query_lemma": "appropriate",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "attribute",
+          "source_field": "object",
+          "part_of_speech": "adjective",
+          "sense_key": "appropriate_software_setting",
+          "sense_hint": "suitable for the intended extraction task",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_008",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0090",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_008",
+          "surface": "目标 F0",
+          "normalized_zh": "目标 F0",
+          "query_lemma": "target fundamental frequency",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "target_fundamental_frequency",
+          "sense_hint": "the intended fundamental-frequency contour or value for a stimulus",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0091",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_008",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge is procedural advice",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0092",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_008",
+          "surface": "文本文件",
+          "normalized_zh": "文本文件",
+          "query_lemma": "text file",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "instrument",
+          "source_field": "predicate",
+          "part_of_speech": "noun",
+          "sense_key": "plain_text_file",
+          "sense_hint": "a file containing plain text data",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0093",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_008",
+          "surface": "定义",
+          "normalized_zh": "定义",
+          "query_lemma": "define",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "define_target_f0",
+          "sense_hint": "specify target fundamental-frequency values",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0094",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_001",
+          "surface": "F0 的转折点",
+          "normalized_zh": "F0 转折点",
+          "query_lemma": "F0 turning point",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "f0_contour_turning_point",
+          "sense_hint": "a point where the direction of an F0 contour changes",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0095",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_001",
+          "surface": "planned",
+          "normalized_zh": "计划",
+          "query_lemma": "planned",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge records an intended modification",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "planned",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0096",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_001",
+          "surface": "二声",
+          "normalized_zh": "普通话二声",
+          "query_lemma": "Mandarin second tone",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "attribute",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "mandarin_second_tone",
+          "sense_hint": "the rising lexical tone in Mandarin",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0097",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_001",
+          "surface": "改变",
+          "normalized_zh": "改变",
+          "query_lemma": "change",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "change_f0_parameter",
+          "sense_hint": "modify a parameter of an F0 contour",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0098",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_002",
+          "surface": "offset",
+          "normalized_zh": "偏移量",
+          "query_lemma": "offset",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "f0_contour_offset",
+          "sense_hint": "an additive displacement applied to an F0 contour",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0099",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_002",
+          "surface": "planned",
+          "normalized_zh": "计划",
+          "query_lemma": "planned",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge records an intended modification",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "planned",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0100",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_002",
+          "surface": "二声",
+          "normalized_zh": "普通话二声",
+          "query_lemma": "Mandarin second tone",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "attribute",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "mandarin_second_tone",
+          "sense_hint": "the rising lexical tone in Mandarin",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0101",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_002",
+          "surface": "改变",
+          "normalized_zh": "改变",
+          "query_lemma": "change",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "change_f0_parameter",
+          "sense_hint": "modify a parameter of an F0 contour",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0102",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_003",
+          "surface": "三声",
+          "normalized_zh": "普通话三声",
+          "query_lemma": "Mandarin third tone",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "result",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "mandarin_third_tone",
+          "sense_hint": "the low or dipping lexical tone in Mandarin",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0103",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_003",
+          "surface": "planned",
+          "normalized_zh": "计划",
+          "query_lemma": "planned",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge records an intended transformation",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "planned",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0104",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_003",
+          "surface": "二声",
+          "normalized_zh": "普通话二声",
+          "query_lemma": "Mandarin second tone",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "subject",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "mandarin_second_tone",
+          "sense_hint": "the rising lexical tone in Mandarin",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0105",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_003",
+          "surface": "逐渐变成",
+          "normalized_zh": "逐渐转变",
+          "query_lemma": "transform gradually",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "object",
+          "part_of_speech": "verb",
+          "sense_key": "gradual_tone_transformation",
+          "sense_hint": "change gradually from one tone contour into another",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0106",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_004",
+          "surface": "等距",
+          "normalized_zh": "等距",
+          "query_lemma": "equidistant",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "adjective",
+          "sense_key": "equally_spaced",
+          "sense_hint": "separated by equal intervals along a scale",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0107",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_004",
+          "surface": "planned",
+          "normalized_zh": "计划",
+          "query_lemma": "planned",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge records an intended specification",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "planned",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0108",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_004",
+          "surface": "每一步",
+          "normalized_zh": "连续体步骤",
+          "query_lemma": "continuum step",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "part_of_speech": "noun",
+          "sense_key": "tone_continuum_step",
+          "sense_hint": "one level in a phonetic continuum",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0109",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_005",
+          "surface": "PSOLA",
+          "normalized_zh": "PSOLA 音高同步叠加方法",
+          "query_lemma": "PSOLA",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "topic",
+          "source_field": "object",
+          "part_of_speech": "proper_noun",
+          "sense_key": "pitch_synchronous_overlap_add",
+          "sense_hint": "pitch-synchronous overlap-add speech modification method",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0110",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_005",
+          "surface": "questioned",
+          "normalized_zh": "询问",
+          "query_lemma": "questioned",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge records a question",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "questioned",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0111",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_005",
+          "surface": "用",
+          "normalized_zh": "使用",
+          "query_lemma": "use",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "object",
+          "part_of_speech": "verb",
+          "sense_key": "use_psola_method",
+          "sense_hint": "apply PSOLA for pitch manipulation",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0112",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_006",
+          "surface": "Pitch",
+          "normalized_zh": "Praat Pitch 对象",
+          "query_lemma": "Praat Pitch object",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "proper_noun",
+          "sense_key": "praat_pitch_object",
+          "sense_hint": "the Praat pitch object used as conversion input",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0113",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_006",
+          "surface": "录音",
+          "normalized_zh": "录音",
+          "query_lemma": "audio recording",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "instrument",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "noun",
+          "sense_key": "speech_audio_recording",
+          "sense_hint": "a recorded speech signal used as the source",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0114",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_006",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge is procedural advice",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0115",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_006",
+          "surface": "生成",
+          "normalized_zh": "生成",
+          "query_lemma": "generate",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "generate_pitch_object",
+          "sense_hint": "create a Praat Pitch object from audio",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0116",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_007",
+          "surface": "Manipulation 对象",
+          "normalized_zh": "Praat Manipulation 对象",
+          "query_lemma": "Praat Manipulation object",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "result",
+          "source_field": "object",
+          "part_of_speech": "proper_noun",
+          "sense_key": "praat_manipulation_object",
+          "sense_hint": "a Praat object used to manipulate duration and pitch",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0117",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_007",
+          "surface": "Pitch",
+          "normalized_zh": "Praat Pitch 对象",
+          "query_lemma": "Praat Pitch object",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "instrument",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "proper_noun",
+          "sense_key": "praat_pitch_object",
+          "sense_hint": "the Praat pitch object used as conversion input",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0118",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_007",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge is procedural advice",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0119",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_007",
+          "surface": "转为",
+          "normalized_zh": "转换",
+          "query_lemma": "convert",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "convert_pitch_to_manipulation",
+          "sense_hint": "convert a Pitch object into a Manipulation object",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_008",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0120",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_008",
+          "surface": "替换音高",
+          "normalized_zh": "替换音高",
+          "query_lemma": "replace pitch",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "verb",
+          "sense_key": "replace_pitch_contour",
+          "sense_hint": "replace an existing pitch contour",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0121",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_008",
+          "surface": "Manipulation 窗口中",
+          "normalized_zh": "Manipulation 窗口",
+          "query_lemma": "Manipulation window",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "location",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "noun",
+          "sense_key": "praat_manipulation_window",
+          "sense_hint": "the Praat editor window for a Manipulation object",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0122",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_008",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge is procedural advice",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0123",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_008",
+          "surface": "使用",
+          "normalized_zh": "使用",
+          "query_lemma": "use",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "use_pitch_replacement",
+          "sense_hint": "use a pitch-replacement function",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_009",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0124",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_009",
+          "surface": "目标音高",
+          "normalized_zh": "目标音高",
+          "query_lemma": "target pitch",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "target_acoustic_pitch",
+          "sense_hint": "the intended pitch values for modified speech",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0125",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_009",
+          "surface": "PSOLA",
+          "normalized_zh": "PSOLA 方法",
+          "query_lemma": "PSOLA",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "instrument",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "proper_noun",
+          "sense_key": "pitch_synchronous_overlap_add",
+          "sense_hint": "pitch-synchronous overlap-add speech modification method",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0126",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_009",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge is procedural advice",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0127",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_009",
+          "surface": "调整",
+          "normalized_zh": "调整",
+          "query_lemma": "adjust",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "adjust_acoustic_pitch",
+          "sense_hint": "modify acoustic pitch values",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_010",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0128",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_010",
+          "surface": "等距级别",
+          "normalized_zh": "等距级别",
+          "query_lemma": "equidistant level",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "equally_spaced_stimulus_level",
+          "sense_hint": "a stimulus level separated from adjacent levels by equal intervals",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0129",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_010",
+          "surface": "9 个",
+          "normalized_zh": "9 个",
+          "query_lemma": "9",
+          "keyword_kind": "literal",
+          "keyword_type": "quantity",
+          "semantic_role": "value",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the required number of equally spaced levels",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "9",
+          "datatype": "number",
+          "unit": "level",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0130",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_010",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge is procedural advice",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0131",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_010",
+          "surface": "总变化范围",
+          "normalized_zh": "总变化范围",
+          "query_lemma": "total change range",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "part_of_speech": "noun",
+          "sense_key": "total_pitch_change_range",
+          "sense_hint": "the total span of pitch change across a continuum",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0132",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_010",
+          "surface": "分配",
+          "normalized_zh": "分配",
+          "query_lemma": "distribute",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "distribute_stimulus_levels",
+          "sense_hint": "divide a total range among stimulus levels",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_011",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0133",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_011",
+          "surface": "时长",
+          "normalized_zh": "时长",
+          "query_lemma": "duration",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "audio_stimulus_duration",
+          "sense_hint": "the temporal length of an audio stimulus",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0134",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_011",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge is procedural advice",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0135",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_011",
+          "surface": "各级别",
+          "normalized_zh": "连续体级别",
+          "query_lemma": "continuum level",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "part_of_speech": "noun",
+          "sense_key": "tone_continuum_level",
+          "sense_hint": "one level in a phonetic continuum",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0136",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_011",
+          "surface": "保持",
+          "normalized_zh": "保持",
+          "query_lemma": "maintain",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "maintain_parameter_consistency",
+          "sense_hint": "keep a parameter consistent across levels",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0137",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_011",
+          "surface": "一致",
+          "normalized_zh": "一致",
+          "query_lemma": "consistent",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "attribute",
+          "source_field": "object",
+          "part_of_speech": "adjective",
+          "sense_key": "consistent_stimulus_parameter",
+          "sense_hint": "unchanged across stimulus levels",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_012",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0138",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_012",
+          "surface": "参数一致",
+          "normalized_zh": "参数一致性",
+          "query_lemma": "parameter consistency",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "stimulus_parameter_consistency",
+          "sense_hint": "holding non-target parameters constant across stimulus levels",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0139",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_012",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "semantic_role": "modality",
+          "keyword_type": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge is procedural advice",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0140",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_012",
+          "surface": "各级别",
+          "normalized_zh": "连续体级别",
+          "query_lemma": "continuum level",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "subject",
+          "source_field": "subject",
+          "part_of_speech": "noun",
+          "sense_key": "tone_continuum_level",
+          "sense_hint": "one level in a phonetic continuum",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0141",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_012",
+          "surface": "保持",
+          "normalized_zh": "保持",
+          "query_lemma": "maintain",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "maintain_parameter_consistency",
+          "sense_hint": "keep a parameter consistent across levels",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0142",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_001",
+          "surface": "Scale pitch",
+          "normalized_zh": "Scale pitch 功能",
+          "query_lemma": "Scale pitch",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "proper_noun",
+          "sense_key": "praat_scale_pitch_command",
+          "sense_hint": "the Praat command named Scale pitch",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0143",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_001",
+          "surface": "第 8 步中",
+          "normalized_zh": "第 8 步",
+          "query_lemma": "8",
+          "keyword_kind": "literal",
+          "keyword_type": "quantity",
+          "semantic_role": "value",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the referenced procedural step number",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "8",
+          "datatype": "number",
+          "unit": "step",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0144",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_001",
+          "surface": "observed",
+          "normalized_zh": "观察到",
+          "query_lemma": "observed",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge reports an observation",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "observed",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0145",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_001",
+          "surface": "没有看到",
+          "normalized_zh": "未看到",
+          "query_lemma": "not see",
+          "keyword_kind": "lexical",
+          "keyword_type": "relation",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "observe_command_absence",
+          "sense_hint": "observe that a command is absent from a step",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0146",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_001",
+          "surface": "negative",
+          "normalized_zh": "否定",
+          "query_lemma": "negative",
+          "keyword_kind": "qualifier",
+          "keyword_type": "polarity",
+          "semantic_role": "polarity",
+          "source_field": "qualifiers.polarity",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge explicitly negates seeing the command",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "negative",
+          "datatype": "polarity",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0147",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_002",
+          "surface": "详细的说明",
+          "normalized_zh": "详细说明",
+          "query_lemma": "detailed instruction",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "detailed_procedural_instruction",
+          "sense_hint": "a step-by-step explanation with additional operational detail",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0148",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_002",
+          "surface": "requested",
+          "normalized_zh": "请求",
+          "query_lemma": "requested",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge records a user request",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "requested",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0149",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_003",
+          "surface": "Replace pitch",
+          "normalized_zh": "Replace pitch 功能",
+          "query_lemma": "Replace pitch",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "verb",
+          "sense_key": "praat_replace_pitch_command",
+          "sense_hint": "a named Praat command that replaces pitch data",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0150",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_003",
+          "surface": "当前 Praat 版本没有 Scale pitch",
+          "normalized_zh": "当前 Praat 版本没有 Scale pitch",
+          "query_lemma": "praat_scale_pitch:absent",
+          "keyword_kind": "qualifier",
+          "keyword_type": "condition",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "use the alternative when Scale pitch is unavailable in the current Praat version",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "praat_scale_pitch:absent",
+          "datatype": "condition",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0151",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_003",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge is conditional procedural advice",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0152",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_003",
+          "surface": "Scale pitch",
+          "normalized_zh": "Scale pitch",
+          "query_lemma": "Scale pitch",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "part_of_speech": "proper_noun",
+          "sense_key": "praat_scale_pitch_command",
+          "sense_hint": "the Praat command named Scale pitch",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0153",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_003",
+          "surface": "Praat 版本",
+          "normalized_zh": "Praat 版本",
+          "query_lemma": "Praat version",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "part_of_speech": "noun",
+          "sense_key": "praat_software_version",
+          "sense_hint": "a particular version of Praat software",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0154",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_003",
+          "surface": "没有",
+          "normalized_zh": "缺少",
+          "query_lemma": "absent",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "part_of_speech": "adjective",
+          "sense_key": "software_command_absent",
+          "sense_hint": "not available in the current software version",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0155",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_004",
+          "surface": "PSOLA 音高替换流程",
+          "normalized_zh": "PSOLA 音高替换流程",
+          "query_lemma": "PSOLA pitch replacement",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "psola_pitch_replacement_workflow",
+          "sense_hint": "a PSOLA-based workflow for replacing a pitch contour",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0156",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_004",
+          "surface": "当前 Praat 版本没有 Scale pitch",
+          "normalized_zh": "当前 Praat 版本没有 Scale pitch",
+          "query_lemma": "praat_scale_pitch:absent",
+          "keyword_kind": "qualifier",
+          "keyword_type": "condition",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "use the equivalent workflow when Scale pitch is unavailable",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "praat_scale_pitch:absent",
+          "datatype": "condition",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0157",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_004",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "semantic_role": "modality",
+          "keyword_type": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge is conditional procedural advice",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0158",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_004",
+          "surface": "Scale pitch",
+          "normalized_zh": "Scale pitch",
+          "query_lemma": "Scale pitch",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "part_of_speech": "proper_noun",
+          "sense_key": "praat_scale_pitch_command",
+          "sense_hint": "the Praat command named Scale pitch",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0159",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_004",
+          "surface": "Praat 版本",
+          "normalized_zh": "Praat 版本",
+          "query_lemma": "Praat version",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "part_of_speech": "noun",
+          "sense_key": "praat_software_version",
+          "sense_hint": "a particular version of Praat software",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0160",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_004",
+          "surface": "没有",
+          "normalized_zh": "缺少",
+          "query_lemma": "absent",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "condition",
+          "source_field": "qualifiers.conditions",
+          "part_of_speech": "adjective",
+          "sense_key": "software_command_absent",
+          "sense_hint": "not available in the current software version",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0161",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_005",
+          "surface": "起始音高",
+          "normalized_zh": "起始音高",
+          "query_lemma": "starting pitch",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "starting_acoustic_pitch",
+          "sense_hint": "the pitch value at the beginning of a contour",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0162",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_005",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "semantic_role": "modality",
+          "keyword_type": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge is procedural advice",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0163",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_005",
+          "surface": "设定",
+          "normalized_zh": "设定",
+          "query_lemma": "set",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "set_pitch_value",
+          "sense_hint": "assign a pitch value",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0164",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_006",
+          "surface": "终止音高",
+          "normalized_zh": "终止音高",
+          "query_lemma": "ending pitch",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "ending_acoustic_pitch",
+          "sense_hint": "the pitch value at the end of a contour",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0165",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_006",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "semantic_role": "modality",
+          "keyword_type": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge is procedural advice",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0166",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_006",
+          "surface": "设定",
+          "normalized_zh": "设定",
+          "query_lemma": "set",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "set_pitch_value",
+          "sense_hint": "assign a pitch value",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0167",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_007",
+          "surface": "平均音高",
+          "normalized_zh": "平均音高",
+          "query_lemma": "mean pitch",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "mean_acoustic_pitch",
+          "sense_hint": "the average pitch value over a specified interval",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0168",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_007",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "semantic_role": "modality",
+          "keyword_type": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge is procedural advice",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0169",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_007",
+          "surface": "设定",
+          "normalized_zh": "设定",
+          "query_lemma": "set",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "set_pitch_value",
+          "sense_hint": "assign a pitch value",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_008",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0170",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_008",
+          "surface": "F0 转折点",
+          "normalized_zh": "F0 转折点",
+          "query_lemma": "F0 turning point",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "f0_contour_turning_point",
+          "sense_hint": "a point where the direction of an F0 contour changes",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0171",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_008",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "semantic_role": "modality",
+          "keyword_type": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge is procedural advice",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0172",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_008",
+          "surface": "检查",
+          "normalized_zh": "检查",
+          "query_lemma": "inspect",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "inspect_f0_parameter",
+          "sense_hint": "examine an F0 parameter at each level",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0173",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_008",
+          "surface": "每个级别",
+          "normalized_zh": "每个连续体级别",
+          "query_lemma": "continuum level",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "subject",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "tone_continuum_level",
+          "sense_hint": "one level in a phonetic continuum",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_009",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0174",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_009",
+          "surface": "offset",
+          "normalized_zh": "偏移量",
+          "query_lemma": "offset",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "f0_contour_offset",
+          "sense_hint": "an additive displacement applied to an F0 contour",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0175",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_009",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "semantic_role": "modality",
+          "keyword_type": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge is procedural advice",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0176",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_009",
+          "surface": "检查",
+          "normalized_zh": "检查",
+          "query_lemma": "inspect",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "inspect_f0_parameter",
+          "sense_hint": "examine an F0 parameter at each level",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0177",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_009",
+          "surface": "每个级别",
+          "normalized_zh": "每个连续体级别",
+          "query_lemma": "continuum level",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "subject",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "tone_continuum_level",
+          "sense_hint": "one level in a phonetic continuum",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_010",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0178",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_010",
+          "surface": "连续体",
+          "normalized_zh": "声调连续体",
+          "query_lemma": "tone continuum",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "phonetic_tone_continuum",
+          "sense_hint": "a graded sequence of speech stimuli between tones",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0179",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_010",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "semantic_role": "modality",
+          "keyword_type": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "the source knowledge is procedural advice",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0180",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_010",
+          "surface": "试听",
+          "normalized_zh": "试听",
+          "query_lemma": "audition",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "audition_audio_result",
+          "sense_hint": "listen to an audio result for evaluation",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-002-1fa98728ac3e_0181",
+          "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_010",
+          "surface": "导出的",
+          "normalized_zh": "已导出",
+          "query_lemma": "exported",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "attribute",
+          "source_field": "object",
+          "part_of_speech": "adjective",
+          "sense_key": "exported_tone_continuum",
+          "sense_hint": "exported from the software for listening",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ]
+    }
+  ]
+}

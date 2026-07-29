@@ -1,0 +1,752 @@
+{
+    "原始文本":  {
+                 "user":  "我准备采用联系事务所合伙人和做业务拓展这两种方式。现在是 11 月，今天联系工作时要不要提 12 月 15 日到 12 月 26 日的休假？我担心现在说会影响分派。",
+                 "agent":  "应该现在说明。提前告知能让合伙人在安排工作时考虑你的可用时间；同时强调你在休假前后都可以工作，并愿意提前完成任务、安排交接。这样既保持透明，也不会把休假包装成无法承担工作的信号。"
+             },
+    "知识":  {
+               "user":  [
+                            {
+                                "statement":  "用户准备采用联系事务所合伙人的方式争取工作。",
+                                "subject":  "用户",
+                                "predicate":  "准备采用",
+                                "object":  "联系事务所合伙人",
+                                "qualifiers":  {
+                                                   "conditions":  [
+
+                                                                  ],
+                                                   "modality":  "planned",
+                                                   "polarity":  "positive",
+                                                   "scope":  [
+
+                                                             ],
+                                                   "temporal":  [
+
+                                                                ]
+                                               }
+                            },
+                            {
+                                "statement":  "用户准备采用业务拓展的方式争取工作。",
+                                "subject":  "用户",
+                                "predicate":  "准备采用",
+                                "object":  "做业务拓展",
+                                "qualifiers":  {
+                                                   "conditions":  [
+
+                                                                  ],
+                                                   "modality":  "planned",
+                                                   "polarity":  "positive",
+                                                   "scope":  [
+
+                                                             ],
+                                                   "temporal":  [
+
+                                                                ]
+                                               }
+                            },
+                            {
+                                "statement":  "当前月份是 11 月。",
+                                "subject":  "当前月份",
+                                "predicate":  "是",
+                                "object":  "11 月",
+                                "qualifiers":  {
+                                                   "conditions":  [
+
+                                                                  ],
+                                                   "modality":  "asserted",
+                                                   "polarity":  "positive",
+                                                   "scope":  [
+
+                                                             ],
+                                                   "temporal":  [
+                                                                    "现在"
+                                                                ]
+                                               }
+                            },
+                            {
+                                "statement":  "用户计划于 12 月 15 日至 12 月 26 日休假。",
+                                "subject":  "用户",
+                                "predicate":  "计划休假",
+                                "object":  "12 月 15 日到 12 月 26 日",
+                                "qualifiers":  {
+                                                   "conditions":  [
+
+                                                                  ],
+                                                   "modality":  "planned",
+                                                   "polarity":  "positive",
+                                                   "scope":  [
+
+                                                             ],
+                                                   "temporal":  [
+                                                                    "12 月 15 日到 12 月 26 日"
+                                                                ]
+                                               }
+                            },
+                            {
+                                "statement":  "用户询问今天联系工作时是否应提及休假。",
+                                "subject":  "用户",
+                                "predicate":  "询问是否提及",
+                                "object":  "休假",
+                                "qualifiers":  {
+                                                   "conditions":  [
+                                                                      "联系工作时"
+                                                                  ],
+                                                   "modality":  "questioned",
+                                                   "polarity":  "positive",
+                                                   "scope":  [
+
+                                                             ],
+                                                   "temporal":  [
+                                                                    "今天"
+                                                                ]
+                                               }
+                            },
+                            {
+                                "statement":  "用户担心现在说明休假会影响工作分派。",
+                                "subject":  "用户",
+                                "predicate":  "担心",
+                                "object":  "说明休假影响工作分派",
+                                "qualifiers":  {
+                                                   "conditions":  [
+
+                                                                  ],
+                                                   "modality":  "possible",
+                                                   "polarity":  "positive",
+                                                   "scope":  [
+
+                                                             ],
+                                                   "temporal":  [
+                                                                    "现在"
+                                                                ]
+                                               }
+                            }
+                        ],
+               "agent":  [
+                             {
+                                 "statement":  "代理建议用户现在说明休假安排。",
+                                 "subject":  "用户",
+                                 "predicate":  "应说明",
+                                 "object":  "休假安排",
+                                 "qualifiers":  {
+                                                    "conditions":  [
+
+                                                                   ],
+                                                    "modality":  "advised",
+                                                    "polarity":  "positive",
+                                                    "scope":  [
+
+                                                              ],
+                                                    "temporal":  [
+                                                                     "现在"
+                                                                 ]
+                                                }
+                             },
+                             {
+                                 "statement":  "代理称提前告知能让合伙人安排工作时考虑用户的可用时间。",
+                                 "subject":  "提前告知",
+                                 "predicate":  "能让合伙人考虑",
+                                 "object":  "用户的可用时间",
+                                 "qualifiers":  {
+                                                    "conditions":  [
+
+                                                                   ],
+                                                    "modality":  "asserted",
+                                                    "polarity":  "positive",
+                                                    "scope":  [
+                                                                  "安排工作时"
+                                                              ],
+                                                    "temporal":  [
+
+                                                                 ]
+                                                }
+                             },
+                             {
+                                 "statement":  "代理建议用户强调休假前可以工作。",
+                                 "subject":  "用户",
+                                 "predicate":  "应强调",
+                                 "object":  "休假前可以工作",
+                                 "qualifiers":  {
+                                                    "conditions":  [
+
+                                                                   ],
+                                                    "modality":  "advised",
+                                                    "polarity":  "positive",
+                                                    "scope":  [
+
+                                                              ],
+                                                    "temporal":  [
+                                                                     "休假前"
+                                                                 ]
+                                                }
+                             },
+                             {
+                                 "statement":  "代理建议用户强调休假后可以工作。",
+                                 "subject":  "用户",
+                                 "predicate":  "应强调",
+                                 "object":  "休假后可以工作",
+                                 "qualifiers":  {
+                                                    "conditions":  [
+
+                                                                   ],
+                                                    "modality":  "advised",
+                                                    "polarity":  "positive",
+                                                    "scope":  [
+
+                                                              ],
+                                                    "temporal":  [
+                                                                     "休假后"
+                                                                 ]
+                                                }
+                             },
+                             {
+                                 "statement":  "代理建议用户表示愿意提前完成任务。",
+                                 "subject":  "用户",
+                                 "predicate":  "应表示愿意",
+                                 "object":  "提前完成任务",
+                                 "qualifiers":  {
+                                                    "conditions":  [
+
+                                                                   ],
+                                                    "modality":  "advised",
+                                                    "polarity":  "positive",
+                                                    "scope":  [
+
+                                                              ],
+                                                    "temporal":  [
+
+                                                                 ]
+                                                }
+                             },
+                             {
+                                 "statement":  "代理建议用户表示愿意安排交接。",
+                                 "subject":  "用户",
+                                 "predicate":  "应表示愿意",
+                                 "object":  "安排交接",
+                                 "qualifiers":  {
+                                                    "conditions":  [
+
+                                                                   ],
+                                                    "modality":  "advised",
+                                                    "polarity":  "positive",
+                                                    "scope":  [
+
+                                                              ],
+                                                    "temporal":  [
+
+                                                                 ]
+                                                }
+                             },
+                             {
+                                 "statement":  "代理称这种表达方式保持透明。",
+                                 "subject":  "这种表达方式",
+                                 "predicate":  "保持",
+                                 "object":  "透明",
+                                 "qualifiers":  {
+                                                    "conditions":  [
+
+                                                                   ],
+                                                    "modality":  "asserted",
+                                                    "polarity":  "positive",
+                                                    "scope":  [
+
+                                                              ],
+                                                    "temporal":  [
+
+                                                                 ]
+                                                }
+                             },
+                             {
+                                 "statement":  "代理称这种表达方式不会把休假包装成无法承担工作的信号。",
+                                 "subject":  "这种表达方式",
+                                 "predicate":  "不会包装成",
+                                 "object":  "无法承担工作的信号",
+                                 "qualifiers":  {
+                                                    "conditions":  [
+
+                                                                   ],
+                                                    "modality":  "asserted",
+                                                    "polarity":  "negative",
+                                                    "scope":  [
+                                                                  "休假"
+                                                              ],
+                                                    "temporal":  [
+
+                                                                 ]
+                                                }
+                             }
+                         ]
+           },
+    "关键词":  {
+                "user":  [
+                             [
+                                 {
+                                     "keyword":  "准备",
+                                     "wordnet":  {
+                                                     "synset":  "fix.v.12",
+                                                     "lemma":  "prepare",
+                                                     "pos":  "v"
+                                                 }
+                                 },
+                                 {
+                                     "keyword":  "合伙人",
+                                     "wordnet":  {
+                                                     "synset":  "partner.n.03",
+                                                     "lemma":  "partner",
+                                                     "pos":  "n"
+                                                 }
+                                 },
+                                 {
+                                     "keyword":  "联系",
+                                     "wordnet":  {
+                                                     "synset":  "reach.v.04",
+                                                     "lemma":  "contact",
+                                                     "pos":  "v"
+                                                 }
+                                 },
+                                 {
+                                     "keyword":  "工作",
+                                     "wordnet":  {
+                                                     "synset":  "work.n.01",
+                                                     "lemma":  "work",
+                                                     "pos":  "n"
+                                                 }
+                                 },
+                                 {
+                                     "keyword":  "争取",
+                                     "wordnet":  {
+                                                     "synset":  "seek.v.01",
+                                                     "lemma":  "seek",
+                                                     "pos":  "v"
+                                                 }
+                                 }
+                             ],
+                             [
+                                 {
+                                     "keyword":  "准备",
+                                     "wordnet":  {
+                                                     "synset":  "fix.v.12",
+                                                     "lemma":  "prepare",
+                                                     "pos":  "v"
+                                                 }
+                                 },
+                                 {
+                                     "keyword":  "业务拓展"
+                                 },
+                                 {
+                                     "keyword":  "工作",
+                                     "wordnet":  {
+                                                     "synset":  "work.n.01",
+                                                     "lemma":  "work",
+                                                     "pos":  "n"
+                                                 }
+                                 },
+                                 {
+                                     "keyword":  "争取",
+                                     "wordnet":  {
+                                                     "synset":  "seek.v.01",
+                                                     "lemma":  "seek",
+                                                     "pos":  "v"
+                                                 }
+                                 },
+                                 {
+                                     "keyword":  "方式",
+                                     "wordnet":  {
+                                                     "synset":  "manner.n.01",
+                                                     "lemma":  "manner",
+                                                     "pos":  "n"
+                                                 }
+                                 }
+                             ],
+                             [
+                                 {
+                                     "keyword":  "现在",
+                                     "wordnet":  {
+                                                     "synset":  "now.r.04",
+                                                     "lemma":  "now",
+                                                     "pos":  "r"
+                                                 }
+                                 },
+                                 {
+                                     "keyword":  "11月"
+                                 }
+                             ],
+                             [
+                                 {
+                                     "keyword":  "休假",
+                                     "wordnet":  {
+                                                     "synset":  "leave.n.01",
+                                                     "lemma":  "leave",
+                                                     "pos":  "n"
+                                                 }
+                                 },
+                                 {
+                                     "keyword":  "计划",
+                                     "wordnet":  {
+                                                     "synset":  "plan.n.01",
+                                                     "lemma":  "plan",
+                                                     "pos":  "n"
+                                                 }
+                                 },
+                                 {
+                                     "keyword":  "12月15日至12月26日"
+                                 }
+                             ],
+                             [
+                                 {
+                                     "keyword":  "今天",
+                                     "wordnet":  {
+                                                     "synset":  "today.n.02",
+                                                     "lemma":  "today",
+                                                     "pos":  "n"
+                                                 }
+                                 },
+                                 {
+                                     "keyword":  "提及",
+                                     "wordnet":  {
+                                                     "synset":  "mention.v.01",
+                                                     "lemma":  "mention",
+                                                     "pos":  "v"
+                                                 }
+                                 },
+                                 {
+                                     "keyword":  "工作",
+                                     "wordnet":  {
+                                                     "synset":  "work.n.01",
+                                                     "lemma":  "work",
+                                                     "pos":  "n"
+                                                 }
+                                 },
+                                 {
+                                     "keyword":  "联系",
+                                     "wordnet":  {
+                                                     "synset":  "reach.v.04",
+                                                     "lemma":  "contact",
+                                                     "pos":  "v"
+                                                 }
+                                 },
+                                 {
+                                     "keyword":  "休假",
+                                     "wordnet":  {
+                                                     "synset":  "leave.n.01",
+                                                     "lemma":  "leave",
+                                                     "pos":  "n"
+                                                 }
+                                 }
+                             ],
+                             [
+                                 {
+                                     "keyword":  "现在",
+                                     "wordnet":  {
+                                                     "synset":  "now.r.04",
+                                                     "lemma":  "now",
+                                                     "pos":  "r"
+                                                 }
+                                 },
+                                 {
+                                     "keyword":  "担心",
+                                     "wordnet":  {
+                                                     "synset":  "worry.v.01",
+                                                     "lemma":  "worry",
+                                                     "pos":  "v"
+                                                 }
+                                 },
+                                 {
+                                     "keyword":  "工作分派"
+                                 },
+                                 {
+                                     "keyword":  "休假",
+                                     "wordnet":  {
+                                                     "synset":  "leave.n.01",
+                                                     "lemma":  "leave",
+                                                     "pos":  "n"
+                                                 }
+                                 },
+                                 {
+                                     "keyword":  "工作",
+                                     "wordnet":  {
+                                                     "synset":  "work.n.01",
+                                                     "lemma":  "work",
+                                                     "pos":  "n"
+                                                 }
+                                 }
+                             ]
+                         ],
+                "agent":  [
+                              [
+                                  {
+                                      "keyword":  "现在",
+                                      "wordnet":  {
+                                                      "synset":  "now.r.04",
+                                                      "lemma":  "now",
+                                                      "pos":  "r"
+                                                  }
+                                  },
+                                  {
+                                      "keyword":  "说明",
+                                      "wordnet":  {
+                                                      "synset":  "explain.v.01",
+                                                      "lemma":  "explain",
+                                                      "pos":  "v"
+                                                  }
+                                  },
+                                  {
+                                      "keyword":  "休假安排"
+                                  },
+                                  {
+                                      "keyword":  "休假",
+                                      "wordnet":  {
+                                                      "synset":  "leave.n.01",
+                                                      "lemma":  "leave",
+                                                      "pos":  "n"
+                                                  }
+                                  },
+                                  {
+                                      "keyword":  "安排",
+                                      "wordnet":  {
+                                                      "synset":  "arrange.v.02",
+                                                      "lemma":  "arrange",
+                                                      "pos":  "v"
+                                                  }
+                                  }
+                              ],
+                              [
+                                  {
+                                      "keyword":  "合伙人",
+                                      "wordnet":  {
+                                                      "synset":  "partner.n.03",
+                                                      "lemma":  "partner",
+                                                      "pos":  "n"
+                                                  }
+                                  },
+                                  {
+                                      "keyword":  "考虑",
+                                      "wordnet":  {
+                                                      "synset":  "consider.v.05",
+                                                      "lemma":  "consider",
+                                                      "pos":  "v"
+                                                  }
+                                  },
+                                  {
+                                      "keyword":  "工作",
+                                      "wordnet":  {
+                                                      "synset":  "work.n.01",
+                                                      "lemma":  "work",
+                                                      "pos":  "n"
+                                                  }
+                                  },
+                                  {
+                                      "keyword":  "安排",
+                                      "wordnet":  {
+                                                      "synset":  "arrange.v.02",
+                                                      "lemma":  "arrange",
+                                                      "pos":  "v"
+                                                  }
+                                  },
+                                  {
+                                      "keyword":  "可用时间"
+                                  },
+                                  {
+                                      "keyword":  "提前",
+                                      "wordnet":  {
+                                                      "synset":  "early.r.02",
+                                                      "lemma":  "early",
+                                                      "pos":  "r"
+                                                  }
+                                  },
+                                  {
+                                      "keyword":  "告知",
+                                      "wordnet":  {
+                                                      "synset":  "inform.v.01",
+                                                      "lemma":  "inform",
+                                                      "pos":  "v"
+                                                  }
+                                  }
+                              ],
+                              [
+                                  {
+                                      "keyword":  "强调",
+                                      "wordnet":  {
+                                                      "synset":  "stress.v.01",
+                                                      "lemma":  "emphasize",
+                                                      "pos":  "v"
+                                                  }
+                                  },
+                                  {
+                                      "keyword":  "休假前"
+                                  },
+                                  {
+                                      "keyword":  "休假",
+                                      "wordnet":  {
+                                                      "synset":  "leave.n.01",
+                                                      "lemma":  "leave",
+                                                      "pos":  "n"
+                                                  }
+                                  },
+                                  {
+                                      "keyword":  "工作",
+                                      "wordnet":  {
+                                                      "synset":  "work.n.01",
+                                                      "lemma":  "work",
+                                                      "pos":  "n"
+                                                  }
+                                  }
+                              ],
+                              [
+                                  {
+                                      "keyword":  "强调",
+                                      "wordnet":  {
+                                                      "synset":  "stress.v.01",
+                                                      "lemma":  "emphasize",
+                                                      "pos":  "v"
+                                                  }
+                                  },
+                                  {
+                                      "keyword":  "休假后"
+                                  },
+                                  {
+                                      "keyword":  "休假",
+                                      "wordnet":  {
+                                                      "synset":  "leave.n.01",
+                                                      "lemma":  "leave",
+                                                      "pos":  "n"
+                                                  }
+                                  },
+                                  {
+                                      "keyword":  "工作",
+                                      "wordnet":  {
+                                                      "synset":  "work.n.01",
+                                                      "lemma":  "work",
+                                                      "pos":  "n"
+                                                  }
+                                  }
+                              ],
+                              [
+                                  {
+                                      "keyword":  "愿意",
+                                      "wordnet":  {
+                                                      "synset":  "willing.a.01",
+                                                      "lemma":  "willing",
+                                                      "pos":  "a"
+                                                  }
+                                  },
+                                  {
+                                      "keyword":  "提前",
+                                      "wordnet":  {
+                                                      "synset":  "early.r.02",
+                                                      "lemma":  "early",
+                                                      "pos":  "r"
+                                                  }
+                                  },
+                                  {
+                                      "keyword":  "任务",
+                                      "wordnet":  {
+                                                      "synset":  "job.n.02",
+                                                      "lemma":  "task",
+                                                      "pos":  "n"
+                                                  }
+                                  },
+                                  {
+                                      "keyword":  "完成",
+                                      "wordnet":  {
+                                                      "synset":  "complete.v.01",
+                                                      "lemma":  "complete",
+                                                      "pos":  "v"
+                                                  }
+                                  }
+                              ],
+                              [
+                                  {
+                                      "keyword":  "愿意",
+                                      "wordnet":  {
+                                                      "synset":  "willing.a.01",
+                                                      "lemma":  "willing",
+                                                      "pos":  "a"
+                                                  }
+                                  },
+                                  {
+                                      "keyword":  "交接",
+                                      "wordnet":  {
+                                                      "synset":  "handover.n.01",
+                                                      "lemma":  "handover",
+                                                      "pos":  "n"
+                                                  }
+                                  },
+                                  {
+                                      "keyword":  "安排",
+                                      "wordnet":  {
+                                                      "synset":  "arrange.v.02",
+                                                      "lemma":  "arrange",
+                                                      "pos":  "v"
+                                                  }
+                                  }
+                              ],
+                              [
+                                  {
+                                      "keyword":  "透明",
+                                      "wordnet":  {
+                                                      "synset":  "candid.s.03",
+                                                      "lemma":  "open",
+                                                      "pos":  "s"
+                                                  }
+                                  },
+                                  {
+                                      "keyword":  "表达",
+                                      "wordnet":  {
+                                                      "synset":  "express.v.01",
+                                                      "lemma":  "express",
+                                                      "pos":  "v"
+                                                  }
+                                  },
+                                  {
+                                      "keyword":  "方式",
+                                      "wordnet":  {
+                                                      "synset":  "manner.n.01",
+                                                      "lemma":  "manner",
+                                                      "pos":  "n"
+                                                  }
+                                  }
+                              ],
+                              [
+                                  {
+                                      "keyword":  "休假",
+                                      "wordnet":  {
+                                                      "synset":  "leave.n.01",
+                                                      "lemma":  "leave",
+                                                      "pos":  "n"
+                                                  }
+                                  },
+                                  {
+                                      "keyword":  "工作",
+                                      "wordnet":  {
+                                                      "synset":  "work.n.01",
+                                                      "lemma":  "work",
+                                                      "pos":  "n"
+                                                  }
+                                  },
+                                  {
+                                      "keyword":  "信号",
+                                      "wordnet":  {
+                                                      "synset":  "indication.n.01",
+                                                      "lemma":  "indication",
+                                                      "pos":  "n"
+                                                  }
+                                  },
+                                  {
+                                      "keyword":  "承担",
+                                      "wordnet":  {
+                                                      "synset":  "undertake.v.01",
+                                                      "lemma":  "undertake",
+                                                      "pos":  "v"
+                                                  }
+                                  },
+                                  {
+                                      "keyword":  "表达",
+                                      "wordnet":  {
+                                                      "synset":  "express.v.01",
+                                                      "lemma":  "express",
+                                                      "pos":  "v"
+                                                  }
+                                  }
+                              ]
+                          ]
+            }
+}

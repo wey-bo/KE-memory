@@ -1,0 +1,233 @@
+{
+  "candidate_id": "WILDCHAT-LEARN-CAND-001",
+  "turn_index": 3,
+  "context_completions": [],
+  "knowledge": [
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_003_001",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "日志显示 Unable to start activity。",
+      "subject": "日志",
+      "predicate": "显示",
+      "object": "Unable to start activity",
+      "qualifiers": {
+        "modality": "observed",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "日志显示：Unable to start activity",
+          "evidence_id": "evidence-4ba9ecd72ec0eeb82241103e4d5428e9e12b6017e119420936b6a2ebc7f1bda7",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 29
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_003_002",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "日志给出的原因是该 activity 需要使用 Theme.AppCompat 主题或其子主题。",
+      "subject": "日志",
+      "predicate": "给出原因",
+      "object": "You need to use a Theme.AppCompat theme or descendant with this activity",
+      "qualifiers": {
+        "modality": "observed",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "原因是 You need to use a Theme.AppCompat theme or descendant with this activity",
+          "evidence_id": "evidence-a1433f37cf4d9c7b5021449ba45048f0e478a16bd23cd28051a4eacc342a60de",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 30,
+          "end": 106
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_003_003",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "该异常说明 Activity 使用的主题不是 Theme.AppCompat 或其子主题。",
+      "subject": "该 Activity 使用的主题",
+      "predicate": "不是",
+      "object": "Theme.AppCompat 或其子主题",
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "negative",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "这个异常说明该 Activity 使用的主题不是 Theme.AppCompat 或其子主题",
+          "evidence_id": "evidence-fabc9a79ec1a1f66a24b97128a9affa1c22cb784de16d981bc145dc4d1fed95f",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 0,
+          "end": 46
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_003_004",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "用户应检查 AndroidManifest.xml 中 MainActivity 的 theme 属性。",
+      "subject": "用户",
+      "predicate": "检查",
+      "object": "AndroidManifest.xml 中 MainActivity 的 theme 属性",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "检查 AndroidManifest.xml 中 MainActivity 的 theme 属性",
+          "evidence_id": "evidence-8872460e3df90a79a499d1a13d0013e5890e7bb62a32130fc414a17b719aee71",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 47,
+          "end": 95
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_003_005",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "用户应确认 styles.xml 中定义了对应的 AppCompat 主题。",
+      "subject": "用户",
+      "predicate": "确认",
+      "object": "styles.xml 中定义了对应的 AppCompat 主题",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "并确认 styles.xml 中定义了对应的 AppCompat 主题",
+          "evidence_id": "evidence-2f66eca41408545db8c02adfca37ddb0bd63e1793530dd1c2a5ef3b8c23bf7e9",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 96,
+          "end": 131
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_003_006",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "用户应同步项目。",
+      "subject": "用户",
+      "predicate": "同步",
+      "object": "项目",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "同步项目后重新运行",
+          "evidence_id": "evidence-8c28d6ac13419c5e3f92260e27cc4c2e5bb389dcef70a0cb4a532ca8f9412716",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 132,
+          "end": 141
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_003_007",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "同步项目后用户应重新运行 app。",
+      "subject": "用户",
+      "predicate": "重新运行",
+      "object": "app",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [
+          "同步项目后"
+        ],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "同步项目后重新运行",
+          "evidence_id": "evidence-8c28d6ac13419c5e3f92260e27cc4c2e5bb389dcef70a0cb4a532ca8f9412716",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 132,
+          "end": 141
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    }
+  ]
+}

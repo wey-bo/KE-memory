@@ -1,0 +1,112 @@
+{
+  "schema_version": "keol_ke_test_run_v1",
+  "source": "data/gold-candidates/KE-test.json",
+  "keol_commit": "44631e64fd07c9b85f22e36035bf49c882dba592",
+  "model_provider": "codex_subagent_batch_a+codex_subagent_batch_b",
+  "dataset_root": "C:\\Users\\86137\\Desktop\\KE-memory\\artifacts\\keol-baseline\\native-output\\KE-test",
+  "input": {
+    "candidate_count": 10,
+    "turn_count": 43,
+    "model_unit_count": 43,
+    "node_count": 405,
+    "edge_count": 371
+  },
+  "ontology": {
+    "concept_count": 164,
+    "individual_count": 229,
+    "operator_count": 161,
+    "assertion_count": 309,
+    "evidence_count": 774
+  },
+  "validation": {
+    "ok": true,
+    "error_count": 0,
+    "warning_count": 0
+  },
+  "normalization": {
+    "provider": "codex_subagent",
+    "batch_count": 5,
+    "concept_update_count": 164,
+    "operator_update_count": 161,
+    "batches": [
+      {
+        "model": "codex_subagent",
+        "applied_concept_updates": 40,
+        "applied_operator_updates": 40,
+        "applied_operator_schema_updates": 22,
+        "unresolved_operator_schema_updates": 0,
+        "skipped_updates": 0,
+        "notes": [
+          "All 40 concepts and 40 operators in payload-000 are covered; no IDs were created.",
+          "Generic cross-domain relations use broad or needs_review with empty input/output schemas.",
+          "Canonical operator names normalize casing while preserving original spellings as aliases."
+        ],
+        "batch_index": 0,
+        "payload": "payload-000.json",
+        "plan": "plan-000.json"
+      },
+      {
+        "model": "codex_subagent",
+        "applied_concept_updates": 40,
+        "applied_operator_updates": 40,
+        "applied_operator_schema_updates": 31,
+        "unresolved_operator_schema_updates": 0,
+        "skipped_updates": 0,
+        "notes": [
+          "All 40 concepts and 40 operators in payload-001 are covered; no IDs were created.",
+          "Cross-domain or semantically mixed operators use broad with empty input/output schemas.",
+          "Taxonomic IS_A is marked meta; concrete relation operators use concept names from the supplied catalog only."
+        ],
+        "batch_index": 1,
+        "payload": "payload-001.json",
+        "plan": "plan-001.json"
+      },
+      {
+        "model": "codex_subagent",
+        "applied_concept_updates": 40,
+        "applied_operator_updates": 40,
+        "applied_operator_schema_updates": 29,
+        "unresolved_operator_schema_updates": 0,
+        "skipped_updates": 0,
+        "notes": [
+          "All 40 concept IDs and 40 operator IDs from payload-002 are covered; no IDs were created.",
+          "Generic or overloaded operators such as contains, requests, accepts, returns, prefers, and selects intentionally have empty schemas.",
+          "Operator schemas use only names present in payload-002 concept_catalog."
+        ],
+        "batch_index": 2,
+        "payload": "payload-002.json",
+        "plan": "plan-002.json"
+      },
+      {
+        "model": "codex_subagent",
+        "applied_concept_updates": 40,
+        "applied_operator_updates": 40,
+        "applied_operator_schema_updates": 30,
+        "unresolved_operator_schema_updates": 0,
+        "skipped_updates": 0,
+        "notes": [
+          "All 40 concept IDs and 40 operator IDs from payload-003 are covered; no IDs were created.",
+          "Overloaded or directionally questionable relations are retained with broad or needs_review status rather than given misleading tight schemas.",
+          "Operator schemas use only names present in payload-003 concept_catalog."
+        ],
+        "batch_index": 3,
+        "payload": "payload-003.json",
+        "plan": "plan-003.json"
+      },
+      {
+        "model": "codex_subagent",
+        "applied_concept_updates": 4,
+        "applied_operator_updates": 1,
+        "applied_operator_schema_updates": 1,
+        "unresolved_operator_schema_updates": 0,
+        "skipped_updates": 0,
+        "notes": [
+          "The documents relation is treated as specific because both observed uses record a legal decision in a will or trust."
+        ],
+        "batch_index": 4,
+        "payload": "payload-004.json",
+        "plan": "plan-004.json"
+      }
+    ]
+  }
+}

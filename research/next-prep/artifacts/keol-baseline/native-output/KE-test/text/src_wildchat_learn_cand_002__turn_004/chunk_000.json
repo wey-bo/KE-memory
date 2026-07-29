@@ -1,0 +1,184 @@
+{
+  "source": {
+    "source_id": "src_wildchat_learn_cand_002__turn_004",
+    "file": "keol-input/turns/wildchat-learn-cand-002__turn-004.txt",
+    "file_type": "txt",
+    "category": "text",
+    "metadata": {
+      "unit_id": "wildchat-learn-cand-002__turn-004",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "turn_index": 4,
+      "json_pointer": "/candidates/3/turns/3",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=e0aeabf3573990b3b4fe5fd6dc87af3f / model=gpt-3.5-turbo-0613 / user_ordinal=1..4 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "chunk": {
+    "id": "chunk_2713369f0d59b3aae937",
+    "index": 0,
+    "text": "用户：\n第 8 步里没有看到 Scale pitch，你能再详细一点吗？\n\nAgent：\n如果当前 Praat 版本没有 Scale pitch，可以改用 Manipulation 中的 Replace pitch 或等效的 PSOLA 音高替换流程；重点是设定起始、终止和平均音高，检查每个级别的 F0 转折点与 offset，再试听导出的连续体。",
+    "size": 175,
+    "metadata": {
+      "unit_id": "wildchat-learn-cand-002__turn-004",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "turn_index": 4,
+      "json_pointer": "/candidates/3/turns/3",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=e0aeabf3573990b3b4fe5fd6dc87af3f / model=gpt-3.5-turbo-0613 / user_ordinal=1..4 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "n1",
+      "name": "第 8 步",
+      "type": "ProcedureStep",
+      "description": "用户当前执行的步骤。",
+      "source_chunk_id": "chunk_2713369f0d59b3aae937"
+    },
+    {
+      "id": "n2",
+      "name": "Scale pitch",
+      "type": "SoftwareCommand",
+      "description": "用户在当前 Praat 版本中没有看到的命令。",
+      "source_chunk_id": "chunk_2713369f0d59b3aae937"
+    },
+    {
+      "id": "n3",
+      "name": "当前 Praat 版本",
+      "type": "SoftwareVersion",
+      "description": "可能不提供 Scale pitch 的 Praat 版本，具体版本号未知。",
+      "source_chunk_id": "chunk_2713369f0d59b3aae937"
+    },
+    {
+      "id": "n4",
+      "name": "Manipulation",
+      "type": "SoftwareObject",
+      "description": "Agent 指定使用替代命令的 Praat 对象。",
+      "source_chunk_id": "chunk_2713369f0d59b3aae937"
+    },
+    {
+      "id": "n5",
+      "name": "Replace pitch",
+      "type": "SoftwareCommand",
+      "description": "Agent 提议替代 Scale pitch 的命令。",
+      "source_chunk_id": "chunk_2713369f0d59b3aae937"
+    },
+    {
+      "id": "n6",
+      "name": "PSOLA 音高替换",
+      "type": "SignalProcessingMethod",
+      "description": "Agent 提议的等效处理流程。",
+      "source_chunk_id": "chunk_2713369f0d59b3aae937"
+    },
+    {
+      "id": "n7",
+      "name": "起始音高",
+      "type": "AcousticParameter",
+      "description": "Agent 要求设定的参数。",
+      "source_chunk_id": "chunk_2713369f0d59b3aae937"
+    },
+    {
+      "id": "n8",
+      "name": "终止音高",
+      "type": "AcousticParameter",
+      "description": "Agent 要求设定的参数。",
+      "source_chunk_id": "chunk_2713369f0d59b3aae937"
+    },
+    {
+      "id": "n9",
+      "name": "平均音高",
+      "type": "AcousticParameter",
+      "description": "Agent 要求设定的参数。",
+      "source_chunk_id": "chunk_2713369f0d59b3aae937"
+    },
+    {
+      "id": "n10",
+      "name": "F0 转折点",
+      "type": "AcousticParameter",
+      "description": "每个级别需要检查的参数。",
+      "source_chunk_id": "chunk_2713369f0d59b3aae937"
+    },
+    {
+      "id": "n11",
+      "name": "F0 offset",
+      "type": "AcousticParameter",
+      "description": "每个级别需要检查的参数。",
+      "source_chunk_id": "chunk_2713369f0d59b3aae937"
+    },
+    {
+      "id": "n12",
+      "name": "导出的连续体",
+      "type": "ExperimentalStimulusSet",
+      "description": "最终需要试听的声调连续体。",
+      "source_chunk_id": "chunk_2713369f0d59b3aae937"
+    }
+  ],
+  "relations": [
+    {
+      "source_entity": "n2",
+      "target_entity": "n1",
+      "relation_type": "EXPECTED_IN",
+      "description": "用户预期在第 8 步看到该命令。"
+    },
+    {
+      "source_entity": "n2",
+      "target_entity": "n3",
+      "relation_type": "MAY_BE_UNAVAILABLE_IN",
+      "description": "Agent 说明当前版本可能没有该命令。"
+    },
+    {
+      "source_entity": "n5",
+      "target_entity": "n2",
+      "relation_type": "ALTERNATIVE_TO",
+      "description": "Replace pitch 可替代 Scale pitch。"
+    },
+    {
+      "source_entity": "n5",
+      "target_entity": "n4",
+      "relation_type": "AVAILABLE_IN",
+      "description": "Agent 指示在 Manipulation 中使用该功能。"
+    },
+    {
+      "source_entity": "n5",
+      "target_entity": "n6",
+      "relation_type": "IMPLEMENTS",
+      "description": "Replace pitch 用于等效的 PSOLA 音高替换流程。"
+    },
+    {
+      "source_entity": "n6",
+      "target_entity": "n7",
+      "relation_type": "CONFIGURED_BY",
+      "description": "流程需要设定起始音高。"
+    },
+    {
+      "source_entity": "n6",
+      "target_entity": "n8",
+      "relation_type": "CONFIGURED_BY",
+      "description": "流程需要设定终止音高。"
+    },
+    {
+      "source_entity": "n6",
+      "target_entity": "n9",
+      "relation_type": "CONFIGURED_BY",
+      "description": "流程需要设定平均音高。"
+    },
+    {
+      "source_entity": "n12",
+      "target_entity": "n10",
+      "relation_type": "CHECKED_BY",
+      "description": "每级结果需检查 F0 转折点。"
+    },
+    {
+      "source_entity": "n12",
+      "target_entity": "n11",
+      "relation_type": "CHECKED_BY",
+      "description": "每级结果需检查 F0 offset。"
+    }
+  ]
+}

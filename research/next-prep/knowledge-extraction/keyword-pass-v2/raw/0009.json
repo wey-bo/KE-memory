@@ -1,0 +1,2215 @@
+{
+  "candidate_id": "WILDCHAT-MGMT-CAND-003",
+  "items": [
+    {
+      "knowledge_id": "D_wildchat-mgmt-cand-003-f877bc2fc8f5_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0001",
+          "knowledge_id": "D_wildchat-mgmt-cand-003-f877bc2fc8f5_001",
+          "surface": "编写",
+          "normalized_zh": "编写",
+          "query_lemma": "write",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "write_management_goals",
+          "sense_hint": "compose written management goals",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0002",
+          "knowledge_id": "D_wildchat-mgmt-cand-003-f877bc2fc8f5_001",
+          "surface": "绩效目标",
+          "normalized_zh": "绩效目标",
+          "query_lemma": "performance goal",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "employee_performance_goal",
+          "sense_hint": "target used to assess job performance",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0003",
+          "knowledge_id": "D_wildchat-mgmt-cand-003-f877bc2fc8f5_001",
+          "surface": "高级项目经理",
+          "normalized_zh": "高级项目经理",
+          "query_lemma": "senior project manager",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "participant",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "senior_project_manager_role",
+          "sense_hint": "senior employee responsible for managing projects",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0004",
+          "knowledge_id": "D_wildchat-mgmt-cand-003-f877bc2fc8f5_001",
+          "surface": "requested",
+          "normalized_zh": "请求",
+          "query_lemma": "requested",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: requested.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "requested",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "D_wildchat-mgmt-cand-003-f877bc2fc8f5_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0005",
+          "knowledge_id": "D_wildchat-mgmt-cand-003-f877bc2fc8f5_002",
+          "surface": "改成",
+          "normalized_zh": "改写为",
+          "query_lemma": "revise",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "predicate",
+          "part_of_speech": "verb",
+          "sense_key": "revise_goal_format",
+          "sense_hint": "change an existing goal into another format",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0006",
+          "knowledge_id": "D_wildchat-mgmt-cand-003-f877bc2fc8f5_002",
+          "surface": "SMART 绩效目标",
+          "normalized_zh": "SMART 绩效目标",
+          "query_lemma": "SMART performance goal",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "result",
+          "source_field": "statement",
+          "part_of_speech": "noun",
+          "sense_key": "smart_performance_goal",
+          "sense_hint": "performance goal that is specific measurable achievable relevant and time-bound",
+          "lookup_targets": [
+            "schema_org",
+            "exact"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0007",
+          "knowledge_id": "D_wildchat-mgmt-cand-003-f877bc2fc8f5_002",
+          "surface": "requested",
+          "normalized_zh": "请求",
+          "query_lemma": "requested",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: requested.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "requested",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0008",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_001",
+          "surface": "绩效目标",
+          "normalized_zh": "绩效目标",
+          "query_lemma": "performance goal",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "employee_performance_goal",
+          "sense_hint": "target used to assess job performance",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0009",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_001",
+          "surface": "10 个",
+          "normalized_zh": "10 个",
+          "query_lemma": "goal count 10",
+          "keyword_kind": "literal",
+          "keyword_type": "quantity",
+          "semantic_role": "value",
+          "source_field": "object",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Typed literal value from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "10",
+          "datatype": "number",
+          "unit": "goal",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0010",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_001",
+          "surface": "公共住房机构的高级项目经理",
+          "normalized_zh": "公共住房机构高级项目经理",
+          "query_lemma": "public housing senior project manager",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "participant",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "noun",
+          "sense_key": "public_housing_senior_project_manager",
+          "sense_hint": "senior project manager working for a public housing organization",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0011",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_001",
+          "surface": "requested",
+          "normalized_zh": "请求",
+          "query_lemma": "requested",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: requested.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "requested",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0012",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_002",
+          "surface": "项目执行效率",
+          "normalized_zh": "项目执行效率",
+          "query_lemma": "project execution efficiency",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "topic",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "project_execution_efficiency",
+          "sense_hint": "efficiency with which projects are carried out",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0013",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_002",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: advised.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0014",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_003",
+          "surface": "报告及时性",
+          "normalized_zh": "报告及时性",
+          "query_lemma": "report timeliness",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "topic",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "report_timeliness",
+          "sense_hint": "degree to which reports are delivered on time",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0015",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_003",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: advised.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0016",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_004",
+          "surface": "绩效指标",
+          "normalized_zh": "绩效指标",
+          "query_lemma": "performance metric",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "topic",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "performance_metric",
+          "sense_hint": "measure used to evaluate performance",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0017",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_004",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: advised.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0018",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_005",
+          "surface": "利益相关方参与",
+          "normalized_zh": "利益相关方参与",
+          "query_lemma": "stakeholder engagement",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "topic",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "stakeholder_engagement",
+          "sense_hint": "involvement of affected or interested parties",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0019",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_005",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: advised.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0020",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_006",
+          "surface": "可负担住房创新",
+          "normalized_zh": "可负担住房创新",
+          "query_lemma": "affordable housing innovation",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "topic",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "affordable_housing_innovation",
+          "sense_hint": "innovation intended to expand or improve affordable housing",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0021",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_006",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: advised.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0022",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_007",
+          "surface": "居民满意度",
+          "normalized_zh": "居民满意度",
+          "query_lemma": "resident satisfaction",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "topic",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "resident_satisfaction",
+          "sense_hint": "degree to which housing residents are satisfied",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0023",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_007",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: advised.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_008",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0024",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_008",
+          "surface": "跨部门协作",
+          "normalized_zh": "跨部门协作",
+          "query_lemma": "cross-department collaboration",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "topic",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "cross_department_collaboration",
+          "sense_hint": "cooperation among organizational departments",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0025",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_008",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: advised.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_009",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0026",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_009",
+          "surface": "持续改进",
+          "normalized_zh": "持续改进",
+          "query_lemma": "continuous improvement",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "topic",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "continuous_process_improvement",
+          "sense_hint": "ongoing effort to improve processes or outcomes",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0027",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_009",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: advised.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_010",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0028",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_010",
+          "surface": "员工培训",
+          "normalized_zh": "员工培训",
+          "query_lemma": "staff training",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "topic",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "staff_training",
+          "sense_hint": "organized instruction for employees",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0029",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_010",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: advised.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_011",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0030",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_011",
+          "surface": "法规趋势",
+          "normalized_zh": "法规趋势",
+          "query_lemma": "regulatory trend",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "topic",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "regulatory_trend",
+          "sense_hint": "direction of change in laws or regulations",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0031",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_011",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: advised.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0032",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_002",
+          "surface": "资本改造项目",
+          "normalized_zh": "资本改造项目",
+          "query_lemma": "capital improvement project",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "capital_improvement_project",
+          "sense_hint": "project that upgrades or renovates physical assets",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0033",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_002",
+          "surface": "按预算",
+          "normalized_zh": "按预算",
+          "query_lemma": "within budget",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "attribute",
+          "source_field": "object",
+          "part_of_speech": "adverb",
+          "sense_key": "within_budget_constraint",
+          "sense_hint": "completed without exceeding the allocated budget",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0034",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_002",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: advised.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0035",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_003",
+          "surface": "资本改造项目",
+          "normalized_zh": "资本改造项目",
+          "query_lemma": "capital improvement project",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "capital_improvement_project",
+          "sense_hint": "project that upgrades or renovates physical assets",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0036",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_003",
+          "surface": "按进度",
+          "normalized_zh": "按进度",
+          "query_lemma": "on schedule",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "attribute",
+          "source_field": "object",
+          "part_of_speech": "adverb",
+          "sense_key": "on_schedule_constraint",
+          "sense_hint": "completed according to the planned schedule",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0037",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_003",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: advised.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0038",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_004",
+          "surface": "公众",
+          "normalized_zh": "公众",
+          "query_lemma": "public",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "participant",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "general_public",
+          "sense_hint": "members of the public affected by a program",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0039",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_004",
+          "surface": "住房项目",
+          "normalized_zh": "住房项目",
+          "query_lemma": "housing program",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "public_housing_program",
+          "sense_hint": "organized public housing initiative",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0040",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_004",
+          "surface": "了解",
+          "normalized_zh": "了解",
+          "query_lemma": "understanding",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "result",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "public_program_understanding",
+          "sense_hint": "public awareness or understanding of a program",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0041",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_004",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: advised.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0042",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_005",
+          "surface": "争取",
+          "normalized_zh": "争取",
+          "query_lemma": "secure",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "object",
+          "part_of_speech": "verb",
+          "sense_key": "secure_funding",
+          "sense_hint": "obtain resources through effort",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0043",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_005",
+          "surface": "资金",
+          "normalized_zh": "资金",
+          "query_lemma": "funding",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "project_funding",
+          "sense_hint": "money available to support programs or projects",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0044",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_005",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: advised.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0045",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_006",
+          "surface": "公平住房合规",
+          "normalized_zh": "公平住房合规",
+          "query_lemma": "fair housing compliance",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "fair_housing_compliance",
+          "sense_hint": "conformity with fair housing requirements",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0046",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_006",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: advised.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0047",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_007",
+          "surface": "机会平等合规",
+          "normalized_zh": "机会平等合规",
+          "query_lemma": "equal opportunity compliance",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "equal_opportunity_compliance",
+          "sense_hint": "conformity with equal opportunity requirements",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0048",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_007",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: advised.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_008",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0049",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_008",
+          "surface": "降低",
+          "normalized_zh": "降低",
+          "query_lemma": "reduce",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "predicate",
+          "source_field": "object",
+          "part_of_speech": "verb",
+          "sense_key": "reduce_metric",
+          "sense_hint": "make a measured value lower",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0050",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_008",
+          "surface": "空置率",
+          "normalized_zh": "空置率",
+          "query_lemma": "vacancy rate",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "housing_vacancy_rate",
+          "sense_hint": "percentage of housing units that are vacant",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0051",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_008",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: advised.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_009",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0052",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_009",
+          "surface": "维修响应",
+          "normalized_zh": "维修响应",
+          "query_lemma": "maintenance response",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "maintenance_service_response",
+          "sense_hint": "service response to a maintenance request",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0053",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_009",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: advised.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_010",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0054",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_010",
+          "surface": "灾害准备",
+          "normalized_zh": "灾害准备",
+          "query_lemma": "disaster preparedness",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "disaster_preparedness",
+          "sense_hint": "readiness for disruptive or hazardous events",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0055",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_010",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: advised.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_011",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0056",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_011",
+          "surface": "多元",
+          "normalized_zh": "多元",
+          "query_lemma": "diversity",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "organizational_diversity",
+          "sense_hint": "presence of varied identities or backgrounds",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0057",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_011",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: advised.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_012",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0058",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_012",
+          "surface": "公平",
+          "normalized_zh": "公平",
+          "query_lemma": "equity",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "organizational_equity",
+          "sense_hint": "fair distribution of access resources and outcomes",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0059",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_012",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: advised.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_013",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0060",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_013",
+          "surface": "包容",
+          "normalized_zh": "包容",
+          "query_lemma": "inclusion",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "organizational_inclusion",
+          "sense_hint": "practice of including diverse participants",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0061",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_013",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: advised.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_014",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0062",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_014",
+          "surface": "居民经济赋能",
+          "normalized_zh": "居民经济赋能",
+          "query_lemma": "resident economic empowerment",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "resident_economic_empowerment",
+          "sense_hint": "increasing residents' capacity to improve their economic position",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0063",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_014",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: advised.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_015",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0064",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_015",
+          "surface": "地方伙伴",
+          "normalized_zh": "地方伙伴",
+          "query_lemma": "local partner",
+          "keyword_kind": "lexical",
+          "keyword_type": "entity",
+          "semantic_role": "participant",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "local_community_partner",
+          "sense_hint": "local organization or party collaborating on work",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0065",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_015",
+          "surface": "合作",
+          "normalized_zh": "合作",
+          "query_lemma": "collaborate",
+          "keyword_kind": "lexical",
+          "keyword_type": "relation",
+          "semantic_role": "predicate",
+          "source_field": "object",
+          "part_of_speech": "verb",
+          "sense_key": "partner_collaboration",
+          "sense_hint": "work jointly with another party",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0066",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_015",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: advised.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0067",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_002",
+          "surface": "入住率",
+          "normalized_zh": "入住率",
+          "query_lemma": "occupancy rate",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "housing_occupancy_rate",
+          "sense_hint": "percentage of housing units that are occupied",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0068",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_002",
+          "surface": "定向宣传",
+          "normalized_zh": "定向宣传",
+          "query_lemma": "targeted outreach",
+          "keyword_kind": "lexical",
+          "keyword_type": "action",
+          "semantic_role": "instrument",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "targeted_public_outreach",
+          "sense_hint": "outreach directed toward a specific audience",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0069",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_002",
+          "surface": "10%",
+          "normalized_zh": "10%",
+          "query_lemma": "10 percent",
+          "keyword_kind": "literal",
+          "keyword_type": "quantity",
+          "semantic_role": "value",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Typed literal value from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "10",
+          "datatype": "percentage",
+          "unit": "percent",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0070",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_002",
+          "surface": "下一财年",
+          "normalized_zh": "下一财年",
+          "query_lemma": "next fiscal year",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Temporal retrieval qualifier from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "next_fiscal_year",
+          "datatype": "other",
+          "unit": null,
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0071",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_002",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: advised.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0072",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_003",
+          "surface": "维修响应时间",
+          "normalized_zh": "维修响应时间",
+          "query_lemma": "maintenance response time",
+          "keyword_kind": "lexical",
+          "keyword_type": "property",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "maintenance_response_time",
+          "sense_hint": "elapsed time before responding to a maintenance request",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0073",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_003",
+          "surface": "数字工单系统",
+          "normalized_zh": "数字工单系统",
+          "query_lemma": "digital work order system",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "instrument",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "digital_work_order_system",
+          "sense_hint": "software system used to manage work orders",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0074",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_003",
+          "surface": "20%",
+          "normalized_zh": "20%",
+          "query_lemma": "20 percent",
+          "keyword_kind": "literal",
+          "keyword_type": "quantity",
+          "semantic_role": "value",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Typed literal value from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "20",
+          "datatype": "percentage",
+          "unit": "percent",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0075",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_003",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: advised.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0076",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_004",
+          "surface": "可负担住房",
+          "normalized_zh": "可负担住房",
+          "query_lemma": "affordable housing",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "affordable_housing",
+          "sense_hint": "housing offered at a cost considered affordable",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0077",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_004",
+          "surface": "拨款",
+          "normalized_zh": "拨款",
+          "query_lemma": "grant funding",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "instrument",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "housing_grant_funding",
+          "sense_hint": "grant money used to support housing",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0078",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_004",
+          "surface": "开发商合作",
+          "normalized_zh": "开发商合作",
+          "query_lemma": "developer partnership",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "instrument",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "housing_developer_partnership",
+          "sense_hint": "collaboration with property developers",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0079",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_004",
+          "surface": "15%",
+          "normalized_zh": "15%",
+          "query_lemma": "15 percent",
+          "keyword_kind": "literal",
+          "keyword_type": "quantity",
+          "semantic_role": "value",
+          "source_field": "qualifiers.scope",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Typed literal value from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "15",
+          "datatype": "percentage",
+          "unit": "percent",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0080",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_004",
+          "surface": "未来两年",
+          "normalized_zh": "未来两年",
+          "query_lemma": "next two years",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Temporal retrieval qualifier from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "P2Y",
+          "datatype": "duration",
+          "unit": "year",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0081",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_004",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: advised.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0082",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_005",
+          "surface": "培训计划",
+          "normalized_zh": "培训计划",
+          "query_lemma": "training program",
+          "keyword_kind": "lexical",
+          "keyword_type": "event",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "staff_training_program",
+          "sense_hint": "organized program for employee instruction",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0083",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_005",
+          "surface": "员工客服",
+          "normalized_zh": "员工客户服务",
+          "query_lemma": "customer service",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "topic",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "staff_customer_service",
+          "sense_hint": "service skills used by staff when assisting customers",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0084",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_005",
+          "surface": "冲突解决",
+          "normalized_zh": "冲突解决",
+          "query_lemma": "conflict resolution",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "topic",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "conflict_resolution",
+          "sense_hint": "process of resolving disagreements",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0085",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_005",
+          "surface": "公平住房",
+          "normalized_zh": "公平住房",
+          "query_lemma": "fair housing",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "topic",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "fair_housing_principle",
+          "sense_hint": "housing access governed by anti-discrimination principles",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0086",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_005",
+          "surface": "六个月内",
+          "normalized_zh": "六个月内",
+          "query_lemma": "within six months",
+          "keyword_kind": "qualifier",
+          "keyword_type": "time",
+          "semantic_role": "time",
+          "source_field": "qualifiers.temporal",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Temporal retrieval qualifier from the supplied knowledge record.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "P6M",
+          "datatype": "duration",
+          "unit": "month",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0087",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_005",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: advised.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0088",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_006",
+          "surface": "具体指标",
+          "normalized_zh": "具体指标",
+          "query_lemma": "specific metric",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "specific_performance_metric",
+          "sense_hint": "clearly defined measure used to evaluate a goal",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0089",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_006",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: advised.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0090",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_007",
+          "surface": "截止时间",
+          "normalized_zh": "截止时间",
+          "query_lemma": "deadline",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "performance_goal_deadline",
+          "sense_hint": "time by which a goal must be completed",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0091",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_007",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: advised.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_008",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0092",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_008",
+          "surface": "可验证结果",
+          "normalized_zh": "可验证结果",
+          "query_lemma": "verifiable outcome",
+          "keyword_kind": "lexical",
+          "keyword_type": "concept",
+          "semantic_role": "object",
+          "source_field": "object",
+          "part_of_speech": "noun",
+          "sense_key": "verifiable_performance_outcome",
+          "sense_hint": "result that can be checked against evidence",
+          "lookup_targets": [
+            "wordnet",
+            "schema_org"
+          ],
+          "normalized_value": null,
+          "datatype": null,
+          "unit": null,
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0093",
+          "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_008",
+          "surface": "advised",
+          "normalized_zh": "建议",
+          "query_lemma": "advised",
+          "keyword_kind": "qualifier",
+          "keyword_type": "modality",
+          "semantic_role": "modality",
+          "source_field": "qualifiers.modality",
+          "part_of_speech": "none",
+          "sense_key": null,
+          "sense_hint": "Supplied epistemic modality: advised.",
+          "lookup_targets": [
+            "exact"
+          ],
+          "normalized_value": "advised",
+          "datatype": "modality",
+          "unit": null,
+          "translation_confidence": 1
+        }
+      ],
+      "no_keyword_reason": null
+    }
+  ]
+}
+

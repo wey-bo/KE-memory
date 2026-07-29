@@ -1,0 +1,152 @@
+{
+  "candidate_id": "TAU-BENCH-CAND-001",
+  "turn_index": 0,
+  "context_completions": [
+    {
+      "completion_id": "C_tau-bench-cand-001-650fada2c0dc_000_001",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "turn_index": 0,
+      "kind": "coreference",
+      "original_span": "这个平板",
+      "interpretation": "用户在同一句中要求退回的平板。",
+      "evidence": [{"turn_index": 0, "message": "user", "occurrence_index": 0, "quote": "那就退回平板吧。另外，我刚买的充电器是配这个平板的"}],
+      "confidence": 1.0,
+      "ambiguity": false
+    },
+    {
+      "completion_id": "C_tau-bench-cand-001-650fada2c0dc_000_002",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "turn_index": 0,
+      "kind": "role_resolution",
+      "original_span": "平板",
+      "interpretation": "订单 #W2692684 中的平板。",
+      "evidence": [
+        {"turn_index": 0, "message": "user", "occurrence_index": 0, "quote": "退回平板"},
+        {"turn_index": 0, "message": "agent", "occurrence_index": 0, "quote": "退回订单 #W2692684 中的平板"}
+      ],
+      "confidence": 1.0,
+      "ambiguity": false
+    },
+    {
+      "completion_id": "C_tau-bench-cand-001-650fada2c0dc_000_003",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "turn_index": 0,
+      "kind": "role_resolution",
+      "original_span": "充电器",
+      "interpretation": "订单 #W9373487 中的便携式充电器。",
+      "evidence": [
+        {"turn_index": 0, "message": "user", "occurrence_index": 0, "quote": "充电器"},
+        {"turn_index": 0, "message": "agent", "occurrence_index": 0, "quote": "订单 #W9373487 中的便携式充电器"}
+      ],
+      "confidence": 1.0,
+      "ambiguity": false
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_001",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "statement": "用户请求退回平板。",
+      "subject": "用户",
+      "predicate": "请求退回",
+      "object": "平板",
+      "qualifiers": {"modality": "requested", "polarity": "positive", "temporal": [], "conditions": [], "scope": []},
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [{"turn_index": 0, "message": "user", "occurrence_index": 0, "quote": "那就退回平板吧"}],
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_002",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "statement": "用户刚买的充电器是配所述平板使用的。",
+      "subject": "用户刚买的充电器",
+      "predicate": "是配套用于",
+      "object": "所述平板",
+      "qualifiers": {"modality": "asserted", "polarity": "positive", "temporal": ["刚买"], "conditions": [], "scope": []},
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [{"turn_index": 0, "message": "user", "occurrence_index": 0, "quote": "我刚买的充电器是配这个平板的"}],
+      "inference_basis": "“这个平板”在同一句内回指用户要求退回的平板。",
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_003",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "statement": "用户请求取消充电器。",
+      "subject": "用户",
+      "predicate": "请求取消",
+      "object": "充电器",
+      "qualifiers": {"modality": "requested", "polarity": "positive", "temporal": [], "conditions": [], "scope": []},
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [{"turn_index": 0, "message": "user", "occurrence_index": 0, "quote": "你能把充电器也取消吗？"}],
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_004",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "statement": "代理计划退回订单 #W2692684 中的平板。",
+      "subject": "代理",
+      "predicate": "计划退回",
+      "object": "订单 #W2692684 中的平板",
+      "qualifiers": {"modality": "planned", "polarity": "positive", "temporal": [], "conditions": ["用户确认执行"], "scope": []},
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [{"turn_index": 0, "message": "agent", "occurrence_index": 0, "quote": "退回订单 #W2692684 中的平板"}],
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_005",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "statement": "代理计划将平板退款退回现有礼品卡。",
+      "subject": "平板退款",
+      "predicate": "计划退回",
+      "object": "现有礼品卡",
+      "qualifiers": {"modality": "planned", "polarity": "positive", "temporal": [], "conditions": ["用户确认执行"], "scope": []},
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [{"turn_index": 0, "message": "agent", "occurrence_index": 0, "quote": "退款退回现有礼品卡"}],
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_006",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "statement": "代理计划取消订单 #W9373487 中的便携式充电器。",
+      "subject": "代理",
+      "predicate": "计划取消",
+      "object": "订单 #W9373487 中的便携式充电器",
+      "qualifiers": {"modality": "planned", "polarity": "positive", "temporal": [], "conditions": ["用户确认执行"], "scope": []},
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [{"turn_index": 0, "message": "agent", "occurrence_index": 0, "quote": "取消订单 #W9373487 中的便携式充电器"}],
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_007",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "statement": "代理计划将取消充电器的原因记录为“已不再需要”。",
+      "subject": "代理",
+      "predicate": "计划记录取消原因",
+      "object": "已不再需要",
+      "qualifiers": {"modality": "planned", "polarity": "positive", "temporal": [], "conditions": ["用户确认执行"], "scope": ["充电器取消"]},
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [{"turn_index": 0, "message": "agent", "occurrence_index": 0, "quote": "原因记为“已不再需要”"}],
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_000_008",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "statement": "代理请求用户确认是否执行平板退货和充电器取消计划。",
+      "subject": "代理",
+      "predicate": "请求确认是否执行",
+      "object": "所述计划",
+      "qualifiers": {"modality": "requested", "polarity": "positive", "temporal": [], "conditions": [], "scope": ["平板退货", "充电器取消"]},
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [{"turn_index": 0, "message": "agent", "occurrence_index": 0, "quote": "请确认是否执行"}],
+      "confidence": 1.0
+    }
+  ]
+}

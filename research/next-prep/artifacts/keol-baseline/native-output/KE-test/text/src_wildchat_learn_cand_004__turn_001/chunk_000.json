@@ -1,0 +1,158 @@
+{
+  "source": {
+    "source_id": "src_wildchat_learn_cand_004__turn_001",
+    "file": "keol-input/turns/wildchat-learn-cand-004__turn-001.txt",
+    "file_type": "txt",
+    "category": "text",
+    "metadata": {
+      "unit_id": "wildchat-learn-cand-004__turn-001",
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "turn_index": 1,
+      "json_pointer": "/candidates/6/turns/0",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=3ca76da0eae68a26604ef25b4bb54bef / model=gpt-3.5-turbo-0613 / user_ordinal=1..3 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "chunk": {
+    "id": "chunk_2ba19ba65e8660988f08",
+    "index": 0,
+    "text": "用户：\n“学习风格会显著影响学生学习”这个说法，请给出更有证据依据、更准确的结论，并据此提出实践建议。\n\nAgent：\n更准确的说法是：研究并不支持把学生固定归类为听觉、视觉或动觉学习者；教学应采用多模态、主动学习和差异化支持，并根据学生的实际表现调整方法。",
+    "size": 129,
+    "metadata": {
+      "unit_id": "wildchat-learn-cand-004__turn-001",
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "turn_index": 1,
+      "json_pointer": "/candidates/6/turns/0",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=3ca76da0eae68a26604ef25b4bb54bef / model=gpt-3.5-turbo-0613 / user_ordinal=1..3 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "n_claim",
+      "name": "固定学习风格显著影响学习",
+      "type": "Claim",
+      "description": "把学生固定归为特定学习风格并认为其显著影响学习的说法。",
+      "source_chunk_id": "chunk_2ba19ba65e8660988f08"
+    },
+    {
+      "id": "n_research",
+      "name": "研究证据",
+      "type": "Evidence",
+      "description": "Agent 用来评估固定学习风格分类的研究依据。",
+      "source_chunk_id": "chunk_2ba19ba65e8660988f08"
+    },
+    {
+      "id": "n_auditory",
+      "name": "听觉学习者",
+      "type": "LearningStyleCategory",
+      "description": "固定学习风格分类之一。",
+      "source_chunk_id": "chunk_2ba19ba65e8660988f08"
+    },
+    {
+      "id": "n_visual",
+      "name": "视觉学习者",
+      "type": "LearningStyleCategory",
+      "description": "固定学习风格分类之一。",
+      "source_chunk_id": "chunk_2ba19ba65e8660988f08"
+    },
+    {
+      "id": "n_kinesthetic",
+      "name": "动觉学习者",
+      "type": "LearningStyleCategory",
+      "description": "固定学习风格分类之一。",
+      "source_chunk_id": "chunk_2ba19ba65e8660988f08"
+    },
+    {
+      "id": "n_teaching",
+      "name": "教学",
+      "type": "Practice",
+      "description": "应依据证据和学生表现调整的教学实践。",
+      "source_chunk_id": "chunk_2ba19ba65e8660988f08"
+    },
+    {
+      "id": "n_multimodal",
+      "name": "多模态教学",
+      "type": "TeachingMethod",
+      "description": "Agent 建议采用的教学方法。",
+      "source_chunk_id": "chunk_2ba19ba65e8660988f08"
+    },
+    {
+      "id": "n_active",
+      "name": "主动学习",
+      "type": "TeachingMethod",
+      "description": "Agent 建议采用的学习方法。",
+      "source_chunk_id": "chunk_2ba19ba65e8660988f08"
+    },
+    {
+      "id": "n_differentiated",
+      "name": "差异化支持",
+      "type": "TeachingMethod",
+      "description": "Agent 建议采用的支持方式。",
+      "source_chunk_id": "chunk_2ba19ba65e8660988f08"
+    },
+    {
+      "id": "n_performance",
+      "name": "学生实际表现",
+      "type": "Observation",
+      "description": "调整教学方法时应依据的学生表现。",
+      "source_chunk_id": "chunk_2ba19ba65e8660988f08"
+    }
+  ],
+  "relations": [
+    {
+      "source_entity": "n_claim",
+      "target_entity": "n_research",
+      "relation_type": "unsupported_by",
+      "description": "Agent 表示研究不支持固定学习风格分类。"
+    },
+    {
+      "source_entity": "n_claim",
+      "target_entity": "n_auditory",
+      "relation_type": "includes",
+      "description": "该分类说法包含听觉类型。"
+    },
+    {
+      "source_entity": "n_claim",
+      "target_entity": "n_visual",
+      "relation_type": "includes",
+      "description": "该分类说法包含视觉类型。"
+    },
+    {
+      "source_entity": "n_claim",
+      "target_entity": "n_kinesthetic",
+      "relation_type": "includes",
+      "description": "该分类说法包含动觉类型。"
+    },
+    {
+      "source_entity": "n_teaching",
+      "target_entity": "n_multimodal",
+      "relation_type": "uses",
+      "description": "Agent 建议教学采用多模态方法。"
+    },
+    {
+      "source_entity": "n_teaching",
+      "target_entity": "n_active",
+      "relation_type": "uses",
+      "description": "Agent 建议教学采用主动学习。"
+    },
+    {
+      "source_entity": "n_teaching",
+      "target_entity": "n_differentiated",
+      "relation_type": "uses",
+      "description": "Agent 建议教学采用差异化支持。"
+    },
+    {
+      "source_entity": "n_teaching",
+      "target_entity": "n_performance",
+      "relation_type": "adjusted_by",
+      "description": "教学方法应根据学生实际表现调整。"
+    }
+  ]
+}

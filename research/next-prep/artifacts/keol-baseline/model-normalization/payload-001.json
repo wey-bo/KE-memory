@@ -1,0 +1,3430 @@
+{
+  "task": "Normalize concept/operator semantics for the existing ontology draft.",
+  "batch": {
+    "concept_offset": 40,
+    "concept_limit": 40,
+    "operator_offset": 40,
+    "operator_limit": 40
+  },
+  "constraints": {
+    "allowed_operator_ids": [
+      "operator_f60ca475b932",
+      "operator_fbc16028c0e4",
+      "operator_c5cb4e8e1f46",
+      "operator_73716c3a1b95",
+      "operator_bc627ede5a2f",
+      "operator_3ddd5c378fe0",
+      "operator_758c23b243cc",
+      "operator_bcb610f27f03",
+      "operator_988334bd3df8",
+      "operator_b97bcbaf6d13",
+      "operator_22c4fa5a7843",
+      "operator_0914f4d25636",
+      "operator_bd36e360b186",
+      "operator_a162665ab190",
+      "operator_e08dc10b6e11",
+      "operator_5015c8ba54cd",
+      "operator_f65639c63453",
+      "operator_0d31698c5c09",
+      "operator_a3975fad2aa4",
+      "operator_97072969a7f0",
+      "operator_23faaf079de7",
+      "operator_b38789c18015",
+      "operator_4e657b5c7578",
+      "operator_90758e51bd74",
+      "operator_1059e3bb4660",
+      "operator_142548050c29",
+      "operator_05b8197392b2",
+      "operator_f21541487f35",
+      "operator_966b967d661b",
+      "operator_33e6367b0666",
+      "operator_44c181796390",
+      "operator_97b637351094",
+      "operator_77da28c6256e",
+      "operator_af7be582ef99",
+      "operator_bf88f2f4374a",
+      "operator_16910443358c",
+      "operator_8f6835a13277",
+      "operator_8e8eee4c9d72",
+      "operator_0434310958ae",
+      "operator_fe58e0299e92"
+    ],
+    "do_not_invent_ids": true,
+    "operator_output_argument_type": "concept"
+  },
+  "schema": {
+    "$defs": {
+      "ConceptUpdate": {
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "canonical_name": {
+            "default": "",
+            "title": "Canonical Name",
+            "type": "string"
+          },
+          "kind": {
+            "default": "",
+            "title": "Kind",
+            "type": "string"
+          },
+          "description": {
+            "default": "",
+            "title": "Description",
+            "type": "string"
+          },
+          "aliases": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Aliases",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "ConceptUpdate",
+        "type": "object"
+      },
+      "OperatorUpdate": {
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "canonical_name": {
+            "default": "",
+            "title": "Canonical Name",
+            "type": "string"
+          },
+          "operator_type": {
+            "default": "",
+            "title": "Operator Type",
+            "type": "string"
+          },
+          "description": {
+            "default": "",
+            "title": "Description",
+            "type": "string"
+          },
+          "aliases": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Aliases",
+            "type": "array"
+          },
+          "semantic_status": {
+            "default": "",
+            "title": "Semantic Status",
+            "type": "string"
+          },
+          "input_concepts": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Input Concepts",
+            "type": "array"
+          },
+          "output_concepts": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Output Concepts",
+            "type": "array"
+          },
+          "schema_confidence": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Schema Confidence"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "OperatorUpdate",
+        "type": "object"
+      }
+    },
+    "properties": {
+      "concept_updates": {
+        "items": {
+          "$ref": "#/$defs/ConceptUpdate"
+        },
+        "title": "Concept Updates",
+        "type": "array"
+      },
+      "operator_updates": {
+        "items": {
+          "$ref": "#/$defs/OperatorUpdate"
+        },
+        "title": "Operator Updates",
+        "type": "array"
+      },
+      "notes": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Notes",
+        "type": "array"
+      }
+    },
+    "title": "NormalizationPlan",
+    "type": "object"
+  },
+  "concepts": [
+    {
+      "id": "concept_4c77d0cc48d8",
+      "name": "PossibleCause",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "依赖兼容性"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_2dde63249023",
+      "name": "ConfigurationSet",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "activity、主题和 intent-filter"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_9aa225100e19",
+      "name": "RuntimeError",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "Unable to start activity"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_640f7adf481b",
+      "name": "SoftwareComponent",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 2,
+      "individual_examples": [
+        "Activity",
+        "MainActivity"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_2b35a0e2c758",
+      "name": "SoftwareRequirement",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "Theme.AppCompat 或其子主题"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_364fac17c1b7",
+      "name": "FilePath",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "app/src/main/AndroidManifest.xml"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_9326acea83ed",
+      "name": "UserInterface",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "Android Studio Project 视图"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_6e01a322d228",
+      "name": "Directory",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "app 模块 manifests 文件夹"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_65bdcba1ae10",
+      "name": "TaskStatus",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "文件已找到"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_439bad723c6b",
+      "name": "MediaChannel",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "转型导师、赋能与健康频道"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_3cb64c63067f",
+      "name": "ContentTheme",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "有独占价值的内容"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_fc9b1c95c7e1",
+      "name": "Plan",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 3,
+      "individual_examples": [
+        "连续 Reels 方案",
+        "内容计划",
+        "Instagram 内容计划"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_7353c80c700f",
+      "name": "FrequencyConstraint",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "每天至少一项活动"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_524d615edb91",
+      "name": "OnlinePlatform",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 2,
+      "individual_examples": [
+        "Telegram",
+        "Instagram"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_48566fe775fb",
+      "name": "Collection",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "内容形式组合"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_e26b4b4fdd2b",
+      "name": "ContentFormat",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 4,
+      "individual_examples": [
+        "博客",
+        "Instagram Live",
+        "Stories",
+        "Reels"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_bdde83783f16",
+      "name": "ContentTechnique",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "故事叙述"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_bb171a55ba08",
+      "name": "ContentSet",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "短教程、锻炼和目标设定"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_3d5748fc06a8",
+      "name": "ContentSeries",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "转变故事系列"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_38cb5091dbb0",
+      "name": "EpisodeTopic",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "迈出第一步"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_2cdaf103bc5c",
+      "name": "StoryElement",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "冲突或问题开场"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_22c978c52212",
+      "name": "NarrativeArc",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "连续成长路径"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_8ed315e73edc",
+      "name": "SpeechSample",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "普通话“居”"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_b68a7e8affd8",
+      "name": "ToneCategory",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "二声"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_0526acd5a83b",
+      "name": "ExperimentalStimulusSet",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 2,
+      "individual_examples": [
+        "9 步等距连续体",
+        "导出的连续体"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_db698d9436a5",
+      "name": "AcousticFeature",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "F0 曲线"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_4253df359c73",
+      "name": "SignalProcessingMethod",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "PSOLA"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_effe8106c8d6",
+      "name": "AudioRecording",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "二声录音"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_3d38ba8a74ba",
+      "name": "DataArtifact",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "F0 文本数据"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_bab347a50527",
+      "name": "DataSet",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 2,
+      "individual_examples": [
+        "连续体目标 F0",
+        "9 组目标值"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_1bb6a256e5e7",
+      "name": "SoftwareObject",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 2,
+      "individual_examples": [
+        "Manipulation",
+        "Pitch"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_5cab94fd096e",
+      "name": "ProcedureStep",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 2,
+      "individual_examples": [
+        "第 8 步",
+        "第 4 步"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_75b03a8fed1d",
+      "name": "Problem",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "提取失败"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_35ad20ff9aae",
+      "name": "FileFormat",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        ".txt"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_6cc4df097f89",
+      "name": "ExtractionParameter",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "音高范围"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_66624a964df9",
+      "name": "AcousticParameter",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 3,
+      "individual_examples": [
+        "时长",
+        "F0 offset",
+        "F0 转折点"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_ea3419a71230",
+      "name": "ExperimentalConstraint",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "9 个等距级别"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_711ae69ecf2f",
+      "name": "NumericRange",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "总变化范围"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_e9a05ac0ffb3",
+      "name": "SoftwareCommand",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 2,
+      "individual_examples": [
+        "Replace pitch",
+        "Scale pitch"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_5355e2e91626",
+      "name": "SoftwareVersion",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "当前 Praat 版本"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    }
+  ],
+  "concept_catalog": [
+    {
+      "name": "Person",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Organization",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Goal",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Role",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Event",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Duration",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "TimeWindow",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Task",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Question",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Recommendation",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Situation",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Group",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Action",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Platform",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Information",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "CalendarMonth",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Communication",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "DateRange",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Process",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Availability",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "RelativeDate",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "EmailSubject",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Commitment",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ProfessionalRole",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Evaluation",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Style",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareApplication",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareDependency",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareConfiguration",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ErrorSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "File",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ConfigurationField",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Integer",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Constraint",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ConfigurationFieldSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Change",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Status",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "RuntimeFailure",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Device",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "DiagnosticTool",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "PossibleCause",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ConfigurationSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "RuntimeError",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareComponent",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareRequirement",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "FilePath",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "UserInterface",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Directory",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "TaskStatus",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "MediaChannel",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ContentTheme",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Plan",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "FrequencyConstraint",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "OnlinePlatform",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Collection",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ContentFormat",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ContentTechnique",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ContentSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ContentSeries",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "EpisodeTopic",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "StoryElement",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "NarrativeArc",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SpeechSample",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ToneCategory",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ExperimentalStimulusSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "AcousticFeature",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SignalProcessingMethod",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "AudioRecording",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "DataArtifact",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "DataSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareObject",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ProcedureStep",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Problem",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "FileFormat",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ExtractionParameter",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "AcousticParameter",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ExperimentalConstraint",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "NumericRange",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareCommand",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareVersion",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "GoalSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Cardinality",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Percentage",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Method",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareSystem",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "TrainingTopicSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ConstraintSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Function",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Parameter",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "PathTemplate",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SpreadsheetFormula",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ExampleValue",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "FormulaValue",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Software",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Hyperlink",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "DataStructure",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "DataColumn",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "StringValue",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Claim",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Evidence",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LearningStyleCategory",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Practice",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "TeachingMethod",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Observation",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Condition",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Challenge",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Capability",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Intervention",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LearningFactor",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LearningOutcome",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "FlightTrip",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "City",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "CalendarDay",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "TripLeg",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "TimePreference",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "PricePreference",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "FlightOption",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "StopPattern",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "TimeOfDay",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "RelativeDateTime",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "MonetaryAmount",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "PriceAssessment",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "CommunicationEndpoint",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Product",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Order",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ReturnRequest",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "CancellationRequest",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "PaymentMethod",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "CancellationReason",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ToolAction",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "OrderItem",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "GiftCard",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ActionStatus",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "IdentifierType",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Identifier",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ProductSize",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Color",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Material",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "OrderStatus",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Decision",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "CalendarDate",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Place",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Concern",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "PlannedEvent",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "InteractionMode",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Topic",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Option",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "TaskRequest",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Document",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Schedule",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LegalDocument",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "EmotionalState",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LegalStatus",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LegalProvision",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "DocumentDraft",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Law",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LegalFormality",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ReviewAction",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LegalDecision",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "EstatePlan",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "CareArrangement",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "FinancialArrangement",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Assessment",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LegalArrangement",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    }
+  ],
+  "operators": [
+    {
+      "id": "operator_f60ca475b932",
+      "name": "DIAGNOSES",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "DIAGNOSES",
+          "quote": "Agent 建议通过 Logcat 查看运行时异常。",
+          "metadata": {
+            "source_entity": "n6",
+            "target_entity": "n4"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "DIAGNOSES",
+          "quote": "若仍崩溃则查看新的 Logcat 异常。",
+          "metadata": {
+            "source_entity": "n9",
+            "target_entity": "n10"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "DiagnosticTool",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "RuntimeFailure",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_fbc16028c0e4",
+      "name": "MAY_CAUSE",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "MAY_CAUSE",
+          "quote": "依赖兼容问题可能导致崩溃。",
+          "metadata": {
+            "source_entity": "n7",
+            "target_entity": "n4"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "PossibleCause",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "RuntimeFailure",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_c5cb4e8e1f46",
+      "name": "ADDRESSES",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "ADDRESSES",
+          "quote": "Agent 将 Gradle 同步列为排查动作。",
+          "metadata": {
+            "source_entity": "n8",
+            "target_entity": "n4"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "ADDRESSES",
+          "quote": "Agent 将 Clean/Rebuild 列为排查动作。",
+          "metadata": {
+            "source_entity": "n9",
+            "target_entity": "n4"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "addresses",
+          "quote": "会议用于处理家人可能的顾虑。",
+          "metadata": {
+            "source_entity": "n_meeting",
+            "target_entity": "n_concerns"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Action",
+            "count": 2
+          },
+          {
+            "name": "PlannedEvent",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "RuntimeFailure",
+            "count": 2
+          },
+          {
+            "name": "Concern",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 2,
+        "output_unique_count": 2
+      }
+    },
+    {
+      "id": "operator_73716c3a1b95",
+      "name": "VIOLATES",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "VIOLATES",
+          "quote": "异常说明当前主题不是 AppCompat 或其子主题。",
+          "metadata": {
+            "source_entity": "n4",
+            "target_entity": "n3"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "SoftwareConfiguration",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "SoftwareRequirement",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_bc627ede5a2f",
+      "name": "CAUSES",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "CAUSES",
+          "quote": "Agent 将主题不匹配解释为启动异常原因。",
+          "metadata": {
+            "source_entity": "n4",
+            "target_entity": "n1"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "causes",
+          "quote": "学习困难会带来特定领域挑战。",
+          "metadata": {
+            "source_entity": "n_difficulty",
+            "target_entity": "n_challenge"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "SoftwareConfiguration",
+            "count": 1
+          },
+          {
+            "name": "Condition",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "RuntimeError",
+            "count": 1
+          },
+          {
+            "name": "Challenge",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 2,
+        "output_unique_count": 2
+      }
+    },
+    {
+      "id": "operator_3ddd5c378fe0",
+      "name": "IS_A",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "IS_A",
+          "quote": "MainActivity 是待检查的 Activity。",
+          "metadata": {
+            "source_entity": "n6",
+            "target_entity": "n2"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "SoftwareComponent",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "SoftwareComponent",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_758c23b243cc",
+      "name": "CONFIGURES",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "CONFIGURES",
+          "quote": "theme 属性配置 MainActivity 的主题。",
+          "metadata": {
+            "source_entity": "n7",
+            "target_entity": "n6"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "CONFIGURES",
+          "quote": "主题引用配置 MainActivity。",
+          "metadata": {
+            "source_entity": "n6",
+            "target_entity": "n5"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "CONFIGURES",
+          "quote": "音高范围影响 F0 提取。",
+          "metadata": {
+            "source_entity": "n8",
+            "target_entity": "n2"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "CONFIGURES",
+          "quote": "提取算法影响 F0 提取。",
+          "metadata": {
+            "source_entity": "n9",
+            "target_entity": "n2"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "ConfigurationField",
+            "count": 2
+          },
+          {
+            "name": "ExtractionParameter",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "SoftwareComponent",
+            "count": 2
+          },
+          {
+            "name": "DataArtifact",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 2,
+        "output_unique_count": 2
+      }
+    },
+    {
+      "id": "operator_bcb610f27f03",
+      "name": "REFERENCES",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "REFERENCES",
+          "quote": "MainActivity 的 theme 属性应引用 AppCompat 主题。",
+          "metadata": {
+            "source_entity": "n7",
+            "target_entity": "n9"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "REFERENCES",
+          "quote": "Manifest 应引用已定义的 AppCompat 子主题。",
+          "metadata": {
+            "source_entity": "n6",
+            "target_entity": "n4"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "ConfigurationField",
+            "count": 2
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "SoftwareConfiguration",
+            "count": 2
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_988334bd3df8",
+      "name": "LOCATED_AT",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "LOCATED_AT",
+          "quote": "Manifest 文件位于 app/src/main 路径。",
+          "metadata": {
+            "source_entity": "n1",
+            "target_entity": "n2"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "File",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "FilePath",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_b97bcbaf6d13",
+      "name": "VISIBLE_IN",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "VISIBLE_IN",
+          "quote": "可在 Android Studio Project 视图中展开该路径。",
+          "metadata": {
+            "source_entity": "n2",
+            "target_entity": "n3"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "VISIBLE_IN",
+          "quote": "也可以从 app 模块的 manifests 文件夹打开。",
+          "metadata": {
+            "source_entity": "n1",
+            "target_entity": "n4"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "FilePath",
+            "count": 1
+          },
+          {
+            "name": "File",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "UserInterface",
+            "count": 1
+          },
+          {
+            "name": "Directory",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 2,
+        "output_unique_count": 2
+      }
+    },
+    {
+      "id": "operator_22c4fa5a7843",
+      "name": "CONSTRAINS",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "CONSTRAINS",
+          "quote": "主题定义名和引用名必须一致。",
+          "metadata": {
+            "source_entity": "n7",
+            "target_entity": "n4"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "CONSTRAINS",
+          "quote": "F0 转折点变化需按等距级别设置。",
+          "metadata": {
+            "source_entity": "n5",
+            "target_entity": "n3"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "CONSTRAINS",
+          "quote": "F0 offset 变化需按等距级别设置。",
+          "metadata": {
+            "source_entity": "n5",
+            "target_entity": "n4"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "ExperimentalConstraint",
+            "count": 2
+          },
+          {
+            "name": "Constraint",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "AcousticParameter",
+            "count": 2
+          },
+          {
+            "name": "SoftwareConfiguration",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 2,
+        "output_unique_count": 2
+      }
+    },
+    {
+      "id": "operator_0914f4d25636",
+      "name": "MANAGES",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "MANAGES",
+          "quote": "用户负责该频道。",
+          "metadata": {
+            "source_entity": "n1",
+            "target_entity": "n2"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Person",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "MediaChannel",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_bd36e360b186",
+      "name": "HAS_THEME",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "HAS_THEME",
+          "quote": "计划围绕独占价值内容制定。",
+          "metadata": {
+            "source_entity": "n5",
+            "target_entity": "n4"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Plan",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "ContentTheme",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_a162665ab190",
+      "name": "HAS_CONSTRAINT",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "HAS_CONSTRAINT",
+          "quote": "每天至少安排一项活动。",
+          "metadata": {
+            "source_entity": "n5",
+            "target_entity": "n7"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "HAS_CONSTRAINT",
+          "quote": "所有目标都应有指标、期限和可验证结果。",
+          "metadata": {
+            "source_entity": "n1",
+            "target_entity": "n16"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Plan",
+            "count": 1
+          },
+          {
+            "name": "GoalSet",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "FrequencyConstraint",
+            "count": 1
+          },
+          {
+            "name": "ConstraintSet",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 2,
+        "output_unique_count": 2
+      }
+    },
+    {
+      "id": "operator_e08dc10b6e11",
+      "name": "PUBLISHED_ON",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "PUBLISHED_ON",
+          "quote": "内容先发布到 Telegram。",
+          "metadata": {
+            "source_entity": "n5",
+            "target_entity": "n8"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "PUBLISHED_ON",
+          "quote": "计划改为 Instagram 版本。",
+          "metadata": {
+            "source_entity": "n1",
+            "target_entity": "n2"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Plan",
+            "count": 2
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "OnlinePlatform",
+            "count": 2
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_5015c8ba54cd",
+      "name": "ADAPTED_AS",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "ADAPTED_AS",
+          "quote": "Agent 建议把博客拆成轮播摘要。",
+          "metadata": {
+            "source_entity": "n3",
+            "target_entity": "n7"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "ContentFormat",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "ContentFormat",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_f65639c63453",
+      "name": "PRESENTS",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "PRESENTS",
+          "quote": "Reels 用于发布短教程、锻炼和目标设定。",
+          "metadata": {
+            "source_entity": "n4",
+            "target_entity": "n8"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "PRESENTS",
+          "quote": "Stories 用于个人故事和互动内容。",
+          "metadata": {
+            "source_entity": "n5",
+            "target_entity": "n9"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "ContentFormat",
+            "count": 2
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "ContentSet",
+            "count": 2
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_0d31698c5c09",
+      "name": "EXTENDS",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "EXTENDS",
+          "quote": "Agent 另建议直播做周期性问答。",
+          "metadata": {
+            "source_entity": "n10",
+            "target_entity": "n9"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "ContentFormat",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "ContentSet",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_a3975fad2aa4",
+      "name": "PROPOSES",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "PROPOSES",
+          "quote": "Agent 提议制作转变故事系列。",
+          "metadata": {
+            "source_entity": "n1",
+            "target_entity": "n3"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Plan",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "ContentSeries",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_97072969a7f0",
+      "name": "HAS_EPISODE",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "HAS_EPISODE",
+          "quote": "第一集讲迈出第一步。",
+          "metadata": {
+            "source_entity": "n3",
+            "target_entity": "n4"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "HAS_EPISODE",
+          "quote": "第二集讲接受不完美。",
+          "metadata": {
+            "source_entity": "n3",
+            "target_entity": "n5"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "HAS_EPISODE",
+          "quote": "第三集讲自我照顾。",
+          "metadata": {
+            "source_entity": "n3",
+            "target_entity": "n6"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "ContentSeries",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "EpisodeTopic",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_23faaf079de7",
+      "name": "PRECEDES",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "PRECEDES",
+          "quote": "第一集位于第二集之前。",
+          "metadata": {
+            "source_entity": "n4",
+            "target_entity": "n5"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "PRECEDES",
+          "quote": "第二集位于第三集之前。",
+          "metadata": {
+            "source_entity": "n5",
+            "target_entity": "n6"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "EpisodeTopic",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "EpisodeTopic",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_b38789c18015",
+      "name": "FORMS",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "FORMS",
+          "quote": "多集形成连续成长路径。",
+          "metadata": {
+            "source_entity": "n3",
+            "target_entity": "n10"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "ContentSeries",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "NarrativeArc",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_4e657b5c7578",
+      "name": "STARTS_FROM",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "STARTS_FROM",
+          "quote": "连续体从二声开始。",
+          "metadata": {
+            "source_entity": "n5",
+            "target_entity": "n3"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "ExperimentalStimulusSet",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "ToneCategory",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_90758e51bd74",
+      "name": "ENDS_AT",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "ENDS_AT",
+          "quote": "连续体逐渐变为三声。",
+          "metadata": {
+            "source_entity": "n5",
+            "target_entity": "n4"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "ExperimentalStimulusSet",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "ToneCategory",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_1059e3bb4660",
+      "name": "HAS_FEATURE",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "HAS_FEATURE",
+          "quote": "二声具有弯曲 F0 曲线。",
+          "metadata": {
+            "source_entity": "n3",
+            "target_entity": "n6"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "HAS_FEATURE",
+          "quote": "三声具有弯曲 F0 曲线。",
+          "metadata": {
+            "source_entity": "n4",
+            "target_entity": "n6"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "ToneCategory",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "AcousticFeature",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_142548050c29",
+      "name": "REPRESENTS",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "REPRESENTS",
+          "quote": "Agent 建议载入代表二声的录音。",
+          "metadata": {
+            "source_entity": "n9",
+            "target_entity": "n3"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "AudioRecording",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "ToneCategory",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_05b8197392b2",
+      "name": "PRODUCES",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "PRODUCES",
+          "quote": "从录音提取并导出 F0 数据。",
+          "metadata": {
+            "source_entity": "n9",
+            "target_entity": "n10"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "produces",
+          "quote": "传入 example 时产生该公式值。",
+          "metadata": {
+            "source_entity": "n_function",
+            "target_entity": "n_output"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "produces",
+          "quote": "函数产生所示公式字符串。",
+          "metadata": {
+            "source_entity": "n_function",
+            "target_entity": "n_output"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "produces",
+          "quote": "任务需要产出会议邀请。",
+          "metadata": {
+            "source_entity": "n_request",
+            "target_entity": "n_invitation"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "produces",
+          "quote": "任务需要产出会议议程。",
+          "metadata": {
+            "source_entity": "n_request",
+            "target_entity": "n_agenda"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "AudioRecording",
+            "count": 1
+          },
+          {
+            "name": "Function",
+            "count": 1
+          },
+          {
+            "name": "TaskRequest",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "DataArtifact",
+            "count": 1
+          },
+          {
+            "name": "FormulaValue",
+            "count": 1
+          },
+          {
+            "name": "Document",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 3,
+        "output_unique_count": 3
+      }
+    },
+    {
+      "id": "operator_f21541487f35",
+      "name": "GENERATES",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "GENERATES",
+          "quote": "按等距规则生成 9 组目标值。",
+          "metadata": {
+            "source_entity": "n10",
+            "target_entity": "n11"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "GENERATES",
+          "quote": "Agent 建议先从录音生成 Pitch。",
+          "metadata": {
+            "source_entity": "n7",
+            "target_entity": "n8"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "DataArtifact",
+            "count": 1
+          },
+          {
+            "name": "AudioRecording",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "DataSet",
+            "count": 1
+          },
+          {
+            "name": "SoftwareObject",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 2,
+        "output_unique_count": 2
+      }
+    },
+    {
+      "id": "operator_966b967d661b",
+      "name": "PROCESSES",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "PROCESSES",
+          "quote": "第 4 步涉及提取 F0。",
+          "metadata": {
+            "source_entity": "n1",
+            "target_entity": "n2"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "ProcedureStep",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "DataArtifact",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_33e6367b0666",
+      "name": "DISPLAYED_IN",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "DISPLAYED_IN",
+          "quote": "F0 数值在 Praat 中显示。",
+          "metadata": {
+            "source_entity": "n2",
+            "target_entity": "n5"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "DataArtifact",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "SoftwareApplication",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_44c181796390",
+      "name": "COPIED_TO",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "COPIED_TO",
+          "quote": "Agent 建议复制到文本编辑器。",
+          "metadata": {
+            "source_entity": "n2",
+            "target_entity": "n6"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "DataArtifact",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "SoftwareApplication",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_97b637351094",
+      "name": "HAS_FORMAT",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "HAS_FORMAT",
+          "quote": "文本文件保存为 .txt。",
+          "metadata": {
+            "source_entity": "n3",
+            "target_entity": "n7"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "File",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "FileFormat",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_77da28c6256e",
+      "name": "DEFINES",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "DEFINES",
+          "quote": "Agent 建议用该文件定义连续体目标 F0。",
+          "metadata": {
+            "source_entity": "n3",
+            "target_entity": "n10"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "File",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "DataSet",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_af7be582ef99",
+      "name": "TRANSFORMS_TO",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "TRANSFORMS_TO",
+          "quote": "目标是让二声逐渐变成三声。",
+          "metadata": {
+            "source_entity": "n1",
+            "target_entity": "n2"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "ToneCategory",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "ToneCategory",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_bf88f2f4374a",
+      "name": "CONVERTS_TO",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "CONVERTS_TO",
+          "quote": "Pitch 再转为 Manipulation 对象。",
+          "metadata": {
+            "source_entity": "n8",
+            "target_entity": "n9"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "SoftwareObject",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "SoftwareObject",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_16910443358c",
+      "name": "DISTRIBUTED_ACROSS",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "DISTRIBUTED_ACROSS",
+          "quote": "总变化范围分配到九个等距级别。",
+          "metadata": {
+            "source_entity": "n11",
+            "target_entity": "n5"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "NumericRange",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "ExperimentalConstraint",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_8f6835a13277",
+      "name": "KEEPS_CONSTANT",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "KEEPS_CONSTANT",
+          "quote": "各级别保持时长一致。",
+          "metadata": {
+            "source_entity": "n5",
+            "target_entity": "n12"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "ExperimentalConstraint",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "AcousticParameter",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_8e8eee4c9d72",
+      "name": "EXPECTED_IN",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "EXPECTED_IN",
+          "quote": "用户预期在第 8 步看到该命令。",
+          "metadata": {
+            "source_entity": "n2",
+            "target_entity": "n1"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "SoftwareCommand",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "ProcedureStep",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_0434310958ae",
+      "name": "MAY_BE_UNAVAILABLE_IN",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "MAY_BE_UNAVAILABLE_IN",
+          "quote": "Agent 说明当前版本可能没有该命令。",
+          "metadata": {
+            "source_entity": "n2",
+            "target_entity": "n3"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "SoftwareCommand",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "SoftwareVersion",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_fe58e0299e92",
+      "name": "ALTERNATIVE_TO",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "ALTERNATIVE_TO",
+          "quote": "Replace pitch 可替代 Scale pitch。",
+          "metadata": {
+            "source_entity": "n5",
+            "target_entity": "n2"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "SoftwareCommand",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "SoftwareCommand",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    }
+  ],
+  "keol_commit": "44631e64fd07c9b85f22e36035bf49c882dba592",
+  "batch_index": 1
+}

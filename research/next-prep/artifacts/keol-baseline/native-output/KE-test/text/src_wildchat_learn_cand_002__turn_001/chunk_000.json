@@ -1,0 +1,190 @@
+{
+  "source": {
+    "source_id": "src_wildchat_learn_cand_002__turn_001",
+    "file": "keol-input/turns/wildchat-learn-cand-002__turn-001.txt",
+    "file_type": "txt",
+    "category": "text",
+    "metadata": {
+      "unit_id": "wildchat-learn-cand-002__turn-001",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "turn_index": 1,
+      "json_pointer": "/candidates/3/turns/0",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=e0aeabf3573990b3b4fe5fd6dc87af3f / model=gpt-3.5-turbo-0613 / user_ordinal=1..4 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "chunk": {
+    "id": "chunk_e6c3fa8483a553c693cf",
+    "index": 0,
+    "text": "用户：\n我想用 Praat 把普通话“居”的二声到三声做成 9 步等距连续体。两个声调的 F0 曲线都比较弯，操作很难。你能教我用 PSOLA 在 Praat 里完成吗？\n\nAgent：\n可以先载入代表二声的录音，提取目标片段和 F0 曲线，把 F0 数据导出为文本并按等距规则生成 9 组目标值，再在 Praat 的 Manipulation/PSOLA 流程中替换或调整音高，逐步试听和检查结果。",
+    "size": 200,
+    "metadata": {
+      "unit_id": "wildchat-learn-cand-002__turn-001",
+      "candidate_id": "WILDCHAT-LEARN-CAND-002",
+      "turn_index": 1,
+      "json_pointer": "/candidates/3/turns/0",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=e0aeabf3573990b3b4fe5fd6dc87af3f / model=gpt-3.5-turbo-0613 / user_ordinal=1..4 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "n1",
+      "name": "用户",
+      "type": "Person",
+      "description": "希望制作普通话声调连续体的用户。",
+      "source_chunk_id": "chunk_e6c3fa8483a553c693cf"
+    },
+    {
+      "id": "n2",
+      "name": "普通话“居”",
+      "type": "SpeechSample",
+      "description": "用户要处理的普通话音节。",
+      "source_chunk_id": "chunk_e6c3fa8483a553c693cf"
+    },
+    {
+      "id": "n3",
+      "name": "二声",
+      "type": "ToneCategory",
+      "description": "连续体的起始声调。",
+      "source_chunk_id": "chunk_e6c3fa8483a553c693cf"
+    },
+    {
+      "id": "n4",
+      "name": "三声",
+      "type": "ToneCategory",
+      "description": "连续体的目标声调。",
+      "source_chunk_id": "chunk_e6c3fa8483a553c693cf"
+    },
+    {
+      "id": "n5",
+      "name": "9 步等距连续体",
+      "type": "ExperimentalStimulusSet",
+      "description": "用户希望生成的九级等距声调连续体。",
+      "source_chunk_id": "chunk_e6c3fa8483a553c693cf"
+    },
+    {
+      "id": "n6",
+      "name": "F0 曲线",
+      "type": "AcousticFeature",
+      "description": "两个声调都较弯、需要操控的基频曲线。",
+      "source_chunk_id": "chunk_e6c3fa8483a553c693cf"
+    },
+    {
+      "id": "n7",
+      "name": "Praat",
+      "type": "SoftwareApplication",
+      "description": "用户指定的语音分析软件。",
+      "source_chunk_id": "chunk_e6c3fa8483a553c693cf"
+    },
+    {
+      "id": "n8",
+      "name": "PSOLA",
+      "type": "SignalProcessingMethod",
+      "description": "用户希望使用的音高修改方法。",
+      "source_chunk_id": "chunk_e6c3fa8483a553c693cf"
+    },
+    {
+      "id": "n9",
+      "name": "二声录音",
+      "type": "AudioRecording",
+      "description": "Agent 建议先载入的起始录音。",
+      "source_chunk_id": "chunk_e6c3fa8483a553c693cf"
+    },
+    {
+      "id": "n10",
+      "name": "F0 文本数据",
+      "type": "DataArtifact",
+      "description": "Agent 建议导出的 F0 数据。",
+      "source_chunk_id": "chunk_e6c3fa8483a553c693cf"
+    },
+    {
+      "id": "n11",
+      "name": "9 组目标值",
+      "type": "DataSet",
+      "description": "Agent 建议按等距规则生成的目标 F0。",
+      "source_chunk_id": "chunk_e6c3fa8483a553c693cf"
+    },
+    {
+      "id": "n12",
+      "name": "Manipulation",
+      "type": "SoftwareObject",
+      "description": "Praat 中用于 PSOLA 音高处理的对象。",
+      "source_chunk_id": "chunk_e6c3fa8483a553c693cf"
+    }
+  ],
+  "relations": [
+    {
+      "source_entity": "n5",
+      "target_entity": "n2",
+      "relation_type": "USES",
+      "description": "连续体以普通话“居”为语音材料。"
+    },
+    {
+      "source_entity": "n5",
+      "target_entity": "n3",
+      "relation_type": "STARTS_FROM",
+      "description": "连续体从二声开始。"
+    },
+    {
+      "source_entity": "n5",
+      "target_entity": "n4",
+      "relation_type": "ENDS_AT",
+      "description": "连续体逐渐变为三声。"
+    },
+    {
+      "source_entity": "n3",
+      "target_entity": "n6",
+      "relation_type": "HAS_FEATURE",
+      "description": "二声具有弯曲 F0 曲线。"
+    },
+    {
+      "source_entity": "n4",
+      "target_entity": "n6",
+      "relation_type": "HAS_FEATURE",
+      "description": "三声具有弯曲 F0 曲线。"
+    },
+    {
+      "source_entity": "n1",
+      "target_entity": "n7",
+      "relation_type": "USES",
+      "description": "用户希望在 Praat 中完成任务。"
+    },
+    {
+      "source_entity": "n5",
+      "target_entity": "n8",
+      "relation_type": "USES",
+      "description": "用户要求使用 PSOLA 生成连续体。"
+    },
+    {
+      "source_entity": "n9",
+      "target_entity": "n3",
+      "relation_type": "REPRESENTS",
+      "description": "Agent 建议载入代表二声的录音。"
+    },
+    {
+      "source_entity": "n9",
+      "target_entity": "n10",
+      "relation_type": "PRODUCES",
+      "description": "从录音提取并导出 F0 数据。"
+    },
+    {
+      "source_entity": "n10",
+      "target_entity": "n11",
+      "relation_type": "GENERATES",
+      "description": "按等距规则生成 9 组目标值。"
+    },
+    {
+      "source_entity": "n12",
+      "target_entity": "n8",
+      "relation_type": "USES",
+      "description": "Manipulation 流程使用 PSOLA 调整音高。"
+    }
+  ]
+}

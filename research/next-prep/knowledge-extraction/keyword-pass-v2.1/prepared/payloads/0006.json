@@ -1,0 +1,1149 @@
+{
+  "prompt_version": "knowledge-keyword-extraction-v2.1",
+  "candidate_id": "WILDCHAT-LEARN-CAND-004",
+  "candidate_namespace": "wildchat-learn-cand-004-dc8956a5d265",
+  "final_knowledge_sha256": "641c88117c206e9901c332e93c4c77e91dc5df703667f441291679dec8c03f41",
+  "active_knowledge": [
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "confidence": 0.99,
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-004",
+          "end": 46,
+          "evidence_id": "evidence-1b9894ee90b8ef910f99858520485bfa7ee9b388c43693492b671c42e304b236",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "请给出更有证据依据、更准确的结论，并据此提出实践建议",
+          "start": 20,
+          "turn_index": 0
+        },
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-004",
+          "end": 30,
+          "evidence_id": "evidence-d46c4a9d28d90799273201378ad91d383bf2ba0fa740b7a049903cae15c4a094",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "“有学习困难的学生能力是固定的、无法提高”这句话也请这样处理",
+          "start": 0,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": "turn 1 的“也请这样处理”跨轮指向 turn 0 明示的处理方式，即先给出更有证据依据且更准确的结论，再据此提出实践建议。",
+      "knowledge_id": "D_wildchat-learn-cand-004-dc8956a5d265_001",
+      "object": "“有学习困难的学生能力是固定的、无法提高”这一说法",
+      "predicate": "请求给出结论并提出建议",
+      "qualifiers": {
+        "conditions": [
+          "结论应更有证据依据",
+          "结论应更准确",
+          "实践建议应依据该结论"
+        ],
+        "modality": "requested",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户请求对“有学习困难的学生能力是固定的、无法提高”这一说法给出更有证据依据且更准确的结论，并依据该结论提出实践建议。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [
+          "K_wildchat-learn-cand-004-dc8956a5d265_001_001"
+        ],
+        "source_turn": 0,
+        "stage": "dialogue",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "confidence": 0.96,
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-004",
+          "end": 46,
+          "evidence_id": "evidence-1b9894ee90b8ef910f99858520485bfa7ee9b388c43693492b671c42e304b236",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "请给出更有证据依据、更准确的结论，并据此提出实践建议",
+          "start": 20,
+          "turn_index": 0
+        },
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-004",
+          "end": 30,
+          "evidence_id": "evidence-c6b7675cd2402c8f7160c8c5f362b0b6ac99dc949713888ea7bb04d54014db70",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "这句话也请这样处理",
+          "start": 21,
+          "turn_index": 1
+        },
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-004",
+          "end": 14,
+          "evidence_id": "evidence-f48737574737a6bfa9196c67c96b836822616efd9652c36a41071fc81406fa4d",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "“记忆是成功学习的关键”呢？",
+          "start": 0,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": "连续对话中 turn 2 的“呢”承接 turn 0 明示、turn 1 再次沿用的处理任务，而不只是脱离上下文地询问一般评价。",
+      "knowledge_id": "D_wildchat-learn-cand-004-dc8956a5d265_002",
+      "object": "“记忆是成功学习的关键”这一说法",
+      "predicate": "请求沿用前述方式处理",
+      "qualifiers": {
+        "conditions": [
+          "结论应更有证据依据",
+          "结论应更准确",
+          "实践建议应依据该结论"
+        ],
+        "modality": "requested",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户请求对“记忆是成功学习的关键”这一说法沿用前述处理方式：给出更有证据依据且更准确的结论，并依据该结论提出实践建议。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [
+          "K_wildchat-learn-cand-004-dc8956a5d265_002_001"
+        ],
+        "source_turn": 0,
+        "stage": "dialogue",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "confidence": 1.0,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-004",
+          "end": 36,
+          "evidence_id": "evidence-830d42eb2a59f3ada006bbcd85da06eca7446d22aefa8c4e32a9ff8fb009eb3f",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "“学习风格会显著影响学生学习”这个说法，请给出更有证据依据、更准确的结论",
+          "start": 0,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-learn-cand-004-dc8956a5d265_000_001",
+      "object": "“学习风格会显著影响学生学习”这一说法",
+      "predicate": "请求给出更准确的结论",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "requested",
+        "polarity": "positive",
+        "scope": [
+          "结论应更有证据依据",
+          "结论应更准确"
+        ],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户请求对“学习风格会显著影响学生学习”这一说法给出更有证据依据且更准确的结论。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "confidence": 1.0,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-004",
+          "end": 46,
+          "evidence_id": "evidence-93e4d7a73c425be2ac6212c1926e7752ff8257c0e8f5f1ca74d4fbc020bc5e74",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "并据此提出实践建议",
+          "start": 37,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-learn-cand-004-dc8956a5d265_000_002",
+      "object": "实践建议",
+      "predicate": "请求提出",
+      "qualifiers": {
+        "conditions": [
+          "依据所给结论"
+        ],
+        "modality": "requested",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户请求根据该结论提出实践建议。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "confidence": 1.0,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-004",
+          "end": 33,
+          "evidence_id": "evidence-b0723b36cbde3d161339cc287a34ea3d917e54be799af65103936cfddc98d89b",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "研究并不支持把学生固定归类为听觉、视觉或动觉学习者",
+          "start": 8,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-learn-cand-004-dc8956a5d265_000_003",
+      "object": "把学生固定归类为听觉、视觉或动觉学习者",
+      "predicate": "支持",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "negative",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "研究不支持把学生固定归类为听觉、视觉或动觉学习者。",
+      "subject": "研究",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "confidence": 1.0,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-004",
+          "end": 53,
+          "evidence_id": "evidence-a66395501bb4794d834b74216cb2e6a4b5a6256c775cb6571c9db78f35ec9ae2",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "教学应采用多模态、主动学习和差异化支持",
+          "start": 34,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-learn-cand-004-dc8956a5d265_000_004",
+      "object": "多模态方法",
+      "predicate": "应采用",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "教学应采用多模态方法。",
+      "subject": "教学",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "confidence": 1.0,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-004",
+          "end": 53,
+          "evidence_id": "evidence-a66395501bb4794d834b74216cb2e6a4b5a6256c775cb6571c9db78f35ec9ae2",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "教学应采用多模态、主动学习和差异化支持",
+          "start": 34,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-learn-cand-004-dc8956a5d265_000_005",
+      "object": "主动学习",
+      "predicate": "应采用",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "教学应采用主动学习。",
+      "subject": "教学",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "confidence": 1.0,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-004",
+          "end": 53,
+          "evidence_id": "evidence-a66395501bb4794d834b74216cb2e6a4b5a6256c775cb6571c9db78f35ec9ae2",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "教学应采用多模态、主动学习和差异化支持",
+          "start": 34,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-learn-cand-004-dc8956a5d265_000_006",
+      "object": "差异化支持",
+      "predicate": "应采用",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "教学应采用差异化支持。",
+      "subject": "教学",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "confidence": 1.0,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-004",
+          "end": 68,
+          "evidence_id": "evidence-66d5f78f983be445dbbc600ace809354a372348bff952d4c6c35106670812508",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "并根据学生的实际表现调整方法",
+          "start": 54,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-learn-cand-004-dc8956a5d265_000_007",
+      "object": null,
+      "predicate": "应根据学生的实际表现调整",
+      "qualifiers": {
+        "conditions": [
+          "根据学生的实际表现"
+        ],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "教学方法应根据学生的实际表现进行调整。",
+      "subject": "教学方法",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "confidence": 1.0,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-004",
+          "end": 22,
+          "evidence_id": "evidence-f4c1b019bf5d19becf09d681194b6b2e60e00924ee511fb16624f222f1497556",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "学习困难会带来特定领域的挑战",
+          "start": 8,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-learn-cand-004-dc8956a5d265_001_002",
+      "object": "特定领域的挑战",
+      "predicate": "会带来",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [
+          "特定领域"
+        ],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "学习困难会在特定领域带来挑战。",
+      "subject": "学习困难",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "confidence": 1.0,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-004",
+          "end": 59,
+          "evidence_id": "evidence-1f8ed4da7e4327005904168fe126f3c0e720e4bd6a736b6ec18f55d2583852f9",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "但通过早期识别、个别化教育计划、差异化教学和持续评估，学生的能力可以发展",
+          "start": 23,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-learn-cand-004-dc8956a5d265_001_003",
+      "object": null,
+      "predicate": "可以发展",
+      "qualifiers": {
+        "conditions": [
+          "早期识别",
+          "个别化教育计划",
+          "差异化教学",
+          "持续评估"
+        ],
+        "modality": "possible",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "学生的能力可以通过早期识别、个别化教育计划、差异化教学和持续评估得到发展。",
+      "subject": "学生的能力",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "confidence": 1.0,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-004",
+          "end": 5,
+          "evidence_id": "evidence-bfc6b9abf4aa8aff24f83ed3197a907fcc71029ef029c0fd59be8c08048c27ce",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "记忆有作用",
+          "start": 0,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-learn-cand-004-dc8956a5d265_002_002",
+      "object": null,
+      "predicate": "对学习有作用",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "记忆对学习有作用。",
+      "subject": "记忆",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "confidence": 1.0,
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-004",
+          "end": 13,
+          "evidence_id": "evidence-211a45df4a0be0b3325f4eaa4a7d550dcc3cf107bc3e9cb5a4609c28c5e48e37",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "记忆有作用，但不是唯一关键",
+          "start": 0,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": "后半句省略的主语承接前半句的“记忆”。",
+      "knowledge_id": "K_wildchat-learn-cand-004-dc8956a5d265_002_003",
+      "object": null,
+      "predicate": "是成功学习的唯一关键",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "negative",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "记忆不是成功学习的唯一关键。",
+      "subject": "记忆",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "confidence": 1.0,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-004",
+          "end": 49,
+          "evidence_id": "evidence-b78f7297e4fa29cb64b1cdc26fd0fbed80ad56a7b763d667542bbd0922818a40",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "深层理解、批判性思维、知识应用、刻意练习和检索练习共同支持长期学习效果",
+          "start": 14,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-learn-cand-004-dc8956a5d265_002_004",
+      "object": "长期学习效果",
+      "predicate": "支持",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": [
+          "长期"
+        ]
+      },
+      "source_status": "agent_generated",
+      "statement": "深层理解支持长期学习效果。",
+      "subject": "深层理解",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "confidence": 1.0,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-004",
+          "end": 49,
+          "evidence_id": "evidence-b78f7297e4fa29cb64b1cdc26fd0fbed80ad56a7b763d667542bbd0922818a40",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "深层理解、批判性思维、知识应用、刻意练习和检索练习共同支持长期学习效果",
+          "start": 14,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-learn-cand-004-dc8956a5d265_002_005",
+      "object": "长期学习效果",
+      "predicate": "支持",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": [
+          "长期"
+        ]
+      },
+      "source_status": "agent_generated",
+      "statement": "批判性思维支持长期学习效果。",
+      "subject": "批判性思维",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "confidence": 1.0,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-004",
+          "end": 49,
+          "evidence_id": "evidence-b78f7297e4fa29cb64b1cdc26fd0fbed80ad56a7b763d667542bbd0922818a40",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "深层理解、批判性思维、知识应用、刻意练习和检索练习共同支持长期学习效果",
+          "start": 14,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-learn-cand-004-dc8956a5d265_002_006",
+      "object": "长期学习效果",
+      "predicate": "支持",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": [
+          "长期"
+        ]
+      },
+      "source_status": "agent_generated",
+      "statement": "知识应用支持长期学习效果。",
+      "subject": "知识应用",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "confidence": 1.0,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-004",
+          "end": 49,
+          "evidence_id": "evidence-b78f7297e4fa29cb64b1cdc26fd0fbed80ad56a7b763d667542bbd0922818a40",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "深层理解、批判性思维、知识应用、刻意练习和检索练习共同支持长期学习效果",
+          "start": 14,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-learn-cand-004-dc8956a5d265_002_007",
+      "object": "长期学习效果",
+      "predicate": "支持",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": [
+          "长期"
+        ]
+      },
+      "source_status": "agent_generated",
+      "statement": "刻意练习支持长期学习效果。",
+      "subject": "刻意练习",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "confidence": 1.0,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-004",
+          "end": 49,
+          "evidence_id": "evidence-b78f7297e4fa29cb64b1cdc26fd0fbed80ad56a7b763d667542bbd0922818a40",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "深层理解、批判性思维、知识应用、刻意练习和检索练习共同支持长期学习效果",
+          "start": 14,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-learn-cand-004-dc8956a5d265_002_008",
+      "object": "长期学习效果",
+      "predicate": "支持",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": [
+          "长期"
+        ]
+      },
+      "source_status": "agent_generated",
+      "statement": "检索练习支持长期学习效果。",
+      "subject": "检索练习",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    }
+  ],
+  "keyword_id_prefix": "KW_wildchat-learn-cand-004-dc8956a5d265_",
+  "output_contract": {
+    "$defs": {
+      "KeywordDraft": {
+        "additionalProperties": false,
+        "properties": {
+          "keyword_id": {
+            "minLength": 1,
+            "title": "Keyword Id",
+            "type": "string"
+          },
+          "knowledge_id": {
+            "minLength": 1,
+            "title": "Knowledge Id",
+            "type": "string"
+          },
+          "surface": {
+            "minLength": 1,
+            "title": "Surface",
+            "type": "string"
+          },
+          "normalized_zh": {
+            "minLength": 1,
+            "title": "Normalized Zh",
+            "type": "string"
+          },
+          "query_lemma": {
+            "minLength": 1,
+            "title": "Query Lemma",
+            "type": "string"
+          },
+          "keyword_kind": {
+            "enum": [
+              "lexical",
+              "literal",
+              "identifier",
+              "qualifier"
+            ],
+            "title": "Keyword Kind",
+            "type": "string"
+          },
+          "keyword_type": {
+            "enum": [
+              "entity",
+              "concept",
+              "action",
+              "event",
+              "property",
+              "relation",
+              "time",
+              "quantity",
+              "condition",
+              "modality",
+              "polarity"
+            ],
+            "title": "Keyword Type",
+            "type": "string"
+          },
+          "semantic_role": {
+            "enum": [
+              "subject",
+              "predicate",
+              "object",
+              "topic",
+              "participant",
+              "recipient",
+              "instrument",
+              "result",
+              "attribute",
+              "value",
+              "time",
+              "location",
+              "condition",
+              "modality",
+              "polarity",
+              "identifier",
+              "other"
+            ],
+            "title": "Semantic Role",
+            "type": "string"
+          },
+          "source_field": {
+            "enum": [
+              "statement",
+              "subject",
+              "predicate",
+              "object",
+              "qualifiers.temporal",
+              "qualifiers.conditions",
+              "qualifiers.scope",
+              "qualifiers.modality",
+              "qualifiers.polarity"
+            ],
+            "title": "Source Field",
+            "type": "string"
+          },
+          "part_of_speech": {
+            "enum": [
+              "noun",
+              "verb",
+              "adjective",
+              "adverb",
+              "proper_noun",
+              "other",
+              "none"
+            ],
+            "title": "Part Of Speech",
+            "type": "string"
+          },
+          "sense_key": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Sense Key"
+          },
+          "sense_hint": {
+            "minLength": 1,
+            "title": "Sense Hint",
+            "type": "string"
+          },
+          "lookup_targets": {
+            "items": {
+              "enum": [
+                "wordnet",
+                "schema_org",
+                "exact"
+              ],
+              "type": "string"
+            },
+            "minItems": 1,
+            "title": "Lookup Targets",
+            "type": "array"
+          },
+          "normalized_value": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Normalized Value"
+          },
+          "datatype": {
+            "anyOf": [
+              {
+                "enum": [
+                  "date",
+                  "datetime",
+                  "time",
+                  "duration",
+                  "temporal_relation",
+                  "number",
+                  "currency",
+                  "percentage",
+                  "version",
+                  "code",
+                  "text",
+                  "identifier",
+                  "modality",
+                  "polarity",
+                  "condition",
+                  "other"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Datatype"
+          },
+          "unit": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Unit"
+          },
+          "translation_confidence": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Translation Confidence",
+            "type": "number"
+          }
+        },
+        "required": [
+          "keyword_id",
+          "knowledge_id",
+          "surface",
+          "normalized_zh",
+          "query_lemma",
+          "keyword_kind",
+          "keyword_type",
+          "semantic_role",
+          "source_field",
+          "part_of_speech",
+          "sense_hint",
+          "lookup_targets",
+          "translation_confidence"
+        ],
+        "title": "KeywordDraft",
+        "type": "object"
+      },
+      "KnowledgeKeywordOutput": {
+        "additionalProperties": false,
+        "properties": {
+          "knowledge_id": {
+            "minLength": 1,
+            "title": "Knowledge Id",
+            "type": "string"
+          },
+          "keywords": {
+            "items": {
+              "$ref": "#/$defs/KeywordDraft"
+            },
+            "title": "Keywords",
+            "type": "array"
+          },
+          "no_keyword_reason": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "No Keyword Reason"
+          }
+        },
+        "required": [
+          "knowledge_id"
+        ],
+        "title": "KnowledgeKeywordOutput",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "candidate_id": {
+        "minLength": 1,
+        "title": "Candidate Id",
+        "type": "string"
+      },
+      "items": {
+        "items": {
+          "$ref": "#/$defs/KnowledgeKeywordOutput"
+        },
+        "title": "Items",
+        "type": "array"
+      }
+    },
+    "required": [
+      "candidate_id"
+    ],
+    "title": "KeywordPassOutput",
+    "type": "object"
+  },
+  "prompt_sha256": "4080bc22eaf5b338ae2e7eaf8ee0aaaf3b88d8c6a816f444b21492a72455a538",
+  "output_contract_sha256": "611b5ff9c589612e7706f99d35e6cd97ddc2ec792ab2b44ea0ae5d35aeefbdd0"
+}

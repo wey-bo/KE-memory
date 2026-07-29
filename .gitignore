@@ -24,3 +24,14 @@ __pycache__/
 *.onnx
 *.gguf
 pytorch_model*.bin
+
+# Research snapshot generated state
+/research/next-prep/.venv*/
+/research/next-prep/.fastembed-cache/
+/research/next-prep/.hf-cache/
+/research/next-prep/.pytest_cache/
+/research/next-prep/.tmp/
+/research/next-prep/tmp/
+/research/next-prep/**/__pycache__/
+/research/next-prep/**/*.py[cod]
+/research/next-prep/artifacts/ontology-memory-experiment/runs/

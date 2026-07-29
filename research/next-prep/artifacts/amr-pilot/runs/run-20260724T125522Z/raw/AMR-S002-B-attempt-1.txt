@@ -1,0 +1,9 @@
+(a / and
+   :op1 (r / request-01
+            :ARG0 (s / speaker)
+            :ARG1 (r2 / return-01
+                     :ARG1 (t / tablet)))
+   :op2 (r3 / request-01
+            :ARG0 s
+            :ARG1 (c / cancel-01
+                     :ARG1 (c2 / charger))))

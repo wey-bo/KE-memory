@@ -1,0 +1,16 @@
+(r / review-01
+   :ARG0 (c / court)
+   :ARG1 (a / appoint-01
+            :ARG1 (p / person
+                     :name (n / name
+                              :op1 "Stephanie")))
+   :condition (n2 / name-01
+                  :ARG0 (y / you)
+                  :ARG1 p
+                  :location (w / will
+                               :poss y))
+   :purpose (e / ensure-01
+                :ARG1 (i / interest-01
+                           :domain a
+                           :mod (b / best)
+                           :ARG1 (c2 / child))))

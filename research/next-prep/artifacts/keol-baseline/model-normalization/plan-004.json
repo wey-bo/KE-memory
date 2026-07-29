@@ -1,0 +1,55 @@
+{
+  "concept_updates": [
+    {
+      "id": "concept_943fdf58321d",
+      "canonical_name": "CareArrangement",
+      "kind": "class",
+      "description": "An arrangement that specifies care or guardianship responsibilities for a dependent, such as a minor.",
+      "aliases": []
+    },
+    {
+      "id": "concept_3666fb86ffd8",
+      "canonical_name": "FinancialArrangement",
+      "kind": "class",
+      "description": "An arrangement that specifies how relevant assets are to be managed.",
+      "aliases": []
+    },
+    {
+      "id": "concept_fd53bfd7939e",
+      "canonical_name": "Assessment",
+      "kind": "class",
+      "description": "An evaluation of a person's willingness and suitability for a responsibility.",
+      "aliases": []
+    },
+    {
+      "id": "concept_57ec50e90f87",
+      "canonical_name": "LegalArrangement",
+      "kind": "class",
+      "description": "A legally structured arrangement, such as a trust, used to organize rights or responsibilities.",
+      "aliases": []
+    }
+  ],
+  "operator_updates": [
+    {
+      "id": "operator_b031c7994ac1",
+      "canonical_name": "documents",
+      "operator_type": "relation",
+      "description": "Relates a legal document or legal arrangement to the legal decision that it formally records.",
+      "aliases": [
+        "records"
+      ],
+      "semantic_status": "specific",
+      "input_concepts": [
+        "LegalDocument",
+        "LegalArrangement"
+      ],
+      "output_concepts": [
+        "LegalDecision"
+      ],
+      "schema_confidence": 0.95
+    }
+  ],
+  "notes": [
+    "The documents relation is treated as specific because both observed uses record a legal decision in a will or trust."
+  ]
+}

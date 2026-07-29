@@ -1,0 +1,86 @@
+{
+  "source": {
+    "source_id": "src_wildchat_learn_cand_001__turn_005",
+    "file": "keol-input/turns/wildchat-learn-cand-001__turn-005.txt",
+    "file_type": "txt",
+    "category": "text",
+    "metadata": {
+      "unit_id": "wildchat-learn-cand-001__turn-005",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "turn_index": 5,
+      "json_pointer": "/candidates/1/turns/4",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=24456e5381c0c4891d80737fa4639f1d / model=gpt-3.5-turbo-0613 / user_ordinal=1..6 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "chunk": {
+    "id": "chunk_b45fca57faf8820a8ebe",
+    "index": 0,
+    "text": "用户：\nAndroidManifest.xml 在哪里？\n\nAgent：\n在 Android Studio 的 Project 视图中展开 app > src > main，里面有 AndroidManifest.xml；也可以展开 app 模块下的 manifests 文件夹直接打开它。",
+    "size": 145,
+    "metadata": {
+      "unit_id": "wildchat-learn-cand-001__turn-005",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "turn_index": 5,
+      "json_pointer": "/candidates/1/turns/4",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=24456e5381c0c4891d80737fa4639f1d / model=gpt-3.5-turbo-0613 / user_ordinal=1..6 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "n1",
+      "name": "AndroidManifest.xml",
+      "type": "File",
+      "description": "用户询问位置的 Android 清单文件。",
+      "source_chunk_id": "chunk_b45fca57faf8820a8ebe"
+    },
+    {
+      "id": "n2",
+      "name": "app/src/main/AndroidManifest.xml",
+      "type": "FilePath",
+      "description": "Agent 给出的项目路径。",
+      "source_chunk_id": "chunk_b45fca57faf8820a8ebe"
+    },
+    {
+      "id": "n3",
+      "name": "Android Studio Project 视图",
+      "type": "UserInterface",
+      "description": "Agent 指示用于定位文件的项目视图。",
+      "source_chunk_id": "chunk_b45fca57faf8820a8ebe"
+    },
+    {
+      "id": "n4",
+      "name": "app 模块 manifests 文件夹",
+      "type": "Directory",
+      "description": "Agent 给出的另一种界面位置。",
+      "source_chunk_id": "chunk_b45fca57faf8820a8ebe"
+    }
+  ],
+  "relations": [
+    {
+      "source_entity": "n1",
+      "target_entity": "n2",
+      "relation_type": "LOCATED_AT",
+      "description": "Manifest 文件位于 app/src/main 路径。"
+    },
+    {
+      "source_entity": "n2",
+      "target_entity": "n3",
+      "relation_type": "VISIBLE_IN",
+      "description": "可在 Android Studio Project 视图中展开该路径。"
+    },
+    {
+      "source_entity": "n1",
+      "target_entity": "n4",
+      "relation_type": "VISIBLE_IN",
+      "description": "也可以从 app 模块的 manifests 文件夹打开。"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+(r / responsible-01
+   :ARG0 (g / guardian)
+   :ARG1 (c / care-01
+      :ARG0 g
+      :ARG1 (p / and
+         :op1 (p2 / person
+            :name (n / name
+               :op1 "Francis"))
+         :op2 (p3 / person
+            :name (n2 / name
+               :op1 "Michael")))
+      :frequency (d / day
+         :quant 1)
+      :mod (i / include-91
+         :ARG1 (n3 / need-01
+            :ARG0 p
+            :mod (a / and
+               :op1 (p4 / physical)
+               :op2 (e / emotional)
+               :op3 (e2 / educational)))))
+   :time (f / future))

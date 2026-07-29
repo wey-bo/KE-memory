@@ -1,0 +1,5 @@
+用户：
+日志显示：Unable to start activity，原因是 You need to use a Theme.AppCompat theme or descendant with this activity。
+
+Agent：
+这个异常说明该 Activity 使用的主题不是 Theme.AppCompat 或其子主题。检查 AndroidManifest.xml 中 MainActivity 的 theme 属性，并确认 styles.xml 中定义了对应的 AppCompat 主题；同步项目后重新运行。

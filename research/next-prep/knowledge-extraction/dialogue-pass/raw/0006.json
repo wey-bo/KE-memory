@@ -1,0 +1,175 @@
+{
+  "candidate_id": "TAU-BENCH-CAND-001",
+  "new_knowledge": [],
+  "operations": [
+    {
+      "operation_id": "R_tau-bench-cand-001-650fada2c0dc_001",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "operation": "supersede",
+      "targets": [
+        "K_tau-bench-cand-001-650fada2c0dc_000_004"
+      ],
+      "replacement": "K_tau-bench-cand-001-650fada2c0dc_001_005",
+      "reason": "代理关于退回订单 #W2692684 中平板的条件性计划，已被工具观察到的平板退货请求提交状态取代。",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "退回订单 #W2692684 中的平板",
+          "evidence_role": "agent_generated"
+        },
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "平板退货请求已提交",
+          "evidence_role": "tool_observed"
+        }
+      ],
+      "confidence": 1.0
+    },
+    {
+      "operation_id": "R_tau-bench-cand-001-650fada2c0dc_002",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "operation": "supersede",
+      "targets": [
+        "K_tau-bench-cand-001-650fada2c0dc_000_005"
+      ],
+      "replacement": "K_tau-bench-cand-001-650fada2c0dc_001_003",
+      "reason": "平板退款退回礼品卡的条件性计划，推进为代理声称已调用退货工具并明确指定现有礼品卡作为退款方式。",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "退款退回现有礼品卡",
+          "evidence_role": "agent_generated"
+        },
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "return_delivered_order_items(order_id=#W2692684, item_id=3788616824, payment_method=gift_card_7711863)",
+          "evidence_role": "agent_generated"
+        }
+      ],
+      "confidence": 1.0
+    },
+    {
+      "operation_id": "R_tau-bench-cand-001-650fada2c0dc_003",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "operation": "supersede",
+      "targets": [
+        "K_tau-bench-cand-001-650fada2c0dc_000_006"
+      ],
+      "replacement": "K_tau-bench-cand-001-650fada2c0dc_001_007",
+      "reason": "代理关于取消订单 #W9373487 中充电器的条件性计划，已被工具观察到的订单取消状态取代。",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "取消订单 #W9373487 中的便携式充电器",
+          "evidence_role": "agent_generated"
+        },
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "充电器订单已取消",
+          "evidence_role": "tool_observed"
+        }
+      ],
+      "confidence": 1.0
+    },
+    {
+      "operation_id": "R_tau-bench-cand-001-650fada2c0dc_004",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "operation": "supersede",
+      "targets": [
+        "K_tau-bench-cand-001-650fada2c0dc_000_007"
+      ],
+      "replacement": "K_tau-bench-cand-001-650fada2c0dc_001_004",
+      "reason": "将充电器取消原因记录为“已不再需要”的计划，推进为代理声称已按 reason=no longer needed 调用取消工具。",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "原因记为“已不再需要”",
+          "evidence_role": "agent_generated"
+        },
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "cancel_pending_order(order_id=#W9373487, reason=no longer needed)",
+          "evidence_role": "agent_generated"
+        }
+      ],
+      "confidence": 1.0
+    },
+    {
+      "operation_id": "R_tau-bench-cand-001-650fada2c0dc_005",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "operation": "supersede",
+      "targets": [
+        "K_tau-bench-cand-001-650fada2c0dc_002_003"
+      ],
+      "replacement": "K_tau-bench-cand-001-650fada2c0dc_004_004",
+      "reason": "代理帮助退回运动鞋的承诺，经过订单识别和用户确认后，推进为工具观察到的运动鞋退货请求已提交。",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "可以",
+          "evidence_role": "agent_generated"
+        },
+        {
+          "turn_index": 4,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "运动鞋退货请求已提交",
+          "evidence_role": "tool_observed"
+        }
+      ],
+      "confidence": 1.0
+    },
+    {
+      "operation_id": "R_tau-bench-cand-001-650fada2c0dc_006",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "operation": "supersede",
+      "targets": [
+        "K_tau-bench-cand-001-650fada2c0dc_003_010"
+      ],
+      "replacement": "K_tau-bench-cand-001-650fada2c0dc_004_005",
+      "reason": "工具结果之后的普通 Agent 话术仅提出将运动鞋退款退回礼品卡；用户确认后，后续工具结果观察到186.45美元将退回礼品卡，因此取代该提议。",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "退款退回现有礼品卡",
+          "evidence_role": "agent_generated"
+        },
+        {
+          "turn_index": 4,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "退款退到我的礼品卡就可以",
+          "evidence_role": "user_reported"
+        },
+        {
+          "turn_index": 4,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "退款 186.45 美元将退回礼品卡",
+          "evidence_role": "tool_observed"
+        }
+      ],
+      "confidence": 1.0
+    }
+  ]
+}

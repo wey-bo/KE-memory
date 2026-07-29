@@ -1,0 +1,2096 @@
+{
+  "candidate_id": "BEAM-CAND-004",
+  "items": [
+    {
+      "knowledge_id": "D_beam-cand-004-4d648a026dc4_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0001",
+          "knowledge_id": "D_beam-cand-004-4d648a026dc4_001",
+          "surface": "再次举行家庭会议",
+          "normalized_zh": "再次举行家庭会议",
+          "query_lemma": "hold another family meeting",
+          "keyword_type": "event",
+          "semantic_role": "处理条件",
+          "source_field": "qualifiers.conditions",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0002",
+          "knowledge_id": "D_beam-cand-004-4d648a026dc4_001",
+          "surface": "Kimberly、Bradley 等家人",
+          "normalized_zh": "Kimberly、Bradley等家人",
+          "query_lemma": "Kimberly Bradley and family",
+          "keyword_type": "entity",
+          "semantic_role": "相关家人",
+          "source_field": "object",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0003",
+          "knowledge_id": "D_beam-cand-004-4d648a026dc4_001",
+          "surface": "可能有的顾虑",
+          "normalized_zh": "可能存在的顾虑",
+          "query_lemma": "possible concerns",
+          "keyword_type": "property",
+          "semantic_role": "不确定顾虑",
+          "source_field": "object",
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0004",
+          "knowledge_id": "D_beam-cand-004-4d648a026dc4_001",
+          "surface": "处理",
+          "normalized_zh": "处理顾虑",
+          "query_lemma": "address concerns",
+          "keyword_type": "action",
+          "semantic_role": "预期作用",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "D_beam-cand-004-4d648a026dc4_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0005",
+          "knowledge_id": "D_beam-cand-004-4d648a026dc4_002",
+          "surface": "Kimberly、Bradley 等家人",
+          "normalized_zh": "Kimberly、Bradley等家人",
+          "query_lemma": "Kimberly Bradley and family",
+          "keyword_type": "entity",
+          "semantic_role": "家庭成员",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0006",
+          "knowledge_id": "D_beam-cand-004-4d648a026dc4_002",
+          "surface": "没有聚在一起",
+          "normalized_zh": "没有聚会",
+          "query_lemma": "not gather together",
+          "keyword_type": "event",
+          "semantic_role": "家庭聚会状态",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0007",
+          "knowledge_id": "D_beam-cand-004-4d648a026dc4_002",
+          "surface": "一阵子",
+          "normalized_zh": "一段时间",
+          "query_lemma": "for some time",
+          "keyword_type": "time",
+          "semantic_role": "持续时间",
+          "source_field": "qualifiers.temporal",
+          "translation_confidence": 0.98
+        }
+      ]
+    },
+    {
+      "knowledge_id": "D_beam-cand-004-4d648a026dc4_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0008",
+          "knowledge_id": "D_beam-cand-004-4d648a026dc4_003",
+          "surface": "决定安排",
+          "normalized_zh": "决定安排会议",
+          "query_lemma": "decide to schedule meeting",
+          "keyword_type": "modality",
+          "semantic_role": "决定",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0009",
+          "knowledge_id": "D_beam-cand-004-4d648a026dc4_003",
+          "surface": "遗嘱执行人选择",
+          "normalized_zh": "遗嘱执行人选择",
+          "query_lemma": "executor selection",
+          "keyword_type": "concept",
+          "semantic_role": "会议主题",
+          "source_field": "object",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0010",
+          "knowledge_id": "D_beam-cand-004-4d648a026dc4_003",
+          "surface": "家庭会议",
+          "normalized_zh": "家庭会议",
+          "query_lemma": "family meeting",
+          "keyword_type": "event",
+          "semantic_role": "安排事项",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0011",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_001",
+          "surface": "担心",
+          "normalized_zh": "担心",
+          "query_lemma": "concerned about",
+          "keyword_type": "property",
+          "semantic_role": "用户顾虑",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0012",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_001",
+          "surface": "遗嘱执行人的选择",
+          "normalized_zh": "遗嘱执行人选择",
+          "query_lemma": "executor selection",
+          "keyword_type": "concept",
+          "semantic_role": "顾虑对象",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0013",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_002",
+          "surface": "Douglas",
+          "normalized_zh": "Douglas",
+          "query_lemma": "Douglas",
+          "keyword_type": "entity",
+          "semantic_role": "遗嘱执行人",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0014",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_002",
+          "surface": "接受",
+          "normalized_zh": "接受安排",
+          "query_lemma": "accept appointment",
+          "keyword_type": "action",
+          "semantic_role": "接受动作",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0015",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_002",
+          "surface": "担任用户遗嘱执行人",
+          "normalized_zh": "担任用户遗嘱执行人",
+          "query_lemma": "serve as user's executor",
+          "keyword_type": "relation",
+          "semantic_role": "角色安排",
+          "source_field": "object",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0016",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_002",
+          "surface": "4 月 15 日",
+          "normalized_zh": "4月15日",
+          "query_lemma": "April 15",
+          "keyword_type": "time",
+          "semantic_role": "接受日期",
+          "source_field": "qualifiers.temporal",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0017",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_002",
+          "surface": "珊瑚湾咖啡馆（Coral Bay Café）",
+          "normalized_zh": "珊瑚湾咖啡馆",
+          "query_lemma": "Coral Bay Cafe",
+          "keyword_type": "entity",
+          "semantic_role": "接受地点",
+          "source_field": "qualifiers.scope",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0018",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_003",
+          "surface": "Kimberly 和 Bradley 等家人",
+          "normalized_zh": "Kimberly、Bradley等家人",
+          "query_lemma": "Kimberly Bradley and family",
+          "keyword_type": "entity",
+          "semantic_role": "会议参与者",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0019",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_003",
+          "surface": "参加",
+          "normalized_zh": "参加会议",
+          "query_lemma": "attend meeting",
+          "keyword_type": "action",
+          "semantic_role": "参与动作",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0020",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_003",
+          "surface": "会议",
+          "normalized_zh": "家庭会议",
+          "query_lemma": "family meeting",
+          "keyword_type": "event",
+          "semantic_role": "参与事件",
+          "source_field": "object",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0021",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_003",
+          "surface": "3 月 25 日",
+          "normalized_zh": "3月25日",
+          "query_lemma": "March 25",
+          "keyword_type": "time",
+          "semantic_role": "会议日期",
+          "source_field": "qualifiers.temporal",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0022",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_003",
+          "surface": "用户家",
+          "normalized_zh": "用户家中",
+          "query_lemma": "user's home",
+          "keyword_type": "entity",
+          "semantic_role": "会议地点",
+          "source_field": "qualifiers.scope",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0023",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_004",
+          "surface": "想知道",
+          "normalized_zh": "询问家人看法",
+          "query_lemma": "wonder about family reaction",
+          "keyword_type": "modality",
+          "semantic_role": "询问意图",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0024",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_004",
+          "surface": "家人得知用户选择 Douglas 后的看法",
+          "normalized_zh": "家人对选择Douglas的看法",
+          "query_lemma": "family reaction to choosing Douglas",
+          "keyword_type": "property",
+          "semantic_role": "询问对象",
+          "source_field": "object",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0025",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_004",
+          "surface": "如果家人知道用户选的是 Douglas",
+          "normalized_zh": "家人得知选择Douglas",
+          "query_lemma": "if family knows Douglas was chosen",
+          "keyword_type": "condition",
+          "semantic_role": "假设条件",
+          "source_field": "qualifiers.conditions",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0026",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_005",
+          "surface": "选择遗嘱执行人",
+          "normalized_zh": "选择遗嘱执行人",
+          "query_lemma": "choose an executor",
+          "keyword_type": "action",
+          "semantic_role": "决定事项",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0027",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_005",
+          "surface": "敏感决定",
+          "normalized_zh": "可能为敏感决定",
+          "query_lemma": "possibly sensitive decision",
+          "keyword_type": "property",
+          "semantic_role": "可能属性",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0028",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_006",
+          "surface": "遗嘱执行人的选择",
+          "normalized_zh": "遗嘱执行人选择",
+          "query_lemma": "executor selection",
+          "keyword_type": "concept",
+          "semantic_role": "敏感事项",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0029",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_006",
+          "surface": "可能敏感",
+          "normalized_zh": "可能敏感",
+          "query_lemma": "possibly sensitive",
+          "keyword_type": "property",
+          "semantic_role": "不确定属性",
+          "source_field": "predicate",
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0030",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_006",
+          "surface": "牵涉家庭关系",
+          "normalized_zh": "涉及家庭关系",
+          "query_lemma": "involving family relationships",
+          "keyword_type": "condition",
+          "semantic_role": "敏感条件",
+          "source_field": "qualifiers.conditions",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0031",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_007",
+          "surface": "坦诚沟通",
+          "normalized_zh": "坦诚沟通",
+          "query_lemma": "communicate openly",
+          "keyword_type": "action",
+          "semantic_role": "建议动作",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0032",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_007",
+          "surface": "Kimberly 和 Bradley",
+          "normalized_zh": "Kimberly和Bradley",
+          "query_lemma": "Kimberly and Bradley",
+          "keyword_type": "entity",
+          "semantic_role": "沟通对象",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_008",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0033",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_008",
+          "surface": "说明",
+          "normalized_zh": "说明选择原因",
+          "query_lemma": "explain selection reasons",
+          "keyword_type": "action",
+          "semantic_role": "建议动作",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0034",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_008",
+          "surface": "选择 Douglas 的原因",
+          "normalized_zh": "选择Douglas的原因",
+          "query_lemma": "reasons for choosing Douglas",
+          "keyword_type": "concept",
+          "semantic_role": "说明内容",
+          "source_field": "object",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0035",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_008",
+          "surface": "Kimberly 和 Bradley",
+          "normalized_zh": "Kimberly和Bradley",
+          "query_lemma": "Kimberly and Bradley",
+          "keyword_type": "entity",
+          "semantic_role": "说明对象",
+          "source_field": "qualifiers.scope",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_009",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0036",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_009",
+          "surface": "讨论",
+          "normalized_zh": "讨论方案",
+          "query_lemma": "discuss option",
+          "keyword_type": "action",
+          "semantic_role": "建议动作",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0037",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_009",
+          "surface": "共同遗嘱执行人",
+          "normalized_zh": "共同遗嘱执行人",
+          "query_lemma": "co-executor",
+          "keyword_type": "concept",
+          "semantic_role": "讨论方案",
+          "source_field": "object",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0038",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_009",
+          "surface": "如果仍有顾虑",
+          "normalized_zh": "如果仍有顾虑",
+          "query_lemma": "if concerns remain",
+          "keyword_type": "condition",
+          "semantic_role": "启用条件",
+          "source_field": "qualifiers.conditions",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_010",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0039",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_010",
+          "surface": "征求意见",
+          "normalized_zh": "征求专业意见",
+          "query_lemma": "seek advice",
+          "keyword_type": "action",
+          "semantic_role": "建议动作",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0040",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_010",
+          "surface": "遗产规划律师 Stephanie",
+          "normalized_zh": "遗产规划律师Stephanie",
+          "query_lemma": "estate planning attorney Stephanie",
+          "keyword_type": "entity",
+          "semantic_role": "咨询对象",
+          "source_field": "object",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0041",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_000_010",
+          "surface": "如果仍有顾虑",
+          "normalized_zh": "如果仍有顾虑",
+          "query_lemma": "if concerns remain",
+          "keyword_type": "condition",
+          "semantic_role": "启用条件",
+          "source_field": "qualifiers.conditions",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0042",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_001",
+          "surface": "再安排一次家庭会议",
+          "normalized_zh": "再次安排家庭会议",
+          "query_lemma": "schedule another family meeting",
+          "keyword_type": "event",
+          "semantic_role": "偏好方案",
+          "source_field": "object",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0043",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_001",
+          "surface": "认为是好主意",
+          "normalized_zh": "认为是合适方案",
+          "query_lemma": "consider a good idea",
+          "keyword_type": "property",
+          "semantic_role": "用户评价",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0044",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_002",
+          "surface": "再次举行家庭会议",
+          "normalized_zh": "再次举行家庭会议",
+          "query_lemma": "hold another family meeting",
+          "keyword_type": "event",
+          "semantic_role": "促成方式",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0045",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_002",
+          "surface": "面对面把事情谈清楚",
+          "normalized_zh": "面对面澄清事情",
+          "query_lemma": "clarify matters face to face",
+          "keyword_type": "action",
+          "semantic_role": "预期作用",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0046",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_005",
+          "surface": "再安排一次家庭会议",
+          "normalized_zh": "再次安排家庭会议",
+          "query_lemma": "schedule another family meeting",
+          "keyword_type": "event",
+          "semantic_role": "促成方式",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0047",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_005",
+          "surface": "每个人的意见被听见",
+          "normalized_zh": "听取每个人的意见",
+          "query_lemma": "everyone's views are heard",
+          "keyword_type": "property",
+          "semantic_role": "预期结果",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0048",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_006",
+          "surface": "家庭会议",
+          "normalized_zh": "家庭会议",
+          "query_lemma": "family meeting",
+          "keyword_type": "event",
+          "semantic_role": "安排对象",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0049",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_006",
+          "surface": "大家方便的时间",
+          "normalized_zh": "所有人方便的时间",
+          "query_lemma": "mutually convenient time",
+          "keyword_type": "time",
+          "semantic_role": "会议时间要求",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0050",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_007",
+          "surface": "家庭会议",
+          "normalized_zh": "家庭会议",
+          "query_lemma": "family meeting",
+          "keyword_type": "event",
+          "semantic_role": "安排对象",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0051",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_007",
+          "surface": "大家方便的地点",
+          "normalized_zh": "所有人方便的地点",
+          "query_lemma": "mutually convenient location",
+          "keyword_type": "entity",
+          "semantic_role": "会议地点要求",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_008",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0052",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_008",
+          "surface": "准备",
+          "normalized_zh": "准备议程",
+          "query_lemma": "prepare agenda",
+          "keyword_type": "action",
+          "semantic_role": "组织动作",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0053",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_008",
+          "surface": "议程",
+          "normalized_zh": "会议议程",
+          "query_lemma": "meeting agenda",
+          "keyword_type": "concept",
+          "semantic_role": "准备对象",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_009",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0054",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_009",
+          "surface": "家庭会议",
+          "normalized_zh": "家庭会议",
+          "query_lemma": "family meeting",
+          "keyword_type": "event",
+          "semantic_role": "讨论场景",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0055",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_009",
+          "surface": "遗嘱执行人的职责",
+          "normalized_zh": "遗嘱执行人职责",
+          "query_lemma": "executor duties",
+          "keyword_type": "concept",
+          "semantic_role": "讨论主题",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_010",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0056",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_010",
+          "surface": "家庭会议",
+          "normalized_zh": "家庭会议",
+          "query_lemma": "family meeting",
+          "keyword_type": "event",
+          "semantic_role": "讨论场景",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0057",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_010",
+          "surface": "对 Douglas 的顾虑",
+          "normalized_zh": "对Douglas的顾虑",
+          "query_lemma": "concerns about Douglas",
+          "keyword_type": "property",
+          "semantic_role": "讨论主题",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_011",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0058",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_011",
+          "surface": "家庭会议",
+          "normalized_zh": "家庭会议",
+          "query_lemma": "family meeting",
+          "keyword_type": "event",
+          "semantic_role": "讨论场景",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0059",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_011",
+          "surface": "共同执行人的可能性",
+          "normalized_zh": "共同执行人的可能性",
+          "query_lemma": "co-executor possibility",
+          "keyword_type": "concept",
+          "semantic_role": "讨论主题",
+          "source_field": "object",
+          "translation_confidence": 0.99
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_012",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0060",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_012",
+          "surface": "家庭会议",
+          "normalized_zh": "家庭会议",
+          "query_lemma": "family meeting",
+          "keyword_type": "event",
+          "semantic_role": "讨论场景",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0061",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_001_012",
+          "surface": "最终决定",
+          "normalized_zh": "最终决定",
+          "query_lemma": "final decision",
+          "keyword_type": "concept",
+          "semantic_role": "讨论主题",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0062",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_002",
+          "surface": "帮助起草",
+          "normalized_zh": "协助起草",
+          "query_lemma": "help draft",
+          "keyword_type": "action",
+          "semantic_role": "请求动作",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0063",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_002",
+          "surface": "会议邀请",
+          "normalized_zh": "会议邀请",
+          "query_lemma": "meeting invitation",
+          "keyword_type": "concept",
+          "semantic_role": "起草对象",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0064",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_003",
+          "surface": "帮助起草",
+          "normalized_zh": "协助起草",
+          "query_lemma": "help draft",
+          "keyword_type": "action",
+          "semantic_role": "请求动作",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0065",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_003",
+          "surface": "会议议程",
+          "normalized_zh": "会议议程",
+          "query_lemma": "meeting agenda",
+          "keyword_type": "concept",
+          "semantic_role": "起草对象",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0066",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_004",
+          "surface": "代理帮助起草邀请和议程",
+          "normalized_zh": "代理协助起草邀请和议程",
+          "query_lemma": "agent drafts invitation and agenda",
+          "keyword_type": "action",
+          "semantic_role": "帮助内容",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0067",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_004",
+          "surface": "很有帮助",
+          "normalized_zh": "很有帮助",
+          "query_lemma": "helpful",
+          "keyword_type": "property",
+          "semantic_role": "用户评价",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0068",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_005",
+          "surface": "表示可以帮助起草",
+          "normalized_zh": "承诺协助起草",
+          "query_lemma": "committed to help draft",
+          "keyword_type": "modality",
+          "semantic_role": "代理承诺",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0069",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_005",
+          "surface": "邀请和议程",
+          "normalized_zh": "邀请和议程",
+          "query_lemma": "invitation and agenda",
+          "keyword_type": "concept",
+          "semantic_role": "起草对象",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0070",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_006",
+          "surface": "会议邀请",
+          "normalized_zh": "会议邀请",
+          "query_lemma": "meeting invitation",
+          "keyword_type": "concept",
+          "semantic_role": "文档类型",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0071",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_006",
+          "surface": "会议主题",
+          "normalized_zh": "会议主题",
+          "query_lemma": "meeting topic",
+          "keyword_type": "concept",
+          "semantic_role": "邀请内容",
+          "source_field": "object",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0072",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_006",
+          "surface": "遗嘱执行人选择",
+          "normalized_zh": "遗嘱执行人选择",
+          "query_lemma": "executor selection",
+          "keyword_type": "concept",
+          "semantic_role": "主题内容",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0073",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_007",
+          "surface": "会议邀请",
+          "normalized_zh": "会议邀请",
+          "query_lemma": "meeting invitation",
+          "keyword_type": "concept",
+          "semantic_role": "文档类型",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0074",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_007",
+          "surface": "拟议日期",
+          "normalized_zh": "拟议日期",
+          "query_lemma": "proposed date",
+          "keyword_type": "time",
+          "semantic_role": "邀请字段",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_008",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0075",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_008",
+          "surface": "会议邀请",
+          "normalized_zh": "会议邀请",
+          "query_lemma": "meeting invitation",
+          "keyword_type": "concept",
+          "semantic_role": "文档类型",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0076",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_008",
+          "surface": "拟议时间",
+          "normalized_zh": "拟议时间",
+          "query_lemma": "proposed time",
+          "keyword_type": "time",
+          "semantic_role": "邀请字段",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_009",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0077",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_009",
+          "surface": "会议邀请",
+          "normalized_zh": "会议邀请",
+          "query_lemma": "meeting invitation",
+          "keyword_type": "concept",
+          "semantic_role": "文档类型",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0078",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_009",
+          "surface": "拟议地点",
+          "normalized_zh": "拟议地点",
+          "query_lemma": "proposed location",
+          "keyword_type": "entity",
+          "semantic_role": "邀请字段",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_010",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0079",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_010",
+          "surface": "会议议程",
+          "normalized_zh": "会议议程",
+          "query_lemma": "meeting agenda",
+          "keyword_type": "concept",
+          "semantic_role": "文档类型",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0080",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_010",
+          "surface": "介绍会议目的",
+          "normalized_zh": "介绍会议目的",
+          "query_lemma": "introduce meeting purpose",
+          "keyword_type": "action",
+          "semantic_role": "议程项目",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_011",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0081",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_011",
+          "surface": "会议议程",
+          "normalized_zh": "会议议程",
+          "query_lemma": "meeting agenda",
+          "keyword_type": "concept",
+          "semantic_role": "文档类型",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0082",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_011",
+          "surface": "讨论遗嘱执行人的职责",
+          "normalized_zh": "讨论遗嘱执行人职责",
+          "query_lemma": "discuss executor duties",
+          "keyword_type": "action",
+          "semantic_role": "议程项目",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_012",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0083",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_012",
+          "surface": "会议议程",
+          "normalized_zh": "会议议程",
+          "query_lemma": "meeting agenda",
+          "keyword_type": "concept",
+          "semantic_role": "文档类型",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0084",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_012",
+          "surface": "听取 Kimberly 的顾虑",
+          "normalized_zh": "听取Kimberly的顾虑",
+          "query_lemma": "hear Kimberly's concerns",
+          "keyword_type": "action",
+          "semantic_role": "议程项目",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_013",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0085",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_013",
+          "surface": "会议议程",
+          "normalized_zh": "会议议程",
+          "query_lemma": "meeting agenda",
+          "keyword_type": "concept",
+          "semantic_role": "文档类型",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0086",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_013",
+          "surface": "听取 Bradley 的顾虑",
+          "normalized_zh": "听取Bradley的顾虑",
+          "query_lemma": "hear Bradley's concerns",
+          "keyword_type": "action",
+          "semantic_role": "议程项目",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_014",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0087",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_014",
+          "surface": "会议议程",
+          "normalized_zh": "会议议程",
+          "query_lemma": "meeting agenda",
+          "keyword_type": "concept",
+          "semantic_role": "文档类型",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0088",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_014",
+          "surface": "讨论共同执行人方案",
+          "normalized_zh": "讨论共同执行人方案",
+          "query_lemma": "discuss co-executor option",
+          "keyword_type": "action",
+          "semantic_role": "议程项目",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_015",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0089",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_015",
+          "surface": "会议议程",
+          "normalized_zh": "会议议程",
+          "query_lemma": "meeting agenda",
+          "keyword_type": "concept",
+          "semantic_role": "文档类型",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0090",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_015",
+          "surface": "确认决定",
+          "normalized_zh": "确认决定",
+          "query_lemma": "confirm decision",
+          "keyword_type": "action",
+          "semantic_role": "议程项目",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_016",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0091",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_016",
+          "surface": "会议议程",
+          "normalized_zh": "会议议程",
+          "query_lemma": "meeting agenda",
+          "keyword_type": "concept",
+          "semantic_role": "文档类型",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0092",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_002_016",
+          "surface": "确认后续步骤",
+          "normalized_zh": "确认后续步骤",
+          "query_lemma": "confirm next steps",
+          "keyword_type": "action",
+          "semantic_role": "议程项目",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0093",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_001",
+          "surface": "必须完成",
+          "normalized_zh": "必须完成遗嘱",
+          "query_lemma": "must complete will",
+          "keyword_type": "modality",
+          "semantic_role": "截止要求",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0094",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_001",
+          "surface": "遗嘱",
+          "normalized_zh": "遗嘱",
+          "query_lemma": "will",
+          "keyword_type": "concept",
+          "semantic_role": "完成对象",
+          "source_field": "object",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0095",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_001",
+          "surface": "2024 年 5 月 15 日前",
+          "normalized_zh": "2024年5月15日前",
+          "query_lemma": "before May 15 2024",
+          "keyword_type": "time",
+          "semantic_role": "截止日期",
+          "source_field": "qualifiers.temporal",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0096",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_002",
+          "surface": "当前时间锚",
+          "normalized_zh": "当前时间锚",
+          "query_lemma": "current time anchor",
+          "keyword_type": "concept",
+          "semantic_role": "时间基准",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0097",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_002",
+          "surface": "2024 年 5 月 2 日",
+          "normalized_zh": "2024年5月2日",
+          "query_lemma": "May 2 2024",
+          "keyword_type": "time",
+          "semantic_role": "当前日期",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0098",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_003",
+          "surface": "压力很大",
+          "normalized_zh": "压力很大",
+          "query_lemma": "high stress",
+          "keyword_type": "property",
+          "semantic_role": "情绪状态",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0099",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_004",
+          "surface": "已经开过会",
+          "normalized_zh": "已经举行家庭会议",
+          "query_lemma": "already held family meeting",
+          "keyword_type": "modality",
+          "semantic_role": "完成状态",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0100",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_004",
+          "surface": "家人",
+          "normalized_zh": "家人",
+          "query_lemma": "family",
+          "keyword_type": "entity",
+          "semantic_role": "会议参与者",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0101",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_005",
+          "surface": "Douglas",
+          "normalized_zh": "Douglas",
+          "query_lemma": "Douglas",
+          "keyword_type": "entity",
+          "semantic_role": "执行人",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0102",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_005",
+          "surface": "已接受",
+          "normalized_zh": "已经接受",
+          "query_lemma": "accepted",
+          "keyword_type": "modality",
+          "semantic_role": "完成状态",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0103",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_005",
+          "surface": "执行人角色",
+          "normalized_zh": "遗嘱执行人角色",
+          "query_lemma": "executor role",
+          "keyword_type": "concept",
+          "semantic_role": "接受角色",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0104",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_006",
+          "surface": "遗嘱具有法律效力",
+          "normalized_zh": "遗嘱具有法律效力",
+          "query_lemma": "legally valid will",
+          "keyword_type": "property",
+          "semantic_role": "目标属性",
+          "source_field": "object",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0105",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_006",
+          "surface": "请求了解",
+          "normalized_zh": "请求了解方法",
+          "query_lemma": "request guidance",
+          "keyword_type": "action",
+          "semantic_role": "用户请求",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0106",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_006",
+          "surface": "用户已经与家人开过会",
+          "normalized_zh": "已经与家人举行会议",
+          "query_lemma": "family meeting already held",
+          "keyword_type": "condition",
+          "semantic_role": "既有条件",
+          "source_field": "qualifiers.conditions",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0107",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_006",
+          "surface": "Douglas 已接受执行人角色",
+          "normalized_zh": "Douglas已接受执行人角色",
+          "query_lemma": "Douglas accepted executor role",
+          "keyword_type": "condition",
+          "semantic_role": "既有条件",
+          "source_field": "qualifiers.conditions",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0108",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_007",
+          "surface": "按截止日期推进",
+          "normalized_zh": "按截止日期推进",
+          "query_lemma": "proceed by deadline",
+          "keyword_type": "action",
+          "semantic_role": "进度要求",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0109",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_007",
+          "surface": "遗嘱工作",
+          "normalized_zh": "遗嘱工作",
+          "query_lemma": "will preparation",
+          "keyword_type": "concept",
+          "semantic_role": "推进对象",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_008",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0110",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_008",
+          "surface": "列出",
+          "normalized_zh": "列出资产",
+          "query_lemma": "list assets",
+          "keyword_type": "action",
+          "semantic_role": "准备动作",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0111",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_008",
+          "surface": "资产",
+          "normalized_zh": "资产",
+          "query_lemma": "assets",
+          "keyword_type": "concept",
+          "semantic_role": "清单内容",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_009",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0112",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_009",
+          "surface": "列出",
+          "normalized_zh": "列出受益人",
+          "query_lemma": "list beneficiaries",
+          "keyword_type": "action",
+          "semantic_role": "准备动作",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0113",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_009",
+          "surface": "受益人",
+          "normalized_zh": "受益人",
+          "query_lemma": "beneficiaries",
+          "keyword_type": "entity",
+          "semantic_role": "清单内容",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_010",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0114",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_010",
+          "surface": "遗嘱",
+          "normalized_zh": "遗嘱",
+          "query_lemma": "will",
+          "keyword_type": "concept",
+          "semantic_role": "法律文档",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0115",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_010",
+          "surface": "明确任命",
+          "normalized_zh": "明确任命执行人",
+          "query_lemma": "explicitly appoint executor",
+          "keyword_type": "action",
+          "semantic_role": "任命动作",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0116",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_010",
+          "surface": "Douglas 为执行人",
+          "normalized_zh": "Douglas担任执行人",
+          "query_lemma": "Douglas as executor",
+          "keyword_type": "relation",
+          "semantic_role": "任命关系",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_011",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0117",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_011",
+          "surface": "准备",
+          "normalized_zh": "准备文本",
+          "query_lemma": "prepare document",
+          "keyword_type": "action",
+          "semantic_role": "准备动作",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0118",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_011",
+          "surface": "遗嘱文本",
+          "normalized_zh": "遗嘱文本",
+          "query_lemma": "will document",
+          "keyword_type": "concept",
+          "semantic_role": "准备对象",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_012",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0119",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_012",
+          "surface": "遗嘱",
+          "normalized_zh": "遗嘱",
+          "query_lemma": "will",
+          "keyword_type": "concept",
+          "semantic_role": "法律文档",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0120",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_012",
+          "surface": "完成签名",
+          "normalized_zh": "完成签名",
+          "query_lemma": "execute signature",
+          "keyword_type": "action",
+          "semantic_role": "法律手续",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0121",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_012",
+          "surface": "按照适用法律",
+          "normalized_zh": "按照适用法律",
+          "query_lemma": "under applicable law",
+          "keyword_type": "condition",
+          "semantic_role": "法律条件",
+          "source_field": "qualifiers.conditions",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_013",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0122",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_013",
+          "surface": "遗嘱",
+          "normalized_zh": "遗嘱",
+          "query_lemma": "will",
+          "keyword_type": "concept",
+          "semantic_role": "法律文档",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0123",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_013",
+          "surface": "完成见证",
+          "normalized_zh": "完成见证",
+          "query_lemma": "complete witnessing",
+          "keyword_type": "action",
+          "semantic_role": "法律手续",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0124",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_013",
+          "surface": "按照适用法律",
+          "normalized_zh": "按照适用法律",
+          "query_lemma": "under applicable law",
+          "keyword_type": "condition",
+          "semantic_role": "法律条件",
+          "source_field": "qualifiers.conditions",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_014",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0125",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_014",
+          "surface": "遗产规划律师",
+          "normalized_zh": "遗产规划律师",
+          "query_lemma": "estate planning attorney",
+          "keyword_type": "entity",
+          "semantic_role": "审核人",
+          "source_field": "object",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0126",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_014",
+          "surface": "请审核",
+          "normalized_zh": "请律师审核",
+          "query_lemma": "request legal review",
+          "keyword_type": "action",
+          "semantic_role": "审核动作",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0127",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_014",
+          "surface": "遗嘱",
+          "normalized_zh": "遗嘱",
+          "query_lemma": "will",
+          "keyword_type": "concept",
+          "semantic_role": "审核对象",
+          "source_field": "qualifiers.scope",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_015",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0128",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_015",
+          "surface": "留出时间",
+          "normalized_zh": "预留时间",
+          "query_lemma": "allow time",
+          "keyword_type": "action",
+          "semantic_role": "时间安排",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0129",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_015",
+          "surface": "见证手续",
+          "normalized_zh": "见证手续",
+          "query_lemma": "witnessing formalities",
+          "keyword_type": "event",
+          "semantic_role": "预留事项",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_016",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0130",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_016",
+          "surface": "留出时间",
+          "normalized_zh": "预留时间",
+          "query_lemma": "allow time",
+          "keyword_type": "action",
+          "semantic_role": "时间安排",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0131",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_003_016",
+          "surface": "公证手续",
+          "normalized_zh": "公证手续",
+          "query_lemma": "notarization formalities",
+          "keyword_type": "event",
+          "semantic_role": "预留事项",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0132",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_001",
+          "surface": "担心",
+          "normalized_zh": "担心",
+          "query_lemma": "concerned about",
+          "keyword_type": "property",
+          "semantic_role": "用户顾虑",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0133",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_001",
+          "surface": "Francis 和 Michael",
+          "normalized_zh": "Francis和Michael",
+          "query_lemma": "Francis and Michael",
+          "keyword_type": "entity",
+          "semantic_role": "被监护人",
+          "source_field": "object",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0134",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_001",
+          "surface": "监护安排",
+          "normalized_zh": "监护安排",
+          "query_lemma": "guardianship arrangement",
+          "keyword_type": "concept",
+          "semantic_role": "顾虑对象",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0135",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_002",
+          "surface": "指定",
+          "normalized_zh": "指定监护人",
+          "query_lemma": "designate guardian",
+          "keyword_type": "action",
+          "semantic_role": "指定动作",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0136",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_002",
+          "surface": "Stephanie",
+          "normalized_zh": "Stephanie",
+          "query_lemma": "Stephanie",
+          "keyword_type": "entity",
+          "semantic_role": "监护人",
+          "source_field": "object",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0137",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_002",
+          "surface": "Francis 和 Michael",
+          "normalized_zh": "Francis和Michael",
+          "query_lemma": "Francis and Michael",
+          "keyword_type": "entity",
+          "semantic_role": "被监护人",
+          "source_field": "object",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0138",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_002",
+          "surface": "4 月 28 日",
+          "normalized_zh": "4月28日",
+          "query_lemma": "April 28",
+          "keyword_type": "time",
+          "semantic_role": "指定日期",
+          "source_field": "qualifiers.temporal",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0139",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_003",
+          "surface": "询问影响",
+          "normalized_zh": "询问影响",
+          "query_lemma": "ask about impact",
+          "keyword_type": "action",
+          "semantic_role": "用户询问",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0140",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_003",
+          "surface": "指定 Stephanie 为监护人",
+          "normalized_zh": "指定Stephanie为监护人",
+          "query_lemma": "designate Stephanie as guardian",
+          "keyword_type": "relation",
+          "semantic_role": "指定事项",
+          "source_field": "object",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0141",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_003",
+          "surface": "遗产计划的影响",
+          "normalized_zh": "对遗产计划的影响",
+          "query_lemma": "impact on estate plan",
+          "keyword_type": "relation",
+          "semantic_role": "影响对象",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0142",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_004",
+          "surface": "指定监护人",
+          "normalized_zh": "指定监护人",
+          "query_lemma": "designate guardian",
+          "keyword_type": "action",
+          "semantic_role": "影响原因",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0143",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_004",
+          "surface": "会影响",
+          "normalized_zh": "会影响",
+          "query_lemma": "affects",
+          "keyword_type": "relation",
+          "semantic_role": "影响关系",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0144",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_004",
+          "surface": "未成年人的照护安排",
+          "normalized_zh": "未成年人照护安排",
+          "query_lemma": "minor care arrangements",
+          "keyword_type": "concept",
+          "semantic_role": "影响对象",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0145",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_005",
+          "surface": "指定监护人",
+          "normalized_zh": "指定监护人",
+          "query_lemma": "designate guardian",
+          "keyword_type": "action",
+          "semantic_role": "影响原因",
+          "source_field": "subject",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0146",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_005",
+          "surface": "会影响",
+          "normalized_zh": "会影响",
+          "query_lemma": "affects",
+          "keyword_type": "relation",
+          "semantic_role": "影响关系",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0147",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_005",
+          "surface": "相关资产管理安排",
+          "normalized_zh": "相关资产管理安排",
+          "query_lemma": "related asset management arrangements",
+          "keyword_type": "concept",
+          "semantic_role": "影响对象",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0148",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_006",
+          "surface": "确认",
+          "normalized_zh": "确认意愿",
+          "query_lemma": "confirm willingness",
+          "keyword_type": "action",
+          "semantic_role": "核实动作",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0149",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_006",
+          "surface": "Stephanie",
+          "normalized_zh": "Stephanie",
+          "query_lemma": "Stephanie",
+          "keyword_type": "entity",
+          "semantic_role": "监护人候选",
+          "source_field": "object",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0150",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_006",
+          "surface": "愿意承担监护职责",
+          "normalized_zh": "愿意承担监护职责",
+          "query_lemma": "willing to assume guardianship duties",
+          "keyword_type": "property",
+          "semantic_role": "核实内容",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_007",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0151",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_007",
+          "surface": "确认",
+          "normalized_zh": "确认适任性",
+          "query_lemma": "confirm suitability",
+          "keyword_type": "action",
+          "semantic_role": "核实动作",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0152",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_007",
+          "surface": "Stephanie",
+          "normalized_zh": "Stephanie",
+          "query_lemma": "Stephanie",
+          "keyword_type": "entity",
+          "semantic_role": "监护人候选",
+          "source_field": "object",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0153",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_007",
+          "surface": "适合承担监护职责",
+          "normalized_zh": "适合承担监护职责",
+          "query_lemma": "suitable for guardianship duties",
+          "keyword_type": "property",
+          "semantic_role": "核实内容",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_008",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0154",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_008",
+          "surface": "考虑",
+          "normalized_zh": "考虑候选人",
+          "query_lemma": "consider candidate",
+          "keyword_type": "action",
+          "semantic_role": "建议动作",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0155",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_008",
+          "surface": "备用监护人",
+          "normalized_zh": "备用监护人",
+          "query_lemma": "alternate guardian",
+          "keyword_type": "concept",
+          "semantic_role": "备选安排",
+          "source_field": "object",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_009",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0156",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_009",
+          "surface": "写清",
+          "normalized_zh": "明确写明",
+          "query_lemma": "specify clearly",
+          "keyword_type": "action",
+          "semantic_role": "文档动作",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0157",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_009",
+          "surface": "监护安排",
+          "normalized_zh": "监护安排",
+          "query_lemma": "guardianship arrangement",
+          "keyword_type": "concept",
+          "semantic_role": "写明内容",
+          "source_field": "object",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0158",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_009",
+          "surface": "遗嘱或信托",
+          "normalized_zh": "遗嘱或信托",
+          "query_lemma": "will or trust",
+          "keyword_type": "concept",
+          "semantic_role": "记录载体",
+          "source_field": "qualifiers.scope",
+          "translation_confidence": 1
+        }
+      ]
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_010",
+      "keywords": [
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0159",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_010",
+          "surface": "写清",
+          "normalized_zh": "明确写明",
+          "query_lemma": "specify clearly",
+          "keyword_type": "action",
+          "semantic_role": "文档动作",
+          "source_field": "predicate",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0160",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_010",
+          "surface": "继承资金的管理方式",
+          "normalized_zh": "继承资金管理方式",
+          "query_lemma": "management of inherited funds",
+          "keyword_type": "concept",
+          "semantic_role": "写明内容",
+          "source_field": "object",
+          "translation_confidence": 1
+        },
+        {
+          "keyword_id": "KW_beam-cand-004-4d648a026dc4_0161",
+          "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_010",
+          "surface": "遗嘱或信托",
+          "normalized_zh": "遗嘱或信托",
+          "query_lemma": "will or trust",
+          "keyword_type": "concept",
+          "semantic_role": "记录载体",
+          "source_field": "qualifiers.scope",
+          "translation_confidence": 1
+        }
+      ]
+    }
+  ]
+}

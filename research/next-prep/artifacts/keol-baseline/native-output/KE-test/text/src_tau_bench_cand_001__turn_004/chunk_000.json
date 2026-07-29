@@ -1,0 +1,171 @@
+{
+  "source": {
+    "source_id": "src_tau_bench_cand_001__turn_004",
+    "file": "keol-input/turns/tau-bench-cand-001__turn-004.txt",
+    "file_type": "txt",
+    "category": "text",
+    "metadata": {
+      "unit_id": "tau-bench-cand-001__turn-004",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "turn_index": 4,
+      "json_pointer": "/candidates/8/turns/3",
+      "source": "τ-bench historical retail / tau-bench-gpt-4o-retail.json / record_index=30 / task_id=30 / trial=0 / user_ordinal=6..10",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "chunk": {
+    "id": "chunk_47ec216751e93c693c54",
+    "index": 0,
+    "text": "用户：\n我不记得订单号了，但它属于我最近的某个订单。\n\nAgent：\n[工具调用] get_order_details(order_id=#W7449508)。[工具结果] 找到包含运动鞋的订单 #W7449508，商品为 6 码黑色合成材料运动鞋，状态为已送达。请确认是否退货，退款退回现有礼品卡。",
+    "size": 150,
+    "metadata": {
+      "unit_id": "tau-bench-cand-001__turn-004",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "turn_index": 4,
+      "json_pointer": "/candidates/8/turns/3",
+      "source": "τ-bench historical retail / tau-bench-gpt-4o-retail.json / record_index=30 / task_id=30 / trial=0 / user_ordinal=6..10",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "n_user",
+      "name": "用户",
+      "type": "Person",
+      "description": "不记得运动鞋订单号的用户。",
+      "source_chunk_id": "chunk_47ec216751e93c693c54"
+    },
+    {
+      "id": "n_order_id",
+      "name": "运动鞋订单号",
+      "type": "Identifier",
+      "description": "用户表示不记得的订单标识。",
+      "source_chunk_id": "chunk_47ec216751e93c693c54"
+    },
+    {
+      "id": "n_recent_order",
+      "name": "最近的某个订单",
+      "type": "Order",
+      "description": "用户确认运动鞋所属的订单范围。",
+      "source_chunk_id": "chunk_47ec216751e93c693c54"
+    },
+    {
+      "id": "n_lookup",
+      "name": "get_order_details",
+      "type": "ToolAction",
+      "description": "查询订单 #W7449508 详情的工具调用。",
+      "source_chunk_id": "chunk_47ec216751e93c693c54"
+    },
+    {
+      "id": "n_order",
+      "name": "订单 #W7449508",
+      "type": "Order",
+      "description": "工具找到的包含运动鞋的订单。",
+      "source_chunk_id": "chunk_47ec216751e93c693c54"
+    },
+    {
+      "id": "n_shoes",
+      "name": "黑色合成材料运动鞋",
+      "type": "Product",
+      "description": "订单中的运动鞋商品。",
+      "source_chunk_id": "chunk_47ec216751e93c693c54"
+    },
+    {
+      "id": "n_size",
+      "name": "6 码",
+      "type": "ProductSize",
+      "description": "运动鞋尺码。",
+      "source_chunk_id": "chunk_47ec216751e93c693c54"
+    },
+    {
+      "id": "n_black",
+      "name": "黑色",
+      "type": "Color",
+      "description": "运动鞋颜色。",
+      "source_chunk_id": "chunk_47ec216751e93c693c54"
+    },
+    {
+      "id": "n_synthetic",
+      "name": "合成材料",
+      "type": "Material",
+      "description": "运动鞋材料。",
+      "source_chunk_id": "chunk_47ec216751e93c693c54"
+    },
+    {
+      "id": "n_delivered",
+      "name": "已送达",
+      "type": "OrderStatus",
+      "description": "工具结果报告的订单状态。",
+      "source_chunk_id": "chunk_47ec216751e93c693c54"
+    },
+    {
+      "id": "n_card",
+      "name": "现有礼品卡",
+      "type": "PaymentMethod",
+      "description": "Agent 提议的退货退款方式。",
+      "source_chunk_id": "chunk_47ec216751e93c693c54"
+    }
+  ],
+  "relations": [
+    {
+      "source_entity": "n_user",
+      "target_entity": "n_order_id",
+      "relation_type": "does_not_remember",
+      "description": "用户明确表示不记得订单号。"
+    },
+    {
+      "source_entity": "n_recent_order",
+      "target_entity": "n_user",
+      "relation_type": "belongs_to",
+      "description": "用户确认运动鞋属于自己的最近订单。"
+    },
+    {
+      "source_entity": "n_lookup",
+      "target_entity": "n_order",
+      "relation_type": "acts_on",
+      "description": "工具调用查询订单 #W7449508。"
+    },
+    {
+      "source_entity": "n_order",
+      "target_entity": "n_shoes",
+      "relation_type": "contains",
+      "description": "工具结果显示订单包含该运动鞋。"
+    },
+    {
+      "source_entity": "n_order",
+      "target_entity": "n_delivered",
+      "relation_type": "has_status",
+      "description": "工具结果显示订单状态为已送达。"
+    },
+    {
+      "source_entity": "n_shoes",
+      "target_entity": "n_size",
+      "relation_type": "size",
+      "description": "运动鞋尺码为 6 码。"
+    },
+    {
+      "source_entity": "n_shoes",
+      "target_entity": "n_black",
+      "relation_type": "color",
+      "description": "运动鞋颜色为黑色。"
+    },
+    {
+      "source_entity": "n_shoes",
+      "target_entity": "n_synthetic",
+      "relation_type": "material",
+      "description": "运动鞋使用合成材料。"
+    },
+    {
+      "source_entity": "n_shoes",
+      "target_entity": "n_card",
+      "relation_type": "refund_to",
+      "description": "Agent 提议退货退款退回现有礼品卡，尚待用户确认。"
+    }
+  ]
+}

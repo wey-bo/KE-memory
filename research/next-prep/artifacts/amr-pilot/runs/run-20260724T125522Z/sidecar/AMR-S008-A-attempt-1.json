@@ -1,0 +1,24 @@
+{
+  "attempt": 1,
+  "finished_at": "2026-07-24T13:37:38.161152Z",
+  "latency_ms": null,
+  "latency_status": "unavailable",
+  "model_id": "gpt-5.6-terra",
+  "parse_errors": [],
+  "parse_status": "valid",
+  "previous_attempt_sha256": null,
+  "prompt_sha256": "bad0c1847798ed97ae5c7e90ab28e4a53e7d920fec6dfdb3a098bf437ebfb88b",
+  "raw_output_sha256": "ffd3baf49cf2d777a5c37945044e796a49edcdc9ba1e62023616219c73c89c46",
+  "representation_gaps": [
+    "Per-call wall-clock latency is unavailable from the subagent execution interface.",
+    "Official PropBank v3.4.0 frame inventory could not be downloaded; frame membership was not validated."
+  ],
+  "route": "A",
+  "run_id": "run-20260724T125522Z",
+  "sample_id": "AMR-S008",
+  "started_at": "2026-07-24T12:55:22Z",
+  "usage": {
+    "reason": "Subagent execution interface did not expose token or cost telemetry.",
+    "status": "unavailable"
+  }
+}

@@ -1,0 +1,11 @@
+(r / request-01
+   :ARG0 (s / speaker)
+   :ARG1 (c / cancel-01
+      :ARG0 (a / addressee)
+      :ARG1 (ch / charger
+         :ARG1-of (b / buy-01
+            :ARG0 s
+            :time (j / just))))
+   :cause (g / go-with-91
+      :ARG1 ch
+      :ARG2 (t / tablet)))

@@ -1,0 +1,136 @@
+{
+  "schema_version": "natural-identity-source-config-v1",
+  "dataset_id": "natural-identity-membership-actor-binding-diagnostic-v4",
+  "source_inputs": {
+    "gold_evidence": "artifacts/identity-memory-experiment/dev-repair-v4/diagnostic-gold-evidence.json",
+    "locomo_raw": "artifacts/natural-benchmark-slices/raw/locomo/locomo10.json"
+  },
+  "cases": [
+    {
+      "case_id": "diag-v4-jon-dance-include",
+      "split": "dev",
+      "relation_kind": "membership",
+      "question": "Does starting a dance studio belong to Jon's memory?",
+      "mentions": [{
+        "mention_id": "diag-v4-jon-dance-mention-include",
+        "source_item_id": "IDENTITY-DIAG-V4-LOCOMO-CONV30-D1-4",
+        "evidence_unit_id": "D1:4",
+        "quote": "I'm starting a dance studio",
+        "surface": "starting a dance studio",
+        "concept_id": "memory:Activity",
+        "source_actor_id": "person:jon",
+        "actor_locator": {"kind": "locomo_dia_id", "sample_id": "conv-30", "dia_id": "D1:4"}
+      }],
+      "query_subject_id": "person:jon",
+      "group_surface": "Jon memories",
+      "member_surface": "starting a dance studio",
+      "authority": {"shared_trusted_identifiers": [], "conflicting_trusted_identifiers": [], "explicit_same_entity": false, "explicit_distinct": false, "actor_binding_authoritative": true, "explicit_membership": false, "explicit_non_membership": false, "required_mention_ids": ["diag-v4-jon-dance-mention-include"]},
+      "gold": {"expected_action": "include", "critical_false_merge": false, "critical_false_membership": false}
+    },
+    {
+      "case_id": "diag-v4-jon-dance-exclude-gina",
+      "split": "dev",
+      "relation_kind": "membership",
+      "question": "Does starting a dance studio belong to Gina's memory?",
+      "mentions": [{
+        "mention_id": "diag-v4-jon-dance-mention-exclude",
+        "source_item_id": "IDENTITY-DIAG-V4-LOCOMO-CONV30-D1-4",
+        "evidence_unit_id": "D1:4",
+        "quote": "I'm starting a dance studio",
+        "surface": "starting a dance studio",
+        "concept_id": "memory:Activity",
+        "source_actor_id": "person:jon",
+        "actor_locator": {"kind": "locomo_dia_id", "sample_id": "conv-30", "dia_id": "D1:4"}
+      }],
+      "query_subject_id": "person:gina",
+      "group_surface": "Gina memories",
+      "member_surface": "starting a dance studio",
+      "authority": {"shared_trusted_identifiers": [], "conflicting_trusted_identifiers": [], "explicit_same_entity": false, "explicit_distinct": false, "actor_binding_authoritative": true, "explicit_membership": false, "explicit_non_membership": false, "required_mention_ids": ["diag-v4-jon-dance-mention-exclude"]},
+      "gold": {"expected_action": "exclude", "critical_false_merge": false, "critical_false_membership": true}
+    },
+    {
+      "case_id": "diag-v4-maria-volunteer-include",
+      "split": "dev",
+      "relation_kind": "membership",
+      "question": "Does volunteering at the homeless shelter belong to Maria's memory?",
+      "mentions": [{
+        "mention_id": "diag-v4-maria-volunteer-mention-include",
+        "source_item_id": "IDENTITY-DIAG-V4-LOCOMO-CONV41-D1-3",
+        "evidence_unit_id": "D1:3",
+        "quote": "Been busy volunteering at the homeless shelter",
+        "surface": "volunteering at the homeless shelter",
+        "concept_id": "memory:Activity",
+        "source_actor_id": "person:maria",
+        "actor_locator": {"kind": "locomo_dia_id", "sample_id": "conv-41", "dia_id": "D1:3"}
+      }],
+      "query_subject_id": "person:maria",
+      "group_surface": "Maria memories",
+      "member_surface": "volunteering at the homeless shelter",
+      "authority": {"shared_trusted_identifiers": [], "conflicting_trusted_identifiers": [], "explicit_same_entity": false, "explicit_distinct": false, "actor_binding_authoritative": true, "explicit_membership": false, "explicit_non_membership": false, "required_mention_ids": ["diag-v4-maria-volunteer-mention-include"]},
+      "gold": {"expected_action": "include", "critical_false_merge": false, "critical_false_membership": false}
+    },
+    {
+      "case_id": "diag-v4-maria-volunteer-exclude-john",
+      "split": "dev",
+      "relation_kind": "membership",
+      "question": "Does volunteering at the homeless shelter belong to John's memory?",
+      "mentions": [{
+        "mention_id": "diag-v4-maria-volunteer-mention-exclude",
+        "source_item_id": "IDENTITY-DIAG-V4-LOCOMO-CONV41-D1-3",
+        "evidence_unit_id": "D1:3",
+        "quote": "Been busy volunteering at the homeless shelter",
+        "surface": "volunteering at the homeless shelter",
+        "concept_id": "memory:Activity",
+        "source_actor_id": "person:maria",
+        "actor_locator": {"kind": "locomo_dia_id", "sample_id": "conv-41", "dia_id": "D1:3"}
+      }],
+      "query_subject_id": "person:john",
+      "group_surface": "John memories",
+      "member_surface": "volunteering at the homeless shelter",
+      "authority": {"shared_trusted_identifiers": [], "conflicting_trusted_identifiers": [], "explicit_same_entity": false, "explicit_distinct": false, "actor_binding_authoritative": true, "explicit_membership": false, "explicit_non_membership": false, "required_mention_ids": ["diag-v4-maria-volunteer-mention-exclude"]},
+      "gold": {"expected_action": "exclude", "critical_false_merge": false, "critical_false_membership": true}
+    },
+    {
+      "case_id": "diag-v4-homepage-owner-abstain",
+      "split": "dev",
+      "relation_kind": "membership",
+      "question": "Does this homepage optimization belong to Jon's memory?",
+      "mentions": [{
+        "mention_id": "diag-v4-homepage-owner-mention",
+        "source_item_id": "BEAM-100K-C001-contradiction_resolution-001",
+        "evidence_unit_id": "24",
+        "quote": "implement the basic homepage route with Flask",
+        "surface": "homepage optimization",
+        "concept_id": "memory:SoftwareTask",
+        "source_actor_id": null,
+        "actor_locator": null
+      }],
+      "query_subject_id": "person:jon",
+      "group_surface": "Jon memories",
+      "member_surface": "homepage optimization",
+      "authority": {"shared_trusted_identifiers": [], "conflicting_trusted_identifiers": [], "explicit_same_entity": false, "explicit_distinct": false, "actor_binding_authoritative": false, "explicit_membership": false, "explicit_non_membership": false, "required_mention_ids": ["diag-v4-homepage-owner-mention"]},
+      "gold": {"expected_action": "abstain", "critical_false_merge": false, "critical_false_membership": true}
+    },
+    {
+      "case_id": "diag-v4-dashboard-owner-abstain",
+      "split": "dev",
+      "relation_kind": "membership",
+      "question": "Does this dashboard optimization belong to Maria's memory?",
+      "mentions": [{
+        "mention_id": "diag-v4-dashboard-owner-mention",
+        "source_item_id": "BEAM-100K-C001-knowledge_update-001",
+        "evidence_unit_id": "114",
+        "quote": "optimize the dashboard API response time",
+        "surface": "dashboard optimization",
+        "concept_id": "memory:SoftwareTask",
+        "source_actor_id": null,
+        "actor_locator": null
+      }],
+      "query_subject_id": "person:maria",
+      "group_surface": "Maria memories",
+      "member_surface": "dashboard optimization",
+      "authority": {"shared_trusted_identifiers": [], "conflicting_trusted_identifiers": [], "explicit_same_entity": false, "explicit_distinct": false, "actor_binding_authoritative": false, "explicit_membership": false, "explicit_non_membership": false, "required_mention_ids": ["diag-v4-dashboard-owner-mention"]},
+      "gold": {"expected_action": "abstain", "critical_false_merge": false, "critical_false_membership": true}
+    }
+  ]
+}

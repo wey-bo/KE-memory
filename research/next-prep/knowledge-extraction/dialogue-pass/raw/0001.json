@@ -1,0 +1,101 @@
+{
+  "candidate_id": "WILDCHAT-MGMT-CAND-002",
+  "new_knowledge": [
+    {
+      "knowledge_id": "D_wildchat-mgmt-cand-002-e88f4bb1070d_001",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "用户请求基于前述 Instagram 故事叙述中的转变/成长主题制定连续 Reels 故事叙述方案。",
+      "subject": "用户",
+      "predicate": "请求制定",
+      "object": "基于前述 Instagram 故事叙述中的转变/成长主题的连续 Reels 故事叙述方案",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "Stories 和 Reels 中的故事叙述"
+        },
+        {
+          "turn_index": 2,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "请基于这个主题，给我一个用故事叙述连续制作 Reels 的方案。"
+        }
+      ],
+      "inference_basis": "Turn 2's '这个主题' most locally and plausibly refers to the transformation/growth theme in the Instagram Stories and Reels storytelling discussed in turn 1, while the antecedent remains somewhat ambiguous.",
+      "confidence": 0.85
+    }
+  ],
+  "operations": [
+    {
+      "operation_id": "R_wildchat-mgmt-cand-002-e88f4bb1070d_001",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "operation": "supersede",
+      "targets": [
+        "K_wildchat-mgmt-cand-002-e88f4bb1070d_000_005"
+      ],
+      "replacement": "K_wildchat-mgmt-cand-002-e88f4bb1070d_001_001",
+      "reason": "The user explicitly changes the requested publication platform from Telegram to an Instagram version.",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "先发布到 Telegram",
+          "evidence_role": "user_reported"
+        },
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "请改成 Instagram 版本",
+          "evidence_role": "user_reported"
+        }
+      ],
+      "confidence": 0.99
+    },
+    {
+      "operation_id": "R_wildchat-mgmt-cand-002-e88f4bb1070d_002",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "operation": "correct",
+      "targets": [
+        "K_wildchat-mgmt-cand-002-e88f4bb1070d_002_001"
+      ],
+      "replacement": "D_wildchat-mgmt-cand-002-e88f4bb1070d_001",
+      "reason": "The most local and plausible antecedent of the previously unspecified theme is the transformation/growth theme in the Instagram Stories and Reels storytelling from turn 1, though some ambiguity remains.",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "Stories 和 Reels 中的故事叙述",
+          "evidence_role": "user_reported"
+        },
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "个人转变故事",
+          "evidence_role": "agent_generated"
+        },
+        {
+          "turn_index": 2,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "请基于这个主题，给我一个用故事叙述连续制作 Reels 的方案。",
+          "evidence_role": "user_reported"
+        }
+      ],
+      "confidence": 0.85
+    }
+  ]
+}

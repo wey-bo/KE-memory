@@ -1,0 +1,357 @@
+{
+  "candidate_id": "BEAM-CAND-004",
+  "turn_index": 4,
+  "context_completions": [
+    {
+      "completion_id": "C_beam-cand-004-4d648a026dc4_004_001",
+      "candidate_id": "BEAM-CAND-004",
+      "turn_index": 4,
+      "kind": "ellipsis",
+      "original_span": "像我在 4 月 28 日做的那样",
+      "interpretation": "用户在 4 月 28 日把 Stephanie 指定为 Francis 和 Michael 的监护人",
+      "confidence": 0.97,
+      "ambiguity": false,
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "像我在 4 月 28 日做的那样，把 Stephanie 指定为监护人",
+          "evidence_id": "evidence-24e8cb51f76fb2f06d92ed247ed05a5889193e1c3e43e48c9b8ace13f8b23eeb",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "user_reported",
+          "start": 29,
+          "end": 64
+        }
+      ]
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_001",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "用户担心 Francis 和 Michael 的监护安排。",
+      "subject": "用户",
+      "predicate": "担心",
+      "object": "Francis 和 Michael 的监护安排",
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我还担心 Francis 和 Michael 的监护安排",
+          "evidence_id": "evidence-300c55d683ab3626bcf8ce1214a73849f7accf862d8434f8c399b479827fcfd3",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 28
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_002",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "用户在 4 月 28 日把 Stephanie 指定为 Francis 和 Michael 的监护人。",
+      "subject": "用户",
+      "predicate": "指定",
+      "object": "Stephanie 为 Francis 和 Michael 的监护人",
+      "qualifiers": {
+        "modality": "claimed_completed",
+        "polarity": "positive",
+        "temporal": [
+          "4 月 28 日"
+        ],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "像我在 4 月 28 日做的那样，把 Stephanie 指定为监护人",
+          "evidence_id": "evidence-24e8cb51f76fb2f06d92ed247ed05a5889193e1c3e43e48c9b8ace13f8b23eeb",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "user_reported",
+          "start": 29,
+          "end": 64
+        }
+      ],
+      "inference_basis": "同一句先提出 Francis 和 Michael 的监护安排，随后说明 4 月 28 日已把 Stephanie 指定为监护人。",
+      "confidence": 0.97
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_003",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "用户询问指定 Stephanie 为监护人会如何影响遗产计划。",
+      "subject": "用户",
+      "predicate": "询问影响",
+      "object": "指定 Stephanie 为监护人对遗产计划的影响",
+      "qualifiers": {
+        "modality": "questioned",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "把 Stephanie 指定为监护人，会怎样影响我的遗产计划？",
+          "evidence_id": "evidence-fbac7c3c7766eea2927ae591d56c763cae5ba77eff68fafe23d5d1d01d6de607",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "user_reported",
+          "start": 46,
+          "end": 77
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_004",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "指定监护人会影响未成年人的照护安排。",
+      "subject": "指定监护人",
+      "predicate": "会影响",
+      "object": "未成年人的照护安排",
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "指定监护人会影响未成年人的照护",
+          "evidence_id": "evidence-8b64fb63a008a8d4b5df967c6fa2712c6224fb22bbea377ce9dc745ac17dd9db",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 0,
+          "end": 15
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_005",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "指定监护人会影响相关资产管理安排。",
+      "subject": "指定监护人",
+      "predicate": "会影响",
+      "object": "相关资产管理安排",
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "指定监护人会影响未成年人的照护和相关资产管理安排。",
+          "evidence_id": "evidence-376c529e3975a385c396fa623915abe71df2c975acfb2dc5005d19afafd68317",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 0,
+          "end": 25
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.97
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_006",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "用户需要确认 Stephanie 是否愿意承担监护职责。",
+      "subject": "用户",
+      "predicate": "确认",
+      "object": "Stephanie 是否愿意承担监护职责",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "需要确认 Stephanie 是否愿意并适合承担职责",
+          "evidence_id": "evidence-3e0f5afdee7bd773318e1efd951b137ad985d02c9ca663e9fa3615850381eafd",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 25,
+          "end": 51
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_007",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "用户需要确认 Stephanie 是否适合承担监护职责。",
+      "subject": "用户",
+      "predicate": "确认",
+      "object": "Stephanie 是否适合承担监护职责",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "需要确认 Stephanie 是否愿意并适合承担职责",
+          "evidence_id": "evidence-3e0f5afdee7bd773318e1efd951b137ad985d02c9ca663e9fa3615850381eafd",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 25,
+          "end": 51
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_008",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "用户应考虑备用监护人。",
+      "subject": "用户",
+      "predicate": "考虑",
+      "object": "备用监护人",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "考虑备用监护人",
+          "evidence_id": "evidence-8fb0482f3c2a067b0961aecc67f1dad96e6fa87156764919f1a31a8c94da93c9",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 52,
+          "end": 59
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_009",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "用户应在遗嘱或信托中写清监护安排。",
+      "subject": "用户",
+      "predicate": "写清",
+      "object": "监护安排",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": [
+          "遗嘱或信托"
+        ]
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "并在遗嘱或信托中写清监护和继承资金的管理方式",
+          "evidence_id": "evidence-2c41e1781c97aa0db4ea3dcddcfae326766be51b2865a94e2b876b5f0d90959d",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 60,
+          "end": 82
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_beam-cand-004-4d648a026dc4_004_010",
+      "candidate_id": "BEAM-CAND-004",
+      "statement": "用户应在遗嘱或信托中写清继承资金的管理方式。",
+      "subject": "用户",
+      "predicate": "写清",
+      "object": "继承资金的管理方式",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": [
+          "遗嘱或信托"
+        ]
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "并在遗嘱或信托中写清监护和继承资金的管理方式",
+          "evidence_id": "evidence-2c41e1781c97aa0db4ea3dcddcfae326766be51b2865a94e2b876b5f0d90959d",
+          "candidate_id": "BEAM-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 60,
+          "end": 82
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    }
+  ]
+}

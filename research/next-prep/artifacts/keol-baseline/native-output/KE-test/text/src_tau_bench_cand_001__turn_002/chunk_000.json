@@ -1,0 +1,196 @@
+{
+  "source": {
+    "source_id": "src_tau_bench_cand_001__turn_002",
+    "file": "keol-input/turns/tau-bench-cand-001__turn-002.txt",
+    "file_type": "txt",
+    "category": "text",
+    "metadata": {
+      "unit_id": "tau-bench-cand-001__turn-002",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "turn_index": 2,
+      "json_pointer": "/candidates/8/turns/1",
+      "source": "τ-bench historical retail / tau-bench-gpt-4o-retail.json / record_index=30 / task_id=30 / trial=0 / user_ordinal=6..10",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "chunk": {
+    "id": "chunk_eb455f7d559c707fe6fe",
+    "index": 0,
+    "text": "用户：\n请执行平板退货和充电器取消。\n\nAgent：\n[工具调用] return_delivered_order_items(order_id=#W2692684, item_id=3788616824, payment_method=gift_card_7711863)；[工具调用] cancel_pending_order(order_id=#W9373487, reason=no longer needed)。[工具结果] 平板退货请求已提交，退款 951.21 美元；充电器订单已取消，109.27 美元已退回礼品卡。",
+    "size": 265,
+    "metadata": {
+      "unit_id": "tau-bench-cand-001__turn-002",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "turn_index": 2,
+      "json_pointer": "/candidates/8/turns/1",
+      "source": "τ-bench historical retail / tau-bench-gpt-4o-retail.json / record_index=30 / task_id=30 / trial=0 / user_ordinal=6..10",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "n_user",
+      "name": "用户",
+      "type": "Person",
+      "description": "确认执行平板退货和充电器取消的人。",
+      "source_chunk_id": "chunk_eb455f7d559c707fe6fe"
+    },
+    {
+      "id": "n_return_action",
+      "name": "return_delivered_order_items",
+      "type": "ToolAction",
+      "description": "针对订单 #W2692684 中平板执行的退货工具调用。",
+      "source_chunk_id": "chunk_eb455f7d559c707fe6fe"
+    },
+    {
+      "id": "n_cancel_action",
+      "name": "cancel_pending_order",
+      "type": "ToolAction",
+      "description": "针对订单 #W9373487 执行的取消工具调用。",
+      "source_chunk_id": "chunk_eb455f7d559c707fe6fe"
+    },
+    {
+      "id": "n_tablet_order",
+      "name": "订单 #W2692684",
+      "type": "Order",
+      "description": "被执行平板退货的订单。",
+      "source_chunk_id": "chunk_eb455f7d559c707fe6fe"
+    },
+    {
+      "id": "n_tablet_item",
+      "name": "商品项 3788616824",
+      "type": "OrderItem",
+      "description": "退货工具调用中的平板商品项。",
+      "source_chunk_id": "chunk_eb455f7d559c707fe6fe"
+    },
+    {
+      "id": "n_charger_order",
+      "name": "订单 #W9373487",
+      "type": "Order",
+      "description": "被取消的待处理充电器订单。",
+      "source_chunk_id": "chunk_eb455f7d559c707fe6fe"
+    },
+    {
+      "id": "n_reason",
+      "name": "no longer needed",
+      "type": "CancellationReason",
+      "description": "工具调用使用的取消原因。",
+      "source_chunk_id": "chunk_eb455f7d559c707fe6fe"
+    },
+    {
+      "id": "n_card",
+      "name": "gift_card_7711863",
+      "type": "GiftCard",
+      "description": "退货工具调用指定的退款方式。",
+      "source_chunk_id": "chunk_eb455f7d559c707fe6fe"
+    },
+    {
+      "id": "n_tablet_refund",
+      "name": "951.21 美元",
+      "type": "MonetaryAmount",
+      "description": "工具结果报告的平板退款金额。",
+      "source_chunk_id": "chunk_eb455f7d559c707fe6fe"
+    },
+    {
+      "id": "n_charger_refund",
+      "name": "109.27 美元",
+      "type": "MonetaryAmount",
+      "description": "工具结果报告的充电器退款金额。",
+      "source_chunk_id": "chunk_eb455f7d559c707fe6fe"
+    },
+    {
+      "id": "n_return_status",
+      "name": "退货请求已提交",
+      "type": "ActionStatus",
+      "description": "工具结果确认的平板退货状态。",
+      "source_chunk_id": "chunk_eb455f7d559c707fe6fe"
+    },
+    {
+      "id": "n_cancel_status",
+      "name": "订单已取消",
+      "type": "ActionStatus",
+      "description": "工具结果确认的充电器订单状态。",
+      "source_chunk_id": "chunk_eb455f7d559c707fe6fe"
+    }
+  ],
+  "relations": [
+    {
+      "source_entity": "n_user",
+      "target_entity": "n_return_action",
+      "relation_type": "authorizes",
+      "description": "用户确认执行平板退货。"
+    },
+    {
+      "source_entity": "n_user",
+      "target_entity": "n_cancel_action",
+      "relation_type": "authorizes",
+      "description": "用户确认执行充电器取消。"
+    },
+    {
+      "source_entity": "n_return_action",
+      "target_entity": "n_tablet_order",
+      "relation_type": "acts_on",
+      "description": "退货调用作用于订单 #W2692684。"
+    },
+    {
+      "source_entity": "n_return_action",
+      "target_entity": "n_tablet_item",
+      "relation_type": "acts_on",
+      "description": "退货调用作用于商品项 3788616824。"
+    },
+    {
+      "source_entity": "n_return_action",
+      "target_entity": "n_card",
+      "relation_type": "refund_to",
+      "description": "退货调用指定礼品卡为退款方式。"
+    },
+    {
+      "source_entity": "n_return_action",
+      "target_entity": "n_return_status",
+      "relation_type": "has_status",
+      "description": "工具结果显示平板退货请求已提交。"
+    },
+    {
+      "source_entity": "n_return_action",
+      "target_entity": "n_tablet_refund",
+      "relation_type": "refund",
+      "description": "工具结果报告平板退款 951.21 美元。"
+    },
+    {
+      "source_entity": "n_cancel_action",
+      "target_entity": "n_charger_order",
+      "relation_type": "acts_on",
+      "description": "取消调用作用于订单 #W9373487。"
+    },
+    {
+      "source_entity": "n_cancel_action",
+      "target_entity": "n_reason",
+      "relation_type": "reason",
+      "description": "取消调用使用 no longer needed 原因。"
+    },
+    {
+      "source_entity": "n_cancel_action",
+      "target_entity": "n_cancel_status",
+      "relation_type": "has_status",
+      "description": "工具结果显示充电器订单已取消。"
+    },
+    {
+      "source_entity": "n_cancel_action",
+      "target_entity": "n_charger_refund",
+      "relation_type": "refund",
+      "description": "工具结果报告充电器退款 109.27 美元。"
+    },
+    {
+      "source_entity": "n_charger_refund",
+      "target_entity": "n_card",
+      "relation_type": "returned_to",
+      "description": "充电器退款已退回礼品卡。"
+    }
+  ]
+}

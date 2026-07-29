@@ -1,0 +1,182 @@
+{
+  "candidate_id": "TASKMASTER2-CAND-001",
+  "new_knowledge": [
+    {
+      "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_001",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "statement": "用户认为代理所述价格为2,677美元的直飞航班有点贵。",
+      "subject": "用户",
+      "predicate": "认为有点贵",
+      "object": "价格为2,677美元的直飞航班",
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": [
+          "直飞航班",
+          "价格：2,677美元"
+        ]
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "这个价格有点贵"
+        }
+      ],
+      "inference_basis": "turn 4 的“这个价格”直接回指紧邻的 turn 3 直飞方案报价2,677美元。",
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "statement": "用户选择了代理最先提供的最便宜往返票，即需要经停一次、凌晨12:30出发、次日11:55抵达且价格为1,287美元的方案。",
+      "subject": "用户",
+      "predicate": "选择",
+      "object": "代理最先提供的最便宜往返票",
+      "qualifiers": {
+        "modality": "committed",
+        "polarity": "positive",
+        "temporal": [
+          "凌晨12:30出发",
+          "次日11:55抵达"
+        ],
+        "conditions": [],
+        "scope": [
+          "经停一次",
+          "价格：1,287美元"
+        ]
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "还是选你刚才说的第一班吧"
+        }
+      ],
+      "inference_basis": "对话中代理先在 turn 2 给出最便宜的经停方案，随后在 turn 3 给出直飞方案；用户因直飞价格较贵而选择“第一班”，故其指代 turn 2 的方案。",
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "statement": "代理声称已将用户所选最便宜往返票的全部信息发送到用户邮箱。",
+      "subject": "代理",
+      "predicate": "声称已发送",
+      "object": "用户所选最便宜往返票的全部信息",
+      "qualifiers": {
+        "modality": "claimed_completed",
+        "polarity": "positive",
+        "temporal": [
+          "已经"
+        ],
+        "conditions": [],
+        "scope": [
+          "发送目的地：用户邮箱"
+        ]
+      },
+      "source_status": "agent_generated",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "已经把全部信息发送到你的邮箱"
+        }
+      ],
+      "inference_basis": "该回复紧接用户对第一班航班的选择，因此“全部信息”在本轮对话中指所选最便宜往返票的信息。",
+      "confidence": 0.99
+    }
+  ],
+  "operations": [
+    {
+      "operation_id": "R_taskmaster2-cand-001-5f5e1081bd0b_001",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "operation": "correct",
+      "targets": [
+        "K_taskmaster2-cand-001-5f5e1081bd0b_004_001"
+      ],
+      "replacement": "D_taskmaster2-cand-001-5f5e1081bd0b_001",
+      "reason": "完整对话消除了逐轮记录中“这个价格”的未解决指代：它是上一轮直飞方案的2,677美元报价。",
+      "evidence": [
+        {
+          "turn_index": 3,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "有一班直飞航班，下午 6 点出发，次日早上 7:35 抵达，价格是 2,677 美元",
+          "evidence_role": "agent_generated"
+        },
+        {
+          "turn_index": 4,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "这个价格有点贵",
+          "evidence_role": "user_reported"
+        }
+      ],
+      "confidence": 1.0
+    },
+    {
+      "operation_id": "R_taskmaster2-cand-001-5f5e1081bd0b_002",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "operation": "correct",
+      "targets": [
+        "K_taskmaster2-cand-001-5f5e1081bd0b_004_002"
+      ],
+      "replacement": "D_taskmaster2-cand-001-5f5e1081bd0b_002",
+      "reason": "完整对话明确“第一班”是代理最先给出的1,287美元经停方案，而不是随后给出的2,677美元直飞方案。",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "我查到最便宜的往返票：需要经停一次，凌晨 12:30 出发，次日 11:55 抵达，价格是 1,287 美元",
+          "evidence_role": "agent_generated"
+        },
+        {
+          "turn_index": 4,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "这个价格有点贵，还是选你刚才说的第一班吧",
+          "evidence_role": "user_reported"
+        }
+      ],
+      "confidence": 1.0
+    },
+    {
+      "operation_id": "R_taskmaster2-cand-001-5f5e1081bd0b_003",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "operation": "correct",
+      "targets": [
+        "K_taskmaster2-cand-001-5f5e1081bd0b_004_003"
+      ],
+      "replacement": "D_taskmaster2-cand-001-5f5e1081bd0b_003",
+      "reason": "完整轮次关系可将代理所说的“全部信息”补全为用户刚选定的最便宜往返票信息。",
+      "evidence": [
+        {
+          "turn_index": 4,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "还是选你刚才说的第一班吧",
+          "evidence_role": "user_reported"
+        },
+        {
+          "turn_index": 4,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "已经把全部信息发送到你的邮箱",
+          "evidence_role": "agent_generated"
+        }
+      ],
+      "confidence": 0.99
+    }
+  ]
+}

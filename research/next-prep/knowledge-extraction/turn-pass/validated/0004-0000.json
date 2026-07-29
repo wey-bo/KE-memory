@@ -1,0 +1,238 @@
+{
+  "candidate_id": "WILDCHAT-LEARN-CAND-004",
+  "turn_index": 0,
+  "context_completions": [],
+  "knowledge": [
+    {
+      "knowledge_id": "K_wildchat-learn-cand-004-dc8956a5d265_000_001",
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "statement": "用户请求对“学习风格会显著影响学生学习”这一说法给出更有证据依据且更准确的结论。",
+      "subject": "用户",
+      "predicate": "请求给出更准确的结论",
+      "object": "“学习风格会显著影响学生学习”这一说法",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": [
+          "结论应更有证据依据",
+          "结论应更准确"
+        ]
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "“学习风格会显著影响学生学习”这个说法，请给出更有证据依据、更准确的结论",
+          "evidence_id": "evidence-830d42eb2a59f3ada006bbcd85da06eca7446d22aefa8c4e32a9ff8fb009eb3f",
+          "candidate_id": "WILDCHAT-LEARN-CAND-004",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 36
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-004-dc8956a5d265_000_002",
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "statement": "用户请求根据该结论提出实践建议。",
+      "subject": "用户",
+      "predicate": "请求提出",
+      "object": "实践建议",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [
+          "依据所给结论"
+        ],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "并据此提出实践建议",
+          "evidence_id": "evidence-93e4d7a73c425be2ac6212c1926e7752ff8257c0e8f5f1ca74d4fbc020bc5e74",
+          "candidate_id": "WILDCHAT-LEARN-CAND-004",
+          "evidence_role": "user_reported",
+          "start": 37,
+          "end": 46
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-004-dc8956a5d265_000_003",
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "statement": "研究不支持把学生固定归类为听觉、视觉或动觉学习者。",
+      "subject": "研究",
+      "predicate": "支持",
+      "object": "把学生固定归类为听觉、视觉或动觉学习者",
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "negative",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "研究并不支持把学生固定归类为听觉、视觉或动觉学习者",
+          "evidence_id": "evidence-b0723b36cbde3d161339cc287a34ea3d917e54be799af65103936cfddc98d89b",
+          "candidate_id": "WILDCHAT-LEARN-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 8,
+          "end": 33
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-004-dc8956a5d265_000_004",
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "statement": "教学应采用多模态方法。",
+      "subject": "教学",
+      "predicate": "应采用",
+      "object": "多模态方法",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "教学应采用多模态、主动学习和差异化支持",
+          "evidence_id": "evidence-a66395501bb4794d834b74216cb2e6a4b5a6256c775cb6571c9db78f35ec9ae2",
+          "candidate_id": "WILDCHAT-LEARN-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 34,
+          "end": 53
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-004-dc8956a5d265_000_005",
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "statement": "教学应采用主动学习。",
+      "subject": "教学",
+      "predicate": "应采用",
+      "object": "主动学习",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "教学应采用多模态、主动学习和差异化支持",
+          "evidence_id": "evidence-a66395501bb4794d834b74216cb2e6a4b5a6256c775cb6571c9db78f35ec9ae2",
+          "candidate_id": "WILDCHAT-LEARN-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 34,
+          "end": 53
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-004-dc8956a5d265_000_006",
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "statement": "教学应采用差异化支持。",
+      "subject": "教学",
+      "predicate": "应采用",
+      "object": "差异化支持",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "教学应采用多模态、主动学习和差异化支持",
+          "evidence_id": "evidence-a66395501bb4794d834b74216cb2e6a4b5a6256c775cb6571c9db78f35ec9ae2",
+          "candidate_id": "WILDCHAT-LEARN-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 34,
+          "end": 53
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-004-dc8956a5d265_000_007",
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "statement": "教学方法应根据学生的实际表现进行调整。",
+      "subject": "教学方法",
+      "predicate": "应根据学生的实际表现调整",
+      "object": null,
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [
+          "根据学生的实际表现"
+        ],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "并根据学生的实际表现调整方法",
+          "evidence_id": "evidence-66d5f78f983be445dbbc600ace809354a372348bff952d4c6c35106670812508",
+          "candidate_id": "WILDCHAT-LEARN-CAND-004",
+          "evidence_role": "agent_generated",
+          "start": 54,
+          "end": 68
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 1.0
+    }
+  ]
+}

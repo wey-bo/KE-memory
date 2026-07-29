@@ -1,0 +1,253 @@
+{
+  "schema_version": "typed-extractor-l1-proposals-v1",
+  "dataset_id": "typed-extractor-l1-dev-v1",
+  "case_count": 12,
+  "run_id": "run-20260728T051243Z-codex-gpt-5-6-sol-typed-l1-dev-v1",
+  "proposer_id": "codex",
+  "proposer_version": "gpt-5.6-sol@2026-07-28",
+  "proposals": [
+    {
+      "case_id": "case-7e92c88f8cfa1fa1",
+      "candidate_ref": "candidate-7e92c88f8cfa1fa1",
+      "decision": "emit_l1",
+      "reason_code": "complete_explicit_state",
+      "typed_candidate": {
+        "kind": "state",
+        "predicate": {"surface": "感到", "sense": "experience emotional pressure", "canonical_operator": "feel"},
+        "entities": [
+          {"local_id": "entity-01", "surface": "用户", "entity_type": "person"},
+          {"local_id": "entity-02", "surface": "压力很大", "entity_type": "emotional_state"}
+        ],
+        "roles": [
+          {"role": "experiencer", "entity_ref": "entity-01"},
+          {"role": "state", "entity_ref": "entity-02"}
+        ],
+        "conditions": [],
+        "scope": [],
+        "modality": "actual",
+        "polarity": "positive",
+        "event_time": null,
+        "valid_time": null,
+        "derivation_provenance": {"derivation": "explicit", "inference_basis": null, "evidence": [{"evidence_id": "evidence-d109329ffef5f02f24a1576a8e47cbd4fee88b54579268716347e7bf44240c02", "speaker": "user"}]},
+        "lifecycle_links": {"conflicts_with_candidate_refs": [], "lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": []},
+        "operation_provenance": {"added_by_operation_refs": [], "confirmed_by_operation_refs": []}
+      }
+    },
+    {
+      "case_id": "case-0ff52f3d6c84832c",
+      "candidate_ref": "candidate-0ff52f3d6c84832c",
+      "decision": "emit_l1",
+      "reason_code": "complete_context_preference",
+      "typed_candidate": {
+        "kind": "preference",
+        "predicate": {"surface": "希望", "sense": "prefer an outbound departure as early as possible", "canonical_operator": "prefer"},
+        "entities": [
+          {"local_id": "entity-01", "surface": "用户", "entity_type": "person"},
+          {"local_id": "entity-02", "surface": "尽可能早的去程", "entity_type": "travel_option"},
+          {"local_id": "entity-03", "surface": "去程", "entity_type": "journey_leg"}
+        ],
+        "roles": [
+          {"role": "holder", "entity_ref": "entity-01"},
+          {"role": "preferred_option", "entity_ref": "entity-02"}
+        ],
+        "conditions": [],
+        "scope": [{"entity_ref": "entity-03"}],
+        "modality": "actual",
+        "polarity": "positive",
+        "event_time": null,
+        "valid_time": null,
+        "derivation_provenance": {"derivation": "context_completed", "inference_basis": "“两程”明确涵盖去程和返程，因此该共同偏好可原子化到去程。", "evidence": [{"evidence_id": "evidence-87a6dabe02b796a4305270982b1ad9d7fe0fa7ad63fcba51ba8e7e88e181f33c", "speaker": "user"}]},
+        "lifecycle_links": {"conflicts_with_candidate_refs": [], "lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": []},
+        "operation_provenance": {"added_by_operation_refs": [], "confirmed_by_operation_refs": []}
+      }
+    },
+    {
+      "case_id": "case-b7b8799c1ec1157a",
+      "candidate_ref": "candidate-b7b8799c1ec1157a",
+      "decision": "emit_l1",
+      "reason_code": "complete_explicit_request",
+      "typed_candidate": {
+        "kind": "task",
+        "predicate": {"surface": "请求退回", "sense": "request that a tablet be returned", "canonical_operator": "return"},
+        "entities": [
+          {"local_id": "entity-01", "surface": "用户", "entity_type": "person"},
+          {"local_id": "entity-02", "surface": "平板", "entity_type": "product"}
+        ],
+        "roles": [
+          {"role": "requester", "entity_ref": "entity-01"},
+          {"role": "theme", "entity_ref": "entity-02"}
+        ],
+        "conditions": [],
+        "scope": [],
+        "modality": "requested",
+        "polarity": "positive",
+        "event_time": null,
+        "valid_time": null,
+        "derivation_provenance": {"derivation": "explicit", "inference_basis": null, "evidence": [{"evidence_id": "evidence-6fc32b73fceca3d9bf6c43c0dd9a3815200e1d24bb96d3df3ea922008b47bbaa", "speaker": "user"}]},
+        "lifecycle_links": {"conflicts_with_candidate_refs": [], "lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": []},
+        "operation_provenance": {"added_by_operation_refs": [], "confirmed_by_operation_refs": []}
+      }
+    },
+    {
+      "case_id": "case-bbb95e69d4027f4a",
+      "candidate_ref": "candidate-bbb95e69d4027f4a",
+      "decision": "emit_l1",
+      "reason_code": "complete_tool_attribute",
+      "typed_candidate": {
+        "kind": "attribute",
+        "predicate": {"surface": "尺码为", "sense": "have footwear size", "canonical_operator": "has_size"},
+        "entities": [
+          {"local_id": "entity-01", "surface": "该运动鞋", "entity_type": "product"},
+          {"local_id": "entity-02", "surface": "6码", "entity_type": "shoe_size"}
+        ],
+        "roles": [
+          {"role": "bearer", "entity_ref": "entity-01"},
+          {"role": "value", "entity_ref": "entity-02"}
+        ],
+        "conditions": [],
+        "scope": [],
+        "modality": "actual",
+        "polarity": "positive",
+        "event_time": null,
+        "valid_time": null,
+        "derivation_provenance": {"derivation": "explicit", "inference_basis": null, "evidence": [{"evidence_id": "evidence-35cc97213b9f1ac5ecaabde17f283066dbe5e67a87f3c63a6a0b73f940bd8b3d", "speaker": "tool"}]},
+        "lifecycle_links": {"conflicts_with_candidate_refs": [], "lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": []},
+        "operation_provenance": {"added_by_operation_refs": [], "confirmed_by_operation_refs": []}
+      }
+    },
+    {
+      "case_id": "case-4dd3f9308395459f",
+      "candidate_ref": "candidate-4dd3f9308395459f",
+      "decision": "emit_l1",
+      "reason_code": "complete_tool_event",
+      "typed_candidate": {
+        "kind": "event",
+        "predicate": {"surface": "已提交", "sense": "submit a product return request", "canonical_operator": "submit"},
+        "entities": [
+          {"local_id": "entity-01", "surface": "平板退货请求", "entity_type": "return_request"}
+        ],
+        "roles": [
+          {"role": "theme", "entity_ref": "entity-01"}
+        ],
+        "conditions": [],
+        "scope": [],
+        "modality": "actual",
+        "polarity": "positive",
+        "event_time": {"surface": "已", "normalized": null},
+        "valid_time": null,
+        "derivation_provenance": {"derivation": "explicit", "inference_basis": null, "evidence": [{"evidence_id": "evidence-ad00e0b28b83f97874abf0846749ac4543b03b9e7c4b034ef4a37961c0e5c188", "speaker": "tool"}]},
+        "lifecycle_links": {"conflicts_with_candidate_refs": [], "lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": ["candidate-4ffef5523d302472"]},
+        "operation_provenance": {"added_by_operation_refs": [], "confirmed_by_operation_refs": []}
+      }
+    },
+    {
+      "case_id": "case-4ffef5523d302472",
+      "candidate_ref": "candidate-4ffef5523d302472",
+      "decision": "emit_l1",
+      "reason_code": "complete_conditional_plan",
+      "typed_candidate": {
+        "kind": "task",
+        "predicate": {"surface": "计划退回", "sense": "plan to return a tablet from a specified order", "canonical_operator": "return"},
+        "entities": [
+          {"local_id": "entity-01", "surface": "代理", "entity_type": "assistant"},
+          {"local_id": "entity-02", "surface": "订单 #W2692684 中的平板", "entity_type": "product"},
+          {"local_id": "entity-03", "surface": "用户确认执行", "entity_type": "condition"}
+        ],
+        "roles": [
+          {"role": "agent", "entity_ref": "entity-01"},
+          {"role": "theme", "entity_ref": "entity-02"}
+        ],
+        "conditions": [{"entity_ref": "entity-03"}],
+        "scope": [],
+        "modality": "planned",
+        "polarity": "positive",
+        "event_time": null,
+        "valid_time": null,
+        "derivation_provenance": {"derivation": "explicit", "inference_basis": null, "evidence": [{"evidence_id": "evidence-ef659c440dfbeaa5d572d60ce18d7e129269484af610aca508c108e84599a544", "speaker": "assistant"}]},
+        "lifecycle_links": {"conflicts_with_candidate_refs": [], "lifecycle": "superseded", "replacement_candidate_ref": "candidate-4dd3f9308395459f", "replaces_candidate_refs": [], "supersedes_candidate_refs": []},
+        "operation_provenance": {"added_by_operation_refs": [], "confirmed_by_operation_refs": []}
+      }
+    },
+    {
+      "case_id": "case-237fcc209af6b4f5",
+      "candidate_ref": "candidate-237fcc209af6b4f5",
+      "decision": "emit_l1",
+      "reason_code": "complete_explicit_time_state",
+      "typed_candidate": {
+        "kind": "state",
+        "predicate": {"surface": "是", "sense": "identify the current temporal anchor", "canonical_operator": "equal"},
+        "entities": [
+          {"local_id": "entity-01", "surface": "当前时间锚", "entity_type": "time_anchor"},
+          {"local_id": "entity-02", "surface": "2024 年 5 月 2 日", "entity_type": "date"}
+        ],
+        "roles": [
+          {"role": "subject", "entity_ref": "entity-01"},
+          {"role": "value", "entity_ref": "entity-02"}
+        ],
+        "conditions": [],
+        "scope": [],
+        "modality": "actual",
+        "polarity": "positive",
+        "event_time": null,
+        "valid_time": {"surface": "2024 年 5 月 2 日", "normalized": "2024-05-02"},
+        "derivation_provenance": {"derivation": "explicit", "inference_basis": null, "evidence": [{"evidence_id": "evidence-eaff1b21576852e9d9904d087733c28a457922de130b74177638e5fb396b473f", "speaker": "user"}]},
+        "lifecycle_links": {"conflicts_with_candidate_refs": [], "lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": []},
+        "operation_provenance": {"added_by_operation_refs": [], "confirmed_by_operation_refs": []}
+      }
+    },
+    {
+      "case_id": "case-0b9908e81d723639",
+      "candidate_ref": "candidate-0b9908e81d723639",
+      "decision": "emit_l1",
+      "reason_code": "complete_plan_unresolved_date",
+      "typed_candidate": {
+        "kind": "event",
+        "predicate": {"surface": "计划出发", "sense": "plan an outbound departure", "canonical_operator": "depart"},
+        "entities": [
+          {"local_id": "entity-01", "surface": "用户", "entity_type": "person"},
+          {"local_id": "entity-02", "surface": "去程", "entity_type": "journey_leg"}
+        ],
+        "roles": [
+          {"role": "traveler", "entity_ref": "entity-01"}
+        ],
+        "conditions": [],
+        "scope": [{"entity_ref": "entity-02"}],
+        "modality": "planned",
+        "polarity": "positive",
+        "event_time": {"surface": "今天", "normalized": null},
+        "valid_time": null,
+        "derivation_provenance": {"derivation": "context_completed", "inference_basis": "“今天”可解析为说话当日，但本轮没有可用于确定日历日期的时间锚点。", "evidence": [{"evidence_id": "evidence-412aa5494228af3db85850b650be132bcb295bd2e35809384aa13db8661a4029", "speaker": "user"}]},
+        "lifecycle_links": {"conflicts_with_candidate_refs": [], "lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": []},
+        "operation_provenance": {"added_by_operation_refs": [], "confirmed_by_operation_refs": []}
+      }
+    },
+    {
+      "case_id": "case-6192746256dbcf53",
+      "candidate_ref": "candidate-6192746256dbcf53",
+      "decision": "abstain",
+      "reason_code": "unresolved_price_referent",
+      "typed_candidate": null
+    },
+    {
+      "case_id": "case-020c40da03c864a2",
+      "candidate_ref": "candidate-020c40da03c864a2",
+      "decision": "abstain",
+      "reason_code": "unsupported_epistemic_modality",
+      "typed_candidate": null
+    },
+    {
+      "case_id": "case-83e21d5036027d1c",
+      "candidate_ref": "candidate-83e21d5036027d1c",
+      "decision": "no_memory",
+      "reason_code": "assistant_question",
+      "typed_candidate": null
+    },
+    {
+      "case_id": "case-eebea674b6382a54",
+      "candidate_ref": "candidate-eebea674b6382a54",
+      "decision": "abstain",
+      "reason_code": "unresolved_diagnostic_alternative",
+      "typed_candidate": null
+    }
+  ]
+}

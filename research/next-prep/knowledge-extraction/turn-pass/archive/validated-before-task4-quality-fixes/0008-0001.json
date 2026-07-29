@@ -1,0 +1,295 @@
+{
+  "candidate_id": "WILDCHAT-LEARN-CAND-001",
+  "turn_index": 1,
+  "context_completions": [
+    {
+      "completion_id": "C_wildchat-learn-cand-001-8def27ce661d_001_001",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "turn_index": 1,
+      "kind": "unresolved",
+      "original_span": "改",
+      "interpretation": "用户请求修改某项配置，但本轮用户消息未明确要修改的对象",
+      "confidence": 1.0,
+      "ambiguity": true,
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "具体应该怎么改？",
+          "evidence_id": "evidence-5eaec6f6ef647e3f097d5888023afbc186cea9722e8f011f11a4246e23c41ade",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 8
+        }
+      ]
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_001_001",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "用户请求修改本轮未明确对象的具体方法。",
+      "subject": "用户",
+      "predicate": "请求",
+      "object": "修改未明确对象的具体方法",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "具体应该怎么改？",
+          "evidence_id": "evidence-5eaec6f6ef647e3f097d5888023afbc186cea9722e8f011f11a4246e23c41ade",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 8
+        }
+      ],
+      "inference_basis": "本轮用户消息没有说明“改”的对象，不能使用其他轮次补全。",
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_001_002",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "用户应在 Android Studio 中打开 app/build.gradle。",
+      "subject": "用户",
+      "predicate": "打开",
+      "object": "app/build.gradle",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": [
+          "Android Studio"
+        ]
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "在 Android Studio 中打开 app/build.gradle",
+          "evidence_id": "evidence-807dc86e90c55f727a878d6d6c0a574a0c5d1b6fdcf8ca02067636e71763d0f5",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 0,
+          "end": 37
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_001_003",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "用户应在 android 块中找到 compileSdkVersion 33。",
+      "subject": "用户",
+      "predicate": "找到",
+      "object": "compileSdkVersion 33",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": [
+          "android 块"
+        ]
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "找到 android 块里的 compileSdkVersion 33",
+          "evidence_id": "evidence-ddf9192be75c351c3e1165ca22ba3029dbf6f666d3efb746d141c9982efebd0d",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 38,
+          "end": 73
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_001_004",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "用户应把 compileSdkVersion 33 改为 compileSdkVersion 34。",
+      "subject": "compileSdkVersion 33",
+      "predicate": "改为",
+      "object": "compileSdkVersion 34",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "改为 compileSdkVersion 34",
+          "evidence_id": "evidence-61da84a76f5bb86cfd05a96e7b669b5ba43d9b4035eff3945cfa05c46c9b9946",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 74,
+          "end": 97
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_001_005",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "修改后用户应点击 Sync Now。",
+      "subject": "用户",
+      "predicate": "点击",
+      "object": "Sync Now",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [
+          "修改 compileSdkVersion 后"
+        ],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "然后点击 Sync Now",
+          "evidence_id": "evidence-db4eb7a4245d17ad605ed1ddf574555d4b0aa64693dd9b01300ebb9cc704be07",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 98,
+          "end": 111
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_001_006",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "同步后用户应重新构建项目。",
+      "subject": "用户",
+      "predicate": "重新构建",
+      "object": "项目",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [
+          "同步后"
+        ],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "同步后重新构建项目",
+          "evidence_id": "evidence-edddd339eea9b455b7d0c469b061af1a29d70fd3c2829190c992655c88f5cffb",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 112,
+          "end": 121
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_001_007",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "是否调整 targetSdk 应根据设备兼容性决定。",
+      "subject": "是否调整 targetSdk",
+      "predicate": "根据设备兼容性决定",
+      "object": null,
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "并根据设备兼容性决定是否同时调整 targetSdk 和 minSdk",
+          "evidence_id": "evidence-e4b3a6cb50d5c28ff23d08dc054704534b3904bbafb8c6ed9828fecaae1e2761",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 122,
+          "end": 157
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_001_008",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "是否调整 minSdk 应根据设备兼容性决定。",
+      "subject": "是否调整 minSdk",
+      "predicate": "根据设备兼容性决定",
+      "object": null,
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "并根据设备兼容性决定是否同时调整 targetSdk 和 minSdk",
+          "evidence_id": "evidence-e4b3a6cb50d5c28ff23d08dc054704534b3904bbafb8c6ed9828fecaae1e2761",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 122,
+          "end": 157
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "candidate_id": "WILDCHAT-MGMT-CAND-001",
+  "new_knowledge": [],
+  "operations": [
+    {
+      "operation_id": "R_wildchat-mgmt-cand-001-4d3900462107_001",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "operation": "supersede",
+      "targets": [
+        "K_wildchat-mgmt-cand-001-4d3900462107_000_004"
+      ],
+      "replacement": "K_wildchat-mgmt-cand-001-4d3900462107_002_004",
+      "reason": "The later user statement replaces the tentative one-week vacation window with a specific planned vacation from December 15 through December 26.",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "未来两个月可能要出国休假一周",
+          "evidence_role": "user_reported"
+        },
+        {
+          "turn_index": 2,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "12 月 15 日到 12 月 26 日的休假",
+          "evidence_role": "user_reported"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "operation_id": "R_wildchat-mgmt-cand-001-4d3900462107_002",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "operation": "confirm",
+      "targets": [
+        "K_wildchat-mgmt-cand-001-4d3900462107_001_006",
+        "K_wildchat-mgmt-cand-001-4d3900462107_001_011"
+      ],
+      "replacement": null,
+      "reason": "The user explicitly adopts the previously suggested approaches of contacting firm partners and doing business development.",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我准备采用联系事务所合伙人和做业务拓展这两种方式",
+          "evidence_role": "user_reported"
+        }
+      ],
+      "confidence": 0.99
+    }
+  ]
+}

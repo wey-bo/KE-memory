@@ -1,0 +1,148 @@
+{
+  "candidate_id": "WILDCHAT-LEARN-CAND-004",
+  "new_knowledge": [
+    {
+      "knowledge_id": "D_wildchat-learn-cand-004-dc8956a5d265_001",
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "statement": "用户请求对“有学习困难的学生能力是固定的、无法提高”这一说法给出更有证据依据且更准确的结论，并依据该结论提出实践建议。",
+      "subject": "用户",
+      "predicate": "请求给出结论并提出建议",
+      "object": "“有学习困难的学生能力是固定的、无法提高”这一说法",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [
+          "结论应更有证据依据",
+          "结论应更准确",
+          "实践建议应依据该结论"
+        ],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "请给出更有证据依据、更准确的结论，并据此提出实践建议"
+        },
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "“有学习困难的学生能力是固定的、无法提高”这句话也请这样处理"
+        }
+      ],
+      "inference_basis": "turn 1 的“也请这样处理”跨轮指向 turn 0 明示的处理方式，即先给出更有证据依据且更准确的结论，再据此提出实践建议。",
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "D_wildchat-learn-cand-004-dc8956a5d265_002",
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "statement": "用户请求对“记忆是成功学习的关键”这一说法沿用前述处理方式：给出更有证据依据且更准确的结论，并依据该结论提出实践建议。",
+      "subject": "用户",
+      "predicate": "请求沿用前述方式处理",
+      "object": "“记忆是成功学习的关键”这一说法",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [
+          "结论应更有证据依据",
+          "结论应更准确",
+          "实践建议应依据该结论"
+        ],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "请给出更有证据依据、更准确的结论，并据此提出实践建议"
+        },
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "这句话也请这样处理"
+        },
+        {
+          "turn_index": 2,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "“记忆是成功学习的关键”呢？"
+        }
+      ],
+      "inference_basis": "连续对话中 turn 2 的“呢”承接 turn 0 明示、turn 1 再次沿用的处理任务，而不只是脱离上下文地询问一般评价。",
+      "confidence": 0.96
+    }
+  ],
+  "operations": [
+    {
+      "operation_id": "R_wildchat-learn-cand-004-dc8956a5d265_001",
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "operation": "correct",
+      "targets": [
+        "K_wildchat-learn-cand-004-dc8956a5d265_001_001"
+      ],
+      "replacement": "D_wildchat-learn-cand-004-dc8956a5d265_001",
+      "reason": "逐轮记录将“这样处理”保留为未明确方式；完整对话提供了 turn 0 的明确先行指令，可以无歧义地补全处理内容。",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "请给出更有证据依据、更准确的结论，并据此提出实践建议",
+          "evidence_role": "user_reported"
+        },
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "这句话也请这样处理",
+          "evidence_role": "user_reported"
+        }
+      ],
+      "confidence": 0.99
+    },
+    {
+      "operation_id": "R_wildchat-learn-cand-004-dc8956a5d265_002",
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "operation": "correct",
+      "targets": [
+        "K_wildchat-learn-cand-004-dc8956a5d265_002_001"
+      ],
+      "replacement": "D_wildchat-learn-cand-004-dc8956a5d265_002",
+      "reason": "逐轮记录只补全为一般评价请求；对话序列显示“呢”是在要求对新命题沿用此前的证据化结论和实践建议任务。",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "请给出更有证据依据、更准确的结论，并据此提出实践建议",
+          "evidence_role": "user_reported"
+        },
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "这句话也请这样处理",
+          "evidence_role": "user_reported"
+        },
+        {
+          "turn_index": 2,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "“记忆是成功学习的关键”呢？",
+          "evidence_role": "user_reported"
+        }
+      ],
+      "confidence": 0.96
+    }
+  ]
+}

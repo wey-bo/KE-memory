@@ -1,0 +1,23 @@
+{
+  "attempt": 1,
+  "finished_at": "2026-07-24T12:56:45.477103Z",
+  "latency_ms": null,
+  "latency_status": "unavailable",
+  "model_id": "gpt-5.6-terra",
+  "parse_errors": [],
+  "parse_status": "not_applicable",
+  "previous_attempt_sha256": null,
+  "prompt_sha256": "99f29817d29a01a91a50bdcc6747c5df7c6fcd2c73510646588125d8fc22951b",
+  "raw_output_sha256": "7452fa380329d1fc2124e2cafe975d4cd8ebc3c780b40a21c01e0981ec917315",
+  "representation_gaps": [
+    "Per-call wall-clock latency is unavailable from the subagent execution interface."
+  ],
+  "route": "C",
+  "run_id": "run-20260724T125522Z",
+  "sample_id": "AMR-S001",
+  "started_at": "2026-07-24T12:55:22Z",
+  "usage": {
+    "reason": "Subagent execution interface did not expose token or cost telemetry.",
+    "status": "unavailable"
+  }
+}

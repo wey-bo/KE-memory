@@ -1,0 +1,77 @@
+{
+  "schema_version": "knowledge_extraction_run_v1",
+  "source": "KE-test.json",
+  "active_method": "knowledge_first_two_pass",
+  "semantic_authoring": "codex_subagents_only",
+  "root_authored_semantic_records": false,
+  "old_keol_or_custom_ke_used_as_model_input": false,
+  "turn_pass": {
+    "status": "validated",
+    "prompt": {
+      "path": "knowledge-extraction/prompts/turn_knowledge_extraction.md",
+      "version": "knowledge-extraction-turn-v1",
+      "sha256": "694d9de90c38121e9f00ab139c8066a4dbbcdae477f54dd6d565a97e50a9177e"
+    },
+    "prepared_manifest": {
+      "path": "knowledge-extraction/turn-pass/prepared/manifest.json",
+      "sha256": "ec9b88ed44a44f634b13816c79d64b636f85cd8bca309bbefa99e151e2897038"
+    },
+    "validated_manifest": {
+      "path": "knowledge-extraction/turn-pass/validated/manifest.json",
+      "sha256": "3444dd9a44ad5bb0c53a65af15b4034ae0fc58508d429715ca58efe118360d1c"
+    },
+    "assignments": [
+      {
+        "subagent_task": "turn_extract_a",
+        "candidates": [
+          "WILDCHAT-MGMT-CAND-001",
+          "WILDCHAT-MGMT-CAND-002",
+          "WILDCHAT-LEARN-CAND-002",
+          "WILDCHAT-MGMT-CAND-003"
+        ],
+        "turn_count": 15,
+        "knowledge_count": 189,
+        "context_completion_count": 15,
+        "status": "validated"
+      },
+      {
+        "subagent_task": "turn_extract_b",
+        "candidates": [
+          "WILDCHAT-LEARN-CAND-004",
+          "TASKMASTER2-CAND-001",
+          "TAU-BENCH-CAND-001"
+        ],
+        "turn_count": 14,
+        "knowledge_count": 78,
+        "context_completion_count": 14,
+        "status": "validated"
+      },
+      {
+        "subagent_task": "turn_extract_c",
+        "candidates": [
+          "BEAM-CAND-004",
+          "WILDCHAT-LEARN-CAND-001",
+          "WILDCHAT-LEARN-CAND-003"
+        ],
+        "turn_count": 14,
+        "knowledge_count": 132,
+        "context_completion_count": 13,
+        "status": "validated"
+      }
+    ],
+    "totals": {
+      "candidate_count": 10,
+      "turn_count": 43,
+      "speaker_slot_count": 86,
+      "raw_output_count": 43,
+      "validated_output_count": 43,
+      "knowledge_count": 399,
+      "context_completion_count": 42,
+      "zero_knowledge_turns": [
+        "0005-0005.json"
+      ],
+      "validation_errors": 0
+    },
+    "raw_hashes_location": "knowledge-extraction/turn-pass/validated/manifest.json"
+  }
+}

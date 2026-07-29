@@ -1,0 +1,107 @@
+{
+  "candidate_id": "TASKMASTER2-CAND-001",
+  "turn_index": 0,
+  "context_completions": [],
+  "knowledge": [
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_001",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "statement": "用户想预订一趟从纽约市到阿姆斯特丹的往返航班。",
+      "subject": "用户",
+      "predicate": "想预订",
+      "object": "从纽约市到阿姆斯特丹的往返航班",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": [
+          "出发地：纽约市",
+          "目的地：阿姆斯特丹",
+          "行程类型：往返"
+        ]
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我想预订一趟从纽约市到阿姆斯特丹的往返航班",
+          "evidence_id": "evidence-d96bdad6ff9c8fc42ad686ec5fe881c40f4585d0d2aa8f2d244d951ee4609e96",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 3,
+          "end": 24
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_002",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "statement": "代理表示可以帮助用户查询航班。",
+      "subject": "代理",
+      "predicate": "可以帮助查询",
+      "object": "航班",
+      "qualifiers": {
+        "modality": "committed",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "我可以帮你查航班",
+          "evidence_id": "evidence-49342e714517c10f36f6071c7797d5e1d13d5440c8a2314f9b09aad7d4adef7d",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 3,
+          "end": 11
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_003",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "statement": "代理询问用户是否还有其他偏好。",
+      "subject": "代理",
+      "predicate": "询问",
+      "object": "用户是否还有其他偏好",
+      "qualifiers": {
+        "modality": "questioned",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 0,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "你还有其他偏好吗？",
+          "evidence_id": "evidence-8f9a6ea213dc53d025e4ac508a873ae6d2d1b93e134d350c3d37220d30fab5f5",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 12,
+          "end": 21
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 1.0
+    }
+  ]
+}

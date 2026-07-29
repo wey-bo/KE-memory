@@ -1,0 +1,128 @@
+{
+  "candidate_id": "WILDCHAT-LEARN-CAND-004",
+  "turn_index": 2,
+  "context_completions": [
+    {
+      "completion_id": "C_wildchat-learn-cand-004-dc8956a5d265_002_001",
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "turn_index": 2,
+      "kind": "ellipsis",
+      "original_span": "“记忆是成功学习的关键”呢？",
+      "interpretation": "用户询问应如何评价“记忆是成功学习的关键”这一说法。",
+      "evidence": [
+        {"turn_index": 2, "message": "user", "occurrence_index": 0, "quote": "“记忆是成功学习的关键”呢？"},
+        {"turn_index": 2, "message": "agent", "occurrence_index": 0, "quote": "记忆有作用，但不是唯一关键"}
+      ],
+      "confidence": 0.98,
+      "ambiguity": false
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge_id": "K_wildchat-learn-cand-004-dc8956a5d265_002_001",
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "statement": "用户询问如何评价“记忆是成功学习的关键”这一说法。",
+      "subject": "用户",
+      "predicate": "询问如何评价",
+      "object": "“记忆是成功学习的关键”这一说法",
+      "qualifiers": {"modality": "questioned", "polarity": "positive", "temporal": [], "conditions": [], "scope": []},
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [{"turn_index": 2, "message": "user", "occurrence_index": 0, "quote": "“记忆是成功学习的关键”呢？"}],
+      "inference_basis": "句末“呢”省略了评价请求，代理回答直接对该说法作出评价。",
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-004-dc8956a5d265_002_002",
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "statement": "记忆对学习有作用。",
+      "subject": "记忆",
+      "predicate": "对学习有作用",
+      "object": null,
+      "qualifiers": {"modality": "asserted", "polarity": "positive", "temporal": [], "conditions": [], "scope": []},
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [{"turn_index": 2, "message": "agent", "occurrence_index": 0, "quote": "记忆有作用"}],
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-004-dc8956a5d265_002_003",
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "statement": "记忆不是成功学习的唯一关键。",
+      "subject": "记忆",
+      "predicate": "是成功学习的唯一关键",
+      "object": null,
+      "qualifiers": {"modality": "asserted", "polarity": "negative", "temporal": [], "conditions": [], "scope": []},
+      "source_status": "agent_generated",
+      "derivation": "context_completed",
+      "evidence": [{"turn_index": 2, "message": "agent", "occurrence_index": 0, "quote": "记忆有作用，但不是唯一关键"}],
+      "inference_basis": "后半句省略的主语承接前半句的“记忆”。",
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-004-dc8956a5d265_002_004",
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "statement": "深层理解支持长期学习效果。",
+      "subject": "深层理解",
+      "predicate": "支持",
+      "object": "长期学习效果",
+      "qualifiers": {"modality": "asserted", "polarity": "positive", "temporal": ["长期"], "conditions": [], "scope": []},
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [{"turn_index": 2, "message": "agent", "occurrence_index": 0, "quote": "深层理解、批判性思维、知识应用、刻意练习和检索练习共同支持长期学习效果"}],
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-004-dc8956a5d265_002_005",
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "statement": "批判性思维支持长期学习效果。",
+      "subject": "批判性思维",
+      "predicate": "支持",
+      "object": "长期学习效果",
+      "qualifiers": {"modality": "asserted", "polarity": "positive", "temporal": ["长期"], "conditions": [], "scope": []},
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [{"turn_index": 2, "message": "agent", "occurrence_index": 0, "quote": "深层理解、批判性思维、知识应用、刻意练习和检索练习共同支持长期学习效果"}],
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-004-dc8956a5d265_002_006",
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "statement": "知识应用支持长期学习效果。",
+      "subject": "知识应用",
+      "predicate": "支持",
+      "object": "长期学习效果",
+      "qualifiers": {"modality": "asserted", "polarity": "positive", "temporal": ["长期"], "conditions": [], "scope": []},
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [{"turn_index": 2, "message": "agent", "occurrence_index": 0, "quote": "深层理解、批判性思维、知识应用、刻意练习和检索练习共同支持长期学习效果"}],
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-004-dc8956a5d265_002_007",
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "statement": "刻意练习支持长期学习效果。",
+      "subject": "刻意练习",
+      "predicate": "支持",
+      "object": "长期学习效果",
+      "qualifiers": {"modality": "asserted", "polarity": "positive", "temporal": ["长期"], "conditions": [], "scope": []},
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [{"turn_index": 2, "message": "agent", "occurrence_index": 0, "quote": "深层理解、批判性思维、知识应用、刻意练习和检索练习共同支持长期学习效果"}],
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-004-dc8956a5d265_002_008",
+      "candidate_id": "WILDCHAT-LEARN-CAND-004",
+      "statement": "检索练习支持长期学习效果。",
+      "subject": "检索练习",
+      "predicate": "支持",
+      "object": "长期学习效果",
+      "qualifiers": {"modality": "asserted", "polarity": "positive", "temporal": ["长期"], "conditions": [], "scope": []},
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [{"turn_index": 2, "message": "agent", "occurrence_index": 0, "quote": "深层理解、批判性思维、知识应用、刻意练习和检索练习共同支持长期学习效果"}],
+      "confidence": 1.0
+    }
+  ]
+}

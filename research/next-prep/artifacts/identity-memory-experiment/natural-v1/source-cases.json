@@ -1,0 +1,519 @@
+{
+  "schema_version": "natural-identity-source-config-v1",
+  "dataset_id": "natural-identity-membership-v1",
+  "source_inputs": {
+    "gold_evidence": "artifacts/natural-benchmark-slices/slice-v1/gold-evidence.json",
+    "locomo_raw": "artifacts/natural-benchmark-slices/raw/locomo/locomo10.json"
+  },
+  "cases": [
+    {
+      "case_id": "NIM-DEV-001-caroline-cross-turn-identity",
+      "split": "dev",
+      "relation_kind": "identity",
+      "question": "Do these two mentions refer to the same person?",
+      "mentions": [
+        {
+          "mention_id": "m-caroline-identity-1",
+          "source_item_id": "LOCOMO-S01-Q005",
+          "evidence_unit_id": "D1:5",
+          "quote": "The transgender stories were so inspiring!",
+          "surface": "Caroline",
+          "concept_id": "memory:Person",
+          "source_actor_id": "person:caroline",
+          "actor_locator": {
+            "kind": "locomo_dia_id",
+            "sample_id": "conv-26",
+            "dia_id": "D1:5"
+          }
+        },
+        {
+          "mention_id": "m-caroline-identity-2",
+          "source_item_id": "LOCOMO-S01-Q004",
+          "evidence_unit_id": "D2:8",
+          "quote": "Researching adoption agencies",
+          "surface": "Caroline",
+          "concept_id": "memory:Person",
+          "source_actor_id": "person:caroline",
+          "actor_locator": {
+            "kind": "locomo_dia_id",
+            "sample_id": "conv-26",
+            "dia_id": "D2:8"
+          }
+        }
+      ],
+      "authority": {
+        "shared_trusted_identifiers": ["locomo-speaker:conv-26:Caroline"],
+        "conflicting_trusted_identifiers": [],
+        "explicit_same_entity": false,
+        "explicit_distinct": false,
+        "actor_binding_authoritative": false,
+        "explicit_membership": false,
+        "explicit_non_membership": false,
+        "required_mention_ids": ["m-caroline-identity-1", "m-caroline-identity-2"]
+      },
+      "gold": {
+        "expected_action": "merge",
+        "critical_false_merge": false,
+        "critical_false_membership": false
+      }
+    },
+    {
+      "case_id": "NIM-DEV-002-caroline-melanie-distinct",
+      "split": "dev",
+      "relation_kind": "identity",
+      "question": "Do these two mentions refer to the same person?",
+      "mentions": [
+        {
+          "mention_id": "m-caroline-distinct",
+          "source_item_id": "LOCOMO-S01-Q004",
+          "evidence_unit_id": "D2:8",
+          "quote": "Researching adoption agencies",
+          "surface": "Caroline",
+          "concept_id": "memory:Person",
+          "source_actor_id": "person:caroline",
+          "actor_locator": {
+            "kind": "locomo_dia_id",
+            "sample_id": "conv-26",
+            "dia_id": "D2:8"
+          }
+        },
+        {
+          "mention_id": "m-melanie-distinct",
+          "source_item_id": "LOCOMO-S01-Q084",
+          "evidence_unit_id": "D2:3",
+          "quote": "I'm starting to realize that self-care is really important.",
+          "surface": "Melanie",
+          "concept_id": "memory:Person",
+          "source_actor_id": "person:melanie",
+          "actor_locator": {
+            "kind": "locomo_dia_id",
+            "sample_id": "conv-26",
+            "dia_id": "D2:3"
+          }
+        }
+      ],
+      "authority": {
+        "shared_trusted_identifiers": [],
+        "conflicting_trusted_identifiers": [
+          "locomo-speaker:conv-26:Caroline",
+          "locomo-speaker:conv-26:Melanie"
+        ],
+        "explicit_same_entity": false,
+        "explicit_distinct": false,
+        "actor_binding_authoritative": false,
+        "explicit_membership": false,
+        "explicit_non_membership": false,
+        "required_mention_ids": ["m-caroline-distinct", "m-melanie-distinct"]
+      },
+      "gold": {
+        "expected_action": "keep_distinct",
+        "critical_false_merge": true,
+        "critical_false_membership": false
+      }
+    },
+    {
+      "case_id": "NIM-DEV-003-caroline-adoption-membership",
+      "split": "dev",
+      "relation_kind": "membership",
+      "question": "Does this adoption-agency research belong to Caroline's memory?",
+      "query_subject_id": "person:caroline",
+      "group_surface": "Caroline memories",
+      "member_surface": "adoption-agency research",
+      "mentions": [
+        {
+          "mention_id": "m-caroline-adoption-member",
+          "source_item_id": "LOCOMO-S01-Q004",
+          "evidence_unit_id": "D2:8",
+          "quote": "Researching adoption agencies",
+          "surface": "adoption-agency research",
+          "concept_id": "memory:Activity",
+          "source_actor_id": "person:caroline",
+          "actor_locator": {
+            "kind": "locomo_dia_id",
+            "sample_id": "conv-26",
+            "dia_id": "D2:8"
+          }
+        }
+      ],
+      "authority": {
+        "shared_trusted_identifiers": [],
+        "conflicting_trusted_identifiers": [],
+        "explicit_same_entity": false,
+        "explicit_distinct": false,
+        "actor_binding_authoritative": true,
+        "explicit_membership": false,
+        "explicit_non_membership": false,
+        "required_mention_ids": ["m-caroline-adoption-member"]
+      },
+      "gold": {
+        "expected_action": "include",
+        "critical_false_merge": false,
+        "critical_false_membership": false
+      }
+    },
+    {
+      "case_id": "NIM-DEV-004-melanie-adoption-mismatch",
+      "split": "dev",
+      "relation_kind": "membership",
+      "question": "Does this adoption-agency research belong to Melanie's memory?",
+      "query_subject_id": "person:melanie",
+      "group_surface": "Melanie memories",
+      "member_surface": "adoption-agency research",
+      "mentions": [
+        {
+          "mention_id": "m-melanie-adoption-mismatch",
+          "source_item_id": "LOCOMO-S01-Q154",
+          "evidence_unit_id": "D2:8",
+          "quote": "Researching adoption agencies",
+          "surface": "adoption-agency research",
+          "concept_id": "memory:Activity",
+          "source_actor_id": "person:caroline",
+          "actor_locator": {
+            "kind": "locomo_dia_id",
+            "sample_id": "conv-26",
+            "dia_id": "D2:8"
+          }
+        }
+      ],
+      "authority": {
+        "shared_trusted_identifiers": [],
+        "conflicting_trusted_identifiers": [],
+        "explicit_same_entity": false,
+        "explicit_distinct": false,
+        "actor_binding_authoritative": true,
+        "explicit_membership": false,
+        "explicit_non_membership": false,
+        "required_mention_ids": ["m-melanie-adoption-mismatch"]
+      },
+      "gold": {
+        "expected_action": "exclude",
+        "critical_false_merge": false,
+        "critical_false_membership": true
+      }
+    },
+    {
+      "case_id": "NIM-DEV-005-category-column-membership",
+      "split": "dev",
+      "relation_kind": "membership",
+      "question": "Is category a requested member of the transactions table schema?",
+      "query_subject_id": "table:transactions",
+      "group_surface": "transactions table",
+      "member_surface": "category column",
+      "mentions": [
+        {
+          "mention_id": "m-category-column",
+          "source_item_id": "BEAM-100K-C001-multi_session_reasoning-001",
+          "evidence_unit_id": "106",
+          "quote": "include a category VARCHAR(50) for better expense classification",
+          "surface": "category column",
+          "concept_id": "memory:SchemaField",
+          "source_actor_id": null,
+          "actor_locator": null
+        }
+      ],
+      "authority": {
+        "shared_trusted_identifiers": [],
+        "conflicting_trusted_identifiers": [],
+        "explicit_same_entity": false,
+        "explicit_distinct": false,
+        "actor_binding_authoritative": false,
+        "explicit_membership": true,
+        "explicit_non_membership": false,
+        "required_mention_ids": ["m-category-column"]
+      },
+      "gold": {
+        "expected_action": "include",
+        "critical_false_merge": false,
+        "critical_false_membership": false
+      }
+    },
+    {
+      "case_id": "NIM-DEV-006-budget-repository-alias-unresolved",
+      "split": "dev",
+      "relation_kind": "identity",
+      "question": "Do these repository/application references identify one repository?",
+      "mentions": [
+        {
+          "mention_id": "m-budget-repository",
+          "source_item_id": "BEAM-100K-C001-knowledge_update-002",
+          "evidence_unit_id": "148",
+          "quote": "my Git repository for the budget tracker project",
+          "surface": "budget tracker repository",
+          "concept_id": "memory:Repository",
+          "source_actor_id": null,
+          "actor_locator": null
+        },
+        {
+          "mention_id": "m-application-main-branch",
+          "source_item_id": "BEAM-100K-C001-knowledge_update-002",
+          "evidence_unit_id": "182",
+          "quote": "commits merged into the main branch, which has now reached 165",
+          "surface": "application main branch",
+          "concept_id": "memory:Repository",
+          "source_actor_id": null,
+          "actor_locator": null
+        }
+      ],
+      "authority": {
+        "shared_trusted_identifiers": [],
+        "conflicting_trusted_identifiers": [],
+        "explicit_same_entity": false,
+        "explicit_distinct": false,
+        "actor_binding_authoritative": false,
+        "explicit_membership": false,
+        "explicit_non_membership": false,
+        "required_mention_ids": ["m-budget-repository", "m-application-main-branch"]
+      },
+      "gold": {
+        "expected_action": "abstain",
+        "critical_false_merge": true,
+        "critical_false_membership": false
+      }
+    },
+    {
+      "case_id": "NIM-HIDDEN-001-honda-civic-cross-session",
+      "split": "hidden",
+      "relation_kind": "identity",
+      "question": "Do these two vehicle mentions refer to the same car?",
+      "mentions": [
+        {
+          "mention_id": "m-honda-new-car",
+          "source_item_id": "LONGMEMEVAL-gpt4_2655b836",
+          "evidence_unit_id": "answer_4be1b6b4_1",
+          "quote": "I've got a new car, a silver Honda Civic that I bought on February 10th",
+          "surface": "new car",
+          "concept_id": "memory:Vehicle",
+          "source_actor_id": null,
+          "actor_locator": null
+        },
+        {
+          "mention_id": "m-honda-gps-car",
+          "source_item_id": "LONGMEMEVAL-gpt4_2655b836",
+          "evidence_unit_id": "answer_4be1b6b4_3",
+          "quote": "my car's GPS system on 3/22",
+          "surface": "car GPS system",
+          "concept_id": "memory:Vehicle",
+          "source_actor_id": null,
+          "actor_locator": null
+        }
+      ],
+      "authority": {
+        "shared_trusted_identifiers": [],
+        "conflicting_trusted_identifiers": [],
+        "explicit_same_entity": true,
+        "explicit_distinct": false,
+        "actor_binding_authoritative": false,
+        "explicit_membership": false,
+        "explicit_non_membership": false,
+        "required_mention_ids": ["m-honda-new-car", "m-honda-gps-car"]
+      },
+      "gold": {
+        "expected_action": "merge",
+        "critical_false_merge": false,
+        "critical_false_membership": false
+      }
+    },
+    {
+      "case_id": "NIM-HIDDEN-002-distinct-learning-events",
+      "split": "hidden",
+      "relation_kind": "identity",
+      "question": "Do these two event mentions refer to the same event?",
+      "mentions": [
+        {
+          "mention_id": "m-time-management-workshop",
+          "source_item_id": "LONGMEMEVAL-gpt4_2487a7cb",
+          "evidence_unit_id": "answer_1c6b85ea_1",
+          "quote": "the workshop on \"Effective Time Management\" at the local community center last Saturday",
+          "surface": "Effective Time Management",
+          "concept_id": "memory:Event",
+          "source_actor_id": null,
+          "actor_locator": null
+        },
+        {
+          "mention_id": "m-python-webinar",
+          "source_item_id": "LONGMEMEVAL-gpt4_2487a7cb",
+          "evidence_unit_id": "answer_1c6b85ea_2",
+          "quote": "a webinar on \"Data Analysis using Python\" two months ago",
+          "surface": "Data Analysis using Python",
+          "concept_id": "memory:Event",
+          "source_actor_id": null,
+          "actor_locator": null
+        }
+      ],
+      "authority": {
+        "shared_trusted_identifiers": [],
+        "conflicting_trusted_identifiers": [],
+        "explicit_same_entity": false,
+        "explicit_distinct": true,
+        "actor_binding_authoritative": false,
+        "explicit_membership": false,
+        "explicit_non_membership": false,
+        "required_mention_ids": ["m-time-management-workshop", "m-python-webinar"]
+      },
+      "gold": {
+        "expected_action": "keep_distinct",
+        "critical_false_merge": true,
+        "critical_false_membership": false
+      }
+    },
+    {
+      "case_id": "NIM-HIDDEN-003-longmemeval-project-identity-unresolved",
+      "split": "hidden",
+      "relation_kind": "identity",
+      "question": "Do these two class-project mentions refer to the same project?",
+      "mentions": [
+        {
+          "mention_id": "m-marketing-research-project",
+          "source_item_id": "LONGMEMEVAL-6d550036",
+          "evidence_unit_id": "answer_ec904b3c_1",
+          "quote": "my Marketing Research class project, where I led the data analysis team",
+          "surface": "Marketing Research class project",
+          "concept_id": "memory:Project",
+          "source_actor_id": null,
+          "actor_locator": null
+        },
+        {
+          "mention_id": "m-data-mining-project",
+          "source_item_id": "LONGMEMEVAL-6d550036",
+          "evidence_unit_id": "answer_ec904b3c_2",
+          "quote": "a solo project for my Data Mining class",
+          "surface": "Data Mining class project",
+          "concept_id": "memory:Project",
+          "source_actor_id": null,
+          "actor_locator": null
+        }
+      ],
+      "authority": {
+        "shared_trusted_identifiers": [],
+        "conflicting_trusted_identifiers": [],
+        "explicit_same_entity": false,
+        "explicit_distinct": false,
+        "actor_binding_authoritative": false,
+        "explicit_membership": false,
+        "explicit_non_membership": false,
+        "required_mention_ids": ["m-marketing-research-project", "m-data-mining-project"]
+      },
+      "gold": {
+        "expected_action": "abstain",
+        "critical_false_merge": true,
+        "critical_false_membership": false
+      }
+    },
+    {
+      "case_id": "NIM-HIDDEN-004-melanie-self-care-membership",
+      "split": "hidden",
+      "relation_kind": "membership",
+      "question": "Does this self-care realization belong to Melanie's memory?",
+      "query_subject_id": "person:melanie",
+      "group_surface": "Melanie memories",
+      "member_surface": "self-care realization",
+      "mentions": [
+        {
+          "mention_id": "m-melanie-self-care-member",
+          "source_item_id": "LOCOMO-S01-Q084",
+          "evidence_unit_id": "D2:3",
+          "quote": "I'm starting to realize that self-care is really important.",
+          "surface": "self-care realization",
+          "concept_id": "memory:Realization",
+          "source_actor_id": "person:melanie",
+          "actor_locator": {
+            "kind": "locomo_dia_id",
+            "sample_id": "conv-26",
+            "dia_id": "D2:3"
+          }
+        }
+      ],
+      "authority": {
+        "shared_trusted_identifiers": [],
+        "conflicting_trusted_identifiers": [],
+        "explicit_same_entity": false,
+        "explicit_distinct": false,
+        "actor_binding_authoritative": true,
+        "explicit_membership": false,
+        "explicit_non_membership": false,
+        "required_mention_ids": ["m-melanie-self-care-member"]
+      },
+      "gold": {
+        "expected_action": "include",
+        "critical_false_merge": false,
+        "critical_false_membership": false
+      }
+    },
+    {
+      "case_id": "NIM-HIDDEN-005-caroline-self-care-mismatch",
+      "split": "hidden",
+      "relation_kind": "membership",
+      "question": "Does this self-care realization belong to Caroline's memory?",
+      "query_subject_id": "person:caroline",
+      "group_surface": "Caroline memories",
+      "member_surface": "self-care realization",
+      "mentions": [
+        {
+          "mention_id": "m-caroline-self-care-mismatch",
+          "source_item_id": "LOCOMO-S01-Q153",
+          "evidence_unit_id": "D2:3",
+          "quote": "I'm starting to realize that self-care is really important.",
+          "surface": "self-care realization",
+          "concept_id": "memory:Realization",
+          "source_actor_id": "person:melanie",
+          "actor_locator": {
+            "kind": "locomo_dia_id",
+            "sample_id": "conv-26",
+            "dia_id": "D2:3"
+          }
+        }
+      ],
+      "authority": {
+        "shared_trusted_identifiers": [],
+        "conflicting_trusted_identifiers": [],
+        "explicit_same_entity": false,
+        "explicit_distinct": false,
+        "actor_binding_authoritative": true,
+        "explicit_membership": false,
+        "explicit_non_membership": false,
+        "required_mention_ids": ["m-caroline-self-care-mismatch"]
+      },
+      "gold": {
+        "expected_action": "exclude",
+        "critical_false_merge": false,
+        "critical_false_membership": true
+      }
+    },
+    {
+      "case_id": "NIM-HIDDEN-006-notes-column-membership",
+      "split": "hidden",
+      "relation_kind": "membership",
+      "question": "Is notes a requested member of the transactions table schema?",
+      "query_subject_id": "table:transactions",
+      "group_surface": "transactions table",
+      "member_surface": "notes column",
+      "mentions": [
+        {
+          "mention_id": "m-notes-column",
+          "source_item_id": "BEAM-100K-C001-multi_session_reasoning-001",
+          "evidence_unit_id": "162",
+          "quote": "add a 'notes' TEXT column to the transactions table without downtime",
+          "surface": "notes column",
+          "concept_id": "memory:SchemaField",
+          "source_actor_id": null,
+          "actor_locator": null
+        }
+      ],
+      "authority": {
+        "shared_trusted_identifiers": [],
+        "conflicting_trusted_identifiers": [],
+        "explicit_same_entity": false,
+        "explicit_distinct": false,
+        "actor_binding_authoritative": false,
+        "explicit_membership": true,
+        "explicit_non_membership": false,
+        "required_mention_ids": ["m-notes-column"]
+      },
+      "gold": {
+        "expected_action": "include",
+        "critical_false_merge": false,
+        "critical_false_membership": false
+      }
+    }
+  ]
+}

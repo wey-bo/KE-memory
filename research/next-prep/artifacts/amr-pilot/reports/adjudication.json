@@ -1,0 +1,156 @@
+{
+  "dispute_count": 7,
+  "disputes": [
+    {
+      "blind_id": "BLIND-117260513219",
+      "candidate_output": "(r / review-01\n   :ARG0 (c / court)\n   :ARG1 (a / appoint-01\n            :ARG1 (p / person\n                     :name (n / name\n                              :op1 \"Stephanie\")))\n   :condition (n2 / name-01\n                  :ARG0 (y / you)\n                  :ARG1 p\n                  :location (w / will\n                               :poss y))\n   :purpose (e / ensure-01\n                :ARG1 (i / interest-01\n                           :domain a\n                           :mod (b / best)\n                           :ARG1 (c2 / child))))\n",
+      "dispute_type": "gold_outcome",
+      "gold_item": {
+        "category": "condition",
+        "evidence_quotes": [
+          "Even if you name Stephanie in your will"
+        ],
+        "importance": "critical",
+        "item_id": "AMR-S012-G001",
+        "statement": "Naming Stephanie in the will is presented as a concessive condition.",
+        "weight": 2
+      },
+      "reviewer_outcomes": {
+        "R1": "omitted",
+        "R2": "incorrect"
+      },
+      "sample_id": "AMR-S012",
+      "user_outcome": "incorrect"
+    },
+    {
+      "blind_id": "BLIND-117260513219",
+      "candidate_output": "(r / review-01\n   :ARG0 (c / court)\n   :ARG1 (a / appoint-01\n            :ARG1 (p / person\n                     :name (n / name\n                              :op1 \"Stephanie\")))\n   :condition (n2 / name-01\n                  :ARG0 (y / you)\n                  :ARG1 p\n                  :location (w / will\n                               :poss y))\n   :purpose (e / ensure-01\n                :ARG1 (i / interest-01\n                           :domain a\n                           :mod (b / best)\n                           :ARG1 (c2 / child))))\n",
+      "dispute_type": "gold_outcome",
+      "gold_item": {
+        "category": "event",
+        "evidence_quotes": [
+          "the court will review the appointment"
+        ],
+        "importance": "critical",
+        "item_id": "AMR-S012-G002",
+        "statement": "The court will review the appointment.",
+        "weight": 2
+      },
+      "reviewer_outcomes": {
+        "R1": "omitted",
+        "R2": "supported"
+      },
+      "sample_id": "AMR-S012",
+      "user_outcome": "supported"
+    },
+    {
+      "blind_id": "BLIND-237126303881",
+      "candidate_output": "(p / prevent-01\n   :polarity -\n   :ARG0 (n / name-01\n            :ARG0 (y / you)\n            :ARG1 (s / person\n                     :name (sn / name\n                               :op1 \"Stephanie\"))\n            :location (w / will))\n   :ARG1 (r / review-01\n            :ARG0 (c / court)\n            :ARG1 (a / appoint-01)\n            :purpose (e / ensure-01\n                      :ARG1 (h / have-condition-91\n                               :ARG1 a\n                               :ARG2 (i / interest\n                                        :mod (b / best)\n                                        :poss (ch / child))))))\n",
+      "dispute_type": "gold_outcome",
+      "gold_item": {
+        "category": "event",
+        "evidence_quotes": [
+          "the court will review the appointment"
+        ],
+        "importance": "critical",
+        "item_id": "AMR-S012-G002",
+        "statement": "The court will review the appointment.",
+        "weight": 2
+      },
+      "reviewer_outcomes": {
+        "R1": "omitted",
+        "R2": "supported"
+      },
+      "sample_id": "AMR-S012",
+      "user_outcome": "omitted"
+    },
+    {
+      "blind_id": "BLIND-314258994197",
+      "candidate_output": "(a / and\n   :op1 (l / leave-01\n            :ARG0 (s / person)\n            :time (t / today))\n   :op2 (r / return-01\n            :ARG1 s\n            :time (d / date-entity\n                     :day 19)))\n",
+      "dispute_type": "gold_outcome",
+      "gold_item": {
+        "category": "event",
+        "evidence_quotes": [
+          "coming back"
+        ],
+        "importance": "critical",
+        "item_id": "AMR-S004-G003",
+        "statement": "The speaker will return.",
+        "weight": 2
+      },
+      "reviewer_outcomes": {
+        "R1": "incorrect",
+        "R2": "supported"
+      },
+      "sample_id": "AMR-S004",
+      "user_outcome": "supported"
+    },
+    {
+      "blind_id": "BLIND-336825660974",
+      "candidate_output": "(s / seem-01\n   :ARG1 (a / available-02\n            :polarity -\n            :ARG1 (i / item\n                     :mod (e / exact)\n                     :ARG2-of (x / exchange-01\n                                  :ARG0 (y / you)\n                                  :ARG1-of (w / want-01\n                                               :ARG0 y)))\n            :time (n / now)\n            :location (v / inventory\n                         :poss (w2 / we))))\n",
+      "dispute_type": "gold_outcome",
+      "gold_item": {
+        "category": "role",
+        "evidence_quotes": [
+          "the exact item you want to exchange for"
+        ],
+        "importance": "critical",
+        "item_id": "AMR-S008-G002",
+        "statement": "The affected object is the exact item the addressee wants as an exchange replacement.",
+        "weight": 2
+      },
+      "reviewer_outcomes": {
+        "R1": "omitted",
+        "R2": "supported"
+      },
+      "sample_id": "AMR-S008",
+      "user_outcome": "supported"
+    },
+    {
+      "blind_id": "BLIND-497402352816",
+      "candidate_output": "(e / enable-01\n   :ARG0 (a / and\n            :op1 (f / follow-01\n                    :ARG0 (y / you)\n                    :ARG1 (s / step))\n            :op2 (a2 / adhere-01\n                     :ARG0 y\n                     :ARG1 (t / timeline)))\n   :ARG1 (f2 / finalize-01\n             :ARG0 y\n             :ARG1 (w / will\n                       :poss y)\n             :time (d / date-entity\n                      :year 2024\n                      :month 5\n                      :day 15))\n   :mod (s2 / should))\n",
+      "dispute_type": "gold_outcome",
+      "gold_item": {
+        "category": "modality",
+        "evidence_quotes": [
+          "should be able to"
+        ],
+        "importance": "critical",
+        "item_id": "AMR-S006-G002",
+        "statement": "The addressee is said to have an expected ability, not a guarantee.",
+        "weight": 2
+      },
+      "reviewer_outcomes": {
+        "R1": "incorrect",
+        "R2": "supported"
+      },
+      "sample_id": "AMR-S006",
+      "user_outcome": "supported"
+    },
+    {
+      "blind_id": "BLIND-609528877878",
+      "candidate_output": "{\"schema_version\":\"amr-pilot-atomic-knowledge-v1\",\"items\":[{\"knowledge_id\":\"K001\",\"statement\":\"Naming Stephanie in your will does not prevent the court from reviewing the appointment.\",\"evidence_quote\":\"Even if you name Stephanie in your will, the court will review the appointment\"},{\"knowledge_id\":\"K002\",\"statement\":\"The court will review the appointment.\",\"evidence_quote\":\"the court will review the appointment\"},{\"knowledge_id\":\"K003\",\"statement\":\"The purpose of the court's review of the appointment is to ensure that the appointment is in the best interest of the children.\",\"evidence_quote\":\"to ensure it is in the best interest of the children\"}],\"representation_gaps\":[]}\n",
+      "dispute_type": "gold_outcome",
+      "gold_item": {
+        "category": "role",
+        "evidence_quotes": [
+          "name Stephanie",
+          "review the appointment"
+        ],
+        "importance": "critical",
+        "item_id": "AMR-S012-G003",
+        "statement": "The object of the court's review is the appointment of Stephanie.",
+        "weight": 2
+      },
+      "reviewer_outcomes": {
+        "R1": "omitted",
+        "R2": "supported"
+      },
+      "sample_id": "AMR-S012",
+      "user_outcome": "omitted"
+    }
+  ],
+  "run_id": "run-20260724T125522Z",
+  "schema_version": "amr-pilot-adjudication-v1",
+  "status": "adjudicated"
+}

@@ -1,0 +1,176 @@
+{
+  "source": {
+    "source_id": "src_wildchat_mgmt_cand_002__turn_003",
+    "file": "keol-input/turns/wildchat-mgmt-cand-002__turn-003.txt",
+    "file_type": "txt",
+    "category": "text",
+    "metadata": {
+      "unit_id": "wildchat-mgmt-cand-002__turn-003",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "turn_index": 3,
+      "json_pointer": "/candidates/2/turns/2",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=4b457fcbf5d2231cf9cc4a762097fb51 / model=gpt-3.5-turbo-0613 / user_ordinal=1..3 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "chunk": {
+    "id": "chunk_d6b45661646aaf2cede7",
+    "index": 0,
+    "text": "用户：\n请基于这个主题，给我一个用故事叙述连续制作 Reels 的方案。\n\nAgent：\n可以做“转变故事”系列：第一集讲迈出第一步，第二集讲接受不完美，第三集讲自我照顾。每集用冲突或问题开场，加入一个具体经历，再用一句可执行的反思问题收尾，让多集形成连续的成长路径。",
+    "size": 134,
+    "metadata": {
+      "unit_id": "wildchat-mgmt-cand-002__turn-003",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "turn_index": 3,
+      "json_pointer": "/candidates/2/turns/2",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=4b457fcbf5d2231cf9cc4a762097fb51 / model=gpt-3.5-turbo-0613 / user_ordinal=1..3 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "n1",
+      "name": "连续 Reels 方案",
+      "type": "Plan",
+      "description": "用户要求基于既定主题设计的连续内容方案。",
+      "source_chunk_id": "chunk_d6b45661646aaf2cede7"
+    },
+    {
+      "id": "n2",
+      "name": "故事叙述",
+      "type": "ContentTechnique",
+      "description": "用户指定的 Reels 制作方法。",
+      "source_chunk_id": "chunk_d6b45661646aaf2cede7"
+    },
+    {
+      "id": "n3",
+      "name": "转变故事系列",
+      "type": "ContentSeries",
+      "description": "Agent 提议的系列主题。",
+      "source_chunk_id": "chunk_d6b45661646aaf2cede7"
+    },
+    {
+      "id": "n4",
+      "name": "迈出第一步",
+      "type": "EpisodeTopic",
+      "description": "Agent 提议的第一集主题。",
+      "source_chunk_id": "chunk_d6b45661646aaf2cede7"
+    },
+    {
+      "id": "n5",
+      "name": "接受不完美",
+      "type": "EpisodeTopic",
+      "description": "Agent 提议的第二集主题。",
+      "source_chunk_id": "chunk_d6b45661646aaf2cede7"
+    },
+    {
+      "id": "n6",
+      "name": "自我照顾",
+      "type": "EpisodeTopic",
+      "description": "Agent 提议的第三集主题。",
+      "source_chunk_id": "chunk_d6b45661646aaf2cede7"
+    },
+    {
+      "id": "n7",
+      "name": "冲突或问题开场",
+      "type": "StoryElement",
+      "description": "Agent 建议每集采用的开场结构。",
+      "source_chunk_id": "chunk_d6b45661646aaf2cede7"
+    },
+    {
+      "id": "n8",
+      "name": "具体经历",
+      "type": "StoryElement",
+      "description": "Agent 建议每集加入的主体内容。",
+      "source_chunk_id": "chunk_d6b45661646aaf2cede7"
+    },
+    {
+      "id": "n9",
+      "name": "可执行的反思问题",
+      "type": "StoryElement",
+      "description": "Agent 建议每集使用的收尾。",
+      "source_chunk_id": "chunk_d6b45661646aaf2cede7"
+    },
+    {
+      "id": "n10",
+      "name": "连续成长路径",
+      "type": "NarrativeArc",
+      "description": "多集共同形成的叙事路径。",
+      "source_chunk_id": "chunk_d6b45661646aaf2cede7"
+    }
+  ],
+  "relations": [
+    {
+      "source_entity": "n1",
+      "target_entity": "n2",
+      "relation_type": "USES",
+      "description": "方案以故事叙述制作连续 Reels。"
+    },
+    {
+      "source_entity": "n1",
+      "target_entity": "n3",
+      "relation_type": "PROPOSES",
+      "description": "Agent 提议制作转变故事系列。"
+    },
+    {
+      "source_entity": "n3",
+      "target_entity": "n4",
+      "relation_type": "HAS_EPISODE",
+      "description": "第一集讲迈出第一步。"
+    },
+    {
+      "source_entity": "n3",
+      "target_entity": "n5",
+      "relation_type": "HAS_EPISODE",
+      "description": "第二集讲接受不完美。"
+    },
+    {
+      "source_entity": "n3",
+      "target_entity": "n6",
+      "relation_type": "HAS_EPISODE",
+      "description": "第三集讲自我照顾。"
+    },
+    {
+      "source_entity": "n4",
+      "target_entity": "n5",
+      "relation_type": "PRECEDES",
+      "description": "第一集位于第二集之前。"
+    },
+    {
+      "source_entity": "n5",
+      "target_entity": "n6",
+      "relation_type": "PRECEDES",
+      "description": "第二集位于第三集之前。"
+    },
+    {
+      "source_entity": "n3",
+      "target_entity": "n7",
+      "relation_type": "USES",
+      "description": "每集以冲突或问题开场。"
+    },
+    {
+      "source_entity": "n3",
+      "target_entity": "n8",
+      "relation_type": "USES",
+      "description": "每集加入具体经历。"
+    },
+    {
+      "source_entity": "n3",
+      "target_entity": "n9",
+      "relation_type": "USES",
+      "description": "每集以反思问题收尾。"
+    },
+    {
+      "source_entity": "n3",
+      "target_entity": "n10",
+      "relation_type": "FORMS",
+      "description": "多集形成连续成长路径。"
+    }
+  ]
+}

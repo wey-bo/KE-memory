@@ -1,0 +1,49 @@
+{
+  "schema_version": "workspace-cleanup-protected-hashes-v1",
+  "run_id": "workspace-cleanup-20260727",
+  "core_impact": "none",
+  "pre_cleanup_workspace": {
+    "file_count": 103163,
+    "bytes": 4497435928
+  },
+  "pre_cleanup_verification": {
+    "root_tests_passed": 61,
+    "knowledge_pipeline_tests_passed": 197,
+    "amr_pilot_tests_passed": 67,
+    "natural_memory_tests_passed": 143,
+    "ontology_memory_tests_passed": 125,
+    "total_tests_passed": 593
+  },
+  "protected_files": [
+    {
+      "path": "artifacts/identity-memory-experiment/natural-v1/reference-report.md",
+      "bytes": 1172,
+      "sha256": "45d0dd7452873e0df8545b9930b19aad6938b2ea764cc2177a16de3e05ba380a"
+    },
+    {
+      "path": "artifacts/identity-memory-experiment/natural-v1/reference-score.json",
+      "bytes": 9494,
+      "sha256": "d346eb0f0d277be39fad363da8f4f89f98b0fc4a49be2a95c0970f62abf562b2"
+    },
+    {
+      "path": "artifacts/identity-memory-experiment/reports/identity-conformance-report-v1.md",
+      "bytes": 1181,
+      "sha256": "bc032cf6a5590a8d1f12adf5d523af9da65d599b66ceddac52667d213b920ae8"
+    },
+    {
+      "path": "artifacts/identity-memory-experiment/runs/run-20260727T080000Z-identity-v1/identity-conformance-results-v1.json",
+      "bytes": 9804,
+      "sha256": "e7cc632ae20f6436156fcd9c777352eac0f8286e63cb24f42ddee05875ae633c"
+    },
+    {
+      "path": "artifacts/natural-benchmark-slices/slice-v1/representation-conformance-report-v5.md",
+      "bytes": 1236,
+      "sha256": "9ef73e7a4a16409ef9f5edbb74e38b2c1b1b628821a4b13ce2bc0698f03a011a"
+    },
+    {
+      "path": "artifacts/natural-benchmark-slices/slice-v1/representation-conformance-results-v5.json",
+      "bytes": 15839,
+      "sha256": "3ec6656c037200f8591fac44cd7e1e4bf2caa3aa9447f3fa5ba9854324d4cc33"
+    }
+  ]
+}

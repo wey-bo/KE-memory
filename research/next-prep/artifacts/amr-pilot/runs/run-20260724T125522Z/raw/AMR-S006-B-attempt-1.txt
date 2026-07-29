@@ -1,0 +1,17 @@
+(e / enable-01
+   :ARG0 (a / and
+            :op1 (f / follow-01
+                    :ARG0 (y / you)
+                    :ARG1 (s / step))
+            :op2 (a2 / adhere-01
+                     :ARG0 y
+                     :ARG1 (t / timeline)))
+   :ARG1 (f2 / finalize-01
+             :ARG0 y
+             :ARG1 (w / will
+                       :poss y)
+             :time (d / date-entity
+                      :year 2024
+                      :month 5
+                      :day 15))
+   :mod (s2 / should))

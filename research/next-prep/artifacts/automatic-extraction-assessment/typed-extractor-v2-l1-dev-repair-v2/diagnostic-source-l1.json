@@ -1,0 +1,1142 @@
+{
+  "schema_version": "typed-extractor-l1-diagnostic-source-v2",
+  "dataset_id": "typed-extractor-l1-dev-repair-v2",
+  "provenance": "diagnostic_authored",
+  "public_vocabulary": {
+    "canonical_operators": [
+      "approve_artifact",
+      "archive_document",
+      "assign_recipient",
+      "book_visit",
+      "complete_backup",
+      "expire_access",
+      "feel_state",
+      "plan_call",
+      "prefer_layout",
+      "publish_artifact",
+      "request_review",
+      "transfer_item"
+    ],
+    "predicate_senses": [
+      "access.expiration",
+      "communication.planned_call",
+      "document.archive_request",
+      "document.recipient_assignment",
+      "person.emotional_state",
+      "preference.layout_scope",
+      "release.conditional_publish",
+      "review.approval",
+      "schedule.review_request",
+      "service.backup_completion",
+      "service.visit_booking",
+      "transfer.item_recipient"
+    ],
+    "condition_operators": [
+      "if"
+    ],
+    "modality_policy": [
+      "asserted|actual",
+      "instruction_only|no_memory",
+      "observed|actual",
+      "planned|planned",
+      "preferred|actual",
+      "questioned|no_memory",
+      "requested|requested",
+      "rumor|abstain",
+      "unsupported_attribution|abstain"
+    ],
+    "operator_kind_bindings": [
+      "approve_artifact|event",
+      "archive_document|task",
+      "assign_recipient|attribute",
+      "book_visit|event",
+      "complete_backup|event",
+      "expire_access|state",
+      "feel_state|state",
+      "plan_call|task",
+      "prefer_layout|preference",
+      "publish_artifact|task",
+      "request_review|task",
+      "transfer_item|event"
+    ],
+    "operator_role_bindings": [
+      "approve_artifact|approver|approval actor",
+      "approve_artifact|theme|approved artifact",
+      "archive_document|assignee|requested actor",
+      "archive_document|requester|request origin",
+      "archive_document|theme|archive target",
+      "assign_recipient|document|assigned document",
+      "assign_recipient|recipient|corrected recipient",
+      "book_visit|beneficiary|visit beneficiary",
+      "book_visit|booking_agent|booking actor",
+      "book_visit|service|booked service",
+      "complete_backup|process|completed process",
+      "expire_access|date|expiration date",
+      "expire_access|resource|expiring resource",
+      "feel_state|experiencer|state holder",
+      "feel_state|state|experienced state",
+      "plan_call|callee|planned recipient",
+      "plan_call|caller|planned caller",
+      "prefer_layout|holder|preference holder",
+      "prefer_layout|preferred_value|preferred layout",
+      "prefer_layout|project|scope project",
+      "publish_artifact|approver|condition actor",
+      "publish_artifact|publisher|publication actor",
+      "publish_artifact|theme|publication target",
+      "request_review|participant|review participant",
+      "request_review|requester|request origin",
+      "request_review|task|requested activity",
+      "transfer_item|recipient|transfer destination",
+      "transfer_item|sender|transfer source",
+      "transfer_item|theme|transferred item"
+    ],
+    "operator_time_bindings": [
+      "expire_access|valid_time_from_object_iso_8601",
+      "feel_state|unresolved_deictic_event_time_to_null",
+      "plan_call|unresolved_deictic_event_time_to_null"
+    ],
+    "scope_operators": [
+      "applies_to"
+    ],
+    "time_policy": [
+      "absolute_calendar_date_to_iso_8601",
+      "unresolved_deictic_time_to_null"
+    ]
+  },
+  "cases": [
+    {
+      "private_case_id": "control-question-no-durable-fact",
+      "primary_family": "false_emission",
+      "secondary_families": ["kind", "predicate_or_operator"],
+      "source_turn": {
+        "user": "Is the printer blue?",
+        "agent": "I do not have that information."
+      },
+      "untyped_candidate": {
+        "statement": "The printer may be blue.",
+        "subject": "the printer",
+        "predicate": "may be",
+        "object": "blue",
+        "qualifiers": {"polarity": "positive"},
+        "source_status": "user_reported",
+        "derivation": "explicit",
+        "inference_basis": null,
+        "projection_status": "active",
+        "lifecycle_links": {
+          "lifecycle": "active",
+          "replacement_candidate_ref": null,
+          "replaces_candidate_refs": [],
+          "supersedes_candidate_refs": [],
+          "conflicts_with_candidate_refs": []
+        },
+        "operation_provenance": {
+          "confirmed_by_operation_refs": [],
+          "added_by_operation_refs": []
+        },
+        "evidence": [
+          {
+            "evidence_id": "diag-l1-evidence-01-question",
+            "speaker": "user",
+            "message": "user",
+            "quote": "Is the printer blue?",
+            "occurrence_index": 0,
+            "start": 0,
+            "end": 20
+          }
+        ]
+      },
+      "expected_decision": "no_memory",
+      "expected_typed_candidate": null,
+      "authority": {
+        "knowledge_id": "diag-l1-knowledge-01-question",
+        "candidate_id": "diag-l1-candidate-01-question",
+        "emission_allowed": false,
+        "required_evidence_bindings": [
+          {"evidence_id": "diag-l1-evidence-01-question", "speaker": "user"}
+        ],
+        "allowed_modalities": [],
+        "allowed_polarities": ["positive"],
+        "allowed_event_times": [],
+        "event_time_may_be_null": true,
+        "allowed_valid_times": [],
+        "valid_time_may_be_null": true,
+        "allowed_condition_values": [],
+        "allowed_scope_values": [],
+        "required_derivation": {
+          "method": "explicit",
+          "basis": null,
+          "evidence_ids": ["diag-l1-evidence-01-question"]
+        },
+        "required_lifecycle": {
+          "lifecycle": "active",
+          "replacement_candidate_ref": null,
+          "replaces_candidate_refs": [],
+          "supersedes_candidate_refs": [],
+          "conflicts_with_candidate_refs": []
+        },
+        "required_operation_provenance": {
+          "confirmed_by_operation_refs": [],
+          "added_by_operation_refs": []
+        },
+        "unresolved_required_fields": []
+      }
+    },
+    {
+      "private_case_id": "control-instruction-no-state",
+      "primary_family": "false_emission",
+      "secondary_families": ["kind", "predicate_or_operator", "evidence"],
+      "source_turn": {
+        "user": "Answer in one line.",
+        "agent": "Understood."
+      },
+      "untyped_candidate": {
+        "statement": "The answer format is one line.",
+        "subject": "the answer",
+        "predicate": "has format",
+        "object": "one line",
+        "qualifiers": {"polarity": "positive"},
+        "source_status": "user_reported",
+        "derivation": "explicit",
+        "inference_basis": null,
+        "projection_status": "active",
+        "lifecycle_links": {
+          "lifecycle": "active",
+          "replacement_candidate_ref": null,
+          "replaces_candidate_refs": [],
+          "supersedes_candidate_refs": [],
+          "conflicts_with_candidate_refs": []
+        },
+        "operation_provenance": {
+          "confirmed_by_operation_refs": [],
+          "added_by_operation_refs": []
+        },
+        "evidence": [
+          {
+            "evidence_id": "diag-l1-evidence-02-instruction",
+            "speaker": "user",
+            "message": "user",
+            "quote": "Answer in one line.",
+            "occurrence_index": 0,
+            "start": 0,
+            "end": 19
+          }
+        ]
+      },
+      "expected_decision": "no_memory",
+      "expected_typed_candidate": null,
+      "authority": {
+        "knowledge_id": "diag-l1-knowledge-02-instruction",
+        "candidate_id": "diag-l1-candidate-02-instruction",
+        "emission_allowed": false,
+        "required_evidence_bindings": [
+          {"evidence_id": "diag-l1-evidence-02-instruction", "speaker": "user"}
+        ],
+        "allowed_modalities": [],
+        "allowed_polarities": ["positive"],
+        "allowed_event_times": [],
+        "event_time_may_be_null": true,
+        "allowed_valid_times": [],
+        "valid_time_may_be_null": true,
+        "allowed_condition_values": [],
+        "allowed_scope_values": [],
+        "required_derivation": {
+          "method": "explicit",
+          "basis": null,
+          "evidence_ids": ["diag-l1-evidence-02-instruction"]
+        },
+        "required_lifecycle": {
+          "lifecycle": "active",
+          "replacement_candidate_ref": null,
+          "replaces_candidate_refs": [],
+          "supersedes_candidate_refs": [],
+          "conflicts_with_candidate_refs": []
+        },
+        "required_operation_provenance": {
+          "confirmed_by_operation_refs": [],
+          "added_by_operation_refs": []
+        },
+        "unresolved_required_fields": []
+      }
+    },
+    {
+      "private_case_id": "unsupported-modal-rumor",
+      "primary_family": "modality_or_polarity",
+      "secondary_families": ["false_emission", "predicate_or_operator"],
+      "source_turn": {
+        "user": "Someone said Ava might own the red cabin.",
+        "agent": "That report is not verified."
+      },
+      "untyped_candidate": {
+        "statement": "Ava owns the red cabin.",
+        "subject": "Ava",
+        "predicate": "owns",
+        "object": "the red cabin",
+        "qualifiers": {"polarity": "positive", "modality": "rumor"},
+        "source_status": "user_reported",
+        "derivation": "explicit",
+        "inference_basis": null,
+        "projection_status": "active",
+        "lifecycle_links": {
+          "lifecycle": "active",
+          "replacement_candidate_ref": null,
+          "replaces_candidate_refs": [],
+          "supersedes_candidate_refs": [],
+          "conflicts_with_candidate_refs": []
+        },
+        "operation_provenance": {
+          "confirmed_by_operation_refs": [],
+          "added_by_operation_refs": []
+        },
+        "evidence": [
+          {
+            "evidence_id": "diag-l1-evidence-03-rumor",
+            "speaker": "user",
+            "message": "user",
+            "quote": "might own",
+            "occurrence_index": 0,
+            "start": 17,
+            "end": 26
+          }
+        ]
+      },
+      "expected_decision": "abstain",
+      "expected_typed_candidate": null,
+      "authority": {
+        "knowledge_id": "diag-l1-knowledge-03-rumor",
+        "candidate_id": "diag-l1-candidate-03-rumor",
+        "emission_allowed": false,
+        "required_evidence_bindings": [
+          {"evidence_id": "diag-l1-evidence-03-rumor", "speaker": "user"}
+        ],
+        "allowed_modalities": [],
+        "allowed_polarities": ["positive"],
+        "allowed_event_times": [],
+        "event_time_may_be_null": true,
+        "allowed_valid_times": [],
+        "valid_time_may_be_null": true,
+        "allowed_condition_values": [],
+        "allowed_scope_values": [],
+        "required_derivation": {
+          "method": "explicit",
+          "basis": null,
+          "evidence_ids": ["diag-l1-evidence-03-rumor"]
+        },
+        "required_lifecycle": {
+          "lifecycle": "active",
+          "replacement_candidate_ref": null,
+          "replaces_candidate_refs": [],
+          "supersedes_candidate_refs": [],
+          "conflicts_with_candidate_refs": []
+        },
+        "required_operation_provenance": {
+          "confirmed_by_operation_refs": [],
+          "added_by_operation_refs": []
+        },
+        "unresolved_required_fields": ["supported_modality"]
+      }
+    },
+    {
+      "private_case_id": "insufficient-evidence-attribution",
+      "primary_family": "evidence",
+      "secondary_families": ["false_emission", "derivation_or_speaker"],
+      "source_turn": {
+        "user": "They praised the draft.",
+        "agent": "No person was identified."
+      },
+      "untyped_candidate": {
+        "statement": "A specific reviewer praised the draft.",
+        "subject": "a specific reviewer",
+        "predicate": "praised",
+        "object": "the draft",
+        "qualifiers": {"polarity": "positive"},
+        "source_status": "user_reported",
+        "derivation": "inferred",
+        "inference_basis": "The source leaves the actor unresolved.",
+        "projection_status": "active",
+        "lifecycle_links": {
+          "lifecycle": "active",
+          "replacement_candidate_ref": null,
+          "replaces_candidate_refs": [],
+          "supersedes_candidate_refs": [],
+          "conflicts_with_candidate_refs": []
+        },
+        "operation_provenance": {
+          "confirmed_by_operation_refs": [],
+          "added_by_operation_refs": []
+        },
+        "evidence": [
+          {
+            "evidence_id": "diag-l1-evidence-04-attribution",
+            "speaker": "user",
+            "message": "user",
+            "quote": "They praised the draft.",
+            "occurrence_index": 0,
+            "start": 0,
+            "end": 23
+          }
+        ]
+      },
+      "expected_decision": "abstain",
+      "expected_typed_candidate": null,
+      "authority": {
+        "knowledge_id": "diag-l1-knowledge-04-attribution",
+        "candidate_id": "diag-l1-candidate-04-attribution",
+        "emission_allowed": false,
+        "required_evidence_bindings": [
+          {"evidence_id": "diag-l1-evidence-04-attribution", "speaker": "user"}
+        ],
+        "allowed_modalities": [],
+        "allowed_polarities": ["positive"],
+        "allowed_event_times": [],
+        "event_time_may_be_null": true,
+        "allowed_valid_times": [],
+        "valid_time_may_be_null": true,
+        "allowed_condition_values": [],
+        "allowed_scope_values": [],
+        "required_derivation": {
+          "method": "inferred",
+          "basis": "The source leaves the actor unresolved.",
+          "evidence_ids": ["diag-l1-evidence-04-attribution"]
+        },
+        "required_lifecycle": {
+          "lifecycle": "active",
+          "replacement_candidate_ref": null,
+          "replaces_candidate_refs": [],
+          "supersedes_candidate_refs": [],
+          "conflicts_with_candidate_refs": []
+        },
+        "required_operation_provenance": {
+          "confirmed_by_operation_refs": [],
+          "added_by_operation_refs": []
+        },
+        "unresolved_required_fields": ["actor"]
+      }
+    },
+    {
+      "private_case_id": "valid-user-state",
+      "primary_family": "false_abstention",
+      "secondary_families": ["evidence", "kind", "predicate_or_operator", "role_or_local_entity", "modality_or_polarity", "time", "condition_or_scope", "derivation_or_speaker", "lifecycle", "operation_provenance"],
+      "source_turn": {
+        "user": "I feel calm today.",
+        "agent": "Noted."
+      },
+      "untyped_candidate": {
+        "statement": "The user feels calm.",
+        "subject": "the user",
+        "predicate": "feels",
+        "object": "calm",
+        "qualifiers": {"polarity": "positive", "time": "today"},
+        "source_status": "user_reported",
+        "derivation": "explicit",
+        "inference_basis": null,
+        "projection_status": "active",
+        "lifecycle_links": {
+          "lifecycle": "active",
+          "replacement_candidate_ref": null,
+          "replaces_candidate_refs": [],
+          "supersedes_candidate_refs": [],
+          "conflicts_with_candidate_refs": []
+        },
+        "operation_provenance": {
+          "confirmed_by_operation_refs": [],
+          "added_by_operation_refs": []
+        },
+        "evidence": [
+          {
+            "evidence_id": "diag-l1-evidence-05-state",
+            "speaker": "user",
+            "message": "user",
+            "quote": "I feel calm today.",
+            "occurrence_index": 0,
+            "start": 0,
+            "end": 18
+          }
+        ]
+      },
+      "expected_decision": "emit_l1",
+      "expected_typed_candidate": {
+        "kind": "state",
+        "predicate": {"surface": "feels", "sense": "person.emotional_state", "canonical_operator": "feel_state"},
+        "local_entities": [
+          {"local_entity_id": "entity-01", "surface": "the user"},
+          {"local_entity_id": "entity-02", "surface": "calm"}
+        ],
+        "roles": [
+          {"role": "experiencer", "role_name": "state holder", "local_entity_id": "entity-01"},
+          {"role": "state", "role_name": "experienced state", "local_entity_id": "entity-02"}
+        ],
+        "modality": "actual",
+        "polarity": "positive",
+        "time": {"event_time": null, "valid_time": null},
+        "condition_bindings": [],
+        "scope_bindings": [],
+        "derivation": {"method": "explicit", "basis": null, "evidence_ids": ["diag-l1-evidence-05-state"]},
+        "evidence_bindings": [{"evidence_id": "diag-l1-evidence-05-state", "speaker": "user"}],
+        "lifecycle": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []}
+      },
+      "authority": {
+        "knowledge_id": "diag-l1-knowledge-05-state",
+        "candidate_id": "diag-l1-candidate-05-state",
+        "emission_allowed": true,
+        "required_evidence_bindings": [{"evidence_id": "diag-l1-evidence-05-state", "speaker": "user"}],
+        "allowed_modalities": ["actual"],
+        "allowed_polarities": ["positive"],
+        "allowed_event_times": [],
+        "event_time_may_be_null": true,
+        "allowed_valid_times": [],
+        "valid_time_may_be_null": true,
+        "allowed_condition_values": [],
+        "allowed_scope_values": [],
+        "required_derivation": {"method": "explicit", "basis": null, "evidence_ids": ["diag-l1-evidence-05-state"]},
+        "required_lifecycle": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "required_operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []},
+        "unresolved_required_fields": ["calendar_date_for_today"]
+      }
+    },
+    {
+      "private_case_id": "valid-requested-task",
+      "primary_family": "false_abstention",
+      "secondary_families": ["evidence", "kind", "predicate_or_operator", "role_or_local_entity", "modality_or_polarity", "condition_or_scope", "lifecycle"],
+      "source_turn": {
+        "user": "Please schedule a review with Dana.",
+        "agent": "I will prepare the request."
+      },
+      "untyped_candidate": {
+        "statement": "The user requests a review with Dana.",
+        "subject": "the user",
+        "predicate": "requests",
+        "object": "a review with Dana",
+        "qualifiers": {"polarity": "positive"},
+        "source_status": "user_reported",
+        "derivation": "explicit",
+        "inference_basis": null,
+        "projection_status": "active",
+        "lifecycle_links": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []},
+        "evidence": [{"evidence_id": "diag-l1-evidence-06-task", "speaker": "user", "message": "user", "quote": "Please schedule a review with Dana.", "occurrence_index": 0, "start": 0, "end": 35}]
+      },
+      "expected_decision": "emit_l1",
+      "expected_typed_candidate": {
+        "kind": "task",
+        "predicate": {"surface": "requests", "sense": "schedule.review_request", "canonical_operator": "request_review"},
+        "local_entities": [
+          {"local_entity_id": "entity-01", "surface": "the user"},
+          {"local_entity_id": "entity-02", "surface": "a review"},
+          {"local_entity_id": "entity-03", "surface": "Dana"}
+        ],
+        "roles": [
+          {"role": "requester", "role_name": "request origin", "local_entity_id": "entity-01"},
+          {"role": "task", "role_name": "requested activity", "local_entity_id": "entity-02"},
+          {"role": "participant", "role_name": "review participant", "local_entity_id": "entity-03"}
+        ],
+        "modality": "requested",
+        "polarity": "positive",
+        "time": {"event_time": null, "valid_time": null},
+        "condition_bindings": [],
+        "scope_bindings": [],
+        "derivation": {"method": "explicit", "basis": null, "evidence_ids": ["diag-l1-evidence-06-task"]},
+        "evidence_bindings": [{"evidence_id": "diag-l1-evidence-06-task", "speaker": "user"}],
+        "lifecycle": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []}
+      },
+      "authority": {
+        "knowledge_id": "diag-l1-knowledge-06-task",
+        "candidate_id": "diag-l1-candidate-06-task",
+        "emission_allowed": true,
+        "required_evidence_bindings": [{"evidence_id": "diag-l1-evidence-06-task", "speaker": "user"}],
+        "allowed_modalities": ["requested"],
+        "allowed_polarities": ["positive"],
+        "allowed_event_times": [],
+        "event_time_may_be_null": true,
+        "allowed_valid_times": [],
+        "valid_time_may_be_null": true,
+        "allowed_condition_values": [],
+        "allowed_scope_values": [],
+        "required_derivation": {"method": "explicit", "basis": null, "evidence_ids": ["diag-l1-evidence-06-task"]},
+        "required_lifecycle": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "required_operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []},
+        "unresolved_required_fields": []
+      }
+    },
+    {
+      "private_case_id": "valid-tool-event",
+      "primary_family": "false_abstention",
+      "secondary_families": ["evidence", "kind", "predicate_or_operator", "role_or_local_entity", "derivation_or_speaker", "lifecycle", "operation_provenance"],
+      "source_turn": {
+        "user": "Run the backup now.",
+        "agent": "Tool: backup job 73 completed."
+      },
+      "untyped_candidate": {
+        "statement": "Backup job 73 completed.",
+        "subject": "backup job 73",
+        "predicate": "completed",
+        "object": null,
+        "qualifiers": {"polarity": "positive"},
+        "source_status": "tool_observed",
+        "derivation": "explicit",
+        "inference_basis": null,
+        "projection_status": "active",
+        "lifecycle_links": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": ["diag-operation-backup-73"]},
+        "evidence": [{"evidence_id": "diag-l1-evidence-07-tool", "speaker": "tool", "message": "agent", "quote": "backup job 73 completed", "occurrence_index": 0, "start": 6, "end": 29}]
+      },
+      "expected_decision": "emit_l1",
+      "expected_typed_candidate": {
+        "kind": "event",
+        "predicate": {"surface": "completed", "sense": "service.backup_completion", "canonical_operator": "complete_backup"},
+        "local_entities": [{"local_entity_id": "entity-01", "surface": "backup job 73"}],
+        "roles": [{"role": "process", "role_name": "completed process", "local_entity_id": "entity-01"}],
+        "modality": "actual",
+        "polarity": "positive",
+        "time": {"event_time": null, "valid_time": null},
+        "condition_bindings": [],
+        "scope_bindings": [],
+        "derivation": {"method": "explicit", "basis": null, "evidence_ids": ["diag-l1-evidence-07-tool"]},
+        "evidence_bindings": [{"evidence_id": "diag-l1-evidence-07-tool", "speaker": "tool"}],
+        "lifecycle": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": ["diag-operation-backup-73"]}
+      },
+      "authority": {
+        "knowledge_id": "diag-l1-knowledge-07-tool",
+        "candidate_id": "diag-l1-candidate-07-tool",
+        "emission_allowed": true,
+        "required_evidence_bindings": [{"evidence_id": "diag-l1-evidence-07-tool", "speaker": "tool"}],
+        "allowed_modalities": ["actual"],
+        "allowed_polarities": ["positive"],
+        "allowed_event_times": [],
+        "event_time_may_be_null": true,
+        "allowed_valid_times": [],
+        "valid_time_may_be_null": true,
+        "allowed_condition_values": [],
+        "allowed_scope_values": [],
+        "required_derivation": {"method": "explicit", "basis": null, "evidence_ids": ["diag-l1-evidence-07-tool"]},
+        "required_lifecycle": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "required_operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": ["diag-operation-backup-73"]},
+        "unresolved_required_fields": []
+      }
+    },
+    {
+      "private_case_id": "evidence-same-speaker-distractor",
+      "primary_family": "evidence",
+      "secondary_families": ["role_or_local_entity", "predicate_or_operator"],
+      "source_turn": {
+        "user": "Mira approved Atlas. Earlier, Mira reviewed Orion.",
+        "agent": "The approval was recorded."
+      },
+      "untyped_candidate": {
+        "statement": "Mira approved Atlas.",
+        "subject": "Mira",
+        "predicate": "approved",
+        "object": "Atlas",
+        "qualifiers": {"polarity": "positive"},
+        "source_status": "user_reported",
+        "derivation": "explicit",
+        "inference_basis": null,
+        "projection_status": "active",
+        "lifecycle_links": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []},
+        "evidence": [
+          {"evidence_id": "diag-l1-evidence-08-approved", "speaker": "user", "message": "user", "quote": "Mira approved Atlas.", "occurrence_index": 0, "start": 0, "end": 20},
+          {"evidence_id": "diag-l1-evidence-08-reviewed", "speaker": "user", "message": "user", "quote": "Mira reviewed Orion.", "occurrence_index": 0, "start": 30, "end": 50}
+        ]
+      },
+      "expected_decision": "emit_l1",
+      "expected_typed_candidate": {
+        "kind": "event",
+        "predicate": {"surface": "approved", "sense": "review.approval", "canonical_operator": "approve_artifact"},
+        "local_entities": [{"local_entity_id": "entity-01", "surface": "Mira"}, {"local_entity_id": "entity-02", "surface": "Atlas"}],
+        "roles": [{"role": "approver", "role_name": "approval actor", "local_entity_id": "entity-01"}, {"role": "theme", "role_name": "approved artifact", "local_entity_id": "entity-02"}],
+        "modality": "actual",
+        "polarity": "positive",
+        "time": {"event_time": null, "valid_time": null},
+        "condition_bindings": [],
+        "scope_bindings": [],
+        "derivation": {"method": "explicit", "basis": null, "evidence_ids": ["diag-l1-evidence-08-approved"]},
+        "evidence_bindings": [{"evidence_id": "diag-l1-evidence-08-approved", "speaker": "user"}],
+        "lifecycle": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []}
+      },
+      "authority": {
+        "knowledge_id": "diag-l1-knowledge-08-evidence",
+        "candidate_id": "diag-l1-candidate-08-evidence",
+        "emission_allowed": true,
+        "required_evidence_bindings": [{"evidence_id": "diag-l1-evidence-08-approved", "speaker": "user"}],
+        "allowed_modalities": ["actual"],
+        "allowed_polarities": ["positive"],
+        "allowed_event_times": [],
+        "event_time_may_be_null": true,
+        "allowed_valid_times": [],
+        "valid_time_may_be_null": true,
+        "allowed_condition_values": [],
+        "allowed_scope_values": [],
+        "required_derivation": {"method": "explicit", "basis": null, "evidence_ids": ["diag-l1-evidence-08-approved"]},
+        "required_lifecycle": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "required_operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []},
+        "unresolved_required_fields": []
+      }
+    },
+    {
+      "private_case_id": "evidence-cross-speaker-distractor",
+      "primary_family": "derivation_or_speaker",
+      "secondary_families": ["evidence", "role_or_local_entity"],
+      "source_turn": {
+        "user": "Ravi asked Nia to archive Cedar.",
+        "agent": "I will remind Nia tomorrow."
+      },
+      "untyped_candidate": {
+        "statement": "Ravi asked Nia to archive Cedar.",
+        "subject": "Ravi",
+        "predicate": "asked to archive",
+        "object": "Cedar",
+        "qualifiers": {"polarity": "positive"},
+        "source_status": "user_reported",
+        "derivation": "explicit",
+        "inference_basis": null,
+        "projection_status": "active",
+        "lifecycle_links": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []},
+        "evidence": [
+          {"evidence_id": "diag-l1-evidence-09-user", "speaker": "user", "message": "user", "quote": "Ravi asked Nia to archive Cedar.", "occurrence_index": 0, "start": 0, "end": 32},
+          {"evidence_id": "diag-l1-evidence-09-agent", "speaker": "assistant", "message": "agent", "quote": "I will remind Nia tomorrow.", "occurrence_index": 0, "start": 0, "end": 27}
+        ]
+      },
+      "expected_decision": "emit_l1",
+      "expected_typed_candidate": {
+        "kind": "task",
+        "predicate": {"surface": "asked to archive", "sense": "document.archive_request", "canonical_operator": "archive_document"},
+        "local_entities": [{"local_entity_id": "entity-01", "surface": "Ravi"}, {"local_entity_id": "entity-02", "surface": "Nia"}, {"local_entity_id": "entity-03", "surface": "Cedar"}],
+        "roles": [{"role": "requester", "role_name": "request origin", "local_entity_id": "entity-01"}, {"role": "assignee", "role_name": "requested actor", "local_entity_id": "entity-02"}, {"role": "theme", "role_name": "archive target", "local_entity_id": "entity-03"}],
+        "modality": "requested",
+        "polarity": "positive",
+        "time": {"event_time": null, "valid_time": null},
+        "condition_bindings": [],
+        "scope_bindings": [],
+        "derivation": {"method": "explicit", "basis": null, "evidence_ids": ["diag-l1-evidence-09-user"]},
+        "evidence_bindings": [{"evidence_id": "diag-l1-evidence-09-user", "speaker": "user"}],
+        "lifecycle": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []}
+      },
+      "authority": {
+        "knowledge_id": "diag-l1-knowledge-09-speaker",
+        "candidate_id": "diag-l1-candidate-09-speaker",
+        "emission_allowed": true,
+        "required_evidence_bindings": [{"evidence_id": "diag-l1-evidence-09-user", "speaker": "user"}],
+        "allowed_modalities": ["requested"],
+        "allowed_polarities": ["positive"],
+        "allowed_event_times": [],
+        "event_time_may_be_null": true,
+        "allowed_valid_times": [],
+        "valid_time_may_be_null": true,
+        "allowed_condition_values": [],
+        "allowed_scope_values": [],
+        "required_derivation": {"method": "explicit", "basis": null, "evidence_ids": ["diag-l1-evidence-09-user"]},
+        "required_lifecycle": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "required_operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []},
+        "unresolved_required_fields": []
+      }
+    },
+    {
+      "private_case_id": "condition-explicit-approver",
+      "primary_family": "condition_or_scope",
+      "secondary_families": ["role_or_local_entity", "evidence"],
+      "source_turn": {
+        "user": "Sam will publish Beacon if Lee approves.",
+        "agent": "The approval condition is clear."
+      },
+      "untyped_candidate": {
+        "statement": "Sam will publish Beacon if Lee approves.",
+        "subject": "Sam",
+        "predicate": "will publish",
+        "object": "Beacon",
+        "qualifiers": {"polarity": "positive", "conditions": ["Lee approves"]},
+        "source_status": "user_reported",
+        "derivation": "explicit",
+        "inference_basis": null,
+        "projection_status": "active",
+        "lifecycle_links": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []},
+        "evidence": [{"evidence_id": "diag-l1-evidence-10-condition", "speaker": "user", "message": "user", "quote": "Sam will publish Beacon if Lee approves.", "occurrence_index": 0, "start": 0, "end": 40}]
+      },
+      "expected_decision": "emit_l1",
+      "expected_typed_candidate": {
+        "kind": "task",
+        "predicate": {"surface": "will publish", "sense": "release.conditional_publish", "canonical_operator": "publish_artifact"},
+        "local_entities": [{"local_entity_id": "entity-01", "surface": "Sam"}, {"local_entity_id": "entity-02", "surface": "Beacon"}, {"local_entity_id": "entity-03", "surface": "Lee"}],
+        "roles": [{"role": "publisher", "role_name": "publication actor", "local_entity_id": "entity-01"}, {"role": "theme", "role_name": "publication target", "local_entity_id": "entity-02"}, {"role": "approver", "role_name": "condition actor", "local_entity_id": "entity-03"}],
+        "modality": "planned",
+        "polarity": "positive",
+        "time": {"event_time": null, "valid_time": null},
+        "condition_bindings": [{"operator": "if", "value": "Lee approves", "local_entity_ids": ["entity-03"]}],
+        "scope_bindings": [],
+        "derivation": {"method": "explicit", "basis": null, "evidence_ids": ["diag-l1-evidence-10-condition"]},
+        "evidence_bindings": [{"evidence_id": "diag-l1-evidence-10-condition", "speaker": "user"}],
+        "lifecycle": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []}
+      },
+      "authority": {
+        "knowledge_id": "diag-l1-knowledge-10-condition",
+        "candidate_id": "diag-l1-candidate-10-condition",
+        "emission_allowed": true,
+        "required_evidence_bindings": [{"evidence_id": "diag-l1-evidence-10-condition", "speaker": "user"}],
+        "allowed_modalities": ["planned"],
+        "allowed_polarities": ["positive"],
+        "allowed_event_times": [],
+        "event_time_may_be_null": true,
+        "allowed_valid_times": [],
+        "valid_time_may_be_null": true,
+        "allowed_condition_values": ["Lee approves"],
+        "allowed_scope_values": [],
+        "required_derivation": {"method": "explicit", "basis": null, "evidence_ids": ["diag-l1-evidence-10-condition"]},
+        "required_lifecycle": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "required_operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []},
+        "unresolved_required_fields": []
+      }
+    },
+    {
+      "private_case_id": "scope-explicit-project",
+      "primary_family": "condition_or_scope",
+      "secondary_families": ["kind", "predicate_or_operator"],
+      "source_turn": {
+        "user": "I prefer the compact layout for Project Kestrel.",
+        "agent": "That project scope is noted."
+      },
+      "untyped_candidate": {
+        "statement": "The user prefers the compact layout for Project Kestrel.",
+        "subject": "the user",
+        "predicate": "prefers",
+        "object": "the compact layout",
+        "qualifiers": {"polarity": "positive", "scope": ["Project Kestrel"]},
+        "source_status": "user_reported",
+        "derivation": "explicit",
+        "inference_basis": null,
+        "projection_status": "active",
+        "lifecycle_links": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []},
+        "evidence": [{"evidence_id": "diag-l1-evidence-11-scope", "speaker": "user", "message": "user", "quote": "I prefer the compact layout for Project Kestrel.", "occurrence_index": 0, "start": 0, "end": 48}]
+      },
+      "expected_decision": "emit_l1",
+      "expected_typed_candidate": {
+        "kind": "preference",
+        "predicate": {"surface": "prefers", "sense": "preference.layout_scope", "canonical_operator": "prefer_layout"},
+        "local_entities": [{"local_entity_id": "entity-01", "surface": "the user"}, {"local_entity_id": "entity-02", "surface": "the compact layout"}, {"local_entity_id": "entity-03", "surface": "Project Kestrel"}],
+        "roles": [{"role": "holder", "role_name": "preference holder", "local_entity_id": "entity-01"}, {"role": "preferred_value", "role_name": "preferred layout", "local_entity_id": "entity-02"}, {"role": "project", "role_name": "scope project", "local_entity_id": "entity-03"}],
+        "modality": "actual",
+        "polarity": "positive",
+        "time": {"event_time": null, "valid_time": null},
+        "condition_bindings": [],
+        "scope_bindings": [{"operator": "applies_to", "value": "Project Kestrel", "local_entity_ids": ["entity-03"]}],
+        "derivation": {"method": "explicit", "basis": null, "evidence_ids": ["diag-l1-evidence-11-scope"]},
+        "evidence_bindings": [{"evidence_id": "diag-l1-evidence-11-scope", "speaker": "user"}],
+        "lifecycle": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []}
+      },
+      "authority": {
+        "knowledge_id": "diag-l1-knowledge-11-scope",
+        "candidate_id": "diag-l1-candidate-11-scope",
+        "emission_allowed": true,
+        "required_evidence_bindings": [{"evidence_id": "diag-l1-evidence-11-scope", "speaker": "user"}],
+        "allowed_modalities": ["actual"],
+        "allowed_polarities": ["positive"],
+        "allowed_event_times": [],
+        "event_time_may_be_null": true,
+        "allowed_valid_times": [],
+        "valid_time_may_be_null": true,
+        "allowed_condition_values": [],
+        "allowed_scope_values": ["Project Kestrel"],
+        "required_derivation": {"method": "explicit", "basis": null, "evidence_ids": ["diag-l1-evidence-11-scope"]},
+        "required_lifecycle": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "required_operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []},
+        "unresolved_required_fields": []
+      }
+    },
+    {
+      "private_case_id": "resolved-calendar-valid-time",
+      "primary_family": "time",
+      "secondary_families": ["evidence", "modality_or_polarity"],
+      "source_turn": {
+        "user": "The access expires on 2026-09-14.",
+        "agent": "The date is recorded."
+      },
+      "untyped_candidate": {
+        "statement": "The access expires on 2026-09-14.",
+        "subject": "the access",
+        "predicate": "expires",
+        "object": "2026-09-14",
+        "qualifiers": {"polarity": "positive", "valid_time": "2026-09-14"},
+        "source_status": "user_reported",
+        "derivation": "explicit",
+        "inference_basis": null,
+        "projection_status": "active",
+        "lifecycle_links": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []},
+        "evidence": [{"evidence_id": "diag-l1-evidence-12-time", "speaker": "user", "message": "user", "quote": "The access expires on 2026-09-14.", "occurrence_index": 0, "start": 0, "end": 33}]
+      },
+      "expected_decision": "emit_l1",
+      "expected_typed_candidate": {
+        "kind": "state",
+        "predicate": {"surface": "expires", "sense": "access.expiration", "canonical_operator": "expire_access"},
+        "local_entities": [{"local_entity_id": "entity-01", "surface": "the access"}, {"local_entity_id": "entity-02", "surface": "2026-09-14"}],
+        "roles": [{"role": "resource", "role_name": "expiring resource", "local_entity_id": "entity-01"}, {"role": "date", "role_name": "expiration date", "local_entity_id": "entity-02"}],
+        "modality": "actual",
+        "polarity": "positive",
+        "time": {"event_time": null, "valid_time": "2026-09-14"},
+        "condition_bindings": [],
+        "scope_bindings": [],
+        "derivation": {"method": "explicit", "basis": null, "evidence_ids": ["diag-l1-evidence-12-time"]},
+        "evidence_bindings": [{"evidence_id": "diag-l1-evidence-12-time", "speaker": "user"}],
+        "lifecycle": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []}
+      },
+      "authority": {
+        "knowledge_id": "diag-l1-knowledge-12-time",
+        "candidate_id": "diag-l1-candidate-12-time",
+        "emission_allowed": true,
+        "required_evidence_bindings": [{"evidence_id": "diag-l1-evidence-12-time", "speaker": "user"}],
+        "allowed_modalities": ["actual"],
+        "allowed_polarities": ["positive"],
+        "allowed_event_times": [],
+        "event_time_may_be_null": true,
+        "allowed_valid_times": ["2026-09-14"],
+        "valid_time_may_be_null": false,
+        "allowed_condition_values": [],
+        "allowed_scope_values": [],
+        "required_derivation": {"method": "explicit", "basis": null, "evidence_ids": ["diag-l1-evidence-12-time"]},
+        "required_lifecycle": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "required_operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []},
+        "unresolved_required_fields": []
+      }
+    },
+    {
+      "private_case_id": "unresolved-deictic-time",
+      "primary_family": "time",
+      "secondary_families": ["derivation_or_speaker", "modality_or_polarity"],
+      "source_turn": {
+        "user": "I will call the vendor tomorrow.",
+        "agent": "No calendar anchor is available."
+      },
+      "untyped_candidate": {
+        "statement": "The user plans to call the vendor tomorrow.",
+        "subject": "the user",
+        "predicate": "plans to call",
+        "object": "the vendor",
+        "qualifiers": {"polarity": "positive", "event_time": "tomorrow"},
+        "source_status": "user_reported",
+        "derivation": "context_completed",
+        "inference_basis": "Tomorrow cannot be normalized without a calendar anchor.",
+        "projection_status": "active",
+        "lifecycle_links": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []},
+        "evidence": [{"evidence_id": "diag-l1-evidence-13-time", "speaker": "user", "message": "user", "quote": "I will call the vendor tomorrow.", "occurrence_index": 0, "start": 0, "end": 32}]
+      },
+      "expected_decision": "emit_l1",
+      "expected_typed_candidate": {
+        "kind": "task",
+        "predicate": {"surface": "plans to call", "sense": "communication.planned_call", "canonical_operator": "plan_call"},
+        "local_entities": [{"local_entity_id": "entity-01", "surface": "the user"}, {"local_entity_id": "entity-02", "surface": "the vendor"}],
+        "roles": [{"role": "caller", "role_name": "planned caller", "local_entity_id": "entity-01"}, {"role": "callee", "role_name": "planned recipient", "local_entity_id": "entity-02"}],
+        "modality": "planned",
+        "polarity": "positive",
+        "time": {"event_time": null, "valid_time": null},
+        "condition_bindings": [],
+        "scope_bindings": [],
+        "derivation": {"method": "context_completed", "basis": "Tomorrow cannot be normalized without a calendar anchor.", "evidence_ids": ["diag-l1-evidence-13-time"]},
+        "evidence_bindings": [{"evidence_id": "diag-l1-evidence-13-time", "speaker": "user"}],
+        "lifecycle": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []}
+      },
+      "authority": {
+        "knowledge_id": "diag-l1-knowledge-13-time",
+        "candidate_id": "diag-l1-candidate-13-time",
+        "emission_allowed": true,
+        "required_evidence_bindings": [{"evidence_id": "diag-l1-evidence-13-time", "speaker": "user"}],
+        "allowed_modalities": ["planned"],
+        "allowed_polarities": ["positive"],
+        "allowed_event_times": [],
+        "event_time_may_be_null": true,
+        "allowed_valid_times": [],
+        "valid_time_may_be_null": true,
+        "allowed_condition_values": [],
+        "allowed_scope_values": [],
+        "required_derivation": {"method": "context_completed", "basis": "Tomorrow cannot be normalized without a calendar anchor.", "evidence_ids": ["diag-l1-evidence-13-time"]},
+        "required_lifecycle": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "required_operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []},
+        "unresolved_required_fields": ["event_time"]
+      }
+    },
+    {
+      "private_case_id": "role-two-people-transfer",
+      "primary_family": "role_or_local_entity",
+      "secondary_families": ["evidence", "predicate_or_operator"],
+      "source_turn": {
+        "user": "Nora transferred the key to Omar.",
+        "agent": "The transfer was recorded."
+      },
+      "untyped_candidate": {
+        "statement": "Nora transferred the key to Omar.",
+        "subject": "Nora",
+        "predicate": "transferred",
+        "object": "the key to Omar",
+        "qualifiers": {"polarity": "positive"},
+        "source_status": "user_reported",
+        "derivation": "explicit",
+        "inference_basis": null,
+        "projection_status": "active",
+        "lifecycle_links": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []},
+        "evidence": [{"evidence_id": "diag-l1-evidence-14-role", "speaker": "user", "message": "user", "quote": "Nora transferred the key to Omar.", "occurrence_index": 0, "start": 0, "end": 33}]
+      },
+      "expected_decision": "emit_l1",
+      "expected_typed_candidate": {
+        "kind": "event",
+        "predicate": {"surface": "transferred", "sense": "transfer.item_recipient", "canonical_operator": "transfer_item"},
+        "local_entities": [{"local_entity_id": "entity-01", "surface": "Nora"}, {"local_entity_id": "entity-02", "surface": "the key"}, {"local_entity_id": "entity-03", "surface": "Omar"}],
+        "roles": [{"role": "sender", "role_name": "transfer source", "local_entity_id": "entity-01"}, {"role": "theme", "role_name": "transferred item", "local_entity_id": "entity-02"}, {"role": "recipient", "role_name": "transfer destination", "local_entity_id": "entity-03"}],
+        "modality": "actual",
+        "polarity": "positive",
+        "time": {"event_time": null, "valid_time": null},
+        "condition_bindings": [],
+        "scope_bindings": [],
+        "derivation": {"method": "explicit", "basis": null, "evidence_ids": ["diag-l1-evidence-14-role"]},
+        "evidence_bindings": [{"evidence_id": "diag-l1-evidence-14-role", "speaker": "user"}],
+        "lifecycle": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []}
+      },
+      "authority": {
+        "knowledge_id": "diag-l1-knowledge-14-role",
+        "candidate_id": "diag-l1-candidate-14-role",
+        "emission_allowed": true,
+        "required_evidence_bindings": [{"evidence_id": "diag-l1-evidence-14-role", "speaker": "user"}],
+        "allowed_modalities": ["actual"],
+        "allowed_polarities": ["positive"],
+        "allowed_event_times": [],
+        "event_time_may_be_null": true,
+        "allowed_valid_times": [],
+        "valid_time_may_be_null": true,
+        "allowed_condition_values": [],
+        "allowed_scope_values": [],
+        "required_derivation": {"method": "explicit", "basis": null, "evidence_ids": ["diag-l1-evidence-14-role"]},
+        "required_lifecycle": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "required_operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []},
+        "unresolved_required_fields": []
+      }
+    },
+    {
+      "private_case_id": "role-agent-versus-beneficiary",
+      "primary_family": "role_or_local_entity",
+      "secondary_families": ["predicate_or_operator", "kind"],
+      "source_turn": {
+        "user": "The agent booked a clinic visit for Priya.",
+        "agent": "The booking is complete."
+      },
+      "untyped_candidate": {
+        "statement": "The agent booked a clinic visit for Priya.",
+        "subject": "the agent",
+        "predicate": "booked",
+        "object": "a clinic visit for Priya",
+        "qualifiers": {"polarity": "positive"},
+        "source_status": "user_reported",
+        "derivation": "explicit",
+        "inference_basis": null,
+        "projection_status": "active",
+        "lifecycle_links": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []},
+        "evidence": [{"evidence_id": "diag-l1-evidence-15-role", "speaker": "user", "message": "user", "quote": "The agent booked a clinic visit for Priya.", "occurrence_index": 0, "start": 0, "end": 42}]
+      },
+      "expected_decision": "emit_l1",
+      "expected_typed_candidate": {
+        "kind": "event",
+        "predicate": {"surface": "booked", "sense": "service.visit_booking", "canonical_operator": "book_visit"},
+        "local_entities": [{"local_entity_id": "entity-01", "surface": "the agent"}, {"local_entity_id": "entity-02", "surface": "a clinic visit"}, {"local_entity_id": "entity-03", "surface": "Priya"}],
+        "roles": [{"role": "booking_agent", "role_name": "booking actor", "local_entity_id": "entity-01"}, {"role": "service", "role_name": "booked service", "local_entity_id": "entity-02"}, {"role": "beneficiary", "role_name": "visit beneficiary", "local_entity_id": "entity-03"}],
+        "modality": "actual",
+        "polarity": "positive",
+        "time": {"event_time": null, "valid_time": null},
+        "condition_bindings": [],
+        "scope_bindings": [],
+        "derivation": {"method": "explicit", "basis": null, "evidence_ids": ["diag-l1-evidence-15-role"]},
+        "evidence_bindings": [{"evidence_id": "diag-l1-evidence-15-role", "speaker": "user"}],
+        "lifecycle": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []}
+      },
+      "authority": {
+        "knowledge_id": "diag-l1-knowledge-15-role",
+        "candidate_id": "diag-l1-candidate-15-role",
+        "emission_allowed": true,
+        "required_evidence_bindings": [{"evidence_id": "diag-l1-evidence-15-role", "speaker": "user"}],
+        "allowed_modalities": ["actual"],
+        "allowed_polarities": ["positive"],
+        "allowed_event_times": [],
+        "event_time_may_be_null": true,
+        "allowed_valid_times": [],
+        "valid_time_may_be_null": true,
+        "allowed_condition_values": [],
+        "allowed_scope_values": [],
+        "required_derivation": {"method": "explicit", "basis": null, "evidence_ids": ["diag-l1-evidence-15-role"]},
+        "required_lifecycle": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": [], "conflicts_with_candidate_refs": []},
+        "required_operation_provenance": {"confirmed_by_operation_refs": [], "added_by_operation_refs": []},
+        "unresolved_required_fields": []
+      }
+    },
+    {
+      "private_case_id": "lifecycle-correction-confirmation",
+      "primary_family": "lifecycle",
+      "secondary_families": ["operation_provenance", "evidence", "derivation_or_speaker"],
+      "source_turn": {
+        "user": "Correction: send the invoice to Sol, not Ren.",
+        "agent": "Confirmed: the invoice recipient is Sol."
+      },
+      "untyped_candidate": {
+        "statement": "The invoice recipient is Sol.",
+        "subject": "the invoice",
+        "predicate": "has recipient",
+        "object": "Sol",
+        "qualifiers": {"polarity": "positive"},
+        "source_status": "user_reported",
+        "derivation": "context_completed",
+        "inference_basis": "The assistant explicitly confirms the user's correction.",
+        "projection_status": "corrected",
+        "lifecycle_links": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": ["diag-l1-candidate-old-recipient"], "conflicts_with_candidate_refs": []},
+        "operation_provenance": {"confirmed_by_operation_refs": ["diag-operation-confirm-recipient"], "added_by_operation_refs": []},
+        "evidence": [
+          {"evidence_id": "diag-l1-evidence-16-user", "speaker": "user", "message": "user", "quote": "send the invoice to Sol", "occurrence_index": 0, "start": 12, "end": 35},
+          {"evidence_id": "diag-l1-evidence-16-agent", "speaker": "assistant", "message": "agent", "quote": "invoice recipient is Sol", "occurrence_index": 0, "start": 15, "end": 39}
+        ]
+      },
+      "expected_decision": "emit_l1",
+      "expected_typed_candidate": {
+        "kind": "attribute",
+        "predicate": {"surface": "has recipient", "sense": "document.recipient_assignment", "canonical_operator": "assign_recipient"},
+        "local_entities": [{"local_entity_id": "entity-01", "surface": "the invoice"}, {"local_entity_id": "entity-02", "surface": "Sol"}],
+        "roles": [{"role": "document", "role_name": "assigned document", "local_entity_id": "entity-01"}, {"role": "recipient", "role_name": "corrected recipient", "local_entity_id": "entity-02"}],
+        "modality": "actual",
+        "polarity": "positive",
+        "time": {"event_time": null, "valid_time": null},
+        "condition_bindings": [],
+        "scope_bindings": [],
+        "derivation": {"method": "context_completed", "basis": "The assistant explicitly confirms the user's correction.", "evidence_ids": ["diag-l1-evidence-16-user", "diag-l1-evidence-16-agent"]},
+        "evidence_bindings": [{"evidence_id": "diag-l1-evidence-16-user", "speaker": "user"}, {"evidence_id": "diag-l1-evidence-16-agent", "speaker": "assistant"}],
+        "lifecycle": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": ["diag-l1-candidate-old-recipient"], "conflicts_with_candidate_refs": []},
+        "operation_provenance": {"confirmed_by_operation_refs": ["diag-operation-confirm-recipient"], "added_by_operation_refs": []}
+      },
+      "authority": {
+        "knowledge_id": "diag-l1-knowledge-16-lifecycle",
+        "candidate_id": "diag-l1-candidate-16-lifecycle",
+        "emission_allowed": true,
+        "required_evidence_bindings": [{"evidence_id": "diag-l1-evidence-16-user", "speaker": "user"}, {"evidence_id": "diag-l1-evidence-16-agent", "speaker": "assistant"}],
+        "allowed_modalities": ["actual"],
+        "allowed_polarities": ["positive"],
+        "allowed_event_times": [],
+        "event_time_may_be_null": true,
+        "allowed_valid_times": [],
+        "valid_time_may_be_null": true,
+        "allowed_condition_values": [],
+        "allowed_scope_values": [],
+        "required_derivation": {"method": "context_completed", "basis": "The assistant explicitly confirms the user's correction.", "evidence_ids": ["diag-l1-evidence-16-user", "diag-l1-evidence-16-agent"]},
+        "required_lifecycle": {"lifecycle": "active", "replacement_candidate_ref": null, "replaces_candidate_refs": [], "supersedes_candidate_refs": ["diag-l1-candidate-old-recipient"], "conflicts_with_candidate_refs": []},
+        "required_operation_provenance": {"confirmed_by_operation_refs": ["diag-operation-confirm-recipient"], "added_by_operation_refs": []},
+        "unresolved_required_fields": []
+      }
+    }
+  ]
+}

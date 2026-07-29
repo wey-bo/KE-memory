@@ -1,0 +1,190 @@
+{
+  "source": {
+    "source_id": "src_wildchat_mgmt_cand_001__turn_004",
+    "file": "keol-input/turns/wildchat-mgmt-cand-001__turn-004.txt",
+    "file_type": "txt",
+    "category": "text",
+    "metadata": {
+      "unit_id": "wildchat-mgmt-cand-001__turn-004",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "turn_index": 4,
+      "json_pointer": "/candidates/0/turns/3",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=f307c772ed4efbb74c3848c4b5debba6 / model=gpt-3.5-turbo-0613 / user_ordinal=1..5 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "chunk": {
+    "id": "chunk_9ff0f59814653fdedc87",
+    "index": 0,
+    "text": "用户：\n我想今天发邮件说明我有空并愿意接工作，下面这样写可以吗？我还想询问客户 X 下一轮融资的大概时间，并说明 12 月 15 日到 26 日出国。\n\nAgent：\n思路是对的，但邮件应更直接：先表达可承担近期项目，再询问客户 X 的融资时间，最后说明休假日期和交接安排。主题可写“近期工作安排和出行计划”，正文说明你愿意接手项目、希望了解融资时间，并承诺在出发前完成待办、保证工作顺利衔接。",
+    "size": 197,
+    "metadata": {
+      "unit_id": "wildchat-mgmt-cand-001__turn-004",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "turn_index": 4,
+      "json_pointer": "/candidates/0/turns/3",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=f307c772ed4efbb74c3848c4b5debba6 / model=gpt-3.5-turbo-0613 / user_ordinal=1..5 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "n1",
+      "name": "用户",
+      "type": "Person",
+      "description": "计划当天发送工作邮件的用户。",
+      "source_chunk_id": "chunk_9ff0f59814653fdedc87"
+    },
+    {
+      "id": "n2",
+      "name": "工作邮件",
+      "type": "Communication",
+      "description": "用户计划今天发送的邮件。",
+      "source_chunk_id": "chunk_9ff0f59814653fdedc87"
+    },
+    {
+      "id": "n3",
+      "name": "今天",
+      "type": "RelativeDate",
+      "description": "邮件计划发送时间。",
+      "source_chunk_id": "chunk_9ff0f59814653fdedc87"
+    },
+    {
+      "id": "n4",
+      "name": "可承担工作",
+      "type": "Availability",
+      "description": "用户希望在邮件中说明的信息。",
+      "source_chunk_id": "chunk_9ff0f59814653fdedc87"
+    },
+    {
+      "id": "n5",
+      "name": "客户 X",
+      "type": "Organization",
+      "description": "用户提到的客户。",
+      "source_chunk_id": "chunk_9ff0f59814653fdedc87"
+    },
+    {
+      "id": "n6",
+      "name": "下一轮融资",
+      "type": "Event",
+      "description": "客户 X 的下一轮融资。",
+      "source_chunk_id": "chunk_9ff0f59814653fdedc87"
+    },
+    {
+      "id": "n7",
+      "name": "融资时间",
+      "type": "Question",
+      "description": "用户希望在邮件中询问的大概时间。",
+      "source_chunk_id": "chunk_9ff0f59814653fdedc87"
+    },
+    {
+      "id": "n8",
+      "name": "出国行程",
+      "type": "Event",
+      "description": "用户计划说明的出国安排。",
+      "source_chunk_id": "chunk_9ff0f59814653fdedc87"
+    },
+    {
+      "id": "n9",
+      "name": "12 月 15 日至 12 月 26 日",
+      "type": "DateRange",
+      "description": "出国日期，未给出年份。",
+      "source_chunk_id": "chunk_9ff0f59814653fdedc87"
+    },
+    {
+      "id": "n10",
+      "name": "近期工作安排和出行计划",
+      "type": "EmailSubject",
+      "description": "Agent 提议的邮件主题。",
+      "source_chunk_id": "chunk_9ff0f59814653fdedc87"
+    },
+    {
+      "id": "n11",
+      "name": "完成出发前待办",
+      "type": "Commitment",
+      "description": "Agent 建议邮件包含的承诺。",
+      "source_chunk_id": "chunk_9ff0f59814653fdedc87"
+    },
+    {
+      "id": "n12",
+      "name": "工作交接",
+      "type": "Task",
+      "description": "Agent 建议邮件说明的衔接安排。",
+      "source_chunk_id": "chunk_9ff0f59814653fdedc87"
+    }
+  ],
+  "relations": [
+    {
+      "source_entity": "n1",
+      "target_entity": "n2",
+      "relation_type": "PLANS",
+      "description": "用户计划发送邮件。"
+    },
+    {
+      "source_entity": "n2",
+      "target_entity": "n3",
+      "relation_type": "HAS_TIME",
+      "description": "邮件计划今天发送。"
+    },
+    {
+      "source_entity": "n2",
+      "target_entity": "n4",
+      "relation_type": "COMMUNICATES",
+      "description": "邮件说明用户有空并愿意接工作。"
+    },
+    {
+      "source_entity": "n6",
+      "target_entity": "n5",
+      "relation_type": "FOR",
+      "description": "下一轮融资属于客户 X。"
+    },
+    {
+      "source_entity": "n7",
+      "target_entity": "n6",
+      "relation_type": "ABOUT",
+      "description": "用户希望询问融资事件的时间。"
+    },
+    {
+      "source_entity": "n2",
+      "target_entity": "n7",
+      "relation_type": "INCLUDES",
+      "description": "邮件将包含融资时间询问。"
+    },
+    {
+      "source_entity": "n2",
+      "target_entity": "n8",
+      "relation_type": "COMMUNICATES",
+      "description": "邮件将说明出国行程。"
+    },
+    {
+      "source_entity": "n8",
+      "target_entity": "n9",
+      "relation_type": "HAS_TIME",
+      "description": "出国日期为 12 月 15 日至 26 日。"
+    },
+    {
+      "source_entity": "n2",
+      "target_entity": "n10",
+      "relation_type": "HAS_SUBJECT",
+      "description": "Agent 提议使用该主题。"
+    },
+    {
+      "source_entity": "n2",
+      "target_entity": "n11",
+      "relation_type": "INCLUDES",
+      "description": "Agent 建议邮件承诺完成出发前待办。"
+    },
+    {
+      "source_entity": "n2",
+      "target_entity": "n12",
+      "relation_type": "INCLUDES",
+      "description": "Agent 建议邮件说明交接安排。"
+    }
+  ]
+}

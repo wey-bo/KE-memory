@@ -1,0 +1,87 @@
+{
+  "candidate_id": "TAU-BENCH-CAND-001",
+  "turn_index": 4,
+  "context_completions": [
+    {
+      "completion_id": "C_tau-bench-cand-001-650fada2c0dc_004_001",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "turn_index": 4,
+      "kind": "role_resolution",
+      "original_span": "运动鞋",
+      "interpretation": "订单 #W7449508 中 item_id=6477915553 的运动鞋。",
+      "evidence": [
+        {"turn_index": 4, "message": "user", "occurrence_index": 0, "quote": "请退回运动鞋"},
+        {"turn_index": 4, "message": "agent", "occurrence_index": 0, "quote": "return_delivered_order_items(order_id=#W7449508, item_id=6477915553, payment_method=gift_card_7711863)"}
+      ],
+      "confidence": 1.0,
+      "ambiguity": false
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_001",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "statement": "用户请求退回运动鞋。",
+      "subject": "用户",
+      "predicate": "请求退回",
+      "object": "运动鞋",
+      "qualifiers": {"modality": "requested", "polarity": "positive", "temporal": [], "conditions": [], "scope": []},
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [{"turn_index": 4, "message": "user", "occurrence_index": 0, "quote": "请退回运动鞋"}],
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_002",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "statement": "用户希望运动鞋退款退到自己的礼品卡。",
+      "subject": "用户",
+      "predicate": "偏好退款退到",
+      "object": "自己的礼品卡",
+      "qualifiers": {"modality": "preferred", "polarity": "positive", "temporal": [], "conditions": ["运动鞋退货"], "scope": []},
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [{"turn_index": 4, "message": "user", "occurrence_index": 0, "quote": "退款退到我的礼品卡就可以"}],
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_003",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "statement": "代理声称调用退货工具处理订单 #W7449508 中商品 6477915553，并指定礼品卡 gift_card_7711863 为退款方式。",
+      "subject": "代理",
+      "predicate": "声称调用",
+      "object": "return_delivered_order_items",
+      "qualifiers": {"modality": "claimed_completed", "polarity": "positive", "temporal": [], "conditions": [], "scope": ["order_id=#W7449508", "item_id=6477915553", "payment_method=gift_card_7711863"]},
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [{"turn_index": 4, "message": "agent", "occurrence_index": 0, "quote": "return_delivered_order_items(order_id=#W7449508, item_id=6477915553, payment_method=gift_card_7711863)"}],
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_004",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "statement": "工具结果显示运动鞋退货请求已提交。",
+      "subject": "运动鞋退货请求",
+      "predicate": "已提交",
+      "object": null,
+      "qualifiers": {"modality": "observed", "polarity": "positive", "temporal": ["已"], "conditions": [], "scope": []},
+      "source_status": "tool_observed",
+      "derivation": "explicit",
+      "evidence": [{"turn_index": 4, "message": "agent", "occurrence_index": 0, "quote": "运动鞋退货请求已提交"}],
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_004_005",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "statement": "工具结果显示186.45美元将退回礼品卡。",
+      "subject": "186.45美元退款",
+      "predicate": "将退回",
+      "object": "礼品卡",
+      "qualifiers": {"modality": "planned", "polarity": "positive", "temporal": ["将"], "conditions": [], "scope": ["运动鞋退货"]},
+      "source_status": "tool_observed",
+      "derivation": "explicit",
+      "evidence": [{"turn_index": 4, "message": "agent", "occurrence_index": 0, "quote": "运动鞋退货请求已提交，退款 186.45 美元将退回礼品卡"}],
+      "confidence": 1.0
+    }
+  ]
+}

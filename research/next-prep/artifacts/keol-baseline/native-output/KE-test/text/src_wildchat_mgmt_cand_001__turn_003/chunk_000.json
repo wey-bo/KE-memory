@@ -1,0 +1,190 @@
+{
+  "source": {
+    "source_id": "src_wildchat_mgmt_cand_001__turn_003",
+    "file": "keol-input/turns/wildchat-mgmt-cand-001__turn-003.txt",
+    "file_type": "txt",
+    "category": "text",
+    "metadata": {
+      "unit_id": "wildchat-mgmt-cand-001__turn-003",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "turn_index": 3,
+      "json_pointer": "/candidates/0/turns/2",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=f307c772ed4efbb74c3848c4b5debba6 / model=gpt-3.5-turbo-0613 / user_ordinal=1..5 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "chunk": {
+    "id": "chunk_c0c734a21d3cf39e422a",
+    "index": 0,
+    "text": "用户：\n我准备采用联系事务所合伙人和做业务拓展这两种方式。现在是 11 月，今天联系工作时要不要提 12 月 15 日到 12 月 26 日的休假？我担心现在说会影响分派。\n\nAgent：\n应该现在说明。提前告知能让合伙人在安排工作时考虑你的可用时间；同时强调你在休假前后都可以工作，并愿意提前完成任务、安排交接。这样既保持透明，也不会把休假包装成无法承担工作的信号。",
+    "size": 184,
+    "metadata": {
+      "unit_id": "wildchat-mgmt-cand-001__turn-003",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "turn_index": 3,
+      "json_pointer": "/candidates/0/turns/2",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=f307c772ed4efbb74c3848c4b5debba6 / model=gpt-3.5-turbo-0613 / user_ordinal=1..5 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "n1",
+      "name": "用户",
+      "type": "Person",
+      "description": "正在决定工作沟通方式的用户。",
+      "source_chunk_id": "chunk_c0c734a21d3cf39e422a"
+    },
+    {
+      "id": "n2",
+      "name": "联系事务所合伙人",
+      "type": "Action",
+      "description": "用户决定采用的方式之一。",
+      "source_chunk_id": "chunk_c0c734a21d3cf39e422a"
+    },
+    {
+      "id": "n3",
+      "name": "业务拓展",
+      "type": "Action",
+      "description": "用户决定采用的方式之一。",
+      "source_chunk_id": "chunk_c0c734a21d3cf39e422a"
+    },
+    {
+      "id": "n4",
+      "name": "11 月",
+      "type": "CalendarMonth",
+      "description": "用户所述当前月份，未给出年份。",
+      "source_chunk_id": "chunk_c0c734a21d3cf39e422a"
+    },
+    {
+      "id": "n5",
+      "name": "今天的工作联系",
+      "type": "Communication",
+      "description": "用户计划当天进行的工作沟通。",
+      "source_chunk_id": "chunk_c0c734a21d3cf39e422a"
+    },
+    {
+      "id": "n6",
+      "name": "12 月 15 日至 12 月 26 日",
+      "type": "DateRange",
+      "description": "用户计划休假的日期范围，未给出年份。",
+      "source_chunk_id": "chunk_c0c734a21d3cf39e422a"
+    },
+    {
+      "id": "n7",
+      "name": "出国休假",
+      "type": "Event",
+      "description": "用户计划在指定日期出国。",
+      "source_chunk_id": "chunk_c0c734a21d3cf39e422a"
+    },
+    {
+      "id": "n8",
+      "name": "工作分派",
+      "type": "Process",
+      "description": "用户担心会受休假告知影响的工作分派。",
+      "source_chunk_id": "chunk_c0c734a21d3cf39e422a"
+    },
+    {
+      "id": "n9",
+      "name": "现在告知休假",
+      "type": "Recommendation",
+      "description": "Agent 明确建议今天联系时说明休假。",
+      "source_chunk_id": "chunk_c0c734a21d3cf39e422a"
+    },
+    {
+      "id": "n10",
+      "name": "休假前后可工作",
+      "type": "Availability",
+      "description": "Agent 建议用户强调的可用性。",
+      "source_chunk_id": "chunk_c0c734a21d3cf39e422a"
+    },
+    {
+      "id": "n11",
+      "name": "提前完成任务",
+      "type": "Action",
+      "description": "Agent 建议用户承诺的安排。",
+      "source_chunk_id": "chunk_c0c734a21d3cf39e422a"
+    },
+    {
+      "id": "n12",
+      "name": "安排交接",
+      "type": "Action",
+      "description": "Agent 建议用户承诺的安排。",
+      "source_chunk_id": "chunk_c0c734a21d3cf39e422a"
+    }
+  ],
+  "relations": [
+    {
+      "source_entity": "n1",
+      "target_entity": "n2",
+      "relation_type": "CHOOSES",
+      "description": "用户准备联系合伙人。"
+    },
+    {
+      "source_entity": "n1",
+      "target_entity": "n3",
+      "relation_type": "CHOOSES",
+      "description": "用户准备做业务拓展。"
+    },
+    {
+      "source_entity": "n5",
+      "target_entity": "n4",
+      "relation_type": "OCCURS_IN",
+      "description": "工作联系发生在用户所述当前 11 月。"
+    },
+    {
+      "source_entity": "n1",
+      "target_entity": "n7",
+      "relation_type": "PLANS",
+      "description": "用户计划出国休假。"
+    },
+    {
+      "source_entity": "n7",
+      "target_entity": "n6",
+      "relation_type": "HAS_TIME",
+      "description": "休假时间为 12 月 15 日至 26 日。"
+    },
+    {
+      "source_entity": "n7",
+      "target_entity": "n8",
+      "relation_type": "MAY_AFFECT",
+      "description": "用户担心告知休假会影响工作分派。"
+    },
+    {
+      "source_entity": "n9",
+      "target_entity": "n5",
+      "relation_type": "APPLIES_TO",
+      "description": "Agent 建议在今天联系时说明休假。"
+    },
+    {
+      "source_entity": "n9",
+      "target_entity": "n7",
+      "relation_type": "COMMUNICATES",
+      "description": "建议沟通休假计划。"
+    },
+    {
+      "source_entity": "n9",
+      "target_entity": "n10",
+      "relation_type": "INCLUDES",
+      "description": "建议同时说明休假前后均可工作。"
+    },
+    {
+      "source_entity": "n9",
+      "target_entity": "n11",
+      "relation_type": "INCLUDES",
+      "description": "建议包含提前完成任务的承诺。"
+    },
+    {
+      "source_entity": "n9",
+      "target_entity": "n12",
+      "relation_type": "INCLUDES",
+      "description": "建议包含交接安排。"
+    }
+  ]
+}

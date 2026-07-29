@@ -1,0 +1,171 @@
+{
+  "candidate_id": "TAU-BENCH-CAND-001",
+  "turn_index": 2,
+  "context_completions": [],
+  "knowledge": [
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_001",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "statement": "用户买了运动鞋。",
+      "subject": "用户",
+      "predicate": "买了",
+      "object": "运动鞋",
+      "qualifiers": {
+        "modality": "asserted",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "买的运动鞋",
+          "evidence_id": "evidence-e7f0f87ace3d2f46807726ae6504171fc478b2d6e4003f00e1238cd2d8bda323",
+          "candidate_id": "TAU-BENCH-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 10,
+          "end": 15
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_002",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "statement": "用户请求代理帮助退回其购买的运动鞋。",
+      "subject": "用户",
+      "predicate": "请求帮助退回",
+      "object": "其购买的运动鞋",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "你也能帮我退回买的运动鞋吗？",
+          "evidence_id": "evidence-0b0d8269844f0bd63381dd3940ff34724829e29e4e8d433bf789ed20fcf48444",
+          "candidate_id": "TAU-BENCH-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 3,
+          "end": 17
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_003",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "statement": "代理表示可以帮助退回运动鞋。",
+      "subject": "代理",
+      "predicate": "可以帮助",
+      "object": "退回运动鞋",
+      "qualifiers": {
+        "modality": "possible",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "可以",
+          "evidence_id": "evidence-c33a354c39576118e4eb2acfc79f3207cf93e1e3ed0fa335c149af254579f6db",
+          "candidate_id": "TAU-BENCH-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 0,
+          "end": 2
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_004",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "statement": "代理请求用户提供运动鞋的订单号。",
+      "subject": "代理",
+      "predicate": "请求提供",
+      "object": "运动鞋的订单号",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "请提供运动鞋的订单号",
+          "evidence_id": "evidence-4ff04c5ef79cfde299ed223732613175a4236625a57cc7dbdd9639a547b1ebef",
+          "candidate_id": "TAU-BENCH-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 3,
+          "end": 13
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_tau-bench-cand-001-650fada2c0dc_002_005",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "statement": "作为提供订单号的替代，代理请求用户确认运动鞋是否属于其最近的某个订单。",
+      "subject": "代理",
+      "predicate": "请求确认",
+      "object": "运动鞋是否属于用户最近的某个订单",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [
+          "最近"
+        ],
+        "conditions": [
+          "不提供运动鞋订单号时的替代方式"
+        ],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "或者确认它是否属于你最近的某个订单",
+          "evidence_id": "evidence-b3e03516762ecc3cc671a1fc53716b89bc4adb9c8c1884089e2321fb94cecffb",
+          "candidate_id": "TAU-BENCH-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 14,
+          "end": 31
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 1.0
+    }
+  ]
+}

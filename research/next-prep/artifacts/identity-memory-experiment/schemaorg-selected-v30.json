@@ -1,0 +1,105 @@
+{
+  "schema_version": "schemaorg-selected-reference-v1",
+  "source": {
+    "authority": "schema.org official GitHub repository",
+    "repository": "https://github.com/schemaorg/schemaorg",
+    "release": "30.0",
+    "commit": "f72e60b7f67578b4af9445fa20fc8ec3fe1c9b93",
+    "commit_date": "2026-07-23T13:32:10Z",
+    "types_blob": "a465eb2b364e5b7eca26fe9e45aae8b175d28c71",
+    "properties_blob": "e58ee705f990b798c3571cbcd59193e28d6107ef",
+    "types_url": "https://github.com/schemaorg/schemaorg/blob/f72e60b7f67578b4af9445fa20fc8ec3fe1c9b93/data/releases/30.0/schemaorg-current-https-types.csv",
+    "properties_url": "https://github.com/schemaorg/schemaorg/blob/f72e60b7f67578b4af9445fa20fc8ec3fe1c9b93/data/releases/30.0/schemaorg-current-https-properties.csv",
+    "retrieved_at": "2026-07-27",
+    "selection_method": "Exact id selection from the official release CSV files"
+  },
+  "use_policy": {
+    "mode": "advisory",
+    "fact_authority": false,
+    "identity_authority": false,
+    "requires_local_mapping_relation": true,
+    "requires_executable_constraints": true
+  },
+  "types": [
+    {
+      "id": "https://schema.org/Action",
+      "label": "Action",
+      "comment": "An action performed by a direct agent and indirect participants upon a direct object. The execution of the action may produce a result.",
+      "sub_type_of": ["https://schema.org/Thing"]
+    },
+    {
+      "id": "https://schema.org/Event",
+      "label": "Event",
+      "comment": "An event happening at a certain time and location. Repeated events may be structured as separate Event objects.",
+      "sub_type_of": ["https://schema.org/Thing"]
+    },
+    {
+      "id": "https://schema.org/Organization",
+      "label": "Organization",
+      "comment": "An organization such as a school, NGO, corporation, club, etc.",
+      "sub_type_of": ["https://schema.org/Thing"]
+    },
+    {
+      "id": "https://schema.org/Person",
+      "label": "Person",
+      "comment": "A person (alive, dead, undead, or fictional).",
+      "sub_type_of": ["https://schema.org/Thing"]
+    },
+    {
+      "id": "https://schema.org/Project",
+      "label": "Project",
+      "comment": "An enterprise, potentially individual but typically collaborative, planned to achieve a particular aim.",
+      "sub_type_of": ["https://schema.org/Organization"]
+    },
+    {
+      "id": "https://schema.org/Role",
+      "label": "Role",
+      "comment": "Additional information about a relationship or property, including a time-bounded relationship.",
+      "sub_type_of": ["https://schema.org/Intangible"]
+    }
+  ],
+  "properties": [
+    {
+      "id": "https://schema.org/agent",
+      "comment": "The direct performer or driver of the action.",
+      "domain_includes": ["https://schema.org/Action"],
+      "range_includes": ["https://schema.org/Organization", "https://schema.org/Person"]
+    },
+    {
+      "id": "https://schema.org/object",
+      "comment": "The object upon which the action is carried out, also known as patient, affected, undergoer, or theme.",
+      "domain_includes": ["https://schema.org/Action"],
+      "range_includes": ["https://schema.org/Thing"]
+    },
+    {
+      "id": "https://schema.org/result",
+      "comment": "The result produced in the action.",
+      "domain_includes": ["https://schema.org/Action"],
+      "range_includes": ["https://schema.org/Thing"]
+    },
+    {
+      "id": "https://schema.org/identifier",
+      "comment": "Any kind of identifier for any kind of Thing, including textual, URL, or PropertyValue identifiers.",
+      "domain_includes": ["https://schema.org/Thing"],
+      "range_includes": ["https://schema.org/PropertyValue", "https://schema.org/Text", "https://schema.org/URL"]
+    },
+    {
+      "id": "https://schema.org/sameAs",
+      "comment": "URL of a reference Web page that unambiguously indicates the item's identity.",
+      "domain_includes": ["https://schema.org/Thing"],
+      "range_includes": ["https://schema.org/URL"]
+    },
+    {
+      "id": "https://schema.org/startDate",
+      "comment": "The start date and time of the item in ISO 8601 format.",
+      "domain_includes": ["https://schema.org/Event", "https://schema.org/Role"],
+      "range_includes": ["https://schema.org/Date", "https://schema.org/DateTime"]
+    },
+    {
+      "id": "https://schema.org/endDate",
+      "comment": "The end date and time of the item in ISO 8601 format.",
+      "domain_includes": ["https://schema.org/Event", "https://schema.org/Role"],
+      "range_includes": ["https://schema.org/Date", "https://schema.org/DateTime"]
+    }
+  ]
+}

@@ -1,0 +1,377 @@
+{
+  "candidate_id": "WILDCHAT-LEARN-CAND-003",
+  "items": [
+    {
+      "knowledge_id": "D_wildchat-learn-cand-003-b1871de6ef7c_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-003-b1871de6ef7c_0001",
+          "knowledge_id": "D_wildchat-learn-cand-003-b1871de6ef7c_001",
+          "surface": "make_hyperlink 函数的使用例子",
+          "normalized_zh": "make_hyperlink函数使用示例",
+          "query_lemma": "make_hyperlink usage example",
+          "keyword_type": "concept",
+          "semantic_role": "requested_example",
+          "source_field": "object",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "D_wildchat-learn-cand-003-b1871de6ef7c_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-003-b1871de6ef7c_0002",
+          "knowledge_id": "D_wildchat-learn-cand-003-b1871de6ef7c_002",
+          "surface": "make_hyperlink 函数与 Pandas apply 一起使用及其参数",
+          "normalized_zh": "make_hyperlink与Pandas apply联合使用及参数",
+          "query_lemma": "make_hyperlink pandas apply parameters",
+          "keyword_type": "concept",
+          "semantic_role": "requested_demonstration",
+          "source_field": "object",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_000_001",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-003-b1871de6ef7c_0003",
+          "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_000_001",
+          "surface": "make_hyperlink",
+          "normalized_zh": "make_hyperlink函数",
+          "query_lemma": "make_hyperlink",
+          "keyword_type": "entity",
+          "semantic_role": "function_under_explanation",
+          "source_field": "object",
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-003-b1871de6ef7c_0004",
+          "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_000_001",
+          "surface": "HYPERLINK",
+          "normalized_zh": "电子表格HYPERLINK公式",
+          "query_lemma": "spreadsheet hyperlink formula",
+          "keyword_type": "concept",
+          "semantic_role": "formula_construct",
+          "source_field": "object",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_000_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-003-b1871de6ef7c_0005",
+          "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_000_002",
+          "surface": "make_hyperlink 函数接收 value",
+          "normalized_zh": "make_hyperlink 函数接收 value 参数",
+          "query_lemma": "make_hyperlink accepts value parameter",
+          "keyword_type": "relation",
+          "semantic_role": "function_parameter_relation",
+          "source_field": "statement",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_000_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-003-b1871de6ef7c_0006",
+          "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_000_003",
+          "surface": "make_hyperlink 函数使用 './{}' 构造相对路径",
+          "normalized_zh": "make_hyperlink 使用 './{}' 构造相对路径",
+          "query_lemma": "make_hyperlink constructs relative path with dot slash template",
+          "keyword_type": "action",
+          "semantic_role": "relative_path_construction",
+          "source_field": "statement",
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-003-b1871de6ef7c_0007",
+          "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_000_003",
+          "surface": "使用 './{}'",
+          "normalized_zh": "使用./{}模板",
+          "query_lemma": "dot slash path template",
+          "keyword_type": "property",
+          "semantic_role": "path_template",
+          "source_field": "qualifiers.scope",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_000_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-003-b1871de6ef7c_0008",
+          "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_000_004",
+          "surface": "make_hyperlink 函数把路径填入电子表格的 HYPERLINK 公式",
+          "normalized_zh": "make_hyperlink 将路径填入电子表格 HYPERLINK 公式",
+          "query_lemma": "make_hyperlink inserts path into spreadsheet HYPERLINK formula",
+          "keyword_type": "relation",
+          "semantic_role": "path_to_hyperlink_formula_insertion",
+          "source_field": "statement",
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-003-b1871de6ef7c_0009",
+          "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_000_004",
+          "surface": "电子表格的 HYPERLINK 公式",
+          "normalized_zh": "电子表格HYPERLINK公式",
+          "query_lemma": "spreadsheet hyperlink formula",
+          "keyword_type": "concept",
+          "semantic_role": "destination_formula",
+          "source_field": "qualifiers.scope",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_000_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-003-b1871de6ef7c_0010",
+          "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_000_005",
+          "surface": "make_hyperlink 函数把显示文本填入电子表格的 HYPERLINK 公式",
+          "normalized_zh": "make_hyperlink 将显示文本填入电子表格 HYPERLINK 公式",
+          "query_lemma": "make_hyperlink inserts display text into spreadsheet HYPERLINK formula",
+          "keyword_type": "relation",
+          "semantic_role": "display_text_to_hyperlink_formula_insertion",
+          "source_field": "statement",
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-003-b1871de6ef7c_0011",
+          "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_000_005",
+          "surface": "电子表格的 HYPERLINK 公式",
+          "normalized_zh": "电子表格HYPERLINK公式",
+          "query_lemma": "spreadsheet hyperlink formula",
+          "keyword_type": "concept",
+          "semantic_role": "destination_formula",
+          "source_field": "qualifiers.scope",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_000_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-003-b1871de6ef7c_0012",
+          "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_000_006",
+          "surface": "=HYPERLINK(\"./example\", \"example\")",
+          "normalized_zh": "HYPERLINK示例公式",
+          "query_lemma": "hyperlink example formula",
+          "keyword_type": "entity",
+          "semantic_role": "function_result",
+          "source_field": "object",
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-003-b1871de6ef7c_0013",
+          "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_000_006",
+          "surface": "传入 example",
+          "normalized_zh": "传入example参数",
+          "query_lemma": "input example",
+          "keyword_type": "condition",
+          "semantic_role": "input_condition",
+          "source_field": "qualifiers.conditions",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_001_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-003-b1871de6ef7c_0014",
+          "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_001_002",
+          "surface": "value = 'example'",
+          "normalized_zh": "value赋值为example",
+          "query_lemma": "value example assignment",
+          "keyword_type": "action",
+          "semantic_role": "example_assignment",
+          "source_field": "object",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_001_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-003-b1871de6ef7c_0015",
+          "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_001_003",
+          "surface": "hyperlink = make_hyperlink(value)",
+          "normalized_zh": "调用make_hyperlink并赋值",
+          "query_lemma": "make_hyperlink assignment",
+          "keyword_type": "action",
+          "semantic_role": "function_call_assignment",
+          "source_field": "object",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_001_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-003-b1871de6ef7c_0016",
+          "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_001_004",
+          "surface": "示例打印 hyperlink",
+          "normalized_zh": "示例打印 hyperlink",
+          "query_lemma": "print hyperlink variable",
+          "keyword_type": "action",
+          "semantic_role": "procedural_print_action",
+          "source_field": "statement",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_001_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-003-b1871de6ef7c_0017",
+          "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_001_005",
+          "surface": "=HYPERLINK(\"./example\", \"example\")",
+          "normalized_zh": "HYPERLINK示例输出",
+          "query_lemma": "hyperlink example output",
+          "keyword_type": "entity",
+          "semantic_role": "example_output",
+          "source_field": "object",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_001_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-003-b1871de6ef7c_0018",
+          "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_001_006",
+          "surface": "可点击链接",
+          "normalized_zh": "可点击链接",
+          "query_lemma": "clickable link",
+          "keyword_type": "concept",
+          "semantic_role": "spreadsheet_interpretation",
+          "source_field": "object",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_002_002",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-003-b1871de6ef7c_0019",
+          "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_002_002",
+          "surface": "Pandas apply 用法中的参数",
+          "normalized_zh": "Pandas apply用法参数",
+          "query_lemma": "pandas apply parameters",
+          "keyword_type": "concept",
+          "semantic_role": "explanation_target",
+          "source_field": "statement",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_002_003",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-003-b1871de6ef7c_0020",
+          "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_002_003",
+          "surface": "应先建立 DataFrame",
+          "normalized_zh": "应先创建 DataFrame",
+          "query_lemma": "create DataFrame first",
+          "keyword_type": "action",
+          "semantic_role": "procedural_dataframe_creation",
+          "source_field": "statement",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_002_004",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-003-b1871de6ef7c_0021",
+          "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_002_004",
+          "surface": "df['Hyperlink'] = df['Value'].apply(make_hyperlink)",
+          "normalized_zh": "Pandas apply生成Hyperlink列",
+          "query_lemma": "pandas apply hyperlink column",
+          "keyword_type": "action",
+          "semantic_role": "procedural_apply_assignment",
+          "source_field": "object",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_002_005",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-003-b1871de6ef7c_0022",
+          "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_002_005",
+          "surface": "Value 列的每个元素依次传给 make_hyperlink",
+          "normalized_zh": "Value列元素传给make_hyperlink",
+          "query_lemma": "apply each value to make_hyperlink",
+          "keyword_type": "relation",
+          "semantic_role": "apply_mapping",
+          "source_field": "statement",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_002_006",
+      "keywords": [
+        {
+          "keyword_id": "KW_wildchat-learn-cand-003-b1871de6ef7c_0023",
+          "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_002_006",
+          "surface": "make_hyperlink 返回的新字符串列",
+          "normalized_zh": "make_hyperlink返回字符串列",
+          "query_lemma": "make_hyperlink output column",
+          "keyword_type": "property",
+          "semantic_role": "generated_column",
+          "source_field": "subject",
+          "translation_confidence": 0.99
+        },
+        {
+          "keyword_id": "KW_wildchat-learn-cand-003-b1871de6ef7c_0024",
+          "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_002_006",
+          "surface": "Hyperlink",
+          "normalized_zh": "Hyperlink列",
+          "query_lemma": "Hyperlink column",
+          "keyword_type": "entity",
+          "semantic_role": "destination_column",
+          "source_field": "object",
+          "translation_confidence": 0.99
+        }
+      ],
+      "no_keyword_reason": null
+    }
+  ]
+}

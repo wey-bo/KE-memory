@@ -1,0 +1,189 @@
+{
+  "source": {
+    "source_id": "src_wildchat_mgmt_cand_001__turn_001",
+    "file": "keol-input/turns/wildchat-mgmt-cand-001__turn-001.txt",
+    "file_type": "txt",
+    "category": "text",
+    "metadata": {
+      "unit_id": "wildchat-mgmt-cand-001__turn-001",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "turn_index": 1,
+      "json_pointer": "/candidates/0/turns/0",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=f307c772ed4efbb74c3848c4b5debba6 / model=gpt-3.5-turbo-0613 / user_ordinal=1..5 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "chunk": {
+    "id": "chunk_cd4b9923d6035b25cada",
+    "index": 0,
+    "text": "用户：\n我在一家律师事务所工作，需要争取更多工作。我想向平时会分派工作的合伙人询问，但未来两个月可能要出国休假一周。我应该什么时候告诉他？如果现在说，他会不会因为项目可能和休假冲突而不给我工作？\n\nAgent：\n最好尽早、透明地沟通，同时说明你会如何安排交付。若项目很紧急，应在分派前说明休假日期；如果任务可调整或委派，也可以先确认工作范围，再说明休假并承诺在离开前完成交接。",
+    "size": 188,
+    "metadata": {
+      "unit_id": "wildchat-mgmt-cand-001__turn-001",
+      "candidate_id": "WILDCHAT-MGMT-CAND-001",
+      "turn_index": 1,
+      "json_pointer": "/candidates/0/turns/0",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=f307c772ed4efbb74c3848c4b5debba6 / model=gpt-3.5-turbo-0613 / user_ordinal=1..5 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "n1",
+      "name": "用户",
+      "type": "Person",
+      "description": "在律师事务所工作的用户。",
+      "source_chunk_id": "chunk_cd4b9923d6035b25cada"
+    },
+    {
+      "id": "n2",
+      "name": "律师事务所",
+      "type": "Organization",
+      "description": "用户当前任职的律师事务所。",
+      "source_chunk_id": "chunk_cd4b9923d6035b25cada"
+    },
+    {
+      "id": "n3",
+      "name": "获得更多工作分派",
+      "type": "Goal",
+      "description": "用户希望争取更多工作的目标。",
+      "source_chunk_id": "chunk_cd4b9923d6035b25cada"
+    },
+    {
+      "id": "n4",
+      "name": "分派工作的合伙人",
+      "type": "Role",
+      "description": "平时负责向用户分派工作的事务所合伙人。",
+      "source_chunk_id": "chunk_cd4b9923d6035b25cada"
+    },
+    {
+      "id": "n5",
+      "name": "出国休假",
+      "type": "Event",
+      "description": "用户计划在未来两个月内进行的出国休假。",
+      "source_chunk_id": "chunk_cd4b9923d6035b25cada"
+    },
+    {
+      "id": "n6",
+      "name": "一周",
+      "type": "Duration",
+      "description": "用户所述休假时长。",
+      "source_chunk_id": "chunk_cd4b9923d6035b25cada"
+    },
+    {
+      "id": "n7",
+      "name": "未来两个月",
+      "type": "TimeWindow",
+      "description": "休假可能发生的时间范围。",
+      "source_chunk_id": "chunk_cd4b9923d6035b25cada"
+    },
+    {
+      "id": "n8",
+      "name": "项目",
+      "type": "Task",
+      "description": "合伙人可能分派给用户的项目。",
+      "source_chunk_id": "chunk_cd4b9923d6035b25cada"
+    },
+    {
+      "id": "n9",
+      "name": "休假告知时机",
+      "type": "Question",
+      "description": "用户询问何时告知合伙人休假计划。",
+      "source_chunk_id": "chunk_cd4b9923d6035b25cada"
+    },
+    {
+      "id": "n10",
+      "name": "尽早透明沟通",
+      "type": "Recommendation",
+      "description": "Agent 建议用户尽早说明休假并沟通交付安排。",
+      "source_chunk_id": "chunk_cd4b9923d6035b25cada"
+    },
+    {
+      "id": "n11",
+      "name": "工作交接",
+      "type": "Task",
+      "description": "Agent 建议用户在休假前完成的交接安排。",
+      "source_chunk_id": "chunk_cd4b9923d6035b25cada"
+    }
+  ],
+  "relations": [
+    {
+      "source_entity": "n1",
+      "target_entity": "n2",
+      "relation_type": "WORKS_AT",
+      "description": "用户陈述自己在该事务所工作。"
+    },
+    {
+      "source_entity": "n1",
+      "target_entity": "n3",
+      "relation_type": "HAS_GOAL",
+      "description": "用户需要争取更多工作。"
+    },
+    {
+      "source_entity": "n4",
+      "target_entity": "n2",
+      "relation_type": "MEMBER_OF",
+      "description": "该合伙人属于用户所在事务所。"
+    },
+    {
+      "source_entity": "n4",
+      "target_entity": "n8",
+      "relation_type": "ASSIGNS",
+      "description": "该角色负责分派项目。"
+    },
+    {
+      "source_entity": "n1",
+      "target_entity": "n5",
+      "relation_type": "PLANS",
+      "description": "用户计划出国休假。"
+    },
+    {
+      "source_entity": "n5",
+      "target_entity": "n6",
+      "relation_type": "HAS_DURATION",
+      "description": "休假持续一周。"
+    },
+    {
+      "source_entity": "n5",
+      "target_entity": "n7",
+      "relation_type": "WITHIN",
+      "description": "休假计划位于未来两个月内。"
+    },
+    {
+      "source_entity": "n5",
+      "target_entity": "n8",
+      "relation_type": "MAY_OVERLAP",
+      "description": "用户担心休假可能与项目冲突。"
+    },
+    {
+      "source_entity": "n9",
+      "target_entity": "n5",
+      "relation_type": "ABOUT",
+      "description": "问题针对休假告知时机。"
+    },
+    {
+      "source_entity": "n10",
+      "target_entity": "n9",
+      "relation_type": "ANSWERS",
+      "description": "Agent 以尽早沟通回应用户问题。"
+    },
+    {
+      "source_entity": "n10",
+      "target_entity": "n11",
+      "relation_type": "INCLUDES",
+      "description": "建议包含说明交接安排。"
+    },
+    {
+      "source_entity": "n11",
+      "target_entity": "n5",
+      "relation_type": "BEFORE",
+      "description": "交接应在休假前完成。"
+    }
+  ]
+}

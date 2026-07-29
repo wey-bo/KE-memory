@@ -1,0 +1,269 @@
+{
+  "payloads": [
+    {
+      "input_sha256": "1fcfbcee5fd385100ec5fd8efcdd9019cd5cdaa01f04ff3a50a4a8557d995ac4",
+      "max_output_tokens": 1200,
+      "messages": [
+        {
+          "content": "Convert one validated atomic-knowledge JSON object into one standard Abstract Meaning Representation graph.\n\nReturn exactly one PENMAN graph and nothing else. Do not use Markdown fences, commentary, JSON, or multiple top-level graphs.\n\nUse only the supplied atomic propositions. Use standard AMR conventions, PropBank frames when available, and standard roles. Preserve participant direction, polarity, modality, intent, time, quantity, conditions, causality, comparison, and clause relations represented by the supplied propositions. Preserve names, dates, amounts, products, and places.\n\nDo not reconstruct or assume an unseen source sentence. Do not add background assumptions. Do not encode provenance, confidence, evidence, lifecycle state, project fields, or evaluator metadata in the graph.\n",
+          "role": "system"
+        },
+        {
+          "content": "{\"items\":[{\"evidence_quote\":\"I'd like to book a round-trip flight from New York City to Amsterdam.\",\"knowledge_id\":\"K001\",\"statement\":\"The speaker would like to book a round-trip flight from New York City to Amsterdam.\"}],\"representation_gaps\":[],\"schema_version\":\"amr-pilot-atomic-knowledge-v1\"}",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "9e54179f8ba3f7c9b34387e589216903973043fd1ce5f84e59e5fd8dd69d0d9d",
+      "prompt_sha256": "2e3c70567d681d8ce92883be695cae11a3b7956b7aba29604af68707dde82813",
+      "prompt_version": "knowledge-to-amr-v1",
+      "route": "B",
+      "sample_id": "AMR-S001",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    },
+    {
+      "input_sha256": "5a5f844c609fd1ba5c32d102cf387c16cdd2be297938d0db633f240eea3c3a68",
+      "max_output_tokens": 1200,
+      "messages": [
+        {
+          "content": "Convert one validated atomic-knowledge JSON object into one standard Abstract Meaning Representation graph.\n\nReturn exactly one PENMAN graph and nothing else. Do not use Markdown fences, commentary, JSON, or multiple top-level graphs.\n\nUse only the supplied atomic propositions. Use standard AMR conventions, PropBank frames when available, and standard roles. Preserve participant direction, polarity, modality, intent, time, quantity, conditions, causality, comparison, and clause relations represented by the supplied propositions. Preserve names, dates, amounts, products, and places.\n\nDo not reconstruct or assume an unseen source sentence. Do not add background assumptions. Do not encode provenance, confidence, evidence, lifecycle state, project fields, or evaluator metadata in the graph.\n",
+          "role": "system"
+        },
+        {
+          "content": "{\"items\":[{\"evidence_quote\":\"please proceed with the return of the tablet\",\"knowledge_id\":\"K001\",\"statement\":\"The speaker requests that the tablet be returned.\"},{\"evidence_quote\":\"cancellation of the charger\",\"knowledge_id\":\"K002\",\"statement\":\"The speaker requests that the charger be cancelled.\"}],\"representation_gaps\":[],\"schema_version\":\"amr-pilot-atomic-knowledge-v1\"}",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "6419b83c79ca4e49835e7d6850b9cdb8385769a099784514991d32506190e9ae",
+      "prompt_sha256": "2e3c70567d681d8ce92883be695cae11a3b7956b7aba29604af68707dde82813",
+      "prompt_version": "knowledge-to-amr-v1",
+      "route": "B",
+      "sample_id": "AMR-S002",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    },
+    {
+      "input_sha256": "0e754dec511510249d7fb4efdeac085e410a21b4e77a15fd3194475ae2cd0c00",
+      "max_output_tokens": 1200,
+      "messages": [
+        {
+          "content": "Convert one validated atomic-knowledge JSON object into one standard Abstract Meaning Representation graph.\n\nReturn exactly one PENMAN graph and nothing else. Do not use Markdown fences, commentary, JSON, or multiple top-level graphs.\n\nUse only the supplied atomic propositions. Use standard AMR conventions, PropBank frames when available, and standard roles. Preserve participant direction, polarity, modality, intent, time, quantity, conditions, causality, comparison, and clause relations represented by the supplied propositions. Preserve names, dates, amounts, products, and places.\n\nDo not reconstruct or assume an unseen source sentence. Do not add background assumptions. Do not encode provenance, confidence, evidence, lifecycle state, project fields, or evaluator metadata in the graph.\n",
+          "role": "system"
+        },
+        {
+          "content": "{\"items\":[{\"evidence_quote\":\"The guardian will be responsible for the day-to-day care of Francis and Michael\",\"knowledge_id\":\"K001\",\"statement\":\"The guardian will be responsible for the day-to-day care of Francis and Michael.\"},{\"evidence_quote\":\"including their physical, emotional, and educational needs\",\"knowledge_id\":\"K002\",\"statement\":\"The guardian's responsibility for the day-to-day care of Francis and Michael includes their physical needs.\"},{\"evidence_quote\":\"including their physical, emotional, and educational needs\",\"knowledge_id\":\"K003\",\"statement\":\"The guardian's responsibility for the day-to-day care of Francis and Michael includes their emotional needs.\"},{\"evidence_quote\":\"including their physical, emotional, and educational needs\",\"knowledge_id\":\"K004\",\"statement\":\"The guardian's responsibility for the day-to-day care of Francis and Michael includes their educational needs.\"}],\"representation_gaps\":[],\"schema_version\":\"amr-pilot-atomic-knowledge-v1\"}",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "4784cf02c774fe7f1b01e0a840853b96f014abf70633a133806b845f47fee18c",
+      "prompt_sha256": "2e3c70567d681d8ce92883be695cae11a3b7956b7aba29604af68707dde82813",
+      "prompt_version": "knowledge-to-amr-v1",
+      "route": "B",
+      "sample_id": "AMR-S003",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    },
+    {
+      "input_sha256": "0e50ff1e350dac0e25803a3a9f9b19dd063a7f61ae203d6f28d5f1942a515fdb",
+      "max_output_tokens": 1200,
+      "messages": [
+        {
+          "content": "Convert one validated atomic-knowledge JSON object into one standard Abstract Meaning Representation graph.\n\nReturn exactly one PENMAN graph and nothing else. Do not use Markdown fences, commentary, JSON, or multiple top-level graphs.\n\nUse only the supplied atomic propositions. Use standard AMR conventions, PropBank frames when available, and standard roles. Preserve participant direction, polarity, modality, intent, time, quantity, conditions, causality, comparison, and clause relations represented by the supplied propositions. Preserve names, dates, amounts, products, and places.\n\nDo not reconstruct or assume an unseen source sentence. Do not add background assumptions. Do not encode provenance, confidence, evidence, lifecycle state, project fields, or evaluator metadata in the graph.\n",
+          "role": "system"
+        },
+        {
+          "content": "{\"items\":[{\"evidence_quote\":\"I'll be leaving today\",\"knowledge_id\":\"K001\",\"statement\":\"The speaker will leave today.\"},{\"evidence_quote\":\"coming back on the 19th\",\"knowledge_id\":\"K002\",\"statement\":\"The speaker will return on the 19th.\"}],\"representation_gaps\":[],\"schema_version\":\"amr-pilot-atomic-knowledge-v1\"}",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "d38616c1420730e760c306c09f9c7227e8df86c69307fb856ed3f38eb27768d2",
+      "prompt_sha256": "2e3c70567d681d8ce92883be695cae11a3b7956b7aba29604af68707dde82813",
+      "prompt_version": "knowledge-to-amr-v1",
+      "route": "B",
+      "sample_id": "AMR-S004",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    },
+    {
+      "input_sha256": "7a7fef568426723e878d724fc0c9c7d755756e9687957041e370f22aed948989",
+      "max_output_tokens": 1200,
+      "messages": [
+        {
+          "content": "Convert one validated atomic-knowledge JSON object into one standard Abstract Meaning Representation graph.\n\nReturn exactly one PENMAN graph and nothing else. Do not use Markdown fences, commentary, JSON, or multiple top-level graphs.\n\nUse only the supplied atomic propositions. Use standard AMR conventions, PropBank frames when available, and standard roles. Preserve participant direction, polarity, modality, intent, time, quantity, conditions, causality, comparison, and clause relations represented by the supplied propositions. Preserve names, dates, amounts, products, and places.\n\nDo not reconstruct or assume an unseen source sentence. Do not add background assumptions. Do not encode provenance, confidence, evidence, lifecycle state, project fields, or evaluator metadata in the graph.\n",
+          "role": "system"
+        },
+        {
+          "content": "{\"items\":[{\"evidence_quote\":\"The refund of $951.21 will be credited to your gift card.\",\"knowledge_id\":\"K001\",\"statement\":\"The refund of $951.21 will be credited to your gift card.\"}],\"representation_gaps\":[],\"schema_version\":\"amr-pilot-atomic-knowledge-v1\"}",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "780719474c338c24c07f726ca51f83022cfea28b70522ae866ef37ed1392f8f9",
+      "prompt_sha256": "2e3c70567d681d8ce92883be695cae11a3b7956b7aba29604af68707dde82813",
+      "prompt_version": "knowledge-to-amr-v1",
+      "route": "B",
+      "sample_id": "AMR-S005",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    },
+    {
+      "input_sha256": "406202e46899c56a83442baaa2e00e57a2c8d709588073bfc57e5ac1b29256e7",
+      "max_output_tokens": 1200,
+      "messages": [
+        {
+          "content": "Convert one validated atomic-knowledge JSON object into one standard Abstract Meaning Representation graph.\n\nReturn exactly one PENMAN graph and nothing else. Do not use Markdown fences, commentary, JSON, or multiple top-level graphs.\n\nUse only the supplied atomic propositions. Use standard AMR conventions, PropBank frames when available, and standard roles. Preserve participant direction, polarity, modality, intent, time, quantity, conditions, causality, comparison, and clause relations represented by the supplied propositions. Preserve names, dates, amounts, products, and places.\n\nDo not reconstruct or assume an unseen source sentence. Do not add background assumptions. Do not encode provenance, confidence, evidence, lifecycle state, project fields, or evaluator metadata in the graph.\n",
+          "role": "system"
+        },
+        {
+          "content": "{\"items\":[{\"evidence_quote\":\"By following these steps and adhering to the timeline, you should be able to finalize your will by the deadline of May 15, 2024.\",\"knowledge_id\":\"K001\",\"statement\":\"Following these steps and adhering to the timeline should enable the addressee to finalize the addressee's will by May 15, 2024.\"}],\"representation_gaps\":[],\"schema_version\":\"amr-pilot-atomic-knowledge-v1\"}",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "b741ad1acb8a91b69ec4b127a0eb41d99c0f3eb474640634a9fdf8c02695be53",
+      "prompt_sha256": "2e3c70567d681d8ce92883be695cae11a3b7956b7aba29604af68707dde82813",
+      "prompt_version": "knowledge-to-amr-v1",
+      "route": "B",
+      "sample_id": "AMR-S006",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    },
+    {
+      "input_sha256": "c225efeb0be41bb3ee06cb4949a3b226e65757b41673c2900778fc1861fa991c",
+      "max_output_tokens": 1200,
+      "messages": [
+        {
+          "content": "Convert one validated atomic-knowledge JSON object into one standard Abstract Meaning Representation graph.\n\nReturn exactly one PENMAN graph and nothing else. Do not use Markdown fences, commentary, JSON, or multiple top-level graphs.\n\nUse only the supplied atomic propositions. Use standard AMR conventions, PropBank frames when available, and standard roles. Preserve participant direction, polarity, modality, intent, time, quantity, conditions, causality, comparison, and clause relations represented by the supplied propositions. Preserve names, dates, amounts, products, and places.\n\nDo not reconstruct or assume an unseen source sentence. Do not add background assumptions. Do not encode provenance, confidence, evidence, lifecycle state, project fields, or evaluator metadata in the graph.\n",
+          "role": "system"
+        },
+        {
+          "content": "{\"items\":[{\"evidence_quote\":\"I don't know if I can go that expensive.\",\"knowledge_id\":\"K001\",\"statement\":\"The speaker is uncertain whether they can choose an option that expensive.\"}],\"representation_gaps\":[],\"schema_version\":\"amr-pilot-atomic-knowledge-v1\"}",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "e4e4c7205ffc037f4c42a1d4e46822a117f695f6ce2c55e7ecfbf23316ea06ae",
+      "prompt_sha256": "2e3c70567d681d8ce92883be695cae11a3b7956b7aba29604af68707dde82813",
+      "prompt_version": "knowledge-to-amr-v1",
+      "route": "B",
+      "sample_id": "AMR-S007",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    },
+    {
+      "input_sha256": "fb00b911895f991a8352f365ee2d612aca76eb1da57163d59fd38daeaa6132cb",
+      "max_output_tokens": 1200,
+      "messages": [
+        {
+          "content": "Convert one validated atomic-knowledge JSON object into one standard Abstract Meaning Representation graph.\n\nReturn exactly one PENMAN graph and nothing else. Do not use Markdown fences, commentary, JSON, or multiple top-level graphs.\n\nUse only the supplied atomic propositions. Use standard AMR conventions, PropBank frames when available, and standard roles. Preserve participant direction, polarity, modality, intent, time, quantity, conditions, causality, comparison, and clause relations represented by the supplied propositions. Preserve names, dates, amounts, products, and places.\n\nDo not reconstruct or assume an unseen source sentence. Do not add background assumptions. Do not encode provenance, confidence, evidence, lifecycle state, project fields, or evaluator metadata in the graph.\n",
+          "role": "system"
+        },
+        {
+          "content": "{\"items\":[{\"evidence_quote\":\"It seems that the exact item you want to exchange for is currently not available in our inventory.\",\"knowledge_id\":\"K001\",\"statement\":\"It seems that the exact item you want to exchange for is currently not available in our inventory.\"}],\"representation_gaps\":[],\"schema_version\":\"amr-pilot-atomic-knowledge-v1\"}",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "ae9acba56e256be47ccb9c69da53bafcd8baf5419ca2683f7b0d2af060499d4f",
+      "prompt_sha256": "2e3c70567d681d8ce92883be695cae11a3b7956b7aba29604af68707dde82813",
+      "prompt_version": "knowledge-to-amr-v1",
+      "route": "B",
+      "sample_id": "AMR-S008",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    },
+    {
+      "input_sha256": "66cc08c09fcc1ca7075638dfa2f2b7784a0a96cfc9623647e906c5411f3bb9f0",
+      "max_output_tokens": 1200,
+      "messages": [
+        {
+          "content": "Convert one validated atomic-knowledge JSON object into one standard Abstract Meaning Representation graph.\n\nReturn exactly one PENMAN graph and nothing else. Do not use Markdown fences, commentary, JSON, or multiple top-level graphs.\n\nUse only the supplied atomic propositions. Use standard AMR conventions, PropBank frames when available, and standard roles. Preserve participant direction, polarity, modality, intent, time, quantity, conditions, causality, comparison, and clause relations represented by the supplied propositions. Preserve names, dates, amounts, products, and places.\n\nDo not reconstruct or assume an unseen source sentence. Do not add background assumptions. Do not encode provenance, confidence, evidence, lifecycle state, project fields, or evaluator metadata in the graph.\n",
+          "role": "system"
+        },
+        {
+          "content": "{\"items\":[{\"evidence_quote\":\"Naming Stephanie as the guardian does not necessarily mean she will also manage the financial assets.\",\"knowledge_id\":\"K001\",\"statement\":\"Naming Stephanie as the guardian does not necessarily mean that Stephanie will also manage the financial assets.\"}],\"representation_gaps\":[],\"schema_version\":\"amr-pilot-atomic-knowledge-v1\"}",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "5c15125a5f41c1ef289d83da1930606352caa9aa982bbc87ced930f5ad8a1eed",
+      "prompt_sha256": "2e3c70567d681d8ce92883be695cae11a3b7956b7aba29604af68707dde82813",
+      "prompt_version": "knowledge-to-amr-v1",
+      "route": "B",
+      "sample_id": "AMR-S009",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    },
+    {
+      "input_sha256": "3dd1730aef4f304e12eeb662bc87c9828af8dbec53fd0076cc43946c2d4bbac4",
+      "max_output_tokens": 1200,
+      "messages": [
+        {
+          "content": "Convert one validated atomic-knowledge JSON object into one standard Abstract Meaning Representation graph.\n\nReturn exactly one PENMAN graph and nothing else. Do not use Markdown fences, commentary, JSON, or multiple top-level graphs.\n\nUse only the supplied atomic propositions. Use standard AMR conventions, PropBank frames when available, and standard roles. Preserve participant direction, polarity, modality, intent, time, quantity, conditions, causality, comparison, and clause relations represented by the supplied propositions. Preserve names, dates, amounts, products, and places.\n\nDo not reconstruct or assume an unseen source sentence. Do not add background assumptions. Do not encode provenance, confidence, evidence, lifecycle state, project fields, or evaluator metadata in the graph.\n",
+          "role": "system"
+        },
+        {
+          "content": "{\"items\":[{\"evidence_quote\":\"There is a nonstop flight\",\"knowledge_id\":\"K001\",\"statement\":\"There is a nonstop flight.\"},{\"evidence_quote\":\"departing at 6 PM\",\"knowledge_id\":\"K002\",\"statement\":\"The nonstop flight departs at 6 PM.\"},{\"evidence_quote\":\"arriving the next day at 7:35 AM\",\"knowledge_id\":\"K003\",\"statement\":\"The nonstop flight arrives the next day at 7:35 AM.\"}],\"representation_gaps\":[],\"schema_version\":\"amr-pilot-atomic-knowledge-v1\"}",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "8d5e5a4831db7d9e0d835f83bea6f94bc193b20233971f56dd6c5c0b8d2168c1",
+      "prompt_sha256": "2e3c70567d681d8ce92883be695cae11a3b7956b7aba29604af68707dde82813",
+      "prompt_version": "knowledge-to-amr-v1",
+      "route": "B",
+      "sample_id": "AMR-S010",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    },
+    {
+      "input_sha256": "de18ae1519d57bbee2e79301eac1f48de0db7e99f0c3a49ee47681b550c037a4",
+      "max_output_tokens": 1200,
+      "messages": [
+        {
+          "content": "Convert one validated atomic-knowledge JSON object into one standard Abstract Meaning Representation graph.\n\nReturn exactly one PENMAN graph and nothing else. Do not use Markdown fences, commentary, JSON, or multiple top-level graphs.\n\nUse only the supplied atomic propositions. Use standard AMR conventions, PropBank frames when available, and standard roles. Preserve participant direction, polarity, modality, intent, time, quantity, conditions, causality, comparison, and clause relations represented by the supplied propositions. Preserve names, dates, amounts, products, and places.\n\nDo not reconstruct or assume an unseen source sentence. Do not add background assumptions. Do not encode provenance, confidence, evidence, lifecycle state, project fields, or evaluator metadata in the graph.\n",
+          "role": "system"
+        },
+        {
+          "content": "{\"items\":[{\"evidence_quote\":\"could you cancel the charger I just bought\",\"knowledge_id\":\"K001\",\"statement\":\"The speaker requests that the addressee cancel the charger the speaker just bought.\"},{\"evidence_quote\":\"charger I just bought\",\"knowledge_id\":\"K002\",\"statement\":\"The speaker just bought the charger.\"},{\"evidence_quote\":\"it goes with the tablet\",\"knowledge_id\":\"K003\",\"statement\":\"The charger goes with the tablet.\"},{\"evidence_quote\":\"since it goes with the tablet\",\"knowledge_id\":\"K004\",\"statement\":\"The charger going with the tablet is given as the reason for the speaker's cancellation request.\"}],\"representation_gaps\":[],\"schema_version\":\"amr-pilot-atomic-knowledge-v1\"}",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "350fb9b64c2cd0759e6a29027a7bcce810bdebf1d3cfc7faee2dc167393c8f67",
+      "prompt_sha256": "2e3c70567d681d8ce92883be695cae11a3b7956b7aba29604af68707dde82813",
+      "prompt_version": "knowledge-to-amr-v1",
+      "route": "B",
+      "sample_id": "AMR-S011",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    },
+    {
+      "input_sha256": "8063dd58724b76952c6d6680a85f57c388257b57c02cc5005ea2214ee7815880",
+      "max_output_tokens": 1200,
+      "messages": [
+        {
+          "content": "Convert one validated atomic-knowledge JSON object into one standard Abstract Meaning Representation graph.\n\nReturn exactly one PENMAN graph and nothing else. Do not use Markdown fences, commentary, JSON, or multiple top-level graphs.\n\nUse only the supplied atomic propositions. Use standard AMR conventions, PropBank frames when available, and standard roles. Preserve participant direction, polarity, modality, intent, time, quantity, conditions, causality, comparison, and clause relations represented by the supplied propositions. Preserve names, dates, amounts, products, and places.\n\nDo not reconstruct or assume an unseen source sentence. Do not add background assumptions. Do not encode provenance, confidence, evidence, lifecycle state, project fields, or evaluator metadata in the graph.\n",
+          "role": "system"
+        },
+        {
+          "content": "{\"items\":[{\"evidence_quote\":\"Even if you name Stephanie in your will, the court will review the appointment\",\"knowledge_id\":\"K001\",\"statement\":\"Naming Stephanie in your will does not prevent the court from reviewing the appointment.\"},{\"evidence_quote\":\"the court will review the appointment\",\"knowledge_id\":\"K002\",\"statement\":\"The court will review the appointment.\"},{\"evidence_quote\":\"to ensure it is in the best interest of the children\",\"knowledge_id\":\"K003\",\"statement\":\"The purpose of the court's review of the appointment is to ensure that the appointment is in the best interest of the children.\"}],\"representation_gaps\":[],\"schema_version\":\"amr-pilot-atomic-knowledge-v1\"}",
+          "role": "user"
+        }
+      ],
+      "model_id": "gpt-5.6-terra",
+      "payload_sha256": "23ce2c878ce15c7fa30a5f9dd81a87477fc50840242ae06d93d65d2b2eace2f3",
+      "prompt_sha256": "2e3c70567d681d8ce92883be695cae11a3b7956b7aba29604af68707dde82813",
+      "prompt_version": "knowledge-to-amr-v1",
+      "route": "B",
+      "sample_id": "AMR-S012",
+      "schema_version": "amr-pilot-model-payload-v1",
+      "temperature": 0
+    }
+  ],
+  "schema_version": "amr-pilot-payload-set-v1"
+}

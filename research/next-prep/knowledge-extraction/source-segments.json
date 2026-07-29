@@ -1,0 +1,41 @@
+{
+  "version": "source-segments-v1",
+  "turns": [
+    {
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "turn_index": 1,
+      "agent_sha256": "fc21a93145b001286129cc15b8f6288db38eeb1b03fbc97cacced0faaeabd28f",
+      "tool_results": [
+        {
+          "quote": "平板退货请求已提交，退款 951.21 美元；充电器订单已取消，109.27 美元已退回礼品卡。",
+          "occurrence_index": 0,
+          "marker_occurrence_index": 0
+        }
+      ]
+    },
+    {
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "turn_index": 3,
+      "agent_sha256": "6b483ead37f67363afe8e07b22923cca7a7edec56925c29ebe5c60a9867c80a4",
+      "tool_results": [
+        {
+          "quote": "找到包含运动鞋的订单 #W7449508，商品为 6 码黑色合成材料运动鞋，状态为已送达。",
+          "occurrence_index": 0,
+          "marker_occurrence_index": 0
+        }
+      ]
+    },
+    {
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "turn_index": 4,
+      "agent_sha256": "86de92795a6a0a23c6d1a23c73a1291e2eca9a0aa914917f6988e4849fc88b0d",
+      "tool_results": [
+        {
+          "quote": "运动鞋退货请求已提交，退款 186.45 美元将退回礼品卡。",
+          "occurrence_index": 0,
+          "marker_occurrence_index": 0
+        }
+      ]
+    }
+  ]
+}

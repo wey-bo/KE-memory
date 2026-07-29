@@ -1,0 +1,46 @@
+{
+  "candidate_id": "TASKMASTER2-CAND-001",
+  "turn_index": 0,
+  "context_completions": [],
+  "knowledge": [
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_001",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "statement": "用户想预订一趟从纽约市到阿姆斯特丹的往返航班。",
+      "subject": "用户",
+      "predicate": "想预订",
+      "object": "从纽约市到阿姆斯特丹的往返航班",
+      "qualifiers": {"modality": "requested", "polarity": "positive", "temporal": [], "conditions": [], "scope": ["出发地：纽约市", "目的地：阿姆斯特丹", "行程类型：往返"]},
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [{"turn_index": 0, "message": "user", "occurrence_index": 0, "quote": "我想预订一趟从纽约市到阿姆斯特丹的往返航班"}],
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_002",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "statement": "代理表示可以帮助用户查询航班。",
+      "subject": "代理",
+      "predicate": "可以帮助查询",
+      "object": "航班",
+      "qualifiers": {"modality": "committed", "polarity": "positive", "temporal": [], "conditions": [], "scope": []},
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [{"turn_index": 0, "message": "agent", "occurrence_index": 0, "quote": "我可以帮你查航班"}],
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_000_003",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "statement": "代理询问用户是否还有其他偏好。",
+      "subject": "代理",
+      "predicate": "询问",
+      "object": "用户是否还有其他偏好",
+      "qualifiers": {"modality": "questioned", "polarity": "positive", "temporal": [], "conditions": [], "scope": []},
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [{"turn_index": 0, "message": "agent", "occurrence_index": 0, "quote": "你还有其他偏好吗？"}],
+      "confidence": 1.0
+    }
+  ]
+}

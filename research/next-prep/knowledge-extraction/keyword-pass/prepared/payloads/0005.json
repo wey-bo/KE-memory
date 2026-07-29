@@ -1,0 +1,981 @@
+{
+  "prompt_version": "knowledge-keyword-extraction-v1",
+  "candidate_id": "WILDCHAT-LEARN-CAND-003",
+  "candidate_namespace": "wildchat-learn-cand-003-b1871de6ef7c",
+  "final_knowledge_sha256": "641c88117c206e9901c332e93c4c77e91dc5df703667f441291679dec8c03f41",
+  "active_knowledge": [
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "confidence": 0.99,
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "end": 33,
+          "evidence_id": "evidence-1a1b027e6f6db30233735050f444e9caadbd6f6f5ce2dabf2116acfbc6f4b1ab",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "def make_hyperlink(value)",
+          "start": 8,
+          "turn_index": 0
+        },
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "end": 9,
+          "evidence_id": "evidence-374341ff559d86a1d53010d8b04afb84b7381e67d3669d1042fefdf681ea94b4",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "能给我一个例子吗？",
+          "start": 0,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": "Turn 1's request for an example refers to the make_hyperlink function introduced in turn 0.",
+      "knowledge_id": "D_wildchat-learn-cand-003-b1871de6ef7c_001",
+      "object": "make_hyperlink 函数的使用例子",
+      "predicate": "请求",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "requested",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户请求一个 make_hyperlink 函数的使用例子。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [
+          "K_wildchat-learn-cand-003-b1871de6ef7c_001_001"
+        ],
+        "source_turn": 0,
+        "stage": "dialogue",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "confidence": 0.99,
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "end": 33,
+          "evidence_id": "evidence-1a1b027e6f6db30233735050f444e9caadbd6f6f5ce2dabf2116acfbc6f4b1ab",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "def make_hyperlink(value)",
+          "start": 8,
+          "turn_index": 0
+        },
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "end": 33,
+          "evidence_id": "evidence-809bcb8a71ff7d01ae086110dcb6b14e54a5499513e7f78504bd269964ff3b99",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "如果和 Pandas 的 apply 一起用，能演示并解释参数吗？",
+          "start": 0,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": "The omitted object in turn 2 is the make_hyperlink function introduced and exemplified in the preceding turns.",
+      "knowledge_id": "D_wildchat-learn-cand-003-b1871de6ef7c_002",
+      "object": "make_hyperlink 函数与 Pandas apply 一起使用及其参数",
+      "predicate": "请求演示并解释",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "requested",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户请求演示 make_hyperlink 函数与 Pandas apply 一起使用并解释参数。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [
+          "K_wildchat-learn-cand-003-b1871de6ef7c_002_001"
+        ],
+        "source_turn": 0,
+        "stage": "dialogue",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "end": 109,
+          "evidence_id": "evidence-edc163fc48adafcee09e4b6ae54a4ccf95bc51833ca0f63f138c0b32fbba1b88",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "请解释这个函数：def make_hyperlink(value): url = './{}'; return '=HYPERLINK(\"%s\", \"%s\")' % (url.format(value), value)",
+          "start": 0,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_000_001",
+      "object": "def make_hyperlink(value): url = './{}'; return '=HYPERLINK(\"%s\", \"%s\")' % (url.format(value), value)",
+      "predicate": "请求解释",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "requested",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户请求解释 make_hyperlink 函数。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "end": 10,
+          "evidence_id": "evidence-9b2317158fdbc3c3faa5e56d0eec0fe231c898935f942cb32d1da1d8e27e9be3",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "函数接收 value",
+          "start": 0,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_000_002",
+      "object": "value",
+      "predicate": "接收",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "make_hyperlink 函数接收 value。",
+      "subject": "make_hyperlink 函数",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "end": 26,
+          "evidence_id": "evidence-8ce720ceacc738d3f3f004782f216cc70d573fc390d820ffad1c5d47b10303dc",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "用 './{}' 构造相对路径",
+          "start": 11,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_000_003",
+      "object": "相对路径",
+      "predicate": "构造",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [
+          "使用 './{}'"
+        ],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "make_hyperlink 函数使用 './{}' 构造相对路径。",
+      "subject": "make_hyperlink 函数",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "end": 56,
+          "evidence_id": "evidence-fee488839cdcee9f21e6b35373f31aa73cbeaf3b335f41a73b6496834b6524d6",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "再把路径和显示文本填入电子表格的 HYPERLINK 公式",
+          "start": 27,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_000_004",
+      "object": "路径",
+      "predicate": "填入",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [
+          "电子表格的 HYPERLINK 公式"
+        ],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "make_hyperlink 函数把路径填入电子表格的 HYPERLINK 公式。",
+      "subject": "make_hyperlink 函数",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "end": 56,
+          "evidence_id": "evidence-fee488839cdcee9f21e6b35373f31aa73cbeaf3b335f41a73b6496834b6524d6",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "再把路径和显示文本填入电子表格的 HYPERLINK 公式",
+          "start": 27,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_000_005",
+      "object": "显示文本",
+      "predicate": "填入",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [
+          "电子表格的 HYPERLINK 公式"
+        ],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "make_hyperlink 函数把显示文本填入电子表格的 HYPERLINK 公式。",
+      "subject": "make_hyperlink 函数",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "end": 109,
+          "evidence_id": "evidence-2c431beffe3c69e910747a2bcec81746e6feb167bb95709be4ac54c1df2e86db",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "传入 example 时，结果会是 =HYPERLINK(\"./example\", \"example\")",
+          "start": 57,
+          "turn_index": 0
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_000_006",
+      "object": "=HYPERLINK(\"./example\", \"example\")",
+      "predicate": "结果会是",
+      "qualifiers": {
+        "conditions": [
+          "传入 example"
+        ],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "向 make_hyperlink 传入 example 时，结果会是 =HYPERLINK(\"./example\", \"example\")。",
+      "subject": "make_hyperlink('example')",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 0,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "end": 20,
+          "evidence_id": "evidence-b0e42b525a9717453deb751844544c140ac1a2f18eee9c2cb1673f08b682be17",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "value = 'example'",
+          "start": 3,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_001_002",
+      "object": "value = 'example'",
+      "predicate": "设置",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "示例把 value 设置为 'example'。",
+      "subject": "示例",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "end": 55,
+          "evidence_id": "evidence-be4f57b7d8ae4ca77169717b2e992b1fa7a52fc2ed14bed49c53eb8667434422",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "hyperlink = make_hyperlink(value)",
+          "start": 22,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_001_003",
+      "object": "hyperlink = make_hyperlink(value)",
+      "predicate": "调用并赋值",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "示例调用 make_hyperlink(value) 并把结果赋给 hyperlink。",
+      "subject": "示例",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "end": 73,
+          "evidence_id": "evidence-11cfa7900a9bc1ac5696119415b0d2c3fd30b4cc2e4e5d1552cd43c9cdfa4041",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "print(hyperlink)",
+          "start": 57,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_001_004",
+      "object": "hyperlink",
+      "predicate": "打印",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "示例打印 hyperlink。",
+      "subject": "示例",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "end": 112,
+          "evidence_id": "evidence-b506117420c0df485a93ac52d2ddd951c2ab97ac1c0c875b55b5f963bd87eaec",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "输出是 =HYPERLINK(\"./example\", \"example\")",
+          "start": 74,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_001_005",
+      "object": "=HYPERLINK(\"./example\", \"example\")",
+      "predicate": "是",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "示例输出是 =HYPERLINK(\"./example\", \"example\")。",
+      "subject": "示例输出",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "confidence": 0.99,
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "end": 128,
+          "evidence_id": "evidence-1fef606152551253c943d985d3454b1906e1f7c2d6072ed890650128533fce99",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "输出是 =HYPERLINK(\"./example\", \"example\")，电子表格会把它识别为可点击链接",
+          "start": 74,
+          "turn_index": 1
+        }
+      ],
+      "inference_basis": "“它”回指同一句前半部分给出的示例输出。",
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_001_006",
+      "object": "可点击链接",
+      "predicate": "识别为",
+      "qualifiers": {
+        "conditions": [
+          "接收示例输出"
+        ],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "电子表格会把该输出识别为可点击链接。",
+      "subject": "电子表格",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 1,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "end": 33,
+          "evidence_id": "evidence-809bcb8a71ff7d01ae086110dcb6b14e54a5499513e7f78504bd269964ff3b99",
+          "evidence_role": "user_reported",
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "如果和 Pandas 的 apply 一起用，能演示并解释参数吗？",
+          "start": 0,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_002_002",
+      "object": "参数",
+      "predicate": "请求解释",
+      "qualifiers": {
+        "conditions": [
+          "与 Pandas 的 apply 一起使用"
+        ],
+        "modality": "requested",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "user_reported",
+      "statement": "用户请求解释该 Pandas apply 用法中的参数。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "end": 13,
+          "evidence_id": "evidence-82b16ffd1e1ba02e5b41ec32f942aee44ab9d6f6609882ea246cba83fe10e021",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "先建立 DataFrame",
+          "start": 0,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_002_003",
+      "object": "DataFrame",
+      "predicate": "建立",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": [
+          "先"
+        ]
+      },
+      "source_status": "agent_generated",
+      "statement": "应先建立 DataFrame。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "end": 69,
+          "evidence_id": "evidence-fa99f1cbc66ed87b5102ccd0ea1265fdd8d127d4bdcec0a8132705e3a86a787e",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "再执行 df['Hyperlink'] = df['Value'].apply(make_hyperlink)",
+          "start": 14,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_002_004",
+      "object": "df['Hyperlink'] = df['Value'].apply(make_hyperlink)",
+      "predicate": "执行",
+      "qualifiers": {
+        "conditions": [
+          "建立 DataFrame 后"
+        ],
+        "modality": "advised",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "建立 DataFrame 后应执行 df['Hyperlink'] = df['Value'].apply(make_hyperlink)。",
+      "subject": "用户",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "end": 110,
+          "evidence_id": "evidence-5db0a5bcc39a99b0121a23dc466f62d33ed1a35073ceb6bbd682124164cb3913",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "apply 会把 Value 列的每个元素依次传给 make_hyperlink",
+          "start": 70,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_002_005",
+      "object": "make_hyperlink",
+      "predicate": "依次传给",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [
+          "Value 列的每个元素"
+        ],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "apply 会把 Value 列的每个元素依次传给 make_hyperlink。",
+      "subject": "apply",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    },
+    {
+      "candidate_id": "WILDCHAT-LEARN-CAND-003",
+      "confidence": 0.99,
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "candidate_id": "WILDCHAT-LEARN-CAND-003",
+          "end": 132,
+          "evidence_id": "evidence-8163a08799d23be16f78cdb2ff57f4d150fe816284e8cc58dd5014614cf14c59",
+          "evidence_role": "agent_generated",
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "返回的新字符串列保存为 Hyperlink",
+          "start": 111,
+          "turn_index": 2
+        }
+      ],
+      "inference_basis": null,
+      "knowledge_id": "K_wildchat-learn-cand-003-b1871de6ef7c_002_006",
+      "object": "Hyperlink",
+      "predicate": "保存为",
+      "qualifiers": {
+        "conditions": [],
+        "modality": "asserted",
+        "polarity": "positive",
+        "scope": [],
+        "temporal": []
+      },
+      "source_status": "agent_generated",
+      "statement": "make_hyperlink 返回的新字符串列保存为 Hyperlink。",
+      "subject": "make_hyperlink 返回的新字符串列",
+      "projection": {
+        "added_by": [],
+        "confirmed_by": [],
+        "conflicts_with": [],
+        "equivalence_group": null,
+        "replacement_id": null,
+        "replaces": [],
+        "source_turn": 2,
+        "stage": "turn",
+        "status": "active",
+        "supersedes": []
+      }
+    }
+  ],
+  "keyword_id_prefix": "KW_wildchat-learn-cand-003-b1871de6ef7c_",
+  "output_contract": {
+    "$defs": {
+      "KeywordDraft": {
+        "additionalProperties": false,
+        "properties": {
+          "keyword_id": {
+            "minLength": 1,
+            "title": "Keyword Id",
+            "type": "string"
+          },
+          "knowledge_id": {
+            "minLength": 1,
+            "title": "Knowledge Id",
+            "type": "string"
+          },
+          "surface": {
+            "minLength": 1,
+            "title": "Surface",
+            "type": "string"
+          },
+          "normalized_zh": {
+            "minLength": 1,
+            "title": "Normalized Zh",
+            "type": "string"
+          },
+          "query_lemma": {
+            "minLength": 1,
+            "title": "Query Lemma",
+            "type": "string"
+          },
+          "keyword_type": {
+            "enum": [
+              "entity",
+              "concept",
+              "action",
+              "event",
+              "property",
+              "relation",
+              "time",
+              "quantity",
+              "condition",
+              "modality"
+            ],
+            "title": "Keyword Type",
+            "type": "string"
+          },
+          "semantic_role": {
+            "minLength": 1,
+            "title": "Semantic Role",
+            "type": "string"
+          },
+          "source_field": {
+            "minLength": 1,
+            "title": "Source Field",
+            "type": "string"
+          },
+          "translation_confidence": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Translation Confidence",
+            "type": "number"
+          }
+        },
+        "required": [
+          "keyword_id",
+          "knowledge_id",
+          "surface",
+          "normalized_zh",
+          "query_lemma",
+          "keyword_type",
+          "semantic_role",
+          "source_field",
+          "translation_confidence"
+        ],
+        "title": "KeywordDraft",
+        "type": "object"
+      },
+      "KnowledgeKeywordOutput": {
+        "additionalProperties": false,
+        "properties": {
+          "knowledge_id": {
+            "minLength": 1,
+            "title": "Knowledge Id",
+            "type": "string"
+          },
+          "keywords": {
+            "items": {
+              "$ref": "#/$defs/KeywordDraft"
+            },
+            "title": "Keywords",
+            "type": "array"
+          },
+          "no_keyword_reason": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "No Keyword Reason"
+          }
+        },
+        "required": [
+          "knowledge_id"
+        ],
+        "title": "KnowledgeKeywordOutput",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "candidate_id": {
+        "minLength": 1,
+        "title": "Candidate Id",
+        "type": "string"
+      },
+      "items": {
+        "items": {
+          "$ref": "#/$defs/KnowledgeKeywordOutput"
+        },
+        "title": "Items",
+        "type": "array"
+      }
+    },
+    "required": [
+      "candidate_id"
+    ],
+    "title": "KeywordPassOutput",
+    "type": "object"
+  },
+  "prompt_sha256": "70dbd462ca8d7ddbedbcf590e4724ef8d8d6162766e821c7c9b7a2f1b5674e78",
+  "output_contract_sha256": "f95617e4bd5a2902c93cfe88c8af55860f235f18c8153afa0fc56a224568132a"
+}

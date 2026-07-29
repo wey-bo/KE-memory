@@ -1,0 +1,28 @@
+{
+  "schema_version": "identity-diagnostic-manifest-v1",
+  "dataset_id": "identity-diagnostic-v1",
+  "frozen_at": "2026-07-27T08:00:00Z",
+  "source_file": "source-scenarios.json",
+  "source_sha256": "a0a3fd7d8eba9b350b44049edd78d18b54cdd697b5ee5d6d44af60fdce064ed3",
+  "gold_file": "gold.json",
+  "gold_sha256": "817d0461af1249fc617f6d8569d81639269309b67c0b2b954c7e50d8dc28f62d",
+  "schemaorg_reference": "../schemaorg-selected-v30.json",
+  "schemaorg_reference_sha256": "38b40b2248f215cd385b8a3500639ae6b4b02bf8dbbb5a7f076cfd0bddae2c4a",
+  "scenario_count": 8,
+  "dev_count": 4,
+  "hidden_count": 4,
+  "pre_registered_gates": {
+    "critical_false_merge_max": 0,
+    "answerable_count_exact": 1.0,
+    "evidence_set_exact": 1.0,
+    "abstention_correctness": 1.0,
+    "revision_correctness": 1.0,
+    "closure_freshness": 1.0,
+    "native_round_trip": 1.0,
+    "extended_amr_v3_round_trip": 1.0,
+    "query_parity": 1.0,
+    "structural_fallback_rate": 0.0,
+    "v5_longmemeval_abstention_regression": true
+  },
+  "claim_boundary": "Hand-authored identity contract diagnostic; not an automatic entity-linking benchmark or a product comparison."
+}

@@ -1,0 +1,221 @@
+{
+  "candidate_id": "TASKMASTER2-CAND-001",
+  "turn_index": 1,
+  "context_completions": [
+    {
+      "completion_id": "C_taskmaster2-cand-001-5f5e1081bd0b_001_001",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "turn_index": 1,
+      "kind": "temporal_resolution",
+      "original_span": "今天",
+      "interpretation": "说话当日；具体日历日期在本轮中无法确定。",
+      "confidence": 1.0,
+      "ambiguity": true,
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我今天出发",
+          "evidence_id": "evidence-412aa5494228af3db85850b650be132bcb295bd2e35809384aa13db8661a4029",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 5
+        }
+      ]
+    },
+    {
+      "completion_id": "C_taskmaster2-cand-001-5f5e1081bd0b_001_002",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "turn_index": 1,
+      "kind": "unresolved",
+      "original_span": "19 号",
+      "interpretation": "某月19日；月份和年份在本轮中未说明。",
+      "confidence": 1.0,
+      "ambiguity": true,
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "19 号回来",
+          "evidence_id": "evidence-8a2b26e7fba00a0925c6ae2bf90080862ac0f103097cec08dc0d3a3f7257a8bc",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 6,
+          "end": 12
+        }
+      ]
+    },
+    {
+      "completion_id": "C_taskmaster2-cand-001-5f5e1081bd0b_001_003",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "turn_index": 1,
+      "kind": "coreference",
+      "original_span": "两程",
+      "interpretation": "去程和返程。",
+      "confidence": 1.0,
+      "ambiguity": false,
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我今天出发，19 号回来。两程都希望尽可能早",
+          "evidence_id": "evidence-3fa11d26ed4570b4dcc2aaef29c5aa4398ec9effe1d6ba6d3e42315c8a4ddf9e",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 22
+        }
+      ]
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_001",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "statement": "用户计划在说话当日出发，具体日历日期在本轮中无法确定。",
+      "subject": "用户",
+      "predicate": "计划出发",
+      "object": null,
+      "qualifiers": {
+        "modality": "planned",
+        "polarity": "positive",
+        "temporal": [
+          "今天（说话当日，具体日期未确定）"
+        ],
+        "conditions": [],
+        "scope": [
+          "去程"
+        ]
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我今天出发",
+          "evidence_id": "evidence-412aa5494228af3db85850b650be132bcb295bd2e35809384aa13db8661a4029",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 5
+        }
+      ],
+      "inference_basis": "“今天”可解析为说话当日，但本轮没有可用于确定日历日期的时间锚点。",
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_002",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "statement": "用户计划在某月19日返回，月份和年份在本轮中未说明。",
+      "subject": "用户",
+      "predicate": "计划返回",
+      "object": null,
+      "qualifiers": {
+        "modality": "planned",
+        "polarity": "positive",
+        "temporal": [
+          "19号（月份和年份未说明）"
+        ],
+        "conditions": [],
+        "scope": [
+          "返程"
+        ]
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "19 号回来",
+          "evidence_id": "evidence-8a2b26e7fba00a0925c6ae2bf90080862ac0f103097cec08dc0d3a3f7257a8bc",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 6,
+          "end": 12
+        }
+      ],
+      "inference_basis": "本轮只给出日号“19号”，没有给出月份或年份。",
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_003",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "statement": "用户希望去程时间尽可能早。",
+      "subject": "用户",
+      "predicate": "偏好",
+      "object": "尽可能早的去程",
+      "qualifiers": {
+        "modality": "preferred",
+        "polarity": "positive",
+        "temporal": [
+          "尽可能早"
+        ],
+        "conditions": [],
+        "scope": [
+          "去程"
+        ]
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "两程都希望尽可能早",
+          "evidence_id": "evidence-87a6dabe02b796a4305270982b1ad9d7fe0fa7ad63fcba51ba8e7e88e181f33c",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 13,
+          "end": 22
+        }
+      ],
+      "inference_basis": "“两程”明确涵盖去程和返程，因此该共同偏好可原子化到去程。",
+      "confidence": 1.0
+    },
+    {
+      "knowledge_id": "K_taskmaster2-cand-001-5f5e1081bd0b_001_004",
+      "candidate_id": "TASKMASTER2-CAND-001",
+      "statement": "用户希望返程时间尽可能早。",
+      "subject": "用户",
+      "predicate": "偏好",
+      "object": "尽可能早的返程",
+      "qualifiers": {
+        "modality": "preferred",
+        "polarity": "positive",
+        "temporal": [
+          "尽可能早"
+        ],
+        "conditions": [],
+        "scope": [
+          "返程"
+        ]
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "两程都希望尽可能早",
+          "evidence_id": "evidence-87a6dabe02b796a4305270982b1ad9d7fe0fa7ad63fcba51ba8e7e88e181f33c",
+          "candidate_id": "TASKMASTER2-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 13,
+          "end": 22
+        }
+      ],
+      "inference_basis": "“两程”明确涵盖去程和返程，因此该共同偏好可原子化到返程。",
+      "confidence": 1.0
+    }
+  ]
+}

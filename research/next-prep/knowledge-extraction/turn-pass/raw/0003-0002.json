@@ -1,0 +1,247 @@
+{
+  "candidate_id": "WILDCHAT-MGMT-CAND-003",
+  "turn_index": 2,
+  "context_completions": [
+    {
+      "completion_id": "C_wildchat-mgmt-cand-003-f877bc2fc8f5_002_001",
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "turn_index": 2,
+      "kind": "unresolved",
+      "original_span": "它们",
+      "interpretation": "当前消息未提供的先前目标集合",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "请把它们改成 SMART 绩效目标"
+        }
+      ],
+      "confidence": 1,
+      "ambiguity": true
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_001",
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "statement": "用户请求把当前消息未提供的先前目标改成 SMART 绩效目标。",
+      "subject": "用户",
+      "predicate": "请求改成",
+      "object": "SMART 绩效目标",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "请把它们改成 SMART 绩效目标"
+        }
+      ],
+      "confidence": 0.99,
+      "inference_basis": "代词“它们”所指的先前目标集合未出现在当前消息中。"
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_002",
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "statement": "代理建议下一财年通过定向宣传将入住率提高 10%。",
+      "subject": "绩效目标",
+      "predicate": "可设为",
+      "object": "通过定向宣传将入住率提高 10%",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [
+          "下一财年"
+        ],
+        "conditions": [],
+        "scope": [
+          "10%"
+        ]
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "下一财年通过定向宣传将入住率提高 10%"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_003",
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "statement": "代理建议通过数字工单系统把维修响应时间缩短 20%。",
+      "subject": "绩效目标",
+      "predicate": "可设为",
+      "object": "通过数字工单系统把维修响应时间缩短 20%",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": [
+          "20%"
+        ]
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "通过数字工单系统把维修响应时间缩短 20%"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_004",
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "statement": "代理建议未来两年通过拨款和开发商合作增加 15% 的可负担住房。",
+      "subject": "绩效目标",
+      "predicate": "可设为",
+      "object": "通过拨款和开发商合作增加 15% 的可负担住房",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [
+          "未来两年"
+        ],
+        "conditions": [],
+        "scope": [
+          "15%"
+        ]
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "未来两年通过拨款和开发商合作增加 15% 的可负担住房"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_005",
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "statement": "代理建议六个月内完成一项涵盖员工客服、冲突解决和公平住房的培训计划。",
+      "subject": "绩效目标",
+      "predicate": "可设为",
+      "object": "完成一项涵盖员工客服、冲突解决和公平住房的培训计划",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [
+          "六个月内"
+        ],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "六个月内完成员工客服、冲突解决和公平住房培训计划"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_006",
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "statement": "代理建议每项 SMART 绩效目标都有具体指标。",
+      "subject": "每项绩效目标",
+      "predicate": "应有",
+      "object": "具体指标",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "每项目标都应有具体指标、截止时间和可验证结果"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_007",
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "statement": "代理建议每项 SMART 绩效目标都有截止时间。",
+      "subject": "每项绩效目标",
+      "predicate": "应有",
+      "object": "截止时间",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "每项目标都应有具体指标、截止时间和可验证结果"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_008",
+      "candidate_id": "WILDCHAT-MGMT-CAND-003",
+      "statement": "代理建议每项 SMART 绩效目标都有可验证结果。",
+      "subject": "每项绩效目标",
+      "predicate": "应有",
+      "object": "可验证结果",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "每项目标都应有具体指标、截止时间和可验证结果"
+        }
+      ],
+      "confidence": 0.98
+    }
+  ]
+}

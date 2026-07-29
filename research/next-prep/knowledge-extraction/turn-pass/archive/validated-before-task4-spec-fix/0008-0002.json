@@ -1,0 +1,435 @@
+{
+  "candidate_id": "WILDCHAT-LEARN-CAND-001",
+  "turn_index": 2,
+  "context_completions": [],
+  "knowledge": [
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_002_001",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "用户添加了依赖。",
+      "subject": "用户",
+      "predicate": "添加",
+      "object": "依赖",
+      "qualifiers": {
+        "modality": "claimed_completed",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "我加了依赖",
+          "evidence_id": "evidence-f7574929c702749e8352c0b12a9990ef5dba2a55fb5f49298b4f83fe6760cd1d",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 0,
+          "end": 5
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_002_002",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "添加依赖后错误都消失了。",
+      "subject": "错误",
+      "predicate": "都消失",
+      "object": null,
+      "qualifiers": {
+        "modality": "observed",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [
+          "添加依赖后"
+        ],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "错误都没了",
+          "evidence_id": "evidence-b9c54bb1e8cc7eda64900011986bbb6b39f17f7f23bab37a432c552adcc69d6f",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 6,
+          "end": 11
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_002_003",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "app 在手机上会立刻关闭。",
+      "subject": "app",
+      "predicate": "立刻关闭",
+      "object": null,
+      "qualifiers": {
+        "modality": "observed",
+        "polarity": "positive",
+        "temporal": [
+          "立刻"
+        ],
+        "conditions": [
+          "在手机上运行"
+        ],
+        "scope": [
+          "手机"
+        ]
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "app 在手机上会立刻关闭",
+          "evidence_id": "evidence-5040a98bca5a190ed108f8aefab348dc55c228ba8a72a5435691ffa2abd7561a",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 14,
+          "end": 27
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_002_004",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "用户请求解决 app 在手机上立刻关闭的问题。",
+      "subject": "用户",
+      "predicate": "请求",
+      "object": "解决 app 在手机上立刻关闭的问题",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "inferred",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "怎么办？",
+          "evidence_id": "evidence-d9fdd7e5d34deaa25c650439c3cecb821a764135aa09e2aff98954ac003c235e",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "user_reported",
+          "start": 28,
+          "end": 32
+        }
+      ],
+      "inference_basis": "问题紧接在 app 会立刻关闭的报告之后。",
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_002_005",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "app 立刻关闭更可能是运行时错误。",
+      "subject": "app 立刻关闭",
+      "predicate": "更像",
+      "object": "运行时错误",
+      "qualifiers": {
+        "modality": "possible",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "这更像运行时错误或依赖兼容问题",
+          "evidence_id": "evidence-cbf15aa12c3b740138f3baefbec94407d9937ade929d45f7bf0859bc5aee27b6",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 0,
+          "end": 15
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_002_006",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "app 立刻关闭更可能是依赖兼容问题。",
+      "subject": "app 立刻关闭",
+      "predicate": "更像",
+      "object": "依赖兼容问题",
+      "qualifiers": {
+        "modality": "possible",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "这更像运行时错误或依赖兼容问题",
+          "evidence_id": "evidence-cbf15aa12c3b740138f3baefbec94407d9937ade929d45f7bf0859bc5aee27b6",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 0,
+          "end": 15
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_002_007",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "用户应先连接设备并查看 Android Studio 的 Logcat。",
+      "subject": "用户",
+      "predicate": "查看",
+      "object": "Android Studio 的 Logcat",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [
+          "先"
+        ],
+        "conditions": [
+          "连接设备"
+        ],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "先连接设备查看 Android Studio 的 Logcat",
+          "evidence_id": "evidence-e21a7df7fb54bb45136b7aa51943f491af84a176167936f44fee71ce68b3a75a",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 16,
+          "end": 47
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_002_008",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "用户应检查新增依赖版本。",
+      "subject": "用户",
+      "predicate": "检查",
+      "object": "新增依赖版本",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "再检查新增依赖版本",
+          "evidence_id": "evidence-b01cbb47fd432c5938cff0888abbc7e06c1740e8b641bb192f8b619524b131ed",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 48,
+          "end": 57
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_002_009",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "用户应执行 Gradle 同步。",
+      "subject": "用户",
+      "predicate": "执行",
+      "object": "Gradle 同步",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "执行 Gradle 同步",
+          "evidence_id": "evidence-36c80d94c873c866aefe6c592b996552b25754f77dd514d05c9376ef7117f947",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 58,
+          "end": 70
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_002_010",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "用户应执行 Clean/Rebuild。",
+      "subject": "用户",
+      "predicate": "执行",
+      "object": "Clean/Rebuild",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "Clean/Rebuild",
+          "evidence_id": "evidence-37ddff78dfe5e8d94e06c2d3af5c2ff1c2b4cfac7a13d1a0c2c7a0beafa0bd93",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 71,
+          "end": 84
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_002_011",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "用户应核对 AndroidManifest.xml 的 activity 配置。",
+      "subject": "用户",
+      "predicate": "核对",
+      "object": "AndroidManifest.xml 的 activity 配置",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "核对 AndroidManifest.xml 的 activity、主题和 intent-filter 配置",
+          "evidence_id": "evidence-3b7c9b28716b2000cb1f37b31670d62796682fb8e41f34aa27859fb8de94aa79",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 86,
+          "end": 140
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_002_012",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "用户应核对 AndroidManifest.xml 的主题配置。",
+      "subject": "用户",
+      "predicate": "核对",
+      "object": "AndroidManifest.xml 的主题配置",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "核对 AndroidManifest.xml 的 activity、主题和 intent-filter 配置",
+          "evidence_id": "evidence-3b7c9b28716b2000cb1f37b31670d62796682fb8e41f34aa27859fb8de94aa79",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 86,
+          "end": 140
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    },
+    {
+      "knowledge_id": "K_wildchat-learn-cand-001-8def27ce661d_002_013",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "statement": "用户应核对 AndroidManifest.xml 的 intent-filter 配置。",
+      "subject": "用户",
+      "predicate": "核对",
+      "object": "AndroidManifest.xml 的 intent-filter 配置",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "核对 AndroidManifest.xml 的 activity、主题和 intent-filter 配置",
+          "evidence_id": "evidence-3b7c9b28716b2000cb1f37b31670d62796682fb8e41f34aa27859fb8de94aa79",
+          "candidate_id": "WILDCHAT-LEARN-CAND-001",
+          "evidence_role": "agent_generated",
+          "start": 86,
+          "end": 140
+        }
+      ],
+      "inference_basis": null,
+      "confidence": 0.99
+    }
+  ]
+}

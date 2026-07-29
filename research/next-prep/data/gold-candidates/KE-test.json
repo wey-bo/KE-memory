@@ -1,0 +1,238 @@
+{
+  "candidates": [
+    {
+      "id": "WILDCHAT-MGMT-CAND-001",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=f307c772ed4efbb74c3848c4b5debba6 / model=gpt-3.5-turbo-0613 / user_ordinal=1..5 / toxic=false / redacted=false",
+      "turns": [
+        {
+          "user": "我在一家律师事务所工作，需要争取更多工作。我想向平时会分派工作的合伙人询问，但未来两个月可能要出国休假一周。我应该什么时候告诉他？如果现在说，他会不会因为项目可能和休假冲突而不给我工作？",
+          "agent": "最好尽早、透明地沟通，同时说明你会如何安排交付。若项目很紧急，应在分派前说明休假日期；如果任务可调整或委派，也可以先确认工作范围，再说明休假并承诺在离开前完成交接。"
+        },
+        {
+          "user": "过去两个月事务所的工作不多，其他人也有类似问题。获得工作分派的最好方式是什么？主动联系事务所里的合伙人，还是联系以前的律所请他们转介？",
+          "agent": "可以同时做几件事：主动联系会分派工作的合伙人，向其他业务组同事表示可提供支持，参加所内活动建立关系，使用内部工作机会平台，并在合规前提下做客户和业务拓展。关键是持续、明确地表达你的可用时间和愿意承担的工作。"
+        },
+        {
+          "user": "我准备采用联系事务所合伙人和做业务拓展这两种方式。现在是 11 月，今天联系工作时要不要提 12 月 15 日到 12 月 26 日的休假？我担心现在说会影响分派。",
+          "agent": "应该现在说明。提前告知能让合伙人在安排工作时考虑你的可用时间；同时强调你在休假前后都可以工作，并愿意提前完成任务、安排交接。这样既保持透明，也不会把休假包装成无法承担工作的信号。"
+        },
+        {
+          "user": "我想今天发邮件说明我有空并愿意接工作，下面这样写可以吗？我还想询问客户 X 下一轮融资的大概时间，并说明 12 月 15 日到 26 日出国。",
+          "agent": "思路是对的，但邮件应更直接：先表达可承担近期项目，再询问客户 X 的融资时间，最后说明休假日期和交接安排。主题可写“近期工作安排和出行计划”，正文说明你愿意接手项目、希望了解融资时间，并承诺在出发前完成待办、保证工作顺利衔接。"
+        },
+        {
+          "user": "谢谢。上面的邮件看起来太正式了，像初级律师写的。我是资深律师，下面这个版本怎么样？",
+          "agent": "可以把语气改得更简洁、自信：说明你目前有空、愿意承担新的挑战；询问客户 X 融资轮次的预期时间以便安排优先级；说明 12 月 15 日到 26 日出行，并表示会在出发前完成任务、与团队协作处理交接。"
+        }
+      ]
+    },
+
+    {
+      "id": "WILDCHAT-MGMT-CAND-002",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=4b457fcbf5d2231cf9cc4a762097fb51 / model=gpt-3.5-turbo-0613 / user_ordinal=1..3 / toxic=false / redacted=false",
+      "turns": [
+        {
+          "user": "我负责一个转型导师、赋能与健康频道的内容运营。请围绕“制作有独占价值的内容”，制定一个 30 天计划，每天至少安排一项活动，先发布到 Telegram。",
+          "agent": "可以按“介绍频道、深度文章、专家直播、教程、案例、冥想音频、书单、问答和自我反思练习”交替安排 30 天，确保内容持续更新，并让订阅者有参与和反馈的入口。"
+        },
+        {
+          "user": "很好。请改成 Instagram 版本，并加入博客、Reels，以及 Stories 和 Reels 中的故事叙述。",
+          "agent": "Instagram 版本可以将博客拆成轮播摘要，用 Reels 发布短教程、锻炼和目标设定，用 Stories 做个人转变故事、投票、问答和幕后内容，再用 Instagram Live 做周期性问答。"
+        },
+        {
+          "user": "请基于这个主题，给我一个用故事叙述连续制作 Reels 的方案。",
+          "agent": "可以做“转变故事”系列：第一集讲迈出第一步，第二集讲接受不完美，第三集讲自我照顾。每集用冲突或问题开场，加入一个具体经历，再用一句可执行的反思问题收尾，让多集形成连续的成长路径。"
+        }
+      ]
+    },
+    {
+      "id": "WILDCHAT-LEARN-CAND-002",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=e0aeabf3573990b3b4fe5fd6dc87af3f / model=gpt-3.5-turbo-0613 / user_ordinal=1..4 / toxic=false / redacted=false",
+      "turns": [
+        {
+          "user": "我想用 Praat 把普通话“居”的二声到三声做成 9 步等距连续体。两个声调的 F0 曲线都比较弯，操作很难。你能教我用 PSOLA 在 Praat 里完成吗？",
+          "agent": "可以先载入代表二声的录音，提取目标片段和 F0 曲线，把 F0 数据导出为文本并按等距规则生成 9 组目标值，再在 Praat 的 Manipulation/PSOLA 流程中替换或调整音高，逐步试听和检查结果。"
+        },
+        {
+          "user": "能具体解释一下第 4 步吗？我没法把它提取成文本文件。",
+          "agent": "提取 F0 后，在 Praat 中选中显示的数值并复制到文本编辑器，保存为 .txt；同时确认音高范围和提取算法设置合适，再用这个文件定义连续体的目标 F0。"
+        },
+        {
+          "user": "我说得更具体一点：我要改变二声的 F0 转折点和 offset，让它逐渐变成三声，而且每一步都要等距。PSOLA 应该怎么用？",
+          "agent": "可以先从录音生成 Pitch，再转为 Manipulation 对象，在 Manipulation 窗口中使用替换音高的功能，以 PSOLA 为方法调整目标音高。把总变化范围按 9 个等距级别分配，并保持时长和其他参数一致。"
+        },
+        {
+          "user": "第 8 步里没有看到 Scale pitch，你能再详细一点吗？",
+          "agent": "如果当前 Praat 版本没有 Scale pitch，可以改用 Manipulation 中的 Replace pitch 或等效的 PSOLA 音高替换流程；重点是设定起始、终止和平均音高，检查每个级别的 F0 转折点与 offset，再试听导出的连续体。"
+        }
+      ]
+    },
+    {
+      "id": "WILDCHAT-MGMT-CAND-003",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=385239bfd15ddb106fca3768d3f845c3 / model=gpt-3.5-turbo-0613 / user_ordinal=1..3 / toxic=false / redacted=false",
+      "turns": [
+        {
+          "user": "请为公共住房机构的高级项目经理写 10 个绩效目标。",
+          "agent": "可以从项目执行效率、报告及时性、绩效指标、利益相关方参与、可负担住房创新、居民满意度、跨部门协作、持续改进、员工培训和法规趋势等方面设定目标。"
+        },
+        {
+          "user": "再写一些目标。",
+          "agent": "还可以增加：按预算和进度完成资本改造项目；提高公众对住房项目的了解；争取更多资金；确保公平住房和机会平等合规；降低空置率；改进维修响应；加强灾害准备；推进多元、公平与包容；促进居民经济赋能；与地方伙伴合作。"
+        },
+        {
+          "user": "请把它们改成 SMART 绩效目标。",
+          "agent": "例如：下一财年通过定向宣传将入住率提高 10%；通过数字工单系统把维修响应时间缩短 20%；未来两年通过拨款和开发商合作增加 15% 的可负担住房；六个月内完成员工客服、冲突解决和公平住房培训计划。每项目标都应有具体指标、截止时间和可验证结果。"
+        }
+      ]
+    },  
+    {
+      "id": "WILDCHAT-LEARN-CAND-004",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=3ca76da0eae68a26604ef25b4bb54bef / model=gpt-3.5-turbo-0613 / user_ordinal=1..3 / toxic=false / redacted=false",
+      "turns": [
+        {
+          "user": "“学习风格会显著影响学生学习”这个说法，请给出更有证据依据、更准确的结论，并据此提出实践建议。",
+          "agent": "更准确的说法是：研究并不支持把学生固定归类为听觉、视觉或动觉学习者；教学应采用多模态、主动学习和差异化支持，并根据学生的实际表现调整方法。"
+        },
+        {
+          "user": "“有学习困难的学生能力是固定的、无法提高”这句话也请这样处理。",
+          "agent": "更准确的结论是：学习困难会带来特定领域的挑战，但通过早期识别、个别化教育计划、差异化教学和持续评估，学生的能力可以发展。"
+        },
+        {
+          "user": "“记忆是成功学习的关键”呢？",
+          "agent": "记忆有作用，但不是唯一关键。深层理解、批判性思维、知识应用、刻意练习和检索练习共同支持长期学习效果。"
+        }
+      ]
+    },
+    {
+      "id": "TASKMASTER2-CAND-001",
+      "source": "Taskmaster-2 flights/train-00000-of-00001.parquet / conversation=dlg-0486d642-4627-489a-a0f3-14d1c2b97068 / user_ordinal=1..6 / raw_utterance_index=0..15",
+      "turns": [
+        {
+          "user": "你好，我想预订一趟从纽约市到阿姆斯特丹的往返航班。",
+          "agent": "好的，我可以帮你查航班。你还有其他偏好吗？"
+        },
+        {
+          "user": "我今天出发，19 号回来。两程都希望尽可能早。",
+          "agent": "好的，听起来没问题。"
+        },
+        {
+          "user": "如果可以，也请帮我找最便宜的航班。",
+          "agent": "我查到最便宜的往返票：需要经停一次，凌晨 12:30 出发，次日 11:55 抵达，价格是 1,287 美元。要我帮你订吗？"
+        },
+        {
+          "user": "有没有直飞的？",
+          "agent": "我再查一下。有一班直飞航班，下午 6 点出发，次日早上 7:35 抵达，价格是 2,677 美元。这个方案更符合你的偏好吗？"
+        },
+        {
+          "user": "这个价格有点贵，还是选你刚才说的第一班吧。",
+          "agent": "好的，已经把全部信息发送到你的邮箱。"
+        },
+        {
+          "user": "非常感谢你的帮助。",
+          "agent": "不客气，祝你旅途愉快。"
+        }
+      ]
+    },
+    {
+      "id": "TAU-BENCH-CAND-001",
+      "source": "τ-bench historical retail / tau-bench-gpt-4o-retail.json / record_index=30 / task_id=30 / trial=0 / user_ordinal=6..10",
+      "turns": [
+        {
+          "user": "那就退回平板吧。另外，我刚买的充电器是配这个平板的，你能把充电器也取消吗？",
+          "agent": "可以，计划如下：1. 退回订单 #W2692684 中的平板，退款退回现有礼品卡；2. 取消订单 #W9373487 中的便携式充电器，原因记为“已不再需要”。请确认是否执行。"
+        },
+        {
+          "user": "请执行平板退货和充电器取消。",
+          "agent": "[工具调用] return_delivered_order_items(order_id=#W2692684, item_id=3788616824, payment_method=gift_card_7711863)；[工具调用] cancel_pending_order(order_id=#W9373487, reason=no longer needed)。[工具结果] 平板退货请求已提交，退款 951.21 美元；充电器订单已取消，109.27 美元已退回礼品卡。"
+        },
+        {
+          "user": "谢谢。你也能帮我退回买的运动鞋吗？",
+          "agent": "可以。请提供运动鞋的订单号，或者确认它是否属于你最近的某个订单。"
+        },
+        {
+          "user": "我不记得订单号了，但它属于我最近的某个订单。",
+          "agent": "[工具调用] get_order_details(order_id=#W7449508)。[工具结果] 找到包含运动鞋的订单 #W7449508，商品为 6 码黑色合成材料运动鞋，状态为已送达。请确认是否退货，退款退回现有礼品卡。"
+        },
+        {
+          "user": "请退回运动鞋，退款退到我的礼品卡就可以。",
+          "agent": "[工具调用] return_delivered_order_items(order_id=#W7449508, item_id=6477915553, payment_method=gift_card_7711863)。[工具结果] 运动鞋退货请求已提交，退款 186.45 美元将退回礼品卡。"
+        }
+      ]
+    },
+    {
+      "id": "BEAM-CAND-004",
+      "source": "Mohammadta/BEAM / split=100K / conversation_id=19 / session_index=1 / message_index=0..9 / source_time_anchor=2024-05-02",
+      "turns": [
+        {
+          "user": "我有点担心遗嘱执行人的选择。Douglas 已于 4 月 15 日在珊瑚湾咖啡馆（Coral Bay Café）接受了这个安排，而 Kimberly 和 Bradley 等家人参加了 3 月 25 日在我家举行的那次会议。我一直在想，如果他们知道我选的是 Douglas，会怎么看？",
+          "agent": "选择遗嘱执行人可能是敏感决定，尤其牵涉家庭关系。你可以和 Kimberly、Bradley 坦诚沟通，说明选择 Douglas 的原因；如果仍有顾虑，也可以讨论共同遗嘱执行人，或向遗产规划律师 Stephanie 征求意见。"
+        },
+        {
+          "user": "我觉得再安排一次家庭会议是个好主意。这样我们可以面对面把事情谈清楚，并处理他们可能有的任何顾虑。而且我们也有一阵子没聚在一起了。",
+          "agent": "再安排一次家庭会议可以让每个人的意见都被听见。可以选一个大家方便的时间和地点，准备议程，讨论遗嘱执行人的职责、对 Douglas 的顾虑、共同执行人的可能性以及最终决定。"
+        },
+        {
+          "user": "好，那就安排一次会议吧。你能帮我起草邀请和议程吗？那会很有帮助。",
+          "agent": "当然可以。邀请可以说明会议主题是讨论遗嘱执行人选择，并列出拟议日期、时间和地点；议程包括介绍目的、讨论职责、听取 Kimberly 和 Bradley 的顾虑、讨论共同执行人方案、确认决定和后续步骤。"
+        },
+        {
+          "user": "我必须在 2024 年 5 月 15 日前完成遗嘱，而当前时间锚是 2024 年 5 月 2 日。我感到压力很大。考虑到我已经和家人开过会、Douglas 也接受了执行人角色，我怎样才能确保遗嘱具有法律效力？",
+          "agent": "可以按截止日期推进：列出资产和受益人，明确 Douglas 的执行人任命，准备遗嘱文本，按照适用法律完成签名和见证，并请遗产规划律师审核；还要留出时间处理见证和公证等手续。"
+        },
+        {
+          "user": "我还担心 Francis 和 Michael 的监护安排。像我在 4 月 28 日做的那样，把 Stephanie 指定为监护人，会怎样影响我的遗产计划？",
+          "agent": "指定监护人会影响未成年人的照护和相关资产管理安排。需要确认 Stephanie 是否愿意并适合承担职责，考虑备用监护人，并在遗嘱或信托中写清监护和继承资金的管理方式。"
+        }
+      ]
+    },
+      {
+      "id": "WILDCHAT-LEARN-CAND-001",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=24456e5381c0c4891d80737fa4639f1d / model=gpt-3.5-turbo-0613 / user_ordinal=1..6 / toxic=false / redacted=false",
+      "turns": [
+        {
+          "user": "检查 AAR 元数据时发现 3 个问题：androidx.activity、activity-ktx 和 activity-compose 1.8.0 都要求 compileSdk 至少为 34，而 app 目前是 android-33。怎么修复？",
+          "agent": "把项目的 compileSdk 更新到至少 34。打开 app 模块的 build.gradle，在 android 配置中把 compileSdkVersion 改为 34，然后同步 Gradle。compileSdk、targetSdk 和 minSdk 的更新可以分别处理。"
+        },
+        {
+          "user": "具体应该怎么改？",
+          "agent": "在 Android Studio 中打开 app/build.gradle，找到 android 块里的 compileSdkVersion 33，改为 compileSdkVersion 34，然后点击 Sync Now。同步后重新构建项目，并根据设备兼容性决定是否同时调整 targetSdk 和 minSdk。"
+        },
+        {
+          "user": "我加了依赖，错误都没了，但 app 在手机上会立刻关闭，怎么办？",
+          "agent": "这更像运行时错误或依赖兼容问题。先连接设备查看 Android Studio 的 Logcat，再检查新增依赖版本、执行 Gradle 同步、Clean/Rebuild，并核对 AndroidManifest.xml 的 activity、主题和 intent-filter 配置。"
+        },
+        {
+          "user": "日志显示：Unable to start activity，原因是 You need to use a Theme.AppCompat theme or descendant with this activity。",
+          "agent": "这个异常说明该 Activity 使用的主题不是 Theme.AppCompat 或其子主题。检查 AndroidManifest.xml 中 MainActivity 的 theme 属性，并确认 styles.xml 中定义了对应的 AppCompat 主题；同步项目后重新运行。"
+        },
+        {
+          "user": "AndroidManifest.xml 在哪里？",
+          "agent": "在 Android Studio 的 Project 视图中展开 app > src > main，里面有 AndroidManifest.xml；也可以展开 app 模块下的 manifests 文件夹直接打开它。"
+        },
+        {
+          "user": "我找到了。那我应该先改 Activity 的主题，还是先改 styles.xml？",
+          "agent": "先确认 styles.xml 中存在可用的 Theme.AppCompat 子主题，再在 Manifest 的 MainActivity 上引用它。两处名称必须一致，之后同步并重新构建，若仍崩溃再回到 Logcat 查看新的异常。"
+        }
+      ]
+    },
+    {
+      "id": "WILDCHAT-LEARN-CAND-003",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=8de48fb173aa6af13b8316f180782b33 / model=gpt-3.5-turbo-0613 / user_ordinal=1..3 / toxic=false / redacted=false",
+      "turns": [
+        {
+          "user": "请解释这个函数：def make_hyperlink(value): url = './{}'; return '=HYPERLINK(\"%s\", \"%s\")' % (url.format(value), value)",
+          "agent": "函数接收 value，用 './{}' 构造相对路径，再把路径和显示文本填入电子表格的 HYPERLINK 公式。传入 example 时，结果会是 =HYPERLINK(\"./example\", \"example\")。"
+        },
+        {
+          "user": "能给我一个例子吗？",
+          "agent": "可以：value = 'example'; hyperlink = make_hyperlink(value); print(hyperlink)。输出是 =HYPERLINK(\"./example\", \"example\")，电子表格会把它识别为可点击链接。"
+        },
+        {
+          "user": "如果和 Pandas 的 apply 一起用，能演示并解释参数吗？",
+          "agent": "先建立 DataFrame，再执行 df['Hyperlink'] = df['Value'].apply(make_hyperlink)。apply 会把 Value 列的每个元素依次传给 make_hyperlink，返回的新字符串列保存为 Hyperlink。"
+        }
+      ]
+    }
+  ]
+}
+

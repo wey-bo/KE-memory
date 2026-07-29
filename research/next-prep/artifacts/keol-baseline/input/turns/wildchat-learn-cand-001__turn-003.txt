@@ -1,0 +1,5 @@
+用户：
+我加了依赖，错误都没了，但 app 在手机上会立刻关闭，怎么办？
+
+Agent：
+这更像运行时错误或依赖兼容问题。先连接设备查看 Android Studio 的 Logcat，再检查新增依赖版本、执行 Gradle 同步、Clean/Rebuild，并核对 AndroidManifest.xml 的 activity、主题和 intent-filter 配置。

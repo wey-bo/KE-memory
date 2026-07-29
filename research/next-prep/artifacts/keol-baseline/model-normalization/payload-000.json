@@ -1,0 +1,4053 @@
+{
+  "task": "Normalize concept/operator semantics for the existing ontology draft.",
+  "batch": {
+    "concept_offset": 0,
+    "concept_limit": 40,
+    "operator_offset": 0,
+    "operator_limit": 40
+  },
+  "constraints": {
+    "allowed_operator_ids": [
+      "operator_14212dc41f5f",
+      "operator_4ca314c13c5b",
+      "operator_599615361f50",
+      "operator_1c210f5d380d",
+      "operator_dd4d8c22f312",
+      "operator_80ddd8707c6e",
+      "operator_c1b0334d804b",
+      "operator_9511d2fd5246",
+      "operator_d0ad3e58ad24",
+      "operator_c82237890ba1",
+      "operator_790915c22e76",
+      "operator_c646689b496f",
+      "operator_7d27da6372c7",
+      "operator_5934c243049c",
+      "operator_a4eb463a8bfe",
+      "operator_e28795f01682",
+      "operator_16824d264945",
+      "operator_13dbe039771f",
+      "operator_f2bceb77ace4",
+      "operator_6714f129839b",
+      "operator_12a2e4df247c",
+      "operator_14e2a6c852b7",
+      "operator_400c66cbea70",
+      "operator_676c1119b93b",
+      "operator_4dfb01b416c5",
+      "operator_0f0c29c97456",
+      "operator_6a91717b2c31",
+      "operator_4a3257bb7ae6",
+      "operator_b1b09c7436ff",
+      "operator_6a7ed8a4c1f3",
+      "operator_dbebc63935f8",
+      "operator_77f94bb097ce",
+      "operator_0052d3315db2",
+      "operator_cc3e668bdc54",
+      "operator_4dac30738f5b",
+      "operator_36fe46f7ee3c",
+      "operator_71707ad63942",
+      "operator_2824730e6749",
+      "operator_de65139a92ff",
+      "operator_3f08976e9b4a"
+    ],
+    "do_not_invent_ids": true,
+    "operator_output_argument_type": "concept"
+  },
+  "schema": {
+    "$defs": {
+      "ConceptUpdate": {
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "canonical_name": {
+            "default": "",
+            "title": "Canonical Name",
+            "type": "string"
+          },
+          "kind": {
+            "default": "",
+            "title": "Kind",
+            "type": "string"
+          },
+          "description": {
+            "default": "",
+            "title": "Description",
+            "type": "string"
+          },
+          "aliases": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Aliases",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "ConceptUpdate",
+        "type": "object"
+      },
+      "OperatorUpdate": {
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "canonical_name": {
+            "default": "",
+            "title": "Canonical Name",
+            "type": "string"
+          },
+          "operator_type": {
+            "default": "",
+            "title": "Operator Type",
+            "type": "string"
+          },
+          "description": {
+            "default": "",
+            "title": "Description",
+            "type": "string"
+          },
+          "aliases": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Aliases",
+            "type": "array"
+          },
+          "semantic_status": {
+            "default": "",
+            "title": "Semantic Status",
+            "type": "string"
+          },
+          "input_concepts": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Input Concepts",
+            "type": "array"
+          },
+          "output_concepts": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Output Concepts",
+            "type": "array"
+          },
+          "schema_confidence": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Schema Confidence"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "OperatorUpdate",
+        "type": "object"
+      }
+    },
+    "properties": {
+      "concept_updates": {
+        "items": {
+          "$ref": "#/$defs/ConceptUpdate"
+        },
+        "title": "Concept Updates",
+        "type": "array"
+      },
+      "operator_updates": {
+        "items": {
+          "$ref": "#/$defs/OperatorUpdate"
+        },
+        "title": "Operator Updates",
+        "type": "array"
+      },
+      "notes": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Notes",
+        "type": "array"
+      }
+    },
+    "title": "NormalizationPlan",
+    "type": "object"
+  },
+  "concepts": [
+    {
+      "id": "concept_bbd46ef0eee4",
+      "name": "Person",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 7,
+      "individual_examples": [
+        "Douglas",
+        "用户",
+        "Francis",
+        "Bradley",
+        "Michael",
+        "Stephanie",
+        "Kimberly"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_e39fed9fc66e",
+      "name": "Organization",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 2,
+      "individual_examples": [
+        "客户 X",
+        "律师事务所"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_910c9b7669d4",
+      "name": "Goal",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "获得更多工作分派"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_d1639724ae2f",
+      "name": "Role",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "分派工作的合伙人"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_edad65594977",
+      "name": "Event",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "出国休假"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_ef12a3c001c8",
+      "name": "Duration",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 2,
+      "individual_examples": [
+        "一周",
+        "30 天"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_b9d3f28092fb",
+      "name": "TimeWindow",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "未来两个月"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_9b339f5748c0",
+      "name": "Task",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "项目"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_4c98dac18b7a",
+      "name": "Question",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 2,
+      "individual_examples": [
+        "休假告知时机",
+        "客户 X 融资时间"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_3ce9d3a0c446",
+      "name": "Recommendation",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "尽早透明沟通"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_ef53334ace16",
+      "name": "Situation",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "工作量较少"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_150b240efc1f",
+      "name": "Group",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "事务所其他人"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_dfc33257e444",
+      "name": "Action",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 5,
+      "individual_examples": [
+        "联系事务所合伙人",
+        "更新 compileSdk",
+        "Sync Now",
+        "Clean/Rebuild",
+        "Gradle 同步"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_2416f09a7a51",
+      "name": "Platform",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "内部工作机会平台"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_1f20ccf3151b",
+      "name": "Information",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "可用时间与工作意愿"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_ba3e1d19aeed",
+      "name": "CalendarMonth",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "11 月"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_1c1974ae1ee3",
+      "name": "Communication",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "今天的工作联系"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_13b0806dfd78",
+      "name": "DateRange",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "12 月 15 日至 12 月 26 日"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_fa6b0c75a560",
+      "name": "Process",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "工作分派"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_cc4dbbd38373",
+      "name": "Availability",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "休假前后可工作"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_ac213fc990d2",
+      "name": "RelativeDate",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "今天"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_348b3b09240d",
+      "name": "EmailSubject",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "近期工作安排和出行计划"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_24f44cb67350",
+      "name": "Commitment",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "完成出发前待办"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_6969a406bd15",
+      "name": "ProfessionalRole",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "资深律师"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_8391f479d746",
+      "name": "Evaluation",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "过于正式"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_e50acd508018",
+      "name": "Style",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "初级律师风格"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_84886163b92c",
+      "name": "SoftwareApplication",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 4,
+      "individual_examples": [
+        "Android app",
+        "Praat",
+        "文本编辑器",
+        "Android Studio"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_b92e045c2acf",
+      "name": "SoftwareDependency",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 3,
+      "individual_examples": [
+        "activity-ktx 1.8.0",
+        "androidx.activity 1.8.0",
+        "activity-compose 1.8.0"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_39cef1682f76",
+      "name": "SoftwareConfiguration",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 5,
+      "individual_examples": [
+        "Theme.AppCompat 子主题",
+        "当前主题",
+        "AppCompat 主题",
+        "compileSdk 33",
+        "compileSdk 34"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_e3b38784a453",
+      "name": "ErrorSet",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "3 个 AAR 元数据问题"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_05443df929d6",
+      "name": "File",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 4,
+      "individual_examples": [
+        "文本文件",
+        "AndroidManifest.xml",
+        "app/build.gradle",
+        "styles.xml"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_36d1603352d4",
+      "name": "ConfigurationField",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 3,
+      "individual_examples": [
+        "theme 属性",
+        "compileSdkVersion",
+        "主题引用"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_35d372fec200",
+      "name": "Integer",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 2,
+      "individual_examples": [
+        "33",
+        "34"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_e44e0e46bf06",
+      "name": "Constraint",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "设备兼容性"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_99d6caf4e400",
+      "name": "ConfigurationFieldSet",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "targetSdk 与 minSdk"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_f502ecaad82f",
+      "name": "Change",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "新增依赖"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_cfbcf93220b6",
+      "name": "Status",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "构建错误消失"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_34dca514b762",
+      "name": "RuntimeFailure",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "启动后立即关闭"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_4cbf8375ca2f",
+      "name": "Device",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "手机"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    },
+    {
+      "id": "concept_b410af5baadd",
+      "name": "DiagnosticTool",
+      "kind": "class",
+      "description": "",
+      "aliases": [],
+      "individual_count": 1,
+      "individual_examples": [
+        "Logcat"
+      ],
+      "source_kind": "extracted",
+      "metadata": {}
+    }
+  ],
+  "concept_catalog": [
+    {
+      "name": "Person",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Organization",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Goal",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Role",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Event",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Duration",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "TimeWindow",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Task",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Question",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Recommendation",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Situation",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Group",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Action",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Platform",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Information",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "CalendarMonth",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Communication",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "DateRange",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Process",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Availability",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "RelativeDate",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "EmailSubject",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Commitment",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ProfessionalRole",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Evaluation",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Style",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareApplication",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareDependency",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareConfiguration",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ErrorSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "File",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ConfigurationField",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Integer",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Constraint",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ConfigurationFieldSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Change",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Status",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "RuntimeFailure",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Device",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "DiagnosticTool",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "PossibleCause",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ConfigurationSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "RuntimeError",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareComponent",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareRequirement",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "FilePath",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "UserInterface",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Directory",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "TaskStatus",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "MediaChannel",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ContentTheme",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Plan",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "FrequencyConstraint",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "OnlinePlatform",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Collection",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ContentFormat",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ContentTechnique",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ContentSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ContentSeries",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "EpisodeTopic",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "StoryElement",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "NarrativeArc",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SpeechSample",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ToneCategory",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ExperimentalStimulusSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "AcousticFeature",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SignalProcessingMethod",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "AudioRecording",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "DataArtifact",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "DataSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareObject",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ProcedureStep",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Problem",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "FileFormat",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ExtractionParameter",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "AcousticParameter",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ExperimentalConstraint",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "NumericRange",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareCommand",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareVersion",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "GoalSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Cardinality",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Percentage",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Method",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SoftwareSystem",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "TrainingTopicSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ConstraintSet",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Function",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Parameter",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "PathTemplate",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "SpreadsheetFormula",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ExampleValue",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "FormulaValue",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Software",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Hyperlink",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "DataStructure",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "DataColumn",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "StringValue",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Claim",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Evidence",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LearningStyleCategory",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Practice",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "TeachingMethod",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Observation",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Condition",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Challenge",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Capability",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Intervention",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LearningFactor",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LearningOutcome",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "FlightTrip",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "City",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "CalendarDay",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "TripLeg",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "TimePreference",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "PricePreference",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "FlightOption",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "StopPattern",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "TimeOfDay",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "RelativeDateTime",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "MonetaryAmount",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "PriceAssessment",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "CommunicationEndpoint",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Product",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Order",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ReturnRequest",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "CancellationRequest",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "PaymentMethod",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "CancellationReason",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ToolAction",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "OrderItem",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "GiftCard",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ActionStatus",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "IdentifierType",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Identifier",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ProductSize",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Color",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Material",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "OrderStatus",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Decision",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "CalendarDate",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Place",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Concern",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "PlannedEvent",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "InteractionMode",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Topic",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Option",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "TaskRequest",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Document",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Schedule",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LegalDocument",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "EmotionalState",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LegalStatus",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LegalProvision",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "DocumentDraft",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Law",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LegalFormality",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "ReviewAction",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LegalDecision",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "EstatePlan",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "CareArrangement",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "FinancialArrangement",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "Assessment",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    },
+    {
+      "name": "LegalArrangement",
+      "kind": "class",
+      "aliases": [],
+      "description": ""
+    }
+  ],
+  "operators": [
+    {
+      "id": "operator_14212dc41f5f",
+      "name": "instance_of",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "seeded",
+      "metadata": {},
+      "examples": []
+    },
+    {
+      "id": "operator_4ca314c13c5b",
+      "name": "build_ontology",
+      "operator_type": "action",
+      "description": "",
+      "aliases": [],
+      "source_kind": "seeded",
+      "metadata": {},
+      "examples": []
+    },
+    {
+      "id": "operator_599615361f50",
+      "name": "WORKS_AT",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "WORKS_AT",
+          "quote": "用户陈述自己在该事务所工作。",
+          "metadata": {
+            "source_entity": "n1",
+            "target_entity": "n2"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Person",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Organization",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_1c210f5d380d",
+      "name": "HAS_GOAL",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "HAS_GOAL",
+          "quote": "用户需要争取更多工作。",
+          "metadata": {
+            "source_entity": "n1",
+            "target_entity": "n3"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Person",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Goal",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_dd4d8c22f312",
+      "name": "MEMBER_OF",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "MEMBER_OF",
+          "quote": "该合伙人属于用户所在事务所。",
+          "metadata": {
+            "source_entity": "n4",
+            "target_entity": "n2"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Role",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Organization",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_80ddd8707c6e",
+      "name": "ASSIGNS",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "ASSIGNS",
+          "quote": "该角色负责分派项目。",
+          "metadata": {
+            "source_entity": "n4",
+            "target_entity": "n8"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Role",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Task",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_c1b0334d804b",
+      "name": "PLANS",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "PLANS",
+          "quote": "用户计划出国休假。",
+          "metadata": {
+            "source_entity": "n1",
+            "target_entity": "n5"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "PLANS",
+          "quote": "用户计划出国休假。",
+          "metadata": {
+            "source_entity": "n1",
+            "target_entity": "n7"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "PLANS",
+          "quote": "用户计划发送邮件。",
+          "metadata": {
+            "source_entity": "n1",
+            "target_entity": "n2"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "plans",
+          "quote": "用户正在规划该往返行程。",
+          "metadata": {
+            "source_entity": "n_user",
+            "target_entity": "n_trip"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "plans",
+          "quote": "用户决定再安排一次家庭会议。",
+          "metadata": {
+            "source_entity": "n_user",
+            "target_entity": "n_meeting"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Person",
+            "count": 4
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Event",
+            "count": 1
+          },
+          {
+            "name": "Communication",
+            "count": 1
+          },
+          {
+            "name": "FlightTrip",
+            "count": 1
+          },
+          {
+            "name": "PlannedEvent",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 4
+      }
+    },
+    {
+      "id": "operator_9511d2fd5246",
+      "name": "HAS_DURATION",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "HAS_DURATION",
+          "quote": "休假持续一周。",
+          "metadata": {
+            "source_entity": "n5",
+            "target_entity": "n6"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "HAS_DURATION",
+          "quote": "该状态已持续过去两个月。",
+          "metadata": {
+            "source_entity": "n2",
+            "target_entity": "n3"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "HAS_DURATION",
+          "quote": "计划持续 30 天。",
+          "metadata": {
+            "source_entity": "n5",
+            "target_entity": "n6"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Event",
+            "count": 1
+          },
+          {
+            "name": "Situation",
+            "count": 1
+          },
+          {
+            "name": "Plan",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Duration",
+            "count": 2
+          },
+          {
+            "name": "TimeWindow",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 3,
+        "output_unique_count": 2
+      }
+    },
+    {
+      "id": "operator_d0ad3e58ad24",
+      "name": "WITHIN",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "WITHIN",
+          "quote": "休假计划位于未来两个月内。",
+          "metadata": {
+            "source_entity": "n5",
+            "target_entity": "n7"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Event",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "TimeWindow",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_c82237890ba1",
+      "name": "MAY_OVERLAP",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "MAY_OVERLAP",
+          "quote": "用户担心休假可能与项目冲突。",
+          "metadata": {
+            "source_entity": "n5",
+            "target_entity": "n8"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Event",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Task",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_790915c22e76",
+      "name": "ABOUT",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "ABOUT",
+          "quote": "问题针对休假告知时机。",
+          "metadata": {
+            "source_entity": "n9",
+            "target_entity": "n5"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "ABOUT",
+          "quote": "用户希望询问融资事件的时间。",
+          "metadata": {
+            "source_entity": "n7",
+            "target_entity": "n6"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "ABOUT",
+          "quote": "用户报告已经找到 Manifest。",
+          "metadata": {
+            "source_entity": "n2",
+            "target_entity": "n1"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "about",
+          "quote": "家人反应的关注对象是执行人选择。",
+          "metadata": {
+            "source_entity": "n_reaction",
+            "target_entity": "n_choice"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Question",
+            "count": 1
+          },
+          {
+            "name": "TaskStatus",
+            "count": 1
+          },
+          {
+            "name": "Concern",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Event",
+            "count": 1
+          },
+          {
+            "name": "File",
+            "count": 1
+          },
+          {
+            "name": "Decision",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 3,
+        "output_unique_count": 3
+      }
+    },
+    {
+      "id": "operator_c646689b496f",
+      "name": "ANSWERS",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "ANSWERS",
+          "quote": "Agent 以尽早沟通回应用户问题。",
+          "metadata": {
+            "source_entity": "n10",
+            "target_entity": "n9"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Recommendation",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Question",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_7d27da6372c7",
+      "name": "INCLUDES",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "INCLUDES",
+          "quote": "建议包含说明交接安排。",
+          "metadata": {
+            "source_entity": "n10",
+            "target_entity": "n11"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "INCLUDES",
+          "quote": "建议同时说明休假前后均可工作。",
+          "metadata": {
+            "source_entity": "n9",
+            "target_entity": "n10"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "INCLUDES",
+          "quote": "建议包含提前完成任务的承诺。",
+          "metadata": {
+            "source_entity": "n9",
+            "target_entity": "n11"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "INCLUDES",
+          "quote": "建议包含交接安排。",
+          "metadata": {
+            "source_entity": "n9",
+            "target_entity": "n12"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "INCLUDES",
+          "quote": "邮件将包含融资时间询问。",
+          "metadata": {
+            "source_entity": "n2",
+            "target_entity": "n7"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "INCLUDES",
+          "quote": "Agent 建议邮件承诺完成出发前待办。",
+          "metadata": {
+            "source_entity": "n2",
+            "target_entity": "n11"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "INCLUDES",
+          "quote": "Agent 建议邮件说明交接安排。",
+          "metadata": {
+            "source_entity": "n2",
+            "target_entity": "n12"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "INCLUDES",
+          "quote": "修订版应询问客户 X 的融资时间。",
+          "metadata": {
+            "source_entity": "n11",
+            "target_entity": "n8"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Plan",
+            "count": 8
+          },
+          {
+            "name": "Document",
+            "count": 5
+          },
+          {
+            "name": "Communication",
+            "count": 4
+          },
+          {
+            "name": "Recommendation",
+            "count": 3
+          },
+          {
+            "name": "ErrorSet",
+            "count": 3
+          },
+          {
+            "name": "GoalSet",
+            "count": 2
+          },
+          {
+            "name": "Claim",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "SoftwareDependency",
+            "count": 3
+          },
+          {
+            "name": "ContentFormat",
+            "count": 3
+          },
+          {
+            "name": "Task",
+            "count": 2
+          },
+          {
+            "name": "Question",
+            "count": 2
+          },
+          {
+            "name": "Goal",
+            "count": 2
+          },
+          {
+            "name": "Availability",
+            "count": 1
+          },
+          {
+            "name": "Action",
+            "count": 1
+          },
+          {
+            "name": "Commitment",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 7,
+        "output_unique_count": 19
+      }
+    },
+    {
+      "id": "operator_5934c243049c",
+      "name": "BEFORE",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "BEFORE",
+          "quote": "交接应在休假前完成。",
+          "metadata": {
+            "source_entity": "n11",
+            "target_entity": "n5"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "BEFORE",
+          "quote": "配置更新后同步 Gradle。",
+          "metadata": {
+            "source_entity": "n9",
+            "target_entity": "n10"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "BEFORE",
+          "quote": "同步后重新构建项目。",
+          "metadata": {
+            "source_entity": "n6",
+            "target_entity": "n7"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "BEFORE",
+          "quote": "Agent 建议先确认样式定义，再修改 Activity 引用。",
+          "metadata": {
+            "source_entity": "n3",
+            "target_entity": "n6"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "BEFORE",
+          "quote": "设置引用后同步并重建。",
+          "metadata": {
+            "source_entity": "n6",
+            "target_entity": "n8"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Action",
+            "count": 2
+          },
+          {
+            "name": "Task",
+            "count": 1
+          },
+          {
+            "name": "File",
+            "count": 1
+          },
+          {
+            "name": "ConfigurationField",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Action",
+            "count": 3
+          },
+          {
+            "name": "Event",
+            "count": 1
+          },
+          {
+            "name": "ConfigurationField",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 4,
+        "output_unique_count": 3
+      }
+    },
+    {
+      "id": "operator_a4eb463a8bfe",
+      "name": "AFFECTS",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "AFFECTS",
+          "quote": "工作不足发生在用户所在事务所。",
+          "metadata": {
+            "source_entity": "n2",
+            "target_entity": "n1"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "AFFECTS",
+          "quote": "其他人也有类似问题。",
+          "metadata": {
+            "source_entity": "n2",
+            "target_entity": "n4"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "AFFECTS",
+          "quote": "app 启动后立即关闭。",
+          "metadata": {
+            "source_entity": "n4",
+            "target_entity": "n1"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "AFFECTS",
+          "quote": "错误表现为 Activity 无法启动。",
+          "metadata": {
+            "source_entity": "n1",
+            "target_entity": "n2"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "AFFECTS",
+          "quote": "用户无法得到文本文件。",
+          "metadata": {
+            "source_entity": "n4",
+            "target_entity": "n3"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "affects",
+          "quote": "Agent 表示监护人指定会影响遗产计划。",
+          "metadata": {
+            "source_entity": "n_designation",
+            "target_entity": "n_estate_plan"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "affects",
+          "quote": "Agent 表示指定会影响未成年人照护。",
+          "metadata": {
+            "source_entity": "n_designation",
+            "target_entity": "n_care"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "affects",
+          "quote": "Agent 表示指定会影响相关资产管理。",
+          "metadata": {
+            "source_entity": "n_designation",
+            "target_entity": "n_asset_management"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "LegalDecision",
+            "count": 3
+          },
+          {
+            "name": "Situation",
+            "count": 2
+          },
+          {
+            "name": "RuntimeFailure",
+            "count": 1
+          },
+          {
+            "name": "RuntimeError",
+            "count": 1
+          },
+          {
+            "name": "Problem",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Organization",
+            "count": 1
+          },
+          {
+            "name": "Group",
+            "count": 1
+          },
+          {
+            "name": "SoftwareApplication",
+            "count": 1
+          },
+          {
+            "name": "SoftwareComponent",
+            "count": 1
+          },
+          {
+            "name": "File",
+            "count": 1
+          },
+          {
+            "name": "EstatePlan",
+            "count": 1
+          },
+          {
+            "name": "CareArrangement",
+            "count": 1
+          },
+          {
+            "name": "FinancialArrangement",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 5,
+        "output_unique_count": 8
+      }
+    },
+    {
+      "id": "operator_e28795f01682",
+      "name": "SUPPORTS",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "SUPPORTS",
+          "quote": "用户将其视为获取工作分派的方案。",
+          "metadata": {
+            "source_entity": "n6",
+            "target_entity": "n5"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "SUPPORTS",
+          "quote": "用户将转介视为备选方案。",
+          "metadata": {
+            "source_entity": "n7",
+            "target_entity": "n5"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "SUPPORTS",
+          "quote": "Agent 建议通过跨业务组支持争取工作。",
+          "metadata": {
+            "source_entity": "n8",
+            "target_entity": "n5"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "SUPPORTS",
+          "quote": "Agent 建议通过内部平台寻找机会。",
+          "metadata": {
+            "source_entity": "n9",
+            "target_entity": "n5"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "SUPPORTS",
+          "quote": "Agent 建议通过业务拓展增加机会。",
+          "metadata": {
+            "source_entity": "n10",
+            "target_entity": "n5"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "SUPPORTS",
+          "quote": "计划应让订阅者能够参与和反馈。",
+          "metadata": {
+            "source_entity": "n5",
+            "target_entity": "n10"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "SUPPORTS",
+          "quote": "在 Manipulation 窗口中执行替换音高。",
+          "metadata": {
+            "source_entity": "n9",
+            "target_entity": "n10"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "supports",
+          "quote": "深层理解支持长期学习效果。",
+          "metadata": {
+            "source_entity": "n_understanding",
+            "target_entity": "n_long_term"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Action",
+            "count": 1
+          },
+          {
+            "name": "Platform",
+            "count": 1
+          },
+          {
+            "name": "Plan",
+            "count": 1
+          },
+          {
+            "name": "SoftwareObject",
+            "count": 1
+          },
+          {
+            "name": "LearningFactor",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Goal",
+            "count": 3
+          },
+          {
+            "name": "Action",
+            "count": 1
+          },
+          {
+            "name": "LearningOutcome",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 5,
+        "output_unique_count": 3
+      }
+    },
+    {
+      "id": "operator_16824d264945",
+      "name": "COMMUNICATES",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "COMMUNICATES",
+          "quote": "联系合伙人时应表达可用时间和意愿。",
+          "metadata": {
+            "source_entity": "n6",
+            "target_entity": "n11"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "COMMUNICATES",
+          "quote": "建议沟通休假计划。",
+          "metadata": {
+            "source_entity": "n9",
+            "target_entity": "n7"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "COMMUNICATES",
+          "quote": "邮件说明用户有空并愿意接工作。",
+          "metadata": {
+            "source_entity": "n2",
+            "target_entity": "n4"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "COMMUNICATES",
+          "quote": "邮件将说明出国行程。",
+          "metadata": {
+            "source_entity": "n2",
+            "target_entity": "n8"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "COMMUNICATES",
+          "quote": "修订版应说明用户目前有空。",
+          "metadata": {
+            "source_entity": "n11",
+            "target_entity": "n7"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "COMMUNICATES",
+          "quote": "修订版应说明出行日期。",
+          "metadata": {
+            "source_entity": "n11",
+            "target_entity": "n9"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Communication",
+            "count": 3
+          },
+          {
+            "name": "Action",
+            "count": 1
+          },
+          {
+            "name": "Recommendation",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Event",
+            "count": 2
+          },
+          {
+            "name": "Information",
+            "count": 1
+          },
+          {
+            "name": "Availability",
+            "count": 1
+          },
+          {
+            "name": "DateRange",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 3,
+        "output_unique_count": 4
+      }
+    },
+    {
+      "id": "operator_13dbe039771f",
+      "name": "CHOOSES",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "CHOOSES",
+          "quote": "用户准备联系合伙人。",
+          "metadata": {
+            "source_entity": "n1",
+            "target_entity": "n2"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "CHOOSES",
+          "quote": "用户准备做业务拓展。",
+          "metadata": {
+            "source_entity": "n1",
+            "target_entity": "n3"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Person",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Action",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_f2bceb77ace4",
+      "name": "OCCURS_IN",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "OCCURS_IN",
+          "quote": "工作联系发生在用户所述当前 11 月。",
+          "metadata": {
+            "source_entity": "n5",
+            "target_entity": "n4"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Communication",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "CalendarMonth",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_6714f129839b",
+      "name": "HAS_TIME",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "HAS_TIME",
+          "quote": "休假时间为 12 月 15 日至 26 日。",
+          "metadata": {
+            "source_entity": "n7",
+            "target_entity": "n6"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "HAS_TIME",
+          "quote": "邮件计划今天发送。",
+          "metadata": {
+            "source_entity": "n2",
+            "target_entity": "n3"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "HAS_TIME",
+          "quote": "出国日期为 12 月 15 日至 26 日。",
+          "metadata": {
+            "source_entity": "n8",
+            "target_entity": "n9"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Event",
+            "count": 1
+          },
+          {
+            "name": "Communication",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "DateRange",
+            "count": 1
+          },
+          {
+            "name": "RelativeDate",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 2,
+        "output_unique_count": 2
+      }
+    },
+    {
+      "id": "operator_12a2e4df247c",
+      "name": "MAY_AFFECT",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "MAY_AFFECT",
+          "quote": "用户担心告知休假会影响工作分派。",
+          "metadata": {
+            "source_entity": "n7",
+            "target_entity": "n8"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Event",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Process",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_14e2a6c852b7",
+      "name": "APPLIES_TO",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "APPLIES_TO",
+          "quote": "Agent 建议在今天联系时说明休假。",
+          "metadata": {
+            "source_entity": "n9",
+            "target_entity": "n5"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "applies_to",
+          "quote": "时间偏好适用于去程。",
+          "metadata": {
+            "source_entity": "n_early",
+            "target_entity": "n_outbound"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "applies_to",
+          "quote": "时间偏好适用于返程。",
+          "metadata": {
+            "source_entity": "n_early",
+            "target_entity": "n_return"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Recommendation",
+            "count": 1
+          },
+          {
+            "name": "TimePreference",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Communication",
+            "count": 1
+          },
+          {
+            "name": "TripLeg",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 2,
+        "output_unique_count": 2
+      }
+    },
+    {
+      "id": "operator_400c66cbea70",
+      "name": "FOR",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "FOR",
+          "quote": "下一轮融资属于客户 X。",
+          "metadata": {
+            "source_entity": "n6",
+            "target_entity": "n5"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "FOR",
+          "quote": "绩效目标面向高级项目经理。",
+          "metadata": {
+            "source_entity": "n3",
+            "target_entity": "n2"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "for",
+          "quote": "邀请用于家庭会议。",
+          "metadata": {
+            "source_entity": "n_invitation",
+            "target_entity": "n_meeting"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "for",
+          "quote": "议程用于家庭会议。",
+          "metadata": {
+            "source_entity": "n_agenda",
+            "target_entity": "n_meeting"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "for",
+          "quote": "监护安排涉及 Francis。",
+          "metadata": {
+            "source_entity": "n_designation",
+            "target_entity": "n_francis"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "for",
+          "quote": "监护安排涉及 Michael。",
+          "metadata": {
+            "source_entity": "n_designation",
+            "target_entity": "n_michael"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "LegalDecision",
+            "count": 2
+          },
+          {
+            "name": "Event",
+            "count": 1
+          },
+          {
+            "name": "GoalSet",
+            "count": 1
+          },
+          {
+            "name": "Document",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Person",
+            "count": 2
+          },
+          {
+            "name": "Organization",
+            "count": 1
+          },
+          {
+            "name": "ProfessionalRole",
+            "count": 1
+          },
+          {
+            "name": "PlannedEvent",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 4,
+        "output_unique_count": 4
+      }
+    },
+    {
+      "id": "operator_676c1119b93b",
+      "name": "HAS_SUBJECT",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "HAS_SUBJECT",
+          "quote": "Agent 提议使用该主题。",
+          "metadata": {
+            "source_entity": "n2",
+            "target_entity": "n10"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Communication",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "EmailSubject",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_4dfb01b416c5",
+      "name": "HAS_ROLE",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "HAS_ROLE",
+          "quote": "用户自述是资深律师。",
+          "metadata": {
+            "source_entity": "n1",
+            "target_entity": "n2"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "HAS_ROLE",
+          "quote": "用户负责内容运营。",
+          "metadata": {
+            "source_entity": "n1",
+            "target_entity": "n3"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "has_role",
+          "quote": "Agent 将 Stephanie 描述为遗产规划律师。",
+          "metadata": {
+            "source_entity": "n_stephanie",
+            "target_entity": "n_lawyer_role"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Person",
+            "count": 3
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "ProfessionalRole",
+            "count": 2
+          },
+          {
+            "name": "Role",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 2
+      }
+    },
+    {
+      "id": "operator_0f0c29c97456",
+      "name": "EVALUATES",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "EVALUATES",
+          "quote": "用户评价上一版邮件。",
+          "metadata": {
+            "source_entity": "n1",
+            "target_entity": "n3"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Person",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Communication",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_6a91717b2c31",
+      "name": "HAS_EVALUATION",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "HAS_EVALUATION",
+          "quote": "上一版被认为太正式。",
+          "metadata": {
+            "source_entity": "n3",
+            "target_entity": "n4"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Communication",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Evaluation",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_4a3257bb7ae6",
+      "name": "HAS_STYLE",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "HAS_STYLE",
+          "quote": "上一版被认为像初级律师写作。",
+          "metadata": {
+            "source_entity": "n3",
+            "target_entity": "n5"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "HAS_STYLE",
+          "quote": "Agent 建议修订版采用简洁自信的语气。",
+          "metadata": {
+            "source_entity": "n11",
+            "target_entity": "n6"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Communication",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Style",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_b1b09c7436ff",
+      "name": "REQUIRES",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "REQUIRES",
+          "quote": "该依赖要求 compileSdk 至少为 34。",
+          "metadata": {
+            "source_entity": "n2",
+            "target_entity": "n5"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "requires",
+          "quote": "Agent 建议确认 Stephanie 的意愿和适任性。",
+          "metadata": {
+            "source_entity": "n_estate_plan",
+            "target_entity": "n_suitability"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "SoftwareDependency",
+            "count": 3
+          },
+          {
+            "name": "EstatePlan",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "SoftwareConfiguration",
+            "count": 3
+          },
+          {
+            "name": "Assessment",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 2,
+        "output_unique_count": 2
+      }
+    },
+    {
+      "id": "operator_6a7ed8a4c1f3",
+      "name": "USES",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "USES",
+          "quote": "app 当前是 android-33。",
+          "metadata": {
+            "source_entity": "n1",
+            "target_entity": "n6"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "USES",
+          "quote": "修改在 app/build.gradle 中完成。",
+          "metadata": {
+            "source_entity": "n9",
+            "target_entity": "n8"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "USES",
+          "quote": "用户要求 Reels 使用故事叙述。",
+          "metadata": {
+            "source_entity": "n4",
+            "target_entity": "n6"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "USES",
+          "quote": "用户要求 Stories 使用故事叙述。",
+          "metadata": {
+            "source_entity": "n5",
+            "target_entity": "n6"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "USES",
+          "quote": "方案以故事叙述制作连续 Reels。",
+          "metadata": {
+            "source_entity": "n1",
+            "target_entity": "n2"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "USES",
+          "quote": "每集以冲突或问题开场。",
+          "metadata": {
+            "source_entity": "n3",
+            "target_entity": "n7"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "USES",
+          "quote": "每集加入具体经历。",
+          "metadata": {
+            "source_entity": "n3",
+            "target_entity": "n8"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "USES",
+          "quote": "每集以反思问题收尾。",
+          "metadata": {
+            "source_entity": "n3",
+            "target_entity": "n9"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Action",
+            "count": 2
+          },
+          {
+            "name": "ContentFormat",
+            "count": 2
+          },
+          {
+            "name": "ExperimentalStimulusSet",
+            "count": 2
+          },
+          {
+            "name": "Goal",
+            "count": 2
+          },
+          {
+            "name": "PlannedEvent",
+            "count": 2
+          },
+          {
+            "name": "SoftwareApplication",
+            "count": 1
+          },
+          {
+            "name": "Plan",
+            "count": 1
+          },
+          {
+            "name": "ContentSeries",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "ContentTechnique",
+            "count": 3
+          },
+          {
+            "name": "SignalProcessingMethod",
+            "count": 3
+          },
+          {
+            "name": "SoftwareConfiguration",
+            "count": 1
+          },
+          {
+            "name": "File",
+            "count": 1
+          },
+          {
+            "name": "StoryElement",
+            "count": 1
+          },
+          {
+            "name": "SpeechSample",
+            "count": 1
+          },
+          {
+            "name": "SoftwareApplication",
+            "count": 1
+          },
+          {
+            "name": "Method",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 12,
+        "output_unique_count": 13
+      }
+    },
+    {
+      "id": "operator_dbebc63935f8",
+      "name": "MODIFIES",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "MODIFIES",
+          "quote": "建议更新 app 的 compileSdk。",
+          "metadata": {
+            "source_entity": "n9",
+            "target_entity": "n1"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "MODIFIES",
+          "quote": "用户给 app 添加了依赖。",
+          "metadata": {
+            "source_entity": "n2",
+            "target_entity": "n1"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "MODIFIES",
+          "quote": "用户要改变二声的 F0 转折点。",
+          "metadata": {
+            "source_entity": "n3",
+            "target_entity": "n1"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "MODIFIES",
+          "quote": "用户要改变二声的 F0 offset。",
+          "metadata": {
+            "source_entity": "n4",
+            "target_entity": "n1"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "AcousticParameter",
+            "count": 2
+          },
+          {
+            "name": "Action",
+            "count": 1
+          },
+          {
+            "name": "Change",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "SoftwareApplication",
+            "count": 2
+          },
+          {
+            "name": "ToneCategory",
+            "count": 2
+          }
+        ],
+        "input_unique_count": 3,
+        "output_unique_count": 2
+      }
+    },
+    {
+      "id": "operator_77f94bb097ce",
+      "name": "SETS",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "SETS",
+          "quote": "目标值为至少 34。",
+          "metadata": {
+            "source_entity": "n9",
+            "target_entity": "n5"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Action",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "SoftwareConfiguration",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_0052d3315db2",
+      "name": "OPENED_IN",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "OPENED_IN",
+          "quote": "应在 Android Studio 中打开该文件。",
+          "metadata": {
+            "source_entity": "n2",
+            "target_entity": "n1"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "File",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "SoftwareApplication",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_cc3e668bdc54",
+      "name": "DEFINED_IN",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "DEFINED_IN",
+          "quote": "compileSdkVersion 位于该文件的 android 块。",
+          "metadata": {
+            "source_entity": "n3",
+            "target_entity": "n2"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "DEFINED_IN",
+          "quote": "这些配置应在 Manifest 中核对。",
+          "metadata": {
+            "source_entity": "n11",
+            "target_entity": "n10"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "DEFINED_IN",
+          "quote": "该属性位于 AndroidManifest.xml。",
+          "metadata": {
+            "source_entity": "n7",
+            "target_entity": "n5"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "DEFINED_IN",
+          "quote": "Agent 建议确认 styles.xml 中定义了对应主题。",
+          "metadata": {
+            "source_entity": "n9",
+            "target_entity": "n8"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "DEFINED_IN",
+          "quote": "先确认 styles.xml 中有可用子主题。",
+          "metadata": {
+            "source_entity": "n4",
+            "target_entity": "n3"
+          }
+        },
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "DEFINED_IN",
+          "quote": "主题引用位于 Manifest。",
+          "metadata": {
+            "source_entity": "n6",
+            "target_entity": "n1"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "ConfigurationField",
+            "count": 3
+          },
+          {
+            "name": "SoftwareConfiguration",
+            "count": 2
+          },
+          {
+            "name": "ConfigurationSet",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "File",
+            "count": 6
+          }
+        ],
+        "input_unique_count": 3,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_4dac30738f5b",
+      "name": "HAS_CURRENT_VALUE",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "HAS_CURRENT_VALUE",
+          "quote": "当前值为 33。",
+          "metadata": {
+            "source_entity": "n3",
+            "target_entity": "n4"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "ConfigurationField",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Integer",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_36fe46f7ee3c",
+      "name": "HAS_TARGET_VALUE",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "HAS_TARGET_VALUE",
+          "quote": "Agent 指示改为 34。",
+          "metadata": {
+            "source_entity": "n3",
+            "target_entity": "n5"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "ConfigurationField",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Integer",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_71707ad63942",
+      "name": "AFTER",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "AFTER",
+          "quote": "修改字段后执行 Sync Now。",
+          "metadata": {
+            "source_entity": "n6",
+            "target_entity": "n3"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Action",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "ConfigurationField",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_2824730e6749",
+      "name": "DEPENDS_ON",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "DEPENDS_ON",
+          "quote": "是否调整这些字段取决于设备兼容性。",
+          "metadata": {
+            "source_entity": "n9",
+            "target_entity": "n8"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "ConfigurationFieldSet",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Constraint",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_de65139a92ff",
+      "name": "FOLLOWED_BY",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "FOLLOWED_BY",
+          "quote": "添加依赖后错误消失。",
+          "metadata": {
+            "source_entity": "n2",
+            "target_entity": "n3"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "Change",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Status",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    },
+    {
+      "id": "operator_3f08976e9b4a",
+      "name": "OCCURS_ON",
+      "operator_type": "relation",
+      "description": "",
+      "aliases": [],
+      "source_kind": "extracted",
+      "metadata": {},
+      "examples": [
+        {
+          "evidence_type": "chunk_relation",
+          "relation_type": "OCCURS_ON",
+          "quote": "故障在手机上发生。",
+          "metadata": {
+            "source_entity": "n4",
+            "target_entity": "n5"
+          }
+        }
+      ],
+      "usage_profile": {
+        "observed_input_concepts": [
+          {
+            "name": "RuntimeFailure",
+            "count": 1
+          }
+        ],
+        "observed_output_concepts": [
+          {
+            "name": "Device",
+            "count": 1
+          }
+        ],
+        "input_unique_count": 1,
+        "output_unique_count": 1
+      }
+    }
+  ],
+  "keol_commit": "44631e64fd07c9b85f22e36035bf49c882dba592",
+  "batch_index": 0
+}

@@ -1,0 +1,397 @@
+{
+  "schema_version": "knowledge_extraction_run_v1",
+  "source": "KE-test.json",
+  "active_method": "knowledge_first_two_pass",
+  "semantic_authoring": "codex_subagents_only",
+  "root_authored_semantic_records": false,
+  "old_keol_or_custom_ke_used_as_model_input": false,
+  "source_segments": {
+    "path": "knowledge-extraction/source-segments.json",
+    "version": "source-segments-v1",
+    "sha256": "678d74db62a9c6338f19d1a7d16910c3092c88b14f6eb201527e56eb82a3d726",
+    "tool_result_item_fields": [
+      "quote",
+      "occurrence_index",
+      "marker_occurrence_index"
+    ]
+  },
+  "turn_pass": {
+    "status": "validated",
+    "prompt": {
+      "path": "knowledge-extraction/prompts/turn_knowledge_extraction.md",
+      "version": "knowledge-extraction-turn-v1",
+      "sha256": "08e83f6151841331c3f0e04efb50c3c53d9c16346a819889230306e32c614aef"
+    },
+    "prepared_manifest": {
+      "path": "knowledge-extraction/turn-pass/prepared/manifest.json",
+      "sha256": "1d022c88e6406e2eaa4a68ed3cbcfa0211e223a487122d8bd62bf74a242b4271"
+    },
+    "validated_manifest": {
+      "path": "knowledge-extraction/turn-pass/validated/manifest.json",
+      "sha256": "85fd62ddaabb9473db30d799dc3e0c668fc3cb50e73902286e1cd325ad96ff14"
+    },
+    "assignments": [
+      {
+        "subagent_task": "turn_extract_a",
+        "candidates": [
+          "WILDCHAT-MGMT-CAND-001",
+          "WILDCHAT-MGMT-CAND-002",
+          "WILDCHAT-LEARN-CAND-002",
+          "WILDCHAT-MGMT-CAND-003"
+        ],
+        "turn_count": 15,
+        "knowledge_count": 189,
+        "context_completion_count": 15,
+        "status": "validated"
+      },
+      {
+        "subagent_task": "turn_extract_b",
+        "candidates": [
+          "WILDCHAT-LEARN-CAND-004",
+          "TASKMASTER2-CAND-001",
+          "TAU-BENCH-CAND-001"
+        ],
+        "turn_count": 14,
+        "knowledge_count": 78,
+        "context_completion_count": 16,
+        "status": "validated"
+      },
+      {
+        "subagent_task": "turn_extract_c",
+        "candidates": [
+          "BEAM-CAND-004",
+          "WILDCHAT-LEARN-CAND-001",
+          "WILDCHAT-LEARN-CAND-003"
+        ],
+        "turn_count": 14,
+        "knowledge_count": 132,
+        "context_completion_count": 13,
+        "status": "validated"
+      }
+    ],
+    "source_segment_correction": {
+      "subagent_task": "tau_turn_source_segment_correction",
+      "completed_at": "2026-07-22T13:56:12.0062356+08:00",
+      "archive_path": "knowledge-extraction/turn-pass/archive/raw-before-source-segment-correction",
+      "files": [
+        {
+          "file": "0006-0001.json",
+          "old_raw_sha256": "4267bbf58d136463013922abe08615e57148deb9202d0d8f0ac741c4d7ae203a",
+          "new_raw_sha256": "e9574544de4f3fc190a9067778357148b307514649c2c6a6b59ddbca9aba2410"
+        },
+        {
+          "file": "0006-0003.json",
+          "old_raw_sha256": "e19d85fd5b6918070ad626cfdc93b0d75d689cd6eb732b20dbfdfc38ee86be6f",
+          "new_raw_sha256": "d51eaa6be73554dc8a7fed23ff136df727cc7d03809bce6e458e397ab28dfd98"
+        },
+        {
+          "file": "0006-0004.json",
+          "old_raw_sha256": "7f194e4794fb27d60769b907fe71083906c1d99bc528c7d609b43a916051b6d4",
+          "new_raw_sha256": "90ca2c76c84c1d2b10fb11dc46ba0520ded826cf1b6166b21a306769647e3fc6"
+        }
+      ]
+    },
+    "publication_archive": "knowledge-extraction/turn-pass/archive/before-marker-binding-v1-20260722T142625+0800",
+    "totals": {
+      "candidate_count": 10,
+      "turn_count": 43,
+      "speaker_slot_count": 86,
+      "raw_output_count": 43,
+      "validated_output_count": 43,
+      "knowledge_count": 399,
+      "context_completion_count": 44,
+      "tool_observed_count": 11,
+      "zero_knowledge_turns": [
+        "0005-0005.json"
+      ],
+      "validation_errors": 0,
+      "raw_hashes_stable_during_validation": true
+    },
+    "raw_hashes_location": "knowledge-extraction/turn-pass/validated/manifest.json"
+  },
+  "dialogue_pass": {
+    "status": "validated",
+    "prompt": {
+      "path": "knowledge-extraction/prompts/dialogue_reconciliation.md",
+      "version": "dialogue-reconciliation-v1",
+      "sha256": "92e7e24bdcc5476ee32611e078dffee45ad33a5afc2034995bd6ce451264026b"
+    },
+    "prepared_manifest": {
+      "path": "knowledge-extraction/dialogue-pass/prepared/manifest.json",
+      "sha256": "984cf4d33db3829ebec56807f9ac594b346a9d272c33f1c83e8da2c156e96441"
+    },
+    "validated_manifest": {
+      "path": "knowledge-extraction/dialogue-pass/validated/manifest.json",
+      "sha256": "7a12485172d41e2a46dd223d00eb194308cbc02a26c88149fc2ada27c00bb2ec"
+    },
+    "candidate_count": 10,
+    "payload_count": 10,
+    "semantic_raw_generated": true,
+    "raw_output_count": 10,
+    "validated_output_count": 10,
+    "assignments": [
+      {
+        "subagent_task": "dialogue_reconcile_a_via_task5_quality_review",
+        "candidates": [
+          "WILDCHAT-MGMT-CAND-001",
+          "WILDCHAT-MGMT-CAND-002",
+          "WILDCHAT-LEARN-CAND-002",
+          "WILDCHAT-MGMT-CAND-003"
+        ],
+        "raw_files": [
+          {
+            "file": "0000.json",
+            "sha256": "3d0be99240369ae2142d2d9a0c877aa62ef9ad4cdc55a041f11f8d9255eada5a"
+          },
+          {
+            "file": "0001.json",
+            "sha256": "0f15e02108bd789f1c9306a7e2423f9650bd15dc69384e85897a308ac0b3a88a"
+          },
+          {
+            "file": "0002.json",
+            "sha256": "efa9db99035301ab43b451f796bdc6e1e729147e01e6d488f783e03df13b4bf5"
+          },
+          {
+            "file": "0003.json",
+            "sha256": "061811a2736fe27229c9cabfd5936f007f1a8dba425ae9e27caca4b4da1cef37"
+          }
+        ],
+        "status": "validated"
+      },
+      {
+        "subagent_task": "dialogue_reconcile_b_via_tool_result_segment_annotation",
+        "candidates": [
+          "WILDCHAT-LEARN-CAND-004",
+          "TASKMASTER2-CAND-001",
+          "TAU-BENCH-CAND-001"
+        ],
+        "raw_files": [
+          {
+            "file": "0004.json",
+            "sha256": "37a34bd7b0b99dc16af503384e6a31f7e8e58459b5e75cd1647a4b312be748ec"
+          },
+          {
+            "file": "0005.json",
+            "sha256": "534145e998db05e4af7a4adac2140cb602afec11ab47e4894061d45d85327758"
+          },
+          {
+            "file": "0006.json",
+            "sha256": "c52570cc51b872e23171decf9866c84cf1d737fe1f6f0353b31101e05f41acd8"
+          }
+        ],
+        "status": "validated"
+      },
+      {
+        "subagent_task": "dialogue_reconcile_c_via_task5_quality_review_followup",
+        "candidates": [
+          "BEAM-CAND-004",
+          "WILDCHAT-LEARN-CAND-001",
+          "WILDCHAT-LEARN-CAND-003"
+        ],
+        "raw_files": [
+          {
+            "file": "0007.json",
+            "sha256": "e6a445e866f1c856ced1a8c1a2cf96203f67dc61dbb6a4470e40aead4a62c08d"
+          },
+          {
+            "file": "0008.json",
+            "sha256": "8722e274fc3cd34cc887870123544a95e1c8eafa8a210188f9ef5dc6125bd5d1"
+          },
+          {
+            "file": "0009.json",
+            "sha256": "b9ce55121fec342ca172c255d44dd76dbf785148a0be85020a7b8303e07deed5"
+          }
+        ],
+        "status": "validated"
+      }
+    ],
+    "semantic_quality_correction": {
+      "reviewers": [
+        "task5_dialogue_pipeline_quality_review",
+        "tool_result_segment_annotation"
+      ],
+      "archive_path": "knowledge-extraction/dialogue-pass/archive/raw-before-semantic-quality-correction",
+      "previous_validated_archive": "knowledge-extraction/dialogue-pass/archive/validated-before-semantic-quality-correction",
+      "completed_at": "2026-07-22T15:24:03.2805493+08:00",
+      "files": [
+        {
+          "file": "0000.json",
+          "old_raw_sha256": "7d7d4676eaff72b0a734a0de5785f0f947bf65d4c1367d5b20fee9cad3d3a63f",
+          "new_raw_sha256": "3d0be99240369ae2142d2d9a0c877aa62ef9ad4cdc55a041f11f8d9255eada5a"
+        },
+        {
+          "file": "0001.json",
+          "old_raw_sha256": "b808ea2e43d3b1521f6078a9070e1e9c36697de4aed853e860a652509cc51eac",
+          "new_raw_sha256": "0f15e02108bd789f1c9306a7e2423f9650bd15dc69384e85897a308ac0b3a88a"
+        },
+        {
+          "file": "0003.json",
+          "old_raw_sha256": "757ed4f5a5c715d0fafe18cc065b1818848ae5f4aa592f1b8bf8d9941ac3a42b",
+          "new_raw_sha256": "061811a2736fe27229c9cabfd5936f007f1a8dba425ae9e27caca4b4da1cef37"
+        },
+        {
+          "file": "0005.json",
+          "old_raw_sha256": "2ddfe5f7c55178e53a357da97cdba13a2be8bc512ba78f0835fc95dc28d2e3ae",
+          "new_raw_sha256": "534145e998db05e4af7a4adac2140cb602afec11ab47e4894061d45d85327758"
+        },
+        {
+          "file": "0007.json",
+          "old_raw_sha256": "69313b657a7de8e469357eb98903093d876aaed6292e1809dbc0de476a645773",
+          "new_raw_sha256": "e6a445e866f1c856ced1a8c1a2cf96203f67dc61dbb6a4470e40aead4a62c08d"
+        },
+        {
+          "file": "0008.json",
+          "old_raw_sha256": "02287db7cfba083f053ef3b04527598b704a40d44b2b19d35b7c7d9dd80e381a",
+          "new_raw_sha256": "8722e274fc3cd34cc887870123544a95e1c8eafa8a210188f9ef5dc6125bd5d1"
+        }
+      ]
+    },
+    "totals": {
+      "new_knowledge_count": 17,
+      "operation_count": 27,
+      "confirm_count": 1,
+      "correct_count": 17,
+      "supersede_count": 9,
+      "conflict_count": 0,
+      "add_count": 0,
+      "user_reported_new_knowledge_count": 16,
+      "agent_generated_new_knowledge_count": 1,
+      "tool_observed_new_knowledge_count": 0,
+      "validation_errors": 0,
+      "raw_hashes_stable_during_validation": true
+    },
+    "raw_hashes_location": "knowledge-extraction/dialogue-pass/validated/manifest.json",
+    "digest_binding_archive": "knowledge-extraction/dialogue-pass/archive/validated-before-dialogue-digest-binding",
+    "completed_at": "2026-07-22T15:24:03.2805493+08:00"
+  },
+  "validation": {
+    "completed_at": "2026-07-22T17:13:17.5867754+08:00",
+    "turn_raw_files": 43,
+    "turn_validated_files": 43,
+    "dialogue_payload_files": 10,
+    "dialogue_raw_files": 10,
+    "dialogue_validated_files": 10,
+    "keyword_payload_files": 10,
+    "keyword_raw_files": 10,
+    "keyword_knowledge_items": 390,
+    "result": "passed"
+  },
+  "projection": {
+    "status": "projected",
+    "turn_manifest_sha256": "85fd62ddaabb9473db30d799dc3e0c668fc3cb50e73902286e1cd325ad96ff14",
+    "dialogue_manifest_sha256": "7a12485172d41e2a46dd223d00eb194308cbc02a26c88149fc2ada27c00bb2ec",
+    "source_segments_sha256": "678d74db62a9c6338f19d1a7d16910c3092c88b14f6eb201527e56eb82a3d726",
+    "output_path": "C:\\Users\\86137\\Desktop\\KE-memory\\knowledge-extraction\\final-knowledge.json",
+    "output_sha256": "641c88117c206e9901c332e93c4c77e91dc5df703667f441291679dec8c03f41",
+    "active_count": 390,
+    "counts": {
+      "active": 390,
+      "corrected": 17,
+      "superseded": 9
+    },
+    "deterministic_replay": true
+  },
+  "knowledge_extraction_documentation": {
+    "path": "knowledge-extraction/knowledge-extraction-prompt-and-strategy.md",
+    "sha256": "ee511aca8ebba67585ca2ce1d6444a1100686ff87fee5f488ce9ed486b5d7af9",
+    "turn_prompt_version": "knowledge-extraction-turn-v1",
+    "turn_prompt_sha256": "08e83f6151841331c3f0e04efb50c3c53d9c16346a819889230306e32c614aef",
+    "dialogue_prompt_version": "dialogue-reconciliation-v1",
+    "dialogue_prompt_sha256": "92e7e24bdcc5476ee32611e078dffee45ad33a5afc2034995bd6ce451264026b"
+  },
+  "keyword_pass": {
+    "status": "validated",
+    "prompt": {
+      "path": "knowledge-extraction/prompts/knowledge_keyword_extraction_v3.md",
+      "version": "knowledge-keyword-extraction-v3",
+      "sha256": "0b5826224feedefbae836f87266d1adb6c60151301bdd3c610685dd0705692c2"
+    },
+    "prepared_manifest": {
+      "path": "knowledge-extraction/keyword-pass-v3/prepared/manifest.json",
+      "sha256": "fd7f21cd6849d82a8a5c47169d8378fc458133937a89a9da8f2bf24a7689fff2"
+    },
+    "aggregate": {
+      "path": "knowledge-extraction/keyword-pass-v3/keyword-pass.json",
+      "sha256": "b74828a73dfd0264533c7a85fcc58716fd8fc15b4e94c7be749b48008bd44d48",
+      "final_knowledge_sha256": "641c88117c206e9901c332e93c4c77e91dc5df703667f441291679dec8c03f41",
+      "wordnet_version": "3.0"
+    },
+    "assignments": [
+      {
+        "subagent_task": "keyword_v3_review_a",
+        "raw_files": [
+          {"file": "0000.json", "sha256": "54aca31062660e7c1d5b4b30a1501871d35a11f630d6fc990bf1b84b731c415c"},
+          {"file": "0007.json", "sha256": "9d474faadbd3410d508c8702a4ebbfe650928a80ea6e11ab79b007a79d49bc9f"}
+        ],
+        "status": "validated"
+      },
+      {
+        "subagent_task": "keyword_v3_extract_b",
+        "raw_files": [
+          {"file": "0001.json", "sha256": "1e85293bf99cdaf5d29cfc1e3bc57ab151ba3b8abe9ee8f314adff943676f7d9"},
+          {"file": "0003.json", "sha256": "ddcd6d5e2ba50e3998abf9d1989f911a84385c714ad5e060f7ef70672320a067"},
+          {"file": "0004.json", "sha256": "cdc7a2824accb7c9d57e295e5d10cb977aaef26ed47628fddf0153c713c545f9"},
+          {"file": "0005.json", "sha256": "2b9495d9d153682d8a25108b0fee7e028d2bf9049c5643b5ef29762cf536b91b"}
+        ],
+        "status": "validated"
+      },
+      {
+        "subagent_task": "keyword_v3_review_c",
+        "raw_files": [
+          {"file": "0002.json", "sha256": "91209b9f96a0e64e3f8f94d95bb31b78487b63bfbcc43c219bce1edc233500b8"},
+          {"file": "0006.json", "sha256": "b06ff3003264005b82269de6504c3983e2e002e22f2736dac018d9c613cc9c1a"},
+          {"file": "0008.json", "sha256": "45a67da95aba25128dc68a7a0a39395f38c1476370faba709b4dce9e7ddf9f79"},
+          {"file": "0009.json", "sha256": "79dfcdf8f2c55d23aaa6ae54f33dbe643ae69938bff5f8b5e5a15ea5335a772b"}
+        ],
+        "status": "validated"
+      }
+    ],
+    "semantic_review": {
+      "semantic_extraction_by_subagents": true,
+      "independent_review_by_subagents": true,
+      "main_process_batch_validation": true,
+      "canonical_wordnet_alias_normalization": true,
+      "verdict": "validated"
+    },
+    "totals": {
+      "candidate_count": 10,
+      "active_knowledge_count": 390,
+      "keyword_count": 1501,
+      "no_keyword_count": 0,
+      "wordnet_mapped_count": 1066,
+      "unmapped_count": 435,
+      "canonical_keyword_count": 628,
+      "raw_hashes_stable_during_validation": true,
+      "deterministic_replay": true
+    },
+    "completed_at": "2026-07-23T17:38:03.3609139+08:00"
+  },
+  "final_json_export": {
+    "status": "generated",
+    "path": "knowledge-extraction/KE-knowledge-keywords.json",
+    "sha256": "234129ee31cf698d5913ee3e8f8e2b43247f71693ad5e173d9a1787d95c4b25f",
+    "schema_version": "ke-knowledge-keywords-by-turn-v2",
+    "turn_count": 43,
+    "active_knowledge_count": 390,
+    "history_knowledge_count": 26,
+    "keyword_item_count": 390,
+    "keyword_count": 1501,
+    "turn_fields": [
+      "原始文本",
+      "知识",
+      "关键词"
+    ],
+    "dialogue_and_turn_ids_in_display": false,
+    "cross_turn_knowledge_placement": "last_evidence_turn",
+    "preview": {
+      "path": "knowledge-extraction/keyword-v3-preview-lawyer-leave.json",
+      "sha256": "087d5d3aff5ac54321243a665d5f99e9e34c805d83ece2cabe3055f47a0c505f",
+      "top_level_fields": [
+        "原始文本",
+        "知识",
+        "关键词"
+      ]
+    },
+    "deterministic_replay": true
+  }
+}

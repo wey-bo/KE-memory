@@ -1,0 +1,145 @@
+{
+  "source": {
+    "source_id": "src_wildchat_learn_cand_001__turn_002",
+    "file": "keol-input/turns/wildchat-learn-cand-001__turn-002.txt",
+    "file_type": "txt",
+    "category": "text",
+    "metadata": {
+      "unit_id": "wildchat-learn-cand-001__turn-002",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "turn_index": 2,
+      "json_pointer": "/candidates/1/turns/1",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=24456e5381c0c4891d80737fa4639f1d / model=gpt-3.5-turbo-0613 / user_ordinal=1..6 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "chunk": {
+    "id": "chunk_257f38326cc6b5233136",
+    "index": 0,
+    "text": "用户：\n具体应该怎么改？\n\nAgent：\n在 Android Studio 中打开 app/build.gradle，找到 android 块里的 compileSdkVersion 33，改为 compileSdkVersion 34，然后点击 Sync Now。同步后重新构建项目，并根据设备兼容性决定是否同时调整 targetSdk 和 minSdk。",
+    "size": 179,
+    "metadata": {
+      "unit_id": "wildchat-learn-cand-001__turn-002",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "turn_index": 2,
+      "json_pointer": "/candidates/1/turns/1",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=24456e5381c0c4891d80737fa4639f1d / model=gpt-3.5-turbo-0613 / user_ordinal=1..6 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "n1",
+      "name": "Android Studio",
+      "type": "SoftwareApplication",
+      "description": "Agent 指定用于修改项目的开发环境。",
+      "source_chunk_id": "chunk_257f38326cc6b5233136"
+    },
+    {
+      "id": "n2",
+      "name": "app/build.gradle",
+      "type": "File",
+      "description": "需要打开的 app 模块配置文件。",
+      "source_chunk_id": "chunk_257f38326cc6b5233136"
+    },
+    {
+      "id": "n3",
+      "name": "compileSdkVersion",
+      "type": "ConfigurationField",
+      "description": "android 块中需要修改的字段。",
+      "source_chunk_id": "chunk_257f38326cc6b5233136"
+    },
+    {
+      "id": "n4",
+      "name": "33",
+      "type": "Integer",
+      "description": "字段当前值。",
+      "source_chunk_id": "chunk_257f38326cc6b5233136"
+    },
+    {
+      "id": "n5",
+      "name": "34",
+      "type": "Integer",
+      "description": "Agent 指示设置的新值。",
+      "source_chunk_id": "chunk_257f38326cc6b5233136"
+    },
+    {
+      "id": "n6",
+      "name": "Sync Now",
+      "type": "Action",
+      "description": "修改后在 Android Studio 中执行的同步操作。",
+      "source_chunk_id": "chunk_257f38326cc6b5233136"
+    },
+    {
+      "id": "n7",
+      "name": "重新构建项目",
+      "type": "Action",
+      "description": "同步后需要执行的构建操作。",
+      "source_chunk_id": "chunk_257f38326cc6b5233136"
+    },
+    {
+      "id": "n8",
+      "name": "设备兼容性",
+      "type": "Constraint",
+      "description": "是否调整 targetSdk 和 minSdk 时应考虑的约束。",
+      "source_chunk_id": "chunk_257f38326cc6b5233136"
+    },
+    {
+      "id": "n9",
+      "name": "targetSdk 与 minSdk",
+      "type": "ConfigurationFieldSet",
+      "description": "可根据设备兼容性另行决定是否调整的配置。",
+      "source_chunk_id": "chunk_257f38326cc6b5233136"
+    }
+  ],
+  "relations": [
+    {
+      "source_entity": "n2",
+      "target_entity": "n1",
+      "relation_type": "OPENED_IN",
+      "description": "应在 Android Studio 中打开该文件。"
+    },
+    {
+      "source_entity": "n3",
+      "target_entity": "n2",
+      "relation_type": "DEFINED_IN",
+      "description": "compileSdkVersion 位于该文件的 android 块。"
+    },
+    {
+      "source_entity": "n3",
+      "target_entity": "n4",
+      "relation_type": "HAS_CURRENT_VALUE",
+      "description": "当前值为 33。"
+    },
+    {
+      "source_entity": "n3",
+      "target_entity": "n5",
+      "relation_type": "HAS_TARGET_VALUE",
+      "description": "Agent 指示改为 34。"
+    },
+    {
+      "source_entity": "n6",
+      "target_entity": "n3",
+      "relation_type": "AFTER",
+      "description": "修改字段后执行 Sync Now。"
+    },
+    {
+      "source_entity": "n6",
+      "target_entity": "n7",
+      "relation_type": "BEFORE",
+      "description": "同步后重新构建项目。"
+    },
+    {
+      "source_entity": "n9",
+      "target_entity": "n8",
+      "relation_type": "DEPENDS_ON",
+      "description": "是否调整这些字段取决于设备兼容性。"
+    }
+  ]
+}

@@ -1,0 +1,164 @@
+{
+  "source": {
+    "source_id": "src_wildchat_learn_cand_001__turn_006",
+    "file": "keol-input/turns/wildchat-learn-cand-001__turn-006.txt",
+    "file_type": "txt",
+    "category": "text",
+    "metadata": {
+      "unit_id": "wildchat-learn-cand-001__turn-006",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "turn_index": 6,
+      "json_pointer": "/candidates/1/turns/5",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=24456e5381c0c4891d80737fa4639f1d / model=gpt-3.5-turbo-0613 / user_ordinal=1..6 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "chunk": {
+    "id": "chunk_a8ce68fe7d5624032766",
+    "index": 0,
+    "text": "用户：\n我找到了。那我应该先改 Activity 的主题，还是先改 styles.xml？\n\nAgent：\n先确认 styles.xml 中存在可用的 Theme.AppCompat 子主题，再在 Manifest 的 MainActivity 上引用它。两处名称必须一致，之后同步并重新构建，若仍崩溃再回到 Logcat 查看新的异常。",
+    "size": 169,
+    "metadata": {
+      "unit_id": "wildchat-learn-cand-001__turn-006",
+      "candidate_id": "WILDCHAT-LEARN-CAND-001",
+      "turn_index": 6,
+      "json_pointer": "/candidates/1/turns/5",
+      "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=24456e5381c0c4891d80737fa4639f1d / model=gpt-3.5-turbo-0613 / user_ordinal=1..6 / toxic=false / redacted=false",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "n1",
+      "name": "AndroidManifest.xml",
+      "type": "File",
+      "description": "用户已找到的文件。",
+      "source_chunk_id": "chunk_a8ce68fe7d5624032766"
+    },
+    {
+      "id": "n2",
+      "name": "文件已找到",
+      "type": "TaskStatus",
+      "description": "用户明确报告的当前任务状态。",
+      "source_chunk_id": "chunk_a8ce68fe7d5624032766"
+    },
+    {
+      "id": "n3",
+      "name": "styles.xml",
+      "type": "File",
+      "description": "需要先检查主题定义的样式文件。",
+      "source_chunk_id": "chunk_a8ce68fe7d5624032766"
+    },
+    {
+      "id": "n4",
+      "name": "Theme.AppCompat 子主题",
+      "type": "SoftwareConfiguration",
+      "description": "Agent 要求先确认存在的主题。",
+      "source_chunk_id": "chunk_a8ce68fe7d5624032766"
+    },
+    {
+      "id": "n5",
+      "name": "MainActivity",
+      "type": "SoftwareComponent",
+      "description": "需要在 Manifest 中引用主题的 Activity。",
+      "source_chunk_id": "chunk_a8ce68fe7d5624032766"
+    },
+    {
+      "id": "n6",
+      "name": "主题引用",
+      "type": "ConfigurationField",
+      "description": "Manifest 中 MainActivity 对主题的引用。",
+      "source_chunk_id": "chunk_a8ce68fe7d5624032766"
+    },
+    {
+      "id": "n7",
+      "name": "主题名称一致",
+      "type": "Constraint",
+      "description": "styles.xml 定义名与 Manifest 引用名必须一致。",
+      "source_chunk_id": "chunk_a8ce68fe7d5624032766"
+    },
+    {
+      "id": "n8",
+      "name": "同步并重新构建",
+      "type": "Action",
+      "description": "修改主题后执行的操作。",
+      "source_chunk_id": "chunk_a8ce68fe7d5624032766"
+    },
+    {
+      "id": "n9",
+      "name": "Logcat",
+      "type": "DiagnosticTool",
+      "description": "若仍崩溃则继续查看的日志工具。",
+      "source_chunk_id": "chunk_a8ce68fe7d5624032766"
+    },
+    {
+      "id": "n10",
+      "name": "应用崩溃",
+      "type": "RuntimeFailure",
+      "description": "修改后仍可能存在的故障。",
+      "source_chunk_id": "chunk_a8ce68fe7d5624032766"
+    }
+  ],
+  "relations": [
+    {
+      "source_entity": "n2",
+      "target_entity": "n1",
+      "relation_type": "ABOUT",
+      "description": "用户报告已经找到 Manifest。"
+    },
+    {
+      "source_entity": "n4",
+      "target_entity": "n3",
+      "relation_type": "DEFINED_IN",
+      "description": "先确认 styles.xml 中有可用子主题。"
+    },
+    {
+      "source_entity": "n6",
+      "target_entity": "n5",
+      "relation_type": "CONFIGURES",
+      "description": "主题引用配置 MainActivity。"
+    },
+    {
+      "source_entity": "n6",
+      "target_entity": "n1",
+      "relation_type": "DEFINED_IN",
+      "description": "主题引用位于 Manifest。"
+    },
+    {
+      "source_entity": "n6",
+      "target_entity": "n4",
+      "relation_type": "REFERENCES",
+      "description": "Manifest 应引用已定义的 AppCompat 子主题。"
+    },
+    {
+      "source_entity": "n7",
+      "target_entity": "n4",
+      "relation_type": "CONSTRAINS",
+      "description": "主题定义名和引用名必须一致。"
+    },
+    {
+      "source_entity": "n3",
+      "target_entity": "n6",
+      "relation_type": "BEFORE",
+      "description": "Agent 建议先确认样式定义，再修改 Activity 引用。"
+    },
+    {
+      "source_entity": "n6",
+      "target_entity": "n8",
+      "relation_type": "BEFORE",
+      "description": "设置引用后同步并重建。"
+    },
+    {
+      "source_entity": "n9",
+      "target_entity": "n10",
+      "relation_type": "DIAGNOSES",
+      "description": "若仍崩溃则查看新的 Logcat 异常。"
+    }
+  ]
+}

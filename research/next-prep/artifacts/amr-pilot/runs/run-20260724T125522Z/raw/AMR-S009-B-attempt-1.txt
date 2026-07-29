@@ -1,0 +1,11 @@
+(m / mean-01
+   :ARG1 (n / name-01
+            :ARG1 (p / person
+                     :name (s / name :op1 "Stephanie"))
+            :ARG2 (g / guardian))
+   :ARG2 (m2 / manage-01
+            :ARG0 p
+            :ARG1 (a / asset
+                     :mod (f / finance)))
+   :polarity -
+   :mod (n2 / necessary))

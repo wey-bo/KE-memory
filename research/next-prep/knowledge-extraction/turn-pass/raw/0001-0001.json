@@ -1,0 +1,391 @@
+{
+  "candidate_id": "WILDCHAT-MGMT-CAND-002",
+  "turn_index": 1,
+  "context_completions": [
+    {
+      "completion_id": "C_wildchat-mgmt-cand-002-e88f4bb1070d_001_001",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "turn_index": 1,
+      "kind": "unresolved",
+      "original_span": "改成 Instagram 版本",
+      "interpretation": "待转换的原始计划或版本未出现在当前消息中",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "请改成 Instagram 版本"
+        }
+      ],
+      "confidence": 1,
+      "ambiguity": true
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_001_001",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "用户请求制作 Instagram 版本。",
+      "subject": "用户",
+      "predicate": "请求",
+      "object": "Instagram 版本",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "请改成 Instagram 版本"
+        }
+      ],
+      "confidence": 0.99,
+      "inference_basis": "当前消息明确给出目标平台 Instagram，但未提供待转换的原始版本。"
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_001_002",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "用户要求 Instagram 版本加入博客。",
+      "subject": "Instagram 版本",
+      "predicate": "应加入",
+      "object": "博客",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "加入博客、Reels"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_001_003",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "用户要求 Instagram 版本加入 Reels。",
+      "subject": "Instagram 版本",
+      "predicate": "应加入",
+      "object": "Reels",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "加入博客、Reels"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_001_004",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "用户要求在 Stories 中加入故事叙述。",
+      "subject": "Stories",
+      "predicate": "应加入",
+      "object": "故事叙述",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "Stories 和 Reels 中的故事叙述"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_001_005",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "用户要求在 Reels 中加入故事叙述。",
+      "subject": "Reels",
+      "predicate": "应加入",
+      "object": "故事叙述",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "Stories 和 Reels 中的故事叙述"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_001_006",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "代理建议将博客拆成轮播摘要。",
+      "subject": "博客",
+      "predicate": "可拆成",
+      "object": "轮播摘要",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "将博客拆成轮播摘要"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_001_007",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "代理建议用 Reels 发布短教程。",
+      "subject": "Reels",
+      "predicate": "可发布",
+      "object": "短教程",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "用 Reels 发布短教程、锻炼和目标设定"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_001_008",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "代理建议用 Reels 发布锻炼内容。",
+      "subject": "Reels",
+      "predicate": "可发布",
+      "object": "锻炼",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "用 Reels 发布短教程、锻炼和目标设定"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_001_009",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "代理建议用 Reels 发布目标设定内容。",
+      "subject": "Reels",
+      "predicate": "可发布",
+      "object": "目标设定",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "用 Reels 发布短教程、锻炼和目标设定"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_001_010",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "代理建议用 Stories 发布个人转变故事。",
+      "subject": "Stories",
+      "predicate": "可发布",
+      "object": "个人转变故事",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "用 Stories 做个人转变故事、投票、问答和幕后内容"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_001_011",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "代理建议用 Stories 开展投票。",
+      "subject": "Stories",
+      "predicate": "可开展",
+      "object": "投票",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "用 Stories 做个人转变故事、投票、问答和幕后内容"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_001_012",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "代理建议用 Stories 开展问答。",
+      "subject": "Stories",
+      "predicate": "可开展",
+      "object": "问答",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "用 Stories 做个人转变故事、投票、问答和幕后内容"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_001_013",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "代理建议用 Stories 发布幕后内容。",
+      "subject": "Stories",
+      "predicate": "可发布",
+      "object": "幕后内容",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "用 Stories 做个人转变故事、投票、问答和幕后内容"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_001_014",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "代理建议用 Instagram Live 做周期性问答。",
+      "subject": "Instagram Live",
+      "predicate": "可做",
+      "object": "周期性问答",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 1,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "用 Instagram Live 做周期性问答"
+        }
+      ],
+      "confidence": 0.98
+    }
+  ]
+}

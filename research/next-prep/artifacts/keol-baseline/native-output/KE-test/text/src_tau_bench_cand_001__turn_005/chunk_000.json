@@ -1,0 +1,131 @@
+{
+  "source": {
+    "source_id": "src_tau_bench_cand_001__turn_005",
+    "file": "keol-input/turns/tau-bench-cand-001__turn-005.txt",
+    "file_type": "txt",
+    "category": "text",
+    "metadata": {
+      "unit_id": "tau-bench-cand-001__turn-005",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "turn_index": 5,
+      "json_pointer": "/candidates/8/turns/4",
+      "source": "τ-bench historical retail / tau-bench-gpt-4o-retail.json / record_index=30 / task_id=30 / trial=0 / user_ordinal=6..10",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "chunk": {
+    "id": "chunk_a99e267337ec9bea97b2",
+    "index": 0,
+    "text": "用户：\n请退回运动鞋，退款退到我的礼品卡就可以。\n\nAgent：\n[工具调用] return_delivered_order_items(order_id=#W7449508, item_id=6477915553, payment_method=gift_card_7711863)。[工具结果] 运动鞋退货请求已提交，退款 186.45 美元将退回礼品卡。",
+    "size": 180,
+    "metadata": {
+      "unit_id": "tau-bench-cand-001__turn-005",
+      "candidate_id": "TAU-BENCH-CAND-001",
+      "turn_index": 5,
+      "json_pointer": "/candidates/8/turns/4",
+      "source": "τ-bench historical retail / tau-bench-gpt-4o-retail.json / record_index=30 / task_id=30 / trial=0 / user_ordinal=6..10",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "n_user",
+      "name": "用户",
+      "type": "Person",
+      "description": "确认退回运动鞋并指定退款方式的人。",
+      "source_chunk_id": "chunk_a99e267337ec9bea97b2"
+    },
+    {
+      "id": "n_action",
+      "name": "return_delivered_order_items",
+      "type": "ToolAction",
+      "description": "针对已送达运动鞋执行的退货工具调用。",
+      "source_chunk_id": "chunk_a99e267337ec9bea97b2"
+    },
+    {
+      "id": "n_order",
+      "name": "订单 #W7449508",
+      "type": "Order",
+      "description": "退货工具调用作用的订单。",
+      "source_chunk_id": "chunk_a99e267337ec9bea97b2"
+    },
+    {
+      "id": "n_item",
+      "name": "商品项 6477915553",
+      "type": "OrderItem",
+      "description": "退货工具调用作用的运动鞋商品项。",
+      "source_chunk_id": "chunk_a99e267337ec9bea97b2"
+    },
+    {
+      "id": "n_card",
+      "name": "gift_card_7711863",
+      "type": "GiftCard",
+      "description": "用户指定且工具调用使用的退款方式。",
+      "source_chunk_id": "chunk_a99e267337ec9bea97b2"
+    },
+    {
+      "id": "n_status",
+      "name": "退货请求已提交",
+      "type": "ActionStatus",
+      "description": "工具结果确认的运动鞋退货状态。",
+      "source_chunk_id": "chunk_a99e267337ec9bea97b2"
+    },
+    {
+      "id": "n_refund",
+      "name": "186.45 美元",
+      "type": "MonetaryAmount",
+      "description": "工具结果报告的运动鞋退款金额。",
+      "source_chunk_id": "chunk_a99e267337ec9bea97b2"
+    }
+  ],
+  "relations": [
+    {
+      "source_entity": "n_user",
+      "target_entity": "n_action",
+      "relation_type": "authorizes",
+      "description": "用户确认执行运动鞋退货。"
+    },
+    {
+      "source_entity": "n_action",
+      "target_entity": "n_order",
+      "relation_type": "acts_on",
+      "description": "工具调用作用于订单 #W7449508。"
+    },
+    {
+      "source_entity": "n_action",
+      "target_entity": "n_item",
+      "relation_type": "acts_on",
+      "description": "工具调用作用于商品项 6477915553。"
+    },
+    {
+      "source_entity": "n_action",
+      "target_entity": "n_card",
+      "relation_type": "refund_to",
+      "description": "工具调用指定退款退回礼品卡。"
+    },
+    {
+      "source_entity": "n_action",
+      "target_entity": "n_status",
+      "relation_type": "has_status",
+      "description": "工具结果显示退货请求已提交。"
+    },
+    {
+      "source_entity": "n_action",
+      "target_entity": "n_refund",
+      "relation_type": "refund",
+      "description": "工具结果报告退款金额为 186.45 美元。"
+    },
+    {
+      "source_entity": "n_refund",
+      "target_entity": "n_card",
+      "relation_type": "returned_to",
+      "description": "退款将退回用户的礼品卡。"
+    }
+  ]
+}

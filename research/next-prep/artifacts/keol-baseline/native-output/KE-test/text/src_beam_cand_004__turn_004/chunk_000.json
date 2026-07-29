@@ -1,0 +1,294 @@
+{
+  "source": {
+    "source_id": "src_beam_cand_004__turn_004",
+    "file": "keol-input/turns/beam-cand-004__turn-004.txt",
+    "file_type": "txt",
+    "category": "text",
+    "metadata": {
+      "unit_id": "beam-cand-004__turn-004",
+      "candidate_id": "BEAM-CAND-004",
+      "turn_index": 4,
+      "json_pointer": "/candidates/9/turns/3",
+      "source": "Mohammadta/BEAM / split=100K / conversation_id=19 / session_index=1 / message_index=0..9 / source_time_anchor=2024-05-02",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "chunk": {
+    "id": "chunk_0b6566f80add47268752",
+    "index": 0,
+    "text": "用户：\n我必须在 2024 年 5 月 15 日前完成遗嘱，而当前时间锚是 2024 年 5 月 2 日。我感到压力很大。考虑到我已经和家人开过会、Douglas 也接受了执行人角色，我怎样才能确保遗嘱具有法律效力？\n\nAgent：\n可以按截止日期推进：列出资产和受益人，明确 Douglas 的执行人任命，准备遗嘱文本，按照适用法律完成签名和见证，并请遗产规划律师审核；还要留出时间处理见证和公证等手续。",
+    "size": 203,
+    "metadata": {
+      "unit_id": "beam-cand-004__turn-004",
+      "candidate_id": "BEAM-CAND-004",
+      "turn_index": 4,
+      "json_pointer": "/candidates/9/turns/3",
+      "source": "Mohammadta/BEAM / split=100K / conversation_id=19 / session_index=1 / message_index=0..9 / source_time_anchor=2024-05-02",
+      "speaker_order": [
+        "user",
+        "agent"
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "n_user",
+      "name": "用户",
+      "type": "Person",
+      "description": "需要在截止日前完成具有法律效力遗嘱的人。",
+      "source_chunk_id": "chunk_0b6566f80add47268752"
+    },
+    {
+      "id": "n_will",
+      "name": "用户的遗嘱",
+      "type": "LegalDocument",
+      "description": "用户需要完成并确保具有法律效力的遗嘱。",
+      "source_chunk_id": "chunk_0b6566f80add47268752"
+    },
+    {
+      "id": "n_deadline",
+      "name": "2024 年 5 月 15 日",
+      "type": "CalendarDate",
+      "description": "遗嘱完成截止日期。",
+      "source_chunk_id": "chunk_0b6566f80add47268752"
+    },
+    {
+      "id": "n_anchor",
+      "name": "2024 年 5 月 2 日",
+      "type": "CalendarDate",
+      "description": "对话给出的当前时间锚。",
+      "source_chunk_id": "chunk_0b6566f80add47268752"
+    },
+    {
+      "id": "n_pressure",
+      "name": "压力很大",
+      "type": "EmotionalState",
+      "description": "用户面对截止日期时表达的状态。",
+      "source_chunk_id": "chunk_0b6566f80add47268752"
+    },
+    {
+      "id": "n_family_meeting",
+      "name": "已举行的家庭会议",
+      "type": "Event",
+      "description": "用户说明已和家人开过的会议。",
+      "source_chunk_id": "chunk_0b6566f80add47268752"
+    },
+    {
+      "id": "n_douglas",
+      "name": "Douglas",
+      "type": "Person",
+      "description": "已经接受遗嘱执行人角色的人。",
+      "source_chunk_id": "chunk_0b6566f80add47268752"
+    },
+    {
+      "id": "n_executor_role",
+      "name": "遗嘱执行人角色",
+      "type": "Role",
+      "description": "Douglas 已接受的角色。",
+      "source_chunk_id": "chunk_0b6566f80add47268752"
+    },
+    {
+      "id": "n_validity",
+      "name": "遗嘱法律效力",
+      "type": "LegalStatus",
+      "description": "用户希望确保的遗嘱状态。",
+      "source_chunk_id": "chunk_0b6566f80add47268752"
+    },
+    {
+      "id": "n_plan",
+      "name": "遗嘱完成计划",
+      "type": "Plan",
+      "description": "Agent 按截止日期提出的办理步骤。",
+      "source_chunk_id": "chunk_0b6566f80add47268752"
+    },
+    {
+      "id": "n_assets",
+      "name": "资产清单",
+      "type": "Information",
+      "description": "Agent 提出的遗嘱准备内容。",
+      "source_chunk_id": "chunk_0b6566f80add47268752"
+    },
+    {
+      "id": "n_beneficiaries",
+      "name": "受益人清单",
+      "type": "Information",
+      "description": "Agent 提出的遗嘱准备内容。",
+      "source_chunk_id": "chunk_0b6566f80add47268752"
+    },
+    {
+      "id": "n_appointment",
+      "name": "Douglas 的执行人任命",
+      "type": "LegalProvision",
+      "description": "Agent 建议在遗嘱中明确的任命。",
+      "source_chunk_id": "chunk_0b6566f80add47268752"
+    },
+    {
+      "id": "n_draft",
+      "name": "遗嘱文本",
+      "type": "DocumentDraft",
+      "description": "Agent 建议准备的法律文本。",
+      "source_chunk_id": "chunk_0b6566f80add47268752"
+    },
+    {
+      "id": "n_law",
+      "name": "适用法律",
+      "type": "Law",
+      "description": "完成签名和见证时需要遵循的法律。",
+      "source_chunk_id": "chunk_0b6566f80add47268752"
+    },
+    {
+      "id": "n_signature",
+      "name": "签名",
+      "type": "LegalFormality",
+      "description": "Agent 提出的遗嘱办理手续。",
+      "source_chunk_id": "chunk_0b6566f80add47268752"
+    },
+    {
+      "id": "n_witnessing",
+      "name": "见证",
+      "type": "LegalFormality",
+      "description": "Agent 提出的遗嘱办理手续。",
+      "source_chunk_id": "chunk_0b6566f80add47268752"
+    },
+    {
+      "id": "n_lawyer",
+      "name": "遗产规划律师",
+      "type": "ProfessionalRole",
+      "description": "Agent 建议审核遗嘱的专业人员。",
+      "source_chunk_id": "chunk_0b6566f80add47268752"
+    },
+    {
+      "id": "n_review",
+      "name": "律师审核",
+      "type": "ReviewAction",
+      "description": "Agent 建议对遗嘱执行的审核。",
+      "source_chunk_id": "chunk_0b6566f80add47268752"
+    },
+    {
+      "id": "n_notarization",
+      "name": "公证",
+      "type": "LegalFormality",
+      "description": "Agent 表示可能需要预留时间处理的手续。",
+      "source_chunk_id": "chunk_0b6566f80add47268752"
+    }
+  ],
+  "relations": [
+    {
+      "source_entity": "n_user",
+      "target_entity": "n_will",
+      "relation_type": "must_complete",
+      "description": "用户必须完成遗嘱。"
+    },
+    {
+      "source_entity": "n_will",
+      "target_entity": "n_deadline",
+      "relation_type": "deadline",
+      "description": "遗嘱必须在 2024 年 5 月 15 日前完成。"
+    },
+    {
+      "source_entity": "n_user",
+      "target_entity": "n_anchor",
+      "relation_type": "current_date",
+      "description": "用户给出的当前时间锚为 2024 年 5 月 2 日。"
+    },
+    {
+      "source_entity": "n_user",
+      "target_entity": "n_pressure",
+      "relation_type": "experiences",
+      "description": "用户表示感到压力很大。"
+    },
+    {
+      "source_entity": "n_user",
+      "target_entity": "n_family_meeting",
+      "relation_type": "has_completed",
+      "description": "用户说明已经和家人开过会。"
+    },
+    {
+      "source_entity": "n_douglas",
+      "target_entity": "n_executor_role",
+      "relation_type": "accepts",
+      "description": "Douglas 已接受执行人角色。"
+    },
+    {
+      "source_entity": "n_user",
+      "target_entity": "n_validity",
+      "relation_type": "seeks",
+      "description": "用户希望确保遗嘱具有法律效力。"
+    },
+    {
+      "source_entity": "n_plan",
+      "target_entity": "n_deadline",
+      "relation_type": "scheduled_by",
+      "description": "Agent 建议按截止日期推进计划。"
+    },
+    {
+      "source_entity": "n_plan",
+      "target_entity": "n_assets",
+      "relation_type": "includes",
+      "description": "计划包含列出资产。"
+    },
+    {
+      "source_entity": "n_plan",
+      "target_entity": "n_beneficiaries",
+      "relation_type": "includes",
+      "description": "计划包含列出受益人。"
+    },
+    {
+      "source_entity": "n_plan",
+      "target_entity": "n_appointment",
+      "relation_type": "includes",
+      "description": "计划包含明确 Douglas 的执行人任命。"
+    },
+    {
+      "source_entity": "n_plan",
+      "target_entity": "n_draft",
+      "relation_type": "includes",
+      "description": "计划包含准备遗嘱文本。"
+    },
+    {
+      "source_entity": "n_signature",
+      "target_entity": "n_law",
+      "relation_type": "governed_by",
+      "description": "签名需要按照适用法律完成。"
+    },
+    {
+      "source_entity": "n_witnessing",
+      "target_entity": "n_law",
+      "relation_type": "governed_by",
+      "description": "见证需要按照适用法律完成。"
+    },
+    {
+      "source_entity": "n_plan",
+      "target_entity": "n_signature",
+      "relation_type": "includes",
+      "description": "计划包含完成签名。"
+    },
+    {
+      "source_entity": "n_plan",
+      "target_entity": "n_witnessing",
+      "relation_type": "includes",
+      "description": "计划包含完成见证。"
+    },
+    {
+      "source_entity": "n_review",
+      "target_entity": "n_will",
+      "relation_type": "reviews",
+      "description": "律师审核针对遗嘱。"
+    },
+    {
+      "source_entity": "n_lawyer",
+      "target_entity": "n_review",
+      "relation_type": "performs",
+      "description": "Agent 建议请遗产规划律师进行审核。"
+    },
+    {
+      "source_entity": "n_plan",
+      "target_entity": "n_notarization",
+      "relation_type": "allows_time_for",
+      "description": "Agent 建议预留时间处理公证等手续。"
+    }
+  ]
+}

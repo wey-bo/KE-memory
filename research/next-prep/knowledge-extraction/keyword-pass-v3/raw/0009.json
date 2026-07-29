@@ -1,0 +1,1995 @@
+{
+    "candidate_id":  "WILDCHAT-MGMT-CAND-003",
+    "items":  [
+                  {
+                      "knowledge_id":  "D_wildchat-mgmt-cand-003-f877bc2fc8f5_001",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0001",
+                                           "knowledge_id":  "D_wildchat-mgmt-cand-003-f877bc2fc8f5_001",
+                                           "surface":  "请求",
+                                           "keyword":  "请求",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "request.v.01",
+                                           "wordnet_lemma":  "request",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0002",
+                                           "knowledge_id":  "D_wildchat-mgmt-cand-003-f877bc2fc8f5_001",
+                                           "surface":  "公共住房",
+                                           "keyword":  "公共住房",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "housing_project.n.01",
+                                           "wordnet_lemma":  "public_housing",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0003",
+                                           "knowledge_id":  "D_wildchat-mgmt-cand-003-f877bc2fc8f5_001",
+                                           "surface":  "项目经理",
+                                           "keyword":  "项目经理",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0004",
+                                           "knowledge_id":  "D_wildchat-mgmt-cand-003-f877bc2fc8f5_001",
+                                           "surface":  "绩效",
+                                           "keyword":  "绩效",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "performance.n.03",
+                                           "wordnet_lemma":  "performance",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.94
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0005",
+                                           "knowledge_id":  "D_wildchat-mgmt-cand-003-f877bc2fc8f5_001",
+                                           "surface":  "目标",
+                                           "keyword":  "目标",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "goal.n.01",
+                                           "wordnet_lemma":  "goal",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "D_wildchat-mgmt-cand-003-f877bc2fc8f5_002",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0006",
+                                           "knowledge_id":  "D_wildchat-mgmt-cand-003-f877bc2fc8f5_002",
+                                           "surface":  "请求",
+                                           "keyword":  "请求",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "predicate",
+                                           "wordnet_synset":  "request.v.01",
+                                           "wordnet_lemma":  "request",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0007",
+                                           "knowledge_id":  "D_wildchat-mgmt-cand-003-f877bc2fc8f5_002",
+                                           "surface":  "绩效",
+                                           "keyword":  "绩效",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "performance.n.03",
+                                           "wordnet_lemma":  "performance",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.94
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0008",
+                                           "knowledge_id":  "D_wildchat-mgmt-cand-003-f877bc2fc8f5_002",
+                                           "surface":  "目标",
+                                           "keyword":  "目标",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "goal.n.01",
+                                           "wordnet_lemma":  "goal",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0009",
+                                           "knowledge_id":  "D_wildchat-mgmt-cand-003-f877bc2fc8f5_002",
+                                           "surface":  "SMART",
+                                           "keyword":  "SMART",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "attribute",
+                                           "source_field":  "statement",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_001",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0010",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_001",
+                                           "surface":  "10 个",
+                                           "keyword":  "10个",
+                                           "keyword_type":  "quantity",
+                                           "semantic_role":  "value",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0011",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_001",
+                                           "surface":  "绩效",
+                                           "keyword":  "绩效",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "performance.n.03",
+                                           "wordnet_lemma":  "performance",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.94
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0012",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_001",
+                                           "surface":  "目标",
+                                           "keyword":  "目标",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "goal.n.01",
+                                           "wordnet_lemma":  "goal",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0013",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_001",
+                                           "surface":  "公共住房",
+                                           "keyword":  "公共住房",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "qualifiers.scope",
+                                           "wordnet_synset":  "housing_project.n.01",
+                                           "wordnet_lemma":  "public_housing",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0014",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_001",
+                                           "surface":  "项目经理",
+                                           "keyword":  "项目经理",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "participant",
+                                           "source_field":  "qualifiers.scope",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_002",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0015",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_002",
+                                           "surface":  "目标",
+                                           "keyword":  "目标",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "goal.n.01",
+                                           "wordnet_lemma":  "goal",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0016",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_002",
+                                           "surface":  "项目",
+                                           "keyword":  "项目",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "project.n.02",
+                                           "wordnet_lemma":  "project",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0017",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_002",
+                                           "surface":  "执行",
+                                           "keyword":  "执行",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "carry_through.v.01",
+                                           "wordnet_lemma":  "execute",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.96
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0018",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_002",
+                                           "surface":  "效率",
+                                           "keyword":  "效率",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "efficiency.n.01",
+                                           "wordnet_lemma":  "efficiency",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.98
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_003",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0019",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_003",
+                                           "surface":  "目标",
+                                           "keyword":  "目标",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "goal.n.01",
+                                           "wordnet_lemma":  "goal",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0020",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_003",
+                                           "surface":  "报告",
+                                           "keyword":  "报告",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "report.n.01",
+                                           "wordnet_lemma":  "report",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0021",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_003",
+                                           "surface":  "及时性",
+                                           "keyword":  "及时性",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "seasonableness.n.01",
+                                           "wordnet_lemma":  "timeliness",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.98
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_004",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0022",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_004",
+                                           "surface":  "目标",
+                                           "keyword":  "目标",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "goal.n.01",
+                                           "wordnet_lemma":  "goal",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0023",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_004",
+                                           "surface":  "绩效",
+                                           "keyword":  "绩效",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "performance.n.03",
+                                           "wordnet_lemma":  "performance",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.94
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0024",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_004",
+                                           "surface":  "指标",
+                                           "keyword":  "指标",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "index.n.02",
+                                           "wordnet_lemma":  "indicator",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.97
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_005",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0025",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_005",
+                                           "surface":  "目标",
+                                           "keyword":  "目标",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "goal.n.01",
+                                           "wordnet_lemma":  "goal",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0026",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_005",
+                                           "surface":  "利益相关方",
+                                           "keyword":  "利益相关方",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "participant",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0027",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_005",
+                                           "surface":  "参与",
+                                           "keyword":  "参与",
+                                           "keyword_type":  "event",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "engagement.n.07",
+                                           "wordnet_lemma":  "participation",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.97
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_006",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0028",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_006",
+                                           "surface":  "目标",
+                                           "keyword":  "目标",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "goal.n.01",
+                                           "wordnet_lemma":  "goal",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0029",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_006",
+                                           "surface":  "可负担住房",
+                                           "keyword":  "可负担住房",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0030",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_006",
+                                           "surface":  "创新",
+                                           "keyword":  "创新",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "invention.n.02",
+                                           "wordnet_lemma":  "innovation",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.96
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_007",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0031",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_007",
+                                           "surface":  "目标",
+                                           "keyword":  "目标",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "goal.n.01",
+                                           "wordnet_lemma":  "goal",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0032",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_007",
+                                           "surface":  "居民",
+                                           "keyword":  "居民",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "participant",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "resident.n.01",
+                                           "wordnet_lemma":  "resident",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0033",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_007",
+                                           "surface":  "满意度",
+                                           "keyword":  "满意度",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "satisfaction.n.01",
+                                           "wordnet_lemma":  "satisfaction",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.98
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_008",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0034",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_008",
+                                           "surface":  "目标",
+                                           "keyword":  "目标",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "goal.n.01",
+                                           "wordnet_lemma":  "goal",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0035",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_008",
+                                           "surface":  "部门",
+                                           "keyword":  "部门",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "participant",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "department.n.01",
+                                           "wordnet_lemma":  "department",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0036",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_008",
+                                           "surface":  "协作",
+                                           "keyword":  "协作",
+                                           "keyword_type":  "event",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "cooperation.n.01",
+                                           "wordnet_lemma":  "cooperation",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_009",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0037",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_009",
+                                           "surface":  "目标",
+                                           "keyword":  "目标",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "goal.n.01",
+                                           "wordnet_lemma":  "goal",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0038",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_009",
+                                           "surface":  "持续",
+                                           "keyword":  "持续",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "attribute",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "continuous.a.01",
+                                           "wordnet_lemma":  "continuous",
+                                           "wordnet_pos":  "a",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0039",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_009",
+                                           "surface":  "改进",
+                                           "keyword":  "改进",
+                                           "keyword_type":  "event",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "improvement.n.01",
+                                           "wordnet_lemma":  "improvement",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.98
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_010",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0040",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_010",
+                                           "surface":  "目标",
+                                           "keyword":  "目标",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "goal.n.01",
+                                           "wordnet_lemma":  "goal",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0041",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_010",
+                                           "surface":  "员工",
+                                           "keyword":  "员工",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "participant",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "employee.n.01",
+                                           "wordnet_lemma":  "employee",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0042",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_010",
+                                           "surface":  "培训",
+                                           "keyword":  "培训",
+                                           "keyword_type":  "event",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "training.n.01",
+                                           "wordnet_lemma":  "training",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_011",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0043",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_011",
+                                           "surface":  "目标",
+                                           "keyword":  "目标",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "goal.n.01",
+                                           "wordnet_lemma":  "goal",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0044",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_011",
+                                           "surface":  "法规",
+                                           "keyword":  "法规",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "regulation.n.01",
+                                           "wordnet_lemma":  "regulation",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0045",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_000_011",
+                                           "surface":  "趋势",
+                                           "keyword":  "趋势",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "tendency.n.04",
+                                           "wordnet_lemma":  "trend",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.98
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_002",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0046",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_002",
+                                           "surface":  "目标",
+                                           "keyword":  "目标",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "goal.n.01",
+                                           "wordnet_lemma":  "goal",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0047",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_002",
+                                           "surface":  "预算",
+                                           "keyword":  "预算",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "attribute",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "budget.n.01",
+                                           "wordnet_lemma":  "budget",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0048",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_002",
+                                           "surface":  "完成",
+                                           "keyword":  "完成",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "complete.v.01",
+                                           "wordnet_lemma":  "complete",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0049",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_002",
+                                           "surface":  "资本改造",
+                                           "keyword":  "资本改造",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0050",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_002",
+                                           "surface":  "项目",
+                                           "keyword":  "项目",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "project.n.02",
+                                           "wordnet_lemma":  "project",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_003",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0051",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_003",
+                                           "surface":  "目标",
+                                           "keyword":  "目标",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "goal.n.01",
+                                           "wordnet_lemma":  "goal",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0052",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_003",
+                                           "surface":  "进度",
+                                           "keyword":  "进度",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "attribute",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "schedule.n.02",
+                                           "wordnet_lemma":  "schedule",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.95
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0053",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_003",
+                                           "surface":  "完成",
+                                           "keyword":  "完成",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "complete.v.01",
+                                           "wordnet_lemma":  "complete",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0054",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_003",
+                                           "surface":  "资本改造",
+                                           "keyword":  "资本改造",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0055",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_003",
+                                           "surface":  "项目",
+                                           "keyword":  "项目",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "project.n.02",
+                                           "wordnet_lemma":  "project",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_004",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0056",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_004",
+                                           "surface":  "目标",
+                                           "keyword":  "目标",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "goal.n.01",
+                                           "wordnet_lemma":  "goal",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0057",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_004",
+                                           "surface":  "提高",
+                                           "keyword":  "提高",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "increase.v.02",
+                                           "wordnet_lemma":  "increase",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0058",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_004",
+                                           "surface":  "公众",
+                                           "keyword":  "公众",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "participant",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "populace.n.01",
+                                           "wordnet_lemma":  "public",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0059",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_004",
+                                           "surface":  "住房",
+                                           "keyword":  "住房",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "housing.n.01",
+                                           "wordnet_lemma":  "housing",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0060",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_004",
+                                           "surface":  "项目",
+                                           "keyword":  "项目",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "project.n.02",
+                                           "wordnet_lemma":  "project",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0061",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_004",
+                                           "surface":  "了解",
+                                           "keyword":  "了解",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "result",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "understanding.n.01",
+                                           "wordnet_lemma":  "understanding",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.98
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_005",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0062",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_005",
+                                           "surface":  "目标",
+                                           "keyword":  "目标",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "goal.n.01",
+                                           "wordnet_lemma":  "goal",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0063",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_005",
+                                           "surface":  "资金",
+                                           "keyword":  "资金",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "support.n.11",
+                                           "wordnet_lemma":  "funding",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_006",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0064",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_006",
+                                           "surface":  "目标",
+                                           "keyword":  "目标",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "goal.n.01",
+                                           "wordnet_lemma":  "goal",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0065",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_006",
+                                           "surface":  "确保",
+                                           "keyword":  "确保",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "guarantee.v.02",
+                                           "wordnet_lemma":  "ensure",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0066",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_006",
+                                           "surface":  "公平住房",
+                                           "keyword":  "公平住房",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0067",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_006",
+                                           "surface":  "合规",
+                                           "keyword":  "合规",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "result",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "conformity.n.02",
+                                           "wordnet_lemma":  "compliance",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.97
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_007",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0068",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_007",
+                                           "surface":  "目标",
+                                           "keyword":  "目标",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "goal.n.01",
+                                           "wordnet_lemma":  "goal",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0069",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_007",
+                                           "surface":  "确保",
+                                           "keyword":  "确保",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "guarantee.v.02",
+                                           "wordnet_lemma":  "ensure",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0070",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_007",
+                                           "surface":  "机会",
+                                           "keyword":  "机会",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "opportunity.n.01",
+                                           "wordnet_lemma":  "opportunity",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0071",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_007",
+                                           "surface":  "平等",
+                                           "keyword":  "平等",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "attribute",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "equality.n.01",
+                                           "wordnet_lemma":  "equality",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0072",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_007",
+                                           "surface":  "合规",
+                                           "keyword":  "合规",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "result",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "conformity.n.02",
+                                           "wordnet_lemma":  "compliance",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.97
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_008",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0073",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_008",
+                                           "surface":  "目标",
+                                           "keyword":  "目标",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "goal.n.01",
+                                           "wordnet_lemma":  "goal",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0074",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_008",
+                                           "surface":  "降低",
+                                           "keyword":  "降低",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "reduce.v.01",
+                                           "wordnet_lemma":  "reduce",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0075",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_008",
+                                           "surface":  "空置",
+                                           "keyword":  "空置",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "attribute",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "vacancy.n.01",
+                                           "wordnet_lemma":  "vacancy",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0076",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_008",
+                                           "surface":  "率",
+                                           "keyword":  "比率",
+                                           "keyword_type":  "quantity",
+                                           "semantic_role":  "value",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "ratio.n.01",
+                                           "wordnet_lemma":  "ratio",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_009",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0077",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_009",
+                                           "surface":  "目标",
+                                           "keyword":  "目标",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "goal.n.01",
+                                           "wordnet_lemma":  "goal",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0078",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_009",
+                                           "surface":  "改进",
+                                           "keyword":  "改进",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "better.v.02",
+                                           "wordnet_lemma":  "improve",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0079",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_009",
+                                           "surface":  "维修",
+                                           "keyword":  "维修",
+                                           "keyword_type":  "event",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "repair.n.01",
+                                           "wordnet_lemma":  "repair",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0080",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_009",
+                                           "surface":  "响应",
+                                           "keyword":  "响应",
+                                           "keyword_type":  "event",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_010",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0081",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_010",
+                                           "surface":  "目标",
+                                           "keyword":  "目标",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "goal.n.01",
+                                           "wordnet_lemma":  "goal",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0082",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_010",
+                                           "surface":  "加强",
+                                           "keyword":  "加强",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "strengthen.v.01",
+                                           "wordnet_lemma":  "strengthen",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0083",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_010",
+                                           "surface":  "灾害",
+                                           "keyword":  "灾害",
+                                           "keyword_type":  "event",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "calamity.n.01",
+                                           "wordnet_lemma":  "disaster",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0084",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_010",
+                                           "surface":  "准备",
+                                           "keyword":  "准备",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "readiness.n.01",
+                                           "wordnet_lemma":  "preparation",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.96
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_011",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0085",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_011",
+                                           "surface":  "目标",
+                                           "keyword":  "目标",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "goal.n.01",
+                                           "wordnet_lemma":  "goal",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0086",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_011",
+                                           "surface":  "推进",
+                                           "keyword":  "推进",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "promote.v.01",
+                                           "wordnet_lemma":  "promote",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.97
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0087",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_011",
+                                           "surface":  "多元",
+                                           "keyword":  "多元",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "diverseness.n.01",
+                                           "wordnet_lemma":  "diversity",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.98
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_012",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0088",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_012",
+                                           "surface":  "目标",
+                                           "keyword":  "目标",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "goal.n.01",
+                                           "wordnet_lemma":  "goal",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0089",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_012",
+                                           "surface":  "推进",
+                                           "keyword":  "推进",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "promote.v.01",
+                                           "wordnet_lemma":  "promote",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.97
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0090",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_012",
+                                           "surface":  "公平",
+                                           "keyword":  "公平",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "fairness.n.01",
+                                           "wordnet_lemma":  "fairness",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.97
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_013",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0091",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_013",
+                                           "surface":  "目标",
+                                           "keyword":  "目标",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "goal.n.01",
+                                           "wordnet_lemma":  "goal",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0092",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_013",
+                                           "surface":  "推进",
+                                           "keyword":  "推进",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "promote.v.01",
+                                           "wordnet_lemma":  "promote",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.97
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0093",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_013",
+                                           "surface":  "包容",
+                                           "keyword":  "包容",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "inclusion.n.01",
+                                           "wordnet_lemma":  "inclusion",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.98
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_014",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0094",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_014",
+                                           "surface":  "目标",
+                                           "keyword":  "目标",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "goal.n.01",
+                                           "wordnet_lemma":  "goal",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0095",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_014",
+                                           "surface":  "促进",
+                                           "keyword":  "促进",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "promote.v.01",
+                                           "wordnet_lemma":  "promote",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.97
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0096",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_014",
+                                           "surface":  "居民",
+                                           "keyword":  "居民",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "participant",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "resident.n.01",
+                                           "wordnet_lemma":  "resident",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0097",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_014",
+                                           "surface":  "经济",
+                                           "keyword":  "经济",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "economic.a.01",
+                                           "wordnet_lemma":  "economic",
+                                           "wordnet_pos":  "a",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0098",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_014",
+                                           "surface":  "赋能",
+                                           "keyword":  "赋能",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_015",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0099",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_015",
+                                           "surface":  "目标",
+                                           "keyword":  "目标",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "goal.n.01",
+                                           "wordnet_lemma":  "goal",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0100",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_015",
+                                           "surface":  "伙伴",
+                                           "keyword":  "伙伴",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "participant",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "collaborator.n.03",
+                                           "wordnet_lemma":  "partner",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.96
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0101",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_001_015",
+                                           "surface":  "合作",
+                                           "keyword":  "合作",
+                                           "keyword_type":  "event",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "collaborate.v.01",
+                                           "wordnet_lemma":  "cooperate",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_002",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0102",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_002",
+                                           "surface":  "定向",
+                                           "keyword":  "定向",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "attribute",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0103",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_002",
+                                           "surface":  "宣传",
+                                           "keyword":  "宣传",
+                                           "keyword_type":  "event",
+                                           "semantic_role":  "instrument",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "promotion.n.01",
+                                           "wordnet_lemma":  "publicity",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.96
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0104",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_002",
+                                           "surface":  "入住率",
+                                           "keyword":  "入住率",
+                                           "keyword_type":  "quantity",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0105",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_002",
+                                           "surface":  "提高",
+                                           "keyword":  "提高",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "increase.v.02",
+                                           "wordnet_lemma":  "increase",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0106",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_002",
+                                           "surface":  "10%",
+                                           "keyword":  "10%",
+                                           "keyword_type":  "quantity",
+                                           "semantic_role":  "value",
+                                           "source_field":  "qualifiers.scope",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0107",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_002",
+                                           "surface":  "下一财年",
+                                           "keyword":  "下一财年",
+                                           "keyword_type":  "time",
+                                           "semantic_role":  "time",
+                                           "source_field":  "qualifiers.temporal",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_003",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0108",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_003",
+                                           "surface":  "工单",
+                                           "keyword":  "工单",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "instrument",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0109",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_003",
+                                           "surface":  "系统",
+                                           "keyword":  "系统",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "instrument",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "system.n.01",
+                                           "wordnet_lemma":  "system",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0110",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_003",
+                                           "surface":  "维修",
+                                           "keyword":  "维修",
+                                           "keyword_type":  "event",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "repair.n.01",
+                                           "wordnet_lemma":  "repair",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0111",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_003",
+                                           "surface":  "响应时间",
+                                           "keyword":  "响应时间",
+                                           "keyword_type":  "time",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0112",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_003",
+                                           "surface":  "缩短",
+                                           "keyword":  "缩短",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "shorten.v.01",
+                                           "wordnet_lemma":  "shorten",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0113",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_003",
+                                           "surface":  "20%",
+                                           "keyword":  "20%",
+                                           "keyword_type":  "quantity",
+                                           "semantic_role":  "value",
+                                           "source_field":  "qualifiers.scope",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_004",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0114",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_004",
+                                           "surface":  "拨款",
+                                           "keyword":  "拨款",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "instrument",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "grant.n.01",
+                                           "wordnet_lemma":  "grant",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0115",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_004",
+                                           "surface":  "开发商",
+                                           "keyword":  "开发商",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "participant",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "developer.n.01",
+                                           "wordnet_lemma":  "developer",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0116",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_004",
+                                           "surface":  "合作",
+                                           "keyword":  "合作",
+                                           "keyword_type":  "event",
+                                           "semantic_role":  "other",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "collaborate.v.01",
+                                           "wordnet_lemma":  "cooperate",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0117",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_004",
+                                           "surface":  "增加",
+                                           "keyword":  "增加",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "predicate",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "increase.v.02",
+                                           "wordnet_lemma":  "increase",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.98
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0118",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_004",
+                                           "surface":  "可负担住房",
+                                           "keyword":  "可负担住房",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0119",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_004",
+                                           "surface":  "15%",
+                                           "keyword":  "15%",
+                                           "keyword_type":  "quantity",
+                                           "semantic_role":  "value",
+                                           "source_field":  "qualifiers.scope",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0120",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_004",
+                                           "surface":  "未来两年",
+                                           "keyword":  "未来两年",
+                                           "keyword_type":  "time",
+                                           "semantic_role":  "time",
+                                           "source_field":  "qualifiers.temporal",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_005",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0121",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_005",
+                                           "surface":  "员工",
+                                           "keyword":  "员工",
+                                           "keyword_type":  "entity",
+                                           "semantic_role":  "participant",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "employee.n.01",
+                                           "wordnet_lemma":  "employee",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0122",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_005",
+                                           "surface":  "客服",
+                                           "keyword":  "客服",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0123",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_005",
+                                           "surface":  "冲突解决",
+                                           "keyword":  "冲突解决",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0124",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_005",
+                                           "surface":  "公平住房",
+                                           "keyword":  "公平住房",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "topic",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0125",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_005",
+                                           "surface":  "培训",
+                                           "keyword":  "培训",
+                                           "keyword_type":  "event",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "training.n.01",
+                                           "wordnet_lemma":  "training",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0126",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_005",
+                                           "surface":  "六个月内",
+                                           "keyword":  "六个月内",
+                                           "keyword_type":  "time",
+                                           "semantic_role":  "time",
+                                           "source_field":  "qualifiers.temporal",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_006",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0127",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_006",
+                                           "surface":  "SMART",
+                                           "keyword":  "SMART",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "attribute",
+                                           "source_field":  "statement",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0128",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_006",
+                                           "surface":  "绩效",
+                                           "keyword":  "绩效",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "performance.n.03",
+                                           "wordnet_lemma":  "performance",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.94
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0129",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_006",
+                                           "surface":  "目标",
+                                           "keyword":  "目标",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "goal.n.01",
+                                           "wordnet_lemma":  "goal",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0130",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_006",
+                                           "surface":  "具体",
+                                           "keyword":  "具体",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "attribute",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "specific.s.02",
+                                           "wordnet_lemma":  "specific",
+                                           "wordnet_pos":  "s",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0131",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_006",
+                                           "surface":  "指标",
+                                           "keyword":  "指标",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "index.n.02",
+                                           "wordnet_lemma":  "indicator",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.97
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_007",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0132",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_007",
+                                           "surface":  "SMART",
+                                           "keyword":  "SMART",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "attribute",
+                                           "source_field":  "statement",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0133",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_007",
+                                           "surface":  "绩效",
+                                           "keyword":  "绩效",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "performance.n.03",
+                                           "wordnet_lemma":  "performance",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.94
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0134",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_007",
+                                           "surface":  "目标",
+                                           "keyword":  "目标",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "goal.n.01",
+                                           "wordnet_lemma":  "goal",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0135",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_007",
+                                           "surface":  "截止时间",
+                                           "keyword":  "截止时间",
+                                           "keyword_type":  "time",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "deadline.n.01",
+                                           "wordnet_lemma":  "deadline",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       }
+                                   ]
+                  },
+                  {
+                      "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_008",
+                      "keywords":  [
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0136",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_008",
+                                           "surface":  "SMART",
+                                           "keyword":  "SMART",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "attribute",
+                                           "source_field":  "statement",
+                                           "wordnet_synset":  null,
+                                           "wordnet_lemma":  null,
+                                           "wordnet_pos":  null,
+                                           "mapping_confidence":  null
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0137",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_008",
+                                           "surface":  "绩效",
+                                           "keyword":  "绩效",
+                                           "keyword_type":  "property",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "performance.n.03",
+                                           "wordnet_lemma":  "performance",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.94
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0138",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_008",
+                                           "surface":  "目标",
+                                           "keyword":  "目标",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "subject",
+                                           "source_field":  "subject",
+                                           "wordnet_synset":  "goal.n.01",
+                                           "wordnet_lemma":  "goal",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0139",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_008",
+                                           "surface":  "验证",
+                                           "keyword":  "验证",
+                                           "keyword_type":  "action",
+                                           "semantic_role":  "attribute",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "verify.v.01",
+                                           "wordnet_lemma":  "verify",
+                                           "wordnet_pos":  "v",
+                                           "mapping_confidence":  0.99
+                                       },
+                                       {
+                                           "keyword_id":  "KW_wildchat-mgmt-cand-003-f877bc2fc8f5_0140",
+                                           "knowledge_id":  "K_wildchat-mgmt-cand-003-f877bc2fc8f5_002_008",
+                                           "surface":  "结果",
+                                           "keyword":  "结果",
+                                           "keyword_type":  "concept",
+                                           "semantic_role":  "object",
+                                           "source_field":  "object",
+                                           "wordnet_synset":  "result.n.03",
+                                           "wordnet_lemma":  "result",
+                                           "wordnet_pos":  "n",
+                                           "mapping_confidence":  0.97
+                                       }
+                                   ]
+                  }
+              ]
+}

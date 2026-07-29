@@ -1,0 +1,2025 @@
+{
+  "prompt_version": "dialogue-reconciliation-v1",
+  "candidate_id": "WILDCHAT-LEARN-CAND-002",
+  "candidate_index": 2,
+  "source": "WildChat-1M / shard=train-00008-of-00014 / conversation_hash=e0aeabf3573990b3b4fe5fd6dc87af3f / model=gpt-3.5-turbo-0613 / user_ordinal=1..4 / toxic=false / redacted=false",
+  "candidate_namespace": "wildchat-learn-cand-002-1fa98728ac3e",
+  "conversation": [
+    {
+      "turn_index": 0,
+      "user": "我想用 Praat 把普通话“居”的二声到三声做成 9 步等距连续体。两个声调的 F0 曲线都比较弯，操作很难。你能教我用 PSOLA 在 Praat 里完成吗？",
+      "agent": "可以先载入代表二声的录音，提取目标片段和 F0 曲线，把 F0 数据导出为文本并按等距规则生成 9 组目标值，再在 Praat 的 Manipulation/PSOLA 流程中替换或调整音高，逐步试听和检查结果。",
+      "source_coordinates": {
+        "user": "/candidates/2/turns/0/user",
+        "agent": "/candidates/2/turns/0/agent"
+      },
+      "tool_result_spans": []
+    },
+    {
+      "turn_index": 1,
+      "user": "能具体解释一下第 4 步吗？我没法把它提取成文本文件。",
+      "agent": "提取 F0 后，在 Praat 中选中显示的数值并复制到文本编辑器，保存为 .txt；同时确认音高范围和提取算法设置合适，再用这个文件定义连续体的目标 F0。",
+      "source_coordinates": {
+        "user": "/candidates/2/turns/1/user",
+        "agent": "/candidates/2/turns/1/agent"
+      },
+      "tool_result_spans": []
+    },
+    {
+      "turn_index": 2,
+      "user": "我说得更具体一点：我要改变二声的 F0 转折点和 offset，让它逐渐变成三声，而且每一步都要等距。PSOLA 应该怎么用？",
+      "agent": "可以先从录音生成 Pitch，再转为 Manipulation 对象，在 Manipulation 窗口中使用替换音高的功能，以 PSOLA 为方法调整目标音高。把总变化范围按 9 个等距级别分配，并保持时长和其他参数一致。",
+      "source_coordinates": {
+        "user": "/candidates/2/turns/2/user",
+        "agent": "/candidates/2/turns/2/agent"
+      },
+      "tool_result_spans": []
+    },
+    {
+      "turn_index": 3,
+      "user": "第 8 步里没有看到 Scale pitch，你能再详细一点吗？",
+      "agent": "如果当前 Praat 版本没有 Scale pitch，可以改用 Manipulation 中的 Replace pitch 或等效的 PSOLA 音高替换流程；重点是设定起始、终止和平均音高，检查每个级别的 F0 转折点与 offset，再试听导出的连续体。",
+      "source_coordinates": {
+        "user": "/candidates/2/turns/3/user",
+        "agent": "/candidates/2/turns/3/agent"
+      },
+      "tool_result_spans": []
+    }
+  ],
+  "first_pass_records": [
+    {
+      "turn_index": 0,
+      "canonical_filename": "0002-0000.json",
+      "sha256": "ded33c9e1c5d61ad1d246fb6249125b0af8ddb48221f41b0263e8e74f22a0e34",
+      "output": {
+        "candidate_id": "WILDCHAT-LEARN-CAND-002",
+        "turn_index": 0,
+        "context_completions": [],
+        "knowledge": [
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_001",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "用户想使用 Praat 制作普通话“居”的声调连续体。",
+            "subject": "用户",
+            "predicate": "想使用",
+            "object": "Praat",
+            "qualifiers": {
+              "modality": "planned",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": [
+                "制作普通话“居”的声调连续体"
+              ]
+            },
+            "source_status": "user_reported",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 0,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "我想用 Praat",
+                "evidence_id": "evidence-fdca2cba3e0b3b1f6efd40362eb9bb683c74c3a5bbcf8bb1c65f395ad673a9d9",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "user_reported",
+                "start": 0,
+                "end": 9
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_002",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "用户想把普通话“居”的二声到三声制作成连续体。",
+            "subject": "用户",
+            "predicate": "想制作",
+            "object": "普通话“居”的二声到三声连续体",
+            "qualifiers": {
+              "modality": "planned",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "user_reported",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 0,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "把普通话“居”的二声到三声做成",
+                "evidence_id": "evidence-37109cc7bd327a3ec95daabd8535a33cee3978d29336ffba1ab93c7ba61cfa60",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "user_reported",
+                "start": 10,
+                "end": 25
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_003",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "用户要求该连续体包含 9 步。",
+            "subject": "连续体",
+            "predicate": "应包含",
+            "object": "9 步",
+            "qualifiers": {
+              "modality": "planned",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": [
+                "9 步"
+              ]
+            },
+            "source_status": "user_reported",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 0,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "9 步等距连续体",
+                "evidence_id": "evidence-a4a0f245eb6477bcea525b13e3af0efa1fdb0496fdba1081f4aa37f908cc489f",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "user_reported",
+                "start": 26,
+                "end": 34
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_004",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "用户要求该连续体各步等距。",
+            "subject": "连续体各步",
+            "predicate": "应为",
+            "object": "等距",
+            "qualifiers": {
+              "modality": "planned",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "user_reported",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 0,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "9 步等距连续体",
+                "evidence_id": "evidence-a4a0f245eb6477bcea525b13e3af0efa1fdb0496fdba1081f4aa37f908cc489f",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "user_reported",
+                "start": 26,
+                "end": 34
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_005",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "二声和三声的 F0 曲线都比较弯。",
+            "subject": "两个声调的 F0 曲线",
+            "predicate": "都比较",
+            "object": "弯",
+            "qualifiers": {
+              "modality": "asserted",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "user_reported",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 0,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "两个声调的 F0 曲线都比较弯",
+                "evidence_id": "evidence-e14f09dc305e50a9e4bc2e233806fa5fa5ba56222f6d410609acf9e8464b0581",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "user_reported",
+                "start": 35,
+                "end": 50
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_006",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "用户认为制作该连续体操作很难。",
+            "subject": "制作声调连续体的操作",
+            "predicate": "很",
+            "object": "难",
+            "qualifiers": {
+              "modality": "asserted",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "user_reported",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 0,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "操作很难",
+                "evidence_id": "evidence-37c2f9ef710883c8e8909c7cf887cf2115d98a7d57b0af83981ea19164028ee7",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "user_reported",
+                "start": 51,
+                "end": 55
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_007",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "用户请求学习如何用 PSOLA 在 Praat 中完成该连续体。",
+            "subject": "用户",
+            "predicate": "请求学习",
+            "object": "用 PSOLA 在 Praat 里完成",
+            "qualifiers": {
+              "modality": "requested",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "user_reported",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 0,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "你能教我用 PSOLA 在 Praat 里完成吗？",
+                "evidence_id": "evidence-7f0ee618e241c38bffd57f0e96bbeb9bf9f441746e8b95239aa86fa1f3c00c0f",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "user_reported",
+                "start": 56,
+                "end": 81
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_008",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "代理建议先载入代表二声的录音。",
+            "subject": "用户",
+            "predicate": "应先载入",
+            "object": "代表二声的录音",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": [
+                "先"
+              ]
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 0,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "可以先载入代表二声的录音",
+                "evidence_id": "evidence-42d84feea1caa49f2e2be2d315124d9c7f372a5226ce5f88cbfab464c7a9effb",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "agent_generated",
+                "start": 0,
+                "end": 12
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_009",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "代理建议提取目标片段。",
+            "subject": "用户",
+            "predicate": "应提取",
+            "object": "目标片段",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 0,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "提取目标片段和 F0 曲线",
+                "evidence_id": "evidence-3d070664c8f093d2406f8dbbb66022af50fd087fed2d01262d716ca1fe5685f3",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "agent_generated",
+                "start": 13,
+                "end": 26
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_010",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "代理建议提取 F0 曲线。",
+            "subject": "用户",
+            "predicate": "应提取",
+            "object": "F0 曲线",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 0,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "提取目标片段和 F0 曲线",
+                "evidence_id": "evidence-3d070664c8f093d2406f8dbbb66022af50fd087fed2d01262d716ca1fe5685f3",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "agent_generated",
+                "start": 13,
+                "end": 26
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_011",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "代理建议把 F0 数据导出为文本。",
+            "subject": "用户",
+            "predicate": "应导出为文本",
+            "object": "F0 数据",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 0,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "把 F0 数据导出为文本",
+                "evidence_id": "evidence-bbd83bba937e6b33419077f735d36eab846dd9d7a317febcedf51124d1ca5123",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "agent_generated",
+                "start": 27,
+                "end": 39
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_012",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "代理建议按等距规则生成 9 组目标值。",
+            "subject": "用户",
+            "predicate": "应生成",
+            "object": "9 组目标值",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [
+                "按等距规则"
+              ],
+              "scope": [
+                "9 组"
+              ]
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 0,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "按等距规则生成 9 组目标值",
+                "evidence_id": "evidence-e7c01ad635b970c7fe1db0a705c8fac16e93d619fd123c12bf600e928cf1e781",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "agent_generated",
+                "start": 40,
+                "end": 54
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_013",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "代理建议在 Praat 的 Manipulation/PSOLA 流程中替换或调整音高。",
+            "subject": "用户",
+            "predicate": "应替换或调整",
+            "object": "音高",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": [
+                "Praat 的 Manipulation/PSOLA 流程中"
+              ]
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 0,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "在 Praat 的 Manipulation/PSOLA 流程中替换或调整音高",
+                "evidence_id": "evidence-9c7d708aaf7528e0a389e845c7e944ccf378c5e02cad7026a2209726040020ec",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "agent_generated",
+                "start": 56,
+                "end": 95
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_014",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "代理建议逐步试听结果。",
+            "subject": "用户",
+            "predicate": "应逐步",
+            "object": "试听结果",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 0,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "逐步试听和检查结果",
+                "evidence_id": "evidence-184ac8a40aad0415d7e81215b35666e810b5de443153ecf5c0b0a705b91a853c",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "agent_generated",
+                "start": 96,
+                "end": 105
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_000_015",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "代理建议逐步检查结果。",
+            "subject": "用户",
+            "predicate": "应逐步",
+            "object": "检查结果",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 0,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "逐步试听和检查结果",
+                "evidence_id": "evidence-184ac8a40aad0415d7e81215b35666e810b5de443153ecf5c0b0a705b91a853c",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "agent_generated",
+                "start": 96,
+                "end": 105
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          }
+        ]
+      }
+    },
+    {
+      "turn_index": 1,
+      "canonical_filename": "0002-0001.json",
+      "sha256": "4fbd38f5c2644a27f2e5425f1ffffcb61e0ad4475045d78b3d2d993e819edb2a",
+      "output": {
+        "candidate_id": "WILDCHAT-LEARN-CAND-002",
+        "turn_index": 1,
+        "context_completions": [
+          {
+            "completion_id": "C_wildchat-learn-cand-002-1fa98728ac3e_001_001",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "turn_index": 1,
+            "kind": "unresolved",
+            "original_span": "第 4 步",
+            "interpretation": "当前消息未提供的先前流程第 4 步",
+            "confidence": 1.0,
+            "ambiguity": true,
+            "evidence": [
+              {
+                "turn_index": 1,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "能具体解释一下第 4 步吗？",
+                "evidence_id": "evidence-c8ae8f711003165814d95da63938d5b7fcb7a3242a1fdc694d3d9be6bff60151",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "user_reported",
+                "start": 0,
+                "end": 14
+              }
+            ]
+          },
+          {
+            "completion_id": "C_wildchat-learn-cand-002-1fa98728ac3e_001_002",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "turn_index": 1,
+            "kind": "unresolved",
+            "original_span": "它",
+            "interpretation": "当前消息未明确说明要提取为文本文件的对象",
+            "confidence": 0.75,
+            "ambiguity": true,
+            "evidence": [
+              {
+                "turn_index": 1,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "我没法把它提取成文本文件",
+                "evidence_id": "evidence-13cecf1e48ac90c90ecc9a0a5de76c2aa08a477e7d551de7ad77c93a0eadc949",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "user_reported",
+                "start": 14,
+                "end": 26
+              }
+            ]
+          }
+        ],
+        "knowledge": [
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_001",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "用户请求具体解释当前消息未提供的第 4 步。",
+            "subject": "用户",
+            "predicate": "请求解释",
+            "object": "未提供的第 4 步",
+            "qualifiers": {
+              "modality": "requested",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "user_reported",
+            "derivation": "context_completed",
+            "evidence": [
+              {
+                "turn_index": 1,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "能具体解释一下第 4 步吗？",
+                "evidence_id": "evidence-c8ae8f711003165814d95da63938d5b7fcb7a3242a1fdc694d3d9be6bff60151",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "user_reported",
+                "start": 0,
+                "end": 14
+              }
+            ],
+            "inference_basis": "当前消息未包含编号流程，因此只能将“第 4 步”保留为未提供的先前步骤。",
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_002",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "用户无法把当前消息未明确的对象提取成文本文件。",
+            "subject": "用户",
+            "predicate": "无法提取成",
+            "object": "文本文件",
+            "qualifiers": {
+              "modality": "asserted",
+              "polarity": "negative",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "user_reported",
+            "derivation": "context_completed",
+            "evidence": [
+              {
+                "turn_index": 1,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "我没法把它提取成文本文件",
+                "evidence_id": "evidence-13cecf1e48ac90c90ecc9a0a5de76c2aa08a477e7d551de7ad77c93a0eadc949",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "user_reported",
+                "start": 14,
+                "end": 26
+              }
+            ],
+            "inference_basis": "代词“它”在当前消息中没有明确先行词。",
+            "confidence": 0.75
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_003",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "代理建议在提取 F0 后选中 Praat 中显示的数值。",
+            "subject": "用户",
+            "predicate": "应选中",
+            "object": "Praat 中显示的数值",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [
+                "提取 F0 后"
+              ],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 1,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "提取 F0 后，在 Praat 中选中显示的数值",
+                "evidence_id": "evidence-2273e234a57ad5902622e2ba8ff0cab3ed1a6572370c65e67c36eedaa6f7f272",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "agent_generated",
+                "start": 0,
+                "end": 24
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_004",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "代理建议把 Praat 中显示的数值复制到文本编辑器。",
+            "subject": "用户",
+            "predicate": "应复制到文本编辑器",
+            "object": "Praat 中显示的数值",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 1,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "提取 F0 后，在 Praat 中选中显示的数值并复制到文本编辑器",
+                "evidence_id": "evidence-f75b561f1649b4e12a92e8678b8e870d370ae70d5ca52e3f2bf562299b1bf904",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "agent_generated",
+                "start": 0,
+                "end": 33
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_005",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "代理建议把复制的数值保存为 .txt 文件。",
+            "subject": "用户",
+            "predicate": "应保存为",
+            "object": ".txt",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 1,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "提取 F0 后，在 Praat 中选中显示的数值并复制到文本编辑器，保存为 .txt",
+                "evidence_id": "evidence-409f03569cff130a05da73582417b5d85350bc78a192eb095931592e9bda42c5",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "agent_generated",
+                "start": 0,
+                "end": 42
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_006",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "代理建议确认音高范围设置合适。",
+            "subject": "用户",
+            "predicate": "应确认",
+            "object": "音高范围设置合适",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 1,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "确认音高范围和提取算法设置合适",
+                "evidence_id": "evidence-16ea1757122fe2ebbc476925bf3cf9a425babb467a34b4c703acd0269a665267",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "agent_generated",
+                "start": 45,
+                "end": 60
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_007",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "代理建议确认提取算法设置合适。",
+            "subject": "用户",
+            "predicate": "应确认",
+            "object": "提取算法设置合适",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 1,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "确认音高范围和提取算法设置合适",
+                "evidence_id": "evidence-16ea1757122fe2ebbc476925bf3cf9a425babb467a34b4c703acd0269a665267",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "agent_generated",
+                "start": 45,
+                "end": 60
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_001_008",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "代理建议用该文本文件定义连续体的目标 F0。",
+            "subject": "用户",
+            "predicate": "应用文本文件定义",
+            "object": "连续体的目标 F0",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 1,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "再用这个文件定义连续体的目标 F0",
+                "evidence_id": "evidence-44d01f61100fcaa28b2619b232a415f67fc6d965db7cab9a76003c7b44df6ab4",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "agent_generated",
+                "start": 61,
+                "end": 78
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          }
+        ]
+      }
+    },
+    {
+      "turn_index": 2,
+      "canonical_filename": "0002-0002.json",
+      "sha256": "bdfaa651c023d9880f468cf56246d5e189fe7e4576108975692e268a5fc2949b",
+      "output": {
+        "candidate_id": "WILDCHAT-LEARN-CAND-002",
+        "turn_index": 2,
+        "context_completions": [
+          {
+            "completion_id": "C_wildchat-learn-cand-002-1fa98728ac3e_002_001",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "turn_index": 2,
+            "kind": "coreference",
+            "original_span": "它",
+            "interpretation": "二声的 F0",
+            "confidence": 0.98,
+            "ambiguity": false,
+            "evidence": [
+              {
+                "turn_index": 2,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "我要改变二声的 F0 转折点和 offset，让它逐渐变成三声",
+                "evidence_id": "evidence-5680fb9881b495a08eff423281c21cba1689b0c7ced3f9cb55101f0616aa415a",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "user_reported",
+                "start": 9,
+                "end": 40
+              }
+            ]
+          }
+        ],
+        "knowledge": [
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_001",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "用户要改变二声 F0 的转折点。",
+            "subject": "用户",
+            "predicate": "要改变",
+            "object": "二声 F0 的转折点",
+            "qualifiers": {
+              "modality": "planned",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "user_reported",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 2,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "我要改变二声的 F0 转折点",
+                "evidence_id": "evidence-d5ad0cf4dd8cc94fba3601b6a9d24cd43a74979d13bd0e771bbe1c90377f9630",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "user_reported",
+                "start": 9,
+                "end": 23
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_002",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "用户要改变二声 F0 的 offset。",
+            "subject": "用户",
+            "predicate": "要改变",
+            "object": "二声 F0 的 offset",
+            "qualifiers": {
+              "modality": "planned",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "user_reported",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 2,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "二声的 F0 转折点和 offset",
+                "evidence_id": "evidence-f53165dcd4e414438395a61d1d1fd5e0f7b097c029e4205c30a708d6834b3fee",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "user_reported",
+                "start": 13,
+                "end": 31
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_003",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "用户要让二声的 F0 逐渐变成三声。",
+            "subject": "用户",
+            "predicate": "要让",
+            "object": "二声的 F0 逐渐变成三声",
+            "qualifiers": {
+              "modality": "planned",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "user_reported",
+            "derivation": "context_completed",
+            "evidence": [
+              {
+                "turn_index": 2,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "让它逐渐变成三声",
+                "evidence_id": "evidence-952fbe57f2e87a3772f227fa5a076638fe337203efa52b728c89138ca83b2b3c",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "user_reported",
+                "start": 32,
+                "end": 40
+              }
+            ],
+            "inference_basis": "同一句中的“它”指代前述“二声的 F0”。",
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_004",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "用户要求每一步都等距。",
+            "subject": "连续体的每一步",
+            "predicate": "应",
+            "object": "等距",
+            "qualifiers": {
+              "modality": "planned",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "user_reported",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 2,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "每一步都要等距",
+                "evidence_id": "evidence-47c56b61dbaefb54a5000ae04f88228a1e2fda94f38b09f3cb281313c14e5967",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "user_reported",
+                "start": 43,
+                "end": 50
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_005",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "用户询问 PSOLA 应该如何使用。",
+            "subject": "用户",
+            "predicate": "询问",
+            "object": "PSOLA 应该怎么用",
+            "qualifiers": {
+              "modality": "questioned",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "user_reported",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 2,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "PSOLA 应该怎么用？",
+                "evidence_id": "evidence-444388063aba842ff080af394c816c34a88231a588f7176339de38b99922dc64",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "user_reported",
+                "start": 51,
+                "end": 63
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_006",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "代理建议先从录音生成 Pitch。",
+            "subject": "用户",
+            "predicate": "应先生成",
+            "object": "Pitch",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": [
+                "从录音"
+              ]
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 2,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "可以先从录音生成 Pitch",
+                "evidence_id": "evidence-ddefe8ac76def6fb411dfa0d2929285a2cdfc20f39eb8ad6abacbc1d4ccaf6e0",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "agent_generated",
+                "start": 0,
+                "end": 14
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_007",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "代理建议把 Pitch 转为 Manipulation 对象。",
+            "subject": "用户",
+            "predicate": "应转为",
+            "object": "Manipulation 对象",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": [
+                "Pitch"
+              ]
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 2,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "可以先从录音生成 Pitch，再转为 Manipulation 对象",
+                "evidence_id": "evidence-36a56d0dcdadd79555cb55153736555dee42f320d794ef91c0338fa466715445",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "agent_generated",
+                "start": 0,
+                "end": 34
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_008",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "代理建议在 Manipulation 窗口中使用替换音高的功能。",
+            "subject": "用户",
+            "predicate": "应使用",
+            "object": "替换音高的功能",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": [
+                "Manipulation 窗口中"
+              ]
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 2,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "在 Manipulation 窗口中使用替换音高的功能",
+                "evidence_id": "evidence-afc21526a8132bbaf56d431f3b131b1e6547ad3e066220afdd1fadc50b703728",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "agent_generated",
+                "start": 35,
+                "end": 62
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_009",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "代理建议以 PSOLA 为方法调整目标音高。",
+            "subject": "用户",
+            "predicate": "应调整",
+            "object": "目标音高",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": [
+                "以 PSOLA 为方法"
+              ]
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 2,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "以 PSOLA 为方法调整目标音高",
+                "evidence_id": "evidence-056e805f00c577a00958a41c1a1a36befa6e107cdaa6aab4bb7a772db76efe47",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "agent_generated",
+                "start": 63,
+                "end": 80
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_010",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "代理建议把总变化范围分配为 9 个等距级别。",
+            "subject": "总变化范围",
+            "predicate": "应分配为",
+            "object": "9 个等距级别",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": [
+                "9 个"
+              ]
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 2,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "把总变化范围按 9 个等距级别分配",
+                "evidence_id": "evidence-5a6f1fa3216cb569e064ee966fd406567461f913c0efdc95d2abf9b24337afaa",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "agent_generated",
+                "start": 81,
+                "end": 98
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_011",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "代理建议在各级别间保持时长一致。",
+            "subject": "各级别",
+            "predicate": "应保持",
+            "object": "时长一致",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 2,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "保持时长和其他参数一致",
+                "evidence_id": "evidence-9a6b089bcb7f94682f1418029bc6497484ceca40bcdfc3bc9cd461bff3988575",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "agent_generated",
+                "start": 100,
+                "end": 111
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_002_012",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "代理建议在各级别间保持其他参数一致。",
+            "subject": "各级别",
+            "predicate": "应保持",
+            "object": "其他参数一致",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 2,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "保持时长和其他参数一致",
+                "evidence_id": "evidence-9a6b089bcb7f94682f1418029bc6497484ceca40bcdfc3bc9cd461bff3988575",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "agent_generated",
+                "start": 100,
+                "end": 111
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          }
+        ]
+      }
+    },
+    {
+      "turn_index": 3,
+      "canonical_filename": "0002-0003.json",
+      "sha256": "c98cf49bae1a4dc5f5c474e8fa4f70d8b2c1909921125c6b714ddb49ca02942c",
+      "output": {
+        "candidate_id": "WILDCHAT-LEARN-CAND-002",
+        "turn_index": 3,
+        "context_completions": [
+          {
+            "completion_id": "C_wildchat-learn-cand-002-1fa98728ac3e_003_001",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "turn_index": 3,
+            "kind": "unresolved",
+            "original_span": "第 8 步",
+            "interpretation": "当前消息未提供的先前流程第 8 步",
+            "confidence": 1.0,
+            "ambiguity": true,
+            "evidence": [
+              {
+                "turn_index": 3,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "第 8 步里没有看到 Scale pitch",
+                "evidence_id": "evidence-913db7db422267ea0e3984fcee3f49e9fd2257b922f6bd1780a7fe069b88251e",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "user_reported",
+                "start": 0,
+                "end": 22
+              }
+            ]
+          }
+        ],
+        "knowledge": [
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_001",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "用户在当前消息未提供的第 8 步中没有看到 Scale pitch。",
+            "subject": "用户",
+            "predicate": "没有看到",
+            "object": "Scale pitch",
+            "qualifiers": {
+              "modality": "observed",
+              "polarity": "negative",
+              "temporal": [],
+              "conditions": [],
+              "scope": [
+                "第 8 步中"
+              ]
+            },
+            "source_status": "user_reported",
+            "derivation": "context_completed",
+            "evidence": [
+              {
+                "turn_index": 3,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "第 8 步里没有看到 Scale pitch",
+                "evidence_id": "evidence-913db7db422267ea0e3984fcee3f49e9fd2257b922f6bd1780a7fe069b88251e",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "user_reported",
+                "start": 0,
+                "end": 22
+              }
+            ],
+            "inference_basis": "当前消息未包含编号流程，因此“第 8 步”只能保留为未提供的先前步骤。",
+            "confidence": 0.99
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_002",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "用户请求更详细的说明。",
+            "subject": "用户",
+            "predicate": "请求",
+            "object": "更详细的说明",
+            "qualifiers": {
+              "modality": "requested",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "user_reported",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 3,
+                "message": "user",
+                "occurrence_index": 0,
+                "quote": "你能再详细一点吗？",
+                "evidence_id": "evidence-8cf5f5793967ce35b171752422ef5eebd13de4769a3ddae3acd022efa5ff58c3",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "user_reported",
+                "start": 23,
+                "end": 32
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_003",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "如果当前 Praat 版本没有 Scale pitch，代理建议改用 Manipulation 中的 Replace pitch。",
+            "subject": "用户",
+            "predicate": "可改用",
+            "object": "Manipulation 中的 Replace pitch",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [
+                "当前 Praat 版本没有 Scale pitch"
+              ],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 3,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "如果当前 Praat 版本没有 Scale pitch，可以改用 Manipulation 中的 Replace pitch",
+                "evidence_id": "evidence-ebcf5f2601981ac6e2d71d784272402ea56842c7fbb5443181d3ef094ef12305",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "agent_generated",
+                "start": 0,
+                "end": 62
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_004",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "如果当前 Praat 版本没有 Scale pitch，代理建议改用等效的 PSOLA 音高替换流程。",
+            "subject": "用户",
+            "predicate": "可改用",
+            "object": "等效的 PSOLA 音高替换流程",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [
+                "当前 Praat 版本没有 Scale pitch"
+              ],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 3,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "如果当前 Praat 版本没有 Scale pitch，可以改用 Manipulation 中的 Replace pitch 或等效的 PSOLA 音高替换流程",
+                "evidence_id": "evidence-32633f78546dda6c8738bbb70148200ea85ed1610ecfb02a17c0e40a440efcf7",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "agent_generated",
+                "start": 0,
+                "end": 80
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_005",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "代理建议设定起始音高。",
+            "subject": "用户",
+            "predicate": "应设定",
+            "object": "起始音高",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 3,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "设定起始、终止和平均音高",
+                "evidence_id": "evidence-d0709a15a7a645ef511863213416dceeccd76e01ff8547819ba92c953876e351",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "agent_generated",
+                "start": 84,
+                "end": 96
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_006",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "代理建议设定终止音高。",
+            "subject": "用户",
+            "predicate": "应设定",
+            "object": "终止音高",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 3,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "设定起始、终止和平均音高",
+                "evidence_id": "evidence-d0709a15a7a645ef511863213416dceeccd76e01ff8547819ba92c953876e351",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "agent_generated",
+                "start": 84,
+                "end": 96
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_007",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "代理建议设定平均音高。",
+            "subject": "用户",
+            "predicate": "应设定",
+            "object": "平均音高",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 3,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "设定起始、终止和平均音高",
+                "evidence_id": "evidence-d0709a15a7a645ef511863213416dceeccd76e01ff8547819ba92c953876e351",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "agent_generated",
+                "start": 84,
+                "end": 96
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_008",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "代理建议检查每个级别的 F0 转折点。",
+            "subject": "用户",
+            "predicate": "应检查",
+            "object": "每个级别的 F0 转折点",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 3,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "检查每个级别的 F0 转折点与 offset",
+                "evidence_id": "evidence-970a51f38706f218c7af1c966208dd789e2eca471476a2298e67e35b789f9d87",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "agent_generated",
+                "start": 97,
+                "end": 119
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_009",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "代理建议检查每个级别的 offset。",
+            "subject": "用户",
+            "predicate": "应检查",
+            "object": "每个级别的 offset",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 3,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "检查每个级别的 F0 转折点与 offset",
+                "evidence_id": "evidence-970a51f38706f218c7af1c966208dd789e2eca471476a2298e67e35b789f9d87",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "agent_generated",
+                "start": 97,
+                "end": 119
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          },
+          {
+            "knowledge_id": "K_wildchat-learn-cand-002-1fa98728ac3e_003_010",
+            "candidate_id": "WILDCHAT-LEARN-CAND-002",
+            "statement": "代理建议试听导出的连续体。",
+            "subject": "用户",
+            "predicate": "应试听",
+            "object": "导出的连续体",
+            "qualifiers": {
+              "modality": "advised",
+              "polarity": "positive",
+              "temporal": [],
+              "conditions": [],
+              "scope": []
+            },
+            "source_status": "agent_generated",
+            "derivation": "explicit",
+            "evidence": [
+              {
+                "turn_index": 3,
+                "message": "agent",
+                "occurrence_index": 0,
+                "quote": "试听导出的连续体",
+                "evidence_id": "evidence-2f202088ab1d92d141d475aacbf9a69040dcde18b74207dc6c48293dda12cbbe",
+                "candidate_id": "WILDCHAT-LEARN-CAND-002",
+                "evidence_role": "agent_generated",
+                "start": 121,
+                "end": 129
+              }
+            ],
+            "inference_basis": null,
+            "confidence": 0.98
+          }
+        ]
+      }
+    }
+  ],
+  "knowledge_id_prefix": "D_wildchat-learn-cand-002-1fa98728ac3e_",
+  "operation_id_prefix": "R_wildchat-learn-cand-002-1fa98728ac3e_",
+  "output_contract": {
+    "$defs": {
+      "EvidenceDraft": {
+        "additionalProperties": false,
+        "description": "A quoted source occurrence before character spans have been resolved.",
+        "properties": {
+          "turn_index": {
+            "minimum": 0,
+            "title": "Turn Index",
+            "type": "integer"
+          },
+          "message": {
+            "enum": [
+              "user",
+              "agent"
+            ],
+            "title": "Message",
+            "type": "string"
+          },
+          "occurrence_index": {
+            "minimum": 0,
+            "title": "Occurrence Index",
+            "type": "integer"
+          },
+          "quote": {
+            "minLength": 1,
+            "title": "Quote",
+            "type": "string"
+          }
+        },
+        "required": [
+          "turn_index",
+          "message",
+          "occurrence_index",
+          "quote"
+        ],
+        "title": "EvidenceDraft",
+        "type": "object"
+      },
+      "KnowledgeDraft": {
+        "additionalProperties": false,
+        "properties": {
+          "knowledge_id": {
+            "minLength": 1,
+            "title": "Knowledge Id",
+            "type": "string"
+          },
+          "candidate_id": {
+            "minLength": 1,
+            "title": "Candidate Id",
+            "type": "string"
+          },
+          "statement": {
+            "minLength": 1,
+            "title": "Statement",
+            "type": "string"
+          },
+          "subject": {
+            "minLength": 1,
+            "title": "Subject",
+            "type": "string"
+          },
+          "predicate": {
+            "minLength": 1,
+            "title": "Predicate",
+            "type": "string"
+          },
+          "object": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Object"
+          },
+          "qualifiers": {
+            "$ref": "#/$defs/Qualifiers"
+          },
+          "source_status": {
+            "enum": [
+              "user_reported",
+              "agent_generated",
+              "tool_observed"
+            ],
+            "title": "Source Status",
+            "type": "string"
+          },
+          "derivation": {
+            "enum": [
+              "explicit",
+              "context_completed",
+              "inferred"
+            ],
+            "title": "Derivation",
+            "type": "string"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/$defs/EvidenceDraft"
+            },
+            "minItems": 1,
+            "title": "Evidence",
+            "type": "array"
+          },
+          "inference_basis": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Inference Basis"
+          },
+          "confidence": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Confidence",
+            "type": "number"
+          }
+        },
+        "required": [
+          "knowledge_id",
+          "candidate_id",
+          "statement",
+          "subject",
+          "predicate",
+          "qualifiers",
+          "source_status",
+          "derivation",
+          "evidence",
+          "confidence"
+        ],
+        "title": "KnowledgeDraft",
+        "type": "object"
+      },
+      "OperationEvidenceDraft": {
+        "additionalProperties": false,
+        "description": "Operation evidence with an explicit epistemic provenance role.",
+        "properties": {
+          "turn_index": {
+            "minimum": 0,
+            "title": "Turn Index",
+            "type": "integer"
+          },
+          "message": {
+            "enum": [
+              "user",
+              "agent"
+            ],
+            "title": "Message",
+            "type": "string"
+          },
+          "occurrence_index": {
+            "minimum": 0,
+            "title": "Occurrence Index",
+            "type": "integer"
+          },
+          "quote": {
+            "minLength": 1,
+            "title": "Quote",
+            "type": "string"
+          },
+          "evidence_role": {
+            "enum": [
+              "user_reported",
+              "agent_generated",
+              "tool_observed"
+            ],
+            "title": "Evidence Role",
+            "type": "string"
+          }
+        },
+        "required": [
+          "turn_index",
+          "message",
+          "occurrence_index",
+          "quote",
+          "evidence_role"
+        ],
+        "title": "OperationEvidenceDraft",
+        "type": "object"
+      },
+      "Qualifiers": {
+        "additionalProperties": false,
+        "properties": {
+          "modality": {
+            "enum": [
+              "asserted",
+              "questioned",
+              "requested",
+              "preferred",
+              "planned",
+              "hypothetical",
+              "possible",
+              "advised",
+              "committed",
+              "claimed_completed",
+              "observed"
+            ],
+            "title": "Modality",
+            "type": "string"
+          },
+          "polarity": {
+            "enum": [
+              "positive",
+              "negative"
+            ],
+            "title": "Polarity",
+            "type": "string"
+          },
+          "temporal": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Temporal",
+            "type": "array"
+          },
+          "conditions": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Conditions",
+            "type": "array"
+          },
+          "scope": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Scope",
+            "type": "array"
+          }
+        },
+        "required": [
+          "modality",
+          "polarity"
+        ],
+        "title": "Qualifiers",
+        "type": "object"
+      },
+      "ReconciliationOperation": {
+        "additionalProperties": false,
+        "properties": {
+          "operation_id": {
+            "minLength": 1,
+            "title": "Operation Id",
+            "type": "string"
+          },
+          "candidate_id": {
+            "minLength": 1,
+            "title": "Candidate Id",
+            "type": "string"
+          },
+          "operation": {
+            "enum": [
+              "confirm",
+              "correct",
+              "supersede",
+              "conflict",
+              "add"
+            ],
+            "title": "Operation",
+            "type": "string"
+          },
+          "targets": {
+            "items": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "title": "Targets",
+            "type": "array"
+          },
+          "replacement": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Replacement"
+          },
+          "reason": {
+            "minLength": 1,
+            "title": "Reason",
+            "type": "string"
+          },
+          "evidence": {
+            "items": {
+              "$ref": "#/$defs/OperationEvidenceDraft"
+            },
+            "minItems": 1,
+            "title": "Evidence",
+            "type": "array"
+          },
+          "confidence": {
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Confidence",
+            "type": "number"
+          }
+        },
+        "required": [
+          "operation_id",
+          "candidate_id",
+          "operation",
+          "reason",
+          "evidence",
+          "confidence"
+        ],
+        "title": "ReconciliationOperation",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "candidate_id": {
+        "minLength": 1,
+        "title": "Candidate Id",
+        "type": "string"
+      },
+      "new_knowledge": {
+        "items": {
+          "$ref": "#/$defs/KnowledgeDraft"
+        },
+        "title": "New Knowledge",
+        "type": "array"
+      },
+      "operations": {
+        "items": {
+          "$ref": "#/$defs/ReconciliationOperation"
+        },
+        "title": "Operations",
+        "type": "array"
+      }
+    },
+    "required": [
+      "candidate_id"
+    ],
+    "title": "DialoguePassOutput",
+    "type": "object"
+  },
+  "prompt_sha256": "6f2cbc205076c080f535a89b74e224c65cef9bef3290f103466c7b10d1210b59",
+  "output_contract_sha256": "a395102dbfc7c6fa2378ca6546b99c82cdf70b0832f19660f0656763c3722085",
+  "source_segments_sha256": "8c51b78f31cc22541868f106381aeb973b95160072b80b0a8bbd72be19385553"
+}

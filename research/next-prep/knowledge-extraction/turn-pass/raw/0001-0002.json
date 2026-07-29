@@ -1,0 +1,291 @@
+{
+  "candidate_id": "WILDCHAT-MGMT-CAND-002",
+  "turn_index": 2,
+  "context_completions": [
+    {
+      "completion_id": "C_wildchat-mgmt-cand-002-e88f4bb1070d_002_001",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "turn_index": 2,
+      "kind": "unresolved",
+      "original_span": "这个主题",
+      "interpretation": "当前消息未说明的主题",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "请基于这个主题"
+        }
+      ],
+      "confidence": 1,
+      "ambiguity": true
+    }
+  ],
+  "knowledge": [
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_002_001",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "用户请求基于未说明的主题制定连续 Reels 方案。",
+      "subject": "用户",
+      "predicate": "请求",
+      "object": "连续制作 Reels 的方案",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "context_completed",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "给我一个用故事叙述连续制作 Reels 的方案"
+        }
+      ],
+      "confidence": 0.99,
+      "inference_basis": "“这个主题”未在当前消息中说明，因此方案主题保持未解析。"
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_002_002",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "用户要求连续 Reels 使用故事叙述。",
+      "subject": "连续 Reels",
+      "predicate": "应使用",
+      "object": "故事叙述",
+      "qualifiers": {
+        "modality": "requested",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "user_reported",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "user",
+          "occurrence_index": 0,
+          "quote": "用故事叙述连续制作 Reels"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_002_003",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "代理建议制作“转变故事”系列。",
+      "subject": "Reels 系列",
+      "predicate": "可制作",
+      "object": "转变故事",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "可以做“转变故事”系列"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_002_004",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "代理建议第一集讲迈出第一步。",
+      "subject": "第一集",
+      "predicate": "可讲",
+      "object": "迈出第一步",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "第一集讲迈出第一步"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_002_005",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "代理建议第二集讲接受不完美。",
+      "subject": "第二集",
+      "predicate": "可讲",
+      "object": "接受不完美",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "第二集讲接受不完美"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_002_006",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "代理建议第三集讲自我照顾。",
+      "subject": "第三集",
+      "predicate": "可讲",
+      "object": "自我照顾",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "第三集讲自我照顾"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_002_007",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "代理建议每集用冲突或问题开场。",
+      "subject": "每集",
+      "predicate": "应用",
+      "object": "冲突或问题开场",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "每集用冲突或问题开场"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_002_008",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "代理建议每集加入一个具体经历。",
+      "subject": "每集",
+      "predicate": "应加入",
+      "object": "一个具体经历",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": [
+          "一个"
+        ]
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "加入一个具体经历"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_002_009",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "代理建议每集用一句可执行的反思问题收尾。",
+      "subject": "每集",
+      "predicate": "应用",
+      "object": "一句可执行的反思问题收尾",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": [
+          "一句"
+        ]
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "用一句可执行的反思问题收尾"
+        }
+      ],
+      "confidence": 0.98
+    },
+    {
+      "knowledge_id": "K_wildchat-mgmt-cand-002-e88f4bb1070d_002_010",
+      "candidate_id": "WILDCHAT-MGMT-CAND-002",
+      "statement": "代理建议多集形成连续的成长路径。",
+      "subject": "多集",
+      "predicate": "应形成",
+      "object": "连续的成长路径",
+      "qualifiers": {
+        "modality": "advised",
+        "polarity": "positive",
+        "temporal": [],
+        "conditions": [],
+        "scope": []
+      },
+      "source_status": "agent_generated",
+      "derivation": "explicit",
+      "evidence": [
+        {
+          "turn_index": 2,
+          "message": "agent",
+          "occurrence_index": 0,
+          "quote": "让多集形成连续的成长路径"
+        }
+      ],
+      "confidence": 0.98
+    }
+  ]
+}

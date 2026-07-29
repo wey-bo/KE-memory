@@ -1,0 +1,584 @@
+{
+  "schema_version": "typed-extractor-l2-diagnostic-source-v1",
+  "dataset_id": "typed-extractor-l2-dev-repair-v1",
+  "provenance": "diagnostic_authored",
+  "public_vocabulary": {
+    "canonical_operators": [
+      "archive_document",
+      "compose_release_task",
+      "compose_round_trip",
+      "persist_state",
+      "prefer_profile",
+      "request_device_service",
+      "resolve_commitment",
+      "resolve_recipient_update"
+    ],
+    "predicate_senses": [
+      "document.archive_coreference",
+      "health.persistent_state",
+      "preference.aggregate_profile",
+      "release.composed_task",
+      "request.device_service_coreference",
+      "task.commitment_resolution",
+      "task.recipient_supersession",
+      "travel.round_trip_composition"
+    ]
+  },
+  "cases": [
+    {
+      "private_case_id": "abstain-unsupported-modality",
+      "primary_family": "unsupported_modality_control",
+      "secondary_families": ["abstention", "evidence", "support"],
+      "private_session_id": "diag-l2-session-01",
+      "source_turns": [
+        {"private_turn_id": "diag-l2-turn-01-a", "turn_index": 0, "user": "Milo may someday lead the audit.", "agent": "The audit possibility remains unverified."},
+        {"private_turn_id": "diag-l2-turn-01-b", "turn_index": 1, "user": "A rumor repeats that possibility.", "agent": "No direct confirmation was supplied."}
+      ],
+      "untyped_candidate": {
+        "statement": "Milo leads the audit.",
+        "subject": "Milo",
+        "predicate": "leads",
+        "object": "the audit",
+        "qualifiers": {"modality": "rumor", "polarity": "positive"},
+        "source_status": "user_reported",
+        "derivation": "inferred",
+        "inference_basis": "Both turns remain modal or hearsay rather than actual.",
+        "evidence": [
+          {"evidence_id": "diag-l2-evidence-01-a", "speaker": "user", "message": "user", "quote": "Milo may someday lead the audit.", "occurrence_index": 0, "start": 0, "end": 32},
+          {"evidence_id": "diag-l2-evidence-01-b", "speaker": "user", "message": "user", "quote": "A rumor repeats that possibility.", "occurrence_index": 0, "start": 0, "end": 33}
+        ]
+      },
+      "typed_l1_support_pack": [
+        {
+          "private_support_id": "diag-l2-support-01-a",
+          "private_turn_id": "diag-l2-turn-01-a",
+          "kind": "task",
+          "predicate": {"surface": "may lead", "sense": "audit.possible_lead", "canonical_operator": "possibly_lead_audit"},
+          "local_entities": [{"local_entity_id": "entity-01", "surface": "Milo"}],
+          "roles": [{"role": "possible_actor", "role_name": "possible audit lead", "local_entity_id": "entity-01"}],
+          "modality": "hypothetical",
+          "evidence_bindings": [{"evidence_id": "diag-l2-evidence-01-a", "speaker": "user"}]
+        },
+        {
+          "private_support_id": "diag-l2-support-01-b",
+          "private_turn_id": "diag-l2-turn-01-b",
+          "kind": "event",
+          "predicate": {"surface": "repeats", "sense": "report.repeat_rumor", "canonical_operator": "repeat_rumor"},
+          "local_entities": [{"local_entity_id": "entity-01", "surface": "a rumor"}],
+          "roles": [{"role": "report", "role_name": "unverified report", "local_entity_id": "entity-01"}],
+          "modality": "hypothetical",
+          "evidence_bindings": [{"evidence_id": "diag-l2-evidence-01-b", "speaker": "user"}]
+        }
+      ],
+      "expected_decision": "abstain",
+      "expected_typed_candidate": null,
+      "authority": {
+        "knowledge_id": "diag-l2-knowledge-01",
+        "candidate_id": "diag-l2-candidate-01",
+        "emission_allowed": false,
+        "required_support_refs": ["diag-l2-support-01-a", "diag-l2-support-01-b"],
+        "required_evidence_bindings": [{"evidence_id": "diag-l2-evidence-01-a", "speaker": "user"}, {"evidence_id": "diag-l2-evidence-01-b", "speaker": "user"}],
+        "required_source_turn_refs": ["diag-l2-turn-01-a", "diag-l2-turn-01-b"],
+        "required_source_session_refs": ["diag-l2-session-01"],
+        "unresolved_required_fields": ["supported_modality"]
+      }
+    },
+    {
+      "private_case_id": "abstain-unresolved-selected-option",
+      "primary_family": "unresolved_selection_control",
+      "secondary_families": ["abstention", "structured_claim", "source_coverage"],
+      "private_session_id": "diag-l2-session-02",
+      "source_turns": [
+        {"private_turn_id": "diag-l2-turn-02-a", "turn_index": 0, "user": "Option Cedar costs 40 credits.", "agent": "Only Cedar is described in this turn."},
+        {"private_turn_id": "diag-l2-turn-02-b", "turn_index": 1, "user": "Choose the earlier one.", "agent": "The referenced option is not recoverable."}
+      ],
+      "untyped_candidate": {
+        "statement": "The user selected an earlier option.",
+        "subject": "the user",
+        "predicate": "selected",
+        "object": "an earlier option",
+        "qualifiers": {"polarity": "positive"},
+        "source_status": "user_reported",
+        "derivation": "context_completed",
+        "inference_basis": "The comparative referent has no closed option set.",
+        "evidence": [
+          {"evidence_id": "diag-l2-evidence-02-a", "speaker": "user", "message": "user", "quote": "Option Cedar costs 40 credits.", "occurrence_index": 0, "start": 0, "end": 30},
+          {"evidence_id": "diag-l2-evidence-02-b", "speaker": "user", "message": "user", "quote": "Choose the earlier one.", "occurrence_index": 0, "start": 0, "end": 23}
+        ]
+      },
+      "typed_l1_support_pack": [
+        {
+          "private_support_id": "diag-l2-support-02-a",
+          "private_turn_id": "diag-l2-turn-02-a",
+          "kind": "attribute",
+          "predicate": {"surface": "costs", "sense": "option.credit_cost", "canonical_operator": "cost_credits"},
+          "local_entities": [{"local_entity_id": "entity-01", "surface": "Option Cedar"}],
+          "roles": [{"role": "option", "role_name": "priced option", "local_entity_id": "entity-01"}],
+          "evidence_bindings": [{"evidence_id": "diag-l2-evidence-02-a", "speaker": "user"}]
+        },
+        {
+          "private_support_id": "diag-l2-support-02-b",
+          "private_turn_id": "diag-l2-turn-02-b",
+          "kind": "task",
+          "predicate": {"surface": "choose", "sense": "selection.unresolved_comparative", "canonical_operator": "choose_option"},
+          "local_entities": [{"local_entity_id": "entity-01", "surface": "the user"}],
+          "roles": [{"role": "selector", "role_name": "selection actor", "local_entity_id": "entity-01"}],
+          "modality": "requested",
+          "evidence_bindings": [{"evidence_id": "diag-l2-evidence-02-b", "speaker": "user"}]
+        }
+      ],
+      "expected_decision": "abstain",
+      "expected_typed_candidate": null,
+      "authority": {
+        "knowledge_id": "diag-l2-knowledge-02",
+        "candidate_id": "diag-l2-candidate-02",
+        "emission_allowed": false,
+        "required_support_refs": ["diag-l2-support-02-a", "diag-l2-support-02-b"],
+        "required_evidence_bindings": [{"evidence_id": "diag-l2-evidence-02-a", "speaker": "user"}, {"evidence_id": "diag-l2-evidence-02-b", "speaker": "user"}],
+        "required_source_turn_refs": ["diag-l2-turn-02-a", "diag-l2-turn-02-b"],
+        "required_source_session_refs": ["diag-l2-session-02"],
+        "unresolved_required_fields": ["selected_option_identity"]
+      }
+    },
+    {
+      "private_case_id": "abstain-incompatible-supports",
+      "primary_family": "incompatible_support_control",
+      "secondary_families": ["abstention", "closure", "support"],
+      "private_session_id": "diag-l2-session-03",
+      "source_turns": [
+        {"private_turn_id": "diag-l2-turn-03-a", "turn_index": 0, "user": "The launch city is Oslo.", "agent": "Oslo is recorded as one report."},
+        {"private_turn_id": "diag-l2-turn-03-b", "turn_index": 1, "user": "The launch city is Lima.", "agent": "Lima conflicts with the earlier report."}
+      ],
+      "untyped_candidate": {
+        "statement": "The launch city is Oslo.",
+        "subject": "the launch city",
+        "predicate": "is",
+        "object": "Oslo",
+        "qualifiers": {"polarity": "positive", "conflict": true},
+        "source_status": "user_reported",
+        "derivation": "context_completed",
+        "inference_basis": "The two supports assert incompatible current values.",
+        "evidence": [
+          {"evidence_id": "diag-l2-evidence-03-a", "speaker": "user", "message": "user", "quote": "The launch city is Oslo.", "occurrence_index": 0, "start": 0, "end": 24},
+          {"evidence_id": "diag-l2-evidence-03-b", "speaker": "user", "message": "user", "quote": "The launch city is Lima.", "occurrence_index": 0, "start": 0, "end": 24}
+        ]
+      },
+      "typed_l1_support_pack": [
+        {
+          "private_support_id": "diag-l2-support-03-a",
+          "private_turn_id": "diag-l2-turn-03-a",
+          "kind": "state",
+          "predicate": {"surface": "is", "sense": "launch.city_value", "canonical_operator": "set_launch_city"},
+          "local_entities": [{"local_entity_id": "entity-01", "surface": "Oslo"}],
+          "roles": [{"role": "value", "role_name": "reported city", "local_entity_id": "entity-01"}],
+          "evidence_bindings": [{"evidence_id": "diag-l2-evidence-03-a", "speaker": "user"}]
+        },
+        {
+          "private_support_id": "diag-l2-support-03-b",
+          "private_turn_id": "diag-l2-turn-03-b",
+          "kind": "state",
+          "predicate": {"surface": "is", "sense": "launch.city_value", "canonical_operator": "set_launch_city"},
+          "local_entities": [{"local_entity_id": "entity-01", "surface": "Lima"}],
+          "roles": [{"role": "value", "role_name": "reported city", "local_entity_id": "entity-01"}],
+          "evidence_bindings": [{"evidence_id": "diag-l2-evidence-03-b", "speaker": "user"}]
+        }
+      ],
+      "expected_decision": "abstain",
+      "expected_typed_candidate": null,
+      "authority": {
+        "knowledge_id": "diag-l2-knowledge-03",
+        "candidate_id": "diag-l2-candidate-03",
+        "emission_allowed": false,
+        "required_support_refs": ["diag-l2-support-03-a", "diag-l2-support-03-b"],
+        "required_evidence_bindings": [{"evidence_id": "diag-l2-evidence-03-a", "speaker": "user"}, {"evidence_id": "diag-l2-evidence-03-b", "speaker": "user"}],
+        "required_source_turn_refs": ["diag-l2-turn-03-a", "diag-l2-turn-03-b"],
+        "required_source_session_refs": ["diag-l2-session-03"],
+        "unresolved_required_fields": ["lifecycle_precedence"]
+      }
+    },
+    {
+      "private_case_id": "abstain-incomplete-evidence-closure",
+      "primary_family": "incomplete_closure_control",
+      "secondary_families": ["abstention", "evidence", "source_coverage"],
+      "private_session_id": "diag-l2-session-04",
+      "source_turns": [
+        {"private_turn_id": "diag-l2-turn-04-a", "turn_index": 0, "user": "Juno drafted the migration plan.", "agent": "The draft event is directly supported."},
+        {"private_turn_id": "diag-l2-turn-04-b", "turn_index": 1, "user": "The approval happened in another channel.", "agent": "The approval source is unavailable here."}
+      ],
+      "untyped_candidate": {
+        "statement": "The migration plan is approved.",
+        "subject": "the migration plan",
+        "predicate": "is approved",
+        "object": null,
+        "qualifiers": {"polarity": "positive"},
+        "source_status": "user_reported",
+        "derivation": "inferred",
+        "inference_basis": "The claimed approval lacks its originating evidence chain.",
+        "evidence": [
+          {"evidence_id": "diag-l2-evidence-04-a", "speaker": "user", "message": "user", "quote": "Juno drafted the migration plan.", "occurrence_index": 0, "start": 0, "end": 32},
+          {"evidence_id": "diag-l2-evidence-04-b", "speaker": "user", "message": "user", "quote": "The approval happened in another channel.", "occurrence_index": 0, "start": 0, "end": 41}
+        ]
+      },
+      "typed_l1_support_pack": [
+        {
+          "private_support_id": "diag-l2-support-04-a",
+          "private_turn_id": "diag-l2-turn-04-a",
+          "kind": "event",
+          "predicate": {"surface": "drafted", "sense": "plan.draft_event", "canonical_operator": "draft_plan"},
+          "local_entities": [{"local_entity_id": "entity-01", "surface": "Juno"}],
+          "roles": [{"role": "author", "role_name": "draft author", "local_entity_id": "entity-01"}],
+          "evidence_bindings": [{"evidence_id": "diag-l2-evidence-04-a", "speaker": "user"}]
+        },
+        {
+          "private_support_id": "diag-l2-support-04-b",
+          "private_turn_id": "diag-l2-turn-04-b",
+          "kind": "state",
+          "predicate": {"surface": "happened elsewhere", "sense": "approval.unbound_report", "canonical_operator": "report_external_approval"},
+          "local_entities": [{"local_entity_id": "entity-01", "surface": "the approval"}],
+          "roles": [{"role": "reported_event", "role_name": "unbound approval", "local_entity_id": "entity-01"}],
+          "evidence_bindings": [{"evidence_id": "diag-l2-evidence-04-b", "speaker": "user"}]
+        }
+      ],
+      "expected_decision": "abstain",
+      "expected_typed_candidate": null,
+      "authority": {
+        "knowledge_id": "diag-l2-knowledge-04",
+        "candidate_id": "diag-l2-candidate-04",
+        "emission_allowed": false,
+        "required_support_refs": ["diag-l2-support-04-a", "diag-l2-support-04-b"],
+        "required_evidence_bindings": [{"evidence_id": "diag-l2-evidence-04-a", "speaker": "user"}, {"evidence_id": "diag-l2-evidence-04-b", "speaker": "user"}],
+        "required_source_turn_refs": ["diag-l2-turn-04-a", "diag-l2-turn-04-b"],
+        "required_source_session_refs": ["diag-l2-session-04"],
+        "unresolved_required_fields": ["approval_source_revision", "approval_evidence_chain"]
+      }
+    },
+    {
+      "private_case_id": "emit-coreference-device-request",
+      "primary_family": "coreference_case",
+      "secondary_families": ["structured_claim", "support", "summary"],
+      "private_session_id": "diag-l2-session-05",
+      "source_turns": [
+        {"private_turn_id": "diag-l2-turn-05-a", "turn_index": 0, "user": "The tablet needs a battery check.", "agent": "The tablet is the active device."},
+        {"private_turn_id": "diag-l2-turn-05-b", "turn_index": 1, "user": "Please service that device.", "agent": "The request refers to the tablet."}
+      ],
+      "untyped_candidate": {
+        "statement": "The user requests service for the tablet.",
+        "subject": "the user",
+        "predicate": "requests service",
+        "object": "the tablet",
+        "qualifiers": {"polarity": "positive"},
+        "source_status": "user_reported",
+        "derivation": "context_completed",
+        "inference_basis": "That device resolves to the tablet introduced in the prior turn.",
+        "evidence": [
+          {"evidence_id": "diag-l2-evidence-05-a", "speaker": "user", "message": "user", "quote": "The tablet needs a battery check.", "occurrence_index": 0, "start": 0, "end": 33},
+          {"evidence_id": "diag-l2-evidence-05-b", "speaker": "user", "message": "user", "quote": "Please service that device.", "occurrence_index": 0, "start": 0, "end": 27}
+        ]
+      },
+      "typed_l1_support_pack": [
+        {"private_support_id": "diag-l2-support-05-a", "private_turn_id": "diag-l2-turn-05-a", "kind": "state", "predicate": {"surface": "needs", "sense": "device.battery_check_need", "canonical_operator": "need_battery_check"}, "local_entities": [{"local_entity_id": "entity-01", "surface": "the tablet"}], "roles": [{"role": "device", "role_name": "device needing check", "local_entity_id": "entity-01"}], "evidence_bindings": [{"evidence_id": "diag-l2-evidence-05-a", "speaker": "user"}]},
+        {"private_support_id": "diag-l2-support-05-b", "private_turn_id": "diag-l2-turn-05-b", "kind": "task", "predicate": {"surface": "service", "sense": "device.service_request", "canonical_operator": "request_device_service"}, "local_entities": [{"local_entity_id": "entity-01", "surface": "that device"}], "roles": [{"role": "theme", "role_name": "service target", "local_entity_id": "entity-01"}], "modality": "requested", "evidence_bindings": [{"evidence_id": "diag-l2-evidence-05-b", "speaker": "user"}]}
+      ],
+      "expected_decision": "emit_l2",
+      "expected_typed_candidate": {
+        "kind": "task",
+        "summary": "The user requests service for the tablet.",
+        "supporting_l1_refs": ["diag-l2-support-05-a", "diag-l2-support-05-b"],
+        "structured_claims": [{"claim_ref": "claim-01", "predicate": {"surface": "requests service", "sense": "request.device_service_coreference", "canonical_operator": "request_device_service"}, "local_entities": [{"local_entity_id": "entity-01", "surface": "the user"}, {"local_entity_id": "entity-02", "surface": "the tablet"}], "roles": [{"role": "requester", "role_name": "request origin", "local_entity_id": "entity-01"}, {"role": "theme", "role_name": "service target", "local_entity_id": "entity-02"}], "modality": "requested", "supporting_l1_refs": ["diag-l2-support-05-a", "diag-l2-support-05-b"]}],
+        "abstraction": {"method": "coreference_resolution", "basis": "The phrase that device resolves to the tablet."},
+        "closure": {"pattern": "multi_evidence_set", "required_support_refs": ["diag-l2-support-05-a", "diag-l2-support-05-b"], "optional_support_refs": []},
+        "source_turn_refs": ["diag-l2-turn-05-a", "diag-l2-turn-05-b"],
+        "source_session_refs": ["diag-l2-session-05"],
+        "evidence_bindings": [{"evidence_id": "diag-l2-evidence-05-a", "speaker": "user"}, {"evidence_id": "diag-l2-evidence-05-b", "speaker": "user"}]
+      },
+      "authority": {"knowledge_id": "diag-l2-knowledge-05", "candidate_id": "diag-l2-candidate-05", "emission_allowed": true, "required_support_refs": ["diag-l2-support-05-a", "diag-l2-support-05-b"], "required_evidence_bindings": [{"evidence_id": "diag-l2-evidence-05-a", "speaker": "user"}, {"evidence_id": "diag-l2-evidence-05-b", "speaker": "user"}], "required_source_turn_refs": ["diag-l2-turn-05-a", "diag-l2-turn-05-b"], "required_source_session_refs": ["diag-l2-session-05"], "allowed_abstraction_methods": ["coreference_resolution"], "allowed_closure_patterns": ["multi_evidence_set"]}
+    },
+    {
+      "private_case_id": "emit-coreference-document-reference",
+      "primary_family": "coreference_case",
+      "secondary_families": ["evidence", "structured_claim", "source_coverage"],
+      "private_session_id": "diag-l2-session-06",
+      "source_turns": [
+        {"private_turn_id": "diag-l2-turn-06-a", "turn_index": 0, "user": "The budget memo is in the shared folder.", "agent": "The memo is now the active document."},
+        {"private_turn_id": "diag-l2-turn-06-b", "turn_index": 1, "user": "Archive that document after review.", "agent": "That document resolves to the budget memo."}
+      ],
+      "untyped_candidate": {
+        "statement": "The user requests archiving the budget memo.",
+        "subject": "the user",
+        "predicate": "requests archiving",
+        "object": "the budget memo",
+        "qualifiers": {"conditions": ["after review"], "polarity": "positive"},
+        "source_status": "user_reported",
+        "derivation": "context_completed",
+        "inference_basis": "That document resolves to the budget memo.",
+        "evidence": [
+          {"evidence_id": "diag-l2-evidence-06-a", "speaker": "user", "message": "user", "quote": "The budget memo is in the shared folder.", "occurrence_index": 0, "start": 0, "end": 40},
+          {"evidence_id": "diag-l2-evidence-06-b", "speaker": "user", "message": "user", "quote": "Archive that document after review.", "occurrence_index": 0, "start": 0, "end": 35}
+        ]
+      },
+      "typed_l1_support_pack": [
+        {"private_support_id": "diag-l2-support-06-a", "private_turn_id": "diag-l2-turn-06-a", "kind": "attribute", "predicate": {"surface": "is in", "sense": "document.folder_location", "canonical_operator": "locate_document"}, "local_entities": [{"local_entity_id": "entity-01", "surface": "the budget memo"}], "roles": [{"role": "document", "role_name": "located document", "local_entity_id": "entity-01"}], "evidence_bindings": [{"evidence_id": "diag-l2-evidence-06-a", "speaker": "user"}]},
+        {"private_support_id": "diag-l2-support-06-b", "private_turn_id": "diag-l2-turn-06-b", "kind": "task", "predicate": {"surface": "archive", "sense": "document.archive_request", "canonical_operator": "archive_document"}, "local_entities": [{"local_entity_id": "entity-01", "surface": "that document"}], "roles": [{"role": "theme", "role_name": "archive target", "local_entity_id": "entity-01"}], "modality": "requested", "evidence_bindings": [{"evidence_id": "diag-l2-evidence-06-b", "speaker": "user"}]}
+      ],
+      "expected_decision": "emit_l2",
+      "expected_typed_candidate": {
+        "kind": "task",
+        "summary": "The user requests archiving the budget memo.",
+        "supporting_l1_refs": ["diag-l2-support-06-a", "diag-l2-support-06-b"],
+        "structured_claims": [{"claim_ref": "claim-01", "predicate": {"surface": "requests archiving", "sense": "document.archive_coreference", "canonical_operator": "archive_document"}, "local_entities": [{"local_entity_id": "entity-01", "surface": "the user"}, {"local_entity_id": "entity-02", "surface": "the budget memo"}], "roles": [{"role": "requester", "role_name": "request origin", "local_entity_id": "entity-01"}, {"role": "theme", "role_name": "archive target", "local_entity_id": "entity-02"}], "modality": "requested", "supporting_l1_refs": ["diag-l2-support-06-a", "diag-l2-support-06-b"]}],
+        "abstraction": {"method": "coreference_resolution", "basis": "That document resolves to the budget memo."},
+        "closure": {"pattern": "multi_evidence_set", "required_support_refs": ["diag-l2-support-06-a", "diag-l2-support-06-b"], "optional_support_refs": []},
+        "source_turn_refs": ["diag-l2-turn-06-a", "diag-l2-turn-06-b"],
+        "source_session_refs": ["diag-l2-session-06"],
+        "evidence_bindings": [{"evidence_id": "diag-l2-evidence-06-a", "speaker": "user"}, {"evidence_id": "diag-l2-evidence-06-b", "speaker": "user"}]
+      },
+      "authority": {"knowledge_id": "diag-l2-knowledge-06", "candidate_id": "diag-l2-candidate-06", "emission_allowed": true, "required_support_refs": ["diag-l2-support-06-a", "diag-l2-support-06-b"], "required_evidence_bindings": [{"evidence_id": "diag-l2-evidence-06-a", "speaker": "user"}, {"evidence_id": "diag-l2-evidence-06-b", "speaker": "user"}], "required_source_turn_refs": ["diag-l2-turn-06-a", "diag-l2-turn-06-b"], "required_source_session_refs": ["diag-l2-session-06"], "allowed_abstraction_methods": ["coreference_resolution"], "allowed_closure_patterns": ["multi_evidence_set"]}
+    },
+    {
+      "private_case_id": "emit-task-composition-release",
+      "primary_family": "task_composition_case",
+      "secondary_families": ["abstraction", "closure", "summary"],
+      "private_session_id": "diag-l2-session-07",
+      "source_turns": [
+        {"private_turn_id": "diag-l2-turn-07-a", "turn_index": 0, "user": "Prepare build 7 for testing.", "agent": "Build 7 is the release target."},
+        {"private_turn_id": "diag-l2-turn-07-b", "turn_index": 1, "user": "Publish it after the tests pass.", "agent": "Publication depends on successful tests."}
+      ],
+      "untyped_candidate": {
+        "statement": "The user requests testing and then publishing build 7.",
+        "subject": "the user",
+        "predicate": "requests release workflow",
+        "object": "build 7",
+        "qualifiers": {"conditions": ["tests pass"], "polarity": "positive"},
+        "source_status": "user_reported",
+        "derivation": "context_completed",
+        "inference_basis": "The two turns define ordered stages of one release task.",
+        "evidence": [
+          {"evidence_id": "diag-l2-evidence-07-a", "speaker": "user", "message": "user", "quote": "Prepare build 7 for testing.", "occurrence_index": 0, "start": 0, "end": 28},
+          {"evidence_id": "diag-l2-evidence-07-b", "speaker": "user", "message": "user", "quote": "Publish it after the tests pass.", "occurrence_index": 0, "start": 0, "end": 32}
+        ]
+      },
+      "typed_l1_support_pack": [
+        {"private_support_id": "diag-l2-support-07-a", "private_turn_id": "diag-l2-turn-07-a", "kind": "task", "predicate": {"surface": "prepare", "sense": "release.prepare_for_test", "canonical_operator": "prepare_build"}, "local_entities": [{"local_entity_id": "entity-01", "surface": "build 7"}], "roles": [{"role": "theme", "role_name": "build target", "local_entity_id": "entity-01"}], "modality": "requested", "evidence_bindings": [{"evidence_id": "diag-l2-evidence-07-a", "speaker": "user"}]},
+        {"private_support_id": "diag-l2-support-07-b", "private_turn_id": "diag-l2-turn-07-b", "kind": "task", "predicate": {"surface": "publish", "sense": "release.publish_after_test", "canonical_operator": "publish_build"}, "local_entities": [{"local_entity_id": "entity-01", "surface": "build 7"}], "roles": [{"role": "theme", "role_name": "publication target", "local_entity_id": "entity-01"}], "modality": "requested", "evidence_bindings": [{"evidence_id": "diag-l2-evidence-07-b", "speaker": "user"}]}
+      ],
+      "expected_decision": "emit_l2",
+      "expected_typed_candidate": {
+        "kind": "task",
+        "summary": "The user requests testing and then publishing build 7.",
+        "supporting_l1_refs": ["diag-l2-support-07-a", "diag-l2-support-07-b"],
+        "structured_claims": [{"claim_ref": "claim-01", "predicate": {"surface": "requests release workflow", "sense": "release.composed_task", "canonical_operator": "compose_release_task"}, "local_entities": [{"local_entity_id": "entity-01", "surface": "the user"}, {"local_entity_id": "entity-02", "surface": "build 7"}], "roles": [{"role": "requester", "role_name": "workflow requester", "local_entity_id": "entity-01"}, {"role": "theme", "role_name": "release target", "local_entity_id": "entity-02"}], "modality": "requested", "supporting_l1_refs": ["diag-l2-support-07-a", "diag-l2-support-07-b"]}],
+        "abstraction": {"method": "task_composition", "basis": "Preparation, testing, and publication form one ordered workflow."},
+        "closure": {"pattern": "temporal_chain", "required_support_refs": ["diag-l2-support-07-a", "diag-l2-support-07-b"], "optional_support_refs": []},
+        "source_turn_refs": ["diag-l2-turn-07-a", "diag-l2-turn-07-b"],
+        "source_session_refs": ["diag-l2-session-07"],
+        "evidence_bindings": [{"evidence_id": "diag-l2-evidence-07-a", "speaker": "user"}, {"evidence_id": "diag-l2-evidence-07-b", "speaker": "user"}]
+      },
+      "authority": {"knowledge_id": "diag-l2-knowledge-07", "candidate_id": "diag-l2-candidate-07", "emission_allowed": true, "required_support_refs": ["diag-l2-support-07-a", "diag-l2-support-07-b"], "required_evidence_bindings": [{"evidence_id": "diag-l2-evidence-07-a", "speaker": "user"}, {"evidence_id": "diag-l2-evidence-07-b", "speaker": "user"}], "required_source_turn_refs": ["diag-l2-turn-07-a", "diag-l2-turn-07-b"], "required_source_session_refs": ["diag-l2-session-07"], "allowed_abstraction_methods": ["task_composition"], "allowed_closure_patterns": ["temporal_chain"]}
+    },
+    {
+      "private_case_id": "emit-task-composition-travel",
+      "primary_family": "task_composition_case",
+      "secondary_families": ["abstraction", "support", "source_coverage"],
+      "private_session_id": "diag-l2-session-08",
+      "source_turns": [
+        {"private_turn_id": "diag-l2-turn-08-a", "turn_index": 0, "user": "Book a train from Leeds to York.", "agent": "The outbound leg is specified."},
+        {"private_turn_id": "diag-l2-turn-08-b", "turn_index": 1, "user": "Add a return trip for Friday.", "agent": "The return leg completes the itinerary."}
+      ],
+      "untyped_candidate": {
+        "statement": "The user requests a Leeds to York round trip returning Friday.",
+        "subject": "the user",
+        "predicate": "requests round trip",
+        "object": "a Leeds to York round trip returning Friday",
+        "qualifiers": {"polarity": "positive"},
+        "source_status": "user_reported",
+        "derivation": "context_completed",
+        "inference_basis": "The return leg composes with the outbound booking request.",
+        "evidence": [
+          {"evidence_id": "diag-l2-evidence-08-a", "speaker": "user", "message": "user", "quote": "Book a train from Leeds to York.", "occurrence_index": 0, "start": 0, "end": 32},
+          {"evidence_id": "diag-l2-evidence-08-b", "speaker": "user", "message": "user", "quote": "Add a return trip for Friday.", "occurrence_index": 0, "start": 0, "end": 29}
+        ]
+      },
+      "typed_l1_support_pack": [
+        {"private_support_id": "diag-l2-support-08-a", "private_turn_id": "diag-l2-turn-08-a", "kind": "task", "predicate": {"surface": "book", "sense": "travel.outbound_request", "canonical_operator": "request_outbound_train"}, "local_entities": [{"local_entity_id": "entity-01", "surface": "Leeds to York"}], "roles": [{"role": "route", "role_name": "outbound route", "local_entity_id": "entity-01"}], "modality": "requested", "evidence_bindings": [{"evidence_id": "diag-l2-evidence-08-a", "speaker": "user"}]},
+        {"private_support_id": "diag-l2-support-08-b", "private_turn_id": "diag-l2-turn-08-b", "kind": "task", "predicate": {"surface": "add", "sense": "travel.return_request", "canonical_operator": "request_return_train"}, "local_entities": [{"local_entity_id": "entity-01", "surface": "Friday return"}], "roles": [{"role": "return_leg", "role_name": "requested return", "local_entity_id": "entity-01"}], "modality": "requested", "evidence_bindings": [{"evidence_id": "diag-l2-evidence-08-b", "speaker": "user"}]}
+      ],
+      "expected_decision": "emit_l2",
+      "expected_typed_candidate": {
+        "kind": "task",
+        "summary": "The user requests a Leeds to York round trip returning Friday.",
+        "supporting_l1_refs": ["diag-l2-support-08-a", "diag-l2-support-08-b"],
+        "structured_claims": [{"claim_ref": "claim-01", "predicate": {"surface": "requests round trip", "sense": "travel.round_trip_composition", "canonical_operator": "compose_round_trip"}, "local_entities": [{"local_entity_id": "entity-01", "surface": "the user"}, {"local_entity_id": "entity-02", "surface": "a Leeds to York round trip returning Friday"}], "roles": [{"role": "requester", "role_name": "trip requester", "local_entity_id": "entity-01"}, {"role": "theme", "role_name": "composed itinerary", "local_entity_id": "entity-02"}], "modality": "requested", "supporting_l1_refs": ["diag-l2-support-08-a", "diag-l2-support-08-b"]}],
+        "abstraction": {"method": "task_composition", "basis": "Outbound and return requests form one round trip."},
+        "closure": {"pattern": "multi_evidence_set", "required_support_refs": ["diag-l2-support-08-a", "diag-l2-support-08-b"], "optional_support_refs": []},
+        "source_turn_refs": ["diag-l2-turn-08-a", "diag-l2-turn-08-b"],
+        "source_session_refs": ["diag-l2-session-08"],
+        "evidence_bindings": [{"evidence_id": "diag-l2-evidence-08-a", "speaker": "user"}, {"evidence_id": "diag-l2-evidence-08-b", "speaker": "user"}]
+      },
+      "authority": {"knowledge_id": "diag-l2-knowledge-08", "candidate_id": "diag-l2-candidate-08", "emission_allowed": true, "required_support_refs": ["diag-l2-support-08-a", "diag-l2-support-08-b"], "required_evidence_bindings": [{"evidence_id": "diag-l2-evidence-08-a", "speaker": "user"}, {"evidence_id": "diag-l2-evidence-08-b", "speaker": "user"}], "required_source_turn_refs": ["diag-l2-turn-08-a", "diag-l2-turn-08-b"], "required_source_session_refs": ["diag-l2-session-08"], "allowed_abstraction_methods": ["task_composition"], "allowed_closure_patterns": ["multi_evidence_set"]}
+    },
+    {
+      "private_case_id": "emit-lifecycle-commitment",
+      "primary_family": "lifecycle_case",
+      "secondary_families": ["abstraction", "closure", "kind"],
+      "private_session_id": "diag-l2-session-09",
+      "source_turns": [
+        {"private_turn_id": "diag-l2-turn-09-a", "turn_index": 0, "user": "I am considering a design review.", "agent": "The review is only under consideration."},
+        {"private_turn_id": "diag-l2-turn-09-b", "turn_index": 1, "user": "I will hold the design review on Tuesday.", "agent": "The later turn commits to the review."}
+      ],
+      "untyped_candidate": {
+        "statement": "The user plans the design review for Tuesday.",
+        "subject": "the user",
+        "predicate": "plans",
+        "object": "the design review for Tuesday",
+        "qualifiers": {"polarity": "positive"},
+        "source_status": "user_reported",
+        "derivation": "context_completed",
+        "inference_basis": "The later commitment supersedes the earlier consideration.",
+        "evidence": [
+          {"evidence_id": "diag-l2-evidence-09-a", "speaker": "user", "message": "user", "quote": "I am considering a design review.", "occurrence_index": 0, "start": 0, "end": 33},
+          {"evidence_id": "diag-l2-evidence-09-b", "speaker": "user", "message": "user", "quote": "I will hold the design review on Tuesday.", "occurrence_index": 0, "start": 0, "end": 41}
+        ]
+      },
+      "typed_l1_support_pack": [
+        {"private_support_id": "diag-l2-support-09-a", "private_turn_id": "diag-l2-turn-09-a", "kind": "task", "predicate": {"surface": "considering", "sense": "task.consideration", "canonical_operator": "consider_task"}, "local_entities": [{"local_entity_id": "entity-01", "surface": "a design review"}], "roles": [{"role": "theme", "role_name": "considered task", "local_entity_id": "entity-01"}], "modality": "hypothetical", "evidence_bindings": [{"evidence_id": "diag-l2-evidence-09-a", "speaker": "user"}]},
+        {"private_support_id": "diag-l2-support-09-b", "private_turn_id": "diag-l2-turn-09-b", "kind": "task", "predicate": {"surface": "will hold", "sense": "task.committed_review", "canonical_operator": "commit_review"}, "local_entities": [{"local_entity_id": "entity-01", "surface": "the design review"}], "roles": [{"role": "theme", "role_name": "committed task", "local_entity_id": "entity-01"}], "modality": "planned", "evidence_bindings": [{"evidence_id": "diag-l2-evidence-09-b", "speaker": "user"}]}
+      ],
+      "expected_decision": "emit_l2",
+      "expected_typed_candidate": {
+        "kind": "task",
+        "summary": "The user plans the design review for Tuesday.",
+        "supporting_l1_refs": ["diag-l2-support-09-a", "diag-l2-support-09-b"],
+        "structured_claims": [{"claim_ref": "claim-01", "predicate": {"surface": "plans", "sense": "task.commitment_resolution", "canonical_operator": "resolve_commitment"}, "local_entities": [{"local_entity_id": "entity-01", "surface": "the user"}, {"local_entity_id": "entity-02", "surface": "the design review for Tuesday"}], "roles": [{"role": "planner", "role_name": "committed actor", "local_entity_id": "entity-01"}, {"role": "theme", "role_name": "committed review", "local_entity_id": "entity-02"}], "modality": "planned", "supporting_l1_refs": ["diag-l2-support-09-a", "diag-l2-support-09-b"]}],
+        "abstraction": {"method": "lifecycle_resolution", "basis": "The planned commitment supersedes mere consideration."},
+        "closure": {"pattern": "update_supersession", "required_support_refs": ["diag-l2-support-09-a", "diag-l2-support-09-b"], "optional_support_refs": []},
+        "source_turn_refs": ["diag-l2-turn-09-a", "diag-l2-turn-09-b"],
+        "source_session_refs": ["diag-l2-session-09"],
+        "evidence_bindings": [{"evidence_id": "diag-l2-evidence-09-a", "speaker": "user"}, {"evidence_id": "diag-l2-evidence-09-b", "speaker": "user"}]
+      },
+      "authority": {"knowledge_id": "diag-l2-knowledge-09", "candidate_id": "diag-l2-candidate-09", "emission_allowed": true, "required_support_refs": ["diag-l2-support-09-a", "diag-l2-support-09-b"], "required_evidence_bindings": [{"evidence_id": "diag-l2-evidence-09-a", "speaker": "user"}, {"evidence_id": "diag-l2-evidence-09-b", "speaker": "user"}], "required_source_turn_refs": ["diag-l2-turn-09-a", "diag-l2-turn-09-b"], "required_source_session_refs": ["diag-l2-session-09"], "allowed_abstraction_methods": ["lifecycle_resolution"], "allowed_closure_patterns": ["update_supersession"]}
+    },
+    {
+      "private_case_id": "emit-lifecycle-supersession",
+      "primary_family": "lifecycle_case",
+      "secondary_families": ["abstraction", "structured_claim", "summary"],
+      "private_session_id": "diag-l2-session-10",
+      "source_turns": [
+        {"private_turn_id": "diag-l2-turn-10-a", "turn_index": 0, "user": "Send the report to Uma.", "agent": "Uma is the initial recipient."},
+        {"private_turn_id": "diag-l2-turn-10-b", "turn_index": 1, "user": "Correction: send the report to Vic instead.", "agent": "Vic supersedes Uma as recipient."}
+      ],
+      "untyped_candidate": {
+        "statement": "The user requests sending the report to Vic.",
+        "subject": "the user",
+        "predicate": "requests sending",
+        "object": "the report to Vic",
+        "qualifiers": {"polarity": "positive"},
+        "source_status": "user_reported",
+        "derivation": "context_completed",
+        "inference_basis": "The explicit correction replaces Uma with Vic.",
+        "evidence": [
+          {"evidence_id": "diag-l2-evidence-10-a", "speaker": "user", "message": "user", "quote": "Send the report to Uma.", "occurrence_index": 0, "start": 0, "end": 23},
+          {"evidence_id": "diag-l2-evidence-10-b", "speaker": "user", "message": "user", "quote": "Correction: send the report to Vic instead.", "occurrence_index": 0, "start": 0, "end": 43}
+        ]
+      },
+      "typed_l1_support_pack": [
+        {"private_support_id": "diag-l2-support-10-a", "private_turn_id": "diag-l2-turn-10-a", "kind": "task", "predicate": {"surface": "send", "sense": "document.send_request", "canonical_operator": "send_report"}, "local_entities": [{"local_entity_id": "entity-01", "surface": "Uma"}], "roles": [{"role": "recipient", "role_name": "initial recipient", "local_entity_id": "entity-01"}], "modality": "requested", "evidence_bindings": [{"evidence_id": "diag-l2-evidence-10-a", "speaker": "user"}]},
+        {"private_support_id": "diag-l2-support-10-b", "private_turn_id": "diag-l2-turn-10-b", "kind": "task", "predicate": {"surface": "send instead", "sense": "document.corrected_recipient", "canonical_operator": "correct_report_recipient"}, "local_entities": [{"local_entity_id": "entity-01", "surface": "Vic"}], "roles": [{"role": "recipient", "role_name": "corrected recipient", "local_entity_id": "entity-01"}], "modality": "requested", "evidence_bindings": [{"evidence_id": "diag-l2-evidence-10-b", "speaker": "user"}]}
+      ],
+      "expected_decision": "emit_l2",
+      "expected_typed_candidate": {
+        "kind": "task",
+        "summary": "The user requests sending the report to Vic.",
+        "supporting_l1_refs": ["diag-l2-support-10-a", "diag-l2-support-10-b"],
+        "structured_claims": [{"claim_ref": "claim-01", "predicate": {"surface": "requests sending", "sense": "task.recipient_supersession", "canonical_operator": "resolve_recipient_update"}, "local_entities": [{"local_entity_id": "entity-01", "surface": "the user"}, {"local_entity_id": "entity-02", "surface": "the report to Vic"}], "roles": [{"role": "requester", "role_name": "request origin", "local_entity_id": "entity-01"}, {"role": "theme", "role_name": "corrected delivery", "local_entity_id": "entity-02"}], "modality": "requested", "supporting_l1_refs": ["diag-l2-support-10-a", "diag-l2-support-10-b"]}],
+        "abstraction": {"method": "lifecycle_resolution", "basis": "The correction supersedes the initial recipient."},
+        "closure": {"pattern": "update_supersession", "required_support_refs": ["diag-l2-support-10-a", "diag-l2-support-10-b"], "optional_support_refs": []},
+        "source_turn_refs": ["diag-l2-turn-10-a", "diag-l2-turn-10-b"],
+        "source_session_refs": ["diag-l2-session-10"],
+        "evidence_bindings": [{"evidence_id": "diag-l2-evidence-10-a", "speaker": "user"}, {"evidence_id": "diag-l2-evidence-10-b", "speaker": "user"}]
+      },
+      "authority": {"knowledge_id": "diag-l2-knowledge-10", "candidate_id": "diag-l2-candidate-10", "emission_allowed": true, "required_support_refs": ["diag-l2-support-10-a", "diag-l2-support-10-b"], "required_evidence_bindings": [{"evidence_id": "diag-l2-evidence-10-a", "speaker": "user"}, {"evidence_id": "diag-l2-evidence-10-b", "speaker": "user"}], "required_source_turn_refs": ["diag-l2-turn-10-a", "diag-l2-turn-10-b"], "required_source_session_refs": ["diag-l2-session-10"], "allowed_abstraction_methods": ["lifecycle_resolution"], "allowed_closure_patterns": ["update_supersession"]}
+    },
+    {
+      "private_case_id": "emit-state-summary",
+      "primary_family": "state_summary_case",
+      "secondary_families": ["kind", "structured_claim", "closure"],
+      "private_session_id": "diag-l2-session-11",
+      "source_turns": [
+        {"private_turn_id": "diag-l2-turn-11-a", "turn_index": 0, "user": "My wrist is sore after typing.", "agent": "The soreness is recorded as a current state."},
+        {"private_turn_id": "diag-l2-turn-11-b", "turn_index": 1, "user": "The soreness is still present this morning.", "agent": "The later observation shows persistence."}
+      ],
+      "untyped_candidate": {
+        "statement": "The user's wrist soreness persists across the two observations.",
+        "subject": "the user",
+        "predicate": "has persistent state",
+        "object": "wrist soreness",
+        "qualifiers": {"polarity": "positive"},
+        "source_status": "user_reported",
+        "derivation": "context_completed",
+        "inference_basis": "Two temporally separated observations report the same state.",
+        "evidence": [
+          {"evidence_id": "diag-l2-evidence-11-a", "speaker": "user", "message": "user", "quote": "My wrist is sore after typing.", "occurrence_index": 0, "start": 0, "end": 30},
+          {"evidence_id": "diag-l2-evidence-11-b", "speaker": "user", "message": "user", "quote": "The soreness is still present this morning.", "occurrence_index": 0, "start": 0, "end": 43}
+        ]
+      },
+      "typed_l1_support_pack": [
+        {"private_support_id": "diag-l2-support-11-a", "private_turn_id": "diag-l2-turn-11-a", "kind": "state", "predicate": {"surface": "is sore", "sense": "health.wrist_soreness", "canonical_operator": "report_wrist_soreness"}, "local_entities": [{"local_entity_id": "entity-01", "surface": "wrist soreness"}], "roles": [{"role": "state", "role_name": "reported condition", "local_entity_id": "entity-01"}], "evidence_bindings": [{"evidence_id": "diag-l2-evidence-11-a", "speaker": "user"}]},
+        {"private_support_id": "diag-l2-support-11-b", "private_turn_id": "diag-l2-turn-11-b", "kind": "state", "predicate": {"surface": "still present", "sense": "health.continued_soreness", "canonical_operator": "report_continued_soreness"}, "local_entities": [{"local_entity_id": "entity-01", "surface": "wrist soreness"}], "roles": [{"role": "state", "role_name": "continued condition", "local_entity_id": "entity-01"}], "evidence_bindings": [{"evidence_id": "diag-l2-evidence-11-b", "speaker": "user"}]}
+      ],
+      "expected_decision": "emit_l2",
+      "expected_typed_candidate": {
+        "kind": "long_running_state",
+        "summary": "The user's wrist soreness persists across the two observations.",
+        "supporting_l1_refs": ["diag-l2-support-11-a", "diag-l2-support-11-b"],
+        "structured_claims": [{"claim_ref": "claim-01", "predicate": {"surface": "has persistent state", "sense": "health.persistent_state", "canonical_operator": "persist_state"}, "local_entities": [{"local_entity_id": "entity-01", "surface": "the user"}, {"local_entity_id": "entity-02", "surface": "wrist soreness"}], "roles": [{"role": "holder", "role_name": "state holder", "local_entity_id": "entity-01"}, {"role": "state", "role_name": "persistent condition", "local_entity_id": "entity-02"}], "supporting_l1_refs": ["diag-l2-support-11-a", "diag-l2-support-11-b"]}],
+        "abstraction": {"method": "state_summary", "basis": "Both observations support persistence of the same state."},
+        "closure": {"pattern": "temporal_chain", "required_support_refs": ["diag-l2-support-11-a", "diag-l2-support-11-b"], "optional_support_refs": []},
+        "source_turn_refs": ["diag-l2-turn-11-a", "diag-l2-turn-11-b"],
+        "source_session_refs": ["diag-l2-session-11"],
+        "evidence_bindings": [{"evidence_id": "diag-l2-evidence-11-a", "speaker": "user"}, {"evidence_id": "diag-l2-evidence-11-b", "speaker": "user"}]
+      },
+      "authority": {"knowledge_id": "diag-l2-knowledge-11", "candidate_id": "diag-l2-candidate-11", "emission_allowed": true, "required_support_refs": ["diag-l2-support-11-a", "diag-l2-support-11-b"], "required_evidence_bindings": [{"evidence_id": "diag-l2-evidence-11-a", "speaker": "user"}, {"evidence_id": "diag-l2-evidence-11-b", "speaker": "user"}], "required_source_turn_refs": ["diag-l2-turn-11-a", "diag-l2-turn-11-b"], "required_source_session_refs": ["diag-l2-session-11"], "allowed_abstraction_methods": ["state_summary"], "allowed_closure_patterns": ["temporal_chain"]}
+    },
+    {
+      "private_case_id": "emit-preference-aggregation",
+      "primary_family": "preference_aggregation_case",
+      "secondary_families": ["kind", "structured_claim", "summary"],
+      "private_session_id": "diag-l2-session-12",
+      "source_turns": [
+        {"private_turn_id": "diag-l2-turn-12-a", "turn_index": 0, "user": "I prefer quiet rooms.", "agent": "Quiet rooms are one explicit preference."},
+        {"private_turn_id": "diag-l2-turn-12-b", "turn_index": 1, "user": "I also choose seats away from doors.", "agent": "Door distance adds a compatible preference."}
+      ],
+      "untyped_candidate": {
+        "statement": "The user prefers quiet rooms and seats away from doors.",
+        "subject": "the user",
+        "predicate": "has preference profile",
+        "object": "quiet rooms and seats away from doors",
+        "qualifiers": {"polarity": "positive"},
+        "source_status": "user_reported",
+        "derivation": "context_completed",
+        "inference_basis": "The two explicit preferences form a compatible profile.",
+        "evidence": [
+          {"evidence_id": "diag-l2-evidence-12-a", "speaker": "user", "message": "user", "quote": "I prefer quiet rooms.", "occurrence_index": 0, "start": 0, "end": 21},
+          {"evidence_id": "diag-l2-evidence-12-b", "speaker": "user", "message": "user", "quote": "I also choose seats away from doors.", "occurrence_index": 0, "start": 0, "end": 36}
+        ]
+      },
+      "typed_l1_support_pack": [
+        {"private_support_id": "diag-l2-support-12-a", "private_turn_id": "diag-l2-turn-12-a", "kind": "preference", "predicate": {"surface": "prefer", "sense": "preference.quiet_room", "canonical_operator": "prefer_quiet_room"}, "local_entities": [{"local_entity_id": "entity-01", "surface": "quiet rooms"}], "roles": [{"role": "preferred_value", "role_name": "room preference", "local_entity_id": "entity-01"}], "evidence_bindings": [{"evidence_id": "diag-l2-evidence-12-a", "speaker": "user"}]},
+        {"private_support_id": "diag-l2-support-12-b", "private_turn_id": "diag-l2-turn-12-b", "kind": "preference", "predicate": {"surface": "choose", "sense": "preference.seat_door_distance", "canonical_operator": "prefer_seat_away_from_door"}, "local_entities": [{"local_entity_id": "entity-01", "surface": "seats away from doors"}], "roles": [{"role": "preferred_value", "role_name": "seat preference", "local_entity_id": "entity-01"}], "evidence_bindings": [{"evidence_id": "diag-l2-evidence-12-b", "speaker": "user"}]}
+      ],
+      "expected_decision": "emit_l2",
+      "expected_typed_candidate": {
+        "kind": "preference_profile",
+        "summary": "The user prefers quiet rooms and seats away from doors.",
+        "supporting_l1_refs": ["diag-l2-support-12-a", "diag-l2-support-12-b"],
+        "structured_claims": [{"claim_ref": "claim-01", "predicate": {"surface": "has preference profile", "sense": "preference.aggregate_profile", "canonical_operator": "prefer_profile"}, "local_entities": [{"local_entity_id": "entity-01", "surface": "the user"}, {"local_entity_id": "entity-02", "surface": "quiet rooms and seats away from doors"}], "roles": [{"role": "holder", "role_name": "preference holder", "local_entity_id": "entity-01"}, {"role": "profile", "role_name": "aggregated preference", "local_entity_id": "entity-02"}], "supporting_l1_refs": ["diag-l2-support-12-a", "diag-l2-support-12-b"]}],
+        "abstraction": {"method": "preference_aggregation", "basis": "Both explicit preferences belong to one compatible profile."},
+        "closure": {"pattern": "multi_evidence_set", "required_support_refs": ["diag-l2-support-12-a", "diag-l2-support-12-b"], "optional_support_refs": []},
+        "source_turn_refs": ["diag-l2-turn-12-a", "diag-l2-turn-12-b"],
+        "source_session_refs": ["diag-l2-session-12"],
+        "evidence_bindings": [{"evidence_id": "diag-l2-evidence-12-a", "speaker": "user"}, {"evidence_id": "diag-l2-evidence-12-b", "speaker": "user"}]
+      },
+      "authority": {"knowledge_id": "diag-l2-knowledge-12", "candidate_id": "diag-l2-candidate-12", "emission_allowed": true, "required_support_refs": ["diag-l2-support-12-a", "diag-l2-support-12-b"], "required_evidence_bindings": [{"evidence_id": "diag-l2-evidence-12-a", "speaker": "user"}, {"evidence_id": "diag-l2-evidence-12-b", "speaker": "user"}], "required_source_turn_refs": ["diag-l2-turn-12-a", "diag-l2-turn-12-b"], "required_source_session_refs": ["diag-l2-session-12"], "allowed_abstraction_methods": ["preference_aggregation"], "allowed_closure_patterns": ["multi_evidence_set"]}
+    }
+  ]
+}
