@@ -59,7 +59,7 @@ Git plumbing, `tempfile`, and Linux `renameat2(RENAME_NOREPLACE)`.
 - Expects private chronology helper
   `_build_materialization_receipt(...) -> FreshV3MaterializationReceipt`.
 
-- [ ] **Step 1: Write approved-receipt and transition tests**
+- [x] **Step 1: Write approved-receipt and transition tests**
 
   Import the absent materializer module and define constants for the repository,
   workspace, official preregistration, active receipt, official evaluation
@@ -72,7 +72,7 @@ Git plumbing, `tempfile`, and Linux `renameat2(RENAME_NOREPLACE)`.
   with wrong mode, noncanonical bytes, changed bytes, unknown fields, or
   coercive counts. The official receipt and all frozen inputs remain untouched.
 
-- [ ] **Step 2: Write strict chronology-builder tests**
+- [x] **Step 2: Write strict chronology-builder tests**
 
   Build the pure fresh-v3 bundle, write its ten canonical payloads into a
   temporary tree, and call `_build_materialization_receipt`. Assert exact
@@ -95,7 +95,7 @@ Git plumbing, `tempfile`, and Linux `renameat2(RENAME_NOREPLACE)`.
   )
   ```
 
-- [ ] **Step 3: Run the focused file and verify RED**
+- [x] **Step 3: Run the focused file and verify RED**
 
   Run from `research/next-prep`:
 
@@ -126,7 +126,7 @@ Git plumbing, `tempfile`, and Linux `renameat2(RENAME_NOREPLACE)`.
 - Produces `_validate_active_receipt_transition`, `_layer_payloads`, and
   `_build_materialization_receipt` for Task 3.
 
-- [ ] **Step 1: Define constants and strict models**
+- [x] **Step 1: Define constants and strict models**
 
   Add exact constants for receipt SHA, relative module/test paths, layer names,
   zero writes, schema/status, and `renameat2` flags. Use
@@ -134,7 +134,7 @@ Git plumbing, `tempfile`, and Linux `renameat2(RENAME_NOREPLACE)`.
   with exact `%Y-%m-%dT%H:%M:%SZ` round-trip. Define artifact bindings with
   SHA-256, `size_bytes >= 1`, and mode `0444`.
 
-- [ ] **Step 2: Implement approved canonical receipt reading**
+- [x] **Step 2: Implement approved canonical receipt reading**
 
   `_read_approved_receipt(path)` must call the relocation module's strict
   regular-file reader, require mode `0444`, exact canonical bytes, exact
@@ -142,7 +142,7 @@ Git plumbing, `tempfile`, and Linux `renameat2(RENAME_NOREPLACE)`.
   `typed-extractor-fresh-v3-authoring-receipt-v2`. It returns the parsed receipt,
   opened bytes, and opened stat for final inode/path revalidation.
 
-- [ ] **Step 3: Implement the phase-transition replay**
+- [x] **Step 3: Implement the phase-transition replay**
 
   `_validate_active_receipt_transition(repository_root, workspace_root,
   require_evaluation_absent)` must:
@@ -161,7 +161,7 @@ Git plumbing, `tempfile`, and Linux `renameat2(RENAME_NOREPLACE)`.
   Return an immutable `ActiveTransition` containing the receipt and the two new
   materializer hashes. Do not call the original pre-implementation validator.
 
-- [ ] **Step 4: Implement layer mapping and chronology construction**
+- [x] **Step 4: Implement layer mapping and chronology construction**
 
   Use this exact mapping:
 
@@ -189,14 +189,14 @@ Git plumbing, `tempfile`, and Linux `renameat2(RENAME_NOREPLACE)`.
   family/manifest hashes, sequence claims, one true hidden-source transition,
   and every zero/false boundary from the design.
 
-- [ ] **Step 5: Run transition/model nodes to GREEN**
+- [x] **Step 5: Run transition/model nodes to GREEN**
 
   Run only receipt-reader, transition, strict-model, and chronology-builder
   nodes. Expected: those nodes pass; publication nodes still fail because the
   writer/validator are absent. Confirm no formal evaluation root or staging
   path exists.
 
-- [ ] **Step 6: Commit the transition layer**
+- [x] **Step 6: Commit the transition layer**
 
   ```bash
   git add \
