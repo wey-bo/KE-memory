@@ -407,6 +407,36 @@ def test_snapshot_writer_does_not_require_anonymous_inode_publication(
     assert target.stat().st_mode & 0o777 == 0o444
 
 
+def test_snapshot_writer_rejects_staging_bytes_changed_by_callback(
+    tmp_path: Path,
+) -> None:
+    receipt = relocation.build_fresh_v3_snapshot_relocation_receipt(
+        REPOSITORY,
+        WORKSPACE,
+        FORMAL_EVALUATION,
+        RECEIPT_TIME,
+    )
+    target = tmp_path / "authoring-implementation-receipt.json"
+
+    def replace_staging_bytes() -> None:
+        staging_files = list(tmp_path.glob(f".{target.name}.staging-*.tmp"))
+        assert len(staging_files) == 1
+        staging = staging_files[0]
+        staging.chmod(0o600)
+        staging.write_bytes(b'{"tampered":true}\n')
+        staging.chmod(0o444)
+
+    with pytest.raises(ValueError, match="staging bytes changed"):
+        relocation._write_snapshot_receipt_no_clobber(
+            target,
+            receipt,
+            before_publish=replace_staging_bytes,
+        )
+
+    assert not target.exists()
+    assert list(tmp_path.iterdir()) == []
+
+
 def test_receipt_writer_rejects_different_existing_target(tmp_path: Path) -> None:
     first = relocation.build_fresh_v3_snapshot_relocation_receipt(
         REPOSITORY,

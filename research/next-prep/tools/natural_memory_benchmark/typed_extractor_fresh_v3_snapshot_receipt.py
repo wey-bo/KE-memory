@@ -598,6 +598,7 @@ def _write_snapshot_receipt_no_clobber(
             os.fstat(descriptor),
             label="fresh v3 relocation receipt staging file",
         )
+        _assert_staging_descriptor_content(descriptor, content)
         try:
             _publish_named_receipt_noreplace(temporary_path, receipt_path)
         except FileExistsError:
@@ -637,6 +638,32 @@ def _write_snapshot_receipt_no_clobber(
         matching_receipt,
         label="fresh v3 relocation receipt",
     )
+
+
+def _assert_staging_descriptor_content(
+    descriptor: int,
+    expected: bytes,
+) -> None:
+    opened = os.fstat(descriptor)
+    if stat.S_IMODE(opened.st_mode) != 0o444 or opened.st_size != len(expected):
+        raise ValueError("fresh v3 relocation receipt staging bytes changed")
+    chunks: list[bytes] = []
+    offset = 0
+    while offset < len(expected):
+        chunk = os.pread(descriptor, len(expected) - offset, offset)
+        if not chunk:
+            raise ValueError("fresh v3 relocation receipt staging bytes changed")
+        chunks.append(chunk)
+        offset += len(chunk)
+    if b"".join(chunks) != expected:
+        raise ValueError("fresh v3 relocation receipt staging bytes changed")
+    rechecked = os.fstat(descriptor)
+    if (
+        (rechecked.st_dev, rechecked.st_ino) != (opened.st_dev, opened.st_ino)
+        or stat.S_IMODE(rechecked.st_mode) != 0o444
+        or rechecked.st_size != len(expected)
+    ):
+        raise ValueError("fresh v3 relocation receipt staging bytes changed")
 
 
 def _publish_named_receipt_noreplace(source: Path, target: Path) -> None:
