@@ -5,6 +5,7 @@ import json
 import os
 import shutil
 import stat
+from collections import Counter
 from pathlib import Path
 from typing import Any
 
@@ -71,6 +72,19 @@ def _write_payload_tree(root: Path) -> None:
             write_json_immutable(path, getattr(bundle_layer, attribute))
             path.chmod(0o444)
     root.chmod(0o775)
+
+
+def _make_bindable_tree(root: Path) -> dict[str, bytes]:
+    _write_payload_tree(root)
+    chronology_path = root / "chronology-receipt.json"
+    chronology_path.write_bytes(b"{}\n")
+    chronology_path.chmod(0o444)
+    expected_files = {"chronology-receipt.json": chronology_path.read_bytes()}
+    for layer, names in materialization.LAYER_VALUES.items():
+        for name in names:
+            path = root / layer / name
+            expected_files[f"{layer}/{name}"] = path.read_bytes()
+    return expected_files
 
 
 def test_transition_binds_approved_receipt_git_authoring_and_materializer() -> None:
@@ -412,6 +426,52 @@ def test_atomic_publish_failure_cleans_only_current_staging_root(
     assert _staging_roots(evaluation_root) == [stale_staging]
 
 
+def test_cleanup_does_not_delete_a_root_replacement_through_path_rmtree(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    evaluation_root = _temporary_evaluation_root(tmp_path)
+    replacement = tmp_path / "replacement-root"
+    replacement.mkdir()
+    marker = replacement / "preserve.txt"
+    marker.write_text("preserve\n", encoding="utf-8")
+    original_rmtree = shutil.rmtree
+
+    def exchange_then_rmtree(
+        path: str,
+        *args: Any,
+        dir_fd: int | None = None,
+        **kwargs: Any,
+    ) -> None:
+        assert dir_fd is not None
+        moved_name = f"{path}.original"
+        os.rename(
+            path,
+            moved_name,
+            src_dir_fd=dir_fd,
+            dst_dir_fd=dir_fd,
+        )
+        os.rename(
+            replacement.name,
+            path,
+            src_dir_fd=dir_fd,
+            dst_dir_fd=dir_fd,
+        )
+        original_rmtree(path, *args, dir_fd=dir_fd, **kwargs)
+
+    def fail_publish(*args: Any, **kwargs: Any) -> None:
+        raise OSError(f"injected publish failure: {args} {kwargs}")
+
+    monkeypatch.setattr(shutil, "rmtree", exchange_then_rmtree)
+    monkeypatch.setattr(materialization, "_publish_noreplace", fail_publish)
+
+    with pytest.raises(OSError, match="injected publish failure"):
+        _materialize_temporary(evaluation_root)
+
+    assert marker.read_text(encoding="utf-8") == "preserve\n"
+    assert not evaluation_root.exists()
+
+
 def test_atomic_publish_refuses_concurrently_created_empty_root(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -573,6 +633,110 @@ def test_publish_rejects_staging_identity_replacement(
         assert replacement_marker.read_text(encoding="utf-8") == "preserve\n"
 
 
+@pytest.mark.parametrize("target", ["root", "layer", "file"])
+def test_bound_tree_enforces_required_modes(
+    tmp_path: Path,
+    target: str,
+) -> None:
+    staging_root = tmp_path / ".typed-extractor-v3-fresh-hidden-v1.staging-bind"
+    expected_files = _make_bindable_tree(staging_root)
+    if target == "root":
+        staging_root.chmod(0o755)
+    elif target == "layer":
+        (staging_root / "l1").chmod(0o755)
+    else:
+        (staging_root / "l1" / "public-l1.json").chmod(0o644)
+
+    parent_descriptor = os.open(
+        tmp_path,
+        os.O_RDONLY | os.O_DIRECTORY | os.O_CLOEXEC | os.O_NOFOLLOW,
+    )
+    bound_tree: materialization._BoundMaterializedTree | None = None
+    try:
+        with pytest.raises(ValueError, match="required mode"):
+            bound_tree = materialization._bind_materialized_tree(
+                parent_descriptor,
+                staging_root.name,
+                expected_files,
+            )
+    finally:
+        if bound_tree is not None:
+            bound_tree.close()
+        os.close(parent_descriptor)
+
+
+@pytest.mark.parametrize("target", ["root", "layer", "file"])
+def test_publish_rejects_mode_mutation_after_final_staging_validation(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    target: str,
+) -> None:
+    evaluation_root = _temporary_evaluation_root(tmp_path)
+    original_validate = materialization._validate_materialized_root
+    staging_validation_count = 0
+
+    def mutate_after_final_staging_validation(**kwargs: Any) -> dict[str, Any]:
+        nonlocal staging_validation_count
+        result = original_validate(**kwargs)
+        artifact_root = Path(kwargs["artifact_root"])
+        if artifact_root.name.startswith(f".{evaluation_root.name}.staging-"):
+            staging_validation_count += 1
+            if staging_validation_count == 2:
+                if target == "root":
+                    artifact_root.chmod(0o755)
+                elif target == "layer":
+                    (artifact_root / "l1").chmod(0o755)
+                else:
+                    (artifact_root / "l1" / "public-l1.json").chmod(0o644)
+        return result
+
+    monkeypatch.setattr(
+        materialization,
+        "_validate_materialized_root",
+        mutate_after_final_staging_validation,
+    )
+
+    with pytest.raises(ValueError, match="mode|identity"):
+        _materialize_temporary(evaluation_root)
+
+    assert staging_validation_count == 2
+    assert not evaluation_root.exists()
+
+
+def test_publish_rejects_canonical_file_replacement_after_final_validation(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    evaluation_root = _temporary_evaluation_root(tmp_path)
+    original_validate = materialization._validate_materialized_root
+    staging_validation_count = 0
+
+    def replace_after_final_staging_validation(**kwargs: Any) -> dict[str, Any]:
+        nonlocal staging_validation_count
+        result = original_validate(**kwargs)
+        artifact_root = Path(kwargs["artifact_root"])
+        if artifact_root.name.startswith(f".{evaluation_root.name}.staging-"):
+            staging_validation_count += 1
+            if staging_validation_count == 2:
+                path = artifact_root / "l1" / "public-l1.json"
+                moved = tmp_path / "original-public-l1.json"
+                path.rename(moved)
+                shutil.copy2(moved, path)
+        return result
+
+    monkeypatch.setattr(
+        materialization,
+        "_validate_materialized_root",
+        replace_after_final_staging_validation,
+    )
+
+    with pytest.raises(ValueError, match="identity"):
+        _materialize_temporary(evaluation_root)
+
+    assert staging_validation_count == 2
+    assert not evaluation_root.exists()
+
+
 def test_materialization_fsyncs_files_directories_and_publication_parent(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -580,17 +744,29 @@ def test_materialization_fsyncs_files_directories_and_publication_parent(
     evaluation_root = _temporary_evaluation_root(tmp_path)
     original_fsync = materialization.os.fsync
     synced_types: list[int] = []
+    synced_identities: Counter[tuple[int, int]] = Counter()
 
     def record_fsync(descriptor: int) -> None:
-        synced_types.append(stat.S_IFMT(os.fstat(descriptor).st_mode))
+        opened = os.fstat(descriptor)
+        synced_types.append(stat.S_IFMT(opened.st_mode))
+        synced_identities[(opened.st_dev, opened.st_ino)] += 1
         original_fsync(descriptor)
 
     monkeypatch.setattr(materialization.os, "fsync", record_fsync)
 
     _materialize_temporary(evaluation_root)
 
-    assert synced_types.count(stat.S_IFREG) >= 11
-    assert synced_types.count(stat.S_IFDIR) >= 5
+    published_entries = [evaluation_root, evaluation_root / "l1", evaluation_root / "l2"]
+    published_entries.extend(
+        path
+        for path in evaluation_root.rglob("*")
+        if path.is_file()
+    )
+    for path in published_entries:
+        opened = path.stat()
+        assert synced_identities[(opened.st_dev, opened.st_ino)] >= 2
+    assert synced_types.count(stat.S_IFREG) >= 22
+    assert synced_types.count(stat.S_IFDIR) >= 8
 
 
 @pytest.mark.parametrize(

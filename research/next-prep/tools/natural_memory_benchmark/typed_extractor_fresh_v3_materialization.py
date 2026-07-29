@@ -5,7 +5,6 @@ import errno
 import hashlib
 import json
 import os
-import shutil
 import stat
 import tempfile
 from dataclasses import dataclass
@@ -658,6 +657,8 @@ class _BoundTreeEntry:
     parent_descriptor: int
     name: str
     opened: os.stat_result
+    required_type: int
+    required_mode: int
     expected_bytes: bytes | None = None
     expected_children: frozenset[str] | None = None
 
@@ -670,7 +671,24 @@ class _BoundMaterializedTree:
     def root_opened(self) -> os.stat_result:
         return self.entries[0].opened
 
-    def verify(self, parent_descriptor: int, root_name: str) -> None:
+    @staticmethod
+    def _require_contract(
+        entry: _BoundTreeEntry,
+        opened: os.stat_result,
+    ) -> None:
+        if stat.S_IFMT(opened.st_mode) != entry.required_type:
+            raise ValueError(
+                f"fresh v3 staging required type drift: {entry.label}"
+            )
+        actual_mode = stat.S_IMODE(opened.st_mode)
+        if actual_mode != entry.required_mode:
+            raise ValueError(
+                "fresh v3 staging required mode drift: "
+                f"{entry.label}; expected {entry.required_mode:04o}, "
+                f"got {actual_mode:04o}"
+            )
+
+    def _verify_entries(self, parent_descriptor: int, root_name: str) -> None:
         for index, entry in enumerate(self.entries):
             current_parent = parent_descriptor if index == 0 else entry.parent_descriptor
             current_name = root_name if index == 0 else entry.name
@@ -685,6 +703,9 @@ class _BoundMaterializedTree:
                     f"fresh v3 staging identity drift: {entry.label}"
                 ) from exc
             descriptor_stat = os.fstat(entry.descriptor)
+            self._require_contract(entry, entry.opened)
+            self._require_contract(entry, current)
+            self._require_contract(entry, descriptor_stat)
             if not _same_entry(current, entry.opened) or not _same_entry(
                 descriptor_stat,
                 entry.opened,
@@ -708,6 +729,24 @@ class _BoundMaterializedTree:
                     raise ValueError(
                         f"fresh v3 staging identity drift: {entry.label}"
                     )
+
+    def verify(
+        self,
+        parent_descriptor: int,
+        root_name: str,
+        *,
+        synchronize: bool = False,
+    ) -> None:
+        self._verify_entries(parent_descriptor, root_name)
+        if not synchronize:
+            return
+        for entry in self.entries:
+            if entry.required_type == stat.S_IFREG:
+                os.fsync(entry.descriptor)
+        for entry in reversed(self.entries):
+            if entry.required_type == stat.S_IFDIR:
+                os.fsync(entry.descriptor)
+        self._verify_entries(parent_descriptor, root_name)
 
     def close(self) -> None:
         for entry in reversed(self.entries):
@@ -745,6 +784,8 @@ def _bind_materialized_tree(
                 parent_descriptor=parent_descriptor,
                 name=root_name,
                 opened=os.fstat(root_descriptor),
+                required_type=stat.S_IFDIR,
+                required_mode=0o775,
                 expected_children=frozenset(
                     {"chronology-receipt.json", "l1", "l2"}
                 ),
@@ -761,6 +802,8 @@ def _bind_materialized_tree(
                 parent_descriptor=root_descriptor,
                 name="chronology-receipt.json",
                 opened=os.fstat(chronology_descriptor),
+                required_type=stat.S_IFREG,
+                required_mode=0o444,
                 expected_bytes=expected_files["chronology-receipt.json"],
             )
         )
@@ -773,6 +816,8 @@ def _bind_materialized_tree(
                     parent_descriptor=root_descriptor,
                     name=layer,
                     opened=os.fstat(layer_descriptor),
+                    required_type=stat.S_IFDIR,
+                    required_mode=0o775,
                     expected_children=frozenset(names),
                 )
             )
@@ -785,6 +830,8 @@ def _bind_materialized_tree(
                         parent_descriptor=layer_descriptor,
                         name=name,
                         opened=os.fstat(descriptor),
+                        required_type=stat.S_IFREG,
+                        required_mode=0o444,
                         expected_bytes=expected_files[f"{layer}/{name}"],
                     )
                 )
@@ -816,8 +863,12 @@ def _publish_noreplace(
         ctypes.c_uint,
     ]
     renameat2.restype = ctypes.c_int
+    bound_tree.verify(
+        parent_descriptor,
+        source_name,
+        synchronize=True,
+    )
     os.fsync(parent_descriptor)
-    bound_tree.verify(parent_descriptor, source_name)
     result = renameat2(
         parent_descriptor,
         os.fsencode(source_name),
@@ -856,16 +907,77 @@ def _remove_exact_staging_root(
     expected: os.stat_result,
 ) -> None:
     try:
-        current = os.stat(
-            staging_name,
-            dir_fd=parent_descriptor,
-            follow_symlinks=False,
-        )
-    except FileNotFoundError:
+        root_descriptor = _open_directory_at(parent_descriptor, staging_name)
+    except (FileNotFoundError, NotADirectoryError):
         return
-    if not _same_identity(current, expected) or not stat.S_ISDIR(current.st_mode):
-        return
-    shutil.rmtree(staging_name, dir_fd=parent_descriptor)
+    try:
+        opened = os.fstat(root_descriptor)
+        if not _same_identity(opened, expected):
+            return
+        if not _remove_directory_contents(root_descriptor):
+            return
+        try:
+            current = os.stat(
+                staging_name,
+                dir_fd=parent_descriptor,
+                follow_symlinks=False,
+            )
+        except FileNotFoundError:
+            return
+        if not _same_identity(current, opened):
+            return
+        os.rmdir(staging_name, dir_fd=parent_descriptor)
+    finally:
+        os.close(root_descriptor)
+
+
+def _remove_directory_contents(directory_descriptor: int) -> bool:
+    for name in os.listdir(directory_descriptor):
+        try:
+            opened = os.stat(
+                name,
+                dir_fd=directory_descriptor,
+                follow_symlinks=False,
+            )
+        except FileNotFoundError:
+            continue
+        if stat.S_ISDIR(opened.st_mode):
+            try:
+                child_descriptor = _open_directory_at(directory_descriptor, name)
+            except (FileNotFoundError, NotADirectoryError):
+                return False
+            try:
+                child_opened = os.fstat(child_descriptor)
+                if not _same_identity(child_opened, opened):
+                    return False
+                if not _remove_directory_contents(child_descriptor):
+                    return False
+                try:
+                    current = os.stat(
+                        name,
+                        dir_fd=directory_descriptor,
+                        follow_symlinks=False,
+                    )
+                except FileNotFoundError:
+                    return False
+                if not _same_identity(current, child_opened):
+                    return False
+                os.rmdir(name, dir_fd=directory_descriptor)
+            finally:
+                os.close(child_descriptor)
+            continue
+        try:
+            current = os.stat(
+                name,
+                dir_fd=directory_descriptor,
+                follow_symlinks=False,
+            )
+        except FileNotFoundError:
+            continue
+        if not _same_identity(current, opened):
+            return False
+        os.unlink(name, dir_fd=directory_descriptor)
+    return True
 
 
 def _materialize_fresh_v3_hidden_to_root(
@@ -941,23 +1053,6 @@ def _materialize_fresh_v3_hidden_to_root(
             artifact_root=staging_root,
             logical_evaluation_root=logical_evaluation_root,
         )
-        _validate_active_receipt_transition(
-            repository_root,
-            workspace_root,
-            require_evaluation_absent=True,
-        )
-        revalidated = _validate_materialized_root(
-            repository_root=repository_root,
-            workspace_root=workspace_root,
-            artifact_root=staging_root,
-            logical_evaluation_root=logical_evaluation_root,
-        )
-        if revalidated != result:
-            raise ValueError("fresh v3 materialization validation result drift")
-        if relocation._entry_exists(evaluation_root):
-            raise ValueError(
-                f"fresh v3 evaluation root must be absent: {evaluation_root}"
-            )
         payloads = _layer_payloads(bundle)
         expected_files = {
             f"{layer}/{name}": canonical_json_bytes(value)
@@ -971,6 +1066,23 @@ def _materialize_fresh_v3_hidden_to_root(
             expected_files,
         )
         try:
+            _validate_active_receipt_transition(
+                repository_root,
+                workspace_root,
+                require_evaluation_absent=True,
+            )
+            revalidated = _validate_materialized_root(
+                repository_root=repository_root,
+                workspace_root=workspace_root,
+                artifact_root=staging_root,
+                logical_evaluation_root=logical_evaluation_root,
+            )
+            if revalidated != result:
+                raise ValueError("fresh v3 materialization validation result drift")
+            if relocation._entry_exists(evaluation_root):
+                raise ValueError(
+                    f"fresh v3 evaluation root must be absent: {evaluation_root}"
+                )
             _publish_noreplace(
                 parent_descriptor,
                 staging_root.name,
