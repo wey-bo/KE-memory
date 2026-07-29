@@ -2,13 +2,23 @@ from __future__ import annotations
 
 import hashlib
 import os
+import stat
 import subprocess
+from datetime import datetime
 from pathlib import Path, PurePosixPath
 from typing import Any, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    field_validator,
+    model_validator,
+)
 
+from . import typed_extractor_fresh_v3_authoring as authoring
 from .typed_extractor_fresh_v3_authoring import _read_regular_path
+from .typed_extractor_fresh_v3_prereg import L1_FAMILIES, L2_FAMILIES
 
 
 class StrictModel(BaseModel):
@@ -34,6 +44,17 @@ NORMALIZED_EVALUATION_ROOT = (
     f"{NORMALIZED_WORKSPACE_PATH}/artifacts/automatic-extraction-assessment/"
     "typed-extractor-v3-fresh-hidden-v1"
 )
+PREREGISTRATION_SHA256 = authoring.PREREGISTRATION_SHA256
+PREREGISTRATION_SCHEMA = authoring.PREREGISTRATION_SCHEMA
+EVALUATION_ID = authoring.EVALUATION_ID
+RECEIPT_NAME = authoring.RECEIPT_NAME
+CANDIDATE_QUEUE_SHA256 = authoring.CANDIDATE_QUEUE_SHA256
+GUARD_FINGERPRINT = authoring.GUARD_FINGERPRINT
+GUARD_RESULTS_WORKSPACE_PATH = authoring.GUARD_RESULTS_WORKSPACE_PATH
+GUARD_RESULTS_SHA256 = authoring.GUARD_RESULTS_SHA256
+GUARD_COUNTS = dict(authoring.GUARD_COUNTS)
+AUTOMATIC_WRITE_COUNTS = dict(authoring.AUTOMATIC_WRITE_COUNTS)
+MATERIALIZATION_WORKSPACE_PATHS = tuple(authoring.MATERIALIZATION_WORKSPACE_PATHS)
 
 _SNAPSHOT_FILES = {
     "preregistration": {
@@ -114,6 +135,134 @@ class RelocationPathBinding(StrictModel):
         "research/next-prep/artifacts/automatic-extraction-assessment/"
         "typed-extractor-v3-fresh-hidden-v1"
     ] = NORMALIZED_EVALUATION_ROOT
+
+
+class PathNeutralAuthoringBinding(StrictModel):
+    preregistration_sha256: Literal[
+        "183cf6fc2991361e5da57b17e06a5970f651000986d50b87e8af2e6796440204"
+    ] = PREREGISTRATION_SHA256
+    preregistration_schema: Literal[
+        "typed-extractor-fresh-v3-preregistration-v1"
+    ] = PREREGISTRATION_SCHEMA
+    preregistration_mode: Literal["0444"] = "0444"
+    code_sha256: dict[str, str]
+    dependency_sha256: dict[str, str]
+    blueprint_manifest_sha256: dict[str, str]
+    prior_input_sha256: dict[str, str]
+    l1_case_count: Literal[24] = 24
+    l2_case_count: Literal[18] = 18
+    l1_families: dict[str, int]
+    l2_families: dict[str, int]
+
+    @model_validator(mode="after")
+    def validate_exact_binding(self) -> "PathNeutralAuthoringBinding":
+        if self.l1_families != L1_FAMILIES or self.l2_families != L2_FAMILIES:
+            raise ValueError("authoring receipt family contract mismatch")
+        if set(self.code_sha256) != {
+            "typed_extractor_fresh_v3_authoring.py",
+            "test_typed_extractor_fresh_v3_authoring.py",
+        }:
+            raise ValueError("authoring receipt code registry mismatch")
+        if set(self.dependency_sha256) != {
+            "authoritative_conformance_runner.py",
+            "authoritative_memory.py",
+            "io.py",
+            "typed_extractor_fresh_v3_prereg.py",
+            "typed_extractor_l1.py",
+            "typed_extractor_l2.py",
+        }:
+            raise ValueError("authoring receipt dependency registry mismatch")
+        if set(self.blueprint_manifest_sha256) != {"l1", "l2"}:
+            raise ValueError("authoring receipt blueprint manifest mismatch")
+        if len(self.prior_input_sha256) != 39:
+            raise ValueError("authoring receipt prior input registry mismatch")
+        for hashes in (
+            self.code_sha256,
+            self.dependency_sha256,
+            self.blueprint_manifest_sha256,
+            self.prior_input_sha256,
+        ):
+            if any(not _is_sha256(value) for value in hashes.values()):
+                raise ValueError("invalid authoring receipt hash")
+        return self
+
+
+class FreshV3SnapshotRelocationReceipt(StrictModel):
+    schema_version: Literal[
+        "typed-extractor-fresh-v3-authoring-receipt-v2"
+    ] = "typed-extractor-fresh-v3-authoring-receipt-v2"
+    status: Literal["frozen"] = "frozen"
+    evaluation_id: Literal["typed-extractor-v3-fresh-hidden-v1"] = EVALUATION_ID
+    receipt_time: str = Field(
+        pattern=r"^2026-07-29T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"
+    )
+    receipt_time_source: Literal[
+        "caller_supplied_untrusted_utc_label"
+    ] = "caller_supplied_untrusted_utc_label"
+    git_snapshot: GitSnapshotBinding
+    path_binding: RelocationPathBinding
+    authoring_binding: PathNeutralAuthoringBinding
+    relocation_code_sha256: dict[str, str]
+    evaluation_root_absent: Literal[True] = True
+    materialization_workspace_paths: list[str]
+    materialization_implementation_absent: Literal[True] = True
+    hidden_artifact_write_count: Literal[0] = 0
+    model_request_count: Literal[0] = 0
+    automatic_write_counts: dict[str, int]
+    candidate_v3_queue_sha256: Literal[
+        "518ead9de8627a9a4384df8cdd9b8728a21fcf797f6b0f3d208dfcb28ac41c0f"
+    ] = CANDIDATE_QUEUE_SHA256
+    guard_fingerprint: Literal[
+        "e184b6caf2998acf1c8700bc84d24bbafd49ab9c8f15738d1af8cc484ee5ebcc"
+    ] = GUARD_FINGERPRINT
+    guard_results_path: Literal[
+        "artifacts/natural-benchmark-slices/slice-v1/"
+        "symbolic-fallback-answerability-v2-fastembed-results.json"
+    ] = GUARD_RESULTS_WORKSPACE_PATH
+    guard_results_sha256: Literal[
+        "f90ee6a8d9ee4a0beb993ae2055c2e7ededd013de9a70e6ce588efbbfedd2645"
+    ] = GUARD_RESULTS_SHA256
+    guard_counts: dict[str, int]
+    pipeline_integration_authorized: Literal[False] = False
+    embedding_authority: Literal[False] = False
+    manual_identity_adjudications_materialized: Literal[False] = False
+    external_memory_systems_rerun: Literal[False] = False
+    longmemeval_status: Literal[
+        "structured_l2_identity_unresolved"
+    ] = "structured_l2_identity_unresolved"
+
+    @field_validator("receipt_time")
+    @classmethod
+    def validate_receipt_time(cls, value: str) -> str:
+        try:
+            parsed = datetime.strptime(value, "%Y-%m-%dT%H:%M:%SZ")
+        except ValueError as exc:
+            raise ValueError("receipt_time must be a valid UTC timestamp") from exc
+        if parsed.strftime("%Y-%m-%dT%H:%M:%SZ") != value:
+            raise ValueError("receipt_time must be a valid UTC timestamp")
+        return value
+
+    @model_validator(mode="after")
+    def validate_exact_contract(self) -> "FreshV3SnapshotRelocationReceipt":
+        if set(self.relocation_code_sha256) != {
+            "typed_extractor_fresh_v3_snapshot_receipt.py",
+            "test_typed_extractor_fresh_v3_snapshot_receipt.py",
+        }:
+            raise ValueError("relocation receipt code registry mismatch")
+        if any(
+            not _is_sha256(value)
+            for value in self.relocation_code_sha256.values()
+        ):
+            raise ValueError("invalid relocation receipt code hash")
+        if self.materialization_workspace_paths != list(
+            MATERIALIZATION_WORKSPACE_PATHS
+        ):
+            raise ValueError("materialization path registry mismatch")
+        if self.automatic_write_counts != AUTOMATIC_WRITE_COUNTS:
+            raise ValueError("authoring receipt write boundary mismatch")
+        if self.guard_counts != GUARD_COUNTS:
+            raise ValueError("authoring receipt guard count mismatch")
+        return self
 
 
 def _absolute_lexical_path(path: Path) -> Path:
@@ -281,3 +430,123 @@ def _validate_relocation_paths(
     if _absolute_lexical_path(evaluation_root) != expected_evaluation:
         raise ValueError("normalized evaluation root path mismatch")
     return RelocationPathBinding()
+
+
+def _is_sha256(value: str) -> bool:
+    return len(value) == 64 and all(char in "0123456789abcdef" for char in value)
+
+
+def _entry_exists(path: Path) -> bool:
+    try:
+        path.lstat()
+    except FileNotFoundError:
+        return False
+    return True
+
+
+def _require_future_absent(evaluation_root: Path, workspace_root: Path) -> None:
+    if _entry_exists(evaluation_root):
+        raise ValueError("fresh v3 evaluation root must be absent before authoring receipt")
+    for raw_path in MATERIALIZATION_WORKSPACE_PATHS:
+        path = _absolute_lexical_path(workspace_root / raw_path)
+        if _entry_exists(path):
+            raise ValueError(f"materialization artifact must be absent: {path}")
+
+
+def _protected_state(workspace_root: Path) -> dict[str, Any]:
+    return authoring._protected_state(workspace_root)
+
+
+def _relocation_code_paths(workspace_root: Path) -> dict[str, Path]:
+    return {
+        "typed_extractor_fresh_v3_snapshot_receipt.py": (
+            workspace_root
+            / "tools/natural_memory_benchmark/"
+            "typed_extractor_fresh_v3_snapshot_receipt.py"
+        ),
+        "test_typed_extractor_fresh_v3_snapshot_receipt.py": (
+            workspace_root
+            / "tests/natural_memory_benchmark/"
+            "test_typed_extractor_fresh_v3_snapshot_receipt.py"
+        ),
+    }
+
+
+def _hash_regular_file(path: Path, *, label: str) -> str:
+    content, _ = _read_regular_path(path, label=label)
+    return hashlib.sha256(content).hexdigest()
+
+
+def build_fresh_v3_snapshot_relocation_receipt(
+    repository_root: Path,
+    workspace_root: Path,
+    evaluation_root: Path,
+    receipt_time: str,
+) -> FreshV3SnapshotRelocationReceipt:
+    repository_root = _require_repository_root(repository_root)
+    workspace_root = _require_workspace_root(repository_root, workspace_root)
+    evaluation_root = _absolute_lexical_path(evaluation_root)
+    preregistration_path = repository_root / NORMALIZED_PREREGISTRATION_PATH
+    preregistration = authoring._load_preregistration(preregistration_path)
+    path_binding = _validate_relocation_paths(
+        preregistration=preregistration,
+        repository_root=repository_root,
+        workspace_root=workspace_root,
+        evaluation_root=evaluation_root,
+    )
+    git_snapshot = _build_git_snapshot_binding(repository_root, workspace_root)
+    _require_future_absent(evaluation_root, workspace_root)
+    protected_state = _protected_state(workspace_root)
+    bundle = authoring.build_fresh_v3_authoring_bundle(preregistration_path)
+
+    preregistration_bytes, preregistration_stat = _read_regular_path(
+        preregistration_path,
+        label="normalized fresh v3 preregistration",
+    )
+    if hashlib.sha256(preregistration_bytes).hexdigest() != PREREGISTRATION_SHA256:
+        raise ValueError("fresh v3 preregistration hash drift")
+    if stat.S_IMODE(preregistration_stat.st_mode) != 0o444:
+        raise ValueError("fresh v3 preregistration must have mode 0444")
+
+    code_paths = authoring._code_paths(workspace_root)
+    dependency_paths = authoring._dependency_paths(workspace_root)
+    relocation_paths = _relocation_code_paths(workspace_root)
+    code_sha256 = {
+        name: _hash_regular_file(path, label=f"authoring code {name}")
+        for name, path in code_paths.items()
+    }
+    dependency_sha256 = {
+        name: _hash_regular_file(path, label=f"authoring dependency {name}")
+        for name, path in dependency_paths.items()
+    }
+    relocation_code_sha256 = {
+        name: _hash_regular_file(path, label=f"relocation code {name}")
+        for name, path in relocation_paths.items()
+    }
+
+    authoring_binding = PathNeutralAuthoringBinding(
+        code_sha256=code_sha256,
+        dependency_sha256=dependency_sha256,
+        blueprint_manifest_sha256={
+            "l1": authoring._hash_value(
+                [item.model_dump(mode="json") for item in bundle.l1.blueprints]
+            ),
+            "l2": authoring._hash_value(
+                [item.model_dump(mode="json") for item in bundle.l2.blueprints]
+            ),
+        },
+        prior_input_sha256=preregistration["input_sha256"],
+        l1_families=dict(L1_FAMILIES),
+        l2_families=dict(L2_FAMILIES),
+    )
+    return FreshV3SnapshotRelocationReceipt(
+        receipt_time=receipt_time,
+        git_snapshot=git_snapshot,
+        path_binding=path_binding,
+        authoring_binding=authoring_binding,
+        relocation_code_sha256=relocation_code_sha256,
+        materialization_workspace_paths=list(MATERIALIZATION_WORKSPACE_PATHS),
+        automatic_write_counts=dict(AUTOMATIC_WRITE_COUNTS),
+        guard_results_sha256=protected_state["guard_results_sha256"],
+        guard_counts=protected_state["guard_counts"],
+    )

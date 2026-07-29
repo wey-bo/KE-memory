@@ -1,13 +1,19 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import os
 import subprocess
 from pathlib import Path
 
 import pytest
+from pydantic import ValidationError
 
-from tools.natural_memory_benchmark.io import load_json
+from tools.natural_memory_benchmark.io import (
+    canonical_json_bytes,
+    load_json,
+    sha256_file,
+)
 from tools.natural_memory_benchmark import (
     typed_extractor_fresh_v3_snapshot_receipt as relocation,
 )
@@ -22,6 +28,8 @@ FORMAL_PREREGISTRATION = (
     / "preregistration.json"
 )
 FORMAL_EVALUATION = ASSESSMENT / "typed-extractor-v3-fresh-hidden-v1"
+FORMAL_RECEIPT = FORMAL_PREREGISTRATION.parent / "authoring-implementation-receipt.json"
+RECEIPT_TIME = "2026-07-29T07:30:00Z"
 SNAPSHOT_COMMIT = "00fa803ee44bcef5a299babb9a8e2b7ba9f994e4"
 EXPECTED_BLOBS = {
     "preregistration": "6433fef43d7c2d68f064d900ff28172f94b4968e",
@@ -203,3 +211,139 @@ def test_relocation_mapping_preserves_original_and_normalized_paths() -> None:
         "research/next-prep/artifacts/automatic-extraction-assessment/"
         "typed-extractor-v3-fresh-hidden-v1"
     )
+
+
+def test_receipt_v2_binds_path_neutral_authoring_and_zero_write_contract() -> None:
+    before = set(FORMAL_PREREGISTRATION.parent.iterdir())
+
+    receipt = relocation.build_fresh_v3_snapshot_relocation_receipt(
+        REPOSITORY,
+        WORKSPACE,
+        FORMAL_EVALUATION,
+        RECEIPT_TIME,
+    )
+
+    assert receipt.schema_version == "typed-extractor-fresh-v3-authoring-receipt-v2"
+    assert receipt.status == "frozen"
+    assert receipt.evaluation_id == "typed-extractor-v3-fresh-hidden-v1"
+    assert receipt.receipt_time == RECEIPT_TIME
+    assert receipt.receipt_time_source == "caller_supplied_untrusted_utc_label"
+    assert receipt.git_snapshot.snapshot_commit == SNAPSHOT_COMMIT
+    assert receipt.path_binding.normalized_workspace_root == "research/next-prep"
+    assert receipt.authoring_binding.preregistration_sha256 == EXPECTED_SHA256[
+        "preregistration"
+    ]
+    assert receipt.authoring_binding.preregistration_mode == "0444"
+    assert receipt.authoring_binding.l1_case_count == 24
+    assert receipt.authoring_binding.l2_case_count == 18
+    assert sum(receipt.authoring_binding.l1_families.values()) == 24
+    assert sum(receipt.authoring_binding.l2_families.values()) == 18
+    assert len(receipt.authoring_binding.prior_input_sha256) == 39
+    assert set(receipt.authoring_binding.blueprint_manifest_sha256) == {"l1", "l2"}
+    assert set(receipt.authoring_binding.code_sha256) == {
+        "typed_extractor_fresh_v3_authoring.py",
+        "test_typed_extractor_fresh_v3_authoring.py",
+    }
+    assert len(receipt.authoring_binding.dependency_sha256) == 6
+    assert receipt.relocation_code_sha256 == {
+        "typed_extractor_fresh_v3_snapshot_receipt.py": sha256_file(
+            WORKSPACE
+            / "tools/natural_memory_benchmark/"
+            "typed_extractor_fresh_v3_snapshot_receipt.py"
+        ),
+        "test_typed_extractor_fresh_v3_snapshot_receipt.py": sha256_file(
+            WORKSPACE
+            / "tests/natural_memory_benchmark/"
+            "test_typed_extractor_fresh_v3_snapshot_receipt.py"
+        ),
+    }
+    assert receipt.evaluation_root_absent is True
+    assert receipt.materialization_implementation_absent is True
+    assert receipt.hidden_artifact_write_count == 0
+    assert receipt.model_request_count == 0
+    assert receipt.automatic_write_counts == relocation.AUTOMATIC_WRITE_COUNTS
+    assert receipt.candidate_v3_queue_sha256 == relocation.CANDIDATE_QUEUE_SHA256
+    assert receipt.guard_fingerprint == relocation.GUARD_FINGERPRINT
+    assert receipt.guard_counts == relocation.GUARD_COUNTS
+    assert receipt.pipeline_integration_authorized is False
+    assert receipt.embedding_authority is False
+    assert receipt.manual_identity_adjudications_materialized is False
+    assert receipt.external_memory_systems_rerun is False
+    assert receipt.longmemeval_status == "structured_l2_identity_unresolved"
+    assert set(FORMAL_PREREGISTRATION.parent.iterdir()) == before
+    assert not FORMAL_RECEIPT.exists()
+
+
+def test_receipt_v2_uses_strict_canonical_model() -> None:
+    receipt = relocation.build_fresh_v3_snapshot_relocation_receipt(
+        REPOSITORY,
+        WORKSPACE,
+        FORMAL_EVALUATION,
+        RECEIPT_TIME,
+    )
+    canonical = canonical_json_bytes(receipt)
+
+    assert canonical.endswith(b"\n")
+    assert relocation.FreshV3SnapshotRelocationReceipt.model_validate(
+        json.loads(canonical),
+        strict=True,
+    ) == receipt
+
+    unknown = receipt.model_dump(mode="json")
+    unknown["unexpected"] = "not allowed"
+    with pytest.raises(ValidationError, match="extra_forbidden"):
+        relocation.FreshV3SnapshotRelocationReceipt.model_validate(unknown)
+
+    coercive = receipt.model_dump(mode="json")
+    coercive["model_request_count"] = "0"
+    with pytest.raises(ValidationError):
+        relocation.FreshV3SnapshotRelocationReceipt.model_validate(coercive)
+
+
+def test_receipt_v2_rejects_impossible_time() -> None:
+    with pytest.raises(ValidationError, match="valid UTC timestamp"):
+        relocation.build_fresh_v3_snapshot_relocation_receipt(
+            REPOSITORY,
+            WORKSPACE,
+            FORMAL_EVALUATION,
+            "2026-07-29T24:00:00Z",
+        )
+
+
+def test_future_absence_rejects_evaluation_or_materialization_artifact(
+    tmp_path: Path,
+) -> None:
+    workspace = tmp_path / "workspace"
+    workspace.mkdir()
+    evaluation = tmp_path / "evaluation"
+    evaluation.mkdir()
+    with pytest.raises(ValueError, match="evaluation root must be absent"):
+        relocation._require_future_absent(evaluation, workspace)
+
+    evaluation.rmdir()
+    materialization = (
+        workspace
+        / "tools/natural_memory_benchmark/"
+        "typed_extractor_fresh_v3_materialization.py"
+    )
+    materialization.parent.mkdir(parents=True)
+    materialization.write_text("future artifact\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="materialization artifact must be absent"):
+        relocation._require_future_absent(evaluation, workspace)
+
+
+def test_receipt_builder_fails_closed_on_live_protected_state_drift(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    def reject_drift(_: Path) -> dict[str, object]:
+        raise ValueError("candidate v3 queue drift")
+
+    monkeypatch.setattr(relocation, "_protected_state", reject_drift)
+
+    with pytest.raises(ValueError, match="candidate v3 queue drift"):
+        relocation.build_fresh_v3_snapshot_relocation_receipt(
+            REPOSITORY,
+            WORKSPACE,
+            FORMAL_EVALUATION,
+            RECEIPT_TIME,
+        )
