@@ -72,6 +72,14 @@ L2_DEV_THRESHOLDS: dict[str, float | int] = {
     "raw_critical_false_emission_count": 0,
     "deterministic_critical_false_materialization_count": 0,
 }
+L2_SCORER_MANIFEST_OUTPUT_NAMES = (
+    "authority-l2.json",
+    "gold-l2.json",
+    "public-l2.json",
+)
+L2_SCORER_MANIFEST_OUTPUT_ALLOWLIST = frozenset(
+    (*L2_SCORER_MANIFEST_OUTPUT_NAMES, "source-cases-l2.json")
+)
 
 L1_QUALIFICATION_ARTIFACTS = (
     "error-analysis.json",
@@ -1094,12 +1102,32 @@ def _require_scoring_inputs(
         _require_read_only(path, label)
 
 
+def _validate_manifest_output_names(
+    manifest_output_names: tuple[str, ...],
+) -> tuple[str, ...]:
+    if (
+        not manifest_output_names
+        or len(manifest_output_names) != len(set(manifest_output_names))
+        or any(
+            not name
+            or "/" in name
+            or "\\" in name
+            or name not in L2_SCORER_MANIFEST_OUTPUT_ALLOWLIST
+            for name in manifest_output_names
+        )
+    ):
+        raise ValueError("invalid manifest output names")
+    return manifest_output_names
+
+
 def score_l2_proposals(
     root: Path,
     proposals_path: Path,
     provenance_path: Path,
     *,
     guard_bundle: MemoryRepresentationBundleV3,
+    manifest_output_names: tuple[str, ...] = L2_SCORER_MANIFEST_OUTPUT_NAMES,
+    required_thresholds: dict[str, float | int] = L2_DEV_THRESHOLDS,
 ) -> L2ScorePayload:
     from .typed_extractor_l2_model_run import (
         L2ModelDispatch,
@@ -1110,7 +1138,11 @@ def score_l2_proposals(
     root = root.resolve()
     proposals_path = proposals_path.resolve()
     provenance_path = provenance_path.resolve()
+    manifest_output_names = _validate_manifest_output_names(manifest_output_names)
+    required_thresholds = dict(required_thresholds)
     _require_scoring_inputs(root, proposals_path, provenance_path)
+    for name in manifest_output_names:
+        _require_read_only(root / name, name)
     public = L2PublicPayload.model_validate(load_json(root / "public-l2.json"))
     authority = L2AuthorityPayload.model_validate(load_json(root / "authority-l2.json"))
     gold = L2GoldPayload.model_validate(load_json(root / "gold-l2.json"))
@@ -1152,12 +1184,11 @@ def score_l2_proposals(
     if proposals.run_id != provenance.run_id:
         raise ValueError("scoring run metadata mismatch")
     expected_output_hashes = {
-        name: sha256_file(root / name)
-        for name in ("authority-l2.json", "gold-l2.json", "public-l2.json")
+        name: sha256_file(root / name) for name in manifest_output_names
     }
     if manifest.output_sha256 != expected_output_hashes:
         raise ValueError("manifest does not bind scoring inputs")
-    if manifest.thresholds != L2_DEV_THRESHOLDS:
+    if manifest.thresholds != required_thresholds:
         raise ValueError("manifest does not match fixed qualification thresholds")
     public_by_id = {item.case_id: item for item in public.cases}
     authority_by_id = {item.case_id: item for item in authority.cases}
@@ -1407,6 +1438,8 @@ def run_l2_scoring_file(
     score_path: Path,
     report_path: Path,
     error_analysis_path: Path,
+    manifest_output_names: tuple[str, ...] = L2_SCORER_MANIFEST_OUTPUT_NAMES,
+    required_thresholds: dict[str, float | int] = L2_DEV_THRESHOLDS,
 ) -> dict[str, Any]:
     from .authoritative_conformance_runner import build_authoritative_conformance_bundle
 
@@ -1420,6 +1453,8 @@ def run_l2_scoring_file(
         proposals_path,
         provenance_path,
         guard_bundle=guard_bundle,
+        manifest_output_names=manifest_output_names,
+        required_thresholds=required_thresholds,
     )
     write_json_immutable(score_path, score)
     write_text_immutable(report_path, render_l2_score_report(score))

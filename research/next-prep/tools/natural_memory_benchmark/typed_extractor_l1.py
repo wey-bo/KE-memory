@@ -27,6 +27,14 @@ class StrictModel(BaseModel):
 
 L1Decision = Literal["emit_l1", "abstain", "no_memory"]
 L1Kind = Literal["event", "state", "preference", "task", "attribute"]
+L1_SCORER_MANIFEST_OUTPUT_NAMES = (
+    "authority-l1.json",
+    "gold-l1.json",
+    "public-l1.json",
+)
+L1_SCORER_MANIFEST_OUTPUT_ALLOWLIST = frozenset(
+    (*L1_SCORER_MANIFEST_OUTPUT_NAMES, "source-cases-l1.json")
+)
 TypedModality = Literal[
     "actual",
     "planned",
@@ -1009,12 +1017,31 @@ def _require_scoring_inputs(root: Path, proposals_path: Path, provenance_path: P
         _require_read_only(path, label)
 
 
+def _validate_manifest_output_names(
+    manifest_output_names: tuple[str, ...],
+) -> tuple[str, ...]:
+    if (
+        not manifest_output_names
+        or len(manifest_output_names) != len(set(manifest_output_names))
+        or any(
+            not name
+            or "/" in name
+            or "\\" in name
+            or name not in L1_SCORER_MANIFEST_OUTPUT_ALLOWLIST
+            for name in manifest_output_names
+        )
+    ):
+        raise ValueError("invalid manifest output names")
+    return manifest_output_names
+
+
 def score_l1_proposals(
     root: Path,
     proposals_path: Path,
     provenance_path: Path,
     *,
     guard_bundle: MemoryRepresentationBundleV3,
+    manifest_output_names: tuple[str, ...] = L1_SCORER_MANIFEST_OUTPUT_NAMES,
 ) -> L1ScorePayload:
     from .typed_extractor_model_run import (
         L1ModelDispatch,
@@ -1025,7 +1052,10 @@ def score_l1_proposals(
     root = root.resolve()
     proposals_path = proposals_path.resolve()
     provenance_path = provenance_path.resolve()
+    manifest_output_names = _validate_manifest_output_names(manifest_output_names)
     _require_scoring_inputs(root, proposals_path, provenance_path)
+    for name in manifest_output_names:
+        _require_read_only(root / name, name)
     public = L1PublicPayload.model_validate(load_json(root / "public-l1.json"))
     authority = L1AuthorityPayload.model_validate(load_json(root / "authority-l1.json"))
     gold = L1GoldPayload.model_validate(load_json(root / "gold-l1.json"))
@@ -1067,8 +1097,7 @@ def score_l1_proposals(
     if proposals.run_id != provenance.run_id:
         raise ValueError("scoring run metadata mismatch")
     if manifest.output_sha256 != {
-        name: sha256_file(root / name)
-        for name in ("authority-l1.json", "gold-l1.json", "public-l1.json")
+        name: sha256_file(root / name) for name in manifest_output_names
     }:
         raise ValueError("manifest does not bind scoring inputs")
     public_by_id = {item.case_id: item for item in public.cases}
@@ -1331,6 +1360,7 @@ def run_l1_scoring_file(
     score_path: Path,
     report_path: Path,
     error_analysis_path: Path,
+    manifest_output_names: tuple[str, ...] = L1_SCORER_MANIFEST_OUTPUT_NAMES,
 ) -> dict[str, Any]:
     guard_bundle = build_authoritative_conformance_bundle(
         guard_root,
@@ -1342,6 +1372,7 @@ def run_l1_scoring_file(
         proposals_path,
         provenance_path,
         guard_bundle=guard_bundle,
+        manifest_output_names=manifest_output_names,
     )
     score_path = score_path.resolve()
     report_path = report_path.resolve()

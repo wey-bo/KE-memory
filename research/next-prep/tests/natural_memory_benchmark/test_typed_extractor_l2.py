@@ -22,10 +22,11 @@ from tools.natural_memory_benchmark.typed_extractor_l2 import (
     TypedL2Closure,
     TypedL2StructuredClaim,
     prepare_l2_dev_slice,
+    run_l2_scoring_file,
     score_l2_proposals,
     validate_l2_dev_slice,
 )
-from tools.natural_memory_benchmark.io import load_json
+from tools.natural_memory_benchmark.io import load_json, sha256_file
 from tools.natural_memory_benchmark.authoritative_conformance_runner import (
     build_authoritative_conformance_bundle,
 )
@@ -55,6 +56,26 @@ GUARD_RESULTS = Path(
     "symbolic-fallback-answerability-v2-fastembed-results.json"
 )
 ISOLATION = "fresh-agent-no-history-declarative"
+V3_L2_OUTPUTS = (
+    "authority-l2.json",
+    "gold-l2.json",
+    "public-l2.json",
+    "source-cases-l2.json",
+)
+V3_L2_THRESHOLDS = {
+    "proposal_coverage": 1.0,
+    "schema_valid_rate": 1.0,
+    "raw_decision_accuracy": 1.0,
+    "raw_abstention_f1": 1.0,
+    "exact_evidence_rate": 1.0,
+    "support_id_accuracy": 1.0,
+    "kind_accuracy": 1.0,
+    "structured_claim_accuracy": 1.0,
+    "abstraction_accuracy": 1.0,
+    "closure_accuracy": 1.0,
+    "source_coverage_accuracy": 1.0,
+    "summary_accuracy": 1.0,
+}
 
 
 def _support(ref: str, turn_ref: str, evidence_id: str) -> TypedL1SupportCandidate:
@@ -554,6 +575,26 @@ def _guard_bundle():
     )
 
 
+def _bind_v3_outputs(root: Path) -> None:
+    source_path = root / "source-cases-l2.json"
+    if source_path.exists():
+        source_path.chmod(0o644)
+    source_path.write_bytes(SOURCE_CONFIG.read_bytes())
+    source_path.chmod(0o444)
+    manifest_path = root / "manifest-l2.json"
+    manifest_path.chmod(0o644)
+    manifest = load_json(manifest_path)
+    manifest["output_sha256"] = {
+        name: sha256_file(root / name) for name in V3_L2_OUTPUTS
+    }
+    manifest["thresholds"] = dict(V3_L2_THRESHOLDS)
+    manifest_path.write_text(
+        json.dumps(manifest, ensure_ascii=False, sort_keys=True),
+        encoding="utf-8",
+    )
+    manifest_path.chmod(0o444)
+
+
 def test_l2_perfect_proposals_pass_raw_and_gate_independently(tmp_path: Path) -> None:
     root = tmp_path / "slice"
     _prepare(root)
@@ -578,6 +619,125 @@ def test_l2_perfect_proposals_pass_raw_and_gate_independently(tmp_path: Path) ->
     assert score.metrics["deterministic_critical_false_materialization_count"] == 0
     assert all(value == 0 for value in score.claim_boundary["automatic_write_counts"].values())
     assert score.guard_state["before_fingerprint"] == score.guard_state["after_fingerprint"]
+
+
+def test_l2_scorer_accepts_explicit_v3_contract_and_threads_it_to_runner(
+    tmp_path: Path,
+) -> None:
+    root = tmp_path / "slice"
+    _prepare(root)
+    run_root = tmp_path / "run"
+    _freeze_from_gold(root, run_root)
+    _bind_v3_outputs(root)
+
+    score = score_l2_proposals(
+        root,
+        run_root / "proposals.json",
+        run_root / "provenance.json",
+        guard_bundle=_guard_bundle(),
+        manifest_output_names=V3_L2_OUTPUTS,
+        required_thresholds=V3_L2_THRESHOLDS,
+    )
+    result = run_l2_scoring_file(
+        root,
+        run_root / "proposals.json",
+        run_root / "provenance.json",
+        guard_root=GUARD_ROOT,
+        guard_slice_id="slice-v1",
+        guard_results_path=GUARD_RESULTS,
+        score_path=run_root / "score.json",
+        report_path=run_root / "report.md",
+        error_analysis_path=run_root / "error-analysis.json",
+        manifest_output_names=V3_L2_OUTPUTS,
+        required_thresholds=V3_L2_THRESHOLDS,
+    )
+
+    assert score.raw_proposer_quality_ready is True
+    assert result["metrics"] == score.metrics
+
+
+@pytest.mark.parametrize(
+    "manifest_output_names",
+    [
+        (*V3_L2_OUTPUTS, "extra-l2.json"),
+        (*V3_L2_OUTPUTS, "source-cases-l2.json"),
+        (*V3_L2_OUTPUTS[:-1], "nested/source-cases-l2.json"),
+    ],
+)
+def test_l2_scorer_rejects_invalid_explicit_manifest_output_names(
+    tmp_path: Path,
+    manifest_output_names: tuple[str, ...],
+) -> None:
+    root = tmp_path / "slice"
+    _prepare(root)
+    run_root = tmp_path / "run"
+    _freeze_from_gold(root, run_root)
+    _bind_v3_outputs(root)
+
+    with pytest.raises(ValueError, match="manifest output names"):
+        score_l2_proposals(
+            root,
+            run_root / "proposals.json",
+            run_root / "provenance.json",
+            guard_bundle=_guard_bundle(),
+            manifest_output_names=manifest_output_names,
+            required_thresholds=V3_L2_THRESHOLDS,
+        )
+
+
+def test_l2_scorer_rejects_missing_or_drifted_v3_contract(tmp_path: Path) -> None:
+    root = tmp_path / "slice"
+    _prepare(root)
+    run_root = tmp_path / "run"
+    _freeze_from_gold(root, run_root)
+    source_path = root / "source-cases-l2.json"
+    source_path.write_bytes(SOURCE_CONFIG.read_bytes())
+    source_path.chmod(0o444)
+
+    with pytest.raises(ValueError, match="manifest does not bind scoring inputs"):
+        score_l2_proposals(
+            root,
+            run_root / "proposals.json",
+            run_root / "provenance.json",
+            guard_bundle=_guard_bundle(),
+            manifest_output_names=V3_L2_OUTPUTS,
+            required_thresholds=V3_L2_THRESHOLDS,
+        )
+
+    _bind_v3_outputs(root)
+    source_path.chmod(0o644)
+    source_path.write_text("source hash drift", encoding="utf-8")
+    source_path.chmod(0o444)
+
+    with pytest.raises(ValueError, match="manifest does not bind scoring inputs"):
+        score_l2_proposals(
+            root,
+            run_root / "proposals.json",
+            run_root / "provenance.json",
+            guard_bundle=_guard_bundle(),
+            manifest_output_names=V3_L2_OUTPUTS,
+            required_thresholds=V3_L2_THRESHOLDS,
+        )
+
+
+def test_l2_scorer_rejects_changed_explicit_threshold(tmp_path: Path) -> None:
+    root = tmp_path / "slice"
+    _prepare(root)
+    run_root = tmp_path / "run"
+    _freeze_from_gold(root, run_root)
+    _bind_v3_outputs(root)
+    changed_thresholds = dict(V3_L2_THRESHOLDS)
+    changed_thresholds["raw_decision_accuracy"] = 0.9
+
+    with pytest.raises(ValueError, match="fixed qualification thresholds"):
+        score_l2_proposals(
+            root,
+            run_root / "proposals.json",
+            run_root / "provenance.json",
+            guard_bundle=_guard_bundle(),
+            manifest_output_names=V3_L2_OUTPUTS,
+            required_thresholds=changed_thresholds,
+        )
 
 
 def test_l2_scoring_uses_evidence_sets_and_abstraction_methods(tmp_path: Path) -> None:

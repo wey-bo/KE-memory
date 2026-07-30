@@ -59,6 +59,12 @@ GUARD_RESULTS = Path(
     "symbolic-fallback-answerability-v2-fastembed-results.json"
 )
 ISOLATION_CONTEXT = "fresh-agent-no-history-declarative"
+V3_L1_OUTPUTS = (
+    "authority-l1.json",
+    "gold-l1.json",
+    "public-l1.json",
+    "source-cases-l1.json",
+)
 
 
 def _candidate() -> TypedL1Candidate:
@@ -462,6 +468,25 @@ def _guard_bundle():
     )
 
 
+def _bind_v3_outputs(root: Path) -> None:
+    source_path = root / "source-cases-l1.json"
+    if source_path.exists():
+        source_path.chmod(0o644)
+    source_path.write_bytes(SOURCE_CONFIG.read_bytes())
+    source_path.chmod(0o444)
+    manifest_path = root / "manifest-l1.json"
+    manifest_path.chmod(0o644)
+    manifest = load_json(manifest_path)
+    manifest["output_sha256"] = {
+        name: sha256_file(root / name) for name in V3_L1_OUTPUTS
+    }
+    manifest_path.write_text(
+        json.dumps(manifest, ensure_ascii=False, sort_keys=True),
+        encoding="utf-8",
+    )
+    manifest_path.chmod(0o444)
+
+
 def test_score_l1_proposals_separates_raw_quality_and_gate_safety(
     tmp_path: Path,
 ) -> None:
@@ -496,6 +521,105 @@ def test_score_l1_proposals_separates_raw_quality_and_gate_safety(
     assert score.claim_boundary["automatic_l2_write_count"] == 0
     assert score.claim_boundary["automatic_identity_write_count"] == 0
     assert score.claim_boundary["automatic_membership_write_count"] == 0
+
+
+def test_l1_scorer_accepts_explicit_v3_manifest_outputs(tmp_path: Path) -> None:
+    root = tmp_path / "slice"
+    _prepare_slice(root)
+    proposals_path, provenance_path = _freeze_proposals(
+        root,
+        _proposal_payload(root),
+        "v3",
+    )
+
+    legacy = score_l1_proposals(
+        root,
+        proposals_path,
+        provenance_path,
+        guard_bundle=_guard_bundle(),
+    )
+    _bind_v3_outputs(root)
+    v3 = score_l1_proposals(
+        root,
+        proposals_path,
+        provenance_path,
+        guard_bundle=_guard_bundle(),
+        manifest_output_names=V3_L1_OUTPUTS,
+    )
+    result = run_l1_scoring_file(
+        root,
+        proposals_path,
+        provenance_path,
+        guard_root=GUARD_ROOT,
+        guard_slice_id="slice-v1",
+        guard_results_path=GUARD_RESULTS,
+        score_path=root / "v3-score.json",
+        report_path=root / "v3-report.md",
+        error_analysis_path=root / "v3-errors.json",
+        manifest_output_names=V3_L1_OUTPUTS,
+    )
+
+    assert legacy.metrics == v3.metrics
+    assert result["metrics"] == v3.metrics
+
+
+@pytest.mark.parametrize(
+    "manifest_output_names",
+    [
+        (*V3_L1_OUTPUTS, "extra-l1.json"),
+        (*V3_L1_OUTPUTS, "source-cases-l1.json"),
+        (*V3_L1_OUTPUTS[:-1], "nested/source-cases-l1.json"),
+    ],
+)
+def test_l1_scorer_rejects_invalid_explicit_manifest_output_names(
+    tmp_path: Path,
+    manifest_output_names: tuple[str, ...],
+) -> None:
+    root = tmp_path / "slice"
+    _prepare_slice(root)
+    proposals_path, provenance_path = _freeze_proposals(root, _proposal_payload(root), "v3")
+    _bind_v3_outputs(root)
+
+    with pytest.raises(ValueError, match="manifest output names"):
+        score_l1_proposals(
+            root,
+            proposals_path,
+            provenance_path,
+            guard_bundle=_guard_bundle(),
+            manifest_output_names=manifest_output_names,
+        )
+
+
+def test_l1_scorer_rejects_missing_or_drifted_v3_source_hash(tmp_path: Path) -> None:
+    root = tmp_path / "slice"
+    _prepare_slice(root)
+    proposals_path, provenance_path = _freeze_proposals(root, _proposal_payload(root), "v3")
+    source_path = root / "source-cases-l1.json"
+    source_path.write_bytes(SOURCE_CONFIG.read_bytes())
+    source_path.chmod(0o444)
+
+    with pytest.raises(ValueError, match="manifest does not bind scoring inputs"):
+        score_l1_proposals(
+            root,
+            proposals_path,
+            provenance_path,
+            guard_bundle=_guard_bundle(),
+            manifest_output_names=V3_L1_OUTPUTS,
+        )
+
+    _bind_v3_outputs(root)
+    source_path.chmod(0o644)
+    source_path.write_text("source hash drift", encoding="utf-8")
+    source_path.chmod(0o444)
+
+    with pytest.raises(ValueError, match="manifest does not bind scoring inputs"):
+        score_l1_proposals(
+            root,
+            proposals_path,
+            provenance_path,
+            guard_bundle=_guard_bundle(),
+            manifest_output_names=V3_L1_OUTPUTS,
+        )
 
 
 def test_gate_does_not_repair_semantically_wrong_predicate(tmp_path: Path) -> None:
