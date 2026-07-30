@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import errno
 import hashlib
 import json
 import os
@@ -434,6 +435,157 @@ def test_atomic_publish_failure_preserves_only_current_and_stale_staging_roots(
     assert stale_staging in staging_roots
 
 
+def test_early_write_failure_preserves_partial_non_authoritative_staging(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    evaluation_root = _temporary_evaluation_root(tmp_path)
+
+    def fail_after_partial_write(
+        staging_descriptor: int,
+        payloads: dict[str, dict[str, object]],
+    ) -> None:
+        assert payloads
+        os.mkdir("l1", dir_fd=staging_descriptor)
+        raise OSError("injected partial staging write failure")
+
+    monkeypatch.setattr(
+        materialization,
+        "_write_layer_payloads",
+        fail_after_partial_write,
+    )
+
+    with pytest.raises(OSError, match="injected partial staging write failure"):
+        _materialize_temporary(evaluation_root)
+
+    assert not evaluation_root.exists()
+    staging_roots = _staging_roots(evaluation_root)
+    assert len(staging_roots) == 1
+    assert {path.name for path in staging_roots[0].iterdir()} == {"l1"}
+    assert not (staging_roots[0] / "chronology-receipt.json").exists()
+
+
+def test_failed_staging_probe_never_masks_primary_failure(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    evaluation_root = _temporary_evaluation_root(tmp_path)
+    original_open_directory_at = materialization._open_directory_at
+    publication_failed = False
+
+    def fail_publish(*args: Any, **kwargs: Any) -> None:
+        nonlocal publication_failed
+        publication_failed = True
+        raise OSError(f"injected publish failure: {args} {kwargs}")
+
+    def fail_preservation_probe(
+        parent_descriptor: int,
+        name: str,
+    ) -> int:
+        if publication_failed:
+            raise OSError(errno.ELOOP, "injected staging symlink replacement")
+        return original_open_directory_at(parent_descriptor, name)
+
+    monkeypatch.setattr(materialization, "_publish_noreplace", fail_publish)
+    monkeypatch.setattr(
+        materialization,
+        "_open_directory_at",
+        fail_preservation_probe,
+    )
+
+    with pytest.raises(OSError, match="injected publish failure"):
+        _materialize_temporary(evaluation_root)
+
+    assert publication_failed is True
+    assert not evaluation_root.exists()
+    assert len(_staging_roots(evaluation_root)) == 1
+
+
+def test_bound_tree_close_failure_never_masks_primary_failure(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    evaluation_root = _temporary_evaluation_root(tmp_path)
+
+    def fail_publish(*_args: Any, **_kwargs: Any) -> None:
+        raise OSError("injected primary publish failure")
+
+    def fail_bound_tree_close(
+        _self: materialization._BoundMaterializedTree,
+    ) -> None:
+        raise OSError("injected bound tree close failure")
+
+    monkeypatch.setattr(materialization, "_publish_noreplace", fail_publish)
+    monkeypatch.setattr(
+        materialization._BoundMaterializedTree,
+        "close",
+        fail_bound_tree_close,
+    )
+
+    with pytest.raises(OSError, match="injected primary publish failure"):
+        _materialize_temporary(evaluation_root)
+
+    assert not evaluation_root.exists()
+    assert len(_staging_roots(evaluation_root)) == 1
+
+
+@pytest.mark.parametrize("close_target", ["staging", "parent"])
+def test_descriptor_close_failure_never_masks_primary_failure(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    close_target: str,
+) -> None:
+    evaluation_root = _temporary_evaluation_root(tmp_path)
+    original_write_layer_payloads = materialization._write_layer_payloads
+    original_close = materialization.os.close
+    descriptors: dict[str, int] = {}
+    close_attempts: list[int] = []
+
+    def capture_staging_descriptor(
+        staging_descriptor: int,
+        payloads: dict[str, dict[str, object]],
+    ) -> None:
+        descriptors["staging"] = staging_descriptor
+        original_write_layer_payloads(staging_descriptor, payloads)
+
+    def fail_publish(
+        parent_descriptor: int,
+        *_args: Any,
+        **_kwargs: Any,
+    ) -> None:
+        descriptors["parent"] = parent_descriptor
+        raise OSError("injected primary publish failure")
+
+    def fail_selected_close(descriptor: int) -> None:
+        close_attempts.append(descriptor)
+        if descriptor == descriptors.get(close_target):
+            raise OSError(f"injected {close_target} descriptor close failure")
+        original_close(descriptor)
+
+    monkeypatch.setattr(
+        materialization,
+        "_write_layer_payloads",
+        capture_staging_descriptor,
+    )
+    monkeypatch.setattr(materialization, "_publish_noreplace", fail_publish)
+    monkeypatch.setattr(materialization.os, "close", fail_selected_close)
+
+    try:
+        with pytest.raises(OSError, match="injected primary publish failure"):
+            _materialize_temporary(evaluation_root)
+    finally:
+        for descriptor in descriptors.values():
+            try:
+                original_close(descriptor)
+            except OSError:
+                pass
+
+    assert descriptors["staging"] in close_attempts
+    assert descriptors["parent"] in close_attempts
+    assert not evaluation_root.exists()
+    assert len(_staging_roots(evaluation_root)) == 1
+
+
 def test_cleanup_never_path_rmdirs_a_replaceable_staging_directory(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
@@ -605,6 +757,97 @@ def test_materialization_replays_transition_and_tree_immediately_before_publish(
     _materialize_temporary(evaluation_root)
 
     assert requirements == [True, False, True, False, False]
+
+
+def test_materialization_rejects_parent_path_replacement_before_return(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    parent = tmp_path / "publication-parent"
+    parent.mkdir()
+    evaluation_root = _temporary_evaluation_root(parent)
+    detached_parent = tmp_path / "detached-publication-parent"
+    original_verify = materialization._BoundMaterializedTree.verify
+    published_verifications = 0
+
+    def replace_parent_before_final_verify(
+        self: materialization._BoundMaterializedTree,
+        parent_descriptor: int,
+        root_name: str,
+        *,
+        synchronize: bool = False,
+    ) -> None:
+        nonlocal published_verifications
+        if root_name == evaluation_root.name:
+            published_verifications += 1
+            if published_verifications == 2:
+                parent.rename(detached_parent)
+                parent.mkdir()
+        original_verify(
+            self,
+            parent_descriptor,
+            root_name,
+            synchronize=synchronize,
+        )
+
+    monkeypatch.setattr(
+        materialization._BoundMaterializedTree,
+        "verify",
+        replace_parent_before_final_verify,
+    )
+
+    with pytest.raises(ValueError, match="parent identity drift"):
+        _materialize_temporary(evaluation_root)
+
+    assert published_verifications == 2
+    assert not evaluation_root.exists()
+    assert (detached_parent / evaluation_root.name).is_dir()
+
+
+def test_parent_exchange_cannot_redirect_staging_writes(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    parent = tmp_path / "publication-parent"
+    parent.mkdir()
+    evaluation_root = _temporary_evaluation_root(parent)
+    detached_parent = tmp_path / "detached-publication-parent"
+    replacement_parent = tmp_path / "replacement-publication-parent"
+    displaced_staging = tmp_path / "displaced-staging"
+    foreign_root = tmp_path / "foreign-root"
+    foreign_root.mkdir(mode=0o700)
+    original_mkdtemp = materialization.tempfile.mkdtemp
+
+    def exchange_parent_during_staging_creation(
+        suffix: str | None = None,
+        prefix: str | None = None,
+        dir: str | os.PathLike[str] | None = None,
+    ) -> str:
+        parent.rename(detached_parent)
+        parent.mkdir()
+        created = Path(original_mkdtemp(suffix=suffix, prefix=prefix, dir=dir))
+        staging_name = created.name
+        created.rename(displaced_staging)
+        (detached_parent / staging_name).symlink_to(
+            foreign_root,
+            target_is_directory=True,
+        )
+        parent.rename(replacement_parent)
+        detached_parent.rename(parent)
+        return str(created)
+
+    monkeypatch.setattr(
+        materialization.tempfile,
+        "mkdtemp",
+        exchange_parent_during_staging_creation,
+    )
+
+    with pytest.raises(OSError):
+        _materialize_temporary(evaluation_root)
+
+    assert list(foreign_root.iterdir()) == []
+    assert stat.S_IMODE(foreign_root.stat().st_mode) == 0o700
+    assert not evaluation_root.exists()
 
 
 @pytest.mark.parametrize("swap", ["root", "layer", "file"])

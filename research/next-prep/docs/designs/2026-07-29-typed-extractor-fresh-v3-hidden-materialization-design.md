@@ -63,8 +63,16 @@ sibling staging root, sets JSON modes to `0444`, builds the chronology receipt
 last, validates the complete staging tree, revalidates the active receipt and
 protected state, and publishes the directory with
 `renameat2(RENAME_NOREPLACE)`. Root and layer directories use mode `0775` for
-the later isolated proposer stage. Any pre-publication error removes only the
-exact staging root.
+the later isolated proposer stage. Staging creation is anchored to an opened
+parent directory descriptor; layer and JSON creation, writes, chmod, and fsync
+remain descriptor-relative and no-follow until publication. Any
+pre-publication error verifies the current staging pathname still names the
+expected directory inode and then preserves the staging tree for audit. A
+failure during writing may leave it partial; even a complete staging chronology
+is uncommitted intent, not evidence that the transition succeeded. Linux
+provides no inode-conditioned unlink/rmdir primitive, so failure handling never
+deletes a replaceable pathname and cleanup errors never replace the primary
+failure. Only the no-replace-published official root is authoritative.
 
 ## Active Receipt Binding
 
@@ -163,9 +171,13 @@ paths outside the frozen payload set. Validation is read-only.
   hash drift: fail before staging.
 - Git ancestry/blob/current-byte or protected-state drift: fail before staging.
 - Invalid authored bundle or contamination: fail before staging.
-- Staging write or validation failure: delete only the unique staging root.
+- Staging write or validation failure: preserve the unique, potentially partial
+  and non-authoritative staging root for audit after verifying its directory
+  identity; do not delete by pathname.
+- Parent/staging path replacement: descriptor-relative creation and writes do
+  not follow the replacement; fail closed before publication.
 - Concurrent target creation: `RENAME_NOREPLACE` fails and preserves the
-  concurrently created target; delete only staging.
+  concurrently created target; preserve staging for audit.
 - Post-publication drift: validator fails closed and never repairs artifacts.
 
 ## Testing And Freeze Gate
@@ -173,7 +185,8 @@ paths outside the frozen payload set. Validation is read-only.
 Tests are written before the module and must first fail because the module is
 absent. Coverage includes exact payload bytes and sets, `24/18` counts, family
 maps, modes, chronology fields, approved receipt binding, Git/protected-state
-replay, invalid UTC, existing/concurrent target refusal, staging cleanup,
+replay, invalid UTC, existing/concurrent target refusal, fail-closed staging
+preservation, parent/staging exchange, cleanup-error precedence,
 payload/chronology/mode drift, unregistered artifacts, model-run paths, and all
 zero/false authorization boundaries.
 

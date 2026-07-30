@@ -243,7 +243,11 @@ Git plumbing, `tempfile`, and Linux `renameat2(RENAME_NOREPLACE)`.
   Cover existing target, invalid UTC, injected publication failure,
   concurrently created target, stale sibling staging, protected-state drift,
   payload/mode/chronology drift, unregistered root/layer artifacts, and any
-  `model-runs` path. Each failure removes only its exact staging root.
+  `model-runs` path. Failures after staging preserve the current staging root
+  for audit, which may be partial and is always non-authoritative; tests must
+  prove cleanup never deletes through a replaceable pathname, never masks the
+  primary failure, never touches stale siblings, and cannot redirect staging
+  writes through a replaced parent or staging path.
 
 - [x] **Step 2: Run the new nodes and verify RED**
 
@@ -253,10 +257,11 @@ Git plumbing, `tempfile`, and Linux `renameat2(RENAME_NOREPLACE)`.
 - [x] **Step 3: Implement canonical staging writes**
 
   Create a unique sibling directory with prefix
-  `.<evaluation-name>.staging-`. Write `l1` and `l2` payloads with
-  `write_json_immutable`, set all JSON files to `0444`, and set layer/root
-  directories to `0775`. Write `chronology-receipt.json` only after all ten
-  payload bindings are available.
+  `.<evaluation-name>.staging-` through an opened parent descriptor. Open the
+  staging directory no-follow, then create and write `l1`, `l2`, and every JSON
+  through directory descriptors with exclusive no-follow file creation. Set all
+  JSON files to `0444` and layer/root directories to `0775`. Write
+  `chronology-receipt.json` only after all ten payload bindings are available.
 
 - [x] **Step 4: Implement complete-tree validation**
 
@@ -289,8 +294,12 @@ Git plumbing, `tempfile`, and Linux `renameat2(RENAME_NOREPLACE)`.
   Validate UTC, target absence, parent directory, and active transition before
   staging. Build/validate the bundle, stage all outputs, validate staging, then
   rerun active transition and staging validation immediately before publication.
-  Publish once. On exception, remove only the exact staging directory if it
-  still exists. Return the validation result without calling a model.
+  Publish once. On exception, verify that the staging pathname still names the
+  originally opened directory inode, then preserve the potentially partial,
+  non-authoritative staging tree for audit. Any chronology in failed staging is
+  uncommitted intent. Do not unlink or rmdir through replaceable pathnames or
+  let any preservation or descriptor cleanup error mask the primary exception.
+  Return the validation result without calling a model.
 
 - [x] **Step 7: Implement the public read-only validator**
 
@@ -381,8 +390,8 @@ Git plumbing, `tempfile`, and Linux `renameat2(RENAME_NOREPLACE)`.
 ## Self-Review
 
 - Spec coverage: phase-transition binding, strict chronology, exact composition,
-  atomic no-replace publication, cleanup, post-validation, review, and formal
-  freeze each map to one task.
+  atomic no-replace publication, fail-closed staging preservation,
+  post-validation, review, and formal freeze each map to one task.
 - Placeholder scan: every function, path, schema, count, mode, command, and
   failure behavior required for implementation is explicit.
 - Type consistency: public signatures and private transition/validation inputs

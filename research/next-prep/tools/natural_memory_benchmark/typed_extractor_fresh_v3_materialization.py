@@ -16,7 +16,7 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator, model_valida
 
 from . import typed_extractor_fresh_v3_authoring as authoring
 from . import typed_extractor_fresh_v3_snapshot_receipt as relocation
-from .io import canonical_json_bytes, write_json_immutable
+from .io import canonical_json_bytes
 from .typed_extractor_fresh_v3_prereg import L1_FAMILIES, L2_FAMILIES
 
 
@@ -453,13 +453,24 @@ def _build_materialization_receipt(
     )
 
 
-def _require_directory(path: Path, *, mode: int, label: str) -> None:
+def _require_directory(
+    path: Path,
+    *,
+    mode: int,
+    label: str,
+    descriptor_opened: os.stat_result | None = None,
+) -> None:
     try:
-        opened = path.lstat()
+        opened = path.lstat() if descriptor_opened is None else path.stat()
     except FileNotFoundError as exc:
         raise FileNotFoundError(f"{label} missing: {path}") from exc
     if not stat.S_ISDIR(opened.st_mode):
         raise ValueError(f"{label} must be a directory")
+    if descriptor_opened is not None and not _same_identity(
+        opened,
+        descriptor_opened,
+    ):
+        raise ValueError(f"{label} identity drift")
     actual_mode = stat.S_IMODE(opened.st_mode)
     if actual_mode != mode:
         raise ValueError(
@@ -467,45 +478,59 @@ def _require_directory(path: Path, *, mode: int, label: str) -> None:
         )
 
 
+def _close_descriptor(descriptor: int) -> None:
+    try:
+        os.close(descriptor)
+    except OSError:
+        pass
+
+
 def _write_layer_payloads(
-    artifact_root: Path,
+    artifact_root_descriptor: int,
     payloads: dict[str, dict[str, Any]],
 ) -> None:
     for layer, values in payloads.items():
-        layer_root = artifact_root / layer
-        layer_root.mkdir()
-        for name, value in values.items():
-            path = layer_root / name
-            write_json_immutable(path, value)
-            path.chmod(0o444)
-            _fsync_regular_file(path)
-        layer_root.chmod(0o775)
-        _fsync_directory(layer_root)
+        os.mkdir(layer, mode=0o700, dir_fd=artifact_root_descriptor)
+        layer_descriptor = _open_directory_at(artifact_root_descriptor, layer)
+        try:
+            for name, value in values.items():
+                _write_json_at(layer_descriptor, name, value)
+            os.fchmod(layer_descriptor, 0o775)
+            os.fsync(layer_descriptor)
+        finally:
+            _close_descriptor(layer_descriptor)
 
 
-def _fsync_regular_file(path: Path) -> None:
+def _write_json_at(
+    parent_descriptor: int,
+    name: str,
+    value: Any,
+) -> None:
     descriptor = os.open(
-        path,
-        os.O_RDONLY | os.O_CLOEXEC | os.O_NOFOLLOW,
+        name,
+        os.O_WRONLY
+        | os.O_CREAT
+        | os.O_EXCL
+        | os.O_CLOEXEC
+        | os.O_NOFOLLOW,
+        0o600,
+        dir_fd=parent_descriptor,
     )
     try:
-        opened = os.fstat(descriptor)
-        if not stat.S_ISREG(opened.st_mode):
-            raise ValueError(f"fsync target must be a regular file: {path}")
+        remaining = memoryview(canonical_json_bytes(value))
+        while remaining:
+            written = os.write(descriptor, remaining)
+            if written == 0:
+                raise OSError("fresh v3 staging write made no progress")
+            remaining = remaining[written:]
+        os.fchmod(descriptor, 0o444)
         os.fsync(descriptor)
     finally:
-        os.close(descriptor)
+        _close_descriptor(descriptor)
 
 
-def _fsync_directory(path: Path) -> None:
-    descriptor = os.open(
-        path,
-        os.O_RDONLY | os.O_DIRECTORY | os.O_CLOEXEC | os.O_NOFOLLOW,
-    )
-    try:
-        os.fsync(descriptor)
-    finally:
-        os.close(descriptor)
+def _descriptor_path(descriptor: int) -> Path:
+    return Path("/proc/self/fd") / str(descriptor)
 
 
 def _validate_materialized_root(
@@ -514,6 +539,7 @@ def _validate_materialized_root(
     workspace_root: Path,
     artifact_root: Path,
     logical_evaluation_root: Path,
+    artifact_root_opened: os.stat_result | None = None,
 ) -> dict[str, Any]:
     repository_root = relocation._require_repository_root(repository_root)
     workspace_root = relocation._require_workspace_root(
@@ -532,6 +558,7 @@ def _validate_materialized_root(
         artifact_root,
         mode=0o775,
         label="fresh v3 materialization root",
+        descriptor_opened=artifact_root_opened,
     )
     if any(path.name == "model-runs" for path in artifact_root.rglob("model-runs")):
         raise ValueError("model runs must be absent from fresh v3 materialization")
@@ -631,6 +658,19 @@ def _same_identity(
         or current.st_ino != expected.st_ino
         or stat.S_IFMT(current.st_mode) != stat.S_IFMT(expected.st_mode)
     )
+
+
+def _require_parent_path_identity(
+    parent_descriptor: int,
+    parent_path: Path,
+) -> None:
+    opened = os.fstat(parent_descriptor)
+    try:
+        current = os.stat(parent_path, follow_symlinks=False)
+    except OSError as exc:
+        raise ValueError("fresh v3 evaluation parent identity drift") from exc
+    if not _same_identity(current, opened):
+        raise ValueError("fresh v3 evaluation parent identity drift")
 
 
 def _read_descriptor_bytes(
@@ -750,7 +790,14 @@ class _BoundMaterializedTree:
 
     def close(self) -> None:
         for entry in reversed(self.entries):
-            os.close(entry.descriptor)
+            _close_descriptor(entry.descriptor)
+
+
+def _close_bound_tree(bound_tree: _BoundMaterializedTree) -> None:
+    try:
+        bound_tree.close()
+    except OSError:
+        pass
 
 
 def _open_directory_at(parent_descriptor: int, name: str) -> int:
@@ -840,7 +887,7 @@ def _bind_materialized_tree(
         return bound
     except Exception:
         for entry in reversed(entries):
-            os.close(entry.descriptor)
+            _close_descriptor(entry.descriptor)
         raise
 
 
@@ -908,16 +955,19 @@ def _preserve_failed_staging_root(
 ) -> None:
     try:
         root_descriptor = _open_directory_at(parent_descriptor, staging_name)
-    except (FileNotFoundError, NotADirectoryError):
+    except OSError:
         return
     try:
-        opened = os.fstat(root_descriptor)
+        try:
+            opened = os.fstat(root_descriptor)
+        except OSError:
+            return
         if not _same_identity(opened, expected):
             return
         # Linux has no conditional unlink/rmdir-by-fd primitive. Preserve the
         # failed staging tree for audit rather than deleting replaceable names.
     finally:
-        os.close(root_descriptor)
+        _close_descriptor(root_descriptor)
 
 
 def _materialize_fresh_v3_hidden_to_root(
@@ -960,38 +1010,40 @@ def _materialize_fresh_v3_hidden_to_root(
         os.O_RDONLY | os.O_DIRECTORY | os.O_CLOEXEC | os.O_NOFOLLOW,
     )
     staging_root: Path | None = None
+    staging_descriptor: int | None = None
     staging_opened: os.stat_result | None = None
     try:
-        staging_root = Path(
+        _require_parent_path_identity(parent_descriptor, evaluation_root.parent)
+        staging_name = Path(
             tempfile.mkdtemp(
                 prefix=f".{evaluation_root.name}.staging-",
-                dir=evaluation_root.parent,
+                dir=_descriptor_path(parent_descriptor),
             )
+        ).name
+        staging_descriptor = _open_directory_at(
+            parent_descriptor,
+            staging_name,
         )
-        staging_opened = os.stat(
-            staging_root.name,
-            dir_fd=parent_descriptor,
-            follow_symlinks=False,
-        )
-        _write_layer_payloads(staging_root, _layer_payloads(bundle))
-        staging_root.chmod(0o775)
+        staging_opened = os.fstat(staging_descriptor)
+        staging_root = evaluation_root.parent / staging_name
+        _require_parent_path_identity(parent_descriptor, evaluation_root.parent)
+        _write_layer_payloads(staging_descriptor, _layer_payloads(bundle))
         chronology = _build_materialization_receipt(
             preregistration_path=preregistration_path,
             artifact_root=staging_root,
             transition=transition,
             materialization_time=materialization_time,
         )
-        chronology_path = staging_root / "chronology-receipt.json"
-        write_json_immutable(chronology_path, chronology)
-        chronology_path.chmod(0o444)
-        _fsync_regular_file(chronology_path)
-        _fsync_directory(staging_root)
+        _write_json_at(staging_descriptor, "chronology-receipt.json", chronology)
+        os.fchmod(staging_descriptor, 0o775)
+        os.fsync(staging_descriptor)
 
         result = _validate_materialized_root(
             repository_root=repository_root,
             workspace_root=workspace_root,
             artifact_root=staging_root,
             logical_evaluation_root=logical_evaluation_root,
+            artifact_root_opened=staging_opened,
         )
         payloads = _layer_payloads(bundle)
         expected_files = {
@@ -1002,7 +1054,7 @@ def _materialize_fresh_v3_hidden_to_root(
         expected_files["chronology-receipt.json"] = canonical_json_bytes(chronology)
         bound_tree = _bind_materialized_tree(
             parent_descriptor,
-            staging_root.name,
+            staging_name,
             expected_files,
         )
         try:
@@ -1016,6 +1068,7 @@ def _materialize_fresh_v3_hidden_to_root(
                 workspace_root=workspace_root,
                 artifact_root=staging_root,
                 logical_evaluation_root=logical_evaluation_root,
+                artifact_root_opened=staging_opened,
             )
             if revalidated != result:
                 raise ValueError("fresh v3 materialization validation result drift")
@@ -1023,12 +1076,20 @@ def _materialize_fresh_v3_hidden_to_root(
                 raise ValueError(
                     f"fresh v3 evaluation root must be absent: {evaluation_root}"
                 )
+            _require_parent_path_identity(
+                parent_descriptor,
+                evaluation_root.parent,
+            )
             _publish_noreplace(
                 parent_descriptor,
-                staging_root.name,
+                staging_name,
                 evaluation_root.name,
                 bound_tree,
                 evaluation_root,
+            )
+            _require_parent_path_identity(
+                parent_descriptor,
+                evaluation_root.parent,
             )
             published = _validate_materialized_root(
                 repository_root=repository_root,
@@ -1039,19 +1100,25 @@ def _materialize_fresh_v3_hidden_to_root(
             if published != revalidated:
                 raise ValueError("fresh v3 post-publication validation result drift")
             bound_tree.verify(parent_descriptor, evaluation_root.name)
+            _require_parent_path_identity(
+                parent_descriptor,
+                evaluation_root.parent,
+            )
             return published
         finally:
-            bound_tree.close()
+            _close_bound_tree(bound_tree)
     except Exception:
         if staging_root is not None and staging_opened is not None:
             _preserve_failed_staging_root(
                 parent_descriptor,
-                staging_root.name,
+                staging_name,
                 staging_opened,
             )
         raise
     finally:
-        os.close(parent_descriptor)
+        if staging_descriptor is not None:
+            _close_descriptor(staging_descriptor)
+        _close_descriptor(parent_descriptor)
 
 
 def _require_exact_official_evaluation_root(
