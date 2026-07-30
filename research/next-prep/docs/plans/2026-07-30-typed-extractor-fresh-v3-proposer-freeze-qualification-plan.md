@@ -443,3 +443,32 @@ def validate_fresh_v3_qualification(
   proposer receipt validation is the only transition into scoring.
 - Scope: no task modifies query, ontology, L1 admission/linking, authoritative
   storage, closure, aggregation, benchmark coverage, or external systems.
+
+## Execution Record
+
+The formal dispatch label was `20260730T061218Z`. Both immutable dispatches
+were frozen before transport. L1 and L2 each used their single authorized HTTP
+opportunity with requested alias `deepseek-chat`; request counts were `1/1`.
+Both requests failed before raw response bytes existed with
+`HTTPError: HTTP Error 403: Forbidden`. No retry or fallback was performed.
+
+Because neither layer produced a raw response, no proposal, provenance, score,
+error analysis, or layer qualification was created. The independent scorer did
+not read authority or gold. All nine automatic write counts remained zero. The
+overall conclusion frozen at `2026-07-30T06:13:39Z` is
+`incomplete_not_qualified`: transport/authorization was incomplete and raw
+automatic extraction quality remains unmeasured.
+
+The L1/L2 failure receipt SHA-256 values are
+`5bf32c6357ec856c5e5dfe741c0d048c685ec3fff13a51a3de06f912d99fa8aa` and
+`a5645f0d863c49063a619a2823e53ff0b11d9bc292522bf61c2c3ffffdb6a21d`.
+The overall score/report/qualification chronology SHA-256 values are
+`28b0719b767328c45dde84ebe8a025b2747bb8a41acd6d4f67eb75eec6b9c8ef`,
+`04b814d02c2715ba446f668628fcb2d7c6a4cae3bed77199da3cf0db0261e883`, and
+`2a7d1653213ba74574cb2bb7fc1ee7394e22227ef0c5ab692f2a9438619420d0`.
+
+A later public API probe, containing no evaluation data, established that the
+runtime key is valid and can access `deepseek-v4-pro`; the service explicitly
+returned `key_model_access_denied` for `deepseek-chat`. This diagnoses the 403
+as model-alias authorization, not an invalid key. It does not alter the frozen
+formal conclusion, and the original run may not be retried or overwritten.

@@ -489,3 +489,25 @@ phase-bound node 使用完整 node ID 精确 deselect，四文件复验为
 用户明确批准；即使后续 qualification 通过，也不自动授权 pipeline integration、
 authoritative write、closure、aggregation、benchmark 扩展或外部系统复跑。人工
 identity 裁决仍不物化，embedding 仍非权威。
+
+## Typed extractor fresh-hidden v3 qualification
+
+2026-07-30 首次正式 fresh-v3 qualification 已冻结为
+`incomplete_not_qualified`。L1/L2 dispatch 均先于请求冻结，正式 run label 为
+`20260730T061218Z`；两层各执行唯一一次 `deepseek-chat` 请求，请求数为 `1/1`，
+均在 raw response 产生前收到 `HTTPError: HTTP Error 403: Forbidden`。没有 retry、
+fallback、raw response、proposal、provenance、score 或 layer qualification；独立
+scorer 未读取 authority/gold，九类 automatic write 均为 `0`。因此该结论只表示
+transport/authorization 阶段不完整，自动抽取质量仍未测量，不能表述为抽取质量
+不通过。
+
+正式 L1/L2 failure receipt SHA-256 分别为
+`5bf32c6357ec856c5e5dfe741c0d048c685ec3fff13a51a3de06f912d99fa8aa` /
+`a5645f0d863c49063a619a2823e53ff0b11d9bc292522bf61c2c3ffffdb6a21d`；
+overall score/report/chronology SHA-256 分别为
+`28b0719b767328c45dde84ebe8a025b2747bb8a41acd6d4f67eb75eec6b9c8ef` /
+`04b814d02c2715ba446f668628fcb2d7c6a4cae3bed77199da3cf0db0261e883` /
+`2a7d1653213ba74574cb2bb7fc1ee7394e22227ef0c5ab692f2a9438619420d0`。
+随后使用不含评测数据的 API probe 确认当前 key 可列出模型且可访问
+`deepseek-v4-pro`，但服务端以 `key_model_access_denied` 拒绝 `deepseek-chat`；故
+403 根因是模型别名权限，不是 key 无效。原 run 保持不可变，不允许补写或覆盖。

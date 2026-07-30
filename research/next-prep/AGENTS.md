@@ -287,6 +287,13 @@ AMR pilot 的正式质量/结构运行 `run-20260724T125522Z` 已固定使用平
 - 不把一次性 benchmark 规则、qid、gold answer 或自然语言模板写成产品语义。
 - 修改后更新本文件的当前状态、未决问题或执行波次；保持它与 `安排.md` 同步。
 
+### 2026-07-30 Typed extractor fresh-v3 qualification
+
+- 正式 fresh-v3 qualification run label 为 `20260730T061218Z`。L1/L2 dispatch 先全部冻结，再各执行一次 `deepseek-chat` 请求；请求数严格为 `1/1`，两层均在 raw response 产生前收到 `HTTPError: HTTP Error 403: Forbidden`，未 retry 或 fallback。
+- 由于两层均无 raw response，未生成 proposal/provenance/score/layer qualification，也未进入 authority/gold scoring。最终结论是 `incomplete_not_qualified`，表示 transport/authorization 未完成，不是已测得的 extraction-quality fail；自动抽取效果仍未测量。
+- L1/L2 failure receipt SHA-256 为 `5bf32c6357ec856c5e5dfe741c0d048c685ec3fff13a51a3de06f912d99fa8aa` / `a5645f0d863c49063a619a2823e53ff0b11d9bc292522bf61c2c3ffffdb6a21d`；overall score/report/chronology SHA-256 为 `28b0719b767328c45dde84ebe8a025b2747bb8a41acd6d4f67eb75eec6b9c8ef` / `04b814d02c2715ba446f668628fcb2d7c6a4cae3bed77199da3cf0db0261e883` / `2a7d1653213ba74574cb2bb7fc1ee7394e22227ef0c5ab692f2a9438619420d0`。九类 automatic write 均为 `0`。
+- 后续无评测数据 probe 证明当前 API key 有效且 `deepseek-v4-pro` 可用；服务端明确以 `key_model_access_denied` 拒绝 `deepseek-chat`。旧 qualification 产物不可覆盖或补写；任何模型替换重测必须使用新的独立 run/结论链。
+
 ### 2026-07-27 本地冻结与 H100 迁移
 
 - 本地 `C:\Users\86137\Desktop\KE-memory` 已完成瘦身并冻结为审计副本。后续实现、模型调用和实验只能在 H100 `/public/home/wwb/KE-mem/KE-memory-next-prep-20260727` 执行；不得继续在本地工作区运行。
