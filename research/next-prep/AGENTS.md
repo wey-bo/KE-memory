@@ -389,3 +389,132 @@ snapshot adapter 已绑定 authoritative Git commit、bundle logical ID、curren
 - one-time fresh-v3 hidden materialization 已于 caller-supplied UTC label `2026-07-30T04:44:31Z` 正式完成；official root 为 `artifacts/automatic-extraction-assessment/typed-extractor-v3-fresh-hidden-v1/`，public validator 为 `valid`，L1/L2 `24/18`，freeze 时 model request/run 均为 `0`。11 个 JSON 均为 `0444`，root/layer 为 `0775`，十个 payload replay `10/10` byte-identical，无 staging、model、proposal、provenance、scoring 或 result 路径。
 - chronology SHA-256 为 `fe3cfbd739de477d99089c4ed6f85322236e00deb9b405596f038366bee16cca`；materializer module/test SHA-256 为 `1e134fcc005da9e10f9f5be95cf46f3451b39f16556b1a088c9f034d02f6bc7e` / `76f5e2377b153b68eef1d5a84be7a865af8a24cbf30b4e5adb7b49915646ab80`。review 为 Critical/Important/Minor `0/0/0`；pre-freeze 为 focused `45 passed`、phase-aware prereg/authoring/snapshot `54 passed, 62 deselected`、typed `255 passed, 1 deselected`、runtime `773 passed, 1 skipped`、natural `775 passed, 24 allowlisted failures, 1 deselected`，knowledge 精确保留 6 个缺 `nltk` collection error。post-freeze 精确 phase rerun 为 `61 passed, 100 deselected`；validator、11-file audit、static、credential `0`、protected hashes 和 zero-write checks 通过。
 - materialization 不授权 proposer/scorer。下一步只能先提交独立 no-history/public-only proposer-freeze/qualification 设计与计划并取得用户明确批准；不得自行执行 proposer、读取 authority/gold 评分、接入 pipeline、执行 authoritative write、closure/aggregation、扩展 benchmark 或复跑外部系统。九类 automatic write 和 manual identity adjudication materialization 仍为 `0`/false，embedding 非权威，`LONGMEMEVAL-6d550036` 继续 unresolved。
+
+## 2026-07-30 后续开发权威计划与边界
+
+本节是当前唯一有效的后续推进顺序和授权边界。与本节冲突的旧“下一步”、旧 403/incomplete 状态或并行 worktree 说明均由本节覆盖，但历史文件、失败记录、冻结 hash 和 Git 提交保持不可变，不得回写或删除。
+
+### 当前事实与结论边界
+
+- 唯一允许写入的工作树是 `/public/home/wwb/KE_mem/ke-memory-demo/.worktrees/e2e-closure-20260730/research/next-prep`，分支 `codex/e2e-closure-20260730`；本节写入前 HEAD 为 `882d2e0d0f14`。不得写入 main、next-prep 原工作树、旧 extraction/Query worktree，不得新建 worktree。
+- fresh-v3 已完成真实 `deepseek-v4-pro` official-v2 资格测试，不是“尚未运行”。L1 覆盖 `24/24`、L2 覆盖 `18/18`，总体结论为 `not_qualified`，权威提交为 `882d2e0`。
+- fresh-v3 L1 主要失败为 `role_or_local_entity_accuracy=0.0`、`kind_accuracy=0.75`、`raw_abstention_f1=0.6666666666666666`、`raw_critical_false_emission_count=1`、`gate_intervention_count=1`。L2 主要失败为 `structured_claim_accuracy=0.0`、`summary_accuracy=0.0`、`closure_accuracy=0.8`、`kind_accuracy=0.6`、`raw_critical_false_emission_count=2`、`gate_intervention_count=4`。两层 deterministic critical false materialization 均为 `0`，不能据此覆盖 raw proposer 质量失败。
+- official-v2 的九类 automatic authoritative write 均为 `0`，不授权 pipeline integration、自动生产写入、closure/aggregate 扩展或 benchmark 扩展。
+- v8 已有 2 条 L1、1 条 L2 和有效 Git snapshot。旧 Query 产生合同不支持的 `entity_list`，系统正确 fail-closed；当前 Query 合同已收窄到执行器真实支持的 `fact`/`count`。
+- v8 query-only 成功最多证明“一次真实模型写入后的受控查询闭环”成立，不会使 fresh-v3 从 `not_qualified` 变为 qualified，也不证明自动抽取已达到生产质量。
+
+### 强制推进顺序
+
+后续只能按以下状态机推进，不得跳步或并行绕过门禁：
+
+```text
+A. v8 query-only 受控闭环
+-> B. 新 diagnostic/dev 数据上的自动抽取修复
+-> C. 新版本 fresh-hidden 自动抽取资格门
+-> D. 无人工注入的真实自动端到端闭环
+-> STOP-1，在仓库整理前向用户汇报并等待具体整理要求
+[用户批准整理范围后] -> E. 仓库整理门
+[用户批准 benchmark 范围后] -> F. memory benchmark
+-> STOP-2，向用户汇报并讨论下一阶段
+```
+
+授权状态：**2026-07-31 已授权完成 Phase A-D**。Phase B、C、D 已授权，但分别受前一阶段 hard gate 约束；只有前一阶段正式通过后才能切换。Phase E/F 只是顺序占位，不等于已批准具体仓库整理或 benchmark 范围。Phase D 正式通过后必须执行 STOP-1。
+
+### A-D 统一失败处理协议（2026-07-31）
+
+- 任一阶段失败后进入 `failure -> freeze failed attempt -> reproduce -> root-cause classification -> falsifiable hypothesis -> failing regression/diagnostic test -> minimal repair -> focused verification -> independent review -> new versioned attempt -> gate re-evaluation`，不得因首次失败结束 A-D。
+- 原失败 attempt 必须 append-only 保留 run ID、输入/prompt/code/model hash、raw response 或 transport failure、failure taxonomy、模型调用次数、automatic write count，以及根因与修复绑定；禁止覆盖、删除或补写成成功。
+- 修复后必须使用新的 attempt/run/version。语义行为改变时必须绑定新的 prompt/code hash；对应失败测试须完成 red -> green，相邻回归通过，且上一失败事实保持不可变。
+- 每个 attempt 仍固定 `max_attempts=1`、无 automatic retry、无 fallback、无模型切换；不得重复执行输入、代码、prompt 和模型完全相同的 attempt。
+- A-D 必须最终全部通过。普通测试失败、模型语义失败或实现困难都属于 RCA/repair loop；只有 key/权限缺失、provider 持续不可达、唯一权威输入无恢复链或需要新增授权/外部数据时才构成外部阻塞。
+
+### Phase A：v8 query-only 受控闭环（已授权，当前执行起点）
+
+目标：复用 v8 已写入的 2 条 L1、1 条 L2 和既有有效 Git snapshot，只补足 checkpoint recovery 与 query-only 入口，完成一次官方 `deepseek-v4-pro` Query 调用和确定性执行。
+
+实施边界：
+
+- 只允许按最小需要修改现有 `tools/natural_memory_benchmark/e2e_openai_runtime.py`、`e2e_pipeline.py`、`query_execution_snapshot_adapter.py` 及 `tests/natural_memory_benchmark/test_e2e_pipeline_smoke.py`；优先复用现有函数，不新增通用 harness、spec、plan、worktree 或非必要文档。
+- Query 前先恢复并重新验证既有 checkpoint：Git commit、bundle logical ID、TurnBundle/L2 closure、registry/identity scope、artifact hash 和 snapshot authority 必须全部闭合。不得创建新的 L1/L2、不得重跑 v8 extraction、不得修改既有 memory bundle 或 snapshot。
+- 外部通道 preflight 必须先于任何 receipt/冻结层扩建：验证 `OPENAI_BASE_URL`、`OPENAI_API_KEY`、`OPENAI_MODEL=deepseek-v4-pro` 可用和目标模型一致。密钥只能来自环境变量，禁止写入命令行、日志、异常、request/response artifact、receipt、测试 fixture 或 Git。
+- Query 只允许一次 semantic request，`max_attempts=1`，不得 retry、fallback 或切换模型。返回必须是执行器支持的 `fact` 或 `count`；`entity_list`、unsupported time、absence 或其他 projection 必须继续 fail-closed。
+- 只增加一个必要的 query-only integration test，证明恢复既有 checkpoint 后不会调用 L1/L2 producer、不会产生 memory write、只发出一次 Query 请求，并经 verified snapshot adapter 返回 evidence-backed answer。
+- 聚焦验证至少覆盖新增 integration test、`test_query_execution_snapshot_adapter.py`、`test_query_plan_v2_executor.py`、`test_query_compiler_v2_openai_producer.py`、`compileall`、`git diff --check` 和 credential pattern scan。既有 pytest frozen-directory warning 本阶段明确延期，不得顺手修改。
+- 独立代码审查必须达到 Critical/Important `0`；任何 query answer 缺 evidence、authority hash、checkpoint/commit binding，或发生第二次模型请求、任何 L1/L2 write，都判定该 attempt 失败，冻结后进入上述 RCA/repair loop。
+
+Phase A 通过标准：同一既有 snapshot 上，Query 的 `fact`/`count` 结果可由 executor 重放，答案完整回指 `MemoryUnitRevision -> EvidenceSpan -> raw turn revision`，且 L1/L2 extraction call count 为 `0`、Query call count 为 `1`、automatic memory write count 为 `0`。该结果必须标注为 `controlled_query_only_closure`，不得标注为 extraction qualified、production ready 或 benchmark ready。
+
+### Phase B：自动抽取质量修复（已授权，受 Phase A gate 约束）
+
+目标：只在新建且与 fresh-v3 隔离的 diagnostic/dev 数据上修复 official-v2 暴露的真实模型质量问题，不在 hidden 结果上调参。
+
+实施边界与门禁：
+
+- 禁止重跑、修改、替换、重采样或反向读取 fresh-v3 hidden case；fresh-v3 official-v2 的 prompt、proposals、raw response、score、report 和 chronology 全部保持只读。
+- diagnostic 必须覆盖 L1 participant/角色分解、局部实体边界、memory kind、abstention/false emission，以及 L2 kind、structured claim、summary、support/closure；不得扩大到 AMR、identity/ontology 扩测、额外 benchmark 或持久层选型。
+- 修复目标是 raw proposer 质量，deterministic gate 只允许拒绝危险 proposal，不得“纠正”语义字段或用 gated safety 掩盖 raw error。不得降低 scorer threshold、删除难例或增加 post-hoc special case。
+- 先写失败测试/diagnostic scorer 断言，再最小修改 prompt、producer 或 deterministic validation；每次模型请求必须 no-history、public-only、计数、绑定 requested/response model，并在读取 authority/gold 前冻结 proposal/provenance。
+- dev 退出门为 L1 全部 preregistered strict metrics `1.0`、L2 全部 preregistered strict metrics `1.0`、两层 `raw_critical_false_emission_count=0`、`gate_intervention_count=0`、`deterministic_critical_false_materialization_count=0`，且 automatic write 仍为 `0`。任一项未达标就停留在 Phase B。
+
+### Phase C：新的 fresh-hidden 自动抽取资格门（已授权，受 Phase B gate 约束）
+
+目标：在 Phase B 完整通过后，以新的 versioned root 和未见数据测量修复是否泛化；这不是 fresh-v3 rerun，也不得覆盖 fresh-v3 结论。
+
+实施边界与门禁：
+
+- 复用现有最小 prereg/materialization/proposer/scorer 合同，不扩建 fresh-v3/Query 通用 harness；只有现有合同无法表达硬门时才允许最小补丁。
+- 在创建 run artifact 前先做传输 preflight，确认 key、endpoint、`deepseek-v4-pro` 访问和 response model 一致。传输失败只记录一个紧凑 failure receipt 并停止，不得先扩建多层恢复/冻结设施。
+- 新 hidden 必须与所有 dev/diagnostic/fresh-v1/v2/v3 数据隔离；composition、全部使用、no-filter/no-replacement/no-resampling、public-only/no-history、每层一次请求、proposal-before-scoring 和 raw/gated 分离报告继续是硬约束。
+- 资格门与 Phase B 相同：所有 strict raw metrics 精确 `1.0`，critical false emission、gate intervention、critical false materialization 均为 `0`。任何失败都禁止进入 Phase D/F，只能回到新 diagnostic 数据修复，不能针对本次 hidden 原地调参。
+
+### Phase D：真实自动端到端闭环（已授权，受 Phase C gate 约束）
+
+目标：证明以下真实链路在没有人工 proposal 注入、没有 gold 暴露、没有跳过 admission/materialization 的情况下成立：
+
+```text
+raw user-agent turns
+-> automatic L1 extraction
+-> automatic L2 extraction/closure
+-> admission and immutable MemoryUnitRevision materialization
+-> atomic Git checkpoint
+-> natural Query compilation
+-> verified execution snapshot
+-> deterministic executor
+-> evidence-backed answer/abstention
+```
+
+验收至少覆盖一个 L1/L2 `fact`、一个跨证据 `count` 和一个应 fail-closed/abstain 的场景。每个场景必须满足：无人工 typed candidate 注入、无 gold-side 输入、失败事务无半成品、Git checkout 可字节级恢复、query plan/registry/snapshot revision 一致、答案值与完整 evidence set 精确、critical false positive 为 `0`、trace completeness 为 `1.0`。v8 query-only 不替代本阶段。
+
+只有 Phase C 与 Phase D 同时通过，才可称“自动抽取到查询的受控端到端闭环通过”。这仍不是生产可用结论。达到此处必须立即停止，不得开始仓库盘点、清理、移动/删除文件、修复 hygiene warning 或执行 benchmark；先向用户提交端到端证据和剩余风险，等待用户给出仓库整理要求。
+
+### 第一强制停止点：Phase D 后、仓库整理前
+
+Phase D 正式通过后必须停止当前开发链并向用户报告：fresh qualification、真实端到端结果、所有失败 attempt 及修复关系、automatic write、Git/evidence replay、代码审查和剩余风险。Phase D 未通过时继续按 RCA/repair loop 处理，不得进入仓库整理。没有用户随后给出的具体整理目标、保留范围、删除边界和明确授权，不得执行任何仓库整理动作，也不得为整理预先新增 manifest、脚本、测试或文档。
+
+### Phase E：仓库整理门（范围待用户给出，当前不得执行）
+
+Phase E 的具体 inventory、`keep/archive/delete` 分类、路径 allowlist、是否处理 pytest frozen-directory warning、允许生成的 manifest 和验收命令均由用户后续要求决定，不能由开发 session 预设。无论后续要求如何，正式 gold/source snapshot、official model raw/provenance/score/report/receipt、有效 Git snapshot 和已引用 hash/manifest 默认不得删除或改写；任何删除仍须使用显式路径 allowlist 并做前后验证。Phase E 未获批准或未通过，不得进入 Phase F，也不得讨论 production rollout。
+
+### Phase F：memory benchmark（需新授权）
+
+前置条件：Phase C 自动抽取 fresh qualification、Phase D 真实自动端到端闭环以及用户后续定义并批准的 Phase E 仓库整理门全部通过。绿色 schema/test 或 Phase A query-only 不能替代这些前置条件。
+
+执行顺序与边界：
+
+- 先在现有冻结 32-item natural slice 上跑完整自动链，而不是只对 gold-side evidence corpus 重放已有 symbolic/dense retrieval：BEAM 10、LoCoMo 10、LongMemEval 12。ingestion、extraction 和 query execution 只能读取 public/raw 输入；result/provenance 冻结后，独立 scorer 才可读取 `gold.json` 和 `gold-evidence.json`。
+- 32-item gate 通过后，再按已批准范围运行 BEAM 100K、LoCoMo 和 LongMemEval。LongMemEval 若仍使用 oracle haystack，必须明确标为 oracle retrieval 条件，不得外推到完整长期检索；LoCoMo category 5 的 `manual_required` 边界继续保留。
+- 同源、同问题、同 TopK/预算下报告本项目 automatic symbolic memory、guarded fallback 和 dense reference。embedding 只允许在预先分类的 lexical/predicate missing-link 缺口触发，不得用于身份、事实、成员关系或 structural reasoning 权威。
+- 必报指标包括：fresh qualification 与有语义标注子集上的 L1/L2 extraction strict quality、Evidence Set Exact Match、All-Evidence@K、Evidence Recall/Precision、answer correctness、abstention correctness、critical false positive、fallback trigger/reason、trace completeness、Git replay、latency、token/cost 和失败样本 taxonomy。表示质量、检索质量、答案质量和产品结论必须分开。
+- Mem0、Graphiti、Hindsight、MemPalace、Zep 等外部系统仍不本地复跑；作者/官方结果只作不可直接比较的上下文。不得宣称相对产品优越性、用户体验提升或 production ready。
+
+### 第二强制停止点：benchmark 后
+
+完成 Phase F 的冻结结果、评分、失败样本和审计报告后必须停止，向用户汇报：通过项、失败项、证据强度、已知偏差、仓库状态以及是否具备进入生产化讨论的资格。未经新一轮用户决策，不得继续生产部署、扩大到 BEAM 500K/1M、选择最终 AMR/KEOL/数据库持久层、复跑外部 memory 系统、自动 authoritative deployment 或清理更多历史资产。
+
+### 跨阶段质量规则
+
+- 所有阶段 fail-closed：preflight、schema、hash、evidence closure、snapshot、review 或模型质量任一硬门失败时，立即停止该 attempt 和阶段切换，冻结失败并进入 RCA/repair loop；不得以补写 receipt、放宽 threshold、静默重试模型或扩大 harness 绕过。
+- 冻结数据 append-only；新实验必须使用新的 versioned root。测试通过、`0 error/0 warning`、完整 proposal coverage 或 gate safety 都不能单独证明模型语义质量。
+- 实现采用 TDD 和最小变更；聚焦测试后跑相关回归与静态检查。已知失败只能使用执行前固定的精确 allowlist，任何新增失败都必须解释并阻止阶段通过。
+- 每个阶段结束都要更新本 `AGENTS.md` 的事实状态、Git commit、模型/数据版本、关键指标、automatic write count 和下一授权边界；不得用摘要替代正式 artifact 路径与 hash。
+- 密钥和敏感 header 永不落盘；正式产物和提交前必须做 credential pattern scan。独立 review 的 Critical/Important 必须为 `0`，Minor 必须显式记录且不得影响验收语义。
