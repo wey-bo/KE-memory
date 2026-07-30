@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 
 import pytest
+from pydantic import ValidationError
 
 from tools.natural_memory_benchmark.authoritative_memory import (
     EvidenceSpanV2,
@@ -17,9 +18,12 @@ from tools.natural_memory_benchmark.l1_admission import (
     CanonicalIdentityMembership,
     CanonicalEntityBinding,
     IdentitySnapshotAuthority,
+    KnownLifecycleRevision,
+    ProposedRevisionAction,
     SourceEpistemicBinding,
     admit_linked_l1,
     make_identity_snapshot_authority,
+    make_known_lifecycle_revision,
     run_dev_ontology_linking_assessment,
 )
 from tools.natural_memory_benchmark.l1_ontology_linking import (
@@ -169,7 +173,7 @@ def _context(
     source_status: str = "user_reported",
     source_speaker: str = "user",
     transaction_time: str | None = "2026-07-29T00:00:00Z",
-    known_lifecycle_candidate_refs: list[str] | None = None,
+    known_lifecycle_revisions: list[KnownLifecycleRevision] | None = None,
 ) -> AdmissionContext:
     return AdmissionContext(
         raw_artifacts=[raw],
@@ -187,7 +191,7 @@ def _context(
                 speaker=source_speaker,
             )
         ],
-        known_lifecycle_candidate_refs=known_lifecycle_candidate_refs or [],
+        known_lifecycle_revisions=known_lifecycle_revisions or [],
         policy=policy
         or AdmissionPolicy(
             policy_id="policy-dev-v1",
@@ -225,7 +229,7 @@ def _rehashed_linked(
     ]
     payload.pop("linked_candidate_hash")
     payload["linked_candidate_hash"] = canonical_sha256(payload)
-    return LinkedL1Candidate.model_validate(payload)
+    return LinkedL1Candidate.model_validate_json(json.dumps(payload))
 
 
 def test_admission_accepts_complete_evidence_closure_for_category_preference(tmp_path):
@@ -244,6 +248,19 @@ def test_admission_accepts_complete_evidence_closure_for_category_preference(tmp
     assert decision.evidence_bindings == [evidence.evidence_id]
     assert decision.proposed_action.action == "create"
     assert decision.proposed_action.automatic_write is False
+
+
+def test_admission_contract_rejects_bool_and_false_literal_coercion() -> None:
+    with pytest.raises(ValidationError):
+        AdmissionPolicy(
+            policy_id="policy-dev-v1",
+            policy_version="1",
+            allow_modalities=["actual"],
+            allow_source_statuses=["user_reported"],
+            require_transaction_time="false",
+        )
+    with pytest.raises(ValidationError):
+        ProposedRevisionAction(action="create", automatic_write=0)
 
 
 def test_admission_rejects_tampered_quote_hash_and_source_slice(tmp_path):
@@ -343,8 +360,10 @@ def test_admission_accepts_resolved_individual_with_fresh_identity_binding(tmp_p
         local_entity_id="entity-01",
         canonical_entity_id="entity:cup-1",
         identity_snapshot_id=authority.snapshot_id,
+        identity_snapshot_revision=authority.snapshot_revision,
         identity_snapshot_hash=authority.snapshot_hash,
         identity_registry_revision="identity-r1",
+        identity_registry_hash=authority.identity_registry_hash,
         identity_status="resolved",
         concept_type_ids=["memory:CoffeeBeverage", "memory:Beverage"],
     )
@@ -376,6 +395,129 @@ def test_admission_accepts_resolved_individual_with_fresh_identity_binding(tmp_p
     assert decision.proposed_action.automatic_write is False
 
 
+def test_identity_binding_requires_complete_authority_pins() -> None:
+    with pytest.raises(ValidationError):
+        CanonicalEntityBinding(
+            local_entity_id="entity-01",
+            canonical_entity_id="entity:cup-1",
+            identity_snapshot_id="identity-snapshot:test",
+            identity_snapshot_hash="0" * 64,
+            identity_registry_revision="identity-r1",
+            identity_status="resolved",
+            concept_type_ids=["memory:CoffeeBeverage"],
+        )
+
+
+@pytest.mark.parametrize(
+    ("binding_updates", "expected_reason"),
+    [
+        (
+            {"identity_snapshot_revision": "identity-snapshot-r0"},
+            "identity_snapshot_binding_mismatch",
+        ),
+        (
+            {"identity_registry_hash": "3" * 64},
+            "identity_registry_binding_mismatch",
+        ),
+        (
+            {"concept_type_ids": ["memory:CoffeeBeverage", "memory:TeaBeverage"]},
+            "identity_membership_type_incompatible",
+        ),
+    ],
+)
+def test_admission_rejects_incomplete_or_overclaimed_identity_authority(
+    tmp_path, binding_updates, expected_reason
+):
+    authority = _identity_authority()
+    binding = CanonicalEntityBinding(
+        local_entity_id="entity-01",
+        canonical_entity_id="entity:cup-1",
+        identity_snapshot_id=authority.snapshot_id,
+        identity_snapshot_revision=authority.snapshot_revision,
+        identity_snapshot_hash=authority.snapshot_hash,
+        identity_registry_revision=authority.identity_registry_revision,
+        identity_registry_hash=authority.identity_registry_hash,
+        identity_status="resolved",
+        concept_type_ids=["memory:CoffeeBeverage", "memory:Beverage"],
+    ).model_copy(update=binding_updates)
+    linked, registry, raw, source, _ = _link(
+        tmp_path,
+        text="I drank this cup of coffee.",
+        predicate_surface="drink",
+        predicate_sense="consume_beverage",
+        canonical_operator="drink",
+        entity_surface="this cup of coffee",
+        identity_binding=binding,
+    )
+
+    decision = admit_linked_l1(
+        linked,
+        registry,
+        _context(
+            raw=raw,
+            source=source,
+            identity_bindings=[binding],
+            identity_snapshot_authorities=[authority],
+            current_identity_snapshot_ids=[authority.snapshot_id],
+        ),
+    )
+
+    assert decision.status == "reject"
+    assert expected_reason in decision.reason_codes
+
+
+def test_admission_rejects_narrower_type_claim_from_broad_authority(tmp_path):
+    authority = make_identity_snapshot_authority(
+        snapshot_id="identity-snapshot:broad",
+        snapshot_revision="identity-snapshot-broad-r1",
+        identity_registry_revision="identity-r1",
+        identity_registry_hash="2" * 64,
+        memberships=[
+            CanonicalIdentityMembership(
+                canonical_entity_id="entity:cup-1",
+                member_entity_ids=["entity:cup-1"],
+                concept_type_ids=["memory:Beverage"],
+            )
+        ],
+        unresolved_entity_ids=[],
+    )
+    binding = CanonicalEntityBinding(
+        local_entity_id="entity-01",
+        canonical_entity_id="entity:cup-1",
+        identity_snapshot_id=authority.snapshot_id,
+        identity_snapshot_revision=authority.snapshot_revision,
+        identity_snapshot_hash=authority.snapshot_hash,
+        identity_registry_revision=authority.identity_registry_revision,
+        identity_registry_hash=authority.identity_registry_hash,
+        identity_status="resolved",
+        concept_type_ids=["memory:CoffeeBeverage"],
+    )
+    linked, registry, raw, source, _ = _link(
+        tmp_path,
+        text="I drank this cup of coffee.",
+        predicate_surface="drink",
+        predicate_sense="consume_beverage",
+        canonical_operator="drink",
+        entity_surface="this cup of coffee",
+        identity_binding=binding,
+    )
+
+    decision = admit_linked_l1(
+        linked,
+        registry,
+        _context(
+            raw=raw,
+            source=source,
+            identity_bindings=[binding],
+            identity_snapshot_authorities=[authority],
+            current_identity_snapshot_ids=[authority.snapshot_id],
+        ),
+    )
+
+    assert decision.status == "reject"
+    assert "identity_membership_type_incompatible" in decision.reason_codes
+
+
 def test_admission_rejects_agent_generated_fact_even_with_valid_evidence(tmp_path):
     linked, registry, raw, source, _ = _link(
         tmp_path,
@@ -390,6 +532,38 @@ def test_admission_rejects_agent_generated_fact_even_with_valid_evidence(tmp_pat
     assert decision.status == "reject"
     assert "source_status_not_authorized" in decision.reason_codes
     assert decision.proposed_action.automatic_write is False
+
+
+def test_admission_rejects_assistant_actual_even_when_inferred_is_allowed(tmp_path):
+    linked, registry, raw, source, _ = _link(
+        tmp_path,
+        text="You prefer coffee.",
+        speaker="assistant",
+    )
+    policy = AdmissionPolicy(
+        policy_id="policy-dev-v1",
+        policy_version="1",
+        allow_modalities=["actual"],
+        allow_source_statuses=["inferred"],
+        allow_evidence_speakers=["assistant"],
+        require_transaction_time=True,
+    )
+
+    decision = admit_linked_l1(
+        linked,
+        registry,
+        _context(
+            raw=raw,
+            source=source,
+            policy=policy,
+            source_status="inferred",
+            source_speaker="assistant",
+        ),
+    )
+
+    assert decision.status == "reject"
+    assert "source_status_not_authorized" in decision.reason_codes
+    assert decision.proposed_action.action == "none"
 
 
 def test_admission_replay_is_deterministic_and_never_writes(tmp_path):
@@ -460,8 +634,10 @@ def test_admission_abstains_when_individual_has_no_snapshot_authority(tmp_path):
         local_entity_id="entity-01",
         canonical_entity_id="entity:cup-1",
         identity_snapshot_id="identity-snapshot:invented",
+        identity_snapshot_revision="identity-snapshot-r1",
         identity_snapshot_hash="0" * 64,
         identity_registry_revision="identity-r1",
+        identity_registry_hash="2" * 64,
         identity_status="resolved",
         concept_type_ids=["memory:CoffeeBeverage"],
     )
@@ -536,6 +712,32 @@ def test_admission_rejects_tampered_raw_revision_identity(tmp_path):
     assert "raw_artifact_revision_identity_mismatch" in decision.reason_codes
 
 
+@pytest.mark.parametrize("path_state", ["missing", "directory", "unreadable"])
+def test_admission_rejects_unavailable_raw_artifact(tmp_path, path_state):
+    linked, registry, raw, source, _ = _link(
+        tmp_path,
+        text="I prefer coffee.",
+    )
+    raw_path = Path(raw.local_path)
+    if path_state == "missing":
+        raw_path.unlink()
+    elif path_state == "directory":
+        raw_path.unlink()
+        raw_path.mkdir()
+    else:
+        raw_path.chmod(0o000)
+
+    decision = admit_linked_l1(
+        linked,
+        registry,
+        _context(raw=raw, source=source),
+    )
+
+    assert decision.status == "reject"
+    assert "raw_artifact_unavailable" in decision.reason_codes
+    assert decision.proposed_action.action == "none"
+
+
 def test_admission_rejects_unreferenced_source_revision(tmp_path):
     linked, registry, raw, source, _ = _link(
         tmp_path,
@@ -565,6 +767,40 @@ def test_admission_rejects_unreferenced_source_revision(tmp_path):
     assert "unexpected_source_revision" in decision.reason_codes
 
 
+def test_decision_reason_order_is_independent_of_nonsemantic_context_order(tmp_path):
+    linked, registry, raw, source, _ = _link(
+        tmp_path,
+        text="I prefer coffee.",
+    )
+    size_invalid = raw.model_copy(
+        update={
+            "artifact_revision_id": "artifact-revision-extra-size",
+            "size_bytes": raw.size_bytes + 1,
+        }
+    )
+    hash_invalid = raw.model_copy(
+        update={
+            "artifact_revision_id": "artifact-revision-extra-hash",
+            "content_sha256": "f" * 64,
+        }
+    )
+    base = _context(raw=raw, source=source)
+    first_context = base.model_copy(
+        update={"raw_artifacts": [raw, size_invalid, hash_invalid]}
+    )
+    second_context = base.model_copy(
+        update={"raw_artifacts": [hash_invalid, size_invalid, raw]}
+    )
+
+    first = admit_linked_l1(linked, registry, first_context)
+    second = admit_linked_l1(linked, registry, second_context)
+
+    assert first.status == second.status == "reject"
+    assert first.admission_context_hash == second.admission_context_hash
+    assert first.reason_codes == second.reason_codes
+    assert first.decision_hash == second.decision_hash
+
+
 def test_decision_hash_binds_full_policy_and_lifecycle_context(tmp_path):
     linked, registry, raw, source, _ = _link(
         tmp_path,
@@ -591,7 +827,13 @@ def test_decision_hash_binds_full_policy_and_lifecycle_context(tmp_path):
             raw=raw,
             source=source,
             policy=broad,
-            known_lifecycle_candidate_refs=["candidate:other"],
+            known_lifecycle_revisions=[
+                make_known_lifecycle_revision(
+                    candidate_ref="candidate:other",
+                    revision_id="candidate:other:r1",
+                    lifecycle_state="active",
+                )
+            ],
         ),
     )
 
@@ -652,6 +894,30 @@ def test_admission_abstains_when_lifecycle_target_is_missing(tmp_path, lifecycle
     assert "lifecycle_target_missing" in decision.reason_codes
 
 
+def test_admission_context_requires_structured_lifecycle_revision_authority() -> None:
+    assert "known_lifecycle_revisions" in AdmissionContext.model_fields
+    assert "known_lifecycle_candidate_refs" not in AdmissionContext.model_fields
+
+
+def test_admission_abstains_for_unknown_lifecycle_target(tmp_path) -> None:
+    lifecycle = TypedLifecycleBinding(
+        lifecycle="superseded",
+        replacement_candidate_ref="candidate:unknown",
+    )
+    linked, registry, raw, source, _ = _link(
+        tmp_path,
+        text="I prefer coffee.",
+        lifecycle=lifecycle,
+    )
+
+    decision = admit_linked_l1(
+        linked, registry, _context(raw=raw, source=source)
+    )
+
+    assert decision.status == "abstain"
+    assert "lifecycle_target_unresolved" in decision.reason_codes
+
+
 @pytest.mark.parametrize(
     "lifecycle",
     [
@@ -672,7 +938,11 @@ def test_admission_proposes_lifecycle_update_for_known_targets(tmp_path, lifecyc
         lifecycle=lifecycle,
     )
     known = [
-        reference
+        make_known_lifecycle_revision(
+            candidate_ref=reference,
+            revision_id=f"{reference}:r1",
+            lifecycle_state="active",
+        )
         for reference in [
             lifecycle.replacement_candidate_ref,
             *lifecycle.conflicts_with_candidate_refs,
@@ -686,14 +956,80 @@ def test_admission_proposes_lifecycle_update_for_known_targets(tmp_path, lifecyc
         _context(
             raw=raw,
             source=source,
-            known_lifecycle_candidate_refs=known,
+            known_lifecycle_revisions=known,
         ),
     )
 
     assert decision.status == "accept"
     assert decision.proposed_action.action == "lifecycle_update"
-    assert decision.proposed_action.target_candidate_refs == known
+    assert decision.proposed_action.target_revisions == known
     assert decision.proposed_action.automatic_write is False
+
+
+@pytest.mark.parametrize(
+    "lifecycle_state",
+    ["retracted", "superseded", "conflicted"],
+)
+def test_admission_rejects_non_active_lifecycle_target(
+    tmp_path, lifecycle_state
+):
+    lifecycle = TypedLifecycleBinding(
+        lifecycle="superseded",
+        replacement_candidate_ref="candidate:replacement",
+    )
+    linked, registry, raw, source, _ = _link(
+        tmp_path,
+        text="I prefer coffee.",
+        lifecycle=lifecycle,
+    )
+    target = make_known_lifecycle_revision(
+        candidate_ref="candidate:replacement",
+        revision_id="candidate:replacement:r1",
+        lifecycle_state=lifecycle_state,
+    )
+
+    decision = admit_linked_l1(
+        linked,
+        registry,
+        _context(raw=raw, source=source, known_lifecycle_revisions=[target]),
+    )
+
+    assert decision.status == "reject"
+    assert "lifecycle_target_not_active" in decision.reason_codes
+    assert decision.proposed_action.action == "none"
+
+
+def test_admission_rejects_tampered_lifecycle_revision_hash(tmp_path) -> None:
+    lifecycle = TypedLifecycleBinding(
+        lifecycle="superseded",
+        replacement_candidate_ref="candidate:replacement",
+    )
+    linked, registry, raw, source, _ = _link(
+        tmp_path,
+        text="I prefer coffee.",
+        lifecycle=lifecycle,
+    )
+    valid_revision = make_known_lifecycle_revision(
+        candidate_ref="candidate:replacement",
+        revision_id="candidate:replacement:r1",
+        lifecycle_state="active",
+    )
+    revision = valid_revision.model_copy(update={"revision_hash": "0" * 64})
+    context = _context(
+        raw=raw,
+        source=source,
+        known_lifecycle_revisions=[valid_revision],
+    ).model_copy(update={"known_lifecycle_revisions": [revision]})
+
+    decision = admit_linked_l1(
+        linked,
+        registry,
+        context,
+    )
+
+    assert decision.status == "reject"
+    assert "lifecycle_revision_hash_mismatch" in decision.reason_codes
+    assert decision.proposed_action.action == "none"
 
 
 def test_dev_assessment_is_complete_immutable_and_replayable(tmp_path):

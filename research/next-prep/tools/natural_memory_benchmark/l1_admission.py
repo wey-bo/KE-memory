@@ -9,11 +9,12 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import stat
 from datetime import datetime
 from pathlib import Path
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 from .authoritative_memory import (
     EvidenceSpanV2,
@@ -49,7 +50,7 @@ from .typed_extractor_l1 import (
 class StrictModel(BaseModel):
     """Immutable, closed admission contract boundary."""
 
-    model_config = ConfigDict(extra="forbid", frozen=True)
+    model_config = ConfigDict(extra="forbid", frozen=True, strict=True)
 
 
 _SHA256 = r"^[0-9a-f]{64}$"
@@ -67,6 +68,80 @@ _SOURCE_STATUSES = Literal[
     "user_reported", "agent_generated", "tool_observed", "inferred"
 ]
 _EVIDENCE_SPEAKERS = Literal["user", "assistant", "tool"]
+_REASON_PRIORITY = (
+    "source_candidate_bytes_mismatch",
+    "source_candidate_hash_mismatch",
+    "registry_hash_mismatch",
+    "linked_registry_binding_mismatch",
+    "linked_candidate_hash_mismatch",
+    "deterministic_link_replay_failed",
+    "deterministic_link_replay_mismatch",
+    "evidence_binding_closure_mismatch",
+    "unexpected_source_revision",
+    "evidence_source_revision_missing",
+    "unexpected_raw_artifact_revision",
+    "source_artifact_revision_missing",
+    "raw_artifact_unavailable",
+    "raw_artifact_revision_identity_mismatch",
+    "raw_artifact_size_mismatch",
+    "raw_artifact_content_hash_mismatch",
+    "source_revision_identity_mismatch",
+    "source_content_hash_mismatch",
+    "source_epistemic_closure_mismatch",
+    "evidence_quote_hash_mismatch",
+    "evidence_source_context_mismatch",
+    "evidence_source_slice_out_of_range",
+    "evidence_source_slice_mismatch",
+    "evidence_epistemic_speaker_mismatch",
+    "speaker_source_status_incompatible",
+    "link_evidence_unbound",
+    "evidence_speaker_not_authorized",
+    "predicate_link_mismatch",
+    "predicate_role_rule_missing",
+    "entity_link_missing",
+    "unknown_local_concept",
+    "predicate_role_type_incompatible",
+    "predicate_rule_binding_mismatch",
+    "ontology_extension_required",
+    "ontology_link_unresolved",
+    "category_identity_shape_invalid",
+    "identity_unresolved",
+    "identity_binding_mismatch",
+    "identity_registry_revision_mismatch",
+    "identity_type_incompatible",
+    "identity_authority_unavailable",
+    "identity_snapshot_hash_mismatch",
+    "identity_snapshot_binding_mismatch",
+    "identity_registry_binding_mismatch",
+    "identity_membership_missing",
+    "identity_membership_type_incompatible",
+    "hypothetical_modality",
+    "modality_not_authorized",
+    "polarity_not_authorized",
+    "source_status_not_authorized",
+    "transaction_time_missing",
+    "transaction_time_invalid",
+    "source_transaction_time_invalid",
+    "transaction_time_precedes_source",
+    "time_binding_unresolved",
+    "lifecycle_target_missing",
+    "lifecycle_revision_hash_mismatch",
+    "lifecycle_target_unresolved",
+    "lifecycle_target_not_active",
+)
+_REASON_PRIORITY_BY_CODE = {
+    reason: index for index, reason in enumerate(_REASON_PRIORITY)
+}
+
+
+def _normalize_reasons(reasons: list[str]) -> list[str]:
+    return sorted(
+        set(reasons),
+        key=lambda reason: (
+            _REASON_PRIORITY_BY_CODE.get(reason, len(_REASON_PRIORITY)),
+            reason,
+        ),
+    )
 
 
 class AdmissionPolicy(StrictModel):
@@ -210,6 +285,53 @@ def make_identity_snapshot_authority(
     )
 
 
+def _lifecycle_revision_payload(
+    *, candidate_ref: str, revision_id: str, lifecycle_state: str
+) -> dict[str, object]:
+    return {
+        "schema_version": "l1-lifecycle-revision-v1",
+        "candidate_ref": candidate_ref,
+        "revision_id": revision_id,
+        "lifecycle_state": lifecycle_state,
+    }
+
+
+class KnownLifecycleRevision(StrictModel):
+    """Exact lifecycle authority record supplied for deterministic resolution."""
+
+    schema_version: Literal["l1-lifecycle-revision-v1"] = (
+        "l1-lifecycle-revision-v1"
+    )
+    candidate_ref: str = Field(min_length=1)
+    revision_id: str = Field(min_length=1)
+    lifecycle_state: Literal["active", "superseded", "conflicted", "retracted"]
+    revision_hash: str = Field(pattern=_SHA256)
+
+    @model_validator(mode="after")
+    def validate_revision_hash(self) -> "KnownLifecycleRevision":
+        payload = _lifecycle_revision_payload(
+            candidate_ref=self.candidate_ref,
+            revision_id=self.revision_id,
+            lifecycle_state=self.lifecycle_state,
+        )
+        if self.revision_hash != canonical_sha256(payload):
+            raise ValueError("lifecycle revision hash mismatch")
+        return self
+
+
+def make_known_lifecycle_revision(
+    *, candidate_ref: str, revision_id: str, lifecycle_state: str
+) -> KnownLifecycleRevision:
+    payload = _lifecycle_revision_payload(
+        candidate_ref=candidate_ref,
+        revision_id=revision_id,
+        lifecycle_state=lifecycle_state,
+    )
+    return KnownLifecycleRevision(
+        **payload, revision_hash=canonical_sha256(payload)
+    )
+
+
 class AdmissionContext(StrictModel):
     """Explicit replay inputs for source, identity, lifecycle, and policy gates."""
 
@@ -224,7 +346,9 @@ class AdmissionContext(StrictModel):
     identity_registry_revision: str = Field(min_length=1)
     identity_registry_hash: str = Field(pattern=_SHA256)
     transaction_time: str | None = None
-    known_lifecycle_candidate_refs: list[str] = Field(default_factory=list)
+    known_lifecycle_revisions: list[KnownLifecycleRevision] = Field(
+        default_factory=list
+    )
     policy: AdmissionPolicy
 
     @model_validator(mode="after")
@@ -242,7 +366,14 @@ class AdmissionContext(StrictModel):
                 [item.snapshot_id for item in self.identity_snapshot_authorities],
             ),
             ("current identity snapshot", self.current_identity_snapshot_ids),
-            ("lifecycle candidate reference", self.known_lifecycle_candidate_refs),
+            (
+                "lifecycle candidate reference",
+                [item.candidate_ref for item in self.known_lifecycle_revisions],
+            ),
+            (
+                "lifecycle revision",
+                [item.revision_id for item in self.known_lifecycle_revisions],
+            ),
         )
         for label, values in checks:
             if len(values) != len(set(values)):
@@ -254,14 +385,22 @@ class ProposedRevisionAction(StrictModel):
     """A request for a future transaction; it can never perform one itself."""
 
     action: Literal["create", "correction", "lifecycle_update", "none"]
-    target_candidate_refs: list[str] = Field(default_factory=list)
+    target_revisions: list[KnownLifecycleRevision] = Field(default_factory=list)
     automatic_write: Literal[False] = False
+
+    @field_validator("automatic_write", mode="before")
+    @classmethod
+    def require_literal_false(cls, value: object) -> object:
+        if value is not False:
+            raise ValueError("automatic_write must be the boolean false literal")
+        return value
 
     @model_validator(mode="after")
     def validate_action_shape(self) -> "ProposedRevisionAction":
-        if len(self.target_candidate_refs) != len(set(self.target_candidate_refs)):
+        candidate_refs = [item.candidate_ref for item in self.target_revisions]
+        if len(candidate_refs) != len(set(candidate_refs)):
             raise ValueError("duplicate proposed action target")
-        if self.action == "none" and self.target_candidate_refs:
+        if self.action == "none" and self.target_revisions:
             raise ValueError("none action cannot name targets")
         return self
 
@@ -323,10 +462,21 @@ class AdmissionDecision(StrictModel):
     ] = Field(default_factory=lambda: dict(_ZERO_WRITES))
     decision_hash: str = Field(pattern=_SHA256)
 
+    @field_validator("automatic_write_counts", mode="before")
+    @classmethod
+    def require_literal_zero_counts(cls, value: object) -> object:
+        if isinstance(value, dict) and any(
+            type(item) is not int or item != 0 for item in value.values()
+        ):
+            raise ValueError("automatic write counts must use integer zero literals")
+        return value
+
     @model_validator(mode="after")
     def validate_decision(self) -> "AdmissionDecision":
         if len(self.reason_codes) != len(set(self.reason_codes)):
             raise ValueError("duplicate admission reason")
+        if self.reason_codes != _normalize_reasons(self.reason_codes):
+            raise ValueError("admission reasons are not in canonical gate order")
         if self.status == "accept" and self.reason_codes:
             raise ValueError("accepted decision cannot contain reasons")
         if self.status != "accept" and not self.reason_codes:
@@ -410,8 +560,9 @@ def _admission_context_payload(context: AdmissionContext) -> dict[str, object]:
     payload["current_identity_snapshot_ids"] = sorted(
         payload["current_identity_snapshot_ids"]
     )
-    payload["known_lifecycle_candidate_refs"] = sorted(
-        payload["known_lifecycle_candidate_refs"]
+    payload["known_lifecycle_revisions"] = sorted(
+        payload["known_lifecycle_revisions"],
+        key=lambda item: str(item["candidate_ref"]),
     )
     payload["policy"] = _policy_payload(context.policy)
     return payload
@@ -441,8 +592,9 @@ def _decision(
     registry: OntologyRegistry,
     context: AdmissionContext,
     action: Literal["create", "correction", "lifecycle_update", "none"],
-    targets: list[str] | None = None,
+    targets: list[KnownLifecycleRevision] | None = None,
 ) -> AdmissionDecision:
+    reasons = _normalize_reasons(reasons)
     snapshot_references = [
         IdentitySnapshotReference(
             snapshot_id=authority.snapshot_id,
@@ -498,7 +650,7 @@ def _decision(
         "identity_registry_hash": context.identity_registry_hash,
         "transaction_time": context.transaction_time,
         "proposed_action": ProposedRevisionAction(
-            action=action, target_candidate_refs=targets or []
+            action=action, target_revisions=targets or []
         ).model_dump(mode="json"),
         "automatic_write_counts": dict(_ZERO_WRITES),
     }
@@ -554,12 +706,39 @@ def _has_valid_evidence_closure(
         if artifact.artifact_revision_id != expected_id:
             _add_once(reasons, "raw_artifact_revision_identity_mismatch")
         path = Path(artifact.local_path)
-        if path.is_file():
+        try:
+            opened = path.lstat()
+        except OSError:
+            _add_once(reasons, "raw_artifact_unavailable")
+            continue
+        if not stat.S_ISREG(opened.st_mode) or not (
+            stat.S_IMODE(opened.st_mode) & 0o444
+        ):
+            _add_once(reasons, "raw_artifact_unavailable")
+            continue
+        try:
             content = path.read_bytes()
-            if len(content) != artifact.size_bytes:
-                _add_once(reasons, "raw_artifact_size_mismatch")
-            if hashlib.sha256(content).hexdigest() != artifact.content_sha256:
-                _add_once(reasons, "raw_artifact_content_hash_mismatch")
+            rechecked = path.lstat()
+        except OSError:
+            _add_once(reasons, "raw_artifact_unavailable")
+            continue
+        if (
+            opened.st_dev,
+            opened.st_ino,
+            opened.st_size,
+            opened.st_mtime_ns,
+        ) != (
+            rechecked.st_dev,
+            rechecked.st_ino,
+            rechecked.st_size,
+            rechecked.st_mtime_ns,
+        ):
+            _add_once(reasons, "raw_artifact_unavailable")
+            continue
+        if len(content) != artifact.size_bytes:
+            _add_once(reasons, "raw_artifact_size_mismatch")
+        if hashlib.sha256(content).hexdigest() != artifact.content_sha256:
+            _add_once(reasons, "raw_artifact_content_hash_mismatch")
 
     for source in context.source_revisions:
         identity = {
@@ -763,7 +942,10 @@ def _validate_identity_and_unresolved(
             continue
         if supplied.get(entity.local_entity_id) != binding:
             _add_once(reasons, "identity_binding_mismatch")
-        if binding.identity_registry_revision != context.identity_registry_revision:
+        if (
+            binding.identity_registry_revision != context.identity_registry_revision
+            or binding.identity_registry_hash != context.identity_registry_hash
+        ):
             _add_once(reasons, "identity_registry_revision_mismatch")
         if not set(entity.selected_concept_ids).issubset(set(binding.concept_type_ids)):
             _add_once(reasons, "identity_type_incompatible")
@@ -781,11 +963,17 @@ def _validate_identity_and_unresolved(
         )
         if canonical_sha256(authority_payload) != authority.snapshot_hash:
             _add_once(reasons, "identity_snapshot_hash_mismatch")
-        if binding.identity_snapshot_hash != authority.snapshot_hash:
+        if (
+            binding.identity_snapshot_revision != authority.snapshot_revision
+            or binding.identity_snapshot_hash != authority.snapshot_hash
+        ):
             _add_once(reasons, "identity_snapshot_binding_mismatch")
         if (
             authority.identity_registry_revision != context.identity_registry_revision
             or authority.identity_registry_hash != context.identity_registry_hash
+            or binding.identity_registry_revision
+            != authority.identity_registry_revision
+            or binding.identity_registry_hash != authority.identity_registry_hash
         ):
             _add_once(reasons, "identity_registry_binding_mismatch")
         if entity.canonical_entity_id in set(authority.unresolved_entity_ids):
@@ -802,8 +990,18 @@ def _validate_identity_and_unresolved(
         if membership is None:
             _add_once(reasons, "identity_membership_missing")
             continue
-        if not set(entity.selected_concept_ids).issubset(
-            set(membership.concept_type_ids)
+        if any(
+            not any(
+                is_subtype(registry, authority_type, declared_type)
+                for authority_type in membership.concept_type_ids
+            )
+            for declared_type in binding.concept_type_ids
+        ) or any(
+            not any(
+                is_subtype(registry, authority_type, selected_type)
+                for authority_type in membership.concept_type_ids
+            )
+            for selected_type in entity.selected_concept_ids
         ):
             _add_once(reasons, "identity_membership_type_incompatible")
 
@@ -833,6 +1031,10 @@ def _validate_lifecycle_and_policy(
     if any(status not in policy.allow_source_statuses for status in source_statuses):
         _add_once(reasons, "source_status_not_authorized")
     if "agent_generated" in source_statuses:
+        _add_once(reasons, "source_status_not_authorized")
+    if candidate.modality == "actual" and any(
+        binding.speaker == "assistant" for binding in candidate.evidence_bindings
+    ):
         _add_once(reasons, "source_status_not_authorized")
     if policy.require_transaction_time and not context.transaction_time:
         _add_once(reasons, "transaction_time_missing")
@@ -867,13 +1069,33 @@ def _validate_lifecycle_and_policy(
             refs.append(lifecycle.replacement_candidate_ref)
     if lifecycle.lifecycle == "conflicted" and not lifecycle.conflicts_with_candidate_refs:
         _add_once(reasons, "lifecycle_target_missing")
-    known = set(context.known_lifecycle_candidate_refs)
+    known = {
+        revision.candidate_ref: revision
+        for revision in context.known_lifecycle_revisions
+    }
+    for revision in context.known_lifecycle_revisions:
+        payload = _lifecycle_revision_payload(
+            candidate_ref=revision.candidate_ref,
+            revision_id=revision.revision_id,
+            lifecycle_state=revision.lifecycle_state,
+        )
+        if revision.revision_hash != canonical_sha256(payload):
+            _add_once(reasons, "lifecycle_revision_hash_mismatch")
     if any(not reference or reference not in known for reference in refs):
         _add_once(reasons, "lifecycle_target_unresolved")
+    if any(
+        known[reference].lifecycle_state != "active"
+        for reference in refs
+        if reference in known
+    ):
+        _add_once(reasons, "lifecycle_target_not_active")
 
 
-def _decision_action(linked: LinkedL1Candidate) -> tuple[
-    Literal["create", "correction", "lifecycle_update"], list[str]
+def _decision_action(
+    linked: LinkedL1Candidate, context: AdmissionContext
+) -> tuple[
+    Literal["create", "correction", "lifecycle_update"],
+    list[KnownLifecycleRevision],
 ]:
     lifecycle = linked.typed_candidate.lifecycle
     targets = sorted(
@@ -890,10 +1112,15 @@ def _decision_action(linked: LinkedL1Candidate) -> tuple[
             ]
         )
     )
+    known = {
+        revision.candidate_ref: revision
+        for revision in context.known_lifecycle_revisions
+    }
+    target_revisions = [known[target] for target in targets if target in known]
     if lifecycle.replaces_candidate_refs:
-        return "correction", targets
+        return "correction", target_revisions
     if lifecycle.lifecycle != "active" or targets:
-        return "lifecycle_update", targets
+        return "lifecycle_update", target_revisions
     return "create", []
 
 
@@ -922,6 +1149,8 @@ def admit_linked_l1(
         "identity_registry_binding_mismatch",
         "identity_membership_missing",
         "identity_membership_type_incompatible",
+        "lifecycle_revision_hash_mismatch",
+        "lifecycle_target_not_active",
     }
     for reason in list(abstain_reasons):
         if reason in identity_rejects:
@@ -958,7 +1187,7 @@ def admit_linked_l1(
             context=context,
             action="none",
         )
-    action, targets = _decision_action(linked)
+    action, targets = _decision_action(linked, context)
     return _decision(
         status="accept",
         reasons=[],
@@ -1033,15 +1262,19 @@ def _diagnostic_identity_binding(
         canonical_entity_id="entity:dev-coffee-cup",
         identity_status="resolved",
         identity_snapshot_id=authority.snapshot_id,
+        identity_snapshot_revision=authority.snapshot_revision,
         identity_snapshot_hash=authority.snapshot_hash,
         identity_registry_revision="identity-dev-v1",
+        identity_registry_hash=authority.identity_registry_hash,
         concept_type_ids=["memory:CoffeeBeverage"],
     )
     return binding, authority
 
 
 def _run_diagnostic_case(
-    spec: dict[str, object], registry: OntologyRegistry
+    spec: dict[str, object],
+    registry: OntologyRegistry,
+    raw_root: Path,
 ) -> tuple[dict[str, object], bool, bool, bool]:
     case_id = str(spec["case_id"])
     text = str(spec["text"])
@@ -1052,11 +1285,13 @@ def _run_diagnostic_case(
     identity_authorities = (
         [identity_authority] if identity_authority is not None else []
     )
+    raw_path = raw_root / f"{case_id}.json"
+    raw_path.write_bytes(text_bytes)
     raw = make_raw_artifact_revision(
         source_id=f"ontology-linking-{case_id}",
         frozen_identity="ontology-linking-dev-v1",
         official_url="https://example.invalid/ontology-linking-dev-v1",
-        local_path=f"diagnostic://ontology-linking-dev-v1/{case_id}",
+        local_path=str(raw_path),
         reader="json",
         size_bytes=len(text_bytes),
         content_sha256=hashlib.sha256(text_bytes).hexdigest(),
@@ -1110,7 +1345,7 @@ def _run_diagnostic_case(
         identity_registry_revision="identity-dev-v1",
         identity_registry_hash="2" * 64,
         transaction_time="2026-07-29T00:00:00Z",
-        known_lifecycle_candidate_refs=[],
+        known_lifecycle_revisions=[],
         policy=AdmissionPolicy(
             policy_id="policy-ontology-linking-dev-v1",
             policy_version="dev-v1",
@@ -1280,7 +1515,11 @@ def run_dev_ontology_linking_assessment(output_root: Path) -> dict[str, object]:
 
     registry = build_diagnostic_ontology_registry()
     specs = _diagnostic_specs()
-    evaluated = [_run_diagnostic_case(spec, registry) for spec in specs]
+    raw_root = Path("/tmp/ke-memory-l1-diagnostic-dev-v1")
+    raw_root.mkdir(mode=0o700, parents=True, exist_ok=True)
+    evaluated = [
+        _run_diagnostic_case(spec, registry, raw_root) for spec in specs
+    ]
     case_results = [item[0] for item in evaluated]
     expected_abstentions = [
         spec["expected_status"] == "abstain" for spec in specs
