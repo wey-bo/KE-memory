@@ -450,3 +450,42 @@ live guard、staging residue、future absence 和 zero-write audit 全部通过�
 proposer、scoring、pipeline integration 或任何 authoritative write。人工 identity
 裁决未物化，embedding 不是权威，`LONGMEMEVAL-6d550036` 继续为
 `structured_l2_identity_unresolved`，外部 memory 系统仍不复跑。
+
+## Typed extractor fresh-hidden v3 materialization
+
+2026-07-30 已完成唯一一次正式 fresh-v3 hidden materialization。官方 root 为
+`artifacts/automatic-extraction-assessment/typed-extractor-v3-fresh-hidden-v1/`，
+caller-supplied UTC label 为 `2026-07-30T04:44:31Z`。public validator 返回
+`valid`：L1 `24`、L2 `18`、model request `0`、freeze 时不存在 model run。root
+精确包含 chronology 与 `l1`/`l2` 两层；十个 source/public/authority/gold/manifest
+payload 和 chronology 共 11 个 JSON，文件 mode 均为 `0444`，root/layer 目录均为
+`0775`，不存在 staging residue、model/proposal/provenance/scoring/result 路径。
+
+chronology schema/status 为
+`typed-extractor-fresh-v3-materialization-receipt-v1` / `frozen_pre_model`，SHA-256
+为 `fe3cfbd739de477d99089c4ed6f85322236e00deb9b405596f038366bee16cca`。
+materializer module/test SHA-256 为
+`1e134fcc005da9e10f9f5be95cf46f3451b39f16556b1a088c9f034d02f6bc7e` /
+`76f5e2377b153b68eef1d5a84be7a865af8a24cbf30b4e5adb7b49915646ab80`。
+十个 payload 的 canonical replay 为 `10/10` byte-identical；L1 八个 family 各 3
+条、L2 九个 family 各 2 条，active receipt SHA/size/mode/nlink、Git recovery chain、
+candidate queue 和 live guard 均未漂移。manual adjudication 仍为 false，九类
+automatic write、model request 和 evaluation-result write 均为 `0`，
+`LONGMEMEVAL-6d550036` 保持 `structured_l2_identity_unresolved`。
+
+独立 rereview 最终为 Critical `0`、Important `0`、Minor `0`。正式调用前 gate：
+focused materialization `45 passed`；phase-aware prereg/authoring/snapshot
+`54 passed, 62 deselected`；tracked typed `255 passed, 1 deselected`；runtime
+`773 passed, 1 skipped`；tracked natural `775 passed, 24 allowlisted failures,
+1 deselected`，24 项仅为缺 `duckdb` 或冻结旧绝对路径；knowledge collection
+精确保留 6 个缺 `nltk` error。Ruff、`compileall`、`tabnanny`、diff、credential、
+protected hash 和 zero-write checks 均通过。正式调用后，XML 导出的 100 个历史
+phase-bound node 使用完整 node ID 精确 deselect，四文件复验为
+`61 passed, 100 deselected`；public validator、11-file audit、Ruff、`compileall`、
+`tabnanny`、diff、credential `0`、parallel SHA 和 protected-state checks 再次通过。
+
+该 materialization 只冻结 pre-model hidden 数据，不授权 proposer 或 scorer。
+下一阶段必须先单独设计 no-history、public-only proposer freeze/qualification 并取得
+用户明确批准；即使后续 qualification 通过，也不自动授权 pipeline integration、
+authoritative write、closure、aggregation、benchmark 扩展或外部系统复跑。人工
+identity 裁决仍不物化，embedding 仍非权威。

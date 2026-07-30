@@ -346,13 +346,13 @@ Git plumbing, `tempfile`, and Linux `renameat2(RENAME_NOREPLACE)`.
 - Consumes the committed/reviewed materializer and fixed active receipt.
 - Produces exactly ten frozen payloads and one chronology receipt.
 
-- [ ] **Step 1: Run an independent read-only review**
+- [x] **Step 1: Run an independent read-only review**
 
   Review the materializer/test commits against the design and this plan. Fix
   every Critical or Important finding with a failing regression test first,
   rerun its focused tests, and repeat review until no such finding remains.
 
-- [ ] **Step 2: Run the complete pre-freeze gate**
+- [x] **Step 2: Run the complete pre-freeze gate**
 
   Run focused materialization, authoring, relocation, prereg, phase-aware typed,
   runtime, static, exact transition, Git blob, candidate queue/live guard,
@@ -360,13 +360,13 @@ Git plumbing, `tempfile`, and Linux `renameat2(RENAME_NOREPLACE)`.
   Run the correctly rooted tracked natural and knowledge suites and report
   known normalization gaps separately without modifying frozen history.
 
-- [ ] **Step 3: Perform the only official materialization call**
+- [x] **Step 3: Perform the only official materialization call**
 
   Call `materialize_fresh_v3_hidden` directly with exact repository/workspace,
   official evaluation root, and one valid current UTC label. Do not invoke CLI,
   proposer, scorer, API transport, materialization retry, or model command.
 
-- [ ] **Step 4: Run the complete post-freeze audit**
+- [x] **Step 4: Run the complete post-freeze audit**
 
   Reopen all eleven files; validate exact SHA/size/mode, `24/18` counts, family
   maps, canonical replay, chronology/Git/receipt/materializer bindings, root
@@ -374,7 +374,7 @@ Git plumbing, `tempfile`, and Linux `renameat2(RENAME_NOREPLACE)`.
   guard, manual-adjudication false, unresolved LongMemEval, credentials, and
   zero writes. Run phase-aware tests and static checks again.
 
-- [ ] **Step 5: Update and commit fact sources**
+- [x] **Step 5: Update and commit fact sources**
 
   Record the caller-supplied label, chronology SHA, materializer/test SHA,
   output counts/modes, review result, pre/post gate results, and remaining
@@ -386,6 +386,36 @@ Git plumbing, `tempfile`, and Linux `renameat2(RENAME_NOREPLACE)`.
   ```bash
   git commit -m "Materialize fresh-v3 hidden evaluation"
   ```
+
+### Task 4 Execution Record
+
+- Independent rereview: Critical `0`, Important `0`, Minor `0`; focused
+  materialization `45 passed`.
+- Pre-freeze gate: phase-aware prereg/authoring/snapshot
+  `54 passed, 62 deselected`; tracked typed `255 passed, 1 deselected`;
+  runtime `773 passed, 1 skipped`; tracked natural
+  `775 passed, 24 allowlisted failures, 1 deselected`; knowledge retained the
+  exact six allowed missing-`nltk` collection errors. Static, credential,
+  protected-state, root/staging-absence, and zero-write checks passed.
+- The only official call used caller-supplied label `2026-07-30T04:44:31Z` and
+  published `artifacts/automatic-extraction-assessment/typed-extractor-v3-fresh-hidden-v1/`.
+  The result was `valid`, with L1/L2 `24/18`, model requests `0`, and no model
+  run at freeze.
+- Chronology SHA-256 is
+  `fe3cfbd739de477d99089c4ed6f85322236e00deb9b405596f038366bee16cca`;
+  materializer module/test SHA-256 values are
+  `1e134fcc005da9e10f9f5be95cf46f3451b39f16556b1a088c9f034d02f6bc7e` /
+  `76f5e2377b153b68eef1d5a84be7a865af8a24cbf30b4e5adb7b49915646ab80`.
+  All eleven JSON files are mode `0444`, root/layer directories are `0775`,
+  and all ten payloads replay byte-identically.
+- Post-freeze audit: the public validator and exact eleven-file audit passed;
+  XML-derived full node IDs produced `61 passed, 100 deselected` across the
+  four phase files. Ruff, compileall, tabnanny, diff, credential `0`, candidate
+  queue/live guard, parallel hashes, and nine zero-write checks passed again.
+- This record does not authorize a proposer or scorer. A separate no-history,
+  public-only proposer-freeze/qualification design and implementation plan
+  require explicit user approval before execution; pipeline integration and
+  authoritative writes remain unauthorized.
 
 ## Self-Review
 
