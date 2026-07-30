@@ -209,6 +209,8 @@ def _validate_turns(turns: Sequence[RawTurnV1]) -> list[RawTurnV1]:
 
 def _make_source_inputs(
     turns: Sequence[RawTurnV1],
+    *,
+    raw_artifact_path: Path,
 ) -> tuple[
     RawArtifactRevision,
     list[SourceRecordRevision],
@@ -218,11 +220,14 @@ def _make_source_inputs(
         f"{item.turn_id}\nuser:{item.user_text}\nassistant:{item.assistant_text}"
         for item in turns
     ).encode("utf-8")
+    raw_artifact_path.parent.mkdir(parents=True, exist_ok=True)
+    with raw_artifact_path.open("xb") as stream:
+        stream.write(raw_bytes)
     artifact = make_raw_artifact_revision(
         source_id="e2e-inline-turns",
         frozen_identity=f"e2e-inline:{hashlib.sha256(raw_bytes).hexdigest()}",
         official_url="urn:ke-memory:e2e-inline",
-        local_path="inline:e2e-turns",
+        local_path=str(raw_artifact_path),
         reader="json",
         size_bytes=len(raw_bytes),
         content_sha256=hashlib.sha256(raw_bytes).hexdigest(),
@@ -795,9 +800,13 @@ def run_e2e_pipeline(
     ontology_registry: OntologyRegistry | None = None,
 ) -> EndToEndResultV1:
     ordered_turns = _validate_turns(turns)
+    repository_path = repository_path.resolve()
     ontology = ontology_registry or build_diagnostic_ontology_registry()
     artifact, source_revisions, extraction_inputs = _make_source_inputs(
-        ordered_turns
+        ordered_turns,
+        raw_artifact_path=repository_path.with_name(
+            f"{repository_path.name}.raw.json"
+        ),
     )
     producer = ProducerIdentity(
         workflow_run_id="run-e2e-closure",
