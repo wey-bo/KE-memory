@@ -61,13 +61,14 @@ from .typed_extractor_l2_model_run import (
 Layer = Literal["l1", "l2"]
 
 REQUESTED_MODEL = "deepseek-v4-pro"
-EVALUATION_ID = "typed-extractor-v3-fresh-hidden-v1-deepseek-v4-pro-rerun-v1"
+OFFICIAL_BASE_URL = "https://api.deepseek.com"
+EVALUATION_ID = "typed-extractor-v3-fresh-hidden-v1-deepseek-v4-pro-official-v1"
 ORIGINAL_RELATIVE_ROOT = (
     "artifacts/automatic-extraction-assessment/typed-extractor-v3-fresh-hidden-v1"
 )
 RERUN_RELATIVE_ROOT = (
     "artifacts/automatic-extraction-assessment/"
-    "typed-extractor-v3-fresh-hidden-v1-deepseek-v4-pro-rerun-v1"
+    "typed-extractor-v3-fresh-hidden-v1-deepseek-v4-pro-official-v1"
 )
 ORIGINAL_FACT_COMMIT = "252e3d9055a191c1434abb8f6308761fe3a2b9c9"
 ORIGINAL_BINDINGS = {
@@ -83,8 +84,8 @@ ORIGINAL_BINDINGS = {
 }
 PROPOSER_ID = "deepseek-official-api"
 PROPOSER_VERSIONS = {
-    "l1": "deepseek-v4-pro@ustc-api-2026-07-30-fresh-v3-rerun-l1",
-    "l2": "deepseek-v4-pro@ustc-api-2026-07-30-fresh-v3-rerun-l2",
+    "l1": "deepseek-v4-pro@official-api-2026-07-30-fresh-v3-l1",
+    "l2": "deepseek-v4-pro@official-api-2026-07-30-fresh-v3-l2",
 }
 CASE_COUNTS = {"l1": 24, "l2": 18}
 ARTIFACT_FILES = (
@@ -138,7 +139,7 @@ class ProposalFreezeReceipt(StrictModel):
     )
     status: Literal["frozen"] = "frozen"
     evaluation_id: Literal[
-        "typed-extractor-v3-fresh-hidden-v1-deepseek-v4-pro-rerun-v1"
+        "typed-extractor-v3-fresh-hidden-v1-deepseek-v4-pro-official-v1"
     ] = EVALUATION_ID
     layer: Layer
     dataset_id: str = Field(min_length=1)
@@ -182,7 +183,7 @@ class ProposalFailureReceipt(StrictModel):
     )
     status: Literal["frozen_failure"] = "frozen_failure"
     evaluation_id: Literal[
-        "typed-extractor-v3-fresh-hidden-v1-deepseek-v4-pro-rerun-v1"
+        "typed-extractor-v3-fresh-hidden-v1-deepseek-v4-pro-official-v1"
     ] = EVALUATION_ID
     layer: Layer
     run_id: str = Field(min_length=1)
@@ -345,8 +346,8 @@ def run_ids(run_label: str) -> dict[str, str]:
         raise ValueError("invalid run label")
     return {
         layer: (
-            f"run-{run_label}-deepseek-v4-pro-typed-{layer}-"
-            "fresh-hidden-v3-rerun"
+            f"run-{run_label}-deepseek-v4-pro-official-typed-{layer}-"
+            "fresh-hidden-v3"
         )
         for layer in ("l1", "l2")
     }
@@ -504,6 +505,10 @@ def run_and_freeze_v4pro_layer(
     layer = _require_layer(layer)
     if not base_url or not api_key:
         raise ValueError("base URL and API key are required")
+    normalized_base_url = base_url.rstrip("/")
+    if normalized_base_url != OFFICIAL_BASE_URL:
+        raise ValueError("official DeepSeek base URL is required")
+    base_url = normalized_base_url
     if isinstance(timeout_seconds, bool) or timeout_seconds <= 0:
         raise ValueError("timeout_seconds must be positive")
     _, workspace_root, original_root, rerun_root = _roots(

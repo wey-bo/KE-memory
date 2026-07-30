@@ -144,9 +144,17 @@ def proposal_response(workspace_root: Path, layer: str) -> bytes:
 
 
 def test_run_ids_bind_v4pro_and_one_label() -> None:
+    assert rerun.EVALUATION_ID == (
+        "typed-extractor-v3-fresh-hidden-v1-deepseek-v4-pro-official-v1"
+    )
+    assert rerun.RERUN_RELATIVE_ROOT.endswith(rerun.EVALUATION_ID)
+    assert rerun.PROPOSER_VERSIONS == {
+        "l1": "deepseek-v4-pro@official-api-2026-07-30-fresh-v3-l1",
+        "l2": "deepseek-v4-pro@official-api-2026-07-30-fresh-v3-l2",
+    }
     assert rerun.run_ids("20260730T080000Z") == {
-        "l1": "run-20260730T080000Z-deepseek-v4-pro-typed-l1-fresh-hidden-v3-rerun",
-        "l2": "run-20260730T080000Z-deepseek-v4-pro-typed-l2-fresh-hidden-v3-rerun",
+        "l1": "run-20260730T080000Z-deepseek-v4-pro-official-typed-l1-fresh-hidden-v3",
+        "l2": "run-20260730T080000Z-deepseek-v4-pro-official-typed-l2-fresh-hidden-v3",
     }
     with pytest.raises(ValueError, match="run label"):
         rerun.run_ids("2026-07-30T08:00:00Z")
@@ -166,6 +174,7 @@ def test_dispatches_use_sibling_root_and_public_only_v4pro(
         run_root = result_root / layer / "model-runs" / result["run_ids"][layer]
         dispatch = load_json(run_root / "dispatch.json")
         assert dispatch["requested_model"] == "deepseek-v4-pro"
+        assert dispatch["proposer_version"] == rerun.PROPOSER_VERSIONS[layer]
         assert dispatch["history_context_inherited"] is False
         assert dispatch["authority_or_gold_allowed"] is False
         assert set(dispatch["allowed_files"]) == {
@@ -204,7 +213,7 @@ def test_successful_layer_calls_opener_once_and_freezes_receipt(
         repository_root,
         workspace_root,
         layer,
-        base_url="https://example.invalid/v1",
+        base_url="https://api.deepseek.com/",
         api_key="runtime-only",
         timeout_seconds=30,
         opener=opener,
@@ -217,6 +226,34 @@ def test_successful_layer_calls_opener_once_and_freezes_receipt(
         Path(result["run_root"]) / name
         for name in rerun.SUCCESS_FILES
     }
+
+
+def test_non_official_base_url_is_rejected_before_opener(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    repository_root, workspace_root, _ = phase_fixture(tmp_path, monkeypatch)
+    rerun.freeze_v4pro_rerun_dispatches(
+        repository_root, workspace_root, "20260730T080000Z"
+    )
+    opener_called = False
+
+    def opener(*_args: Any, **_kwargs: Any) -> FakeResponse:
+        nonlocal opener_called
+        opener_called = True
+        raise AssertionError("opener must not be called")
+
+    with pytest.raises(ValueError, match="official DeepSeek base URL"):
+        rerun.run_and_freeze_v4pro_layer(
+            repository_root,
+            workspace_root,
+            "l1",
+            base_url="https://api.deepseek.com.attacker.invalid",
+            api_key="runtime-only",
+            timeout_seconds=30,
+            opener=opener,
+        )
+
+    assert opener_called is False
 
 
 def test_transport_failure_calls_opener_once_and_cannot_be_retried(
@@ -234,7 +271,7 @@ def test_transport_failure_calls_opener_once_and_cannot_be_retried(
         raise PermissionError("denied")
 
     kwargs = {
-        "base_url": "https://example.invalid/v1",
+        "base_url": "https://api.deepseek.com",
         "api_key": "runtime-only",
         "timeout_seconds": 30,
         "opener": opener,
