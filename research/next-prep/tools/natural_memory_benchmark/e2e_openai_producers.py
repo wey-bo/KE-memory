@@ -358,8 +358,25 @@ class _OpenAICompatibleJSONClient:
             except Exception as exc:
                 if self._retryable(exc) and attempt < self.max_attempts:
                     continue
+                if isinstance(exc, HTTPError):
+                    try:
+                        error_body = exc.read()
+                        response_sha256 = hashlib.sha256(error_body).hexdigest()
+                    except OSError:
+                        response_sha256 = "unavailable"
+                    raise ModelBoundaryError(
+                        f"{self.stage} model request failed after {attempt} "
+                        f"attempt(s): reason=http_error; http_status={exc.code}; "
+                        f"response_sha256={response_sha256}"
+                    ) from None
+                if isinstance(exc, (TimeoutError, socket.timeout)):
+                    reason = "request_timeout"
+                else:
+                    reason = "request_exception"
                 raise ModelBoundaryError(
-                    f"{self.stage} model request failed after {attempt} attempt(s)"
+                    f"{self.stage} model request failed after {attempt} "
+                    f"attempt(s): reason={reason}; http_status=unavailable; "
+                    "response_sha256=unavailable"
                 ) from None
 
             response_sha256 = hashlib.sha256(raw).hexdigest()

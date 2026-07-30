@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import hashlib
+import io
 import json
 from pathlib import Path
 from typing import Any
+from urllib.error import HTTPError
 
 import pytest
 
@@ -344,6 +346,42 @@ def test_model_boundary_error_reports_sanitized_response_fingerprint(
     assert "http_status=200" in message
     assert f"response_sha256={hashlib.sha256(response).hexdigest()}" in message
     assert forbidden_text not in message
+    assert not repository.exists()
+    assert not result_path.exists()
+
+
+def test_model_boundary_http_error_reports_sanitized_fingerprint(
+    tmp_path: Path,
+) -> None:
+    error_body = b"sensitive-provider-error-body"
+    http_error = HTTPError(
+        url="https://model.invalid/v1/chat/completions",
+        code=422,
+        msg="Unprocessable Entity",
+        hdrs=None,
+        fp=io.BytesIO(error_body),
+    )
+    repository = tmp_path / "http-error-memory-history.git"
+    result_path = tmp_path / "http-error-result.json"
+
+    with pytest.raises(ModelBoundaryError) as captured:
+        run_openai_e2e(
+            turns=_turns(),
+            question="What beverage is preferred?",
+            repository_path=repository,
+            result_path=result_path,
+            base_url="https://model.invalid/v1",
+            api_key="credential-that-must-not-leak",
+            model="test-model",
+            max_attempts=1,
+            opener=_SequencedOpener([http_error]),
+        )
+
+    message = str(captured.value)
+    assert "reason=http_error" in message
+    assert "http_status=422" in message
+    assert f"response_sha256={hashlib.sha256(error_body).hexdigest()}" in message
+    assert "sensitive-provider-error-body" not in message
     assert not repository.exists()
     assert not result_path.exists()
 
