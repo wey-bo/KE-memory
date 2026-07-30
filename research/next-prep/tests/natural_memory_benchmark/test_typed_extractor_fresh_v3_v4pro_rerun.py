@@ -228,6 +228,49 @@ def test_successful_layer_calls_opener_once_and_freezes_receipt(
     }
 
 
+def test_response_model_mismatch_is_rejected_before_proposal_freeze(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    repository_root, workspace_root, result_root = phase_fixture(
+        tmp_path, monkeypatch
+    )
+    dispatches = rerun.freeze_v4pro_rerun_dispatches(
+        repository_root, workspace_root, "20260730T080000Z"
+    )
+
+    def opener(*_args: Any, **_kwargs: Any) -> FakeResponse:
+        response = json.loads(proposal_response(workspace_root, "l1"))
+        response["model"] = "deepseek-chat"
+        return FakeResponse(
+            json.dumps(response, ensure_ascii=False, sort_keys=True).encode()
+        )
+
+    with pytest.raises(ValueError, match="response model must match requested model"):
+        rerun.run_and_freeze_v4pro_layer(
+            repository_root,
+            workspace_root,
+            "l1",
+            base_url="https://api.deepseek.com",
+            api_key="runtime-only",
+            timeout_seconds=30,
+            opener=opener,
+        )
+
+    run_root = (
+        result_root
+        / "l1/model-runs"
+        / dispatches["run_ids"]["l1"]
+    )
+    assert {path.name for path in run_root.iterdir()} == {
+        "dispatch.json",
+        "raw-response.json",
+        "proposal-freeze-failure-receipt.json",
+    }
+    failure = load_json(run_root / "proposal-freeze-failure-receipt.json")
+    assert failure["failure_type"] == "ValueError"
+    assert set(failure["artifacts"]) == {"dispatch.json", "raw-response.json"}
+
+
 def test_non_official_base_url_is_rejected_before_opener(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

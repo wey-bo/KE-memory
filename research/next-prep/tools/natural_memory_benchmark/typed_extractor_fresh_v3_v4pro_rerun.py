@@ -545,6 +545,13 @@ def run_and_freeze_v4pro_layer(
             }
             if layer == "l1":
                 run_l1_openai_compatible_proposer(**common)
+            else:
+                run_l2_openai_compatible_proposer(**common)
+            raw = load_json(run_root / "raw-response.json")
+            response_model = raw.get("model")
+            if response_model != REQUESTED_MODEL:
+                raise ValueError("response model must match requested model")
+            if layer == "l1":
                 freeze_l1_model_proposals(
                     public,
                     staged,
@@ -556,7 +563,6 @@ def run_and_freeze_v4pro_layer(
                     isolation_context=ISOLATION_CONTEXT,
                 )
             else:
-                run_l2_openai_compatible_proposer(**common)
                 freeze_l2_model_proposals(
                     public,
                     staged,
@@ -567,10 +573,6 @@ def run_and_freeze_v4pro_layer(
                     raw_response_path=run_root / "raw-response.json",
                     isolation_context=ISOLATION_CONTEXT,
                 )
-        raw = load_json(run_root / "raw-response.json")
-        response_model = raw.get("model")
-        if not isinstance(response_model, str) or not response_model:
-            raise ValueError("raw response model missing")
         dispatch = load_json(run_root / "dispatch.json")
         receipt = ProposalFreezeReceipt(
             layer=layer,
