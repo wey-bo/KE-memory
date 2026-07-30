@@ -233,6 +233,40 @@ def test_successful_layer_calls_opener_once_and_freezes_receipt(
     assert receipt["evaluation_id"] == rerun.EVALUATION_ID
 
 
+def test_proposal_validator_accepts_exact_post_score_artifact_set(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    repository_root, workspace_root, _ = phase_fixture(
+        tmp_path, monkeypatch
+    )
+    rerun.freeze_v4pro_rerun_dispatches(
+        repository_root, workspace_root, "20260730T080000Z"
+    )
+
+    def opener(*_args: Any, **_kwargs: Any) -> FakeResponse:
+        return FakeResponse(proposal_response(workspace_root, "l1"))
+
+    frozen = rerun.run_and_freeze_v4pro_layer(
+        repository_root,
+        workspace_root,
+        "l1",
+        base_url="https://api.deepseek.com",
+        api_key="runtime-only",
+        timeout_seconds=30,
+        opener=opener,
+    )
+    run_root = Path(frozen["run_root"])
+    for name in rerun.POST_SCORE_FILES - rerun.SUCCESS_FILES:
+        path = run_root / name
+        path.write_bytes(b"{}\n")
+        path.chmod(0o444)
+
+    validated = rerun.validate_v4pro_proposal_freeze(
+        repository_root, workspace_root, "l1"
+    )
+    assert validated["status"] == "valid"
+
+
 def test_response_model_mismatch_is_rejected_before_proposal_freeze(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:

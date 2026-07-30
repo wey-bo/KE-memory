@@ -609,7 +609,8 @@ def validate_v4pro_proposal_freeze(
     )
     state = _load_preflight(rerun_root)
     run_root = _discover_runs(rerun_root)[layer]
-    if {path.name for path in run_root.iterdir()} != SUCCESS_FILES:
+    actual_names = {path.name for path in run_root.iterdir()}
+    if actual_names not in (SUCCESS_FILES, POST_SCORE_FILES):
         raise ValueError(f"{layer} proposal freeze artifact set mismatch")
     dispatch = _validate_dispatch(workspace_root, original_root, layer, run_root)
     receipt_content = _read_immutable(
