@@ -269,7 +269,10 @@ class _BufferedResponse:
 
 
 class _SequencedOpener:
-    def __init__(self, responses: list[bytes | Exception]) -> None:
+    def __init__(
+        self,
+        responses: list[bytes | Exception | _BufferedResponse],
+    ) -> None:
         self.responses = list(responses)
         self.requests: list[dict[str, Any]] = []
         self.timeouts: list[int] = []
@@ -282,7 +285,18 @@ class _SequencedOpener:
         response = self.responses.pop(0)
         if isinstance(response, Exception):
             raise response
+        if isinstance(response, _BufferedResponse):
+            return response
         return _BufferedResponse(response)
+
+
+class _ReadFailingResponse(_BufferedResponse):
+    def __init__(self, exc: Exception) -> None:
+        super().__init__(b"sensitive-provider-response-body")
+        self.exc = exc
+
+    def read(self) -> bytes:
+        raise self.exc
 
 
 def _chat_response(payload: object, *, include_model: bool = True) -> bytes:
@@ -382,6 +396,72 @@ def test_model_boundary_http_error_reports_sanitized_fingerprint(
     assert "http_status=422" in message
     assert f"response_sha256={hashlib.sha256(error_body).hexdigest()}" in message
     assert "sensitive-provider-error-body" not in message
+    assert not repository.exists()
+    assert not result_path.exists()
+
+
+def test_model_boundary_open_exception_reports_sanitized_phase_and_type(
+    tmp_path: Path,
+) -> None:
+    credential = "credential-that-must-not-leak"
+    exception_detail = "sensitive-open-exception-detail"
+    repository = tmp_path / "open-error-memory-history.git"
+    result_path = tmp_path / "open-error-result.json"
+
+    with pytest.raises(ModelBoundaryError) as captured:
+        run_openai_e2e(
+            turns=_turns(),
+            question="What beverage is preferred?",
+            repository_path=repository,
+            result_path=result_path,
+            base_url="https://model.invalid/v1",
+            api_key=credential,
+            model="test-model",
+            max_attempts=1,
+            opener=_SequencedOpener(
+                [ConnectionResetError(exception_detail)]
+            ),
+        )
+
+    message = str(captured.value)
+    assert "reason=request_exception" in message
+    assert "request_phase=open" in message
+    assert "exception_type=ConnectionResetError" in message
+    assert exception_detail not in message
+    assert credential not in message
+    assert not repository.exists()
+    assert not result_path.exists()
+
+
+def test_model_boundary_read_exception_reports_sanitized_phase_and_type(
+    tmp_path: Path,
+) -> None:
+    credential = "credential-that-must-not-leak"
+    exception_detail = "sensitive-provider-response-body"
+    repository = tmp_path / "read-error-memory-history.git"
+    result_path = tmp_path / "read-error-result.json"
+
+    with pytest.raises(ModelBoundaryError) as captured:
+        run_openai_e2e(
+            turns=_turns(),
+            question="What beverage is preferred?",
+            repository_path=repository,
+            result_path=result_path,
+            base_url="https://model.invalid/v1",
+            api_key=credential,
+            model="test-model",
+            max_attempts=1,
+            opener=_SequencedOpener(
+                [_ReadFailingResponse(ConnectionAbortedError(exception_detail))]
+            ),
+        )
+
+    message = str(captured.value)
+    assert "reason=request_exception" in message
+    assert "request_phase=read" in message
+    assert "exception_type=ConnectionAbortedError" in message
+    assert exception_detail not in message
+    assert credential not in message
     assert not repository.exists()
     assert not result_path.exists()
 

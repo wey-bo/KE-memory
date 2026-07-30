@@ -351,9 +351,11 @@ class _OpenAICompatibleJSONClient:
             method="POST",
         )
         for attempt in range(1, self.max_attempts + 1):
+            request_phase: Literal["open", "read"] = "open"
             try:
                 with self._opener(request, timeout=self.timeout_seconds) as response:
                     response_status = getattr(response, "status", None)
+                    request_phase = "read"
                     raw = response.read()
             except Exception as exc:
                 if self._retryable(exc) and attempt < self.max_attempts:
@@ -367,7 +369,9 @@ class _OpenAICompatibleJSONClient:
                     raise ModelBoundaryError(
                         f"{self.stage} model request failed after {attempt} "
                         f"attempt(s): reason=http_error; http_status={exc.code}; "
-                        f"response_sha256={response_sha256}"
+                        f"response_sha256={response_sha256}; "
+                        f"request_phase={request_phase}; "
+                        f"exception_type={type(exc).__name__}"
                     ) from None
                 if isinstance(exc, (TimeoutError, socket.timeout)):
                     reason = "request_timeout"
@@ -376,7 +380,9 @@ class _OpenAICompatibleJSONClient:
                 raise ModelBoundaryError(
                     f"{self.stage} model request failed after {attempt} "
                     f"attempt(s): reason={reason}; http_status=unavailable; "
-                    "response_sha256=unavailable"
+                    "response_sha256=unavailable; "
+                    f"request_phase={request_phase}; "
+                    f"exception_type={type(exc).__name__}"
                 ) from None
 
             response_sha256 = hashlib.sha256(raw).hexdigest()
