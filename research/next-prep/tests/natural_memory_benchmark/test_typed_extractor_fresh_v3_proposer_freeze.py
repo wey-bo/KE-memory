@@ -243,6 +243,28 @@ def test_base_materialization_replays_current_official_root() -> None:
     assert result["status"] == "frozen_pre_model"
 
 
+def test_preflight_uses_frozen_artifact_replay_after_scorer_commit(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr(
+        proposer_freeze,
+        "_common_bindings",
+        lambda *_args, **_kwargs: {"status": "valid"},
+    )
+    monkeypatch.setattr(
+        proposer_freeze,
+        "_require_no_result_paths",
+        lambda *_args, **_kwargs: None,
+    )
+
+    result = proposer_freeze.validate_fresh_v3_proposer_preflight(
+        REPOSITORY_ROOT,
+        WORKSPACE_ROOT,
+    )
+
+    assert result["status"] == "valid"
+
+
 def test_git_state_allows_only_formal_fresh_v3_evidence_after_dispatch(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,

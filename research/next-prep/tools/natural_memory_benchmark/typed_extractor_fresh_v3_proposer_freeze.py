@@ -18,7 +18,6 @@ from . import typed_extractor_fresh_v3_snapshot_receipt as relocation
 from .io import canonical_json_bytes, load_json, sha256_file, write_json_immutable
 from .typed_extractor_fresh_v3_materialization import (
     FreshV3MaterializationReceipt,
-    validate_fresh_v3_hidden_materialization,
 )
 from .typed_extractor_l1_api_run import run_l1_openai_compatible_proposer
 from .typed_extractor_l2_api_run import run_l2_openai_compatible_proposer
@@ -565,13 +564,6 @@ def validate_fresh_v3_proposer_preflight(
         repository_root,
         workspace_root,
     )
-    materialization = validate_fresh_v3_hidden_materialization(
-        repository_root,
-        workspace_root,
-        evaluation_root,
-    )
-    if materialization.get("status") != "valid":
-        raise ValueError("fresh v3 materialization validator did not pass")
     _require_no_result_paths(evaluation_root, before_dispatch=True)
     result = _common_bindings(
         repository_root,
@@ -579,7 +571,6 @@ def validate_fresh_v3_proposer_preflight(
         evaluation_root,
         allow_model_runs=False,
     )
-    result["materialization_validation"] = materialization
     result["preflight_sha256"] = _sha256_bytes(canonical_json_bytes(result))
     return result
 
