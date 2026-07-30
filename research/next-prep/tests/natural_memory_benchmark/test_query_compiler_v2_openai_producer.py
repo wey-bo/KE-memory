@@ -169,6 +169,60 @@ def test_producer_returns_strict_typed_draft_without_putting_key_in_body() -> No
     assert API_KEY.encode("utf-8") not in request_bodies[0]
 
 
+def test_request_exposes_only_executable_answer_kinds() -> None:
+    module = _module()
+    request_bodies: list[bytes] = []
+
+    def opener(request: Any, *, timeout: int) -> _Response:
+        request_bodies.append(request.data)
+        return _response(json.dumps(_draft_payload()))
+
+    producer = module.OpenAICompatibleQueryDraftProducer(
+        registry=_registry(),
+        base_url="https://api.example.invalid/v1",
+        api_key=API_KEY,
+        model="deepseek-v4-flash",
+        opener=opener,
+    )
+
+    producer.produce(
+        _request().model_copy(
+            update={"raw_query": "What beverage is preferred?"}
+        )
+    )
+
+    request_payload = json.loads(request_bodies[0])
+    public_input = json.loads(request_payload["messages"][1]["content"])
+    response_schema = public_input["response_schema"]
+    answer_ref = response_schema["properties"]["answer"]["$ref"]
+    answer_schema = response_schema["$defs"][answer_ref.rsplit("/", 1)[-1]]
+    assert answer_schema["properties"]["kind"]["enum"] == ["fact", "count"]
+    assert public_input["operational_contract"]["answer_kind"] == {
+        "supported": ["fact", "count"],
+        "entity_valued_what_which": "fact",
+        "explicit_count_or_how_many": "count",
+    }
+
+
+def test_producer_rejects_answer_kind_outside_operational_contract() -> None:
+    module = _module()
+    payload = _draft_payload()
+    answer = payload["answer"]
+    assert isinstance(answer, dict)
+    answer["kind"] = "entity_list"
+    producer = module.OpenAICompatibleQueryDraftProducer(
+        registry=_registry(),
+        base_url="https://api.example.invalid/v1",
+        api_key=API_KEY,
+        model="deepseek-v4-flash",
+        opener=lambda *_args, **_kwargs: _response(json.dumps(payload)),
+        max_attempts=1,
+    )
+
+    with pytest.raises(module.QueryDraftProductionError, match="invalid response"):
+        producer.produce(_request())
+
+
 def test_producer_rejects_non_json_model_content() -> None:
     module = _module()
     producer = module.OpenAICompatibleQueryDraftProducer(

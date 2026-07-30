@@ -2,15 +2,35 @@ from __future__ import annotations
 
 import json
 import socket
-from typing import Any, Callable
+from typing import Any, Callable, Literal
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
 from .query_compiler_v2 import (
+    AnswerDraftV1,
     CompilerRegistryV1,
     QueryDraftRequestV1,
     QueryDraftV1,
 )
+
+
+class _OperationalAnswerDraftV1(AnswerDraftV1):
+    kind: Literal["fact", "count"]
+
+
+class _OperationalQueryDraftV1(QueryDraftV1):
+    answer: _OperationalAnswerDraftV1
+
+
+def _operational_contract() -> dict[str, object]:
+    return {
+        "schema_version": "query-draft-operational-contract-v1",
+        "answer_kind": {
+            "supported": ["fact", "count"],
+            "entity_valued_what_which": "fact",
+            "explicit_count_or_how_many": "count",
+        },
+    }
 
 
 class QueryDraftProductionError(RuntimeError):
@@ -57,7 +77,8 @@ class OpenAICompatibleQueryDraftProducer:
         public_input = {
             "request": request.model_dump(mode="json"),
             "registry": self.registry.model_dump(mode="json"),
-            "response_schema": QueryDraftV1.model_json_schema(),
+            "response_schema": _OperationalQueryDraftV1.model_json_schema(),
+            "operational_contract": _operational_contract(),
         }
         payload = {
             "model": self.model,
@@ -68,7 +89,10 @@ class OpenAICompatibleQueryDraftProducer:
                         "Compile the natural-language question into exactly one "
                         "QueryDraftV1 JSON object. Use only aliases and role types "
                         "from the supplied registry. Return JSON only, with no "
-                        "Markdown or explanatory text."
+                        "Markdown or explanatory text. Follow the supplied "
+                        "operational_contract: entity-valued what/which questions "
+                        "use answer.kind fact; use count only for explicit count "
+                        "or how-many questions."
                     ),
                 },
                 {
@@ -107,7 +131,10 @@ class OpenAICompatibleQueryDraftProducer:
             payload = json.loads(content)
             if not isinstance(payload, dict):
                 raise TypeError("response content must be a JSON object")
-            draft = QueryDraftV1.model_validate(payload)
+            operational_draft = _OperationalQueryDraftV1.model_validate(payload)
+            draft = QueryDraftV1.model_validate(
+                operational_draft.model_dump(mode="json")
+            )
             if draft.query_id != request.query_id:
                 raise ValueError("response query_id mismatch")
             return draft
