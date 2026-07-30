@@ -11,6 +11,7 @@ from .query_compiler_v2 import (
     CompilerRegistryV1,
     QueryDraftRequestV1,
     QueryDraftV1,
+    model_message_text,
 )
 
 
@@ -106,7 +107,6 @@ class OpenAICompatibleQueryDraftProducer:
             ],
             "temperature": 0,
             "max_tokens": self.max_tokens,
-            "response_format": {"type": "json_object"},
         }
         return Request(
             f"{self.base_url}/chat/completions",
@@ -125,9 +125,7 @@ class OpenAICompatibleQueryDraftProducer:
             choices = response["choices"]
             if not isinstance(choices, list) or len(choices) != 1:
                 raise ValueError("response must contain exactly one choice")
-            content = choices[0]["message"]["content"]
-            if not isinstance(content, str):
-                raise TypeError("response content must be text")
+            content = model_message_text(choices[0]["message"])
             payload = json.loads(content)
             if not isinstance(payload, dict):
                 raise TypeError("response content must be a JSON object")

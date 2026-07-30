@@ -18,6 +18,7 @@ from .e2e_pipeline import (
     TurnExtractionInputV1,
 )
 from .l1_ontology_linking import OntologyRegistry
+from .query_compiler_v2 import model_message_text
 from .typed_extractor_l1 import (
     L1Kind,
     TypedL1Candidate,
@@ -443,7 +444,6 @@ class _OpenAICompatibleJSONClient:
             ],
             "temperature": 0,
             "max_tokens": self.max_tokens,
-            "response_format": {"type": "json_object"},
         }
         request_bytes = json.dumps(payload, ensure_ascii=False, sort_keys=True).encode(
             "utf-8"
@@ -523,11 +523,10 @@ class _OpenAICompatibleJSONClient:
             ):
                 raise invalid_response("choices")
             message = choices[0].get("message")
-            if not isinstance(message, dict):
-                raise invalid_response("content")
-            content = message.get("content")
-            if not isinstance(content, str):
-                raise invalid_response("content")
+            try:
+                content = model_message_text(message)
+            except TypeError:
+                raise invalid_response("content") from None
             try:
                 result = json.loads(content)
             except (json.JSONDecodeError, UnicodeDecodeError):

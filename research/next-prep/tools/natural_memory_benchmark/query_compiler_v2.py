@@ -24,6 +24,24 @@ class StrictModel(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True)
 
 
+def model_message_text(message: object) -> str:
+    """Return the assistant text of one chat message.
+
+    Some OpenAI-compatible providers answer with a null ``content`` and place
+    the whole payload in ``reasoning_content``. Accept that shape so a complete
+    model answer is not discarded as a transport failure.
+    """
+    if not isinstance(message, dict):
+        raise TypeError("response message must be an object")
+    content = message.get("content")
+    if isinstance(content, str) and content.strip():
+        return content
+    reasoning = message.get("reasoning_content")
+    if isinstance(reasoning, str) and reasoning.strip():
+        return reasoning
+    raise TypeError("response message carries no assistant text")
+
+
 DraftTermKind = Literal["entity_surface", "variable", "literal"]
 CompiledTermKind = Literal["entity", "variable", "literal"]
 AnswerKindV2 = Literal["fact", "evidence_set", "count", "polarity", "entity_list"]

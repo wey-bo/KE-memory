@@ -9,6 +9,7 @@ from urllib.error import HTTPError
 
 import pytest
 
+from tools.natural_memory_benchmark import e2e_openai_runtime as e2e_runtime
 from tools.natural_memory_benchmark.e2e_openai_producers import (
     ModelBoundaryError,
     OpenAICompatibleL1BatchProducer,
@@ -22,7 +23,11 @@ from tools.natural_memory_benchmark.e2e_pipeline import (
     ProposedL2CandidateV1,
     RawTurnV1,
     TurnExtractionInputV1,
+    build_compiler_registry,
     run_e2e_pipeline,
+)
+from tools.natural_memory_benchmark.git_memory_history import (
+    GitMemoryHistoryRepository,
 )
 from tools.natural_memory_benchmark.l1_ontology_linking import (
     build_diagnostic_ontology_registry,
@@ -37,6 +42,7 @@ from tools.natural_memory_benchmark.query_compiler_v2 import (
     QueryTermDraftV1,
 )
 from tools.natural_memory_benchmark.query_compiler_v2_openai_producer import (
+    OpenAICompatibleQueryDraftProducer,
     QueryDraftProductionError,
 )
 from tools.natural_memory_benchmark.typed_extractor_l1 import (
@@ -309,6 +315,105 @@ def _chat_response(payload: object, *, include_model: bool = True) -> bytes:
     if include_model:
         envelope["model"] = "test-model-response"
     return json.dumps(envelope, sort_keys=True).encode("utf-8")
+
+
+def _reasoning_only_chat_response(payload: object) -> bytes:
+    """Reproduce the observed provider shape: null content, payload in reasoning."""
+    return json.dumps(
+        {
+            "model": "test-model-response",
+            "choices": [
+                {
+                    "finish_reason": "stop",
+                    "message": {
+                        "role": "assistant",
+                        "content": None,
+                        "reasoning_content": json.dumps(payload, sort_keys=True),
+                    },
+                }
+            ],
+        },
+        sort_keys=True,
+    ).encode("utf-8")
+
+
+def test_query_draft_request_does_not_pin_broken_json_object_format() -> None:
+    producer = OpenAICompatibleQueryDraftProducer(
+        registry=build_compiler_registry(build_diagnostic_ontology_registry()),
+        base_url="https://model.invalid/v1",
+        api_key="credential-that-must-not-enter-artifacts",
+        model="test-model",
+        max_attempts=1,
+    )
+    request = QueryDraftRequestV1(
+        query_id="query-e2e-1",
+        raw_query="What beverage is preferred?",
+        query_time="2026-07-31T00:00:00Z",
+        compiler_policy_revision="e2e-query-policy-v1",
+    )
+    body = json.loads(producer._request(request).data)
+    assert "response_format" not in body
+
+
+def test_query_draft_accepts_reasoning_only_payload(tmp_path: Path) -> None:
+    repository = tmp_path / "reasoning-memory-history.git"
+    initial = run_e2e_pipeline(
+        turns=_turns(),
+        l1_producer=_L1Producer(),
+        l2_producer=_L2Producer(),
+        query_producer=_QueryProducer(),
+        repository_path=repository,
+        question="What beverage is preferred?",
+    )
+    opener = _SequencedOpener(
+        [_reasoning_only_chat_response(_production_query_payload())]
+    )
+    outcome = e2e_runtime.run_openai_query_only(
+        question="What beverage is preferred?",
+        query_time="2026-07-31T00:00:00Z",
+        repository_path=repository,
+        expected_git_commit=initial.snapshot.git_commit,
+        expected_checkpoint_id=initial.snapshot.checkpoint_id,
+        result_path=tmp_path / "reasoning-result.json",
+        base_url="https://model.invalid/v1",
+        api_key="credential-that-must-not-enter-artifacts",
+        model="test-model",
+        timeout_seconds=37,
+        max_attempts=1,
+        opener=opener,
+    )
+    assert len(opener.requests) == 1
+    assert outcome.receipt.query_call_count == 1
+    assert outcome.receipt.automatic_memory_write_count == 0
+    assert outcome.pipeline.answer.answer_values == ("memory:CoffeeBeverage",)
+
+
+def test_l1_producer_accepts_reasoning_only_payload(tmp_path: Path) -> None:
+    opener = _SequencedOpener(
+        [
+            _reasoning_only_chat_response(_production_l1_payload()),
+            _reasoning_only_chat_response(_production_l2_payload()),
+            _reasoning_only_chat_response(_production_query_payload()),
+        ]
+    )
+    outcome = run_openai_e2e(
+        turns=_turns(),
+        question="What beverage is preferred?",
+        repository_path=tmp_path / "reasoning-e2e-history.git",
+        result_path=tmp_path / "reasoning-e2e-result.json",
+        base_url="https://model.invalid/v1",
+        api_key="credential-that-must-not-enter-artifacts",
+        model="test-model",
+        timeout_seconds=37,
+        max_attempts=1,
+        opener=opener,
+    )
+    assert [item.stage for item in outcome.receipt.model_calls] == [
+        "l1",
+        "l2",
+        "query",
+    ]
+    assert outcome.pipeline.answer.answer_values == ("memory:CoffeeBeverage",)
 
 
 @pytest.mark.parametrize(
@@ -815,6 +920,92 @@ def test_openai_runtime_closes_model_write_query_and_evidence(tmp_path: Path) ->
         },
     ]
     assert contract["policy"]["allowed_polarities"] == ["positive"]
+
+
+def test_openai_query_only_recovers_checkpoint_without_memory_writes(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repository = tmp_path / "existing-memory-history.git"
+    initial = run_e2e_pipeline(
+        turns=_turns(),
+        l1_producer=_L1Producer(),
+        l2_producer=_L2Producer(),
+        query_producer=_QueryProducer(),
+        repository_path=repository,
+        question="What beverage is preferred?",
+    )
+    history = GitMemoryHistoryRepository(repository)
+    head_before = history.head_commit()
+    state_before = history.read_state(commit=head_before)
+    raw_path = repository.with_name(f"{repository.name}.raw.json")
+    raw_before = raw_path.read_bytes()
+
+    def forbidden_producer(*_args: object, **_kwargs: object) -> object:
+        raise AssertionError("query-only execution must not construct L1/L2 producers")
+
+    monkeypatch.setattr(
+        e2e_runtime,
+        "OpenAICompatibleL1BatchProducer",
+        forbidden_producer,
+    )
+    monkeypatch.setattr(
+        e2e_runtime,
+        "OpenAICompatibleL2Producer",
+        forbidden_producer,
+    )
+    opener = _SequencedOpener([_chat_response(_production_query_payload())])
+    result_path = tmp_path / "query-only-result.json"
+    outcome = e2e_runtime.run_openai_query_only(
+        question="What beverage is preferred?",
+        query_time="2026-07-31T00:00:00Z",
+        repository_path=repository,
+        expected_git_commit=initial.snapshot.git_commit,
+        expected_checkpoint_id=initial.snapshot.checkpoint_id,
+        result_path=result_path,
+        base_url="https://model.invalid/v1",
+        api_key="credential-that-must-not-enter-artifacts",
+        model="test-model",
+        timeout_seconds=37,
+        max_attempts=1,
+        opener=opener,
+    )
+
+    head_after = history.head_commit()
+    state_after = history.read_state(commit=head_after)
+    assert head_after == head_before
+    assert state_after == state_before
+    assert raw_path.read_bytes() == raw_before
+    assert len(opener.requests) == 1
+    assert outcome.receipt.model_call.attempts == 1
+    assert outcome.receipt.query_call_count == 1
+    assert outcome.receipt.l1_producer_call_count == 0
+    assert outcome.receipt.l2_producer_call_count == 0
+    assert outcome.receipt.automatic_memory_write_count == 0
+    assert outcome.receipt.deterministic_replay_verified is True
+    assert outcome.pipeline.execution == outcome.pipeline.deterministic_replay
+    assert outcome.pipeline.answer.answer_values == ("memory:CoffeeBeverage",)
+    assert {span.text for span in outcome.pipeline.answer.evidence_spans} == {
+        "Coffee is preferred.",
+        "Coffee is drunk regularly.",
+    }
+    source_revision_ids = {
+        item.source_revision_id
+        for item in outcome.pipeline.bundle.source_record_revisions
+    }
+    assert {
+        span.source_revision_id for span in outcome.pipeline.answer.evidence_spans
+    }.issubset(source_revision_ids)
+    assert outcome.receipt.snapshot.git_commit == head_before
+    assert outcome.receipt.snapshot.checkpoint_id == state_before.checkpoint_id
+    assert outcome.receipt.snapshot.bundle_id == outcome.pipeline.bundle.bundle_id
+    assert outcome.receipt.snapshot.registry_sha256
+    assert outcome.receipt.snapshot.snapshot_sha256
+    assert outcome.receipt.snapshot.authority_sha256
+    assert result_path.stat().st_mode & 0o222 == 0
+    assert "credential-that-must-not-enter-artifacts" not in result_path.read_text(
+        encoding="utf-8"
+    )
 
 
 def test_l1_semantics_and_non_emission_stop_before_raw_or_git(tmp_path: Path) -> None:

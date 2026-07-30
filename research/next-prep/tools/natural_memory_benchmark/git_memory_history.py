@@ -712,6 +712,27 @@ class GitMemoryHistoryRepository:
             )
         return state.model_copy(update={"git_commit": target})
 
+    def commit_parents(self, commit: str) -> list[str]:
+        return self._git("show", "-s", "--format=%P", commit).split()
+
+    def read_checkpoint_manifest(
+        self,
+        *,
+        commit: str | None = None,
+    ) -> CheckpointManifest:
+        target = commit or self.head_commit()
+        state = self.read_state(commit=target)
+        if state.checkpoint_id is None:
+            raise GitMemoryHistoryError(
+                "genesis state does not publish a checkpoint manifest"
+            )
+        path = (
+            f"checkpoints/{state.sequence:020d}-{state.checkpoint_id}.json"
+        )
+        return CheckpointManifest.model_validate(
+            self._read_json_at(target, path)
+        )
+
     def make_checkpoint(
         self,
         *,
