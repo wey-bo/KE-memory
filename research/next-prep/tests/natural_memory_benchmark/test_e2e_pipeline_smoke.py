@@ -32,6 +32,9 @@ from tools.natural_memory_benchmark.query_compiler_v2 import (
     QueryRoleDraftV1,
     QueryTermDraftV1,
 )
+from tools.natural_memory_benchmark.query_compiler_v2_openai_producer import (
+    QueryDraftProductionError,
+)
 from tools.natural_memory_benchmark.typed_extractor_l1 import (
     TypedDerivationProvenance,
     TypedEvidenceBinding,
@@ -262,28 +265,31 @@ class _BufferedResponse:
 
 
 class _SequencedOpener:
-    def __init__(self, responses: list[bytes]) -> None:
+    def __init__(self, responses: list[bytes | Exception]) -> None:
         self.responses = list(responses)
         self.requests: list[dict[str, Any]] = []
+        self.timeouts: list[int] = []
 
     def __call__(self, request: Any, *, timeout: int) -> _BufferedResponse:
-        del timeout
+        self.timeouts.append(timeout)
         self.requests.append(json.loads(request.data))
         if not self.responses:
             raise AssertionError("unexpected model request")
-        return _BufferedResponse(self.responses.pop(0))
+        response = self.responses.pop(0)
+        if isinstance(response, Exception):
+            raise response
+        return _BufferedResponse(response)
 
 
-def _chat_response(payload: object) -> bytes:
-    return json.dumps(
-        {
-            "model": "test-model-response",
-            "choices": [
-                {"message": {"content": json.dumps(payload, sort_keys=True)}}
-            ],
-        },
-        sort_keys=True,
-    ).encode("utf-8")
+def _chat_response(payload: object, *, include_model: bool = True) -> bytes:
+    envelope = {
+        "choices": [
+            {"message": {"content": json.dumps(payload, sort_keys=True)}}
+        ],
+    }
+    if include_model:
+        envelope["model"] = "test-model-response"
+    return json.dumps(envelope, sort_keys=True).encode("utf-8")
 
 
 def _production_l1_payload() -> dict[str, object]:
@@ -328,6 +334,7 @@ def _production_l1_payload() -> dict[str, object]:
             {
                 "turn_id": turn_id,
                 "candidate_ref": allocate_support_ref(turn_id),
+                "decision": "emit_l1",
                 "typed_candidate": candidate.model_dump(mode="json"),
             }
         )
@@ -431,6 +438,7 @@ def test_production_contract_and_malformed_l1_fail_before_git(tmp_path: Path) ->
             turns=_turns(),
             question="What beverage is preferred?",
             repository_path=repository,
+            result_path=tmp_path / "malformed-result.json",
             base_url="https://model.invalid/v1",
             api_key="credential-that-must-not-leak",
             model="test-model",
@@ -440,10 +448,27 @@ def test_production_contract_and_malformed_l1_fail_before_git(tmp_path: Path) ->
     assert not repository.exists()
     assert not repository.with_name(f"{repository.name}.raw.json").exists()
 
+    existing_result = tmp_path / "existing-result.json"
+    existing_result.write_text("occupied", encoding="utf-8")
+    preflight = _SequencedOpener([])
+    with pytest.raises(FileExistsError, match="repository, raw artifact, and result"):
+        run_openai_e2e(
+            turns=_turns(),
+            question="What beverage is preferred?",
+            repository_path=tmp_path / "preflight-memory-history.git",
+            result_path=existing_result,
+            base_url="https://model.invalid/v1",
+            api_key="not-used",
+            model="test-model",
+            opener=preflight,
+        )
+    assert preflight.requests == []
+
 
 def test_openai_runtime_closes_model_write_query_and_evidence(tmp_path: Path) -> None:
     opener = _SequencedOpener(
         [
+            TimeoutError("transient transport timeout"),
             _chat_response(_production_l1_payload()),
             _chat_response(_production_l2_payload()),
             _chat_response(_production_query_payload()),
@@ -453,9 +478,12 @@ def test_openai_runtime_closes_model_write_query_and_evidence(tmp_path: Path) ->
         turns=_turns(),
         question="What beverage is preferred?",
         repository_path=tmp_path / "model-memory-history.git",
+        result_path=tmp_path / "model-result.json",
         base_url="https://model.invalid/v1",
         api_key="credential-that-must-not-enter-public-input",
         model="test-model",
+        timeout_seconds=37,
+        max_attempts=2,
         opener=opener,
     )
 
@@ -472,6 +500,8 @@ def test_openai_runtime_closes_model_write_query_and_evidence(tmp_path: Path) ->
         "l2",
         "query",
     ]
+    assert outcome.receipt.model_calls[0].attempts == 2
+    assert opener.timeouts == [37, 37, 37, 37]
 
     l1_public = json.loads(opener.requests[0]["messages"][1]["content"])
     serialized_public = json.dumps(l1_public, sort_keys=True).casefold()
@@ -494,6 +524,122 @@ def test_openai_runtime_closes_model_write_query_and_evidence(tmp_path: Path) ->
             "valid_time_policy": "optional",
         }
     ]
+    assert contract["policy"]["operator_evidence_cues"] == [
+        {
+            "canonical_operator": "prefer",
+            "cues": ["prefer", "preferred", "preference"],
+        },
+        {
+            "canonical_operator": "drink",
+            "cues": ["drink", "drank", "drunk"],
+        },
+        {
+            "canonical_operator": "add_ingredient",
+            "cues": ["add", "added"],
+        },
+    ]
+    assert contract["policy"]["allowed_polarities"] == ["positive"]
+
+
+def test_l1_semantics_and_non_emission_stop_before_raw_or_git(tmp_path: Path) -> None:
+    cases: list[tuple[str, list[RawTurnV1], dict[str, object]]] = []
+
+    wrong_entity_turns = _turns()
+    wrong_entity_turns[0] = wrong_entity_turns[0].model_copy(
+        update={"user_text": "I prefer tea."}
+    )
+    cases.append(("wrong-entity", wrong_entity_turns, _production_l1_payload()))
+
+    wrong_operator = _production_l1_payload()
+    wrong_operator_candidate = wrong_operator["proposals"][1]["typed_candidate"]
+    wrong_operator_candidate["kind"] = "preference"
+    wrong_operator_candidate["predicate"] = {
+        "surface": "prefer",
+        "sense": "preference_theme",
+        "canonical_operator": "prefer",
+    }
+    cases.append(("wrong-operator", _turns(), wrong_operator))
+
+    non_emission = _production_l1_payload()
+    non_emission["proposals"][0]["decision"] = "abstain"
+    non_emission["proposals"][0]["typed_candidate"] = None
+    cases.append(("non-emission", _turns(), non_emission))
+
+    for name, turns, payload in cases:
+        repository = tmp_path / f"{name}-memory-history.git"
+        result_path = tmp_path / f"{name}-result.json"
+        with pytest.raises(ModelBoundaryError, match="l1"):
+            run_openai_e2e(
+                turns=turns,
+                question="What beverage is preferred?",
+                repository_path=repository,
+                result_path=result_path,
+                base_url="https://model.invalid/v1",
+                api_key="credential-that-must-not-leak",
+                model="test-model",
+                opener=_SequencedOpener([_chat_response(payload)]),
+            )
+        assert not repository.exists()
+        assert not repository.with_name(f"{repository.name}.raw.json").exists()
+        assert not result_path.exists()
+
+
+def test_l2_claim_requires_admitted_l1_semantic_support(tmp_path: Path) -> None:
+    turns = _turns()
+    turns[0] = turns[0].model_copy(
+        update={"user_text": "Coffee is drunk daily."}
+    )
+    l1_payload = _production_l1_payload()
+    first_candidate = l1_payload["proposals"][0]["typed_candidate"]
+    first_candidate["kind"] = "event"
+    first_candidate["predicate"] = {
+        "surface": "drink",
+        "sense": "consume_beverage",
+        "canonical_operator": "drink",
+    }
+    repository = tmp_path / "unsupported-l2-memory-history.git"
+    result_path = tmp_path / "unsupported-l2-result.json"
+    with pytest.raises(ModelBoundaryError, match="l2"):
+        run_openai_e2e(
+            turns=turns,
+            question="What beverage is preferred?",
+            repository_path=repository,
+            result_path=result_path,
+            base_url="https://model.invalid/v1",
+            api_key="credential-that-must-not-leak",
+            model="test-model",
+            opener=_SequencedOpener(
+                [
+                    _chat_response(l1_payload),
+                    _chat_response(_production_l2_payload()),
+                ]
+            ),
+        )
+    assert not repository.exists()
+    assert not result_path.exists()
+
+
+def test_query_response_without_model_is_rejected_without_result(tmp_path: Path) -> None:
+    repository = tmp_path / "missing-model-memory-history.git"
+    result_path = tmp_path / "missing-model-result.json"
+    with pytest.raises(QueryDraftProductionError):
+        run_openai_e2e(
+            turns=_turns(),
+            question="What beverage is preferred?",
+            repository_path=repository,
+            result_path=result_path,
+            base_url="https://model.invalid/v1",
+            api_key="credential-that-must-not-leak",
+            model="test-model",
+            opener=_SequencedOpener(
+                [
+                    _chat_response(_production_l1_payload()),
+                    _chat_response(_production_l2_payload()),
+                    _chat_response(_production_query_payload(), include_model=False),
+                ]
+            ),
+        )
+    assert not result_path.exists()
 
 
 def test_minimal_pipeline_closes_memory_query_and_evidence(tmp_path: Path) -> None:

@@ -17,7 +17,12 @@ from .e2e_pipeline import (
     TurnExtractionInputV1,
 )
 from .l1_ontology_linking import OntologyRegistry
-from .typed_extractor_l1 import L1Kind, TypedL1Candidate, TypedModality
+from .typed_extractor_l1 import (
+    L1Kind,
+    TypedL1Candidate,
+    TypedModality,
+    TypedPolarity,
+)
 from .typed_extractor_l2 import (
     ClosurePattern,
     L2AbstractionMethod,
@@ -48,6 +53,20 @@ class ModalityTimePolicyV1(StrictModel):
     modality: TypedModality
     event_time_policy: TimeFieldPolicy
     valid_time_policy: TimeFieldPolicy
+
+
+class OperatorEvidenceCueV1(StrictModel):
+    canonical_operator: str = Field(min_length=1)
+    cues: list[str] = Field(min_length=1)
+
+    @model_validator(mode="after")
+    def validate_cues(self) -> "OperatorEvidenceCueV1":
+        normalized = [item.casefold().strip() for item in self.cues]
+        if any(not item for item in normalized) or len(normalized) != len(
+            set(normalized)
+        ):
+            raise ValueError("operator evidence cues must be non-empty and unique")
+        return self
 
 
 class L2OperatorPolicyV1(StrictModel):
@@ -88,6 +107,8 @@ class ProductionExtractionPolicyV1(StrictModel):
     l1_role_display_bindings: list[OperatorRoleDisplayBindingV1] = Field(
         min_length=1
     )
+    operator_evidence_cues: list[OperatorEvidenceCueV1] = Field(min_length=1)
+    allowed_polarities: list[TypedPolarity] = Field(min_length=1)
     modality_time_policies: list[ModalityTimePolicyV1] = Field(min_length=1)
     l2_operator_policies: list[L2OperatorPolicyV1] = Field(min_length=1)
     source_status: Literal["user_reported"] = "user_reported"
@@ -107,6 +128,11 @@ class ProductionExtractionPolicyV1(StrictModel):
         ]
         if len(roles) != len(set(roles)):
             raise ValueError("duplicate L1 role display binding")
+        cue_operators = [item.canonical_operator for item in self.operator_evidence_cues]
+        if len(cue_operators) != len(set(cue_operators)):
+            raise ValueError("duplicate operator evidence cue binding")
+        if len(self.allowed_polarities) != len(set(self.allowed_polarities)):
+            raise ValueError("duplicate allowed polarity")
         modalities = [item.modality for item in self.modality_time_policies]
         if len(modalities) != len(set(modalities)):
             raise ValueError("duplicate modality time policy")
@@ -139,6 +165,12 @@ def validate_production_policy(
     }
     if policy_roles != registry_roles:
         raise ValueError("L1 role display coverage does not match registry")
+
+    cue_operators = {
+        item.canonical_operator for item in policy.operator_evidence_cues
+    }
+    if cue_operators != registry_operators:
+        raise ValueError("operator evidence cue coverage does not match registry")
 
     if not policy.modality_time_policies:
         raise ValueError("modality time policy is empty")
@@ -191,6 +223,21 @@ def build_diagnostic_production_policy(
                 display_role="destination",
             ),
         ],
+        operator_evidence_cues=[
+            OperatorEvidenceCueV1(
+                canonical_operator="prefer",
+                cues=["prefer", "preferred", "preference"],
+            ),
+            OperatorEvidenceCueV1(
+                canonical_operator="drink",
+                cues=["drink", "drank", "drunk"],
+            ),
+            OperatorEvidenceCueV1(
+                canonical_operator="add_ingredient",
+                cues=["add", "added"],
+            ),
+        ],
+        allowed_polarities=["positive"],
         modality_time_policies=[
             ModalityTimePolicyV1(
                 modality="actual",
@@ -361,7 +408,16 @@ class ProductionPublicTurnV1(StrictModel):
 class ProductionL1ProposalV1(StrictModel):
     turn_id: str = Field(min_length=1)
     candidate_ref: str = Field(pattern=r"^support-[0-9a-f]{16}$")
-    typed_candidate: TypedL1Candidate
+    decision: Literal["emit_l1", "abstain", "no_memory"]
+    typed_candidate: TypedL1Candidate | None = None
+
+    @model_validator(mode="after")
+    def validate_decision_union(self) -> "ProductionL1ProposalV1":
+        if self.decision == "emit_l1" and self.typed_candidate is None:
+            raise ValueError("emit_l1 requires a typed candidate")
+        if self.decision != "emit_l1" and self.typed_candidate is not None:
+            raise ValueError("non-emission decision cannot include a typed candidate")
+        return self
 
 
 class ProductionL1BatchResponseV1(StrictModel):
@@ -421,6 +477,8 @@ class BoundL1CandidateProducer:
         expected_evidence = f"evidence-{value.turn.turn_id}-user"
         if value.user_evidence.evidence_id != expected_evidence:
             raise ValueError("runtime evidence allocation changed after L1 proposal")
+        if proposal.decision != "emit_l1" or proposal.typed_candidate is None:
+            raise ValueError("bound L1 proposal is not an emission")
         self._consumed.add(value.turn.turn_id)
         return [
             ProposedL1CandidateV1(
@@ -471,6 +529,8 @@ class OpenAICompatibleL1BatchProducer:
         if proposal.candidate_ref != public_turn.candidate_ref:
             raise ValueError("L1 candidate ref does not match allocated ref")
         candidate = proposal.typed_candidate
+        if proposal.decision != "emit_l1" or candidate is None:
+            raise ValueError("operational E2E requires emit_l1 for every turn")
         rules = [
             item
             for item in self.registry.predicate_role_constraints
@@ -486,6 +546,20 @@ class OpenAICompatibleL1BatchProducer:
         }
         if kind_by_operator[candidate.predicate.canonical_operator] != candidate.kind:
             raise ValueError("L1 kind does not match operator policy")
+        quote = public_turn.evidence_quote.casefold()
+        if any(item.surface.casefold() not in quote for item in candidate.local_entities):
+            raise ValueError("L1 local entity surface is not grounded in user evidence")
+        cues_by_operator = {
+            item.canonical_operator: item.cues
+            for item in self.policy.operator_evidence_cues
+        }
+        if not any(
+            cue.casefold() in quote
+            for cue in cues_by_operator[candidate.predicate.canonical_operator]
+        ):
+            raise ValueError("L1 operator has no public cue in user evidence")
+        if candidate.polarity not in self.policy.allowed_polarities:
+            raise ValueError("L1 polarity is not authorized")
         display_by_role = {
             (item.canonical_operator, item.machine_role): item.display_role
             for item in self.policy.l1_role_display_bindings
@@ -710,6 +784,27 @@ class OpenAICompatibleL2Producer:
                 claim.predicate.canonical_operator,
             ) not in registry_tuples:
                 raise ValueError("L2 predicate tuple is not public")
+            admitted_by_ref = {
+                item.candidate_ref: item.linked_candidate.typed_candidate
+                for item in admitted_l1
+            }
+            claim_predicate = (
+                claim.predicate.surface,
+                claim.predicate.sense,
+                claim.predicate.canonical_operator,
+            )
+            semantic_support = [
+                admitted_by_ref[item]
+                for item in claim.supporting_l1_refs
+                if (
+                    admitted_by_ref[item].predicate.surface,
+                    admitted_by_ref[item].predicate.sense,
+                    admitted_by_ref[item].predicate.canonical_operator,
+                )
+                == claim_predicate
+            ]
+            if not semantic_support:
+                raise ValueError("L2 claim predicate lacks admitted L1 semantic support")
             display_by_role = {
                 item.machine_role: item.display_role
                 for item in operator_policy.role_bindings
@@ -720,6 +815,37 @@ class OpenAICompatibleL2Producer:
                 item.role_name != display_by_role[item.role] for item in claim.roles
             ):
                 raise ValueError("L2 role display mismatch")
+            support_combinations: set[tuple[str, str, str]] = set()
+            for support in semantic_support:
+                support_surfaces = {
+                    item.local_entity_id: item.surface.casefold()
+                    for item in support.local_entities
+                }
+                support_combinations.update(
+                    (
+                        item.role,
+                        item.role_name,
+                        support_surfaces[item.local_entity_id],
+                    )
+                    for item in support.roles
+                )
+            claim_surfaces = {
+                item.local_entity_id: item.surface.casefold()
+                for item in claim.local_entities
+            }
+            claim_combinations = {
+                (
+                    item.role,
+                    item.role_name,
+                    claim_surfaces[item.local_entity_id],
+                )
+                for item in claim.roles
+            }
+            if not claim_combinations.issubset(support_combinations):
+                raise ValueError("L2 claim roles or entities lack admitted L1 support")
+            summary = candidate.summary.casefold()
+            if any(surface not in summary for surface in claim_surfaces.values()):
+                raise ValueError("L2 claim entity surface is absent from summary")
             if candidate.abstraction.method not in operator_policy.allowed_abstraction_methods:
                 raise ValueError("L2 abstraction method is not public")
             if candidate.closure.pattern not in operator_policy.allowed_closure_patterns:

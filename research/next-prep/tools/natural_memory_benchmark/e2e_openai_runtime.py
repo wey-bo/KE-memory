@@ -26,7 +26,10 @@ from .e2e_pipeline import (
     run_e2e_pipeline,
 )
 from .l1_ontology_linking import build_diagnostic_ontology_registry
-from .query_compiler_v2_openai_producer import OpenAICompatibleQueryDraftProducer
+from .query_compiler_v2_openai_producer import (
+    OpenAICompatibleQueryDraftProducer,
+    QueryDraftProductionError,
+)
 
 
 class _BufferedResponse:
@@ -65,7 +68,9 @@ class _QueryRecordingOpener:
             if not isinstance(response_model, str) or not response_model.strip():
                 raise TypeError("query response model is absent")
         except Exception:
-            response_model = "unidentified-response-model"
+            raise QueryDraftProductionError(
+                "query draft response did not identify its model"
+            ) from None
         self.response_model = response_model
         return _BufferedResponse(raw)
 
@@ -116,15 +121,25 @@ def run_openai_e2e(
     turns: Sequence[RawTurnV1],
     question: str,
     repository_path: Path,
+    result_path: Path,
     base_url: str,
     api_key: str,
     model: str,
+    timeout_seconds: int = 600,
+    max_attempts: int = 2,
     opener: Callable[..., Any] = urlopen,
 ) -> OpenAIE2EOutcome:
     repository_path = repository_path.resolve()
+    result_path = result_path.resolve()
     raw_path = repository_path.with_name(f"{repository_path.name}.raw.json")
-    if repository_path.exists() or raw_path.exists():
-        raise FileExistsError("model E2E repository and raw artifact must be fresh")
+    if repository_path.exists() or raw_path.exists() or result_path.exists():
+        raise FileExistsError(
+            "model E2E repository, raw artifact, and result must be fresh"
+        )
+    if timeout_seconds <= 0:
+        raise ValueError("model timeout must be positive")
+    if max_attempts not in {1, 2}:
+        raise ValueError("model attempts must be one or two")
     ordered_turns = [
         RawTurnV1.model_validate(item.model_dump(mode="json")) for item in turns
     ]
@@ -139,6 +154,8 @@ def run_openai_e2e(
         base_url=base_url,
         api_key=api_key,
         model=model,
+        timeout_seconds=timeout_seconds,
+        max_attempts=max_attempts,
         opener=opener,
     )
     bound_l1 = l1_batch.produce(ordered_turns)
@@ -149,6 +166,8 @@ def run_openai_e2e(
         base_url=base_url,
         api_key=api_key,
         model=model,
+        timeout_seconds=timeout_seconds,
+        max_attempts=max_attempts,
         opener=opener,
     )
     query_recording_opener = _QueryRecordingOpener(opener)
@@ -157,7 +176,8 @@ def run_openai_e2e(
         base_url=base_url,
         api_key=api_key,
         model=model,
-        max_attempts=2,
+        timeout_seconds=timeout_seconds,
+        max_attempts=max_attempts,
         opener=query_recording_opener,
     )
     workflow_run_id = "run-openai-e2e-" + canonical_sha256(
@@ -200,6 +220,7 @@ def run_openai_e2e(
         ),
         answer=pipeline.answer,
     )
+    _write_receipt_exclusive(result_path, receipt)
     return OpenAIE2EOutcome(pipeline=pipeline, receipt=receipt)
 
 
@@ -218,11 +239,15 @@ def _write_receipt_exclusive(path: Path, receipt: OpenAIE2ERunReceiptV1) -> None
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        description="Run the diagnostic-ontology production model E2E smoke."
+    )
     parser.add_argument("--turns", required=True)
     parser.add_argument("--question", required=True)
     parser.add_argument("--repository", required=True)
     parser.add_argument("--result", required=True)
+    parser.add_argument("--timeout-seconds", type=int, default=600)
+    parser.add_argument("--max-attempts", type=int, choices=(1, 2), default=2)
     args = parser.parse_args()
 
     base_url = os.environ.get("OPENAI_BASE_URL")
@@ -238,11 +263,13 @@ def main() -> int:
         turns=turns,
         question=args.question,
         repository_path=Path(args.repository),
+        result_path=Path(args.result),
         base_url=base_url,
         api_key=api_key,
         model=model,
+        timeout_seconds=args.timeout_seconds,
+        max_attempts=args.max_attempts,
     )
-    _write_receipt_exclusive(Path(args.result), outcome.receipt)
     print(
         json.dumps(
             {
