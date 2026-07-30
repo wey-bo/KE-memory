@@ -145,16 +145,16 @@ def proposal_response(workspace_root: Path, layer: str) -> bytes:
 
 def test_run_ids_bind_v4pro_and_one_label() -> None:
     assert rerun.EVALUATION_ID == (
-        "typed-extractor-v3-fresh-hidden-v1-deepseek-v4-pro-official-v1"
+        "typed-extractor-v3-fresh-hidden-v1-deepseek-v4-pro-official-v2"
     )
     assert rerun.RERUN_RELATIVE_ROOT.endswith(rerun.EVALUATION_ID)
     assert rerun.PROPOSER_VERSIONS == {
-        "l1": "deepseek-v4-pro@official-api-2026-07-30-fresh-v3-l1",
-        "l2": "deepseek-v4-pro@official-api-2026-07-30-fresh-v3-l2",
+        "l1": "deepseek-v4-pro@official-api-2026-07-30-fresh-v3-l1-v2",
+        "l2": "deepseek-v4-pro@official-api-2026-07-30-fresh-v3-l2-v2",
     }
     assert rerun.run_ids("20260730T080000Z") == {
-        "l1": "run-20260730T080000Z-deepseek-v4-pro-official-typed-l1-fresh-hidden-v3",
-        "l2": "run-20260730T080000Z-deepseek-v4-pro-official-typed-l2-fresh-hidden-v3",
+        "l1": "run-20260730T080000Z-deepseek-v4-pro-official-v2-typed-l1-fresh-hidden-v3",
+        "l2": "run-20260730T080000Z-deepseek-v4-pro-official-v2-typed-l2-fresh-hidden-v3",
     }
     with pytest.raises(ValueError, match="run label"):
         rerun.run_ids("2026-07-30T08:00:00Z")
@@ -199,6 +199,7 @@ def test_successful_layer_calls_opener_once_and_freezes_receipt(
         body = json.loads(request.data)
         calls.append(body)
         assert body["model"] == "deepseek-v4-pro"
+        assert body["max_tokens"] == 32768
         assert len(body["messages"]) == 2
         user_payload = json.loads(body["messages"][1]["content"])
         assert set(user_payload) == {"dispatch_metadata", "public_input"}
@@ -226,6 +227,10 @@ def test_successful_layer_calls_opener_once_and_freezes_receipt(
         Path(result["run_root"]) / name
         for name in rerun.SUCCESS_FILES
     }
+    receipt = load_json(
+        Path(result["run_root"]) / "proposal-freeze-receipt.json"
+    )
+    assert receipt["evaluation_id"] == rerun.EVALUATION_ID
 
 
 def test_response_model_mismatch_is_rejected_before_proposal_freeze(
