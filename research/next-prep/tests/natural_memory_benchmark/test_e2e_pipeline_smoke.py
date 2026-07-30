@@ -12,6 +12,7 @@ import pytest
 from tools.natural_memory_benchmark.e2e_openai_producers import (
     ModelBoundaryError,
     OpenAICompatibleL1BatchProducer,
+    ProductionL1BatchResponseV1,
     allocate_support_ref,
     build_diagnostic_production_policy,
 )
@@ -585,6 +586,107 @@ def _production_query_payload() -> dict[str, object]:
     return _QueryProducer().produce(request).model_dump(mode="json")
 
 
+def test_l1_schema_contract_error_reports_sanitized_fingerprint(
+    tmp_path: Path,
+) -> None:
+    credential = "credential-that-must-not-leak"
+    payload = _production_l1_payload()
+    del payload["proposals"][0]["typed_candidate"]["kind"]
+    response = _chat_response(payload)
+    repository = tmp_path / "schema-error-memory-history.git"
+    result_path = tmp_path / "schema-error-result.json"
+
+    with pytest.raises(ModelBoundaryError) as captured:
+        run_openai_e2e(
+            turns=_turns(),
+            question="What beverage is preferred?",
+            repository_path=repository,
+            result_path=result_path,
+            base_url="https://model.invalid/v1",
+            api_key=credential,
+            model="test-model",
+            max_attempts=1,
+            opener=_SequencedOpener([response]),
+        )
+
+    message = str(captured.value)
+    assert "reason=schema" in message
+    assert "validation_path=proposals.0.typed_candidate.kind" in message
+    assert "validation_type=missing" in message
+    assert f"response_sha256={hashlib.sha256(response).hexdigest()}" in message
+    assert "Coffee is preferred." not in message
+    assert credential not in message
+    assert not repository.exists()
+    assert not result_path.exists()
+
+
+def test_l1_unexpected_schema_exception_is_sanitized(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    credential = "credential-that-must-not-leak"
+    exception_detail = "sensitive-schema-exception-detail"
+    response = _chat_response(_production_l1_payload())
+
+    def fail_validation(_value: object) -> object:
+        raise TypeError(exception_detail)
+
+    monkeypatch.setattr(
+        ProductionL1BatchResponseV1,
+        "model_validate",
+        fail_validation,
+    )
+    with pytest.raises(ModelBoundaryError) as captured:
+        run_openai_e2e(
+            turns=_turns(),
+            question="What beverage is preferred?",
+            repository_path=tmp_path / "schema-internal-memory-history.git",
+            result_path=tmp_path / "schema-internal-result.json",
+            base_url="https://model.invalid/v1",
+            api_key=credential,
+            model="test-model",
+            max_attempts=1,
+            opener=_SequencedOpener([response]),
+        )
+
+    message = str(captured.value)
+    assert "reason=schema_internal" in message
+    assert f"response_sha256={hashlib.sha256(response).hexdigest()}" in message
+    assert exception_detail not in message
+    assert credential not in message
+
+
+def test_l1_turn_coverage_error_reports_sanitized_fingerprint(
+    tmp_path: Path,
+) -> None:
+    payload = _production_l1_payload()
+    payload["proposals"].pop()
+    response = _chat_response(payload)
+    repository = tmp_path / "coverage-error-memory-history.git"
+    result_path = tmp_path / "coverage-error-result.json"
+
+    with pytest.raises(ModelBoundaryError) as captured:
+        run_openai_e2e(
+            turns=_turns(),
+            question="What beverage is preferred?",
+            repository_path=repository,
+            result_path=result_path,
+            base_url="https://model.invalid/v1",
+            api_key="credential-that-must-not-leak",
+            model="test-model",
+            max_attempts=1,
+            opener=_SequencedOpener([response]),
+        )
+
+    message = str(captured.value)
+    assert "reason=turn_coverage" in message
+    assert f"response_sha256={hashlib.sha256(response).hexdigest()}" in message
+    assert "Coffee is preferred." not in message
+    assert "credential-that-must-not-leak" not in message
+    assert not repository.exists()
+    assert not result_path.exists()
+
+
 def test_production_contract_and_malformed_l1_fail_before_git(tmp_path: Path) -> None:
     registry = build_diagnostic_ontology_registry()
     policy = build_diagnostic_production_policy(registry)
@@ -716,13 +818,22 @@ def test_openai_runtime_closes_model_write_query_and_evidence(tmp_path: Path) ->
 
 
 def test_l1_semantics_and_non_emission_stop_before_raw_or_git(tmp_path: Path) -> None:
-    cases: list[tuple[str, list[RawTurnV1], dict[str, object]]] = []
+    cases: list[
+        tuple[str, list[RawTurnV1], dict[str, object], str]
+    ] = []
 
     wrong_entity_turns = _turns()
     wrong_entity_turns[0] = wrong_entity_turns[0].model_copy(
         update={"user_text": "I prefer tea."}
     )
-    cases.append(("wrong-entity", wrong_entity_turns, _production_l1_payload()))
+    cases.append(
+        (
+            "wrong-entity",
+            wrong_entity_turns,
+            _production_l1_payload(),
+            "local_entity_not_grounded",
+        )
+    )
 
     wrong_operator = _production_l1_payload()
     wrong_operator_candidate = wrong_operator["proposals"][1]["typed_candidate"]
@@ -732,23 +843,54 @@ def test_l1_semantics_and_non_emission_stop_before_raw_or_git(tmp_path: Path) ->
         "sense": "preference_theme",
         "canonical_operator": "prefer",
     }
-    cases.append(("wrong-operator", _turns(), wrong_operator))
+    cases.append(
+        ("wrong-operator", _turns(), wrong_operator, "operator_cue_missing")
+    )
 
     non_emission = _production_l1_payload()
     non_emission["proposals"][0]["decision"] = "abstain"
     non_emission["proposals"][0]["typed_candidate"] = None
-    cases.append(("non-emission", _turns(), non_emission))
+    cases.append(("non-emission", _turns(), non_emission, "emission_required"))
 
     invented_time = _production_l1_payload()
     invented_time["proposals"][0]["typed_candidate"]["time"]["event_time"] = (
         "2099-01-01"
     )
-    cases.append(("invented-time", _turns(), invented_time))
+    cases.append(("invented-time", _turns(), invented_time, "forbidden_time"))
 
-    for name, turns, payload in cases:
+    negated_turns = _turns()
+    negated_turns[0] = negated_turns[0].model_copy(
+        update={"user_text": "Coffee is not preferred."}
+    )
+    cases.append(
+        (
+            "negated-operator",
+            negated_turns,
+            _production_l1_payload(),
+            "operator_cue_negated",
+        )
+    )
+
+    for name, user_text in (
+        ("negated-no-one", "Coffee is preferred by no one."),
+        ("negated-not-anymore", "Coffee is preferred, but not anymore."),
+    ):
+        turns = _turns()
+        turns[0] = turns[0].model_copy(update={"user_text": user_text})
+        cases.append(
+            (
+                name,
+                turns,
+                _production_l1_payload(),
+                "operator_cue_negated",
+            )
+        )
+
+    for name, turns, payload, validation_code in cases:
         repository = tmp_path / f"{name}-memory-history.git"
         result_path = tmp_path / f"{name}-result.json"
-        with pytest.raises(ModelBoundaryError, match="l1"):
+        response = _chat_response(payload)
+        with pytest.raises(ModelBoundaryError, match="l1") as captured:
             run_openai_e2e(
                 turns=turns,
                 question="What beverage is preferred?",
@@ -757,8 +899,13 @@ def test_l1_semantics_and_non_emission_stop_before_raw_or_git(tmp_path: Path) ->
                 base_url="https://model.invalid/v1",
                 api_key="credential-that-must-not-leak",
                 model="test-model",
-                opener=_SequencedOpener([_chat_response(payload)]),
+                opener=_SequencedOpener([response]),
             )
+        message = str(captured.value)
+        assert "reason=candidate_grounding" in message
+        assert f"validation_code={validation_code}" in message
+        assert f"response_sha256={hashlib.sha256(response).hexdigest()}" in message
+        assert "credential-that-must-not-leak" not in message
         assert not repository.exists()
         assert not repository.with_name(f"{repository.name}.raw.json").exists()
         assert not result_path.exists()
@@ -779,7 +926,7 @@ def test_l2_claim_requires_admitted_l1_semantic_support(tmp_path: Path) -> None:
     }
     repository = tmp_path / "unsupported-l2-memory-history.git"
     result_path = tmp_path / "unsupported-l2-result.json"
-    with pytest.raises(ModelBoundaryError, match="l2"):
+    with pytest.raises(ModelBoundaryError, match="l2") as captured:
         run_openai_e2e(
             turns=turns,
             question="What beverage is preferred?",
@@ -795,6 +942,10 @@ def test_l2_claim_requires_admitted_l1_semantic_support(tmp_path: Path) -> None:
                 ]
             ),
         )
+    message = str(captured.value)
+    assert "reason=candidate_grounding" in message
+    assert "validation_code=claim_predicate_without_support" in message
+    assert "credential-that-must-not-leak" not in message
     assert not repository.exists()
     assert not result_path.exists()
 
@@ -802,7 +953,7 @@ def test_l2_claim_requires_admitted_l1_semantic_support(tmp_path: Path) -> None:
     unsupported_summary["typed_candidate"]["summary"] = "Coffee is avoided."
     summary_repository = tmp_path / "unsupported-summary-memory-history.git"
     summary_result = tmp_path / "unsupported-summary-result.json"
-    with pytest.raises(ModelBoundaryError, match="l2"):
+    with pytest.raises(ModelBoundaryError, match="l2") as captured:
         run_openai_e2e(
             turns=_turns(),
             question="What beverage is preferred?",
@@ -818,7 +969,95 @@ def test_l2_claim_requires_admitted_l1_semantic_support(tmp_path: Path) -> None:
                 ]
             ),
         )
+    message = str(captured.value)
+    assert "reason=candidate_grounding" in message
+    assert "validation_code=summary_operator_cue_missing" in message
+    assert "credential-that-must-not-leak" not in message
     assert not summary_result.exists()
+
+    negated_summary = _production_l2_payload()
+    negated_summary["typed_candidate"]["summary"] = "Coffee is not preferred."
+    negated_repository = tmp_path / "negated-summary-memory-history.git"
+    negated_result = tmp_path / "negated-summary-result.json"
+    with pytest.raises(ModelBoundaryError, match="l2") as captured:
+        run_openai_e2e(
+            turns=_turns(),
+            question="What beverage is preferred?",
+            repository_path=negated_repository,
+            result_path=negated_result,
+            base_url="https://model.invalid/v1",
+            api_key="credential-that-must-not-leak",
+            model="test-model",
+            opener=_SequencedOpener(
+                [
+                    _chat_response(_production_l1_payload()),
+                    _chat_response(negated_summary),
+                ]
+            ),
+        )
+    message = str(captured.value)
+    assert "reason=candidate_grounding" in message
+    assert "validation_code=summary_operator_cue_negated" in message
+    assert "credential-that-must-not-leak" not in message
+    assert not negated_result.exists()
+
+    post_negated_summary = _production_l2_payload()
+    post_negated_summary["typed_candidate"]["summary"] = (
+        "Coffee is preferred, but not anymore."
+    )
+    post_negated_result = tmp_path / "post-negated-summary-result.json"
+    with pytest.raises(ModelBoundaryError, match="l2") as captured:
+        run_openai_e2e(
+            turns=_turns(),
+            question="What beverage is preferred?",
+            repository_path=tmp_path / "post-negated-summary-memory-history.git",
+            result_path=post_negated_result,
+            base_url="https://model.invalid/v1",
+            api_key="credential-that-must-not-leak",
+            model="test-model",
+            opener=_SequencedOpener(
+                [
+                    _chat_response(_production_l1_payload()),
+                    _chat_response(post_negated_summary),
+                ]
+            ),
+        )
+    message = str(captured.value)
+    assert "validation_code=summary_operator_cue_negated" in message
+    assert "credential-that-must-not-leak" not in message
+    assert not post_negated_result.exists()
+
+
+def test_without_modifier_does_not_negate_positive_preference(
+    tmp_path: Path,
+) -> None:
+    turns = _turns()
+    turns[0] = turns[0].model_copy(
+        update={"user_text": "Coffee without sugar is preferred."}
+    )
+    l2_payload = _production_l2_payload()
+    l2_payload["typed_candidate"]["summary"] = (
+        "Coffee without sugar is preferred."
+    )
+    outcome = run_openai_e2e(
+        turns=turns,
+        question="What beverage is preferred?",
+        repository_path=tmp_path / "without-modifier-memory-history.git",
+        result_path=tmp_path / "without-modifier-result.json",
+        base_url="https://model.invalid/v1",
+        api_key="credential-that-must-not-leak",
+        model="test-model",
+        opener=_SequencedOpener(
+            [
+                _chat_response(_production_l1_payload()),
+                _chat_response(l2_payload),
+                _chat_response(_production_query_payload()),
+            ]
+        ),
+    )
+
+    assert outcome.pipeline.snapshot.verification_status == "valid"
+    assert outcome.pipeline.execution.answer_values == ("memory:CoffeeBeverage",)
 
 
 def test_query_response_without_model_is_rejected_without_result(tmp_path: Path) -> None:

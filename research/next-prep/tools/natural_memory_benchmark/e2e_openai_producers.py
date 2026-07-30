@@ -2,12 +2,13 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import socket
 from typing import Any, Callable, Literal, Sequence
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_validator
 
 from .e2e_pipeline import (
     AdmittedL1Record,
@@ -276,6 +277,112 @@ class ModelCallHashV1(StrictModel):
     request_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
     response_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
     attempts: int = Field(ge=1, le=2)
+
+
+_CONTRACT_VALIDATION_CODES = {
+    "candidate modality is not authorized": "modality_not_authorized",
+    "candidate is missing required time": "required_time_missing",
+    "candidate contains forbidden time": "forbidden_time",
+    "L1 candidate ref does not match allocated ref": "candidate_ref_mismatch",
+    "operational E2E requires emit_l1 for every turn": "emission_required",
+    "L1 predicate tuple is not public": "predicate_not_public",
+    "L1 kind does not match operator policy": "kind_policy_mismatch",
+    "L1 local entity surface is not grounded in user evidence": (
+        "local_entity_not_grounded"
+    ),
+    "L1 operator has no public cue in user evidence": "operator_cue_missing",
+    "L1 operator cue is explicitly negated in user evidence": (
+        "operator_cue_negated"
+    ),
+    "L1 polarity is not authorized": "polarity_not_authorized",
+    "L1 role coverage does not match predicate contract": "role_coverage_mismatch",
+    "L1 role display does not match policy": "role_display_mismatch",
+    "L1 evidence binding does not match public turn": "evidence_binding_mismatch",
+    "L1 derivation is not exact explicit evidence": "derivation_mismatch",
+    "L1 lifecycle is outside create-active policy": "lifecycle_policy_mismatch",
+    "L1 proposal contains unsupported production bindings": "unsupported_bindings",
+    "L2 support order or coverage mismatch": "support_coverage_mismatch",
+    "L2 required closure mismatch": "required_closure_mismatch",
+    "L2 optional support is not allowed": "optional_support_not_allowed",
+    "L2 turn closure mismatch": "turn_closure_mismatch",
+    "L2 session closure mismatch": "session_closure_mismatch",
+    "L2 evidence closure mismatch": "evidence_closure_mismatch",
+    "production L2 requires one structured claim": "structured_claim_count",
+    "L2 claim support closure mismatch": "claim_support_closure_mismatch",
+    "L2 operator kind is not public": "operator_kind_not_public",
+    "L2 predicate tuple is not public": "predicate_not_public",
+    "L2 claim predicate lacks admitted L1 semantic support": (
+        "claim_predicate_without_support"
+    ),
+    "L2 role coverage mismatch": "role_coverage_mismatch",
+    "L2 role display mismatch": "role_display_mismatch",
+    "L2 claim roles or entities lack admitted L1 support": (
+        "claim_roles_without_support"
+    ),
+    "L2 claim entity surface is absent from summary": "summary_entity_missing",
+    "L2 summary lacks the selected operator evidence cue": (
+        "summary_operator_cue_missing"
+    ),
+    "L2 summary explicitly negates the selected operator cue": (
+        "summary_operator_cue_negated"
+    ),
+    "L2 abstraction method is not public": "abstraction_method_not_public",
+    "L2 closure pattern is not public": "closure_pattern_not_public",
+}
+
+
+def _safe_schema_error(exc: ValidationError) -> tuple[str, str]:
+    errors = exc.errors(
+        include_url=False,
+        include_context=False,
+        include_input=False,
+    )
+    if not errors:
+        return "root", "unknown"
+    error = errors[0]
+    error_type = str(error.get("type", "unknown"))
+    if not error_type.isascii() or not error_type.replace("_", "").isalnum():
+        error_type = "unknown"
+    location = error.get("loc", ())
+    safe_parts: list[str] = []
+    for index, part in enumerate(location):
+        if isinstance(part, int):
+            safe_parts.append(str(part))
+        elif error_type == "extra_forbidden" and index == len(location) - 1:
+            safe_parts.append("extra")
+        elif (
+            isinstance(part, str)
+            and part.isascii()
+            and len(part) <= 64
+            and all(character.isalnum() or character == "_" for character in part)
+        ):
+            safe_parts.append(part)
+        else:
+            safe_parts.append("field")
+    return ".".join(safe_parts) or "root", error_type
+
+
+def _contract_validation_code(exc: Exception) -> str:
+    return _CONTRACT_VALIDATION_CODES.get(
+        str(exc),
+        "internal_validation_error",
+    )
+
+
+def _has_explicit_negation(text: str) -> bool:
+    tokens = re.findall(r"[a-z]+(?:'[a-z]+)?", text.casefold())
+    negations = {
+        "no",
+        "not",
+        "never",
+        "neither",
+        "nor",
+        "nobody",
+        "none",
+        "nothing",
+        "nowhere",
+    }
+    return any(token in negations or token.endswith("n't") for token in tokens)
 
 
 class _OpenAICompatibleJSONClient:
@@ -608,6 +715,10 @@ class OpenAICompatibleL1BatchProducer:
             for cue in cues_by_operator[candidate.predicate.canonical_operator]
         ):
             raise ValueError("L1 operator has no public cue in user evidence")
+        if candidate.polarity == "positive" and _has_explicit_negation(quote):
+            raise ValueError(
+                "L1 operator cue is explicitly negated in user evidence"
+            )
         if candidate.polarity not in self.policy.allowed_polarities:
             raise ValueError("L1 polarity is not authorized")
         display_by_role = {
@@ -688,19 +799,45 @@ class OpenAICompatibleL1BatchProducer:
                 "raw_turns": [item.model_dump(mode="json") for item in public_turns],
             },
         )
+        call = self.client.last_call
+        response_sha256 = call.response_sha256 if call is not None else "unavailable"
         try:
             response = ProductionL1BatchResponseV1.model_validate(raw)
-            by_turn = {item.turn_id: item for item in response.proposals}
-            if set(by_turn) != {item.turn_id for item in public_turns}:
-                raise ValueError("L1 response turn coverage mismatch")
+        except ValidationError as exc:
+            validation_path, validation_type = _safe_schema_error(exc)
+            raise ModelBoundaryError(
+                "l1 model proposal failed contract validation: reason=schema; "
+                f"validation_path={validation_path}; "
+                f"validation_type={validation_type}; "
+                f"response_sha256={response_sha256}"
+            ) from None
+        except Exception:
+            raise ModelBoundaryError(
+                "l1 model proposal failed contract validation: "
+                "reason=schema_internal; "
+                f"response_sha256={response_sha256}"
+            ) from None
+        by_turn = {item.turn_id: item for item in response.proposals}
+        if set(by_turn) != {item.turn_id for item in public_turns}:
+            raise ModelBoundaryError(
+                "l1 model proposal failed contract validation: "
+                "reason=turn_coverage; "
+                f"response_sha256={response_sha256}"
+            )
+        try:
             public_by_turn = {item.turn_id: item for item in public_turns}
             for turn_id, proposal in by_turn.items():
                 self._validate_candidate(
                     public_turn=public_by_turn[turn_id],
                     proposal=proposal,
                 )
-        except Exception:
-            raise ModelBoundaryError("l1 model proposal failed contract validation") from None
+        except Exception as exc:
+            raise ModelBoundaryError(
+                "l1 model proposal failed contract validation: "
+                "reason=candidate_grounding; "
+                f"validation_code={_contract_validation_code(exc)}; "
+                f"response_sha256={response_sha256}"
+            ) from None
         return BoundL1CandidateProducer(response.proposals)
 
 
@@ -785,8 +922,25 @@ class OpenAICompatibleL2Producer:
                 "accepted_l1": public_support,
             },
         )
+        call = self.client.last_call
+        response_sha256 = call.response_sha256 if call is not None else "unavailable"
         try:
             response = ProductionL2ResponseV1.model_validate(raw)
+        except ValidationError as exc:
+            validation_path, validation_type = _safe_schema_error(exc)
+            raise ModelBoundaryError(
+                "l2 model proposal failed contract validation: reason=schema; "
+                f"validation_path={validation_path}; "
+                f"validation_type={validation_type}; "
+                f"response_sha256={response_sha256}"
+            ) from None
+        except Exception:
+            raise ModelBoundaryError(
+                "l2 model proposal failed contract validation: "
+                "reason=schema_internal; "
+                f"response_sha256={response_sha256}"
+            ) from None
+        try:
             candidate = response.typed_candidate
             if candidate.supporting_l1_refs != support_refs:
                 raise ValueError("L2 support order or coverage mismatch")
@@ -905,6 +1059,10 @@ class OpenAICompatibleL2Producer:
                 for cue in operator_cues[claim.predicate.canonical_operator]
             ):
                 raise ValueError("L2 summary lacks the selected operator evidence cue")
+            if claim.polarity == "positive" and _has_explicit_negation(summary):
+                raise ValueError(
+                    "L2 summary explicitly negates the selected operator cue"
+                )
             if candidate.abstraction.method not in operator_policy.allowed_abstraction_methods:
                 raise ValueError("L2 abstraction method is not public")
             if candidate.closure.pattern not in operator_policy.allowed_closure_patterns:
@@ -923,8 +1081,13 @@ class OpenAICompatibleL2Producer:
                 operation_provenance=admitted_l1[0].linked_candidate.typed_candidate.operation_provenance,
             )
             _validate_time(candidate=synthetic_l1, policy=self.policy)
-        except Exception:
-            raise ModelBoundaryError("l2 model proposal failed contract validation") from None
+        except Exception as exc:
+            raise ModelBoundaryError(
+                "l2 model proposal failed contract validation: "
+                "reason=candidate_grounding; "
+                f"validation_code={_contract_validation_code(exc)}; "
+                f"response_sha256={response_sha256}"
+            ) from None
         return [
             ProposedL2CandidateV1(
                 candidate_ref=response.candidate_ref,
