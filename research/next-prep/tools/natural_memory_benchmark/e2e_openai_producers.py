@@ -353,39 +353,66 @@ class _OpenAICompatibleJSONClient:
         for attempt in range(1, self.max_attempts + 1):
             try:
                 with self._opener(request, timeout=self.timeout_seconds) as response:
+                    response_status = getattr(response, "status", None)
                     raw = response.read()
-                envelope = json.loads(raw)
-                response_model = envelope["model"]
-                choices = envelope["choices"]
-                if not isinstance(response_model, str) or not response_model.strip():
-                    raise TypeError("missing response model")
-                if not isinstance(choices, list) or len(choices) != 1:
-                    raise TypeError("response must contain one choice")
-                content = choices[0]["message"]["content"]
-                if not isinstance(content, str):
-                    raise TypeError("response content must be text")
-                result = json.loads(content)
-                if not isinstance(result, dict):
-                    raise TypeError("response content must be a JSON object")
-                self.last_call = ModelCallHashV1(
-                    stage=self.stage,
-                    requested_model=self.model,
-                    response_model=response_model,
-                    request_sha256=hashlib.sha256(request_bytes).hexdigest(),
-                    response_sha256=hashlib.sha256(raw).hexdigest(),
-                    attempts=attempt,
-                )
-                return result
-            except (KeyError, TypeError, ValueError, json.JSONDecodeError):
-                raise ModelBoundaryError(
-                    f"{self.stage} model response was invalid"
-                ) from None
             except Exception as exc:
                 if self._retryable(exc) and attempt < self.max_attempts:
                     continue
                 raise ModelBoundaryError(
                     f"{self.stage} model request failed after {attempt} attempt(s)"
                 ) from None
+
+            response_sha256 = hashlib.sha256(raw).hexdigest()
+            status_text = (
+                str(response_status)
+                if isinstance(response_status, int)
+                else "unavailable"
+            )
+
+            def invalid_response(reason: str) -> ModelBoundaryError:
+                return ModelBoundaryError(
+                    f"{self.stage} model response was invalid: "
+                    f"reason={reason}; http_status={status_text}; "
+                    f"response_sha256={response_sha256}"
+                )
+
+            try:
+                envelope = json.loads(raw)
+            except (json.JSONDecodeError, UnicodeDecodeError):
+                raise invalid_response("envelope_json") from None
+            if not isinstance(envelope, dict):
+                raise invalid_response("envelope_shape")
+            response_model = envelope.get("model")
+            if not isinstance(response_model, str) or not response_model.strip():
+                raise invalid_response("response_model")
+            choices = envelope.get("choices")
+            if (
+                not isinstance(choices, list)
+                or len(choices) != 1
+                or not isinstance(choices[0], dict)
+            ):
+                raise invalid_response("choices")
+            message = choices[0].get("message")
+            if not isinstance(message, dict):
+                raise invalid_response("content")
+            content = message.get("content")
+            if not isinstance(content, str):
+                raise invalid_response("content")
+            try:
+                result = json.loads(content)
+            except (json.JSONDecodeError, UnicodeDecodeError):
+                raise invalid_response("content_json") from None
+            if not isinstance(result, dict):
+                raise invalid_response("content_shape")
+            self.last_call = ModelCallHashV1(
+                stage=self.stage,
+                requested_model=self.model,
+                response_model=response_model,
+                request_sha256=hashlib.sha256(request_bytes).hexdigest(),
+                response_sha256=response_sha256,
+                attempts=attempt,
+            )
+            return result
         raise AssertionError("unreachable model retry state")
 
 

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 from typing import Any
@@ -253,6 +254,7 @@ def _turns() -> list[RawTurnV1]:
 class _BufferedResponse:
     def __init__(self, payload: bytes) -> None:
         self.payload = payload
+        self.status = 200
 
     def __enter__(self) -> "_BufferedResponse":
         return self
@@ -290,6 +292,60 @@ def _chat_response(payload: object, *, include_model: bool = True) -> bytes:
     if include_model:
         envelope["model"] = "test-model-response"
     return json.dumps(envelope, sort_keys=True).encode("utf-8")
+
+
+@pytest.mark.parametrize(
+    ("response", "reason", "forbidden_text"),
+    [
+        (
+            b"sensitive-provider-envelope",
+            "envelope_json",
+            "sensitive-provider-envelope",
+        ),
+        (
+            json.dumps(
+                {
+                    "model": "test-model-response",
+                    "choices": [
+                        {"message": {"content": "sensitive-provider-content"}}
+                    ],
+                },
+                sort_keys=True,
+            ).encode("utf-8"),
+            "content_json",
+            "sensitive-provider-content",
+        ),
+    ],
+)
+def test_model_boundary_error_reports_sanitized_response_fingerprint(
+    tmp_path: Path,
+    response: bytes,
+    reason: str,
+    forbidden_text: str,
+) -> None:
+    repository = tmp_path / f"{reason}-memory-history.git"
+    result_path = tmp_path / f"{reason}-result.json"
+
+    with pytest.raises(ModelBoundaryError) as captured:
+        run_openai_e2e(
+            turns=_turns(),
+            question="What beverage is preferred?",
+            repository_path=repository,
+            result_path=result_path,
+            base_url="https://model.invalid/v1",
+            api_key="credential-that-must-not-leak",
+            model="test-model",
+            max_attempts=1,
+            opener=_SequencedOpener([response]),
+        )
+
+    message = str(captured.value)
+    assert f"reason={reason}" in message
+    assert "http_status=200" in message
+    assert f"response_sha256={hashlib.sha256(response).hexdigest()}" in message
+    assert forbidden_text not in message
+    assert not repository.exists()
+    assert not result_path.exists()
 
 
 def _production_l1_payload() -> dict[str, object]:
