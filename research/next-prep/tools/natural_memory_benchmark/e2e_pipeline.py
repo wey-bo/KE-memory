@@ -841,7 +841,7 @@ def run_e2e_pipeline(
                 identity_registry_revision=f"category-only-{ontology.registry_hash[:16]}",
                 identity_registry_hash=ontology.registry_hash,
                 transaction_time=_timestamp(turn.turn_index * 10 + 2),
-                known_lifecycle_candidate_refs=[],
+                known_lifecycle_revisions=[],
                 policy=AdmissionPolicy(
                     policy_id="e2e-category-create",
                     policy_version="1",
