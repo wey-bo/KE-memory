@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from hashlib import sha256
 
 import pytest
@@ -125,6 +126,17 @@ def test_registry_hash_and_external_mappings_are_strictly_validated() -> None:
         )
 
 
+def test_linking_contract_rejects_false_literal_integer_coercion() -> None:
+    with pytest.raises(ValidationError):
+        AdvisoryMapping(
+            source="wordnet",
+            source_version="3.0",
+            external_id="wn:coffee.n.01",
+            relation="exact",
+            may_authorize_link=0,
+        )
+
+
 def test_extension_proposal_has_no_canonical_concept_id_field() -> None:
     proposal = ProvisionalConceptExtensionProposal(
         proposal_id="extension-unknown-drink",
@@ -165,6 +177,39 @@ def test_preference_for_coffee_links_category_not_individual() -> None:
     assert entity.canonical_entity_id is None
 
 
+def test_category_mention_with_identity_binding_fails_closed() -> None:
+    candidate = _candidate(
+        predicate="prefer",
+        sense="preference_theme",
+        operator="prefer",
+        entities=["coffee"],
+        roles=[("theme", 1)],
+    )
+    binding = CanonicalEntityBinding(
+        local_entity_id="entity-01",
+        canonical_entity_id="entity:coffee-cup-42",
+        identity_status="resolved",
+        identity_snapshot_id="identity-snapshot-01",
+        identity_snapshot_revision="identity-snapshot-r1",
+        identity_snapshot_hash="a" * 64,
+        identity_registry_revision="identity-r1",
+        identity_registry_hash="b" * 64,
+        concept_type_ids=["memory:CoffeeBeverage"],
+    )
+
+    linked = link_l1_candidate(
+        candidate,
+        build_diagnostic_ontology_registry(),
+        _spans(candidate),
+        [binding],
+    )
+
+    entity = linked.entity_links[0]
+    assert entity.interpretation == "unresolved"
+    assert entity.canonical_entity_id is None
+    assert linked.unresolved_local_entity_ids == ["entity-01"]
+
+
 def test_specific_coffee_cup_requires_and_copies_explicit_caller_identity() -> None:
     candidate = _candidate(
         predicate="drink",
@@ -182,8 +227,10 @@ def test_specific_coffee_cup_requires_and_copies_explicit_caller_identity() -> N
         canonical_entity_id="entity:coffee-cup-42",
         identity_status="resolved",
         identity_snapshot_id="identity-snapshot-01",
+        identity_snapshot_revision="identity-snapshot-r1",
         identity_snapshot_hash="a" * 64,
         identity_registry_revision="identity-r1",
+        identity_registry_hash="b" * 64,
         concept_type_ids=["memory:CoffeeBeverage"],
     )
     linked = link_l1_candidate(
@@ -257,7 +304,7 @@ def test_linked_envelope_binds_source_hash_evidence_registry_and_replays_determi
     stale = first.model_dump(mode="json")
     stale["registry_hash"] = "b" * 64
     with pytest.raises(ValidationError, match="registry hash"):
-        type(first).model_validate(stale)
+        type(first).model_validate_json(json.dumps(stale))
 
 
 def test_linking_rejects_incomplete_evidence_span_closure() -> None:
@@ -353,8 +400,10 @@ def test_linked_hash_normalizes_evidence_and_identity_type_order() -> None:
         canonical_entity_id="entity:coffee-cup-42",
         identity_status="resolved",
         identity_snapshot_id="identity-snapshot-01",
+        identity_snapshot_revision="identity-snapshot-r1",
         identity_snapshot_hash="a" * 64,
         identity_registry_revision="identity-r1",
+        identity_registry_hash="b" * 64,
         concept_type_ids=["memory:CoffeeBeverage", "memory:Beverage"],
     )
     second_binding = first_binding.model_copy(

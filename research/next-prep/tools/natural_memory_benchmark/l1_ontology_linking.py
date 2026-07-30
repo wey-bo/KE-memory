@@ -9,7 +9,7 @@ from __future__ import annotations
 import hashlib
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 from .authoritative_memory import EvidenceSpanV2, canonical_sha256
 from .io import canonical_json_bytes
@@ -19,7 +19,7 @@ from .typed_extractor_l1 import TypedL1Candidate
 class StrictModel(BaseModel):
     """Immutable model boundary for linking inputs and diagnostic outputs."""
 
-    model_config = ConfigDict(extra="forbid", frozen=True)
+    model_config = ConfigDict(extra="forbid", frozen=True, strict=True)
 
 
 _CONCEPT_ID = r"^memory:[A-Za-z][A-Za-z0-9]*$"
@@ -36,6 +36,18 @@ class AdvisoryMapping(StrictModel):
     may_authorize_link: Literal[False] = False
     may_authorize_identity: Literal[False] = False
     may_authorize_admission: Literal[False] = False
+
+    @field_validator(
+        "may_authorize_link",
+        "may_authorize_identity",
+        "may_authorize_admission",
+        mode="before",
+    )
+    @classmethod
+    def require_literal_false(cls, value: object) -> object:
+        if value is not False:
+            raise ValueError("authority flags must be the boolean false literal")
+        return value
 
 
 class OntologyConcept(StrictModel):
@@ -236,8 +248,10 @@ class CanonicalEntityBinding(StrictModel):
     canonical_entity_id: str | None = Field(default=None, min_length=1)
     identity_status: Literal["resolved", "unresolved"]
     identity_snapshot_id: str = Field(min_length=1)
+    identity_snapshot_revision: str = Field(min_length=1)
     identity_snapshot_hash: str = Field(pattern=_SHA256)
     identity_registry_revision: str = Field(min_length=1)
+    identity_registry_hash: str = Field(pattern=_SHA256)
     concept_type_ids: list[str] = Field(default_factory=list)
 
     @model_validator(mode="after")
@@ -687,8 +701,12 @@ def link_l1_candidate(
             extension_proposal=extension,
         )
         caller_binding = binding_by_local_id.get(local_entity.local_entity_id)
-        if caller_binding is not None and caller_binding.identity_status == "resolved":
-            if not selected_ids or not set(selected_ids).issubset(
+        if _is_demonstrative_instance(local_entity.surface):
+            if caller_binding is None or caller_binding.identity_status != "resolved":
+                interpretation = "unresolved"
+                canonical_entity_id = None
+                retained_binding = caller_binding
+            elif not selected_ids or not set(selected_ids).issubset(
                 set(caller_binding.concept_type_ids)
             ):
                 interpretation = "unresolved"
@@ -698,7 +716,7 @@ def link_l1_candidate(
                 interpretation = "individual"
                 canonical_entity_id = caller_binding.canonical_entity_id
                 retained_binding = caller_binding
-        elif _is_demonstrative_instance(local_entity.surface) or caller_binding is not None:
+        elif caller_binding is not None:
             interpretation = "unresolved"
             canonical_entity_id = None
             retained_binding = caller_binding
@@ -763,5 +781,5 @@ def link_l1_candidate(
     }
     serialized_envelope = _json_compatible(envelope)
     assert isinstance(serialized_envelope, dict)
-    serialized_envelope["linked_candidate_hash"] = canonical_sha256(serialized_envelope)
-    return LinkedL1Candidate.model_validate(serialized_envelope)
+    envelope["linked_candidate_hash"] = canonical_sha256(serialized_envelope)
+    return LinkedL1Candidate.model_validate(envelope)
