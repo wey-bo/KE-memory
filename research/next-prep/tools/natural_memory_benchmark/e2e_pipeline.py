@@ -798,6 +798,7 @@ def run_e2e_pipeline(
     repository_path: Path,
     question: str,
     ontology_registry: OntologyRegistry | None = None,
+    memory_producer: ProducerIdentity | None = None,
 ) -> EndToEndResultV1:
     ordered_turns = _validate_turns(turns)
     repository_path = repository_path.resolve()
@@ -808,7 +809,7 @@ def run_e2e_pipeline(
             f"{repository_path.name}.raw.json"
         ),
     )
-    producer = ProducerIdentity(
+    producer = memory_producer or ProducerIdentity(
         workflow_run_id="run-e2e-closure",
         producer_id="e2e-pipeline",
         producer_version="1",

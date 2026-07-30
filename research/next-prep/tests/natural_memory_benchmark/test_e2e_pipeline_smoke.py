@@ -1,15 +1,27 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
+from typing import Any
 
 import pytest
 
+from tools.natural_memory_benchmark.e2e_openai_producers import (
+    ModelBoundaryError,
+    OpenAICompatibleL1BatchProducer,
+    allocate_support_ref,
+    build_diagnostic_production_policy,
+)
+from tools.natural_memory_benchmark.e2e_openai_runtime import run_openai_e2e
 from tools.natural_memory_benchmark.e2e_pipeline import (
     ProposedL1CandidateV1,
     ProposedL2CandidateV1,
     RawTurnV1,
     TurnExtractionInputV1,
     run_e2e_pipeline,
+)
+from tools.natural_memory_benchmark.l1_ontology_linking import (
+    build_diagnostic_ontology_registry,
 )
 from tools.natural_memory_benchmark.query_compiler_v2 import (
     AnswerDraftV1,
@@ -232,6 +244,255 @@ def _turns() -> list[RawTurnV1]:
             user_text="Coffee is drunk regularly.",
             assistant_text="Understood.",
         ),
+    ]
+
+
+class _BufferedResponse:
+    def __init__(self, payload: bytes) -> None:
+        self.payload = payload
+
+    def __enter__(self) -> "_BufferedResponse":
+        return self
+
+    def __exit__(self, *_args: object) -> None:
+        return None
+
+    def read(self) -> bytes:
+        return self.payload
+
+
+class _SequencedOpener:
+    def __init__(self, responses: list[bytes]) -> None:
+        self.responses = list(responses)
+        self.requests: list[dict[str, Any]] = []
+
+    def __call__(self, request: Any, *, timeout: int) -> _BufferedResponse:
+        del timeout
+        self.requests.append(json.loads(request.data))
+        if not self.responses:
+            raise AssertionError("unexpected model request")
+        return _BufferedResponse(self.responses.pop(0))
+
+
+def _chat_response(payload: object) -> bytes:
+    return json.dumps(
+        {
+            "model": "test-model-response",
+            "choices": [
+                {"message": {"content": json.dumps(payload, sort_keys=True)}}
+            ],
+        },
+        sort_keys=True,
+    ).encode("utf-8")
+
+
+def _production_l1_payload() -> dict[str, object]:
+    proposals: list[dict[str, object]] = []
+    values = (
+        ("turn-0000000000000001", "preference", "prefer", "preference_theme", "prefer"),
+        ("turn-0000000000000002", "event", "drink", "consume_beverage", "drink"),
+    )
+    for turn_id, kind, surface, sense, operator in values:
+        evidence_id = f"evidence-{turn_id}-user"
+        candidate = TypedL1Candidate(
+            kind=kind,
+            predicate=TypedPredicate(
+                surface=surface,
+                sense=sense,
+                canonical_operator=operator,
+            ),
+            local_entities=[
+                TypedLocalEntity(local_entity_id="entity-01", surface="coffee")
+            ],
+            roles=[
+                TypedRoleBinding(
+                    role="theme",
+                    role_name="theme",
+                    local_entity_id="entity-01",
+                )
+            ],
+            modality="actual",
+            polarity="positive",
+            time=TypedTimeBinding(),
+            derivation=TypedDerivationProvenance(
+                method="explicit",
+                evidence_ids=[evidence_id],
+            ),
+            evidence_bindings=[
+                TypedEvidenceBinding(evidence_id=evidence_id, speaker="user")
+            ],
+            lifecycle=TypedLifecycleBinding(lifecycle="active"),
+            operation_provenance=TypedOperationProvenance(),
+        )
+        proposals.append(
+            {
+                "turn_id": turn_id,
+                "candidate_ref": allocate_support_ref(turn_id),
+                "typed_candidate": candidate.model_dump(mode="json"),
+            }
+        )
+    return {
+        "schema_version": "production-l1-batch-response-v1",
+        "proposals": proposals,
+    }
+
+
+def _production_l2_payload() -> dict[str, object]:
+    turns = _turns()
+    support_refs = [allocate_support_ref(item.turn_id) for item in turns]
+    evidence_bindings = [
+        TypedEvidenceBinding(
+            evidence_id=f"evidence-{item.turn_id}-user",
+            speaker="user",
+        )
+        for item in turns
+    ]
+    candidate = TypedL2Candidate(
+        kind="preference_profile",
+        summary="Coffee is the supported beverage preference.",
+        supporting_l1_refs=support_refs,
+        structured_claims=[
+            TypedL2StructuredClaim(
+                claim_ref="claim-01",
+                predicate=TypedPredicate(
+                    surface="prefer",
+                    sense="preference_theme",
+                    canonical_operator="prefer",
+                ),
+                local_entities=[
+                    TypedLocalEntity(local_entity_id="entity-01", surface="coffee")
+                ],
+                roles=[
+                    TypedRoleBinding(
+                        role="theme",
+                        role_name="theme",
+                        local_entity_id="entity-01",
+                    )
+                ],
+                modality="actual",
+                polarity="positive",
+                time=TypedTimeBinding(),
+                supporting_l1_refs=support_refs,
+            )
+        ],
+        abstraction=TypedL2Abstraction(
+            method="preference_aggregation",
+            basis="two admitted category facts",
+        ),
+        closure=TypedL2Closure(
+            pattern="multi_evidence_set",
+            required_support_refs=support_refs,
+        ),
+        source_turn_refs=[item.turn_id for item in turns],
+        source_session_refs=[turns[0].session_id],
+        evidence_bindings=evidence_bindings,
+    )
+    return {
+        "schema_version": "production-l2-response-v1",
+        "candidate_ref": "l2-preference-profile-model",
+        "typed_candidate": candidate.model_dump(mode="json"),
+    }
+
+
+def _production_query_payload() -> dict[str, object]:
+    request = QueryDraftRequestV1(
+        query_id="query-e2e-1",
+        raw_query="What beverage is preferred?",
+        query_time="2026-07-30T00:00:23Z",
+        compiler_policy_revision="e2e-query-policy-v1",
+    )
+    return _QueryProducer().produce(request).model_dump(mode="json")
+
+
+def test_production_contract_and_malformed_l1_fail_before_git(tmp_path: Path) -> None:
+    registry = build_diagnostic_ontology_registry()
+    policy = build_diagnostic_production_policy(registry)
+    incomplete = policy.model_copy(
+        update={
+            "l1_role_display_bindings": policy.l1_role_display_bindings[:-1]
+        }
+    )
+    unopened = _SequencedOpener([])
+    with pytest.raises(ValueError, match="role.*coverage"):
+        OpenAICompatibleL1BatchProducer(
+            registry=registry,
+            policy=incomplete,
+            base_url="https://model.invalid/v1",
+            api_key="not-written-anywhere",
+            model="test-model",
+            opener=unopened,
+        )
+    assert unopened.requests == []
+
+    malformed = _SequencedOpener([_chat_response("not a proposal object")])
+    repository = tmp_path / "malformed-memory-history.git"
+    with pytest.raises(ModelBoundaryError) as error:
+        run_openai_e2e(
+            turns=_turns(),
+            question="What beverage is preferred?",
+            repository_path=repository,
+            base_url="https://model.invalid/v1",
+            api_key="credential-that-must-not-leak",
+            model="test-model",
+            opener=malformed,
+        )
+    assert "credential-that-must-not-leak" not in str(error.value)
+    assert not repository.exists()
+    assert not repository.with_name(f"{repository.name}.raw.json").exists()
+
+
+def test_openai_runtime_closes_model_write_query_and_evidence(tmp_path: Path) -> None:
+    opener = _SequencedOpener(
+        [
+            _chat_response(_production_l1_payload()),
+            _chat_response(_production_l2_payload()),
+            _chat_response(_production_query_payload()),
+        ]
+    )
+    outcome = run_openai_e2e(
+        turns=_turns(),
+        question="What beverage is preferred?",
+        repository_path=tmp_path / "model-memory-history.git",
+        base_url="https://model.invalid/v1",
+        api_key="credential-that-must-not-enter-public-input",
+        model="test-model",
+        opener=opener,
+    )
+
+    result = outcome.pipeline
+    assert result.snapshot.verification_status == "valid"
+    assert result.execution.answer_values == ("memory:CoffeeBeverage",)
+    assert result.answer.fallback_triggered is False
+    assert {span.text for span in result.answer.evidence_spans} == {
+        "Coffee is preferred.",
+        "Coffee is drunk regularly.",
+    }
+    assert [item.stage for item in outcome.receipt.model_calls] == [
+        "l1",
+        "l2",
+        "query",
+    ]
+
+    l1_public = json.loads(opener.requests[0]["messages"][1]["content"])
+    serialized_public = json.dumps(l1_public, sort_keys=True).casefold()
+    assert "gold" not in serialized_public
+    assert "authority" not in serialized_public
+    contract = l1_public["public_contract"]
+    assert contract["ontology_registry"]["registry_hash"]
+    assert len(contract["ontology_registry"]["concepts"]) == 9
+    assert len(contract["ontology_registry"]["predicate_role_constraints"]) == 4
+    assert {item["canonical_operator"] for item in contract["policy"]["l1_operator_kind_bindings"]} == {
+        "prefer",
+        "drink",
+        "add_ingredient",
+    }
+    assert len(contract["policy"]["l1_role_display_bindings"]) == 4
+    assert contract["policy"]["modality_time_policies"] == [
+        {
+            "modality": "actual",
+            "event_time_policy": "optional",
+            "valid_time_policy": "optional",
+        }
     ]
 
 
