@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 from pydantic import ValidationError
@@ -710,6 +711,43 @@ def test_admission_rejects_tampered_raw_revision_identity(tmp_path):
 
     assert decision.status == "reject"
     assert "raw_artifact_revision_identity_mismatch" in decision.reason_codes
+
+
+def test_admission_accepts_when_only_raw_mtime_ns_converges(
+    tmp_path, monkeypatch
+):
+    linked, registry, raw, source, _ = _link(
+        tmp_path,
+        text="I prefer coffee.",
+    )
+    raw_path = Path(raw.local_path)
+    original_lstat = Path.lstat
+    raw_lstat_calls = 0
+
+    def converging_lstat(path):
+        nonlocal raw_lstat_calls
+        observed = original_lstat(path)
+        if path != raw_path:
+            return observed
+        raw_lstat_calls += 1
+        return SimpleNamespace(
+            st_mode=observed.st_mode,
+            st_dev=observed.st_dev,
+            st_ino=observed.st_ino,
+            st_size=observed.st_size,
+            st_mtime_ns=observed.st_mtime_ns + raw_lstat_calls,
+        )
+
+    monkeypatch.setattr(Path, "lstat", converging_lstat)
+
+    decision = admit_linked_l1(
+        linked,
+        registry,
+        _context(raw=raw, source=source),
+    )
+
+    assert decision.status == "accept"
+    assert "raw_artifact_unavailable" not in decision.reason_codes
 
 
 @pytest.mark.parametrize("path_state", ["missing", "directory", "unreadable"])

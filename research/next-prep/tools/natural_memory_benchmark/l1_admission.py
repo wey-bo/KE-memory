@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import os
 import stat
 from datetime import datetime
 from pathlib import Path
@@ -706,32 +707,49 @@ def _has_valid_evidence_closure(
         if artifact.artifact_revision_id != expected_id:
             _add_once(reasons, "raw_artifact_revision_identity_mismatch")
         path = Path(artifact.local_path)
+        descriptor: int | None = None
         try:
-            opened = path.lstat()
+            path_opened = path.lstat()
+            if not stat.S_ISREG(path_opened.st_mode) or not (
+                stat.S_IMODE(path_opened.st_mode) & 0o444
+            ):
+                _add_once(reasons, "raw_artifact_unavailable")
+                continue
+            descriptor = os.open(
+                path,
+                os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0),
+            )
+            opened = os.fstat(descriptor)
+            if (path_opened.st_dev, path_opened.st_ino) != (
+                opened.st_dev,
+                opened.st_ino,
+            ):
+                _add_once(reasons, "raw_artifact_unavailable")
+                continue
+            if not stat.S_ISREG(opened.st_mode) or not (
+                stat.S_IMODE(opened.st_mode) & 0o444
+            ):
+                _add_once(reasons, "raw_artifact_unavailable")
+                continue
+            with os.fdopen(descriptor, "rb", closefd=False) as stream:
+                content = stream.read()
+            rechecked = os.fstat(descriptor)
+            path_rechecked = path.lstat()
         except OSError:
             _add_once(reasons, "raw_artifact_unavailable")
             continue
-        if not stat.S_ISREG(opened.st_mode) or not (
-            stat.S_IMODE(opened.st_mode) & 0o444
-        ):
-            _add_once(reasons, "raw_artifact_unavailable")
-            continue
-        try:
-            content = path.read_bytes()
-            rechecked = path.lstat()
-        except OSError:
-            _add_once(reasons, "raw_artifact_unavailable")
-            continue
-        if (
-            opened.st_dev,
-            opened.st_ino,
-            opened.st_size,
-            opened.st_mtime_ns,
-        ) != (
+        finally:
+            if descriptor is not None:
+                os.close(descriptor)
+        opened_identity = (opened.st_dev, opened.st_ino, opened.st_size)
+        if opened_identity != (
             rechecked.st_dev,
             rechecked.st_ino,
             rechecked.st_size,
-            rechecked.st_mtime_ns,
+        ) or opened_identity != (
+            path_rechecked.st_dev,
+            path_rechecked.st_ino,
+            path_rechecked.st_size,
         ):
             _add_once(reasons, "raw_artifact_unavailable")
             continue
