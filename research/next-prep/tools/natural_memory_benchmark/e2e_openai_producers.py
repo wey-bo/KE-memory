@@ -241,8 +241,8 @@ def build_diagnostic_production_policy(
         modality_time_policies=[
             ModalityTimePolicyV1(
                 modality="actual",
-                event_time_policy="optional",
-                valid_time_policy="optional",
+                event_time_policy="forbidden",
+                valid_time_policy="forbidden",
             )
         ],
         l2_operator_policies=[
@@ -846,6 +846,15 @@ class OpenAICompatibleL2Producer:
             summary = candidate.summary.casefold()
             if any(surface not in summary for surface in claim_surfaces.values()):
                 raise ValueError("L2 claim entity surface is absent from summary")
+            operator_cues = {
+                item.canonical_operator: item.cues
+                for item in self.policy.operator_evidence_cues
+            }
+            if not any(
+                cue.casefold() in summary
+                for cue in operator_cues[claim.predicate.canonical_operator]
+            ):
+                raise ValueError("L2 summary lacks the selected operator evidence cue")
             if candidate.abstraction.method not in operator_policy.allowed_abstraction_methods:
                 raise ValueError("L2 abstraction method is not public")
             if candidate.closure.pattern not in operator_policy.allowed_closure_patterns:

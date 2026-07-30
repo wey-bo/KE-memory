@@ -520,8 +520,8 @@ def test_openai_runtime_closes_model_write_query_and_evidence(tmp_path: Path) ->
     assert contract["policy"]["modality_time_policies"] == [
         {
             "modality": "actual",
-            "event_time_policy": "optional",
-            "valid_time_policy": "optional",
+            "event_time_policy": "forbidden",
+            "valid_time_policy": "forbidden",
         }
     ]
     assert contract["policy"]["operator_evidence_cues"] == [
@@ -564,6 +564,12 @@ def test_l1_semantics_and_non_emission_stop_before_raw_or_git(tmp_path: Path) ->
     non_emission["proposals"][0]["decision"] = "abstain"
     non_emission["proposals"][0]["typed_candidate"] = None
     cases.append(("non-emission", _turns(), non_emission))
+
+    invented_time = _production_l1_payload()
+    invented_time["proposals"][0]["typed_candidate"]["time"]["event_time"] = (
+        "2099-01-01"
+    )
+    cases.append(("invented-time", _turns(), invented_time))
 
     for name, turns, payload in cases:
         repository = tmp_path / f"{name}-memory-history.git"
@@ -617,6 +623,28 @@ def test_l2_claim_requires_admitted_l1_semantic_support(tmp_path: Path) -> None:
         )
     assert not repository.exists()
     assert not result_path.exists()
+
+    unsupported_summary = _production_l2_payload()
+    unsupported_summary["typed_candidate"]["summary"] = "Coffee is avoided."
+    summary_repository = tmp_path / "unsupported-summary-memory-history.git"
+    summary_result = tmp_path / "unsupported-summary-result.json"
+    with pytest.raises(ModelBoundaryError, match="l2"):
+        run_openai_e2e(
+            turns=_turns(),
+            question="What beverage is preferred?",
+            repository_path=summary_repository,
+            result_path=summary_result,
+            base_url="https://model.invalid/v1",
+            api_key="credential-that-must-not-leak",
+            model="test-model",
+            opener=_SequencedOpener(
+                [
+                    _chat_response(_production_l1_payload()),
+                    _chat_response(unsupported_summary),
+                ]
+            ),
+        )
+    assert not summary_result.exists()
 
 
 def test_query_response_without_model_is_rejected_without_result(tmp_path: Path) -> None:
