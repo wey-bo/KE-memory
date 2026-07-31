@@ -235,7 +235,7 @@ class OpenAIQueryOnlyOutcome:
 
 #: Windows a query-only attempt must observe for authoritative writes. Recorded
 #: in the receipt so the zero write count states what it actually covered.
-OBSERVED_WRITE_PHASES = ("recovery", "snapshot", "execution")
+OBSERVED_WRITE_PHASES = ("recovery", "snapshot", "compilation", "execution")
 
 
 class ExtractionCallObserver:
@@ -307,16 +307,23 @@ class MemoryWriteObserver:
         "_command",
     )
 
-    #: git verbs that mutate refs, the object database, or the index.
-    MUTATING_GIT_VERBS = frozenset(
+    #: git verbs known to only read. Anything else reaching the generic
+    #: primitive is counted as a write, so an unlisted or newly introduced
+    #: mutating verb fails closed instead of going unobserved.
+    READ_ONLY_GIT_VERBS = frozenset(
         {
-            "init",
-            "commit-tree",
-            "write-tree",
-            "update-index",
-            "update-ref",
-            "symbolic-ref",
-            "hash-object",
+            "cat-file",
+            "ls-tree",
+            "rev-list",
+            "rev-parse",
+            "show",
+            "merge-base",
+            "for-each-ref",
+            "diff",
+            "diff-tree",
+            "log",
+            "status",
+            "verify-pack",
         }
     )
 
@@ -369,11 +376,11 @@ class MemoryWriteObserver:
         return classmethod(wrapper) if is_classmethod else wrapper
 
     def _mutates(self, args: tuple[object, ...]) -> bool:
-        # args[0] is the bound instance; the git verb follows.
-        return any(
-            isinstance(item, str) and item in self.MUTATING_GIT_VERBS
-            for item in args[1:]
-        )
+        # args[0] is the bound instance; the git verb is the first argv entry.
+        verbs = [item for item in args[1:] if isinstance(item, str)]
+        if not verbs:
+            return True
+        return verbs[0] not in self.READ_ONLY_GIT_VERBS
 
     @property
     def count(self) -> int:
@@ -720,12 +727,15 @@ def _run_openai_query_only(
         identity_revision=compiler_registry.identity_revision,
         compiler_policy_revision="e2e-query-policy-v1",
     )
-    compilation = compile_natural_query(
-        question=question,
-        context=query_context,
-        registry=compiler_registry,
-        producer=query_producer,
-    )
+    # The model request runs inside this window: it is the one stage where
+    # untrusted output drives code, so it must not be the stage left unobserved.
+    with write_observer.observing("compilation"):
+        compilation = compile_natural_query(
+            question=question,
+            context=query_context,
+            registry=compiler_registry,
+            producer=query_producer,
+        )
     if compilation.status != "executable" or compilation.plan is None:
         raise ValueError(
             "query compilation abstained: "

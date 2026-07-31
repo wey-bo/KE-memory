@@ -241,6 +241,20 @@ def test_write_observer_counts_direct_git_mutation(tmp_path: Path) -> None:
     assert initial.snapshot.git_commit == head
 
 
+def test_unlisted_git_verbs_count_as_writes() -> None:
+    """The verb filter must fail closed, so an unknown verb is a write."""
+    observer = MemoryWriteObserver()
+    # read-tree mutates the index and is used by the commit builder, so a
+    # mutating-verb allowlist that omitted it would have been fail-open.
+    assert observer._mutates((None, "read-tree", "--empty")) is True
+    assert observer._mutates((None, "some-future-plumbing-verb")) is True
+    assert observer._mutates((None,)) is True
+    for verb in ("cat-file", "ls-tree", "rev-list", "rev-parse", "show"):
+        assert observer._mutates((None, verb)) is False, verb
+    # A read-only verb appearing as an argument must not mask a mutating verb.
+    assert observer._mutates((None, "update-ref", "refs/heads/show")) is True
+
+
 def test_write_observer_covers_the_repository_write_surface() -> None:
     """The observed method list must not silently miss a write entry point."""
     observed = set(MemoryWriteObserver.WRITE_METHODS)
@@ -272,6 +286,7 @@ def test_query_only_counts_writes_across_the_whole_attempt(
     assert outcome.receipt.observed_write_phases == (
         "recovery",
         "snapshot",
+        "compilation",
         "execution",
     )
 
