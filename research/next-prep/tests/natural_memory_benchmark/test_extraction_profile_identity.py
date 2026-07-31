@@ -49,7 +49,7 @@ def test_profile_states_its_scope_honestly() -> None:
     """
     profile = _profile()
     assert profile.scope == "diagnostic"
-    assert profile.profile_id == "production-diagnostic-profile-v1"
+    assert profile.profile_id == "operational-diagnostic-profile-v1"
 
 
 def test_profile_records_the_layer_vocabularies_separately() -> None:
@@ -63,7 +63,7 @@ def test_profile_records_the_layer_vocabularies_separately() -> None:
         ("drink", "consume_beverage"),
         ("prefer", "preference_theme"),
     )
-    assert profile.l2_operators == ("prefer",)
+    assert profile.l2_operator_senses == (("prefer", "preference_theme"),)
     assert profile.l1_vocabulary_sha256 != profile.l2_vocabulary_sha256
 
 
@@ -105,8 +105,11 @@ def test_qualification_results_do_not_transfer_across_profiles() -> None:
         qualified_profile=profile, execution_profile=profile
     )
 
-    foreign = profile.model_copy(
-        update={
+    # profile 现在自校验哈希，所以伪造一份要绕过校验器才能构造出来——这正是
+    # 迁移检查必须自己重算哈希的理由。
+    foreign = profile.model_construct(
+        **{
+            **profile.model_dump(),
             "profile_id": "fresh-v3-qualification-profile",
             "profile_sha256": "0" * 64,
         }
@@ -132,7 +135,9 @@ def test_the_measured_zero_overlap_is_stated_as_a_fact() -> None:
     l1_overlap = set(profile.l1_operator_senses) & set(
         QUALIFICATION_PROFILE_L1_OPERATOR_SENSES
     )
-    l2_overlap = set(profile.l2_operators) & set(QUALIFICATION_PROFILE_L2_OPERATORS)
+    l2_overlap = {
+        operator for operator, _sense in profile.l2_operator_senses
+    } & set(QUALIFICATION_PROFILE_L2_OPERATORS)
     assert l1_overlap == set(), l1_overlap
     assert l2_overlap == set(), l2_overlap
     assert len(QUALIFICATION_PROFILE_L1_OPERATOR_SENSES) == 24

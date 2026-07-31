@@ -470,6 +470,25 @@ Phase A 通过标准：同一既有 snapshot 上，Query 的 `fact`/`count` 结�
 
 - 复核补充事实：production 与 qualification 并非同一条链。production 使用窄内联 prompt（`prefer`/`drink`/`add_ingredient`）并在 pipeline 内硬编码 `source_status="user_reported"`、`speaker="user"`、`allow_modalities=["actual"]` 与 category-only identity，而 fresh-v3 使用完整 V10/V9 prompt。因此 Phase A 只证明窄路径闭环成立，不能证明被 fresh gate 检验的通用抽取能力已进入生产。
 
+### 冻结事实：operational-diagnostic-profile-v1 的范围与结论边界（2026-07-31）
+
+两条链在**同一层**上词汇表零交集，已实测确认，非推断：
+
+| 层 | qualification（fresh-v3） | operational | 交集 |
+|---|---|---|---|
+| L1 operator/sense | 24 对 | 3 对（`prefer`/`drink`/`add_ingredient`） | **0/24** |
+| L2 operator/sense | 18 对 | 1 对（`prefer`） | **0/18** |
+
+由此固定以下边界，任何报告不得越过：
+
+- 本 profile 的正式标识为 `operational-diagnostic-profile-v1`，`scope="diagnostic"`。它是**受控运行诊断范围**，不是生产本体。名称中不得再出现 `production`。
+- fresh-v3 的 `not_qualified` 结论保持不变，不得重跑、覆盖或重新解释。fresh-v3 通过与否都**不能**推出本 profile 通过，反向亦然。
+- 资格结论只能在 profile 身份（`profile_id` 与自校验的 `profile_sha256`）完全一致时迁移。按身份而非交集比例 fail closed：部分重叠仍会留下未被资格化的词汇。
+- L2 身份必须覆盖 operator、sense、abstraction method 与 closure pattern 四项；四者任一变化都改变 profile 哈希。L1 与 L2 词表分开记录、哈希互异——两层本不该共用算子，合并会使跨层差异与同层漂移无法区分。
+- 抽取 profile 与查询执行 profile 分开记录。Phase A 冻结的 v8 checkpoint 写在 profile 存在之前，如实记为 `unbound_legacy`，**不得参与任何方向的资格迁移**。
+- Phase C 通过后的结论只能表述为 `operational_diagnostic_profile_qualified`；Phase D 通过后只能表述为 `controlled_automatic_e2e_closure`。两者都**不等于**通用抽取合格、benchmark ready 或 production ready。
+- 不得用共享 prompt、producer、runner 论证两条链等价；那只是 infrastructure alignment。
+
 ### Phase B：自动抽取质量修复（已授权，受 Phase A gate 约束）
 
 目标：只在新建且与 fresh-v3 隔离的 diagnostic/dev 数据上修复 official-v2 暴露的真实模型质量问题，不在 hidden 结果上调参。

@@ -261,7 +261,12 @@ def test_every_frozen_receipt_shape_is_loadable() -> None:
     asserted_v1 = {
         key: value
         for key, value in measured.items()
-        if key not in ("observed_write_phases", "extraction_profile")
+        if key
+        not in (
+            "observed_write_phases",
+            "snapshot_extraction_profile",
+            "query_execution_profile",
+        )
     }
     asserted_v1["schema_version"] = "openai-query-only-receipt-v1"
     transitional = {
@@ -275,7 +280,7 @@ def test_every_frozen_receipt_shape_is_loadable() -> None:
     frozen_v2_without_profile = {
         key: value
         for key, value in measured.items()
-        if key != "extraction_profile"
+        if key not in ("snapshot_extraction_profile", "query_execution_profile")
     }
     for label, payload, expected in (
         ("asserted v1", asserted_v1, e2e_runtime.OpenAIQueryOnlyReceiptV1),

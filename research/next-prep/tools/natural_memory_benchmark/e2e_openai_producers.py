@@ -208,7 +208,7 @@ class ExtractionProfileIdentityV1(StrictModel):
     """Which extraction profile a run used, in a form drift cannot hide from.
 
     A qualification result only carries over to a run using the same profile.
-    The measured vocabularies of the qualification and production chains do not
+    The measured vocabularies of the qualification and operational chains do not
     intersect at either layer, so sharing a prompt, producer and runner removes
     engineering duplication without making one chain's qualification stand for
     the other's. Binding the identity makes that mismatch a checkable fact
@@ -217,34 +217,80 @@ class ExtractionProfileIdentityV1(StrictModel):
     L1 and L2 vocabularies are recorded separately. The two layers are not
     supposed to share operators — L1 states atomic facts and L2 states
     cross-turn abstractions — so folding them into one hash would make a
-    cross-layer difference indistinguishable from same-layer drift.
+    cross-layer difference indistinguishable from same-layer drift. The L2 side
+    records sense, abstraction method and closure pattern as well as operator,
+    because each of those changes what L2 may mean; recording only the operator
+    would let the L2 contract change under an unchanged hash.
+
+    The hash self-verifies, so editing a field cannot produce a profile that
+    still looks legitimate.
     """
 
     schema_version: Literal["extraction-profile-identity-v1"] = (
         "extraction-profile-identity-v1"
     )
     profile_id: str = Field(min_length=1)
-    #: 自称 diagnostic 而不是 production：3 个 L1 算子和 1 个 L2 算子是受控范围，
-    #: 把它读成一般生产能力会高估已验证的东西。
-    scope: Literal["diagnostic", "production"]
-    l1_operator_senses: tuple[tuple[str, str], ...] = Field(min_length=1)
-    l2_operators: tuple[str, ...] = Field(min_length=1)
+    #: 自称 diagnostic 而不是 production：3 个 L1 算子和 1 个 L2 算子是受控运行
+    #: 诊断范围，把它读成一般生产能力会高估已验证的东西。`unbound_legacy` 用于
+    #: 没有 profile 的历史 snapshot，它不得参与任何资格迁移。
+    scope: Literal["diagnostic", "production", "unbound_legacy"]
+    l1_operator_senses: tuple[tuple[str, str], ...] = Field(default_factory=tuple)
+    l2_operator_senses: tuple[tuple[str, str], ...] = Field(default_factory=tuple)
+    l2_abstraction_methods: tuple[str, ...] = Field(default_factory=tuple)
+    l2_closure_patterns: tuple[str, ...] = Field(default_factory=tuple)
     l1_vocabulary_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
     l2_vocabulary_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
     ontology_registry_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
     policy_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
     profile_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
 
+    def hash_body(self) -> dict[str, object]:
+        """The exact payload the profile hash covers.
+
+        The L1 vocabulary hash is part of the body, so an L1 change moves the
+        overall profile hash even when only L2 is being compared.
+        """
+        return {
+            "profile_id": self.profile_id,
+            "scope": self.scope,
+            "l1_vocabulary_sha256": self.l1_vocabulary_sha256,
+            "l2_vocabulary_sha256": self.l2_vocabulary_sha256,
+            "ontology_registry_sha256": self.ontology_registry_sha256,
+            "policy_sha256": self.policy_sha256,
+        }
+
+    @model_validator(mode="after")
+    def validate_profile_hash(self) -> "ExtractionProfileIdentityV1":
+        for name in (
+            "l1_operator_senses",
+            "l2_operator_senses",
+            "l2_abstraction_methods",
+            "l2_closure_patterns",
+        ):
+            listed = list(getattr(self, name))
+            if listed != sorted(set(listed)):
+                raise ValueError(f"{name} must be sorted and deduplicated")
+        if self.profile_sha256 != canonical_sha256(self.hash_body()):
+            raise ValueError("extraction profile hash mismatch")
+        return self
+
 
 def build_extraction_profile_identity(
     *,
     registry: OntologyRegistry,
     policy: ProductionExtractionPolicyV1,
-    profile_id: str = "production-diagnostic-profile-v1",
+    profile_id: str = "operational-diagnostic-profile-v1",
     scope: Literal["diagnostic", "production"] = "diagnostic",
+    validate_policy: bool = True,
 ) -> ExtractionProfileIdentityV1:
-    """Derive the profile identity from the registry and policy actually used."""
-    validate_production_policy(registry, policy)
+    """Derive the profile identity from the registry and policy actually used.
+
+    ``validate_policy`` exists so a deliberately shifted vocabulary can be
+    hashed in a test without the registry/policy coverage invariant refusing it
+    first. Real callers leave it on.
+    """
+    if validate_policy:
+        validate_production_policy(registry, policy)
     l1_operators = {
         item.canonical_operator for item in policy.l1_operator_kind_bindings
     }
@@ -257,13 +303,47 @@ def build_extraction_profile_identity(
             }
         )
     )
-    l2_operators = tuple(
-        sorted({item.canonical_operator for item in policy.l2_operator_policies})
+    l2_operators = {
+        item.canonical_operator for item in policy.l2_operator_policies
+    }
+    # L2 的语义空间由 operator、sense、抽象方法与闭包模式共同决定，四者都进哈希。
+    l2_operator_senses = tuple(
+        sorted(
+            {
+                (item.canonical_operator, item.predicate_sense)
+                for item in registry.predicate_role_constraints
+                if item.canonical_operator in l2_operators
+            }
+        )
+    )
+    l2_abstraction_methods = tuple(
+        sorted(
+            {
+                method
+                for item in policy.l2_operator_policies
+                for method in item.allowed_abstraction_methods
+            }
+        )
+    )
+    l2_closure_patterns = tuple(
+        sorted(
+            {
+                pattern
+                for item in policy.l2_operator_policies
+                for pattern in item.allowed_closure_patterns
+            }
+        )
     )
     l1_vocabulary_sha256 = canonical_sha256(
         {"l1_operator_senses": [list(item) for item in l1_operator_senses]}
     )
-    l2_vocabulary_sha256 = canonical_sha256({"l2_operators": list(l2_operators)})
+    l2_vocabulary_sha256 = canonical_sha256(
+        {
+            "l2_operator_senses": [list(item) for item in l2_operator_senses],
+            "l2_abstraction_methods": list(l2_abstraction_methods),
+            "l2_closure_patterns": list(l2_closure_patterns),
+        }
+    )
     policy_sha256 = canonical_sha256(policy.model_dump(mode="json"))
     body = {
         "profile_id": profile_id,
@@ -276,9 +356,35 @@ def build_extraction_profile_identity(
     return ExtractionProfileIdentityV1(
         **body,
         l1_operator_senses=l1_operator_senses,
-        l2_operators=l2_operators,
+        l2_operator_senses=l2_operator_senses,
+        l2_abstraction_methods=l2_abstraction_methods,
+        l2_closure_patterns=l2_closure_patterns,
         profile_sha256=canonical_sha256(body),
     )
+
+
+def _unbound_legacy_profile() -> ExtractionProfileIdentityV1:
+    """The explicit identity of a snapshot written before profiles existed.
+
+    Naming the absence is safer than leaving it null: a missing profile would
+    otherwise be compared as if it happened to match, and a legacy v8 snapshot
+    would silently inherit a qualification it was never measured against.
+    """
+    empty = canonical_sha256({})
+    body = {
+        "profile_id": "unbound_legacy",
+        "scope": "unbound_legacy",
+        "l1_vocabulary_sha256": empty,
+        "l2_vocabulary_sha256": empty,
+        "ontology_registry_sha256": empty,
+        "policy_sha256": empty,
+    }
+    return ExtractionProfileIdentityV1(
+        **body, profile_sha256=canonical_sha256(body)
+    )
+
+
+UNBOUND_LEGACY_PROFILE = _unbound_legacy_profile()
 
 
 def assert_qualification_transferable(
@@ -291,7 +397,22 @@ def assert_qualification_transferable(
     Fail closed on identity rather than on vocabulary overlap: partial overlap
     would still leave part of the executed vocabulary unqualified, and treating
     that as covered is exactly the inference this guard exists to prevent.
+
+    An unbound legacy profile never carries a qualification in either direction.
+    It records that a snapshot predates profiles, which is the opposite of
+    evidence that it was measured.
     """
+    for label, profile in (
+        ("qualified", qualified_profile),
+        ("executed", execution_profile),
+    ):
+        if profile.scope == "unbound_legacy":
+            raise ValueError(
+                f"{label} profile is unbound legacy and cannot transfer "
+                "qualification"
+            )
+        if profile.profile_sha256 != canonical_sha256(profile.hash_body()):
+            raise ValueError(f"{label} profile hash does not verify")
     if qualified_profile.profile_id != execution_profile.profile_id:
         raise ValueError(
             "qualification profile id does not match the executed profile"

@@ -19,6 +19,7 @@ from .authoritative_memory import (
     canonical_sha256,
 )
 from .e2e_openai_producers import (
+    UNBOUND_LEGACY_PROFILE,
     ExtractionProfileIdentityV1,
     ModelCallHashV1,
     OpenAICompatibleL1BatchProducer,
@@ -245,19 +246,23 @@ class OpenAIQueryOnlyReceiptV2(StrictModel):
     automatic_memory_write_count: int = Field(ge=0)
     observed_write_phases: tuple[str, ...] = Field(min_length=1)
     deterministic_replay_verified: bool
-    #: 这次运行用的是哪个 extraction profile。可选而非必填：已冻结的 v2 收据没有
-    #: 这个字段，设为必填会让那些不可变记录变成不可读。未设置时从序列化结果中
-    #: 省略，这样一份冻结收据仍然逐字节往返，而不是被补上一个 null。
-    extraction_profile: ExtractionProfileIdentityV1 | None = Field(
-        default=None, exclude=False
-    )
+    #: 写出这份记忆的 profile，与本次查询执行用的 profile 分开记录。两者可以不
+    #: 同——查询侧不做抽取——合成一个字段就无法分别校验，也无法表达"这次查询跑在
+    #: 一份由别的 profile 写出的记忆上"。没有 profile 的历史 snapshot 记为
+    #: unbound_legacy 而不是留空。
+    #:
+    #: 可选而非必填：已冻结的 v2 收据没有这两个字段，设为必填会让那些不可变记录
+    #: 变成不可读。未设置时从序列化结果中省略，冻结收据因此仍逐字节往返。
+    snapshot_extraction_profile: ExtractionProfileIdentityV1 | None = None
+    query_execution_profile: ExtractionProfileIdentityV1 | None = None
     snapshot: QueryOnlySnapshotReceiptV1
     answer: EvidenceBackedAnswerV1
 
     def model_dump(self, **kwargs: Any) -> dict[str, Any]:
         payload = super().model_dump(**kwargs)
-        if payload.get("extraction_profile") is None:
-            payload.pop("extraction_profile", None)
+        for name in ("snapshot_extraction_profile", "query_execution_profile"):
+            if payload.get(name) is None:
+                payload.pop(name, None)
         return payload
 
 
@@ -469,6 +474,21 @@ class MemoryWriteObserver:
     @property
     def count(self) -> int:
         return len(self.calls)
+
+
+def _recovered_extraction_profile(
+    bundle: MemoryRepresentationBundleV3,
+) -> ExtractionProfileIdentityV1:
+    """State which profile wrote a recovered bundle, without guessing.
+
+    Bundles committed before profiles existed carry no profile, and the honest
+    answer is ``unbound_legacy`` rather than the current profile: assuming they
+    match is precisely how a snapshot would inherit a qualification it was never
+    measured against. Nothing in the committed bundle records a profile yet, so
+    every recovered bundle is legacy until a profile-bearing bundle exists.
+    """
+    del bundle
+    return UNBOUND_LEGACY_PROFILE
 
 
 def load_recovered_bundle(
@@ -806,6 +826,13 @@ def _run_openai_query_only(
     compiler_registry = build_compiler_registry(
         registry, identity_snapshot=recovered_snapshot
     )
+    query_execution_profile = build_extraction_profile_identity(
+        registry=registry,
+        policy=build_diagnostic_production_policy(registry),
+    )
+    # 被恢复的 snapshot 由哪个 profile 写出：Phase A 冻结的 v8 checkpoint 写在
+    # profile 存在之前，如实记为 unbound_legacy 而不是假定它与当前 profile 相同。
+    recovered_extraction_profile = _recovered_extraction_profile(recovered.bundle)
     recovered_snapshot_id = (
         recovered_snapshot.snapshot_id if recovered_snapshot is not None else None
     )
@@ -927,12 +954,11 @@ def _run_openai_query_only(
         automatic_memory_write_count=write_observer.count,
         observed_write_phases=tuple(write_observer.phases),
         deterministic_replay_verified=execution == deterministic_replay,
-        # 收据自述它用的是哪个 profile：一份不说明 profile 的收据无法判断某个
-        # 资格结论是否适用于它。
-        extraction_profile=build_extraction_profile_identity(
-            registry=registry,
-            policy=build_diagnostic_production_policy(registry),
-        ),
+        # 收据自述两侧 profile：一份不说明 profile 的收据无法判断某个资格结论
+        # 是否适用于它。写出这份记忆的 profile 由被恢复的 snapshot 决定，查询
+        # 执行侧则是本次运行自己的 profile。
+        snapshot_extraction_profile=recovered_extraction_profile,
+        query_execution_profile=query_execution_profile,
         snapshot=QueryOnlySnapshotReceiptV1(
             repository_path=str(recovered.repository.repo_path),
             checkpoint_id=recovered.checkpoint_id,
