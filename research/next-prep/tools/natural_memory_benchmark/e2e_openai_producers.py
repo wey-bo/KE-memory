@@ -21,9 +21,17 @@ from .l1_ontology_linking import OntologyRegistry
 from .query_compiler_v2 import model_message_text
 from .typed_extractor_l1 import (
     L1Kind,
+    TypedDerivationProvenance,
+    TypedEvidenceBinding,
     TypedL1Candidate,
+    TypedLifecycleBinding,
+    TypedLocalEntity,
     TypedModality,
+    TypedOperationProvenance,
     TypedPolarity,
+    TypedPredicate,
+    TypedRoleBinding,
+    TypedTimeBinding,
 )
 from .typed_extractor_l2 import (
     ClosurePattern,
@@ -547,6 +555,136 @@ class _OpenAICompatibleJSONClient:
 
 def allocate_support_ref(turn_id: str) -> str:
     return f"support-{hashlib.sha256(turn_id.encode('utf-8')).hexdigest()[:16]}"
+
+
+class L1RoleSlotV1(StrictModel):
+    """One semantic role filled by a span of the user's own words."""
+
+    role: str = Field(min_length=1)
+    surface: str = Field(min_length=1)
+    char_start: int = Field(ge=0)
+    char_end: int = Field(ge=0)
+
+    @model_validator(mode="after")
+    def validate_span(self) -> "L1RoleSlotV1":
+        if self.char_end <= self.char_start:
+            raise ValueError("role slot span must be non-empty")
+        if self.char_end - self.char_start != len(self.surface):
+            raise ValueError("role slot span length does not match its surface")
+        return self
+
+
+class L1SemanticSlotProposalV1(StrictModel):
+    """The semantic judgement for one candidate, without mechanical structure.
+
+    Identifiers, role wiring, evidence bindings, derivation, lifecycle and
+    operation provenance are all derivable from the public turn, so they are
+    materialized by the program rather than requested from the model.
+    """
+
+    predicate_surface: str = Field(min_length=1)
+    predicate_sense: str = Field(min_length=1)
+    canonical_operator: str = Field(min_length=1)
+    kind: L1Kind
+    modality: TypedModality
+    polarity: TypedPolarity
+    role_slots: list[L1RoleSlotV1] = Field(min_length=1)
+    event_time: str | None = None
+    valid_time: str | None = None
+
+
+def materialize_typed_l1_candidate(
+    *,
+    slots: L1SemanticSlotProposalV1,
+    registry: OntologyRegistry,
+    policy: ProductionExtractionPolicyV1,
+    user_text: str,
+    evidence_id: str,
+) -> TypedL1Candidate:
+    """Build a typed candidate from a semantic proposal, deterministically.
+
+    Offsets are supplied by the model but verified against the raw text rather
+    than re-derived by search, so substring matching stays a validator and the
+    decision about what the span is stays with the model.
+    """
+    predicate_rules = [
+        item
+        for item in registry.predicate_role_constraints
+        if item.predicate_surface == slots.predicate_surface
+        and item.predicate_sense == slots.predicate_sense
+        and item.canonical_operator == slots.canonical_operator
+    ]
+    if not predicate_rules:
+        raise ValueError("L1 predicate tuple is not public")
+
+    kind_by_operator = {
+        item.canonical_operator: item.kind
+        for item in policy.l1_operator_kind_bindings
+    }
+    expected_kind = kind_by_operator.get(slots.canonical_operator)
+    if expected_kind is None or expected_kind != slots.kind:
+        raise ValueError("L1 kind does not match operator policy")
+
+    display_by_role = {
+        item.machine_role: item.display_role
+        for item in policy.l1_role_display_bindings
+        if item.canonical_operator == slots.canonical_operator
+    }
+
+    entity_ids: dict[str, str] = {}
+    local_entities: list[TypedLocalEntity] = []
+    roles: list[TypedRoleBinding] = []
+    for slot in slots.role_slots:
+        if user_text[slot.char_start : slot.char_end] != slot.surface:
+            raise ValueError(
+                "L1 role slot offset does not quote the user's own words"
+            )
+        display_role = display_by_role.get(slot.role)
+        if display_role is None:
+            raise ValueError("L1 role is not published for this operator")
+        entity_id = entity_ids.get(slot.surface)
+        if entity_id is None:
+            entity_id = f"entity-{len(local_entities) + 1:02d}"
+            entity_ids[slot.surface] = entity_id
+            local_entities.append(
+                TypedLocalEntity(local_entity_id=entity_id, surface=slot.surface)
+            )
+        roles.append(
+            TypedRoleBinding(
+                role=slot.role,
+                role_name=display_role,
+                local_entity_id=entity_id,
+            )
+        )
+
+    return TypedL1Candidate(
+        kind=slots.kind,
+        predicate=TypedPredicate(
+            surface=slots.predicate_surface,
+            sense=slots.predicate_sense,
+            canonical_operator=slots.canonical_operator,
+        ),
+        local_entities=local_entities,
+        roles=roles,
+        modality=slots.modality,
+        polarity=slots.polarity,
+        time=TypedTimeBinding(
+            event_time=slots.event_time,
+            valid_time=slots.valid_time,
+        ),
+        condition_bindings=[],
+        scope_bindings=[],
+        derivation=TypedDerivationProvenance(
+            method="explicit",
+            basis=None,
+            evidence_ids=[evidence_id],
+        ),
+        evidence_bindings=[
+            TypedEvidenceBinding(evidence_id=evidence_id, speaker="user")
+        ],
+        lifecycle=TypedLifecycleBinding(lifecycle="active"),
+        operation_provenance=TypedOperationProvenance(),
+    )
 
 
 def allocate_candidate_ref(turn_id: str, ordinal: int) -> str:
