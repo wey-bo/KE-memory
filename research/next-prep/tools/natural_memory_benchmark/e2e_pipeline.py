@@ -816,7 +816,7 @@ def run_e2e_pipeline(
     )
     admitted_l1: list[AdmittedL1Record] = []
     seen_candidate_refs: set[str] = set()
-    no_memory_turn_ids: set[str] = set()
+    no_memory_reasons: dict[str, str] = {}
     for turn in ordered_turns:
         extraction_input = extraction_inputs[turn.turn_id]
         proposals = l1_producer.produce(extraction_input)
@@ -824,7 +824,12 @@ def run_e2e_pipeline(
             # A turn that states no durable fact is a recorded outcome, not a
             # failure: the raw turn stays addressable and the bundle publishes a
             # no-memory reason instead of an L1 unit.
-            no_memory_turn_ids.add(turn.turn_id)
+            # Which non-emission it was matters: abstain means the evidence was
+            # not sufficient, no_memory means there was nothing durable to keep.
+            reason = getattr(l1_producer, "non_emission_reason", None)
+            no_memory_reasons[turn.turn_id] = (
+                reason(turn.turn_id) if callable(reason) else None
+            ) or "no durable memory proposed for this turn"
             continue
         for proposal in proposals:
             if proposal.candidate_ref in seen_candidate_refs:
@@ -902,11 +907,7 @@ def run_e2e_pipeline(
                 ],
                 extraction_state="complete",
                 l1_unit_revision_ids=[item.revision.revision_id for item in members],
-                no_memory_reason=(
-                    "no durable memory proposed for this turn"
-                    if turn.turn_id in no_memory_turn_ids
-                    else None
-                ),
+                no_memory_reason=no_memory_reasons.get(turn.turn_id),
                 failure_reason=None,
                 extractor_id=producer.producer_id,
                 extractor_version=producer.producer_version,

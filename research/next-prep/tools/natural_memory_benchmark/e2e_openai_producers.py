@@ -864,6 +864,20 @@ class BoundL1CandidateProducer:
             self._by_turn.setdefault(item.turn_id, []).append(item)
         self._consumed: set[str] = set()
 
+    def non_emission_reason(self, turn_id: str) -> str | None:
+        """返回该轮的非产出结论，产出记忆的轮次返回 None。
+
+        `abstain` 与 `no_memory` 是两种不同结论：前者表示依据不足以安全落库，
+        后者表示这一轮确实没有值得留存的事实。两者都不产出候选，但下游必须
+        能够分辨，否则 Phase C 的 abstention 指标无法在 production 重放。
+        """
+        proposals = self._by_turn.get(turn_id)
+        if not proposals:
+            return None
+        if any(item.decision == "emit_l1" for item in proposals):
+            return None
+        return proposals[0].decision
+
     def produce(self, value: TurnExtractionInputV1) -> list[ProposedL1CandidateV1]:
         turn_id = value.turn.turn_id
         proposals = self._by_turn.get(turn_id)
@@ -876,7 +890,8 @@ class BoundL1CandidateProducer:
         emissions = [item for item in proposals if item.decision == "emit_l1"]
         if not emissions:
             # A turn that states nothing durable is a recorded outcome, so the
-            # pipeline receives no candidate rather than an error.
+            # pipeline receives no candidate rather than an error. Which
+            # non-emission it was stays available via `non_emission_reason`.
             return []
         candidates: list[ProposedL1CandidateV1] = []
         for ordinal, proposal in enumerate(emissions):
