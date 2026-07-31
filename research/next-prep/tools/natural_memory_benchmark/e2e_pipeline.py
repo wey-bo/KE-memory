@@ -64,6 +64,15 @@ from .query_compiler_v2 import (
     QueryDraftProducer,
     compile_natural_query,
 )
+from .identity_resolution import (
+    ConceptRegistryEntry,
+    EntityRecord,
+    IdentityAwareMemoryBundleV4,
+    IdentityDecision,
+    IdentitySnapshot,
+    build_identity_snapshot,
+    evaluate_identity_closure,
+)
 from .query_execution_snapshot_adapter import execute_authoritative_query
 from .query_plan_v2_executor import QueryExecutionResultV3
 from .representation_contract import (
@@ -626,7 +635,11 @@ def materialize_closed_l2(
     )
 
 
-def build_compiler_registry(ontology: OntologyRegistry) -> CompilerRegistryV1:
+def build_compiler_registry(
+    ontology: OntologyRegistry,
+    *,
+    identity_snapshot: "IdentitySnapshot | None" = None,
+) -> CompilerRegistryV1:
     concepts = {item.concept_id: item for item in ontology.concepts}
 
     def ancestors(concept_id: str) -> set[str]:
@@ -665,6 +678,18 @@ def build_compiler_registry(ontology: OntologyRegistry) -> CompilerRegistryV1:
                 role_types=role_types,
             )
         )
+    # 绑定了 identity snapshot 时，作用域内的概念如实报告为 resolved；
+    # 未绑定时保持 unresolved，避免凭空声称已解析。
+    scoped = (
+        set(identity_snapshot.scoped_entity_ids)
+        if identity_snapshot is not None
+        else set()
+    )
+    unresolved = (
+        {item for group in identity_snapshot.unresolved_groups for item in group}
+        if identity_snapshot is not None
+        else set()
+    )
     return CompilerRegistryV1(
         ontology_revision=ontology.revision,
         identity_revision=f"category-only-{ontology.registry_hash[:16]}",
@@ -673,8 +698,23 @@ def build_compiler_registry(ontology: OntologyRegistry) -> CompilerRegistryV1:
         entity_types={
             concept_id: sorted(ancestors(concept_id)) for concept_id in concepts
         },
-        identity_status={concept_id: "unresolved" for concept_id in concepts},
+        identity_status={
+            concept_id: (
+                "resolved"
+                if concept_id in scoped and concept_id not in unresolved
+                else "unresolved"
+            )
+            for concept_id in concepts
+        },
         predicate_aliases=dict(predicate_aliases),
+        identity_snapshot_id=(
+            identity_snapshot.snapshot_id if identity_snapshot is not None else None
+        ),
+        identity_input_fingerprint=(
+            identity_snapshot.input_fingerprint
+            if identity_snapshot is not None
+            else None
+        ),
     )
 
 
@@ -748,6 +788,114 @@ def commit_authoritative_snapshot(
         verification_status="valid",
         bundle_history_artifact=bundle_artifact,
     )
+
+
+def promote_to_category_identity_bundle(
+    *,
+    bundle: MemoryRepresentationBundleV3,
+    ontology: OntologyRegistry,
+    policy_version: str = "identity-policy-v1",
+    transaction_time: str | None = None,
+) -> IdentityAwareMemoryBundleV4:
+    """给 category-only 记忆一份如实的 identity snapshot。
+
+    category 实体就是本体概念标识符，彼此天然区分：没有两个表面指向同一个个体
+    需要合并。把这一事实表达成一份可重建的 snapshot，而不是放宽 count 的契约,
+    这样 compiler 合同与已冻结的评测记录都不受影响。
+
+    每个概念自成一个 canonical group，一条 `keep_distinct` 决策记录它们互不
+    相同，证据闭包由权威构造器生成并回指真实的 L1 单元与来源修订。
+    """
+    entity_ids = sorted(
+        {
+            role.entity_id
+            for unit in bundle.l1_units
+            for role in unit.roles
+            if role.entity_id is not None
+        }
+    )
+    if not entity_ids:
+        raise ValueError("category identity promotion requires bound entities")
+
+    concept_ids = {item.concept_id for item in ontology.concepts}
+    missing = [item for item in entity_ids if item not in concept_ids]
+    if missing:
+        raise ValueError(
+            "category identity promotion requires ontology concepts: "
+            + ", ".join(missing)
+        )
+    label_by_concept = {item.concept_id: item.label for item in ontology.concepts}
+
+    l1_unit_ids = sorted({item.unit_id for item in bundle.l1_units})
+    source_revision_ids = sorted(
+        {item.source_revision_id for item in bundle.source_record_revisions}
+    )
+    entity_records = [
+        EntityRecord(
+            entity_id=entity_id,
+            concept_ids=[entity_id],
+            names=[label_by_concept.get(entity_id, entity_id)],
+            lifecycle="active",
+            source_l1_unit_ids=l1_unit_ids,
+            source_revision_ids=source_revision_ids,
+        )
+        for entity_id in entity_ids
+    ]
+    concept_registry = [
+        ConceptRegistryEntry(
+            concept_id=item.concept_id,
+            label=item.label,
+            parent_concept_ids=list(item.parent_concept_ids),
+            identity_authority=False,
+        )
+        for item in ontology.concepts
+    ]
+
+    stamp = transaction_time or _timestamp(1)
+    decisions: list[IdentityDecision] = []
+    if len(entity_ids) >= 2:
+        # `keep_distinct` 需要至少两个主体；单实体作用域天然无需决策。
+        decisions.append(
+            IdentityDecision(
+                decision_id="identity-decision-category-distinct",
+                action="keep_distinct",
+                status="accepted",
+                subject_entity_ids=entity_ids,
+                reason_code="category_entities_are_distinct_by_construction",
+                evidence_l1_unit_ids=l1_unit_ids,
+                evidence_source_revision_ids=source_revision_ids,
+                closure_id="identity-closure-category-distinct",
+                transaction_time=stamp,
+                producer=ProducerIdentity(
+                    workflow_run_id="run-category-identity",
+                    producer_id="category-identity-promoter",
+                    producer_version="1",
+                ),
+            )
+        )
+
+    payload = bundle.model_dump(mode="json")
+    payload.pop("schema_version", None)
+    staged = IdentityAwareMemoryBundleV4(
+        **payload,
+        concept_registry=concept_registry,
+        entity_records=entity_records,
+        identity_decisions=decisions,
+        identity_closures=[],
+        identity_snapshots=[],
+        aggregate_claims=[],
+    )
+    closures = [
+        evaluate_identity_closure(staged, item, policy_version=policy_version)
+        for item in decisions
+    ]
+    with_closures = staged.model_copy(update={"identity_closures": closures})
+    snapshot = build_identity_snapshot(
+        with_closures,
+        scoped_entity_ids=entity_ids,
+        policy_version=policy_version,
+    )
+    return with_closures.model_copy(update={"identity_snapshots": [snapshot]})
 
 
 def build_evidence_backed_answer(
