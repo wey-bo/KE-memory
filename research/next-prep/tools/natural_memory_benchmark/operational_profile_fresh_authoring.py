@@ -489,6 +489,44 @@ def classify_decision_outcome(
     return "reported_mismatch"
 
 
+def classify_emission_outcome(
+    *,
+    expected_decision: str,
+    observed_decision: str,
+    observed_modality: str | None,
+    policy: Any,
+) -> Literal[
+    "match",
+    "raw_semantic_false_emission",
+    "policy_scope_disagreement",
+    "reported_mismatch",
+]:
+    """Classify an emission by what the model actually wrote.
+
+    Comparing only "gold refused, model emitted" put two unlike errors under one
+    number. Writing a conditional as ``actual`` asserts an occurrence the text
+    does not — a real defect. Writing a request as ``requested`` reports the text
+    faithfully and claims no occurrence; it conflicts with the diagnostic write
+    scope, not with the evidence.
+
+    Separating them loosens nothing. An unauthorized modality still fails
+    admission and materialization, so it still cannot reach authoritative
+    memory. What changes is how the failure is classified, not what may be
+    written.
+    """
+    authorized = {item.modality for item in policy.modality_time_policies}
+    if expected_decision == observed_decision:
+        return "match"
+    emitting = observed_decision in ("emit_l1", "emit_l2")
+    expected_emitting = expected_decision in ("emit_l1", "emit_l2")
+    if emitting and not expected_emitting:
+        if observed_modality is not None and observed_modality not in authorized:
+            # 未授权模态：模型没有声称事件已发生，落库仍会被拒。
+            return "policy_scope_disagreement"
+        return "raw_semantic_false_emission"
+    return "reported_mismatch"
+
+
 def label_confidence_report() -> dict[str, Any]:
     """Publish which labels are gated and which are only observed."""
     gated = [
