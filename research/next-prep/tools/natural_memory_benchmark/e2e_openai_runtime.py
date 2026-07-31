@@ -36,6 +36,7 @@ from .git_memory_history import (
     GitMemoryHistoryRepository,
     HistoryArtifact,
 )
+from .identity_resolution import IdentityAwareMemoryBundleV4
 from .l1_ontology_linking import build_diagnostic_ontology_registry
 from .query_compiler_v2 import (
     QueryCompilationResultV1,
@@ -456,6 +457,27 @@ class MemoryWriteObserver:
         return len(self.calls)
 
 
+def load_recovered_bundle(
+    payload: dict[str, Any],
+) -> MemoryRepresentationBundleV3:
+    """Read a committed bundle in whichever shape was committed.
+
+    The pipeline commits an identity-aware V4 bundle so a count can be answered,
+    but earlier checkpoints hold plain V3. Dispatch on the recorded schema
+    version rather than guessing, and fail closed on an unknown one: silently
+    dropping identity would make a recovered count abstain for a reason that has
+    nothing to do with the memory it recovered.
+    """
+    schema_version = payload.get("schema_version")
+    if schema_version == "identity-aware-memory-bundle-v4":
+        return IdentityAwareMemoryBundleV4.model_validate(payload)
+    if schema_version == "memory-representation-bundle-v3":
+        return MemoryRepresentationBundleV3.model_validate(payload)
+    raise ValueError(
+        "recovered bundle carries an unsupported schema version"
+    )
+
+
 @dataclass(frozen=True)
 class RecoveredCheckpoint:
     repository: GitMemoryHistoryRepository
@@ -527,7 +549,7 @@ def recover_authoritative_checkpoint(
         revision_id=bundle_descriptors[0].revision_id,
         commit=head_commit,
     )
-    bundle = MemoryRepresentationBundleV3.model_validate(
+    bundle = load_recovered_bundle(
         bundle_artifact.payload["memory_representation_bundle"]
     )
     turn_bundles: list[TurnBundleRevision] = []

@@ -70,6 +70,7 @@ from .identity_resolution import (
     IdentityAwareMemoryBundleV4,
     IdentityDecision,
     IdentitySnapshot,
+    assess_identity_bundle_integrity,
     build_identity_snapshot,
     evaluate_identity_closure,
 )
@@ -876,6 +877,17 @@ def promote_to_category_identity_bundle(
 
     payload = bundle.model_dump(mode="json")
     payload.pop("schema_version", None)
+    # 已升级的 bundle 会带着 identity 字段，与下面显式给出的实参冲突。重新推导
+    # 而不是合并，这样重复升级得到的结果与首次升级一致，而不是报错或叠加。
+    for field in (
+        "concept_registry",
+        "entity_records",
+        "identity_decisions",
+        "identity_closures",
+        "identity_snapshots",
+        "aggregate_claims",
+    ):
+        payload.pop(field, None)
     staged = IdentityAwareMemoryBundleV4(
         **payload,
         concept_registry=concept_registry,
@@ -1125,6 +1137,27 @@ def run_e2e_pipeline(
         )
 
     commit_time = _timestamp(len(ordered_turns) * 10 + 2)
+    # 升级必须发生在提交之前：提交后再升级会让 Git 中的 artifact 与 bundle 不
+    # 一致。identity 让 fact / count / abstain 落在同一份记忆上。
+    #
+    # 一轮都没有产出记忆时没有实体可解析，此时跳过升级：一份空记忆本来就没有
+    # identity 可言，为它硬造一份 snapshot 会是在陈述不存在的事实。
+    identity_snapshot: IdentitySnapshot | None = None
+    if any(
+        role.entity_id is not None for unit in bundle.l1_units for role in unit.roles
+    ):
+        bundle = promote_to_category_identity_bundle(
+            bundle=bundle,
+            ontology=ontology,
+            transaction_time=commit_time,
+        )
+        identity_report = assess_identity_bundle_integrity(bundle)
+        if not identity_report.valid:
+            raise ValueError(
+                "identity bundle integrity failed: "
+                + "; ".join(identity_report.errors)
+            )
+        identity_snapshot = bundle.identity_snapshots[0]
     snapshot = commit_authoritative_snapshot(
         repository_path=repository_path,
         bundle=bundle,
@@ -1142,7 +1175,12 @@ def run_e2e_pipeline(
         checkpoint_id=snapshot.checkpoint_id,
         git_commit=snapshot.git_commit,
     )
-    compiler_registry = build_compiler_registry(ontology)
+    compiler_registry = build_compiler_registry(
+        ontology, identity_snapshot=identity_snapshot
+    )
+    identity_snapshot_id = (
+        identity_snapshot.snapshot_id if identity_snapshot is not None else None
+    )
     query_context = QueryContextV1(
         query_id="query-e2e-1",
         raw_query=question,
@@ -1171,6 +1209,7 @@ def run_e2e_pipeline(
         turn_bundles=turn_bundles,
         registry=compiler_registry,
         plan=compilation.plan,
+        identity_snapshot_id=identity_snapshot_id,
     )
     answer = build_evidence_backed_answer(execution=execution, bundle=bundle)
     return EndToEndResultV1(
