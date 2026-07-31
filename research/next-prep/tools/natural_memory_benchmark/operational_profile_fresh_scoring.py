@@ -100,6 +100,7 @@ def score_layer(*, cases: list[dict[str, Any]], policy: Any) -> dict[str, Any]:
     raw_correct = 0
     gated_correct = 0
     raw_false_emissions = 0
+    missing_indisputable = 0
     scope_disagreements = 0
     convention_disagreements = 0
     interventions: list[dict[str, Any]] = []
@@ -128,14 +129,27 @@ def score_layer(*, cases: list[dict[str, Any]], policy: Any) -> dict[str, Any]:
                     "gate_reason": outcome.gate_reason,
                 }
             )
+        # 每例自己的确定度必须传进去：不传就等于把 indisputable 漏报当成约定。
         classification = classify_emission_outcome(
             expected_decision=expected,
             observed_decision=raw_decision,
             observed_modality=raw_modality,
             policy=policy,
+            label_confidence=case["label_confidence"],
         )
         if classification == "raw_semantic_false_emission":
             raw_false_emissions += 1
+            raw_errors.append(
+                {
+                    "knowledge_id": case["knowledge_id"],
+                    "expected_decision": expected,
+                    "raw_decision": raw_decision,
+                    "raw_modality": raw_modality,
+                    "taxonomy": classification,
+                }
+            )
+        elif classification == "missing_an_indisputable_fact":
+            missing_indisputable += 1
             raw_errors.append(
                 {
                     "knowledge_id": case["knowledge_id"],
@@ -152,15 +166,18 @@ def score_layer(*, cases: list[dict[str, Any]], policy: Any) -> dict[str, Any]:
         elif classification != "match":
             raise ValueError(f"unhandled classification: {classification}")
 
-    # 约定标签分歧不否决资格，但真实错误与 gate 拦截都会。
-    raw_ready = raw_false_emissions == 0 and (
-        raw_correct + convention_disagreements + scope_disagreements == total
+    # 约定标签分歧不否决资格；编造事实与漏报不容争议的事实都会。
+    raw_ready = (
+        raw_false_emissions == 0
+        and missing_indisputable == 0
+        and raw_correct + convention_disagreements + scope_disagreements == total
     )
     return {
         "case_count": total,
         "raw_decision_accuracy": raw_correct / total,
         "gated_decision_accuracy": gated_correct / total,
         "raw_semantic_false_emission_count": raw_false_emissions,
+        "missing_indisputable_fact_count": missing_indisputable,
         "policy_scope_disagreement_count": scope_disagreements,
         "convention_disagreement_count": convention_disagreements,
         "gate_intervention_count": len(interventions),
@@ -169,6 +186,16 @@ def score_layer(*, cases: list[dict[str, Any]], policy: Any) -> dict[str, Any]:
         "raw_ready": raw_ready,
         # 通过必须同时满足：raw 全绿，且程序一次都没有出手。
         "qualified": raw_ready and len(interventions) == 0,
+        # 自述执行了哪些门控项，避免"声称的规则"与"实际执行的规则"再次脱节。
+        "gated_outcomes": (
+            "raw_semantic_false_emission",
+            "missing_an_indisputable_fact",
+        ),
+        "reported_not_gated_outcomes": (
+            "convention_disagreement",
+            "policy_scope_disagreement",
+            "reported_mismatch",
+        ),
         "reporting_rule": (
             "gate interventions are reported separately and never substitute for "
             "raw model correctness"

@@ -495,10 +495,13 @@ def classify_emission_outcome(
     observed_decision: str,
     observed_modality: str | None,
     policy: Any,
+    label_confidence: LabelConfidence = "convention",
 ) -> Literal[
     "match",
     "raw_semantic_false_emission",
     "policy_scope_disagreement",
+    "missing_an_indisputable_fact",
+    "convention_disagreement",
     "reported_mismatch",
 ]:
     """Classify an emission by what the model actually wrote.
@@ -513,6 +516,13 @@ def classify_emission_outcome(
     admission and materialization, so it still cannot reach authoritative
     memory. What changes is how the failure is classified, not what may be
     written.
+
+    ``label_confidence`` is read rather than ignored. An earlier version returned
+    ``reported_mismatch`` for every non-emission direction, so a model that
+    declined an *indisputable* fact scored as a convention disagreement and still
+    qualified — the preregistration requires that to gate. The parameter defaults
+    to ``convention`` because that is the weaker claim: a caller who forgets to
+    pass it gets a reported mismatch rather than a silent gate.
     """
     authorized = {item.modality for item in policy.modality_time_policies}
     if expected_decision == observed_decision:
@@ -524,6 +534,12 @@ def classify_emission_outcome(
             # 未授权模态：模型没有声称事件已发生，落库仍会被拒。
             return "policy_scope_disagreement"
         return "raw_semantic_false_emission"
+    if not emitting and not expected_emitting:
+        # 两种非产出标签之间的分歧：归属属于约定，与确定度无关。
+        return "convention_disagreement"
+    # 该产出而未产出。标签不容争议时这是漏报事实，必须进门。
+    if label_confidence == "indisputable":
+        return "missing_an_indisputable_fact"
     return "reported_mismatch"
 
 

@@ -363,6 +363,83 @@ def build_extraction_profile_identity(
     )
 
 
+def build_producer_contract_identity(
+    *,
+    registry: OntologyRegistry,
+    policy: ProductionExtractionPolicyV1,
+    chain: Literal["production", "phase_c_qualification"],
+    prompt_override: str | None = None,
+) -> dict[str, str]:
+    """Identify the whole producer contract, not just the vocabulary.
+
+    ``profile_sha256`` covers the vocabulary, registry and policy. It does not
+    cover the prompt, the response schema, the producer or the materializer — so
+    two chains can share a profile hash while asking the model for different
+    things. That is exactly the situation between Phase C and the production path:
+    the qualification runner asks for a complete typed candidate, while production
+    asks for semantic slots and materializes the rest itself.
+
+    Recording those dimensions makes the difference a checkable fact instead of
+    something a reader has to notice, and stops a profile hash from standing in for
+    a claim it cannot support.
+    """
+    import inspect
+
+    if chain == "production":
+        producer_source = inspect.getsource(OpenAICompatibleL1BatchProducer)
+        materializer_source = inspect.getsource(materialize_typed_l1_candidate)
+        response_schema = ProductionL1SlotBatchResponseV1.model_json_schema()
+        prompt = prompt_override
+        if prompt is None:
+            prompt = inspect.getsource(
+                OpenAICompatibleL1BatchProducer.produce
+            )
+    else:
+        from .operational_profile_fresh_runner import build_l1_system_prompt
+
+        producer_source = "operational_profile_fresh_runner.run_layer"
+        # 资格链要求模型直接返回完整 typed candidate，程序不做物化。
+        materializer_source = "none: the model returns a complete typed candidate"
+        response_schema = {"contract": "typed-extractor-l1-proposals-v1"}
+        prompt = prompt_override or build_l1_system_prompt(
+            registry=registry, policy=policy
+        )
+
+    body = {
+        "chain": chain,
+        "prompt_sha256": hashlib.sha256(prompt.encode("utf-8")).hexdigest(),
+        "response_schema_sha256": canonical_sha256(response_schema),
+        "producer_sha256": hashlib.sha256(
+            producer_source.encode("utf-8")
+        ).hexdigest(),
+        "materializer_sha256": hashlib.sha256(
+            materializer_source.encode("utf-8")
+        ).hexdigest(),
+        "policy_sha256": canonical_sha256(policy.model_dump(mode="json")),
+        "ontology_registry_sha256": registry.registry_hash,
+    }
+    return {**body, "producer_contract_sha256": canonical_sha256(body)}
+
+
+def assert_producer_contract_transferable(
+    *,
+    qualified_contract: dict[str, str],
+    execution_contract: dict[str, str],
+) -> None:
+    """Refuse to carry a qualification across differing producer contracts.
+
+    Fails closed on the contract hash rather than the profile hash. A qualification
+    earned by asking the model for one thing does not describe a run that asks for
+    another, even when the vocabulary is identical.
+    """
+    if qualified_contract["producer_contract_sha256"] != (
+        execution_contract["producer_contract_sha256"]
+    ):
+        raise ValueError(
+            "qualified producer contract does not match the executed contract"
+        )
+
+
 def _unbound_legacy_profile() -> ExtractionProfileIdentityV1:
     """The explicit identity of a snapshot written before profiles existed.
 

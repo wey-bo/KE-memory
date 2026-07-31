@@ -671,6 +671,7 @@ def build_manifest(
     case_count: int,
     l1_payloads: dict[str, dict[str, Any]] | None = None,
     dataset_id: str = DATASET_ID,
+    blueprint_reports: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Bind the three outputs by hash, with the claim boundary recorded.
 
@@ -679,6 +680,14 @@ def build_manifest(
     """
     from .authoritative_memory import canonical_json_bytes
 
+    # manifest 必须描述它实际打包的那批用例。此前无论传入哪一版 blueprints，都
+    # 调用全局 v1 报告，于是 hidden-v3 的 manifest 里出现的是 op-l1-* 旧 ID，
+    # authored_blueprints hash 也不是 v3 的摘要——自描述与 lineage 都是错的。
+    reports = blueprint_reports or {
+        "coverage": coverage_report(),
+        "label_confidence": label_confidence_report(),
+    }
+    blueprint_sha256 = hashlib.sha256(canonical_json_bytes(reports)).hexdigest()
     output_sha256 = {
         name: hashlib.sha256(canonical_json_bytes(payload)).hexdigest()
         for name, payload in sorted(payloads.items())
@@ -691,6 +700,7 @@ def build_manifest(
             payloads=l1_payloads,
             case_count=len(l1_payloads["gold-l1.json"]["items"]),
             dataset_id=dataset_id,
+            blueprint_reports=blueprint_reports,
         )
         qualification = {
             name: hashlib.sha256(canonical_json_bytes(payload)).hexdigest()
@@ -703,22 +713,10 @@ def build_manifest(
             "schema_version": "typed-extractor-l2-manifest-v1",
             "dataset_id": dataset_id,
             "case_count": case_count,
-            "input_sha256": {
-                "authored_blueprints": hashlib.sha256(
-                    canonical_json_bytes(
-                        {
-                            "coverage": coverage_report(),
-                            "label_confidence": label_confidence_report(),
-                        }
-                    )
-                ).hexdigest(),
-            },
+            "input_sha256": {"authored_blueprints": blueprint_sha256},
             "l1_qualification_sha256": qualification,
             "output_sha256": output_sha256,
-            "distribution": {
-                "coverage": coverage_report(),
-                "label_confidence": label_confidence_report(),
-            },
+            "distribution": dict(reports),
             "thresholds": dict(_L2_THRESHOLDS),
             "claim_boundary": {
                 "diagnostic_only": True,
@@ -732,21 +730,9 @@ def build_manifest(
         "schema_version": f"typed-extractor-{layer}-manifest-v1",
         "dataset_id": dataset_id,
         "case_count": case_count,
-        "input_sha256": {
-            "authored_blueprints": hashlib.sha256(
-                canonical_json_bytes(
-                    {
-                        "coverage": coverage_report(),
-                        "label_confidence": label_confidence_report(),
-                    }
-                )
-            ).hexdigest(),
-        },
+        "input_sha256": {"authored_blueprints": blueprint_sha256},
         "output_sha256": output_sha256,
-        "distribution": {
-            "coverage": coverage_report(),
-            "label_confidence": label_confidence_report(),
-        },
+        "distribution": dict(reports),
         "claim_boundary": {
             "diagnostic_only": True,
             "automatic_authoritative_writes": False,
@@ -763,6 +749,7 @@ def freeze_dataset(
     l1_blueprints: tuple[L1CaseBlueprint, ...] = L1_BLUEPRINTS,
     l2_blueprints: tuple[Any, ...] = L2_BLUEPRINTS,
     dataset_id: str = DATASET_ID,
+    blueprint_reports: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Write and freeze every artifact once, refusing to overwrite.
 
@@ -798,6 +785,7 @@ def freeze_dataset(
             case_count=len(blueprints),
             l1_payloads=l1_payloads if layer == "l2" else None,
             dataset_id=dataset_id,
+            blueprint_reports=blueprint_reports,
         )
         for name, payload in (*payloads.items(), (f"manifest-{layer}.json", manifest)):
             path = root / name
