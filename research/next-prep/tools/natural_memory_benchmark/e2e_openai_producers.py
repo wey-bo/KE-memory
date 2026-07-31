@@ -254,10 +254,13 @@ def build_diagnostic_production_policy(
         # 个方向都要接受 grounding 检查，所以放开这里不等于放松校验。
         allowed_polarities=["positive", "negative"],
         modality_time_policies=[
+            # 一条事实何时开始成立是它内容的一部分，所以 valid_time 可选。
+            # event_time 仍然禁止：一个偏好不是发生在某一刻的事件，允许它会把
+            # 两种不同的时间语义混为一谈。
             ModalityTimePolicyV1(
                 modality="actual",
                 event_time_policy="forbidden",
-                valid_time_policy="forbidden",
+                valid_time_policy="optional",
             )
         ],
         l2_operator_policies=[

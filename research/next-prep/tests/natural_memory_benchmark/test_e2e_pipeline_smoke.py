@@ -929,7 +929,7 @@ def test_openai_runtime_closes_model_write_query_and_evidence(tmp_path: Path) ->
         {
             "modality": "actual",
             "event_time_policy": "forbidden",
-            "valid_time_policy": "forbidden",
+            "valid_time_policy": "optional",
         }
     ]
     assert contract["policy"]["operator_evidence_cues"] == [
