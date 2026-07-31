@@ -1,0 +1,67 @@
+{
+  "cases": [
+    {
+      "expect": "abstain",
+      "id": "dev-cond-01",
+      "user": "Once the grinder is repaired, coffee is drunk at dawn."
+    },
+    {
+      "expect": "abstain",
+      "id": "dev-cond-02",
+      "user": "Coffee is drunk at dawn once the grinder is repaired."
+    },
+    {
+      "expect": "abstain",
+      "id": "dev-cond-03",
+      "user": "So long as the cafe stays open, tea is drunk after work."
+    },
+    {
+      "expect": "abstain",
+      "id": "dev-cond-04",
+      "user": "Supposing the order lands, milk is added to the tea."
+    },
+    {
+      "expect": "abstain",
+      "id": "dev-cond-05",
+      "user": "Tea is drunk after work as long as the cafe stays open."
+    },
+    {
+      "expect": "emit_l1",
+      "id": "dev-plain-01",
+      "user": "Coffee is drunk at dawn."
+    },
+    {
+      "expect": "emit_l1",
+      "id": "dev-plain-02",
+      "user": "Milk is added to the tea."
+    },
+    {
+      "expect": "emit_l1",
+      "id": "dev-plain-03",
+      "user": "Tea is preferred, if that matters."
+    },
+    {
+      "expect": "abstain",
+      "id": "dev-whenever-01",
+      "user": "Whenever the kettle is free, coffee is drunk at dawn."
+    },
+    {
+      "expect": "abstain",
+      "id": "dev-whenever-02",
+      "user": "Coffee is drunk at dawn whenever the kettle is free."
+    },
+    {
+      "expect": "abstain",
+      "id": "dev-whenever-03",
+      "user": "Whenever there is milk, milk is added to the tea."
+    },
+    {
+      "expect": "abstain",
+      "id": "dev-when-01",
+      "user": "When the shop opens, tea is drunk on the terrace."
+    }
+  ],
+  "dataset_id": "operational-profile-prompt-dev-v1",
+  "note": "whenever/when cases added after attempt 2: a habitual conditional reads like a routine fact, which is why the model emitted actual with reason_code durable_conditional_event_stated.",
+  "purpose": "raw prompt improvement for conditional modality; never a hidden set"
+}

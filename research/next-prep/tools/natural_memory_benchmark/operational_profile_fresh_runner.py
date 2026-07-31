@@ -66,7 +66,15 @@ def build_l1_system_prompt(*, registry: Any, policy: Any) -> str:
         "operation_provenance.\n"
         "Use only operators, senses, kinds, modalities and polarities listed in "
         "allowed_vocabulary. Quote entity surfaces verbatim from the user text. "
-        "Never invent a fact the text does not state."
+        "Never invent a fact the text does not state.\n"
+        # 针对实测根因：同一个条件句单独判断时会 abstain，与十一个正常事实同批
+        # 时却被产出为 actual。所以问题不在条件句指令，而在逐例判断被邻例带偏。
+        "Judge each case only on its own source turn. Cases are unrelated to one "
+        "another; a neighbouring case being an emission is not evidence about this "
+        "one. In particular, a conditional or habitual-conditional clause (if, "
+        "when, whenever, once, unless, as long as, provided, supposing) means the "
+        "fact holds only under that condition and has not been established, so it "
+        "must abstain even when other cases in the same batch are plain facts."
     )
 
 

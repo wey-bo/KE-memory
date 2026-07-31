@@ -104,6 +104,25 @@ def test_the_prompt_forbids_converting_to_actual() -> None:
     assert "actual" in lowered
 
 
+def test_the_prompt_requires_case_independence() -> None:
+    """prompt 必须要求逐例独立判断。
+
+    attempt 2 的实测根因是批次上下文依赖：同一个条件句单独判断会 abstain，与
+    十一个正常事实同批时却产出 actual。仅加强条件句措辞无效，因为孤立时指令
+    本就被遵守。
+    """
+    from tools.natural_memory_benchmark.operational_profile_fresh_runner import (
+        build_l1_system_prompt,
+    )
+
+    registry, policy, _profile = _profile_and_policy()
+    prompt = build_l1_system_prompt(registry=registry, policy=policy).casefold()
+    assert "each case only on its own source turn" in prompt
+    assert "neighbouring case" in prompt
+    assert "whenever" in prompt
+    assert "same batch" in prompt
+
+
 def test_the_prompt_only_names_authorized_modalities_as_usable() -> None:
     """prompt 公布的可用模态必须与 policy 一致。"""
     from tools.natural_memory_benchmark.operational_profile_fresh_runner import (

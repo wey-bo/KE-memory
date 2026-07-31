@@ -1,0 +1,28 @@
+{
+  "dataset_id": "operational-profile-prompt-dev-v1",
+  "hidden_v2_exposure": {
+    "consequence": "hidden-v2 is now burned for qualification purposes. Attempt 3 must run on a new hidden-v3, and no qualification claim may rest on hidden-v2.",
+    "purpose": "diagnosis of a known failure, not qualification",
+    "replayed_on_hidden_v2": true
+  },
+  "measurements": [
+    {
+      "conditional_case": "emit_l1 actual, reason_code=conditional_habitual_event",
+      "probe": "current prompt, full hidden-v2 batch",
+      "response_sha256_prefix": "c660ad9afdc1a06d"
+    },
+    {
+      "conditional_case": "abstain, reason_code=conditional_habitual",
+      "probe": "candidate prompt, full hidden-v2 batch",
+      "response_sha256_prefix": "22f5da6743946080"
+    }
+  ],
+  "not_done": {
+    "gate_used_to_mask_raw_error": false,
+    "gold_edited": false,
+    "scoring_rules_changed": false,
+    "vocabulary_widened": false
+  },
+  "repair": "case independence instruction added to the L1 system prompt",
+  "targets_root_cause": "Batch context dependence: the same conditional abstains alone and emits actual beside eleven other cases. Strengthening conditional wording alone would not have helped, since the instruction is already obeyed in isolation."
+}

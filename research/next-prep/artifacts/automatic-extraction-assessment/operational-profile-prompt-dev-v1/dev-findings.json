@@ -1,0 +1,30 @@
+{
+  "dataset_id": "operational-profile-prompt-dev-v1",
+  "implication_for_prompt_repair": "Strengthening the conditional wording alone is unlikely to help, because the instruction is already followed in isolation. The prompt must make each case's judgement independent of its neighbours.",
+  "measured_with_real_model_calls": true,
+  "observations": [
+    {
+      "probe": "12 dev sentences, no untyped_candidate, isolated",
+      "response_sha256_prefix": "a2184a4fd64e6085",
+      "result": "12/12 correct, including the whenever family"
+    },
+    {
+      "probe": "whenever sentences with untyped_candidate attached",
+      "response_sha256_prefix": "4eb13fe20846d4a6",
+      "result": "abstain, reason_code=conditional_statement"
+    },
+    {
+      "probe": "the exact attempt-2 sentence, alone",
+      "response_sha256_prefix": "333d62dfa2fec638",
+      "result": "abstain, reason_code=conditional_statement"
+    },
+    {
+      "probe": "the exact attempt-2 sentence inside the full 12-case batch",
+      "response_sha256_prefix": "c660ad9afdc1a06d",
+      "result": "emit_l1 with modality=actual, reason_code=conditional_habitual_event"
+    }
+  ],
+  "purpose": "raw prompt diagnosis for the attempt-2 conditional failure",
+  "root_cause": "Batch context dependence, not a missing instruction. The same sentence abstains alone and emits actual when scored alongside eleven other cases, eight of which are legitimate emissions. Surrounded by habitual facts the model reclassifies the conditional as a habitual event.",
+  "why_the_first_dev_probe_missed_it": "It sent the sentences without the untyped_candidate and effectively as an isolated set, so it scored 12/12 and looked like the prompt was already correct. A dev probe that does not reproduce the real request shape is not evidence about the real request."
+}
