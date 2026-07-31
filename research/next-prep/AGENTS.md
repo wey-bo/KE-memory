@@ -453,6 +453,14 @@ Phase A 通过标准：同一既有 snapshot 上，Query 的 `fact`/`count` 结�
 - 验证：focused 与相邻套件 `156 passed`；broad `tests/natural_memory_benchmark` 与 HEAD 基线一致（基线 `301 failed / 700 passed`，改动后 `301 failed / 704 passed`，无新增 failure，既有 gap 仍为缺 `duckdb`/`nltk` 与冻结旧绝对路径）。ruff、`compileall`、`tabnanny`、`git diff --check` 通过；credential scan 在 artifact、diff 与 HTTP 401/malformed/header-embedding 错误路径均为 `0` 命中。以六个 write API 全部布防的探针证明 query-only 路径不触达任何写入口，transport 失败时 HTTP attempt 恰为 `1` 且不产出 artifact，`max_attempts=2` 被直接拒绝。
 - Phase A 结论仅为 `controlled_query_only_closure`，权威提交 `f0ef893`。它不改变 fresh-v3 的 `not_qualified`，不代表自动抽取质量、production readiness 或 benchmark 结论。
 
+#### Phase A 复核与重新验证（2026-07-31）
+
+- attempt 2 的独立审查返回 6 项 Important，Phase A gate 要求 Critical/Important `0`，因此 attempt 2 被重新归类为 `not_qualified`；其真实模型闭环观测保留，不回写为通过。冻结记录为 `.runs/phase-a-query-only-v1-attempt-2/superseded-receipt.json`。六项为：仅 compilation abstention 被拦截、`response_model` 未与 `requested_model` 比对、四个保证计数为 schema `Literal` 而非测量值、`result_path` 未排除仓库内部（测试确认确实在仓库内创建了文件）、receipt snapshot hash 与执行 authority hash 来自不同 snapshot 且未比对、checkpoint recovery 仅读 head manifest 会静默丢弃早期 checkpoint 的 turn bundle。修复提交 `788d3f6`。
+- 我在自己的修复中又发现两个缺陷，修复提交 `8573550`：`MemoryWriteObserver` 以 `getattr` 取得已绑定的 classmethod 再作为普通属性还原，导致 `GitMemoryHistoryRepository.initialize` 在一次观测窗口后不再是 classmethod；观测窗口仅覆盖 execution，recovery 与 snapshot 阶段的写入会漏计而 receipt 仍报 `0`。现改为捕获/还原类 `__dict__` 原始描述符，并分别观测 `recovery`/`snapshot`/`execution` 且在 receipt 中记录 `observed_write_phases`。attempt 3 因此被 supersede。
+- attempt 4 通过全部 gate，但其后提交 `f00f10f` 修改了 query-only 入口所导入的 `e2e_pipeline.py`，其证据不再描述当前树，故 supersede 并重新验证。静态与运行时均确认该改动位于 `run_e2e_pipeline`，query-only 路径从不调用它（以抛异常桩替换后仍能到达模型边界且不产出 artifact），这解释了结果不变，但不替代重跑。
+- 正式通过的是 attempt 5，HEAD `f00f10f`：`.runs/phase-a-query-only-v1-attempt-5/query-only-receipt.json`（mode `0444`）。`deepseek-v4-pro` requested/response 一致、`attempts=1`、`query_call_count=1`、`l1/l2_producer_call_count=0`、`automatic_memory_write_count=0`（观测覆盖 recovery/snapshot/execution）、`deterministic_replay_verified=true`、`abstained=false`、`fallback_triggered=false`、`closure_complete=true`。answer 为 `memory:CoffeeBeverage`，evidence `evidence-turn-0000000000000001-user` 闭合到 `source-revision-5a316a782f8ab0b9bc006241`，其原文切片确为 `Coffee is preferred.`；v8 head `0e04cd2c`、commit 数 `2`、raw artifact `bfb6a284` 均未漂移。focused 与相邻套件 `152 passed`；五个 attempt 的 receipt 全部 append-only 保留，credential scan `0` 命中。
+- 复核补充事实：production 与 qualification 并非同一条链。production 使用窄内联 prompt（`prefer`/`drink`/`add_ingredient`）并在 pipeline 内硬编码 `source_status="user_reported"`、`speaker="user"`、`allow_modalities=["actual"]` 与 category-only identity，而 fresh-v3 使用完整 V10/V9 prompt。因此 Phase A 只证明窄路径闭环成立，不能证明被 fresh gate 检验的通用抽取能力已进入生产。
+
 ### Phase B：自动抽取质量修复（已授权，受 Phase A gate 约束）
 
 目标：只在新建且与 fresh-v3 隔离的 diagnostic/dev 数据上修复 official-v2 暴露的真实模型质量问题，不在 hidden 结果上调参。
