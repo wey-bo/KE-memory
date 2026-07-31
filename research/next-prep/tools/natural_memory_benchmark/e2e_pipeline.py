@@ -48,6 +48,7 @@ from .l1_admission import (
     AdmissionPolicy,
     SourceEpistemicBinding,
     admit_linked_l1,
+    make_known_lifecycle_revision,
 )
 from .l1_ontology_linking import (
     LinkedL1Candidate,
@@ -295,6 +296,12 @@ def _make_source_inputs(
     return artifact, source_revisions, inputs
 
 
+def _l1_unit_id(candidate_ref: str) -> str:
+    """Derive an L1 unit id from its candidate ref, deterministically."""
+    digest = hashlib.sha256(candidate_ref.encode("utf-8")).hexdigest()[:16]
+    return f"l1-{digest}"
+
+
 def _assert_decision_binding(
     *,
     linked: LinkedL1Candidate,
@@ -306,8 +313,16 @@ def _assert_decision_binding(
             "L1 admission did not accept the candidate: "
             + ",".join(decision.reason_codes)
         )
-    if decision.proposed_action.action != "create":
-        raise ValueError("the minimal pipeline accepts create actions only")
+    # 一次更正会被 admission 判定为 lifecycle_update 而不是 create，因为它要
+    # 改动先前那条事实的状态。其余写动作仍在本作用域之外。
+    if decision.proposed_action.action not in ("create", "lifecycle_update"):
+        raise ValueError(
+            "the minimal pipeline accepts create and lifecycle_update actions only"
+        )
+    if decision.proposed_action.action == "lifecycle_update" and not (
+        linked.typed_candidate.lifecycle.supersedes_candidate_refs
+    ):
+        raise ValueError("a lifecycle update must state what it supersedes")
     if decision.source_candidate_hash != linked.source_candidate_hash:
         raise ValueError("admission decision source candidate binding mismatch")
     if decision.linked_candidate_hash != linked.linked_candidate_hash:
@@ -387,7 +402,7 @@ def materialize_admitted_l1(
 
     typed = linked.typed_candidate
     unit = L1MemoryUnitV2(
-        unit_id=f"l1-{hashlib.sha256(proposal.candidate_ref.encode('utf-8')).hexdigest()[:16]}",
+        unit_id=_l1_unit_id(proposal.candidate_ref),
         kind=typed.kind,
         predicate=Predicate(
             surface=linked.predicate_link.predicate_surface,
@@ -977,6 +992,10 @@ def run_e2e_pipeline(
     admitted_l1: list[AdmittedL1Record] = []
     seen_candidate_refs: set[str] = set()
     no_memory_reasons: dict[str, str] = {}
+    #: 每条已接纳候选的当前 lifecycle 状态。一次更正会把它取代的那条改成
+    #: superseded，后续轮次的 admission 因此看到的是最新状态。
+    lifecycle_states: dict[str, str] = {}
+    superseded_by: dict[str, str] = {}
     for turn in ordered_turns:
         extraction_input = extraction_inputs[turn.turn_id]
         proposals = l1_producer.produce(extraction_input)
@@ -1021,7 +1040,16 @@ def run_e2e_pipeline(
                 identity_registry_revision=f"category-only-{ontology.registry_hash[:16]}",
                 identity_registry_hash=ontology.registry_hash,
                 transaction_time=_timestamp(turn.turn_index * 10 + 2),
-                known_lifecycle_revisions=[],
+                # 一次更正要取代先前的事实，admission 就必须看得到那些事实的
+                # lifecycle 状态。之前恒为空，所以任何取代目标都 unresolved。
+                known_lifecycle_revisions=[
+                    make_known_lifecycle_revision(
+                        candidate_ref=item.candidate_ref,
+                        revision_id=item.revision.revision_id,
+                        lifecycle_state=lifecycle_states[item.candidate_ref],
+                    )
+                    for item in admitted_l1
+                ],
                 policy=AdmissionPolicy(
                     policy_id="e2e-category-create",
                     policy_version="1",
@@ -1031,15 +1059,53 @@ def run_e2e_pipeline(
                 ),
             )
             decision = admit_linked_l1(linked, ontology, context)
-            admitted_l1.append(
-                materialize_admitted_l1(
-                    proposal=proposal,
-                    linked=linked,
-                    decision=decision,
-                    context=context,
-                    producer=producer,
-                )
+            record = materialize_admitted_l1(
+                proposal=proposal,
+                linked=linked,
+                decision=decision,
+                context=context,
+                producer=producer,
             )
+            admitted_l1.append(record)
+            lifecycle_states[record.candidate_ref] = "active"
+            # 记下取代关系，落库时把被取代的那条改成 superseded。
+            for target in linked.typed_candidate.lifecycle.supersedes_candidate_refs:
+                lifecycle_states[target] = "superseded"
+                superseded_by[target] = record.candidate_ref
+
+    # 更正追加的 lifecycle_update 修订必须在 turn bundle 之前建好：turn bundle
+    # 必须引用当前修订，而被取代单元的当前修订正是这条新修订。
+    supersession_by_ref: dict[str, MemoryUnitRevision] = {}
+    for target_ref in sorted(superseded_by):
+        target = next(
+            item for item in admitted_l1 if item.candidate_ref == target_ref
+        )
+        payload = target.revision.payload
+        if not isinstance(payload, L1MemoryUnitV2):
+            raise ValueError("only an L1 unit can be superseded")
+        supersession_time = _timestamp(len(ordered_turns) * 10 + 4)
+        supersession_by_ref[target_ref] = make_memory_unit_revision(
+            # payload 的 transaction_time 必须与修订自身一致：这条修订记录的是
+            # "此刻起它不再是当前事实"，所以两者都取更正发生的时刻。
+            payload=payload.model_copy(
+                update={
+                    "lifecycle": "superseded",
+                    "time": payload.time.model_copy(
+                        update={"transaction_time": supersession_time}
+                    ),
+                }
+            ),
+            revision_number=target.revision.revision_number + 1,
+            previous_revision_id=target.revision.revision_id,
+            revision_kind="lifecycle_update",
+            transaction_time=supersession_time,
+            source_revision_ids=list(target.revision.source_revision_ids),
+            derived_from_revision_ids=[target.revision.revision_id],
+            producer=producer,
+        )
+
+    def _current_revision(item: AdmittedL1Record) -> MemoryUnitRevision:
+        return supersession_by_ref.get(item.candidate_ref, item.revision)
 
     turn_bundles: list[TurnBundleRevision] = []
     for turn in ordered_turns:
@@ -1066,7 +1132,9 @@ def run_e2e_pipeline(
                     ),
                 ],
                 extraction_state="complete",
-                l1_unit_revision_ids=[item.revision.revision_id for item in members],
+                l1_unit_revision_ids=[
+                    _current_revision(item).revision_id for item in members
+                ],
                 no_memory_reason=no_memory_reasons.get(turn.turn_id),
                 failure_reason=None,
                 extractor_id=producer.producer_id,
@@ -1092,9 +1160,15 @@ def run_e2e_pipeline(
         if l2_proposals
         else None
     )
+    # 原始修订与更正追加的修订都进入历史：更正不改写既有修订，所以"曾经如此"
+    # 和"现在如此"都可查，历史仍然只追加。
     l1_revisions = [item.revision for item in admitted_l1]
+    l1_revisions.extend(supersession_by_ref[ref] for ref in sorted(superseded_by))
+    # 当前视图取每个单元的当前修订：被取代的单元由此变为 superseded。
     l1_units = [
-        item.payload for item in l1_revisions if isinstance(item.payload, L1MemoryUnitV2)
+        payload
+        for payload in (_current_revision(item).payload for item in admitted_l1)
+        if isinstance(payload, L1MemoryUnitV2)
     ]
     l2_units: list[L2MemoryUnitV2] = []
     if l2_record is not None:

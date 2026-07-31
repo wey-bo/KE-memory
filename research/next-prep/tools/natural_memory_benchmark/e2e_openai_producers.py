@@ -323,6 +323,8 @@ _CONTRACT_VALIDATION_CODES = {
     "L1 evidence binding does not match public turn": "evidence_binding_mismatch",
     "L1 derivation is not exact explicit evidence": "derivation_mismatch",
     "L1 lifecycle is outside create-active policy": "lifecycle_policy_mismatch",
+    "L1 supersession target is the turn itself": "supersession_self_reference",
+    "L1 supersession target is not a known turn": "supersession_target_unknown",
     "L1 proposal contains unsupported production bindings": "unsupported_bindings",
     "L2 support order or coverage mismatch": "support_coverage_mismatch",
     "L2 required closure mismatch": "required_closure_mismatch",
@@ -618,6 +620,9 @@ class L1SemanticSlotProposalV1(StrictModel):
     role_slots: list[L1RoleSlotV1] = Field(min_length=1)
     event_time: str | None = None
     valid_time: str | None = None
+    #: 这一轮更正了哪几轮的事实。用轮次而非候选 ref 表达：模型看得到轮次，看
+    #: 不到 ref 的分配规则，换算由程序负责。
+    supersedes_turn_ids: list[str] = Field(default_factory=list)
 
 
 def materialize_typed_l1_candidate(
@@ -709,7 +714,14 @@ def materialize_typed_l1_candidate(
         evidence_bindings=[
             TypedEvidenceBinding(evidence_id=evidence_id, speaker="user")
         ],
-        lifecycle=TypedLifecycleBinding(lifecycle="active"),
+        # 更正本身仍然是一条 active 事实；被它取代的是别人。轮次到候选 ref 的
+        # 换算在这里完成，模型不必知道 ref 怎么分配。
+        lifecycle=TypedLifecycleBinding(
+            lifecycle="active",
+            supersedes_candidate_refs=[
+                allocate_support_ref(item) for item in slots.supersedes_turn_ids
+            ],
+        ),
         operation_provenance=TypedOperationProvenance(),
     )
 
@@ -1223,11 +1235,12 @@ class OpenAICompatibleL1BatchProducer:
         ):
             raise ValueError("L1 derivation is not exact explicit evidence")
         lifecycle = candidate.lifecycle
+        # supersession 是被支持的：一次更正必须能取代它更正的那条事实。其余
+        # lifecycle 关系仍在本作用域之外。
         if (
             lifecycle.lifecycle != self.policy.lifecycle
             or lifecycle.replacement_candidate_ref is not None
             or lifecycle.replaces_candidate_refs
-            or lifecycle.supersedes_candidate_refs
             or lifecycle.conflicts_with_candidate_refs
         ):
             raise ValueError("L1 lifecycle is outside create-active policy")
@@ -1325,6 +1338,17 @@ class OpenAICompatibleL1BatchProducer:
                             )
                         )
                         continue
+                    # 取代目标必须是本批次里真实存在的另一轮：否则模型可以凭空
+                    # 声明一条取代关系，或让一轮取代自己形成自引用。
+                    for target in proposal.slots.supersedes_turn_ids:
+                        if target == turn_id:
+                            raise ValueError(
+                                "L1 supersession target is the turn itself"
+                            )
+                        if target not in public_by_turn:
+                            raise ValueError(
+                                "L1 supersession target is not a known turn"
+                            )
                     candidate = materialize_typed_l1_candidate(
                         slots=proposal.slots,
                         registry=self.registry,
