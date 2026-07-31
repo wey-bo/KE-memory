@@ -189,6 +189,34 @@ class OpenAIQueryOnlyReceiptV1(StrictModel):
     answer: EvidenceBackedAnswerV1
 
 
+class OpenAIQueryOnlyReceiptV1Transitional(StrictModel):
+    """A receipt written while ``v1`` was being changed in place.
+
+    Attempts 4 and 5 were emitted mid-change: they carry the ``v1`` label but
+    the measured ``v2`` shape, so neither the ``v1`` nor the ``v2`` model can
+    load them. The bytes are frozen evidence and must not be edited, so this
+    model exists to keep them machine-readable. Do not emit this shape.
+    """
+
+    schema_version: Literal["openai-query-only-receipt-v1"] = (
+        "openai-query-only-receipt-v1"
+    )
+    workflow_run_id: str = Field(min_length=1)
+    requested_model: str = Field(min_length=1)
+    closure_kind: Literal["controlled_query_only_closure"] = (
+        "controlled_query_only_closure"
+    )
+    model_call: ModelCallHashV1
+    query_call_count: int = Field(ge=0)
+    l1_producer_call_count: int = Field(ge=0)
+    l2_producer_call_count: int = Field(ge=0)
+    automatic_memory_write_count: int = Field(ge=0)
+    observed_write_phases: tuple[str, ...] = Field(min_length=1)
+    deterministic_replay_verified: bool
+    snapshot: QueryOnlySnapshotReceiptV1
+    answer: EvidenceBackedAnswerV1
+
+
 class OpenAIQueryOnlyReceiptV2(StrictModel):
     """Query-only closure receipt with measured, not asserted, guarantees.
 
@@ -227,6 +255,29 @@ class QueryOnlyPipelineResultV1(StrictModel):
     answer: EvidenceBackedAnswerV1
 
 
+def load_query_only_receipt(
+    payload: dict[str, Any],
+) -> (
+    OpenAIQueryOnlyReceiptV1
+    | OpenAIQueryOnlyReceiptV1Transitional
+    | OpenAIQueryOnlyReceiptV2
+):
+    """Load any frozen query-only receipt, whatever shape it was written in.
+
+    The label alone does not identify the contract, because attempts 4 and 5
+    were written while ``v1`` was being changed in place. Dispatch on label and
+    shape so every append-only artifact stays readable without editing it.
+    """
+    version = payload.get("schema_version")
+    if version == "openai-query-only-receipt-v2":
+        return OpenAIQueryOnlyReceiptV2.model_validate(payload)
+    if version == "openai-query-only-receipt-v1":
+        if "observed_write_phases" in payload:
+            return OpenAIQueryOnlyReceiptV1Transitional.model_validate(payload)
+        return OpenAIQueryOnlyReceiptV1.model_validate(payload)
+    raise ValueError(f"unknown query-only receipt schema: {version!r}")
+
+
 @dataclass(frozen=True)
 class OpenAIQueryOnlyOutcome:
     pipeline: QueryOnlyPipelineResultV1
@@ -251,9 +302,14 @@ class ExtractionCallObserver:
         self.l2_calls: list[str] = []
         self._restore: list[tuple[str, Any]] = []
 
+    #: Guards against a second observer patching over an active one, which on a
+    #: non-LIFO exit would leave a wrapper installed for the process.
+    _active: "ExtractionCallObserver | None" = None
+
     def __enter__(self) -> "ExtractionCallObserver":
-        if self._restore:
+        if self._restore or type(self)._active is not None:
             raise RuntimeError("extraction observation windows must not nest")
+        type(self)._active = self
         module = sys.modules[__name__]
         for name, sink in (
             ("OpenAICompatibleL1BatchProducer", self.l1_calls),
@@ -269,6 +325,12 @@ class ExtractionCallObserver:
         while self._restore:
             name, original = self._restore.pop()
             setattr(module, name, original)
+        if type(self)._active is self:
+            type(self)._active = None
+
+    @property
+    def active(self) -> bool:
+        return bool(self._restore)
 
     @staticmethod
     def _wrap(name: str, original: Any, sink: list[str]) -> Any:
@@ -312,6 +374,9 @@ class MemoryWriteObserver:
     #: mutating verb fails closed instead of going unobserved.
     READ_ONLY_GIT_VERBS = frozenset(
         {
+            # Plumbing reads only. `status` and `diff` are deliberately absent:
+            # both can write (index refresh, `--output=`), so they count as
+            # writes rather than widening the read-only set.
             "cat-file",
             "ls-tree",
             "rev-list",
@@ -319,13 +384,14 @@ class MemoryWriteObserver:
             "show",
             "merge-base",
             "for-each-ref",
-            "diff",
             "diff-tree",
-            "log",
-            "status",
             "verify-pack",
         }
     )
+
+    #: Guards against a second observer patching over an active one, which on a
+    #: non-LIFO exit would leave a wrapper installed for the process.
+    _active: "MemoryWriteObserver | None" = None
 
     def __init__(self) -> None:
         self.calls: list[str] = []
@@ -339,8 +405,9 @@ class MemoryWriteObserver:
         return self
 
     def __enter__(self) -> "MemoryWriteObserver":
-        if self._restore:
+        if self._restore or type(self)._active is not None:
             raise RuntimeError("write observation windows must not nest")
+        type(self)._active = self
         if self._phase is not None:
             self.phases.append(self._phase)
             self._phase = None
@@ -362,6 +429,8 @@ class MemoryWriteObserver:
         while self._restore:
             name, descriptor = self._restore.pop()
             setattr(GitMemoryHistoryRepository, name, descriptor)
+        if type(self)._active is self:
+            type(self)._active = None
 
     def _wrap(self, name: str, descriptor: Any) -> Any:
         observer = self
@@ -657,6 +726,10 @@ def _run_openai_query_only(
     opener: Callable[..., Any],
     extraction_observer: ExtractionCallObserver,
 ) -> OpenAIQueryOnlyOutcome:
+    if not extraction_observer.active:
+        raise ValueError(
+            "query-only execution requires an active extraction observer"
+        )
     repository_path = Path(repository_path).resolve()
     result_path = Path(result_path).resolve()
     if result_path.exists():

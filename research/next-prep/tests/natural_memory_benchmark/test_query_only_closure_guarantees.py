@@ -13,6 +13,7 @@ controlled closure that did not happen:
 
 from __future__ import annotations
 
+import tempfile
 from pathlib import Path
 from typing import Any
 
@@ -80,6 +81,49 @@ def _query_only(
     )
 
 
+def test_an_observed_extraction_call_aborts_the_attempt(tmp_path: Path) -> None:
+    """The zero count must come from the observer, not from a constant.
+
+    Asserting the count equals zero is satisfied by a hardcoded zero too, so
+    this forces a real extraction construction inside the window and requires
+    the guard to notice it. If the receipt field were wired to a constant, the
+    attempt would succeed instead of being refused.
+    """
+    repository, initial = _seeded_repository(tmp_path, "counted-history.git")
+    result_path = tmp_path / "counted-result.json"
+    real_execute = e2e_runtime.execute_authoritative_query
+
+    def executing_after_building_a_producer(**kwargs: Any) -> Any:
+        try:
+            e2e_runtime.OpenAICompatibleL1BatchProducer(  # type: ignore[call-arg]
+                registry=None,
+                policy=None,
+                base_url="https://model.invalid/v1",
+                api_key="k",
+                model="m",
+            )
+        except Exception:
+            pass
+        return real_execute(**kwargs)
+
+    opener = _SequencedOpener([_chat_response(_production_query_payload())])
+    with pytest.MonkeyPatch.context() as patch:
+        patch.setattr(
+            e2e_runtime,
+            "execute_authoritative_query",
+            executing_after_building_a_producer,
+        )
+        with pytest.raises(ValueError, match="no extraction calls"):
+            _query_only(
+                repository,
+                initial,
+                result_path,
+                opener=opener,
+                model="test-model-response",
+            )
+    assert not result_path.exists()
+
+
 def test_extraction_counts_come_from_an_observer(tmp_path: Path) -> None:
     """The zero extraction count must be observed, not written in by hand."""
     repository, initial = _seeded_repository(tmp_path, "extraction-history.git")
@@ -108,8 +152,13 @@ def test_extraction_counts_come_from_an_observer(tmp_path: Path) -> None:
 
 def test_constructing_an_extraction_producer_is_counted() -> None:
     """A producer built during the window must raise the recorded count."""
+    real_l1 = e2e_runtime.OpenAICompatibleL1BatchProducer
+    real_l2 = e2e_runtime.OpenAICompatibleL2Producer
     with e2e_runtime.ExtractionCallObserver() as observer:
         assert observer.l1_count == 0 and observer.l2_count == 0
+        assert e2e_runtime.OpenAICompatibleL1BatchProducer is not real_l1, (
+            "the producer name must actually be patched inside the window"
+        )
         try:
             e2e_runtime.OpenAICompatibleL1BatchProducer(  # type: ignore[call-arg]
                 registry=None,
@@ -123,27 +172,119 @@ def test_constructing_an_extraction_producer_is_counted() -> None:
         assert observer.l1_count == 1, (
             "constructing an L1 producer must be observed even if it then fails"
         )
-    assert (
-        e2e_runtime.OpenAICompatibleL1BatchProducer
-        is not observer._wrap  # type: ignore[comparison-overlap]
-    )
+    # Compare against the real classes, not the wrapper factory: the factory is
+    # never the installed value, so asserting against it proves nothing.
+    assert e2e_runtime.OpenAICompatibleL1BatchProducer is real_l1
+    assert e2e_runtime.OpenAICompatibleL2Producer is real_l2
 
 
-def test_frozen_v1_receipts_still_validate() -> None:
-    """Changing the counters was a contract change, so v1 must keep loading."""
-    fields = e2e_runtime.OpenAIQueryOnlyReceiptV1.model_fields
-    for name in (
-        "query_call_count",
-        "l1_producer_call_count",
-        "l2_producer_call_count",
-        "automatic_memory_write_count",
-    ):
-        assert "Literal" in repr(fields[name].annotation), (
-            f"the historical v1 shape must keep its asserted {name}"
+def test_extraction_observation_windows_cannot_nest() -> None:
+    """A second observer must be refused, not left leaking a wrapper."""
+    real_l1 = e2e_runtime.OpenAICompatibleL1BatchProducer
+    outer = e2e_runtime.ExtractionCallObserver()
+    inner = e2e_runtime.ExtractionCallObserver()
+    with outer:
+        with pytest.raises(RuntimeError, match="must not nest"):
+            inner.__enter__()
+    assert e2e_runtime.OpenAICompatibleL1BatchProducer is real_l1
+    assert e2e_runtime.ExtractionCallObserver._active is None
+
+
+def test_write_observation_windows_cannot_nest() -> None:
+    """The same guard must hold for the write observer."""
+    before = {
+        name: GitMemoryHistoryRepository.__dict__.get(name)
+        for name in MemoryWriteObserver.WRITE_METHODS
+    }
+    outer = MemoryWriteObserver()
+    inner = MemoryWriteObserver()
+    with outer.observing("recovery"):
+        with pytest.raises(RuntimeError, match="must not nest"):
+            inner.observing("snapshot").__enter__()
+    for name, descriptor in before.items():
+        assert GitMemoryHistoryRepository.__dict__.get(name) is descriptor
+    assert MemoryWriteObserver._active is None
+
+
+def test_inactive_extraction_observer_is_refused(tmp_path: Path) -> None:
+    """An unobserved attempt must not be able to emit a receipt."""
+    repository, initial = _seeded_repository(tmp_path, "inactive-history.git")
+    result_path = tmp_path / "inactive-result.json"
+    opener = _SequencedOpener([_chat_response(_production_query_payload())])
+    with pytest.raises(ValueError, match="active extraction observer"):
+        e2e_runtime._run_openai_query_only(
+            question="What beverage is preferred?",
+            query_time="2026-07-31T00:00:00Z",
+            repository_path=repository,
+            expected_git_commit=initial.snapshot.git_commit,
+            expected_checkpoint_id=initial.snapshot.checkpoint_id,
+            result_path=result_path,
+            query_id="query-e2e-1",
+            base_url="https://model.invalid/v1",
+            api_key="k",
+            model="test-model-response",
+            timeout_seconds=37,
+            max_attempts=1,
+            opener=opener,
+            extraction_observer=e2e_runtime.ExtractionCallObserver(),
         )
-    assert "observed_write_phases" not in fields
-    v2_fields = OpenAIQueryOnlyReceiptV2.model_fields
-    assert "observed_write_phases" in v2_fields
+    assert not result_path.exists()
+
+
+def _sample_receipt_payload(tmp_path: Path | None = None) -> dict[str, Any]:
+    """A real receipt payload, so the loader is tested against genuine shapes."""
+    root = tmp_path or Path(tempfile.mkdtemp())
+    repository, initial = _seeded_repository(root, "loader-history.git")
+    opener = _SequencedOpener([_chat_response(_production_query_payload())])
+    outcome = _query_only(
+        repository,
+        initial,
+        root / "loader-result.json",
+        opener=opener,
+        model="test-model-response",
+    )
+    return outcome.receipt.model_dump(mode="json")
+
+
+def test_every_frozen_receipt_shape_is_loadable() -> None:
+    """Frozen receipts must stay machine-readable without editing the bytes.
+
+    Three shapes exist: the original asserted-counter v1, the transitional
+    payloads written while v1 was being changed in place (v1 label, measured
+    shape), and v2. A reader must be able to load all three, so this validates
+    real payloads rather than inspecting field declarations.
+    """
+    measured = _sample_receipt_payload()
+    asserted_v1 = {
+        key: value
+        for key, value in measured.items()
+        if key != "observed_write_phases"
+    }
+    asserted_v1["schema_version"] = "openai-query-only-receipt-v1"
+    transitional = {
+        **asserted_v1,
+        "observed_write_phases": list(measured["observed_write_phases"]),
+    }
+    measured_v2 = {
+        **transitional,
+        "schema_version": "openai-query-only-receipt-v2",
+    }
+    for label, payload, expected in (
+        ("asserted v1", asserted_v1, e2e_runtime.OpenAIQueryOnlyReceiptV1),
+        (
+            "transitional v1",
+            transitional,
+            e2e_runtime.OpenAIQueryOnlyReceiptV1Transitional,
+        ),
+        ("measured v2", measured_v2, OpenAIQueryOnlyReceiptV2),
+    ):
+        loaded = e2e_runtime.load_query_only_receipt(payload)
+        assert isinstance(loaded, expected), label
+        assert loaded.model_dump(mode="json") == payload, (
+            f"{label} must round-trip unchanged"
+        )
+    with pytest.raises(ValueError, match="unknown query-only receipt schema"):
+        e2e_runtime.load_query_only_receipt({"schema_version": "nope"})
 
 
 def test_receipt_counters_are_measured_not_schema_constants() -> None:
