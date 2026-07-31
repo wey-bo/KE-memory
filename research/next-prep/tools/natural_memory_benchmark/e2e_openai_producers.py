@@ -1600,7 +1600,16 @@ class OpenAICompatibleL1BatchProducer:
                 "role, the exact surface from the user text, and that surface's "
                 "character offsets in the user text. Do not construct "
                 "identifiers, evidence bindings, derivation, lifecycle or "
-                "provenance. Return JSON only."
+                "provenance.\n"
+                # predicate_surface 与 role slot surface 的来源不同：前者取自
+                # registry 已发布的元组，后者取自用户原文。缺了这句区分，把
+                # "preferred"/"drunk" 按原文变形是合理读法，却会被边界拒绝。
+                "predicate_surface, predicate_sense and canonical_operator must be "
+                "copied verbatim from one published tuple in "
+                "predicate_role_constraints. Do not inflect the predicate surface "
+                "to match the user's wording: role slot surfaces come from the "
+                "user text, but the predicate triple comes from the registry.\n"
+                "Return JSON only."
             ),
             public_input={
                 "public_contract": public_contract,
