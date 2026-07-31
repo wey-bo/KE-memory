@@ -214,3 +214,24 @@ def test_kind_must_match_the_operator_policy() -> None:
     """Operator to kind is a published binding, so a mismatch is refused."""
     with pytest.raises(ValueError, match="kind"):
         _materialize(_slots(kind="event"))
+
+
+def test_batch_producer_requests_slots_not_typed_candidates() -> None:
+    """The prompt the model actually receives must ask for the slot contract."""
+    from tools.natural_memory_benchmark.e2e_openai_producers import (
+        ProductionL1SlotBatchResponseV1,
+    )
+
+    schema = ProductionL1SlotBatchResponseV1.model_json_schema()
+    rendered = str(schema)
+    for mechanical in (
+        "local_entity_id",
+        "evidence_bindings",
+        "operation_provenance",
+        "replaces_candidate_refs",
+    ):
+        assert mechanical not in rendered, (
+            f"the response schema still asks the model for {mechanical}"
+        )
+    for semantic in ("role_slots", "canonical_operator", "polarity"):
+        assert semantic in rendered, f"the slot schema must still carry {semantic}"

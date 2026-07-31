@@ -734,6 +734,48 @@ class ProductionL1ProposalV1(StrictModel):
         return self
 
 
+class ProductionL1SlotProposalV1(StrictModel):
+    """One turn's decision, carrying semantics only when it emits."""
+
+    turn_id: str = Field(min_length=1)
+    decision: Literal["emit_l1", "abstain", "no_memory"]
+    slots: L1SemanticSlotProposalV1 | None = None
+
+    @model_validator(mode="after")
+    def validate_decision_union(self) -> "ProductionL1SlotProposalV1":
+        if self.decision == "emit_l1" and self.slots is None:
+            raise ValueError("emit_l1 requires semantic slots")
+        if self.decision != "emit_l1" and self.slots is not None:
+            raise ValueError("non-emission decision cannot include slots")
+        return self
+
+
+class ProductionL1SlotBatchResponseV1(StrictModel):
+    """The response contract for the semantic-slot L1 proposer."""
+
+    schema_version: Literal["production-l1-slot-batch-response-v1"] = (
+        "production-l1-slot-batch-response-v1"
+    )
+    proposals: list[ProductionL1SlotProposalV1] = Field(min_length=1)
+
+    @model_validator(mode="after")
+    def validate_decisions(self) -> "ProductionL1SlotBatchResponseV1":
+        non_emitting = {
+            item.turn_id for item in self.proposals if item.decision != "emit_l1"
+        }
+        emitting = {
+            item.turn_id for item in self.proposals if item.decision == "emit_l1"
+        }
+        if non_emitting & emitting:
+            raise ValueError(
+                "a turn cannot both emit and decline to emit a memory"
+            )
+        for turn_id in non_emitting:
+            if sum(item.turn_id == turn_id for item in self.proposals) != 1:
+                raise ValueError("a declining turn carries exactly one decision")
+        return self
+
+
 class ProductionL1BatchResponseV1(StrictModel):
     schema_version: Literal["production-l1-batch-response-v1"] = (
         "production-l1-batch-response-v1"
