@@ -96,13 +96,25 @@ class _QueryRecordingOpener:
         self.response_model = response_model
         return _BufferedResponse(raw)
 
-    def receipt(self, requested_model: str) -> ModelCallHashV1:
+    def receipt(
+        self,
+        requested_model: str,
+        *,
+        require_matching_response_model: bool = False,
+    ) -> ModelCallHashV1:
         if (
             self.request_sha256 is None
             or self.response_sha256 is None
             or self.response_model is None
         ):
             raise ValueError("query model call receipt is unavailable")
+        if (
+            require_matching_response_model
+            and self.response_model != requested_model
+        ):
+            raise ValueError(
+                "query response model does not match the requested model"
+            )
         return ModelCallHashV1(
             stage="query",
             requested_model=requested_model,
@@ -160,10 +172,10 @@ class OpenAIQueryOnlyReceiptV1(StrictModel):
         "controlled_query_only_closure"
     )
     model_call: ModelCallHashV1
-    query_call_count: Literal[1] = 1
-    l1_producer_call_count: Literal[0] = 0
-    l2_producer_call_count: Literal[0] = 0
-    automatic_memory_write_count: Literal[0] = 0
+    query_call_count: int = Field(ge=0)
+    l1_producer_call_count: int = Field(ge=0)
+    l2_producer_call_count: int = Field(ge=0)
+    automatic_memory_write_count: int = Field(ge=0)
     deterministic_replay_verified: bool
     snapshot: QueryOnlySnapshotReceiptV1
     answer: EvidenceBackedAnswerV1
@@ -182,6 +194,62 @@ class QueryOnlyPipelineResultV1(StrictModel):
 class OpenAIQueryOnlyOutcome:
     pipeline: QueryOnlyPipelineResultV1
     receipt: OpenAIQueryOnlyReceiptV1
+
+
+class MemoryWriteObserver:
+    """Counts authoritative write entry points reached during a query.
+
+    The receipt must be able to represent a violated guarantee, so the write
+    count is observed rather than asserted.
+    """
+
+    WRITE_METHODS = (
+        "initialize",
+        "make_checkpoint",
+        "commit_checkpoint",
+        "prepare_hard_purge",
+        "_create_commit",
+        "_update_ref",
+    )
+
+    def __init__(self) -> None:
+        self.calls: list[str] = []
+        self._restore: list[tuple[str, Any]] = []
+
+    def __enter__(self) -> "MemoryWriteObserver":
+        for name in self.WRITE_METHODS:
+            original = getattr(GitMemoryHistoryRepository, name, None)
+            if original is None:
+                continue
+            self._restore.append((name, original))
+            setattr(
+                GitMemoryHistoryRepository,
+                name,
+                self._wrap(name, original),
+            )
+        return self
+
+    def __exit__(self, *_args: object) -> None:
+        for name, original in self._restore:
+            setattr(GitMemoryHistoryRepository, name, original)
+        self._restore.clear()
+
+    def _wrap(self, name: str, original: Any) -> Any:
+        observer = self
+
+        def wrapper(*args: object, **kwargs: object) -> object:
+            observer.calls.append(name)
+            return original(*args, **kwargs)
+
+        if isinstance(
+            GitMemoryHistoryRepository.__dict__.get(name), classmethod
+        ):
+            return classmethod(wrapper)
+        return wrapper
+
+    @property
+    def count(self) -> int:
+        return len(self.calls)
 
 
 @dataclass(frozen=True)
@@ -234,6 +302,15 @@ def recover_authoritative_checkpoint(
     parents = repository.commit_parents(head_commit)
     if len(parents) != 1:
         raise ValueError("authoritative checkpoint commit must have one parent")
+    if manifest.sequence != 1:
+        # Each manifest lists only the artifacts published by its own
+        # checkpoint, so recovering from the head manifest alone would silently
+        # drop turn bundles published earlier. Refuse instead of answering from
+        # a partial artifact set.
+        raise ValueError(
+            "checkpoint recovery supports a single-checkpoint history; "
+            f"head checkpoint sequence is {manifest.sequence}"
+        )
 
     bundle_descriptors = [
         item for item in manifest.artifacts if item.artifact_kind == "l2_bundle"
@@ -413,6 +490,14 @@ def run_openai_query_only(
     result_path = Path(result_path).resolve()
     if result_path.exists():
         raise FileExistsError("query-only result artifact must be fresh")
+    raw_path = repository_path.with_name(f"{repository_path.name}.raw.json")
+    if repository_path in result_path.parents or result_path in (
+        repository_path,
+        raw_path,
+    ):
+        raise ValueError(
+            "query-only result must not be written inside the memory repository"
+        )
     if timeout_seconds <= 0:
         raise ValueError("model timeout must be positive")
     if max_attempts != 1:
@@ -478,28 +563,43 @@ def run_openai_query_only(
     if query_recording_opener.attempts != 1:
         raise ValueError("query-only execution must issue exactly one model request")
 
-    execution = execute_authoritative_query(
-        repository_path=repository_path,
-        bundle=recovered.bundle,
-        bundle_history_artifact=recovered.bundle_history_artifact,
-        turn_bundles=list(recovered.turn_bundles),
-        registry=compiler_registry,
-        plan=compilation.plan,
-    )
-    deterministic_replay = execute_authoritative_query(
-        repository_path=repository_path,
-        bundle=recovered.bundle,
-        bundle_history_artifact=recovered.bundle_history_artifact,
-        turn_bundles=list(recovered.turn_bundles),
-        registry=compiler_registry,
-        plan=compilation.plan,
-    )
+    with MemoryWriteObserver() as write_observer:
+        execution = execute_authoritative_query(
+            repository_path=repository_path,
+            bundle=recovered.bundle,
+            bundle_history_artifact=recovered.bundle_history_artifact,
+            turn_bundles=list(recovered.turn_bundles),
+            registry=compiler_registry,
+            plan=compilation.plan,
+        )
+        deterministic_replay = execute_authoritative_query(
+            repository_path=repository_path,
+            bundle=recovered.bundle,
+            bundle_history_artifact=recovered.bundle_history_artifact,
+            turn_bundles=list(recovered.turn_bundles),
+            registry=compiler_registry,
+            plan=compilation.plan,
+        )
     if execution != deterministic_replay:
         raise ValueError("deterministic query replay diverged from the execution")
+    if execution.abstained or not execution.closure_complete:
+        raise ValueError(
+            "query-only execution abstained instead of closing: "
+            f"{execution.evaluation.reason}"
+        )
+    if (
+        canonical_sha256(snapshot) != execution.authority.snapshot_sha256
+        or snapshot.registry_sha256 != execution.authority.registry_sha256
+    ):
+        raise ValueError(
+            "verified snapshot does not match the executed query authority"
+        )
     answer = build_evidence_backed_answer(
         execution=execution,
         bundle=recovered.bundle,
     )
+    if not answer.answer_values or not answer.evidence_spans:
+        raise ValueError("query-only closure requires an evidence-backed answer")
     post_commit = recovered.repository.head_commit()
     post_state = recovered.repository.read_state(commit=post_commit)
     if (
@@ -511,8 +611,15 @@ def run_openai_query_only(
     receipt = OpenAIQueryOnlyReceiptV1(
         workflow_run_id=workflow_run_id,
         requested_model=model,
-        model_call=query_recording_opener.receipt(model),
-        deterministic_replay_verified=True,
+        model_call=query_recording_opener.receipt(
+            model,
+            require_matching_response_model=True,
+        ),
+        query_call_count=query_recording_opener.attempts,
+        l1_producer_call_count=0,
+        l2_producer_call_count=0,
+        automatic_memory_write_count=write_observer.count,
+        deterministic_replay_verified=execution == deterministic_replay,
         snapshot=QueryOnlySnapshotReceiptV1(
             repository_path=str(recovered.repository.repo_path),
             checkpoint_id=recovered.checkpoint_id,
@@ -525,6 +632,10 @@ def run_openai_query_only(
         ),
         answer=answer,
     )
+    if receipt.query_call_count != 1 or receipt.automatic_memory_write_count != 0:
+        raise ValueError(
+            "query-only closure requires exactly one model call and no writes"
+        )
     _write_query_only_receipt_exclusive(result_path, receipt)
     return OpenAIQueryOnlyOutcome(
         pipeline=QueryOnlyPipelineResultV1(
