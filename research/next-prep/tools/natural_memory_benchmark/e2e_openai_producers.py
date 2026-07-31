@@ -10,6 +10,7 @@ from urllib.request import Request, urlopen
 
 from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_validator
 
+from .authoritative_memory import canonical_sha256
 from .e2e_pipeline import (
     AdmittedL1Record,
     ProposedL1CandidateV1,
@@ -201,6 +202,137 @@ def validate_production_policy(
         actual_roles = {item.machine_role for item in l2_policy.role_bindings}
         if actual_roles != expected_roles:
             raise ValueError("L2 role coverage does not match registry")
+
+
+class ExtractionProfileIdentityV1(StrictModel):
+    """Which extraction profile a run used, in a form drift cannot hide from.
+
+    A qualification result only carries over to a run using the same profile.
+    The measured vocabularies of the qualification and production chains do not
+    intersect at either layer, so sharing a prompt, producer and runner removes
+    engineering duplication without making one chain's qualification stand for
+    the other's. Binding the identity makes that mismatch a checkable fact
+    instead of something a reader has to notice.
+
+    L1 and L2 vocabularies are recorded separately. The two layers are not
+    supposed to share operators — L1 states atomic facts and L2 states
+    cross-turn abstractions — so folding them into one hash would make a
+    cross-layer difference indistinguishable from same-layer drift.
+    """
+
+    schema_version: Literal["extraction-profile-identity-v1"] = (
+        "extraction-profile-identity-v1"
+    )
+    profile_id: str = Field(min_length=1)
+    #: 自称 diagnostic 而不是 production：3 个 L1 算子和 1 个 L2 算子是受控范围，
+    #: 把它读成一般生产能力会高估已验证的东西。
+    scope: Literal["diagnostic", "production"]
+    l1_operator_senses: tuple[tuple[str, str], ...] = Field(min_length=1)
+    l2_operators: tuple[str, ...] = Field(min_length=1)
+    l1_vocabulary_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    l2_vocabulary_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    ontology_registry_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    policy_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    profile_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+
+
+def build_extraction_profile_identity(
+    *,
+    registry: OntologyRegistry,
+    policy: ProductionExtractionPolicyV1,
+    profile_id: str = "production-diagnostic-profile-v1",
+    scope: Literal["diagnostic", "production"] = "diagnostic",
+) -> ExtractionProfileIdentityV1:
+    """Derive the profile identity from the registry and policy actually used."""
+    validate_production_policy(registry, policy)
+    l1_operators = {
+        item.canonical_operator for item in policy.l1_operator_kind_bindings
+    }
+    l1_operator_senses = tuple(
+        sorted(
+            {
+                (item.canonical_operator, item.predicate_sense)
+                for item in registry.predicate_role_constraints
+                if item.canonical_operator in l1_operators
+            }
+        )
+    )
+    l2_operators = tuple(
+        sorted({item.canonical_operator for item in policy.l2_operator_policies})
+    )
+    l1_vocabulary_sha256 = canonical_sha256(
+        {"l1_operator_senses": [list(item) for item in l1_operator_senses]}
+    )
+    l2_vocabulary_sha256 = canonical_sha256({"l2_operators": list(l2_operators)})
+    policy_sha256 = canonical_sha256(policy.model_dump(mode="json"))
+    body = {
+        "profile_id": profile_id,
+        "scope": scope,
+        "l1_vocabulary_sha256": l1_vocabulary_sha256,
+        "l2_vocabulary_sha256": l2_vocabulary_sha256,
+        "ontology_registry_sha256": registry.registry_hash,
+        "policy_sha256": policy_sha256,
+    }
+    return ExtractionProfileIdentityV1(
+        **body,
+        l1_operator_senses=l1_operator_senses,
+        l2_operators=l2_operators,
+        profile_sha256=canonical_sha256(body),
+    )
+
+
+def assert_qualification_transferable(
+    *,
+    qualified_profile: ExtractionProfileIdentityV1,
+    execution_profile: ExtractionProfileIdentityV1,
+) -> None:
+    """Refuse to carry a qualification across differing profiles.
+
+    Fail closed on identity rather than on vocabulary overlap: partial overlap
+    would still leave part of the executed vocabulary unqualified, and treating
+    that as covered is exactly the inference this guard exists to prevent.
+    """
+    if qualified_profile.profile_id != execution_profile.profile_id:
+        raise ValueError(
+            "qualification profile id does not match the executed profile"
+        )
+    if qualified_profile.profile_sha256 != execution_profile.profile_sha256:
+        raise ValueError(
+            "qualification profile hash does not match the executed profile"
+        )
+
+
+def _qualification_profile_vocabularies() -> tuple[
+    tuple[tuple[str, str], ...], tuple[str, ...]
+]:
+    """Read the fresh-v3 qualification vocabulary from its own blueprints.
+
+    Derived rather than restated, so this cannot drift away from the chain it
+    describes and quietly report an overlap that no longer holds.
+    """
+    from .typed_extractor_fresh_v3_authoring import (
+        _L1_BLUEPRINTS,
+        _L2_BLUEPRINTS,
+    )
+
+    l1 = tuple(
+        sorted(
+            {
+                (item.vocabulary_operator, item.vocabulary_sense)
+                for item in _L1_BLUEPRINTS
+            }
+        )
+    )
+    l2 = tuple(
+        sorted({item.vocabulary_operator for item in _L2_BLUEPRINTS})
+    )
+    return l1, l2
+
+
+(
+    QUALIFICATION_PROFILE_L1_OPERATOR_SENSES,
+    QUALIFICATION_PROFILE_L2_OPERATORS,
+) = _qualification_profile_vocabularies()
 
 
 def build_diagnostic_production_policy(

@@ -19,10 +19,12 @@ from .authoritative_memory import (
     canonical_sha256,
 )
 from .e2e_openai_producers import (
+    ExtractionProfileIdentityV1,
     ModelCallHashV1,
     OpenAICompatibleL1BatchProducer,
     OpenAICompatibleL2Producer,
     build_diagnostic_production_policy,
+    build_extraction_profile_identity,
 )
 from .e2e_pipeline import (
     EndToEndResultV1,
@@ -243,8 +245,20 @@ class OpenAIQueryOnlyReceiptV2(StrictModel):
     automatic_memory_write_count: int = Field(ge=0)
     observed_write_phases: tuple[str, ...] = Field(min_length=1)
     deterministic_replay_verified: bool
+    #: 这次运行用的是哪个 extraction profile。可选而非必填：已冻结的 v2 收据没有
+    #: 这个字段，设为必填会让那些不可变记录变成不可读。未设置时从序列化结果中
+    #: 省略，这样一份冻结收据仍然逐字节往返，而不是被补上一个 null。
+    extraction_profile: ExtractionProfileIdentityV1 | None = Field(
+        default=None, exclude=False
+    )
     snapshot: QueryOnlySnapshotReceiptV1
     answer: EvidenceBackedAnswerV1
+
+    def model_dump(self, **kwargs: Any) -> dict[str, Any]:
+        payload = super().model_dump(**kwargs)
+        if payload.get("extraction_profile") is None:
+            payload.pop("extraction_profile", None)
+        return payload
 
 
 class QueryOnlyPipelineResultV1(StrictModel):
@@ -913,6 +927,12 @@ def _run_openai_query_only(
         automatic_memory_write_count=write_observer.count,
         observed_write_phases=tuple(write_observer.phases),
         deterministic_replay_verified=execution == deterministic_replay,
+        # 收据自述它用的是哪个 profile：一份不说明 profile 的收据无法判断某个
+        # 资格结论是否适用于它。
+        extraction_profile=build_extraction_profile_identity(
+            registry=registry,
+            policy=build_diagnostic_production_policy(registry),
+        ),
         snapshot=QueryOnlySnapshotReceiptV1(
             repository_path=str(recovered.repository.repo_path),
             checkpoint_id=recovered.checkpoint_id,

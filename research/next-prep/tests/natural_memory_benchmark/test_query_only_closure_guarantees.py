@@ -255,19 +255,27 @@ def test_every_frozen_receipt_shape_is_loadable() -> None:
     real payloads rather than inspecting field declarations.
     """
     measured = _sample_receipt_payload()
+    # The frozen v1 shapes predate the extraction profile, so a v1 payload never
+    # carried it. Deriving them from a current receipt has to drop it, or this
+    # test would assert that the immutable records contain a field they cannot.
     asserted_v1 = {
         key: value
         for key, value in measured.items()
-        if key != "observed_write_phases"
+        if key not in ("observed_write_phases", "extraction_profile")
     }
     asserted_v1["schema_version"] = "openai-query-only-receipt-v1"
     transitional = {
         **asserted_v1,
         "observed_write_phases": list(measured["observed_write_phases"]),
     }
-    measured_v2 = {
-        **transitional,
-        "schema_version": "openai-query-only-receipt-v2",
+    # v2 is the shape a current run writes, so it keeps the extraction profile.
+    measured_v2 = dict(measured)
+    # A v2 receipt frozen before the profile field existed omits it, and must
+    # still load, so that shape is exercised too.
+    frozen_v2_without_profile = {
+        key: value
+        for key, value in measured.items()
+        if key != "extraction_profile"
     }
     for label, payload, expected in (
         ("asserted v1", asserted_v1, e2e_runtime.OpenAIQueryOnlyReceiptV1),
@@ -277,6 +285,11 @@ def test_every_frozen_receipt_shape_is_loadable() -> None:
             e2e_runtime.OpenAIQueryOnlyReceiptV1Transitional,
         ),
         ("measured v2", measured_v2, OpenAIQueryOnlyReceiptV2),
+        (
+            "v2 frozen before the profile field",
+            frozen_v2_without_profile,
+            OpenAIQueryOnlyReceiptV2,
+        ),
     ):
         loaded = e2e_runtime.load_query_only_receipt(payload)
         assert isinstance(loaded, expected), label
