@@ -2,7 +2,7 @@
 
 外部审计指出三处缺口，这里逐项固定为可执行断言：
 
-* `ProductionL2ResponseV1` 没有 decision 字段，pipeline 又强制恰好产出一条
+* L2 响应契约没有 decision 字段，pipeline 又强制恰好产出一条
   L2，因此 Phase C 的 abstention 指标无法在 production 等价重放。
 * L1 producer 执行 `allowed_polarities`，L2 producer 不执行，所以 L2 可以提出
   policy 未授权的极性。
@@ -19,7 +19,7 @@ import pytest
 from tools.natural_memory_benchmark.e2e_openai_producers import (
     ModelBoundaryError,
     OpenAICompatibleL2Producer,
-    ProductionL2ResponseV1,
+    ProductionL2SlotResponseV1,
     build_diagnostic_production_policy,
 )
 from tools.natural_memory_benchmark.l1_ontology_linking import (
@@ -35,29 +35,27 @@ from test_e2e_pipeline_smoke import (  # noqa: F401
 
 def test_l2_response_can_decline_to_emit() -> None:
     """一次没有可靠抽象的 L2 请求必须能表达“不产出”。"""
-    fields = ProductionL2ResponseV1.model_fields
+    fields = ProductionL2SlotResponseV1.model_fields
     assert "decision" in fields, (
         "L2 缺少 decision 字段，无法表达 abstain，"
         "Phase C 的 abstention 指标无法在 production 重放"
     )
-    declined = ProductionL2ResponseV1.model_validate(
+    declined = ProductionL2SlotResponseV1.model_validate(
         {
-            "schema_version": "production-l2-response-v1",
-            "candidate_ref": "l2-declined",
+            "schema_version": "production-l2-slot-response-v1",
             "decision": "abstain",
         }
     )
-    assert declined.typed_candidate is None
+    assert declined.slots is None
     assert declined.decision == "abstain"
 
 
 def test_l2_emission_still_requires_a_candidate() -> None:
     """放开弃权不能让“声称产出但没有内容”通过。"""
     with pytest.raises(ValueError):
-        ProductionL2ResponseV1.model_validate(
+        ProductionL2SlotResponseV1.model_validate(
             {
-                "schema_version": "production-l2-response-v1",
-                "candidate_ref": "l2-broken",
+                "schema_version": "production-l2-slot-response-v1",
                 "decision": "emit_l2",
             }
         )
@@ -67,8 +65,7 @@ def test_l2_declining_yields_no_proposal() -> None:
     """弃权时 producer 必须返回空列表，而不是抛错或伪造一条。"""
     registry = build_diagnostic_ontology_registry()
     payload = {
-        "schema_version": "production-l2-response-v1",
-        "candidate_ref": "l2-declined",
+        "schema_version": "production-l2-slot-response-v1",
         "decision": "abstain",
     }
     producer = OpenAICompatibleL2Producer(
@@ -122,8 +119,7 @@ def test_l2_polarity_must_be_authorized_by_policy() -> None:
     policy = build_diagnostic_production_policy(registry)
     assert policy.allowed_polarities == ["positive"]
     payload = json.loads(json.dumps(_production_l2_payload()))
-    for claim in payload["typed_candidate"]["structured_claims"]:
-        claim["polarity"] = "negative"
+    payload["slots"]["polarity"] = "negative"
     producer = OpenAICompatibleL2Producer(
         registry=registry,
         policy=policy,

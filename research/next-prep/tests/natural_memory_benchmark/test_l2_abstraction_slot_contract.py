@@ -158,6 +158,47 @@ def test_role_surface_must_come_from_a_support() -> None:
         )
 
 
+def test_two_memories_from_one_turn_yield_one_turn_ref() -> None:
+    """同一轮的多条 L1 支撑只能贡献一个 source_turn_ref。
+
+    L1 现在是每轮 0..N 元，所以两条 admitted L1 落在同一轮是可达输入。物化器
+    若逐条追加 turn_id，就会产出重复引用，而 producer 的闭包检查比较的是去重
+    列表，于是合法的多事实输入被判为 turn_closure_mismatch。
+    """
+    admitted = list(_admitted_l1())
+    admitted[1] = admitted[1].model_copy(update={"turn_id": admitted[0].turn_id})
+    candidate = _materialize(_slots(), tuple(admitted))
+    assert candidate.source_turn_refs == [admitted[0].turn_id]
+
+
+def test_role_surface_matches_support_regardless_of_case() -> None:
+    """大小写不是语义区分，但物化出的表面必须逐字取自支撑。
+
+    L1 的实体表面是从用户原文摘下来的，所以真实取值可能是 "Coffee"。producer
+    下游每一处 grounding 检查都做 casefold 比较，物化器却精确匹配，于是模型
+    给出 "coffee" 就会被判为 claim_roles_without_support——一个大小写造成的
+    假拒绝。匹配放宽到大小写无关，但写入的表面仍取支撑的原样拼写。
+    """
+    admitted = _admitted_l1()
+    support_surfaces = {
+        entity.surface
+        for item in admitted
+        for entity in item.linked_candidate.typed_candidate.local_entities
+    }
+    assert len(support_surfaces) == 1, "夹具前提：支撑只有一个实体表面"
+    actual = next(iter(support_surfaces))
+    # 用与支撑相反的大小写提出请求，确保匹配不依赖拼写大小写。
+    requested = actual.upper() if actual[0].islower() else actual.lower()
+    assert requested != actual
+    candidate = _materialize(
+        _slots(role_slots=[{"role": "theme", "support_entity_surface": requested}]),
+        admitted,
+    )
+    claim = candidate.structured_claims[0]
+    # 写入的表面取支撑的原样拼写，而不是模型请求里的拼写。
+    assert [item.surface for item in claim.local_entities] == [actual]
+
+
 def test_slot_contract_excludes_mechanical_fields() -> None:
     """机械字段不得出现在模型契约里。"""
     fields = set(L2AbstractionSlotProposalV1.model_fields)

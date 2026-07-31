@@ -345,6 +345,19 @@ _CONTRACT_VALIDATION_CODES = {
     ),
     "L2 abstraction method is not public": "abstraction_method_not_public",
     "L2 closure pattern is not public": "closure_pattern_not_public",
+    "L2 operator is not published by policy": "operator_kind_not_public",
+    "L2 kind does not match operator policy": "operator_kind_not_public",
+    "L2 abstraction method is not authorized": "abstraction_method_not_public",
+    "L2 policy must publish exactly one closure pattern": (
+        "closure_pattern_not_public"
+    ),
+    "L2 role surface is not present in any L1 support": (
+        "claim_roles_without_support"
+    ),
+    "L2 role is not published for this operator": "role_not_published",
+    "L2 materialization requires admitted L1 support": (
+        "support_coverage_mismatch"
+    ),
 }
 
 
@@ -770,8 +783,10 @@ def materialize_typed_l2_candidate(
         raise ValueError("L2 predicate tuple is not public")
 
     support_refs = [item.candidate_ref for item in admitted_l1]
+    # 大小写不是语义区分，producer 下游的 grounding 检查也全部 casefold 比较，
+    # 所以按 casefold 匹配；写入时用支撑自己的拼写，不用模型请求里的拼写。
     support_surfaces = {
-        entity.surface: entity.surface
+        entity.surface.casefold(): entity.surface
         for item in admitted_l1
         for entity in item.linked_candidate.typed_candidate.local_entities
     }
@@ -785,19 +800,21 @@ def materialize_typed_l2_candidate(
     local_entities: list[TypedLocalEntity] = []
     roles: list[TypedRoleBinding] = []
     for slot in slots.role_slots:
-        if slot.support_entity_surface not in support_surfaces:
+        surface_key = slot.support_entity_surface.casefold()
+        support_surface = support_surfaces.get(surface_key)
+        if support_surface is None:
             raise ValueError("L2 role surface is not present in any L1 support")
         display_role = display_by_role.get(slot.role)
         if display_role is None:
             raise ValueError("L2 role is not published for this operator")
-        entity_id = entity_ids.get(slot.support_entity_surface)
+        entity_id = entity_ids.get(surface_key)
         if entity_id is None:
             entity_id = f"entity-{len(local_entities) + 1:02d}"
-            entity_ids[slot.support_entity_surface] = entity_id
+            entity_ids[surface_key] = entity_id
             local_entities.append(
                 TypedLocalEntity(
                     local_entity_id=entity_id,
-                    surface=slot.support_entity_surface,
+                    surface=support_surface,
                 )
             )
         roles.append(
@@ -849,10 +866,28 @@ def materialize_typed_l2_candidate(
             pattern=closure_pattern,
             required_support_refs=support_refs,
         ),
-        source_turn_refs=[item.turn_id for item in admitted_l1],
-        source_session_refs=sorted({item.session_id for item in admitted_l1}),
+        # 一轮可以贡献多条 L1，所以按首次出现去重：重复引用会让合法的多事实
+        # 输入撞上 producer 自己的 turn 闭包检查。
+        source_turn_refs=list(dict.fromkeys(item.turn_id for item in admitted_l1)),
+        source_session_refs=list(
+            dict.fromkeys(item.session_id for item in admitted_l1)
+        ),
         evidence_bindings=evidence_bindings,
     )
+
+
+def allocate_l2_candidate_ref(support_refs: Sequence[str]) -> str:
+    """Allocate L2 identity deterministically from the support it abstracts.
+
+    L2 identity is a function of what the unit abstracts, so the same admitted
+    support always yields the same ref and a replay is comparable. Order is
+    preserved rather than sorted, because the support order is itself part of
+    the closure the pipeline checks.
+    """
+    if not support_refs:
+        raise ValueError("L2 candidate ref requires admitted support")
+    seed = "\n".join(support_refs).encode("utf-8")
+    return f"l2-{hashlib.sha256(seed).hexdigest()[:16]}"
 
 
 def allocate_candidate_ref(turn_id: str, ordinal: int) -> str:
@@ -978,24 +1013,26 @@ class ProductionL1BatchResponseV1(StrictModel):
         return self
 
 
-class ProductionL2ResponseV1(StrictModel):
-    schema_version: Literal["production-l2-response-v1"] = (
-        "production-l2-response-v1"
-    )
-    candidate_ref: str = Field(
-        min_length=1,
-        pattern=r"^[A-Za-z0-9][A-Za-z0-9._:-]{0,255}$",
+class ProductionL2SlotResponseV1(StrictModel):
+    """The response contract for the abstraction-slot L2 proposer.
+
+    `candidate_ref` is allocated by the program from the admitted support, so
+    the model neither invents nor restates memory identity.
+    """
+
+    schema_version: Literal["production-l2-slot-response-v1"] = (
+        "production-l2-slot-response-v1"
     )
     #: L2 也必须能够拒绝作答：没有可靠抽象时产出 abstain 而不是硬造一条。
     decision: Literal["emit_l2", "abstain"] = "emit_l2"
-    typed_candidate: TypedL2Candidate | None = None
+    slots: L2AbstractionSlotProposalV1 | None = None
 
     @model_validator(mode="after")
-    def validate_decision_union(self) -> "ProductionL2ResponseV1":
-        if self.decision == "emit_l2" and self.typed_candidate is None:
-            raise ValueError("emit_l2 requires a typed candidate")
-        if self.decision == "abstain" and self.typed_candidate is not None:
-            raise ValueError("abstain cannot include a typed candidate")
+    def validate_decision_union(self) -> "ProductionL2SlotResponseV1":
+        if self.decision == "emit_l2" and self.slots is None:
+            raise ValueError("emit_l2 requires abstraction slots")
+        if self.decision == "abstain" and self.slots is not None:
+            raise ValueError("abstain cannot include abstraction slots")
         return self
 
 
@@ -1369,21 +1406,23 @@ class OpenAICompatibleL2Producer:
         ]
         raw = self.client.request(
             system_prompt=(
-                "Return exactly one production-l2-response-v1 JSON object. Use "
-                "the exact admitted support, turn, session, and evidence closure. "
+                "Return exactly one production-l2-slot-response-v1 JSON object. "
+                "Decide whether the admitted L1 supports jointly establish a "
+                "durable abstraction: emit_l2 with abstraction slots, or "
+                "abstain with no slots. Give the predicate tuple, kind, "
+                "abstraction method, modality, polarity, which support surface "
+                "fills which public role, and a statement of the abstraction. "
+                "Support, turn, session, evidence and closure references are "
+                "derived from the admitted support, so do not restate them. "
                 "Return JSON only."
             ),
             public_input={
                 "public_contract": {
                     "ontology_registry": self.registry.model_dump(mode="json"),
                     "policy": self.policy.model_dump(mode="json"),
-                    "required_support_refs": support_refs,
-                    "required_turn_refs": turn_refs,
-                    "required_session_refs": session_refs,
-                    "required_evidence_bindings": [
-                        item.model_dump(mode="json") for item in evidence_bindings
-                    ],
-                    "response_schema": ProductionL2ResponseV1.model_json_schema(),
+                    "response_schema": (
+                        ProductionL2SlotResponseV1.model_json_schema()
+                    ),
                 },
                 "accepted_l1": public_support,
             },
@@ -1391,7 +1430,7 @@ class OpenAICompatibleL2Producer:
         call = self.client.last_call
         response_sha256 = call.response_sha256 if call is not None else "unavailable"
         try:
-            response = ProductionL2ResponseV1.model_validate(raw)
+            response = ProductionL2SlotResponseV1.model_validate(raw)
         except ValidationError as exc:
             validation_path, validation_type = _safe_schema_error(exc)
             raise ModelBoundaryError(
@@ -1406,11 +1445,18 @@ class OpenAICompatibleL2Producer:
                 "reason=schema_internal; "
                 f"response_sha256={response_sha256}"
             ) from None
-        if response.decision == "abstain" or response.typed_candidate is None:
+        if response.decision == "abstain" or response.slots is None:
             # 没有可靠抽象是一个被记录的结果，不是失败。
             return []
         try:
-            candidate = response.typed_candidate
+            candidate = materialize_typed_l2_candidate(
+                slots=response.slots,
+                admitted_l1=admitted_l1,
+                registry=self.registry,
+                policy=self.policy,
+            )
+            # 物化出的候选仍然要过下面每一条 production 契约检查：程序造的结构
+            # 不因为出自程序就被信任。
             for claim in candidate.structured_claims:
                 if claim.polarity not in self.policy.allowed_polarities:
                     raise ValueError("L2 polarity is not authorized")
@@ -1562,7 +1608,7 @@ class OpenAICompatibleL2Producer:
             ) from None
         return [
             ProposedL2CandidateV1(
-                candidate_ref=response.candidate_ref,
-                typed_candidate=response.typed_candidate,
+                candidate_ref=allocate_l2_candidate_ref(support_refs),
+                typed_candidate=candidate,
             )
         ]

@@ -685,59 +685,26 @@ def _production_l1_slot_payload() -> dict[str, object]:
 
 
 def _production_l2_payload() -> dict[str, object]:
-    turns = _turns()
-    support_refs = [allocate_support_ref(item.turn_id) for item in turns]
-    evidence_bindings = [
-        TypedEvidenceBinding(
-            evidence_id=f"evidence-{item.turn_id}-user",
-            speaker="user",
-        )
-        for item in turns
-    ]
-    candidate = TypedL2Candidate(
-        kind="preference_profile",
-        summary="Coffee is the supported beverage preference.",
-        supporting_l1_refs=support_refs,
-        structured_claims=[
-            TypedL2StructuredClaim(
-                claim_ref="claim-01",
-                predicate=TypedPredicate(
-                    surface="prefer",
-                    sense="preference_theme",
-                    canonical_operator="prefer",
-                ),
-                local_entities=[
-                    TypedLocalEntity(local_entity_id="entity-01", surface="coffee")
-                ],
-                roles=[
-                    TypedRoleBinding(
-                        role="theme",
-                        role_name="theme",
-                        local_entity_id="entity-01",
-                    )
-                ],
-                modality="actual",
-                polarity="positive",
-                time=TypedTimeBinding(),
-                supporting_l1_refs=support_refs,
-            )
-        ],
-        abstraction=TypedL2Abstraction(
-            method="preference_aggregation",
-            basis="two admitted category facts",
-        ),
-        closure=TypedL2Closure(
-            pattern="multi_evidence_set",
-            required_support_refs=support_refs,
-        ),
-        source_turn_refs=[item.turn_id for item in turns],
-        source_session_refs=[turns[0].session_id],
-        evidence_bindings=evidence_bindings,
-    )
+    """The abstraction-slot wire shape the L2 producer now requests.
+
+    Support, turn, session, evidence, closure and claim references are derived
+    from the admitted support, so the model only states the abstraction. The
+    program uses `statement` verbatim as the summary.
+    """
     return {
-        "schema_version": "production-l2-response-v1",
-        "candidate_ref": "l2-preference-profile-model",
-        "typed_candidate": candidate.model_dump(mode="json"),
+        "schema_version": "production-l2-slot-response-v1",
+        "decision": "emit_l2",
+        "slots": {
+            "kind": "preference_profile",
+            "statement": "Coffee is the supported beverage preference.",
+            "predicate_surface": "prefer",
+            "predicate_sense": "preference_theme",
+            "canonical_operator": "prefer",
+            "abstraction_method": "preference_aggregation",
+            "modality": "actual",
+            "polarity": "positive",
+            "role_slots": [{"role": "theme", "support_entity_surface": "coffee"}],
+        },
     }
 
 
@@ -1202,7 +1169,7 @@ def test_l2_claim_requires_admitted_l1_semantic_support(tmp_path: Path) -> None:
     assert not result_path.exists()
 
     unsupported_summary = _production_l2_payload()
-    unsupported_summary["typed_candidate"]["summary"] = "Coffee is avoided."
+    unsupported_summary["slots"]["statement"] = "Coffee is avoided."
     summary_repository = tmp_path / "unsupported-summary-memory-history.git"
     summary_result = tmp_path / "unsupported-summary-result.json"
     with pytest.raises(ModelBoundaryError, match="l2") as captured:
@@ -1228,7 +1195,7 @@ def test_l2_claim_requires_admitted_l1_semantic_support(tmp_path: Path) -> None:
     assert not summary_result.exists()
 
     negated_summary = _production_l2_payload()
-    negated_summary["typed_candidate"]["summary"] = "Coffee is not preferred."
+    negated_summary["slots"]["statement"] = "Coffee is not preferred."
     negated_repository = tmp_path / "negated-summary-memory-history.git"
     negated_result = tmp_path / "negated-summary-result.json"
     with pytest.raises(ModelBoundaryError, match="l2") as captured:
@@ -1254,7 +1221,7 @@ def test_l2_claim_requires_admitted_l1_semantic_support(tmp_path: Path) -> None:
     assert not negated_result.exists()
 
     post_negated_summary = _production_l2_payload()
-    post_negated_summary["typed_candidate"]["summary"] = (
+    post_negated_summary["slots"]["statement"] = (
         "Coffee is preferred, but not anymore."
     )
     post_negated_result = tmp_path / "post-negated-summary-result.json"
@@ -1288,9 +1255,7 @@ def test_without_modifier_does_not_negate_positive_preference(
         update={"user_text": "Coffee without sugar is preferred."}
     )
     l2_payload = _production_l2_payload()
-    l2_payload["typed_candidate"]["summary"] = (
-        "Coffee without sugar is preferred."
-    )
+    l2_payload["slots"]["statement"] = "Coffee without sugar is preferred."
     outcome = run_openai_e2e(
         turns=turns,
         question="What beverage is preferred?",
