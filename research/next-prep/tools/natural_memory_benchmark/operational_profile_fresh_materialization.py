@@ -23,6 +23,7 @@ from .operational_profile_fresh_authoring import (
     L1_BLUEPRINTS,
     L2_BLUEPRINTS,
     L1CaseBlueprint,
+    L2CaseBlueprint,
     coverage_report,
     label_confidence_report,
     opaque_ref,
@@ -280,8 +281,15 @@ def build_l1_payloads(
     *,
     registry: Any | None = None,
     policy: Any | None = None,
+    blueprints: tuple[L1CaseBlueprint, ...] = L1_BLUEPRINTS,
+    dataset_id: str = DATASET_ID,
 ) -> dict[str, dict[str, Any]]:
-    """Build public, authority and gold for L1."""
+    """Build public, authority and gold for L1.
+
+    Parameterized over the case set so a later hidden version reuses this
+    machinery instead of copying it; the frozen v1 artifacts on disk are
+    unaffected because they are already written.
+    """
     if registry is None or policy is None:
         from .e2e_openai_producers import build_diagnostic_production_policy
         from .l1_ontology_linking import build_diagnostic_ontology_registry
@@ -295,22 +303,22 @@ def build_l1_payloads(
     return {
         "public-l1.json": {
             "schema_version": "typed-extractor-l1-public-v1",
-            "dataset_id": DATASET_ID,
-            "case_count": len(L1_BLUEPRINTS),
+            "dataset_id": dataset_id,
+            "case_count": len(blueprints),
             "allowed_vocabulary": vocabulary,
-            "cases": [_public_l1_case(item) for item in L1_BLUEPRINTS],
+            "cases": [_public_l1_case(item) for item in blueprints],
         },
         "authority-l1.json": {
             "schema_version": "typed-extractor-l1-authority-v1",
-            "dataset_id": DATASET_ID,
-            "case_count": len(L1_BLUEPRINTS),
-            "cases": [_authority_l1_case(item) for item in L1_BLUEPRINTS],
+            "dataset_id": dataset_id,
+            "case_count": len(blueprints),
+            "cases": [_authority_l1_case(item) for item in blueprints],
         },
         "gold-l1.json": {
             "schema_version": "typed-extractor-l1-gold-v1",
-            "dataset_id": DATASET_ID,
-            "case_count": len(L1_BLUEPRINTS),
-            "items": [_gold_l1_item(item) for item in L1_BLUEPRINTS],
+            "dataset_id": dataset_id,
+            "case_count": len(blueprints),
+            "items": [_gold_l1_item(item) for item in blueprints],
         },
     }
 
@@ -355,6 +363,43 @@ _L2_SUPPORT_FACTS: dict[str, dict[str, Any]] = {
         "surface": "It",
         "polarity": "positive",
     },
+    # --- hidden-v2 的支撑轮次 ---
+    "Tea is preferred.": {
+        "kind": "preference",
+        "operator": "prefer",
+        "sense": "preference_theme",
+        "surface": "Tea",
+        "polarity": "positive",
+    },
+    "Tea is no longer preferred.": {
+        "kind": "preference",
+        "operator": "prefer",
+        "sense": "preference_theme",
+        "surface": "Tea",
+        "polarity": "negative",
+    },
+    "Tea is drunk after every deployment.": {
+        "kind": "event",
+        "operator": "drink",
+        "sense": "consume_beverage",
+        "surface": "Tea",
+        "polarity": "positive",
+    },
+    "Coffee is drunk at noon.": {
+        "kind": "event",
+        "operator": "drink",
+        "sense": "consume_beverage",
+        "surface": "Coffee",
+        "polarity": "positive",
+    },
+    "That one is drunk at noon.": {
+        # 同样如实保留指代表面，解析交给 L2。
+        "kind": "event",
+        "operator": "drink",
+        "sense": "consume_beverage",
+        "surface": "That one",
+        "polarity": "positive",
+    },
 }
 
 
@@ -394,12 +439,16 @@ def _l2_support_candidate(
     }
 
 
-def build_l2_payloads() -> dict[str, dict[str, Any]]:
+def build_l2_payloads(
+    *,
+    blueprints: tuple[L2CaseBlueprint, ...] = L2_BLUEPRINTS,
+    dataset_id: str = DATASET_ID,
+) -> dict[str, dict[str, Any]]:
     """Build public, authority and gold for L2."""
     public_cases: list[dict[str, Any]] = []
     authority_cases: list[dict[str, Any]] = []
     gold_items: list[dict[str, Any]] = []
-    for item in L2_BLUEPRINTS:
+    for item in blueprints:
         case_id = opaque_ref("case", item.knowledge_id)
         candidate_ref = opaque_ref("candidate", item.knowledge_id)
         support_refs = [
@@ -584,6 +633,7 @@ def build_manifest(
     payloads: dict[str, dict[str, Any]],
     case_count: int,
     l1_payloads: dict[str, dict[str, Any]] | None = None,
+    dataset_id: str = DATASET_ID,
 ) -> dict[str, Any]:
     """Bind the three outputs by hash, with the claim boundary recorded.
 
@@ -602,7 +652,8 @@ def build_manifest(
         l1_manifest = build_manifest(
             layer="l1",
             payloads=l1_payloads,
-            case_count=len(L1_BLUEPRINTS),
+            case_count=len(l1_payloads["gold-l1.json"]["items"]),
+            dataset_id=dataset_id,
         )
         qualification = {
             name: hashlib.sha256(canonical_json_bytes(payload)).hexdigest()
@@ -613,7 +664,7 @@ def build_manifest(
         ).hexdigest()
         return {
             "schema_version": "typed-extractor-l2-manifest-v1",
-            "dataset_id": DATASET_ID,
+            "dataset_id": dataset_id,
             "case_count": case_count,
             "input_sha256": {
                 "authored_blueprints": hashlib.sha256(
@@ -642,7 +693,7 @@ def build_manifest(
         }
     return {
         "schema_version": f"typed-extractor-{layer}-manifest-v1",
-        "dataset_id": DATASET_ID,
+        "dataset_id": dataset_id,
         "case_count": case_count,
         "input_sha256": {
             "authored_blueprints": hashlib.sha256(
@@ -669,11 +720,18 @@ def build_manifest(
     }
 
 
-def freeze_dataset(root: Path) -> dict[str, Any]:
+def freeze_dataset(
+    root: Path,
+    *,
+    l1_blueprints: tuple[L1CaseBlueprint, ...] = L1_BLUEPRINTS,
+    l2_blueprints: tuple[Any, ...] = L2_BLUEPRINTS,
+    dataset_id: str = DATASET_ID,
+) -> dict[str, Any]:
     """Write and freeze every artifact once, refusing to overwrite.
 
     Append-only by construction: a changed dataset is a new directory, so a
-    frozen record can never be quietly rewritten.
+    frozen record can never be quietly rewritten. The case set is a parameter so
+    a later hidden version is a new directory built by the same code.
     """
     import os
 
@@ -685,18 +743,24 @@ def freeze_dataset(root: Path) -> dict[str, Any]:
     root.mkdir(parents=True, exist_ok=True)
 
     written: dict[str, str] = {}
-    l1_payloads = build_l1_payloads()
-    for layer, builder, blueprints in (
-        ("l1", build_l1_payloads, L1_BLUEPRINTS),
-        ("l2", build_l2_payloads, L2_BLUEPRINTS),
-    ):
-        payloads = builder()
+    l1_payloads = build_l1_payloads(
+        blueprints=l1_blueprints, dataset_id=dataset_id
+    )
+    for layer, blueprints in (("l1", l1_blueprints), ("l2", l2_blueprints)):
+        payloads = (
+            l1_payloads
+            if layer == "l1"
+            else build_l2_payloads(
+                blueprints=l2_blueprints, dataset_id=dataset_id
+            )
+        )
         assert_public_carries_no_verdict(payloads[f"public-{layer}.json"])
         manifest = build_manifest(
             layer=layer,
             payloads=payloads,
             case_count=len(blueprints),
             l1_payloads=l1_payloads if layer == "l2" else None,
+            dataset_id=dataset_id,
         )
         for name, payload in (*payloads.items(), (f"manifest-{layer}.json", manifest)):
             path = root / name
