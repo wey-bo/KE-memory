@@ -570,6 +570,7 @@ _CONTRACT_VALIDATION_CODES = {
     ),
     "L1 polarity is not authorized": "polarity_not_authorized",
     "L1 polarity is not grounded in user evidence": "polarity_not_grounded",
+    "L1 modality is not grounded in user evidence": "modality_not_grounded",
     "L2 polarity is not authorized": "polarity_not_authorized",
     "L1 role coverage does not match predicate contract": "role_coverage_mismatch",
     "L1 role display does not match policy": "role_display_mismatch",
@@ -674,6 +675,60 @@ def _has_explicit_negation(text: str) -> bool:
         "nowhere",
     }
     return any(token in negations or token.endswith("n't") for token in tokens)
+
+
+#: 引出条件从句的标记。一个事实若被这样的从句限定，它尚未成立，因此不能以
+#: actual 落库。
+_CONDITIONAL_MARKERS = (
+    "if",
+    "unless",
+    "provided",
+    "providing",
+    "assuming",
+    "should",
+    "when",
+    "whenever",
+    "once",
+    "in case",
+    "as long as",
+    "so long as",
+    "supposing",
+)
+
+#: 这些后续词表明条件词并不作用于所陈述的事实本身，而是附带说明。
+#: 例如 "Coffee is preferred, if that matters" 里的偏好本身是无条件的。
+_INCIDENTAL_CONDITIONAL_TAILS = (
+    "that matters",
+    "you were wondering",
+    "you are wondering",
+    "that helps",
+    "i may say so",
+    "you like",
+    "you prefer",
+    "anything",
+)
+
+
+def _conditions_the_claim(text: str) -> bool:
+    """Say whether a conditional clause governs the stated fact.
+
+    A guarded fact has not happened, so recording it as actual asserts an
+    occurrence the text does not. Written as evidence grounding rather than a
+    lookup for one sentence: the marker has to appear as a clause boundary, and
+    an aside like "if that matters" leaves the fact itself unconditional, so
+    treating every conditional word as disqualifying would manufacture false
+    refusals.
+    """
+    lowered = text.casefold()
+    for marker in _CONDITIONAL_MARKERS:
+        for match in re.finditer(rf"(?<![a-z]){re.escape(marker)}(?![a-z])", lowered):
+            tail = lowered[match.end() :].lstrip(" ,")
+            if any(tail.startswith(item) for item in _INCIDENTAL_CONDITIONAL_TAILS):
+                continue
+            # 从句必须真的引出一个子句，而不是句末孤立的词。
+            if tail:
+                return True
+    return False
 
 
 class _OpenAICompatibleJSONClient:
@@ -1450,6 +1505,10 @@ class OpenAICompatibleL1BatchProducer:
             for cue in cues_by_operator[candidate.predicate.canonical_operator]
         ):
             raise ValueError("L1 operator has no public cue in user evidence")
+        # 模态必须与原文一致：被条件从句限定的事实尚未成立，把它记成 actual
+        # 就是断言原文没有说的事情。这与极性检查同类，都是证据 grounding。
+        if candidate.modality == "actual" and _conditions_the_claim(quote):
+            raise ValueError("L1 modality is not grounded in user evidence")
         # 极性必须与原文一致，两个方向都检查：把否定写成肯定会记下相反的事实，
         # 把肯定写成否定同样如此，两者都是 critical false emission。
         negated = _has_explicit_negation(quote)
