@@ -114,9 +114,15 @@ def test_pipeline_records_an_l2_abstention_instead_of_failing() -> None:
 
 
 def test_l2_polarity_must_be_authorized_by_policy() -> None:
-    """L2 极性必须受 policy allowlist 约束，与 L1 同等。"""
+    """L2 极性必须受 policy allowlist 约束，与 L1 同等。
+
+    诊断 policy 现在两种极性都授权，所以这里显式收窄成只允许 positive：否则
+    这条保证会因为没有未授权取值而变成空测。
+    """
     registry = build_diagnostic_ontology_registry()
-    policy = build_diagnostic_production_policy(registry)
+    policy = build_diagnostic_production_policy(registry).model_copy(
+        update={"allowed_polarities": ["positive"]}
+    )
     assert policy.allowed_polarities == ["positive"]
     payload = json.loads(json.dumps(_production_l2_payload()))
     payload["slots"]["polarity"] = "negative"

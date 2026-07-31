@@ -946,7 +946,7 @@ def test_openai_runtime_closes_model_write_query_and_evidence(tmp_path: Path) ->
             "cues": ["add", "added"],
         },
     ]
-    assert contract["policy"]["allowed_polarities"] == ["positive"]
+    assert contract["policy"]["allowed_polarities"] == ["positive", "negative"]
 
 
 def test_openai_query_only_recovers_checkpoint_without_memory_writes(

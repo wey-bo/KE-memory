@@ -141,9 +141,24 @@ def test_unauthorized_abstraction_fails_closed() -> None:
 
 
 def test_unauthorized_polarity_fails_closed() -> None:
-    """policy 的极性 allowlist 在物化阶段同样生效。"""
+    """policy 的极性 allowlist 在物化阶段同样生效。
+
+    诊断 policy 现在两种极性都授权，所以显式收窄成只允许 positive：否则没有
+    未授权取值可试，这条保证会变成空测。
+    """
+    registry = build_diagnostic_ontology_registry()
+    policy = build_diagnostic_production_policy(registry).model_copy(
+        update={"allowed_polarities": ["positive"]}
+    )
     with pytest.raises(ValueError, match="polarity"):
-        _materialize(_slots(polarity="negative"))
+        materialize_typed_l2_candidate(
+            slots=L2AbstractionSlotProposalV1.model_validate(
+                _slots(polarity="negative")
+            ),
+            admitted_l1=_admitted_l1(),
+            registry=registry,
+            policy=policy,
+        )
 
 
 def test_role_surface_must_come_from_a_support() -> None:

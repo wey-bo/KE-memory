@@ -250,7 +250,9 @@ def build_diagnostic_production_policy(
                 cues=["add", "added"],
             ),
         ],
-        allowed_polarities=["positive"],
+        # 一条被否定的事实与一条不存在的事实是两回事，前者应当被记住。极性两
+        # 个方向都要接受 grounding 检查，所以放开这里不等于放松校验。
+        allowed_polarities=["positive", "negative"],
         modality_time_policies=[
             ModalityTimePolicyV1(
                 modality="actual",
@@ -311,6 +313,7 @@ _CONTRACT_VALIDATION_CODES = {
         "operator_cue_negated"
     ),
     "L1 polarity is not authorized": "polarity_not_authorized",
+    "L1 polarity is not grounded in user evidence": "polarity_not_grounded",
     "L2 polarity is not authorized": "polarity_not_authorized",
     "L1 role coverage does not match predicate contract": "role_coverage_mismatch",
     "L1 role display does not match policy": "role_display_mismatch",
@@ -1179,10 +1182,15 @@ class OpenAICompatibleL1BatchProducer:
             for cue in cues_by_operator[candidate.predicate.canonical_operator]
         ):
             raise ValueError("L1 operator has no public cue in user evidence")
-        if candidate.polarity == "positive" and _has_explicit_negation(quote):
+        # 极性必须与原文一致，两个方向都检查：把否定写成肯定会记下相反的事实，
+        # 把肯定写成否定同样如此，两者都是 critical false emission。
+        negated = _has_explicit_negation(quote)
+        if candidate.polarity == "positive" and negated:
             raise ValueError(
                 "L1 operator cue is explicitly negated in user evidence"
             )
+        if candidate.polarity == "negative" and not negated:
+            raise ValueError("L1 polarity is not grounded in user evidence")
         if candidate.polarity not in self.policy.allowed_polarities:
             raise ValueError("L1 polarity is not authorized")
         display_by_role = {
