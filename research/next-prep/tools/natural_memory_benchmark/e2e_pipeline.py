@@ -816,11 +816,16 @@ def run_e2e_pipeline(
     )
     admitted_l1: list[AdmittedL1Record] = []
     seen_candidate_refs: set[str] = set()
+    no_memory_turn_ids: set[str] = set()
     for turn in ordered_turns:
         extraction_input = extraction_inputs[turn.turn_id]
         proposals = l1_producer.produce(extraction_input)
         if not proposals:
-            raise ValueError("each turn requires at least one L1 proposal")
+            # A turn that states no durable fact is a recorded outcome, not a
+            # failure: the raw turn stays addressable and the bundle publishes a
+            # no-memory reason instead of an L1 unit.
+            no_memory_turn_ids.add(turn.turn_id)
+            continue
         for proposal in proposals:
             if proposal.candidate_ref in seen_candidate_refs:
                 raise ValueError("duplicate L1 candidate ref")
@@ -897,7 +902,11 @@ def run_e2e_pipeline(
                 ],
                 extraction_state="complete",
                 l1_unit_revision_ids=[item.revision.revision_id for item in members],
-                no_memory_reason=None,
+                no_memory_reason=(
+                    "no durable memory proposed for this turn"
+                    if turn.turn_id in no_memory_turn_ids
+                    else None
+                ),
                 failure_reason=None,
                 extractor_id=producer.producer_id,
                 extractor_version=producer.producer_version,
