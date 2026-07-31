@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import json
 import os
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Callable, Literal, Sequence
@@ -163,8 +164,43 @@ class QueryOnlySnapshotReceiptV1(StrictModel):
 
 
 class OpenAIQueryOnlyReceiptV1(StrictModel):
+    """Historical query-only receipt. Retained so frozen artifacts still load.
+
+    The four counters are schema literals here, so a receipt in this shape
+    asserts its guarantees rather than reporting measurements. Superseded by
+    ``OpenAIQueryOnlyReceiptV2``; do not emit this shape for new attempts.
+    """
+
     schema_version: Literal["openai-query-only-receipt-v1"] = (
         "openai-query-only-receipt-v1"
+    )
+    workflow_run_id: str = Field(min_length=1)
+    requested_model: str = Field(min_length=1)
+    closure_kind: Literal["controlled_query_only_closure"] = (
+        "controlled_query_only_closure"
+    )
+    model_call: ModelCallHashV1
+    query_call_count: Literal[1] = 1
+    l1_producer_call_count: Literal[0] = 0
+    l2_producer_call_count: Literal[0] = 0
+    automatic_memory_write_count: Literal[0] = 0
+    deterministic_replay_verified: bool
+    snapshot: QueryOnlySnapshotReceiptV1
+    answer: EvidenceBackedAnswerV1
+
+
+class OpenAIQueryOnlyReceiptV2(StrictModel):
+    """Query-only closure receipt with measured, not asserted, guarantees.
+
+    ``v1`` declared the four guarantee counters as schema literals, so a
+    violated guarantee was unrepresentable. Measuring them changed the meaning
+    of the same field names, which is a contract change rather than an
+    extension, so this is a new schema version and the frozen ``v1`` receipts
+    keep validating against their own model.
+    """
+
+    schema_version: Literal["openai-query-only-receipt-v2"] = (
+        "openai-query-only-receipt-v2"
     )
     workflow_run_id: str = Field(min_length=1)
     requested_model: str = Field(min_length=1)
@@ -194,7 +230,61 @@ class QueryOnlyPipelineResultV1(StrictModel):
 @dataclass(frozen=True)
 class OpenAIQueryOnlyOutcome:
     pipeline: QueryOnlyPipelineResultV1
-    receipt: OpenAIQueryOnlyReceiptV1
+    receipt: OpenAIQueryOnlyReceiptV2
+
+
+#: Windows a query-only attempt must observe for authoritative writes. Recorded
+#: in the receipt so the zero write count states what it actually covered.
+OBSERVED_WRITE_PHASES = ("recovery", "snapshot", "execution")
+
+
+class ExtractionCallObserver:
+    """Counts L1/L2 producer construction and use during a query-only attempt.
+
+    Query-only closure asserts an extraction call count of zero. That claim must
+    be measured on the path that emits the receipt, not merely proven by tests
+    patching the producers.
+    """
+
+    def __init__(self) -> None:
+        self.l1_calls: list[str] = []
+        self.l2_calls: list[str] = []
+        self._restore: list[tuple[str, Any]] = []
+
+    def __enter__(self) -> "ExtractionCallObserver":
+        if self._restore:
+            raise RuntimeError("extraction observation windows must not nest")
+        module = sys.modules[__name__]
+        for name, sink in (
+            ("OpenAICompatibleL1BatchProducer", self.l1_calls),
+            ("OpenAICompatibleL2Producer", self.l2_calls),
+        ):
+            original = getattr(module, name)
+            self._restore.append((name, original))
+            setattr(module, name, self._wrap(name, original, sink))
+        return self
+
+    def __exit__(self, *_args: object) -> None:
+        module = sys.modules[__name__]
+        while self._restore:
+            name, original = self._restore.pop()
+            setattr(module, name, original)
+
+    @staticmethod
+    def _wrap(name: str, original: Any, sink: list[str]) -> Any:
+        def wrapper(*args: object, **kwargs: object) -> object:
+            sink.append(name)
+            return original(*args, **kwargs)
+
+        return wrapper
+
+    @property
+    def l1_count(self) -> int:
+        return len(self.l1_calls)
+
+    @property
+    def l2_count(self) -> int:
+        return len(self.l2_calls)
 
 
 class MemoryWriteObserver:
@@ -499,6 +589,42 @@ def run_openai_query_only(
     opener: Callable[..., Any] = urlopen,
 ) -> OpenAIQueryOnlyOutcome:
     """Recover an existing checkpoint and answer one query without any write."""
+    with ExtractionCallObserver() as extraction_observer:
+        return _run_openai_query_only(
+            question=question,
+            query_time=query_time,
+            repository_path=repository_path,
+            expected_git_commit=expected_git_commit,
+            expected_checkpoint_id=expected_checkpoint_id,
+            result_path=result_path,
+            query_id=query_id,
+            base_url=base_url,
+            api_key=api_key,
+            model=model,
+            timeout_seconds=timeout_seconds,
+            max_attempts=max_attempts,
+            opener=opener,
+            extraction_observer=extraction_observer,
+        )
+
+
+def _run_openai_query_only(
+    *,
+    question: str,
+    query_time: str,
+    repository_path: Path,
+    expected_git_commit: str,
+    expected_checkpoint_id: str,
+    result_path: Path,
+    query_id: str,
+    base_url: str,
+    api_key: str,
+    model: str,
+    timeout_seconds: int,
+    max_attempts: int,
+    opener: Callable[..., Any],
+    extraction_observer: ExtractionCallObserver,
+) -> OpenAIQueryOnlyOutcome:
     repository_path = Path(repository_path).resolve()
     result_path = Path(result_path).resolve()
     if result_path.exists():
@@ -624,7 +750,7 @@ def run_openai_query_only(
     ):
         raise ValueError("query-only execution must not advance authoritative history")
 
-    receipt = OpenAIQueryOnlyReceiptV1(
+    receipt = OpenAIQueryOnlyReceiptV2(
         workflow_run_id=workflow_run_id,
         requested_model=model,
         model_call=query_recording_opener.receipt(
@@ -632,8 +758,8 @@ def run_openai_query_only(
             require_matching_response_model=True,
         ),
         query_call_count=query_recording_opener.attempts,
-        l1_producer_call_count=0,
-        l2_producer_call_count=0,
+        l1_producer_call_count=extraction_observer.l1_count,
+        l2_producer_call_count=extraction_observer.l2_count,
         automatic_memory_write_count=write_observer.count,
         observed_write_phases=tuple(write_observer.phases),
         deterministic_replay_verified=execution == deterministic_replay,
@@ -649,9 +775,20 @@ def run_openai_query_only(
         ),
         answer=answer,
     )
-    if receipt.query_call_count != 1 or receipt.automatic_memory_write_count != 0:
+    if (
+        receipt.query_call_count != 1
+        or receipt.l1_producer_call_count != 0
+        or receipt.l2_producer_call_count != 0
+        or receipt.automatic_memory_write_count != 0
+    ):
         raise ValueError(
-            "query-only closure requires exactly one model call and no writes"
+            "query-only closure requires exactly one model call, no extraction "
+            "calls, and no writes"
+        )
+    if receipt.observed_write_phases != OBSERVED_WRITE_PHASES:
+        raise ValueError(
+            "query-only closure must observe writes across "
+            f"{OBSERVED_WRITE_PHASES}"
         )
     _write_query_only_receipt_exclusive(result_path, receipt)
     return OpenAIQueryOnlyOutcome(
@@ -669,7 +806,7 @@ def run_openai_query_only(
 
 def _write_query_only_receipt_exclusive(
     path: Path,
-    receipt: OpenAIQueryOnlyReceiptV1,
+    receipt: OpenAIQueryOnlyReceiptV2,
 ) -> None:
     path = path.resolve()
     path.parent.mkdir(parents=True, exist_ok=True)

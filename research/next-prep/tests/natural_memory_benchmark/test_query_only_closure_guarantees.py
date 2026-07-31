@@ -18,9 +18,10 @@ from typing import Any
 
 import pytest
 
+from tools.natural_memory_benchmark import e2e_openai_runtime as e2e_runtime
 from tools.natural_memory_benchmark.e2e_openai_runtime import (
     MemoryWriteObserver,
-    OpenAIQueryOnlyReceiptV1,
+    OpenAIQueryOnlyReceiptV2,
     recover_authoritative_checkpoint,
     run_openai_query_only,
 )
@@ -77,9 +78,75 @@ def _query_only(
     )
 
 
+def test_extraction_counts_come_from_an_observer(tmp_path: Path) -> None:
+    """The zero extraction count must be observed, not written in by hand."""
+    repository, initial = _seeded_repository(tmp_path, "extraction-history.git")
+    opener = _SequencedOpener([_chat_response(_production_query_payload())])
+    seen: list[str] = []
+    real_observer = e2e_runtime.ExtractionCallObserver
+
+    class _RecordingObserver(real_observer):  # type: ignore[misc,valid-type]
+        def __exit__(self, *args: object) -> None:
+            seen.append("closed")
+            super().__exit__(*args)
+
+    with pytest.MonkeyPatch.context() as patch:
+        patch.setattr(e2e_runtime, "ExtractionCallObserver", _RecordingObserver)
+        outcome = _query_only(
+            repository,
+            initial,
+            tmp_path / "extraction-result.json",
+            opener=opener,
+            model="test-model-response",
+        )
+    assert seen == ["closed"], "the attempt must run inside an extraction observer"
+    assert outcome.receipt.l1_producer_call_count == 0
+    assert outcome.receipt.l2_producer_call_count == 0
+
+
+def test_constructing_an_extraction_producer_is_counted() -> None:
+    """A producer built during the window must raise the recorded count."""
+    with e2e_runtime.ExtractionCallObserver() as observer:
+        assert observer.l1_count == 0 and observer.l2_count == 0
+        try:
+            e2e_runtime.OpenAICompatibleL1BatchProducer(  # type: ignore[call-arg]
+                registry=None,
+                policy=None,
+                base_url="https://model.invalid/v1",
+                api_key="k",
+                model="m",
+            )
+        except Exception:
+            pass
+        assert observer.l1_count == 1, (
+            "constructing an L1 producer must be observed even if it then fails"
+        )
+    assert (
+        e2e_runtime.OpenAICompatibleL1BatchProducer
+        is not observer._wrap  # type: ignore[comparison-overlap]
+    )
+
+
+def test_frozen_v1_receipts_still_validate() -> None:
+    """Changing the counters was a contract change, so v1 must keep loading."""
+    fields = e2e_runtime.OpenAIQueryOnlyReceiptV1.model_fields
+    for name in (
+        "query_call_count",
+        "l1_producer_call_count",
+        "l2_producer_call_count",
+        "automatic_memory_write_count",
+    ):
+        assert "Literal" in repr(fields[name].annotation), (
+            f"the historical v1 shape must keep its asserted {name}"
+        )
+    assert "observed_write_phases" not in fields
+    v2_fields = OpenAIQueryOnlyReceiptV2.model_fields
+    assert "observed_write_phases" in v2_fields
+
+
 def test_receipt_counters_are_measured_not_schema_constants() -> None:
     """A receipt whose counters cannot express a violation proves nothing."""
-    fields = OpenAIQueryOnlyReceiptV1.model_fields
+    fields = OpenAIQueryOnlyReceiptV2.model_fields
     for name in (
         "query_call_count",
         "l1_producer_call_count",
