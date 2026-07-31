@@ -176,6 +176,7 @@ class OpenAIQueryOnlyReceiptV1(StrictModel):
     l1_producer_call_count: int = Field(ge=0)
     l2_producer_call_count: int = Field(ge=0)
     automatic_memory_write_count: int = Field(ge=0)
+    observed_write_phases: tuple[str, ...] = Field(min_length=1)
     deterministic_replay_verified: bool
     snapshot: QueryOnlySnapshotReceiptV1
     answer: EvidenceBackedAnswerV1
@@ -214,38 +215,50 @@ class MemoryWriteObserver:
 
     def __init__(self) -> None:
         self.calls: list[str] = []
+        self.phases: list[str] = []
+        self._phase: str | None = None
         self._restore: list[tuple[str, Any]] = []
 
+    def observing(self, phase: str) -> "MemoryWriteObserver":
+        """Label the next observation window so coverage is auditable."""
+        self._phase = phase
+        return self
+
     def __enter__(self) -> "MemoryWriteObserver":
+        if self._restore:
+            raise RuntimeError("write observation windows must not nest")
+        if self._phase is not None:
+            self.phases.append(self._phase)
+            self._phase = None
         for name in self.WRITE_METHODS:
-            original = getattr(GitMemoryHistoryRepository, name, None)
-            if original is None:
+            # Read the raw descriptor rather than the bound attribute so a
+            # classmethod is restored as a classmethod.
+            descriptor = GitMemoryHistoryRepository.__dict__.get(name)
+            if descriptor is None:
                 continue
-            self._restore.append((name, original))
+            self._restore.append((name, descriptor))
             setattr(
                 GitMemoryHistoryRepository,
                 name,
-                self._wrap(name, original),
+                self._wrap(name, descriptor),
             )
         return self
 
     def __exit__(self, *_args: object) -> None:
-        for name, original in self._restore:
-            setattr(GitMemoryHistoryRepository, name, original)
-        self._restore.clear()
+        while self._restore:
+            name, descriptor = self._restore.pop()
+            setattr(GitMemoryHistoryRepository, name, descriptor)
 
-    def _wrap(self, name: str, original: Any) -> Any:
+    def _wrap(self, name: str, descriptor: Any) -> Any:
         observer = self
+        is_classmethod = isinstance(descriptor, classmethod)
+        function = descriptor.__func__ if is_classmethod else descriptor
 
         def wrapper(*args: object, **kwargs: object) -> object:
             observer.calls.append(name)
-            return original(*args, **kwargs)
+            return function(*args, **kwargs)
 
-        if isinstance(
-            GitMemoryHistoryRepository.__dict__.get(name), classmethod
-        ):
-            return classmethod(wrapper)
-        return wrapper
+        return classmethod(wrapper) if is_classmethod else wrapper
 
     @property
     def count(self) -> int:
@@ -503,20 +516,23 @@ def run_openai_query_only(
     if max_attempts != 1:
         raise ValueError("query-only execution fixes a single model attempt")
 
-    recovered = recover_authoritative_checkpoint(
-        repository_path=repository_path,
-        expected_git_commit=expected_git_commit,
-        expected_checkpoint_id=expected_checkpoint_id,
-    )
+    write_observer = MemoryWriteObserver()
+    with write_observer.observing("recovery"):
+        recovered = recover_authoritative_checkpoint(
+            repository_path=repository_path,
+            expected_git_commit=expected_git_commit,
+            expected_checkpoint_id=expected_checkpoint_id,
+        )
     registry = build_diagnostic_ontology_registry()
     compiler_registry = build_compiler_registry(registry)
-    snapshot = build_query_execution_snapshot(
-        repository_path=repository_path,
-        bundle=recovered.bundle,
-        bundle_history_artifact=recovered.bundle_history_artifact,
-        turn_bundles=list(recovered.turn_bundles),
-        registry=compiler_registry,
-    )
+    with write_observer.observing("snapshot"):
+        snapshot = build_query_execution_snapshot(
+            repository_path=repository_path,
+            bundle=recovered.bundle,
+            bundle_history_artifact=recovered.bundle_history_artifact,
+            turn_bundles=list(recovered.turn_bundles),
+            registry=compiler_registry,
+        )
     if snapshot.memory_view != recovered.memory_view:
         raise ValueError("verified snapshot memory view does not match the checkpoint")
 
@@ -563,7 +579,7 @@ def run_openai_query_only(
     if query_recording_opener.attempts != 1:
         raise ValueError("query-only execution must issue exactly one model request")
 
-    with MemoryWriteObserver() as write_observer:
+    with write_observer.observing("execution"):
         execution = execute_authoritative_query(
             repository_path=repository_path,
             bundle=recovered.bundle,
@@ -619,6 +635,7 @@ def run_openai_query_only(
         l1_producer_call_count=0,
         l2_producer_call_count=0,
         automatic_memory_write_count=write_observer.count,
+        observed_write_phases=tuple(write_observer.phases),
         deterministic_replay_verified=execution == deterministic_replay,
         snapshot=QueryOnlySnapshotReceiptV1(
             repository_path=str(recovered.repository.repo_path),

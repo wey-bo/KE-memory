@@ -19,11 +19,15 @@ from typing import Any
 import pytest
 
 from tools.natural_memory_benchmark.e2e_openai_runtime import (
+    MemoryWriteObserver,
     OpenAIQueryOnlyReceiptV1,
     recover_authoritative_checkpoint,
     run_openai_query_only,
 )
 from tools.natural_memory_benchmark.e2e_pipeline import run_e2e_pipeline
+from tools.natural_memory_benchmark.git_memory_history import (
+    GitMemoryHistoryRepository,
+)
 
 from test_e2e_pipeline_smoke import (  # noqa: F401
     _chat_response,
@@ -90,6 +94,64 @@ def test_receipt_counters_are_measured_not_schema_constants() -> None:
         assert fields[name].is_required(), (
             f"{name} must be supplied from a measurement at construction"
         )
+
+
+def test_write_observer_restores_descriptors_exactly() -> None:
+    """Observing writes must not corrupt the repository class afterwards."""
+    before = {
+        name: GitMemoryHistoryRepository.__dict__.get(name)
+        for name in MemoryWriteObserver.WRITE_METHODS
+    }
+    with MemoryWriteObserver():
+        pass
+    for name, descriptor in before.items():
+        assert GitMemoryHistoryRepository.__dict__.get(name) is descriptor, (
+            f"{name} was not restored to its original descriptor"
+        )
+    try:
+        with MemoryWriteObserver():
+            raise RuntimeError("observed failure")
+    except RuntimeError:
+        pass
+    for name, descriptor in before.items():
+        assert GitMemoryHistoryRepository.__dict__.get(name) is descriptor, (
+            f"{name} leaked a patched descriptor after an exception"
+        )
+
+
+def test_write_observer_covers_the_repository_write_surface() -> None:
+    """The observed method list must not silently miss a write entry point."""
+    observed = set(MemoryWriteObserver.WRITE_METHODS)
+    missing = [
+        name
+        for name in ("initialize", "commit_checkpoint", "prepare_hard_purge")
+        if name not in observed
+    ]
+    assert missing == [], f"unobserved write entry points: {missing}"
+
+
+def test_query_only_counts_writes_across_the_whole_attempt(
+    tmp_path: Path,
+) -> None:
+    """A write anywhere in the attempt must be counted, not just during execution."""
+    repository, initial = _seeded_repository(tmp_path, "window-history.git")
+    opener = _SequencedOpener([_chat_response(_production_query_payload())])
+    outcome = _query_only(
+        repository,
+        initial,
+        tmp_path / "window-result.json",
+        opener=opener,
+        model="test-model-response",
+    )
+    assert outcome.receipt.automatic_memory_write_count == 0
+    # The recorded value must come from an observation that spans recovery,
+    # snapshot verification and execution, so a write in any of those phases
+    # would be visible rather than hidden outside the observed window.
+    assert outcome.receipt.observed_write_phases == (
+        "recovery",
+        "snapshot",
+        "execution",
+    )
 
 
 def test_query_only_rejects_response_model_mismatch(tmp_path: Path) -> None:
