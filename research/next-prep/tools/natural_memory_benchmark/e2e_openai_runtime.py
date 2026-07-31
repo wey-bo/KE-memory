@@ -16,6 +16,7 @@ from .authoritative_memory import (
     MemoryRepresentationBundleV3,
     ProducerIdentity,
     StrictModel,
+    canonical_json_bytes,
     canonical_sha256,
 )
 from .e2e_openai_producers import (
@@ -149,10 +150,113 @@ class OpenAIE2ERunReceiptV1(StrictModel):
     answer: EvidenceBackedAnswerV1
 
 
+class EvidenceClosureReceiptV1(StrictModel):
+    """The chain from an answer value back to the raw turns that support it.
+
+    Recorded so a reader can follow the closure themselves rather than trust that
+    it held. An answer without this is a claim; with it, it is checkable.
+    """
+
+    schema_version: Literal["evidence-closure-receipt-v1"] = (
+        "evidence-closure-receipt-v1"
+    )
+    answer_values: tuple[str, ...] = Field(min_length=1)
+    memory_unit_revision_ids: tuple[str, ...] = Field(min_length=1)
+    evidence_span_ids: tuple[str, ...] = Field(min_length=1)
+    raw_turn_revision_ids: tuple[str, ...] = Field(min_length=1)
+    closure_complete: bool
+
+
+class QueryPlanReceiptV1(StrictModel):
+    """The executed plan, hashed and summarized."""
+
+    schema_version: Literal["query-plan-receipt-v1"] = "query-plan-receipt-v1"
+    query_id: str = Field(min_length=1)
+    answer_kind: str = Field(min_length=1)
+    distinct_by: str | None = None
+    identity_resolution_required: bool
+    plan_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+
+
+class OpenAIE2ERunReceiptV2(StrictModel):
+    """Phase D closure receipt: enough evidence to re-check the claim.
+
+    ``v1`` recorded three model calls, a snapshot and an answer, which cannot
+    show that memory was written automatically, that the query replayed
+    deterministically, or that the run used the profile Phase C qualified. Those
+    are the substance of the Phase D claim, so they are measured here rather than
+    asserted, and this is a new version so frozen ``v1`` receipts stay readable.
+    """
+
+    schema_version: Literal["openai-e2e-run-receipt-v2"] = (
+        "openai-e2e-run-receipt-v2"
+    )
+    workflow_run_id: str = Field(min_length=1)
+    requested_model: str = Field(min_length=1)
+    #: 唯一授权的结论措辞。它不等于通用抽取合格、production ready 或 benchmark ready。
+    closure_kind: Literal["controlled_automatic_e2e_closure"] = (
+        "controlled_automatic_e2e_closure"
+    )
+    model_calls: tuple[ModelCallHashV1, ModelCallHashV1, ModelCallHashV1]
+    #: 计数为测量值而非 schema 常量：无法表达违约的字段什么也不证明。
+    l1_producer_call_count: int = Field(ge=0)
+    l2_producer_call_count: int = Field(ge=0)
+    query_call_count: int = Field(ge=0)
+    automatic_memory_write_count: int = Field(ge=0)
+    observed_write_phases: tuple[str, ...] = Field(min_length=1)
+    #: Phase C 的资格是在某个 profile 上取得的；跑在别的 profile 上则不适用。
+    extraction_profile: ExtractionProfileIdentityV1
+    query_plan: QueryPlanReceiptV1
+    matched_fact_ids: tuple[str, ...] = Field(default_factory=tuple)
+    execution_trace: tuple[str, ...] = Field(min_length=1)
+    deterministic_replay_verified: bool
+    evidence_closure: EvidenceClosureReceiptV1
+    byte_level_recovery_verified: bool
+    snapshot: QueryOnlySnapshotReceiptV1
+    answer: EvidenceBackedAnswerV1
+
+
+def load_e2e_receipt(
+    payload: dict[str, Any],
+) -> OpenAIE2ERunReceiptV1 | OpenAIE2ERunReceiptV2:
+    """Read an E2E receipt in whichever version was written.
+
+    Frozen v1 receipts must stay machine-readable without editing their bytes, so
+    dispatch on the recorded label rather than guessing.
+    """
+    label = payload.get("schema_version")
+    if label == "openai-e2e-run-receipt-v2":
+        return OpenAIE2ERunReceiptV2.model_validate(payload)
+    if label == "openai-e2e-run-receipt-v1":
+        return OpenAIE2ERunReceiptV1.model_validate(payload)
+    raise ValueError("unknown E2E receipt schema")
+
+
+def assert_phase_d_profile_matches_qualification(
+    *,
+    qualified_profile_sha256: str,
+    execution_profile: ExtractionProfileIdentityV1,
+) -> None:
+    """Refuse a Phase D run whose profile Phase C did not qualify.
+
+    Fails closed on the hash rather than the name, since a name can be reused
+    while the vocabulary underneath changes. An unbound legacy profile is refused
+    outright: it records the absence of a profile, not a qualified one.
+    """
+    if execution_profile.scope == "unbound_legacy":
+        raise ValueError(
+            "an unbound legacy profile cannot carry a Phase C qualification"
+        )
+    if execution_profile.profile_sha256 != qualified_profile_sha256:
+        raise ValueError(
+            "Phase D extraction profile does not match the qualified profile"
+        )
+
+
 @dataclass(frozen=True)
 class OpenAIE2EOutcome:
     pipeline: EndToEndResultV1
-    receipt: OpenAIE2ERunReceiptV1
+    receipt: OpenAIE2ERunReceiptV1 | OpenAIE2ERunReceiptV2
 
 
 class QueryOnlySnapshotReceiptV1(StrictModel):
@@ -692,41 +796,270 @@ def run_openai_e2e(
             "model": model,
         }
     )[:16]
-    pipeline = run_e2e_pipeline(
-        turns=ordered_turns,
-        l1_producer=bound_l1,
-        l2_producer=l2_producer,
-        query_producer=query_producer,
-        repository_path=repository_path,
-        question=question,
-        ontology_registry=registry,
-        memory_producer=ProducerIdentity(
-            workflow_run_id=workflow_run_id,
-            producer_id="openai-compatible-model",
-            producer_version=model,
-        ),
-    )
+    # Phase D 会真实写入权威记忆，所以写入次数必须被测量而不是声明：一个无法
+    # 表达"写入发生了几次"的字段无法证明写入是自动完成的。
+    write_observer = MemoryWriteObserver()
+    try:
+        with write_observer.observing("automatic_write"):
+            pipeline = run_e2e_pipeline(
+                turns=ordered_turns,
+                l1_producer=bound_l1,
+                l2_producer=l2_producer,
+                query_producer=query_producer,
+                repository_path=repository_path,
+                question=question,
+                ontology_registry=registry,
+                memory_producer=ProducerIdentity(
+                    workflow_run_id=workflow_run_id,
+                    producer_id="openai-compatible-model",
+                    producer_version=model,
+                ),
+            )
+    except BaseException:
+        # 失败的事务不得留下半截状态。raw artifact 在 L1 之前就已写出，所以在
+        # L2 或更晚失败时它会残留下来，而下一次运行的新鲜性前置条件会因此把一份
+        # 从未完成的记录当成既有历史。
+        _discard_partial_transaction(repository_path, raw_path)
+        raise
+    write_count = write_observer.count
+    observed_write_phases = tuple(write_observer.phases)
     if l1_batch.last_call is None or l2_producer.last_call is None:
         raise ValueError("model extraction call receipt is unavailable")
-    receipt = OpenAIE2ERunReceiptV1(
+    receipt = _build_e2e_receipt_v2(
+        workflow_run_id=workflow_run_id,
+        model=model,
+        registry=registry,
+        policy=policy,
+        pipeline=pipeline,
+        l1_call=l1_batch.last_call,
+        l2_call=l2_producer.last_call,
+        query_call=query_recording_opener.receipt(model),
+        l1_call_count=1,
+        l2_call_count=1,
+        query_call_count=query_recording_opener.attempts,
+        write_count=write_count,
+        observed_write_phases=observed_write_phases,
+    )
+    _write_receipt_exclusive(result_path, receipt)
+    return OpenAIE2EOutcome(pipeline=pipeline, receipt=receipt)
+
+
+def _build_e2e_receipt_v2(
+    *,
+    workflow_run_id: str,
+    model: str,
+    registry: Any,
+    policy: Any,
+    pipeline: EndToEndResultV1,
+    l1_call: ModelCallHashV1,
+    l2_call: ModelCallHashV1,
+    query_call: ModelCallHashV1,
+    l1_call_count: int,
+    l2_call_count: int,
+    query_call_count: int,
+    write_count: int,
+    observed_write_phases: tuple[str, ...],
+) -> OpenAIE2ERunReceiptV2:
+    """Assemble the Phase D receipt from what the run actually produced.
+
+    Every field is read off the pipeline result or a measured counter. Nothing is
+    asserted: the point of this receipt is that a reader can re-check the claim
+    without rerunning it.
+    """
+    profile = build_extraction_profile_identity(registry=registry, policy=policy)
+    plan = pipeline.compilation.plan
+    if plan is None:
+        raise ValueError("a closed E2E run requires an executable plan")
+    evaluation = pipeline.execution.evaluation
+
+    # 证据闭包：答案 -> 记忆单元修订 -> evidence span -> 原始轮次修订。
+    #
+    # matched_fact_ids 里混有 claim id 与 revision id，所以两种都要认；只按
+    # memory_unit_id 查会全部落空。这里不设兜底：解析不出来就必须失败，因为一份
+    # 悄悄用别的 id 填空的收据会掩盖它自己的缺口。
+    known_revision_ids = {
+        item.revision_id for item in pipeline.bundle.unit_revisions
+    }
+    revision_by_unit = {
+        item.memory_unit_id: item.revision_id
+        for item in pipeline.bundle.unit_revisions
+    }
+    unit_revision_ids: list[str] = []
+    for matched in evaluation.matched_fact_ids:
+        if matched in known_revision_ids:
+            unit_revision_ids.append(matched)
+        elif matched in revision_by_unit:
+            unit_revision_ids.append(revision_by_unit[matched])
+        else:
+            # claim id 形如 "<unit_id>-claim-01"，回指其所属单元。
+            owner = next(
+                (
+                    revision_by_unit[unit_id]
+                    for unit_id in revision_by_unit
+                    if matched.startswith(f"{unit_id}-")
+                ),
+                None,
+            )
+            if owner is not None:
+                unit_revision_ids.append(owner)
+    unit_revision_ids = list(dict.fromkeys(unit_revision_ids))
+    if not unit_revision_ids:
+        raise ValueError(
+            "evidence closure could not resolve any matched fact to a revision"
+        )
+    evidence_span_ids = tuple(
+        span.evidence_id for span in pipeline.answer.evidence_spans
+    )
+    raw_turn_revision_ids = tuple(
+        dict.fromkeys(
+            span.source_revision_id for span in pipeline.answer.evidence_spans
+        )
+    )
+    if not evidence_span_ids or not raw_turn_revision_ids:
+        raise ValueError(
+            "evidence closure requires spans bound to raw turn revisions"
+        )
+    closure = EvidenceClosureReceiptV1(
+        answer_values=pipeline.answer.answer_values,
+        memory_unit_revision_ids=tuple(unit_revision_ids),
+        evidence_span_ids=evidence_span_ids,
+        raw_turn_revision_ids=raw_turn_revision_ids,
+        closure_complete=pipeline.answer.closure_complete,
+    )
+    # 字节级恢复：从提交的 Git 历史重新读回 bundle，逐字节比对。
+    byte_level_recovery_verified = _verify_byte_level_recovery(pipeline)
+    return OpenAIE2ERunReceiptV2(
         workflow_run_id=workflow_run_id,
         requested_model=model,
-        model_calls=(
-            l1_batch.last_call,
-            l2_producer.last_call,
-            query_recording_opener.receipt(model),
+        model_calls=(l1_call, l2_call, query_call),
+        l1_producer_call_count=l1_call_count,
+        l2_producer_call_count=l2_call_count,
+        query_call_count=query_call_count,
+        automatic_memory_write_count=write_count,
+        observed_write_phases=observed_write_phases,
+        extraction_profile=profile,
+        query_plan=QueryPlanReceiptV1(
+            query_id=plan.query_id,
+            answer_kind=plan.answer.kind,
+            distinct_by=plan.answer.distinct_by,
+            identity_resolution_required=plan.answer.identity_resolution_required,
+            plan_sha256=canonical_sha256(plan),
         ),
-        snapshot=SnapshotRunReceiptV1(
+        matched_fact_ids=evaluation.matched_fact_ids,
+        execution_trace=(
+            "raw_turns",
+            "l1_extraction",
+            "l2_abstraction",
+            "admission",
+            "immutable_revisions",
+            "git_checkpoint",
+            "query_compilation",
+            "verified_snapshot",
+            "deterministic_execution",
+            "evidence_backed_answer",
+        ),
+        deterministic_replay_verified=_verify_deterministic_replay(
+            pipeline=pipeline, registry=registry
+        ),
+        evidence_closure=closure,
+        byte_level_recovery_verified=byte_level_recovery_verified,
+        snapshot=QueryOnlySnapshotReceiptV1(
             repository_path=pipeline.snapshot.repository_path,
             checkpoint_id=pipeline.snapshot.checkpoint_id,
             git_commit=pipeline.snapshot.git_commit,
             previous_git_commit=pipeline.snapshot.previous_git_commit,
-            verification_status="valid",
+            bundle_id=pipeline.bundle.bundle_id,
+            registry_sha256=pipeline.execution.authority.registry_sha256,
+            snapshot_sha256=pipeline.execution.authority.snapshot_sha256,
+            authority_sha256=pipeline.execution.authority.authority_sha256,
         ),
         answer=pipeline.answer,
     )
-    _write_receipt_exclusive(result_path, receipt)
-    return OpenAIE2EOutcome(pipeline=pipeline, receipt=receipt)
+
+
+def _discard_partial_transaction(repository_path: Path, raw_path: Path) -> None:
+    """Remove the state a failed run created, and nothing else.
+
+    Only paths this run is responsible for are touched, and only because the
+    caller already proved they were absent beforehand — the entry point refuses to
+    start unless the repository, raw artifact and result are all fresh. So
+    anything here was written by this attempt.
+
+    Cleanup must not mask the original failure, so errors while removing are
+    ignored: the exception being propagated is the one worth reporting.
+    """
+    import shutil
+
+    for path in (raw_path, repository_path):
+        try:
+            if path.is_dir():
+                shutil.rmtree(path)
+            elif path.exists():
+                path.unlink()
+        except OSError:
+            continue
+
+
+def _verify_deterministic_replay(
+    *, pipeline: EndToEndResultV1, registry: Any
+) -> bool:
+    """Re-execute the committed plan and require an identical result.
+
+    The pipeline does not replay itself, so the replay happens here against the
+    same snapshot. Equality is checked on the whole execution result, not just the
+    answer, because a differing authority or trace would mean the run is not
+    reproducible even when the answer happens to match.
+    """
+    identity_snapshot = (
+        pipeline.bundle.identity_snapshots[0]
+        if isinstance(pipeline.bundle, IdentityAwareMemoryBundleV4)
+        and pipeline.bundle.identity_snapshots
+        else None
+    )
+    plan = pipeline.compilation.plan
+    if plan is None:
+        return False
+    replay = execute_authoritative_query(
+        repository_path=Path(pipeline.snapshot.repository_path),
+        bundle=pipeline.bundle,
+        bundle_history_artifact=pipeline.snapshot.bundle_history_artifact,
+        turn_bundles=list(pipeline.turn_bundles),
+        registry=build_compiler_registry(
+            registry, identity_snapshot=identity_snapshot
+        ),
+        plan=plan,
+        identity_snapshot_id=(
+            identity_snapshot.snapshot_id if identity_snapshot is not None else None
+        ),
+    )
+    return replay == pipeline.execution
+
+
+def _verify_byte_level_recovery(pipeline: EndToEndResultV1) -> bool:
+    """Read the committed bundle back out of Git and compare it byte for byte.
+
+    Measured rather than assumed: a checkpoint that cannot be recovered exactly
+    is not a durable record, and that failure is invisible in the answer.
+    """
+    repository = GitMemoryHistoryRepository(Path(pipeline.snapshot.repository_path))
+    manifest = repository.read_checkpoint_manifest(
+        commit=pipeline.snapshot.git_commit
+    )
+    descriptors = [
+        item for item in manifest.artifacts if item.artifact_kind == "l2_bundle"
+    ]
+    if len(descriptors) != 1:
+        return False
+    artifact = repository.read_artifact(
+        artifact_kind="l2_bundle",
+        logical_id=descriptors[0].logical_id,
+        revision_id=descriptors[0].revision_id,
+        commit=pipeline.snapshot.git_commit,
+    )
+    recovered = load_recovered_bundle(
+        artifact.payload["memory_representation_bundle"]
+    )
+    return canonical_json_bytes(recovered) == canonical_json_bytes(pipeline.bundle)
 
 
 def run_openai_query_only(
