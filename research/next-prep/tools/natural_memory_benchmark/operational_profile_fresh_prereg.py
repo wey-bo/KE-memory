@@ -94,6 +94,33 @@ class RoleSeparation(StrictModel):
     proposer_may_read_authority_or_gold: Literal[False] = False
 
 
+class LabelGatingPolicy(StrictModel):
+    """Which author judgements may gate, and which may only be observed.
+
+    Some labels in this dataset are author conventions rather than facts. Whether
+    a question counts as ``no_memory`` or ``abstain`` is the clearest case: not
+    emitting is indisputable, but which non-emission label applies is a taxonomy
+    choice that a real deployment might reasonably make differently.
+
+    Gating on a convention would measure conformance to the author's taxonomy
+    instead of to the evidence, and "repairing" the model to match it would be
+    worse than not testing it. So the gate counts only fabrication and
+    indisputable misses; convention disagreements are reported.
+    """
+
+    gated_outcomes: tuple[str, ...] = (
+        "emitting_a_fact_the_text_does_not_support",
+        "missing_an_indisputable_fact",
+    )
+    reported_not_gated_outcomes: tuple[str, ...] = (
+        "choosing_the_other_non_emission_label",
+        "declining_a_convention_emission",
+    )
+    convention_labels_may_gate: Literal[False] = False
+    #: 明确禁止：不得为了让约定标签变绿而改动实现。
+    repair_toward_convention_labels_authorized: Literal[False] = False
+
+
 class ConclusionBoundary(StrictModel):
     """What a pass may and may not be called."""
 
@@ -163,6 +190,9 @@ class OperationalProfileFreshPreregistrationV1(StrictModel):
     )
     role_separation: RoleSeparation = Field(default_factory=RoleSeparation)
     execution_policy: ExecutionPolicy = Field(default_factory=ExecutionPolicy)
+    label_gating_policy: LabelGatingPolicy = Field(
+        default_factory=LabelGatingPolicy
+    )
     conclusion_boundary: ConclusionBoundary = Field(
         default_factory=ConclusionBoundary
     )
@@ -299,6 +329,7 @@ def build_operational_profile_fresh_preregistration(
         ],
         "role_separation": RoleSeparation().model_dump(mode="json"),
         "execution_policy": ExecutionPolicy().model_dump(mode="json"),
+        "label_gating_policy": LabelGatingPolicy().model_dump(mode="json"),
         "conclusion_boundary": ConclusionBoundary().model_dump(mode="json"),
     }
     return OperationalProfileFreshPreregistrationV1.model_validate(

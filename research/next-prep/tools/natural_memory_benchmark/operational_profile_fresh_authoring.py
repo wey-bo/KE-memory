@@ -35,6 +35,17 @@ L1Coverage = Literal[
     "confusable_roles_or_entities",
     "boundary_modality_polarity_time_or_lifecycle",
 ]
+
+#: 一个标签有多确定，决定它能不能当硬门。
+#:
+#: ``indisputable``：任何合理读者都会同意，且判错会写下与原文相反或原文没有的
+#: 事实。这类才可以进 critical false emission 硬门。
+#:
+#: ``convention``：作者的合理约定，但真实场景里未必成立。典型例子是"疑问句算
+#: no_memory 还是 abstain"——问句确实没陈述持久事实，可是把"依据不足"与"本来
+#: 无事可记"划在哪一侧是约定而非事实。这类只作为观测记录，不得作为硬门，也
+#: 不得据此把模型"改绿"：那只会让实现去拟合我的约定。
+LabelConfidence = Literal["indisputable", "convention"]
 L2Coverage = Literal[
     "multi_evidence_aggregation",
     "wrong_summary",
@@ -69,6 +80,8 @@ class L1CaseBlueprint(StrictModel):
     polarity: Literal["positive", "negative"] = "positive"
     valid_time: str | None = None
     expected_decision: Literal["emit_l1", "abstain", "no_memory"]
+    #: 这个标签是不容争议的，还是作者约定。只有前者能进硬门。
+    label_confidence: LabelConfidence
     #: 为何如此判定。写在数据里，评分失败时能直接对照作者意图，而不是事后推测。
     rationale: str = Field(min_length=1)
 
@@ -89,6 +102,8 @@ class L2CaseBlueprint(StrictModel):
     abstraction_method: Literal["preference_aggregation"] = "preference_aggregation"
     closure_pattern: Literal["multi_evidence_set"] = "multi_evidence_set"
     expected_decision: Literal["emit_l2", "abstain"]
+    #: 这个标签是不容争议的，还是作者约定。只有前者能进硬门。
+    label_confidence: LabelConfidence
     rationale: str = Field(min_length=1)
 
 
@@ -109,6 +124,7 @@ L1_BLUEPRINTS: tuple[L1CaseBlueprint, ...] = (
         object="coffee",
         role_surfaces=(("theme", "Coffee"),),
         expected_decision="emit_l1",
+        label_confidence="indisputable",
         rationale="A plain durable preference stated by the user in their own words.",
     ),
     L1CaseBlueprint(
@@ -125,9 +141,13 @@ L1_BLUEPRINTS: tuple[L1CaseBlueprint, ...] = (
         object="beverage",
         role_surfaces=(("theme", "beverage"),),
         expected_decision="no_memory",
+        label_confidence="convention",
         rationale=(
-            "A question states no durable fact. Emitting a preference here would "
-            "invent one the user never expressed."
+            "Not emitting is indisputable: the user expressed no preference, so "
+            "emitting one would invent it. Which non-emission label applies is a "
+            "convention — a reader could argue a question is 'nothing durable to "
+            "keep' (no_memory) or 'insufficient basis' (abstain). Only the refusal "
+            "to emit is gated; the choice between the two labels is reported."
         ),
     ),
     L1CaseBlueprint(
@@ -144,6 +164,7 @@ L1_BLUEPRINTS: tuple[L1CaseBlueprint, ...] = (
         object="tea",
         role_surfaces=(("theme", "Tea"),),
         expected_decision="emit_l1",
+        label_confidence="indisputable",
         rationale=(
             "Two beverages appear and only the first fills the theme role. Binding "
             "coffee would record the opposite preference."
@@ -164,6 +185,7 @@ L1_BLUEPRINTS: tuple[L1CaseBlueprint, ...] = (
         role_surfaces=(("theme", "Coffee"),),
         polarity="negative",
         expected_decision="emit_l1",
+        label_confidence="indisputable",
         rationale=(
             "A denied preference is a fact worth keeping, and its polarity must be "
             "negative rather than dropped or inverted."
@@ -184,6 +206,7 @@ L1_BLUEPRINTS: tuple[L1CaseBlueprint, ...] = (
         object="coffee",
         role_surfaces=(("theme", "Coffee"),),
         expected_decision="emit_l1",
+        label_confidence="indisputable",
         rationale="A recurring consumption event stated explicitly.",
     ),
     L1CaseBlueprint(
@@ -200,10 +223,13 @@ L1_BLUEPRINTS: tuple[L1CaseBlueprint, ...] = (
         object="coffee",
         role_surfaces=(("theme", "coffee"),),
         expected_decision="abstain",
+        label_confidence="convention",
         rationale=(
-            "A conditional statement is not an actual event. The operational policy "
-            "authorizes only actual modality, so this must abstain rather than be "
-            "recorded as something that happened."
+            "Not recording this as something that happened is indisputable: the "
+            "event is conditional and the policy authorizes only actual modality. "
+            "Which non-emission label applies is a convention — a reader could "
+            "argue the conditional carries nothing durable at all. Only the refusal "
+            "to emit an actual event is gated."
         ),
     ),
     L1CaseBlueprint(
@@ -220,6 +246,7 @@ L1_BLUEPRINTS: tuple[L1CaseBlueprint, ...] = (
         object="milk",
         role_surfaces=(("theme", "Milk"),),
         expected_decision="emit_l1",
+        label_confidence="indisputable",
         rationale=(
             "The negation attaches to coffee, not to the drinking of milk. Binding "
             "coffee, or marking the whole claim negative, would both be wrong."
@@ -240,6 +267,7 @@ L1_BLUEPRINTS: tuple[L1CaseBlueprint, ...] = (
         role_surfaces=(("theme", "Coffee"),),
         valid_time="2026-03-01T00:00:00Z",
         expected_decision="emit_l1",
+        label_confidence="indisputable",
         rationale=(
             "The date is part of what the fact says, so valid_time must carry it "
             "rather than be discarded."
@@ -260,6 +288,7 @@ L1_BLUEPRINTS: tuple[L1CaseBlueprint, ...] = (
         object="milk",
         role_surfaces=(("theme", "Milk"), ("destination", "coffee")),
         expected_decision="emit_l1",
+        label_confidence="indisputable",
         rationale=(
             "Both published roles are filled: milk is the theme, coffee the "
             "destination."
@@ -280,9 +309,13 @@ L1_BLUEPRINTS: tuple[L1CaseBlueprint, ...] = (
         role_surfaces=(("theme", "milk"), ("destination", "coffee")),
         modality="requested",
         expected_decision="abstain",
+        label_confidence="convention",
         rationale=(
-            "A request is not an event that occurred. Recording it as actual would "
-            "assert something that has not happened."
+            "Not recording this as an occurrence is indisputable: nothing has been "
+            "added yet, so an actual event would assert something false. Which "
+            "non-emission label applies is a convention, and a system that keeps "
+            "requests as requested-modality facts would reasonably emit instead — "
+            "which is why only the refusal to assert an actual event is gated."
         ),
     ),
     L1CaseBlueprint(
@@ -299,6 +332,7 @@ L1_BLUEPRINTS: tuple[L1CaseBlueprint, ...] = (
         object="coffee",
         role_surfaces=(("theme", "Coffee"), ("destination", "milk")),
         expected_decision="emit_l1",
+        label_confidence="indisputable",
         rationale=(
             "The same two entities as the correct case with the roles reversed. "
             "Reusing the earlier binding would record the wrong direction."
@@ -318,9 +352,12 @@ L1_BLUEPRINTS: tuple[L1CaseBlueprint, ...] = (
         object=None,
         role_surfaces=(("theme", "that"),),
         expected_decision="no_memory",
+        label_confidence="convention",
         rationale=(
-            "Nothing durable is stated and no ingredient is named. This must be a "
-            "recorded no-memory outcome, distinct from abstaining on weak evidence."
+            "Not emitting is indisputable: no ingredient is named, so any "
+            "add_ingredient fact would be fabricated. Calling it no_memory rather "
+            "than abstain is the convention — here the two readings are closest, "
+            "since 'nothing to keep' and 'no basis' coincide."
         ),
     ),
 )
@@ -340,6 +377,7 @@ L2_BLUEPRINTS: tuple[L2CaseBlueprint, ...] = (
         object="coffee",
         support_surface="Coffee",
         expected_decision="emit_l2",
+        label_confidence="indisputable",
         rationale=(
             "Two admitted facts about the same beverage jointly establish the "
             "preference profile."
@@ -358,6 +396,7 @@ L2_BLUEPRINTS: tuple[L2CaseBlueprint, ...] = (
         object="tea",
         support_surface="Tea",
         expected_decision="abstain",
+        label_confidence="indisputable",
         rationale=(
             "The summary names a beverage no support mentions. It must not be "
             "emitted just because the shape is valid."
@@ -376,10 +415,13 @@ L2_BLUEPRINTS: tuple[L2CaseBlueprint, ...] = (
         object="coffee",
         support_surface="Coffee",
         expected_decision="emit_l2",
+        label_confidence="convention",
         rationale=(
-            "The second turn refers back to the first. The abstraction is over one "
-            "beverage, and its entity must resolve to the L1 support rather than to "
-            "a new entity for the pronoun."
+            "If the abstraction is emitted, its entity must resolve to the L1 "
+            "support rather than to a new entity for the pronoun. Whether to emit "
+            "at all is the convention: resolving 'it' across turns is a judgement, "
+            "and a system that declines to resolve pronouns would reasonably "
+            "abstain. So the entity binding is gated, the decision is reported."
         ),
     ),
     L2CaseBlueprint(
@@ -395,12 +437,78 @@ L2_BLUEPRINTS: tuple[L2CaseBlueprint, ...] = (
         object="coffee",
         support_surface="Coffee",
         expected_decision="abstain",
+        label_confidence="indisputable",
         rationale=(
             "The support denies the very preference the summary asserts. Emitting "
             "here is the critical false emission the gate must hold at zero."
         ),
     ),
 )
+
+
+def classify_decision_outcome(
+    *,
+    expected_decision: str,
+    observed_decision: str,
+    label_confidence: LabelConfidence,
+) -> Literal[
+    "match",
+    "gated_violation",
+    "convention_disagreement",
+    "reported_mismatch",
+]:
+    """Say what a decision mismatch actually is, before it reaches a gate.
+
+    The existing scorer counts any emission against a non-emission gold as a
+    critical false emission. That is right for "the model wrote a fact the text
+    does not support", and wrong for "the model chose abstain where the author
+    wrote no_memory" — the second is a disagreement about a convention, and
+    gating on it would make the model conform to the author's taxonomy rather
+    than to the evidence.
+
+    So the split is by what the disagreement costs:
+
+    * emitting where the author refused to emit is a ``gated_violation``
+      regardless of label confidence: a fabricated fact is a real defect.
+    * disagreeing only about *which* non-emission label applies is a
+      ``convention_disagreement``, reported and never gated.
+    * anything else on a convention label is reported, not gated.
+    """
+    if expected_decision == observed_decision:
+        return "match"
+    emitting = observed_decision in ("emit_l1", "emit_l2")
+    expected_emitting = expected_decision in ("emit_l1", "emit_l2")
+    if emitting and not expected_emitting:
+        # 写下原文不支持的事实：无论标签确定度都是真实缺陷。
+        return "gated_violation"
+    if not emitting and not expected_emitting:
+        # 两种非产出标签之间的分歧：这正是"疑问句算哪一类"这种约定问题。
+        return "convention_disagreement"
+    if label_confidence == "indisputable":
+        return "gated_violation"
+    return "reported_mismatch"
+
+
+def label_confidence_report() -> dict[str, Any]:
+    """Publish which labels are gated and which are only observed."""
+    gated = [
+        item.knowledge_id
+        for item in (*L1_BLUEPRINTS, *L2_BLUEPRINTS)
+        if item.label_confidence == "indisputable"
+    ]
+    convention = [
+        item.knowledge_id
+        for item in (*L1_BLUEPRINTS, *L2_BLUEPRINTS)
+        if item.label_confidence == "convention"
+    ]
+    return {
+        "indisputable_case_ids": sorted(gated),
+        "convention_case_ids": sorted(convention),
+        "indisputable_count": len(gated),
+        "convention_count": len(convention),
+        "gate_counts_only_indisputable_violations": True,
+        "convention_labels_are_reported_not_gated": True,
+    }
 
 
 def coverage_report() -> dict[str, Any]:
