@@ -212,33 +212,92 @@ def _gold_l1_item(item: L1CaseBlueprint) -> dict[str, Any]:
     return payload
 
 
-def build_l1_payloads() -> dict[str, dict[str, Any]]:
+def build_allowed_vocabulary(
+    *,
+    registry: Any,
+    policy: Any,
+) -> dict[str, list[str]]:
+    """Derive the published vocabulary from the frozen policy, never by hand.
+
+    Attempt 1 failed here. The hand-written vocabulary offered modalities
+    ``['actual', 'requested']`` — taken from what the *cases* happened to use —
+    while the policy authorizes ``actual`` alone, and the prompt told the model
+    to use whatever was published. The model then read a request as ``requested``
+    modality, faithfully, and was scored as a fabrication.
+
+    Deriving the vocabulary from the policy makes that class of drift
+    unrepresentable: the proposer can only ever be offered what the policy will
+    actually accept.
+    """
+    return {
+        "canonical_operators": sorted(
+            {item.canonical_operator for item in policy.l1_operator_kind_bindings}
+        ),
+        "predicate_senses": sorted(
+            {
+                item.predicate_sense
+                for item in registry.predicate_role_constraints
+                if item.canonical_operator
+                in {
+                    binding.canonical_operator
+                    for binding in policy.l1_operator_kind_bindings
+                }
+            }
+        ),
+        "decisions": ["abstain", "emit_l1", "no_memory"],
+        "kinds": sorted({item.kind for item in policy.l1_operator_kind_bindings}),
+        "modalities": [item.modality for item in policy.modality_time_policies],
+        "polarities": sorted(policy.allowed_polarities),
+        "speakers": ["user"],
+        "roles": sorted(
+            {item.machine_role for item in policy.l1_role_display_bindings}
+        ),
+    }
+
+
+def assert_vocabulary_matches_policy(
+    *,
+    vocabulary: dict[str, list[str]],
+    registry: Any,
+    policy: Any,
+) -> None:
+    """Refuse a published vocabulary that disagrees with the policy.
+
+    Checked rather than trusted: the drift that broke attempt 1 was invisible in
+    every artifact until the model's own output exposed it.
+    """
+    expected = build_allowed_vocabulary(registry=registry, policy=policy)
+    for key, values in expected.items():
+        actual = vocabulary.get(key)
+        if actual != values:
+            raise ValueError(
+                f"published {key} disagree with the policy: "
+                f"published={actual}, authorized={values}"
+            )
+
+
+def build_l1_payloads(
+    *,
+    registry: Any | None = None,
+    policy: Any | None = None,
+) -> dict[str, dict[str, Any]]:
     """Build public, authority and gold for L1."""
+    if registry is None or policy is None:
+        from .e2e_openai_producers import build_diagnostic_production_policy
+        from .l1_ontology_linking import build_diagnostic_ontology_registry
+
+        registry = registry or build_diagnostic_ontology_registry()
+        policy = policy or build_diagnostic_production_policy(registry)
+    vocabulary = build_allowed_vocabulary(registry=registry, policy=policy)
+    assert_vocabulary_matches_policy(
+        vocabulary=vocabulary, registry=registry, policy=policy
+    )
     return {
         "public-l1.json": {
             "schema_version": "typed-extractor-l1-public-v1",
             "dataset_id": DATASET_ID,
             "case_count": len(L1_BLUEPRINTS),
-            "allowed_vocabulary": {
-                "canonical_operators": sorted(
-                    {item.canonical_operator for item in L1_BLUEPRINTS}
-                ),
-                "predicate_senses": sorted(
-                    {item.predicate_sense for item in L1_BLUEPRINTS}
-                ),
-                "decisions": ["abstain", "emit_l1", "no_memory"],
-                "kinds": sorted({item.kind for item in L1_BLUEPRINTS}),
-                "modalities": sorted({item.modality for item in L1_BLUEPRINTS}),
-                "polarities": sorted({item.polarity for item in L1_BLUEPRINTS}),
-                "speakers": ["user"],
-                "roles": sorted(
-                    {
-                        role
-                        for item in L1_BLUEPRINTS
-                        for role, _surface in item.role_surfaces
-                    }
-                ),
-            },
+            "allowed_vocabulary": vocabulary,
             "cases": [_public_l1_case(item) for item in L1_BLUEPRINTS],
         },
         "authority-l1.json": {

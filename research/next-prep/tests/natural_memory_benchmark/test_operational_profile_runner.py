@@ -14,11 +14,25 @@ import pytest
 
 from tools.natural_memory_benchmark import operational_profile_fresh_runner as runner
 
-DATASET = (
-    Path(__file__).resolve().parents[2]
-    / "artifacts/automatic-extraction-assessment/operational-profile-fresh-hidden-v1"
-)
 CREDENTIAL = "credential-that-must-not-reach-any-artifact"
+
+
+@pytest.fixture(scope="module")
+def dataset(tmp_path_factory: pytest.TempPathFactory) -> Path:
+    """A dataset built under the corrected contract.
+
+    The frozen v1 dataset carries the drifted vocabulary that broke attempt 1,
+    and it must not be edited in place, so the runner's mechanics are exercised
+    against a freshly materialized dataset instead. The guard refusing v1 is the
+    fix working, not a problem to route around.
+    """
+    from tools.natural_memory_benchmark.operational_profile_fresh_materialization import (
+        freeze_dataset,
+    )
+
+    root = tmp_path_factory.mktemp("contract-bound-dataset") / "dataset"
+    freeze_dataset(root)
+    return root
 
 
 def _stub_response(payload: dict[str, object]) -> bytes:
@@ -50,10 +64,10 @@ def _patch_request(monkeypatch: pytest.MonkeyPatch, response: bytes) -> list[dic
 
 
 def test_freeze_order_and_read_only(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, stub_env: None
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, stub_env: None, dataset: Path
 ) -> None:
     """四个产物必须按 dispatch→raw→proposals→provenance 冻结且只读。"""
-    public = json.loads((DATASET / "public-l1.json").read_text())
+    public = json.loads((dataset / "public-l1.json").read_text())
     proposals = {
         "proposals": [
             {
@@ -70,7 +84,7 @@ def test_freeze_order_and_read_only(
     _patch_request(monkeypatch, _stub_response(proposals))
     attempt = tmp_path / "attempt"
     result = runner.run_layer(
-        layer="l1", dataset_root=DATASET, attempt_root=attempt
+        layer="l1", dataset_root=dataset, attempt_root=attempt
     )
 
     names = [
@@ -101,10 +115,10 @@ def test_freeze_order_and_read_only(
 
 
 def test_exactly_one_request_is_issued(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, stub_env: None
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, stub_env: None, dataset: Path
 ) -> None:
     """一层只能发出一次请求。"""
-    public = json.loads((DATASET / "public-l1.json").read_text())
+    public = json.loads((dataset / "public-l1.json").read_text())
     calls = _patch_request(
         monkeypatch,
         _stub_response(
@@ -124,16 +138,16 @@ def test_exactly_one_request_is_issued(
         ),
     )
     runner.run_layer(
-        layer="l1", dataset_root=DATASET, attempt_root=tmp_path / "one"
+        layer="l1", dataset_root=dataset, attempt_root=tmp_path / "one"
     )
     assert len(calls) == 1
 
 
 def test_no_artifact_contains_the_credential(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, stub_env: None
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, stub_env: None, dataset: Path
 ) -> None:
     """凭据不得出现在任何冻结产物里。"""
-    public = json.loads((DATASET / "public-l1.json").read_text())
+    public = json.loads((dataset / "public-l1.json").read_text())
     _patch_request(
         monkeypatch,
         _stub_response(
@@ -153,13 +167,13 @@ def test_no_artifact_contains_the_credential(
         ),
     )
     attempt = tmp_path / "credential-check"
-    runner.run_layer(layer="l1", dataset_root=DATASET, attempt_root=attempt)
+    runner.run_layer(layer="l1", dataset_root=dataset, attempt_root=attempt)
     for path in attempt.iterdir():
         assert CREDENTIAL not in path.read_text(encoding="utf-8"), path.name
 
 
 def test_a_populated_attempt_root_is_refused(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, stub_env: None
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, stub_env: None, dataset: Path
 ) -> None:
     """已有内容的 attempt 目录必须被拒绝：冻结记录不得被改写。"""
     attempt = tmp_path / "used"
@@ -167,12 +181,12 @@ def test_a_populated_attempt_root_is_refused(
     (attempt / "leftover.json").write_text("{}", encoding="utf-8")
     with pytest.raises(runner.ProposerError, match="already populated"):
         runner.run_layer(
-            layer="l1", dataset_root=DATASET, attempt_root=attempt
+            layer="l1", dataset_root=dataset, attempt_root=attempt
         )
 
 
 def test_missing_configuration_fails_before_any_request(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, dataset: Path
 ) -> None:
     """配置缺失必须在发请求之前失败，且不得泄漏值。"""
     monkeypatch.delenv("OPENAI_API_KEY", raising=False)
@@ -181,13 +195,13 @@ def test_missing_configuration_fails_before_any_request(
     calls = _patch_request(monkeypatch, b"{}")
     with pytest.raises(runner.ProposerError, match="OPENAI_API_KEY"):
         runner.run_layer(
-            layer="l1", dataset_root=DATASET, attempt_root=tmp_path / "nocfg"
+            layer="l1", dataset_root=dataset, attempt_root=tmp_path / "nocfg"
         )
     assert calls == []
 
 
 def test_non_json_content_fails_with_a_fingerprint(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, stub_env: None
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, stub_env: None, dataset: Path
 ) -> None:
     """非 JSON 响应必须以指纹报错，而不是回显内容。"""
     _patch_request(
@@ -201,7 +215,7 @@ def test_non_json_content_fails_with_a_fingerprint(
     )
     with pytest.raises(runner.ProposerError) as captured:
         runner.run_layer(
-            layer="l1", dataset_root=DATASET, attempt_root=tmp_path / "bad"
+            layer="l1", dataset_root=dataset, attempt_root=tmp_path / "bad"
         )
     message = str(captured.value)
     assert "response_sha256=" in message
@@ -209,7 +223,7 @@ def test_non_json_content_fails_with_a_fingerprint(
 
 
 def test_gold_exposure_is_checked_before_the_request(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, stub_env: None
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, stub_env: None, dataset: Path
 ) -> None:
     """gold 可达时必须在发请求之前就失败。"""
     calls = _patch_request(monkeypatch, b"{}")
@@ -224,6 +238,6 @@ def test_gold_exposure_is_checked_before_the_request(
     )
     with pytest.raises(ValueError, match="gold"):
         runner.run_layer(
-            layer="l1", dataset_root=DATASET, attempt_root=tmp_path / "leak"
+            layer="l1", dataset_root=dataset, attempt_root=tmp_path / "leak"
         )
     assert calls == []

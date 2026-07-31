@@ -29,23 +29,94 @@ from .authoritative_memory import canonical_json_bytes
 RUN_ROOT = Path("/public/home/wwb/KE_mem/ke-memory-demo/.runs")
 DATASET_ID = "operational-profile-fresh-hidden-v1"
 
-_L1_SYSTEM_PROMPT = (
-    "You extract durable memory facts. For each case you receive the raw turn "
-    "and an untyped candidate. Decide exactly one of: emit_l1 when the user's "
-    "own words state a durable fact; abstain when a fact may be present but the "
-    "evidence does not support recording it as actual; no_memory when the turn "
-    "states nothing durable to keep.\n"
-    "Return JSON only, as {\"proposals\": [{\"case_id\": ..., "
-    "\"candidate_ref\": ..., \"decision\": ..., \"confidence\": 0.0-1.0, "
-    "\"reason_code\": ..., \"typed_candidate\": ... or null}]}.\n"
-    "typed_candidate is required for emit_l1 and must be null otherwise. It "
-    "carries kind, predicate{surface,sense,canonical_operator}, local_entities, "
-    "roles, modality, polarity, time, condition_bindings, scope_bindings, "
-    "derivation, evidence_bindings, lifecycle and operation_provenance.\n"
-    "Use only operators, senses, kinds, modalities and polarities listed in "
-    "allowed_vocabulary. Quote entity surfaces verbatim from the user text. "
-    "Never invent a fact the text does not state."
-)
+def build_l1_system_prompt(*, registry: Any, policy: Any) -> str:
+    """Build the L1 prompt from the frozen policy.
+
+    Attempt 1's contract mismatch came from a hand-written prompt and vocabulary
+    drifting away from the policy they were supposed to serve. Deriving the
+    authorized modalities here means the prompt cannot offer something the policy
+    will reject, and cannot silently diverge from the profile it claims to run
+    under.
+    """
+    authorized = [item.modality for item in policy.modality_time_policies]
+    unauthorized = [
+        name
+        for name in ("requested", "planned", "hypothetical", "recommended", "denied")
+        if name not in authorized
+    ]
+    return (
+        "You extract durable memory facts. For each case you receive the raw "
+        "turn and an untyped candidate. Decide exactly one of: emit_l1 when the "
+        "user's own words state a durable fact; abstain when a fact may be "
+        "present but the evidence does not support recording it under an "
+        "authorized modality; no_memory when the turn states nothing durable to "
+        "keep.\n"
+        f"The only authorized modality values are: {', '.join(authorized)}.\n"
+        "If the evidence supports only "
+        f"{', '.join(unauthorized)} — for example a request, a plan or a "
+        "conditional — you must abstain. Do not convert such evidence into "
+        "actual, and do not emit a modality outside the authorized list.\n"
+        'Return JSON only, as {"proposals": [{"case_id": ..., '
+        '"candidate_ref": ..., "decision": ..., "confidence": 0.0-1.0, '
+        '"reason_code": ..., "typed_candidate": ... or null}]}.\n'
+        "typed_candidate is required for emit_l1 and must be null otherwise. It "
+        "carries kind, predicate{surface,sense,canonical_operator}, "
+        "local_entities, roles, modality, polarity, time, condition_bindings, "
+        "scope_bindings, derivation, evidence_bindings, lifecycle and "
+        "operation_provenance.\n"
+        "Use only operators, senses, kinds, modalities and polarities listed in "
+        "allowed_vocabulary. Quote entity surfaces verbatim from the user text. "
+        "Never invent a fact the text does not state."
+    )
+
+
+def prompt_declared_modalities(prompt: str) -> set[str]:
+    """Read back which modalities a prompt declares usable.
+
+    Lets a test check the prompt itself rather than the intention behind it.
+    """
+    marker = "The only authorized modality values are:"
+    for line in prompt.splitlines():
+        if line.startswith(marker):
+            tail = line[len(marker) :].strip().rstrip(".")
+            return {item.strip() for item in tail.split(",") if item.strip()}
+    raise ValueError("prompt does not declare its authorized modalities")
+
+
+def build_phase_c_contract_binding(
+    *,
+    layer: Literal["l1", "l2"],
+    registry: Any,
+    policy: Any,
+) -> dict[str, Any]:
+    """Bind prompt, vocabulary and policy to the profile they run under.
+
+    Without this, Phase C could run a different prompt and policy under the same
+    profile hash — the false equivalence the profile guard exists to prevent,
+    occurring inside the qualification chain itself.
+    """
+    from .e2e_openai_producers import build_extraction_profile_identity
+    from .operational_profile_fresh_materialization import build_allowed_vocabulary
+
+    profile = build_extraction_profile_identity(registry=registry, policy=policy)
+    vocabulary = build_allowed_vocabulary(registry=registry, policy=policy)
+    prompt = (
+        build_l1_system_prompt(registry=registry, policy=policy)
+        if layer == "l1"
+        else _L2_SYSTEM_PROMPT
+    )
+    return {
+        "layer": layer,
+        "profile_id": profile.profile_id,
+        "profile_sha256": profile.profile_sha256,
+        "policy_sha256": profile.policy_sha256,
+        "ontology_registry_sha256": profile.ontology_registry_sha256,
+        "vocabulary_modalities": list(vocabulary["modalities"]),
+        "vocabulary_sha256": hashlib.sha256(
+            canonical_json_bytes(vocabulary)
+        ).hexdigest(),
+        "prompt_sha256": hashlib.sha256(prompt.encode("utf-8")).hexdigest(),
+    }
 
 _L2_SYSTEM_PROMPT = (
     "You decide whether admitted L1 facts jointly establish a durable "
@@ -163,8 +234,23 @@ def run_layer(
         raise ProposerError(f"attempt root already populated: {attempt_root}")
     attempt_root.mkdir(parents=True, exist_ok=True)
 
+    from .e2e_openai_producers import build_diagnostic_production_policy
+    from .l1_ontology_linking import build_diagnostic_ontology_registry
+    from .operational_profile_fresh_materialization import (
+        assert_vocabulary_matches_policy,
+    )
+
     public_path = dataset_root / f"public-{layer}.json"
-    system_prompt = _L1_SYSTEM_PROMPT if layer == "l1" else _L2_SYSTEM_PROMPT
+    registry = build_diagnostic_ontology_registry()
+    policy = build_diagnostic_production_policy(registry)
+    system_prompt = (
+        build_l1_system_prompt(registry=registry, policy=policy)
+        if layer == "l1"
+        else _L2_SYSTEM_PROMPT
+    )
+    contract = build_phase_c_contract_binding(
+        layer=layer, registry=registry, policy=policy
+    )
     # 请求发出之前先确认 gold 不可达：事后再查就已经晚了。
     assert_gold_not_exposed(
         gold_paths=(
@@ -177,6 +263,14 @@ def run_layer(
         prompt_text=system_prompt,
     )
     public_payload = json.loads(public_path.read_text(encoding="utf-8"))
+    # 发请求之前确认公开给模型的词表与 policy 一致。attempt 1 正是在这里漂移：
+    # 模型用了被告知可用、而 policy 并不接受的取值。
+    if layer == "l1":
+        assert_vocabulary_matches_policy(
+            vocabulary=public_payload["allowed_vocabulary"],
+            registry=registry,
+            policy=policy,
+        )
     base_url, api_key, model = _endpoint()
 
     # 1) dispatch：先冻结"打算做什么"，再去做。
@@ -202,6 +296,9 @@ def run_layer(
         "system_prompt_sha256": hashlib.sha256(
             system_prompt.encode("utf-8")
         ).hexdigest(),
+        # prompt、词表与 policy 一并绑定到 profile：否则"同 profile hash、不同
+        # prompt/policy"的假等价可以在资格链内部复现。
+        "contract_binding": contract,
     }
     dispatch_sha = _freeze(
         attempt_root / f"dispatch-{layer}.json", canonical_json_bytes(dispatch)
