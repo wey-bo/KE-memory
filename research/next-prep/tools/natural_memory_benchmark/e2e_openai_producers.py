@@ -37,7 +37,10 @@ from .typed_extractor_l2 import (
     ClosurePattern,
     L2AbstractionMethod,
     L2Kind,
+    TypedL2Abstraction,
     TypedL2Candidate,
+    TypedL2Closure,
+    TypedL2StructuredClaim,
 )
 
 
@@ -689,6 +692,166 @@ def materialize_typed_l1_candidate(
         ],
         lifecycle=TypedLifecycleBinding(lifecycle="active"),
         operation_provenance=TypedOperationProvenance(),
+    )
+
+
+class L2RoleSlotV1(StrictModel):
+    """L2 claim 的一个角色，实体来自某条 admitted L1 支撑的表面。"""
+
+    role: str = Field(min_length=1)
+    support_entity_surface: str = Field(min_length=1)
+
+
+class L2AbstractionSlotProposalV1(StrictModel):
+    """L2 的语义判断：哪些支撑该合并成什么抽象。
+
+    支撑集、来源轮次/会话、evidence 绑定、closure、lifecycle、claim_ref 以及
+    claim 内的局部实体与角色连线都可以从 admitted L1 确定性推导，因此不向模型
+    索取。`statement` 是这条抽象的自然语言陈述，程序逐字用作 summary。
+    """
+
+    kind: L2Kind
+    statement: str = Field(min_length=1)
+    predicate_surface: str = Field(min_length=1)
+    predicate_sense: str = Field(min_length=1)
+    canonical_operator: str = Field(min_length=1)
+    abstraction_method: L2AbstractionMethod
+    modality: TypedModality
+    polarity: TypedPolarity
+    role_slots: list[L2RoleSlotV1] = Field(min_length=1)
+    event_time: str | None = None
+    valid_time: str | None = None
+
+
+def materialize_typed_l2_candidate(
+    *,
+    slots: L2AbstractionSlotProposalV1,
+    admitted_l1: Sequence[AdmittedL1Record],
+    registry: OntologyRegistry,
+    policy: ProductionExtractionPolicyV1,
+) -> TypedL2Candidate:
+    """从一个抽象提案确定性地物化 L2 候选。
+
+    summary 逐字取自 `statement`，不追加标点：fresh-v3 的 gold summary 比公共
+    statement 多一个句号，而 scorer 精确比较字符串，所以任何“复制后再加工”都
+    会让照做的提案记零分。
+    """
+    if not admitted_l1:
+        raise ValueError("L2 materialization requires admitted L1 support")
+
+    operator_policy = next(
+        (
+            item
+            for item in policy.l2_operator_policies
+            if item.canonical_operator == slots.canonical_operator
+        ),
+        None,
+    )
+    if operator_policy is None:
+        raise ValueError("L2 operator is not published by policy")
+    if operator_policy.kind != slots.kind:
+        raise ValueError("L2 kind does not match operator policy")
+    if slots.abstraction_method not in operator_policy.allowed_abstraction_methods:
+        raise ValueError("L2 abstraction method is not authorized")
+    if slots.polarity not in policy.allowed_polarities:
+        raise ValueError("L2 polarity is not authorized")
+    if len(operator_policy.allowed_closure_patterns) != 1:
+        raise ValueError("L2 policy must publish exactly one closure pattern")
+    closure_pattern = operator_policy.allowed_closure_patterns[0]
+
+    predicate_rules = [
+        item
+        for item in registry.predicate_role_constraints
+        if item.predicate_surface == slots.predicate_surface
+        and item.predicate_sense == slots.predicate_sense
+        and item.canonical_operator == slots.canonical_operator
+    ]
+    if not predicate_rules:
+        raise ValueError("L2 predicate tuple is not public")
+
+    support_refs = [item.candidate_ref for item in admitted_l1]
+    support_surfaces = {
+        entity.surface: entity.surface
+        for item in admitted_l1
+        for entity in item.linked_candidate.typed_candidate.local_entities
+    }
+    display_by_role = {
+        item.machine_role: item.display_role
+        for item in operator_policy.role_bindings
+        if item.canonical_operator == slots.canonical_operator
+    }
+
+    entity_ids: dict[str, str] = {}
+    local_entities: list[TypedLocalEntity] = []
+    roles: list[TypedRoleBinding] = []
+    for slot in slots.role_slots:
+        if slot.support_entity_surface not in support_surfaces:
+            raise ValueError("L2 role surface is not present in any L1 support")
+        display_role = display_by_role.get(slot.role)
+        if display_role is None:
+            raise ValueError("L2 role is not published for this operator")
+        entity_id = entity_ids.get(slot.support_entity_surface)
+        if entity_id is None:
+            entity_id = f"entity-{len(local_entities) + 1:02d}"
+            entity_ids[slot.support_entity_surface] = entity_id
+            local_entities.append(
+                TypedLocalEntity(
+                    local_entity_id=entity_id,
+                    surface=slot.support_entity_surface,
+                )
+            )
+        roles.append(
+            TypedRoleBinding(
+                role=slot.role,
+                role_name=display_role,
+                local_entity_id=entity_id,
+            )
+        )
+
+    evidence_bindings = [
+        TypedEvidenceBinding(evidence_id=evidence_id, speaker="user")
+        for evidence_id in sorted(
+            {
+                span.evidence_id
+                for item in admitted_l1
+                for span in item.revision.payload.source.evidence_spans
+            }
+        )
+    ]
+    return TypedL2Candidate(
+        kind=slots.kind,
+        summary=slots.statement,
+        supporting_l1_refs=support_refs,
+        structured_claims=[
+            TypedL2StructuredClaim(
+                claim_ref="claim-01",
+                predicate=TypedPredicate(
+                    surface=slots.predicate_surface,
+                    sense=slots.predicate_sense,
+                    canonical_operator=slots.canonical_operator,
+                ),
+                local_entities=local_entities,
+                roles=roles,
+                modality=slots.modality,
+                polarity=slots.polarity,
+                time=TypedTimeBinding(
+                    event_time=slots.event_time,
+                    valid_time=slots.valid_time,
+                ),
+                supporting_l1_refs=support_refs,
+            )
+        ],
+        abstraction=TypedL2Abstraction(
+            method=slots.abstraction_method,
+            basis="Admitted L1 supports jointly establish the abstraction.",
+        ),
+        closure=TypedL2Closure(
+            pattern=closure_pattern,
+            required_support_refs=support_refs,
+        ),
+        source_turn_refs=[item.turn_id for item in admitted_l1],
+        source_session_refs=sorted({item.session_id for item in admitted_l1}),
+        evidence_bindings=evidence_bindings,
     )
 
 
