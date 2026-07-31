@@ -781,7 +781,20 @@ def _run_openai_query_only(
             expected_checkpoint_id=expected_checkpoint_id,
         )
     registry = build_diagnostic_ontology_registry()
-    compiler_registry = build_compiler_registry(registry)
+    # 绑定恢复出来的那份 snapshot：不绑定的话恢复出的实体会被报告为 unresolved，
+    # 一个 count 只能弃权，而这与被恢复的记忆无关。
+    recovered_snapshot = (
+        recovered.bundle.identity_snapshots[0]
+        if isinstance(recovered.bundle, IdentityAwareMemoryBundleV4)
+        and recovered.bundle.identity_snapshots
+        else None
+    )
+    compiler_registry = build_compiler_registry(
+        registry, identity_snapshot=recovered_snapshot
+    )
+    recovered_snapshot_id = (
+        recovered_snapshot.snapshot_id if recovered_snapshot is not None else None
+    )
     with write_observer.observing("snapshot"):
         snapshot = build_query_execution_snapshot(
             repository_path=repository_path,
@@ -789,6 +802,7 @@ def _run_openai_query_only(
             bundle_history_artifact=recovered.bundle_history_artifact,
             turn_bundles=list(recovered.turn_bundles),
             registry=compiler_registry,
+            identity_snapshot_id=recovered_snapshot_id,
         )
     if snapshot.memory_view != recovered.memory_view:
         raise ValueError("verified snapshot memory view does not match the checkpoint")
@@ -847,6 +861,7 @@ def _run_openai_query_only(
             turn_bundles=list(recovered.turn_bundles),
             registry=compiler_registry,
             plan=compilation.plan,
+            identity_snapshot_id=recovered_snapshot_id,
         )
         deterministic_replay = execute_authoritative_query(
             repository_path=repository_path,
@@ -855,6 +870,7 @@ def _run_openai_query_only(
             turn_bundles=list(recovered.turn_bundles),
             registry=compiler_registry,
             plan=compilation.plan,
+            identity_snapshot_id=recovered_snapshot_id,
         )
     if execution != deterministic_replay:
         raise ValueError("deterministic query replay diverged from the execution")
