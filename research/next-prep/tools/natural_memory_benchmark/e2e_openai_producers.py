@@ -549,6 +549,20 @@ def allocate_support_ref(turn_id: str) -> str:
     return f"support-{hashlib.sha256(turn_id.encode('utf-8')).hexdigest()[:16]}"
 
 
+def allocate_candidate_ref(turn_id: str, ordinal: int) -> str:
+    """Allocate candidate identity deterministically, program-side.
+
+    Ordinal 0 keeps the historical single-candidate value, so a turn with one
+    memory produces exactly the ref it always did.
+    """
+    if ordinal < 0:
+        raise ValueError("candidate ordinal must not be negative")
+    if ordinal == 0:
+        return allocate_support_ref(turn_id)
+    seed = f"{turn_id}#{ordinal}".encode("utf-8")
+    return f"support-{hashlib.sha256(seed).hexdigest()[:16]}"
+
+
 class ProductionPublicTurnV1(StrictModel):
     session_id: str = Field(min_length=1)
     turn_id: str = Field(min_length=1)
@@ -563,7 +577,13 @@ class ProductionPublicTurnV1(StrictModel):
 
 class ProductionL1ProposalV1(StrictModel):
     turn_id: str = Field(min_length=1)
-    candidate_ref: str = Field(pattern=r"^support-[0-9a-f]{16}$")
+    #: Optional because the program allocates candidate identity. A model that
+    #: supplies one must still match its allocation, but it is not required to
+    #: reproduce an identifier the program already knows.
+    candidate_ref: str | None = Field(
+        default=None,
+        pattern=r"^support-[0-9a-f]{16}$",
+    )
     decision: Literal["emit_l1", "abstain", "no_memory"]
     typed_candidate: TypedL1Candidate | None = None
 
@@ -583,11 +603,30 @@ class ProductionL1BatchResponseV1(StrictModel):
     proposals: list[ProductionL1ProposalV1] = Field(min_length=1)
 
     @model_validator(mode="after")
-    def validate_unique_turns(self) -> "ProductionL1BatchResponseV1":
-        turn_ids = [item.turn_id for item in self.proposals]
-        refs = [item.candidate_ref for item in self.proposals]
-        if len(turn_ids) != len(set(turn_ids)) or len(refs) != len(set(refs)):
+    def validate_unique_candidates(self) -> "ProductionL1BatchResponseV1":
+        # A turn may carry several memories, so turn ids repeat legitimately.
+        # Candidate identity must still be unique, and a turn that states
+        # nothing durable carries exactly one non-emission decision.
+        refs = [
+            item.candidate_ref
+            for item in self.proposals
+            if item.candidate_ref is not None
+        ]
+        if len(refs) != len(set(refs)):
             raise ValueError("duplicate production L1 proposal")
+        non_emitting = {
+            item.turn_id for item in self.proposals if item.decision != "emit_l1"
+        }
+        emitting = {
+            item.turn_id for item in self.proposals if item.decision == "emit_l1"
+        }
+        if non_emitting & emitting:
+            raise ValueError(
+                "a turn cannot both emit and decline to emit a memory"
+            )
+        for turn_id in non_emitting:
+            if sum(item.turn_id == turn_id for item in self.proposals) != 1:
+                raise ValueError("a declining turn carries exactly one decision")
         return self
 
 
@@ -622,26 +661,40 @@ def _validate_time(
 
 
 class BoundL1CandidateProducer:
+    """Replays frozen proposals, allowing zero, one, or several per turn."""
+
     def __init__(self, proposals: Sequence[ProductionL1ProposalV1]) -> None:
-        self._by_turn = {item.turn_id: item for item in proposals}
+        self._by_turn: dict[str, list[ProductionL1ProposalV1]] = {}
+        for item in proposals:
+            self._by_turn.setdefault(item.turn_id, []).append(item)
         self._consumed: set[str] = set()
 
     def produce(self, value: TurnExtractionInputV1) -> list[ProposedL1CandidateV1]:
-        proposal = self._by_turn.get(value.turn.turn_id)
-        if proposal is None or value.turn.turn_id in self._consumed:
+        turn_id = value.turn.turn_id
+        proposals = self._by_turn.get(turn_id)
+        if proposals is None or turn_id in self._consumed:
             raise ValueError("bound L1 proposal coverage mismatch")
-        expected_evidence = f"evidence-{value.turn.turn_id}-user"
+        expected_evidence = f"evidence-{turn_id}-user"
         if value.user_evidence.evidence_id != expected_evidence:
             raise ValueError("runtime evidence allocation changed after L1 proposal")
-        if proposal.decision != "emit_l1" or proposal.typed_candidate is None:
-            raise ValueError("bound L1 proposal is not an emission")
-        self._consumed.add(value.turn.turn_id)
-        return [
-            ProposedL1CandidateV1(
-                candidate_ref=proposal.candidate_ref,
-                typed_candidate=proposal.typed_candidate,
+        self._consumed.add(turn_id)
+        emissions = [item for item in proposals if item.decision == "emit_l1"]
+        if not emissions:
+            # A turn that states nothing durable is a recorded outcome, so the
+            # pipeline receives no candidate rather than an error.
+            return []
+        candidates: list[ProposedL1CandidateV1] = []
+        for ordinal, proposal in enumerate(emissions):
+            candidate = proposal.typed_candidate
+            if candidate is None:
+                raise ValueError("bound L1 emission is missing its candidate")
+            candidates.append(
+                ProposedL1CandidateV1(
+                    candidate_ref=allocate_candidate_ref(turn_id, ordinal),
+                    typed_candidate=candidate,
+                )
             )
-        ]
+        return candidates
 
 
 class OpenAICompatibleL1BatchProducer:
@@ -682,11 +735,13 @@ class OpenAICompatibleL1BatchProducer:
         public_turn: ProductionPublicTurnV1,
         proposal: ProductionL1ProposalV1,
     ) -> None:
-        if proposal.candidate_ref != public_turn.candidate_ref:
-            raise ValueError("L1 candidate ref does not match allocated ref")
+        # Candidate identity is allocated program-side and checked per turn in
+        # `produce`, where the emission ordinals are known.
         candidate = proposal.typed_candidate
         if proposal.decision != "emit_l1" or candidate is None:
-            raise ValueError("operational E2E requires emit_l1 for every turn")
+            # A declining decision is a valid outcome; there is no typed
+            # candidate to ground, so grounding checks do not apply.
+            return
         rules = [
             item
             for item in self.registry.predicate_role_constraints
@@ -816,7 +871,11 @@ class OpenAICompatibleL1BatchProducer:
                 "reason=schema_internal; "
                 f"response_sha256={response_sha256}"
             ) from None
-        by_turn = {item.turn_id: item for item in response.proposals}
+        # Every turn must be decided exactly once, but a turn may carry several
+        # emissions, so group rather than collapse to one proposal per turn.
+        by_turn: dict[str, list[ProductionL1ProposalV1]] = {}
+        for item in response.proposals:
+            by_turn.setdefault(item.turn_id, []).append(item)
         if set(by_turn) != {item.turn_id for item in public_turns}:
             raise ModelBoundaryError(
                 "l1 model proposal failed contract validation: "
@@ -825,11 +884,25 @@ class OpenAICompatibleL1BatchProducer:
             )
         try:
             public_by_turn = {item.turn_id: item for item in public_turns}
-            for turn_id, proposal in by_turn.items():
-                self._validate_candidate(
-                    public_turn=public_by_turn[turn_id],
-                    proposal=proposal,
-                )
+            for turn_id, proposals in by_turn.items():
+                emissions = [
+                    item for item in proposals if item.decision == "emit_l1"
+                ]
+                for ordinal, proposal in enumerate(emissions):
+                    # A supplied ref must match the program's allocation for
+                    # this emission ordinal; omitting it is the normal case.
+                    if proposal.candidate_ref is not None and (
+                        proposal.candidate_ref
+                        != allocate_candidate_ref(turn_id, ordinal)
+                    ):
+                        raise ValueError(
+                            "L1 candidate ref does not match allocated ref"
+                        )
+                for proposal in proposals:
+                    self._validate_candidate(
+                        public_turn=public_by_turn[turn_id],
+                        proposal=proposal,
+                    )
         except Exception as exc:
             raise ModelBoundaryError(
                 "l1 model proposal failed contract validation: "

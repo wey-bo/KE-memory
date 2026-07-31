@@ -1038,10 +1038,9 @@ def test_l1_semantics_and_non_emission_stop_before_raw_or_git(tmp_path: Path) ->
         ("wrong-operator", _turns(), wrong_operator, "operator_cue_missing")
     )
 
-    non_emission = _production_l1_payload()
-    non_emission["proposals"][0]["decision"] = "abstain"
-    non_emission["proposals"][0]["typed_candidate"] = None
-    cases.append(("non-emission", _turns(), non_emission, "emission_required"))
+    # A non-emission decision is no longer an L1 contract violation: a turn
+    # that states nothing durable is a recorded outcome. See
+    # test_production_l1_arity_and_abstention.py for that behaviour.
 
     invented_time = _production_l1_payload()
     invented_time["proposals"][0]["typed_candidate"]["time"]["event_time"] = (
