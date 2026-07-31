@@ -26,9 +26,11 @@ from tools.natural_memory_benchmark.e2e_openai_runtime import (
     run_openai_query_only,
 )
 from tools.natural_memory_benchmark.e2e_pipeline import run_e2e_pipeline
+from tools.natural_memory_benchmark import query_execution_snapshot_adapter
 from tools.natural_memory_benchmark.git_memory_history import (
     GitMemoryHistoryRepository,
 )
+from tools.natural_memory_benchmark.query_plan_v2_executor import _abstain
 
 from test_e2e_pipeline_smoke import (  # noqa: F401
     _chat_response,
@@ -186,6 +188,27 @@ def test_write_observer_restores_descriptors_exactly() -> None:
         )
 
 
+def test_write_observer_counts_direct_git_mutation(tmp_path: Path) -> None:
+    """The generic git primitive must not be an unobserved write bypass."""
+    repository, initial = _seeded_repository(tmp_path, "bypass-history.git")
+    history = GitMemoryHistoryRepository(repository)
+    head = history.head_commit()
+    with MemoryWriteObserver() as observer:
+        # A read-only plumbing call must not be counted.
+        history._git("rev-parse", "refs/heads/authoritative")
+        assert observer.count == 0
+        # A ref mutation reached directly through the primitive must be.
+        history._git(
+            "update-ref",
+            "refs/heads/observed-probe",
+            head,
+        )
+        assert observer.count == 1, (
+            "a direct update-ref through the git primitive must be observed"
+        )
+    assert initial.snapshot.git_commit == head
+
+
 def test_write_observer_covers_the_repository_write_surface() -> None:
     """The observed method list must not silently miss a write entry point."""
     observed = set(MemoryWriteObserver.WRITE_METHODS)
@@ -236,8 +259,44 @@ def test_query_only_rejects_response_model_mismatch(tmp_path: Path) -> None:
     assert not (tmp_path / "mismatch-result.json").exists()
 
 
-def test_query_only_rejects_abstained_execution(tmp_path: Path) -> None:
-    """An execution that answers nothing must not yield a closure receipt."""
+def test_execution_level_abstention_is_gated(tmp_path: Path) -> None:
+    """The executor declining must abort the attempt, not yield a receipt.
+
+    The sibling test below is blocked earlier, by the compilation gate, so this
+    one drives a genuinely abstained execution to reach the execution gate.
+    """
+    repository, initial = _seeded_repository(tmp_path, "exec-abstain-history.git")
+    result_path = tmp_path / "exec-abstain-result.json"
+
+    def abstaining_evaluation(plan: Any, snapshot: Any) -> Any:
+        return _abstain(plan, "no_matching_facts")
+
+    opener = _SequencedOpener([_chat_response(_production_query_payload())])
+    with pytest.MonkeyPatch.context() as patch:
+        patch.setattr(
+            query_execution_snapshot_adapter,
+            "_evaluate_compiled_query_snapshot",
+            abstaining_evaluation,
+        )
+        with pytest.raises(ValueError, match="abstained instead of closing"):
+            _query_only(
+                repository,
+                initial,
+                result_path,
+                opener=opener,
+                model="test-model-response",
+            )
+    assert not result_path.exists()
+
+
+def test_unsupported_absence_request_is_gated_at_compilation(
+    tmp_path: Path,
+) -> None:
+    """An unanswerable absence request must not yield a closure receipt.
+
+    This input is refused by the compilation gate rather than the execution
+    gate; the execution gate is covered by the test above.
+    """
     repository, initial = _seeded_repository(tmp_path)
     payload = _production_query_payload()
     # Require an explicit absence the snapshot cannot establish, so the

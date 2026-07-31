@@ -101,7 +101,7 @@ class _QueryRecordingOpener:
         self,
         requested_model: str,
         *,
-        require_matching_response_model: bool = False,
+        require_matching_response_model: bool = True,
     ) -> ModelCallHashV1:
         if (
             self.request_sha256 is None
@@ -301,6 +301,23 @@ class MemoryWriteObserver:
         "prepare_hard_purge",
         "_create_commit",
         "_update_ref",
+        # `_command` is the generic git primitive every writer funnels through.
+        # Observing it closes the bypass of calling it directly, and the verb
+        # filter below keeps read-only plumbing uncounted.
+        "_command",
+    )
+
+    #: git verbs that mutate refs, the object database, or the index.
+    MUTATING_GIT_VERBS = frozenset(
+        {
+            "init",
+            "commit-tree",
+            "write-tree",
+            "update-index",
+            "update-ref",
+            "symbolic-ref",
+            "hash-object",
+        }
     )
 
     def __init__(self) -> None:
@@ -345,10 +362,18 @@ class MemoryWriteObserver:
         function = descriptor.__func__ if is_classmethod else descriptor
 
         def wrapper(*args: object, **kwargs: object) -> object:
-            observer.calls.append(name)
+            if name != "_command" or observer._mutates(args):
+                observer.calls.append(name)
             return function(*args, **kwargs)
 
         return classmethod(wrapper) if is_classmethod else wrapper
+
+    def _mutates(self, args: tuple[object, ...]) -> bool:
+        # args[0] is the bound instance; the git verb follows.
+        return any(
+            isinstance(item, str) and item in self.MUTATING_GIT_VERBS
+            for item in args[1:]
+        )
 
     @property
     def count(self) -> int:
@@ -629,7 +654,11 @@ def _run_openai_query_only(
     result_path = Path(result_path).resolve()
     if result_path.exists():
         raise FileExistsError("query-only result artifact must be fresh")
-    raw_path = repository_path.with_name(f"{repository_path.name}.raw.json")
+    # Resolve the raw artifact too: if it is itself a symlink, a name-derived
+    # comparison would miss a result path pointing at the same file.
+    raw_path = repository_path.with_name(
+        f"{repository_path.name}.raw.json"
+    ).resolve()
     if repository_path in result_path.parents or result_path in (
         repository_path,
         raw_path,

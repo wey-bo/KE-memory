@@ -403,7 +403,7 @@ def test_l1_producer_accepts_reasoning_only_payload(tmp_path: Path) -> None:
         result_path=tmp_path / "reasoning-e2e-result.json",
         base_url="https://model.invalid/v1",
         api_key="credential-that-must-not-enter-artifacts",
-        model="test-model",
+        model="test-model-response",
         timeout_seconds=37,
         max_attempts=1,
         opener=opener,
@@ -862,7 +862,7 @@ def test_openai_runtime_closes_model_write_query_and_evidence(tmp_path: Path) ->
         result_path=tmp_path / "model-result.json",
         base_url="https://model.invalid/v1",
         api_key="credential-that-must-not-enter-public-input",
-        model="test-model",
+        model="test-model-response",
         timeout_seconds=37,
         max_attempts=2,
         opener=opener,
@@ -1237,7 +1237,7 @@ def test_without_modifier_does_not_negate_positive_preference(
         result_path=tmp_path / "without-modifier-result.json",
         base_url="https://model.invalid/v1",
         api_key="credential-that-must-not-leak",
-        model="test-model",
+        model="test-model-response",
         opener=_SequencedOpener(
             [
                 _chat_response(_production_l1_payload()),
