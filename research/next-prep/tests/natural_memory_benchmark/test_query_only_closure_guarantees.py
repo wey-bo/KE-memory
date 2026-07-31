@@ -188,6 +188,38 @@ def test_write_observer_restores_descriptors_exactly() -> None:
         )
 
 
+def test_a_stray_write_during_the_attempt_aborts_it(tmp_path: Path) -> None:
+    """A write smuggled into the attempt must be counted and refuse the receipt."""
+    repository, initial = _seeded_repository(tmp_path, "stray-write-history.git")
+    result_path = tmp_path / "stray-write-result.json"
+    real_execute = e2e_runtime.execute_authoritative_query
+
+    def executing_with_a_stray_write(**kwargs: Any) -> Any:
+        GitMemoryHistoryRepository(kwargs["repository_path"])._git(
+            "update-ref",
+            "refs/heads/stray-probe",
+            initial.snapshot.git_commit,
+        )
+        return real_execute(**kwargs)
+
+    opener = _SequencedOpener([_chat_response(_production_query_payload())])
+    with pytest.MonkeyPatch.context() as patch:
+        patch.setattr(
+            e2e_runtime,
+            "execute_authoritative_query",
+            executing_with_a_stray_write,
+        )
+        with pytest.raises(ValueError, match="no extraction calls, and no writes"):
+            _query_only(
+                repository,
+                initial,
+                result_path,
+                opener=opener,
+                model="test-model-response",
+            )
+    assert not result_path.exists()
+
+
 def test_write_observer_counts_direct_git_mutation(tmp_path: Path) -> None:
     """The generic git primitive must not be an unobserved write bypass."""
     repository, initial = _seeded_repository(tmp_path, "bypass-history.git")
