@@ -294,6 +294,10 @@ _CONTRACT_VALIDATION_CODES = {
     "candidate contains forbidden time": "forbidden_time",
     "L1 candidate ref does not match allocated ref": "candidate_ref_mismatch",
     "operational E2E requires emit_l1 for every turn": "emission_required",
+    "L1 role slot offset does not quote the user's own words": (
+        "role_slot_offset_mismatch"
+    ),
+    "L1 role is not published for this operator": "role_not_published",
     "L1 predicate tuple is not public": "predicate_not_public",
     "L1 kind does not match operator policy": "kind_policy_mismatch",
     "L1 local entity surface is not grounded in user evidence": (
@@ -1020,13 +1024,21 @@ class OpenAICompatibleL1BatchProducer:
         public_contract = {
             "ontology_registry": self.registry.model_dump(mode="json"),
             "policy": self.policy.model_dump(mode="json"),
-            "response_schema": ProductionL1BatchResponseV1.model_json_schema(),
+            "response_schema": (
+                ProductionL1SlotBatchResponseV1.model_json_schema()
+            ),
         }
         raw = self.client.request(
             system_prompt=(
-                "Return exactly one production-l1-batch-response-v1 JSON object. "
-                "Copy only public operator, role, policy, candidate, and evidence "
-                "bindings. Return JSON only."
+                "Return exactly one production-l1-slot-batch-response-v1 JSON "
+                "object. Decide, for each turn, whether it states a durable "
+                "memory: emit_l1 with semantic slots, or no_memory/abstain with "
+                "no slots. A turn may state several memories, so it may carry "
+                "several emit_l1 proposals. For each role slot give the public "
+                "role, the exact surface from the user text, and that surface's "
+                "character offsets in the user text. Do not construct "
+                "identifiers, evidence bindings, derivation, lifecycle or "
+                "provenance. Return JSON only."
             ),
             public_input={
                 "public_contract": public_contract,
@@ -1036,7 +1048,7 @@ class OpenAICompatibleL1BatchProducer:
         call = self.client.last_call
         response_sha256 = call.response_sha256 if call is not None else "unavailable"
         try:
-            response = ProductionL1BatchResponseV1.model_validate(raw)
+            response = ProductionL1SlotBatchResponseV1.model_validate(raw)
         except ValidationError as exc:
             validation_path, validation_type = _safe_schema_error(exc)
             raise ModelBoundaryError(
@@ -1053,7 +1065,7 @@ class OpenAICompatibleL1BatchProducer:
             ) from None
         # Every turn must be decided exactly once, but a turn may carry several
         # emissions, so group rather than collapse to one proposal per turn.
-        by_turn: dict[str, list[ProductionL1ProposalV1]] = {}
+        by_turn: dict[str, list[ProductionL1SlotProposalV1]] = {}
         for item in response.proposals:
             by_turn.setdefault(item.turn_id, []).append(item)
         if set(by_turn) != {item.turn_id for item in public_turns}:
@@ -1062,27 +1074,40 @@ class OpenAICompatibleL1BatchProducer:
                 "reason=turn_coverage; "
                 f"response_sha256={response_sha256}"
             )
+        materialized: list[ProductionL1ProposalV1] = []
         try:
             public_by_turn = {item.turn_id: item for item in public_turns}
             for turn_id, proposals in by_turn.items():
-                emissions = [
-                    item for item in proposals if item.decision == "emit_l1"
-                ]
-                for ordinal, proposal in enumerate(emissions):
-                    # A supplied ref must match the program's allocation for
-                    # this emission ordinal; omitting it is the normal case.
-                    if proposal.candidate_ref is not None and (
-                        proposal.candidate_ref
-                        != allocate_candidate_ref(turn_id, ordinal)
-                    ):
-                        raise ValueError(
-                            "L1 candidate ref does not match allocated ref"
-                        )
+                public_turn = public_by_turn[turn_id]
                 for proposal in proposals:
-                    self._validate_candidate(
-                        public_turn=public_by_turn[turn_id],
-                        proposal=proposal,
+                    if proposal.decision != "emit_l1" or proposal.slots is None:
+                        materialized.append(
+                            ProductionL1ProposalV1(
+                                turn_id=turn_id,
+                                decision=proposal.decision,
+                            )
+                        )
+                        continue
+                    candidate = materialize_typed_l1_candidate(
+                        slots=proposal.slots,
+                        registry=self.registry,
+                        policy=self.policy,
+                        user_text=public_turn.user_text,
+                        evidence_id=public_turn.evidence_id,
                     )
+                    typed = ProductionL1ProposalV1(
+                        turn_id=turn_id,
+                        decision="emit_l1",
+                        typed_candidate=candidate,
+                    )
+                    # The materialized candidate still faces every production
+                    # contract check, so program-built structure is not trusted
+                    # merely because the program built it.
+                    self._validate_candidate(
+                        public_turn=public_turn,
+                        proposal=typed,
+                    )
+                    materialized.append(typed)
         except Exception as exc:
             raise ModelBoundaryError(
                 "l1 model proposal failed contract validation: "
@@ -1090,7 +1115,7 @@ class OpenAICompatibleL1BatchProducer:
                 f"validation_code={_contract_validation_code(exc)}; "
                 f"response_sha256={response_sha256}"
             ) from None
-        return BoundL1CandidateProducer(response.proposals)
+        return BoundL1CandidateProducer(materialized)
 
 
 class OpenAICompatibleL2Producer:

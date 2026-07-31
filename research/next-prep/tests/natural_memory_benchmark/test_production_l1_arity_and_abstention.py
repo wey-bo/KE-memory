@@ -26,6 +26,7 @@ from tools.natural_memory_benchmark.e2e_openai_producers import (
     OpenAICompatibleL1BatchProducer,
     ProductionL1BatchResponseV1,
     allocate_candidate_ref,
+    allocate_support_ref,
     build_diagnostic_production_policy,
 )
 from tools.natural_memory_benchmark.l1_ontology_linking import (
@@ -35,6 +36,7 @@ from tools.natural_memory_benchmark.l1_ontology_linking import (
 from test_e2e_pipeline_smoke import (  # noqa: F401
     _chat_response,
     _production_l1_payload,
+    _production_l1_slot_payload,
     _SequencedOpener,
     _turns,
 )
@@ -93,11 +95,11 @@ def test_batch_response_still_rejects_duplicate_candidate_refs() -> None:
 
 def test_a_turn_may_carry_no_durable_memory() -> None:
     """A question or control utterance must be an accepted outcome."""
-    payload = _production_l1_payload()
+    payload = _production_l1_slot_payload()
     kept = _proposal_for("turn-0000000000000001", payload)
     empty = _proposal_for("turn-0000000000000002", payload)
     empty["decision"] = "no_memory"
-    empty["typed_candidate"] = None
+    empty.pop("slots", None)
     payload["proposals"] = [kept, empty]
     opener = _SequencedOpener([_chat_response(payload)])
     bound = _batch_producer(opener).produce(_turns())
@@ -120,19 +122,14 @@ def _extraction_inputs() -> dict[str, Any]:
 
 def test_multiple_candidates_reach_the_pipeline_for_one_turn() -> None:
     """Two proposals on one turn must both be handed to the pipeline."""
-    payload = _production_l1_payload()
+    payload = _production_l1_slot_payload()
     first = _proposal_for("turn-0000000000000001", payload)
     second = json.loads(json.dumps(first))
-    second["candidate_ref"] = "support-00000000000000c1"
     payload["proposals"] = [
         first,
         second,
         _proposal_for("turn-0000000000000002", payload),
     ]
-    # The program owns candidate identity, so the model's second proposal
-    # carries no ref of its own.
-    second.pop("candidate_ref", None)
-    payload["proposals"][1] = second
     opener = _SequencedOpener([_chat_response(payload)])
     bound = _batch_producer(opener).produce(_turns())
     inputs = _extraction_inputs()
@@ -144,16 +141,15 @@ def test_multiple_candidates_reach_the_pipeline_for_one_turn() -> None:
     }
     # Ordinal 0 must keep the historical single-candidate value.
     assert allocate_candidate_ref("turn-0000000000000001", 0) == (
-        first["candidate_ref"]
+        allocate_support_ref("turn-0000000000000001")
     )
 
 
 def test_model_response_need_not_echo_the_allocated_candidate_ref() -> None:
     """candidate_ref is program-allocated, so the model must not have to guess it."""
-    payload = _production_l1_payload()
-    proposals = payload["proposals"]
-    for item in proposals:
-        item.pop("candidate_ref", None)
+    payload = _production_l1_slot_payload()
+    for item in payload["proposals"]:
+        assert "candidate_ref" not in item
     opener = _SequencedOpener([_chat_response(payload)])
     try:
         bound = _batch_producer(opener).produce(_turns())

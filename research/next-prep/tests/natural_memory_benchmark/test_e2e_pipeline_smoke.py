@@ -13,7 +13,7 @@ from tools.natural_memory_benchmark import e2e_openai_runtime as e2e_runtime
 from tools.natural_memory_benchmark.e2e_openai_producers import (
     ModelBoundaryError,
     OpenAICompatibleL1BatchProducer,
-    ProductionL1BatchResponseV1,
+    ProductionL1SlotBatchResponseV1,
     allocate_support_ref,
     build_diagnostic_production_policy,
 )
@@ -391,7 +391,7 @@ def test_query_draft_accepts_reasoning_only_payload(tmp_path: Path) -> None:
 def test_l1_producer_accepts_reasoning_only_payload(tmp_path: Path) -> None:
     opener = _SequencedOpener(
         [
-            _reasoning_only_chat_response(_production_l1_payload()),
+            _reasoning_only_chat_response(_production_l1_slot_payload()),
             _reasoning_only_chat_response(_production_l2_payload()),
             _reasoning_only_chat_response(_production_query_payload()),
         ]
@@ -624,6 +624,66 @@ def _production_l1_payload() -> dict[str, object]:
     }
 
 
+def _slot_proposal(
+    turn_id: str,
+    *,
+    kind: str,
+    surface: str,
+    sense: str,
+    operator: str,
+    entity_surface: str = "Coffee",
+    char_start: int = 0,
+    role: str = "theme",
+    event_time: str | None = None,
+    valid_time: str | None = None,
+) -> dict[str, object]:
+    return {
+        "turn_id": turn_id,
+        "decision": "emit_l1",
+        "slots": {
+            "predicate_surface": surface,
+            "predicate_sense": sense,
+            "canonical_operator": operator,
+            "kind": kind,
+            "modality": "actual",
+            "polarity": "positive",
+            "role_slots": [
+                {
+                    "role": role,
+                    "surface": entity_surface,
+                    "char_start": char_start,
+                    "char_end": char_start + len(entity_surface),
+                }
+            ],
+            "event_time": event_time,
+            "valid_time": valid_time,
+        },
+    }
+
+
+def _production_l1_slot_payload() -> dict[str, object]:
+    """The semantic-slot wire shape the L1 batch producer now requests."""
+    return {
+        "schema_version": "production-l1-slot-batch-response-v1",
+        "proposals": [
+            _slot_proposal(
+                "turn-0000000000000001",
+                kind="preference",
+                surface="prefer",
+                sense="preference_theme",
+                operator="prefer",
+            ),
+            _slot_proposal(
+                "turn-0000000000000002",
+                kind="event",
+                surface="drink",
+                sense="consume_beverage",
+                operator="drink",
+            ),
+        ],
+    }
+
+
 def _production_l2_payload() -> dict[str, object]:
     turns = _turns()
     support_refs = [allocate_support_ref(item.turn_id) for item in turns]
@@ -695,8 +755,8 @@ def test_l1_schema_contract_error_reports_sanitized_fingerprint(
     tmp_path: Path,
 ) -> None:
     credential = "credential-that-must-not-leak"
-    payload = _production_l1_payload()
-    del payload["proposals"][0]["typed_candidate"]["kind"]
+    payload = _production_l1_slot_payload()
+    del payload["proposals"][0]["slots"]["kind"]
     response = _chat_response(payload)
     repository = tmp_path / "schema-error-memory-history.git"
     result_path = tmp_path / "schema-error-result.json"
@@ -716,7 +776,7 @@ def test_l1_schema_contract_error_reports_sanitized_fingerprint(
 
     message = str(captured.value)
     assert "reason=schema" in message
-    assert "validation_path=proposals.0.typed_candidate.kind" in message
+    assert "validation_path=proposals.0.slots.kind" in message
     assert "validation_type=missing" in message
     assert f"response_sha256={hashlib.sha256(response).hexdigest()}" in message
     assert "Coffee is preferred." not in message
@@ -731,13 +791,13 @@ def test_l1_unexpected_schema_exception_is_sanitized(
 ) -> None:
     credential = "credential-that-must-not-leak"
     exception_detail = "sensitive-schema-exception-detail"
-    response = _chat_response(_production_l1_payload())
+    response = _chat_response(_production_l1_slot_payload())
 
     def fail_validation(_value: object) -> object:
         raise TypeError(exception_detail)
 
     monkeypatch.setattr(
-        ProductionL1BatchResponseV1,
+        ProductionL1SlotBatchResponseV1,
         "model_validate",
         fail_validation,
     )
@@ -764,7 +824,7 @@ def test_l1_unexpected_schema_exception_is_sanitized(
 def test_l1_turn_coverage_error_reports_sanitized_fingerprint(
     tmp_path: Path,
 ) -> None:
-    payload = _production_l1_payload()
+    payload = _production_l1_slot_payload()
     payload["proposals"].pop()
     response = _chat_response(payload)
     repository = tmp_path / "coverage-error-memory-history.git"
@@ -850,7 +910,7 @@ def test_openai_runtime_closes_model_write_query_and_evidence(tmp_path: Path) ->
     opener = _SequencedOpener(
         [
             TimeoutError("transient transport timeout"),
-            _chat_response(_production_l1_payload()),
+            _chat_response(_production_l1_slot_payload()),
             _chat_response(_production_l2_payload()),
             _chat_response(_production_query_payload()),
         ]
@@ -1013,6 +1073,8 @@ def test_l1_semantics_and_non_emission_stop_before_raw_or_git(tmp_path: Path) ->
         tuple[str, list[RawTurnV1], dict[str, object], str]
     ] = []
 
+    # A surface the program cannot find at the stated offsets in the user's own
+    # words must fail closed rather than be materialized.
     wrong_entity_turns = _turns()
     wrong_entity_turns[0] = wrong_entity_turns[0].model_copy(
         update={"user_text": "I prefer tea."}
@@ -1021,19 +1083,20 @@ def test_l1_semantics_and_non_emission_stop_before_raw_or_git(tmp_path: Path) ->
         (
             "wrong-entity",
             wrong_entity_turns,
-            _production_l1_payload(),
-            "local_entity_not_grounded",
+            _production_l1_slot_payload(),
+            "role_slot_offset_mismatch",
         )
     )
 
-    wrong_operator = _production_l1_payload()
-    wrong_operator_candidate = wrong_operator["proposals"][1]["typed_candidate"]
-    wrong_operator_candidate["kind"] = "preference"
-    wrong_operator_candidate["predicate"] = {
-        "surface": "prefer",
-        "sense": "preference_theme",
-        "canonical_operator": "prefer",
-    }
+    wrong_operator = _production_l1_slot_payload()
+    wrong_operator["proposals"][1]["slots"].update(
+        {
+            "kind": "preference",
+            "predicate_surface": "prefer",
+            "predicate_sense": "preference_theme",
+            "canonical_operator": "prefer",
+        }
+    )
     cases.append(
         ("wrong-operator", _turns(), wrong_operator, "operator_cue_missing")
     )
@@ -1042,10 +1105,8 @@ def test_l1_semantics_and_non_emission_stop_before_raw_or_git(tmp_path: Path) ->
     # that states nothing durable is a recorded outcome. See
     # test_production_l1_arity_and_abstention.py for that behaviour.
 
-    invented_time = _production_l1_payload()
-    invented_time["proposals"][0]["typed_candidate"]["time"]["event_time"] = (
-        "2099-01-01"
-    )
+    invented_time = _production_l1_slot_payload()
+    invented_time["proposals"][0]["slots"]["event_time"] = "2099-01-01"
     cases.append(("invented-time", _turns(), invented_time, "forbidden_time"))
 
     negated_turns = _turns()
@@ -1056,7 +1117,7 @@ def test_l1_semantics_and_non_emission_stop_before_raw_or_git(tmp_path: Path) ->
         (
             "negated-operator",
             negated_turns,
-            _production_l1_payload(),
+            _production_l1_slot_payload(),
             "operator_cue_negated",
         )
     )
@@ -1071,7 +1132,7 @@ def test_l1_semantics_and_non_emission_stop_before_raw_or_git(tmp_path: Path) ->
             (
                 name,
                 turns,
-                _production_l1_payload(),
+                _production_l1_slot_payload(),
                 "operator_cue_negated",
             )
         )
@@ -1106,14 +1167,15 @@ def test_l2_claim_requires_admitted_l1_semantic_support(tmp_path: Path) -> None:
     turns[0] = turns[0].model_copy(
         update={"user_text": "Coffee is drunk daily."}
     )
-    l1_payload = _production_l1_payload()
-    first_candidate = l1_payload["proposals"][0]["typed_candidate"]
-    first_candidate["kind"] = "event"
-    first_candidate["predicate"] = {
-        "surface": "drink",
-        "sense": "consume_beverage",
-        "canonical_operator": "drink",
-    }
+    l1_payload = _production_l1_slot_payload()
+    l1_payload["proposals"][0]["slots"].update(
+        {
+            "kind": "event",
+            "predicate_surface": "drink",
+            "predicate_sense": "consume_beverage",
+            "canonical_operator": "drink",
+        }
+    )
     repository = tmp_path / "unsupported-l2-memory-history.git"
     result_path = tmp_path / "unsupported-l2-result.json"
     with pytest.raises(ModelBoundaryError, match="l2") as captured:
@@ -1154,7 +1216,7 @@ def test_l2_claim_requires_admitted_l1_semantic_support(tmp_path: Path) -> None:
             model="test-model",
             opener=_SequencedOpener(
                 [
-                    _chat_response(_production_l1_payload()),
+                    _chat_response(_production_l1_slot_payload()),
                     _chat_response(unsupported_summary),
                 ]
             ),
@@ -1180,7 +1242,7 @@ def test_l2_claim_requires_admitted_l1_semantic_support(tmp_path: Path) -> None:
             model="test-model",
             opener=_SequencedOpener(
                 [
-                    _chat_response(_production_l1_payload()),
+                    _chat_response(_production_l1_slot_payload()),
                     _chat_response(negated_summary),
                 ]
             ),
@@ -1207,7 +1269,7 @@ def test_l2_claim_requires_admitted_l1_semantic_support(tmp_path: Path) -> None:
             model="test-model",
             opener=_SequencedOpener(
                 [
-                    _chat_response(_production_l1_payload()),
+                    _chat_response(_production_l1_slot_payload()),
                     _chat_response(post_negated_summary),
                 ]
             ),
@@ -1239,7 +1301,7 @@ def test_without_modifier_does_not_negate_positive_preference(
         model="test-model-response",
         opener=_SequencedOpener(
             [
-                _chat_response(_production_l1_payload()),
+                _chat_response(_production_l1_slot_payload()),
                 _chat_response(l2_payload),
                 _chat_response(_production_query_payload()),
             ]
@@ -1264,7 +1326,7 @@ def test_query_response_without_model_is_rejected_without_result(tmp_path: Path)
             model="test-model",
             opener=_SequencedOpener(
                 [
-                    _chat_response(_production_l1_payload()),
+                    _chat_response(_production_l1_slot_payload()),
                     _chat_response(_production_l2_payload()),
                     _chat_response(_production_query_payload(), include_model=False),
                 ]

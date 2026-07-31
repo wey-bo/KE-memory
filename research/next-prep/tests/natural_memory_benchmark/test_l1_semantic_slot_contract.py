@@ -17,6 +17,9 @@ substring matching stays a validator instead of becoming the parser.
 
 from __future__ import annotations
 
+import tempfile
+from pathlib import Path
+
 import pytest
 
 from tools.natural_memory_benchmark.e2e_openai_producers import (
@@ -214,6 +217,87 @@ def test_kind_must_match_the_operator_policy() -> None:
     """Operator to kind is a published binding, so a mismatch is refused."""
     with pytest.raises(ValueError, match="kind"):
         _materialize(_slots(kind="event"))
+
+
+def test_live_producer_asks_for_slots_and_materializes_structure() -> None:
+    """The batch producer must send the slot schema and build structure itself."""
+    import json
+    import sys
+
+    sys.path.insert(0, "tests/natural_memory_benchmark")
+    from test_e2e_pipeline_smoke import (
+        _chat_response,
+        _SequencedOpener,
+        _turns,
+    )
+
+    from tools.natural_memory_benchmark.e2e_openai_producers import (
+        OpenAICompatibleL1BatchProducer,
+    )
+    from tools.natural_memory_benchmark.e2e_pipeline import _make_source_inputs
+
+    registry = build_diagnostic_ontology_registry()
+    slot_payload = {
+        "schema_version": "production-l1-slot-batch-response-v1",
+        "proposals": [
+            {
+                "turn_id": "turn-0000000000000001",
+                "decision": "emit_l1",
+                "slots": _slots(
+                    role_slots=[
+                        {
+                            "role": "theme",
+                            "surface": "Coffee",
+                            "char_start": 0,
+                            "char_end": 6,
+                        }
+                    ]
+                ),
+            },
+            {
+                "turn_id": "turn-0000000000000002",
+                "decision": "no_memory",
+            },
+        ],
+    }
+    opener = _SequencedOpener([_chat_response(slot_payload)])
+    producer = OpenAICompatibleL1BatchProducer(
+        registry=registry,
+        policy=build_diagnostic_production_policy(registry),
+        base_url="https://model.invalid/v1",
+        api_key="credential-that-must-not-enter-artifacts",
+        model="test-model-response",
+        max_attempts=1,
+        opener=opener,
+    )
+    bound = producer.produce(_turns())
+
+    sent = json.loads(opener.requests[0]["messages"][1]["content"])
+    schema = json.dumps(sent["public_contract"]["response_schema"])
+    assert "role_slots" in schema, "the model must be asked for semantic slots"
+    assert "local_entity_id" not in schema, (
+        "the model must no longer be asked to build local entity identifiers"
+    )
+
+    root = Path(tempfile.mkdtemp())
+    _artifact, _sources, inputs = _make_source_inputs(
+        _turns(), raw_artifact_path=root / "slot-live.raw.json"
+    )
+    produced = bound.produce(inputs["turn-0000000000000001"])
+    assert len(produced) == 1
+    candidate = produced[0].typed_candidate
+    # Structure the model never sent, supplied by the program:
+    assert [item.local_entity_id for item in candidate.local_entities] == [
+        "entity-01"
+    ]
+    assert candidate.roles[0].local_entity_id == "entity-01"
+    assert candidate.derivation.method == "explicit"
+    assert candidate.lifecycle.lifecycle == "active"
+    assert candidate.evidence_bindings[0].evidence_id == (
+        "evidence-turn-0000000000000001-user"
+    )
+    # And the declining turn yields no candidate at all.
+    assert bound.produce(inputs["turn-0000000000000002"]) == []
 
 
 def test_batch_producer_requests_slots_not_typed_candidates() -> None:
