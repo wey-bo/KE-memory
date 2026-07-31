@@ -400,6 +400,43 @@ _L2_SUPPORT_FACTS: dict[str, dict[str, Any]] = {
         "surface": "That one",
         "polarity": "positive",
     },
+    # --- hidden-v3 的支撑轮次 ---
+    "Milk is preferred.": {
+        "kind": "preference",
+        "operator": "prefer",
+        "sense": "preference_theme",
+        "surface": "Milk",
+        "polarity": "positive",
+    },
+    "Milk is drunk before bed.": {
+        "kind": "event",
+        "operator": "drink",
+        "sense": "consume_beverage",
+        "surface": "Milk",
+        "polarity": "positive",
+    },
+    "Milk is never drunk before bed.": {
+        "kind": "event",
+        "operator": "drink",
+        "sense": "consume_beverage",
+        "surface": "Milk",
+        "polarity": "negative",
+    },
+    "Coffee is drunk mid-afternoon.": {
+        "kind": "event",
+        "operator": "drink",
+        "sense": "consume_beverage",
+        "surface": "Coffee",
+        "polarity": "positive",
+    },
+    "The same drink is taken before bed.": {
+        # 指代表面如实保留，回指解析交给 L2。
+        "kind": "event",
+        "operator": "drink",
+        "sense": "consume_beverage",
+        "surface": "The same drink",
+        "polarity": "positive",
+    },
 }
 
 
