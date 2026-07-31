@@ -916,37 +916,52 @@ def run_e2e_pipeline(
 
     bundle_id = f"bundle-e2e-{artifact.content_sha256[:16]}"
     l2_proposals = l2_producer.produce(tuple(admitted_l1))
-    if len(l2_proposals) != 1:
-        raise ValueError("the minimal pipeline requires exactly one L2 proposal")
-    l2_record = materialize_closed_l2(
-        proposal=l2_proposals[0],
-        admitted_l1=admitted_l1,
-        bundle_id=bundle_id,
-        source_revisions=source_revisions,
-        producer=producer,
-        transaction_time=_timestamp(len(ordered_turns) * 10 + 1),
+    if len(l2_proposals) > 1:
+        raise ValueError("the minimal pipeline accepts at most one L2 proposal")
+    # 没有可靠抽象是一个被记录的结果：L1 记忆仍然物化并提交，只是没有 L2。
+    l2_record = (
+        materialize_closed_l2(
+            proposal=l2_proposals[0],
+            admitted_l1=admitted_l1,
+            bundle_id=bundle_id,
+            source_revisions=source_revisions,
+            producer=producer,
+            transaction_time=_timestamp(len(ordered_turns) * 10 + 1),
+        )
+        if l2_proposals
+        else None
     )
     l1_revisions = [item.revision for item in admitted_l1]
     l1_units = [
         item.payload for item in l1_revisions if isinstance(item.payload, L1MemoryUnitV2)
     ]
-    l2_unit = l2_record.revision.payload
-    if not isinstance(l2_unit, L2MemoryUnitV2):
-        raise ValueError("materialized L2 revision does not contain an L2 payload")
+    l2_units: list[L2MemoryUnitV2] = []
+    if l2_record is not None:
+        l2_unit = l2_record.revision.payload
+        if not isinstance(l2_unit, L2MemoryUnitV2):
+            raise ValueError("materialized L2 revision does not contain an L2 payload")
+        l2_units.append(l2_unit)
+    unit_revisions = [
+        *l1_revisions,
+        *([l2_record.revision] if l2_record is not None else []),
+    ]
     bundle = MemoryRepresentationBundleV3(
         bundle_id=bundle_id,
         profile=_profile(),
         raw_artifact_revisions=[artifact],
         source_record_revisions=source_revisions,
-        unit_revisions=[*l1_revisions, l2_record.revision],
+        unit_revisions=unit_revisions,
         current_revision_ids={
-            item.memory_unit_id: item.revision_id
-            for item in [*l1_revisions, l2_record.revision]
+            item.memory_unit_id: item.revision_id for item in unit_revisions
         },
         l1_units=l1_units,
-        l2_units=[l2_unit],
-        closure_specs=[l2_record.closure_spec],
-        closure_evaluations=[l2_record.closure_evaluation],
+        l2_units=l2_units,
+        closure_specs=(
+            [l2_record.closure_spec] if l2_record is not None else []
+        ),
+        closure_evaluations=(
+            [l2_record.closure_evaluation] if l2_record is not None else []
+        ),
         query_plans=[],
         metadata={
             "closure_evaluator_id": "e2e-closure-evaluator",

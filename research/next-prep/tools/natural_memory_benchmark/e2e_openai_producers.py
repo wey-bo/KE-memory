@@ -308,6 +308,7 @@ _CONTRACT_VALIDATION_CODES = {
         "operator_cue_negated"
     ),
     "L1 polarity is not authorized": "polarity_not_authorized",
+    "L2 polarity is not authorized": "polarity_not_authorized",
     "L1 role coverage does not match predicate contract": "role_coverage_mismatch",
     "L1 role display does not match policy": "role_display_mismatch",
     "L1 evidence binding does not match public turn": "evidence_binding_mismatch",
@@ -822,7 +823,17 @@ class ProductionL2ResponseV1(StrictModel):
         min_length=1,
         pattern=r"^[A-Za-z0-9][A-Za-z0-9._:-]{0,255}$",
     )
-    typed_candidate: TypedL2Candidate
+    #: L2 也必须能够拒绝作答：没有可靠抽象时产出 abstain 而不是硬造一条。
+    decision: Literal["emit_l2", "abstain"] = "emit_l2"
+    typed_candidate: TypedL2Candidate | None = None
+
+    @model_validator(mode="after")
+    def validate_decision_union(self) -> "ProductionL2ResponseV1":
+        if self.decision == "emit_l2" and self.typed_candidate is None:
+            raise ValueError("emit_l2 requires a typed candidate")
+        if self.decision == "abstain" and self.typed_candidate is not None:
+            raise ValueError("abstain cannot include a typed candidate")
+        return self
 
 
 def _validate_time(
@@ -1217,8 +1228,14 @@ class OpenAICompatibleL2Producer:
                 "reason=schema_internal; "
                 f"response_sha256={response_sha256}"
             ) from None
+        if response.decision == "abstain" or response.typed_candidate is None:
+            # 没有可靠抽象是一个被记录的结果，不是失败。
+            return []
         try:
             candidate = response.typed_candidate
+            for claim in candidate.structured_claims:
+                if claim.polarity not in self.policy.allowed_polarities:
+                    raise ValueError("L2 polarity is not authorized")
             if candidate.supporting_l1_refs != support_refs:
                 raise ValueError("L2 support order or coverage mismatch")
             if candidate.closure.required_support_refs != support_refs:
