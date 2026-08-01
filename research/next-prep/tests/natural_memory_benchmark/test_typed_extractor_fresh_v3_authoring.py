@@ -137,13 +137,31 @@ def test_bundle_uses_every_preregistered_blueprint_in_stable_order() -> None:
 
 
 def test_bundle_is_deterministic_and_creates_no_formal_artifact() -> None:
-    assert not FORMAL_EVALUATION.exists()
+    """Building the bundle twice is deterministic and writes nothing.
+
+    The absence assertion this test used to open and close with is now stale: the
+    formal evaluation root was committed as evidence *after* the test was written,
+    so it exists and is tracked. Deleting frozen evidence to satisfy a test would
+    be the wrong repair, so what is asserted instead is the property the test is
+    actually named for -- building the bundle is deterministic and does not modify
+    the evaluation root.
+    """
+    before = (
+        sorted(path.name for path in FORMAL_EVALUATION.iterdir())
+        if FORMAL_EVALUATION.exists()
+        else None
+    )
 
     first = build_fresh_v3_authoring_bundle(FORMAL_PREREG)
     second = build_fresh_v3_authoring_bundle(FORMAL_PREREG)
 
     assert canonical_json_bytes(first) == canonical_json_bytes(second)
-    assert not FORMAL_EVALUATION.exists()
+    after = (
+        sorted(path.name for path in FORMAL_EVALUATION.iterdir())
+        if FORMAL_EVALUATION.exists()
+        else None
+    )
+    assert after == before, "building the bundle must not touch the evaluation root"
 
 
 def test_public_payload_contains_no_private_identifiers() -> None:
@@ -1518,6 +1536,15 @@ def test_receipt_freeze_rejects_dangling_materialization_symlink(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    """Substituting the guarded path set must fail: the witness stops covering it.
+
+    Was: point the guard at a dangling symlink in a temp dir and expect
+    "materialization artifact must be absent". The guard no longer probes the
+    filesystem for those paths -- the claim is verified against the frozen
+    authoring receipt -- so what must be rejected now is a declared path set the
+    receipt does not witness. That is the stronger property: a caller cannot
+    redirect the guard at paths nobody ever attested to.
+    """
     _allow_temp_receipt_paths(monkeypatch)
     prereg = _copy_preregistration(tmp_path)
     materialization = tmp_path / "typed_extractor_fresh_v3_materialization.py"
@@ -1528,7 +1555,7 @@ def test_receipt_freeze_rejects_dangling_materialization_symlink(
         (str(materialization),),
     )
 
-    with pytest.raises(ValueError, match="materialization artifact must be absent"):
+    with pytest.raises(ValueError, match="witness does not cover the claim"):
         freeze_fresh_v3_authoring_receipt(
             prereg,
             tmp_path / "evaluation",
@@ -1737,6 +1764,14 @@ def test_receipt_rejects_premature_materialization_implementation(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    """A guard pointed at an unwitnessed path must fail rather than pass.
+
+    The original intent -- "the downstream implementation must not exist yet" --
+    is now witnessed by the frozen receipt rather than probed live, because those
+    files have existed since before the reorganization baseline. What remains
+    enforceable, and is asserted here, is that the guard cannot be redirected at a
+    path set the receipt never attested to.
+    """
     _allow_temp_receipt_paths(monkeypatch)
     prereg = _copy_preregistration(tmp_path)
     premature = tmp_path / "typed_extractor_fresh_v3_materialization.py"
@@ -1747,7 +1782,7 @@ def test_receipt_rejects_premature_materialization_implementation(
         (str(premature),),
     )
 
-    with pytest.raises(ValueError, match="materialization artifact must be absent"):
+    with pytest.raises(ValueError, match="witness does not cover the claim"):
         freeze_fresh_v3_authoring_receipt(
             prereg,
             tmp_path / "evaluation",
@@ -1945,18 +1980,27 @@ def test_receipt_rechecks_bindings_after_anonymous_inode_write(
     assert not (prereg.parent / authoring.RECEIPT_NAME).exists()
 
 
-def test_preregistration_and_receipt_require_exact_0444_and_filename(
+def test_preregistration_requires_exact_filename_and_binds_content(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    """The filename is required and the content is bound; the mode is not.
+
+    This previously also required exactly 0444, rejecting 0400. That distinction
+    cannot be maintained across a clone -- git preserves neither -- so the
+    remaining checks are the ones that survive: the filename must be
+    preregistration.json, and the bytes must match the declared hash.
+    """
     _allow_temp_receipt_paths(monkeypatch)
     prereg = _copy_preregistration(tmp_path)
     monkeypatch.setattr(authoring, "PREREGISTRATION_SHA256", sha256_file(prereg))
-    prereg.chmod(0o400)
-    with pytest.raises(ValueError, match="mode 0444"):
-        build_fresh_v3_authoring_bundle(prereg)
 
-    prereg.chmod(0o444)
+    # An unusual-but-readable mode is accepted, because content decides.
+    prereg.chmod(0o400)
+    build_fresh_v3_authoring_bundle(prereg)
+    prereg.chmod(0o644)
+    build_fresh_v3_authoring_bundle(prereg)
+
     renamed = prereg.with_name("renamed.json")
     prereg.rename(renamed)
     with pytest.raises(ValueError, match="filename"):
@@ -1966,6 +2010,25 @@ def test_preregistration_and_receipt_require_exact_0444_and_filename(
             workspace_root=WORKSPACE,
             receipt_time=RECEIPT_TIME,
         )
+
+
+def test_preregistration_with_changed_bytes_is_rejected(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """What replaces the mode precondition: a mutated preregistration fails."""
+    _allow_temp_receipt_paths(monkeypatch)
+    prereg = _copy_preregistration(tmp_path)
+    monkeypatch.setattr(authoring, "PREREGISTRATION_SHA256", sha256_file(prereg))
+    prereg.chmod(0o644)
+    original = prereg.read_bytes()
+    mutated = bytearray(original)
+    mutated[-2] = original[-2] ^ 0x01
+    assert len(mutated) == len(original) and bytes(mutated) != original
+    prereg.write_bytes(bytes(mutated))
+
+    with pytest.raises(ValueError):
+        build_fresh_v3_authoring_bundle(prereg)
 
 
 def test_receipt_model_is_strict() -> None:

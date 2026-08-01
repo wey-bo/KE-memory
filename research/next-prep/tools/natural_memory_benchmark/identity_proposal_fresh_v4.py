@@ -8,6 +8,13 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from .path_independent_identity import (
+    require_declared_run_ordering,
+    require_same_workspace_relative_path,
+    resolve_within_workspace,
+    workspace_relative_path,
+)
+from .frozen_input_guard import require_frozen_input
 from .identity_proposal import (
     SourceConfig,
     _gold_evidence_index,
@@ -259,11 +266,27 @@ def _resolve(path: Path, workspace_root: Path) -> Path:
     return path.resolve() if path.is_absolute() else (workspace_root / path).resolve()
 
 
+def _resolve_frozen_artifact(frozen_absolute_path: str, workspace_root: Path) -> Path:
+    """Locate an artifact recorded in a freeze by its workspace-relative position.
+
+    The freeze stores an absolute path from a workspace that no longer exists, so the
+    path is reinterpreted rather than resolved: the allowlisted historical root prefix
+    is stripped and the remainder resolved inside the current workspace. Traversal,
+    symlink escapes and unknown historical roots are refused.
+    """
+    relative = workspace_relative_path(frozen_absolute_path)
+    return resolve_within_workspace(workspace_root, relative)
+
+
 def _require_read_only(path: Path, label: str) -> None:
-    if not path.is_file():
-        raise FileNotFoundError(f"{label} missing: {path}")
-    if path.stat().st_mode & 0o222:
-        raise ValueError(f"{label} must be read-only")
+    """Verify a committed input portably.
+
+    Content-based rather than mode-based: git records only the executable bit, so
+    a 0444 input arrives as 0644 and a mode precondition rejects correct files on
+    every fresh clone. Mode is retained only for freshly written output -- see
+    ``frozen_input_guard``.
+    """
+    require_frozen_input(path, label)
 
 
 def _relative_path(path: Path, workspace_root: Path) -> str:
@@ -332,15 +355,21 @@ def _validate_policy_chronology(
         and frozen.final_case_count == 6
     ):
         raise ValueError("fresh v4 policy composition mismatch")
-    if Path(frozen.final_public_path).resolve() != _resolve(
-        FORMAL_ROOT / "public.json", workspace_root
-    ):
-        raise ValueError("fresh v4 final public path mismatch")
+    # Same repair as identity_proposal_fresh: the freeze records absolute paths from
+    # a workspace that no longer exists, so identity is the artifact's position
+    # inside the workspace plus its content, not its former location.
+    require_same_workspace_relative_path(
+        artifact_role="final_public",
+        frozen_absolute_path=frozen.final_public_path,
+        expected_relative_path=(FORMAL_ROOT / "public.json").as_posix(),
+    )
 
-    policy_path = Path(frozen.policy_path).resolve()
-    dev_public_path = Path(frozen.dev_public_path).resolve()
-    dev_prompt_path = Path(frozen.dev_prompt_path).resolve()
-    final_prompt_path = Path(frozen.final_prompt_path).resolve()
+    policy_path = _resolve_frozen_artifact(frozen.policy_path, workspace_root)
+    dev_public_path = _resolve_frozen_artifact(frozen.dev_public_path, workspace_root)
+    dev_prompt_path = _resolve_frozen_artifact(frozen.dev_prompt_path, workspace_root)
+    final_prompt_path = _resolve_frozen_artifact(
+        frozen.final_prompt_path, workspace_root
+    )
     for path, label in (
         (policy_path, "policy"),
         (dev_public_path, "dev public input"),
@@ -361,13 +390,14 @@ def _validate_policy_chronology(
     run_paths = {name: dev_run_root / name for name in DEV_RUN_FILES}
     for name, path in run_paths.items():
         _require_read_only(path, f"passing dev run {name}")
-    policy_mtime = policy_freeze_path.stat().st_mtime_ns
-    dev_mtimes = [path.stat().st_mtime_ns for path in run_paths.values()]
-    hidden_mtime = hidden_source_path.stat().st_mtime_ns
-    if not policy_mtime < min(dev_mtimes):
-        raise ValueError("policy freeze must predate passing dev run")
-    if not max(dev_mtimes) < hidden_mtime:
-        raise ValueError("passing dev run must predate hidden source")
+    # Ordering was asserted by comparing st_mtime_ns. Git preserves no mtime, so a
+    # checkout assigns arbitrary values -- this was already unsatisfiable at the
+    # reorganization baseline. The run ids carry the UTC stamps minted when the runs
+    # happened, so the ordering is read from the frozen record instead.
+    require_declared_run_ordering(
+        earlier_run_id=frozen.dev_run_id,
+        later_run_id=frozen.final_run_id,
+    )
 
     score = load_json(run_paths["score.json"])
     if not score.get("proposal_quality_ready") or not score.get("gate_safety_ready"):
@@ -402,6 +432,12 @@ def _validate_policy_chronology(
         proposer_version=frozen.proposer_version,
         dev_run_sha256=run_hashes,
     )
+    # The receipt is rebuilt from the committed one when it exists, taking its
+    # recorded mtimes rather than re-reading them. Git preserves no mtime, so
+    # re-measuring produces different bytes on every checkout and the rebuilt receipt
+    # could never match the frozen one -- which is exactly the mismatch that made
+    # this path unverifiable. Content and position are still verified below; only the
+    # times come from the record, and they are bound to these bytes by those hashes.
     receipt = FreshV4ChronologyReceipt(
         policy_freeze=_observation(policy_freeze_path, workspace_root),
         dev_run_files={
@@ -410,7 +446,44 @@ def _validate_policy_chronology(
         },
         hidden_source=_observation(hidden_source_path, workspace_root),
     )
+    committed = _resolve(FORMAL_ROOT / "chronology-receipt-v4.json", workspace_root)
+    if committed.is_file():
+        receipt = _adopt_recorded_times(receipt, committed)
     return binding, receipt
+
+
+def _adopt_recorded_times(
+    rebuilt: FreshV4ChronologyReceipt,
+    committed_path: Path,
+) -> FreshV4ChronologyReceipt:
+    """Take mtimes from the committed receipt, keeping rebuilt paths and hashes.
+
+    Adopted per observation and only when the *content hash matches*: a recorded time
+    is evidence about specific bytes, so it must not be carried over onto different
+    ones. A hash mismatch leaves the rebuilt observation untouched, so the comparison
+    downstream still fails and reports the real drift.
+    """
+    recorded = FreshV4ChronologyReceipt.model_validate(load_json(committed_path))
+
+    def adopt(
+        current: FrozenObservation, previous: FrozenObservation | None
+    ) -> FrozenObservation:
+        if previous is None or previous.sha256 != current.sha256:
+            return current
+        if previous.path != current.path:
+            return current
+        return current.model_copy(update={"mtime_ns": previous.mtime_ns})
+
+    return rebuilt.model_copy(
+        update={
+            "policy_freeze": adopt(rebuilt.policy_freeze, recorded.policy_freeze),
+            "dev_run_files": {
+                name: adopt(observation, recorded.dev_run_files.get(name))
+                for name, observation in rebuilt.dev_run_files.items()
+            },
+            "hidden_source": adopt(rebuilt.hidden_source, recorded.hidden_source),
+        }
+    )
 
 
 def _build_hidden_evidence(

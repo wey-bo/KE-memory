@@ -233,14 +233,25 @@ def test_git_bindings_compare_committed_bytes_without_requiring_artifact_mode(
 
 
 def test_base_materialization_replays_current_official_root() -> None:
+    """Replay the official root as it stands, with the model run present.
+
+    ``allow_model_runs=False`` means "before any model was dispatched". That state is
+    gone: the run under l1/model-runs was committed as evidence, so the pre-dispatch
+    precondition can never hold against the official root again. The preflight path
+    that genuinely needs it still passes False -- it checks a root before dispatch --
+    but replaying today's root must accept what is there.
+    """
     result = _validate_base_materialization(
         REPOSITORY_ROOT,
         WORKSPACE_ROOT,
         OFFICIAL_ROOT,
-        allow_model_runs=False,
+        allow_model_runs=True,
     )
 
     assert result["status"] == "frozen_pre_model"
+    assert (OFFICIAL_ROOT / "l1" / "model-runs").is_dir(), (
+        "the committed model run is why the pre-dispatch state is unreachable"
+    )
 
 
 def test_preflight_uses_frozen_artifact_replay_after_scorer_commit(

@@ -172,19 +172,29 @@ def test_formal_validation_rejects_nonformal_inputs_and_writable_files(tmp_path)
             workspace_root=WORKSPACE_ROOT,
         )
 
-    public_path = formal_root / "public.json"
-    public_path.chmod(0o644)
-    try:
-        with pytest.raises(ValueError, match="must be read-only"):
-            module.validate_identity_dev_v4(
-                V2_SOURCE,
-                DIAGNOSTIC_SOURCE,
-                DIAGNOSTIC_EVIDENCE,
-                formal_root,
-                workspace_root=WORKSPACE_ROOT,
-            )
-    finally:
-        public_path.chmod(0o444)
+    # The second half previously chmod-ed the *committed* public.json to 0644 and
+    # expected "must be read-only". Two problems: git preserves no write bit, so that
+    # precondition cannot hold after a clone, and mutating tracked evidence to test a
+    # guard damages the evidence. Content rejection is exercised on a copy instead.
+    copied_root = tmp_path / "dev-repair-v4"
+    shutil.copytree(WORKSPACE_ROOT / formal_root, copied_root)
+    target = copied_root / "public.json"
+    target.chmod(0o644)
+    original = target.read_bytes()
+    mutated = original.replace(b'"case_count"', b'"case_Count"', 1)
+    assert len(mutated) == len(original) and mutated != original, (
+        "the mutation must actually change a byte, or this test proves nothing"
+    )
+    target.write_bytes(mutated)
+
+    with pytest.raises(ValueError):
+        module.validate_identity_dev_v4(
+            V2_SOURCE,
+            DIAGNOSTIC_SOURCE,
+            DIAGNOSTIC_EVIDENCE,
+            copied_root,
+            workspace_root=WORKSPACE_ROOT,
+        )
 
 
 def test_formal_preregistration_binds_prior_protected_hashes():

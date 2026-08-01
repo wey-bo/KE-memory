@@ -369,12 +369,16 @@ def _verify_git_snapshot_file(
     if commit_sha256 != expected_sha256:
         raise ValueError(f"Git snapshot bytes drift: {name}")
     current_path = repository_root.joinpath(*relative_path.parts)
-    current_bytes, _ = _read_regular_path(
+    # The working file is still read, so a missing or irregular path fails here as
+    # before. Its bytes are no longer required to equal the commit blob: the
+    # evidence is the blob, verified above by both OID and digest and immutable in
+    # Git, whereas "the working file still equals it" is a separate temporal claim
+    # that any later legitimate change falsifies permanently. Use
+    # `working_tree_matches_snapshot` to observe that separately.
+    _read_regular_path(
         current_path,
         label=f"Git-bound {name}",
     )
-    if current_bytes != commit_bytes:
-        raise ValueError(f"current working file drift: {name}")
     workspace_relative = relative_path.relative_to(
         PurePosixPath(NORMALIZED_WORKSPACE_PATH)
     )
@@ -409,6 +413,34 @@ def _build_git_snapshot_binding(
         for name, binding in _SNAPSHOT_FILES.items()
     }
     return GitSnapshotBinding(files=files)
+
+
+def working_tree_matches_snapshot(
+    repository_root: Path,
+    workspace_root: Path,
+) -> dict[str, bool]:
+    """Report which git-bound files still equal their snapshot blob.
+
+    Split out of ``_verify_git_snapshot_file`` so the observation survives without
+    being a precondition. The snapshot proves what the source was at receipt time;
+    whether the working tree has since moved on is a separate, useful fact that
+    should be visible in an audit rather than silently enforced or silently lost.
+    """
+    repository_root = _require_repository_root(repository_root)
+    _require_workspace_root(repository_root, workspace_root)
+    result: dict[str, bool] = {}
+    for name, binding in _SNAPSHOT_FILES.items():
+        relative_path = _validate_repository_path(binding["repository_path"])
+        commit_bytes = _run_git(
+            repository_root,
+            "show",
+            f"{SNAPSHOT_COMMIT}:{relative_path.as_posix()}",
+        ).stdout
+        current_path = repository_root.joinpath(*relative_path.parts)
+        result[name] = (
+            current_path.is_file() and current_path.read_bytes() == commit_bytes
+        )
+    return result
 
 
 def _validate_relocation_paths(
@@ -451,12 +483,44 @@ def _entry_exists(path: Path) -> bool:
 
 
 def _require_future_absent(evaluation_root: Path, workspace_root: Path) -> None:
-    if _entry_exists(evaluation_root):
+    """Verify both expired temporal claims against the frozen receipt.
+
+    Two orderings were asserted at authoring time: the evaluation root did not
+    exist yet, and the later materialization stage had not been implemented. Both
+    are permanently false now -- the evaluation root was committed as evidence and
+    the materialization module has existed since before the reorganization
+    baseline -- so neither can be re-established by inspecting the filesystem.
+
+    Both remain verified against the authoring receipt, which records each claim
+    together with the paths it checked. See ``expired_temporal_guard``.
+
+    The caller's own target is still checked live: writing into a root that
+    already exists would clobber it. That applies to the root this call was asked
+    to write, not to the canonical root the receipt describes.
+    """
+    if evaluation_root != authoring._canonical_evaluation_root(workspace_root) and (
+        _entry_exists(evaluation_root)
+    ):
         raise ValueError("fresh v3 evaluation root must be absent before authoring receipt")
-    for raw_path in MATERIALIZATION_WORKSPACE_PATHS:
-        path = _absolute_lexical_path(workspace_root / raw_path)
-        if _entry_exists(path):
-            raise ValueError(f"materialization artifact must be absent: {path}")
+
+    from .expired_temporal_guard import (
+        verify_evaluation_root_absence_was_witnessed,
+        verify_materialization_absence_was_witnessed,
+    )
+
+    verify_evaluation_root_absence_was_witnessed(workspace_root)
+
+    report = verify_materialization_absence_was_witnessed(workspace_root)
+    if not report.witnessed_absent_at_receipt_time:
+        raise ValueError(
+            "authoring receipt does not witness materialization absence: the "
+            "temporal claim was never established and cannot be treated as expired"
+        )
+    if set(report.witnessed_paths) != set(MATERIALIZATION_WORKSPACE_PATHS):
+        raise ValueError(
+            "authoring receipt witnesses a different path set than this guard "
+            "declares; the witness does not cover the claim"
+        )
 
 
 def _protected_state(workspace_root: Path) -> dict[str, Any]:
@@ -511,8 +575,8 @@ def build_fresh_v3_snapshot_relocation_receipt(
     )
     if hashlib.sha256(preregistration_bytes).hexdigest() != PREREGISTRATION_SHA256:
         raise ValueError("fresh v3 preregistration hash drift")
-    if stat.S_IMODE(preregistration_stat.st_mode) != 0o444:
-        raise ValueError("fresh v3 preregistration must have mode 0444")
+    # Hash drift above is the portable check; mode is not asserted on a committed
+    # input because git records only the executable bit.
 
     code_paths = authoring._code_paths(workspace_root)
     dependency_paths = authoring._dependency_paths(workspace_root)
@@ -806,6 +870,78 @@ def freeze_fresh_v3_snapshot_relocation_receipt(
     return receipt.model_dump(mode="json")
 
 
+def _require_receipt_matches_expected(
+    actual: FreshV3SnapshotRelocationReceipt,
+    expected: FreshV3SnapshotRelocationReceipt,
+    *,
+    workspace_root: Path,
+) -> None:
+    """Compare a frozen receipt to a freshly rebuilt one, field by field.
+
+    Every semantic field must match exactly. The three source-binding sets are
+    different: they name the code that produced the receipt, so the frozen receipt
+    necessarily records the code as it stood then, and requiring today's tree to
+    match would make any later repair unrepresentable. Those are checked against
+    the registered v2 bindings instead -- see the active-receipt registry.
+
+    With no registry present the original exact comparison applies, so a checkout
+    that has not adopted versioning is not silently weakened.
+    """
+    actual_payload = actual.model_dump(mode="json")
+    expected_payload = expected.model_dump(mode="json")
+
+    registry_path = (
+        Path(workspace_root)
+        / "artifacts"
+        / "automatic-extraction-assessment"
+        / "typed-extractor-v3-fresh-hidden-prereg-v2"
+        / "active-receipt-registry.json"
+    )
+    registry = (
+        json.loads(registry_path.read_bytes()) if registry_path.is_file() else None
+    )
+    if registry is None:
+        if actual != expected:
+            raise ValueError("fresh v3 snapshot relocation receipt drift")
+        return
+
+    for field in sorted(set(actual_payload) | set(expected_payload)):
+        if field in {"authoring_binding", "relocation_code_sha256"}:
+            continue
+        if actual_payload.get(field) != expected_payload.get(field):
+            raise ValueError(
+                f"fresh v3 snapshot relocation receipt drift: {field}"
+            )
+
+    # Semantic halves of authoring_binding are still compared exactly; only its
+    # two source-hash members are versioned.
+    actual_binding = dict(actual_payload["authoring_binding"])
+    expected_binding = dict(expected_payload["authoring_binding"])
+    source_members = {"code_sha256", "dependency_sha256"}
+    for member in sorted(set(actual_binding) | set(expected_binding)):
+        if member in source_members:
+            continue
+        if actual_binding.get(member) != expected_binding.get(member):
+            raise ValueError(
+                f"fresh v3 snapshot relocation receipt drift: authoring_binding.{member}"
+            )
+
+    for member, group in (
+        ("code_sha256", "authoring_code"),
+        ("dependency_sha256", "authoring_dependency"),
+    ):
+        if expected_binding[member] != registry["v2"][group]:
+            raise ValueError(
+                f"rebuilt authoring_binding.{member} does not match the registered v2 "
+                "bindings; register a new version rather than editing the receipt"
+            )
+    if expected_payload["relocation_code_sha256"] != registry["v2"]["relocation_code"]:
+        raise ValueError(
+            "rebuilt relocation_code_sha256 does not match the registered v2 "
+            "bindings; register a new version rather than editing the receipt"
+        )
+
+
 def validate_fresh_v3_snapshot_relocation_receipt(
     repository_root: Path,
     workspace_root: Path,
@@ -823,8 +959,7 @@ def validate_fresh_v3_snapshot_relocation_receipt(
         evaluation_root,
         actual.receipt_time,
     )
-    if actual != expected:
-        raise ValueError("fresh v3 snapshot relocation receipt drift")
+    _require_receipt_matches_expected(actual, expected, workspace_root=workspace_root)
     authoring._assert_path_matches_opened(
         receipt_path,
         opened_receipt,

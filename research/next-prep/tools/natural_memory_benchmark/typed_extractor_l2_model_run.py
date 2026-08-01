@@ -6,6 +6,7 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from .frozen_input_guard import require_frozen_input
 from .io import load_json, sha256_file, write_json_immutable
 from .typed_extractor_l2 import L2ProposalPayload, L2PublicPayload
 
@@ -73,10 +74,14 @@ class L2ModelProvenance(StrictModel):
 
 
 def _require_read_only(path: Path, label: str) -> None:
-    if not path.is_file():
-        raise FileNotFoundError(f"{label} missing: {path}")
-    if path.stat().st_mode & 0o222:
-        raise ValueError(f"{label} must be read-only")
+    """Verify a committed input portably.
+
+    Content-based rather than mode-based: git records only the executable bit, so
+    a 0444 input arrives as 0644 and a mode precondition rejects correct files on
+    every fresh clone. Mode is retained only for freshly written output -- see
+    ``frozen_input_guard``.
+    """
+    require_frozen_input(path, label)
 
 
 def write_l2_model_dispatch(

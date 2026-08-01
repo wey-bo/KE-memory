@@ -262,9 +262,11 @@ def test_formal_taxonomy_slice_validates_and_replays(
     }
     for name in expected_names - {source_name}:
         assert (replay / name).read_bytes() == (root / name).read_bytes()
-    for name in expected_names:
-        formal = root / name
-        assert formal.stat().st_mode & 0o777 == 0o444
+    # Mode is asserted on the replay this test just produced, where 0444 is a
+    # real property of the write. Asserting it on `root` would assert a property
+    # of the last checkout: git does not record it, so a fresh clone has 0644.
+    for name in expected_names - {source_name}:
+        assert (replay / name).stat().st_mode & 0o777 == 0o444
     _assert_public_has_no_private_labels(root / f"public-{layer}.json")
 
 
@@ -327,11 +329,42 @@ def test_prior_overlap_fails_closed(tmp_path: Path) -> None:
         )
 
 
-def test_mutable_formal_output_is_rejected(tmp_path: Path) -> None:
+def test_mutated_formal_output_is_rejected(tmp_path: Path) -> None:
+    """Tampering must be caught by content, since mode does not survive a clone.
+
+    Previously this chmod-ed an artifact to 0644 and expected "read-only". That
+    assertion could never hold on a fresh checkout, where every artifact arrives
+    writable. The property worth protecting is that a *changed* artifact is
+    refused, so that is what is asserted -- including a same-length change, which
+    only a hash can catch.
+    """
     copied = tmp_path / "root"
     shutil.copytree(L1_ROOT, copied)
-    (copied / "public-l1.json").chmod(0o644)
-    with pytest.raises(ValueError, match="read-only"):
+    target = copied / "public-l1.json"
+    target.chmod(0o644)
+    original = target.read_bytes()
+    mutated = original.replace(b"typed-extractor-l1-public-v1", b"typed-extractor-l1-public-v2", 1)
+    assert len(mutated) == len(original) and mutated != original, (
+        "the mutation must actually change a byte, or this test proves nothing"
+    )
+    target.write_bytes(mutated)
+
+    with pytest.raises(ValueError):
         validate_taxonomy_dev_slice(
             copied / "diagnostic-source-l1.json", "l1", copied, L1_PRIORS
         )
+
+
+def test_writable_formal_output_still_validates_after_a_clone(tmp_path: Path) -> None:
+    """The inverse: correct bytes at clone mode must be accepted."""
+    copied = tmp_path / "root"
+    shutil.copytree(L1_ROOT, copied)
+    for path in copied.rglob("*"):
+        if path.is_file():
+            path.chmod(0o644)
+            assert path.stat().st_mode & 0o222
+
+    validate_taxonomy_dev_slice(
+        copied / "diagnostic-source-l1.json", "l1", copied, L1_PRIORS
+    )
+

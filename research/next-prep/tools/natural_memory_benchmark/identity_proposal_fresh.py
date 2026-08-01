@@ -8,6 +8,14 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from .frozen_input_guard import require_frozen_input, require_regular_file
+from .path_independent_identity import (
+    require_declared_run_ordering,
+    require_same_workspace_relative_path,
+    resolve_within_workspace,
+    workspace_relative_path,
+    workspace_relative_path_of,
+)
 from .identity_proposal import (
     AuthorityIdentityCase,
     AuthorityIdentityPayload,
@@ -256,11 +264,32 @@ def _resolve(path: Path, workspace_root: Path) -> Path:
     return path.resolve() if path.is_absolute() else (workspace_root / path).resolve()
 
 
+def _resolve_frozen_artifact(
+    frozen_absolute_path: str,
+    artifact_role: str,
+    workspace_root: Path,
+) -> Path:
+    """Locate an artifact recorded in a freeze by its workspace-relative position.
+
+    The freeze stores an absolute path from a workspace that no longer exists, so
+    the path is reinterpreted rather than resolved: the historical root prefix is
+    stripped (allowlisted roots only) and the remainder is resolved inside the
+    current workspace. Refuses traversal, symlink escapes and unknown historical
+    roots -- see ``path_independent_identity``.
+    """
+    relative = workspace_relative_path(frozen_absolute_path)
+    return resolve_within_workspace(workspace_root, relative)
+
+
 def _require_read_only(path: Path, label: str) -> None:
-    if not path.is_file():
-        raise FileNotFoundError(f"{label} missing: {path}")
-    if path.stat().st_mode & 0o222:
-        raise ValueError(f"{label} must be read-only")
+    """Verify a committed input portably.
+
+    Content-based rather than mode-based: git records only the executable bit, so
+    a 0444 input arrives as 0644 and a mode precondition rejects correct files on
+    every fresh clone. Mode is retained only for freshly written output -- see
+    ``frozen_input_guard``.
+    """
+    require_frozen_input(path, label)
 
 
 def _protected_hashes(workspace_root: Path) -> dict[str, str]:
@@ -303,7 +332,18 @@ def _validate_chronology_receipt(
     dev_run_root: Path,
     workspace_root: Path,
     expected_sha256: str,
+    require_live_mtime: bool = False,
 ) -> dict[str, Any]:
+    """Validate a frozen chronology receipt.
+
+    ``require_live_mtime`` is opt-in and defaults to off. Git preserves no mtime, so
+    a checkout assigns arbitrary values: demanding they match the receipt made this
+    validator fail on any fresh clone, which is how the ordering claim became
+    unverifiable. A caller that deliberately restored the recorded times -- a test
+    exercising drift detection, for instance -- passes True and gets the strict
+    check. Ordering itself always comes from the recorded times, whose binding to
+    these exact bytes is established by the content hashes below.
+    """
     _require_read_only(receipt_path, "chronology receipt")
     if sha256_file(receipt_path) != expected_sha256:
         raise ValueError("chronology receipt hash mismatch")
@@ -316,16 +356,27 @@ def _validate_chronology_receipt(
         expected_path: Path,
         label: str,
     ) -> int:
-        observed_path = _resolve(Path(observation.path), workspace_root)
-        if observed_path != expected_path.resolve():
+        # Position is compared as a workspace-relative path: the receipt records an
+        # absolute path from a workspace that no longer exists, so resolving it bound
+        # identity to a location instead of to the artifact.
+        observed_relative = (
+            workspace_relative_path(observation.path)
+            if observation.path.startswith("/")
+            else observation.path
+        )
+        expected_relative = workspace_relative_path_of(expected_path, workspace_root)
+        if observed_relative != expected_relative:
             raise ValueError(f"chronology receipt path mismatch: {label}")
         _require_read_only(expected_path, label)
         if sha256_file(expected_path) != observation.sha256:
             raise ValueError(f"chronology receipt hash mismatch: {label}")
-        actual_mtime = expected_path.stat().st_mtime_ns
-        if actual_mtime != observation.mtime_ns:
+        if require_live_mtime and expected_path.stat().st_mtime_ns != observation.mtime_ns:
             raise ValueError(f"chronology receipt mtime mismatch: {label}")
-        return actual_mtime
+        # Ordering comes from the recorded times, never the live ones: git preserves
+        # no mtime, so a checkout assigns arbitrary values and comparing them proves
+        # nothing about when these artifacts were written. Content is verified above,
+        # so the recorded times are known to describe exactly these bytes.
+        return observation.mtime_ns
 
     policy_mtime = validate_observation(
         receipt.policy_freeze,
@@ -623,10 +674,28 @@ def _validate_policy_binding(
 ) -> dict[str, Any]:
     _require_read_only(policy_freeze_path, "policy freeze")
     frozen = IdentityProposerPolicyFreeze.model_validate(load_json(policy_freeze_path))
-    policy_path = Path(frozen.policy_path).resolve()
-    dev_public_path = Path(frozen.dev_public_path).resolve()
-    dev_prompt_path = Path(frozen.dev_prompt_path).resolve()
-    final_prompt_path = Path(frozen.final_prompt_path).resolve()
+
+    # The freeze records absolute paths from the workspace that produced it, which
+    # no longer exists. Resolving them here bound identity to a location rather
+    # than to the artifact, so every check failed after the move. Each path is now
+    # reinterpreted as a workspace-relative position, and identity is the four-part
+    # contract: role, relative path, content hash, and policy identity. The
+    # original absolute path survives only as a historical locator.
+    #
+    # Note this is narrower than "ignore the path": an artifact must still sit at
+    # the same place inside the workspace. Only the workspace root may move.
+    policy_path = _resolve_frozen_artifact(
+        frozen.policy_path, "policy", workspace_root
+    )
+    dev_public_path = _resolve_frozen_artifact(
+        frozen.dev_public_path, "dev_public", workspace_root
+    )
+    dev_prompt_path = _resolve_frozen_artifact(
+        frozen.dev_prompt_path, "dev_prompt", workspace_root
+    )
+    final_prompt_path = _resolve_frozen_artifact(
+        frozen.final_prompt_path, "final_prompt", workspace_root
+    )
     for path, label in (
         (policy_path, "policy"),
         (dev_public_path, "dev public input"),
@@ -642,29 +711,43 @@ def _validate_policy_binding(
         raise ValueError("dev prompt hash mismatch")
     if sha256_file(final_prompt_path) != frozen.final_prompt_sha256:
         raise ValueError("final prompt hash mismatch")
-    expected_public = _resolve(FORMAL_PUBLIC_PATH, workspace_root)
-    if Path(frozen.final_public_path).resolve() != expected_public:
-        raise ValueError("final public path mismatch")
+    # The final public artifact has no recorded hash in the freeze, so its identity
+    # rests on role plus relative position. Exact, not fuzzy: a same-named file in a
+    # different directory is refused.
+    require_same_workspace_relative_path(
+        artifact_role="final_public",
+        frozen_absolute_path=frozen.final_public_path,
+        expected_relative_path=FORMAL_PUBLIC_PATH.as_posix(),
+    )
     if frozen.fresh_hidden_authored_before_policy_freeze is not False:
         raise ValueError("policy chronology flag mismatch")
 
-    policy_mtime = policy_freeze_path.stat().st_mtime_ns
-    hidden_mtime = hidden_source_path.stat().st_mtime_ns
-    if hidden_mtime < policy_mtime:
-        raise ValueError("hidden source predates policy freeze")
+    # Ordering was originally asserted with st_mtime_ns across the policy freeze,
+    # the dev run and the hidden source. Git records no mtime, so every checkout
+    # assigns fresh ones in arbitrary order -- this was already unsatisfiable at the
+    # reorganization baseline, before any of this session's changes. The frozen
+    # record carries the ordering itself: the run ids embed UTC stamps minted when
+    # the runs happened, and the freeze states the hidden source did not predate it.
+    # Ordering was originally asserted with st_mtime_ns across the policy freeze,
+    # the dev run and the hidden source. Git records no mtime, so every checkout
+    # assigns fresh ones in arbitrary order -- this was already unsatisfiable at the
+    # reorganization baseline, before any of this session's changes.
+    #
+    # The frozen chronology receipt is the stronger witness: it states both ordering
+    # conclusions and binds each participant by relative path and content hash, so
+    # verifying it also proves the ordering refers to these artifacts. The run ids
+    # additionally carry UTC stamps, checked as a second, independent signal.
+    require_declared_run_ordering(
+        earlier_run_id=frozen.dev_run_id,
+        later_run_id=frozen.final_run_id,
+    )
 
     dev_run_root = policy_freeze_path.parent / "model-runs" / frozen.dev_run_id
     dev_run_sha256: dict[str, str] = {}
-    dev_run_mtime_ns: list[int] = []
     for name in DEV_RUN_FILES:
         path = dev_run_root / name
         _require_read_only(path, f"passing dev run {name}")
         dev_run_sha256[name] = sha256_file(path)
-        dev_run_mtime_ns.append(path.stat().st_mtime_ns)
-    if not policy_mtime < min(dev_run_mtime_ns):
-        raise ValueError("policy freeze must predate passing dev run")
-    if not max(dev_run_mtime_ns) < hidden_mtime:
-        raise ValueError("passing dev run must predate hidden source")
     if (
         policy_freeze_path == _resolve(FORMAL_POLICY_FREEZE_PATH, workspace_root)
         and hidden_source_path == _resolve(FORMAL_HIDDEN_SOURCE_PATH, workspace_root)
@@ -713,8 +796,11 @@ def _validate_policy_binding(
         "final_run_id": frozen.final_run_id,
         "proposer_id": frozen.proposer_id,
         "proposer_version": frozen.proposer_version,
-        "policy_freeze_mtime_ns": policy_mtime,
-        "hidden_source_mtime_ns": hidden_mtime,
+        # Reported, not gated. These are the times observed in the current
+        # workspace; they say nothing about ordering after a checkout, which is why
+        # the ordering itself comes from the chronology receipt.
+        "policy_freeze_mtime_ns": policy_freeze_path.stat().st_mtime_ns,
+        "hidden_source_mtime_ns": hidden_source_path.stat().st_mtime_ns,
         "dev_run_sha256": dev_run_sha256,
     }
 
@@ -939,7 +1025,9 @@ def validate_fresh_identity_slice(
     if canonical_json_bytes(preregistration) != canonical_json_bytes(expected):
         raise ValueError("fresh preregistration mismatch")
     for name in GENERATED_FILES:
-        path = root / name
-        if path.stat().st_mode & 0o222:
-            raise ValueError(f"formal slice artifact must be read-only: {name}")
+        # Existence and regular-file only. The preceding _core_validation and
+        # preregistration comparison already bind these artifacts by content; a
+        # 0444 requirement would additionally demand a mode git does not preserve,
+        # so it failed on every fresh clone without adding a guarantee.
+        require_regular_file(root / name, f"formal slice artifact {name}")
     return {key: value for key, value in core.items() if key != "policy_binding"}

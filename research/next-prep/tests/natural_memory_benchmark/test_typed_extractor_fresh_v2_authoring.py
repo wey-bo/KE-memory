@@ -200,17 +200,43 @@ def test_bundle_renders_existing_strict_l1_and_l2_payload_models() -> None:
 
 
 def test_bundle_is_deterministic_and_does_not_mutate_formal_artifacts() -> None:
-    assert not OFFICIAL_EVALUATION_ROOT.exists()
+    """Building the bundle twice is deterministic and writes nothing.
+
+    The absence assertions were dropped: the official evaluation root was committed
+    as evidence after this test was written, and it has existed since before the
+    reorganization baseline. What the test actually protects is that building does
+    not *change* anything, so the root's contents and the receipt are captured before
+    and compared after -- a stronger check than absence, since it would also catch a
+    build that quietly rewrote an existing artifact.
+    """
     receipt_path = PREREGISTRATION.parent / "authoring-implementation-receipt.json"
     receipt_before = receipt_path.read_bytes() if receipt_path.exists() else None
+    root_before = (
+        {
+            path.relative_to(OFFICIAL_EVALUATION_ROOT).as_posix(): path.read_bytes()
+            for path in sorted(OFFICIAL_EVALUATION_ROOT.rglob("*"))
+            if path.is_file()
+        }
+        if OFFICIAL_EVALUATION_ROOT.exists()
+        else None
+    )
 
     first = _build()
     second = _build()
 
     assert _canonical(first) == _canonical(second)
-    assert not OFFICIAL_EVALUATION_ROOT.exists()
     receipt_after = receipt_path.read_bytes() if receipt_path.exists() else None
     assert receipt_after == receipt_before
+    root_after = (
+        {
+            path.relative_to(OFFICIAL_EVALUATION_ROOT).as_posix(): path.read_bytes()
+            for path in sorted(OFFICIAL_EVALUATION_ROOT.rglob("*"))
+            if path.is_file()
+        }
+        if OFFICIAL_EVALUATION_ROOT.exists()
+        else None
+    )
+    assert root_after == root_before
 
 
 def test_public_payloads_exclude_private_family_authority_and_gold_material() -> None:

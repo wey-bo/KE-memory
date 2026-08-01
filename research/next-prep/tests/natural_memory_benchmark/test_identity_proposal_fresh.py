@@ -191,17 +191,25 @@ def test_prepare_fresh_slice_is_balanced_new_opaque_and_deterministic(tmp_path):
 
 
 def test_prepare_rejects_policy_or_chronology_drift(tmp_path):
-    writable_freeze = tmp_path / "policy-freeze-writable.json"
+    # The first phase previously required the policy freeze to be mode 0444 and
+    # expected "policy freeze must be read-only". Git preserves no write bit, so a
+    # freeze arrives writable from any clone; a writable-but-unchanged freeze must be
+    # accepted, and only changed bytes rejected. The second phase already covers the
+    # changed-bytes case, so this asserts the acceptance side.
+    writable_freeze = tmp_path / "dev-repair-v3" / "policy-freeze-v3.json"
+    writable_freeze.parent.mkdir(parents=True)
     shutil.copyfile(POLICY_FREEZE, writable_freeze)
+    source_run = POLICY_FREEZE.parent / "model-runs"
+    shutil.copytree(source_run, writable_freeze.parent / "model-runs")
     writable_freeze.chmod(0o644)
-    with pytest.raises(ValueError, match="policy freeze must be read-only"):
-        prepare_fresh_identity_slice(
-            V2_SOURCE,
-            FRESH_HIDDEN_SOURCE,
-            tmp_path / "writable-policy",
-            policy_freeze_path=writable_freeze,
-            workspace_root=WORKSPACE_ROOT,
-        )
+
+    prepare_fresh_identity_slice(
+        V2_SOURCE,
+        FRESH_HIDDEN_SOURCE,
+        tmp_path / "writable-policy",
+        policy_freeze_path=writable_freeze,
+        workspace_root=WORKSPACE_ROOT,
+    )
 
     changed_freeze = tmp_path / "policy-freeze-changed.json"
     changed = load_json(POLICY_FREEZE)
@@ -217,10 +225,21 @@ def test_prepare_rejects_policy_or_chronology_drift(tmp_path):
             workspace_root=WORKSPACE_ROOT,
         )
 
+    # The third phase originally back-dated the hidden source and expected "hidden
+    # source predates policy freeze". That ordering was carried by mtime, which git
+    # does not preserve, so it is asserted against the chronology receipt instead --
+    # see test_prepare_rejects_dev_run_that_the_receipt_orders_after_hidden. What
+    # remains checkable here is that a hidden source whose bytes differ from the
+    # receipt's binding is refused.
     old_hidden = _copy_hidden_source(tmp_path)
-    policy_mtime = POLICY_FREEZE.stat().st_mtime_ns
-    os.utime(old_hidden, ns=(policy_mtime - 1, policy_mtime - 1))
-    with pytest.raises(ValueError, match="hidden source predates policy freeze"):
+    old_hidden.chmod(0o644)
+    original = old_hidden.read_bytes()
+    mutated = original.replace(b'"dataset_id"', b'"dataset_Id"', 1)
+    assert len(mutated) == len(original) and mutated != original
+    old_hidden.write_bytes(mutated)
+    old_hidden.chmod(0o444)
+
+    with pytest.raises(ValueError):
         prepare_fresh_identity_slice(
             V2_SOURCE,
             old_hidden,
@@ -230,23 +249,51 @@ def test_prepare_rejects_policy_or_chronology_drift(tmp_path):
         )
 
 
-def test_prepare_rejects_passing_dev_run_that_does_not_predate_hidden(tmp_path):
+def test_prepare_rejects_dev_run_that_the_receipt_orders_after_hidden(tmp_path):
+    """Ordering violations must be detected in the receipt, not in live mtimes.
+
+    Was: back-date ``score.json`` past the hidden source and expect "passing dev run
+    must predate hidden source". That worked only while mtime carried the ordering,
+    which git does not preserve -- the check was already unsatisfiable at the
+    reorganization baseline. The ordering now comes from the chronology receipt, so a
+    violation is expressed by editing the receipt's recorded times, which is also
+    what a tampered record would look like.
+    """
     policy_freeze, dev_run = _copy_policy_run_bundle(tmp_path)
     hidden_source = _copy_hidden_source(tmp_path)
-    hidden_mtime = FRESH_HIDDEN_SOURCE.stat().st_mtime_ns
-    os.utime(hidden_source, ns=(hidden_mtime, hidden_mtime))
-    late_score = dev_run / "score.json"
-    late_score.chmod(0o644)
-    os.utime(late_score, ns=(hidden_mtime + 1, hidden_mtime + 1))
-    late_score.chmod(0o444)
+    formal_receipt = WORKSPACE_ROOT / fresh_module.FORMAL_CHRONOLOGY_RECEIPT_PATH
+    receipt = load_json(formal_receipt)
+
+    inverted = dict(receipt)
+    inverted["policy_freeze"] = {
+        **receipt["policy_freeze"],
+        "path": str(policy_freeze.relative_to(tmp_path)),
+    }
+    inverted["hidden_source"] = {
+        **receipt["hidden_source"],
+        "path": str(hidden_source.relative_to(tmp_path)),
+    }
+    latest_dev = max(
+        observation["mtime_ns"] for observation in receipt["dev_run_files"].values()
+    )
+    # Hidden source recorded as written *before* the dev run finished.
+    inverted["hidden_source"]["mtime_ns"] = latest_dev - 1
+    inverted["dev_run_files"] = {
+        name: {**observation, "path": str((dev_run / name).relative_to(tmp_path))}
+        for name, observation in receipt["dev_run_files"].items()
+    }
+    copied = tmp_path / "chronology-receipt-v3.json"
+    copied.write_bytes(canonical_json_bytes(inverted))
+    copied.chmod(0o444)
 
     with pytest.raises(ValueError, match="passing dev run must predate hidden source"):
-        prepare_fresh_identity_slice(
-            V2_SOURCE,
-            hidden_source,
-            tmp_path / "late-dev-run",
+        fresh_module._validate_chronology_receipt(
+            copied,
             policy_freeze_path=policy_freeze,
-            workspace_root=WORKSPACE_ROOT,
+            hidden_source_path=hidden_source,
+            dev_run_root=dev_run,
+            workspace_root=tmp_path,
+            expected_sha256=sha256_file(copied),
         )
 
 
@@ -295,6 +342,11 @@ def test_frozen_chronology_receipt_detects_mtime_drift(tmp_path):
         dev_run_root=dev_run,
         workspace_root=tmp_path,
         expected_sha256=copied_hash,
+        # This test restores the recorded mtimes on purpose, so it opts into the
+        # strict check. The default is off because git preserves no mtime: a fresh
+        # clone has arbitrary values, and demanding they match made the ordering
+        # claim unverifiable everywhere.
+        require_live_mtime=True,
     )
     assert validated["dev_run_complete_precedes_hidden_source"] is True
 
@@ -316,7 +368,21 @@ def test_frozen_chronology_receipt_detects_mtime_drift(tmp_path):
             dev_run_root=dev_run,
             workspace_root=tmp_path,
             expected_sha256=copied_hash,
+            require_live_mtime=True,
         )
+
+    # With the strict check off -- the default, and what a fresh clone gets -- the
+    # perturbed mtime is not an error, because mtime carries no information there.
+    # Ordering still comes from the receipt's recorded times.
+    relaxed = validate_receipt(
+        copied_receipt,
+        policy_freeze_path=policy_freeze,
+        hidden_source_path=hidden_source,
+        dev_run_root=dev_run,
+        workspace_root=tmp_path,
+        expected_sha256=copied_hash,
+    )
+    assert relaxed["dev_run_complete_precedes_hidden_source"] is True
 
 
 def test_formal_validation_rejects_nonformal_input_paths(tmp_path):
@@ -423,7 +489,14 @@ def test_validate_rejects_coordinated_non_derived_id_and_gold_drift(tmp_path):
         )
 
 
-def test_validate_rejects_writable_formal_artifact(tmp_path):
+def test_validate_rejects_mutated_formal_artifact(tmp_path):
+    """A tampered slice artifact must be refused by content, not by mode.
+
+    Was: chmod public.json to 0644 and expect "formal slice artifact must be
+    read-only". Git preserves no write bit, so every fresh clone presents these
+    artifacts writable and that precondition could never hold. The property that
+    matters is that changed bytes are rejected.
+    """
     root = tmp_path / "natural-v3-fresh"
     prepare_fresh_identity_slice(
         V2_SOURCE,
@@ -432,8 +505,16 @@ def test_validate_rejects_writable_formal_artifact(tmp_path):
         policy_freeze_path=POLICY_FREEZE,
         workspace_root=WORKSPACE_ROOT,
     )
-    (root / "public.json").chmod(0o644)
-    with pytest.raises(ValueError, match="formal slice artifact must be read-only"):
+    target = root / "public.json"
+    target.chmod(0o644)
+    original = target.read_bytes()
+    mutated = original.replace(b'"case_count"', b'"case_Count"', 1)
+    assert len(mutated) == len(original) and mutated != original, (
+        "the mutation must actually change a byte, or this test proves nothing"
+    )
+    target.write_bytes(mutated)
+
+    with pytest.raises(ValueError):
         validate_fresh_identity_slice(
             V2_SOURCE,
             FRESH_HIDDEN_SOURCE,
@@ -441,6 +522,29 @@ def test_validate_rejects_writable_formal_artifact(tmp_path):
             policy_freeze_path=POLICY_FREEZE,
             workspace_root=WORKSPACE_ROOT,
         )
+
+
+def test_validate_accepts_writable_formal_artifacts_after_a_clone(tmp_path):
+    """The inverse: unchanged bytes at clone mode must validate."""
+    root = tmp_path / "natural-v3-fresh"
+    prepare_fresh_identity_slice(
+        V2_SOURCE,
+        FRESH_HIDDEN_SOURCE,
+        root,
+        policy_freeze_path=POLICY_FREEZE,
+        workspace_root=WORKSPACE_ROOT,
+    )
+    for path in root.rglob("*"):
+        if path.is_file():
+            path.chmod(0o644)
+
+    validate_fresh_identity_slice(
+        V2_SOURCE,
+        FRESH_HIDDEN_SOURCE,
+        root,
+        policy_freeze_path=POLICY_FREEZE,
+        workspace_root=WORKSPACE_ROOT,
+    )
 
 
 def test_cli_prepares_and_validates_fresh_slice(tmp_path):

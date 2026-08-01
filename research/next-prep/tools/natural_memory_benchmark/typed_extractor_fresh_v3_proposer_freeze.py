@@ -317,11 +317,17 @@ def _require_directory(path: Path, label: str, mode: int = 0o775) -> None:
 
 
 def _read_immutable(path: Path, label: str) -> bytes:
+    """Read a committed artifact, verifying everything that survives a clone.
+
+    The regular-file, symlink and swap-during-read checks all stay: they describe
+    the file being read right now. The 0444 requirement does not -- git records no
+    write bit, so a committed artifact arrives writable and this refused every
+    fresh checkout. Callers compare the returned bytes against a recorded digest,
+    which is the portable guarantee.
+    """
     opened = path.lstat()
     if not stat.S_ISREG(opened.st_mode) or stat.S_ISLNK(opened.st_mode):
         raise ValueError(f"{label} must be a regular non-symlink file")
-    if stat.S_IMODE(opened.st_mode) != 0o444:
-        raise ValueError(f"{label} must have mode 0444")
     content = path.read_bytes()
     rechecked = path.lstat()
     if (opened.st_dev, opened.st_ino, opened.st_size) != (

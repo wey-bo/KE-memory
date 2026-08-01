@@ -39,10 +39,11 @@ def _unit_sort_key(unit: EvidenceUnit) -> tuple[int, str]:
 
 
 def _load_beam_message_index(path: Path, conversation_id: str) -> dict[str, EvidenceUnit]:
-    try:
-        import duckdb
-    except ImportError as error:  # pragma: no cover - environment guard
-        raise RuntimeError("DuckDB is required to read BEAM parquet") from error
+    # Same contract as loaders.load_beam_candidates: source validation is part of
+    # the evidence chain, so a missing reader is a failure, not a skip.
+    from .evaluation_environment import require_duckdb
+
+    duckdb = require_duckdb()
 
     connection = duckdb.connect()
     row = connection.execute(

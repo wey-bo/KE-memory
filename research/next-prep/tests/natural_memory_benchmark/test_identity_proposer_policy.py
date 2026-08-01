@@ -209,26 +209,21 @@ def test_freeze_policy_supports_v4_dataset_and_variable_case_counts(tmp_path):
         assert f"`case_count`: `{case_count}`" in content
 
 
-def test_freeze_policy_rejects_writable_input_and_conflicting_replay(tmp_path):
+def test_freeze_policy_accepts_writable_input_and_rejects_conflicting_replay(tmp_path):
+    """A writable policy is accepted; a conflicting replay is not.
+
+    The first phase previously required the policy to be mode 0444 and expected
+    "policy must be read-only". Git preserves no write bit, so a policy arrives
+    writable from any clone and that precondition could never hold. The protection
+    that matters is the second phase: re-freezing with different bytes is refused,
+    which is what actually keeps a frozen policy immutable.
+    """
     dev_root = tmp_path / "dev-repair-v3"
     prepare_identity_dev_slice(V2_SOURCE, dev_root, workspace_root=WORKSPACE_ROOT)
     policy_path = tmp_path / "policy-v1.md"
     policy_path.write_text("abstain without explicit evidence\n", encoding="utf-8")
-    with pytest.raises(ValueError, match="policy must be read-only"):
-        freeze_identity_proposer_policy(
-            policy_path,
-            tmp_path / "dev-prompt.md",
-            tmp_path / "final-prompt.md",
-            tmp_path / "policy-freeze.json",
-            dev_public_path=dev_root / "public.json",
-            final_public_path=tmp_path / "future-public.json",
-            dev_run_id="run-dev-policy-v1",
-            final_run_id="run-fresh-v3",
-            proposer_id="codex-gpt-5.6-sol",
-            proposer_version="2026-07-27-policy-v1",
-        )
+    assert policy_path.stat().st_mode & 0o222, "precondition: writable, as after a clone"
 
-    policy_path.chmod(0o444)
     dev_prompt = tmp_path / "dev-prompt.md"
     final_prompt = tmp_path / "final-prompt.md"
     freeze_path = tmp_path / "policy-freeze.json"

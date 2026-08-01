@@ -85,10 +85,12 @@ def _maybe_answer_from_item(item: Mapping[str, Any]) -> str | None:
 
 
 def load_beam_candidates(path: Path) -> list[NaturalBenchmarkCandidate]:
-    try:
-        import duckdb
-    except ImportError as error:  # pragma: no cover - environment guard
-        raise RuntimeError("DuckDB is required to read BEAM parquet") from error
+    # Routed through the evaluation contract so the failure names the install
+    # group and can never degrade into a skip: an unread parquet means the source
+    # replay path is unverified, which must not report green.
+    from .evaluation_environment import require_duckdb
+
+    duckdb = require_duckdb()
 
     connection = duckdb.connect()
     rows = connection.execute(

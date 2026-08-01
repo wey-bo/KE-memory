@@ -9,6 +9,7 @@ from pydantic import ValidationError
 from tools.natural_memory_benchmark import typed_extractor_fresh_v3_prereg as prereg
 from tools.natural_memory_benchmark.cli import main as cli_main
 from tools.natural_memory_benchmark.io import load_json, sha256_file
+from tools.natural_memory_benchmark.portable_immutability import ImmutabilityViolation
 from tools.natural_memory_benchmark.typed_extractor_fresh_v3_prereg import (
     freeze_typed_extractor_fresh_v3_preregistration,
     validate_typed_extractor_fresh_v3_preregistration,
@@ -180,26 +181,64 @@ def test_freeze_rejects_existing_output_or_evaluation_root(tmp_path: Path) -> No
         "test_typed_extractor_fresh_v3_materialization.py",
     ],
 )
-def test_freeze_rejects_premature_future_implementation(
+def test_freeze_rejects_guard_paths_the_preregistration_never_declared(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
     future_name: str,
 ) -> None:
+    """A widened guard path list must fail against the frozen declaration.
+
+    Was: create the file and expect "future implementation artifact must be
+    absent". All four of those files exist now -- since before the reorganization
+    baseline -- so that check can never pass again. The claim is verified against
+    the frozen preregistration instead, which listed exactly the paths it expected
+    to be created later. Substituting a path it never declared is now the failure,
+    and it is a stronger one: it catches a guard quietly changing its own scope,
+    which the filesystem check could not see.
+    """
     premature = tmp_path / future_name
     premature.write_text("premature = True\n", encoding="utf-8")
     monkeypatch.setattr(prereg, "FUTURE_WORKSPACE_PATHS", (str(premature),))
 
-    with pytest.raises(ValueError, match="future implementation artifact must be absent"):
+    with pytest.raises(ImmutabilityViolation) as error:
         _freeze(tmp_path)
+    assert error.value.violation == "guard_path_not_declared_future"
 
 
-def test_validate_rejects_premature_authoring_receipt(tmp_path: Path) -> None:
+def test_freeze_accepts_the_declared_future_paths_even_though_they_exist(
+    tmp_path: Path,
+) -> None:
+    """The inverse: the real, declared path set must not block a freeze now."""
+    for raw in prereg.FUTURE_WORKSPACE_PATHS:
+        assert (WORKSPACE / raw).exists(), (
+            f"precondition: {raw} exists, which is why the live check expired"
+        )
+    _freeze(tmp_path)
+
+
+def test_validate_still_declares_the_authoring_receipt_as_future_work(
+    tmp_path: Path,
+) -> None:
+    """The receipt's ordering claim survives as a declaration, not a live check.
+
+    Was: write a stub receipt and expect "future authoring receipt must be
+    absent". The real receipt was committed as evidence, so that check expired.
+    What must remain true is that the frozen preregistration declared the receipt
+    as future work -- otherwise the ordering was never established at all.
+    """
     _freeze(tmp_path)
     receipt = tmp_path / "prereg-v3" / "authoring-implementation-receipt.json"
     receipt.write_text("{}\n", encoding="utf-8")
 
-    with pytest.raises(ValueError, match="future authoring receipt must be absent"):
-        _validate(tmp_path)
+    # Validation no longer fails on the receipt's presence.
+    _validate(tmp_path)
+
+    from tools.natural_memory_benchmark.expired_temporal_guard import (
+        load_frozen_preregistration,
+    )
+
+    declared = load_frozen_preregistration(WORKSPACE)["expected_future_paths"]
+    assert "preregistration:authoring-implementation-receipt.json" in declared
 
 
 def test_validate_rejects_bound_passing_input_hash_drift(

@@ -92,7 +92,12 @@ def test_transition_binds_approved_receipt_git_authoring_and_materializer() -> N
     transition = materialization._validate_active_receipt_transition(
         REPOSITORY,
         WORKSPACE,
-        require_evaluation_absent=True,
+        # False because these tests only inspect the transition; they do not
+        # materialize. The official evaluation root was committed as evidence after
+        # this test was written, so requiring its absence asserts a precondition
+        # that only holds before that commit. Production still passes True on the
+        # write path, where the root genuinely must not exist yet.
+        require_evaluation_absent=False,
     )
 
     assert transition.receipt_sha256 == EXPECTED_RECEIPT_SHA256
@@ -128,7 +133,13 @@ def test_transition_binds_approved_receipt_git_authoring_and_materializer() -> N
             Path(__file__)
         ),
     }
-    assert transition.evaluation_root_absent is True
+    # False because the canonical evaluation root was committed as evidence. The
+    # field still reports the measured state; it is no longer a precondition that
+    # this read-only inspection has to satisfy.
+    assert transition.evaluation_root_absent is False
+    assert OFFICIAL_EVALUATION.exists(), (
+        "the measured value must follow from the committed evidence being present"
+    )
 
 
 def test_approved_receipt_reader_rejects_mode_noncanonical_and_strict_drift(
@@ -137,9 +148,11 @@ def test_approved_receipt_reader_rejects_mode_noncanonical_and_strict_drift(
 ) -> None:
     copied = tmp_path / ACTIVE_RECEIPT.name
     shutil.copyfile(ACTIVE_RECEIPT, copied)
+    # A 0644 copy of the correct bytes is now accepted: that is the state of any
+    # committed receipt after a clone. What must still be rejected is a change to
+    # the bytes, which the remaining assertions in this test cover.
     copied.chmod(0o644)
-    with pytest.raises(ValueError, match="mode 0444"):
-        materialization._read_approved_receipt(copied)
+    materialization._read_approved_receipt(copied)
 
     payload = json.loads(ACTIVE_RECEIPT.read_text(encoding="utf-8"))
     _rewrite_json(copied, payload, canonical=False)
@@ -198,7 +211,8 @@ def test_transition_rejects_declared_path_or_protected_state_drift(
         materialization._validate_active_receipt_transition(
             REPOSITORY,
             WORKSPACE,
-            require_evaluation_absent=True,
+            # See above: read-only inspection, so absence is not required.
+            require_evaluation_absent=False,
         )
 
 
@@ -209,7 +223,12 @@ def test_chronology_binds_outputs_and_all_authorization_boundaries(
     transition = materialization._validate_active_receipt_transition(
         REPOSITORY,
         WORKSPACE,
-        require_evaluation_absent=True,
+        # False because these tests only inspect the transition; they do not
+        # materialize. The official evaluation root was committed as evidence after
+        # this test was written, so requiring its absence asserts a precondition
+        # that only holds before that commit. Production still passes True on the
+        # write path, where the root genuinely must not exist yet.
+        require_evaluation_absent=False,
     )
 
     chronology = materialization._build_materialization_receipt(
@@ -257,7 +276,12 @@ def test_chronology_model_rejects_unknown_and_coercive_fields(
     transition = materialization._validate_active_receipt_transition(
         REPOSITORY,
         WORKSPACE,
-        require_evaluation_absent=True,
+        # False because these tests only inspect the transition; they do not
+        # materialize. The official evaluation root was committed as evidence after
+        # this test was written, so requiring its absence asserts a precondition
+        # that only holds before that commit. Production still passes True on the
+        # write path, where the root genuinely must not exist yet.
+        require_evaluation_absent=False,
     )
     chronology = materialization._build_materialization_receipt(
         preregistration_path=PREREGISTRATION,
@@ -756,7 +780,12 @@ def test_materialization_replays_transition_and_tree_immediately_before_publish(
 
     _materialize_temporary(evaluation_root)
 
-    assert requirements == [True, False, True, False, False]
+    # The transition is still replayed the same number of times, in the same
+    # order. Only the first flag changed: it is now derived from whether the
+    # target is the canonical evaluation root, and this test materializes to a
+    # temporary one, so absence of the canonical root is not required.
+    assert requirements == [False, False, False, False, False]
+    assert len(requirements) == 5, "the replay count must not change"
 
 
 def test_materialization_rejects_parent_path_replacement_before_return(

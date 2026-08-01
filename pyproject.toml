@@ -15,6 +15,13 @@ ke-memory-serve = "ke_memory_service.api:main"
 
 [dependency-groups]
 dev = ["pyright>=1.1.403,<2", "pytest>=8.4,<9", "pytest-asyncio>=1,<2", "respx>=0.22,<1", "ruff>=0.12,<1"]
+# Evaluation and conformance only. DuckDB reads the BEAM parquet that source
+# replay resolves against, so source validation cannot run without it -- but it
+# is an evaluation tool, and the production wheel must not carry it. Kept out of
+# [project.dependencies] deliberately: the wheel verifier checks for exactly this
+# kind of leak. Pinned rather than ranged so a conformance result names the
+# reader version that produced it.
+evaluation = ["duckdb==1.5.5"]
 
 [build-system]
 requires = ["hatchling>=1.27,<2"]

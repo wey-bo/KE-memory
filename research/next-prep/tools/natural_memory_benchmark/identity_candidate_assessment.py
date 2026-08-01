@@ -16,6 +16,7 @@ from .identity_proposal import (
 )
 from .identity_resolution import IdentityAwareMemoryBundleV4
 from .identity_resolution import build_identity_scenario_bundle
+from .frozen_input_guard import require_frozen_input
 from .io import (
     load_json,
     sha256_file,
@@ -170,10 +171,15 @@ class IdentityProposalScorePayload(StrictModel):
 
 
 def _require_read_only(path: Path, label: str) -> None:
-    if not path.is_file():
-        raise FileNotFoundError(f"{label} does not exist: {path}")
-    if path.stat().st_mode & 0o222:
-        raise ValueError(f"{label} must be read-only")
+    """Verify a committed input portably.
+
+    Kept under the original name so the 4 call sites in this module read
+    unchanged, but the check is now content-based: mode does not survive a clone,
+    so requiring 0444 here rejected correct inputs on every fresh checkout. See
+    ``frozen_input_guard`` for why mode is retained only for freshly written
+    output.
+    """
+    require_frozen_input(path, label)
 
 
 def _ratio(numerator: int, denominator: int) -> float:

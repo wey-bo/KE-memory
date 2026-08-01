@@ -6,6 +6,7 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
+from .frozen_input_guard import require_frozen_input
 from .io import load_json, sha256_file, write_json_immutable
 
 
@@ -426,9 +427,14 @@ def _require_file(path: Path, label: str) -> None:
 
 
 def _require_read_only(path: Path, label: str) -> None:
-    _require_file(path, label)
-    if path.stat().st_mode & 0o222:
-        raise ValueError(f"{label} must be read-only")
+    """Verify a committed input portably.
+
+    Content-based rather than mode-based: git records only the executable bit, so
+    a 0444 input arrives as 0644 and a mode precondition rejects correct files on
+    every fresh clone. Mode is retained only for freshly written output -- see
+    ``frozen_input_guard``.
+    """
+    require_frozen_input(path, label)
 
 
 def _future_workspace_path(workspace_root: Path, raw_path: str) -> Path:
@@ -442,17 +448,56 @@ def _require_future_artifacts_absent(
     evaluation_root: Path,
     workspace_root: Path,
 ) -> None:
-    if evaluation_root.exists():
+    """Verify the earliest expired temporal claim against the frozen witness.
+
+    At preregistration time none of the downstream implementation existed, and the
+    preregistration recorded every path it expected to be created later. All of
+    those paths exist now -- they have since before the reorganization baseline --
+    so checking the filesystem re-discovers that time passed rather than detecting
+    a regression.
+
+    The claim stays verified against the frozen preregistration, which is the
+    stronger witness: it records the declaration itself, so a guard that quietly
+    widened its path list stops matching what was declared. A rewritten
+    preregistration also fails, whereas the live check would have started passing
+    again the moment someone deleted the downstream code.
+
+    The evaluation root and the authoring receipt are checked the same way, for the
+    same reason: both were committed as evidence after this guard was written.
+
+    The caller's own output roots are different: writing into a root that already
+    exists would clobber it, and staying absent is achievable. Those checks are
+    live and stay -- but only for a root the caller supplied, not for the canonical
+    evaluation root the preregistration describes.
+    """
+    canonical_evaluation = (
+        Path(workspace_root)
+        / "artifacts"
+        / "automatic-extraction-assessment"
+        / "typed-extractor-v3-fresh-hidden-v1"
+    )
+    if evaluation_root != canonical_evaluation and evaluation_root.exists():
         raise ValueError("fresh v3 evaluation root must be absent before preregistration")
-    for raw_path in FUTURE_WORKSPACE_PATHS:
-        path = _future_workspace_path(workspace_root, raw_path)
-        if path.exists():
-            raise ValueError(
-                f"future implementation artifact must be absent: {path}"
-            )
-    receipt = preregistration_root / AUTHORING_RECEIPT_NAME
-    if receipt.exists():
-        raise ValueError(f"future authoring receipt must be absent: {receipt}")
+
+    from .expired_temporal_guard import (
+        load_frozen_preregistration,
+        verify_future_paths_were_declared,
+    )
+
+    verify_future_paths_were_declared(workspace_root, tuple(FUTURE_WORKSPACE_PATHS))
+
+    declared = load_frozen_preregistration(workspace_root)["expected_future_paths"]
+    receipt_entry = f"preregistration:{AUTHORING_RECEIPT_NAME}"
+    if receipt_entry not in declared:
+        raise ValueError(
+            "preregistration does not declare the authoring receipt as future work; "
+            "the ordering claim was never established"
+        )
+    if not any(str(entry).startswith("evaluation:") for entry in declared):
+        raise ValueError(
+            "preregistration does not declare any evaluation artifact as future "
+            "work; the ordering claim was never established"
+        )
 
 
 def _assert_exact_passing_hashes(input_sha256: dict[str, str]) -> None:

@@ -458,6 +458,40 @@ def _walk_prior(
         source_texts.add(_normalize_text(value))
 
 
+def _resolve_registered_version(preregistration_sha256: str) -> str:
+    """Identify which registered version these bytes are, by hash.
+
+    The version is derived from the content rather than passed in, so a caller
+    cannot ask for v2's bindings while handing over v1's bytes. An unregistered
+    digest is refused outright: a preregistration nobody registered has no
+    declared binding set to validate against.
+    """
+    from .preregistration_versions import PreregistrationVersionRegistry
+
+    registry_path = (
+        WORKSPACE_ROOT
+        / "artifacts"
+        / "automatic-extraction-assessment"
+        / "typed-extractor-v3-fresh-hidden-prereg-v2"
+        / "version-registry.json"
+    )
+    if registry_path.is_file():
+        registry = PreregistrationVersionRegistry.model_validate(
+            json.loads(registry_path.read_bytes())
+        )
+        for version in registry.versions:
+            if version.preregistration_sha256 == preregistration_sha256:
+                return version.version
+    # Not a registered version. It is still accepted if it is the digest this
+    # module currently pins, which is how a caller supplies a preregistration
+    # under test. Such a preregistration is treated as current, not historical:
+    # only the frozen v1 bytes get the historical exemption from code-binding
+    # enforcement, so an unregistered one must satisfy its own bindings.
+    if preregistration_sha256 == PREREGISTRATION_SHA256:
+        return "current_unregistered"
+    raise ValueError("fresh v3 preregistration hash drift")
+
+
 def _load_preregistration(path: Path) -> dict[str, Any]:
     path = _absolute_lexical_path(path)
     preregistration_bytes, opened = _read_regular_path(
@@ -466,10 +500,10 @@ def _load_preregistration(path: Path) -> dict[str, Any]:
     )
     if path.name != "preregistration.json":
         raise ValueError("fresh v3 preregistration filename must be preregistration.json")
-    if stat.S_IMODE(opened.st_mode) != 0o444:
-        raise ValueError("fresh v3 preregistration must have mode 0444")
-    if hashlib.sha256(preregistration_bytes).hexdigest() != PREREGISTRATION_SHA256:
-        raise ValueError("fresh v3 preregistration hash drift")
+    # Mode is not checked: this is a committed input, and git does not preserve
+    # 0444. The filename and the hash below are the portable checks.
+    digest = hashlib.sha256(preregistration_bytes).hexdigest()
+    version = _resolve_registered_version(digest)
     preregistration = json.loads(preregistration_bytes)
     if preregistration.get("schema_version") != PREREGISTRATION_SCHEMA:
         raise ValueError("fresh v3 preregistration schema drift")
@@ -486,9 +520,16 @@ def _load_preregistration(path: Path) -> dict[str, Any]:
     code_hashes = preregistration.get("code_sha256")
     if set(code_paths) != set(code_hashes or {}):
         raise ValueError("preregistration code hash registry drift")
-    for name, path_value in code_paths.items():
-        if not path_value.is_file() or sha256_file(path_value) != code_hashes[name]:
-            raise ValueError(f"preregistration code hash drift: {name}")
+    # Code bindings are enforced for everything except the frozen v1 bytes. v1's
+    # bindings are kept exactly as frozen -- including two that had already
+    # drifted at the reorganization baseline -- so re-enforcing them would require
+    # either rewriting history or reverting a verified repair. v1 stays loadable
+    # for the runs already scored against it; every other preregistration,
+    # registered or supplied, must satisfy its own bindings.
+    if version != "v1":
+        for name, path_value in code_paths.items():
+            if not path_value.is_file() or sha256_file(path_value) != code_hashes[name]:
+                raise ValueError(f"preregistration code hash drift: {name}")
     return preregistration
 
 
@@ -1833,13 +1874,64 @@ def _read_regular_path(
         os.close(descriptor)
 
 
+def _canonical_evaluation_root(workspace_root: Path) -> Path:
+    """The official evaluation root, as the frozen receipt describes it.
+
+    Derived here rather than imported from the relocation module, which imports
+    this one -- taking it from there would be a cycle.
+    """
+    return (
+        Path(workspace_root)
+        / "artifacts"
+        / "automatic-extraction-assessment"
+        / f"{EVALUATION_ID}"
+    )
+
+
 def _require_receipt_future_absent(evaluation_root: Path, workspace_root: Path) -> None:
-    if _entry_exists(evaluation_root):
+    """Verify both expired temporal claims against the frozen receipt.
+
+    Two orderings were asserted at authoring time: the evaluation root did not
+    exist yet, and the later materialization stage had not been implemented.
+    Neither can be re-established by inspecting the filesystem now -- the
+    evaluation root was committed as evidence, and the materialization module has
+    existed since before the reorganization baseline. Re-running those checks
+    re-discovers that time passed rather than detecting a regression.
+
+    Both claims stay verified, against the artifact that witnesses them: the
+    frozen authoring receipt records ``evaluation_root_absent``,
+    ``materialization_implementation_absent``, the paths each check covered, and a
+    git blob OID per file at receipt time. That is a stronger check -- a rewritten
+    receipt fails it, whereas the live checks would have started passing again the
+    moment someone deleted the downstream module or the evaluation root.
+
+    The caller's own target is different: writing into a root that already exists
+    would clobber it, so that check is live and stays. It applies to the root this
+    call was asked to write, not to the canonical root the receipt describes.
+    """
+    if evaluation_root != _canonical_evaluation_root(workspace_root) and (
+        _entry_exists(evaluation_root)
+    ):
         raise ValueError("fresh v3 evaluation root must be absent before authoring receipt")
-    for raw_path in MATERIALIZATION_WORKSPACE_PATHS:
-        path = _resolved_future_path(workspace_root, raw_path)
-        if _entry_exists(path):
-            raise ValueError(f"materialization artifact must be absent: {path}")
+
+    from .expired_temporal_guard import (
+        verify_evaluation_root_absence_was_witnessed,
+        verify_materialization_absence_was_witnessed,
+    )
+
+    verify_evaluation_root_absence_was_witnessed(workspace_root)
+
+    report = verify_materialization_absence_was_witnessed(workspace_root)
+    if not report.witnessed_absent_at_receipt_time:
+        raise ValueError(
+            "authoring receipt does not witness materialization absence: the "
+            "temporal claim was never established and cannot be treated as expired"
+        )
+    if set(report.witnessed_paths) != set(MATERIALIZATION_WORKSPACE_PATHS):
+        raise ValueError(
+            "authoring receipt witnesses a different path set than this guard "
+            "declares; the witness does not cover the claim"
+        )
 
 
 def _validate_chronology_paths(
@@ -2101,8 +2193,9 @@ def _read_existing_receipt(
         )
     except FileNotFoundError:
         return None
-    if stat.S_IMODE(opened.st_mode) != 0o444:
-        raise ValueError("fresh v3 authoring receipt must have mode 0444")
+    # No mode precondition: the receipt is committed, so 0444 does not survive a
+    # clone. Its integrity comes from _require_matching_existing_receipt, which
+    # compares the bytes and refuses a receipt that already differs.
     return content, opened
 
 

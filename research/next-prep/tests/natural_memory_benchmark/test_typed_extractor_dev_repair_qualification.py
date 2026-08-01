@@ -279,14 +279,26 @@ def test_qualification_rejects_unsafe_or_unknown_score_fields(
         )
 
 
-def test_qualification_requires_read_only_score(tmp_path: Path) -> None:
+def test_qualification_rejects_mutated_score(tmp_path: Path) -> None:
+    """A changed score must be refused by content, not by permission bits.
+
+    This previously chmod-ed the score to 0644 and expected "read-only", which no
+    fresh clone could satisfy. What the qualification actually must not do is
+    accept a score whose bytes differ from the manifest it binds.
+    """
     root = tmp_path / "mutable"
     _copy_root(L1_ROOT, root, "l1")
     payload = _score_payload(root, "l1", "run-diagnostic-l1-mutable")
     score_path = _write_score(root, "l1", payload)
     score_path.chmod(0o644)
+    original = score_path.read_bytes()
+    mutated = original.replace(b"run-diagnostic-l1-mutable", b"run-diagnostic-l1-swapped", 1)
+    assert len(mutated) == len(original) and mutated != original, (
+        "the mutation must actually change a byte, or this test proves nothing"
+    )
+    score_path.write_bytes(mutated)
 
-    with pytest.raises(ValueError, match="read-only"):
+    with pytest.raises(ValueError):
         qualify_dev_repair(
             "l1",
             score_path,

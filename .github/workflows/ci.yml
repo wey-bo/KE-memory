@@ -30,6 +30,30 @@ jobs:
           KEOL_SOURCE: ${{ github.workspace }}/.deps/KEOL/src
         run: scripts/ci/check.sh
 
+  # Separate job because the evaluation dependency must not be present when the
+  # quality job builds and verifies the wheel: keeping them apart is what proves
+  # the production package does not carry an evaluation reader.
+  conformance:
+    needs: quality
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.11.26"
+          enable-cache: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install evaluation dependencies
+        # --frozen so a drifted lockfile fails here rather than silently
+        # resolving a different reader version than the pin declares.
+        run: uv sync --frozen --group evaluation
+      - name: Verify the evaluation environment contract
+        # Fails when the pinned reader is missing or mismatched. Never skips:
+        # an unread parquet leaves the source replay path unverified.
+        run: scripts/ci/verify_conformance_environment.sh
+
   container:
     needs: quality
     runs-on: ubuntu-latest

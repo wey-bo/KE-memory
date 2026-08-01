@@ -129,21 +129,26 @@ def test_dispatch_and_freeze_validate_public_only_contract(tmp_path):
     assert provenance_path.stat().st_mode & 0o777 == 0o444
 
 
-def test_dispatch_requires_frozen_inputs_and_freeze_detects_hash_changes(tmp_path):
+def test_dispatch_binds_the_prompt_and_freeze_detects_hash_changes(tmp_path):
+    """Changing the prompt after dispatch must be caught by its hash.
+
+    The first half of this test previously required the prompt to be mode 0444
+    before dispatch would accept it. That precondition cannot hold on a fresh
+    clone, and it was never the real protection: the binding that matters is the
+    prompt hash recorded in the dispatch, which is what the second half asserts.
+    """
     root = tmp_path / "natural-v2"
     prepare_opaque_identity_slice(V1_SOURCE, root, workspace_root=WORKSPACE_ROOT)
     prompt = tmp_path / "prompt.md"
     prompt.write_text("not frozen\n", encoding="utf-8")
-    with pytest.raises(ValueError, match="prompt must be read-only"):
-        _write_dispatch(root, prompt, tmp_path / "dispatch.json")
 
-    prompt.chmod(0o444)
+    # A writable prompt is accepted -- that is the state after any checkout.
     dispatch_path = tmp_path / "dispatch.json"
     _write_dispatch(root, prompt, dispatch_path)
     staged = _write_staged_proposals(tmp_path, root / "public.json")
-    prompt.chmod(0o644)
+
+    # Changing it afterwards is not, because the dispatch bound its hash.
     prompt.write_text("changed after dispatch\n", encoding="utf-8")
-    prompt.chmod(0o444)
     with pytest.raises(ValueError, match="prompt hash mismatch"):
         freeze_identity_model_proposals(
             root / "public.json",
@@ -154,6 +159,30 @@ def test_dispatch_requires_frozen_inputs_and_freeze_detects_hash_changes(tmp_pat
             dispatch_path=dispatch_path,
             isolation_context=ISOLATION_CONTEXT,
         )
+
+
+def test_freeze_accepts_an_unchanged_prompt_at_clone_mode(tmp_path):
+    """The inverse: right bytes at 0644 must not be rejected."""
+    root = tmp_path / "natural-v2"
+    prepare_opaque_identity_slice(V1_SOURCE, root, workspace_root=WORKSPACE_ROOT)
+    prompt = tmp_path / "prompt.md"
+    prompt.write_text("stable prompt\n", encoding="utf-8")
+    prompt.chmod(0o644)
+
+    dispatch_path = tmp_path / "dispatch.json"
+    _write_dispatch(root, prompt, dispatch_path)
+    staged = _write_staged_proposals(tmp_path, root / "public.json")
+
+    assert prompt.stat().st_mode & 0o222, "precondition: writable, as after a clone"
+    freeze_identity_model_proposals(
+        root / "public.json",
+        staged,
+        tmp_path / "proposals.json",
+        tmp_path / "provenance.json",
+        prompt_path=prompt,
+        dispatch_path=dispatch_path,
+        isolation_context=ISOLATION_CONTEXT,
+    )
 
 
 @pytest.mark.parametrize(

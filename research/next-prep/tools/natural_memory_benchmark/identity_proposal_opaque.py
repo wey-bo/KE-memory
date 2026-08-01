@@ -9,6 +9,7 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from .frozen_input_guard import require_regular_file
 from .identity_proposal import (
     SourceConfig,
     freeze_natural_identity_slice,
@@ -514,7 +515,7 @@ def validate_opaque_identity_slice(
     if preregistration.identifier_policy != OpaqueIdentifierPolicy():
         raise ValueError("identifier policy mismatch")
     for name in SLICE_FILES:
-        path = v2_root / name
-        if path.stat().st_mode & 0o222:
-            raise ValueError(f"formal slice artifact must be read-only: {name}")
+        # Content is already bound by files_sha256 in the preregistration checked
+        # above; mode is not asserted because a committed artifact arrives 0644.
+        require_regular_file(v2_root / name, f"formal slice artifact {name}")
     return core

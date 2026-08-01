@@ -251,13 +251,37 @@ def test_validate_rejects_preregistration_policy_drift(
         validate_opaque_identity_slice(V1_SOURCE, root, workspace_root=WORKSPACE_ROOT)
 
 
-def test_validate_rejects_writable_formal_slice_file(tmp_path):
+def test_validate_rejects_mutated_formal_slice_file(tmp_path):
+    """A tampered slice artifact must be refused by content.
+
+    Was: chmod to 0644 and expect "must be read-only". That could not hold on a
+    fresh clone, where every file is writable. The property that matters is that
+    changed bytes are rejected, which files_sha256 in the preregistration covers.
+    """
     root = tmp_path / "natural-v2"
     prepare_opaque_identity_slice(V1_SOURCE, root, workspace_root=WORKSPACE_ROOT)
-    (root / "public.json").chmod(0o644)
+    target = root / "public.json"
+    target.chmod(0o644)
+    original = target.read_bytes()
+    mutated = original.replace(b'"concept_id":"memory:Person"', b'"concept_id":"memory:Poster"', 1)
+    assert len(mutated) == len(original) and mutated != original, (
+        "the mutation must actually change a byte, or this test proves nothing"
+    )
+    target.write_bytes(mutated)
 
-    with pytest.raises(ValueError, match="formal slice artifact must be read-only"):
+    with pytest.raises(ValueError):
         validate_opaque_identity_slice(V1_SOURCE, root, workspace_root=WORKSPACE_ROOT)
+
+
+def test_validate_accepts_writable_formal_slice_after_a_clone(tmp_path):
+    """The inverse: unchanged bytes at clone mode must validate."""
+    root = tmp_path / "natural-v2"
+    prepare_opaque_identity_slice(V1_SOURCE, root, workspace_root=WORKSPACE_ROOT)
+    for path in root.rglob("*"):
+        if path.is_file():
+            path.chmod(0o644)
+
+    validate_opaque_identity_slice(V1_SOURCE, root, workspace_root=WORKSPACE_ROOT)
 
 
 def test_prepare_rejects_conflicting_existing_mapping(tmp_path):

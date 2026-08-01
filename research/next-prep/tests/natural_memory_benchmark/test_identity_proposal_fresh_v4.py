@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import importlib
 import json
-import os
 import shutil
 from pathlib import Path
 
@@ -125,20 +124,33 @@ def test_prepare_fresh_v4_rejects_prior_hidden_evidence_overlap(tmp_path):
         )
 
 
-def test_prepare_fresh_v4_rejects_hidden_that_predates_passing_dev(tmp_path):
+def test_prepare_fresh_v4_rejects_hidden_source_with_unexpected_bytes(tmp_path):
+    """Ordering is no longer carried by mtime, so tamper detection is by content.
+
+    Was: back-date the hidden source past the dev run's ``score.json`` and expect
+    "passing dev run must predate hidden source". Git preserves no mtime, so a
+    checkout assigns arbitrary values and that ordering could not be established --
+    it was already unsatisfiable at the reorganization baseline. The chronology
+    receipt now carries the ordering; what remains checkable at this entry point is
+    that a hidden source whose bytes differ from the frozen binding is refused.
+    """
     module = _module()
     hidden_path = tmp_path / "hidden-source-cases.json"
     shutil.copyfile(V4_HIDDEN_SOURCE, hidden_path)
-    score_mtime = (PASSING_DEV_RUN / "score.json").stat().st_mtime_ns
-    os.utime(hidden_path, ns=(score_mtime - 1, score_mtime - 1))
+    original = hidden_path.read_bytes()
+    mutated = original.replace(b'"dataset_id"', b'"dataset_Id"', 1)
+    assert len(mutated) == len(original) and mutated != original, (
+        "the mutation must actually change a byte, or this test proves nothing"
+    )
+    hidden_path.write_bytes(mutated)
     hidden_path.chmod(0o444)
 
-    with pytest.raises(ValueError, match="passing dev run must predate hidden source"):
+    with pytest.raises(ValueError):
         module.prepare_fresh_identity_v4(
             V2_SOURCE,
             V3_HIDDEN_SOURCE,
             hidden_path,
-            tmp_path / "old-hidden",
+            tmp_path / "mutated-hidden",
             policy_freeze_path=POLICY_FREEZE,
             workspace_root=WORKSPACE_ROOT,
         )
@@ -168,17 +180,27 @@ def test_formal_fresh_v4_requires_exact_inputs_and_read_only_outputs(tmp_path):
             workspace_root=WORKSPACE_ROOT,
         )
 
-    public_path = formal_root / "public.json"
-    public_path.chmod(0o644)
-    try:
-        with pytest.raises(ValueError, match="must be read-only"):
-            module.validate_fresh_identity_v4(
-                V2_SOURCE,
-                V3_HIDDEN_SOURCE,
-                V4_HIDDEN_SOURCE,
-                formal_root,
-                policy_freeze_path=POLICY_FREEZE,
-                workspace_root=WORKSPACE_ROOT,
-            )
-    finally:
-        public_path.chmod(0o444)
+    # The second half previously chmod-ed the *committed* public.json to 0644 and
+    # expected "must be read-only". Two problems: git preserves no write bit, so that
+    # precondition cannot hold after a clone, and mutating tracked evidence to test a
+    # guard damages the evidence. Content rejection is exercised on a copy instead.
+    copied_root = tmp_path / "natural-v4-fresh"
+    shutil.copytree(WORKSPACE_ROOT / formal_root, copied_root)
+    target = copied_root / "public.json"
+    target.chmod(0o644)
+    original = target.read_bytes()
+    mutated = original.replace(b'"case_count"', b'"case_Count"', 1)
+    assert len(mutated) == len(original) and mutated != original, (
+        "the mutation must actually change a byte, or this test proves nothing"
+    )
+    target.write_bytes(mutated)
+
+    with pytest.raises(ValueError):
+        module.validate_fresh_identity_v4(
+            V2_SOURCE,
+            V3_HIDDEN_SOURCE,
+            V4_HIDDEN_SOURCE,
+            copied_root,
+            policy_freeze_path=POLICY_FREEZE,
+            workspace_root=WORKSPACE_ROOT,
+        )

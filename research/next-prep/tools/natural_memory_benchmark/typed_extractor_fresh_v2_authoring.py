@@ -2736,8 +2736,8 @@ def _current_inventory(
 def _validate_preregistration(path: Path) -> dict[str, Any]:
     if not path.is_file():
         raise FileNotFoundError(f"preregistration missing: {path}")
-    if path.stat().st_mode & 0o222:
-        raise ValueError("preregistration must be read-only")
+    # The hash below is what binds this preregistration. A mode precondition would
+    # reject a correct file on every fresh clone, since git drops 0444.
     if sha256_file(path) != PREREGISTRATION_SHA256:
         raise ValueError("preregistration hash drift")
     payload = load_json(path)

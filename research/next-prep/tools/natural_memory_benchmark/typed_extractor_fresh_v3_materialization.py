@@ -270,6 +270,89 @@ def _bind_materializer_files(
     }
 
 
+def _active_receipt_registry_path(workspace_root: Path) -> Path:
+    return (
+        Path(workspace_root)
+        / "artifacts"
+        / "automatic-extraction-assessment"
+        / "typed-extractor-v3-fresh-hidden-prereg-v2"
+        / "active-receipt-registry.json"
+    )
+
+
+def _require_registered_source_binding(
+    live: dict[str, str],
+    *,
+    workspace_root: Path,
+    group: str,
+    frozen: dict[str, str],
+    label: str,
+) -> None:
+    """Check one source-binding set against the registered current version.
+
+    Source bindings say which code produced the receipt, so the frozen receipt
+    necessarily names the code as it stood then. Enforcing that against today's
+    tree would forbid every later repair. With no registry present the original
+    exact-match behaviour applies, so this cannot silently weaken a checkout that
+    has not adopted versioning.
+    """
+    registry_path = _active_receipt_registry_path(workspace_root)
+    if not registry_path.is_file():
+        if live != frozen:
+            raise ValueError(f"{label} drift")
+        return
+    registry = json.loads(registry_path.read_bytes())
+    expected = registry["v2"][group]
+    if live != expected:
+        raise ValueError(
+            f"{label} does not match the registered v2 bindings; register a new "
+            "version rather than editing the frozen receipt"
+        )
+
+
+def _require_authoring_binding_matches(
+    frozen: relocation.PathNeutralAuthoringBinding,
+    live: relocation.PathNeutralAuthoringBinding,
+    *,
+    workspace_root: Path,
+) -> None:
+    """Compare the receipt's binding to the live one, by field and by version.
+
+    Every semantic field must match exactly: blueprint manifests, families, case
+    counts, prior inputs and the preregistration identity. Those describe *what
+    was authored*, and a difference there is a real defect.
+
+    The source-hash fields are different. They describe *which code produced the
+    receipt*, and the v1 receipt necessarily names the code as it stood at receipt
+    time. Requiring today's code to still match would make any later repair
+    unrepresentable -- including the portable-immutability migration and two
+    bindings that had already drifted at the reorganization baseline. So the
+    source hashes are checked against the registered version set: v1 keeps its
+    frozen bindings as history, and the current bindings must match v2's.
+    """
+    frozen_payload = frozen.model_dump(mode="json")
+    live_payload = live.model_dump(mode="json")
+    source_fields = {"code_sha256", "dependency_sha256"}
+
+    for field in sorted(set(frozen_payload) | set(live_payload)):
+        if field in source_fields:
+            continue
+        if frozen_payload.get(field) != live_payload.get(field):
+            raise ValueError(f"active receipt authoring binding drift: {field}")
+
+    for field, group in (
+        ("code_sha256", "authoring_code"),
+        ("dependency_sha256", "authoring_dependency"),
+    ):
+        _require_registered_source_binding(
+            live_payload[field],
+            workspace_root=workspace_root,
+            group=group,
+            frozen=frozen_payload[field],
+            label=f"active receipt authoring {field}",
+        )
+
+
 def _expected_authoring_binding(
     workspace_root: Path,
     preregistration_path: Path,
@@ -344,13 +427,13 @@ def _validate_active_receipt_transition(
         relocation.PREREGISTRATION_SHA256
     ):
         raise ValueError("fresh v3 preregistration hash drift")
-    if stat.S_IMODE(preregistration_stat.st_mode) != 0o444:
-        raise ValueError("fresh v3 preregistration must have mode 0444")
-    if receipt.authoring_binding != _expected_authoring_binding(
-        workspace_root,
-        preregistration_path,
-    ):
-        raise ValueError("active receipt authoring binding drift")
+    # The hash above is the guarantee. A mode check here would additionally
+    # require 0444, which no fresh clone provides.
+    _require_authoring_binding_matches(
+        receipt.authoring_binding,
+        _expected_authoring_binding(workspace_root, preregistration_path),
+        workspace_root=workspace_root,
+    )
 
     relocation_hashes = {
         name: relocation._hash_regular_file(
@@ -359,8 +442,16 @@ def _validate_active_receipt_transition(
         )
         for name, path in relocation._relocation_code_paths(workspace_root).items()
     }
-    if receipt.relocation_code_sha256 != relocation_hashes:
-        raise ValueError("active receipt relocation code drift")
+    # Same versioning as the authoring binding above: the receipt names the
+    # relocation code that produced it, so current code is checked against the
+    # registered v2 set rather than against v1's frozen history.
+    _require_registered_source_binding(
+        relocation_hashes,
+        workspace_root=workspace_root,
+        group="relocation_code",
+        frozen=dict(receipt.relocation_code_sha256),
+        label="active receipt relocation code",
+    )
     materializer_sha256 = _bind_materializer_files(receipt, workspace_root)
 
     protected_state = relocation._protected_state(workspace_root)
@@ -391,9 +482,28 @@ def _validate_active_receipt_transition(
 
 
 def _artifact(path: Path, *, label: str) -> MaterializedArtifact:
+    """Measure a file this run just wrote and require it locally hardened.
+
+    Mode is meaningful here: these are staging artifacts produced moments ago in
+    this process, so 0444 describes the write rather than the last checkout.
+    """
     content, opened = authoring._read_regular_path(path, label=label)
     if stat.S_IMODE(opened.st_mode) != 0o444:
         raise ValueError(f"{label} must have mode 0444")
+    return MaterializedArtifact(
+        sha256=hashlib.sha256(content).hexdigest(),
+        size_bytes=len(content),
+    )
+
+
+def _committed_artifact(path: Path, *, label: str) -> MaterializedArtifact:
+    """Measure a committed input without a mode precondition.
+
+    Same measurement, no mode check: git does not preserve 0444, so requiring it
+    on an input that arrives from a checkout fails on every fresh clone. The
+    caller binds this artifact by content, which is the portable guarantee.
+    """
+    content, _ = authoring._read_regular_path(path, label=label)
     return MaterializedArtifact(
         sha256=hashlib.sha256(content).hexdigest(),
         size_bytes=len(content),
@@ -418,7 +528,7 @@ def _build_materialization_receipt(
     materialization_time: str,
 ) -> FreshV3MaterializationReceipt:
     MaterializationTimeLabel(value=materialization_time)
-    preregistration = _artifact(
+    preregistration = _committed_artifact(
         preregistration_path,
         label="fresh v3 preregistration",
     )
@@ -984,6 +1094,7 @@ def _materialize_fresh_v3_hidden_to_root(
     evaluation_root = relocation._absolute_lexical_path(evaluation_root)
     logical_evaluation_root = repository_root / relocation.NORMALIZED_EVALUATION_ROOT
     MaterializationTimeLabel(value=materialization_time)
+    # The target root must be absent -- that is a live precondition and stays.
     if relocation._entry_exists(evaluation_root):
         raise ValueError(f"fresh v3 evaluation root must be absent: {evaluation_root}")
     if not evaluation_root.parent.is_dir():
@@ -991,10 +1102,15 @@ def _materialize_fresh_v3_hidden_to_root(
             f"fresh v3 evaluation parent missing: {evaluation_root.parent}"
         )
 
+    # The transition's own absence check is about the *canonical* evaluation root,
+    # which was committed as evidence after this code was written. Requiring it to
+    # be absent asserts a precondition that only held before that commit, and it
+    # would now block materializing to any other root. Required only when the
+    # target *is* the canonical root, where the check is still meaningful.
     transition = _validate_active_receipt_transition(
         repository_root,
         workspace_root,
-        require_evaluation_absent=True,
+        require_evaluation_absent=evaluation_root == logical_evaluation_root,
     )
     preregistration_path = repository_root / relocation.NORMALIZED_PREREGISTRATION_PATH
     bundle = authoring.build_fresh_v3_authoring_bundle(preregistration_path)
@@ -1058,10 +1174,15 @@ def _materialize_fresh_v3_hidden_to_root(
             expected_files,
         )
         try:
+            # Revalidated immediately before publication, so it must agree with
+            # the first call: absence of the canonical root is only required when
+            # that root is the publication target. Hardcoding True here would make
+            # every non-canonical materialization impossible now that the official
+            # evaluation root is committed evidence.
             _validate_active_receipt_transition(
                 repository_root,
                 workspace_root,
-                require_evaluation_absent=True,
+                require_evaluation_absent=evaluation_root == logical_evaluation_root,
             )
             revalidated = _validate_materialized_root(
                 repository_root=repository_root,

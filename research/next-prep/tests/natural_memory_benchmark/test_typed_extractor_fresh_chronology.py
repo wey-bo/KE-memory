@@ -69,9 +69,15 @@ def test_freeze_chronology_binds_read_only_artifacts_before_model_runs(
     )["status"] == "valid"
 
 
-def test_freeze_chronology_rejects_existing_model_runs_or_mutable_inputs(
+def test_freeze_chronology_rejects_existing_model_runs_and_mutated_inputs(
     tmp_path: Path,
 ) -> None:
+    """Model runs must be absent, and a changed artifact must be detected.
+
+    The second half previously chmod-ed an artifact to 0644 and expected
+    "must be read-only". That check could not survive a clone, so it is replaced
+    by the property the chronology receipt actually binds: the artifact hash.
+    """
     prereg, evaluation = _artifacts(tmp_path)
     (evaluation / "l2" / "model-runs").mkdir()
 
@@ -82,8 +88,26 @@ def test_freeze_chronology_rejects_existing_model_runs_or_mutable_inputs(
         )
 
     (evaluation / "l2" / "model-runs").rmdir()
-    (evaluation / "l1" / "public-l1.json").chmod(0o644)
-    with pytest.raises(ValueError, match="must be read-only"):
+
+    # A writable-but-unchanged tree is the normal state after a checkout, so the
+    # receipt must freeze successfully here.
+    freeze_fresh_chronology_receipt(
+        preregistration_path=prereg,
+        evaluation_root=evaluation,
+    )
+    target = evaluation / "l1" / "public-l1.json"
+    target.chmod(0o644)
+    original = target.read_bytes()
+    mutated = bytes(original[:-2]) + b"9\n"
+    assert len(mutated) == len(original) and mutated != original, (
+        "the mutation must actually change a byte, or this test proves nothing"
+    )
+    target.write_bytes(mutated)
+
+    # Re-freezing now must refuse rather than quietly rewrite the receipt: the
+    # changed artifact yields a different receipt, and the existing one is
+    # immutable. That refusal is what makes the mutation detectable.
+    with pytest.raises(FileExistsError, match="immutable artifact differs"):
         freeze_fresh_chronology_receipt(
             preregistration_path=prereg,
             evaluation_root=evaluation,
