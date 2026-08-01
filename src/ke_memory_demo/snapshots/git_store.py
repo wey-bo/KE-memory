@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections import Counter
-from collections.abc import Generator
+from collections.abc import Generator, Mapping
 from contextlib import contextmanager
 import hashlib
 import os
@@ -16,9 +16,7 @@ from pydantic import BaseModel
 
 from ke_memory_demo.core.json import canonical_json
 from ke_memory_demo.infra.telemetry import ModelTrace, validate_usage_context_only_trace
-from ke_memory_demo.pipeline import (
-    EVALUATION_ARTIFACT_REGISTRY,
-    PIPELINE_ARTIFACT_REGISTRY,
+from ke_memory_demo.contracts import (
     STAGE_ARTIFACT_ALLOWLIST,
     STAGE_PREDECESSOR,
     PipelineRunManifest,
@@ -173,7 +171,7 @@ class GitSnapshotStore:
         with self._detached_worktree(snapshot_id) as checkout:
             checked_artifacts = ArtifactStore(
                 checkout,
-                registry=_artifact_registry(),
+                registry=_artifact_registry(self._artifacts),
             )
             stage_manifest = checked_artifacts.validate_stage(
                 run_id,
@@ -460,7 +458,7 @@ class GitSnapshotStore:
         with self._detached_worktree(parent_snapshot_id) as checkout:
             predecessor_artifacts = ArtifactStore(
                 checkout,
-                registry=_artifact_registry(),
+                registry=_artifact_registry(self._artifacts),
             )
             predecessor_manifest = predecessor_artifacts.validate_stage(
                 run_id,
@@ -572,8 +570,14 @@ class GitSnapshotStore:
                 raise cleanup_error
 
 
-def _artifact_registry() -> dict[str, type[BaseModel]]:
-    return {
-        **PIPELINE_ARTIFACT_REGISTRY,
-        **dict(EVALUATION_ARTIFACT_REGISTRY),
-    }
+def _artifact_registry(artifacts: ArtifactStore) -> Mapping[str, type[BaseModel]]:
+    """The registry to validate against: the one this store was built with.
+
+    Previously this merged the module-level pipeline and evaluation registries, which
+    made a pipeline-only process fail -- the evaluation registry is populated by
+    importing evaluation, and a pipeline run has no reason to. The artifact store
+    already carries whatever the composition root registered, so reading it there is
+    both correct and narrower: a store built without evaluation types validates
+    without them.
+    """
+    return artifacts.registry

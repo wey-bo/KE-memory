@@ -101,55 +101,51 @@ PIPELINE_ARTIFACT_REGISTRY: dict[str, type[BaseModel]] = {
 }
 
 
-class _EvaluationArtifactRegistry(Mapping[str, type[BaseModel]]):
+class _LazyArtifactRegistry(Mapping[str, type[BaseModel]]):
+    """A registry populated by a higher layer at import time.
+
+    The evaluation artifact map used to live here as a method with a deferred
+    ``import ke_memory_demo.evaluation`` inside it. That made contracts depend on
+    measurement while looking, to a static reader, like it did not -- the deferral
+    hid the cycle rather than removing it.
+
+    Now the direction is inverted: ``evaluation`` registers its artifact types into
+    this object, and the layers below it (pipeline, snapshots) read the mapping
+    without naming evaluation at all. Reading before registration raises rather
+    than returning an empty map, so a missing registration is a loud failure and
+    not a silently reduced artifact set.
+    """
+
+    def __init__(self, label: str) -> None:
+        self._label = label
+        self._entries: dict[str, type[BaseModel]] | None = None
+
+    def register(self, entries: Mapping[str, type[BaseModel]]) -> None:
+        if self._entries is not None and dict(self._entries) != dict(entries):
+            raise RuntimeError(f"{self._label} already registered with different entries")
+        self._entries = dict(entries)
+
+    def _require(self) -> dict[str, type[BaseModel]]:
+        if self._entries is None:
+            raise RuntimeError(
+                f"{self._label} has not been registered; import "
+                "ke_memory_demo.evaluation before reading it"
+            )
+        return self._entries
+
     def __getitem__(self, key: str) -> type[BaseModel]:
-        return self._registry()[key]
+        return self._require()[key]
 
     def __iter__(self) -> Iterator[str]:
-        return iter(self._registry())
+        return iter(self._require())
 
     def __len__(self) -> int:
-        return len(self._registry())
-
-    @staticmethod
-    def _registry() -> dict[str, type[BaseModel]]:
-        from ke_memory_demo.evaluation.manifest import ExperimentManifest
-        from ke_memory_demo.evaluation.models import (
-            AggregateMetrics,
-            BaselinePublicResult,
-            EvaluationFailure,
-            EvaluationRun,
-            GoldSourceMapping,
-            JudgeResult,
-            OperationUsageMetrics,
-            ProbeQuestion,
-            QuestionAnswer,
-            QuestionMetrics,
-            ReportDocument,
-            TurnKEAuditCase,
-        )
-        from ke_memory_demo.retrieval import QueryExtractionTrace, RetrievalTrace
-
-        return {
-            "probe_questions": ProbeQuestion,
-            "gold_source_mappings": GoldSourceMapping,
-            "experiment_manifests": ExperimentManifest,
-            "query_traces": QueryExtractionTrace,
-            "retrieval_traces": RetrievalTrace,
-            "question_answers": QuestionAnswer,
-            "judge_results": JudgeResult,
-            "evaluation_failures": EvaluationFailure,
-            "evaluation_runs": EvaluationRun,
-            "question_metrics": QuestionMetrics,
-            "aggregate_metrics": AggregateMetrics,
-            "operation_usage_metrics": OperationUsageMetrics,
-            "baseline_public_results": BaselinePublicResult,
-            "turn_ke_audits": TurnKEAuditCase,
-            "report_documents": ReportDocument,
-        }
+        return len(self._require())
 
 
-EVALUATION_ARTIFACT_REGISTRY: Mapping[str, type[BaseModel]] = _EvaluationArtifactRegistry()
+EVALUATION_ARTIFACT_REGISTRY: _LazyArtifactRegistry = _LazyArtifactRegistry(
+    "EVALUATION_ARTIFACT_REGISTRY"
+)
 
 
 _INGESTED_ARTIFACTS = frozenset(

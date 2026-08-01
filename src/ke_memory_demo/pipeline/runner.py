@@ -53,9 +53,9 @@ from ke_memory_demo.settings import AppSettings
 from ke_memory_demo.snapshots import GitSnapshotStore
 from ke_memory_demo.storage import ArtifactStore, MemoryIndex
 
-from .checkpoints import CheckpointStore
-from .concurrency import bounded_ordered_map
-from .models import (
+from ke_memory_demo.storage.checkpoints import CheckpointStore
+from ke_memory_demo.core.concurrency import bounded_ordered_map
+from ke_memory_demo.contracts import (
     OntologyRunIdentity,
     PipelineRunManifest,
     PipelineStage,

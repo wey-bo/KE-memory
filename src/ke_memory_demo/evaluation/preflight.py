@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+# Defined in core so the pipeline can raise it without importing evaluation.
+from ke_memory_demo.core.errors import PreflightCheckFailure
+
 from collections.abc import Awaitable
 import re
 from typing import Protocol
@@ -54,8 +57,7 @@ class PreflightPorts(Protocol):
     def check(self, name: str) -> Awaitable[str]: ...
 
 
-class PreflightCheckFailure(RuntimeError):
-    """A preflight check failed with an intentionally sanitized detail."""
+
 
 
 class EvaluationPreflight:

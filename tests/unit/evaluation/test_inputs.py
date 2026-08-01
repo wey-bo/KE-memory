@@ -31,8 +31,8 @@ from ke_memory_demo.pipeline import (
     PipelineRunManifest,
     PipelineStage,
 )
-from ke_memory_demo.pipeline.runtime import validate_evaluation_snapshot_contract
-from ke_memory_demo.pipeline.runtime import build_evaluation_preflight
+from ke_memory_demo.evaluation.runtime import validate_evaluation_snapshot_contract
+from ke_memory_demo.evaluation.runtime import build_evaluation_preflight
 from ke_memory_demo.settings import EvaluationConcurrencySettings, load_settings
 
 

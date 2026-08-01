@@ -108,3 +108,37 @@ __all__ = [
     "question_manifest_sha256",
     "select_turn_ke_audits",
 ]
+
+
+# Register the evaluation artifact types into the contracts registry.
+#
+# This is the inverted edge: contracts used to reach *up* into evaluation through a
+# deferred import, which hid a cycle from static reading. Now evaluation pushes its
+# types down, so pipeline and snapshots can read the mapping without naming
+# evaluation. Registration happens at import time, and reading before it raises.
+def _register_evaluation_artifacts() -> None:
+    from ke_memory_demo.contracts import EVALUATION_ARTIFACT_REGISTRY
+    from ke_memory_demo.retrieval import QueryExtractionTrace, RetrievalTrace
+
+    EVALUATION_ARTIFACT_REGISTRY.register(
+        {
+            "probe_questions": ProbeQuestion,
+            "gold_source_mappings": GoldSourceMapping,
+            "experiment_manifests": ExperimentManifest,
+            "query_traces": QueryExtractionTrace,
+            "retrieval_traces": RetrievalTrace,
+            "question_answers": QuestionAnswer,
+            "judge_results": JudgeResult,
+            "evaluation_failures": EvaluationFailure,
+            "evaluation_runs": EvaluationRun,
+            "question_metrics": QuestionMetrics,
+            "aggregate_metrics": AggregateMetrics,
+            "operation_usage_metrics": OperationUsageMetrics,
+            "baseline_public_results": BaselinePublicResult,
+            "turn_ke_audits": TurnKEAuditCase,
+            "report_documents": ReportDocument,
+        }
+    )
+
+
+_register_evaluation_artifacts()

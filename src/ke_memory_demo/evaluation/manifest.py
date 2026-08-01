@@ -15,7 +15,7 @@ from pydantic import (
 )
 
 from ke_memory_demo.core.json import JsonValue, canonical_json
-from ke_memory_demo.pipeline.models import OntologyRunIdentity
+from ke_memory_demo.contracts import OntologyRunIdentity
 from ke_memory_demo.settings import EvaluationConcurrencySettings
 
 

@@ -56,7 +56,10 @@ from ke_memory_demo.evaluation.metrics import (
 )
 from ke_memory_demo.evaluation.report import ReportInvariantError
 from ke_memory_demo.infra.telemetry import ModelTrace, TraceContext, UsageRecord
-from ke_memory_demo.pipeline.runtime import evaluation_can_promote, finalize_evaluation_outputs
+from ke_memory_demo.evaluation.runtime import (
+    evaluation_can_promote,
+    finalize_evaluation_outputs,
+)
 from ke_memory_demo.retrieval import (
     QueryGroundingSpan,
     QueryKE,

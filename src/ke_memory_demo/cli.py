@@ -19,10 +19,13 @@ from ke_memory_demo.pipeline import (
     PipelineStageResult,
     RuntimeFactory,
 )
-from ke_memory_demo.pipeline.runtime import (
+from ke_memory_demo.contracts import EVALUATION_ARTIFACT_REGISTRY
+from ke_memory_demo.evaluation.runtime import (
     build_evaluation_preflight,
     materialize_evaluation_report,
 )
+from ke_memory_demo.evaluation.stage import EvaluationStage
+from ke_memory_demo.pipeline.ports import RuntimeContext
 from ke_memory_demo.settings import resolve_config_layout
 from ke_memory_demo.snapshots import GitSnapshotStore
 from ke_memory_demo.storage import ArtifactStore
@@ -419,13 +422,38 @@ def _execute_evaluation_command(
     smoke: bool,
 ) -> None:
     async def invoke() -> tuple[EvaluationRun, str | None]:
+        # Composition root: build the production runtime and the evaluation stage
+        # side by side, then hand the stage only the context and port it needs. The
+        # stage never receives the factory itself, so the dependency stays visible in
+        # its constructor rather than becoming a lookup through a stored object.
         layout = resolve_config_layout(config_root)
-        factory = RuntimeFactory.from_paths(layout, state_root)
+        factory = RuntimeFactory.from_paths(
+            layout,
+            state_root,
+            extra_artifact_registry=EVALUATION_ARTIFACT_REGISTRY,
+        )
+        stage = EvaluationStage(
+            context=RuntimeContext(
+                state_root=factory.artifacts.root,
+                code_commit=factory.code_commit,
+            ),
+            port=factory,
+            settings=factory.settings,
+            artifacts=factory.artifacts,
+            snapshots=factory.snapshots,
+            ontology=factory.ontology,
+            work_model=factory.work_model,
+        )
         try:
-            run = await factory.run_evaluation(run_id, snapshot_id, smoke=smoke)
-            return run, factory.evaluation_snapshot_id
+            run = await stage.run_evaluation(run_id, snapshot_id, smoke=smoke)
+            return run, stage.evaluation_snapshot_id
         finally:
-            await factory.aclose()
+            # Each object closes what it opened: the stage its judge and answer
+            # clients, the factory its work model and ontology.
+            try:
+                await stage.aclose()
+            finally:
+                await factory.aclose()
 
     try:
         run, evaluation_snapshot_id = asyncio.run(invoke())

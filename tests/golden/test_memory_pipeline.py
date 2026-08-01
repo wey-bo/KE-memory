@@ -69,6 +69,8 @@ from ke_memory_demo.infra.telemetry import (
     TraceContext,
     UsageRecord,
 )
+from ke_memory_demo.evaluation.stage import EvaluationStage
+from ke_memory_demo.pipeline.ports import RuntimeContext
 from ke_memory_demo.pipeline import (
     PIPELINE_ARTIFACT_REGISTRY,
     CheckpointStore,
@@ -971,7 +973,22 @@ async def test_runtime_factory_hydrates_isolated_conversations_from_exact_snapsh
         work_recorder=recorder,
         code_commit="c" * 40,
     )
-    cumulative = factory._cumulative_evaluation_records(  # pyright: ignore[reportPrivateUsage]
+    # _cumulative_evaluation_records moved to EvaluationStage with the evaluation
+    # split, so the stage is composed here the way the CLI composes it: context and
+    # narrow port, never the factory itself.
+    stage = EvaluationStage(
+        context=RuntimeContext(
+            state_root=factory.artifacts.root,
+            code_commit=factory.code_commit,
+        ),
+        port=factory,
+        settings=factory.settings,
+        artifacts=factory.artifacts,
+        snapshots=factory.snapshots,
+        ontology=factory.ontology,
+        work_model=factory.work_model,
+    )
+    cumulative = stage._cumulative_evaluation_records(  # pyright: ignore[reportPrivateUsage]
         result.run_id,
         result.snapshot_id,
     )

@@ -189,7 +189,21 @@ def test_evaluation_commands_run_fake_ke_only_evaluation(
 
     calls: list[tuple[str, str | None, bool]] = []
 
+    # The CLI is now a composition root: it builds the pipeline factory and the
+    # evaluation stage separately, so both are faked. run_evaluation lives on the
+    # stage; the factory only supplies the collaborators the stage is given.
     class FakeFactory:
+        settings = SimpleNamespace()
+        artifacts = SimpleNamespace(root=Path("/nonexistent-state-root"))
+        snapshots = SimpleNamespace()
+        ontology = SimpleNamespace()
+        work_model = SimpleNamespace()
+        code_commit = "b" * 40
+
+        async def aclose(self) -> None:
+            return None
+
+    class FakeStage:
         evaluation_snapshot_id: str | None = None
 
         async def run_evaluation(
@@ -214,10 +228,15 @@ def test_evaluation_commands_run_fake_ke_only_evaluation(
         async def aclose(self) -> None:
             return None
 
-    def fake_from_paths(_config_root: Path, _state_root: Path) -> FakeFactory:
+    def fake_from_paths(
+        _config_root: Path,
+        _state_root: Path,
+        **_kwargs: object,
+    ) -> FakeFactory:
         return FakeFactory()
 
     monkeypatch.setattr(cli.RuntimeFactory, "from_paths", fake_from_paths)
+    monkeypatch.setattr(cli, "EvaluationStage", lambda **_kwargs: FakeStage())
     arguments = [
         "evaluate",
         command,
