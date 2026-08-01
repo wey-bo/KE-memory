@@ -20,8 +20,10 @@ fi
 cd "$research_root"
 
 # Reuse an existing interpreter when one is provided. `uv run --project` would
-# otherwise create a per-worktree .venv, and this repo's environment is ~4.9G:
-# one per worktree is how the checkout grew to several times its own size.
+# otherwise create a per-worktree .venv. The reason to avoid that is checkout
+# isolation, not disk: the environments here are hardlinked to one shared store, so
+# an extra one costs about 29 MB rather than its apparent 4.8G. A build environment
+# still does not belong inside a checkout, which is reason enough.
 # CI sets nothing and gets a fresh managed environment, which is correct there.
 # In a worktree, repo_root is the worktree rather than the checkout that owns the
 # environment, so resolve the main root via the shared git dir.
