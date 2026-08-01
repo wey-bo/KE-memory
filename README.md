@@ -18,6 +18,38 @@ The service package includes an SDK-neutral `MCPMemoryFacade` for `memory_add`, 
 `memory_answer_context`, `memory_get`, and `memory_forget`. It also defines a `PrincipalRegistry`
 contract and deterministic reference implementation for future tenant/user/agent registration.
 
+### Layering inside `ke_memory_demo`
+
+Subpackages form five layers. A layer may import its own or any lower layer, never
+a higher one, and `tests/architecture/test_dependency_direction.py` enforces this by
+reading the real import graph:
+
+```text
+1  core, domain                    leaf packages: ids, json, errors, records
+2  infra, storage                  telemetry, LLM transport, artifact store, checkpoints
+3  aggregation, contracts,         data contracts and the memory capabilities
+   embedding, extraction,
+   retrieval, ontology, answering,
+   history, snapshots, ingestion,
+   online, systems
+4  pipeline                        stage orchestration and the runtime factory
+5  evaluation                      measures the pipeline; nothing may depend on it
+```
+
+Two consequences worth knowing before adding code:
+
+- `contracts` holds the pipeline data contracts but sits at layer 3, not inside
+  `pipeline`. Lower layers such as `snapshots` need those shapes, and routing them
+  through the orchestration layer above created import cycles.
+- Nothing outside `evaluation` and `cli` may import `evaluation`. Measurement may
+  depend on the thing measured; the reverse makes the core untestable in isolation.
+  `RuntimeFactory` builds pipeline runs and `EvaluationStage` measures them; the CLI
+  is the composition root that builds both and passes the stage a narrow port rather
+  than the factory itself.
+
+The gate also fails on an unclassified subpackage, so a new subpackage must be
+assigned a layer rather than silently escaping the rules.
+
 
 ## Research and Next-prep Snapshot
 
@@ -38,6 +70,30 @@ KEOL_SOURCE=/path/to/KEOL/src scripts/ci/check.sh
 The script verifies the locked environment, repository boundaries, full tests, Ruff, Pyright, and
 the wheel build. GitHub Actions checks out KEOL at commit
 `44631e64fd07c9b85f22e36035bf49c882dba592` before invoking it.
+
+`KEOL_SOURCE` is required, not optional: `tests/contract/test_online_keol_bridge.py`
+imports the pinned KEOL package, and without it that file fails to collect, so a run
+without `KEOL_SOURCE` cannot report a repository-wide pass.
+
+### Conformance environment
+
+The research conformance job is separate, and needs one dependency the production
+package deliberately does not carry:
+
+```bash
+uv sync --frozen --group evaluation
+scripts/ci/verify_conformance_environment.sh
+```
+
+DuckDB reads the BEAM parquet that source replay resolves against, so source
+validation cannot run without it. It is pinned in the `evaluation` dependency group
+rather than in `[project.dependencies]`, because the production wheel must not ship an
+evaluation reader -- `scripts/ci/verify_wheel.py` runs in the job that does *not*
+install the group, which is what proves the boundary holds.
+
+When the dependency is missing, conformance fails rather than skipping. A skipped
+source-replay test reports green while leaving the data replay path unverified, so
+the outcome in that case is `conformance_not_verified`, not a pass.
 
 Build and smoke the persistent container in offline mode:
 
