@@ -22,6 +22,7 @@ from .l1_ontology_linking import OntologyRegistry
 from .query_compiler_v2 import model_message_text
 from .typed_extractor_l1 import (
     L1Kind,
+    L1ProposalPayload,
     TypedDerivationProvenance,
     TypedEvidenceBinding,
     TypedL1Candidate,
@@ -363,6 +364,27 @@ def build_extraction_profile_identity(
     )
 
 
+#: 生产链L1 system prompt。提为模块常量，使 contract hash 能锚定 prompt 本身
+#: 而不是它所在的函数源码——后者会随迁移改变。
+_PRODUCTION_L1_SYSTEM_PROMPT = (
+    "Return exactly one production-l1-slot-batch-response-v1 JSON "
+    "object. Decide, for each turn, whether it states a durable "
+    "memory: emit_l1 with semantic slots, or no_memory/abstain with "
+    "no slots. A turn may state several memories, so it may carry "
+    "several emit_l1 proposals. For each role slot give the public "
+    "role, the exact surface from the user text, and that surface's "
+    "character offsets in the user text. Do not construct "
+    "identifiers, evidence bindings, derivation, lifecycle or "
+    "provenance.\n"
+    "predicate_surface, predicate_sense and canonical_operator must be "
+    "copied verbatim from one published tuple in "
+    "predicate_role_constraints. Do not inflect the predicate surface "
+    "to match the user's wording: role slot surfaces come from the "
+    "user text, but the predicate triple comes from the registry.\n"
+    "Return JSON only."
+)
+
+
 def build_producer_contract_identity(
     *,
     registry: OntologyRegistry,
@@ -383,38 +405,37 @@ def build_producer_contract_identity(
     something a reader has to notice, and stops a profile hash from standing in for
     a claim it cannot support.
     """
-    import inspect
-
     if chain == "production":
-        producer_source = inspect.getsource(OpenAICompatibleL1BatchProducer)
-        materializer_source = inspect.getsource(materialize_typed_l1_candidate)
         response_schema = ProductionL1SlotBatchResponseV1.model_json_schema()
+        # 生产链要求语义槽位，其余字段由程序物化，物化契约由槽位模型自身声明。
+        request_shape = "semantic_slots_materialized_by_program"
+        materialization_contract = L1SemanticSlotProposalV1.model_json_schema()
         prompt = prompt_override
         if prompt is None:
-            prompt = inspect.getsource(
-                OpenAICompatibleL1BatchProducer.produce
-            )
+            prompt = _PRODUCTION_L1_SYSTEM_PROMPT
     else:
         from .operational_profile_fresh_runner import build_l1_system_prompt
 
-        producer_source = "operational_profile_fresh_runner.run_layer"
+        response_schema = L1ProposalPayload.model_json_schema()
         # 资格链要求模型直接返回完整 typed candidate，程序不做物化。
-        materializer_source = "none: the model returns a complete typed candidate"
-        response_schema = {"contract": "typed-extractor-l1-proposals-v1"}
+        request_shape = "complete_typed_candidate_from_model"
+        materialization_contract = {"materializer": "none"}
         prompt = prompt_override or build_l1_system_prompt(
             registry=registry, policy=policy
         )
 
     body = {
         "chain": chain,
+        # 锚点是被声明的契约，不是实现它的代码文本。移动模块或重写 import 不会
+        # 改变模型被要求做什么，因此也不该改变这个哈希；反之，改 prompt 或改
+        # response schema 会。
+        "contract_anchor": "declared_contract_not_source_text",
+        "request_shape": request_shape,
         "prompt_sha256": hashlib.sha256(prompt.encode("utf-8")).hexdigest(),
         "response_schema_sha256": canonical_sha256(response_schema),
-        "producer_sha256": hashlib.sha256(
-            producer_source.encode("utf-8")
-        ).hexdigest(),
-        "materializer_sha256": hashlib.sha256(
-            materializer_source.encode("utf-8")
-        ).hexdigest(),
+        "materialization_contract_sha256": canonical_sha256(
+            materialization_contract
+        ),
         "policy_sha256": canonical_sha256(policy.model_dump(mode="json")),
         "ontology_registry_sha256": registry.registry_hash,
     }
@@ -1668,26 +1689,7 @@ class OpenAICompatibleL1BatchProducer:
             ),
         }
         raw = self.client.request(
-            system_prompt=(
-                "Return exactly one production-l1-slot-batch-response-v1 JSON "
-                "object. Decide, for each turn, whether it states a durable "
-                "memory: emit_l1 with semantic slots, or no_memory/abstain with "
-                "no slots. A turn may state several memories, so it may carry "
-                "several emit_l1 proposals. For each role slot give the public "
-                "role, the exact surface from the user text, and that surface's "
-                "character offsets in the user text. Do not construct "
-                "identifiers, evidence bindings, derivation, lifecycle or "
-                "provenance.\n"
-                # predicate_surface 与 role slot surface 的来源不同：前者取自
-                # registry 已发布的元组，后者取自用户原文。缺了这句区分，把
-                # "preferred"/"drunk" 按原文变形是合理读法，却会被边界拒绝。
-                "predicate_surface, predicate_sense and canonical_operator must be "
-                "copied verbatim from one published tuple in "
-                "predicate_role_constraints. Do not inflect the predicate surface "
-                "to match the user's wording: role slot surfaces come from the "
-                "user text, but the predicate triple comes from the registry.\n"
-                "Return JSON only."
-            ),
+            system_prompt=_PRODUCTION_L1_SYSTEM_PROMPT,
             public_input={
                 "public_contract": public_contract,
                 "raw_turns": [item.model_dump(mode="json") for item in public_turns],

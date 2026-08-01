@@ -20,14 +20,17 @@ from tools.natural_memory_benchmark.l1_ontology_linking import (
 
 
 def _l1_prompt() -> str:
-    """Read the prompt the live L1 producer actually sends."""
-    import inspect
+    """Read the prompt the live L1 producer actually sends.
 
+    Reads the module constant rather than the function source. The prompt was
+    extracted to a constant so the producer contract hash could stop moving with
+    the code; reading source here would tie this test to the same brittleness.
+    """
     from tools.natural_memory_benchmark.e2e_openai_producers import (
-        OpenAICompatibleL1BatchProducer,
+        _PRODUCTION_L1_SYSTEM_PROMPT,
     )
 
-    return inspect.getsource(OpenAICompatibleL1BatchProducer.produce)
+    return _PRODUCTION_L1_SYSTEM_PROMPT
 
 
 def test_the_prompt_says_the_predicate_triple_comes_from_the_registry() -> None:

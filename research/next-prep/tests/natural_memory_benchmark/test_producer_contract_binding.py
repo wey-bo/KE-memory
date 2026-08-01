@@ -38,12 +38,15 @@ def test_the_contract_covers_more_than_the_profile() -> None:
     contract = build_producer_contract_identity(
         registry=registry, policy=policy, chain="production"
     )
+    # 锚点是被声明的契约，不是实现它的源码文本：源码哈希会随迁移改变，而模型
+    # 被要求做什么并没有改变。
     for name in (
         "chain",
+        "contract_anchor",
+        "request_shape",
         "prompt_sha256",
         "response_schema_sha256",
-        "producer_sha256",
-        "materializer_sha256",
+        "materialization_contract_sha256",
         "policy_sha256",
         "ontology_registry_sha256",
         "producer_contract_sha256",
