@@ -25,7 +25,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from ke_memory_demo.core.json import JsonObject, JsonValue, canonical_json
+from ke_memory_demo.core.json import JsonObject, canonical_json
 
 from .channels import GoldChannel, LoadedBenchmark, QuestionChannel
 from .data_boundaries import Split, SplitPlan
@@ -77,6 +77,13 @@ def materialize_splits(
     """Write one file per split, each carrying only its own questions and gold."""
     destination.mkdir(parents=True, exist_ok=True)
     turns = _turns_by_conversation(loaded)
+    # Session membership travels with the split. A PublicTurn does not name its session, and
+    # opaque handles share no prefix, so an isolated analysis cannot reconstruct it otherwise.
+    members = {
+        session.session_handle: [t.evidence_handle for t in session.turns]
+        for conversation in loaded.build_input.conversations
+        for session in conversation.sessions
+    }
     written: list[MaterializedSplit] = []
 
     for split in Split:
@@ -86,8 +93,14 @@ def materialize_splits(
         questions = [q for q in loaded.questions.questions if q.question_id in ids]
         labels = [label for label in loaded.gold.labels if label.question_id in ids]
         handles = {q.conversation_handle for q in questions}
+        sessions_of_split = {
+            session.session_handle
+            for conversation in loaded.build_input.conversations
+            if conversation.conversation_handle in handles
+            for session in conversation.sessions
+        }
 
-        payload: JsonValue = {
+        payload: JsonObject = {
             "split": str(split),
             "questions": [q.model_dump(mode="json") for q in questions],
             # Gold for this split only. A different split's answers are not in this file.
@@ -95,6 +108,12 @@ def materialize_splits(
             "turns": {
                 handle: [t.model_dump(mode="json") for t in turns.get(handle, ())]
                 for handle in sorted(handles)
+            },
+            # Only the sessions belonging to this split's own conversations.
+            "session_members": {
+                str(session): [str(handle) for handle in handles_in_session]
+                for session, handles_in_session in sorted(members.items())
+                if session in sessions_of_split
             },
         }
         body = canonical_json(payload)

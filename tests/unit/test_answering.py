@@ -7,6 +7,7 @@ from typing import TypeVar
 import pytest
 from pydantic import BaseModel
 
+from ke_memory_demo.request_contract import RequestBudget
 from ke_memory_demo.answering import (
     ANSWER_MAX_OUTPUT_TOKENS,
     ANSWER_MODEL,
@@ -134,15 +135,42 @@ async def test_answer_service_rejects_a_citation_not_in_packed_evidence() -> Non
         )
 
 
-async def test_answer_service_rejects_full_serialized_evidence_above_hard_limit() -> None:
+async def test_answer_service_refuses_a_request_over_its_injected_budget() -> None:
+    """Enforcement must run in production, through the shared contract.
+
+    The former check compared an evidence-only count against a module constant of 8192 that no
+    contract could see. The budget is now injected, names its arm, and is applied to the whole
+    serialized request, so this test pins the real refusal path rather than a private threshold.
+    """
     client = _AnswerClient(AnswerModelOutput(answer="unused"))
+    # A budget small enough that the serialized request cannot fit.
+    tight = RequestBudget(
+        arm_identity="test_arm",
+        context_window_tokens=400,
+        system_reserve_tokens=10,
+        output_reserve_tokens=20,
+        safety_margin_tokens=5,
+    )
     oversized = _evidence().model_copy(
         update={"metadata": {"provenance": "p" * 8192}, "token_count": 1}
     )
 
-    with pytest.raises(AnswerInvariantError, match="8192-token hard limit"):
-        await AnswerService(client, token_counter=_CharacterTokenCounter()).answer(
-            "question", (oversized,)
-        )
+    with pytest.raises(AnswerInvariantError, match="not_executed_context_limit"):
+        await AnswerService(
+            client, token_counter=_CharacterTokenCounter(), budget=tight
+        ).answer("question", (oversized,))
 
     assert client.calls == []
+
+
+@pytest.mark.asyncio
+async def test_the_answer_arm_budget_is_declared_by_the_contract() -> None:
+    """A service must not hold an unbound number, even a correct one."""
+    service = AnswerService(
+        _AnswerClient(AnswerModelOutput(answer="ok")),
+        token_counter=_CharacterTokenCounter(),
+    )
+    assert service.budget.arm_identity == "answer_arm"
+    assert service.budget is not None
+    # The arithmetic is derivable, so an audit can recompute it rather than trust it.
+    assert str(service.budget.request_budget_tokens) in service.budget.arithmetic()

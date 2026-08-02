@@ -1,55 +1,82 @@
 {
- "attribution_discipline": {
-  "ambiguity_rule": "where the signals cannot separate two classes, both are recorded and the observation is marked ambiguous rather than assigned to the convenient one",
-  "ontology_gap_caveat": "a high ontology_gap_share is a warning about the classification, not a finding about the ontology",
-  "rule": "a class is assigned only when its own evidence is present"
- },
- "corpus": {
-  "build_input_sha256": "d2be5b43b296925556f9c05ce6ce4388fab06323067f78293f7290c985a6d4bb",
-  "conversations": 500,
-  "corpus_id": "longmemeval-oracle",
-  "memory_artifact_sha256": "01a7e406ce4d264b3a38086da96229bc1387ba30855cd1fda49254207e48333a",
-  "questions": 500,
-  "single_build_rule": "one build and one extraction per frozen corpus",
-  "source": "/public/home/wwb/datasets/LongMemEval/longmemeval_oracle.json"
- },
- "held_out_unreachable": "structural: the held-out split file is not in the analysis namespace",
- "inspected_count": 244,
- "judge": "not called; this track has no judge dependency",
- "ledger": {
-  "ambiguous_count": 244,
-  "class_evidence_requirements": {
-   "context_coverage": "the conversation or evidence exceeded a frozen budget, so no selection could have succeeded",
-   "evidence_closure": "the selected evidence is individually correct but does not close: a derivation or supporting span is missing",
-   "extraction_structural": "a surface unit is missing, malformed, or split or merged wrongly, independent of any ontology decision",
-   "normalization_gap": "the same entity, role or predicate appears under variant surface forms that were not unified, while the target concept itself exists",
-   "ontology_gap": "no existing type, relation or operator can express the fact, so normalization could not have fixed it",
-   "query_compiler": "the question compiled to a plan that does not express what was asked, or was declared unsupported while the memory holds the answer",
-   "retrieval_ranking": "the gold evidence is present and expressible, and the plan is right, but the evidence was not selected or was ranked below the cut",
-   "semantic_handling": "abstention, time, modality, negation, conflict or supersession was handled wrongly, with the relevant evidence present"
+ "analysis_isolation": {
+  "analysis_module": "sandbox_ledger_analysis",
+  "analysis_sandbox": {
+   "evidence_basis": "observed_* fields are read from the child's own /proc/self/mountinfo, /proc/self/fd and directory listings, not asserted by the parent",
+   "gold_channel_mounted": false,
+   "intended_mounts": [
+    "/interp (ro, copied interpreter)",
+    "/usr (ro)",
+    "/dev/{urandom,null,zero} (only these three nodes)",
+    "/proc (fresh procfs in a private PID namespace)",
+    "/staging (the analysis module only)",
+    "/tmp (empty tmpfs)",
+    "no split directory is mounted, so a sibling split cannot be opened"
+   ],
+   "namespaces": [
+    "user",
+    "mount",
+    "network",
+    "pid"
+   ],
+   "observed_fd_count": 4,
+   "observed_mount_points": [
+    "/",
+    "/dev/null",
+    "/dev/urandom",
+    "/dev/zero",
+    "/interp",
+    "/proc",
+    "/usr"
+   ],
+   "observed_network_interfaces": [],
+   "observed_root_entries": [
+    "dev",
+    "interp",
+    "lib",
+    "lib64",
+    "proc",
+    "staging",
+    "tmp",
+    "usr"
+   ],
+   "observed_staging_entries": [
+    "_child.py",
+    "sandbox_ledger_analysis.py"
+   ],
+   "question_channel_mounted": false,
+   "reconciled": true,
+   "reconciliation_notes": [],
+   "repository_mounted": false
   },
-  "counts_by_class": {
-   "context_coverage": 0,
-   "evidence_closure": 79,
-   "extraction_structural": 0,
-   "normalization_gap": 0,
-   "ontology_gap": 0,
-   "query_compiler": 165,
-   "retrieval_ranking": 0,
-   "semantic_handling": 0
-  },
-  "indistinguishable_pairs": {
-   "evidence_closure | retrieval_ranking": 79,
-   "ontology_gap | query_compiler": 165
-  },
-  "observation_count": 244,
-  "ontology_possible_share": 0.6762295081967213,
-  "ontology_primary_share": 0.0,
-  "share_note": "the primary share counts only the forced label and reads as if the ontology were fine; the possible share is the honest figure, because it counts every observation where the ontology was never ruled out",
-  "what_this_is": "lexical-fixture failure-shape inventory, not architectural attribution"
+  "consumed_split_sha256": "c33f3901c225f5966aaa0c88cb3c708bd0db0cd050ff19ec9aea4cf29c0e03c8",
+  "gold_labels_in_corpus": 500,
+  "gold_labels_visible_to_analysis": 244,
+  "mechanism": "the published analysis runs inside the namespace, receiving one split payload on stdin. The parent computes no observation, so the analysing process never holds another split's gold.",
+  "probe_saw_repository": false,
+  "sibling_files_reachable": [],
+  "split_files": [
+   {
+    "file": "discovery.json",
+    "question_count": 244,
+    "sha256": "c33f3901c225f5966aaa0c88cb3c708bd0db0cd050ff19ec9aea4cf29c0e03c8",
+    "split": "discovery"
+   },
+   {
+    "file": "validation.json",
+    "question_count": 97,
+    "sha256": "8d2069f481652722e00796df76aef7ac30926c32d312126710ebf57caa1caccc",
+    "split": "validation"
+   },
+   {
+    "file": "held_out.json",
+    "question_count": 147,
+    "sha256": "55d38d6230716623adfad68696fc506f78028a062a9ebc9d308f6d01a772c89c",
+    "split": "held_out"
+   }
+  ]
  },
- "pipeline_caveat": "raw PublicTurn -> regex terms -> first lexical mapping -> lexical selection. The sandboxed builder's artifact is not consumed by this pipeline, so no observation can be attributed to real extraction, mapping, ontology, query compilation or retrieval. Attribution needs a per-layer trace or oracle substitution.",
- "sandbox": {
+ "build_sandbox": {
   "evidence_basis": "observed_* fields are read from the child's own /proc/self/mountinfo, /proc/self/fd and directory listings, not asserted by the parent",
   "gold_channel_mounted": false,
   "intended_mounts": [
@@ -98,8 +125,46 @@
   "reconciliation_notes": [],
   "repository_mounted": false
  },
- "split_ids": {
-  "discovery_count": 244,
+ "corpus": {
+  "build_input_sha256": "d2be5b43b296925556f9c05ce6ce4388fab06323067f78293f7290c985a6d4bb",
+  "conversations": 500,
+  "corpus_id": "longmemeval-oracle",
+  "memory_artifact_sha256": "01a7e406ce4d264b3a38086da96229bc1387ba30855cd1fda49254207e48333a",
+  "questions": 500,
+  "single_build_rule": "one build and one extraction per frozen corpus",
+  "source": "/public/home/wwb/datasets/LongMemEval/longmemeval_oracle.json"
+ },
+ "judge": "not called; this track has no judge dependency",
+ "shape_inventory": {
+  "no_primary_owner": "possible_owners is unordered and no forced primary owner is recorded, because the real layers did not run",
+  "observation_count": 227,
+  "possible_owner_mentions": {
+   "delivery_budget": 1,
+   "evidence_closure": 225,
+   "extraction": 1,
+   "normalization": 226,
+   "ontology": 1,
+   "query_compiler": 1,
+   "retrieval": 226
+  },
+  "possible_owner_share": {
+   "delivery_budget": 0.004405286343612335,
+   "evidence_closure": 0.9911894273127754,
+   "extraction": 0.004405286343612335,
+   "normalization": 0.9955947136563876,
+   "ontology": 0.004405286343612335,
+   "query_compiler": 0.004405286343612335,
+   "retrieval": 0.9955947136563876
+  },
+  "questions_analysed": 244,
+  "shape_counts": {
+   "empty_selection": 1,
+   "gold_delivery_over_limit": 1,
+   "partial_gold_overlap": 225
+  }
+ },
+ "split_counts": {
+  "discovery": 244,
   "excluded_retired_slice_items": [
    "gpt4_2655b836",
    "gpt4_2487a7cb",
@@ -114,82 +179,8 @@
    "e47becba",
    "118b2229"
   ],
-  "held_out_count": 147,
-  "validation_count": 97
- },
- "split_isolation": {
-  "analysis_sandbox": {
-   "evidence_basis": "observed_* fields are read from the child's own /proc/self/mountinfo, /proc/self/fd and directory listings, not asserted by the parent",
-   "gold_channel_mounted": false,
-   "intended_mounts": [
-    "/interp (ro, copied interpreter)",
-    "/usr (ro)",
-    "/dev/{urandom,null,zero} (only these three nodes)",
-    "/proc (fresh procfs in a private PID namespace)",
-    "/staging (the analysis module only)",
-    "/tmp (empty tmpfs)",
-    "no split directory is mounted, so a sibling split cannot be opened"
-   ],
-   "namespaces": [
-    "user",
-    "mount",
-    "network",
-    "pid"
-   ],
-   "observed_fd_count": 4,
-   "observed_mount_points": [
-    "/",
-    "/dev/null",
-    "/dev/urandom",
-    "/dev/zero",
-    "/interp",
-    "/proc",
-    "/usr"
-   ],
-   "observed_network_interfaces": [],
-   "observed_root_entries": [
-    "dev",
-    "interp",
-    "lib",
-    "lib64",
-    "proc",
-    "staging",
-    "tmp",
-    "usr"
-   ],
-   "observed_staging_entries": [
-    "_child.py",
-    "split_probe.py"
-   ],
-   "question_channel_mounted": false,
-   "reconciled": true,
-   "reconciliation_notes": [],
-   "repository_mounted": false
-  },
-  "discovery_split_sha256": "d819d19e7b61ec88083841f7bf2685c893b6e6ce6799ad1688f5443292d43431",
-  "files": [
-   {
-    "file": "discovery.json",
-    "question_count": 244,
-    "sha256": "d819d19e7b61ec88083841f7bf2685c893b6e6ce6799ad1688f5443292d43431",
-    "split": "discovery"
-   },
-   {
-    "file": "validation.json",
-    "question_count": 97,
-    "sha256": "6ac52c375d9f84bd1e1197eab5c3aa2a80cc28798e6c4ec7fc7078e21dd54277",
-    "split": "validation"
-   },
-   {
-    "file": "held_out.json",
-    "question_count": 147,
-    "sha256": "03cd5cc7f1cd4b986ce46f34e01b63e20238e18f17377fad8e03ba4b737e061c",
-    "split": "held_out"
-   }
-  ],
-  "mechanism": "each split is written to its own file and analysis runs in a namespace where no other split file exists, so held-out gold is absent rather than undeclared",
-  "probe_saw_repository": false,
-  "sibling_files_reachable": []
+  "held_out": 147,
+  "validation": 97
  },
  "splits": {
   "corpus_id": "longmemeval-oracle",
@@ -204,5 +195,6 @@
   "salt": "ke-memory-discovery-v1"
  },
  "stage": "1b",
- "status": "diagnostic_only"
+ "status": "diagnostic_only",
+ "what_this_is": "shape inventory produced inside the isolation sandbox from one split payload. Shapes describe what happened; possible_owners is unordered and no primary owner is chosen, because the real extraction, mapping, ontology, query-compilation and retrieval layers did not run"
 }

@@ -100,19 +100,25 @@ def test_the_builder_is_byte_identical_to_the_previous_inline_construction() -> 
     )
 
 
-def test_answer_service_delegates_to_the_shared_builder() -> None:
-    """A contract only binds if the runtime consumes it."""
+def test_answer_service_consumes_both_halves_of_the_contract() -> None:
+    """A contract binds only if the runtime consumes it, for construction *and* enforcement.
+
+    An earlier round shared the payload builder while leaving an 8192-token module constant and a
+    private evidence-only threshold in place, so enforcement stayed unbound.
+    """
     source = (
         Path(__file__).resolve().parents[3] / "src" / "ke_memory_demo" / "answering.py"
     ).read_text(encoding="utf-8")
-    assert "from ke_memory_demo.request_contract import build_answer_request" in source
     assert "return build_answer_request(question, ordered)" in source
-    # The inline dict that diverged from the freeze must be gone.
+    assert "enforce_budget(question, ordered, self._budget)" in source
+    # The inline dict and the unbound threshold must both be gone.
     assert '"task": "answer_from_evidence"' not in source
+    assert "MAX_EVIDENCE_TOKENS" not in source
 
 
-def test_one_budget_derives_its_own_arithmetic() -> None:
+def test_a_budget_names_its_arm_and_derives_its_own_arithmetic() -> None:
     budget = RequestBudget(
+        arm_identity="test_arm",
         context_window_tokens=128_000,
         system_reserve_tokens=116,
         output_reserve_tokens=1024,
@@ -120,11 +126,14 @@ def test_one_budget_derives_its_own_arithmetic() -> None:
     )
     assert budget.request_budget_tokens == 128_000 - 116 - 1024 - 2560
     assert str(budget.request_budget_tokens) in budget.arithmetic()
+    # The arm identity is what stops a number being unbound; different arms may differ.
+    assert budget.arm_identity in budget.arithmetic()
     assert budget.over_limit_policy is OverLimitPolicy.NOT_EXECUTED_CONTEXT_LIMIT
 
 
 def test_a_budget_whose_reserves_exhaust_the_window_is_refused() -> None:
     budget = RequestBudget(
+        arm_identity="test_arm",
         context_window_tokens=100,
         system_reserve_tokens=50,
         output_reserve_tokens=40,
@@ -139,6 +148,7 @@ def test_the_request_is_counted_once_over_the_whole_serialization() -> None:
     evidence = _evidence(3)
     question = "where does the user live now"
     budget = RequestBudget(
+        arm_identity="test_arm",
         context_window_tokens=128_000,
         system_reserve_tokens=116,
         output_reserve_tokens=1024,
@@ -159,6 +169,7 @@ def test_the_request_is_counted_once_over_the_whole_serialization() -> None:
 
 def test_an_oversized_request_is_not_executed_rather_than_truncated() -> None:
     budget = RequestBudget(
+        arm_identity="test_arm",
         context_window_tokens=200,
         system_reserve_tokens=10,
         output_reserve_tokens=20,

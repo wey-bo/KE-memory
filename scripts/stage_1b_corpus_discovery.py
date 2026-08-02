@@ -15,30 +15,15 @@ Runs without a judge.
 from __future__ import annotations
 
 import json
-from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
 
-from ke_memory_demo.evaluation.arms import (
-    ArmBudget,
-    turns_by_conversation,
-)
 from ke_memory_demo.evaluation.benchmark_loaders import load_longmemeval
-from ke_memory_demo.domain import Evidence
 from ke_memory_demo.evaluation.channels import (
-    PublicTurn,
     assert_build_input_is_blind,
     assert_handles_are_opaque,
-    session_membership,
 )
 from ke_memory_demo.evaluation.data_boundaries import Split, plan_splits
-from ke_memory_demo.evaluation.issue_ledger import (
-    CLASS_EVIDENCE_REQUIREMENT,
-    IssueClass,
-    IssueLedger,
-    classify,
-)
-from ke_memory_demo.evaluation.pipeline_stages import baseline_pipeline
 from ke_memory_demo.evaluation.regression_slice import load_regression_slice
 from ke_memory_demo.evaluation.sandboxed_build import (
     run_sandboxed_build,
@@ -49,10 +34,6 @@ from ke_memory_demo.evaluation.split_isolation import (
     channels_for_split,
     materialize_splits,
 )
-from ke_memory_demo.request_contract import (
-    RequestBudget,
-    measure_request,
-)
 
 LONGMEMEVAL = Path("/public/home/wwb/datasets/LongMemEval/longmemeval_oracle.json")
 SLICE_DIR = Path("research/next-prep/artifacts/natural-benchmark-slices/slice-v1")
@@ -60,58 +41,9 @@ REPORT_PATH = Path("artifacts/stage-1b/discovery-report.json")
 LEDGER_PATH = Path("artifacts/stage-1b/issue-ledger.json")
 
 # Dev-derived pending budget, unchanged from Stage 0.5 so discovery and the harness agree.
-DELIVERY_BUDGET = ArmBudget(
-    evidence_budget_tokens=24_576,
-    answer_max_output_tokens=1024,
-    max_evidence_units=64,
-)
-
-# The single request budget, shared with the answer path rather than restated here.
-REQUEST_BUDGET = RequestBudget(
-    context_window_tokens=128_000,
-    system_reserve_tokens=116,
-    output_reserve_tokens=1024,
-    safety_margin_tokens=2560,
-)
 
 
-def _expanded_gold(
-    refs: Sequence[str],
-    available: Sequence[PublicTurn],
-    members: Mapping[str, Sequence[str]],
-) -> set[str]:
-    """Resolve gold references to turn handles through published session membership."""
-    handles = {t.evidence_handle for t in available}
-    expanded: set[str] = set()
-    for ref in refs:
-        if ref in handles:
-            expanded.add(ref)
-            continue
-        expanded.update(h for h in members.get(ref, ()) if h in handles)
-    return expanded
 
-
-def _as_evidence(turns: Sequence[PublicTurn]) -> list[Evidence]:
-    """Present turns as Evidence so feasibility is measured on the real request shape.
-
-    Counting a synthetic triple would repeat the mistake the contract freeze was rejected for:
-    the answer path sends full Evidence records, so feasibility has to be judged on those.
-    """
-    return [
-        Evidence(
-            evidence_id=turn.evidence_handle,
-            rank=index + 1,
-            score=1.0,
-            channel="symbolic",
-            text=turn.text,
-            source_exchange_ids=(),
-            source_message_ids=(),
-            system_record_ids=(),
-            metadata={},
-            token_count=turn.approximate_tokens,
-        )
-        for index, turn in enumerate(turns)
-    ]
 
 
 def main() -> int:
@@ -168,57 +100,27 @@ def main() -> int:
         print(f"FAIL: sandbox did not reconcile: {build.sandbox.reconciliation_notes}")
         return 1
 
-    turns = turns_by_conversation(corpus.build_input)
-    # Opaque handles share no prefix, so session-to-turn membership must come from the loader.
-    members = session_membership(corpus.build_input)
-    pipeline = baseline_pipeline()
 
-    observations = []
-    inspected: list[str] = []
-    for question in discovery_questions.questions:
-        inspected.append(question.question_id)
-        available = turns.get(question.conversation_handle, ())
-        label = discovery_gold.label_for(question.question_id)
-        if label is None:
-            continue
-        # A long conversation does not make a question infeasible: only the gold evidence
-        # itself failing to fit does. Testing whole-conversation length instead conflated the
-        # two and produced a context_coverage record with no basis.
-        gold_turns = [
-            t
-            for t in available
-            if t.evidence_handle in _expanded_gold(label.evidence_refs, available, members)
-        ]
-        delivery_infeasible = (
-            bool(gold_turns)
-            and measure_request(
-                question.question, _as_evidence(gold_turns), REQUEST_BUDGET
-            ).request_tokens
-            > REQUEST_BUDGET.request_budget_tokens
-        )
-        trace = pipeline.run(question, available)
-        observation = classify(
-            question,
-            label,
-            available,
-            trace.selected_handles,
-            delivery_infeasible=delivery_infeasible,
-            plan_terms=trace.plan.requested_canonical_ids,
-            session_members=members,
-        )
-        if observation is not None:
-            observations.append(observation)
-
-    ledger = IssueLedger(
-        corpus_id="longmemeval-oracle",
-        split=str(Split.DISCOVERY),
-        observations=tuple(observations),
+    # The published analysis runs inside the sandbox on the discovery payload alone. Computing
+    # observations here would put the whole corpus and all 500 gold labels in the analysing
+    # process, which is what an earlier version did while isolating only a probe.
+    analysis = analyse_split_in_isolation(
+        discovery_file,
+        analysis_source=Path(
+            "src/ke_memory_demo/evaluation/sandbox_ledger_analysis.py"
+        ).resolve(),
+        analysis_module="sandbox_ledger_analysis",
+        analysis_attr="analyse",
     )
+    result = analysis.payload
+    if not isinstance(result, dict):
+        print("FAIL: the isolated analysis did not return a result object")
+        return 1
 
-    counts = ledger.counts()
     report: dict[str, Any] = {
         "stage": "1b",
         "status": "diagnostic_only",
+        "what_this_is": result["what_this_is"],
         "corpus": {
             "corpus_id": "longmemeval-oracle",
             "source": str(LONGMEMEVAL),
@@ -228,62 +130,40 @@ def main() -> int:
             "memory_artifact_sha256": build.artifact_sha256,
             "single_build_rule": "one build and one extraction per frozen corpus",
         },
-        "sandbox": build.sandbox.as_json(),
-        "split_isolation": {
+        "build_sandbox": build.sandbox.as_json(),
+        "analysis_isolation": {
             "mechanism": (
-                "each split is written to its own file and analysis runs in a namespace where "
-                "no other split file exists, so held-out gold is absent rather than undeclared"
+                "the published analysis runs inside the namespace, receiving one split payload on "
+                "stdin. The parent computes no observation, so the analysing process never holds "
+                "another split's gold."
             ),
-            "files": [m.as_json() for m in materialized],
-            "discovery_split_sha256": discovery_file.sha256,
+            "analysis_module": "sandbox_ledger_analysis",
+            "consumed_split_sha256": analysis.consumed_split_sha256,
+            "gold_labels_visible_to_analysis": result["gold_labels_visible"],
+            "gold_labels_in_corpus": len(corpus.gold.labels),
+            "split_files": [m.as_json() for m in materialized],
             "sibling_files_reachable": isolated.payload.get("sibling_files_reachable", []),
             "probe_saw_repository": isolated.payload.get("repo_visible"),
-            "analysis_sandbox": isolated.sandbox.as_json(),
+            "analysis_sandbox": analysis.sandbox.as_json(),
         },
         "splits": plan.summary(),
-        "split_ids": {
-            "discovery_count": len(plan.ids_for(Split.DISCOVERY)),
-            "validation_count": len(plan.ids_for(Split.VALIDATION)),
-            "held_out_count": len(plan.ids_for(Split.HELD_OUT)),
+        "split_counts": {
+            "discovery": len(plan.ids_for(Split.DISCOVERY)),
+            "validation": len(plan.ids_for(Split.VALIDATION)),
+            "held_out": len(plan.ids_for(Split.HELD_OUT)),
             "excluded_retired_slice_items": excluded,
         },
-        "held_out_unreachable": "structural: the held-out split file is not in the analysis namespace",
-        "inspected_count": len(inspected),
-        "ledger": {
-            "what_this_is": "lexical-fixture failure-shape inventory, not architectural attribution",
-            "observation_count": len(ledger.observations),
-            "counts_by_class": counts,
-            "ambiguous_count": ledger.ambiguous_count(),
-            "indistinguishable_pairs": ledger.indistinguishable_pairs(),
-            "ontology_primary_share": ledger.ontology_primary_share(),
-            "ontology_possible_share": ledger.ontology_possible_share(),
-            "share_note": (
-                "the primary share counts only the forced label and reads as if the ontology "
-                "were fine; the possible share is the honest figure, because it counts every "
-                "observation where the ontology was never ruled out"
-            ),
-            "class_evidence_requirements": {
-                str(cls): requirement
-                for cls, requirement in CLASS_EVIDENCE_REQUIREMENT.items()
-            },
-        },
-        "attribution_discipline": {
-            "rule": "a class is assigned only when its own evidence is present",
-            "ambiguity_rule": (
-                "where the signals cannot separate two classes, both are recorded and the "
-                "observation is marked ambiguous rather than assigned to the convenient one"
-            ),
-            "ontology_gap_caveat": (
-                "a high ontology_gap_share is a warning about the classification, not a "
-                "finding about the ontology"
+        "shape_inventory": {
+            "observation_count": result["observation_count"],
+            "questions_analysed": result["questions_analysed"],
+            "shape_counts": result["shape_counts"],
+            "possible_owner_mentions": result["possible_owner_mentions"],
+            "possible_owner_share": result["possible_owner_share"],
+            "no_primary_owner": (
+                "possible_owners is unordered and no forced primary owner is recorded, because "
+                "the real layers did not run"
             ),
         },
-        "pipeline_caveat": (
-            "raw PublicTurn -> regex terms -> first lexical mapping -> lexical selection. The "
-            "sandboxed builder's artifact is not consumed by this pipeline, so no observation "
-            "can be attributed to real extraction, mapping, ontology, query compilation or "
-            "retrieval. Attribution needs a per-layer trace or oracle substitution."
-        ),
         "judge": "not called; this track has no judge dependency",
     }
 
@@ -292,9 +172,10 @@ def main() -> int:
         (
             LEDGER_PATH,
             {
-                "corpus_id": ledger.corpus_id,
-                "split": ledger.split,
-                "observations": [o.model_dump(mode="json") for o in ledger.observations],
+                "corpus_id": "longmemeval-oracle",
+                "split": str(Split.DISCOVERY),
+                "produced_inside_sandbox": True,
+                "observations": result["observations"],
             },
         ),
     ):
@@ -303,23 +184,25 @@ def main() -> int:
 
     print(f"corpus: {report['corpus']['conversations']} conversations, "
           f"{report['corpus']['questions']} questions")
-    print(f"sandbox reconciled: {build.sandbox.reconciled}")
+    print(f"build sandbox reconciled: {build.sandbox.reconciled}")
+    iso = report["analysis_isolation"]
     print(
-        f"splits: discovery={report['split_ids']['discovery_count']} "
-        f"validation={report['split_ids']['validation_count']} "
-        f"held_out={report['split_ids']['held_out_count']} "
-        f"excluded={len(excluded)}"
+        f"analysis isolation: gold visible to analysis "
+        f"{iso['gold_labels_visible_to_analysis']} of {iso['gold_labels_in_corpus']} in corpus"
     )
-    print(f"inspected (discovery only): {len(inspected)}")
-    print(f"observations: {len(ledger.observations)}")
-    for cls in IssueClass:
-        if counts[str(cls)]:
-            print(f"  {str(cls):<24} {counts[str(cls)]}")
-    print(f"ambiguous: {ledger.ambiguous_count()}")
-    print(f"ontology primary share: {ledger.ontology_primary_share():.3f}")
-    print(f"ontology possible share: {ledger.ontology_possible_share():.3f}")
-    for pair, count in ledger.indistinguishable_pairs().items():
-        print(f"  indistinguishable: {pair} -> {count}")
+    print(f"  sibling split files reachable: {iso['sibling_files_reachable']}")
+    counts = report["split_counts"]
+    print(
+        f"splits: discovery={counts['discovery']} validation={counts['validation']} "
+        f"held_out={counts['held_out']} excluded={len(counts['excluded_retired_slice_items'])}"
+    )
+    inv = report["shape_inventory"]
+    print(f"observations: {inv['observation_count']} of {inv['questions_analysed']} analysed")
+    for shape, count in inv["shape_counts"].items():
+        print(f"  {shape:<38} {count}")
+    print("possible owners (unordered, no primary):")
+    for owner, share in inv["possible_owner_share"].items():
+        print(f"  {owner:<22} share={share:.3f}")
     print(f"reports: {REPORT_PATH}, {LEDGER_PATH}")
     return 0
 

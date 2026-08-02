@@ -1,0 +1,98 @@
+{
+ "binding_evidence": {
+  "budget_enforced_in_production": true,
+  "enforcement_point": "ke_memory_demo.request_contract.enforce_budget",
+  "private_threshold_removed": "the 8192-token module constant in answering.py is gone; the budget is injected and names its arm",
+  "request_builder_shared": "AnswerService.request_payload delegates to request_contract.build_answer_request, so the frozen shape is the shape sent"
+ },
+ "contract": {
+  "budget": {
+   "arithmetic": "[answer_arm] 128000 context - 116 system - 1024 output - 2560 margin = 124300 request",
+   "arm_identity": "answer_arm",
+   "enforced_in_production": true,
+   "enforcement_reference": "ke_memory_demo.request_contract.enforce_budget",
+   "over_limit_policy": "not_executed_context_limit",
+   "request_budget_tokens": 124300,
+   "terms": {
+    "context_window_tokens": 128000,
+    "output_reserve_tokens": 1024,
+    "safety_margin_tokens": 2560,
+    "system_reserve_tokens": 116
+   }
+  },
+  "budget_sha256": "3a8e68e82312a2a82b9d5ac4c617a824b378c892256dbaadf723ab5d1513a51a",
+  "hash_scope": "each digest covers its own section only, so a change to the request shape and a change to the budget move different hashes",
+  "request": {
+   "builder_reference": "ke_memory_demo.request_contract.build_answer_request",
+   "builder_source_sha256": "022ccb39aaf4720c0a1971182de1846c4447c3523081db3773725df09fc7558a",
+   "counting_method": "approximate_tokens over the whole serialized request once; per-component rounded sums drift from this total and may not be substituted",
+   "evidence_fields": [
+    "channel",
+    "evidence_id",
+    "metadata",
+    "rank",
+    "score",
+    "source_exchange_ids",
+    "source_message_ids",
+    "system_record_ids",
+    "text"
+   ],
+   "example_serialized_bytes": 262,
+   "excluded_evidence_fields": [
+    "token_count"
+   ],
+   "task": "answer_from_evidence"
+  },
+  "request_sha256": "aff8bf9f24c4cb4ce40d24c469f6ee0b17b53cb10b1fe85095610b682d455dcf",
+  "supersedes": {
+   "authority": "the superseded hashes recompute correctly but no longer represent the path they name, so they carry no authority over a run",
+   "reason": "that freeze hashed a three-field PublicTurn triple and summed per-turn rounded estimates, while the runtime sends nine-field Evidence records counted once over the whole serialized request",
+   "superseded_artifact": "artifacts/stage-1a/contract-freeze.json",
+   "superseded_hashes": {
+    "combined_hash_of_hashes": "9ab4213f2456457bb04639574982dd97f1e7a5062972849afb3834addee63836",
+    "combined_hash_scope": "SHA-256 over the four hashes above; a convenience digest that must not be cited in place of the individual four",
+    "hash_scope": "each digest is SHA-256 over the canonical JSON of its own contract section only, so a change to one contract moves exactly one hash",
+    "over_limit_policy_sha256": "945f5c0193572fe136b24181a3e60066bf0e0dac5eaa578dc2c9a9344a5ebee4",
+    "reserve_sha256": "6202f16af00a69d92cdad25d2cda3b13ebf23bee0d997c0bd24d6c59b34962b3",
+    "serialization_sha256": "a5adeaf2739cd3f03a93d1ef803f401d7f4efca055f35dade8e4e980f3f53af3",
+    "tokenizer_sha256": "ff6ce2ee1086f1c3b577ed4f54d5587a1339843259692219a717e1e3e6eabbfa"
+   }
+  }
+ },
+ "eligibility": {
+  "arm_identity": "answer_arm",
+  "boundary_gap_tokens": 110886,
+  "counting_basis": "approximate_tokens over the full serialized request, measured once per question through request_contract.measure_request",
+  "coverage": "22/32",
+  "eligible_count": 22,
+  "ineligible_item_ids": [
+   "BEAM-100K-C001-abstention-001",
+   "BEAM-100K-C001-abstention-002",
+   "BEAM-100K-C001-contradiction_resolution-001",
+   "BEAM-100K-C001-contradiction_resolution-002",
+   "BEAM-100K-C001-knowledge_update-001",
+   "BEAM-100K-C001-knowledge_update-002",
+   "BEAM-100K-C001-multi_session_reasoning-001",
+   "BEAM-100K-C001-multi_session_reasoning-002",
+   "BEAM-100K-C001-temporal_reasoning-001",
+   "BEAM-100K-C001-temporal_reasoning-002"
+  ],
+  "largest_eligible_request_tokens": 31725,
+  "request_budget_tokens": 124300,
+  "smallest_ineligible_request_tokens": 142611,
+  "standing": "diagnostic: the tokenizer is a character approximation and is not provider authoritative, so this bounds instrumentation and cannot prove a request fits"
+ },
+ "judge": "not called",
+ "measured_inputs": {
+  "system_prompt_sha256": "d1d7ca93e2cddb7b66edd5a9d71ffe8921d5c497e1d2591ebac3de9aa857dece",
+  "system_reserve_basis": "approximate_tokens over the real prompt bytes",
+  "system_reserve_tokens": 116
+ },
+ "residual_caveats": [
+  "the tokenizer is a character approximation and is not provider authoritative, so every figure bounds instrumentation and cannot prove a request fits",
+  "the 128000 context window is vendor published, not measured against the API",
+  "different arms may hold different budgets; only unbound numbers are forbidden"
+ ],
+ "stage": "1a-runtime",
+ "standing": "diagnostic_draft_bound_to_the_runtime_path"
+}

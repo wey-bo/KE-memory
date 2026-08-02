@@ -9,12 +9,14 @@ There were also three unreconciled budgets: 8192 inside ``AnswerService``, 24576
 delivery arm, and 124285 from the freeze. A contract that names one of three numbers is not a
 contract.
 
-So this module owns request construction, and both callers consume it:
+So this module owns request construction and budget enforcement, and both callers consume it:
 
 - :func:`build_answer_request` produces the exact payload that goes on the wire.
 - :func:`serialized_request_bytes` produces the exact bytes, once, for counting.
-- :class:`RequestBudget` is the single budget, and :func:`enforce_budget` is the only place
-  the over-limit policy is applied.
+- :class:`RequestBudget` names the arm it belongs to, so different arms may hold different
+  numbers while no number is left unbound.
+- :func:`enforce_budget` is the only place the over-limit policy is applied, and production
+  calls it. A helper that only tests call enforces nothing.
 
 Counting happens on the whole serialized request rather than per component. Summing
 per-component rounded estimates drifts from the real total by tens of tokens, which the review
@@ -40,6 +42,28 @@ NonEmptyString = Annotated[str, Field(min_length=1)]
 # the runtime emits rather than a copy that can drift.
 ANSWER_TASK: Final[str] = "answer_from_evidence"
 
+# The answer arm's budget, declared here so the value is discoverable from the contract rather
+# than hidden in a service module. deepseek-v4-flash advertises a 128000-token context; the
+# system reserve is measured from the real prompt and the output reserve matches
+# ANSWER_MAX_OUTPUT_TOKENS.
+ANSWER_ARM_BUDGET_TERMS: Final[dict[str, int]] = {
+    "context_window_tokens": 128_000,
+    "system_reserve_tokens": 116,
+    "output_reserve_tokens": 1024,
+    "safety_margin_tokens": 2560,
+}
+
+
+def answer_arm_budget() -> "RequestBudget":
+    """The answer arm's budget, built from the declared terms."""
+    return RequestBudget(
+        arm_identity="answer_arm",
+        context_window_tokens=ANSWER_ARM_BUDGET_TERMS["context_window_tokens"],
+        system_reserve_tokens=ANSWER_ARM_BUDGET_TERMS["system_reserve_tokens"],
+        output_reserve_tokens=ANSWER_ARM_BUDGET_TERMS["output_reserve_tokens"],
+        safety_margin_tokens=ANSWER_ARM_BUDGET_TERMS["safety_margin_tokens"],
+    )
+
 
 class RequestBuildError(ValueError):
     """A request could not be built, or violates the frozen budget."""
@@ -56,10 +80,16 @@ class OverLimitPolicy(StrEnum):
 
 
 class RequestBudget(BaseModel):
-    """The single budget. Every caller receives this instance, never a private constant."""
+    """A budget, carrying the arm it belongs to.
+
+    Different arms may legitimately hold different numbers, so the type is not a singleton. What
+    it removes is an *unbound* number: every budget names its arm, and a service receives one
+    explicitly instead of closing over a module constant that no contract can see.
+    """
 
     model_config = ConfigDict(frozen=True, extra="forbid")
 
+    arm_identity: NonEmptyString
     context_window_tokens: int = Field(gt=0)
     system_reserve_tokens: int = Field(ge=0)
     output_reserve_tokens: int = Field(gt=0)
@@ -83,7 +113,7 @@ class RequestBudget(BaseModel):
 
     def arithmetic(self) -> str:
         return (
-            f"{self.context_window_tokens} context"
+            f"[{self.arm_identity}] {self.context_window_tokens} context"
             f" - {self.system_reserve_tokens} system"
             f" - {self.output_reserve_tokens} output"
             f" - {self.safety_margin_tokens} margin"

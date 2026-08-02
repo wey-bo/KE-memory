@@ -11,7 +11,13 @@ from ke_memory_demo.core.json import JsonObject, canonical_json
 from ke_memory_demo.domain import Evidence
 from ke_memory_demo.infra.llm import StructuredCompletion
 from ke_memory_demo.infra.telemetry import TraceContext, UsageRecord
-from ke_memory_demo.request_contract import build_answer_request
+from ke_memory_demo.request_contract import (
+    RequestBudget,
+    RequestBuildError,
+    answer_arm_budget,
+    build_answer_request,
+    enforce_budget,
+)
 from ke_memory_demo.retrieval.evidence_payload import serialize_evidence_payload
 from ke_memory_demo.retrieval.tokens import TokenCounter
 
@@ -22,7 +28,6 @@ ANSWER_MODEL = "deepseek-v4-flash"
 # tokens with no reasoning tokens, so this leaves ample headroom and a truncated
 # answer signals a real defect rather than an under-provisioned budget.
 ANSWER_MAX_OUTPUT_TOKENS = 1024
-MAX_EVIDENCE_TOKENS = 8192
 _PROMPT_PATH = Path(__file__).resolve().parents[2] / "prompts/answer/system.md"
 
 NonEmptyString = Annotated[str, Field(min_length=1)]
@@ -75,7 +80,14 @@ class AnswerService:
         model: ConfiguredAnswerClient,
         *,
         token_counter: TokenCounter,
+        budget: RequestBudget | None = None,
     ) -> None:
+        """Take the budget explicitly.
+
+        An 8192-token module constant used to live here, unreachable from any contract, while the
+        freeze published a different number. The budget is now injected and carries its arm
+        identity, so a mismatch between contract and execution is visible rather than latent.
+        """
         if model.model_name != ANSWER_MODEL:
             raise AnswerInvariantError(f"answer client must use {ANSWER_MODEL}")
         if model.max_output_tokens != ANSWER_MAX_OUTPUT_TOKENS:
@@ -84,12 +96,18 @@ class AnswerService:
             )
         self._model = model
         self._token_counter = token_counter
+        self._budget = budget if budget is not None else answer_arm_budget()
         self._prompt = _read_prompt()
         self.prompt_sha256 = hashlib.sha256(self._prompt.encode("utf-8")).hexdigest()
 
     @property
     def model_name(self) -> str:
         return self._model.model_name
+
+    @property
+    def budget(self) -> RequestBudget:
+        """The budget in force, so a caller and an audit can read the same number."""
+        return self._budget
 
     def request_payload(
         self,
@@ -155,10 +173,13 @@ class AnswerService:
             raise AnswerInvariantError("packed evidence IDs must be unique")
         ordered = tuple(sorted(packed, key=lambda item: (item.rank, item.evidence_id)))
         evidence_tokens = self._count_evidence_tokens(ordered)
-        if evidence_tokens > MAX_EVIDENCE_TOKENS:
-            raise AnswerInvariantError(
-                f"packed evidence exceeds the {MAX_EVIDENCE_TOKENS}-token hard limit"
-            )
+        # Enforcement goes through the shared contract, over the whole serialized request rather
+        # than an evidence-only count. A private threshold here would be a second, unbound
+        # policy that no freeze could constrain.
+        try:
+            enforce_budget(question, ordered, self._budget)
+        except RequestBuildError as error:
+            raise AnswerInvariantError(str(error)) from error
         return ordered, evidence_tokens
 
     def _count_evidence_tokens(self, evidence: Sequence[Evidence]) -> int:
