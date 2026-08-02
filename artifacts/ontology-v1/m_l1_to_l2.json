@@ -1,0 +1,235 @@
+{
+  "entries": [
+    {
+      "evidence_required": 2,
+      "kind": "abstracts_from",
+      "l1_source_ids": [
+        "l1:preference.threshold",
+        "l1:role.constraint_on",
+        "l1:state.capability_constraint"
+      ],
+      "l2_target_id": "l2:abstraction.carried_constraint",
+      "map_id": "m:abstraction.carried_constraint",
+      "rule": "a restriction observed once, plus a later aim in whose statement it does not recur and whose satisfaction it still bears on; the scope must be derivable from the later aim and not assumed to be unbounded"
+    },
+    {
+      "evidence_required": 3,
+      "kind": "aggregates_over",
+      "l1_source_ids": [
+        "l1:event.media_consumption",
+        "l1:qualifier.time",
+        "l1:time.recurring"
+      ],
+      "l2_target_id": "l2:abstraction.habit",
+      "map_id": "m:abstraction.habit",
+      "rule": "three or more event observations of one type by one subject on occasions distinguishable by their l1:qualifier.time value; an l1:time.recurring assertion is a claim about a habit and counts as one observation, never as three"
+    },
+    {
+      "evidence_required": 2,
+      "kind": "aggregates_over",
+      "l1_source_ids": [
+        "l1:preference.affinity",
+        "l1:preference.comparative",
+        "l1:preference.threshold",
+        "l1:qualifier.polarity"
+      ],
+      "l2_target_id": "l2:abstraction.preference_profile",
+      "map_id": "m:abstraction.preference_profile",
+      "rule": "two or more preference observations sharing a holder, retaining both polarities and any comparative ordering; a comparative may not be synthesised from two affinities, so an ordering enters the profile only if a comparative was observed"
+    },
+    {
+      "evidence_required": 2,
+      "kind": "aggregates_over",
+      "l1_source_ids": [
+        "l1:task.declared_intention",
+        "l1:task.outstanding_requirement"
+      ],
+      "l2_target_id": "l2:abstraction.project",
+      "map_id": "m:abstraction.project",
+      "rule": "two or more declared intentions by one agent whose completions serve one outcome neither achieves alone; adjacency in time is not sufficient, since the shared outcome is what separates a project from two unrelated aims stated together"
+    },
+    {
+      "evidence_required": 1,
+      "kind": "abstracts_from",
+      "l1_source_ids": [
+        "l1:state.circumstance",
+        "l1:state.possession"
+      ],
+      "l2_target_id": "l2:abstraction.standing_condition",
+      "map_id": "m:abstraction.standing_condition",
+      "rule": "one circumstance observation with no later observation ending it; the continuation is inferred and the instance must stay distinguishable from a re-confirmed one"
+    },
+    {
+      "evidence_required": 2,
+      "kind": "aggregates_over",
+      "l1_source_ids": [
+        "l1:event.commitment_made",
+        "l1:task.abandoned_intention",
+        "l1:task.declared_intention",
+        "l1:task.outstanding_requirement"
+      ],
+      "l2_target_id": "l2:abstraction.task",
+      "map_id": "m:abstraction.task",
+      "rule": "a declared intention plus at least one later observation bearing on whether it closed; the closing observation may be a commitment, an abandonment, or a requirement being met, and its absence yields l2:lifecycle.lapsed rather than a guess at the outcome"
+    },
+    {
+      "evidence_required": 2,
+      "kind": "aggregates_over",
+      "l1_source_ids": [
+        "l1:qualifier.assertion_standing",
+        "l1:standing.current",
+        "l1:standing.superseded",
+        "l1:state.circumstance"
+      ],
+      "l2_target_id": "l2:abstraction.value_history",
+      "map_id": "m:abstraction.value_history",
+      "rule": "two or more observations of one attribute of one subject bearing different values, ordered by assertion time, with exactly one carrying l1:standing.current; the superseded values stay addressable rather than being overwritten"
+    },
+    {
+      "evidence_required": 1,
+      "kind": "import_as",
+      "l1_source_ids": [
+        "l1:role.constraint_on"
+      ],
+      "l2_target_id": "l2:pattern.constraint_union",
+      "map_id": "m:import.pattern_constraint_union",
+      "rule": "the L1 position a restriction restricts becomes the key a constraint union groups by; the pattern adds accumulation and conflict retention, which the position lacks"
+    },
+    {
+      "evidence_required": 2,
+      "kind": "import_as",
+      "l1_source_ids": [
+        "l1:task.declared_intention"
+      ],
+      "l2_target_id": "l2:pattern.goal_decomposition",
+      "map_id": "m:import.pattern_goal_decomposition",
+      "rule": "the L1 intention is the unit being decomposed; the pattern adds the shared-outcome requirement, which a single intention cannot state about itself"
+    },
+    {
+      "evidence_required": 2,
+      "kind": "import_as",
+      "l1_source_ids": [
+        "l1:time.recurring"
+      ],
+      "l2_target_id": "l2:pattern.recurrence_count",
+      "map_id": "m:import.pattern_recurrence_count",
+      "rule": "the L1 value asserts recurrence in one utterance; the pattern counts occasions instead, so the import is a change of evidentiary basis rather than a rename"
+    },
+    {
+      "evidence_required": 2,
+      "kind": "import_as",
+      "l1_source_ids": [
+        "l1:qualifier.assertion_standing"
+      ],
+      "l2_target_id": "l2:pattern.temporal_series",
+      "map_id": "m:import.pattern_temporal_series",
+      "rule": "the L1 dimension marks one assertion as current or superseded; the pattern keeps the whole ordered series, which no single assertion's standing expresses"
+    },
+    {
+      "evidence_required": 1,
+      "kind": "import_as",
+      "l1_source_ids": [
+        "l1:role.constraint_on"
+      ],
+      "l2_target_id": "l2:role.scope",
+      "map_id": "m:import.role_scope",
+      "rule": "the L1 position a restriction applies to is narrowed to one assertion; the L2 role records how much further it carries, which is not information any L1 item holds"
+    },
+    {
+      "evidence_required": 1,
+      "kind": "import_as",
+      "l1_source_ids": [
+        "l1:role.holder"
+      ],
+      "l2_target_id": "l2:role.subject",
+      "map_id": "m:import.role_subject",
+      "rule": "the L1 holder of one assertion becomes the L2 subject an abstraction is about; they diverge when supports come from several speakers, so the ids stay distinct"
+    },
+    {
+      "evidence_required": 1,
+      "kind": "import_as",
+      "l1_source_ids": [
+        "l1:role.attribute_bearer"
+      ],
+      "l2_target_id": "l2:role.tracked_attribute",
+      "map_id": "m:import.role_tracked_attribute",
+      "rule": "the L1 bearer position identifies which attribute an observation is about, and the L2 role fixes that attribute as the index of one history"
+    },
+    {
+      "evidence_required": 1,
+      "kind": "qualifier_lift",
+      "l1_source_ids": [
+        "l1:source_status.derived",
+        "l1:standing.current"
+      ],
+      "l2_target_id": "l2:evidence.partial_support_marked",
+      "map_id": "m:lift.evidence_partial_support",
+      "rule": "an abstraction is derived rather than observed, so its source status lifts to derived and its support completeness must be stated alongside it"
+    },
+    {
+      "evidence_required": 1,
+      "kind": "qualifier_lift",
+      "l1_source_ids": [
+        "l1:source_status.derived"
+      ],
+      "l2_target_id": "l2:evidence.supports_addressable",
+      "map_id": "m:lift.evidence_supports_addressable",
+      "rule": "a derived assertion has no independent source of its own, so the observations it was derived from are the only thing that can stand as its evidence"
+    },
+    {
+      "evidence_required": 1,
+      "kind": "qualifier_lift",
+      "l1_source_ids": [
+        "l1:event.commitment_made",
+        "l1:polarity.affirmed"
+      ],
+      "l2_target_id": "l2:lifecycle.achieved",
+      "map_id": "m:lift.lifecycle_achieved",
+      "rule": "an affirmed commitment event closes the aim it fulfils, so the L1 outcome lifts to the abstraction's status; an l1:event.attempt_failed must not lift here"
+    },
+    {
+      "evidence_required": 1,
+      "kind": "qualifier_lift",
+      "l1_source_ids": [
+        "l1:polarity.indeterminate",
+        "l1:time.unspecified"
+      ],
+      "l2_target_id": "l2:lifecycle.lapsed",
+      "map_id": "m:lift.lifecycle_lapsed",
+      "rule": "when no observation bears on the outcome, the status is unknown rather than failed; this edge exists so that absence of evidence has somewhere to lift to"
+    },
+    {
+      "evidence_required": 1,
+      "kind": "qualifier_lift",
+      "l1_source_ids": [
+        "l1:modality.intended",
+        "l1:task.outstanding_requirement"
+      ],
+      "l2_target_id": "l2:lifecycle.open",
+      "map_id": "m:lift.lifecycle_open",
+      "rule": "an intention with a requirement still outstanding is live, so intent modality plus an unmet requirement lift to an open status"
+    },
+    {
+      "evidence_required": 1,
+      "kind": "qualifier_lift",
+      "l1_source_ids": [
+        "l1:standing.superseded"
+      ],
+      "l2_target_id": "l2:lifecycle.superseded_by_revision",
+      "map_id": "m:lift.lifecycle_superseded",
+      "rule": "an assertion superseded by a revised value lifts to an abstraction replaced by a revised version of itself, which is neither achievement nor abandonment"
+    }
+  ],
+  "freeze": {
+    "excludes_benchmark_facts": true,
+    "excludes_individuals": true,
+    "hash_scope": "SHA-256 over the canonical JSON of this unit's model only, excluding this freeze block; a change to any other unit cannot move this digest",
+    "judge_dependency": "none; no model or judge call was made by this build",
+    "sha256": "c39c616dc16ac9c56063798c4e367732b735089eb19fd7c2f58a5e7ff3dc78e5",
+    "unit": "m_l1_to_l2"
+  },
+  "l1_version": "1.0.0",
+  "l2_version": "1.0.0",
+  "unit_id": "M_L1_to_L2",
+  "version": "1.0.0"
+}

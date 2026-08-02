@@ -1,0 +1,681 @@
+{
+  "freeze": {
+    "excludes_benchmark_facts": true,
+    "excludes_individuals": true,
+    "hash_scope": "SHA-256 over the canonical JSON of this unit's model only, excluding this freeze block; a change to any other unit cannot move this digest",
+    "judge_dependency": "none; no model or judge call was made by this build",
+    "sha256": "7c34ad1b477deae86826758bf3be706f9a73b0513494c2616d8a23d17f439cec",
+    "unit": "o_l2"
+  },
+  "items": [
+    {
+      "item": {
+        "aliases": [
+          "as I said before",
+          "same as last time",
+          "applies throughout"
+        ],
+        "constraints": [
+          {
+            "expression": "how far the restriction carries has to be recorded, because a constraint with unbounded scope will eventually be applied where the subject never intended it",
+            "kind": "scope_must_be_explicit"
+          }
+        ],
+        "id": "l2:abstraction.carried_constraint",
+        "provenance": [
+          {
+            "evidence": "4091 of 4736 multi-service dialogues (86.4%) reuse a value across services: city 2238, location 1711, destination_city 1672, appointment_date 1058",
+            "source": "sgd_state_dynamics"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "aggregates",
+            "target_id": "l2:pattern.constraint_union"
+          }
+        ],
+        "role_kind": "concept",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l2:role.subject"
+          },
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l2:role.scope"
+          }
+        ],
+        "sense": "a restriction stated once and applying to later aims that never restate it"
+      },
+      "item_type": "abstraction_type",
+      "minimum_support": 2,
+      "spans_sessions": true
+    },
+    {
+      "item": {
+        "aliases": [
+          "usually does",
+          "regular routine",
+          "every time"
+        ],
+        "constraints": [
+          {
+            "expression": "at least three occasions, and a stated frequency is not one of them. 'I always cook on Sundays' is one observation of a claimed habit; two such claims are two claims, not two occasions",
+            "kind": "three_distinct_occasions"
+          },
+          {
+            "expression": "the support for this item is the weakest in O_L2: only 80 of 65245 MSC sentences state a frequency, and SGD recurrence is across dialogues by different users rather than repeated behaviour by one subject. It is admitted with a support floor of 3 because the alternative is to model recurrence as repeated l2:task, which would report every repeated action as a fresh unfinished aim",
+            "kind": "thin_evidence_admitted_knowingly"
+          }
+        ],
+        "id": "l2:abstraction.habit",
+        "provenance": [
+          {
+            "evidence": "80 of 65245 persona sentences state an explicit frequency ('usually', 'always', 'every day'); attested but rare, hence the support floor of 3",
+            "source": "msc_personas"
+          },
+          {
+            "evidence": "recurring service pairs across dialogues (Restaurants+Movies 247) show the co-occurrence shape, though not repetition by a single subject",
+            "source": "sgd_state_dynamics"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "aggregates",
+            "target_id": "l2:pattern.recurrence_count"
+          }
+        ],
+        "role_kind": "concept",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l2:role.subject"
+          }
+        ],
+        "sense": "a behaviour a subject repeats on distinct occasions, evidenced by the repetitions"
+      },
+      "item_type": "abstraction_type",
+      "minimum_support": 3,
+      "spans_sessions": true
+    },
+    {
+      "item": {
+        "aliases": [
+          "their taste",
+          "what they usually like",
+          "known preferences"
+        ],
+        "constraints": [
+          {
+            "expression": "a profile holds positive and negative entries at once; collapsing to positives loses the 970 dislike observations MSC attests",
+            "kind": "retains_polarity_split"
+          }
+        ],
+        "id": "l2:abstraction.preference_profile",
+        "provenance": [
+          {
+            "evidence": "personas are authored as multi-sentence sets (65245 sentences overall) combining 13819 positive and 970 negative dispositions per subject",
+            "source": "msc_personas"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "aggregates",
+            "target_id": "l2:pattern.constraint_union"
+          }
+        ],
+        "role_kind": "concept",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l2:role.subject"
+          }
+        ],
+        "sense": "the standing set of a subject's likes and dislikes in one area, with their conflicts kept"
+      },
+      "item_type": "abstraction_type",
+      "minimum_support": 2,
+      "spans_sessions": true
+    },
+    {
+      "item": {
+        "aliases": [
+          "the whole plan",
+          "everything for the trip",
+          "overall effort"
+        ],
+        "constraints": [
+          {
+            "expression": "at least two sub-aims that are not the same aim restated; one aim with two mentions is l2:task and calling it a project double-counts",
+            "kind": "two_distinct_sub_aims"
+          }
+        ],
+        "id": "l2:abstraction.project",
+        "provenance": [
+          {
+            "evidence": "8266 two-service, 2185 three-service and 288 four-service dialogues; the recurring Flights+Hotels+Travel chain (163) is one outcome over three aims",
+            "source": "sgd_state_dynamics"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "aggregates",
+            "target_id": "l2:pattern.goal_decomposition"
+          },
+          {
+            "kind": "is_a",
+            "target_id": "l2:abstraction.task"
+          }
+        ],
+        "role_kind": "concept",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l2:role.subject"
+          }
+        ],
+        "sense": "several tasks pursued under one outcome, where no single task achieves that outcome"
+      },
+      "item_type": "abstraction_type",
+      "minimum_support": 2,
+      "spans_sessions": true
+    },
+    {
+      "item": {
+        "aliases": [
+          "still the case",
+          "as far as we know",
+          "long-running situation"
+        ],
+        "constraints": [
+          {
+            "expression": "continuation is inferred, not observed, so an instance must remain distinguishable from a condition re-confirmed at the time of asking",
+            "kind": "persistence_is_an_assumption"
+          }
+        ],
+        "id": "l2:abstraction.standing_condition",
+        "provenance": [
+          {
+            "evidence": "14288 ongoing-state persona sentences are asserted once and treated as holding for the whole conversation set without restatement",
+            "source": "msc_personas"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "aggregates",
+            "target_id": "l2:pattern.temporal_series"
+          }
+        ],
+        "role_kind": "concept",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l2:role.subject"
+          }
+        ],
+        "sense": "a circumstance treated as continuing to hold until something is observed to end it"
+      },
+      "item_type": "abstraction_type",
+      "minimum_support": 1,
+      "spans_sessions": true
+    },
+    {
+      "item": {
+        "aliases": [
+          "what they were trying to do",
+          "open item",
+          "the thing they started"
+        ],
+        "constraints": [
+          {
+            "expression": "a task needs the observation that declared it and at least one later observation bearing on whether it closed; a declaration alone is an L1 intention and does not become an L2 task by being remembered",
+            "kind": "requires_declaration_and_status"
+          }
+        ],
+        "id": "l2:abstraction.task",
+        "provenance": [
+          {
+            "evidence": "an intent declared in one turn is satisfied several turns later via required_slots; INFORM_INTENT 3952 precedes NOTIFY_SUCCESS 1796",
+            "source": "sgd_state_dynamics"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "aggregates",
+            "target_id": "l2:pattern.temporal_series"
+          }
+        ],
+        "role_kind": "concept",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l2:role.subject"
+          }
+        ],
+        "sense": "one aim tracked across turns, from the moment it is declared until it closes or lapses"
+      },
+      "item_type": "abstraction_type",
+      "minimum_support": 2,
+      "spans_sessions": false
+    },
+    {
+      "item": {
+        "aliases": [
+          "what it changed from",
+          "used to be",
+          "previous value"
+        ],
+        "constraints": [
+          {
+            "expression": "the old value stays addressable: 'what did they say before' cannot be answered from the current value, and 71.6% of dialogues change one",
+            "kind": "superseded_values_retained"
+          }
+        ],
+        "id": "l2:abstraction.value_history",
+        "provenance": [
+          {
+            "evidence": "3661 of 5110 dialogues revise a user slot value; most-revised are city 571, departure_date 516, date 456, appointment_time 377",
+            "source": "sgd_state_dynamics"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "aggregates",
+            "target_id": "l2:pattern.temporal_series"
+          }
+        ],
+        "role_kind": "concept",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l2:role.subject"
+          },
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l2:role.tracked_attribute"
+          }
+        ],
+        "sense": "the ordered series of values one attribute of one subject has taken, with the current one"
+      },
+      "item_type": "abstraction_type",
+      "minimum_support": 2,
+      "spans_sessions": true
+    },
+    {
+      "item": {
+        "aliases": [
+          "incomplete evidence",
+          "partially supported"
+        ],
+        "constraints": [
+          {
+            "expression": "partial support must not be presented as complete support; this was the dominant observed shape and is the failure most likely to go unnoticed",
+            "kind": "partial_is_not_complete"
+          }
+        ],
+        "id": "l2:evidence.partial_support_marked",
+        "provenance": [
+          {
+            "evidence": "225 of 227 discovery observations were shaped partial_gold_overlap, against 1 empty_selection and 1 gold_delivery_over_limit",
+            "source": "discovery_gap_shape"
+          }
+        ],
+        "relations": [],
+        "role_kind": "concept",
+        "roles": [],
+        "sense": "an abstraction resting on some but not all of its expected supports must say so"
+      },
+      "item_type": "evidence_constraint",
+      "minimum_support": 1,
+      "spans_sessions": false
+    },
+    {
+      "item": {
+        "aliases": [
+          "show your evidence"
+        ],
+        "constraints": [
+          {
+            "expression": "an abstraction with no addressable supports is rejected rather than reported with low confidence, matching the layer-gold rule that an abstraction with an empty derivation is malformed",
+            "kind": "no_unsupported_abstraction"
+          }
+        ],
+        "id": "l2:evidence.supports_addressable",
+        "provenance": [
+          {
+            "evidence": "L2GoldAbstraction in evaluation/layer_gold.py rejects an abstraction whose derived_from is empty, so this ontology must state the same requirement",
+            "source": "repository_vocabulary"
+          }
+        ],
+        "relations": [],
+        "role_kind": "concept",
+        "roles": [],
+        "sense": "every abstraction must name the observations it rests on, individually and retrievably"
+      },
+      "item_type": "evidence_constraint",
+      "minimum_support": 1,
+      "spans_sessions": false
+    },
+    {
+      "item": {
+        "aliases": [
+          "done",
+          "completed",
+          "sorted"
+        ],
+        "constraints": [],
+        "id": "l2:lifecycle.achieved",
+        "provenance": [
+          {
+            "evidence": "NOTIFY_SUCCESS 1796 confirms a transactional intent completed",
+            "source": "sgd_schema"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "lifecycle_of",
+            "target_id": "l2:abstraction.task"
+          }
+        ],
+        "role_kind": "vocabulary_value",
+        "roles": [],
+        "sense": "evidence shows the abstraction's outcome was reached"
+      },
+      "item_type": "lifecycle_state",
+      "minimum_support": 1,
+      "spans_sessions": false
+    },
+    {
+      "item": {
+        "aliases": [
+          "went quiet",
+          "no further mention"
+        ],
+        "constraints": [
+          {
+            "expression": "silence is not failure. Reporting a lapsed aim as abandoned asserts an outcome no observation supports, which is the more damaging error",
+            "kind": "not_a_synonym_for_failed"
+          }
+        ],
+        "id": "l2:lifecycle.lapsed",
+        "provenance": [
+          {
+            "evidence": "225 of 227 discovery observations were shaped partial_gold_overlap, meaning supporting evidence was partially retrieved; a status of unknown must be representable or partial support gets reported as a definite outcome",
+            "source": "discovery_gap_shape"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "lifecycle_of",
+            "target_id": "l2:abstraction.task"
+          }
+        ],
+        "role_kind": "vocabulary_value",
+        "roles": [],
+        "sense": "no evidence of an ending and none of progress either, so the status is genuinely unknown"
+      },
+      "item_type": "lifecycle_state",
+      "minimum_support": 1,
+      "spans_sessions": false
+    },
+    {
+      "item": {
+        "aliases": [
+          "in progress",
+          "still going",
+          "unfinished"
+        ],
+        "constraints": [],
+        "id": "l2:lifecycle.open",
+        "provenance": [
+          {
+            "evidence": "an intent with unfilled required_slots is live; SYSTEM REQUEST 5008 is the act of pursuing it",
+            "source": "sgd_schema"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "lifecycle_of",
+            "target_id": "l2:abstraction.task"
+          }
+        ],
+        "role_kind": "vocabulary_value",
+        "roles": [],
+        "sense": "the abstraction is live: evidence shows it started and none shows it ended"
+      },
+      "item_type": "lifecycle_state",
+      "minimum_support": 1,
+      "spans_sessions": false
+    },
+    {
+      "item": {
+        "aliases": [
+          "changed plan",
+          "replaced by a new version"
+        ],
+        "constraints": [],
+        "id": "l2:lifecycle.superseded_by_revision",
+        "provenance": [
+          {
+            "evidence": "71.6% of dialogues revise a value, and a revised aim is neither achieved nor abandoned; without this status one of the two would be asserted falsely",
+            "source": "sgd_state_dynamics"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "lifecycle_of",
+            "target_id": "l2:abstraction.value_history"
+          }
+        ],
+        "role_kind": "vocabulary_value",
+        "roles": [],
+        "sense": "the abstraction was replaced by a revised version of itself rather than ended"
+      },
+      "item_type": "lifecycle_state",
+      "minimum_support": 1,
+      "spans_sessions": false
+    },
+    {
+      "item": {
+        "aliases": [
+          "accumulated constraints",
+          "all requirements"
+        ],
+        "constraints": [
+          {
+            "expression": "a later restriction does not silently delete an earlier one; resolving the conflict is a decision with evidence, not a side effect of merging",
+            "kind": "conflicts_are_retained"
+          }
+        ],
+        "id": "l2:pattern.constraint_union",
+        "provenance": [
+          {
+            "evidence": "86.4% of 4736 multi-service dialogues reuse a value across services (city 2238, location 1711), so restrictions accumulate across sub-goals",
+            "source": "sgd_state_dynamics"
+          }
+        ],
+        "relations": [],
+        "role_kind": "concept",
+        "roles": [],
+        "sense": "collect every restriction stated about one target and keep them all, including conflicts"
+      },
+      "item_type": "aggregation_pattern",
+      "minimum_support": 1,
+      "spans_sessions": false
+    },
+    {
+      "item": {
+        "aliases": [
+          "sub-goals",
+          "parts of one aim"
+        ],
+        "constraints": [
+          {
+            "expression": "temporal adjacency is not decomposition; two adjacent sub-goals must share an outcome or the grouping is coincidence",
+            "kind": "shared_outcome_required"
+          }
+        ],
+        "id": "l2:pattern.goal_decomposition",
+        "provenance": [
+          {
+            "evidence": "10739 of 16142 dialogues span 2-4 services, and the frequent chains (Flights+Hotels+Travel 163) share a single trip outcome",
+            "source": "sgd_state_dynamics"
+          }
+        ],
+        "relations": [],
+        "role_kind": "concept",
+        "roles": [],
+        "sense": "group observations under a shared outcome that no one of them achieves alone"
+      },
+      "item_type": "aggregation_pattern",
+      "minimum_support": 2,
+      "spans_sessions": false
+    },
+    {
+      "item": {
+        "aliases": [
+          "frequency",
+          "how often",
+          "repeat count"
+        ],
+        "constraints": [
+          {
+            "expression": "two mentions of one occurrence are one observation, not two. Counting mentions instead of occasions inflates every frequency claim",
+            "kind": "distinct_occasions_required"
+          }
+        ],
+        "id": "l2:pattern.recurrence_count",
+        "provenance": [
+          {
+            "evidence": "SGD service pairs recur across dialogues (Restaurants+Movies 247, Homes+Calendar 235), so co-occurrence counts are measurable",
+            "source": "sgd_state_dynamics"
+          }
+        ],
+        "relations": [],
+        "role_kind": "concept",
+        "roles": [],
+        "sense": "count how many separate observations instantiate the same type, over distinct occasions"
+      },
+      "item_type": "aggregation_pattern",
+      "minimum_support": 2,
+      "spans_sessions": false
+    },
+    {
+      "item": {
+        "aliases": [
+          "history",
+          "timeline",
+          "series over time"
+        ],
+        "constraints": [
+          {
+            "expression": "the series is not a set: reordering changes which value is current, so an implementation that collapses to the latest value has lost the item",
+            "kind": "order_is_the_content"
+          }
+        ],
+        "id": "l2:pattern.temporal_series",
+        "provenance": [
+          {
+            "evidence": "71.6% of 5110 dialogues revise a slot value at least once, so a series of two or more values for one attribute is the normal observation",
+            "source": "sgd_state_dynamics"
+          }
+        ],
+        "relations": [],
+        "role_kind": "concept",
+        "roles": [],
+        "sense": "order observations about one subject and attribute by time, keeping the whole series"
+      },
+      "item_type": "aggregation_pattern",
+      "minimum_support": 2,
+      "spans_sessions": false
+    },
+    {
+      "item": {
+        "aliases": [
+          "applies to",
+          "extent"
+        ],
+        "constraints": [],
+        "id": "l2:role.scope",
+        "provenance": [
+          {
+            "evidence": "a value reused across 2 services in 86.4% of multi-service dialogues has a scope wider than the service it was first stated in",
+            "source": "sgd_state_dynamics"
+          }
+        ],
+        "relations": [],
+        "role_kind": "role",
+        "roles": [],
+        "sense": "how far an abstraction's applicability extends beyond the observations supporting it"
+      },
+      "item_type": "evidence_constraint",
+      "minimum_support": 1,
+      "spans_sessions": false
+    },
+    {
+      "item": {
+        "aliases": [
+          "who it is about"
+        ],
+        "constraints": [
+          {
+            "expression": "supports concerning different subjects do not aggregate; a profile built across subjects would attribute one person's preferences to another",
+            "kind": "single_subject"
+          }
+        ],
+        "id": "l2:role.subject",
+        "provenance": [
+          {
+            "evidence": "tau-bench retail policy permits one user per conversation and requires denying requests about any other user, making subject identity a hard boundary",
+            "source": "tau_bench_policy"
+          }
+        ],
+        "relations": [],
+        "role_kind": "role",
+        "roles": [],
+        "sense": "the party an abstraction is about, which every supporting observation must concern"
+      },
+      "item_type": "evidence_constraint",
+      "minimum_support": 1,
+      "spans_sessions": false
+    },
+    {
+      "item": {
+        "aliases": [
+          "attribute being tracked"
+        ],
+        "constraints": [
+          {
+            "expression": "two attributes revised in the same dialogue are two histories; SGD revises appointment_date and appointment_time independently",
+            "kind": "one_attribute_per_history"
+          }
+        ],
+        "id": "l2:role.tracked_attribute",
+        "provenance": [
+          {
+            "evidence": "revision counts are per slot (city 571, departure_date 516), so a history is indexed by attribute and not by dialogue",
+            "source": "sgd_state_dynamics"
+          }
+        ],
+        "relations": [],
+        "role_kind": "role",
+        "roles": [],
+        "sense": "which single attribute a history is a history of"
+      },
+      "item_type": "evidence_constraint",
+      "minimum_support": 1,
+      "spans_sessions": false
+    }
+  ],
+  "unit_id": "O_L2",
+  "version": "1.0.0"
+}

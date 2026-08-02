@@ -1,0 +1,2090 @@
+{
+  "freeze": {
+    "excludes_benchmark_facts": true,
+    "excludes_individuals": true,
+    "hash_scope": "SHA-256 over the canonical JSON of this unit's model only, excluding this freeze block; a change to any other unit cannot move this digest",
+    "judge_dependency": "none; no model or judge call was made by this build",
+    "sha256": "a3ee1a25fd5cd71dc700822b9d540bf25956029d436dd6cee3bb26849d365648",
+    "unit": "o_l1"
+  },
+  "items": [
+    {
+      "item": {
+        "aliases": [
+          "rating",
+          "score",
+          "stars",
+          "reviews"
+        ],
+        "constraints": [
+          {
+            "expression": "a third-party rating is a property of the entity; the holder's own attitude is l1:preference.affinity and the two must not be merged",
+            "kind": "not_a_preference"
+          }
+        ],
+        "id": "l1:attribute.assessment",
+        "provenance": [
+          {
+            "evidence": "average_rating (3 services), star_rating; Taskmaster2 rating 2993, score 3262, star_rating 2083",
+            "source": "sgd_schema"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "is_a",
+            "target_id": "l1:attribute.magnitude"
+          }
+        ],
+        "role_kind": "concept",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.attribute_bearer"
+          }
+        ],
+        "sense": "an evaluative score attributed to an entity by parties other than the current holder"
+      },
+      "item_type": "attribute_type"
+    },
+    {
+      "item": {
+        "aliases": [
+          "available",
+          "in stock",
+          "free",
+          "open"
+        ],
+        "constraints": [],
+        "id": "l1:attribute.availability",
+        "provenance": [
+          {
+            "evidence": "GetCarsAvailable and Calendar_1 GetAvailableTime make availability the queried attribute; SYSTEM INFORM_COUNT 1779 reports how much of it there is",
+            "source": "sgd_schema"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "qualified_by",
+            "target_id": "l1:qualifier.polarity"
+          }
+        ],
+        "role_kind": "concept",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.attribute_bearer"
+          }
+        ],
+        "sense": "whether an entity can currently be obtained or used"
+      },
+      "item_type": "attribute_type"
+    },
+    {
+      "item": {
+        "aliases": [
+          "date",
+          "day",
+          "when"
+        ],
+        "constraints": [],
+        "id": "l1:attribute.calendar_position",
+        "provenance": [
+          {
+            "evidence": "date (4 services), departure_date (3), check_in_date (3), appointment_date (3), return_date, pickup_date, dropoff_date, leaving_date collapse to one family",
+            "source": "sgd_schema"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "qualified_by",
+            "target_id": "l1:qualifier.time"
+          }
+        ],
+        "role_kind": "concept",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.attribute_bearer"
+          }
+        ],
+        "sense": "the day a situation is located on"
+      },
+      "item_type": "attribute_type"
+    },
+    {
+      "item": {
+        "aliases": [
+          "time",
+          "time of day",
+          "hour"
+        ],
+        "constraints": [
+          {
+            "expression": "kept separate because SGD revises them independently: appointment_time 371 revisions against appointment_date 374, on the same appointments",
+            "kind": "separate_from_calendar_position"
+          }
+        ],
+        "id": "l1:attribute.clock_position",
+        "provenance": [
+          {
+            "evidence": "time (3 services), appointment_time (3), pickup_time, leaving_time and four Flights outbound/inbound time slots; Taskmaster2 time 9087, time_of_day 3874",
+            "source": "sgd_schema"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "qualified_by",
+            "target_id": "l1:qualifier.time"
+          }
+        ],
+        "role_kind": "concept",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.attribute_bearer"
+          }
+        ],
+        "sense": "the time of day a situation is located at, independent of which day"
+      },
+      "item_type": "attribute_type"
+    },
+    {
+      "item": {
+        "aliases": [
+          "name",
+          "title",
+          "called"
+        ],
+        "constraints": [
+          {
+            "expression": "this item says entities bear names; it holds no name. A stored name would be an Individual, which this ontology excludes",
+            "kind": "type_level_only"
+          }
+        ],
+        "id": "l1:attribute.designation",
+        "provenance": [
+          {
+            "evidence": "'name' is the most frequent facet at 75676 occurrences and appears in every one of the 7 domains",
+            "source": "taskmaster2_annotations"
+          }
+        ],
+        "relations": [],
+        "role_kind": "concept",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.attribute_bearer"
+          }
+        ],
+        "sense": "the name by which an entity is referred to, which identifies without describing"
+      },
+      "item_type": "attribute_type"
+    },
+    {
+      "item": {
+        "aliases": [
+          "type",
+          "category",
+          "class",
+          "style"
+        ],
+        "constraints": [],
+        "id": "l1:attribute.kind",
+        "provenance": [
+          {
+            "evidence": "'type' facet 25958 occurrences; SGD carries type/car_type/event_type/show_type/fare_type/ride_type as the same attribute under six service-local names",
+            "source": "taskmaster2_annotations"
+          }
+        ],
+        "relations": [],
+        "role_kind": "concept",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.attribute_bearer"
+          }
+        ],
+        "sense": "the sub-category an entity belongs to within its own domain"
+      },
+      "item_type": "attribute_type"
+    },
+    {
+      "item": {
+        "aliases": [
+          "amount",
+          "price",
+          "cost",
+          "how much",
+          "how many"
+        ],
+        "constraints": [
+          {
+            "expression": "values are comparable, which is what l1:preference.threshold needs; an unordered attribute cannot be the range of a bound",
+            "kind": "ordered"
+          }
+        ],
+        "id": "l1:attribute.magnitude",
+        "provenance": [
+          {
+            "evidence": "price (4 services), total_price (3), fare (2), balance, amount, ride_fare plus the count family (passengers, party_size, number_of_rooms)",
+            "source": "sgd_schema"
+          }
+        ],
+        "relations": [],
+        "role_kind": "concept",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.attribute_bearer"
+          }
+        ],
+        "sense": "a quantity on an ordered scale, so two values of it can be compared"
+      },
+      "item_type": "attribute_type"
+    },
+    {
+      "item": {
+        "aliases": [
+          "location",
+          "address",
+          "city",
+          "area",
+          "where"
+        ],
+        "constraints": [],
+        "id": "l1:attribute.place",
+        "provenance": [
+          {
+            "evidence": "city (6 services), street_address (6), address (3), location (3) plus Taskmaster2 location 11461 and sub_location 1893",
+            "source": "sgd_schema"
+          }
+        ],
+        "relations": [],
+        "role_kind": "concept",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.attribute_bearer"
+          }
+        ],
+        "sense": "where an entity or situation is located, at any granularity"
+      },
+      "item_type": "attribute_type"
+    },
+    {
+      "item": {
+        "aliases": [
+          "failed",
+          "did not go through",
+          "unavailable"
+        ],
+        "constraints": [
+          {
+            "expression": "a failed attempt must not be recorded as opening a state; treating NOTIFY_FAILURE like NOTIFY_SUCCESS would assert 302 arrangements that do not exist",
+            "kind": "no_resulting_state"
+          }
+        ],
+        "id": "l1:event.attempt_failed",
+        "provenance": [
+          {
+            "evidence": "SYSTEM NOTIFY_FAILURE 302 across 2559 dialogues; a failed attempt is attested and is not the negation of a success event",
+            "source": "sgd_dialogue_acts"
+          }
+        ],
+        "relations": [],
+        "role_kind": "concept",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.agent"
+          },
+          {
+            "is_required": false,
+            "range_id": null,
+            "role_id": "l1:role.theme"
+          }
+        ],
+        "sense": "a bounded occurrence in which an intended action did not achieve its result"
+      },
+      "item_type": "event_type"
+    },
+    {
+      "item": {
+        "aliases": [
+          "booked",
+          "reserved",
+          "scheduled"
+        ],
+        "constraints": [
+          {
+            "expression": "this event begins a state that outlives it, so an instance without a resulting l1:state.pending_arrangement is incompletely represented",
+            "kind": "opens_a_state"
+          }
+        ],
+        "id": "l1:event.commitment_made",
+        "provenance": [
+          {
+            "evidence": "NOTIFY_SUCCESS 1796 marks the moment a transactional intent completes, against NOTIFY_FAILURE 302 where no arrangement comes into existence",
+            "source": "sgd_dialogue_acts"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "specializes_sense",
+            "target_id": "l1:predicate.commit_to_arrangement"
+          }
+        ],
+        "role_kind": "concept",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.agent"
+          },
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.theme"
+          }
+        ],
+        "sense": "a bounded occurrence in which an arrangement comes into existence"
+      },
+      "item_type": "event_type"
+    },
+    {
+      "item": {
+        "aliases": [
+          "cancelled",
+          "called off"
+        ],
+        "constraints": [],
+        "id": "l1:event.commitment_withdrawn",
+        "provenance": [
+          {
+            "evidence": "cancel_pending_order requires a reason from a closed set ('no longer needed', 'ordered by mistake'), so withdrawal is a distinct event with its own cause",
+            "source": "tau_bench_tools"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "specializes_sense",
+            "target_id": "l1:predicate.change_arrangement"
+          }
+        ],
+        "role_kind": "concept",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.agent"
+          },
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.theme"
+          }
+        ],
+        "sense": "a bounded occurrence that ends an existing arrangement without fulfilling it"
+      },
+      "item_type": "event_type"
+    },
+    {
+      "item": {
+        "aliases": [
+          "asked about",
+          "enquiry"
+        ],
+        "constraints": [],
+        "id": "l1:event.information_request",
+        "provenance": [
+          {
+            "evidence": "USER REQUEST 3394 and SYSTEM REQUEST 5008 are bounded ask events",
+            "source": "sgd_dialogue_acts"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "specializes_sense",
+            "target_id": "l1:predicate.seek_information"
+          }
+        ],
+        "role_kind": "concept",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.agent"
+          },
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.theme"
+          }
+        ],
+        "sense": "a bounded occurrence in which one party asks another for information"
+      },
+      "item_type": "event_type"
+    },
+    {
+      "item": {
+        "aliases": [
+          "watched",
+          "listened to",
+          "played"
+        ],
+        "constraints": [],
+        "id": "l1:event.media_consumption",
+        "provenance": [
+          {
+            "evidence": "movie_search 45318 and music 21229 annotation instances, with streaming_service 2756 naming the instrument of consumption",
+            "source": "taskmaster2_annotations"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "specializes_sense",
+            "target_id": "l1:predicate.consume_media"
+          }
+        ],
+        "role_kind": "concept",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.agent"
+          },
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.theme"
+          }
+        ],
+        "sense": "a bounded occurrence of experiencing a content item"
+      },
+      "item_type": "event_type"
+    },
+    {
+      "item": {
+        "aliases": [
+          "fact",
+          "stated"
+        ],
+        "constraints": [],
+        "id": "l1:modality.asserted",
+        "provenance": [
+          {
+            "evidence": "INFORM 10647 by users and 3244 by the system present slot values",
+            "source": "sgd_dialogue_acts"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "qualified_by",
+            "target_id": "l1:qualifier.modality"
+          }
+        ],
+        "role_kind": "vocabulary_value",
+        "roles": [],
+        "sense": "presented as holding in the world, independent of anyone wanting it to"
+      },
+      "item_type": "qualifier_value"
+    },
+    {
+      "item": {
+        "aliases": [
+          "belief",
+          "thinks",
+          "i guess"
+        ],
+        "constraints": [],
+        "id": "l1:modality.believed",
+        "provenance": [
+          {
+            "evidence": "ke_memory_demo.domain.Modality.BELIEF already partitions this from FACT, and keeping the distinction preserves compatibility with extracted units",
+            "source": "repository_vocabulary"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "qualified_by",
+            "target_id": "l1:qualifier.modality"
+          }
+        ],
+        "role_kind": "vocabulary_value",
+        "roles": [],
+        "sense": "presented as the speaker's belief, which may be wrong without being a lie"
+      },
+      "item_type": "qualifier_value"
+    },
+    {
+      "item": {
+        "aliases": [
+          "preference",
+          "would like",
+          "wants"
+        ],
+        "constraints": [],
+        "id": "l1:modality.desired",
+        "provenance": [
+          {
+            "evidence": "13819 of 65245 persona sentences match an affect-positive pattern ('I like/love/enjoy/prefer'), the single largest attested attitude",
+            "source": "msc_personas"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "qualified_by",
+            "target_id": "l1:qualifier.modality"
+          }
+        ],
+        "role_kind": "vocabulary_value",
+        "roles": [],
+        "sense": "presented as wanted by the holder, without commitment to bringing it about"
+      },
+      "item_type": "qualifier_value"
+    },
+    {
+      "item": {
+        "aliases": [
+          "instruction",
+          "please do",
+          "standing order"
+        ],
+        "constraints": [],
+        "id": "l1:modality.directed",
+        "provenance": [
+          {
+            "evidence": "retail policy requires explicit user confirmation before consequential actions, so a directive is a distinct attitude from a stated preference",
+            "source": "tau_bench_tools"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "qualified_by",
+            "target_id": "l1:qualifier.modality"
+          }
+        ],
+        "role_kind": "vocabulary_value",
+        "roles": [],
+        "sense": "presented as an instruction the addressee is expected to comply with"
+      },
+      "item_type": "qualifier_value"
+    },
+    {
+      "item": {
+        "aliases": [
+          "goal",
+          "going to",
+          "plan to"
+        ],
+        "constraints": [],
+        "id": "l1:modality.intended",
+        "provenance": [
+          {
+            "evidence": "INFORM_INTENT 3952 and AFFIRM_INTENT 680 commit the user to an intent; 1061 MSC persona sentences match 'I want/plan/hope to'",
+            "source": "sgd_dialogue_acts"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "qualified_by",
+            "target_id": "l1:qualifier.modality"
+          }
+        ],
+        "role_kind": "vocabulary_value",
+        "roles": [],
+        "sense": "presented as a commitment by the agent to bring the situation about"
+      },
+      "item_type": "qualifier_value"
+    },
+    {
+      "item": {
+        "aliases": [
+          "positive",
+          "yes"
+        ],
+        "constraints": [],
+        "id": "l1:polarity.affirmed",
+        "provenance": [
+          {
+            "evidence": "AFFIRM 2070 and AFFIRM_INTENT 680",
+            "source": "sgd_dialogue_acts"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "qualified_by",
+            "target_id": "l1:qualifier.polarity"
+          },
+          {
+            "kind": "opposite_of",
+            "target_id": "l1:polarity.denied"
+          }
+        ],
+        "role_kind": "vocabulary_value",
+        "roles": [],
+        "sense": "the assertion holds as stated"
+      },
+      "item_type": "qualifier_value"
+    },
+    {
+      "item": {
+        "aliases": [
+          "negative",
+          "no",
+          "not"
+        ],
+        "constraints": [],
+        "id": "l1:polarity.denied",
+        "provenance": [
+          {
+            "evidence": "NEGATE 2127 and NEGATE_INTENT 407; MSC contributes 970 affect-negative persona sentences ('I hate', \"I don't like\")",
+            "source": "sgd_dialogue_acts"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "qualified_by",
+            "target_id": "l1:qualifier.polarity"
+          }
+        ],
+        "role_kind": "vocabulary_value",
+        "roles": [],
+        "sense": "the assertion is stated not to hold, which is content and not absence of content"
+      },
+      "item_type": "qualifier_value"
+    },
+    {
+      "item": {
+        "aliases": [
+          "unknown polarity"
+        ],
+        "constraints": [],
+        "id": "l1:polarity.indeterminate",
+        "provenance": [
+          {
+            "evidence": "ke_memory_demo.domain.Polarity.UNKNOWN exists for extracted units, and an ontology without it would force a wrong choice at mapping time",
+            "source": "repository_vocabulary"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "qualified_by",
+            "target_id": "l1:qualifier.polarity"
+          }
+        ],
+        "role_kind": "vocabulary_value",
+        "roles": [],
+        "sense": "the assertion's polarity cannot be recovered from what was said"
+      },
+      "item_type": "qualifier_value"
+    },
+    {
+      "item": {
+        "aliases": [
+          "modify",
+          "change",
+          "cancel",
+          "update",
+          "reschedule"
+        ],
+        "constraints": [
+          {
+            "expression": "an instance is only well-formed if a prior commit_to_arrangement is recoverable; tau-bench refuses to modify an order that is not pending",
+            "kind": "presupposes_prior_commitment"
+          }
+        ],
+        "id": "l1:predicate.change_arrangement",
+        "provenance": [
+          {
+            "evidence": "retail exposes cancel_pending_order, modify_pending_order_address/items/payment and airline exposes cancel_reservation and three update_reservation_* tools",
+            "source": "tau_bench_tools"
+          }
+        ],
+        "relations": [],
+        "role_kind": "operator",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.agent"
+          },
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.theme"
+          }
+        ],
+        "sense": "the agent alters or withdraws an arrangement that already exists"
+      },
+      "item_type": "predicate_sense"
+    },
+    {
+      "item": {
+        "aliases": [
+          "reserve",
+          "book",
+          "schedule",
+          "make an appointment"
+        ],
+        "constraints": [
+          {
+            "expression": "a commitment is only complete when the counterparty confirms; tau-bench retail policy requires explicit user 'yes' before any write",
+            "kind": "requires_confirmation"
+          },
+          {
+            "expression": "an arrangement may later be modified or cancelled, so an instance is not terminal; tau-bench exposes cancel and modify for reservations",
+            "kind": "creates_revisable_obligation"
+          }
+        ],
+        "id": "l1:predicate.commit_to_arrangement",
+        "provenance": [
+          {
+            "evidence": "Reserve (7) + Book (4) + Schedule (1) = 12 intent names, and every one has is_transactional true",
+            "source": "sgd_schema"
+          }
+        ],
+        "relations": [],
+        "role_kind": "operator",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.agent"
+          },
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.theme"
+          },
+          {
+            "is_required": false,
+            "range_id": null,
+            "role_id": "l1:role.quantity"
+          }
+        ],
+        "sense": "the agent binds itself to a future arrangement, creating an obligation on both sides"
+      },
+      "item_type": "predicate_sense"
+    },
+    {
+      "item": {
+        "aliases": [
+          "play",
+          "watch",
+          "listen to",
+          "stream"
+        ],
+        "constraints": [],
+        "id": "l1:predicate.consume_media",
+        "provenance": [
+          {
+            "evidence": "Play (3) intents -- PlaySong, PlayMovie, PlayMedia -- are transactional yet create no obligation, so they are neither seek_information nor commitment",
+            "source": "sgd_schema"
+          }
+        ],
+        "relations": [],
+        "role_kind": "operator",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.agent"
+          },
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.theme"
+          },
+          {
+            "is_required": false,
+            "range_id": null,
+            "role_id": "l1:role.instrument"
+          }
+        ],
+        "sense": "the agent experiences a content item, which changes no arrangement and leaves a trace"
+      },
+      "item_type": "predicate_sense"
+    },
+    {
+      "item": {
+        "aliases": [
+          "like",
+          "prefer",
+          "dislike",
+          "be a fan of",
+          "hate"
+        ],
+        "constraints": [
+          {
+            "expression": "an instance must carry a l1:qualifier.polarity value, because the same predicate covers 13819 like-patterns and 970 dislike-patterns in MSC",
+            "kind": "polarity_bearing"
+          }
+        ],
+        "id": "l1:predicate.hold_attitude",
+        "provenance": [
+          {
+            "evidence": "13819 affect-positive and 970 affect-negative persona sentences share one argument frame and differ only in polarity",
+            "source": "msc_personas"
+          }
+        ],
+        "relations": [],
+        "role_kind": "operator",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.holder"
+          },
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.theme"
+          }
+        ],
+        "sense": "a holder stands in an evaluative relation to a theme, positively or negatively"
+      },
+      "item_type": "predicate_sense"
+    },
+    {
+      "item": {
+        "aliases": [
+          "live in",
+          "work as",
+          "study",
+          "own",
+          "have"
+        ],
+        "constraints": [],
+        "id": "l1:predicate.occupy_role",
+        "provenance": [
+          {
+            "evidence": "14288 ongoing-state and 8660 possession persona sentences describe a durable relation with no evaluative component",
+            "source": "msc_personas"
+          }
+        ],
+        "relations": [],
+        "role_kind": "operator",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.holder"
+          },
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.theme"
+          }
+        ],
+        "sense": "a holder stands in a durable non-evaluative relation to a place, activity or entity"
+      },
+      "item_type": "predicate_sense"
+    },
+    {
+      "item": {
+        "aliases": [
+          "find",
+          "search",
+          "look up",
+          "check",
+          "ask about"
+        ],
+        "constraints": [
+          {
+            "expression": "an instance of this sense must not be recorded as changing any state; SGD marks 29 of 53 intents non-transactional and these are those",
+            "kind": "no_world_change"
+          }
+        ],
+        "id": "l1:predicate.seek_information",
+        "provenance": [
+          {
+            "evidence": "Find (12) + Search (7) + Lookup (2) + Check (1) = 22 of 53 intent names, and all 22 belong to intents with is_transactional false",
+            "source": "sgd_schema"
+          }
+        ],
+        "relations": [],
+        "role_kind": "operator",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.agent"
+          },
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.theme"
+          },
+          {
+            "is_required": false,
+            "range_id": null,
+            "role_id": "l1:role.constraint_on"
+          }
+        ],
+        "sense": "the agent tries to obtain information about a theme without changing anything"
+      },
+      "item_type": "predicate_sense"
+    },
+    {
+      "item": {
+        "aliases": [
+          "buy",
+          "pay",
+          "transfer",
+          "purchase"
+        ],
+        "constraints": [
+          {
+            "expression": "a value transfer names the means, because reversing it depends on the means: tau-bench refunds a gift card immediately and a card in 5-7 days",
+            "kind": "requires_instrument"
+          }
+        ],
+        "id": "l1:predicate.transfer_value",
+        "provenance": [
+          {
+            "evidence": "Buy (5) + Transfer (1) intents, all transactional; Banks_1 TransferMoney requires amount and recipient_account_name together",
+            "source": "sgd_schema"
+          }
+        ],
+        "relations": [],
+        "role_kind": "operator",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.agent"
+          },
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.theme"
+          },
+          {
+            "is_required": false,
+            "range_id": null,
+            "role_id": "l1:role.recipient"
+          },
+          {
+            "is_required": false,
+            "range_id": null,
+            "role_id": "l1:role.instrument"
+          },
+          {
+            "is_required": false,
+            "range_id": null,
+            "role_id": "l1:role.quantity"
+          }
+        ],
+        "sense": "the agent gives up something of value and a recipient acquires it"
+      },
+      "item_type": "predicate_sense"
+    },
+    {
+      "item": {
+        "aliases": [
+          "likes",
+          "dislikes",
+          "enjoys",
+          "is into"
+        ],
+        "constraints": [],
+        "id": "l1:preference.affinity",
+        "provenance": [
+          {
+            "evidence": "13819 affect-positive and 970 affect-negative persona sentences; the largest single attested preference shape",
+            "source": "msc_personas"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "specializes_sense",
+            "target_id": "l1:predicate.hold_attitude"
+          },
+          {
+            "kind": "qualified_by",
+            "target_id": "l1:qualifier.polarity"
+          }
+        ],
+        "role_kind": "concept",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.holder"
+          },
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.theme"
+          }
+        ],
+        "sense": "the holder is favourably or unfavourably disposed towards a theme, taken on its own"
+      },
+      "item_type": "preference_type"
+    },
+    {
+      "item": {
+        "aliases": [
+          "prefers x to y",
+          "rather than",
+          "would sooner"
+        ],
+        "constraints": [
+          {
+            "expression": "two affinity items with the same polarity do not entail a ranking, so a comparative may not be synthesised from them",
+            "kind": "irreducible_to_affinities"
+          }
+        ],
+        "id": "l1:preference.comparative",
+        "provenance": [
+          {
+            "evidence": "USER SELECT 2577 chooses among offered alternatives and REQUEST_ALTS 1397 rejects the current offer in favour of another, both ranking acts",
+            "source": "sgd_dialogue_acts"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "specializes_sense",
+            "target_id": "l1:predicate.hold_attitude"
+          }
+        ],
+        "role_kind": "concept",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.holder"
+          },
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.theme"
+          },
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.constraint_on"
+          }
+        ],
+        "sense": "the holder ranks one theme above another, which neither theme's affinity alone states"
+      },
+      "item_type": "preference_type"
+    },
+    {
+      "item": {
+        "aliases": [
+          "at most",
+          "no more than",
+          "at least",
+          "under budget"
+        ],
+        "constraints": [],
+        "id": "l1:preference.threshold",
+        "provenance": [
+          {
+            "evidence": "ordered categorical ranges support bounds: Restaurants_1 price_range ['inexpensive'..'very expensive'] and Hotels_1 star_rating ['1'..'5']",
+            "source": "sgd_schema"
+          }
+        ],
+        "relations": [],
+        "role_kind": "concept",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.holder"
+          },
+          {
+            "is_required": true,
+            "range_id": "l1:attribute.magnitude",
+            "role_id": "l1:role.constraint_on"
+          }
+        ],
+        "sense": "the holder wants an attribute to stay within a bound, rather than favouring a theme"
+      },
+      "item_type": "preference_type"
+    },
+    {
+      "item": {
+        "aliases": [
+          "currency",
+          "supersession status"
+        ],
+        "constraints": [],
+        "id": "l1:qualifier.assertion_standing",
+        "provenance": [
+          {
+            "evidence": "3661 of 5110 dialogues (71.6%) revise at least one user slot value mid-dialogue; city 571, departure_date 516, date 456",
+            "source": "sgd_state_dynamics"
+          }
+        ],
+        "relations": [],
+        "role_kind": "concept",
+        "roles": [],
+        "sense": "whether the assertion still stands or has been replaced by a later one"
+      },
+      "item_type": "qualifier_dimension"
+    },
+    {
+      "item": {
+        "aliases": [
+          "attitude",
+          "mood"
+        ],
+        "constraints": [],
+        "id": "l1:qualifier.modality",
+        "provenance": [
+          {
+            "evidence": "INFORM_INTENT 3952 and AFFIRM_INTENT 680 mark a wanted situation, distinct from INFORM 10647 marking an asserted one",
+            "source": "sgd_dialogue_acts"
+          }
+        ],
+        "relations": [],
+        "role_kind": "concept",
+        "roles": [],
+        "sense": "the attitude the assertion carries towards its content: asserted, wanted, planned"
+      },
+      "item_type": "qualifier_dimension"
+    },
+    {
+      "item": {
+        "aliases": [
+          "negation"
+        ],
+        "constraints": [],
+        "id": "l1:qualifier.polarity",
+        "provenance": [
+          {
+            "evidence": "NEGATE 2127 against AFFIRM 2070 and NEGATE_INTENT 407 against AFFIRM_INTENT 680: denial is as frequent as affirmation",
+            "source": "sgd_dialogue_acts"
+          }
+        ],
+        "relations": [],
+        "role_kind": "concept",
+        "roles": [],
+        "sense": "whether the assertion affirms or denies that its content holds"
+      },
+      "item_type": "qualifier_dimension"
+    },
+    {
+      "item": {
+        "aliases": [
+          "evidentiality",
+          "attribution"
+        ],
+        "constraints": [],
+        "id": "l1:qualifier.source_status",
+        "provenance": [
+          {
+            "evidence": "the speaker field partitions all acts into USER and SYSTEM, and NOTIFY_SUCCESS 1796 / NOTIFY_FAILURE 302 report a system-side outcome",
+            "source": "sgd_dialogue_acts"
+          }
+        ],
+        "relations": [],
+        "role_kind": "concept",
+        "roles": [],
+        "sense": "who or what vouches for the content: the user, the assistant, a tool, or inference"
+      },
+      "item_type": "qualifier_dimension"
+    },
+    {
+      "item": {
+        "aliases": [
+          "tense",
+          "temporal reference"
+        ],
+        "constraints": [],
+        "id": "l1:qualifier.time",
+        "provenance": [
+          {
+            "evidence": "date/time slots are ubiquitous (date in 4 services, time in 3) and are always about the described situation, not the utterance",
+            "source": "sgd_schema"
+          }
+        ],
+        "relations": [],
+        "role_kind": "concept",
+        "roles": [],
+        "sense": "when the described situation holds, relative to the moment it was asserted"
+      },
+      "item_type": "qualifier_dimension"
+    },
+    {
+      "item": {
+        "aliases": [
+          "actor",
+          "initiator"
+        ],
+        "constraints": [],
+        "id": "l1:role.agent",
+        "provenance": [
+          {
+            "evidence": "USER INFORM 10647 and SYSTEM OFFER 10569 are acts by distinct initiators; every intent in schema.json is performed by one of the two",
+            "source": "sgd_dialogue_acts"
+          }
+        ],
+        "relations": [],
+        "role_kind": "role",
+        "roles": [],
+        "sense": "the participant who initiates the event and whose action brings it about"
+      },
+      "item_type": "role"
+    },
+    {
+      "item": {
+        "aliases": [
+          "subject of attribute"
+        ],
+        "constraints": [],
+        "id": "l1:role.attribute_bearer",
+        "provenance": [
+          {
+            "evidence": "the 3-part annotation names split frame.facet.filler, so the bearer position is separate from the facet; 'name' fills it 75676 times",
+            "source": "taskmaster2_annotations"
+          }
+        ],
+        "relations": [],
+        "role_kind": "role",
+        "roles": [],
+        "sense": "the entity an attribute is predicated of, as distinct from the attribute value"
+      },
+      "item_type": "role"
+    },
+    {
+      "item": {
+        "aliases": [
+          "restricts"
+        ],
+        "constraints": [],
+        "id": "l1:role.constraint_on",
+        "provenance": [
+          {
+            "evidence": "search intents pass user restrictions as slot values, e.g. Restaurants_1 price_range over ['inexpensive'..'very expensive'] narrows a search",
+            "source": "sgd_schema"
+          }
+        ],
+        "relations": [],
+        "role_kind": "role",
+        "roles": [],
+        "sense": "what a preference or requirement restricts, as opposed to the value it restricts it to"
+      },
+      "item_type": "role"
+    },
+    {
+      "item": {
+        "aliases": [
+          "bearer",
+          "experiencer"
+        ],
+        "constraints": [],
+        "id": "l1:role.holder",
+        "provenance": [
+          {
+            "evidence": "65245 persona sentences ascribe states to a subject who performs no action: 14288 match an ongoing-state pattern such as 'I live/work/am'",
+            "source": "msc_personas"
+          }
+        ],
+        "relations": [],
+        "role_kind": "role",
+        "roles": [],
+        "sense": "the participant a state or preference is true of, who need not act for it to hold"
+      },
+      "item_type": "role"
+    },
+    {
+      "item": {
+        "aliases": [
+          "means",
+          "via"
+        ],
+        "constraints": [],
+        "id": "l1:role.instrument",
+        "provenance": [
+          {
+            "evidence": "retail order changes require payment_method_id and Music services require playback_device, both a means rather than a theme",
+            "source": "tau_bench_tools"
+          }
+        ],
+        "relations": [],
+        "role_kind": "role",
+        "roles": [],
+        "sense": "the means by which the agent brings the event about, including a tool or channel"
+      },
+      "item_type": "role"
+    },
+    {
+      "item": {
+        "aliases": [
+          "count",
+          "party size",
+          "how many of them"
+        ],
+        "constraints": [],
+        "id": "l1:role.quantity",
+        "provenance": [
+          {
+            "evidence": "a count family recurs with service-specific names: passengers, travelers, group_size, party_size, number_of_seats, number_of_tickets, number_of_rooms",
+            "source": "sgd_schema"
+          }
+        ],
+        "relations": [],
+        "role_kind": "role",
+        "roles": [],
+        "sense": "how many units of the theme the predicate applies to"
+      },
+      "item_type": "role"
+    },
+    {
+      "item": {
+        "aliases": [
+          "beneficiary",
+          "addressee"
+        ],
+        "constraints": [],
+        "id": "l1:role.recipient",
+        "provenance": [
+          {
+            "evidence": "Banks_1 separates account_type from recipient_account_type and recipient_account_name, so sender and receiver are separate positions",
+            "source": "sgd_schema"
+          }
+        ],
+        "relations": [],
+        "role_kind": "role",
+        "roles": [],
+        "sense": "the participant who receives the theme, distinct from the agent who sends it"
+      },
+      "item_type": "role"
+    },
+    {
+      "item": {
+        "aliases": [
+          "origin",
+          "from"
+        ],
+        "constraints": [],
+        "id": "l1:role.source_location",
+        "provenance": [
+          {
+            "evidence": "origin/from_location/from_station/origin_airport appear as an origin family across Buses, Flights and RideSharing services",
+            "source": "sgd_schema"
+          }
+        ],
+        "relations": [],
+        "role_kind": "role",
+        "roles": [],
+        "sense": "the place or state a movement or transition starts from"
+      },
+      "item_type": "role"
+    },
+    {
+      "item": {
+        "aliases": [
+          "destination",
+          "to"
+        ],
+        "constraints": [],
+        "id": "l1:role.target_location",
+        "provenance": [
+          {
+            "evidence": "destination appears in 5 services and destination_airport/to_location/to_station in others; Taskmaster2 records destination1 4018 times",
+            "source": "sgd_schema"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "opposite_of",
+            "target_id": "l1:role.source_location"
+          }
+        ],
+        "role_kind": "role",
+        "roles": [],
+        "sense": "the place or state a movement or transition ends at"
+      },
+      "item_type": "role"
+    },
+    {
+      "item": {
+        "aliases": [
+          "object",
+          "patient"
+        ],
+        "constraints": [],
+        "id": "l1:role.theme",
+        "provenance": [
+          {
+            "evidence": "every transactional intent (24 of 53) names the thing acted on in its required_slots, for instance TransferMoney requires amount",
+            "source": "sgd_schema"
+          }
+        ],
+        "relations": [],
+        "role_kind": "role",
+        "roles": [],
+        "sense": "the entity the predicate is about, created, changed or transferred by the event"
+      },
+      "item_type": "role"
+    },
+    {
+      "item": {
+        "aliases": [
+          "agent generated",
+          "said by assistant"
+        ],
+        "constraints": [],
+        "id": "l1:source_status.assistant_asserted",
+        "provenance": [
+          {
+            "evidence": "SYSTEM OFFER 10569 and SYSTEM INFORM 3244 originate system-side",
+            "source": "sgd_dialogue_acts"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "qualified_by",
+            "target_id": "l1:qualifier.source_status"
+          }
+        ],
+        "role_kind": "vocabulary_value",
+        "roles": [],
+        "sense": "the assistant produced the content, so it inherits the assistant's reliability"
+      },
+      "item_type": "qualifier_value"
+    },
+    {
+      "item": {
+        "aliases": [
+          "mutually confirmed",
+          "read back and accepted"
+        ],
+        "constraints": [],
+        "id": "l1:source_status.confirmed_by_both",
+        "provenance": [
+          {
+            "evidence": "SYSTEM CONFIRM 10387 followed by USER AFFIRM 2070 is the corpus's most frequent agreement structure; tau-bench policy mandates it before writes",
+            "source": "sgd_dialogue_acts"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "qualified_by",
+            "target_id": "l1:qualifier.source_status"
+          }
+        ],
+        "role_kind": "vocabulary_value",
+        "roles": [],
+        "sense": "user and assistant explicitly agreed on the content, so neither alone is the authority"
+      },
+      "item_type": "qualifier_value"
+    },
+    {
+      "item": {
+        "aliases": [
+          "inferred",
+          "computed"
+        ],
+        "constraints": [],
+        "id": "l1:source_status.derived",
+        "provenance": [
+          {
+            "evidence": "ke_memory_demo.online.SourceStatus.DERIVED already exists, and every L2 abstraction will carry this status, so it must be nameable at L1",
+            "source": "repository_vocabulary"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "qualified_by",
+            "target_id": "l1:qualifier.source_status"
+          }
+        ],
+        "role_kind": "vocabulary_value",
+        "roles": [],
+        "sense": "the content was inferred from other content and has no independent source of its own"
+      },
+      "item_type": "qualifier_value"
+    },
+    {
+      "item": {
+        "aliases": [
+          "tool result",
+          "api result",
+          "looked up"
+        ],
+        "constraints": [],
+        "id": "l1:source_status.tool_observed",
+        "provenance": [
+          {
+            "evidence": "get_order_details, get_reservation_details and get_user_details return backend state rather than dialogue content",
+            "source": "tau_bench_tools"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "qualified_by",
+            "target_id": "l1:qualifier.source_status"
+          }
+        ],
+        "role_kind": "vocabulary_value",
+        "roles": [],
+        "sense": "a tool or backend returned the content, which is checkable independently of the dialogue"
+      },
+      "item_type": "qualifier_value"
+    },
+    {
+      "item": {
+        "aliases": [
+          "said by user",
+          "self-reported"
+        ],
+        "constraints": [],
+        "id": "l1:source_status.user_reported",
+        "provenance": [
+          {
+            "evidence": "10647 USER INFORM acts are the user's own report of a value",
+            "source": "sgd_dialogue_acts"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "qualified_by",
+            "target_id": "l1:qualifier.source_status"
+          }
+        ],
+        "role_kind": "vocabulary_value",
+        "roles": [],
+        "sense": "the user is the authority for the content; nothing else corroborates it"
+      },
+      "item_type": "qualifier_value"
+    },
+    {
+      "item": {
+        "aliases": [
+          "active",
+          "still holds"
+        ],
+        "constraints": [],
+        "id": "l1:standing.current",
+        "provenance": [
+          {
+            "evidence": "ke_memory_demo.domain.Lifecycle.ACTIVE",
+            "source": "repository_vocabulary"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "qualified_by",
+            "target_id": "l1:qualifier.assertion_standing"
+          },
+          {
+            "kind": "opposite_of",
+            "target_id": "l1:standing.superseded"
+          }
+        ],
+        "role_kind": "vocabulary_value",
+        "roles": [],
+        "sense": "no later assertion has replaced this one"
+      },
+      "item_type": "qualifier_value"
+    },
+    {
+      "item": {
+        "aliases": [
+          "withdrawn",
+          "never mind",
+          "cancelled that"
+        ],
+        "constraints": [],
+        "id": "l1:standing.retracted",
+        "provenance": [
+          {
+            "evidence": "NEGATE_INTENT 407 abandons a declared intent without providing another, which is withdrawal rather than substitution",
+            "source": "sgd_dialogue_acts"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "qualified_by",
+            "target_id": "l1:qualifier.assertion_standing"
+          }
+        ],
+        "role_kind": "vocabulary_value",
+        "roles": [],
+        "sense": "the asserter withdrew the content without substituting a replacement value"
+      },
+      "item_type": "qualifier_value"
+    },
+    {
+      "item": {
+        "aliases": [
+          "outdated",
+          "changed since",
+          "replaced"
+        ],
+        "constraints": [],
+        "id": "l1:standing.superseded",
+        "provenance": [
+          {
+            "evidence": "71.6% of 5110 dialogues revise a slot value, so supersession is the common case rather than an exception",
+            "source": "sgd_state_dynamics"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "qualified_by",
+            "target_id": "l1:qualifier.assertion_standing"
+          }
+        ],
+        "role_kind": "vocabulary_value",
+        "roles": [],
+        "sense": "a later assertion about the same subject and attribute replaced this one"
+      },
+      "item_type": "qualifier_value"
+    },
+    {
+      "item": {
+        "aliases": [
+          "cannot",
+          "not allowed",
+          "restriction",
+          "requirement"
+        ],
+        "constraints": [
+          {
+            "expression": "a constraint cannot be traded off the way a preference can; conflating them makes a hard requirement look like a rankable option",
+            "kind": "distinct_from_preference"
+          }
+        ],
+        "id": "l1:state.capability_constraint",
+        "provenance": [
+          {
+            "evidence": "tau-bench policy states hard limits (a gift card must cover the total; item modification cannot change product type) that are not preferences",
+            "source": "tau_bench_tools"
+          }
+        ],
+        "relations": [],
+        "role_kind": "concept",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.holder"
+          },
+          {
+            "is_required": false,
+            "range_id": null,
+            "role_id": "l1:role.constraint_on"
+          }
+        ],
+        "sense": "a standing limit on what the holder can do or accept, not a matter of taste"
+      },
+      "item_type": "state_type"
+    },
+    {
+      "item": {
+        "aliases": [
+          "situation",
+          "circumstances",
+          "as things stand"
+        ],
+        "constraints": [
+          {
+            "expression": "a new value supersedes the old while remaining the same state; SGD revises city 571 times and departure_date 516 times in 5110 dialogues",
+            "kind": "revisable_without_identity_change"
+          }
+        ],
+        "id": "l1:state.circumstance",
+        "provenance": [
+          {
+            "evidence": "14288 of 65245 persona sentences assert an ongoing circumstance ('I live in', 'I work as', 'I am a')",
+            "source": "msc_personas"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "specializes_sense",
+            "target_id": "l1:predicate.occupy_role"
+          }
+        ],
+        "role_kind": "concept",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.holder"
+          },
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.theme"
+          }
+        ],
+        "sense": "a durable non-evaluative fact about a holder, such as where they live or what they do"
+      },
+      "item_type": "state_type"
+    },
+    {
+      "item": {
+        "aliases": [
+          "booked and upcoming",
+          "on the calendar",
+          "order pending"
+        ],
+        "constraints": [
+          {
+            "expression": "this state ends by fulfilment or by l1:event.commitment_withdrawn, and not by the passage of time alone",
+            "kind": "terminates_on_fulfilment_or_withdrawal"
+          }
+        ],
+        "id": "l1:state.pending_arrangement",
+        "provenance": [
+          {
+            "evidence": "tau-bench order status is a four-value lifecycle (pending, processed, delivered, cancelled) and only pending permits modification",
+            "source": "tau_bench_tools"
+          }
+        ],
+        "relations": [],
+        "role_kind": "concept",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.holder"
+          },
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.theme"
+          }
+        ],
+        "sense": "an arrangement exists and its obligations have not yet been discharged"
+      },
+      "item_type": "state_type"
+    },
+    {
+      "item": {
+        "aliases": [
+          "owns",
+          "has",
+          "keeps"
+        ],
+        "constraints": [],
+        "id": "l1:state.possession",
+        "provenance": [
+          {
+            "evidence": "8660 of 65245 persona sentences match an 'I have/own' pattern",
+            "source": "msc_personas"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "is_a",
+            "target_id": "l1:state.circumstance"
+          }
+        ],
+        "role_kind": "concept",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.holder"
+          },
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.theme"
+          }
+        ],
+        "sense": "a holder has something at their disposal over an interval"
+      },
+      "item_type": "state_type"
+    },
+    {
+      "item": {
+        "aliases": [
+          "gave up on",
+          "dropped it",
+          "stopped trying to"
+        ],
+        "constraints": [],
+        "id": "l1:task.abandoned_intention",
+        "provenance": [
+          {
+            "evidence": "NEGATE_INTENT 407 abandons a previously declared intent, so abandonment is attested as its own outcome rather than as an absent completion",
+            "source": "sgd_dialogue_acts"
+          }
+        ],
+        "relations": [],
+        "role_kind": "concept",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.agent"
+          },
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.theme"
+          }
+        ],
+        "sense": "an aim the agent declared and then gave up without achieving it"
+      },
+      "item_type": "task_type"
+    },
+    {
+      "item": {
+        "aliases": [
+          "wants to",
+          "needs to",
+          "trying to",
+          "looking to"
+        ],
+        "constraints": [
+          {
+            "expression": "an L1 task is what one turn makes explicit; anything requiring evidence from a second turn is an O_L2 abstraction and not this item",
+            "kind": "single_turn_scope"
+          }
+        ],
+        "id": "l1:task.declared_intention",
+        "provenance": [
+          {
+            "evidence": "USER INFORM_INTENT 3952 declares an aim in one turn, and SYSTEM OFFER_INTENT 1087 proposes one",
+            "source": "sgd_dialogue_acts"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "qualified_by",
+            "target_id": "l1:qualifier.modality"
+          }
+        ],
+        "role_kind": "concept",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.agent"
+          },
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.theme"
+          }
+        ],
+        "sense": "the agent states an aim it has not yet achieved, at a granularity resolvable in one turn"
+      },
+      "item_type": "task_type"
+    },
+    {
+      "item": {
+        "aliases": [
+          "still need",
+          "waiting on",
+          "to be confirmed"
+        ],
+        "constraints": [
+          {
+            "expression": "this item ends when the missing value is supplied, so it is not a preference and must not survive its own satisfaction",
+            "kind": "closes_when_supplied"
+          }
+        ],
+        "id": "l1:task.outstanding_requirement",
+        "provenance": [
+          {
+            "evidence": "required_slots on each intent names exactly what is outstanding; SYSTEM REQUEST 5008 is the act of asking for one of them",
+            "source": "sgd_schema"
+          }
+        ],
+        "relations": [],
+        "role_kind": "concept",
+        "roles": [
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.agent"
+          },
+          {
+            "is_required": true,
+            "range_id": null,
+            "role_id": "l1:role.theme"
+          }
+        ],
+        "sense": "a specific piece of information or action still missing before an intention can complete"
+      },
+      "item_type": "task_type"
+    },
+    {
+      "item": {
+        "aliases": [
+          "future",
+          "upcoming",
+          "planned for"
+        ],
+        "constraints": [],
+        "id": "l1:time.after_assertion",
+        "provenance": [
+          {
+            "evidence": "forward-looking slots are pervasive: check_in_date, departure_date, appointment_date, pickup_date all denote a situation not yet realised",
+            "source": "sgd_schema"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "qualified_by",
+            "target_id": "l1:qualifier.time"
+          }
+        ],
+        "role_kind": "vocabulary_value",
+        "roles": [],
+        "sense": "the situation is expected or scheduled to hold after the moment of assertion"
+      },
+      "item_type": "qualifier_value"
+    },
+    {
+      "item": {
+        "aliases": [
+          "present",
+          "currently",
+          "right now"
+        ],
+        "constraints": [],
+        "id": "l1:time.at_assertion",
+        "provenance": [
+          {
+            "evidence": "14288 persona sentences assert a state holding at utterance time",
+            "source": "msc_personas"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "qualified_by",
+            "target_id": "l1:qualifier.time"
+          }
+        ],
+        "role_kind": "vocabulary_value",
+        "roles": [],
+        "sense": "the situation holds at the moment of assertion"
+      },
+      "item_type": "qualifier_value"
+    },
+    {
+      "item": {
+        "aliases": [
+          "past",
+          "already happened"
+        ],
+        "constraints": [],
+        "id": "l1:time.before_assertion",
+        "provenance": [
+          {
+            "evidence": "1632 of 65245 persona sentences match a past-event pattern ('I used to', 'I graduated', 'I moved')",
+            "source": "msc_personas"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "qualified_by",
+            "target_id": "l1:qualifier.time"
+          },
+          {
+            "kind": "opposite_of",
+            "target_id": "l1:time.after_assertion"
+          }
+        ],
+        "role_kind": "vocabulary_value",
+        "roles": [],
+        "sense": "the situation held or occurred before the moment of assertion"
+      },
+      "item_type": "qualifier_value"
+    },
+    {
+      "item": {
+        "aliases": [
+          "habitually",
+          "every week",
+          "regularly"
+        ],
+        "constraints": [],
+        "id": "l1:time.recurring",
+        "provenance": [
+          {
+            "evidence": "80 of 65245 persona sentences match an explicit frequency pattern ('usually', 'always', 'every day'); rare but structurally distinct",
+            "source": "msc_personas"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "qualified_by",
+            "target_id": "l1:qualifier.time"
+          }
+        ],
+        "role_kind": "vocabulary_value",
+        "roles": [],
+        "sense": "the situation holds repeatedly on some cycle rather than once"
+      },
+      "item_type": "qualifier_value"
+    },
+    {
+      "item": {
+        "aliases": [
+          "during",
+          "over a period",
+          "ongoing since"
+        ],
+        "constraints": [],
+        "id": "l1:time.spanning",
+        "provenance": [
+          {
+            "evidence": "paired boundary slots define intervals: check_in_date/check_out_date, outbound_departure_time/inbound_arrival_time; Taskmaster2 date_range 2469",
+            "source": "sgd_schema"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "qualified_by",
+            "target_id": "l1:qualifier.time"
+          }
+        ],
+        "role_kind": "vocabulary_value",
+        "roles": [],
+        "sense": "the situation holds over an interval rather than at a point"
+      },
+      "item_type": "qualifier_value"
+    },
+    {
+      "item": {
+        "aliases": [
+          "timeless",
+          "no time given"
+        ],
+        "constraints": [],
+        "id": "l1:time.unspecified",
+        "provenance": [
+          {
+            "evidence": "the majority of persona sentences carry no temporal marker at all, so an explicit unspecified value prevents a default of 'present' being invented",
+            "source": "msc_personas"
+          }
+        ],
+        "relations": [
+          {
+            "kind": "qualified_by",
+            "target_id": "l1:qualifier.time"
+          }
+        ],
+        "role_kind": "vocabulary_value",
+        "roles": [],
+        "sense": "no temporal location is recoverable from the assertion"
+      },
+      "item_type": "qualifier_value"
+    }
+  ],
+  "unit_id": "O_L1",
+  "version": "1.0.0"
+}

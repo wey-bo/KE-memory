@@ -1,0 +1,487 @@
+{
+ "acceptance": {
+  "artifact_consumed": true,
+  "artifact_sha256": "ba0a3af7685b2a982919df072c6a96c227255ede470a3b1a5be4bbe802d11c1f",
+  "artifact_turns_read": 6092,
+  "builder_id": "stage-2-handle-index-builder",
+  "gold_retrieval_oracle_exact": 1.0,
+  "gold_retrieval_requirement_met": true,
+  "no_gold_in_chain_output": true,
+  "substitution_changes_only_target_and_downstream": true
+ },
+ "chain": {
+  "layer_status_counts": {
+   "answer": {
+    "empty": 13,
+    "ok": 19
+   },
+   "builder_artifact": {
+    "ok": 32
+   },
+   "delivery": {
+    "ok": 19,
+    "refused": 13
+   },
+   "extraction": {
+    "ok": 32
+   },
+   "l1_l2": {
+    "empty": 10,
+    "ok": 22
+   },
+   "mapping": {
+    "ok": 32
+   },
+   "query_plan": {
+    "ok": 32
+   },
+   "retrieval": {
+    "empty": 13,
+    "ok": 19
+   }
+  },
+  "layers": [
+   "build_input",
+   "builder_artifact",
+   "extraction",
+   "mapping",
+   "l1_l2",
+   "query_plan",
+   "retrieval",
+   "delivery",
+   "answer"
+  ],
+  "non_empty_selection": 19,
+  "questions": 32
+ },
+ "consumption_evidence": "every layer trace carries the artifact digest and assert_artifact_read_by_every_layer rejects a mismatch, so a layer that reached back to the corpus would fail rather than pass silently",
+ "cumulative_substitution": {
+  "interpretation": "a zero single-layer rate means necessary but not sufficient, not inert; the cumulative series is what shows the layers compose",
+  "series": [
+   {
+    "layers_applied": [
+     "gold_extraction"
+    ],
+    "selection_exact_match_rate": 0.0
+   },
+   {
+    "layers_applied": [
+     "gold_extraction",
+     "gold_memory_mapping"
+    ],
+    "selection_exact_match_rate": 0.0
+   },
+   {
+    "layers_applied": [
+     "gold_extraction",
+     "gold_memory_mapping",
+     "gold_l2_abstraction"
+    ],
+    "selection_exact_match_rate": 0.0
+   },
+   {
+    "layers_applied": [
+     "gold_extraction",
+     "gold_memory_mapping",
+     "gold_l2_abstraction",
+     "gold_query_plan"
+    ],
+    "selection_exact_match_rate": 1.0
+   }
+  ]
+ },
+ "data_rule": "the 32 items are never fresh hidden again",
+ "gold_retrieval_oracle": {
+  "executed_on": "32/32 slice items",
+  "items_closed": "32/32",
+  "per_item": [
+   {
+    "closed": true,
+    "gold_handles": [],
+    "question_id": "BEAM-100K-C001-abstention-001",
+    "selected_handles": []
+   },
+   {
+    "closed": true,
+    "gold_handles": [],
+    "question_id": "BEAM-100K-C001-abstention-002",
+    "selected_handles": []
+   },
+   {
+    "closed": true,
+    "gold_handles": [
+     "h00400",
+     "h00434"
+    ],
+    "question_id": "BEAM-100K-C001-contradiction_resolution-001",
+    "selected_handles": [
+     "h00400",
+     "h00434"
+    ]
+   },
+   {
+    "closed": true,
+    "gold_handles": [
+     "h00630"
+    ],
+    "question_id": "BEAM-100K-C001-contradiction_resolution-002",
+    "selected_handles": [
+     "h00630"
+    ]
+   },
+   {
+    "closed": true,
+    "gold_handles": [
+     "h00838",
+     "h00866"
+    ],
+    "question_id": "BEAM-100K-C001-knowledge_update-001",
+    "selected_handles": [
+     "h00838",
+     "h00866"
+    ]
+   },
+   {
+    "closed": true,
+    "gold_handles": [
+     "h01088",
+     "h01122"
+    ],
+    "question_id": "BEAM-100K-C001-knowledge_update-002",
+    "selected_handles": [
+     "h01088",
+     "h01122"
+    ]
+   },
+   {
+    "closed": true,
+    "gold_handles": [
+     "h01142",
+     "h01234",
+     "h01290"
+    ],
+    "question_id": "BEAM-100K-C001-multi_session_reasoning-001",
+    "selected_handles": [
+     "h01142",
+     "h01234",
+     "h01290"
+    ]
+   },
+   {
+    "closed": true,
+    "gold_handles": [
+     "h01332",
+     "h01400",
+     "h01466"
+    ],
+    "question_id": "BEAM-100K-C001-multi_session_reasoning-002",
+    "selected_handles": [
+     "h01332",
+     "h01400",
+     "h01466"
+    ]
+   },
+   {
+    "closed": true,
+    "gold_handles": [
+     "h01504",
+     "h01506"
+    ],
+    "question_id": "BEAM-100K-C001-temporal_reasoning-001",
+    "selected_handles": [
+     "h01504",
+     "h01506"
+    ]
+   },
+   {
+    "closed": true,
+    "gold_handles": [
+     "h01720",
+     "h01778"
+    ],
+    "question_id": "BEAM-100K-C001-temporal_reasoning-002",
+    "selected_handles": [
+     "h01720",
+     "h01778"
+    ]
+   },
+   {
+    "closed": true,
+    "gold_handles": [
+     "h01905"
+    ],
+    "question_id": "LOCOMO-S01-Q004",
+    "selected_handles": [
+     "h01905"
+    ]
+   },
+   {
+    "closed": true,
+    "gold_handles": [
+     "h02303"
+    ],
+    "question_id": "LOCOMO-S01-Q005",
+    "selected_handles": [
+     "h02303"
+    ]
+   },
+   {
+    "closed": true,
+    "gold_handles": [
+     "h02720"
+    ],
+    "question_id": "LOCOMO-S01-Q001",
+    "selected_handles": [
+     "h02720"
+    ]
+   },
+   {
+    "closed": true,
+    "gold_handles": [
+     "h03148"
+    ],
+    "question_id": "LOCOMO-S01-Q002",
+    "selected_handles": [
+     "h03148"
+    ]
+   },
+   {
+    "closed": true,
+    "gold_handles": [
+     "h03564",
+     "h03566"
+    ],
+    "question_id": "LOCOMO-S01-Q003",
+    "selected_handles": [
+     "h03564",
+     "h03566"
+    ]
+   },
+   {
+    "closed": true,
+    "gold_handles": [
+     "h04014",
+     "h04047"
+    ],
+    "question_id": "LOCOMO-S01-Q015",
+    "selected_handles": [
+     "h04014",
+     "h04047"
+    ]
+   },
+   {
+    "closed": true,
+    "gold_handles": [
+     "h04413"
+    ],
+    "question_id": "LOCOMO-S01-Q083",
+    "selected_handles": [
+     "h04413"
+    ]
+   },
+   {
+    "closed": true,
+    "gold_handles": [
+     "h04833"
+    ],
+    "question_id": "LOCOMO-S01-Q084",
+    "selected_handles": [
+     "h04833"
+    ]
+   },
+   {
+    "closed": true,
+    "gold_handles": [
+     "h05252"
+    ],
+    "question_id": "LOCOMO-S01-Q153",
+    "selected_handles": [
+     "h05252"
+    ]
+   },
+   {
+    "closed": true,
+    "gold_handles": [
+     "h05676"
+    ],
+    "question_id": "LOCOMO-S01-Q154",
+    "selected_handles": [
+     "h05676"
+    ]
+   },
+   {
+    "closed": true,
+    "gold_handles": [
+     "h06070",
+     "h06071",
+     "h06072"
+    ],
+    "question_id": "LONGMEMEVAL-gpt4_2655b836",
+    "selected_handles": [
+     "h06070",
+     "h06071",
+     "h06072"
+    ]
+   },
+   {
+    "closed": true,
+    "gold_handles": [
+     "h06073",
+     "h06074"
+    ],
+    "question_id": "LONGMEMEVAL-gpt4_2487a7cb",
+    "selected_handles": [
+     "h06073",
+     "h06074"
+    ]
+   },
+   {
+    "closed": true,
+    "gold_handles": [
+     "h06075",
+     "h06076",
+     "h06077"
+    ],
+    "question_id": "LONGMEMEVAL-0a995998",
+    "selected_handles": [
+     "h06075",
+     "h06076",
+     "h06077"
+    ]
+   },
+   {
+    "closed": true,
+    "gold_handles": [
+     "h06078",
+     "h06079",
+     "h06080",
+     "h06081"
+    ],
+    "question_id": "LONGMEMEVAL-6d550036",
+    "selected_handles": [
+     "h06078",
+     "h06079",
+     "h06080",
+     "h06081"
+    ]
+   },
+   {
+    "closed": true,
+    "gold_handles": [
+     "h06082",
+     "h06083"
+    ],
+    "question_id": "LONGMEMEVAL-6a1eabeb",
+    "selected_handles": [
+     "h06082",
+     "h06083"
+    ]
+   },
+   {
+    "closed": true,
+    "gold_handles": [
+     "h06084",
+     "h06085"
+    ],
+    "question_id": "LONGMEMEVAL-6aeb4375",
+    "selected_handles": [
+     "h06084",
+     "h06085"
+    ]
+   },
+   {
+    "closed": true,
+    "gold_handles": [
+     "h06086"
+    ],
+    "question_id": "LONGMEMEVAL-e47becba",
+    "selected_handles": [
+     "h06086"
+    ]
+   },
+   {
+    "closed": true,
+    "gold_handles": [
+     "h06087"
+    ],
+    "question_id": "LONGMEMEVAL-118b2229",
+    "selected_handles": [
+     "h06087"
+    ]
+   },
+   {
+    "closed": true,
+    "gold_handles": [
+     "h06088"
+    ],
+    "question_id": "LONGMEMEVAL-7161e7e2",
+    "selected_handles": [
+     "h06088"
+    ]
+   },
+   {
+    "closed": true,
+    "gold_handles": [
+     "h06089"
+    ],
+    "question_id": "LONGMEMEVAL-c4f10528",
+    "selected_handles": [
+     "h06089"
+    ]
+   },
+   {
+    "closed": true,
+    "gold_handles": [
+     "h06090"
+    ],
+    "question_id": "LONGMEMEVAL-8a2466db",
+    "selected_handles": [
+     "h06090"
+    ]
+   },
+   {
+    "closed": true,
+    "gold_handles": [
+     "h06091"
+    ],
+    "question_id": "LONGMEMEVAL-06878be2",
+    "selected_handles": [
+     "h06091"
+    ]
+   }
+  ],
+  "requirement": "1.0; anything less means the oracle is not exact",
+  "selection_exact_match_rate": 1.0
+ },
+ "judge": "not called",
+ "no_quality_threshold": "no model-quality pass line and no targeted repair; the answer layer is a stub, so answer correctness is not evaluated here",
+ "purpose": "validate the real chain and the attribution tooling; instruments only",
+ "single_layer_isolation": {
+  "gold_evidence_selection": {
+   "changed_its_own_layer_on": "2/2",
+   "target_layer": "retrieval",
+   "upstream_change_rejected": true
+  },
+  "gold_extraction": {
+   "changed_its_own_layer_on": "2/2",
+   "target_layer": "extraction",
+   "upstream_change_rejected": true
+  },
+  "gold_l2_abstraction": {
+   "changed_its_own_layer_on": "2/2",
+   "target_layer": "l1_l2",
+   "upstream_change_rejected": true
+  },
+  "gold_memory_mapping": {
+   "changed_its_own_layer_on": "2/2",
+   "target_layer": "mapping",
+   "upstream_change_rejected": true
+  },
+  "gold_query_plan": {
+   "changed_its_own_layer_on": "2/2",
+   "target_layer": "query_plan",
+   "upstream_change_rejected": true
+  }
+ },
+ "stage": "3"
+}

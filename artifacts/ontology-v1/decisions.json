@@ -1,0 +1,903 @@
+{
+  "decisions": [
+    {
+      "accepted_as": null,
+      "candidate": "act.goodbye",
+      "disposition": "rejected",
+      "reason": "SYSTEM GOODBYE 2559 and USER GOODBYE 1320. Rejected on the same ground as thank_you: it marks conversation structure, not content",
+      "source": "sgd_dialogue_acts"
+    },
+    {
+      "accepted_as": null,
+      "candidate": "act.inform_count",
+      "disposition": "rejected",
+      "reason": "SYSTEM INFORM_COUNT 1779 reports how many results matched. Rejected as an act; the quantity it reports is attribute.magnitude over attribute.availability",
+      "source": "sgd_dialogue_acts"
+    },
+    {
+      "accepted_as": null,
+      "candidate": "act.offer",
+      "disposition": "rejected",
+      "reason": "SYSTEM OFFER 10569, the second most frequent act. Rejected as an act, but its content is retained: what an offer proposes is an arrangement, and choosing among offers is preference.comparative, both accepted",
+      "source": "sgd_dialogue_acts"
+    },
+    {
+      "accepted_as": null,
+      "candidate": "act.req_more",
+      "disposition": "rejected",
+      "reason": "SYSTEM REQ_MORE 1534. Rejected as dialogue management with no content of its own",
+      "source": "sgd_dialogue_acts"
+    },
+    {
+      "accepted_as": null,
+      "candidate": "act.select",
+      "disposition": "rejected",
+      "reason": "USER SELECT 2577. Rejected as an act while its content was accepted: selecting one of several offers is the evidence behind preference.comparative",
+      "source": "sgd_dialogue_acts"
+    },
+    {
+      "accepted_as": null,
+      "candidate": "act.thank_you",
+      "disposition": "rejected",
+      "reason": "USER THANK_YOU 3035 occurrences. Rejected because an act is a property of an utterance and this one leaves nothing to remember; admitting frequent acts would fill the ontology with types no question can be about",
+      "source": "sgd_dialogue_acts"
+    },
+    {
+      "accepted_as": null,
+      "candidate": "airline_named_carriers",
+      "disposition": "rejected",
+      "reason": "the airlines slot enumerates eight named carriers as possible_values. Rejected because each is an Individual, which the plan excludes outright; a type-level ontology records that carriers exist as a role filler, never which ones",
+      "source": "sgd_schema"
+    },
+    {
+      "accepted_as": null,
+      "candidate": "amenity",
+      "disposition": "rejected",
+      "reason": "third most frequent facet at 19235. Rejected despite the frequency because it recurs only within lodging frames; the cross-domain test was recurrence across unrelated domains, which amenity fails while attribute.kind subsumes it",
+      "source": "taskmaster2_annotations"
+    },
+    {
+      "accepted_as": null,
+      "candidate": "attribute.contact_channel",
+      "disposition": "deferred",
+      "reason": "phone_number is the single most widely shared slot name, in 9 of 26 services. Deferred rather than accepted because every observed use is an Individual's identifier, so the type-level content is thin: 'entities can be contacted'",
+      "source": "sgd_schema"
+    },
+    {
+      "accepted_as": null,
+      "candidate": "cuisine",
+      "disposition": "rejected",
+      "reason": "food_order 12981 annotations with 'food' filling 13851 slots. Rejected as a sub-category of a single vertical; attribute.kind covers the position",
+      "source": "taskmaster2_annotations"
+    },
+    {
+      "accepted_as": null,
+      "candidate": "date_literals",
+      "disposition": "rejected",
+      "reason": "non-categorical date slots carry literal dates. Rejected as Individuals. This is why the time vocabulary is relative to assertion time: the relation is type-level while the literal is a fact about one dialogue",
+      "source": "sgd_schema"
+    },
+    {
+      "accepted_as": null,
+      "candidate": "departure_date",
+      "disposition": "rejected",
+      "reason": "one of five date slots (with check_in_date, appointment_date, pickup_date, show_date) that differ only in which service declares them. Rejected in favour of attribute.calendar_position; keeping all five would encode SGD's service catalogue",
+      "source": "sgd_schema"
+    },
+    {
+      "accepted_as": null,
+      "candidate": "flight",
+      "disposition": "rejected",
+      "reason": "Flights_1 and Flights_2 in SGD, flight_search 32210 in Taskmaster2, and an entire tau-bench airline environment. Rejected as a domain vertical; its structure is role.source_location, role.target_location and commit_to_arrangement, all accepted",
+      "source": "sgd_schema"
+    },
+    {
+      "accepted_as": null,
+      "candidate": "hotel",
+      "disposition": "rejected",
+      "reason": "three SGD services (Hotels_1/2/3) and 28074 Taskmaster2 hotel_search annotations. Rejected as a domain vertical. Notably the three services disagree on slot names (pets_welcome vs pets_allowed), so even within one corpus it is not one schema",
+      "source": "sgd_schema"
+    },
+    {
+      "accepted_as": "l1:attribute.assessment",
+      "candidate": "l1:attribute.assessment",
+      "disposition": "accepted",
+      "reason": "attribute_type; attribute family recurring across at least three unrelated domains. Evidence: average_rating (3 services), star_rating; Taskmaster2 rating 2993, score 3262, star_rating 2083",
+      "source": "sgd_schema"
+    },
+    {
+      "accepted_as": "l1:attribute.availability",
+      "candidate": "l1:attribute.availability",
+      "disposition": "accepted",
+      "reason": "attribute_type; attribute family recurring across at least three unrelated domains. Evidence: GetCarsAvailable and Calendar_1 GetAvailableTime make availability the queried attribute; SYSTEM INFORM_COUNT 1779 reports how much of it there is",
+      "source": "sgd_schema"
+    },
+    {
+      "accepted_as": "l1:attribute.calendar_position",
+      "candidate": "l1:attribute.calendar_position",
+      "disposition": "accepted",
+      "reason": "attribute_type; attribute family recurring across at least three unrelated domains. Evidence: date (4 services), departure_date (3), check_in_date (3), appointment_date (3), return_date, pickup_date, dropoff_date, leaving_date collapse to one family",
+      "source": "sgd_schema"
+    },
+    {
+      "accepted_as": "l1:attribute.clock_position",
+      "candidate": "l1:attribute.clock_position",
+      "disposition": "accepted",
+      "reason": "attribute_type; attribute family recurring across at least three unrelated domains. Evidence: time (3 services), appointment_time (3), pickup_time, leaving_time and four Flights outbound/inbound time slots; Taskmaster2 time 9087, time_of_day 3874",
+      "source": "sgd_schema"
+    },
+    {
+      "accepted_as": "l1:attribute.designation",
+      "candidate": "l1:attribute.designation",
+      "disposition": "accepted",
+      "reason": "attribute_type; attribute family recurring across at least three unrelated domains. Evidence: 'name' is the most frequent facet at 75676 occurrences and appears in every one of the 7 domains",
+      "source": "taskmaster2_annotations"
+    },
+    {
+      "accepted_as": "l1:attribute.kind",
+      "candidate": "l1:attribute.kind",
+      "disposition": "accepted",
+      "reason": "attribute_type; attribute family recurring across at least three unrelated domains. Evidence: 'type' facet 25958 occurrences; SGD carries type/car_type/event_type/show_type/fare_type/ride_type as the same attribute under six service-local names",
+      "source": "taskmaster2_annotations"
+    },
+    {
+      "accepted_as": "l1:attribute.magnitude",
+      "candidate": "l1:attribute.magnitude",
+      "disposition": "accepted",
+      "reason": "attribute_type; attribute family recurring across at least three unrelated domains. Evidence: price (4 services), total_price (3), fare (2), balance, amount, ride_fare plus the count family (passengers, party_size, number_of_rooms)",
+      "source": "sgd_schema"
+    },
+    {
+      "accepted_as": "l1:attribute.place",
+      "candidate": "l1:attribute.place",
+      "disposition": "accepted",
+      "reason": "attribute_type; attribute family recurring across at least three unrelated domains. Evidence: city (6 services), street_address (6), address (3), location (3) plus Taskmaster2 location 11461 and sub_location 1893",
+      "source": "sgd_schema"
+    },
+    {
+      "accepted_as": "l1:event.attempt_failed",
+      "candidate": "l1:event.attempt_failed",
+      "disposition": "accepted",
+      "reason": "event_type; bounded occurrence, separated from its sense so occurrences can be counted. Evidence: SYSTEM NOTIFY_FAILURE 302 across 2559 dialogues; a failed attempt is attested and is not the negation of a success event",
+      "source": "sgd_dialogue_acts"
+    },
+    {
+      "accepted_as": "l1:event.commitment_made",
+      "candidate": "l1:event.commitment_made",
+      "disposition": "accepted",
+      "reason": "event_type; bounded occurrence, separated from its sense so occurrences can be counted. Evidence: NOTIFY_SUCCESS 1796 marks the moment a transactional intent completes, against NOTIFY_FAILURE 302 where no arrangement comes into existence",
+      "source": "sgd_dialogue_acts"
+    },
+    {
+      "accepted_as": "l1:event.commitment_withdrawn",
+      "candidate": "l1:event.commitment_withdrawn",
+      "disposition": "accepted",
+      "reason": "event_type; bounded occurrence, separated from its sense so occurrences can be counted. Evidence: cancel_pending_order requires a reason from a closed set ('no longer needed', 'ordered by mistake'), so withdrawal is a distinct event with its own cause",
+      "source": "tau_bench_tools"
+    },
+    {
+      "accepted_as": "l1:event.information_request",
+      "candidate": "l1:event.information_request",
+      "disposition": "accepted",
+      "reason": "event_type; bounded occurrence, separated from its sense so occurrences can be counted. Evidence: USER REQUEST 3394 and SYSTEM REQUEST 5008 are bounded ask events",
+      "source": "sgd_dialogue_acts"
+    },
+    {
+      "accepted_as": "l1:event.media_consumption",
+      "candidate": "l1:event.media_consumption",
+      "disposition": "accepted",
+      "reason": "event_type; bounded occurrence, separated from its sense so occurrences can be counted. Evidence: movie_search 45318 and music 21229 annotation instances, with streaming_service 2756 naming the instrument of consumption",
+      "source": "taskmaster2_annotations"
+    },
+    {
+      "accepted_as": "l1:modality.asserted",
+      "candidate": "l1:modality.asserted",
+      "disposition": "accepted",
+      "reason": "qualifier_value; attested assertion attitude, kept as a narrowing of domain.Modality. Evidence: INFORM 10647 by users and 3244 by the system present slot values",
+      "source": "sgd_dialogue_acts"
+    },
+    {
+      "accepted_as": "l1:modality.believed",
+      "candidate": "l1:modality.believed",
+      "disposition": "accepted",
+      "reason": "qualifier_value; attested assertion attitude, kept as a narrowing of domain.Modality. Evidence: ke_memory_demo.domain.Modality.BELIEF already partitions this from FACT, and keeping the distinction preserves compatibility with extracted units",
+      "source": "repository_vocabulary"
+    },
+    {
+      "accepted_as": "l1:modality.desired",
+      "candidate": "l1:modality.desired",
+      "disposition": "accepted",
+      "reason": "qualifier_value; attested assertion attitude, kept as a narrowing of domain.Modality. Evidence: 13819 of 65245 persona sentences match an affect-positive pattern ('I like/love/enjoy/prefer'), the single largest attested attitude",
+      "source": "msc_personas"
+    },
+    {
+      "accepted_as": "l1:modality.directed",
+      "candidate": "l1:modality.directed",
+      "disposition": "accepted",
+      "reason": "qualifier_value; attested assertion attitude, kept as a narrowing of domain.Modality. Evidence: retail policy requires explicit user confirmation before consequential actions, so a directive is a distinct attitude from a stated preference",
+      "source": "tau_bench_tools"
+    },
+    {
+      "accepted_as": "l1:modality.intended",
+      "candidate": "l1:modality.intended",
+      "disposition": "accepted",
+      "reason": "qualifier_value; attested assertion attitude, kept as a narrowing of domain.Modality. Evidence: INFORM_INTENT 3952 and AFFIRM_INTENT 680 commit the user to an intent; 1061 MSC persona sentences match 'I want/plan/hope to'",
+      "source": "sgd_dialogue_acts"
+    },
+    {
+      "accepted_as": "l1:polarity.affirmed",
+      "candidate": "l1:polarity.affirmed",
+      "disposition": "accepted",
+      "reason": "qualifier_value; denial is content; the corpus negates almost as often as it affirms. Evidence: AFFIRM 2070 and AFFIRM_INTENT 680",
+      "source": "sgd_dialogue_acts"
+    },
+    {
+      "accepted_as": "l1:polarity.denied",
+      "candidate": "l1:polarity.denied",
+      "disposition": "accepted",
+      "reason": "qualifier_value; denial is content; the corpus negates almost as often as it affirms. Evidence: NEGATE 2127 and NEGATE_INTENT 407; MSC contributes 970 affect-negative persona sentences ('I hate', \"I don't like\")",
+      "source": "sgd_dialogue_acts"
+    },
+    {
+      "accepted_as": "l1:polarity.indeterminate",
+      "candidate": "l1:polarity.indeterminate",
+      "disposition": "accepted",
+      "reason": "qualifier_value; denial is content; the corpus negates almost as often as it affirms. Evidence: ke_memory_demo.domain.Polarity.UNKNOWN exists for extracted units, and an ontology without it would force a wrong choice at mapping time",
+      "source": "repository_vocabulary"
+    },
+    {
+      "accepted_as": "l1:predicate.change_arrangement",
+      "candidate": "l1:predicate.change_arrangement",
+      "disposition": "accepted",
+      "reason": "predicate_sense; sense clustering several intent verbs that share one argument frame. Evidence: retail exposes cancel_pending_order, modify_pending_order_address/items/payment and airline exposes cancel_reservation and three update_reservation_* tools",
+      "source": "tau_bench_tools"
+    },
+    {
+      "accepted_as": "l1:predicate.commit_to_arrangement",
+      "candidate": "l1:predicate.commit_to_arrangement",
+      "disposition": "accepted",
+      "reason": "predicate_sense; sense clustering several intent verbs that share one argument frame. Evidence: Reserve (7) + Book (4) + Schedule (1) = 12 intent names, and every one has is_transactional true",
+      "source": "sgd_schema"
+    },
+    {
+      "accepted_as": "l1:predicate.consume_media",
+      "candidate": "l1:predicate.consume_media",
+      "disposition": "accepted",
+      "reason": "predicate_sense; sense clustering several intent verbs that share one argument frame. Evidence: Play (3) intents -- PlaySong, PlayMovie, PlayMedia -- are transactional yet create no obligation, so they are neither seek_information nor commitment",
+      "source": "sgd_schema"
+    },
+    {
+      "accepted_as": "l1:predicate.hold_attitude",
+      "candidate": "l1:predicate.hold_attitude",
+      "disposition": "accepted",
+      "reason": "predicate_sense; sense clustering several intent verbs that share one argument frame. Evidence: 13819 affect-positive and 970 affect-negative persona sentences share one argument frame and differ only in polarity",
+      "source": "msc_personas"
+    },
+    {
+      "accepted_as": "l1:predicate.occupy_role",
+      "candidate": "l1:predicate.occupy_role",
+      "disposition": "accepted",
+      "reason": "predicate_sense; sense clustering several intent verbs that share one argument frame. Evidence: 14288 ongoing-state and 8660 possession persona sentences describe a durable relation with no evaluative component",
+      "source": "msc_personas"
+    },
+    {
+      "accepted_as": "l1:predicate.seek_information",
+      "candidate": "l1:predicate.seek_information",
+      "disposition": "accepted",
+      "reason": "predicate_sense; sense clustering several intent verbs that share one argument frame. Evidence: Find (12) + Search (7) + Lookup (2) + Check (1) = 22 of 53 intent names, and all 22 belong to intents with is_transactional false",
+      "source": "sgd_schema"
+    },
+    {
+      "accepted_as": "l1:predicate.transfer_value",
+      "candidate": "l1:predicate.transfer_value",
+      "disposition": "accepted",
+      "reason": "predicate_sense; sense clustering several intent verbs that share one argument frame. Evidence: Buy (5) + Transfer (1) intents, all transactional; Banks_1 TransferMoney requires amount and recipient_account_name together",
+      "source": "sgd_schema"
+    },
+    {
+      "accepted_as": "l1:preference.affinity",
+      "candidate": "l1:preference.affinity",
+      "disposition": "accepted",
+      "reason": "preference_type; evaluative disposition, split by what it ranges over. Evidence: 13819 affect-positive and 970 affect-negative persona sentences; the largest single attested preference shape",
+      "source": "msc_personas"
+    },
+    {
+      "accepted_as": "l1:preference.comparative",
+      "candidate": "l1:preference.comparative",
+      "disposition": "accepted",
+      "reason": "preference_type; evaluative disposition, split by what it ranges over. Evidence: USER SELECT 2577 chooses among offered alternatives and REQUEST_ALTS 1397 rejects the current offer in favour of another, both ranking acts",
+      "source": "sgd_dialogue_acts"
+    },
+    {
+      "accepted_as": "l1:preference.threshold",
+      "candidate": "l1:preference.threshold",
+      "disposition": "accepted",
+      "reason": "preference_type; evaluative disposition, split by what it ranges over. Evidence: ordered categorical ranges support bounds: Restaurants_1 price_range ['inexpensive'..'very expensive'] and Hotels_1 star_rating ['1'..'5']",
+      "source": "sgd_schema"
+    },
+    {
+      "accepted_as": "l1:qualifier.assertion_standing",
+      "candidate": "l1:qualifier.assertion_standing",
+      "disposition": "accepted",
+      "reason": "qualifier_dimension; a dimension of an assertion rather than a property of its subject. Evidence: 3661 of 5110 dialogues (71.6%) revise at least one user slot value mid-dialogue; city 571, departure_date 516, date 456",
+      "source": "sgd_state_dynamics"
+    },
+    {
+      "accepted_as": "l1:qualifier.modality",
+      "candidate": "l1:qualifier.modality",
+      "disposition": "accepted",
+      "reason": "qualifier_dimension; a dimension of an assertion rather than a property of its subject. Evidence: INFORM_INTENT 3952 and AFFIRM_INTENT 680 mark a wanted situation, distinct from INFORM 10647 marking an asserted one",
+      "source": "sgd_dialogue_acts"
+    },
+    {
+      "accepted_as": "l1:qualifier.polarity",
+      "candidate": "l1:qualifier.polarity",
+      "disposition": "accepted",
+      "reason": "qualifier_dimension; a dimension of an assertion rather than a property of its subject. Evidence: NEGATE 2127 against AFFIRM 2070 and NEGATE_INTENT 407 against AFFIRM_INTENT 680: denial is as frequent as affirmation",
+      "source": "sgd_dialogue_acts"
+    },
+    {
+      "accepted_as": "l1:qualifier.source_status",
+      "candidate": "l1:qualifier.source_status",
+      "disposition": "accepted",
+      "reason": "qualifier_dimension; a dimension of an assertion rather than a property of its subject. Evidence: the speaker field partitions all acts into USER and SYSTEM, and NOTIFY_SUCCESS 1796 / NOTIFY_FAILURE 302 report a system-side outcome",
+      "source": "sgd_dialogue_acts"
+    },
+    {
+      "accepted_as": "l1:qualifier.time",
+      "candidate": "l1:qualifier.time",
+      "disposition": "accepted",
+      "reason": "qualifier_dimension; a dimension of an assertion rather than a property of its subject. Evidence: date/time slots are ubiquitous (date in 4 services, time in 3) and are always about the described situation, not the utterance",
+      "source": "sgd_schema"
+    },
+    {
+      "accepted_as": "l1:role.agent",
+      "candidate": "l1:role.agent",
+      "disposition": "accepted",
+      "reason": "role; argument position recurring across services under different slot names. Evidence: USER INFORM 10647 and SYSTEM OFFER 10569 are acts by distinct initiators; every intent in schema.json is performed by one of the two",
+      "source": "sgd_dialogue_acts"
+    },
+    {
+      "accepted_as": "l1:role.attribute_bearer",
+      "candidate": "l1:role.attribute_bearer",
+      "disposition": "accepted",
+      "reason": "role; argument position recurring across services under different slot names. Evidence: the 3-part annotation names split frame.facet.filler, so the bearer position is separate from the facet; 'name' fills it 75676 times",
+      "source": "taskmaster2_annotations"
+    },
+    {
+      "accepted_as": "l1:role.constraint_on",
+      "candidate": "l1:role.constraint_on",
+      "disposition": "accepted",
+      "reason": "role; argument position recurring across services under different slot names. Evidence: search intents pass user restrictions as slot values, e.g. Restaurants_1 price_range over ['inexpensive'..'very expensive'] narrows a search",
+      "source": "sgd_schema"
+    },
+    {
+      "accepted_as": "l1:role.holder",
+      "candidate": "l1:role.holder",
+      "disposition": "accepted",
+      "reason": "role; argument position recurring across services under different slot names. Evidence: 65245 persona sentences ascribe states to a subject who performs no action: 14288 match an ongoing-state pattern such as 'I live/work/am'",
+      "source": "msc_personas"
+    },
+    {
+      "accepted_as": "l1:role.instrument",
+      "candidate": "l1:role.instrument",
+      "disposition": "accepted",
+      "reason": "role; argument position recurring across services under different slot names. Evidence: retail order changes require payment_method_id and Music services require playback_device, both a means rather than a theme",
+      "source": "tau_bench_tools"
+    },
+    {
+      "accepted_as": "l1:role.quantity",
+      "candidate": "l1:role.quantity",
+      "disposition": "accepted",
+      "reason": "role; argument position recurring across services under different slot names. Evidence: a count family recurs with service-specific names: passengers, travelers, group_size, party_size, number_of_seats, number_of_tickets, number_of_rooms",
+      "source": "sgd_schema"
+    },
+    {
+      "accepted_as": "l1:role.recipient",
+      "candidate": "l1:role.recipient",
+      "disposition": "accepted",
+      "reason": "role; argument position recurring across services under different slot names. Evidence: Banks_1 separates account_type from recipient_account_type and recipient_account_name, so sender and receiver are separate positions",
+      "source": "sgd_schema"
+    },
+    {
+      "accepted_as": "l1:role.source_location",
+      "candidate": "l1:role.source_location",
+      "disposition": "accepted",
+      "reason": "role; argument position recurring across services under different slot names. Evidence: origin/from_location/from_station/origin_airport appear as an origin family across Buses, Flights and RideSharing services",
+      "source": "sgd_schema"
+    },
+    {
+      "accepted_as": "l1:role.target_location",
+      "candidate": "l1:role.target_location",
+      "disposition": "accepted",
+      "reason": "role; argument position recurring across services under different slot names. Evidence: destination appears in 5 services and destination_airport/to_location/to_station in others; Taskmaster2 records destination1 4018 times",
+      "source": "sgd_schema"
+    },
+    {
+      "accepted_as": "l1:role.theme",
+      "candidate": "l1:role.theme",
+      "disposition": "accepted",
+      "reason": "role; argument position recurring across services under different slot names. Evidence: every transactional intent (24 of 53) names the thing acted on in its required_slots, for instance TransferMoney requires amount",
+      "source": "sgd_schema"
+    },
+    {
+      "accepted_as": "l1:source_status.assistant_asserted",
+      "candidate": "l1:source_status.assistant_asserted",
+      "disposition": "accepted",
+      "reason": "qualifier_value; who vouches for the content, which changes how it may be used. Evidence: SYSTEM OFFER 10569 and SYSTEM INFORM 3244 originate system-side",
+      "source": "sgd_dialogue_acts"
+    },
+    {
+      "accepted_as": "l1:source_status.confirmed_by_both",
+      "candidate": "l1:source_status.confirmed_by_both",
+      "disposition": "accepted",
+      "reason": "qualifier_value; who vouches for the content, which changes how it may be used. Evidence: SYSTEM CONFIRM 10387 followed by USER AFFIRM 2070 is the corpus's most frequent agreement structure; tau-bench policy mandates it before writes",
+      "source": "sgd_dialogue_acts"
+    },
+    {
+      "accepted_as": "l1:source_status.derived",
+      "candidate": "l1:source_status.derived",
+      "disposition": "accepted",
+      "reason": "qualifier_value; who vouches for the content, which changes how it may be used. Evidence: ke_memory_demo.online.SourceStatus.DERIVED already exists, and every L2 abstraction will carry this status, so it must be nameable at L1",
+      "source": "repository_vocabulary"
+    },
+    {
+      "accepted_as": "l1:source_status.tool_observed",
+      "candidate": "l1:source_status.tool_observed",
+      "disposition": "accepted",
+      "reason": "qualifier_value; who vouches for the content, which changes how it may be used. Evidence: get_order_details, get_reservation_details and get_user_details return backend state rather than dialogue content",
+      "source": "tau_bench_tools"
+    },
+    {
+      "accepted_as": "l1:source_status.user_reported",
+      "candidate": "l1:source_status.user_reported",
+      "disposition": "accepted",
+      "reason": "qualifier_value; who vouches for the content, which changes how it may be used. Evidence: 10647 USER INFORM acts are the user's own report of a value",
+      "source": "sgd_dialogue_acts"
+    },
+    {
+      "accepted_as": "l1:standing.current",
+      "candidate": "l1:standing.current",
+      "disposition": "accepted",
+      "reason": "qualifier_value; whether an assertion still holds, needed because revision is the norm. Evidence: ke_memory_demo.domain.Lifecycle.ACTIVE",
+      "source": "repository_vocabulary"
+    },
+    {
+      "accepted_as": "l1:standing.retracted",
+      "candidate": "l1:standing.retracted",
+      "disposition": "accepted",
+      "reason": "qualifier_value; whether an assertion still holds, needed because revision is the norm. Evidence: NEGATE_INTENT 407 abandons a declared intent without providing another, which is withdrawal rather than substitution",
+      "source": "sgd_dialogue_acts"
+    },
+    {
+      "accepted_as": "l1:standing.superseded",
+      "candidate": "l1:standing.superseded",
+      "disposition": "accepted",
+      "reason": "qualifier_value; whether an assertion still holds, needed because revision is the norm. Evidence: 71.6% of 5110 dialogues revise a slot value, so supersession is the common case rather than an exception",
+      "source": "sgd_state_dynamics"
+    },
+    {
+      "accepted_as": "l1:state.capability_constraint",
+      "candidate": "l1:state.capability_constraint",
+      "disposition": "accepted",
+      "reason": "state_type; holds over an interval and is revisable without changing identity. Evidence: tau-bench policy states hard limits (a gift card must cover the total; item modification cannot change product type) that are not preferences",
+      "source": "tau_bench_tools"
+    },
+    {
+      "accepted_as": "l1:state.circumstance",
+      "candidate": "l1:state.circumstance",
+      "disposition": "accepted",
+      "reason": "state_type; holds over an interval and is revisable without changing identity. Evidence: 14288 of 65245 persona sentences assert an ongoing circumstance ('I live in', 'I work as', 'I am a')",
+      "source": "msc_personas"
+    },
+    {
+      "accepted_as": "l1:state.pending_arrangement",
+      "candidate": "l1:state.pending_arrangement",
+      "disposition": "accepted",
+      "reason": "state_type; holds over an interval and is revisable without changing identity. Evidence: tau-bench order status is a four-value lifecycle (pending, processed, delivered, cancelled) and only pending permits modification",
+      "source": "tau_bench_tools"
+    },
+    {
+      "accepted_as": "l1:state.possession",
+      "candidate": "l1:state.possession",
+      "disposition": "accepted",
+      "reason": "state_type; holds over an interval and is revisable without changing identity. Evidence: 8660 of 65245 persona sentences match an 'I have/own' pattern",
+      "source": "msc_personas"
+    },
+    {
+      "accepted_as": "l1:task.abandoned_intention",
+      "candidate": "l1:task.abandoned_intention",
+      "disposition": "accepted",
+      "reason": "task_type; intention at single-turn granularity, with cross-turn scope left to O_L2. Evidence: NEGATE_INTENT 407 abandons a previously declared intent, so abandonment is attested as its own outcome rather than as an absent completion",
+      "source": "sgd_dialogue_acts"
+    },
+    {
+      "accepted_as": "l1:task.declared_intention",
+      "candidate": "l1:task.declared_intention",
+      "disposition": "accepted",
+      "reason": "task_type; intention at single-turn granularity, with cross-turn scope left to O_L2. Evidence: USER INFORM_INTENT 3952 declares an aim in one turn, and SYSTEM OFFER_INTENT 1087 proposes one",
+      "source": "sgd_dialogue_acts"
+    },
+    {
+      "accepted_as": "l1:task.outstanding_requirement",
+      "candidate": "l1:task.outstanding_requirement",
+      "disposition": "accepted",
+      "reason": "task_type; intention at single-turn granularity, with cross-turn scope left to O_L2. Evidence: required_slots on each intent names exactly what is outstanding; SYSTEM REQUEST 5008 is the act of asking for one of them",
+      "source": "sgd_schema"
+    },
+    {
+      "accepted_as": "l1:time.after_assertion",
+      "candidate": "l1:time.after_assertion",
+      "disposition": "accepted",
+      "reason": "qualifier_value; temporal relation between event and assertion, which survives dropping literals. Evidence: forward-looking slots are pervasive: check_in_date, departure_date, appointment_date, pickup_date all denote a situation not yet realised",
+      "source": "sgd_schema"
+    },
+    {
+      "accepted_as": "l1:time.at_assertion",
+      "candidate": "l1:time.at_assertion",
+      "disposition": "accepted",
+      "reason": "qualifier_value; temporal relation between event and assertion, which survives dropping literals. Evidence: 14288 persona sentences assert a state holding at utterance time",
+      "source": "msc_personas"
+    },
+    {
+      "accepted_as": "l1:time.before_assertion",
+      "candidate": "l1:time.before_assertion",
+      "disposition": "accepted",
+      "reason": "qualifier_value; temporal relation between event and assertion, which survives dropping literals. Evidence: 1632 of 65245 persona sentences match a past-event pattern ('I used to', 'I graduated', 'I moved')",
+      "source": "msc_personas"
+    },
+    {
+      "accepted_as": "l1:time.recurring",
+      "candidate": "l1:time.recurring",
+      "disposition": "accepted",
+      "reason": "qualifier_value; temporal relation between event and assertion, which survives dropping literals. Evidence: 80 of 65245 persona sentences match an explicit frequency pattern ('usually', 'always', 'every day'); rare but structurally distinct",
+      "source": "msc_personas"
+    },
+    {
+      "accepted_as": "l1:time.spanning",
+      "candidate": "l1:time.spanning",
+      "disposition": "accepted",
+      "reason": "qualifier_value; temporal relation between event and assertion, which survives dropping literals. Evidence: paired boundary slots define intervals: check_in_date/check_out_date, outbound_departure_time/inbound_arrival_time; Taskmaster2 date_range 2469",
+      "source": "sgd_schema"
+    },
+    {
+      "accepted_as": "l1:time.unspecified",
+      "candidate": "l1:time.unspecified",
+      "disposition": "accepted",
+      "reason": "qualifier_value; temporal relation between event and assertion, which survives dropping literals. Evidence: the majority of persona sentences carry no temporal marker at all, so an explicit unspecified value prevents a default of 'present' being invented",
+      "source": "msc_personas"
+    },
+    {
+      "accepted_as": null,
+      "candidate": "l2.decision_with_rationale",
+      "disposition": "deferred",
+      "reason": "SELECT 2577 and REQUEST_ALTS 1397 show choices being made, but neither carries the reason. Deferred: a decision type whose rationale is never observable would be unfillable, and abstraction.preference_profile absorbs the choice evidence for now",
+      "source": "sgd_dialogue_acts"
+    },
+    {
+      "accepted_as": null,
+      "candidate": "l2.social_relationship",
+      "disposition": "deferred",
+      "reason": "personas mention family and friends, and cross-session memory plainly needs relationships. Deferred because MSC persona sentences are unstructured and the relationship is not annotated, so any inventory would be guessed rather than measured. This is the largest known gap in O_L2",
+      "source": "msc_personas"
+    },
+    {
+      "accepted_as": null,
+      "candidate": "l2.topic",
+      "disposition": "deferred",
+      "reason": "domain.AggregateNodeKind.TOPIC exists. Deferred because a topic has no derivation rule the map could state: nothing in the corpora says when two observations are the same topic, and an abstraction with no derivation is what O_L2 forbids",
+      "source": "repository_vocabulary"
+    },
+    {
+      "accepted_as": "l2:abstraction.carried_constraint",
+      "candidate": "l2:abstraction.carried_constraint",
+      "disposition": "accepted",
+      "reason": "abstraction_type; structure no single observation can witness, with a measured basis. Evidence: 4091 of 4736 multi-service dialogues (86.4%) reuse a value across services: city 2238, location 1711, destination_city 1672, appointment_date 1058",
+      "source": "sgd_state_dynamics"
+    },
+    {
+      "accepted_as": "l2:abstraction.habit",
+      "candidate": "l2:abstraction.habit",
+      "disposition": "accepted",
+      "reason": "abstraction_type; structure no single observation can witness, with a measured basis. Evidence: 80 of 65245 persona sentences state an explicit frequency ('usually', 'always', 'every day'); attested but rare, hence the support floor of 3",
+      "source": "msc_personas"
+    },
+    {
+      "accepted_as": "l2:abstraction.preference_profile",
+      "candidate": "l2:abstraction.preference_profile",
+      "disposition": "accepted",
+      "reason": "abstraction_type; structure no single observation can witness, with a measured basis. Evidence: personas are authored as multi-sentence sets (65245 sentences overall) combining 13819 positive and 970 negative dispositions per subject",
+      "source": "msc_personas"
+    },
+    {
+      "accepted_as": "l2:abstraction.project",
+      "candidate": "l2:abstraction.project",
+      "disposition": "accepted",
+      "reason": "abstraction_type; structure no single observation can witness, with a measured basis. Evidence: 8266 two-service, 2185 three-service and 288 four-service dialogues; the recurring Flights+Hotels+Travel chain (163) is one outcome over three aims",
+      "source": "sgd_state_dynamics"
+    },
+    {
+      "accepted_as": "l2:abstraction.standing_condition",
+      "candidate": "l2:abstraction.standing_condition",
+      "disposition": "accepted",
+      "reason": "abstraction_type; structure no single observation can witness, with a measured basis. Evidence: 14288 ongoing-state persona sentences are asserted once and treated as holding for the whole conversation set without restatement",
+      "source": "msc_personas"
+    },
+    {
+      "accepted_as": "l2:abstraction.task",
+      "candidate": "l2:abstraction.task",
+      "disposition": "accepted",
+      "reason": "abstraction_type; structure no single observation can witness, with a measured basis. Evidence: an intent declared in one turn is satisfied several turns later via required_slots; INFORM_INTENT 3952 precedes NOTIFY_SUCCESS 1796",
+      "source": "sgd_state_dynamics"
+    },
+    {
+      "accepted_as": "l2:abstraction.value_history",
+      "candidate": "l2:abstraction.value_history",
+      "disposition": "accepted",
+      "reason": "abstraction_type; structure no single observation can witness, with a measured basis. Evidence: 3661 of 5110 dialogues revise a user slot value; most-revised are city 571, departure_date 516, date 456, appointment_time 377",
+      "source": "sgd_state_dynamics"
+    },
+    {
+      "accepted_as": "l2:evidence.partial_support_marked",
+      "candidate": "l2:evidence.partial_support_marked",
+      "disposition": "accepted",
+      "reason": "evidence_constraint; honesty requirement on every abstraction, cited by the map. Evidence: 225 of 227 discovery observations were shaped partial_gold_overlap, against 1 empty_selection and 1 gold_delivery_over_limit",
+      "source": "discovery_gap_shape"
+    },
+    {
+      "accepted_as": "l2:evidence.supports_addressable",
+      "candidate": "l2:evidence.supports_addressable",
+      "disposition": "accepted",
+      "reason": "evidence_constraint; honesty requirement on every abstraction, cited by the map. Evidence: L2GoldAbstraction in evaluation/layer_gold.py rejects an abstraction whose derived_from is empty, so this ontology must state the same requirement",
+      "source": "repository_vocabulary"
+    },
+    {
+      "accepted_as": "l2:lifecycle.achieved",
+      "candidate": "l2:lifecycle.achieved",
+      "disposition": "accepted",
+      "reason": "lifecycle_state; status of an abstraction, which no assertion's own standing can express. Evidence: NOTIFY_SUCCESS 1796 confirms a transactional intent completed",
+      "source": "sgd_schema"
+    },
+    {
+      "accepted_as": "l2:lifecycle.lapsed",
+      "candidate": "l2:lifecycle.lapsed",
+      "disposition": "accepted",
+      "reason": "lifecycle_state; status of an abstraction, which no assertion's own standing can express. Evidence: 225 of 227 discovery observations were shaped partial_gold_overlap, meaning supporting evidence was partially retrieved; a status of unknown must be representable or partial support gets reported as a definite outcome",
+      "source": "discovery_gap_shape"
+    },
+    {
+      "accepted_as": "l2:lifecycle.open",
+      "candidate": "l2:lifecycle.open",
+      "disposition": "accepted",
+      "reason": "lifecycle_state; status of an abstraction, which no assertion's own standing can express. Evidence: an intent with unfilled required_slots is live; SYSTEM REQUEST 5008 is the act of pursuing it",
+      "source": "sgd_schema"
+    },
+    {
+      "accepted_as": "l2:lifecycle.superseded_by_revision",
+      "candidate": "l2:lifecycle.superseded_by_revision",
+      "disposition": "accepted",
+      "reason": "lifecycle_state; status of an abstraction, which no assertion's own standing can express. Evidence: 71.6% of dialogues revise a value, and a revised aim is neither achieved nor abandoned; without this status one of the two would be asserted falsely",
+      "source": "sgd_state_dynamics"
+    },
+    {
+      "accepted_as": "l2:pattern.constraint_union",
+      "candidate": "l2:pattern.constraint_union",
+      "disposition": "accepted",
+      "reason": "aggregation_pattern; a computation over many observations, reviewable independently of its users. Evidence: 86.4% of 4736 multi-service dialogues reuse a value across services (city 2238, location 1711), so restrictions accumulate across sub-goals",
+      "source": "sgd_state_dynamics"
+    },
+    {
+      "accepted_as": "l2:pattern.goal_decomposition",
+      "candidate": "l2:pattern.goal_decomposition",
+      "disposition": "accepted",
+      "reason": "aggregation_pattern; a computation over many observations, reviewable independently of its users. Evidence: 10739 of 16142 dialogues span 2-4 services, and the frequent chains (Flights+Hotels+Travel 163) share a single trip outcome",
+      "source": "sgd_state_dynamics"
+    },
+    {
+      "accepted_as": "l2:pattern.recurrence_count",
+      "candidate": "l2:pattern.recurrence_count",
+      "disposition": "accepted",
+      "reason": "aggregation_pattern; a computation over many observations, reviewable independently of its users. Evidence: SGD service pairs recur across dialogues (Restaurants+Movies 247, Homes+Calendar 235), so co-occurrence counts are measurable",
+      "source": "sgd_state_dynamics"
+    },
+    {
+      "accepted_as": "l2:pattern.temporal_series",
+      "candidate": "l2:pattern.temporal_series",
+      "disposition": "accepted",
+      "reason": "aggregation_pattern; a computation over many observations, reviewable independently of its users. Evidence: 71.6% of 5110 dialogues revise a slot value at least once, so a series of two or more values for one attribute is the normal observation",
+      "source": "sgd_state_dynamics"
+    },
+    {
+      "accepted_as": "l2:role.scope",
+      "candidate": "l2:role.scope",
+      "disposition": "accepted",
+      "reason": "evidence_constraint; an abstraction-level position that diverges from its L1 counterpart. Evidence: a value reused across 2 services in 86.4% of multi-service dialogues has a scope wider than the service it was first stated in",
+      "source": "sgd_state_dynamics"
+    },
+    {
+      "accepted_as": "l2:role.subject",
+      "candidate": "l2:role.subject",
+      "disposition": "accepted",
+      "reason": "evidence_constraint; an abstraction-level position that diverges from its L1 counterpart. Evidence: tau-bench retail policy permits one user per conversation and requires denying requests about any other user, making subject identity a hard boundary",
+      "source": "tau_bench_policy"
+    },
+    {
+      "accepted_as": "l2:role.tracked_attribute",
+      "candidate": "l2:role.tracked_attribute",
+      "disposition": "accepted",
+      "reason": "evidence_constraint; an abstraction-level position that diverges from its L1 counterpart. Evidence: revision counts are per slot (city 571, departure_date 516), so a history is indexed by attribute and not by dialogue",
+      "source": "sgd_state_dynamics"
+    },
+    {
+      "accepted_as": null,
+      "candidate": "modality.hypothesis",
+      "disposition": "deferred",
+      "reason": "domain.Modality.HYPOTHESIS exists in the repository, so dropping it costs compatibility. Deferred rather than accepted because no build corpus attests it: SGD has no conditional act and MSC personas assert rather than suppose. Admitting it on the strength of an existing enum would be inventing coverage",
+      "source": "repository_vocabulary"
+    },
+    {
+      "accepted_as": null,
+      "candidate": "modality.question",
+      "disposition": "deferred",
+      "reason": "domain.Modality.QUESTION exists in the repository. Deferred because SGD's REQUEST (3394 user, 5008 system) is a speech act asking for a slot value, not an assertion carrying question modality, and event.information_request covers the act. Whether a question is ever remembered content is the open question",
+      "source": "repository_vocabulary"
+    },
+    {
+      "accepted_as": null,
+      "candidate": "movie",
+      "disposition": "rejected",
+      "reason": "movie_search 45318 annotations plus SGD Movies_1 and Media_1. Rejected as a domain vertical; what generalises is event.media_consumption, which is accepted",
+      "source": "taskmaster2_annotations"
+    },
+    {
+      "accepted_as": null,
+      "candidate": "number_of_rooms",
+      "disposition": "rejected",
+      "reason": "one of seven count slots (passengers, travelers, group_size, party_size, number_of_seats, number_of_tickets, number_of_riders). Rejected in favour of role.quantity plus attribute.magnitude",
+      "source": "sgd_schema"
+    },
+    {
+      "accepted_as": null,
+      "candidate": "order_status_values",
+      "disposition": "rejected",
+      "reason": "tau-bench's pending/processed/delivered/cancelled. Rejected as an application's state machine rather than an ontology; the general content is state.pending_arrangement and event.commitment_withdrawn, both accepted",
+      "source": "tau_bench_policy"
+    },
+    {
+      "accepted_as": null,
+      "candidate": "origin_airport",
+      "disposition": "rejected",
+      "reason": "a service-local narrowing of the origin family (origin, from_location, from_station). Rejected in favour of role.source_location, which is the position all four names occupy",
+      "source": "sgd_schema"
+    },
+    {
+      "accepted_as": null,
+      "candidate": "playback_device",
+      "disposition": "rejected",
+      "reason": "appears in Music_1 and Music_2 with inconsistent casing of the same values ('Kitchen speaker' vs 'kitchen speaker'). Rejected as domain-specific; the general position is role.instrument, and the values themselves are Individuals",
+      "source": "sgd_schema"
+    },
+    {
+      "accepted_as": null,
+      "candidate": "product_and_item_ids",
+      "disposition": "rejected",
+      "reason": "order_id, product_id, item_id, user_id, reservation_id thread through nearly every tool. Rejected as identifiers of Individuals; attribute.designation records that entities are identified without recording any identifier",
+      "source": "tau_bench_tools"
+    },
+    {
+      "accepted_as": null,
+      "candidate": "restaurant",
+      "disposition": "rejected",
+      "reason": "Taskmaster2's most frequent frame at 46133 annotations, and SGD has Restaurants_1. Rejected because frequency in the build corpus is the wrong test: a foundation ontology containing restaurant has fitted the corpora it was built from, and the general content is already carried by attribute.place, attribute.assessment and predicate.commit_to_arrangement",
+      "source": "taskmaster2_annotations"
+    },
+    {
+      "accepted_as": null,
+      "candidate": "role.cause",
+      "disposition": "deferred",
+      "reason": "cancel_pending_order takes a reason from a closed set, which is the only causal argument position in any build corpus. Deferred as a single-tool attestation; one occurrence is thin evidence for a general role, and PropBank would have settled it",
+      "source": "tau_bench_tools"
+    },
+    {
+      "accepted_as": null,
+      "candidate": "role.duration",
+      "disposition": "deferred",
+      "reason": "derivable from paired boundary slots (check_in_date/check_out_date) but never expressed directly. Deferred: time.spanning marks that an interval exists, and a separate duration role would need a measurement construct v1 lacks",
+      "source": "sgd_schema"
+    },
+    {
+      "accepted_as": null,
+      "candidate": "seating_class",
+      "disposition": "rejected",
+      "reason": "an ordered categorical slot in Flights_1/2. Rejected as vertical content, though its orderedness informed attribute.magnitude, which preference.threshold ranges over",
+      "source": "sgd_schema"
+    },
+    {
+      "accepted_as": null,
+      "candidate": "sports_team",
+      "disposition": "rejected",
+      "reason": "'team' is the single most frequent filler at 28230, across mlb/epl/mls/nba/nfl frames. Rejected as domain content, and it is close to an Individual: the filler positions are occupied by named teams rather than by a type",
+      "source": "taskmaster2_annotations"
+    },
+    {
+      "accepted_as": null,
+      "candidate": "tool.calculate",
+      "disposition": "rejected",
+      "reason": "present in both environments. Rejected: arithmetic on values is not an ontology type, and the accepted attribute.magnitude already marks which values are ordered",
+      "source": "tau_bench_tools"
+    },
+    {
+      "accepted_as": null,
+      "candidate": "tool.think",
+      "disposition": "rejected",
+      "reason": "present in both tau-bench environments. Rejected because it is an agent scratchpad that changes no state and asserts nothing; treating it as content would let an agent's own reasoning enter memory as though it were observed",
+      "source": "tau_bench_tools"
+    },
+    {
+      "accepted_as": null,
+      "candidate": "tool.transfer_to_human_agents",
+      "disposition": "rejected",
+      "reason": "present in both environments. Rejected as harness control flow rather than a type of remembered content",
+      "source": "tau_bench_tools"
+    }
+  ],
+  "freeze": {
+    "excludes_benchmark_facts": true,
+    "excludes_individuals": true,
+    "hash_scope": "SHA-256 over the canonical JSON of this unit's model only, excluding this freeze block; a change to any other unit cannot move this digest",
+    "judge_dependency": "none; no model or judge call was made by this build",
+    "sha256": "8d6abe3bab619f2dbc8dbf58a1b168ac76ec72c17299ea356aa2a2cc25a8448a",
+    "unit": "decisions"
+  },
+  "ontology_version": "1.0.0",
+  "uncovered": [
+    {
+      "expression": "conditional commitment ('if the price drops, book it')",
+      "observed_in": "sgd_dialogue_acts",
+      "why_not_covered": "no build corpus attests a conditional act; SGD's acts are all unconditional, so the construct would be authored from imagination",
+      "would_require": "a modality for suspended commitment plus a trigger relation"
+    },
+    {
+      "expression": "degree of preference strength ('I really love X' vs 'X is fine')",
+      "observed_in": "msc_personas",
+      "why_not_covered": "MSC intensifiers are unannotated, so strength cannot be measured from the corpus and any scale would be an invented ordinal",
+      "would_require": "a graded value space on preference.affinity, and annotation to fit it"
+    },
+    {
+      "expression": "preference held on behalf of another person",
+      "observed_in": "sgd_schema",
+      "why_not_covered": "attested indirectly (a booking for several passengers) but never as whose preference a constraint is; role.holder assumes the speaker",
+      "would_require": "separating the holder of a preference from its beneficiary"
+    },
+    {
+      "expression": "reason for a choice among alternatives",
+      "observed_in": "sgd_dialogue_acts",
+      "why_not_covered": "SELECT 2577 and REQUEST_ALTS 1397 record that a choice was made and never why; the rationale is absent from the data, not from the model",
+      "would_require": "a causal role, deferred as role.cause for the same lack of evidence"
+    },
+    {
+      "expression": "social relationship between two parties",
+      "observed_in": "msc_personas",
+      "why_not_covered": "present in persona text but unannotated, so any relationship inventory would be guessed; recorded here as the largest known O_L2 gap",
+      "would_require": "an L2 relationship type plus an annotated source to ground it"
+    },
+    {
+      "expression": "topical grouping of otherwise unrelated observations",
+      "observed_in": "repository_vocabulary",
+      "why_not_covered": "no corpus signal says when two observations share a topic, so no derivation rule could be written and the map would have nothing to record",
+      "would_require": "a similarity criterion the ontology could state rather than compute"
+    },
+    {
+      "expression": "uncertainty a speaker attaches to their own claim ('I think it was Tuesday')",
+      "observed_in": "msc_personas",
+      "why_not_covered": "modality.believed marks the attitude but carries no confidence; the corpora provide no calibration for a numeric one",
+      "would_require": "a confidence dimension, and evidence about how to value it"
+    },
+    {
+      "expression": "obligation owed by the assistant rather than the user",
+      "observed_in": "tau_bench_policy",
+      "why_not_covered": "tau-bench policy binds the agent (confirm before writing, transfer when out of scope) but this is operator policy, not the user's remembered content",
+      "would_require": "deciding whether agent-side obligations belong in a memory ontology"
+    }
+  ]
+}

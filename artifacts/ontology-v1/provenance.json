@@ -1,0 +1,89 @@
+{
+  "discovery_split_use": "two general gap shapes only, cited as counts: 225 of 227 observations shaped partial_gold_overlap, 1 empty_selection, 1 gold_delivery_over_limit. These justified l2:lifecycle.lapsed and l2:evidence.partial_support_marked. No question, answer, gold label, rubric or dataset identity was read, and no alias anywhere in either layer derives from a discovery sample; the freeze models scan every item's sense and aliases for evaluation-corpus names and reject a match",
+  "freeze": {
+    "excludes_benchmark_facts": true,
+    "excludes_individuals": true,
+    "hash_scope": "SHA-256 over the canonical JSON of this unit's model only, excluding this freeze block; a change to any other unit cannot move this digest",
+    "judge_dependency": "none; no model or judge call was made by this build",
+    "sha256": "58a36b607e7513f490be22d177fdb47d210636ad1252f5767a1b5b537f3841d5",
+    "unit": "provenance"
+  },
+  "judge_dependency": "none. No judge call and no model API call is made by the ontology build; it is arithmetic and authorship over local corpus files",
+  "keol_role": "offline construction and normalization only. Nothing here admits a term at runtime, and the freeze units are immutable once hashed, so a coverage gap cannot be closed by online vocabulary expansion",
+  "model_api_calls": 0,
+  "ontology_version": "1.0.0",
+  "sources": [
+    {
+      "consulted": true,
+      "content_sha256": "97b6c21673aa7e5c2d1ceef52aa35170c565223cdcbf33bb24c69739bda04a82",
+      "detail": "service, slot and intent definitions: 26 services, 131 distinct slot names, 53 intents of which 24 are transactional. The richest structured source and the origin of the role, predicate-sense and attribute sections",
+      "locator": "/public/home/wwb/datasets/SGD/train/schema.json",
+      "name": "SGD schema (Schema-Guided Dialogue)",
+      "observed_units": 26
+    },
+    {
+      "consulted": true,
+      "content_sha256": null,
+      "detail": "16142 dialogues in 127 files. Act counts over 2559 dialogues; state-revision rate 71.6% over 5110; multi-service rate 10739/16142; cross-service value reuse 4091/4736 over a separate 40-file sample",
+      "locator": "/public/home/wwb/datasets/SGD/train",
+      "name": "SGD dialogues (acts and state dynamics)",
+      "observed_units": 16142
+    },
+    {
+      "consulted": true,
+      "content_sha256": null,
+      "detail": "17304 dialogues across 7 domains, 281 distinct annotation names. Supplied the attribute-facet frequencies that decided which families recur cross-domain and which are vertical content",
+      "locator": "/public/home/wwb/datasets/Taskmaster2",
+      "name": "Taskmaster-2",
+      "observed_units": 17304
+    },
+    {
+      "consulted": true,
+      "content_sha256": "75440be006945f5e92141f2374becd551a17a4a98ccd982d1d06c821b40c7dc7",
+      "detail": "65245 persona sentences over train/valid/test. Supplied the preference and stable-state evidence: 13819 affect-positive, 970 affect-negative, 14288 ongoing-state, 8660 possession, 1061 goal, 80 explicit-frequency",
+      "locator": "/public/home/wwb/datasets/MSC/msc_personas_all.json",
+      "name": "MSC personas",
+      "observed_units": 65245
+    },
+    {
+      "consulted": true,
+      "content_sha256": null,
+      "detail": "two environments (retail 17 tools, airline 15 tools) plus their wiki.md policies. Supplied the operator/tool distinction, the confirmation constraint and the single-subject boundary",
+      "locator": "/public/home/wwb/datasets/tau-bench/tau-bench-main/tau_bench/envs",
+      "name": "tau-bench tool schemas and policies",
+      "observed_units": 32
+    },
+    {
+      "consulted": true,
+      "content_sha256": null,
+      "detail": "Modality (8 values), Polarity (3), Lifecycle (5), SourceStatus (4), OntologyRole (3), AggregateNodeKind (14). O_L1 narrows rather than copies these: OntologyRole.INDIVIDUAL is excluded, and two Modality values deferred",
+      "locator": "src/ke_memory_demo/domain/memory.py, src/ke_memory_demo/online/models.py",
+      "name": "ke_memory_demo repository vocabularies",
+      "observed_units": 37
+    },
+    {
+      "consulted": false,
+      "content_sha256": null,
+      "detail": "verified by `import nltk` (ModuleNotFoundError) and by the absence of ~/nltk_data and /usr/share/nltk_data. It would have supplied the sense inventory and hypernym chains for the predicate senses; those senses are therefore clustered from SGD intent verbs and labelled as corpus-clustered, with no synset ids claimed",
+      "locator": "unavailable: nltk is not installed and no nltk_data directory exists",
+      "name": "WordNet",
+      "observed_units": 0
+    },
+    {
+      "consulted": false,
+      "content_sha256": null,
+      "detail": "it would have supplied the canonical argument-structure inventory for the role section. The ten accepted roles are instead corpus-shaped from SGD slot families, which is why role.cause and role.duration are deferred rather than decided: PropBank is what would have settled them",
+      "locator": "unavailable: no local copy found under the dataset roots",
+      "name": "PropBank",
+      "observed_units": 0
+    },
+    {
+      "consulted": false,
+      "content_sha256": null,
+      "detail": "it would have supplied a cross-checked type hierarchy for the attribute families. The eight accepted attribute types are instead justified by cross-domain recurrence within the build corpora, so no schema.org type name or hierarchy is claimed anywhere in O_L1",
+      "locator": "unavailable: no local copy, and outbound HTTPS did not complete",
+      "name": "schema.org",
+      "observed_units": 0
+    }
+  ]
+}

@@ -742,6 +742,216 @@
   "metrics_rule": "Metrics from a partial run are reported only over completed items, always alongside the completion count and the pre-registered sample size. They are labelled partial and are never compared against a complete run.",
   "resumption_rule": "A partial run is never resumed. Continuing requires a separately pre-registered fresh sample and an explicit user decision, which is the same mandatory_stop boundary that governs a completed run."
  },
+ "program_plan": {
+  "rationale": "C1 to C3 restored measurement credibility. They do not confer Stage 2 capability, so the work now switches from repairing instruments to exposing real system behaviour.",
+  "shape": "two parallel tracks converging on one formal run",
+  "stage_0_close_out": {
+   "analysis_sandbox_reconciled": true,
+   "authorisation": "instrument credibility only; Stage 2 is not authorised by this",
+   "builder_artifact_consumed": false,
+   "discovery_gold_visible": "244 of 500",
+   "forced_primary_owner_present": false,
+   "freeze_calls_production_path": true,
+   "freeze_refuses_unenforced_budget": true,
+   "open_gap": "the ontology arm records memory_artifact_sha256 but no stage consumes the artifact. Recording a hash is not consumption, and this gap stays open until Track B closes it.",
+   "sibling_split_files_reachable": [],
+   "status": "verified"
+  },
+  "stage_3_rehearsal": {
+   "acceptance": [
+    "gold evidence oracle reaches 1.0",
+    "a substitution changes only its target layer",
+    "no gold leakage",
+    "the builder artifact is demonstrably consumed"
+   ],
+   "data_rule": "the 32 items are never fresh hidden again",
+   "explicitly_not": "no model quality threshold and no targeted repair",
+   "purpose": "validate the real chain and the attribution tooling",
+   "status": "passed_instruments_only"
+  },
+  "stage_4_formal": {
+   "external_systems": "Mem0, Graphiti, Hindsight and similar are not rerun",
+   "first_round_arms": [
+    "full_history diagnostic",
+    "raw dense baseline",
+    "ontology-memory primary"
+   ],
+   "freeze_before_run": [
+    "fresh public and gold",
+    "O_L1",
+    "O_L2",
+    "M_L1_to_L2",
+    "mapper",
+    "builder",
+    "model",
+    "prompt",
+    "budgets",
+    "execution code"
+   ],
+   "full_history_rule": "over-context items are marked context_ineligible and affect only that arm's denominator; they do not vanish from the benchmark",
+   "reporting": [
+    "mapping",
+    "L1",
+    "L2",
+    "query",
+    "evidence",
+    "constraint",
+    "answer and citation",
+    "cost",
+    "failure propagation"
+   ],
+   "result_discipline": "a formal result exposes problems. Gates, gold, ontology and mapper are not adjusted because a number is unflattering; a fix belongs to a new version and a new fresh set.",
+   "status": "blocked_until_both_tracks_converge"
+  },
+  "track_a_ontology": {
+   "artifacts": "artifacts/ontology-v1/",
+   "contents": [
+    "stable ids",
+    "senses",
+    "aliases",
+    "types",
+    "relations",
+    "roles",
+    "constraints"
+   ],
+   "counts": {
+    "map_entries": 20,
+    "o_l1_items": 67,
+    "o_l2_items": 20
+   },
+   "decisions": {
+    "accepted": 87,
+    "deferred": 8,
+    "rejected": 25
+   },
+   "deliverables": [
+    "source snapshots",
+    "candidate decisions",
+    "rejections",
+    "uncovered expressions",
+    "executable subset"
+   ],
+   "discovery_split_rule": "the discovery split may contribute general gap candidates only. It may not read questions, gold, dataset identity, and may not yield sample-specific aliases.",
+   "excluded": [
+    "benchmark facts",
+    "Individuals"
+   ],
+   "freeze_rule": "each unit versioned and hashed independently; the two layers do not share a vocabulary by default",
+   "freeze_units": [
+    "O_L1",
+    "O_L2",
+    "M_L1_to_L2"
+   ],
+   "hashes": {
+    "M_L1_to_L2": "c39c616dc16ac9c56063798c4e367732b735089eb19fd7c2f58a5e7ff3dc78e5",
+    "O_L1": "a3ee1a25fd5cd71dc700822b9d540bf25956029d436dd6cee3bb26849d365648",
+    "O_L2": "7c34ad1b477deae86826758bf3be706f9a73b0513494c2616d8a23d17f439cec"
+   },
+   "independent_verification": "the three unit hashes were recomputed from the artifacts and matched; O_L1 and O_L2 share zero ids; all 20 L2 items are declared in the map and all 45 map references resolve; no Individual or benchmark literal appears in either layer.",
+   "keol_role": "offline construction and normalization only; dynamic admission is not a core capability here",
+   "mapper_gate": "blind evaluation may now begin, since the ontology is frozen",
+   "name": "foundation ontology v1, then mapper blind evaluation",
+   "non_criteria": "scale is not a pass condition, and a coverage gap may not be masked by online vocabulary expansion",
+   "residual_caveats": [
+    "constraint expression fields are prose in a fixed shape, not executable; nothing in v1 evaluates them, which was chosen over shipping a DSL that would imply enforcement the freeze cannot back",
+    "l2:abstraction.habit rests on the weakest evidence in either layer (80 of 65245 MSC sentences state a frequency) and carries that limitation in the item itself"
+   ],
+   "sources": [
+    "WordNet",
+    "PropBank",
+    "schema.org",
+    "domain vocabularies",
+    "independent build corpus"
+   ],
+   "sources_consulted": [
+    "SGD schema",
+    "SGD dialogues",
+    "Taskmaster-2",
+    "MSC personas",
+    "tau-bench",
+    "repo vocabularies"
+   ],
+   "sources_unconsulted": [
+    "WordNet",
+    "PropBank",
+    "schema.org"
+   ],
+   "status": "frozen_pending_review",
+   "unconsulted_note": "none are available offline: nltk is absent, no PropBank copy exists and outbound HTTPS to schema.org timed out. Predicate senses are labelled corpus-clustered from SGD intent verbs rather than claiming synset ids, and no schema.org type name appears anywhere.",
+   "uncovered_expressions": 8
+  },
+  "track_b_real_architecture": {
+   "artifact_consumption": {
+    "artifact_sha256": "ba0a3af7685b2a982919df072c6a96c227255ede470a3b1a5be4bbe802d11c1f",
+    "builder_id": "stage-2-handle-index-builder",
+    "closed": true,
+    "evidence": "the builder now emits a handle-addressable index with per-turn digests instead of counts, and every layer trace carries the artifact digest. assert_artifact_read_by_every_layer rejects a mismatch, so a layer reaching back to the corpus fails rather than passing silently.",
+    "turns_read": 6092
+   },
+   "artifact_rule": "the ontology arm must actually read the frozen artifact; recording a sha256 does not count",
+   "first_real_system_defect_found": {
+    "defect": "LexicalMapping took sorted(terms)[0], so numeric tokens won alphabetically and nearly every unit mapped to a digit id. Overlap with any question was empty and baseline selection was 0 of 32.",
+    "fix": "numeric tokens excluded and a unit maps to several ids; baseline selection is now 19 of 32",
+    "standing": "this is a fixture defect, not an ontology finding",
+    "why_it_was_invisible_before": "the previous fixture ran beside the chain rather than as a layer of it, so there was no real mapping stage whose output could be inspected."
+   },
+   "name": "real execution chain with per-layer traces",
+   "oracle_rule": "the five oracles must replace real layers and exist only in the evaluation process. Report single-layer and cumulative substitution together; a zero single-layer gain does not license the conclusion that the module is sound.",
+   "remaining_limitation": "the layers are lexical. They are real layers of the chain and each slot accepts a stronger backend, but no number here measures the ontology or a production mapper.",
+   "required_chain": [
+    "MemoryBuildInput",
+    "builder artifact",
+    "extraction",
+    "mapping",
+    "L1/L2",
+    "query plan",
+    "retrieval",
+    "delivery",
+    "answer"
+   ],
+   "sensitivity_rule": "module sensitivity is recorded only where an oracle demonstrably changes the result; no single root cause is forced",
+   "single_and_cumulative": {
+    "cumulative": [
+     [
+      "gold_extraction",
+      0.0
+     ],
+     [
+      "gold_memory_mapping",
+      0.0
+     ],
+     [
+      "gold_l2_abstraction",
+      0.0
+     ],
+     [
+      "gold_query_plan",
+      1.0
+     ]
+    ],
+    "reading": "a zero single-layer rate means necessary but not sufficient, not inert. The cumulative series reaching 1.0 at four layers is what shows they compose.",
+    "single_layer": {
+     "gold_evidence_selection": "2/2",
+     "gold_extraction": "2/2",
+     "gold_l2_abstraction": "2/2",
+     "gold_memory_mapping": "2/2",
+     "gold_query_plan": "2/2"
+    }
+   },
+   "stage_3_acceptance": {
+    "artifact_consumed": true,
+    "artifact_sha256": "ba0a3af7685b2a982919df072c6a96c227255ede470a3b1a5be4bbe802d11c1f",
+    "artifact_turns_read": 6092,
+    "builder_id": "stage-2-handle-index-builder",
+    "gold_retrieval_oracle_exact": 1.0,
+    "gold_retrieval_requirement_met": true,
+    "no_gold_in_chain_output": true,
+    "substitution_changes_only_target_and_downstream": true
+   },
+   "status": "chain_connected_pending_review",
+   "trace_rule": "each layer emits an independent trace with input and output hashes and a failure status"
+  }
+ },
  "schema_version": "benchmark-plan-v2.1-diagnostic-v1",
  "semantic_assistance_policy": {
   "allowed_integrity_checks": [

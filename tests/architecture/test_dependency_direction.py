@@ -47,6 +47,7 @@ LAYERS: tuple[tuple[str, ...], ...] = (
         "extraction",
         "retrieval",
         "ontology",
+        "ontology_v1",
         "answering",
         "history",
         "snapshots",
