@@ -1,14 +1,23 @@
-"""Corpus-driven discovery: build a frozen corpus and classify what goes wrong.
+"""A failure-shape inventory over the lexical fixture. Not architectural attribution.
 
-Runs from the frozen harness commit. The corpus is built once, inside the sandbox, from
-conversations only; questions and gold are loaded in this controller process after the
-sandboxed build has exited.
+The name matters, because a review found the previous framing overstated what this measures.
+The pipeline that produces these observations is::
 
-The point of the issue ledger is to resist a single attractive explanation. Attributing every
-failure to ontology insufficiency would produce a large ontology and no diagnosis, so each
-observation is classified into one of eight classes, and a class is only assigned when its own
-evidence is present. Where the evidence does not distinguish between two classes, the
-observation is recorded as ambiguous rather than assigned to the more convenient one.
+    raw PublicTurn -> regex terms -> first lexical mapping -> lexical selection
+
+The sandboxed builder's artifact is not consumed by it. So an observation locates the *shape* of
+a failure and cannot attribute it to real extraction, mapping, ontology, query compilation or
+retrieval, because none of those modules ran.
+
+What the class labels therefore mean:
+
+- a ``query_compiler`` label means query-compiler and ontology are indistinguishable here
+- an ``evidence_closure`` label means closure and retrieval are indistinguishable here
+- ``ontology_gap_share`` counts only the forced primary label, so it understates how often the
+  ontology is a live candidate; :meth:`IssueLedger.ontology_possible_share` reports that instead
+
+Real attribution needs a per-layer trace through the actual architecture, or oracle
+substitution. Until then this is an inventory of failure shapes, and it is labelled as one.
 """
 
 from __future__ import annotations
@@ -111,11 +120,12 @@ class IssueLedger(_Record):
     def ambiguous_count(self) -> int:
         return sum(1 for o in self.observations if o.is_ambiguous)
 
-    def ontology_share(self) -> float:
-        """Fraction attributed to a genuine ontology gap.
+    def ontology_primary_share(self) -> float:
+        """Fraction whose forced primary label is an ontology gap.
 
-        Reported prominently because a high share is a warning sign about the classification,
-        not a finding about the ontology.
+        Reported only alongside :meth:`ontology_possible_share`. On its own it reads as evidence
+        the ontology is fine, when it actually reflects that the classifier assigns a single
+        primary label and prefers the more specific one.
         """
         if not self.observations:
             return 0.0
@@ -124,6 +134,31 @@ class IssueLedger(_Record):
         )
         return gaps / len(self.observations)
 
+    def ontology_possible_share(self) -> float:
+        """Fraction where the ontology is a live candidate, primary or ambiguous.
+
+        This is the honest figure. A primary share of zero alongside a possible share of two
+        thirds means the ontology was never ruled out, only never chosen.
+        """
+        if not self.observations:
+            return 0.0
+        possible = sum(
+            1
+            for o in self.observations
+            if o.issue_class is IssueClass.ONTOLOGY_GAP
+            or IssueClass.ONTOLOGY_GAP in o.ambiguous_with
+        )
+        return possible / len(self.observations)
+
+    def indistinguishable_pairs(self) -> dict[str, int]:
+        """How often each pair of classes could not be separated."""
+        pairs: dict[str, int] = {}
+        for observation in self.observations:
+            for other in observation.ambiguous_with:
+                key = " | ".join(sorted({str(observation.issue_class), str(other)}))
+                pairs[key] = pairs.get(key, 0) + 1
+        return dict(sorted(pairs.items()))
+
 
 def classify(
     question: BenchmarkQuestion,
@@ -131,7 +166,7 @@ def classify(
     available: Sequence[PublicTurn],
     selected_handles: Sequence[str],
     *,
-    context_limited: bool,
+    delivery_infeasible: bool,
     plan_terms: Sequence[str],
     session_members: Mapping[str, Sequence[str]] | None = None,
 ) -> Observation | None:
@@ -151,13 +186,13 @@ def classify(
     handles = {t.evidence_handle for t in available}
     counts = (len(expanded), len(got))
 
-    if context_limited:
+    if delivery_infeasible:
         return Observation(
             question_id=question.question_id,
             issue_class=IssueClass.CONTEXT_COVERAGE,
             evidence=(
-                "the conversation exceeded the frozen budget, so no selection could have "
-                "recovered the gold set"
+                "the gold evidence itself does not fit the delivery budget, so no selection "
+                "could have delivered it"
             ),
             gold_evidence_count=counts[0],
             selected_evidence_count=counts[1],

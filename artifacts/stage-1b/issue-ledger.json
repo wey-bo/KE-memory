@@ -1916,10 +1916,12 @@
    "selected_evidence_count": 1
   },
   {
-   "ambiguous_with": [],
-   "evidence": "the conversation exceeded the frozen budget, so no selection could have recovered the gold set",
+   "ambiguous_with": [
+    "retrieval_ranking"
+   ],
+   "evidence": "1 of 72 gold unit(s) were selected, so the evidence set does not close",
    "gold_evidence_count": 72,
-   "issue_class": "context_coverage",
+   "issue_class": "evidence_closure",
    "ontology_candidate_hint": "",
    "question_id": "gpt4_a1b77f9c",
    "selected_evidence_count": 1

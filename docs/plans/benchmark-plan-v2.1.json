@@ -778,6 +778,11 @@
  "track_status": {
   "contract_freeze": {
    "artifact": "artifacts/stage-1a/contract-freeze.json",
+   "bimodality_gap": {
+    "note": "the two figures measure different things and an earlier plan entry reported them under one label, which read as a contradiction. 112810 sums raw PublicTurn approximate_tokens; 117184 sums the serialized form the artifact uses. Both are correct on their own basis and the basis is now always stated.",
+    "raw_turn_token_basis": 112810,
+    "serialized_basis": 117184
+   },
    "eligibility": {
     "coverage": "22/32",
     "ineligible_item_ids": [
@@ -803,7 +808,7 @@
     "serialization_sha256": "a5adeaf2739cd3f03a93d1ef803f401d7f4efca055f35dade8e4e980f3f53af3",
     "tokenizer_sha256": "ff6ce2ee1086f1c3b577ed4f54d5587a1339843259692219a717e1e3e6eabbfa"
    },
-   "independent_verification": "the four section hashes were recomputed from the artifact and matched; the reserve arithmetic was checked to be self-consistent (124285 = 128000 - 116 - 15 - 1024 - 2560); and the eligible set was recounted from the slice, giving 22 eligible and 10 ineligible, all BEAM, with a 112810-token gap between the largest eligible and smallest ineligible item",
+   "independent_verification": "the four section hashes were recomputed from the artifact and matched; the reserve arithmetic was checked to be self-consistent (124285 = 128000 - 116 - 15 - 1024 - 2560); and the eligible set was recounted from the slice, giving 22 eligible and 10 ineligible, all BEAM.",
    "items": [
     "tokenizer name, version, implementation, parameters and counting method",
     "exact byte representation of system, prompt and turn serialization",
@@ -816,7 +821,20 @@
     "the tokenizer remains a non-authoritative character approximation, so every figure bounds instrumentation and cannot guarantee a request fits the model context",
     "the 128000 context window is vendor-published, not measured against the API"
    ],
-   "status": "frozen",
+   "review_verdict": "accepted only as a diagnostic contract draft. The four hashes recompute correctly, but they bind a synthetic PublicTurn triple rather than the real answer request, and no runtime consumes them, so they do not constrain a formal run.",
+   "round_five_resolution": {
+    "C1_contract_bound_nothing": {
+     "finding": "the freeze hashed a synthetic {evidence_handle, speaker, text} triple while AnswerService sent model_evidence_payload(Evidence) with full records, and three budgets coexisted: 8192 inside AnswerService, 24576 for the delivery arm, 124285 from the freeze. No runtime consumed serialize_evidence_request, as_arm_budget or the over-limit policy.",
+     "resolution": "src/ke_memory_demo/request_contract.py now owns request construction, and AnswerService.request_payload delegates to build_answer_request, so the runtime consumes the contract rather than agreeing with it by coincidence. RequestBudget is the single budget and enforce_budget is the only place the over-limit policy is applied.",
+     "verified": "the delegated payload is byte-identical to the previous inline construction, and the evidence records carry all nine Evidence fields rather than three. A test asserts the inline dict is gone from answering.py."
+    },
+    "C2_eligibility_was_not_a_full_request_count": {
+     "finding": "per-turn and per-question estimates were rounded separately and summed, drifting -42 to +15 tokens from the real request.",
+     "resolution": "measure_request counts approximate_tokens over the whole serialized request once. A test asserts the per-component sum differs from the single count.",
+     "standing": "22/32 is retained as a diagnostic result and is no longer described as exact serialized request eligibility."
+    }
+   },
+   "status": "bound_to_the_real_request_path_pending_review",
    "zero_delta_explanation": "coverage stayed at 22/32 even though measurement became stricter (serialization overhead now charged, up to 6610 tokens) and the budget tightened by 643. The set held because the slice is bimodal by a margin far wider than either change, which the artifact measures rather than asserts."
   },
   "corpus_discovery": {
@@ -848,8 +866,8 @@
    ],
    "judge_dependency": "none; this is why the tracks were split",
    "ledger_counts": {
-    "context_coverage": 1,
-    "evidence_closure": 78,
+    "context_coverage": 0,
+    "evidence_closure": 79,
     "extraction_structural": 0,
     "normalization_gap": 0,
     "ontology_gap": 0,
@@ -859,12 +877,40 @@
    },
    "ontology_gap_share": 0.0,
    "pipeline_caveat": "the pipeline is the lexical fixture, not the ontology backend, so the ledger locates where a real backend must do better and is not a measurement of the ontology",
+   "round_five_resolution": {
+    "C3_held_out_was_not_isolated": {
+     "finding": "all 500 questions and their gold were loaded before the split, and inspected was a list a caller appended to by hand, so any code could read held-out gold without declaring it. The plan also described a load order that was the reverse of what executed.",
+     "resolution": "split_isolation.py materializes each split to its own file and runs analysis in a namespace containing no other split file. Held-out gold is absent rather than undeclared.",
+     "verified": "a probe searching every split filename by absolute path reports sibling_files_reachable empty and repo_visible false, and the sandbox manifest reconciles against the child mountinfo."
+    },
+    "C4_ledger_was_not_attribution": {
+     "finding": "the sandbox builder artifact was never consumed by the diagnostic pipeline, which ran a lexical fixture over raw turns, so no observation could be attributed to real extraction, mapping, ontology, query compilation or retrieval. ontology_gap_share counted only the forced primary label and read as if the ontology were fine.",
+     "numbers": {
+      "indistinguishable_pairs": {
+       "evidence_closure | retrieval_ranking": 79,
+       "ontology_gap | query_compiler": 165
+      },
+      "ontology_possible_share": 0.6762295081967213,
+      "ontology_primary_share": 0.0
+     },
+     "resolution": "renamed to a lexical-fixture failure-shape inventory. The ledger now reports ontology_possible_share alongside the primary share, and publishes which class pairs could not be separated."
+    },
+    "I1_context_limit_had_no_basis": {
+     "finding": "context_limited tested whether the whole conversation exceeded 24576 raw tokens, but a long conversation can still yield a small recoverable gold set.",
+     "resolution": "the basis is now whether the gold evidence itself fits the delivery budget, measured through the shared request contract. The single unfounded context_coverage record is gone."
+    }
+   },
    "splits": {
     "discovery": 244,
     "held_out": 147,
     "validation": 97
    },
-   "status": "first_pass_complete"
+   "status": "failure_shape_inventory_pending_review",
+   "still_required_before_stage_2": [
+    "a per-layer trace through the real architecture, or oracle substitution, before any observation may be attributed to a module",
+    "the sandbox build artifact must actually feed the diagnostic pipeline"
+   ],
+   "what_this_is": "lexical-fixture failure-shape inventory, not architectural attribution"
   },
   "formal_benchmark": {
    "judge_dependency": "hard; the judge key must be rotated first and no judge call is permitted before then",

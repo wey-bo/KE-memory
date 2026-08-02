@@ -111,7 +111,7 @@ def test_a_session_level_gold_reference_resolves_through_published_membership() 
             _label(("s00000",)),
             turns,
             ["h00000", "h00001"],
-            context_limited=False,
+            delivery_infeasible=False,
             plan_terms=("berlin",),
             session_members=members,
         )
@@ -124,7 +124,7 @@ def test_a_session_level_gold_reference_resolves_through_published_membership() 
         _label(("s00000",)),
         turns,
         ["h00000", "h00001"],
-        context_limited=False,
+        delivery_infeasible=False,
         plan_terms=("berlin",),
         session_members=None,
     )
@@ -132,14 +132,19 @@ def test_a_session_level_gold_reference_resolves_through_published_membership() 
     assert blind.issue_class is IssueClass.EXTRACTION_STRUCTURAL
 
 
-def test_context_limit_takes_precedence_over_any_other_class() -> None:
-    """No selection could have succeeded, so blaming retrieval would be wrong."""
+def test_infeasible_delivery_takes_precedence_over_any_other_class() -> None:
+    """No selection could have delivered the gold, so blaming retrieval would be wrong.
+
+    The basis is the gold evidence failing to fit, not the conversation being long: a long
+    conversation can still yield a small recoverable gold set, and conflating the two produced a
+    context_coverage record with no basis.
+    """
     observation = classify(
         _question(),
         _label(("h00000",)),
         [_turn("h00000")],
         [],
-        context_limited=True,
+        delivery_infeasible=True,
         plan_terms=(),
         session_members={},
     )
@@ -153,7 +158,7 @@ def test_expected_abstention_that_answered_is_semantic_not_retrieval() -> None:
         _label(()),
         [_turn("h00000")],
         ["h00000"],
-        context_limited=False,
+        delivery_infeasible=False,
         plan_terms=("berlin",),
         session_members={},
     )
@@ -168,7 +173,7 @@ def test_selecting_nothing_is_ambiguous_with_an_ontology_gap() -> None:
         _label(("h00000",)),
         [_turn("h00000")],
         [],
-        context_limited=False,
+        delivery_infeasible=False,
         plan_terms=("berlin",),
         session_members={},
     )
@@ -184,7 +189,7 @@ def test_a_superset_selection_is_a_precision_failure() -> None:
         _label(("h00000",)),
         [_turn("h00000"), _turn("h00001")],
         ["h00000", "h00001"],
-        context_limited=False,
+        delivery_infeasible=False,
         plan_terms=("berlin",),
         session_members={},
     )
@@ -198,7 +203,7 @@ def test_a_partial_selection_is_a_closure_failure() -> None:
         _label(("h00000", "h00001")),
         [_turn("h00000"), _turn("h00001")],
         ["h00000"],
-        context_limited=False,
+        delivery_infeasible=False,
         plan_terms=("berlin",),
         session_members={},
     )
@@ -213,15 +218,19 @@ def test_no_class_may_be_assigned_without_a_stated_evidence_requirement() -> Non
     assert all(requirement.strip() for requirement in CLASS_EVIDENCE_REQUIREMENT.values())
 
 
-def test_ontology_share_is_reported_so_over_attribution_is_visible() -> None:
-    """A high ontology share warns about the classifier, not about the ontology."""
+def test_both_ontology_shares_are_reported() -> None:
+    """The primary share alone reads as if the ontology were fine.
+
+    A primary share of zero beside a possible share of two thirds means the ontology was never
+    ruled out, only never chosen as the single forced label.
+    """
     observations = [
         classify(
             _question(),
             _label(("h00000",)),
             [_turn("h00000"), _turn("h00001")],
             ["h00000", "h00001"],
-            context_limited=False,
+            delivery_infeasible=False,
             plan_terms=("berlin",),
             session_members={},
         )
@@ -231,5 +240,7 @@ def test_ontology_share_is_reported_so_over_attribution_is_visible() -> None:
         split="discovery",
         observations=tuple(o for o in observations if o is not None),
     )
-    assert ledger.ontology_share() == 0.0
+    assert ledger.ontology_primary_share() == 0.0
     assert sum(ledger.counts().values()) == len(ledger.observations)
+    # A retrieval-ranking observation carries no ontology ambiguity, so both shares agree here.
+    assert ledger.ontology_possible_share() == 0.0

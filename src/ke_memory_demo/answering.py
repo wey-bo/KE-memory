@@ -11,10 +11,8 @@ from ke_memory_demo.core.json import JsonObject, canonical_json
 from ke_memory_demo.domain import Evidence
 from ke_memory_demo.infra.llm import StructuredCompletion
 from ke_memory_demo.infra.telemetry import TraceContext, UsageRecord
-from ke_memory_demo.retrieval.evidence_payload import (
-    model_evidence_payload,
-    serialize_evidence_payload,
-)
+from ke_memory_demo.request_contract import build_answer_request
+from ke_memory_demo.retrieval.evidence_payload import serialize_evidence_payload
 from ke_memory_demo.retrieval.tokens import TokenCounter
 
 
@@ -98,12 +96,14 @@ class AnswerService:
         question: str,
         evidence: Sequence[Evidence],
     ) -> JsonObject:
+        """Build the request through the shared contract.
+
+        Delegating rather than constructing the dict here is what makes the frozen contract
+        binding: four rounds of contract work hashed a shape this method did not send, and the
+        hashes constrained nothing as a result.
+        """
         ordered, _evidence_tokens = self._prepare_evidence(question, evidence)
-        return {
-            "task": "answer_from_evidence",
-            "question": question,
-            "evidence": list(model_evidence_payload(ordered)),
-        }
+        return build_answer_request(question, ordered)
 
     async def answer(
         self,
