@@ -1,0 +1,411 @@
+{
+  "schema_version": "benchmark-plan-v2.1-diagnostic-v1",
+  "status": "approved_plan_execution_not_started",
+  "created_on": "2026-08-02",
+  "source_plan": {
+    "path": "/public/home/wwb/KE_mem/ke-memory-demo/.runs/reorg-phase1-baseline/benchmark-plan-v2.json",
+    "sha256": "dd495e673713d6e10948dbf5d390e2b4bf5dd3b95152174365545aa8d32b7ab2",
+    "rule": "The source plan remains immutable. This v2.1 document is the self-contained approved successor for diagnostic-v1."
+  },
+  "current_evidence_boundary": {
+    "phase_c": "operational_diagnostic_profile_qualified on its own qualification contract",
+    "phase_d": "one controlled automatic write-to-query closure on the production contract",
+    "c_to_d_transfer": "not_yet_proven",
+    "fresh_v3": "not_qualified and not reinterpreted",
+    "forbidden_claims": [
+      "general automatic extraction is qualified",
+      "benchmark ready",
+      "production ready",
+      "product superiority",
+      "carrier selection is complete"
+    ]
+  },
+  "benchmark_identity": {
+    "name": "KE-memory diagnostic benchmark v1",
+    "type": "diagnostic",
+    "overall_pass_fail": false,
+    "purpose": [
+      "Build, inspect and expand a frozen foundational ontology that covers common memory situations.",
+      "Measure natural-expression to canonical-ontology mapping without letting the mapper leak benchmark answers.",
+      "Expose extraction, abstraction, retrieval, execution and answer failures on natural memory benchmarks.",
+      "Determine whether failures belong to implementation, ontology coverage or architecture, and attribute them to the correct module."
+    ],
+    "not_primary": [
+      "leaderboard ranking",
+      "qualification or release approval",
+      "KEOL dynamic ontology effectiveness",
+      "carrier selection",
+      "external memory-system comparison"
+    ]
+  },
+  "ontology_model": {
+    "ontology": "A versioned namespace of stable ids, senses, aliases, types, relations, roles and constraints. A bare string vocabulary is insufficient because mapping correctness requires identity and sense.",
+    "KEOL": "A method for dynamic ontology construction: unmapped expressions become candidates that can be normalized, deduplicated, conflict-checked, admitted or rejected, and versioned. In diagnostic-v1 it is observed only as a side track and is not a core scored capability.",
+    "Extended_AMR": "An extension of AMR's ontology space and an instance-graph encoding bound to canonical ontology items. It is a possible carrier, not the preselected carrier and not a competitor to KEOL.",
+    "candidate_sources": {
+      "WordNet": "sense-oriented lexical source",
+      "schema.org": "concept and property structure source",
+      "PropBank_AMR": "predicate sense and semantic-role source",
+      "domain_vocabularies": "curated domain-specific source"
+    },
+    "foundation_layout": {
+      "memory_core": "Shared cross-scenario concepts for provenance, identity, time, modality, polarity, conflict, supersession, evidence and lifecycle.",
+      "domain_namespaces": "Versioned domain/* namespaces for scenario-specific concepts; dataset/* namespaces are forbidden as containers for answer-specific benchmark concepts.",
+      "O_L1": "Atomic event, state, preference, task and attribute ontology. Frozen and hashed independently.",
+      "O_L2": "Cross-turn and cross-session abstraction ontology. Frozen and hashed independently from O_L1.",
+      "cross_layer_map": "Explicit versioned derivation/import map. Shared vocabulary is never implicit."
+    }
+  },
+  "ontology_foundation_pilot": {
+    "language": "English only for diagnostic-v1; canonical ids are language-neutral and aliases carry language tags.",
+    "build_corpora": [
+      "Schema-Guided Dialogue",
+      "Taskmaster-2 train",
+      "Multi-Session Chat train",
+      "controlled WildChat samples",
+      "tau-bench train and tool traces"
+    ],
+    "scenario_families": [
+      "people and relationships",
+      "preferences and habits",
+      "events and experiences",
+      "plans commitments and tasks",
+      "states resources and environment",
+      "interactions tools and transactions"
+    ],
+    "cross_scenario_semantics": [
+      "time",
+      "modality",
+      "negation",
+      "condition",
+      "source status",
+      "identity",
+      "conflict",
+      "supersession",
+      "evidence",
+      "lifecycle"
+    ],
+    "target_scale": {
+      "coverage_spans": "approximately 500 spans for automatic candidate mining and coverage analysis",
+      "formal_mapping_gold": "100 to 150 cases",
+      "double_blind_review": "approximately 15 percent plus risk-triggered review"
+    },
+    "review_policy": {
+      "single_review_default": true,
+      "mandatory_second_review": [
+        "high-risk novel concepts or senses",
+        "suspected false merge or false split",
+        "complex L2 abstraction or closure"
+      ],
+      "model_role": "proposal only",
+      "human_role": "final canonical ontology decision"
+    },
+    "freeze_output": [
+      "ontology-v0",
+      "O_L1-v0",
+      "O_L2-v0",
+      "cross-layer-map-v0",
+      "source and provenance manifest",
+      "mapping annotation guide"
+    ]
+  },
+  "data_separation": {
+    "ontology_build_corpus": "Used only to build and inspect the ontology foundation.",
+    "ontology_mapping_gold": "Separately authored cases used to score mapping quality; not used to derive aliases, prompts or ontology items after freeze.",
+    "end_to_end_benchmarks": "Native BEAM, LoCoMo and LongMemEval inputs used for the diagnostic memory run.",
+    "legacy_32_item_slice": "Dev and regression only; permanently forbidden as fresh hidden.",
+    "no_cross_contamination": [
+      "No benchmark question, answer, gold evidence id or rubric enters ontology construction.",
+      "No formal mapping-gold failure may add an alias or ontology item before that frozen evaluation is reported.",
+      "No end-to-end failure may change the prompt, ontology, mapper or executor and then be rerun on the same formal set."
+    ]
+  },
+  "mapper_anti_cheating_contract": {
+    "memory_mapper": [
+      "query-blind",
+      "gold-blind",
+      "sample-identity-blind"
+    ],
+    "freeze_order": [
+      "Load the frozen ontology and public conversation only.",
+      "Run extraction and surface-semantic construction.",
+      "Map L1 and L2 to the complete frozen ontology without benchmark-derived candidate retrieval.",
+      "Build memory once per conversation.",
+      "Freeze extraction, mapping, L1/L2 memory and provenance.",
+      "Only after memory freeze reveal the benchmark questions to query compilation."
+    ],
+    "mapping_outputs": [
+      "mapped",
+      "ambiguous",
+      "novel_candidate",
+      "insufficient_context",
+      "out_of_scope"
+    ],
+    "query_mapper": "Separate from the memory mapper but bound to the same complete frozen ontology and version hashes.",
+    "unsupported_query_rule": "An unsupported query must be reported as executor capability failure. The task contract may not exclude it after inspection.",
+    "forbidden_shortcuts": [
+      "candidate retrieval that uses question or sample identity",
+      "benchmark-derived aliases or few-shot examples",
+      "dataset-category-specific prompts",
+      "per-item ontology patches",
+      "reading gold evidence before memory freeze"
+    ]
+  },
+  "semantic_assistance_policy": {
+    "forbidden": [
+      "heuristic keyword or regular-expression semantic correction",
+      "sample-specific branches",
+      "semantic gates that correct model output or force abstention",
+      "contract narrowing that removes unsupported natural questions",
+      "targeted prompt or ontology optimization against formal failures",
+      "rerunning the same formal set after a semantic repair"
+    ],
+    "allowed_integrity_checks": [
+      "JSON and schema validity",
+      "canonical id and reference validity",
+      "EvidenceSpan and derivation closure",
+      "hash and split isolation",
+      "atomic publication and no-overwrite behavior",
+      "scorer input-output validation"
+    ],
+    "invalid_structure_rule": "Invalid structure is scored as an error; integrity checks do not repair semantics.",
+    "reporting_rule": "Raw model and mapper quality is reported directly. A structural rejection is not evidence that the model understood the case."
+  },
+  "memory_construction_contract": {
+    "L1": {
+      "unit": "A user message, agent message, tool message or tool event; surrounding context may resolve reference but may not supply an unstated fact.",
+      "source_status": [
+        "user_reported",
+        "agent_generated",
+        "tool_observed"
+      ],
+      "revision": "Append-only. Later information confirms, corrects, supersedes or conflicts with prior revisions instead of overwriting them."
+    },
+    "L2": {
+      "input": "Frozen L1 units, their raw evidence and only the necessary prior context.",
+      "timing": "Incrementally at each session end.",
+      "requirements": [
+        "typed abstraction independent of O_L1 vocabulary",
+        "L1 derivation ids",
+        "EvidenceSpan closure",
+        "no benchmark question, future session or gold access"
+      ],
+      "reporting": "Raw abstraction, ontology mapping, derivation and evidence closure are scored separately."
+    },
+    "answer_model_boundary": "For the ontology arm, the answer model may read only the question, query plan, symbolic matches and selected EvidenceSpans. It may not read the full conversation history."
+  },
+  "official_arms": [
+    {
+      "id": "full_history_baseline",
+      "input": "complete public history",
+      "purpose": "Measure answer capability when no memory compression or ontology mapping is required."
+    },
+    {
+      "id": "raw_dense_retrieval_baseline",
+      "input": "raw evidence units under the same question and answer budget",
+      "purpose": "Measure a non-ontology retrieval baseline."
+    },
+    {
+      "id": "ontology_memory_system",
+      "input": "one query-blind frozen memory build plus symbolic query execution",
+      "purpose": "Measure the current architecture and ontology mapping path."
+    }
+  ],
+  "external_system_boundary": "Mem0, Graphiti, Hindsight, MemPalace, Zep and similar systems are not rerun in diagnostic-v1. Author-reported results remain external context only.",
+  "diagnostic_benchmark_sample": {
+    "total_questions": 100,
+    "BEAM": 20,
+    "LoCoMo": 40,
+    "LongMemEval": 40,
+    "selection": "Pre-registered natural-question sampling before any system output is inspected.",
+    "special_annotations": [
+      "LongMemEval oracle-haystack conditions are reported separately and never generalized to full retrieval.",
+      "LoCoMo category 5 remains manual_required where official answer gold is insufficient."
+    ]
+  },
+  "architecture_diagnostics": {
+    "ablations": [
+      "L1-only versus L1-plus-L2",
+      "surface-semantic versus ontology-mapped",
+      "native carrier offline round-trip"
+    ],
+    "oracle_substitutions": [
+      "gold extraction",
+      "gold memory mapping",
+      "gold L2 abstraction and derivation",
+      "gold query plan",
+      "gold evidence selection"
+    ],
+    "carrier_rule": "No new Extended-AMR or KEOL projection experiment and no carrier selection in diagnostic-v1. Existing native-carrier round-trip is an offline diagnostic only.",
+    "module_ownership": {
+      "extraction": "surface events, states, roles, source status, time, modality, polarity and evidence spans",
+      "ontology": "canonical ids, senses, aliases, types, relations, constraints, O_L1/O_L2 and cross-layer map",
+      "mapping": "surface-semantic to canonical ontology decision and ambiguity or unresolved state",
+      "identity": "entity identity, merge, split, membership and reference resolution",
+      "history": "immutable revisions, conflict, supersession and temporal state",
+      "L2": "cross-turn and cross-session abstraction, derivation and closure",
+      "query": "question mapping, QuerySlotPlan and unsupported-operation reporting",
+      "executor": "symbolic constraints, joins, counts, time, negation, conflict and abstention",
+      "retrieval": "candidate evidence recovery without semantic authority",
+      "answer": "evidence-bounded answer generation",
+      "storage_snapshot": "atomic write, replay, revision binding and byte recovery",
+      "pipeline": "ordering, isolation and end-to-end state transitions"
+    }
+  },
+  "metrics": {
+    "ontology_and_mapping": [
+      "mapping coverage",
+      "canonical sense accuracy",
+      "ambiguity rate",
+      "unresolved rate",
+      "mis-mapping rate",
+      "false merge and false split",
+      "ontology redundancy growth",
+      "ontology version consistency",
+      "query-memory alignment",
+      "error propagation rate"
+    ],
+    "L1_L2_structure": [
+      "L1 event-role and evidence accuracy",
+      "L1 source, time, modality, polarity and lifecycle accuracy",
+      "L2 raw abstraction accuracy",
+      "L2 mapping accuracy",
+      "L1-to-L2 derivation correctness",
+      "L2 evidence closure"
+    ],
+    "retrieval_execution_answer": [
+      "Evidence Set Exact Match",
+      "All-Evidence at K",
+      "Evidence Recall and Precision",
+      "constraint satisfaction",
+      "abstention correctness",
+      "critical false positive",
+      "answer correctness",
+      "latency, tokens and cost when available"
+    ],
+    "answer_evidence_matrix": [
+      "answer correct and evidence correct",
+      "answer correct and evidence wrong",
+      "answer wrong and evidence correct",
+      "answer wrong and evidence wrong"
+    ],
+    "no_compensation": [
+      "L2 may not hide an L1 failure.",
+      "Final answer correctness may not hide wrong evidence.",
+      "A structural validator intervention may not hide raw semantic error."
+    ]
+  },
+  "model_protocol": {
+    "model": "deepseek-v4-pro",
+    "fixed": [
+      "provider model identity",
+      "prompt versions",
+      "temperature and decoding settings",
+      "response schemas",
+      "per-arm budgets"
+    ],
+    "stability_check": "Pre-register repeated inference on 10 percent of the sample and report disagreement; repetition is for stability measurement, not majority-vote repair.",
+    "retry": "Only a transport failure may resend the byte-identical request. A semantic or schema failure is a scored failure and is not retried."
+  },
+  "failure_attribution": {
+    "primary_classes": [
+      "implementation_defect",
+      "ontology_gap",
+      "architecture_problem"
+    ],
+    "architecture_evidence_levels": [
+      "suspected",
+      "reproduced",
+      "cross_source",
+      "oracle_confirmed"
+    ],
+    "architecture_change_candidate_rule": "Only oracle_confirmed evidence, or a reproduced failure that is also cross_source, may enter a later architecture-change discussion.",
+    "method": [
+      "Freeze the untouched failure and all relevant intermediate artifacts.",
+      "Locate the earliest incorrect module output.",
+      "Use the smallest pre-registered oracle substitution that can falsify the attribution.",
+      "Compare downstream change without modifying the formal run.",
+      "Assign one primary owner and record secondary propagation separately.",
+      "Do not repair, tune or rerun during diagnostic-v1."
+    ]
+  },
+  "execution_stages": [
+    {
+      "id": 0,
+      "name": "preflight and freeze",
+      "outputs": [
+        "source, split and contamination manifests",
+        "model, prompt, ontology, mapper, executor and scorer identities",
+        "root-test skipped test id and reason",
+        "anti-cheating and question-release audit",
+        "failure-attribution matrix"
+      ],
+      "stop_on_failure": true
+    },
+    {
+      "id": 1,
+      "name": "ontology foundation pilot",
+      "outputs": [
+        "ontology-v0",
+        "O_L1-v0",
+        "O_L2-v0",
+        "cross-layer-map-v0",
+        "mapping gold and adjudication ledger",
+        "coverage and ambiguity report"
+      ],
+      "rule": "Freeze before end-to-end benchmark questions are exposed to the memory mapper."
+    },
+    {
+      "id": 2,
+      "name": "harness and anti-cheating regression",
+      "input": "the existing 32-item dev/regression slice only",
+      "outputs": [
+        "harness integrity report",
+        "question-blind memory-freeze proof",
+        "oracle-substitution self-tests",
+        "no semantic heuristic or gate audit"
+      ],
+      "rule": "This stage validates instrumentation only and produces no benchmark claim."
+    },
+    {
+      "id": 3,
+      "name": "untouched diagnostic-v1 run",
+      "input": "the pre-registered 100-question natural sample",
+      "outputs": [
+        "three official arm results",
+        "all intermediate L1, mapping, L2, query, evidence and answer artifacts",
+        "stability subset results",
+        "metric tables and answer-evidence matrix"
+      ],
+      "rule": "One formal run under frozen inputs. No semantic repair or targeted rerun."
+    },
+    {
+      "id": 4,
+      "name": "RCA and architecture diagnosis",
+      "outputs": [
+        "implementation defect ledger",
+        "ontology gap ledger",
+        "architecture issue ledger with evidence levels",
+        "module-owner attribution",
+        "falsifiable follow-up hypotheses",
+        "residual uncertainty and sample limitations"
+      ],
+      "rule": "Report findings only. Do not implement repairs."
+    }
+  ],
+  "mandatory_stop": {
+    "trigger": "The diagnostic-v1 RCA report and its immutable evidence index are complete.",
+    "actions": [
+      "stop all benchmark execution",
+      "do not repair implementation defects",
+      "do not add ontology entries or aliases from formal failures",
+      "do not tune prompts, mapper, executor or answer model",
+      "do not rerun the formal sample",
+      "do not start a larger benchmark",
+      "do not select a carrier",
+      "do not rerun external memory systems",
+      "do not make benchmark-ready or production-ready claims"
+    ],
+    "next_step": "Return the RCA report to the user and wait for a separate decision about ontology expansion, module repairs, architecture changes and the design of a fresh evaluation."
+  }
+}
