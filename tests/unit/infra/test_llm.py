@@ -209,6 +209,8 @@ def _model_settings(
     model: str = "gpt-5.4",
     temperature: float = 0.0,
     max_output_tokens: int = 4096,
+    supports_json_schema: bool = True,
+    disable_thinking: bool = False,
 ) -> ModelSettings:
     return ModelSettings(
         model=model,
@@ -216,6 +218,8 @@ def _model_settings(
         api_key_env="TEST_MODEL_API_KEY",
         temperature=temperature,
         max_output_tokens=max_output_tokens,
+        supports_json_schema=supports_json_schema,
+        disable_thinking=disable_thinking,
     )
 
 
@@ -676,6 +680,61 @@ async def test_artifact_trace_jsonl_contains_no_literal_or_decodable_secret(tmp_
     canonical = (tmp_path / "runs/run-1/extract/model_traces.jsonl").read_text()
     assert secret not in canonical
     _assert_secret_not_recoverable(json.loads(canonical), secret)
+
+
+@pytest.mark.asyncio
+async def test_model_settings_downgrade_schema_mode_and_disable_thinking() -> None:
+    """Provider capability recorded on the model overrides a caller's schema request.
+
+    DeepSeek rejects response_format type json_schema with "This response_format type
+    is unavailable now", and its flash model bills reasoning tokens as completion
+    tokens unless thinking is disabled. Both facts are per-model, so a caller passing
+    supports_json_schema=True must still be downgraded to json_object, and the
+    thinking control must reach the request.
+    """
+    settings = _model_settings(
+        model="deepseek-v4-flash",
+        max_output_tokens=1024,
+        supports_json_schema=False,
+        disable_thinking=True,
+    )
+    client, fake, _recorder, _delays = _structured_client(
+        [_completion('{"value":7}')],
+        settings=settings,
+        supports_json_schema=True,
+    )
+
+    result = await client.complete(
+        ExampleOutput,
+        [{"role": "user", "content": "JSON please"}],
+        TraceContext(operation="answer"),
+    )
+
+    assert result == ExampleOutput(value=7)
+    request = fake.completions.calls[0]
+    assert request["response_format"] == {"type": "json_object"}
+    assert request["extra_body"] == {"thinking": {"type": "disabled"}}
+    assert request["max_completion_tokens"] == 1024
+
+
+@pytest.mark.asyncio
+async def test_thinking_stays_absent_unless_the_model_disables_it() -> None:
+    settings = _model_settings(model="gpt-5.5", max_output_tokens=2048)
+    client, fake, _recorder, _delays = _structured_client(
+        [_completion('{"value":1}')],
+        settings=settings,
+        supports_json_schema=True,
+    )
+
+    await client.complete(
+        ExampleOutput,
+        [{"role": "user", "content": "JSON please"}],
+        TraceContext(operation="judge"),
+    )
+
+    request = fake.completions.calls[0]
+    assert "extra_body" not in request
+    assert cast(dict[str, object], request["response_format"])["type"] == "json_schema"
 
 
 @pytest.mark.asyncio
@@ -1225,7 +1284,7 @@ def test_production_constructor_uses_work_secret_without_exposing_it(
     )
 
     assert captured == {
-        "base_url": "https://api.penguinsaichat.dpdns.org/v1",
+        "base_url": "https://api.deepseek.com/v1",
         "api_key": secret,
         "max_retries": 0,
     }

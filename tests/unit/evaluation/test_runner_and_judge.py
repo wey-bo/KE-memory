@@ -86,7 +86,7 @@ class _ConcurrencyProbe:
 
 
 class _AnswerClient:
-    model_name = "gpt-5.4"
+    model_name = "deepseek-v4-flash"
     max_output_tokens = 1024
 
     def __init__(self, probe: _ConcurrencyProbe) -> None:
@@ -117,7 +117,7 @@ class _AnswerClient:
 
 
 class _JudgeClient:
-    model_name = "deepseek-v4-pro"
+    model_name = "gpt-5.5"
     max_output_tokens = 2048
 
     def __init__(self, probe: _ConcurrencyProbe | None = None) -> None:
@@ -279,7 +279,7 @@ def _answer(question: ProbeQuestion) -> QuestionAnswer:
         answer=f"Candidate answer for {question.id}",
         citations=(evidence.evidence_id,),
         retrieval_trace=_retrieval_trace(question.question, evidence.evidence_id),
-        usage=_usage("gpt-5.4", "answer-1"),
+        usage=_usage("deepseek-v4-flash", "answer-1"),
     )
 
 
@@ -293,7 +293,7 @@ def _judgement(question_id: str) -> JudgeResult:
         unsupported_claim=False,
         abstention_correct=None,
         short_rationale="The rubric is satisfied.",
-        usage=_usage("deepseek-v4-pro", f"judge-{question_id}"),
+        usage=_usage("gpt-5.5", f"judge-{question_id}"),
     )
 
 
@@ -325,9 +325,9 @@ def _manifest(
             ),
             normalization_mode="bounded-best-effort",
         ),
-        work_model="gpt-5.4",
+        work_model="deepseek-v4-flash",
         work_base_url="https://work.invalid/v1",
-        judge_model="deepseek-v4-pro",
+        judge_model="gpt-5.5",
         judge_base_url="https://judge.invalid/v1",
         answer_prompt_sha256=answer_prompt_sha256,
         judge_prompt_sha256=judge_prompt_sha256,
@@ -423,7 +423,7 @@ def test_judge_result_rejects_a_forged_authoritative_score() -> None:
             unsupported_claim=False,
             abstention_correct=None,
             short_rationale="One item is satisfied.",
-            usage=_usage("deepseek-v4-pro", "judge-1"),
+            usage=_usage("gpt-5.5", "judge-1"),
         )
 
 

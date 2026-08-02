@@ -36,6 +36,15 @@ class ModelSettings(_FrozenModel):
     api_key_env: NonEmptyString
     temperature: NonNegativeFloat
     max_output_tokens: PositiveInt
+    # Not every provider accepts the same structured-output and reasoning controls.
+    # DeepSeek rejects response_format type json_schema with "This response_format
+    # type is unavailable now" and accepts json_object instead, so schema support is
+    # a per-model fact rather than a global one.
+    supports_json_schema: bool = True
+    # DeepSeek reasoning models bill reasoning tokens as completion tokens and spend
+    # them before emitting any content. Setting this disables that, which makes the
+    # output budget predictable.
+    disable_thinking: bool = False
 
 
 class EmbeddingSettings(_FrozenModel):

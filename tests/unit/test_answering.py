@@ -32,7 +32,7 @@ class _AnswerClient:
         self,
         output: AnswerModelOutput,
         *,
-        model_name: str = "gpt-5.4",
+        model_name: str = "deepseek-v4-flash",
         max_output_tokens: int = 1024,
     ) -> None:
         self.model_name = model_name
@@ -85,7 +85,7 @@ async def test_answer_service_uses_fixed_prompt_configuration_citations_and_usag
 
     result = await service.answer("What is the project status?", (_evidence(),))
 
-    assert ANSWER_MODEL == "gpt-5.4"
+    assert ANSWER_MODEL == "deepseek-v4-flash"
     assert ANSWER_MAX_OUTPUT_TOKENS == 1024
     assert result.answer == "The project is active."
     assert result.citations == ("evidence-1",)
@@ -99,7 +99,7 @@ async def test_answer_service_uses_fixed_prompt_configuration_citations_and_usag
     assert payload["evidence"][0]["evidence_id"] == "evidence-1"
     assert "token_count" not in payload["evidence"][0]
     assert trace.operation == "common-answer"
-    assert trace.metadata["model"] == "gpt-5.4"
+    assert trace.metadata["model"] == "deepseek-v4-flash"
     assert trace.metadata["max_output_tokens"] == 1024
     assert len(str(trace.metadata["prompt_sha256"])) == 64
 
@@ -108,7 +108,7 @@ async def test_answer_service_uses_fixed_prompt_configuration_citations_and_usag
     ("model_name", "max_output_tokens"),
     [
         pytest.param("other-model", 1024, id="model"),
-        pytest.param("gpt-5.4", 2048, id="output-limit"),
+        pytest.param("deepseek-v4-flash", 2048, id="output-limit"),
     ],
 )
 def test_answer_service_rejects_nonfixed_client_configuration(
@@ -121,7 +121,7 @@ def test_answer_service_rejects_nonfixed_client_configuration(
         max_output_tokens=max_output_tokens,
     )
 
-    with pytest.raises(AnswerInvariantError, match="gpt-5.4|1024"):
+    with pytest.raises(AnswerInvariantError, match="deepseek-v4-flash|1024"):
         AnswerService(client, token_counter=_CharacterTokenCounter())
 
 

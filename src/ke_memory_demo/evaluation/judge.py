@@ -14,7 +14,7 @@ from ke_memory_demo.infra.telemetry import TraceContext
 from .models import JudgeResult, ProbeQuestion, QuestionAnswer, RubricJudgement
 
 
-JUDGE_MODEL = "deepseek-v4-pro"
+JUDGE_MODEL = "gpt-5.5"
 JUDGE_MAX_OUTPUT_TOKENS = 2048
 _PROMPT_PATH = Path(__file__).resolve().parents[3] / "prompts/judge/system.md"
 ModelT = TypeVar("ModelT", bound=BaseModel)

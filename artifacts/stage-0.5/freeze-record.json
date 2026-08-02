@@ -1,0 +1,65 @@
+{
+ "evaluation_code_sha256": "2f33aee85836312767e30e2c80685e352010035c0f985b6e8bc47bcf4fff191c",
+ "frozen_on": "2026-08-02",
+ "note": "Frozen so corpus discovery can start from a clean tree. Every metric in the report is diagnostic_only until the tokenizer, serialization and reserve contracts are frozen.",
+ "plan_sha256": "43d30923940657eb68285cc0d8046e254c8a519c9c5eadfcf3b7070d8c28ef21",
+ "report_sha256": "ad72eb72467008189ae4664394a418e2f7ef4b3c12ebaa058433855e62d6e909",
+ "sandbox_manifest": {
+  "evidence_basis": "observed_* fields are read from the child's own /proc/self/mountinfo, /proc/self/fd and directory listings, not asserted by the parent",
+  "gold_channel_mounted": false,
+  "intended_mounts": [
+   "/interp (ro, copied interpreter)",
+   "/usr (ro)",
+   "/lib (resolved through /usr)",
+   "/lib64 (resolved through /usr)",
+   "/dev/{urandom,null,zero} (only these three nodes)",
+   "/proc (fresh procfs in a private PID namespace)",
+   "/staging (the builder module file, and nothing else)",
+   "/tmp (empty tmpfs)"
+  ],
+  "namespaces": [
+   "user",
+   "mount",
+   "network",
+   "pid"
+  ],
+  "observed_fd_count": 4,
+  "observed_mount_points": [
+   "/",
+   "/dev/null",
+   "/dev/urandom",
+   "/dev/zero",
+   "/interp",
+   "/proc",
+   "/usr"
+  ],
+  "observed_network_interfaces": [],
+  "observed_root_entries": [
+   "dev",
+   "interp",
+   "lib",
+   "lib64",
+   "proc",
+   "staging",
+   "tmp",
+   "usr"
+  ],
+  "observed_staging_entries": [
+   "_child.py",
+   "stage_0_5_builder.py"
+  ],
+  "question_channel_mounted": false,
+  "reconciled": true,
+  "reconciliation_notes": [],
+  "repository_mounted": false
+ },
+ "sandbox_manifest_sha256": "9773b5879b0c5584c79942f3ef8f81ff2d6b9d4b30877095a7aeb4b71c44559b",
+ "stage": "0.5",
+ "test_log_sha256": "7633cf16fa4cca54a9469dd857102db5ffad1f0a181d546d83cc35ffe53d019a",
+ "verification": {
+  "git_diff_check": "clean",
+  "pyright": "91 errors, matching the pre-existing baseline exactly",
+  "ruff": "All checks passed",
+  "tests": "836 passed, 1 skipped in 56.86s"
+ }
+}

@@ -1,411 +1,820 @@
 {
-  "schema_version": "benchmark-plan-v2.1-diagnostic-v1",
-  "status": "approved_plan_execution_not_started",
-  "created_on": "2026-08-02",
-  "source_plan": {
-    "path": "/public/home/wwb/KE_mem/ke-memory-demo/.runs/reorg-phase1-baseline/benchmark-plan-v2.json",
-    "sha256": "dd495e673713d6e10948dbf5d390e2b4bf5dd3b95152174365545aa8d32b7ab2",
-    "rule": "The source plan remains immutable. This v2.1 document is the self-contained approved successor for diagnostic-v1."
-  },
-  "current_evidence_boundary": {
-    "phase_c": "operational_diagnostic_profile_qualified on its own qualification contract",
-    "phase_d": "one controlled automatic write-to-query closure on the production contract",
-    "c_to_d_transfer": "not_yet_proven",
-    "fresh_v3": "not_qualified and not reinterpreted",
-    "forbidden_claims": [
-      "general automatic extraction is qualified",
-      "benchmark ready",
-      "production ready",
-      "product superiority",
-      "carrier selection is complete"
-    ]
-  },
-  "benchmark_identity": {
-    "name": "KE-memory diagnostic benchmark v1",
-    "type": "diagnostic",
-    "overall_pass_fail": false,
-    "purpose": [
-      "Build, inspect and expand a frozen foundational ontology that covers common memory situations.",
-      "Measure natural-expression to canonical-ontology mapping without letting the mapper leak benchmark answers.",
-      "Expose extraction, abstraction, retrieval, execution and answer failures on natural memory benchmarks.",
-      "Determine whether failures belong to implementation, ontology coverage or architecture, and attribute them to the correct module."
-    ],
-    "not_primary": [
-      "leaderboard ranking",
-      "qualification or release approval",
-      "KEOL dynamic ontology effectiveness",
-      "carrier selection",
-      "external memory-system comparison"
-    ]
-  },
-  "ontology_model": {
-    "ontology": "A versioned namespace of stable ids, senses, aliases, types, relations, roles and constraints. A bare string vocabulary is insufficient because mapping correctness requires identity and sense.",
-    "KEOL": "A method for dynamic ontology construction: unmapped expressions become candidates that can be normalized, deduplicated, conflict-checked, admitted or rejected, and versioned. In diagnostic-v1 it is observed only as a side track and is not a core scored capability.",
-    "Extended_AMR": "An extension of AMR's ontology space and an instance-graph encoding bound to canonical ontology items. It is a possible carrier, not the preselected carrier and not a competitor to KEOL.",
-    "candidate_sources": {
-      "WordNet": "sense-oriented lexical source",
-      "schema.org": "concept and property structure source",
-      "PropBank_AMR": "predicate sense and semantic-role source",
-      "domain_vocabularies": "curated domain-specific source"
-    },
-    "foundation_layout": {
-      "memory_core": "Shared cross-scenario concepts for provenance, identity, time, modality, polarity, conflict, supersession, evidence and lifecycle.",
-      "domain_namespaces": "Versioned domain/* namespaces for scenario-specific concepts; dataset/* namespaces are forbidden as containers for answer-specific benchmark concepts.",
-      "O_L1": "Atomic event, state, preference, task and attribute ontology. Frozen and hashed independently.",
-      "O_L2": "Cross-turn and cross-session abstraction ontology. Frozen and hashed independently from O_L1.",
-      "cross_layer_map": "Explicit versioned derivation/import map. Shared vocabulary is never implicit."
-    }
-  },
-  "ontology_foundation_pilot": {
-    "language": "English only for diagnostic-v1; canonical ids are language-neutral and aliases carry language tags.",
-    "build_corpora": [
-      "Schema-Guided Dialogue",
-      "Taskmaster-2 train",
-      "Multi-Session Chat train",
-      "controlled WildChat samples",
-      "tau-bench train and tool traces"
-    ],
-    "scenario_families": [
-      "people and relationships",
-      "preferences and habits",
-      "events and experiences",
-      "plans commitments and tasks",
-      "states resources and environment",
-      "interactions tools and transactions"
-    ],
-    "cross_scenario_semantics": [
-      "time",
-      "modality",
-      "negation",
-      "condition",
-      "source status",
-      "identity",
-      "conflict",
-      "supersession",
-      "evidence",
-      "lifecycle"
-    ],
-    "target_scale": {
-      "coverage_spans": "approximately 500 spans for automatic candidate mining and coverage analysis",
-      "formal_mapping_gold": "100 to 150 cases",
-      "double_blind_review": "approximately 15 percent plus risk-triggered review"
-    },
-    "review_policy": {
-      "single_review_default": true,
-      "mandatory_second_review": [
-        "high-risk novel concepts or senses",
-        "suspected false merge or false split",
-        "complex L2 abstraction or closure"
-      ],
-      "model_role": "proposal only",
-      "human_role": "final canonical ontology decision"
-    },
-    "freeze_output": [
-      "ontology-v0",
-      "O_L1-v0",
-      "O_L2-v0",
-      "cross-layer-map-v0",
-      "source and provenance manifest",
-      "mapping annotation guide"
-    ]
-  },
-  "data_separation": {
-    "ontology_build_corpus": "Used only to build and inspect the ontology foundation.",
-    "ontology_mapping_gold": "Separately authored cases used to score mapping quality; not used to derive aliases, prompts or ontology items after freeze.",
-    "end_to_end_benchmarks": "Native BEAM, LoCoMo and LongMemEval inputs used for the diagnostic memory run.",
-    "legacy_32_item_slice": "Dev and regression only; permanently forbidden as fresh hidden.",
-    "no_cross_contamination": [
-      "No benchmark question, answer, gold evidence id or rubric enters ontology construction.",
-      "No formal mapping-gold failure may add an alias or ontology item before that frozen evaluation is reported.",
-      "No end-to-end failure may change the prompt, ontology, mapper or executor and then be rerun on the same formal set."
-    ]
-  },
-  "mapper_anti_cheating_contract": {
-    "memory_mapper": [
-      "query-blind",
-      "gold-blind",
-      "sample-identity-blind"
-    ],
-    "freeze_order": [
-      "Load the frozen ontology and public conversation only.",
-      "Run extraction and surface-semantic construction.",
-      "Map L1 and L2 to the complete frozen ontology without benchmark-derived candidate retrieval.",
-      "Build memory once per conversation.",
-      "Freeze extraction, mapping, L1/L2 memory and provenance.",
-      "Only after memory freeze reveal the benchmark questions to query compilation."
-    ],
-    "mapping_outputs": [
-      "mapped",
-      "ambiguous",
-      "novel_candidate",
-      "insufficient_context",
-      "out_of_scope"
-    ],
-    "query_mapper": "Separate from the memory mapper but bound to the same complete frozen ontology and version hashes.",
-    "unsupported_query_rule": "An unsupported query must be reported as executor capability failure. The task contract may not exclude it after inspection.",
-    "forbidden_shortcuts": [
-      "candidate retrieval that uses question or sample identity",
-      "benchmark-derived aliases or few-shot examples",
-      "dataset-category-specific prompts",
-      "per-item ontology patches",
-      "reading gold evidence before memory freeze"
-    ]
-  },
-  "semantic_assistance_policy": {
-    "forbidden": [
-      "heuristic keyword or regular-expression semantic correction",
-      "sample-specific branches",
-      "semantic gates that correct model output or force abstention",
-      "contract narrowing that removes unsupported natural questions",
-      "targeted prompt or ontology optimization against formal failures",
-      "rerunning the same formal set after a semantic repair"
-    ],
-    "allowed_integrity_checks": [
-      "JSON and schema validity",
-      "canonical id and reference validity",
-      "EvidenceSpan and derivation closure",
-      "hash and split isolation",
-      "atomic publication and no-overwrite behavior",
-      "scorer input-output validation"
-    ],
-    "invalid_structure_rule": "Invalid structure is scored as an error; integrity checks do not repair semantics.",
-    "reporting_rule": "Raw model and mapper quality is reported directly. A structural rejection is not evidence that the model understood the case."
-  },
-  "memory_construction_contract": {
-    "L1": {
-      "unit": "A user message, agent message, tool message or tool event; surrounding context may resolve reference but may not supply an unstated fact.",
-      "source_status": [
-        "user_reported",
-        "agent_generated",
-        "tool_observed"
-      ],
-      "revision": "Append-only. Later information confirms, corrects, supersedes or conflicts with prior revisions instead of overwriting them."
-    },
-    "L2": {
-      "input": "Frozen L1 units, their raw evidence and only the necessary prior context.",
-      "timing": "Incrementally at each session end.",
-      "requirements": [
-        "typed abstraction independent of O_L1 vocabulary",
-        "L1 derivation ids",
-        "EvidenceSpan closure",
-        "no benchmark question, future session or gold access"
-      ],
-      "reporting": "Raw abstraction, ontology mapping, derivation and evidence closure are scored separately."
-    },
-    "answer_model_boundary": "For the ontology arm, the answer model may read only the question, query plan, symbolic matches and selected EvidenceSpans. It may not read the full conversation history."
-  },
-  "official_arms": [
-    {
-      "id": "full_history_baseline",
-      "input": "complete public history",
-      "purpose": "Measure answer capability when no memory compression or ontology mapping is required."
-    },
-    {
-      "id": "raw_dense_retrieval_baseline",
-      "input": "raw evidence units under the same question and answer budget",
-      "purpose": "Measure a non-ontology retrieval baseline."
-    },
-    {
-      "id": "ontology_memory_system",
-      "input": "one query-blind frozen memory build plus symbolic query execution",
-      "purpose": "Measure the current architecture and ontology mapping path."
-    }
+ "architecture_diagnostics": {
+  "ablations": [
+   "L1-only versus L1-plus-L2",
+   "surface-semantic versus ontology-mapped",
+   "native carrier offline round-trip"
   ],
-  "external_system_boundary": "Mem0, Graphiti, Hindsight, MemPalace, Zep and similar systems are not rerun in diagnostic-v1. Author-reported results remain external context only.",
-  "diagnostic_benchmark_sample": {
-    "total_questions": 100,
-    "BEAM": 20,
-    "LoCoMo": 40,
-    "LongMemEval": 40,
-    "selection": "Pre-registered natural-question sampling before any system output is inspected.",
-    "special_annotations": [
-      "LongMemEval oracle-haystack conditions are reported separately and never generalized to full retrieval.",
-      "LoCoMo category 5 remains manual_required where official answer gold is insufficient."
-    ]
+  "carrier_rule": "No new Extended-AMR or KEOL projection experiment and no carrier selection in diagnostic-v1. Existing native-carrier round-trip is an offline diagnostic only.",
+  "module_ownership": {
+   "L2": "cross-turn and cross-session abstraction, derivation and closure",
+   "answer": "evidence-bounded answer generation",
+   "executor": "symbolic constraints, joins, counts, time, negation, conflict and abstention",
+   "extraction": "surface events, states, roles, source status, time, modality, polarity and evidence spans",
+   "history": "immutable revisions, conflict, supersession and temporal state",
+   "identity": "entity identity, merge, split, membership and reference resolution",
+   "mapping": "surface-semantic to canonical ontology decision and ambiguity or unresolved state",
+   "ontology": "canonical ids, senses, aliases, types, relations, constraints, O_L1/O_L2 and cross-layer map",
+   "pipeline": "ordering, isolation and end-to-end state transitions",
+   "query": "question mapping, QuerySlotPlan and unsupported-operation reporting",
+   "retrieval": "candidate evidence recovery without semantic authority",
+   "storage_snapshot": "atomic write, replay, revision binding and byte recovery"
   },
-  "architecture_diagnostics": {
-    "ablations": [
-      "L1-only versus L1-plus-L2",
-      "surface-semantic versus ontology-mapped",
-      "native carrier offline round-trip"
-    ],
-    "oracle_substitutions": [
-      "gold extraction",
-      "gold memory mapping",
-      "gold L2 abstraction and derivation",
-      "gold query plan",
-      "gold evidence selection"
-    ],
-    "carrier_rule": "No new Extended-AMR or KEOL projection experiment and no carrier selection in diagnostic-v1. Existing native-carrier round-trip is an offline diagnostic only.",
-    "module_ownership": {
-      "extraction": "surface events, states, roles, source status, time, modality, polarity and evidence spans",
-      "ontology": "canonical ids, senses, aliases, types, relations, constraints, O_L1/O_L2 and cross-layer map",
-      "mapping": "surface-semantic to canonical ontology decision and ambiguity or unresolved state",
-      "identity": "entity identity, merge, split, membership and reference resolution",
-      "history": "immutable revisions, conflict, supersession and temporal state",
-      "L2": "cross-turn and cross-session abstraction, derivation and closure",
-      "query": "question mapping, QuerySlotPlan and unsupported-operation reporting",
-      "executor": "symbolic constraints, joins, counts, time, negation, conflict and abstention",
-      "retrieval": "candidate evidence recovery without semantic authority",
-      "answer": "evidence-bounded answer generation",
-      "storage_snapshot": "atomic write, replay, revision binding and byte recovery",
-      "pipeline": "ordering, isolation and end-to-end state transitions"
-    }
-  },
-  "metrics": {
-    "ontology_and_mapping": [
-      "mapping coverage",
-      "canonical sense accuracy",
-      "ambiguity rate",
-      "unresolved rate",
-      "mis-mapping rate",
-      "false merge and false split",
-      "ontology redundancy growth",
-      "ontology version consistency",
-      "query-memory alignment",
-      "error propagation rate"
-    ],
-    "L1_L2_structure": [
-      "L1 event-role and evidence accuracy",
-      "L1 source, time, modality, polarity and lifecycle accuracy",
-      "L2 raw abstraction accuracy",
-      "L2 mapping accuracy",
-      "L1-to-L2 derivation correctness",
-      "L2 evidence closure"
-    ],
-    "retrieval_execution_answer": [
-      "Evidence Set Exact Match",
-      "All-Evidence at K",
-      "Evidence Recall and Precision",
-      "constraint satisfaction",
-      "abstention correctness",
-      "critical false positive",
-      "answer correctness",
-      "latency, tokens and cost when available"
-    ],
-    "answer_evidence_matrix": [
-      "answer correct and evidence correct",
-      "answer correct and evidence wrong",
-      "answer wrong and evidence correct",
-      "answer wrong and evidence wrong"
-    ],
-    "no_compensation": [
-      "L2 may not hide an L1 failure.",
-      "Final answer correctness may not hide wrong evidence.",
-      "A structural validator intervention may not hide raw semantic error."
-    ]
-  },
-  "model_protocol": {
-    "model": "deepseek-v4-pro",
-    "fixed": [
-      "provider model identity",
-      "prompt versions",
-      "temperature and decoding settings",
-      "response schemas",
-      "per-arm budgets"
-    ],
-    "stability_check": "Pre-register repeated inference on 10 percent of the sample and report disagreement; repetition is for stability measurement, not majority-vote repair.",
-    "retry": "Only a transport failure may resend the byte-identical request. A semantic or schema failure is a scored failure and is not retried."
-  },
-  "failure_attribution": {
-    "primary_classes": [
-      "implementation_defect",
-      "ontology_gap",
-      "architecture_problem"
-    ],
-    "architecture_evidence_levels": [
-      "suspected",
-      "reproduced",
-      "cross_source",
-      "oracle_confirmed"
-    ],
-    "architecture_change_candidate_rule": "Only oracle_confirmed evidence, or a reproduced failure that is also cross_source, may enter a later architecture-change discussion.",
-    "method": [
-      "Freeze the untouched failure and all relevant intermediate artifacts.",
-      "Locate the earliest incorrect module output.",
-      "Use the smallest pre-registered oracle substitution that can falsify the attribution.",
-      "Compare downstream change without modifying the formal run.",
-      "Assign one primary owner and record secondary propagation separately.",
-      "Do not repair, tune or rerun during diagnostic-v1."
-    ]
-  },
-  "execution_stages": [
-    {
-      "id": 0,
-      "name": "preflight and freeze",
-      "outputs": [
-        "source, split and contamination manifests",
-        "model, prompt, ontology, mapper, executor and scorer identities",
-        "root-test skipped test id and reason",
-        "anti-cheating and question-release audit",
-        "failure-attribution matrix"
-      ],
-      "stop_on_failure": true
-    },
-    {
-      "id": 1,
-      "name": "ontology foundation pilot",
-      "outputs": [
-        "ontology-v0",
-        "O_L1-v0",
-        "O_L2-v0",
-        "cross-layer-map-v0",
-        "mapping gold and adjudication ledger",
-        "coverage and ambiguity report"
-      ],
-      "rule": "Freeze before end-to-end benchmark questions are exposed to the memory mapper."
-    },
-    {
-      "id": 2,
-      "name": "harness and anti-cheating regression",
-      "input": "the existing 32-item dev/regression slice only",
-      "outputs": [
-        "harness integrity report",
-        "question-blind memory-freeze proof",
-        "oracle-substitution self-tests",
-        "no semantic heuristic or gate audit"
-      ],
-      "rule": "This stage validates instrumentation only and produces no benchmark claim."
-    },
-    {
-      "id": 3,
-      "name": "untouched diagnostic-v1 run",
-      "input": "the pre-registered 100-question natural sample",
-      "outputs": [
-        "three official arm results",
-        "all intermediate L1, mapping, L2, query, evidence and answer artifacts",
-        "stability subset results",
-        "metric tables and answer-evidence matrix"
-      ],
-      "rule": "One formal run under frozen inputs. No semantic repair or targeted rerun."
-    },
-    {
-      "id": 4,
-      "name": "RCA and architecture diagnosis",
-      "outputs": [
-        "implementation defect ledger",
-        "ontology gap ledger",
-        "architecture issue ledger with evidence levels",
-        "module-owner attribution",
-        "falsifiable follow-up hypotheses",
-        "residual uncertainty and sample limitations"
-      ],
-      "rule": "Report findings only. Do not implement repairs."
-    }
+  "oracle_substitutions": [
+   "gold extraction",
+   "gold memory mapping",
+   "gold L2 abstraction and derivation",
+   "gold query plan",
+   "gold evidence selection"
+  ]
+ },
+ "benchmark_identity": {
+  "name": "KE-memory diagnostic benchmark v1",
+  "not_primary": [
+   "leaderboard ranking",
+   "qualification or release approval",
+   "KEOL dynamic ontology effectiveness",
+   "carrier selection",
+   "external memory-system comparison"
   ],
-  "mandatory_stop": {
-    "trigger": "The diagnostic-v1 RCA report and its immutable evidence index are complete.",
-    "actions": [
-      "stop all benchmark execution",
-      "do not repair implementation defects",
-      "do not add ontology entries or aliases from formal failures",
-      "do not tune prompts, mapper, executor or answer model",
-      "do not rerun the formal sample",
-      "do not start a larger benchmark",
-      "do not select a carrier",
-      "do not rerun external memory systems",
-      "do not make benchmark-ready or production-ready claims"
+  "overall_pass_fail": false,
+  "purpose": [
+   "Build, inspect and expand a frozen foundational ontology that covers common memory situations.",
+   "Measure natural-expression to canonical-ontology mapping without letting the mapper leak benchmark answers.",
+   "Expose extraction, abstraction, retrieval, execution and answer failures on natural memory benchmarks.",
+   "Determine whether failures belong to implementation, ontology coverage or architecture, and attribute them to the correct module."
+  ],
+  "type": "diagnostic"
+ },
+ "created_on": "2026-08-02",
+ "current_evidence_boundary": {
+  "c_to_d_transfer": "not_yet_proven",
+  "forbidden_claims": [
+   "general automatic extraction is qualified",
+   "benchmark ready",
+   "production ready",
+   "product superiority",
+   "carrier selection is complete"
+  ],
+  "fresh_v3": "not_qualified and not reinterpreted",
+  "phase_c": "operational_diagnostic_profile_qualified on its own qualification contract",
+  "phase_d": "one controlled automatic write-to-query closure on the production contract"
+ },
+ "data_boundaries": {
+  "current_32_item_slice": "harness and dev slice; already used for oracle and regression, so it is retired as a final test set",
+  "discovery_corpus": "used to find problems and generate ontology candidates",
+  "held_out_test": "not inspected or tuned against before the ontology is frozen; without genuinely untouched data the final result is labelled diagnostic",
+  "single_build_rule": "one build and one extraction per frozen corpus; a retriever may use its own legitimate index space but may not re-extract a different representation at retrieval time",
+  "validation_slice": "used to accept, modify or reject ontology candidates"
+ },
+ "data_separation": {
+  "end_to_end_benchmarks": "Native BEAM, LoCoMo and LongMemEval inputs used for the diagnostic memory run.",
+  "legacy_32_item_slice": "Dev and regression only; permanently forbidden as fresh hidden.",
+  "legacy_32_item_slice_exclusion": "The slice is located at research/next-prep/artifacts/natural-benchmark-slices/slice-v1/gold.json and draws 10 items from BEAM, 10 from LoCoMo and 12 from LongMemEval, which are the same three benchmarks the Stage 3 sample draws from. The pre-registered 100-question sample must therefore exclude every item_id in this slice, and the contamination manifest must record the excluded ids.",
+  "no_cross_contamination": [
+   "No benchmark question, answer, gold evidence id or rubric enters ontology construction.",
+   "No formal mapping-gold failure may add an alias or ontology item before that frozen evaluation is reported.",
+   "No end-to-end failure may change the prompt, ontology, mapper or executor and then be rerun on the same formal set."
+  ],
+  "ontology_build_corpus": "Used only to build and inspect the ontology foundation.",
+  "ontology_mapping_gold": "Separately authored cases used to score mapping quality; not used to derive aliases, prompts or ontology items after freeze."
+ },
+ "diagnostic_benchmark_sample": {
+  "BEAM": 20,
+  "LoCoMo": 40,
+  "LongMemEval": 40,
+  "selection": "Pre-registered natural-question sampling before any system output is inspected.",
+  "special_annotations": [
+   "LongMemEval oracle-haystack conditions are reported separately and never generalized to full retrieval.",
+   "LoCoMo category 5 remains manual_required where official answer gold is insufficient."
+  ],
+  "total_questions": 100
+ },
+ "execution_stages": [
+  {
+   "gate_semantics": "A blocked gate is not a failure of the memory system and carries no diagnostic claim. It blocks execution until its input is supplied. Stage 0 may not be marked complete while any gate is blocked or pending.",
+   "id": 0,
+   "name": "preflight and freeze",
+   "outputs": [
+    "source, split and contamination manifests",
+    "model, prompt, ontology, mapper, executor and scorer identities",
+    "root-test skipped test id and reason",
+    "anti-cheating and question-release audit",
+    "failure-attribution matrix"
+   ],
+   "preflight_gates": [
+    {
+     "check": "The repository-relative source plan at docs/plans/archive/benchmark-plan-v2.json exists and its sha256 equals dd495e673713d6e10948dbf5d390e2b4bf5dd3b95152174365545aa8d32b7ab2.",
+     "id": "source_plan_integrity",
+     "status": "pass",
+     "verified_on": "2026-08-02"
+    },
+    {
+     "check": "One live probe confirms the provider returns model id deepseek-v4-flash for a request that names deepseek-v4-flash, and the provider model list is recorded.",
+     "evidence": "Provider model list returned deepseek-v4-flash and deepseek-v4-pro. A probe naming deepseek-v4-flash returned model deepseek-v4-flash. response_format json_object verified. Reasoning-token behaviour recorded under model_protocol.reasoning_model_budget.",
+     "id": "model_identity_probe",
+     "status": "pass",
+     "verified_on": "2026-08-02"
+    },
+    {
+     "check": "The credential named in model_protocol.credential_env_var is present in the environment and authenticates against the provider. Credential values are never written to any artifact, manifest or log.",
+     "credential_hygiene_note": "The judge credential was supplied in plaintext in conversation and should be rotated once this work is accepted. It is stored only in .env.local, which is git-ignored, and the preflight credential_scan check reported 153 files with 0 matches.",
+     "evidence": ".env.local exists at mode 0600 carrying both role credentials. A live Stage 0 preflight returned work_model pass for deepseek-v4-flash at api.deepseek.com and judge_model pass for gpt-5.5 at the proxy, so both roles authenticate and both served model ids match what config declares.",
+     "id": "credentials_present",
+     "status": "pass",
+     "verified_on": "2026-08-02"
+    },
+    {
+     "check": "Every request that runs in json_object mode satisfies the provider's requirement that the prompt mention json.",
+     "evidence": "DeepSeek rejects json_object mode with 'Prompt must contain the word json in some form to use response_format of type json_object'. The Stage 0 work_model probe sent 'Return exactly {\"ready\":true}.' and failed with PermanentModelError, and prompts/answer/system.md contains no occurrence of json, so every answer request would have failed the same way. The client now appends a schema-carrying instruction whenever it falls back to json_object, which satisfies the requirement and also restates the schema the provider no longer enforces. Verified live: the probe returns ready=true and served model deepseek-v4-flash.",
+     "id": "json_object_prompt_requirement",
+     "status": "pass",
+     "verified_on": "2026-08-02",
+     "why_it_matters": "This defect was invisible to the entire test suite because every test supplies its own fake client. It was only reachable by driving the real client against the real provider, which is the reason Stage 2 instrumentation validation precedes Stage 1 adjudication."
+    },
+    {
+     "acquired": {
+      "BEAM": "100K split has 20 chats, matching the planned BEAM sample of 20",
+      "LoCoMo": "10 conversations and 1986 QA; category 5 holds 446 of them and remains manual_required",
+      "LongMemEval": "500 questions in the oracle split across six question types",
+      "multi_session_chat": "persona file distributed with the LoCoMo repository",
+      "schema_guided_dialogue": "127 train files plus schema.json; 16142 dialogues, 329964 turns, 26 services",
+      "taskmaster_2": "7 domains, 17304 dialogues",
+      "tau_bench": "1980 historical trajectory records plus 88 few-shot tool-trace lines"
+     },
+     "check": "Every corpus this plan names resolves to a local path with a recorded sha256 and item count: the three end-to-end benchmarks BEAM, LoCoMo and LongMemEval, and the five Stage 1 build corpora Schema-Guided Dialogue, Taskmaster-2 train, Multi-Session Chat train, controlled WildChat samples and tau-bench train and tool traces.",
+     "declared_gap": {
+      "corpus": "controlled WildChat samples",
+      "impact": "Four of five Stage 1 build corpora are present and far exceed the target of roughly 500 coverage spans. The missing corpus narrows the observed range of open-domain unconstrained user language.",
+      "reason": "The dataset is ungated but its shards redirect to the unreachable CDN host us.aws.cdn.hf.co, which returns HTTP 302 with zero bytes from this host.",
+      "rule": "Stage 1 may proceed on the four available corpora only if the coverage report names this gap explicitly and Stage 4 carries it in residual limitations. The gap may not be silently omitted, and its absence may not be described as full coverage of natural expression."
+     },
+     "forbidden_source_reconfirmed": "No corpus was taken from the legacy Fusion Memory project, including the LongMemEval adapter test that exists inside it.",
+     "id": "corpora_present",
+     "integrity_rule": "Each corpus is validated by parsing it, not by checking its byte length. Acquisition produced a zero-byte LoCoMo file and seventeen 14-byte HTTP 404 bodies saved under .json names, all of which a length check would have accepted and a parse check rejected.",
+     "longmemeval_split_note": "Only longmemeval_oracle.json is present. Any non-oracle retrieval condition requires fetching longmemeval_s_cleaned.json first. The existing rule that oracle-haystack results are reported separately and never generalized to full retrieval continues to apply.",
+     "manifest": "/public/home/wwb/datasets/CORPUS_MANIFEST.md",
+     "status": "pass_with_declared_gap",
+     "verified_on": "2026-08-02"
+    },
+    {
+     "check": "The 32-item dev/regression slice that Stage 2 declares as its only input resolves to a specific recorded path with a sha256 and an item count of 32.",
+     "evidence": "slice_id slice-v1, schema natural-benchmark-gold-v1, exactly 32 items composed of beam 10, locomo 10 and longmemeval 12. It binds its own source manifest by sha256 2b80802e5f5bc1c3b518408eb78efae9b30333105f6973bb010edd728dd18f50.",
+     "forbidden_as_fresh_hidden": "This slice remains permanently forbidden as fresh hidden data. Its 32 items overlap the same three benchmarks the Stage 3 sample draws from, so the pre-registered 100-question sample must exclude every item_id in this slice and the contamination manifest must record that exclusion.",
+     "id": "regression_slice_present",
+     "location_caveat": "The slice currently lives inside the vendored audit snapshot under research/, which the vendored_snapshot_is_not_instruction gate otherwise treats as read-only history. Reading this slice as Stage 2 data is permitted and is not a licence to read any other file in that snapshot as a current instruction or as benchmark input.",
+     "path": "research/next-prep/artifacts/natural-benchmark-slices/slice-v1/gold.json",
+     "sha256": "86164a2fc39f9014102b69a6180772f1ca8eee91a90ab6b1d86c3b4aa3fefad4",
+     "status": "pass",
+     "verified_on": "2026-08-02"
+    },
+    {
+     "check": "Documents under research/ are treated as an immutable audit snapshot and are never read as current instructions.",
+     "evidence": "The vendored snapshot under research/next-prep contains superseded guidance, including an AGENTS.md paragraph asserting that Extended-AMR was already selected as the primary candidate carrier. That assertion is superseded by ontology_model in this plan, which holds that Extended-AMR is a possible carrier and not the preselected one, and by carrier_rule, which forbids carrier selection in diagnostic-v1.",
+     "id": "vendored_snapshot_is_not_instruction",
+     "rule": "Where the vendored snapshot and this plan conflict, this plan governs.",
+     "status": "pass"
+    },
+    {
+     "check": "Every model role the run uses is named in model_protocol, and no role silently routes to an undeclared provider.",
+     "code_invariants_realigned": "AnswerService and the judge each hard-code a model name and an output-token budget and reject a client that disagrees. Both were still pinned to the retired gpt-5.4 and deepseek-v4-pro values, so the first real request would have raised rather than run. Both are updated, and a settings test now asserts the shipped config satisfies both invariants because every other test builds its own fake client and would not catch the drift.",
+     "credential_rule": "The work role reads KE_MEMORY_WORK_API_KEY and must hold the DeepSeek official credential. The judge role reads KE_MEMORY_JUDGE_API_KEY and must hold the proxy credential. The two are different providers and must not share a credential. Stage 0 authenticates both roles independently and stops if either fails.",
+     "evidence": "Two roles are declared and both match config. The work role, which generates the answers being scored, is deepseek-v4-flash at api.deepseek.com with thinking disabled; it was previously gpt-5.4 on the proxy while model_protocol declared only DeepSeek. The judge role is gpt-5.5 on the api.penguinsaichat.dpdns.org proxy, deliberately a different model family so answer correctness is not self-evaluated.",
+     "id": "answer_model_routing_declared",
+     "judge_provider_unverified_risk": "The judge sits behind a third-party proxy whose upstream routing is not guaranteed. Its served model id must be recorded per request and asserted stable exactly as the direct provider's is; if the proxy cannot supply a stable id, judge verdicts are reported as provider-unverified. This was not probed live because doing so would have required sending a credential to that host.",
+     "status": "pass",
+     "verified_on": "2026-08-02",
+     "why_it_mattered": "answer correctness and the answer-evidence matrix are attributed to the declared model. An answer generated by an undeclared model would be unattributable in exactly the way a silent provider substitution is unattributable."
+    },
+    {
+     "check": "Stage 1 has produced a frozen hashed ontology-v0 before any end-to-end benchmark question is exposed to the memory mapper, and Stage 2 has passed before Stage 3 begins.",
+     "id": "no_stage_bypass",
+     "status": "pending"
+    }
+   ],
+   "stop_on_failure": true
+  },
+  {
+   "exit_criteria": [
+    "all three arms execute over the 32-item regression slice and produce the shared result contract",
+    "each of the five oracle substitutions runs and changes only its own layer",
+    "an architecture test proves production and mapper import paths cannot reach gold",
+    "the freeze-once proof artifact exists and validates",
+    "new metrics compute on synthetic fixtures with hand-checked expected values",
+    "existing QuestionMetrics semantics are unchanged"
+   ],
+   "findings": {
+    "budget_finding_resolved": {
+     "original_observation": "Five LongMemEval questions carry gold evidence larger than the original 8192-token budget, one needing roughly 18000 tokens, so no arm could reach delivery exact match on them.",
+     "residual": "fixture_lexical_retrieval still reports budget_limited on 20 of 32 items because it selects very broadly (up to 188 units, about 130K tokens) and delivery caps at 24K. That is the metric split working as intended: broad selection followed by bounded delivery is exactly the distinction the earlier single figure hid.",
+     "resolution": "The delivery budget is preregistered at 24576 tokens, which covers the largest gold set. Selection and delivery exact match now agree for every arm, and budget_limited_count is reported rather than samples being dropped."
+    },
+    "defects_found_and_fixed": [
+     "The Stage 0 work_model probe and prompts/answer/system.md contained no occurrence of json while running in json_object mode, so DeepSeek rejected every such request. Unreachable by the test suite because all tests inject fake clients.",
+     "The thinking control was sent as a top-level kwarg, which the OpenAI SDK rejects outright; it must travel in extra_body.",
+     "The regression-slice loader addressed evidence by loop index while gold addressed it by unit_id, and gold records were coerced with str() into stringified dicts. Both defects drove every evidence metric to zero while the harness still reported success.",
+     "MemoryFreezeProof.artifact trusted current state, so a proof whose build_count had been raised via model_copy could still render a valid freeze claim. It now re-validates.",
+     "The settings test fixture cleared credential environment variables but not the repository .env.local, so creating real credentials broke two previously passing tests."
     ],
-    "next_step": "Return the RCA report to the user and wait for a separate decision about ontology expansion, module repairs, architecture changes and the design of a fresh evaluation."
+    "known_limitations": [
+     "Every arm and pipeline stage in this run is a lexical fixture reported under a fixture identity. The numbers describe the fixtures, not the ontology path. Stage 2 substitutes the real symbolic backend behind the same interfaces.",
+     "Answer generation is a deterministic stub, so answer correctness, abstention correctness and constraint satisfaction are all recorded as unknown rather than computed.",
+     "The four per-layer oracles are validated only on a two-question synthetic fixture. That proves the substitution mechanism works; it does not measure anything about the slice, and the slice run withholds those four layers for lack of annotation.",
+     "The oracle stages substitute stages of the diagnostic pipeline, not yet of the production memory path, so attribution claims are about the harness until Stage 2 wires the backend.",
+     "full_history is context limited on 10 of 32 slice items because the conversations exceed a 128000-token context. On those items it is a truncated-history condition, not a capability ceiling.",
+     "tests/contract/test_online_keol_bridge.py still cannot be collected: it imports the onto package from the private genuineknowledge/KEOL repository, which returns 404 anonymously. No repository-wide pass is claimed.",
+     "The judge was verified only as proxy-declared, and the judge key still requires rotation before any further judge call."
+    ],
+    "oracle_falsifiability_check": "gold_evidence_selection reaches selection exact match of 1.000. The other four layers are validated on a synthetic fixture with independently authored per-layer gold: each is asserted to change its own stage, and the cumulative series rises from 0.000 to 1.000 once all four are applied. A zero marginal rate for a single layer means necessary-but-not-sufficient, not inert, which is why both marginal and cumulative figures are reported.",
+    "round_four_verification_points": {
+     "digest_mutations": "eleven mutations plus array reordering all move the digest, and the two same-membership orderings differ from each other.",
+     "fail_closed": "the production script calls sandbox_available() and returns 1; verified by forcing it false, which prints a refusal rather than degrading to an in-process build. A skipped test cannot substitute for this gate.",
+     "hostile_routes_blocked": "known absolute path, sys.path search, __file__ parent traversal, bounded recursive search and /proc/self/fd all fail. The probe previously read 32 gold items through the absolute path.",
+     "library_roots_exclude_venv": "_library_roots skips anything inside sys.prefix and uses the base interpreter from pyvenv.cfg; the diff carries no venv-incident residue.",
+     "manifest_vs_mountinfo": "SandboxManifest now carries observed_mount_points, observed_root_entries, observed_staging_entries, observed_fd_count and observed_network_interfaces, all read from the child. _reconcile compares them against intent and the build raises when they disagree. Verified: 7 observed mount points, none under /public.",
+     "reconciliation_not_vacuous": "seven violation classes are each shown to be rejected: forbidden mount, forbidden root entry, extra staging file, missing staging file, leaked descriptors, network interface, and absent mountinfo.",
+     "source_identity_controller_only": "set(MemoryBuildInput.model_fields) == {\"conversations\"}.",
+     "staging_single_file": "observed staging is exactly {hostile_probe.py, _child.py}; a directory is never mounted."
+    },
+    "status": "reworked_pending_fourth_review",
+    "validation_report": "artifacts/stage-0.5/harness-validation-report.json",
+    "verification": {
+     "independent_reverification_note": "the reviewer could not re-run these numbers because the worktree was not present in their task directory; all figures above are from this worktree",
+     "lint": "ruff clean across src, service, ontology, tests and scripts",
+     "sandbox_regressions": "six tests covering the hostile probe, the published visibility allowlist, and eleven digest mutations; skipped rather than passed vacuously when namespaces are unavailable",
+     "tests": "833 passed, 1 skipped, excluding the KEOL contract module that cannot be collected without a pinned KEOL path",
+     "types": "pyright at the 91-error pre-existing baseline exactly, zero net new errors"
+    }
+   },
+   "id": 0.5,
+   "name": "diagnostic harness foundation",
+   "on_mid_stage_failure": "partial_run",
+   "outputs": [
+    "unified public-input loader for BEAM, LoCoMo and LongMemEval",
+    "three arm adapters sharing one question, model, budget and result contract",
+    "five oracle substitutions confined to the evaluation diagnostic layer",
+    "32-item slice public/gold separation loader with a freeze-once proof",
+    "ESEM, All-Evidence at K, constraint satisfaction and answer-evidence matrix",
+    "harness validation report over synthetic fixtures and the 32-item regression"
+   ],
+   "produces_no_benchmark_claim": "This stage validates instrumentation. It yields no coverage, quality, capability or readiness claim, and no formal sample is consumed.",
+   "rationale": "A repository audit on 2026-08-02 found the evaluation layer cannot execute this plan as written. There were zero occurrences of oracle, arm, ablation, full_history_baseline or raw_dense_retrieval anywhere in src, tests or scripts; ingestion carried only beam.py with no LoCoMo or LongMemEval loader; and the 32-item slice had no loader at all. Stage 2 cannot validate oracle substitutions that do not exist, and Stage 3 cannot run three arms that do not exist. This stage builds only the evaluation layer so that Stage 1's unrecoverable human adjudication is not spent before the harness is known to work.",
+   "requirements": {
+    "freeze_once_proof": "The loader must demonstrate that memory is built exactly once per conversation from public input, frozen and hashed, before any question is revealed. The proof is an artifact, not a comment.",
+    "metrics_compatibility": "The existing QuestionMetrics fields keep their current meaning as a compatibility layer for prior BEAM results. New metrics are added alongside; no existing field is redefined, so earlier BEAM numbers remain comparable.",
+    "oracle_substitution_boundary": "The five substitutions are gold extraction, gold memory mapping, gold L2 abstraction and derivation, gold query plan and gold evidence selection. Each replaces exactly one layer by dependency injection at the evaluation boundary. Production runtime, the mapper and the pipeline must contain no import path that reads gold. An oracle run is labelled as such and never reported as a system result.",
+    "three_arms": "full_history, raw_dense_retrieval and ontology_memory must be comparable: identical questions, identical model and decoding settings, identical evidence and answer budgets, and one shared result contract. An arm that silently receives a different budget or a different question set is not a baseline.",
+    "unified_loader": "One public-input contract across all three benchmarks. A loader exposes public conversation content only; question text, answers, gold evidence ids and rubrics travel on a separate gold channel that the memory mapper cannot reach."
+   },
+   "review_history": {
+    "budget_decision_accepted": {
+     "all_samples_retained": true,
+     "delivery_budget_tokens": 24576,
+     "full_history_basis": "model context bound, not a sentinel",
+     "status": "dev_derived_pending, frozen for the formal set",
+     "tokenizer_caveat": "approximate and non-authoritative, so bounds are instrumentation-side and cannot guarantee a prompt fits"
+    },
+    "first_submission": "rejected_partial",
+    "fourth_submission": "rejected_partial",
+    "full_history_ruling_applied": {
+     "before_formal_run": "freeze full prompt serialization, tokenizer contract and system/prompt/output reserve; the approximate tokenizer cannot prove a request fits",
+     "cross_arm_denominator": "common eligible 22",
+     "full_history_denominator": "eligible 22, with coverage 22/32 and the ten ids in the headline",
+     "full_history_ineligible": "recorded not_executed_context_limit, never truncated and relabelled",
+     "retrieval_and_ontology_arms": "all 32 items"
+    },
+    "new_finding_full_history_is_context_limited": {
+     "consequence": "For those items full_history is a truncated-history condition, not a complete-history capability ceiling, and the report labels it that way. No budget setting makes them fit; only a larger-context model would.",
+     "observation": "The largest slice conversations measure about 130800 approximate tokens, which exceeds a 128000-token context once reserve is deducted. full_history is context limited on 10 of 32 items.",
+     "open_decision": "Whether the formal run keeps these items under a labelled truncated-history condition, or excludes them from the full_history arm only, is a user decision."
+    },
+    "reviewed_head": "98f1fdbc",
+    "round_five_critical": {
+     "C1_no_runtime_isolation": {
+      "allowlist_published": "SandboxManifest.visible_mounts lists the eight visible mounts, and the report asserts repository_mounted, question_channel_mounted and gold_channel_mounted are all false.",
+      "finding": "extra_import_roots was itself a path, and the child shared the filesystem namespace, so an empty working directory and a scrubbed environment proved nothing. A hostile probe confirmed it: reading a hard-coded absolute path returned all 32 gold items. The two earlier FileNotFoundErrors showed only that two relative paths were wrong.",
+      "host_dependency": "the interpreter lives on a JuiceFS FUSE mount that a new user namespace cannot see, so it is copied into local storage rather than bind-mounted. sandbox_available() gates the run and the script fails closed when namespaces are unavailable.",
+      "resolution": "sandboxed_build.py runs the build inside unprivileged user, mount, network and PID namespaces with a tmpfs root. Only a copied interpreter, /usr, /dev/{urandom,null,zero}, a fresh procfs and a staging directory holding the single builder module are present. The repository, question channel and gold channel are never mounted, so they are absent from the namespace rather than unreadable. Inherited descriptors above stdio are closed and networking is unshared.",
+      "staging_rule": "only the builder module file is copied into staging. A tests/ directory is never mounted, so a probe cannot reach its neighbours.",
+      "verified": "the same hostile probe now reports repo_visible false, home_visible false, known_absolute_readable false, sys.path search empty, __file__ parent search null, and 4 file descriptors. gold_items_read is absent where it previously reported 32."
+     },
+     "C2_source_identity_still_exposed": {
+      "finding": "source_identity remained on the build input. Even an allowlisted schema version or content hash can be matched offline against a known corpus.",
+      "resolution": "The field is removed from MemoryBuildInput entirely. It lives on LoadedBenchmark and is bound to the freeze receipt after the build finishes. The build input now carries exactly one field, conversations.",
+      "verified": "set(MemoryBuildInput.model_fields) == {\"conversations\"}, and canonical_content exposes only build_input_schema and conversations."
+     },
+     "C3_digest_mutation_coverage_incomplete": {
+      "finding": "The digest was claimed to bind all metadata levels but only session metadata was covered by a mutation test.",
+      "resolution": "Coverage extended to eleven mutations: turn text, speaker, token count and handle; session metadata and handle; conversation metadata and handle; an added turn; an added conversation; and array reordering. Reordering is additionally asserted to distinguish the two same-membership inputs from each other, not merely from the baseline."
+     }
+    },
+    "round_five_notes": {
+     "metric_standing": "The report now classifies every figure as diagnostic_only and lists the three unfrozen contract items: tokenizer contract, full prompt serialization, and system/prompt/output reserve. Coverage 22/32, selection exact match 1.000 and recall 1.000 are explicitly marked as not citable as capability results or as evidence that a request fits the model context.",
+     "self_inflicted_incident": "An early sandbox attempt added the parent of sys.executable to the mount list, which bind-mounted over the project virtualenv bin directory and destroyed it. The venv was rebuilt with uv sync, and _library_roots now excludes anything inside sys.prefix and uses the base interpreter from pyvenv.cfg."
+    },
+    "round_four_critical": {
+     "C1_question_and_gold_reachable_at_build": {
+      "finding": "The controller loaded public input, questions and gold into one process before running the builder, so a legitimate-looking builder reached 32 questions and 32 answers through a closure while the receipt still validated. A function signature is not runtime isolation.",
+      "resolution": "isolated_build.py runs the build in a child process that receives the serialized build input on stdin, is given no file paths, and starts in an empty temporary directory with a scrubbed environment. Questions enter the controller process only after the child exits.",
+      "verified": "a hostile probe builder attempting to open slice.json and gold.json returns \"blocked: FileNotFoundError\" for both, and sees only three content keys."
+     },
+     "C2_mapper_saw_dataset_identity": {
+      "finding": "MemoryBuildInput carried a benchmark field, source_identity carried loader_id \"regression-slice-loader\", and handles such as slice-BEAM-100K-C001-abstention-001 disclosed benchmark, conversation and category. Tests only forbade those values in metadata and missed the formal fields and handles.",
+      "resolution": "The benchmark field is removed from the build input and lives on LoadedBenchmark, controller-side. loader_id is off the allowlist, leaving only build_input_schema_version. HandleMint assigns opaque handles (c00000/s00000/h00000) and keeps the translation controller-side; assert_handles_are_opaque rejects any handle carrying semantics.",
+      "verified": "all four loaders now emit opaque handles with gold references remapped through the mint."
+     },
+     "C3_receipt_did_not_bind_public_content": {
+      "finding": "content_digest hashed only the handle structure, so changing a turn’s text from \"original bytes\" to \"tampered bytes\" left the digest identical. The receipt bound nothing about content.",
+      "resolution": "content_digest is now SHA-256 over the full canonical build input, including turn text, speaker, token counts, session and conversation metadata, and source identity.",
+      "verified": "a per-field mutation test asserts the digest moves for text, speaker, approximate_tokens, session metadata and source identity."
+     },
+     "C4_slice_oracle_was_never_executed": {
+      "finding": "The oracle ran only on two synthetic fixtures while the report merely listed gold_evidence_selection as \"reported\" for the slice, with no substitution, no per-item closure and no ESEM. The 1.0 evidenced two fixtures, not the real 32-item path.",
+      "resolution": "The evidence-selection oracle now executes per item over all 32 slice questions, recording gold handles, selected handles and closure for each.",
+      "verified": "32/32 items closed, selection exact match 1.000 on the real slice path."
+     }
+    },
+    "round_four_important": {
+     "I1_oracles_not_fail_closed": "An unknown question id defaulted evidence refs to the empty set and produced selected=() instead of raising, so a typo became a plausible abstention. Substitution now raises on an unknown question id and on layer-gold identity mismatch, and LayerGold validates reference closure: mapping and L2 may not reference handles extraction gold does not produce, a plan may not request canonical ids neither mapping nor L2 can supply, and an abstraction may not have an empty derivation. All four paths verified.",
+     "I2_full_history_truncation_counted": "Applied the ruling. Items whose conversation exceeds the model context are recorded not_executed_context_limit for full_history and excluded from its denominator; coverage 22/32 and the ten item ids are reported in the headline; cross-arm comparison uses the common eligible 22 while retrieval and memory arms are additionally reported over all 32. full_history now shows budget_limited=0 because it no longer truncates and claims to be full history."
+    },
+    "round_three_critical": {
+     "C1_builder_saw_every_question": {
+      "finding": "PublicInput carried a questions tuple and the script handed the whole object to the builder, so all 32 questions were visible at build time. The receipt proved the wrapper ran once, not that the builder was blind.",
+      "resolution": "Three mutually incompatible channels. MemoryBuildInput has no question field at all and forbids extra fields, so a builder cannot receive a question even by mistake; QuestionChannel is released only through FrozenMemory.release_questions; GoldChannel is for the scorer and oracles. Question-blindness is now a property of the type rather than a claim in an artifact.",
+      "verified": "'questions' not in MemoryBuildInput.model_fields, and a constructor call passing questions raises."
+     },
+     "C2_metadata_defence_was_bypassable": {
+      "finding": "Only top-level keys were checked, source_identity was unchecked and carried gold_sha256, and assert_no_gold_reaches used isinstance so a question subclass with an answer field passed. All four counterexamples were reproduced.",
+      "resolution": "Replaced the denylist with a recursive positive allowlist: only named keys survive at any level, values must be scalars, and nested containers are refused outright rather than filtered. source_identity is allowlisted too. The question guard now tests exact type, not isinstance. Dataset-identifying fields (benchmark, split, question_type, sample_id, item_id, category) are excluded so a mapper cannot special-case a dataset.",
+      "verified": "seven regression tests in tests/unit/evaluation/test_channel_bypasses.py, one per bypass plus dataset-id and builder-signature checks."
+     },
+     "C3_four_oracles_were_not_layer_gold": {
+      "finding": "GoldExtraction filtered input by the question's final evidence refs and GoldMemoryMapping tagged those same units, so both injected question relevance rather than substituting their layer. Worse, the L2 abstraction was computed and never consumed, so substituting it changed the trace and nothing scored; its ESEM stayed at the baseline 0.34375.",
+      "resolution": "Added independently authored per-layer gold artifacts (extraction roles and predicates, mapping canonical id and sense, L2 abstractions with derivations, frozen query plans). substitute() raises when the required layer gold is absent instead of falling back. The pipeline now routes selection through the L2 output via QueryPlan.requires_abstraction, so abstraction quality changes the scored result.",
+      "slice_reporting_rule": "The 32-item slice carries no extraction, mapping, L2 or query-plan annotation, so those four layers are reported only on the synthetic fixture and withheld from the slice run.",
+      "verified": "on the synthetic fixture, substituting the plan alone selects nothing while plan plus gold L2 selects exactly the gold set, which is only possible if L2 feeds selection."
+     }
+    },
+    "round_three_important": {
+     "I1_effectiveness_was_not_asserted": "assert_substitution_is_effective now requires the target layer's output to have changed, in addition to forbidding upstream change. An inert substitution raises rather than being reported as executed.",
+     "I2_digest_was_not_a_hash": "MemoryBuilder now takes a canonicalizer and computes SHA-256 of canonical bytes itself, so a caller cannot supply a payload as a digest. receipt() re-verifies the artifact internally rather than depending on the caller having called verify_artifact.",
+     "I3_stub_shaped_metrics": "answer_correct, abstention_correct, critical_false_positive and constraint_satisfaction are all None when no real judge ran. Reporting zero satisfied constraints was no more honest than reporting all of them; both invent a result.",
+     "I4_budget_contract": "The 100000000 sentinel is gone. full_history is bound to the model's real 128000-token context less answer and prompt reserve, with the tokenizer contract recorded as an explicitly non-authoritative approximation."
+    },
+    "second_submission": "rejected_partial",
+    "third_submission": "rejected_partial",
+    "verdict": "Two rejections. Round two fixed the LongMemEval leak path, the slice questions and the selection/delivery split; round three found three further Critical defects, all reproduced before rework."
+   },
+   "scope_rule": "Evaluation and ingestion layers only. Core memory semantics stay untouched: base ontology, dynamic ontology extension interface, L1 extraction, L2 abstraction, question handling, symbol-first recall and guarded embedding fallback are not modified.",
+   "stop_after": "Stage 0.5 ends with a harness validation report and an explicit review. Stage 1 human ontology adjudication does not begin until that review is accepted."
+  },
+  {
+   "batching": {
+    "alpha_is_not_a_benchmark_claim": "ontology-v0-alpha validates process only and supports no coverage, quality or readiness claim.",
+    "batch_1_alpha": {
+     "exit_criteria": [
+      "every mapping output falls into one of the five declared mapping_outputs states",
+      "the adjudication ledger records a decision and a rationale for every case",
+      "inter-reviewer disagreement on the double-blind subset is measured and reported",
+      "no schema or guide change is pending"
+     ],
+     "output": "ontology-v0-alpha, frozen and hashed",
+     "purpose": "Validate the annotation guide, the mapping-output vocabulary, the adjudication ledger format and the double-blind review procedure end to end.",
+     "size": "approximately 30 mapping-gold cases"
+    },
+    "batch_2_full": {
+     "output": "ontology-v0, frozen and hashed",
+     "precondition": "batch_1_alpha exit criteria are met and any guide or schema defect it exposed is fixed before batch 2 authoring begins",
+     "size": "the remaining cases up to 100 to 150 total"
+    },
+    "guide_change_rule": "A guide or schema change made after batch_1_alpha requires re-adjudicating the alpha cases under the new guide before they may join ontology-v0. Alpha cases are never silently carried forward under a changed guide.",
+    "rationale": "Human canonical-ontology adjudication cannot be delegated and is the single largest serial cost in this plan. Authoring 100 to 150 mapping-gold cases before any of the annotation workflow is validated risks discovering a guide or schema defect after all the expensive adjudication is already spent."
+   },
+   "coverage_measurement_rule": "The coverage and ambiguity report states O_L1 and O_L2 item counts against the declared scenario_families and cross_scenario_semantics, so that ontology adequacy is a measured quantity rather than an assumption. A prior taxonomy iteration carried roughly 7 O_L1 items and 3 O_L2 items, which covers only a fraction of the declared semantics; ontology-v0 must report its own counts and name every declared family or semantic dimension that has no corresponding ontology item.",
+   "id": 1,
+   "name": "ontology foundation pilot",
+   "outputs": [
+    "ontology-v0",
+    "O_L1-v0",
+    "O_L2-v0",
+    "cross-layer-map-v0",
+    "mapping gold and adjudication ledger",
+    "coverage and ambiguity report"
+   ],
+   "rule": "Freeze before end-to-end benchmark questions are exposed to the memory mapper."
+  },
+  {
+   "depends_on_stage_0_5": "Stage 2 cannot run before Stage 0.5 delivers the arms, oracle substitutions and slice loader, because its oracle-substitution self-tests and question-blind freeze proof have nothing to exercise otherwise.",
+   "id": 2,
+   "input": "the existing 32-item dev/regression slice only",
+   "name": "harness and anti-cheating regression",
+   "on_mid_stage_failure": "partial_run",
+   "outputs": [
+    "harness integrity report",
+    "question-blind memory-freeze proof",
+    "oracle-substitution self-tests",
+    "no semantic heuristic or gate audit"
+   ],
+   "rule": "This stage validates instrumentation only and produces no benchmark claim."
+  },
+  {
+   "id": 3,
+   "incremental_persistence_rule": "Every per-item artifact is written and flushed as it is produced, so that an interruption at item N preserves items 1 through N-1 as valid evidence rather than losing the run.",
+   "input": "the pre-registered 100-question natural sample",
+   "name": "untouched diagnostic-v1 run",
+   "on_mid_stage_failure": "partial_run",
+   "outputs": [
+    "three official arm results",
+    "all intermediate L1, mapping, L2, query, evidence and answer artifacts",
+    "stability subset results",
+    "metric tables and answer-evidence matrix"
+   ],
+   "rule": "One formal run under frozen inputs. No semantic repair or targeted rerun."
+  },
+  {
+   "id": 4,
+   "name": "RCA and architecture diagnosis",
+   "on_mid_stage_failure": "partial_run",
+   "outputs": [
+    "implementation defect ledger",
+    "ontology gap ledger",
+    "architecture issue ledger with evidence levels",
+    "module-owner attribution",
+    "falsifiable follow-up hypotheses",
+    "residual uncertainty and sample limitations"
+   ],
+   "rule": "Report findings only. Do not implement repairs."
   }
+ ],
+ "external_system_boundary": "Mem0, Graphiti, Hindsight, MemPalace, Zep and similar systems are not rerun in diagnostic-v1. Author-reported results remain external context only.",
+ "failure_attribution": {
+  "architecture_change_candidate_rule": "Only oracle_confirmed evidence, or a reproduced failure that is also cross_source, may enter a later architecture-change discussion.",
+  "architecture_evidence_levels": [
+   "suspected",
+   "reproduced",
+   "cross_source",
+   "oracle_confirmed"
+  ],
+  "method": [
+   "Freeze the untouched failure and all relevant intermediate artifacts.",
+   "Locate the earliest incorrect module output.",
+   "Use the smallest pre-registered oracle substitution that can falsify the attribution.",
+   "Compare downstream change without modifying the formal run.",
+   "Assign one primary owner and record secondary propagation separately.",
+   "Do not repair, tune or rerun during diagnostic-v1."
+  ],
+  "primary_classes": [
+   "implementation_defect",
+   "ontology_gap",
+   "architecture_problem"
+  ]
+ },
+ "mandatory_stop": {
+  "actions": [
+   "stop all benchmark execution",
+   "do not repair implementation defects",
+   "do not add ontology entries or aliases from formal failures",
+   "do not tune prompts, mapper, executor or answer model",
+   "do not rerun the formal sample",
+   "do not start a larger benchmark",
+   "do not select a carrier",
+   "do not rerun external memory systems",
+   "do not make benchmark-ready or production-ready claims"
+  ],
+  "next_step": "Return the RCA report to the user and wait for a separate decision about ontology expansion, module repairs, architecture changes and the design of a fresh evaluation.",
+  "trigger": "The diagnostic-v1 RCA report and its immutable evidence index are complete."
+ },
+ "mapper_anti_cheating_contract": {
+  "forbidden_shortcuts": [
+   "candidate retrieval that uses question or sample identity",
+   "benchmark-derived aliases or few-shot examples",
+   "dataset-category-specific prompts",
+   "per-item ontology patches",
+   "reading gold evidence before memory freeze"
+  ],
+  "freeze_order": [
+   "Load the frozen ontology and public conversation only.",
+   "Run extraction and surface-semantic construction.",
+   "Map L1 and L2 to the complete frozen ontology without benchmark-derived candidate retrieval.",
+   "Build memory once per conversation.",
+   "Freeze extraction, mapping, L1/L2 memory and provenance.",
+   "Only after memory freeze reveal the benchmark questions to query compilation."
+  ],
+  "mapping_outputs": [
+   "mapped",
+   "ambiguous",
+   "novel_candidate",
+   "insufficient_context",
+   "out_of_scope"
+  ],
+  "memory_mapper": [
+   "query-blind",
+   "gold-blind",
+   "sample-identity-blind"
+  ],
+  "query_mapper": "Separate from the memory mapper but bound to the same complete frozen ontology and version hashes.",
+  "unsupported_query_rule": "An unsupported query must be reported as executor capability failure. The task contract may not exclude it after inspection."
+ },
+ "memory_construction_contract": {
+  "L1": {
+   "revision": "Append-only. Later information confirms, corrects, supersedes or conflicts with prior revisions instead of overwriting them.",
+   "source_status": [
+    "user_reported",
+    "agent_generated",
+    "tool_observed"
+   ],
+   "unit": "A user message, agent message, tool message or tool event; surrounding context may resolve reference but may not supply an unstated fact."
+  },
+  "L2": {
+   "input": "Frozen L1 units, their raw evidence and only the necessary prior context.",
+   "reporting": "Raw abstraction, ontology mapping, derivation and evidence closure are scored separately.",
+   "requirements": [
+    "typed abstraction independent of O_L1 vocabulary",
+    "L1 derivation ids",
+    "EvidenceSpan closure",
+    "no benchmark question, future session or gold access"
+   ],
+   "timing": "Incrementally at each session end."
+  },
+  "answer_model_boundary": "For the ontology arm, the answer model may read only the question, query plan, symbolic matches and selected EvidenceSpans. It may not read the full conversation history."
+ },
+ "metrics": {
+  "L1_L2_structure": [
+   "L1 event-role and evidence accuracy",
+   "L1 source, time, modality, polarity and lifecycle accuracy",
+   "L2 raw abstraction accuracy",
+   "L2 mapping accuracy",
+   "L1-to-L2 derivation correctness",
+   "L2 evidence closure"
+  ],
+  "answer_evidence_matrix": [
+   "answer correct and evidence correct",
+   "answer correct and evidence wrong",
+   "answer wrong and evidence correct",
+   "answer wrong and evidence wrong"
+  ],
+  "no_compensation": [
+   "L2 may not hide an L1 failure.",
+   "Final answer correctness may not hide wrong evidence.",
+   "A structural validator intervention may not hide raw semantic error."
+  ],
+  "ontology_and_mapping": [
+   "mapping coverage",
+   "canonical sense accuracy",
+   "ambiguity rate",
+   "unresolved rate",
+   "mis-mapping rate",
+   "false merge and false split",
+   "ontology redundancy growth",
+   "ontology version consistency",
+   "query-memory alignment",
+   "error propagation rate"
+  ],
+  "retrieval_execution_answer": [
+   "Evidence Set Exact Match",
+   "All-Evidence at K",
+   "Evidence Recall and Precision",
+   "constraint satisfaction",
+   "abstention correctness",
+   "critical false positive",
+   "answer correctness",
+   "latency, tokens and cost when available"
+  ]
+ },
+ "model_protocol": {
+  "credential_env_var": "OPENAI_API_KEY",
+  "fixed": [
+   "provider model identity",
+   "prompt versions",
+   "temperature and decoding settings",
+   "response schemas",
+   "per-arm budgets"
+  ],
+  "model": "deepseek-v4-flash",
+  "model_identity_verification": {
+   "per_request_recording": "Every formal-run artifact records the response model id alongside the requested id; a post-run audit asserts a single distinct response model id across the entire run.",
+   "rationale": "A prior evaluation requested deepseek-chat and was served deepseek-v4-flash without the mismatch blocking the run, so its reported scores cannot be attributed to the intended model. Silent provider substitution invalidates the model identity that model_protocol.fixed claims to hold constant.",
+   "requested_must_equal_response": true,
+   "rule": "Every request records the requested model id and the model id the provider returns. The run stops if they differ.",
+   "stage_0_probe": "Stage 0 issues one live probe, asserts the response model id equals deepseek-v4-flash, and records the provider model list in the identity manifest.",
+   "stop_on_mismatch": true
+  },
+  "provider_base_url": "https://api.deepseek.com",
+  "reasoning_model_budget": {
+   "decision": "The answer role runs with thinking disabled. This makes the output budget cover visible content only, so answer_max_output_tokens returns to 1024 with ample headroom.",
+   "finding": "Verified on 2026-08-02: deepseek-v4-flash defaults to emitting reasoning tokens that are billed as completion tokens. A max_tokens of 8 returned empty content with all 8 tokens consumed as reasoning; the same prompt at 800 returned 'ok' using 13 completion tokens of which 11 were reasoning. Passing thinking type disabled removes reasoning entirely: the same one-word prompt then used 1 completion token, and a multi-hop supersession question used 193 completion tokens with zero reasoning tokens versus 381 with reasoning, producing identical correct output including correct supersession.",
+   "is_reasoning_model": true,
+   "recording": "Every artifact records completion_tokens and completion_tokens_details.reasoning_tokens separately, so a silent re-enabling of thinking is visible in the artifacts.",
+   "rule": "A truncated response caused by an under-provisioned budget is an instrumentation defect and must not be scored as a semantic or schema failure.",
+   "structured_output": "DeepSeek rejects response_format type json_schema with 'This response_format type is unavailable now' and accepts json_object, verified on 2026-08-02. Schema support is therefore a per-model setting: the answer role uses json_object while the judge role keeps json_schema. Because json_object does not enforce a schema at the provider, answer payloads are validated locally and a schema violation is a scored failure rather than a repaired one.",
+   "thinking_disabled": true
+  },
+  "retry": "Only a transport failure may resend the byte-identical request. A semantic or schema failure is a scored failure and is not retried.",
+  "retry_bound": {
+   "max_transport_retries_per_request": 3,
+   "not_transport_failures": [
+    "HTTP 200 with content that fails schema validation",
+    "HTTP 200 with empty content",
+    "a truncated response caused by an adequate-but-exhausted budget",
+    "a refusal or an off-schema natural-language reply"
+   ],
+   "on_exhaustion": "Record the request as an unrecoverable transport failure, mark the item incomplete, and trigger the partial_run procedure. Do not substitute a different model, relax the schema, or reword the prompt.",
+   "rationale": "An unbounded transport retry is a rerun loophole: it lets a semantic failure be reclassified as a transport failure and retried until it passes.",
+   "transport_failure_definition": "A connection error, timeout, or HTTP 429/5xx received with no parseable response body."
+  },
+  "roles": {
+   "judge": "Scores answer correctness. gpt-5.5 at the api.penguinsaichat.dpdns.org proxy, credential KE_MEMORY_JUDGE_API_KEY, response_format json_schema.",
+   "judge_independence": "Because the judge is a different model family from the generator, answer correctness is an independent judgement rather than self-evaluation.",
+   "judge_provider_caveat": "The judge runs behind a third-party proxy, which gives no guarantee about which upstream model actually serves a request. model_identity_verification therefore applies to the judge as well: its served model id is recorded per request and asserted stable across the run, and a mismatch stops the run. If the proxy cannot return a stable model id, judge verdicts are reported as provider-unverified.",
+   "two_model_rule": "The generator and the judge are deliberately different models so that answer correctness is not self-evaluated. Both roles, both providers and both model identities are declared here; no role may route anywhere undeclared.",
+   "work": "Generates the answers being scored. deepseek-v4-flash at api.deepseek.com, credential KE_MEMORY_WORK_API_KEY, thinking disabled, response_format json_object."
+  },
+  "stability_check": "Pre-register repeated inference on 10 percent of the sample and report disagreement; repetition is for stability measurement, not majority-vote repair.",
+  "stability_check_isolation": "Stability repetitions are written to a separate stability namespace, never overwrite the first formal response, and never contribute to any primary metric. Only the first formal response per item feeds the metric tables; the stability subset is reported as disagreement rate only."
+ },
+ "official_arms": [
+  {
+   "id": "full_history_baseline",
+   "input": "complete public history",
+   "purpose": "Measure answer capability when no memory compression or ontology mapping is required."
+  },
+  {
+   "id": "raw_dense_retrieval_baseline",
+   "input": "raw evidence units under the same question and answer budget",
+   "purpose": "Measure a non-ontology retrieval baseline."
+  },
+  {
+   "id": "ontology_memory_system",
+   "input": "one query-blind frozen memory build plus symbolic query execution",
+   "purpose": "Measure the current architecture and ontology mapping path."
+  }
+ ],
+ "ontology_foundation_pilot": {
+  "build_corpora": [
+   "Schema-Guided Dialogue",
+   "Taskmaster-2 train",
+   "Multi-Session Chat train",
+   "controlled WildChat samples",
+   "tau-bench train and tool traces"
+  ],
+  "cross_scenario_semantics": [
+   "time",
+   "modality",
+   "negation",
+   "condition",
+   "source status",
+   "identity",
+   "conflict",
+   "supersession",
+   "evidence",
+   "lifecycle"
+  ],
+  "freeze_output": [
+   "ontology-v0",
+   "O_L1-v0",
+   "O_L2-v0",
+   "cross-layer-map-v0",
+   "source and provenance manifest",
+   "mapping annotation guide"
+  ],
+  "language": "English only for diagnostic-v1; canonical ids are language-neutral and aliases carry language tags.",
+  "review_policy": {
+   "human_role": "final canonical ontology decision",
+   "mandatory_second_review": [
+    "high-risk novel concepts or senses",
+    "suspected false merge or false split",
+    "complex L2 abstraction or closure"
+   ],
+   "model_role": "proposal only",
+   "single_review_default": true
+  },
+  "scenario_families": [
+   "people and relationships",
+   "preferences and habits",
+   "events and experiences",
+   "plans commitments and tasks",
+   "states resources and environment",
+   "interactions tools and transactions"
+  ],
+  "target_scale": {
+   "coverage_spans": "approximately 500 spans for automatic candidate mining and coverage analysis",
+   "double_blind_review": "approximately 15 percent plus risk-triggered review",
+   "formal_mapping_gold": "100 to 150 cases"
+  }
+ },
+ "ontology_model": {
+  "Extended_AMR": "An extension of AMR's ontology space and an instance-graph encoding bound to canonical ontology items. It is a possible carrier, not the preselected carrier and not a competitor to KEOL.",
+  "KEOL": "A method for dynamic ontology construction: unmapped expressions become candidates that can be normalized, deduplicated, conflict-checked, admitted or rejected, and versioned. In diagnostic-v1 it is observed only as a side track and is not a core scored capability.",
+  "candidate_sources": {
+   "PropBank_AMR": "predicate sense and semantic-role source",
+   "WordNet": "sense-oriented lexical source",
+   "domain_vocabularies": "curated domain-specific source",
+   "schema.org": "concept and property structure source"
+  },
+  "foundation_layout": {
+   "O_L1": "Atomic event, state, preference, task and attribute ontology. Frozen and hashed independently.",
+   "O_L2": "Cross-turn and cross-session abstraction ontology. Frozen and hashed independently from O_L1.",
+   "cross_layer_map": "Explicit versioned derivation/import map. Shared vocabulary is never implicit.",
+   "domain_namespaces": "Versioned domain/* namespaces for scenario-specific concepts; dataset/* namespaces are forbidden as containers for answer-specific benchmark concepts.",
+   "memory_core": "Shared cross-scenario concepts for provenance, identity, time, modality, polarity, conflict, supersession, evidence and lifecycle."
+  },
+  "ontology": "A versioned namespace of stable ids, senses, aliases, types, relations, roles and constraints. A bare string vocabulary is insufficient because mapping correctness requires identity and sense."
+ },
+ "partial_run": {
+  "actions": [
+   "Stop the stage at the point of failure and make no further model requests.",
+   "Freeze every artifact already produced, unmodified, including the failing item's raw request and response.",
+   "Record the last completed item index, the failure point, the failure class and the raw error.",
+   "Mark the run partial_run in its manifest and record how many of the pre-registered items completed.",
+   "Report the partial result to the user with its completion count stated."
+  ],
+  "definition": "A formal stage that begins but does not complete, for any reason including transport exhaustion, corpus defect, environment failure, budget exhaustion or operator interruption.",
+  "diagnostic_value_rule": "A partial run caused by an instrumentation or environment defect is a valid finding about the harness and is reported as such. It is not a finding about memory or ontology quality.",
+  "forbidden": [
+   "rerunning the same pre-registered formal sample after a partial run",
+   "resuming into the same formal artifact set and presenting the result as one complete run",
+   "repairing the failure cause and continuing within the same formal run",
+   "computing headline metrics as though the sample were complete",
+   "discarding completed items to make the run look clean",
+   "reclassifying a semantic failure as a transport failure in order to retry it"
+  ],
+  "metrics_rule": "Metrics from a partial run are reported only over completed items, always alongside the completion count and the pre-registered sample size. They are labelled partial and are never compared against a complete run.",
+  "resumption_rule": "A partial run is never resumed. Continuing requires a separately pre-registered fresh sample and an explicit user decision, which is the same mandatory_stop boundary that governs a completed run."
+ },
+ "schema_version": "benchmark-plan-v2.1-diagnostic-v1",
+ "semantic_assistance_policy": {
+  "allowed_integrity_checks": [
+   "JSON and schema validity",
+   "canonical id and reference validity",
+   "EvidenceSpan and derivation closure",
+   "hash and split isolation",
+   "atomic publication and no-overwrite behavior",
+   "scorer input-output validation"
+  ],
+  "forbidden": [
+   "heuristic keyword or regular-expression semantic correction",
+   "sample-specific branches",
+   "semantic gates that correct model output or force abstention",
+   "contract narrowing that removes unsupported natural questions",
+   "targeted prompt or ontology optimization against formal failures",
+   "rerunning the same formal set after a semantic repair"
+  ],
+  "invalid_structure_rule": "Invalid structure is scored as an error; integrity checks do not repair semantics.",
+  "reporting_rule": "Raw model and mapper quality is reported directly. A structural rejection is not evidence that the model understood the case."
+ },
+ "source_plan": {
+  "main_worktree_origin": "/public/home/wwb/KE_mem/ke-memory-demo/.runs/reorg-phase1-baseline/benchmark-plan-v2.json",
+  "path": "docs/plans/archive/benchmark-plan-v2.json",
+  "reachability_rule": "The repository-relative path is the authoritative reference and must resolve from any worktree or clone. The main_worktree_origin field records provenance only; it lives under an untracked .runs/ directory that is NOT reachable from a worktree or a fresh clone and must never be the path a script resolves. Stage 0 verifies the repository-relative copy against sha256 and stops on mismatch or absence.",
+  "rule": "The source plan remains immutable. This v2.1 document is the self-contained approved successor for diagnostic-v1.",
+  "sha256": "dd495e673713d6e10948dbf5d390e2b4bf5dd3b95152174365545aa8d32b7ab2"
+ },
+ "stage_failure_semantics": {
+  "rationale": "A stage without a defined failure branch invites an undeclared repair-and-retry loop, which is exactly how a prior effort turned each gate failure into a fresh round of refreezing rather than a reported result.",
+  "rule": "Every stage has an explicit failure branch. Stage 0 stops the run outright. Stages 1 through 4 enter the partial_run procedure. No stage may respond to its own failure by repairing the cause and retrying in place."
+ },
+ "status": "approved_plan_execution_not_started",
+ "track_status": {
+  "contract_freeze": {
+   "exit": "every item hashed separately, then the eligible set and coverage recomputed",
+   "items": [
+    "tokenizer name, version, implementation, parameters and counting method",
+    "exact byte representation of system, prompt and turn serialization",
+    "context window, system/prompt/output reserve and safety margin",
+    "over-limit policy fixed to not_executed_context_limit"
+   ],
+   "judge_dependency": "none; the judge key does not gate this track",
+   "status": "blocked_on_harness_commit"
+  },
+  "corpus_discovery": {
+   "attribution_rule": "failures may not be attributed wholesale to ontology insufficiency",
+   "build_rule": "the builder receives conversations only; questions and gold load in the controller after the sandboxed build exits",
+   "entry": "a clean commit of the frozen harness",
+   "issue_ledger_classes": [
+    "extraction and structural errors",
+    "entity, role and predicate normalization gaps",
+    "genuine ontology type, relation or operator gaps",
+    "query compiler and slot-plan errors",
+    "retrieval and ranking errors",
+    "evidence assembly and closure errors",
+    "abstention, time, modality, negation, conflict and update handling errors",
+    "context-limit and coverage issues"
+   ],
+   "judge_dependency": "none; this is why the tracks were split",
+   "status": "blocked_on_harness_commit"
+  },
+  "formal_benchmark": {
+   "judge_dependency": "hard; the judge key must be rotated first and no judge call is permitted before then",
+   "reporting_rule": "cross-arm comparison uses the common eligible set; retrieval and ontology arms may also report full coverage but denominators may never be mixed. Report representation coverage, ranking, evidence closure, constraint and abstention behaviour and end-to-end utility together; a single ESEM or recall figure may not be cited as system capability.",
+   "status": "blocked_on_key_rotation_and_contract_freeze"
+  },
+  "harness_review": {
+   "exit": "reviewer accepts, then a clean commit records code, report, test log and sandbox manifest hashes",
+   "scope_frozen": true,
+   "scope_note": "Round-four scope is closed: no new threat model or architectural requirement is in scope. The seven verification points are addressed and each is backed by a test.",
+   "status": "awaiting_reviewer_verification"
+  },
+  "rationale": "A single plan status let the judge key block everything, including corpus analysis that does not need a judge at all. Four independent statuses let corpus discovery start as soon as the harness is frozen."
+ }
 }

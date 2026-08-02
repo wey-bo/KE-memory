@@ -1,0 +1,737 @@
+{
+ "answer_model": "deterministic stub; answer correctness, abstention correctness and constraint satisfaction are all recorded as unknown, and no quality claim follows",
+ "arm_contract_hashes": {
+  "fixture_lexical_memory": "arm-contract:c3fa284b1f6721c00e703f9a54597a03dfd458eccfd24142ec7dd37a72b80571",
+  "fixture_lexical_retrieval": "arm-contract:c3fa284b1f6721c00e703f9a54597a03dfd458eccfd24142ec7dd37a72b80571",
+  "full_history": "arm-contract:d6c6ecb0263f6c5d2580afadbb3b94c2c593b0b3d5e7d4b7b0b6a6cfa9c374ab"
+ },
+ "arm_identity_note": "fixture_lexical_retrieval and fixture_lexical_memory are lexical stand-ins. raw_dense_retrieval and ontology_memory are reserved for real backends.",
+ "arms": {
+  "fixture_lexical_memory": {
+   "abstention_correct_rate": null,
+   "all_evidence_at_k_rate": 0.15625,
+   "answer_correct_rate": null,
+   "answer_scored_count": 0,
+   "budget_limited_count": 0,
+   "constraint_question_count": 0,
+   "constraint_satisfaction_rate": null,
+   "critical_false_positive_count": null,
+   "delivery_exact_match_rate": 0.09375,
+   "matrix": {
+    "answer_correct_evidence_correct": 0,
+    "answer_correct_evidence_wrong": 0,
+    "answer_wrong_evidence_correct": 0,
+    "answer_wrong_evidence_wrong": 0
+   },
+   "mean_delivery_precision": 0.10625,
+   "mean_delivery_recall": 0.17708333333333334,
+   "mean_selection_precision": 0.10625,
+   "mean_selection_recall": 0.17708333333333334,
+   "question_count": 32,
+   "selection_exact_match_rate": 0.09375
+  },
+  "fixture_lexical_retrieval": {
+   "abstention_correct_rate": null,
+   "all_evidence_at_k_rate": 0.59375,
+   "answer_correct_rate": null,
+   "answer_scored_count": 0,
+   "budget_limited_count": 18,
+   "constraint_question_count": 0,
+   "constraint_satisfaction_rate": null,
+   "critical_false_positive_count": null,
+   "delivery_exact_match_rate": 0.34375,
+   "matrix": {
+    "answer_correct_evidence_correct": 0,
+    "answer_correct_evidence_wrong": 0,
+    "answer_wrong_evidence_correct": 0,
+    "answer_wrong_evidence_wrong": 0
+   },
+   "mean_delivery_precision": 0.40352440206046536,
+   "mean_delivery_recall": 0.7369791666666666,
+   "mean_selection_precision": 0.388346197356579,
+   "mean_selection_recall": 0.7734375,
+   "question_count": 32,
+   "selection_exact_match_rate": 0.34375
+  },
+  "full_history": {
+   "abstention_correct_rate": null,
+   "all_evidence_at_k_rate": 0.6363636363636364,
+   "answer_correct_rate": null,
+   "answer_scored_count": 0,
+   "budget_limited_count": 0,
+   "constraint_question_count": 0,
+   "constraint_satisfaction_rate": null,
+   "critical_false_positive_count": null,
+   "delivery_exact_match_rate": 0.5454545454545454,
+   "matrix": {
+    "answer_correct_evidence_correct": 0,
+    "answer_correct_evidence_wrong": 0,
+    "answer_wrong_evidence_correct": 0,
+    "answer_wrong_evidence_wrong": 0
+   },
+   "mean_delivery_precision": 0.5467563462790193,
+   "mean_delivery_recall": 1.0,
+   "mean_selection_precision": 0.5467563462790193,
+   "mean_selection_recall": 1.0,
+   "question_count": 22,
+   "selection_exact_match_rate": 0.5454545454545454
+  }
+ },
+ "budgets": {
+  "delivery_budget": {
+   "answer_max_output_tokens": 1024,
+   "evidence_budget_tokens": 24576,
+   "max_evidence_units": 64
+  },
+  "delivery_budget_status": "dev_derived_pending; frozen for the formal set",
+  "full_history_basis": "model context 128000 tokens less answer and prompt reserve; a capability upper bound, not a shared budget",
+  "full_history_budget": {
+   "answer_max_output_tokens": 1024,
+   "evidence_budget_tokens": 124928,
+   "max_evidence_units": 100000
+  },
+  "full_history_context_limited": {
+   "consequence": "for those items full_history is a truncated-history condition, not a complete-history upper bound, and must be reported as such rather than as the capability ceiling",
+   "finding": "the largest slice conversations measure about 130800 approximate tokens, which exceeds a 128000-token context once answer and prompt reserve are deducted. full_history is therefore genuinely context limited on those items rather than budget limited by choice: no budget setting makes them fit.",
+   "observed": []
+  },
+  "tokenizer": {
+   "chars_per_token": 4,
+   "is_provider_authoritative": false,
+   "tokenizer_id": "approx-chars-4"
+  },
+  "tokenizer_caveat": "the tokenizer is a deterministic approximation and is not provider authoritative, so these bounds are instrumentation-side and do not guarantee a prompt fits the model context"
+ },
+ "channel_separation": {
+  "build_input_has_question_field": false,
+  "note": "the memory build receives MemoryBuildInput, which has no question field, so question-blindness is structural rather than asserted by the receipt",
+  "public_metadata_policy": "recursive positive allowlist, scalars only"
+ },
+ "cross_arm_comparison": {
+  "common_eligible_question_ids": [
+   "LOCOMO-S01-Q004",
+   "LOCOMO-S01-Q005",
+   "LOCOMO-S01-Q001",
+   "LOCOMO-S01-Q002",
+   "LOCOMO-S01-Q003",
+   "LOCOMO-S01-Q015",
+   "LOCOMO-S01-Q083",
+   "LOCOMO-S01-Q084",
+   "LOCOMO-S01-Q153",
+   "LOCOMO-S01-Q154",
+   "LONGMEMEVAL-gpt4_2655b836",
+   "LONGMEMEVAL-gpt4_2487a7cb",
+   "LONGMEMEVAL-0a995998",
+   "LONGMEMEVAL-6d550036",
+   "LONGMEMEVAL-6a1eabeb",
+   "LONGMEMEVAL-6aeb4375",
+   "LONGMEMEVAL-e47becba",
+   "LONGMEMEVAL-118b2229",
+   "LONGMEMEVAL-7161e7e2",
+   "LONGMEMEVAL-c4f10528",
+   "LONGMEMEVAL-8a2466db",
+   "LONGMEMEVAL-06878be2"
+  ],
+  "cross_arm_denominator": 22,
+  "rule": "cross-arm comparison uses only the questions every arm executed. The retrieval and memory arms are additionally reported over all 32 items in the arms section above."
+ },
+ "excluded_item_ids": [
+  "BEAM-100K-C001-abstention-001",
+  "BEAM-100K-C001-abstention-002",
+  "BEAM-100K-C001-contradiction_resolution-001",
+  "BEAM-100K-C001-contradiction_resolution-002",
+  "BEAM-100K-C001-knowledge_update-001",
+  "BEAM-100K-C001-knowledge_update-002",
+  "BEAM-100K-C001-multi_session_reasoning-001",
+  "BEAM-100K-C001-multi_session_reasoning-002",
+  "BEAM-100K-C001-temporal_reasoning-001",
+  "BEAM-100K-C001-temporal_reasoning-002",
+  "LOCOMO-S01-Q001",
+  "LOCOMO-S01-Q002",
+  "LOCOMO-S01-Q003",
+  "LOCOMO-S01-Q004",
+  "LOCOMO-S01-Q005",
+  "LOCOMO-S01-Q015",
+  "LOCOMO-S01-Q083",
+  "LOCOMO-S01-Q084",
+  "LOCOMO-S01-Q153",
+  "LOCOMO-S01-Q154",
+  "LONGMEMEVAL-06878be2",
+  "LONGMEMEVAL-0a995998",
+  "LONGMEMEVAL-118b2229",
+  "LONGMEMEVAL-6a1eabeb",
+  "LONGMEMEVAL-6aeb4375",
+  "LONGMEMEVAL-6d550036",
+  "LONGMEMEVAL-7161e7e2",
+  "LONGMEMEVAL-8a2466db",
+  "LONGMEMEVAL-c4f10528",
+  "LONGMEMEVAL-e47becba",
+  "LONGMEMEVAL-gpt4_2487a7cb",
+  "LONGMEMEVAL-gpt4_2655b836"
+ ],
+ "freeze_receipt": {
+  "build_input_sha256": "69e70bf2e824644581da8f1adc6901876373e1ead856b8832e62294c8363a511",
+  "content_digest": "69e70bf2e824644581da8f1adc6901876373e1ead856b8832e62294c8363a511",
+  "controller_source_identity": {
+   "handle_mapping_size": 6156,
+   "loader_id": "regression-slice-loader",
+   "loader_version": "3"
+  },
+  "digest_binds_content": "content_digest is SHA-256 over the full canonical build input including turn text, speaker and token counts, so a content tamper moves it",
+  "freeze_order_valid": true,
+  "memory_artifact_sha256": "fdbed97a30fe1611c887f01eeabf17f50edab97c9602946f59d7224f735915fe",
+  "observed_build_count": 1,
+  "questions_released_after_build": true,
+  "sandbox": {
+   "evidence_basis": "observed_* fields are read from the child's own /proc/self/mountinfo, /proc/self/fd and directory listings, not asserted by the parent",
+   "gold_channel_mounted": false,
+   "intended_mounts": [
+    "/interp (ro, copied interpreter)",
+    "/usr (ro)",
+    "/lib (resolved through /usr)",
+    "/lib64 (resolved through /usr)",
+    "/dev/{urandom,null,zero} (only these three nodes)",
+    "/proc (fresh procfs in a private PID namespace)",
+    "/staging (the builder module file, and nothing else)",
+    "/tmp (empty tmpfs)"
+   ],
+   "namespaces": [
+    "user",
+    "mount",
+    "network",
+    "pid"
+   ],
+   "observed_fd_count": 4,
+   "observed_mount_points": [
+    "/",
+    "/dev/null",
+    "/dev/urandom",
+    "/dev/zero",
+    "/interp",
+    "/proc",
+    "/usr"
+   ],
+   "observed_network_interfaces": [],
+   "observed_root_entries": [
+    "dev",
+    "interp",
+    "lib",
+    "lib64",
+    "proc",
+    "staging",
+    "tmp",
+    "usr"
+   ],
+   "observed_staging_entries": [
+    "_child.py",
+    "stage_0_5_builder.py"
+   ],
+   "question_channel_mounted": false,
+   "reconciled": true,
+   "reconciliation_notes": [],
+   "repository_mounted": false
+  }
+ },
+ "full_history_eligibility": {
+  "coverage": "22/32",
+  "ineligible_item_ids": [
+   "BEAM-100K-C001-abstention-001",
+   "BEAM-100K-C001-abstention-002",
+   "BEAM-100K-C001-contradiction_resolution-001",
+   "BEAM-100K-C001-contradiction_resolution-002",
+   "BEAM-100K-C001-knowledge_update-001",
+   "BEAM-100K-C001-knowledge_update-002",
+   "BEAM-100K-C001-multi_session_reasoning-001",
+   "BEAM-100K-C001-multi_session_reasoning-002",
+   "BEAM-100K-C001-temporal_reasoning-001",
+   "BEAM-100K-C001-temporal_reasoning-002"
+  ],
+  "not_executed": {
+   "full_history": [
+    "BEAM-100K-C001-abstention-001",
+    "BEAM-100K-C001-abstention-002",
+    "BEAM-100K-C001-contradiction_resolution-001",
+    "BEAM-100K-C001-contradiction_resolution-002",
+    "BEAM-100K-C001-knowledge_update-001",
+    "BEAM-100K-C001-knowledge_update-002",
+    "BEAM-100K-C001-multi_session_reasoning-001",
+    "BEAM-100K-C001-multi_session_reasoning-002",
+    "BEAM-100K-C001-temporal_reasoning-001",
+    "BEAM-100K-C001-temporal_reasoning-002"
+   ]
+  },
+  "rule": "full_history metrics use the eligible denominator only. Truncating an over-context conversation and reporting it as full history would misname the measurement, so those items are not executed for this arm.",
+  "status_for_ineligible": "not_executed_context_limit"
+ },
+ "k": 10,
+ "metric_standing": {
+  "classification": "diagnostic_only",
+  "may_not_be_cited_as": [
+   "a capability result",
+   "evidence that a request fits the model context",
+   "a qualification or readiness signal"
+  ],
+  "not_yet_frozen": [
+   "tokenizer contract (currently an approximation, not provider authoritative)",
+   "full prompt serialization",
+   "system, prompt and output token reserve"
+  ],
+  "reason": "every figure here is diagnostic until the tokenizer contract, the full prompt serialization and the system/prompt/output reserve are frozen. The tokenizer is a character approximation and cannot prove a request fits the model context, so coverage 22/32, selection exact match 1.000 and recall 1.000 describe the harness under an unfrozen contract."
+ },
+ "oracle_layers_on_fixture": {
+  "_cumulative_composition": {
+   "interpretation": "marginal single-layer rates can be zero while the layers compose to a correct selection; a zero marginal rate means necessary-but-not-sufficient, not inert",
+   "series": [
+    {
+     "layers_applied": [
+      "gold_extraction"
+     ],
+     "selection_exact_match_rate": 0.0
+    },
+    {
+     "layers_applied": [
+      "gold_extraction",
+      "gold_memory_mapping"
+     ],
+     "selection_exact_match_rate": 0.0
+    },
+    {
+     "layers_applied": [
+      "gold_extraction",
+      "gold_memory_mapping",
+      "gold_l2_abstraction"
+     ],
+     "selection_exact_match_rate": 0.0
+    },
+    {
+     "layers_applied": [
+      "gold_extraction",
+      "gold_memory_mapping",
+      "gold_l2_abstraction",
+      "gold_query_plan"
+     ],
+     "selection_exact_match_rate": 1.0
+    }
+   ]
+  },
+  "gold_evidence_selection": {
+   "assumes_perfect": "retrieval recovered exactly the gold evidence set for the question",
+   "effective_on": "2/2",
+   "requires_gold_artifact": "evidence_selection",
+   "selection_exact_match_rate": 1.0,
+   "substitution_point": "evidence_selection",
+   "target_layer_change_asserted": true,
+   "validated_on": "synthetic fixture with independently authored per-layer gold"
+  },
+  "gold_extraction": {
+   "assumes_perfect": "L1 extraction produced exactly the declared surface units, with correct roles and predicates",
+   "effective_on": "2/2",
+   "requires_gold_artifact": "extraction",
+   "selection_exact_match_rate": 0.0,
+   "substitution_point": "extraction",
+   "target_layer_change_asserted": true,
+   "validated_on": "synthetic fixture with independently authored per-layer gold"
+  },
+  "gold_l2_abstraction": {
+   "assumes_perfect": "cross-unit abstractions and their derivation links are correct",
+   "effective_on": "2/2",
+   "requires_gold_artifact": "l2",
+   "selection_exact_match_rate": 0.0,
+   "substitution_point": "l2",
+   "target_layer_change_asserted": true,
+   "validated_on": "synthetic fixture with independently authored per-layer gold"
+  },
+  "gold_memory_mapping": {
+   "assumes_perfect": "every surface unit mapped to the correct canonical ontology id and sense",
+   "effective_on": "2/2",
+   "requires_gold_artifact": "mapping",
+   "selection_exact_match_rate": 0.0,
+   "substitution_point": "mapping",
+   "target_layer_change_asserted": true,
+   "validated_on": "synthetic fixture with independently authored per-layer gold"
+  },
+  "gold_query_plan": {
+   "assumes_perfect": "the question compiled to the correct frozen plan, including whether it needs an abstraction",
+   "effective_on": "2/2",
+   "requires_gold_artifact": "query_plan",
+   "selection_exact_match_rate": 0.0,
+   "substitution_point": "query_plan",
+   "target_layer_change_asserted": true,
+   "validated_on": "synthetic fixture with independently authored per-layer gold"
+  }
+ },
+ "oracle_layers_on_slice": {
+  "gold_evidence_selection": {
+   "executed_on": "32/32 slice items",
+   "items_closed": "32/32",
+   "per_item": [
+    {
+     "closed": true,
+     "gold_handles": [],
+     "question_id": "BEAM-100K-C001-abstention-001",
+     "selected_handles": []
+    },
+    {
+     "closed": true,
+     "gold_handles": [],
+     "question_id": "BEAM-100K-C001-abstention-002",
+     "selected_handles": []
+    },
+    {
+     "closed": true,
+     "gold_handles": [
+      "h00400",
+      "h00434"
+     ],
+     "question_id": "BEAM-100K-C001-contradiction_resolution-001",
+     "selected_handles": [
+      "h00400",
+      "h00434"
+     ]
+    },
+    {
+     "closed": true,
+     "gold_handles": [
+      "h00630"
+     ],
+     "question_id": "BEAM-100K-C001-contradiction_resolution-002",
+     "selected_handles": [
+      "h00630"
+     ]
+    },
+    {
+     "closed": true,
+     "gold_handles": [
+      "h00838",
+      "h00866"
+     ],
+     "question_id": "BEAM-100K-C001-knowledge_update-001",
+     "selected_handles": [
+      "h00838",
+      "h00866"
+     ]
+    },
+    {
+     "closed": true,
+     "gold_handles": [
+      "h01088",
+      "h01122"
+     ],
+     "question_id": "BEAM-100K-C001-knowledge_update-002",
+     "selected_handles": [
+      "h01088",
+      "h01122"
+     ]
+    },
+    {
+     "closed": true,
+     "gold_handles": [
+      "h01142",
+      "h01234",
+      "h01290"
+     ],
+     "question_id": "BEAM-100K-C001-multi_session_reasoning-001",
+     "selected_handles": [
+      "h01142",
+      "h01234",
+      "h01290"
+     ]
+    },
+    {
+     "closed": true,
+     "gold_handles": [
+      "h01332",
+      "h01400",
+      "h01466"
+     ],
+     "question_id": "BEAM-100K-C001-multi_session_reasoning-002",
+     "selected_handles": [
+      "h01332",
+      "h01400",
+      "h01466"
+     ]
+    },
+    {
+     "closed": true,
+     "gold_handles": [
+      "h01504",
+      "h01506"
+     ],
+     "question_id": "BEAM-100K-C001-temporal_reasoning-001",
+     "selected_handles": [
+      "h01504",
+      "h01506"
+     ]
+    },
+    {
+     "closed": true,
+     "gold_handles": [
+      "h01720",
+      "h01778"
+     ],
+     "question_id": "BEAM-100K-C001-temporal_reasoning-002",
+     "selected_handles": [
+      "h01720",
+      "h01778"
+     ]
+    },
+    {
+     "closed": true,
+     "gold_handles": [
+      "h01905"
+     ],
+     "question_id": "LOCOMO-S01-Q004",
+     "selected_handles": [
+      "h01905"
+     ]
+    },
+    {
+     "closed": true,
+     "gold_handles": [
+      "h02303"
+     ],
+     "question_id": "LOCOMO-S01-Q005",
+     "selected_handles": [
+      "h02303"
+     ]
+    },
+    {
+     "closed": true,
+     "gold_handles": [
+      "h02720"
+     ],
+     "question_id": "LOCOMO-S01-Q001",
+     "selected_handles": [
+      "h02720"
+     ]
+    },
+    {
+     "closed": true,
+     "gold_handles": [
+      "h03148"
+     ],
+     "question_id": "LOCOMO-S01-Q002",
+     "selected_handles": [
+      "h03148"
+     ]
+    },
+    {
+     "closed": true,
+     "gold_handles": [
+      "h03564",
+      "h03566"
+     ],
+     "question_id": "LOCOMO-S01-Q003",
+     "selected_handles": [
+      "h03564",
+      "h03566"
+     ]
+    },
+    {
+     "closed": true,
+     "gold_handles": [
+      "h04014",
+      "h04047"
+     ],
+     "question_id": "LOCOMO-S01-Q015",
+     "selected_handles": [
+      "h04014",
+      "h04047"
+     ]
+    },
+    {
+     "closed": true,
+     "gold_handles": [
+      "h04413"
+     ],
+     "question_id": "LOCOMO-S01-Q083",
+     "selected_handles": [
+      "h04413"
+     ]
+    },
+    {
+     "closed": true,
+     "gold_handles": [
+      "h04833"
+     ],
+     "question_id": "LOCOMO-S01-Q084",
+     "selected_handles": [
+      "h04833"
+     ]
+    },
+    {
+     "closed": true,
+     "gold_handles": [
+      "h05252"
+     ],
+     "question_id": "LOCOMO-S01-Q153",
+     "selected_handles": [
+      "h05252"
+     ]
+    },
+    {
+     "closed": true,
+     "gold_handles": [
+      "h05676"
+     ],
+     "question_id": "LOCOMO-S01-Q154",
+     "selected_handles": [
+      "h05676"
+     ]
+    },
+    {
+     "closed": true,
+     "gold_handles": [
+      "h06070",
+      "h06071",
+      "h06072"
+     ],
+     "question_id": "LONGMEMEVAL-gpt4_2655b836",
+     "selected_handles": [
+      "h06070",
+      "h06071",
+      "h06072"
+     ]
+    },
+    {
+     "closed": true,
+     "gold_handles": [
+      "h06073",
+      "h06074"
+     ],
+     "question_id": "LONGMEMEVAL-gpt4_2487a7cb",
+     "selected_handles": [
+      "h06073",
+      "h06074"
+     ]
+    },
+    {
+     "closed": true,
+     "gold_handles": [
+      "h06075",
+      "h06076",
+      "h06077"
+     ],
+     "question_id": "LONGMEMEVAL-0a995998",
+     "selected_handles": [
+      "h06075",
+      "h06076",
+      "h06077"
+     ]
+    },
+    {
+     "closed": true,
+     "gold_handles": [
+      "h06078",
+      "h06079",
+      "h06080",
+      "h06081"
+     ],
+     "question_id": "LONGMEMEVAL-6d550036",
+     "selected_handles": [
+      "h06078",
+      "h06079",
+      "h06080",
+      "h06081"
+     ]
+    },
+    {
+     "closed": true,
+     "gold_handles": [
+      "h06082",
+      "h06083"
+     ],
+     "question_id": "LONGMEMEVAL-6a1eabeb",
+     "selected_handles": [
+      "h06082",
+      "h06083"
+     ]
+    },
+    {
+     "closed": true,
+     "gold_handles": [
+      "h06084",
+      "h06085"
+     ],
+     "question_id": "LONGMEMEVAL-6aeb4375",
+     "selected_handles": [
+      "h06084",
+      "h06085"
+     ]
+    },
+    {
+     "closed": true,
+     "gold_handles": [
+      "h06086"
+     ],
+     "question_id": "LONGMEMEVAL-e47becba",
+     "selected_handles": [
+      "h06086"
+     ]
+    },
+    {
+     "closed": true,
+     "gold_handles": [
+      "h06087"
+     ],
+     "question_id": "LONGMEMEVAL-118b2229",
+     "selected_handles": [
+      "h06087"
+     ]
+    },
+    {
+     "closed": true,
+     "gold_handles": [
+      "h06088"
+     ],
+     "question_id": "LONGMEMEVAL-7161e7e2",
+     "selected_handles": [
+      "h06088"
+     ]
+    },
+    {
+     "closed": true,
+     "gold_handles": [
+      "h06089"
+     ],
+     "question_id": "LONGMEMEVAL-c4f10528",
+     "selected_handles": [
+      "h06089"
+     ]
+    },
+    {
+     "closed": true,
+     "gold_handles": [
+      "h06090"
+     ],
+     "question_id": "LONGMEMEVAL-8a2466db",
+     "selected_handles": [
+      "h06090"
+     ]
+    },
+    {
+     "closed": true,
+     "gold_handles": [
+      "h06091"
+     ],
+     "question_id": "LONGMEMEVAL-06878be2",
+     "selected_handles": [
+      "h06091"
+     ]
+    }
+   ],
+   "requirement": "32/32 exact match; anything less means the oracle is not exact",
+   "selection_exact_match_rate": 1.0
+  },
+  "reason": "the slice carries no extraction, mapping, L2 or query-plan annotation. Reinterpreting its evidence references as those four kinds of gold would inject question relevance instead of substituting the layer, so those layers are validated only on the synthetic fixture.",
+  "withheld": [
+   "gold_extraction",
+   "gold_memory_mapping",
+   "gold_l2_abstraction",
+   "gold_query_plan"
+  ]
+ },
+ "slice_item_count": 32,
+ "stage": "0.5",
+ "status": "instrumentation_validation_only"
+}

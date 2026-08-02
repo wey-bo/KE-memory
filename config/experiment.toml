@@ -8,6 +8,10 @@ expected_questions = 60
 
 [retrieval]
 evidence_budget_tokens = 8192
+# The answer model runs with thinking disabled, so this budget covers visible output
+# only. A measured multi-hop supersession answer used 193 completion tokens and no
+# reasoning tokens, so 1024 leaves ample headroom. A truncated answer caused by an
+# exhausted budget is an instrumentation defect, not a semantic failure.
 answer_max_output_tokens = 1024
 
 [aggregation]

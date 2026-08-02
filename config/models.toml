@@ -1,13 +1,21 @@
 [work]
-model = "gpt-5.4"
-base_url = "https://api.penguinsaichat.dpdns.org/v1"
+model = "deepseek-v4-flash"
+base_url = "https://api.deepseek.com/v1"
 api_key_env = "KE_MEMORY_WORK_API_KEY"
 temperature = 0.0
 max_output_tokens = 4096
+# DeepSeek rejects response_format type json_schema ("This response_format type is
+# unavailable now") and accepts json_object.
+supports_json_schema = false
+# flash is a reasoning model by default and bills reasoning tokens as completion
+# tokens. Disabling thinking makes the answer budget predictable: a multi-hop
+# supersession question measured 381 completion tokens with thinking (144 reasoning)
+# and 193 with thinking disabled, with identical correct output.
+disable_thinking = true
 
 [judge]
-model = "deepseek-v4-pro"
-base_url = "https://api.deepseek.com/v1"
+model = "gpt-5.5"
+base_url = "https://api.penguinsaichat.dpdns.org/v1"
 api_key_env = "KE_MEMORY_JUDGE_API_KEY"
 temperature = 0.0
 max_output_tokens = 2048

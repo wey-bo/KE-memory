@@ -330,16 +330,23 @@ class _LiveEvaluationPreflightPorts:
             trace_recorder=InMemoryTraceRecorder(),
         )
         try:
-            response = await client.complete(
+            completion = await client.complete_with_usage(
                 _EvaluationProbeResponse,
                 [{"role": "user", "content": 'Return exactly {"ready":true}.'}],
                 TraceContext(operation="evaluation_preflight", metadata={"check": name}),
             )
-            if response.ready is not True:
+            if completion.value.ready is not True:
                 raise PreflightCheckFailure(f"{name}:StructuredProbeRejected")
+            # The fingerprint must name the model that actually served the request, not
+            # the one we asked for. A provider that silently substitutes a different
+            # model would otherwise be recorded under the requested identity, which
+            # makes every downstream score unattributable.
+            served_model = completion.usage.model
+            if served_model != model_settings.model:
+                raise PreflightCheckFailure(f"{name}:ModelIdentityMismatch")
         finally:
             await client.aclose()
-        return f"{name}:model={model_settings.model}:base_url={endpoint}"
+        return f"{name}:model={served_model}:base_url={endpoint}"
 
     def _check_ke_ready_snapshot(self) -> str:
         _manifest, conversations = self._load_snapshot()

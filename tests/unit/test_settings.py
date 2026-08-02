@@ -4,6 +4,9 @@ import shutil
 import pytest
 from pydantic import ValidationError
 
+from ke_memory_demo.answering import ANSWER_MAX_OUTPUT_TOKENS, ANSWER_MODEL
+from ke_memory_demo.evaluation.judge import JUDGE_MAX_OUTPUT_TOKENS, JUDGE_MODEL
+from ke_memory_demo import settings as settings_module
 from ke_memory_demo.settings import SettingsError, load_settings, resolve_config_layout
 
 
@@ -18,31 +21,73 @@ LIVE_ENV_VARS = (
 
 
 @pytest.fixture(autouse=True)
-def unset_live_environment(monkeypatch: pytest.MonkeyPatch) -> None:
+def unset_live_environment(monkeypatch: pytest.MonkeyPatch, project_root: Path) -> None:
+    """Isolate tests from real credentials, including a developer's .env.local.
+
+    Clearing the process environment is not enough: load_settings calls load_dotenv on
+    the project's .env.local, so on a machine where that file exists the values come
+    straight back and any test asserting a missing-credential error would fail. Only
+    the repository's own dotenv file is ignored, so tests that build a dotenv under
+    tmp_path still exercise real loading.
+    """
     for name in LIVE_ENV_VARS:
         monkeypatch.delenv(name, raising=False)
+
+    real_load_dotenv = settings_module.load_dotenv
+    repo_dotenv = (project_root / ".env.local").resolve()
+
+    def load_dotenv_ignoring_repo_file(dotenv_path: object = None, **kwargs: object) -> bool:
+        if dotenv_path is not None and Path(str(dotenv_path)).resolve() == repo_dotenv:
+            return False
+        return bool(real_load_dotenv(dotenv_path, **kwargs))  # pyright: ignore[reportArgumentType]
+
+    monkeypatch.setattr(settings_module, "load_dotenv", load_dotenv_ignoring_repo_file)
 
 
 def test_settings_keep_secret_values_out_of_toml(project_root: Path):
     assert "sk-" not in (project_root / "config/models.toml").read_text()
 
 
+def test_configured_models_match_the_code_invariants(project_root: Path):
+    """The shipped config must satisfy the answer and judge invariants.
+
+    AnswerService and the judge each pin a model name and an output-token budget and
+    raise if the client they are handed disagrees. Those invariants live in code while
+    the values they check live in config, so a config edit can leave the two out of
+    step. Every existing test builds its own fake client, so none of them would catch
+    that: the mismatch would only surface as a runtime failure once a real run starts.
+    """
+    settings = load_settings(project_root)
+    answer_settings = settings.work.model_copy(
+        update={"max_output_tokens": settings.retrieval.answer_max_output_tokens}
+    )
+
+    assert answer_settings.model == ANSWER_MODEL
+    assert answer_settings.max_output_tokens == ANSWER_MAX_OUTPUT_TOKENS
+    assert settings.judge.model == JUDGE_MODEL
+    assert settings.judge.max_output_tokens == JUDGE_MAX_OUTPUT_TOKENS
+
+
 def test_settings_load_all_exact_model_values(project_root: Path):
     settings = load_settings(project_root)
 
     assert settings.work.model_dump() == {
-        "model": "gpt-5.4",
-        "base_url": "https://api.penguinsaichat.dpdns.org/v1",
+        "model": "deepseek-v4-flash",
+        "base_url": "https://api.deepseek.com/v1",
         "api_key_env": "KE_MEMORY_WORK_API_KEY",
         "temperature": 0.0,
         "max_output_tokens": 4096,
+        "supports_json_schema": False,
+        "disable_thinking": True,
     }
     assert settings.judge.model_dump() == {
-        "model": "deepseek-v4-pro",
-        "base_url": "https://api.deepseek.com/v1",
+        "model": "gpt-5.5",
+        "base_url": "https://api.penguinsaichat.dpdns.org/v1",
         "api_key_env": "KE_MEMORY_JUDGE_API_KEY",
         "temperature": 0.0,
         "max_output_tokens": 2048,
+        "supports_json_schema": True,
+        "disable_thinking": False,
     }
     assert settings.embedding.model_dump() == {
         "enabled": False,

@@ -18,7 +18,11 @@ from ke_memory_demo.retrieval.evidence_payload import (
 from ke_memory_demo.retrieval.tokens import TokenCounter
 
 
-ANSWER_MODEL = "gpt-5.4"
+ANSWER_MODEL = "deepseek-v4-flash"
+# The answer client runs with thinking disabled, so this budget covers visible output
+# only. Measured on 2026-08-02, a multi-hop supersession answer used 193 completion
+# tokens with no reasoning tokens, so this leaves ample headroom and a truncated
+# answer signals a real defect rather than an under-provisioned budget.
 ANSWER_MAX_OUTPUT_TOKENS = 1024
 MAX_EVIDENCE_TOKENS = 8192
 _PROMPT_PATH = Path(__file__).resolve().parents[2] / "prompts/answer/system.md"

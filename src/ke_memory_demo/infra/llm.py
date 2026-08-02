@@ -13,7 +13,7 @@ from typing import Any, Generic, Protocol, TypeVar, cast
 from openai import AsyncOpenAI
 from pydantic import BaseModel, TypeAdapter, ValidationError
 
-from ke_memory_demo.core.json import JsonObject, JsonValue
+from ke_memory_demo.core.json import JsonObject, JsonValue, canonical_json
 from ke_memory_demo.settings import AppSettings, ModelSettings
 
 from .redaction import redact_text, redact_tree
@@ -388,7 +388,10 @@ class StructuredModelClient:
         messages: list[JsonObject],
     ) -> dict[str, Any]:
         response_format: JsonObject
-        if self._supports_json_schema:
+        # A caller may request schema mode, but a model whose provider rejects
+        # json_schema cannot use it. The narrower of the two wins.
+        schema_mode = self._supports_json_schema and self._settings.supports_json_schema
+        if schema_mode:
             response_format = {
                 "type": "json_schema",
                 "json_schema": {
@@ -400,15 +403,44 @@ class StructuredModelClient:
         else:
             response_format = {"type": "json_object"}
 
+        if not schema_mode:
+            # DeepSeek rejects json_object mode unless the prompt itself mentions
+            # json: "Prompt must contain the word 'json' in some form to use
+            # 'response_format' of type 'json_object'." In json_object mode the
+            # provider also enforces no schema, so the caller's schema has to be
+            # stated in the prompt anyway. Appending it here keeps every call site
+            # and prompt file free of a provider-specific quirk.
+            messages = [*messages, self._json_mode_instruction(model_type)]
+
         request: dict[str, Any] = {
             "model": self._settings.model,
             "messages": [dict(message) for message in messages],
             "max_completion_tokens": self._settings.max_output_tokens,
             "response_format": response_format,
         }
+        if self._settings.disable_thinking:
+            # The OpenAI SDK rejects unknown top-level kwargs, so a provider-specific
+            # control has to travel in extra_body to reach the wire.
+            request["extra_body"] = {"thinking": {"type": "disabled"}}
         if not self._settings.model.lower().startswith(_NO_TEMPERATURE_PREFIXES):
             request["temperature"] = self._settings.temperature
         return request
+
+    @staticmethod
+    def _json_mode_instruction(model_type: type[BaseModel]) -> JsonObject:
+        """State the required JSON shape for providers that enforce no schema.
+
+        Carries the literal word "json" so DeepSeek accepts json_object mode, and
+        carries the schema so the model still knows the exact shape it must return.
+        """
+        schema = canonical_json(cast(JsonObject, model_type.model_json_schema())).decode("utf-8")
+        return {
+            "role": "user",
+            "content": (
+                "Return only a single json object, with no prose and no code fence, "
+                f"conforming exactly to this json schema: {schema}"
+            ),
+        }
 
     def _validated_messages(self, messages: Sequence[Mapping[str, object]]) -> list[JsonObject]:
         try:
