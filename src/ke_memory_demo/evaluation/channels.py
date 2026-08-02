@@ -98,6 +98,9 @@ class PublicSession(_Record):
     turns: tuple[PublicTurn, ...]
     metadata: JsonObject = Field(default_factory=dict)
 
+    def turn_handles(self) -> tuple[str, ...]:
+        return tuple(t.evidence_handle for t in self.turns)
+
     @model_validator(mode="after")
     def _validate_metadata(self) -> PublicSession:
         _reject_unlisted(self.metadata, ALLOWED_SESSION_METADATA, f"session {self.session_handle}")
@@ -343,6 +346,21 @@ def assert_build_input_is_blind(
                 f"build-input metadata distinguishes the gold evidence subset for "
                 f"{label.question_id}"
             )
+
+
+def session_membership(build_input: MemoryBuildInput) -> dict[str, tuple[str, ...]]:
+    """Map each session handle to the turn handles beneath it.
+
+    Gold in LongMemEval names sessions while selection is scored per turn. Before handles
+    became opaque a turn handle carried its session as a prefix, so membership was implicit;
+    now it has to be published, or a session-level gold reference resolves to nothing and
+    every such question is misread as an extraction failure.
+    """
+    return {
+        session.session_handle: session.turn_handles()
+        for conversation in build_input.conversations
+        for session in conversation.sessions
+    }
 
 
 def build_input_handles(build_input: MemoryBuildInput) -> dict[str, set[str]]:

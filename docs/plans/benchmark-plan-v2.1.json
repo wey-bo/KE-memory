@@ -777,7 +777,33 @@
  "status": "approved_plan_execution_not_started",
  "track_status": {
   "contract_freeze": {
+   "artifact": "artifacts/stage-1a/contract-freeze.json",
+   "eligibility": {
+    "coverage": "22/32",
+    "ineligible_item_ids": [
+     "BEAM-100K-C001-abstention-001",
+     "BEAM-100K-C001-abstention-002",
+     "BEAM-100K-C001-contradiction_resolution-001",
+     "BEAM-100K-C001-contradiction_resolution-002",
+     "BEAM-100K-C001-knowledge_update-001",
+     "BEAM-100K-C001-knowledge_update-002",
+     "BEAM-100K-C001-multi_session_reasoning-001",
+     "BEAM-100K-C001-multi_session_reasoning-002",
+     "BEAM-100K-C001-temporal_reasoning-001",
+     "BEAM-100K-C001-temporal_reasoning-002"
+    ]
+   },
    "exit": "every item hashed separately, then the eligible set and coverage recomputed",
+   "hashes": {
+    "combined_hash_of_hashes": "9ab4213f2456457bb04639574982dd97f1e7a5062972849afb3834addee63836",
+    "combined_hash_scope": "SHA-256 over the four hashes above; a convenience digest that must not be cited in place of the individual four",
+    "hash_scope": "each digest is SHA-256 over the canonical JSON of its own contract section only, so a change to one contract moves exactly one hash",
+    "over_limit_policy_sha256": "945f5c0193572fe136b24181a3e60066bf0e0dac5eaa578dc2c9a9344a5ebee4",
+    "reserve_sha256": "6202f16af00a69d92cdad25d2cda3b13ebf23bee0d997c0bd24d6c59b34962b3",
+    "serialization_sha256": "a5adeaf2739cd3f03a93d1ef803f401d7f4efca055f35dade8e4e980f3f53af3",
+    "tokenizer_sha256": "ff6ce2ee1086f1c3b577ed4f54d5587a1339843259692219a717e1e3e6eabbfa"
+   },
+   "independent_verification": "the four section hashes were recomputed from the artifact and matched; the reserve arithmetic was checked to be self-consistent (124285 = 128000 - 116 - 15 - 1024 - 2560); and the eligible set was recounted from the slice, giving 22 eligible and 10 ineligible, all BEAM, with a 112810-token gap between the largest eligible and smallest ineligible item",
    "items": [
     "tokenizer name, version, implementation, parameters and counting method",
     "exact byte representation of system, prompt and turn serialization",
@@ -785,12 +811,31 @@
     "over-limit policy fixed to not_executed_context_limit"
    ],
    "judge_dependency": "none; the judge key does not gate this track",
-   "status": "blocked_on_harness_commit"
+   "reserve_arithmetic": "128000 context - 116 system - 15 envelope - 1024 output - 2560 margin (2%) = 124285 evidence",
+   "residual_caveats": [
+    "the tokenizer remains a non-authoritative character approximation, so every figure bounds instrumentation and cannot guarantee a request fits the model context",
+    "the 128000 context window is vendor-published, not measured against the API"
+   ],
+   "status": "frozen",
+   "zero_delta_explanation": "coverage stayed at 22/32 even though measurement became stricter (serialization overhead now charged, up to 6610 tokens) and the budget tightened by 643. The set held because the slice is bimodal by a margin far wider than either change, which the artifact measures rather than asserts."
   },
   "corpus_discovery": {
+   "ambiguous_count": 243,
+   "artifacts": [
+    "artifacts/stage-1b/discovery-report.json",
+    "artifacts/stage-1b/issue-ledger.json"
+   ],
    "attribution_rule": "failures may not be attributed wholesale to ontology insufficiency",
    "build_rule": "the builder receives conversations only; questions and gold load in the controller after the sandboxed build exits",
+   "classifier_defects_found": [
+    "a first run reported 78 of 79 observations as extraction failures; session-level gold references were compared against turn handles, which opaque handles made impossible to resolve by prefix",
+    "a second run reported 243 of 244 after the expansion was fixed, because the unresolvable check still subtracted turn handles from session references",
+    "both were classifier defects rather than findings; a near-total concentration in one class is the signal that the classifier is wrong"
+   ],
+   "corpus": "longmemeval-oracle, 500 conversations, built once inside the sandbox",
    "entry": "a clean commit of the frozen harness",
+   "excluded_retired_slice_items": 12,
+   "held_out_untouched": "enforced mechanically by assert_held_out_untouched, not asserted",
    "issue_ledger_classes": [
     "extraction and structural errors",
     "entity, role and predicate normalization gaps",
@@ -802,7 +847,24 @@
     "context-limit and coverage issues"
    ],
    "judge_dependency": "none; this is why the tracks were split",
-   "status": "blocked_on_harness_commit"
+   "ledger_counts": {
+    "context_coverage": 1,
+    "evidence_closure": 78,
+    "extraction_structural": 0,
+    "normalization_gap": 0,
+    "ontology_gap": 0,
+    "query_compiler": 165,
+    "retrieval_ranking": 0,
+    "semantic_handling": 0
+   },
+   "ontology_gap_share": 0.0,
+   "pipeline_caveat": "the pipeline is the lexical fixture, not the ontology backend, so the ledger locates where a real backend must do better and is not a measurement of the ontology",
+   "splits": {
+    "discovery": 244,
+    "held_out": 147,
+    "validation": 97
+   },
+   "status": "first_pass_complete"
   },
   "formal_benchmark": {
    "judge_dependency": "hard; the judge key must be rotated first and no judge call is permitted before then",
@@ -810,10 +872,12 @@
    "status": "blocked_on_key_rotation_and_contract_freeze"
   },
   "harness_review": {
+   "commit": "76b1980",
    "exit": "reviewer accepts, then a clean commit records code, report, test log and sandbox manifest hashes",
+   "freeze_record": "artifacts/stage-0.5/freeze-record.json",
    "scope_frozen": true,
    "scope_note": "Round-four scope is closed: no new threat model or architectural requirement is in scope. The seven verification points are addressed and each is backed by a test.",
-   "status": "awaiting_reviewer_verification"
+   "status": "frozen_and_committed"
   },
   "rationale": "A single plan status let the judge key block everything, including corpus analysis that does not need a judge at all. Four independent statuses let corpus discovery start as soon as the harness is frozen."
  }

@@ -1,0 +1,127 @@
+{
+ "attribution_discipline": {
+  "ambiguity_rule": "where the signals cannot separate two classes, both are recorded and the observation is marked ambiguous rather than assigned to the convenient one",
+  "ontology_gap_caveat": "a high ontology_gap_share is a warning about the classification, not a finding about the ontology",
+  "rule": "a class is assigned only when its own evidence is present"
+ },
+ "corpus": {
+  "build_input_sha256": "d2be5b43b296925556f9c05ce6ce4388fab06323067f78293f7290c985a6d4bb",
+  "conversations": 500,
+  "corpus_id": "longmemeval-oracle",
+  "memory_artifact_sha256": "01a7e406ce4d264b3a38086da96229bc1387ba30855cd1fda49254207e48333a",
+  "questions": 500,
+  "single_build_rule": "one build and one extraction per frozen corpus",
+  "source": "/public/home/wwb/datasets/LongMemEval/longmemeval_oracle.json"
+ },
+ "held_out_untouched": true,
+ "inspected_count": 244,
+ "judge": "not called; this track has no judge dependency",
+ "ledger": {
+  "ambiguous_count": 243,
+  "class_evidence_requirements": {
+   "context_coverage": "the conversation or evidence exceeded a frozen budget, so no selection could have succeeded",
+   "evidence_closure": "the selected evidence is individually correct but does not close: a derivation or supporting span is missing",
+   "extraction_structural": "a surface unit is missing, malformed, or split or merged wrongly, independent of any ontology decision",
+   "normalization_gap": "the same entity, role or predicate appears under variant surface forms that were not unified, while the target concept itself exists",
+   "ontology_gap": "no existing type, relation or operator can express the fact, so normalization could not have fixed it",
+   "query_compiler": "the question compiled to a plan that does not express what was asked, or was declared unsupported while the memory holds the answer",
+   "retrieval_ranking": "the gold evidence is present and expressible, and the plan is right, but the evidence was not selected or was ranked below the cut",
+   "semantic_handling": "abstention, time, modality, negation, conflict or supersession was handled wrongly, with the relevant evidence present"
+  },
+  "counts_by_class": {
+   "context_coverage": 1,
+   "evidence_closure": 78,
+   "extraction_structural": 0,
+   "normalization_gap": 0,
+   "ontology_gap": 0,
+   "query_compiler": 165,
+   "retrieval_ranking": 0,
+   "semantic_handling": 0
+  },
+  "observation_count": 244,
+  "ontology_gap_share": 0.0
+ },
+ "pipeline_caveat": "the pipeline here is the lexical fixture, not the ontology backend, so these observations locate where a real backend must do better; they are not a measurement of the ontology",
+ "sandbox": {
+  "evidence_basis": "observed_* fields are read from the child's own /proc/self/mountinfo, /proc/self/fd and directory listings, not asserted by the parent",
+  "gold_channel_mounted": false,
+  "intended_mounts": [
+   "/interp (ro, copied interpreter)",
+   "/usr (ro)",
+   "/lib (resolved through /usr)",
+   "/lib64 (resolved through /usr)",
+   "/dev/{urandom,null,zero} (only these three nodes)",
+   "/proc (fresh procfs in a private PID namespace)",
+   "/staging (the builder module file, and nothing else)",
+   "/tmp (empty tmpfs)"
+  ],
+  "namespaces": [
+   "user",
+   "mount",
+   "network",
+   "pid"
+  ],
+  "observed_fd_count": 4,
+  "observed_mount_points": [
+   "/",
+   "/dev/null",
+   "/dev/urandom",
+   "/dev/zero",
+   "/interp",
+   "/proc",
+   "/usr"
+  ],
+  "observed_network_interfaces": [],
+  "observed_root_entries": [
+   "dev",
+   "interp",
+   "lib",
+   "lib64",
+   "proc",
+   "staging",
+   "tmp",
+   "usr"
+  ],
+  "observed_staging_entries": [
+   "_child.py",
+   "stage_0_5_builder.py"
+  ],
+  "question_channel_mounted": false,
+  "reconciled": true,
+  "reconciliation_notes": [],
+  "repository_mounted": false
+ },
+ "split_ids": {
+  "discovery_count": 244,
+  "excluded_retired_slice_items": [
+   "gpt4_2655b836",
+   "gpt4_2487a7cb",
+   "0a995998",
+   "6d550036",
+   "6a1eabeb",
+   "6aeb4375",
+   "8a2466db",
+   "06878be2",
+   "7161e7e2",
+   "c4f10528",
+   "e47becba",
+   "118b2229"
+  ],
+  "held_out_count": 147,
+  "validation_count": 97
+ },
+ "splits": {
+  "corpus_id": "longmemeval-oracle",
+  "counts": {
+   "discovery": 244,
+   "held_out": 147,
+   "validation": 97
+  },
+  "disjoint": true,
+  "excluded_count": 12,
+  "rule": "questions are ranked by sha256(salt + question_id) and partitioned, so the split is reproducible and independent of file order",
+  "salt": "ke-memory-discovery-v1"
+ },
+ "stage": "1b",
+ "status": "diagnostic_only"
+}
