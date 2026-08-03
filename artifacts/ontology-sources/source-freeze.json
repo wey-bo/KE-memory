@@ -1,0 +1,74 @@
+{
+  "combined_hash": null,
+  "entries": [
+    {
+      "acquisition": {
+        "licence": "WordNet 3.0 Licence (Princeton University); permissive, requires the copyright notice and disclaimer to be retained",
+        "raw_bytes": 10775600,
+        "raw_path": "/public/home/wwb/datasets/ontology-sources/wordnet-3.0-nltk.zip",
+        "raw_sha256": "cbda5ea6eef7f36a97a43d4a75f85e07fccbb4f23657d27b4ccbc93e2646ab59",
+        "resolved_version": "WordNet 3.0; nltk_data blob 3c68cd207844f071a5206f7fbed23e5c607ec02f (packages/corpora/wordnet.zip at gh-pages commit 550b6625bcef1f2abff2ff770a5a0d272c9c6b2a)",
+        "retrieved_at": "2026-08-03",
+        "status": "acquired",
+        "url": "https://api.github.com/repos/nltk/nltk_data/git/blobs/3c68cd207844f071a5206f7fbed23e5c607ec02f"
+      },
+      "artifact": "wordnet.json",
+      "parsed_counts": {
+        "lexnames": 45,
+        "synsets_a": 18156,
+        "synsets_n": 82115,
+        "synsets_r": 3621,
+        "synsets_total": 117659,
+        "synsets_v": 13767
+      },
+      "snapshot_sha256": "eba9d73958aea91f3b153495b13b378100e93b465b8d1d54889bd5a7c3e03689",
+      "source": "wordnet",
+      "status": "acquired"
+    },
+    {
+      "acquisition": {
+        "licence": "Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)",
+        "raw_bytes": 4192601,
+        "raw_path": "/public/home/wwb/datasets/ontology-sources/propbank-frames-3.4.0.tar.gz",
+        "raw_sha256": "3a9d4d25d8f29b5f536452630e2dd83823ca230c45a3fabde785df21a21957dd",
+        "resolved_version": "propbank-frames v3.4.0; tag commit 4087fa9ab5c40907c34ff91a56acc2cab1670145",
+        "retrieved_at": "2026-08-03",
+        "status": "acquired",
+        "url": "https://codeload.github.com/propbank/propbank-frames/tar.gz/refs/tags/v3.4.0"
+      },
+      "artifact": "propbank.json",
+      "parsed_counts": {
+        "frame_files": 7564,
+        "predicates": 9087,
+        "roles": 28616,
+        "rolesets": 11205
+      },
+      "snapshot_sha256": "1fd6e453dde2388e6da757ef17717dd1b3c3da082c3c210521707ba89bd0b086",
+      "source": "propbank",
+      "status": "acquired"
+    },
+    {
+      "acquisition": {
+        "licence": "Creative Commons Attribution-ShareAlike 3.0 (CC BY-SA 3.0)",
+        "raw_bytes": 1550917,
+        "raw_path": "/public/home/wwb/datasets/ontology-sources/schemaorg-30.0-current-https.jsonld",
+        "raw_sha256": "4467fa19edcb1d7fb3c46c0adf3591b7f870c4a60b7838bdb61694fd02864cf6",
+        "resolved_version": "schema.org 30.0; blob e69c25e9b6c3ab08557f80ad1c10dae0d6b25766 (data/releases/30.0/schemaorg-current-https.jsonld at release v30.0, commit 420231f6bfac8372fc564abb121fae57ccb36a0c)",
+        "retrieved_at": "2026-08-03",
+        "status": "acquired",
+        "url": "https://api.github.com/repos/schemaorg/schemaorg/git/blobs/e69c25e9b6c3ab08557f80ad1c10dae0d6b25766"
+      },
+      "artifact": "schemaorg.json",
+      "parsed_counts": {
+        "classes": 1010,
+        "enumeration_members": 533,
+        "graph_nodes": 3219,
+        "properties": 1676
+      },
+      "snapshot_sha256": "3d2d0175ed33a49afb124c8d4841ed1b6a17dcf44f7d688423b70abbf1f3d23a",
+      "source": "schemaorg",
+      "status": "acquired"
+    }
+  ],
+  "hash_scope": "SHA-256 over the canonical JSON of this source snapshot alone, excluding this freeze block; a change to another ontology source cannot move this digest"
+}

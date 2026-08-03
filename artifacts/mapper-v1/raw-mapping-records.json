@@ -1,0 +1,678 @@
+{
+ "mapper_identity": {
+  "ambiguity_margin": 0.15,
+  "mapper_id": "mapper-v1-lexical",
+  "mapper_version": "1.0.0",
+  "minimum_confidence": 0.1,
+  "o_l1_sha256": "a3ee1a25fd5cd71dc700822b9d540bf25956029d436dd6cee3bb26849d365648",
+  "o_l2_sha256": "7c34ad1b477deae86826758bf3be706f9a73b0513494c2616d8a23d17f439cec",
+  "top_k": 5
+ },
+ "note": "raw mapper output, preserved exactly as produced. No error here is corrected downstream.",
+ "records": {
+  "L1-001": {
+   "ambiguity_margin": 0.0,
+   "candidates": [
+    {
+     "confidence": 0.2,
+     "layer": "l1",
+     "matched_terms": [
+      "place"
+     ],
+     "ontology_id": "l1:attribute.place",
+     "sense": "where an entity or situation is located, at any granularity"
+    },
+    {
+     "confidence": 0.2,
+     "layer": "l1",
+     "matched_terms": [
+      "booked"
+     ],
+     "ontology_id": "l1:event.commitment_made",
+     "sense": "a bounded occurrence in which an arrangement comes into existence"
+    },
+    {
+     "confidence": 0.2,
+     "layer": "l1",
+     "matched_terms": [
+      "place"
+     ],
+     "ontology_id": "l1:predicate.occupy_role",
+     "sense": "a holder stands in a durable non-evaluative relation to a place, activity or entity"
+    },
+    {
+     "confidence": 0.2,
+     "layer": "l1",
+     "matched_terms": [
+      "place"
+     ],
+     "ontology_id": "l1:role.source_location",
+     "sense": "the place or state a movement or transition starts from"
+    },
+    {
+     "confidence": 0.2,
+     "layer": "l1",
+     "matched_terms": [
+      "place"
+     ],
+     "ontology_id": "l1:role.target_location",
+     "sense": "the place or state a movement or transition ends at"
+    }
+   ],
+   "expression_id": "expr-l1001",
+   "layer": "l1",
+   "resolution": "ambiguous",
+   "top_ontology_id": "l1:attribute.place",
+   "top_sense": "where an entity or situation is located, at any granularity"
+  },
+  "L1-002": {
+   "ambiguity_margin": 0.0,
+   "candidates": [
+    {
+     "confidence": 0.25,
+     "layer": "l1",
+     "matched_terms": [
+      "please"
+     ],
+     "ontology_id": "l1:modality.directed",
+     "sense": "presented as an instruction the addressee is expected to comply with"
+    },
+    {
+     "confidence": 0.25,
+     "layer": "l1",
+     "matched_terms": [
+      "cancel"
+     ],
+     "ontology_id": "l1:predicate.change_arrangement",
+     "sense": "the agent alters or withdraws an arrangement that already exists"
+    }
+   ],
+   "expression_id": "expr-l1002",
+   "layer": "l1",
+   "resolution": "ambiguous",
+   "top_ontology_id": "l1:modality.directed",
+   "top_sense": "presented as an instruction the addressee is expected to comply with"
+  },
+  "L1-003": {
+   "ambiguity_margin": 0.0,
+   "candidates": [
+    {
+     "confidence": 0.25,
+     "layer": "l1",
+     "matched_terms": [
+      "like"
+     ],
+     "ontology_id": "l1:modality.desired",
+     "sense": "presented as wanted by the holder, without commitment to bringing it about"
+    },
+    {
+     "confidence": 0.25,
+     "layer": "l1",
+     "matched_terms": [
+      "like"
+     ],
+     "ontology_id": "l1:predicate.hold_attitude",
+     "sense": "a holder stands in an evaluative relation to a theme, positively or negatively"
+    }
+   ],
+   "expression_id": "expr-l1003",
+   "layer": "l1",
+   "resolution": "ambiguous",
+   "top_ontology_id": "l1:modality.desired",
+   "top_sense": "presented as wanted by the holder, without commitment to bringing it about"
+  },
+  "L1-004": {
+   "ambiguity_margin": null,
+   "candidates": [],
+   "expression_id": "expr-l1004",
+   "layer": "l1",
+   "resolution": "unresolved",
+   "top_ontology_id": "",
+   "top_sense": ""
+  },
+  "L1-005": {
+   "ambiguity_margin": 0.0,
+   "candidates": [
+    {
+     "confidence": 0.25,
+     "layer": "l1",
+     "matched_terms": [
+      "can"
+     ],
+     "ontology_id": "l1:attribute.availability",
+     "sense": "whether an entity can currently be obtained or used"
+    },
+    {
+     "confidence": 0.25,
+     "layer": "l1",
+     "matched_terms": [
+      "can"
+     ],
+     "ontology_id": "l1:attribute.magnitude",
+     "sense": "a quantity on an ordered scale, so two values of it can be compared"
+    },
+    {
+     "confidence": 0.25,
+     "layer": "l1",
+     "matched_terms": [
+      "look"
+     ],
+     "ontology_id": "l1:predicate.seek_information",
+     "sense": "the agent tries to obtain information about a theme without changing anything"
+    },
+    {
+     "confidence": 0.25,
+     "layer": "l1",
+     "matched_terms": [
+      "can"
+     ],
+     "ontology_id": "l1:state.capability_constraint",
+     "sense": "a standing limit on what the holder can do or accept, not a matter of taste"
+    },
+    {
+     "confidence": 0.25,
+     "layer": "l1",
+     "matched_terms": [
+      "can"
+     ],
+     "ontology_id": "l1:task.outstanding_requirement",
+     "sense": "a specific piece of information or action still missing before an intention can complete"
+    }
+   ],
+   "expression_id": "expr-l1005",
+   "layer": "l1",
+   "resolution": "ambiguous",
+   "top_ontology_id": "l1:attribute.availability",
+   "top_sense": "whether an entity can currently be obtained or used"
+  },
+  "L1-006": {
+   "ambiguity_margin": null,
+   "candidates": [
+    {
+     "confidence": 0.333333,
+     "layer": "l1",
+     "matched_terms": [
+      "work"
+     ],
+     "ontology_id": "l1:predicate.occupy_role",
+     "sense": "a holder stands in a durable non-evaluative relation to a place, activity or entity"
+    }
+   ],
+   "expression_id": "expr-l1006",
+   "layer": "l1",
+   "resolution": "mapped",
+   "top_ontology_id": "l1:predicate.occupy_role",
+   "top_sense": "a holder stands in a durable non-evaluative relation to a place, activity or entity"
+  },
+  "L1-007": {
+   "ambiguity_margin": null,
+   "candidates": [
+    {
+     "confidence": 0.2,
+     "layer": "l1",
+     "matched_terms": [
+      "watched"
+     ],
+     "ontology_id": "l1:event.media_consumption",
+     "sense": "a bounded occurrence of experiencing a content item"
+    }
+   ],
+   "expression_id": "expr-l1007",
+   "layer": "l1",
+   "resolution": "mapped",
+   "top_ontology_id": "l1:event.media_consumption",
+   "top_sense": "a bounded occurrence of experiencing a content item"
+  },
+  "L1-008": {
+   "ambiguity_margin": 0.6,
+   "candidates": [
+    {
+     "confidence": 0.8,
+     "layer": "l1",
+     "matched_terms": [
+      "did",
+      "failed",
+      "not",
+      "through"
+     ],
+     "ontology_id": "l1:event.attempt_failed",
+     "sense": "a bounded occurrence in which an intended action did not achieve its result"
+    },
+    {
+     "confidence": 0.2,
+     "layer": "l1",
+     "matched_terms": [
+      "not"
+     ],
+     "ontology_id": "l1:polarity.denied",
+     "sense": "the assertion is stated not to hold, which is content and not absence of content"
+    },
+    {
+     "confidence": 0.2,
+     "layer": "l1",
+     "matched_terms": [
+      "not"
+     ],
+     "ontology_id": "l1:role.holder",
+     "sense": "the participant a state or preference is true of, who need not act for it to hold"
+    },
+    {
+     "confidence": 0.2,
+     "layer": "l1",
+     "matched_terms": [
+      "not"
+     ],
+     "ontology_id": "l1:state.capability_constraint",
+     "sense": "a standing limit on what the holder can do or accept, not a matter of taste"
+    },
+    {
+     "confidence": 0.2,
+     "layer": "l1",
+     "matched_terms": [
+      "not"
+     ],
+     "ontology_id": "l1:state.pending_arrangement",
+     "sense": "an arrangement exists and its obligations have not yet been discharged"
+    }
+   ],
+   "expression_id": "expr-l1008",
+   "layer": "l1",
+   "resolution": "mapped",
+   "top_ontology_id": "l1:event.attempt_failed",
+   "top_sense": "a bounded occurrence in which an intended action did not achieve its result"
+  },
+  "L1-009": {
+   "ambiguity_margin": 0.333334,
+   "candidates": [
+    {
+     "confidence": 0.666667,
+     "layer": "l1",
+     "matched_terms": [
+      "called",
+      "off"
+     ],
+     "ontology_id": "l1:event.commitment_withdrawn",
+     "sense": "a bounded occurrence that ends an existing arrangement without fulfilling it"
+    },
+    {
+     "confidence": 0.333333,
+     "layer": "l1",
+     "matched_terms": [
+      "called"
+     ],
+     "ontology_id": "l1:attribute.designation",
+     "sense": "the name by which an entity is referred to, which identifies without describing"
+    }
+   ],
+   "expression_id": "expr-l1009",
+   "layer": "l1",
+   "resolution": "mapped",
+   "top_ontology_id": "l1:event.commitment_withdrawn",
+   "top_sense": "a bounded occurrence that ends an existing arrangement without fulfilling it"
+  },
+  "L1-010": {
+   "ambiguity_margin": 0.333333,
+   "candidates": [
+    {
+     "confidence": 0.5,
+     "layer": "l1",
+     "matched_terms": [
+      "sooner",
+      "than",
+      "would"
+     ],
+     "ontology_id": "l1:preference.comparative",
+     "sense": "the holder ranks one theme above another, which neither theme's affinity alone states"
+    },
+    {
+     "confidence": 0.166667,
+     "layer": "l1",
+     "matched_terms": [
+      "than"
+     ],
+     "ontology_id": "l1:attribute.assessment",
+     "sense": "an evaluative score attributed to an entity by parties other than the current holder"
+    },
+    {
+     "confidence": 0.166667,
+     "layer": "l1",
+     "matched_terms": [
+      "would"
+     ],
+     "ontology_id": "l1:modality.desired",
+     "sense": "presented as wanted by the holder, without commitment to bringing it about"
+    },
+    {
+     "confidence": 0.166667,
+     "layer": "l1",
+     "matched_terms": [
+      "than"
+     ],
+     "ontology_id": "l1:preference.threshold",
+     "sense": "the holder wants an attribute to stay within a bound, rather than favouring a theme"
+    },
+    {
+     "confidence": 0.166667,
+     "layer": "l1",
+     "matched_terms": [
+      "than"
+     ],
+     "ontology_id": "l1:time.recurring",
+     "sense": "the situation holds repeatedly on some cycle rather than once"
+    }
+   ],
+   "expression_id": "expr-l1010",
+   "layer": "l1",
+   "resolution": "mapped",
+   "top_ontology_id": "l1:preference.comparative",
+   "top_sense": "the holder ranks one theme above another, which neither theme's affinity alone states"
+  },
+  "L1-011": {
+   "ambiguity_margin": 0.2,
+   "candidates": [
+    {
+     "confidence": 0.4,
+     "layer": "l1",
+     "matched_terms": [
+      "more",
+      "than"
+     ],
+     "ontology_id": "l1:preference.threshold",
+     "sense": "the holder wants an attribute to stay within a bound, rather than favouring a theme"
+    },
+    {
+     "confidence": 0.2,
+     "layer": "l1",
+     "matched_terms": [
+      "than"
+     ],
+     "ontology_id": "l1:attribute.assessment",
+     "sense": "an evaluative score attributed to an entity by parties other than the current holder"
+    },
+    {
+     "confidence": 0.2,
+     "layer": "l1",
+     "matched_terms": [
+      "than"
+     ],
+     "ontology_id": "l1:preference.comparative",
+     "sense": "the holder ranks one theme above another, which neither theme's affinity alone states"
+    },
+    {
+     "confidence": 0.2,
+     "layer": "l1",
+     "matched_terms": [
+      "than"
+     ],
+     "ontology_id": "l1:time.recurring",
+     "sense": "the situation holds repeatedly on some cycle rather than once"
+    },
+    {
+     "confidence": 0.2,
+     "layer": "l1",
+     "matched_terms": [
+      "than"
+     ],
+     "ontology_id": "l1:time.spanning",
+     "sense": "the situation holds over an interval rather than at a point"
+    }
+   ],
+   "expression_id": "expr-l1011",
+   "layer": "l1",
+   "resolution": "mapped",
+   "top_ontology_id": "l1:preference.threshold",
+   "top_sense": "the holder wants an attribute to stay within a bound, rather than favouring a theme"
+  },
+  "L1-012": {
+   "ambiguity_margin": null,
+   "candidates": [
+    {
+     "confidence": 0.333333,
+     "layer": "l1",
+     "matched_terms": [
+      "change"
+     ],
+     "ontology_id": "l1:predicate.change_arrangement",
+     "sense": "the agent alters or withdraws an arrangement that already exists"
+    }
+   ],
+   "expression_id": "expr-l1012",
+   "layer": "l1",
+   "resolution": "mapped",
+   "top_ontology_id": "l1:predicate.change_arrangement",
+   "top_sense": "the agent alters or withdraws an arrangement that already exists"
+  },
+  "L1-013": {
+   "ambiguity_margin": 0.0,
+   "candidates": [
+    {
+     "confidence": 0.25,
+     "layer": "l1",
+     "matched_terms": [
+      "has"
+     ],
+     "ontology_id": "l1:qualifier.assertion_standing",
+     "sense": "whether the assertion still stands or has been replaced by a later one"
+    },
+    {
+     "confidence": 0.25,
+     "layer": "l1",
+     "matched_terms": [
+      "has"
+     ],
+     "ontology_id": "l1:source_status.derived",
+     "sense": "the content was inferred from other content and has no independent source of its own"
+    },
+    {
+     "confidence": 0.25,
+     "layer": "l1",
+     "matched_terms": [
+      "has"
+     ],
+     "ontology_id": "l1:standing.current",
+     "sense": "no later assertion has replaced this one"
+    },
+    {
+     "confidence": 0.25,
+     "layer": "l1",
+     "matched_terms": [
+      "has"
+     ],
+     "ontology_id": "l1:state.possession",
+     "sense": "a holder has something at their disposal over an interval"
+    },
+    {
+     "confidence": 0.25,
+     "layer": "l1",
+     "matched_terms": [
+      "has"
+     ],
+     "ontology_id": "l1:task.declared_intention",
+     "sense": "the agent states an aim it has not yet achieved, at a granularity resolvable in one turn"
+    }
+   ],
+   "expression_id": "expr-l1013",
+   "layer": "l1",
+   "resolution": "ambiguous",
+   "top_ontology_id": "l1:qualifier.assertion_standing",
+   "top_sense": "whether the assertion still stands or has been replaced by a later one"
+  },
+  "L1-014": {
+   "ambiguity_margin": 0.0,
+   "candidates": [
+    {
+     "confidence": 0.25,
+     "layer": "l1",
+     "matched_terms": [
+      "then"
+     ],
+     "ontology_id": "l1:task.abandoned_intention",
+     "sense": "an aim the agent declared and then gave up without achieving it"
+    },
+    {
+     "confidence": 0.25,
+     "layer": "l1",
+     "matched_terms": [
+      "right"
+     ],
+     "ontology_id": "l1:time.at_assertion",
+     "sense": "the situation holds at the moment of assertion"
+    }
+   ],
+   "expression_id": "expr-l1014",
+   "layer": "l1",
+   "resolution": "ambiguous",
+   "top_ontology_id": "l1:task.abandoned_intention",
+   "top_sense": "an aim the agent declared and then gave up without achieving it"
+  },
+  "L1-015": {
+   "ambiguity_margin": null,
+   "candidates": [
+    {
+     "confidence": 0.166667,
+     "layer": "l1",
+     "matched_terms": [
+      "price"
+     ],
+     "ontology_id": "l1:attribute.magnitude",
+     "sense": "a quantity on an ordered scale, so two values of it can be compared"
+    }
+   ],
+   "expression_id": "expr-l1015",
+   "layer": "l1",
+   "resolution": "mapped",
+   "top_ontology_id": "l1:attribute.magnitude",
+   "top_sense": "a quantity on an ordered scale, so two values of it can be compared"
+  },
+  "L2-001": {
+   "ambiguity_margin": 0.0,
+   "candidates": [
+    {
+     "confidence": 0.166667,
+     "layer": "l2",
+     "matched_terms": [
+      "every"
+     ],
+     "ontology_id": "l2:abstraction.habit",
+     "sense": "a behaviour a subject repeats on distinct occasions, evidenced by the repetitions"
+    },
+    {
+     "confidence": 0.166667,
+     "layer": "l2",
+     "matched_terms": [
+      "running"
+     ],
+     "ontology_id": "l2:abstraction.standing_condition",
+     "sense": "a circumstance treated as continuing to hold until something is observed to end it"
+    },
+    {
+     "confidence": 0.166667,
+     "layer": "l2",
+     "matched_terms": [
+      "every"
+     ],
+     "ontology_id": "l2:evidence.supports_addressable",
+     "sense": "every abstraction must name the observations it rests on, individually and retrievably"
+    },
+    {
+     "confidence": 0.166667,
+     "layer": "l2",
+     "matched_terms": [
+      "every"
+     ],
+     "ontology_id": "l2:pattern.constraint_union",
+     "sense": "collect every restriction stated about one target and keep them all, including conflicts"
+    },
+    {
+     "confidence": 0.166667,
+     "layer": "l2",
+     "matched_terms": [
+      "every"
+     ],
+     "ontology_id": "l2:role.subject",
+     "sense": "the party an abstraction is about, which every supporting observation must concern"
+    }
+   ],
+   "expression_id": "expr-l2001",
+   "layer": "l2",
+   "resolution": "ambiguous",
+   "top_ontology_id": "l2:abstraction.habit",
+   "top_sense": "a behaviour a subject repeats on distinct occasions, evidenced by the repetitions"
+  },
+  "L2-002": {
+   "ambiguity_margin": null,
+   "candidates": [
+    {
+     "confidence": 0.166667,
+     "layer": "l2",
+     "matched_terms": [
+      "trying"
+     ],
+     "ontology_id": "l2:abstraction.task",
+     "sense": "one aim tracked across turns, from the moment it is declared until it closes or lapses"
+    }
+   ],
+   "expression_id": "expr-l2002",
+   "layer": "l2",
+   "resolution": "mapped",
+   "top_ontology_id": "l2:abstraction.task",
+   "top_sense": "one aim tracked across turns, from the moment it is declared until it closes or lapses"
+  },
+  "L2-003": {
+   "ambiguity_margin": 0.125,
+   "candidates": [
+    {
+     "confidence": 0.25,
+     "layer": "l2",
+     "matched_terms": [
+      "has",
+      "one"
+     ],
+     "ontology_id": "l2:abstraction.value_history",
+     "sense": "the ordered series of values one attribute of one subject has taken, with the current one"
+    },
+    {
+     "confidence": 0.125,
+     "layer": "l2",
+     "matched_terms": [
+      "one"
+     ],
+     "ontology_id": "l2:abstraction.preference_profile",
+     "sense": "the standing set of a subject's likes and dislikes in one area, with their conflicts kept"
+    },
+    {
+     "confidence": 0.125,
+     "layer": "l2",
+     "matched_terms": [
+      "one"
+     ],
+     "ontology_id": "l2:abstraction.project",
+     "sense": "several tasks pursued under one outcome, where no single task achieves that outcome"
+    },
+    {
+     "confidence": 0.125,
+     "layer": "l2",
+     "matched_terms": [
+      "one"
+     ],
+     "ontology_id": "l2:abstraction.task",
+     "sense": "one aim tracked across turns, from the moment it is declared until it closes or lapses"
+    },
+    {
+     "confidence": 0.125,
+     "layer": "l2",
+     "matched_terms": [
+      "one"
+     ],
+     "ontology_id": "l2:pattern.constraint_union",
+     "sense": "collect every restriction stated about one target and keep them all, including conflicts"
+    }
+   ],
+   "expression_id": "expr-l2003",
+   "layer": "l2",
+   "resolution": "ambiguous",
+   "top_ontology_id": "l2:abstraction.value_history",
+   "top_sense": "the ordered series of values one attribute of one subject has taken, with the current one"
+  }
+ }
+}

@@ -743,6 +743,212 @@
   "resumption_rule": "A partial run is never resumed. Continuing requires a separately pre-registered fresh sample and an explicit user decision, which is the same mandatory_stop boundary that governs a completed run."
  },
  "program_plan": {
+  "mapper_v1": {
+   "artifacts": [
+    "artifacts/mapper-v1/blind-validation-report.json",
+    "artifacts/mapper-v1/raw-mapping-records.json"
+   ],
+   "attribution_classes": [
+    "ontology missing",
+    "ontology sense, alias or type defect",
+    "mapper candidate generation",
+    "mapper ranking or disambiguation",
+    "genuine ambiguity",
+    "annotation disagreement"
+   ],
+   "attribution_rule": "no single owner is forced",
+   "blindness_evidence": {
+    "enforced_by": "MapperInput has no field for any of these and forbids extras; expression_id is rejected if it discloses dataset identity",
+    "forbidden_and_absent": [
+     "question",
+     "gold",
+     "split",
+     "dataset name",
+     "sample id"
+    ],
+    "gold_consulted_after_mapping": true,
+    "mapper_inputs": [
+     "expression_id (opaque)",
+     "speaker",
+     "text"
+    ]
+   },
+   "chain_installation": {
+    "instrument_criteria_still_hold": {
+     "artifact_consumed": true,
+     "artifact_sha256": "ba0a3af7685b2a982919df072c6a96c227255ede470a3b1a5be4bbe802d11c1f",
+     "artifact_turns_read": 6092,
+     "builder_id": "stage-2-handle-index-builder",
+     "gold_retrieval_oracle_exact": 1.0,
+     "gold_retrieval_requirement_met": true,
+     "no_gold_in_chain_output": true,
+     "substitution_changes_only_target_and_downstream": true
+    },
+    "rerun_rule": "the 32 items were rerun only to revalidate trace, artifact consumption and oracles; not a fresh evaluation",
+    "selection_after": "23/32",
+    "slots": [
+     "mapping",
+     "query_plan"
+    ],
+    "status": "installed",
+    "why_two_slots": "installing the mapper in the mapping slot alone drove selection from 19 of 32 to 0 of 32. The mapper was correct; the planner was the unmigrated layer, still emitting lex:* terms against l1:* ontology ids, so no plan could intersect a mapping. A mapper is only usable when the query side shares its vocabulary."
+   },
+   "chain_installation_rule": "mapper v1 replaces the lexical mapping slot, then the 32 items are rerun only to confirm the trace, artifact consumption and oracles still hold. That slice is not re-treated as a fresh evaluation.",
+   "defects_found_in_mapper_v1": [
+    {
+     "defect": "confidence normalised only by the item vocabulary, so a single decisive alias hit scored 1/12 and fell under the floor",
+     "fix": "confidence is the stronger of item recall and utterance precision",
+     "symptom": "every utterance mapped to nothing, including \"cancel my flight reservation\""
+    },
+    {
+     "defect": "the no-correction-gate check scanned raw text and matched its own banned-name list",
+     "fix": "parse the module and inspect defined function names instead of substrings",
+     "symptom": "the checker reported itself as a violation and the run aborted"
+    }
+   ],
+   "gold": {
+    "ambiguous_cases": 1,
+    "case_count": 18,
+    "negative_cases": 4,
+    "novel_cases": 2,
+    "provenance_rule": "each case was written by reading an O_L1 or O_L2 item and composing an utterance that should evoke it. No case was derived from any benchmark question or evidence gold.",
+    "review_counts": {
+     "double_review": 7,
+     "single_review": 11
+    }
+   },
+   "gold_rule": "mapping gold is authored independently and never back-derived from evidence gold. Clear items get a single review; novel, ambiguous, L2 and disputed items get a second independent adjudication, which keeps the manual volume bounded.",
+   "input_rule": "natural expression plus the frozen O_L1/O_L2 only. Questions, gold, split, dataset name and sample ids are all forbidden inputs.",
+   "mapper_freeze_hash": "444f60f45e5ee2c507e36a2d48b09359ea0942a3b389683cf857ce3d7c1e4b74",
+   "metric_rule": "reported separately for L1 and L2",
+   "metrics": [
+    "coverage",
+    "sense accuracy",
+    "ambiguity",
+    "unresolved",
+    "mis-mapping",
+    "false merge",
+    "false split"
+   ],
+   "order": [
+    "freeze mapper v1",
+    "build independent mapping gold",
+    "one-shot validation blind run",
+    "failure attribution",
+    "install mapper v1 into the nine-stage chain"
+   ],
+   "output_rule": "raw top-k candidates, sense, confidence, ambiguity and unresolved are preserved. No semantic correction gate, no post-hoc repair of an error.",
+   "results": {
+    "attribution_class_mentions": {
+     "annotation_disagreement": 1,
+     "genuine_ambiguity": 1,
+     "mapper_candidate_generation": 1,
+     "mapper_ranking_disambiguation": 10,
+     "ontology_missing": 2,
+     "ontology_sense_alias_type_defect": 4
+    },
+    "attribution_rule": "a failure is assigned to every class its evidence admits; no single owner is forced. The mentions therefore sum above the failure count.",
+    "metrics_l1": {
+     "ambiguity_rate": 0.4,
+     "case_count": 15,
+     "coverage": 0.9333333333333333,
+     "coverage_note": "fraction of cases where the mapper returned any candidate",
+     "false_merge": 2,
+     "false_positive_denominator": 3,
+     "false_positive_on_negatives": 3,
+     "false_split": 4,
+     "mis_mapping_rate": 0.36363636363636365,
+     "negative_cases": 3,
+     "positive_cases": 11,
+     "sense_accuracy": 0.5454545454545454,
+     "sense_accuracy_denominator": 11,
+     "unresolved_rate": 0.06666666666666667
+    },
+    "metrics_l2": {
+     "ambiguity_rate": 0.6666666666666666,
+     "case_count": 3,
+     "coverage": 1.0,
+     "coverage_note": "fraction of cases where the mapper returned any candidate",
+     "false_merge": 0,
+     "false_positive_denominator": 1,
+     "false_positive_on_negatives": 1,
+     "false_split": 1,
+     "mis_mapping_rate": 0.5,
+     "negative_cases": 1,
+     "positive_cases": 2,
+     "sense_accuracy": 0.5,
+     "sense_accuracy_denominator": 2,
+     "unresolved_rate": 0.0
+    },
+    "overall": {
+     "cases": 18,
+     "correct": 7,
+     "correct_rate": 0.3888888888888889
+    }
+   },
+   "standing": "diagnostic. The mapper is lexical over a seed ontology and the gold set is 18 authored cases, so these figures detect gross behaviour rather than production mapping accuracy.",
+   "status": "blind_validation_complete_pending_review"
+  },
+  "ontology_source_debt": {
+   "effect_on_ontology_v1": "the sourcing bar on calling v1 a broad foundation ontology is lifted. The seed is still 67 and 20 items, so breadth remains a question of content rather than provenance.",
+   "hash_rule": "one independent sha256 per source; no combined digest stands in for the three",
+   "independent_verification": "the three raw archive hashes were recomputed from /public/home/wwb/datasets/ontology-sources and matched the manifest; the three snapshot hashes were recomputed from the artifacts and matched; parsed counts are non-trivial (PropBank 11205 rolesets over 9087 predicates and 28616 roles, schema.org 1010 classes and 1676 properties, WordNet 45 lexnames).",
+   "prose_constraints": "unchanged: prose constraint expressions still do not count toward any executable-constraint metric.",
+   "required": [
+    "WordNet",
+    "PropBank",
+    "schema.org"
+   ],
+   "rule": "each must be acquired and frozen at an explicit version. This does not block mapper v1 diagnosis, but until it is complete the current ontology may not be called a broad foundation ontology.",
+   "sources": {
+    "propbank": {
+     "licence": "Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)",
+     "parsed_counts": {
+      "frame_files": 7564,
+      "predicates": 9087,
+      "roles": 28616,
+      "rolesets": 11205
+     },
+     "raw_sha256": "3a9d4d25d8f29b5f536452630e2dd83823ca230c45a3fabde785df21a21957dd",
+     "resolved_version": "propbank-frames v3.4.0; tag commit 4087fa9ab5c40907c34ff91a56acc2cab1670145",
+     "snapshot_sha256": "1fd6e453dde2388e6da757ef17717dd1b3c3da082c3c210521707ba89bd0b086",
+     "status": "acquired",
+     "url": "https://codeload.github.com/propbank/propbank-frames/tar.gz/refs/tags/v3.4.0"
+    },
+    "schemaorg": {
+     "licence": "Creative Commons Attribution-ShareAlike 3.0 (CC BY-SA 3.0)",
+     "parsed_counts": {
+      "classes": 1010,
+      "enumeration_members": 533,
+      "graph_nodes": 3219,
+      "properties": 1676
+     },
+     "raw_sha256": "4467fa19edcb1d7fb3c46c0adf3591b7f870c4a60b7838bdb61694fd02864cf6",
+     "resolved_version": "schema.org 30.0; blob e69c25e9b6c3ab08557f80ad1c10dae0d6b25766 (data/releases/30.0/schemaorg-current-https.jsonld at release v30.0, commit 420231f6bfac8372fc564abb121fae57ccb36a0c)",
+     "snapshot_sha256": "3d2d0175ed33a49afb124c8d4841ed1b6a17dcf44f7d688423b70abbf1f3d23a",
+     "status": "acquired",
+     "url": "https://api.github.com/repos/schemaorg/schemaorg/git/blobs/e69c25e9b6c3ab08557f80ad1c10dae0d6b25766"
+    },
+    "wordnet": {
+     "licence": "WordNet 3.0 Licence (Princeton University); permissive, requires the copyright notice and disclaimer to be retained",
+     "parsed_counts": {
+      "lexnames": 45,
+      "synsets_a": 18156,
+      "synsets_n": 82115,
+      "synsets_r": 3621,
+      "synsets_total": 117659,
+      "synsets_v": 13767
+     },
+     "raw_sha256": "cbda5ea6eef7f36a97a43d4a75f85e07fccbb4f23657d27b4ccbc93e2646ab59",
+     "resolved_version": "WordNet 3.0; nltk_data blob 3c68cd207844f071a5206f7fbed23e5c607ec02f (packages/corpora/wordnet.zip at gh-pages commit 550b6625bcef1f2abff2ff770a5a0d272c9c6b2a)",
+     "snapshot_sha256": "eba9d73958aea91f3b153495b13b378100e93b465b8d1d54889bd5a7c3e03689",
+     "status": "acquired",
+     "url": "https://api.github.com/repos/nltk/nltk_data/git/blobs/3c68cd207844f071a5206f7fbed23e5c607ec02f"
+    }
+   },
+   "status": "paid",
+   "still_outstanding": "the acquired sources are frozen snapshots and have not yet been consulted to extend O_L1/O_L2. Folding them in is a separate ontology version."
+  },
   "rationale": "C1 to C3 restored measurement credibility. They do not confer Stage 2 capability, so the work now switches from repairing instruments to exposing real system behaviour.",
   "shape": "two parallel tracks converging on one formal run",
   "stage_0_close_out": {
@@ -767,6 +973,7 @@
    "data_rule": "the 32 items are never fresh hidden again",
    "explicitly_not": "no model quality threshold and no targeted repair",
    "purpose": "validate the real chain and the attribution tooling",
+   "review_verdict": "instrument acceptance passed. The 19 of 32 figure is a post-fix dev regression result and is neither an ontology nor a mapper score.",
    "status": "passed_instruments_only"
   },
   "stage_4_formal": {
@@ -789,6 +996,7 @@
     "execution code"
    ],
    "full_history_rule": "over-context items are marked context_ineligible and affect only that arm's denominator; they do not vanish from the benchmark",
+   "preflight_gate": "only after mapper v1, the ontology source boundary and the real chain converge. One run on a fresh set; the 32 items are never reused as hidden; external systems are not rerun; and a formal result may not be answered by changing the ontology, mapper, gold or scoring rules.",
    "reporting": [
     "mapping",
     "L1",
@@ -856,6 +1064,7 @@
     "constraint expression fields are prose in a fixed shape, not executable; nothing in v1 evaluates them, which was chosen over shipping a DSL that would imply enforcement the freeze cannot back",
     "l2:abstraction.habit rests on the weakest evidence in either layer (80 of 65245 MSC sentences state a frequency) and carries that limitation in the item itself"
    ],
+   "review_verdict": "sufficient to start mapper blind testing. At 67 and 20 items with three external sources never actually consulted, it may not be called a broad foundation ontology covering common memory situations. The term is withheld until the source debt is paid.",
    "sources": [
     "WordNet",
     "PropBank",
@@ -876,7 +1085,7 @@
     "PropBank",
     "schema.org"
    ],
-   "status": "frozen_pending_review",
+   "status": "ontology_seed_v1_frozen",
    "unconsulted_note": "none are available offline: nltk is absent, no PropBank copy exists and outbound HTTPS to schema.org timed out. Predicate senses are labelled corpus-clustered from SGD intent verbs rather than claiming synset ids, and no schema.org type name appears anywhere.",
    "uncovered_expressions": 8
   },
@@ -909,6 +1118,7 @@
     "delivery",
     "answer"
    ],
+   "review_verdict": "the nine-stage chain, artifact consumption and the oracle attribution mechanism all hold. The layers remain lexical implementations and may not be described as production capability.",
    "sensitivity_rule": "module sensitivity is recorded only where an oracle demonstrably changes the result; no single root cause is forced",
    "single_and_cumulative": {
     "cumulative": [
@@ -948,7 +1158,7 @@
     "no_gold_in_chain_output": true,
     "substitution_changes_only_target_and_downstream": true
    },
-   "status": "chain_connected_pending_review",
+   "status": "diagnostic_execution_chain_ready",
    "trace_rule": "each layer emits an independent trace with input and output hashes and a failure status"
   }
  },

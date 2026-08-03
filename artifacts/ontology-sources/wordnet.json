@@ -1,0 +1,278 @@
+{
+  "acquisition": {
+    "licence": "WordNet 3.0 Licence (Princeton University); permissive, requires the copyright notice and disclaimer to be retained",
+    "raw_bytes": 10775600,
+    "raw_path": "/public/home/wwb/datasets/ontology-sources/wordnet-3.0-nltk.zip",
+    "raw_sha256": "cbda5ea6eef7f36a97a43d4a75f85e07fccbb4f23657d27b4ccbc93e2646ab59",
+    "resolved_version": "WordNet 3.0; nltk_data blob 3c68cd207844f071a5206f7fbed23e5c607ec02f (packages/corpora/wordnet.zip at gh-pages commit 550b6625bcef1f2abff2ff770a5a0d272c9c6b2a)",
+    "retrieved_at": "2026-08-03",
+    "status": "acquired",
+    "url": "https://api.github.com/repos/nltk/nltk_data/git/blobs/3c68cd207844f071a5206f7fbed23e5c607ec02f"
+  },
+  "freeze": {
+    "hash_scope": "SHA-256 over the canonical JSON of this source snapshot alone, excluding this freeze block; a change to another ontology source cannot move this digest",
+    "sha256": "eba9d73958aea91f3b153495b13b378100e93b465b8d1d54889bd5a7c3e03689",
+    "source": "wordnet"
+  },
+  "lexname_count": 45,
+  "release": "3.0",
+  "sample": [
+    {
+      "gloss": "(usually followed by `to') having the necessary means or skill or know-how or authority to do something; \"able to swim\"; \"she was able to program her computer\"; \"we were at last able to buy a car\"; \"able to get a grant for the project\"",
+      "hypernyms": [],
+      "lexname": "adj.all",
+      "offset": "00001740",
+      "pos": "a",
+      "synset_id": "a#00001740",
+      "words": [
+        "able"
+      ]
+    },
+    {
+      "gloss": "(usually followed by `to') not having the necessary means or skill or know-how; \"unable to get to town without a car\"; \"unable to obtain funds\"",
+      "hypernyms": [],
+      "lexname": "adj.all",
+      "offset": "00002098",
+      "pos": "a",
+      "synset_id": "a#00002098",
+      "words": [
+        "unable"
+      ]
+    },
+    {
+      "gloss": "facing away from the axis of an organ or organism; \"the abaxial surface of a leaf is the underside or side facing away from the stem\"",
+      "hypernyms": [],
+      "lexname": "adj.all",
+      "offset": "00002312",
+      "pos": "a",
+      "synset_id": "a#00002312",
+      "words": [
+        "abaxial",
+        "dorsal"
+      ]
+    },
+    {
+      "gloss": "nearest to or facing toward the axis of an organ or organism; \"the upper side of a leaf is known as the adaxial surface\"",
+      "hypernyms": [],
+      "lexname": "adj.all",
+      "offset": "00002527",
+      "pos": "a",
+      "synset_id": "a#00002527",
+      "words": [
+        "adaxial",
+        "ventral"
+      ]
+    },
+    {
+      "gloss": "facing or on the side toward the apex",
+      "hypernyms": [],
+      "lexname": "adj.all",
+      "offset": "00002730",
+      "pos": "a",
+      "synset_id": "a#00002730",
+      "words": [
+        "acroscopic"
+      ]
+    },
+    {
+      "gloss": "that which is perceived or known or inferred to have its own distinct existence (living or nonliving)",
+      "hypernyms": [],
+      "lexname": "noun.Tops",
+      "offset": "00001740",
+      "pos": "n",
+      "synset_id": "n#00001740",
+      "words": [
+        "entity"
+      ]
+    },
+    {
+      "gloss": "an entity that has physical existence",
+      "hypernyms": [
+        "n#00001740"
+      ],
+      "lexname": "noun.Tops",
+      "offset": "00001930",
+      "pos": "n",
+      "synset_id": "n#00001930",
+      "words": [
+        "physical_entity"
+      ]
+    },
+    {
+      "gloss": "a general concept formed by extracting common features from specific examples",
+      "hypernyms": [
+        "n#00001740"
+      ],
+      "lexname": "noun.Tops",
+      "offset": "00002137",
+      "pos": "n",
+      "synset_id": "n#00002137",
+      "words": [
+        "abstraction",
+        "abstract_entity"
+      ]
+    },
+    {
+      "gloss": "a separate and self-contained entity",
+      "hypernyms": [
+        "n#00001930"
+      ],
+      "lexname": "noun.Tops",
+      "offset": "00002452",
+      "pos": "n",
+      "synset_id": "n#00002452",
+      "words": [
+        "thing"
+      ]
+    },
+    {
+      "gloss": "a tangible and visible entity; an entity that can cast a shadow; \"it was full of rackets, balls and other objects\"",
+      "hypernyms": [
+        "n#00001930"
+      ],
+      "lexname": "noun.Tops",
+      "offset": "00002684",
+      "pos": "n",
+      "synset_id": "n#00002684",
+      "words": [
+        "object",
+        "physical_object"
+      ]
+    },
+    {
+      "gloss": "without musical accompaniment; \"they performed a cappella\"",
+      "hypernyms": [],
+      "lexname": "adv.all",
+      "offset": "00001740",
+      "pos": "r",
+      "synset_id": "r#00001740",
+      "words": [
+        "a_cappella"
+      ]
+    },
+    {
+      "gloss": "in the Christian era; used before dates after the supposed year Christ was born; \"in AD 200\"",
+      "hypernyms": [],
+      "lexname": "adv.all",
+      "offset": "00001837",
+      "pos": "r",
+      "synset_id": "r#00001837",
+      "words": [
+        "AD",
+        "A.D.",
+        "anno_Domini"
+      ]
+    },
+    {
+      "gloss": "of the period coinciding with the Christian era; preferred by some writers who are not Christians; \"in 200 CE\"",
+      "hypernyms": [],
+      "lexname": "adv.all",
+      "offset": "00001981",
+      "pos": "r",
+      "synset_id": "r#00001981",
+      "words": [
+        "CE",
+        "C.E.",
+        "Common_Era"
+      ]
+    },
+    {
+      "gloss": "before the Christian era; used following dates before the supposed year Christ was born; \"in 200 BC\"",
+      "hypernyms": [],
+      "lexname": "adv.all",
+      "offset": "00002142",
+      "pos": "r",
+      "synset_id": "r#00002142",
+      "words": [
+        "BC",
+        "B.C.",
+        "before_Christ"
+      ]
+    },
+    {
+      "gloss": "of the period before the Common Era; preferred by some writers who are not Christians; \"in 200 BCE\"",
+      "hypernyms": [],
+      "lexname": "adv.all",
+      "offset": "00002296",
+      "pos": "r",
+      "synset_id": "r#00002296",
+      "words": [
+        "BCE",
+        "B.C.E."
+      ]
+    },
+    {
+      "gloss": "draw air into, and expel out of, the lungs; \"I can breathe better when the air is clean\"; \"The patient is respiring\"",
+      "hypernyms": [],
+      "lexname": "verb.body",
+      "offset": "00001740",
+      "pos": "v",
+      "synset_id": "v#00001740",
+      "words": [
+        "breathe",
+        "take_a_breath",
+        "respire",
+        "suspire"
+      ]
+    },
+    {
+      "gloss": "undergo the biomedical and metabolic processes of respiration by taking up oxygen and producing carbon monoxide",
+      "hypernyms": [
+        "v#02108377"
+      ],
+      "lexname": "verb.body",
+      "offset": "00002325",
+      "pos": "v",
+      "synset_id": "v#00002325",
+      "words": [
+        "respire"
+      ]
+    },
+    {
+      "gloss": "breathe easily again, as after exertion or anxiety",
+      "hypernyms": [
+        "v#00001740"
+      ],
+      "lexname": "verb.body",
+      "offset": "00002573",
+      "pos": "v",
+      "synset_id": "v#00002573",
+      "words": [
+        "respire"
+      ]
+    },
+    {
+      "gloss": "breathe with great difficulty, as when experiencing a strong emotion; \"She choked with emotion when she spoke about her deceased husband\"",
+      "hypernyms": [
+        "v#00001740"
+      ],
+      "lexname": "verb.body",
+      "offset": "00002724",
+      "pos": "v",
+      "synset_id": "v#00002724",
+      "words": [
+        "choke"
+      ]
+    },
+    {
+      "gloss": "breathe excessively hard and fast; \"The mountain climber started to hyperventilate\"",
+      "hypernyms": [
+        "v#00001740"
+      ],
+      "lexname": "verb.body",
+      "offset": "00002942",
+      "pos": "v",
+      "synset_id": "v#00002942",
+      "words": [
+        "hyperventilate"
+      ]
+    }
+  ],
+  "source": "wordnet",
+  "synset_count_by_pos": {
+    "a": 18156,
+    "n": 82115,
+    "r": 3621,
+    "v": 13767
+  }
+}

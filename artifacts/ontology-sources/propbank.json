@@ -1,0 +1,187 @@
+{
+  "acquisition": {
+    "licence": "Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)",
+    "raw_bytes": 4192601,
+    "raw_path": "/public/home/wwb/datasets/ontology-sources/propbank-frames-3.4.0.tar.gz",
+    "raw_sha256": "3a9d4d25d8f29b5f536452630e2dd83823ca230c45a3fabde785df21a21957dd",
+    "resolved_version": "propbank-frames v3.4.0; tag commit 4087fa9ab5c40907c34ff91a56acc2cab1670145",
+    "retrieved_at": "2026-08-03",
+    "status": "acquired",
+    "url": "https://codeload.github.com/propbank/propbank-frames/tar.gz/refs/tags/v3.4.0"
+  },
+  "frame_file_count": 7564,
+  "freeze": {
+    "hash_scope": "SHA-256 over the canonical JSON of this source snapshot alone, excluding this freeze block; a change to another ontology source cannot move this digest",
+    "sha256": "1fd6e453dde2388e6da757ef17717dd1b3c3da082c3c210521707ba89bd0b086",
+    "source": "propbank"
+  },
+  "predicate_count": 9087,
+  "release": "3.4.0",
+  "role_count": 28616,
+  "roleset_count": 11205,
+  "sample": [
+    {
+      "lemma": "1500",
+      "name": "consisting of a quantity of 1500",
+      "role_descriptions": [
+        "thing that is 1500"
+      ],
+      "role_numbers": [
+        "1"
+      ],
+      "roleset_id": "1500.01"
+    },
+    {
+      "lemma": "300",
+      "name": "consisting of a quantity of 300",
+      "role_descriptions": [
+        "thing that is 300"
+      ],
+      "role_numbers": [
+        "1"
+      ],
+      "roleset_id": "300.01"
+    },
+    {
+      "lemma": "cte",
+      "name": "imaging scan of the intestines using computed tomography",
+      "role_descriptions": [
+        "performer",
+        "entity scanned"
+      ],
+      "role_numbers": [
+        "0",
+        "1"
+      ],
+      "roleset_id": "cte.01"
+    },
+    {
+      "lemma": "ct",
+      "name": "scan using computed tomography",
+      "role_descriptions": [
+        "performer",
+        "entity scanned",
+        "more specific entity scanned, if in addition to ARG1"
+      ],
+      "role_numbers": [
+        "0",
+        "1",
+        "2"
+      ],
+      "roleset_id": "ct.01"
+    },
+    {
+      "lemma": "EGD",
+      "name": "use an endoscope to view the upper part of the gastrointestinal tract",
+      "role_descriptions": [
+        "doctor",
+        "patient"
+      ],
+      "role_numbers": [
+        "0",
+        "1"
+      ],
+      "roleset_id": "egd.01"
+    },
+    {
+      "lemma": "MRI",
+      "name": "use magnetic resonance imaging",
+      "role_descriptions": [
+        "performer",
+        "entity scanned",
+        "more specific entity scanned, if in addition to ARG1"
+      ],
+      "role_numbers": [
+        "0",
+        "1",
+        "2"
+      ],
+      "roleset_id": "mri.01"
+    },
+    {
+      "lemma": "Whipple",
+      "name": "removal of several organs, including: the head of the pancreas, the duodenum or part of the duodenum, the bile duct, the gallbladder, and sometimes other tissue",
+      "role_descriptions": [
+        "remover",
+        "removed",
+        "removed from"
+      ],
+      "role_numbers": [
+        "0",
+        "1",
+        "2"
+      ],
+      "roleset_id": "whipple.01"
+    },
+    {
+      "lemma": "aa",
+      "name": "awake and alert",
+      "role_descriptions": [
+        "awake/alert entity"
+      ],
+      "role_numbers": [
+        "0"
+      ],
+      "roleset_id": "aa.01"
+    },
+    {
+      "lemma": "aao",
+      "name": "awake, alert and oriented (part of a neuro exam)",
+      "role_descriptions": [
+        "awake, alert, and oriented person",
+        "oriented to (some number out of 3, usually \"x3\" or such)"
+      ],
+      "role_numbers": [
+        "0",
+        "1"
+      ],
+      "roleset_id": "aao.01"
+    },
+    {
+      "lemma": "abandon",
+      "name": "leave behind",
+      "role_descriptions": [
+        "abandoner",
+        "entity left behind",
+        "attribute of arg1"
+      ],
+      "role_numbers": [
+        "0",
+        "1",
+        "2"
+      ],
+      "roleset_id": "abandon.01"
+    },
+    {
+      "lemma": "abandon",
+      "name": "exchange",
+      "role_descriptions": [
+        "abandoner",
+        "thing abandoned, left behind",
+        "preferred item"
+      ],
+      "role_numbers": [
+        "0",
+        "1",
+        "2"
+      ],
+      "roleset_id": "abandon.02"
+    },
+    {
+      "lemma": "abandon",
+      "name": "surrender, give_over",
+      "role_descriptions": [
+        "entity abandoning something",
+        "thing abandoned",
+        "benefactive, abandoned-to"
+      ],
+      "role_numbers": [
+        "0",
+        "1",
+        "2"
+      ],
+      "roleset_id": "abandon.03"
+    }
+  ],
+  "source": "propbank"
+}

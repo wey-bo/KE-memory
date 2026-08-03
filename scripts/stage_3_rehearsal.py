@@ -48,13 +48,19 @@ from ke_memory_demo.evaluation.memory_artifact import (
     parse_memory_artifact,
 )
 from ke_memory_demo.evaluation.oracle_fixture import build_fixture
+from ke_memory_demo.evaluation.mapper_v1_layer import (
+    MapperV1MappingLayer,
+    MapperV1QueryPlanLayer,
+)
 from ke_memory_demo.evaluation.regression_slice import load_regression_slice
+from ke_memory_demo.mapper_v1.mapper import MapperV1, load_frozen_ontology
 from ke_memory_demo.evaluation.sandboxed_build import (
     run_sandboxed_build,
     sandbox_available,
 )
 
 SLICE_DIR = Path("research/next-prep/artifacts/natural-benchmark-slices/slice-v1")
+ONTOLOGY_DIR = Path("artifacts/ontology-v1")
 BUILDER = Path("src/ke_memory_demo/evaluation/stage_0_5_builder.py")
 REPORT = Path("artifacts/stage-3/rehearsal-report.json")
 
@@ -264,7 +270,18 @@ def main() -> int:
     )
     artifact = parse_memory_artifact(build.artifact)
 
-    chain = baseline_chain()
+    # Mapper v1 replaces the lexical mapping slot. This rerun revalidates the trace, artifact
+    # consumption and the oracles; it is not a fresh evaluation of the slice.
+    mapper = MapperV1(load_frozen_ontology(ONTOLOGY_DIR))
+    mapper_layer = MapperV1MappingLayer(mapper)
+    plan_layer = MapperV1QueryPlanLayer(mapper)
+    # Both slots move together. Installing the mapper alone left the planner emitting lex:* terms
+    # against l1:* ontology ids, so the two vocabularies could never intersect.
+    chain = (
+        baseline_chain()
+        .with_layer(Layer.MAPPING, mapper_layer)
+        .with_layer(Layer.QUERY_PLAN, plan_layer)
+    )
     baseline_results = [chain.run(q, artifact) for q in loaded.questions.questions]
     for result in baseline_results:
         assert_artifact_read_by_every_layer(result)
@@ -300,6 +317,16 @@ def main() -> int:
             "rejects a mismatch, so a layer that reached back to the corpus would fail rather than "
             "pass silently"
         ),
+        "mapping_slot": {
+            "implementation": "mapper_v1 installed in the chain's mapping layer",
+            "mapper_freeze_hash": mapper.freeze_hash(),
+            "query_plan_slot": "mapper_v1 also compiles the question, so plan and mapping share one vocabulary",
+            "resolution_counts_last_question": mapper_layer.resolution_counts(),
+            "rerun_purpose": (
+                "revalidate trace, artifact consumption and oracles with the real mapper in place; "
+                "the 32 items are not re-treated as a fresh evaluation"
+            ),
+        },
         "chain": {
             "layers": [str(layer) for layer in Layer],
             "questions": len(loaded.questions.questions),

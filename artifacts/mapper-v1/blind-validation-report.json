@@ -1,0 +1,393 @@
+{
+ "attribution": {
+  "class_mentions": {
+   "annotation_disagreement": 1,
+   "genuine_ambiguity": 1,
+   "mapper_candidate_generation": 1,
+   "mapper_ranking_disambiguation": 10,
+   "ontology_missing": 2,
+   "ontology_sense_alias_type_defect": 4
+  },
+  "classes": [
+   "ontology_missing",
+   "ontology_sense_alias_type_defect",
+   "mapper_candidate_generation",
+   "mapper_ranking_disambiguation",
+   "genuine_ambiguity",
+   "annotation_disagreement"
+  ],
+  "per_case": [
+   {
+    "case_id": "L1-001",
+    "correct": false,
+    "expected_ids": [
+     "l1:predicate.commit_to_arrangement"
+    ],
+    "expected_outcome": "maps_to",
+    "layer": "l1",
+    "note": "mapped to the wrong existing item; either ranking or an over-broad alias",
+    "observed_resolution": "ambiguous",
+    "observed_top": "l1:attribute.place",
+    "possible_classes": [
+     "mapper_ranking_disambiguation",
+     "ontology_sense_alias_type_defect"
+    ],
+    "review": "single_review"
+   },
+   {
+    "case_id": "L1-002",
+    "correct": false,
+    "expected_ids": [
+     "l1:predicate.change_arrangement"
+    ],
+    "expected_outcome": "maps_to",
+    "layer": "l1",
+    "note": "the correct item was generated but ranked below another candidate",
+    "observed_resolution": "ambiguous",
+    "observed_top": "l1:modality.directed",
+    "possible_classes": [
+     "mapper_ranking_disambiguation"
+    ],
+    "review": "single_review"
+   },
+   {
+    "case_id": "L1-003",
+    "correct": false,
+    "expected_ids": [
+     "l1:predicate.hold_attitude"
+    ],
+    "expected_outcome": "maps_to",
+    "layer": "l1",
+    "note": "the correct item was generated but ranked below another candidate",
+    "observed_resolution": "ambiguous",
+    "observed_top": "l1:modality.desired",
+    "possible_classes": [
+     "mapper_ranking_disambiguation"
+    ],
+    "review": "single_review"
+   },
+   {
+    "case_id": "L1-004",
+    "correct": false,
+    "expected_ids": [
+     "l1:predicate.transfer_value"
+    ],
+    "expected_outcome": "maps_to",
+    "layer": "l1",
+    "note": "generated no candidate for an item that exists; either retrieval missed it or its aliases do not cover this phrasing",
+    "observed_resolution": "unresolved",
+    "observed_top": "",
+    "possible_classes": [
+     "mapper_candidate_generation",
+     "ontology_sense_alias_type_defect"
+    ],
+    "review": "single_review"
+   },
+   {
+    "case_id": "L1-005",
+    "correct": false,
+    "expected_ids": [
+     "l1:predicate.seek_information"
+    ],
+    "expected_outcome": "maps_to",
+    "layer": "l1",
+    "note": "the correct item was generated but ranked below another candidate",
+    "observed_resolution": "ambiguous",
+    "observed_top": "l1:attribute.availability",
+    "possible_classes": [
+     "mapper_ranking_disambiguation"
+    ],
+    "review": "single_review"
+   },
+   {
+    "case_id": "L1-006",
+    "correct": true,
+    "expected_ids": [
+     "l1:predicate.occupy_role"
+    ],
+    "expected_outcome": "maps_to",
+    "layer": "l1",
+    "note": "correct",
+    "observed_resolution": "mapped",
+    "observed_top": "l1:predicate.occupy_role",
+    "possible_classes": [],
+    "review": "single_review"
+   },
+   {
+    "case_id": "L1-007",
+    "correct": true,
+    "expected_ids": [
+     "l1:predicate.consume_media",
+     "l1:event.media_consumption"
+    ],
+    "expected_outcome": "maps_to",
+    "layer": "l1",
+    "note": "correct",
+    "observed_resolution": "mapped",
+    "observed_top": "l1:event.media_consumption",
+    "possible_classes": [],
+    "review": "double_review"
+   },
+   {
+    "case_id": "L1-008",
+    "correct": true,
+    "expected_ids": [
+     "l1:event.attempt_failed"
+    ],
+    "expected_outcome": "maps_to",
+    "layer": "l1",
+    "note": "correct",
+    "observed_resolution": "mapped",
+    "observed_top": "l1:event.attempt_failed",
+    "possible_classes": [],
+    "review": "single_review"
+   },
+   {
+    "case_id": "L1-009",
+    "correct": true,
+    "expected_ids": [
+     "l1:event.commitment_withdrawn"
+    ],
+    "expected_outcome": "maps_to",
+    "layer": "l1",
+    "note": "correct",
+    "observed_resolution": "mapped",
+    "observed_top": "l1:event.commitment_withdrawn",
+    "possible_classes": [],
+    "review": "single_review"
+   },
+   {
+    "case_id": "L1-010",
+    "correct": true,
+    "expected_ids": [
+     "l1:preference.comparative"
+    ],
+    "expected_outcome": "maps_to",
+    "layer": "l1",
+    "note": "correct",
+    "observed_resolution": "mapped",
+    "observed_top": "l1:preference.comparative",
+    "possible_classes": [],
+    "review": "double_review"
+   },
+   {
+    "case_id": "L1-011",
+    "correct": true,
+    "expected_ids": [
+     "l1:preference.threshold"
+    ],
+    "expected_outcome": "maps_to",
+    "layer": "l1",
+    "note": "correct",
+    "observed_resolution": "mapped",
+    "observed_top": "l1:preference.threshold",
+    "possible_classes": [],
+    "review": "single_review"
+   },
+   {
+    "case_id": "L1-012",
+    "correct": false,
+    "expected_ids": [
+     "l1:predicate.change_arrangement",
+     "l1:predicate.commit_to_arrangement"
+    ],
+    "expected_outcome": "ambiguous_among",
+    "layer": "l1",
+    "note": "collapsed a genuine ambiguity to a single answer; the choice was defensible but the ambiguity was not reported",
+    "observed_resolution": "mapped",
+    "observed_top": "l1:predicate.change_arrangement",
+    "possible_classes": [
+     "genuine_ambiguity",
+     "mapper_ranking_disambiguation"
+    ],
+    "review": "double_review"
+   },
+   {
+    "case_id": "L1-013",
+    "correct": false,
+    "expected_ids": [],
+    "expected_outcome": "unresolved",
+    "layer": "l1",
+    "note": "fired where no item applies; either the ranking floor is too low or an alias is too broad",
+    "observed_resolution": "ambiguous",
+    "observed_top": "l1:qualifier.assertion_standing",
+    "possible_classes": [
+     "mapper_ranking_disambiguation",
+     "ontology_sense_alias_type_defect"
+    ],
+    "review": "single_review"
+   },
+   {
+    "case_id": "L1-014",
+    "correct": false,
+    "expected_ids": [],
+    "expected_outcome": "unresolved",
+    "layer": "l1",
+    "note": "fired where no item applies; either the ranking floor is too low or an alias is too broad",
+    "observed_resolution": "ambiguous",
+    "observed_top": "l1:task.abandoned_intention",
+    "possible_classes": [
+     "mapper_ranking_disambiguation",
+     "ontology_sense_alias_type_defect"
+    ],
+    "review": "single_review"
+   },
+   {
+    "case_id": "L1-015",
+    "correct": false,
+    "expected_ids": [],
+    "expected_outcome": "unresolved",
+    "layer": "l1",
+    "note": "fired on an expression the freeze recorded as uncovered; a partial match was ranked above declining",
+    "observed_resolution": "mapped",
+    "observed_top": "l1:attribute.magnitude",
+    "possible_classes": [
+     "mapper_ranking_disambiguation",
+     "ontology_missing"
+    ],
+    "review": "double_review"
+   },
+   {
+    "case_id": "L2-001",
+    "correct": true,
+    "expected_ids": [
+     "l2:abstraction.habit"
+    ],
+    "expected_outcome": "maps_to",
+    "layer": "l2",
+    "note": "correct",
+    "observed_resolution": "ambiguous",
+    "observed_top": "l2:abstraction.habit",
+    "possible_classes": [],
+    "review": "double_review"
+   },
+   {
+    "case_id": "L2-002",
+    "correct": false,
+    "expected_ids": [
+     "l2:abstraction.project"
+    ],
+    "expected_outcome": "maps_to",
+    "layer": "l2",
+    "note": "mapped to a different item on a case the reviewers themselves flagged as disputed",
+    "observed_resolution": "mapped",
+    "observed_top": "l2:abstraction.task",
+    "possible_classes": [
+     "annotation_disagreement",
+     "mapper_ranking_disambiguation"
+    ],
+    "review": "double_review"
+   },
+   {
+    "case_id": "L2-003",
+    "correct": false,
+    "expected_ids": [],
+    "expected_outcome": "unresolved",
+    "layer": "l2",
+    "note": "fired on an expression the freeze recorded as uncovered; a partial match was ranked above declining",
+    "observed_resolution": "ambiguous",
+    "observed_top": "l2:abstraction.value_history",
+    "possible_classes": [
+     "mapper_ranking_disambiguation",
+     "ontology_missing"
+    ],
+    "review": "double_review"
+   }
+  ],
+  "rule": "a failure is assigned to every class its evidence admits; no single owner is forced. The mentions therefore sum above the failure count."
+ },
+ "blindness": {
+  "enforced_by": "MapperInput has no field for any of these and forbids extras; expression_id is rejected if it discloses dataset identity",
+  "forbidden_and_absent": [
+   "question",
+   "gold",
+   "split",
+   "dataset name",
+   "sample id"
+  ],
+  "gold_consulted_after_mapping": true,
+  "mapper_inputs": [
+   "expression_id (opaque)",
+   "speaker",
+   "text"
+  ]
+ },
+ "caveats": [
+  "the mapper is lexical, so these figures bound a lexical mapper over a seed ontology and are not a production mapping capability",
+  "18 authored cases is a small gold set; it detects gross behaviour, not fine accuracy",
+  "the ontology is the seed freeze, and three external sources were unavailable when it was built, so an ontology_missing attribution may reflect that debt"
+ ],
+ "gold_provenance": {
+  "ambiguous_cases": 1,
+  "authoring_rule": "each case was written by reading an O_L1 or O_L2 item and composing an utterance that should evoke it. No case was derived from any benchmark question or evidence gold.",
+  "case_count": 18,
+  "negative_cases": 4,
+  "not_derived_from": [
+   "benchmark questions",
+   "evidence gold",
+   "dataset identity",
+   "sample ids"
+  ],
+  "novel_cases": 2,
+  "review_counts": {
+   "double_review": 7,
+   "single_review": 11
+  },
+  "why_negatives_matter": "a gold set of clean positives cannot detect a mapper that maps everything to something"
+ },
+ "judge": "not called",
+ "mapper_freeze_hash": "444f60f45e5ee2c507e36a2d48b09359ea0942a3b389683cf857ce3d7c1e4b74",
+ "mapper_identity": {
+  "ambiguity_margin": 0.15,
+  "mapper_id": "mapper-v1-lexical",
+  "mapper_version": "1.0.0",
+  "minimum_confidence": 0.1,
+  "o_l1_sha256": "a3ee1a25fd5cd71dc700822b9d540bf25956029d436dd6cee3bb26849d365648",
+  "o_l2_sha256": "7c34ad1b477deae86826758bf3be706f9a73b0513494c2616d8a23d17f439cec",
+  "top_k": 5
+ },
+ "metrics_l1": {
+  "ambiguity_rate": 0.4,
+  "case_count": 15,
+  "coverage": 0.9333333333333333,
+  "coverage_note": "fraction of cases where the mapper returned any candidate",
+  "false_merge": 2,
+  "false_positive_denominator": 3,
+  "false_positive_on_negatives": 3,
+  "false_split": 4,
+  "mis_mapping_rate": 0.36363636363636365,
+  "negative_cases": 3,
+  "positive_cases": 11,
+  "sense_accuracy": 0.5454545454545454,
+  "sense_accuracy_denominator": 11,
+  "unresolved_rate": 0.06666666666666667
+ },
+ "metrics_l2": {
+  "ambiguity_rate": 0.6666666666666666,
+  "case_count": 3,
+  "coverage": 1.0,
+  "coverage_note": "fraction of cases where the mapper returned any candidate",
+  "false_merge": 0,
+  "false_positive_denominator": 1,
+  "false_positive_on_negatives": 1,
+  "false_split": 1,
+  "mis_mapping_rate": 0.5,
+  "negative_cases": 1,
+  "positive_cases": 2,
+  "sense_accuracy": 0.5,
+  "sense_accuracy_denominator": 2,
+  "unresolved_rate": 0.0
+ },
+ "overall": {
+  "cases": 18,
+  "correct": 7,
+  "correct_rate": 0.3888888888888889
+ },
+ "review_counts": {
+  "double_review": 7,
+  "single_review": 11
+ },
+ "run_discipline": "one run. No repair loop, no post-hoc correction, and no second run after adjusting the mapper, which would measure the adjustment.",
+ "stage": "mapper-v1-blind-validation",
+ "standing": "diagnostic"
+}

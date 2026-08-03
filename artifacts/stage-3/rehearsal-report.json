@@ -12,15 +12,15 @@
  "chain": {
   "layer_status_counts": {
    "answer": {
-    "empty": 13,
-    "ok": 19
+    "empty": 9,
+    "ok": 23
    },
    "builder_artifact": {
     "ok": 32
    },
    "delivery": {
-    "ok": 19,
-    "refused": 13
+    "ok": 23,
+    "refused": 9
    },
    "extraction": {
     "ok": 32
@@ -33,11 +33,12 @@
     "ok": 32
    },
    "query_plan": {
-    "ok": 32
+    "empty": 1,
+    "ok": 31
    },
    "retrieval": {
-    "empty": 13,
-    "ok": 19
+    "empty": 9,
+    "ok": 23
    }
   },
   "layers": [
@@ -51,7 +52,7 @@
    "delivery",
    "answer"
   ],
-  "non_empty_selection": 19,
+  "non_empty_selection": 23,
   "questions": 32
  },
  "consumption_evidence": "every layer trace carries the artifact digest and assert_artifact_read_by_every_layer rejects a mismatch, so a layer that reached back to the corpus would fail rather than pass silently",
@@ -454,6 +455,17 @@
   "selection_exact_match_rate": 1.0
  },
  "judge": "not called",
+ "mapping_slot": {
+  "implementation": "mapper_v1 installed in the chain's mapping layer",
+  "mapper_freeze_hash": "444f60f45e5ee2c507e36a2d48b09359ea0942a3b389683cf857ce3d7c1e4b74",
+  "query_plan_slot": "mapper_v1 also compiles the question, so plan and mapping share one vocabulary",
+  "rerun_purpose": "revalidate trace, artifact consumption and oracles with the real mapper in place; the 32 items are not re-treated as a fresh evaluation",
+  "resolution_counts_last_question": {
+   "ambiguous": 1,
+   "mapped": 0,
+   "unresolved": 0
+  }
+ },
  "no_quality_threshold": "no model-quality pass line and no targeted repair; the answer layer is a stub, so answer correctness is not evaluated here",
  "purpose": "validate the real chain and the attribution tooling; instruments only",
  "single_layer_isolation": {

@@ -1,0 +1,113 @@
+{
+  "acquisition": {
+    "licence": "Creative Commons Attribution-ShareAlike 3.0 (CC BY-SA 3.0)",
+    "raw_bytes": 1550917,
+    "raw_path": "/public/home/wwb/datasets/ontology-sources/schemaorg-30.0-current-https.jsonld",
+    "raw_sha256": "4467fa19edcb1d7fb3c46c0adf3591b7f870c4a60b7838bdb61694fd02864cf6",
+    "resolved_version": "schema.org 30.0; blob e69c25e9b6c3ab08557f80ad1c10dae0d6b25766 (data/releases/30.0/schemaorg-current-https.jsonld at release v30.0, commit 420231f6bfac8372fc564abb121fae57ccb36a0c)",
+    "retrieved_at": "2026-08-03",
+    "status": "acquired",
+    "url": "https://api.github.com/repos/schemaorg/schemaorg/git/blobs/e69c25e9b6c3ab08557f80ad1c10dae0d6b25766"
+  },
+  "class_count": 1010,
+  "enumeration_member_count": 533,
+  "freeze": {
+    "hash_scope": "SHA-256 over the canonical JSON of this source snapshot alone, excluding this freeze block; a change to another ontology source cannot move this digest",
+    "sha256": "3d2d0175ed33a49afb124c8d4841ed1b6a17dcf44f7d688423b70abbf1f3d23a",
+    "source": "schemaorg"
+  },
+  "graph_node_count": 3219,
+  "property_count": 1676,
+  "release": "30.0",
+  "sample": [
+    {
+      "comment": "An action performed by a direct agent and indirect participants upon a direct object. Optionally happens at a location with the help of an inanimate instrument. The execution of the action may produce a result. Specific action sub-type documentation specifies the exact expectation of each argument/role.\\n\\nSee also [blog post](https://blog.schema.org/2014/04/16/announcing-schema-org-actions/) and [Actions overview document](https://schema.org/docs/actions.html).",
+      "label": "Action",
+      "supertypes": [
+        "schema:Thing"
+      ],
+      "term_id": "schema:Action",
+      "term_type": "rdfs:Class"
+    },
+    {
+      "comment": "An article, such as a news article or piece of investigative report. Newspapers and magazines have articles of many different types and this is intended to cover them all.\\n\\nSee also [blog post](https://blog.schema.org/2014/09/02/schema-org-support-for-bibliographic-relationships-and-periodicals/).",
+      "label": "Article",
+      "supertypes": [
+        "schema:CreativeWork"
+      ],
+      "term_id": "schema:Article",
+      "term_type": "rdfs:Class"
+    },
+    {
+      "comment": "The most generic kind of creative work, including books, movies, photographs, software programs, etc.",
+      "label": "CreativeWork",
+      "supertypes": [
+        "schema:Thing"
+      ],
+      "term_id": "schema:CreativeWork",
+      "term_type": "rdfs:Class"
+    },
+    {
+      "comment": "An event happening at a certain time and location, such as a concert, lecture, or festival. Ticketing information may be added via the [[offers]] property. Repeated events may be structured as separate Event objects.",
+      "label": "Event",
+      "supertypes": [
+        "schema:Thing"
+      ],
+      "term_id": "schema:Event",
+      "term_type": "rdfs:Class"
+    },
+    {
+      "comment": "A utility class that serves as the umbrella for a number of 'intangible' things such as quantities, structured values, etc.",
+      "label": "Intangible",
+      "supertypes": [
+        "schema:Thing"
+      ],
+      "term_id": "schema:Intangible",
+      "term_type": "rdfs:Class"
+    },
+    {
+      "comment": "An organization such as a school, NGO, corporation, club, etc.",
+      "label": "Organization",
+      "supertypes": [
+        "schema:Thing"
+      ],
+      "term_id": "schema:Organization",
+      "term_type": "rdfs:Class"
+    },
+    {
+      "comment": "A person (alive, dead, undead, or fictional).",
+      "label": "Person",
+      "supertypes": [
+        "schema:Thing"
+      ],
+      "term_id": "schema:Person",
+      "term_type": "rdfs:Class"
+    },
+    {
+      "comment": "Entities that have a somewhat fixed, physical extension.",
+      "label": "Place",
+      "supertypes": [
+        "schema:Thing"
+      ],
+      "term_id": "schema:Place",
+      "term_type": "rdfs:Class"
+    },
+    {
+      "comment": "Any offered product or service. For example: a pair of shoes; a concert ticket; the rental of a car; a haircut; or an episode of a TV show streamed online.",
+      "label": "Product",
+      "supertypes": [
+        "schema:Thing"
+      ],
+      "term_id": "schema:Product",
+      "term_type": "rdfs:Class"
+    },
+    {
+      "comment": "The most generic type of item.",
+      "label": "Thing",
+      "supertypes": [],
+      "term_id": "schema:Thing",
+      "term_type": "rdfs:Class"
+    }
+  ],
+  "source": "schemaorg"
+}
