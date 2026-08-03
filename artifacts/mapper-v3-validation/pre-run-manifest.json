@@ -1,0 +1,46 @@
+{
+ "artifact": "mapper v3 fresh validation pre-run manifest",
+ "commits": {
+  "baseline": "796f47c",
+  "gold": "6f35ed6",
+  "mapper_freeze": "17a7887",
+  "scorer": "d430f5b"
+ },
+ "environment": {
+  "platform": "Linux-6.12.43+deb13-amd64-x86_64-with-glibc2.41",
+  "python": "3.12.13"
+ },
+ "execution_policy": {
+  "low_score_is_a_result": "a poor number is the finding. Adjusting the mapper and re-running would measure a mapper fitted to this set",
+  "re_execution_allowed_only_if": "no semantic output was produced and every digest here is byte-identical",
+  "runs_permitted": 1
+ },
+ "inputs": {
+  "fresh_set_expressions": 160,
+  "fresh_set_sha256": "b576db052cb158364dde3261bfb6d10d150b4874ee1dd524efc91799793d42db",
+  "gold_artifact_sha256": "a976ffc33aca241e8b6dd774980ed5c224b1f10080e1821aa0d409dad0f6e6e9",
+  "gold_counts_by_outcome": {
+   "ambiguous": 0,
+   "concept": 119,
+   "none": 36,
+   "out_of_scope": 5
+  },
+  "gold_model_digest": "c636fb18925070b9e7ed92236ef802da51fc5e184667b5046e2bdfedc162b33d",
+  "mapper_artifact_sha256": "ea41f69f4ba5a13502bceedb3aba6093af1969336f81e3039d6ae7ffa249b141",
+  "mapper_freeze_hash": "f096094d789361314611c2bf58b887cb5338b6f78c8e1c2039f1f745aa2df219",
+  "ontology": {
+   "m_l1_to_l2_v3": "619a6e3edf1b85e940fc1bb3a8b4cf5a380d9c3b18a829ad6e12ebdb90684de7",
+   "o_v2_l1": "76465be5ecfed0c988599f3c2dba442af0bc149911d2189bfe8e6f37b47932e9",
+   "o_v2_l2": "308ba27fc274f4c1b538d70c0166e7ea01ba6c16d92adcb3136b801647c64858",
+   "o_v3_l1": "f7fb828d16f4ced606f71d8f5040064879c94fe3d2e6ab4f97a6ad69d44eff9f",
+   "o_v3_l2": "e32f41b5f55d5e91f056848b415f0c5ba5f4ba6580bbf6909975225bcadafe68"
+  }
+ },
+ "known_limits": {
+  "annotator_independence": "procedural declaration, not artifact proof: both halves of the gold were written while mapper v3 already existed in the tree. Import isolation in both directions is what the architecture gate does establish",
+  "ontology_gaps_accounted": "three v2 gaps (habit derivation bound to media consumption, kinship lacking collateral descent, circumstance unable to say medical) and one unlicensed v3 addition (l2:abstraction.value_commitment) are recorded in the gold artifact and were not repaired; no ontology byte changed for this run",
+  "true_ambiguity_abstention": "the gold holds zero ambiguous records, so this metric must report unavailable. No record was added afterwards to give it a denominator"
+ },
+ "manifest_sha256": "d4a4734ac2ebafef559be917a719789d9c3333def9c8278897b874bc33d3c23f",
+ "written": "before the mapper was called, so the report can name this manifest's digest"
+}

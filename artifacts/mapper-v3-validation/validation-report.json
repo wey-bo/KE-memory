@@ -1,0 +1,122 @@
+{
+ "artifact": "mapper-v3 scoring report",
+ "metrics_definitions": {
+  "candidate_recall.macro": "denominator: the count of id-bearing (concept/ambiguous) gold records. numerator: how many of those records had every one of their gold target ids recalled by the mapping result (full per-expression recall, not partial credit).",
+  "candidate_recall.micro": "denominator: the total count of individual gold target ids across id-bearing (concept/ambiguous) gold records, summed one by one. numerator: how many of those individual ids appear in the corresponding mapping result's target_ids. out_of_scope and none records contribute no ids and are excluded.",
+  "critical_false_mapping": "denominator: gold records labelled none or out_of_scope combined. numerator: how many of those the mapper nevertheless answered with one or more target ids. The most important failure class in this report: inventing structure where gold says there is none, whether because the content is not memory-worthy or because the combined ontology cannot express it.",
+  "multi_label_selection.incomplete_multi_label_selection": "denominator: gold records naming more than one target id (same population as multi_label_selection). numerator: how many of those the mapper answered with one target id or none -- an incomplete multi-label answer, not a merge of distinct gold targets into a single wrong one.",
+  "multi_label_selection.multi_label_selection": "denominator: gold records naming more than one target id. numerator: how many of those the mapper answered with more than one target id.",
+  "no_map_behaviour.correct_abstention": "denominator: gold records labelled none. numerator: how many of those the mapper reported as outcome unresolved.",
+  "no_map_behaviour.missed_content": "denominator: id-bearing (concept/ambiguous) gold records. numerator: how many of those the mapper incorrectly reported as outcome unresolved, despite gold naming real content.",
+  "ontology_coverage": "denominator: every gold record in this run. numerator: gold records whose outcome is not out_of_scope. Measures the combined ontology's expressiveness, not the mapper -- computed from gold labels alone.",
+  "ontology_gap": "not a rate: the explicit list of gold records labelled out_of_scope, which are removed from every recall and accuracy denominator above before it is computed.",
+  "ranking_or_sense_accuracy": "denominator: id-bearing (concept/ambiguous) gold records whose mapping result returned at least one target id. numerator: of those, how many had a mapping result whose target_ids were a subset of, or equal to, the gold target_ids. Expressions the mapper left unresolved are excluded from this denominator; they are covered by no_map_behaviour.missed_content instead.",
+  "true_ambiguity_abstention": "denominator: gold records labelled ambiguous. numerator: how many of those the mapper reported as outcome ambiguous. This round's gold is expected to contain zero ambiguous records, in which case this metric reports unavailable rather than 0.0 or 1.0."
+ },
+ "not_a_benchmark_claim": "a mapping-quality measurement over 160 expressions. It is not a benchmark result and confers no production or Stage 4 qualification; that decision is taken separately from this artifact",
+ "pre_run_manifest_sha256": "d4a4734ac2ebafef559be917a719789d9c3333def9c8278897b874bc33d3c23f",
+ "report": {
+  "candidate_recall": {
+   "macro": {
+    "availability": "available",
+    "completed": 119,
+    "denominator": 119,
+    "numerator": 0,
+    "unavailable_reason": null,
+    "value": 0.0
+   },
+   "micro": {
+    "availability": "available",
+    "completed": 751,
+    "denominator": 751,
+    "numerator": 21,
+    "unavailable_reason": null,
+    "value": 0.02796271637816245
+   },
+   "reading": "micro sums over every gold target id across id-bearing expressions; macro counts an expression as a hit only when the mapper recalled every one of its gold target ids. Both exclude out_of_scope expressions, which have no gold target ids to recall"
+  },
+  "critical_false_mapping": {
+   "availability": "available",
+   "completed": 41,
+   "denominator": 41,
+   "numerator": 17,
+   "unavailable_reason": null,
+   "value": 0.4146341463414634
+  },
+  "multi_label_selection": {
+   "incomplete_multi_label_selection": {
+    "availability": "available",
+    "completed": 118,
+    "denominator": 118,
+    "numerator": 90,
+    "unavailable_reason": null,
+    "value": 0.7627118644067796
+   },
+   "multi_label_selection": {
+    "availability": "available",
+    "completed": 118,
+    "denominator": 118,
+    "numerator": 28,
+    "unavailable_reason": null,
+    "value": 0.23728813559322035
+   }
+  },
+  "no_map_behaviour": {
+   "correct_abstention": {
+    "availability": "available",
+    "completed": 36,
+    "denominator": 36,
+    "numerator": 23,
+    "unavailable_reason": null,
+    "value": 0.6388888888888888
+   },
+   "missed_content": {
+    "availability": "available",
+    "completed": 119,
+    "denominator": 119,
+    "numerator": 59,
+    "unavailable_reason": null,
+    "value": 0.4957983193277311
+   }
+  },
+  "ontology_coverage": {
+   "availability": "available",
+   "completed": 160,
+   "denominator": 160,
+   "numerator": 155,
+   "unavailable_reason": null,
+   "value": 0.96875
+  },
+  "ontology_gap": {
+   "out_of_scope_count": 5,
+   "out_of_scope_expression_ids": [
+    "fx-000033",
+    "fx-000044",
+    "fx-000066",
+    "fx-000068",
+    "fx-000090"
+   ],
+   "reading": "expressions labelled out_of_scope are removed from every recall and accuracy denominator before it is computed; a gap in the combined ontology is not a mapper failure and must never be counted as one"
+  },
+  "ranking_or_sense_accuracy": {
+   "availability": "available",
+   "completed": 60,
+   "denominator": 60,
+   "numerator": 6,
+   "unavailable_reason": null,
+   "value": 0.1
+  },
+  "total_gold_records": 160,
+  "total_mapping_results": 160,
+  "true_ambiguity_abstention": {
+   "availability": "unavailable",
+   "completed": 0,
+   "denominator": 0,
+   "numerator": 0,
+   "unavailable_reason": "the gold set contains no records labelled ambiguous, so true-ambiguity abstention was not exercised by this run",
+   "value": null
+  }
+ },
+ "run_standing": "single_execution_immutable_result",
+ "scored_against_gold_sha256": "c636fb18925070b9e7ed92236ef802da51fc5e184667b5046e2bdfedc162b33d"
+}
