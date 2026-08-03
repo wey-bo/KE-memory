@@ -749,7 +749,7 @@
    "formal_benchmark_not_yet_ready": "the critical path is ontology v2 and natural-expression mapper validation. The judge key can be handled in parallel and is not what gates the run.",
    "mapper_v1_diagnostic_failed_as_expected": "7 of 18 correct with all four negatives mis-mapped. A repair attempt on discovery data reached 12.5 percent abstention against v1 baseline 9.8 percent and is not a fix; the diagnosis is that lexical overlap is too weak a signal for the abstain decision.",
    "mapper_v2_not_yet_built": "the lexical repair attempt is retired. Mapper v2 has not been built: candidate generation must be rebuilt on WordNet lemmas and senses, PropBank predicates and rolesets, schema.org types and properties, and the native O_L1/O_L2 aliases and type constraints.",
-   "natural_mapping_quality_not_yet_measured": "the 18 cases were composed by reading ontology items, which makes them a controlled mapper probe. They say nothing about mapping quality on natural expression.",
+   "natural_mapping_quality_not_yet_measured": "measured. L1 end-to-end 0.114 with ontology ceiling 1.0, so the limit is candidate generation rather than ontology coverage. The result is immutable and the sample is spent.",
    "ontology_sources_frozen": "WordNet 3.0, PropBank 3.4.0 and schema.org 30.0 acquired and frozen at explicit commits with licences and independent hashes. They have not yet been used to extend the ontology.",
    "ontology_v2_recovered_candidate_frozen": "six units frozen with independent digests. Recovered from a crashed build, so it is a candidate freeze and may not be described as a clean, reproducible ontology build."
   },
@@ -971,6 +971,46 @@
     "wordnet": "lemma, part of speech and sense count only; polysemy above 4 is not standalone evidence"
    },
    "status": "passed_with_one_structural_fix"
+  },
+  "mapper_v2_natural_validation": {
+   "artifact": "artifacts/mapper-v2-validation/validation-report.json",
+   "gold_sha256": "718343722e7ce9dfb9b9ffcff2f856f9e3b8068b88143b64a8e1a3f846cf3834",
+   "l1": {
+    "candidate_recall": 0.1646,
+    "ceiling_basis": "48/48 gold targets present",
+    "end_to_end": 0.1139,
+    "false_mapping_on_gold_none_rate": 0.6333,
+    "false_merge": "35/76",
+    "false_split": "0/3",
+    "no_map_precision": 0.32,
+    "no_map_recall": 0.3902,
+    "ontology_ceiling": 1.0,
+    "ranking_accuracy": 0.6923
+   },
+   "l2": {
+    "candidate_recall": 0.0,
+    "denominator_warning": "5 positive cases; not comparable to L1",
+    "ontology_ceiling": 1.0,
+    "positive_cases": 5
+   },
+   "mapper_freeze_hash": "3cd4fcd9a92276e826dc7650962096be22d1e53356f51abdf7743aef03604126",
+   "not_a_gate": "a low semantic score is a result rather than a gate. Improving the mapper requires a new mapper version and a new fresh sample; this sample is spent.",
+   "primary_finding": {
+    "evidence": "the ontology ceiling is 1.0 at both layers, so every gold target the annotators named exists in ontology v2. Ranking is 0.69 when the target reaches top-k. But candidate recall is 0.165, so generation fails to surface the target in 66 of 79 positive cases.",
+    "implication": "alias plus roleset evidence cannot reach categories expressed by construction rather than by word choice. Closing this needs a different kind of evidence, not more aliases: the gap is between lexical recognition and reading what an utterance does.",
+    "where_the_bottleneck_is": "candidate generation, not ranking and not ontology coverage",
+    "why_generation_fails": "the most-missed targets are semantic categories with no reliable lexical trigger: task.declared_intention missed 30 times, preference.affinity 27, state.possession 11. \"Animals are amazing\" attests affinity and contains no word any alias list would carry, and \"I think I will try using roasted sweet potatoes\" attests an intention through syntax rather than vocabulary. Structural evidence from PropBank helps only where a predicate is present."
+   },
+   "raw_output": "artifacts/mapper-v2-validation/raw-mapper-output.json",
+   "report_sha256": "456513fecdf520ed2487f75b0209480c10dfc1bc03b0232560bc1acf35f6bb3d",
+   "run_discipline": "one run over the frozen sample. No threshold adjusted, no alias added, no output corrected, and the sample was not re-run. The result stands as measured.",
+   "sample_sha256": "2a0a6813305c7a97b00ab321337dae46c7b9eb2f96d93112a5af9327ede31e33",
+   "secondary_findings": {
+    "false_mapping_on_gold_none": "0.6333 of gold-none expressions were mapped anyway, so the abstain path is still weak on natural conversation even after the discovery-data repairs",
+    "false_merge": "35 of 76 multi-target cases returned a single answer. Natural utterances routinely attest several things at once and the mapper reports one.",
+    "l2_recall_zero": "L2 recall is 0 over 5 cases. The derivation mechanism is verified correct in isolation, so this follows from L1 recall being too low to satisfy any rule evidence_required threshold."
+   },
+   "status": "spent_immutable"
   },
   "next_sequence": [
    {

@@ -1,0 +1,143 @@
+{
+ "artifact": "one-shot natural mapping validation",
+ "caveats": [
+  "the mapper is lexical and structural over a recovered candidate ontology freeze, not a production mapping system",
+  "120 expressions bound the resolution of every rate here",
+  "an ontology_ceiling below 1.0 caps every metric beneath it, so a low end-to-end figure may be an ontology result rather than a mapper result"
+ ],
+ "gap_categories_from_annotation": {
+  "episodic_experience_and_object_significance": "a specific remembered occasion and the personal meaning attached to a place or a possession: a sunset watched with someone who has died, a tattoo standing for freedom, lucky shoes where every mark has a story. state.possession records that the object is held and nothing about what it means; no type carries an occasion as an experience",
+  "fictional_or_role_play_frame": "role-play turns where the speaker voices a character. The propositions are real text but false of the subject, and the source_status vocabulary has no value for in-fiction content, so a mapper that extracts them pollutes memory with a persona's facts",
+  "generic_activity_or_pursuit": "v2 types media consumption, relocation, commitment, life transition and objective completion, but has no event or state type for an ordinary activity, hobby or creative practice: recording a podcast, hosting a party, attending a retreat, a beach outing. Would require an activity event type with a participation role, plus a pursuit state type for the ongoing-practice reading",
+  "held_value_or_general_belief": "a subject's priority ordering ('safety is super important to me') and their general causal beliefs about the world ('self-care makes you strong for tough times') are both memory-worthy and both untyped. attribute.assessment rates an entity's quality, which is a different claim, and modality.believed qualifies an assertion without giving the belief a subject-held type",
+  "positive_capability_or_skill": "state.capability_constraint types what a subject cannot do; nothing types what they can. Skill level, competence and quantified progress ('completed 4 projects since starting classes', 'my skills are making a difference') have no home"
+ },
+ "graded_review": "everything was labelled once; novel cases, genuine ambiguity, L2 abstractions and cases the annotator found hard carry an adjudication note. Clear cases were not double-reviewed, which is the effort bound the task set",
+ "inputs": {
+  "expressions": 120,
+  "gold_sha256": "718343722e7ce9dfb9b9ffcff2f856f9e3b8068b88143b64a8e1a3f846cf3834",
+  "mapper_freeze_hash": "3cd4fcd9a92276e826dc7650962096be22d1e53356f51abdf7743aef03604126",
+  "mapper_identity": {
+   "ambiguity_ratio": 0.85,
+   "mapper_id": "mapper-v2-structural",
+   "mapper_version": "2.0.0",
+   "o_l1_sha256": "76465be5ecfed0c988599f3c2dba442af0bc149911d2189bfe8e6f37b47932e9",
+   "o_l2_sha256": "308ba27fc274f4c1b538d70c0166e7ea01ba6c16d92adcb3136b801647c64858",
+   "propbank_sha256": "3a9d4d25d8f29b5f536452630e2dd83823ca230c45a3fabde785df21a21957dd",
+   "schemaorg_sha256": "4467fa19edcb1d7fb3c46c0adf3591b7f870c4a60b7838bdb61694fd02864cf6",
+   "wordnet_sha256": "cbda5ea6eef7f36a97a43d4a75f85e07fccbb4f23657d27b4ccbc93e2646ab59"
+  },
+  "sample_sha256": "2a0a6813305c7a97b00ab321337dae46c7b9eb2f96d93112a5af9327ede31e33"
+ },
+ "judge": "not called",
+ "l2_denominator_warning": "gold names 5 L2 targets against 231 L1 references, so every L2 rate rests on very few cases and must be read with its denominator rather than compared to L1",
+ "layer_paths": {
+  "l1": "recognition from lexical and structural evidence",
+  "l2": "derivation over attested L1 items through M_L1_to_L2",
+  "why_reported_separately": "the two layers take different paths, so one figure spanning both would describe neither"
+ },
+ "metrics_l1": {
+  "ambiguity": {
+   "ambiguous_results": 14,
+   "rate_over_all_cases": 0.1167
+  },
+  "candidate_recall": {
+   "cases": 79,
+   "reading": "when the target exists, does generation surface it at all",
+   "recall": 0.1646,
+   "target_in_top_k": 13
+  },
+  "end_to_end_correct": {
+   "cases": 79,
+   "correct": 9,
+   "rate": 0.1139
+  },
+  "layer": "l1",
+  "merge_and_split": {
+   "false_merge": 35,
+   "false_split": 0,
+   "multi_target_cases": 76,
+   "single_target_cases": 3
+  },
+  "negative_cases": 41,
+  "no_map": {
+   "declined": 50,
+   "declined_correctly": 16,
+   "false_mapping_on_gold_none": 19,
+   "false_mapping_on_gold_none_rate": 0.6333,
+   "false_mapping_on_out_of_scope": 6,
+   "false_mapping_on_out_of_scope_rate": 0.5455,
+   "precision": 0.32,
+   "reading": "gold none and out_of_scope both expect a decline but mean different things: none is content the ontology should not cover, out_of_scope is content it cannot. Mapping an out_of_scope expression is a ceiling failure wearing the costume of a false positive.",
+   "recall": 0.3902
+  },
+  "ontology_ceiling": {
+   "ceiling": 1.0,
+   "gold_targets_named": 48,
+   "gold_targets_present_in_ontology": 48,
+   "missing_targets": [],
+   "reading": "the share of gold targets the ontology contains. A mapper cannot recover what was never admitted, so this bounds every metric below it."
+  },
+  "positive_cases": 79,
+  "ranking_accuracy": {
+   "accuracy": 0.6923,
+   "cases_with_target_in_top_k": 13,
+   "ranked_first": 9,
+   "reading": "given recall, is the correct item first; isolates ranking from generation"
+  }
+ },
+ "metrics_l2": {
+  "ambiguity": {
+   "ambiguous_results": 1,
+   "rate_over_all_cases": 0.0083
+  },
+  "candidate_recall": {
+   "cases": 5,
+   "reading": "when the target exists, does generation surface it at all",
+   "recall": 0.0,
+   "target_in_top_k": 0
+  },
+  "end_to_end_correct": {
+   "cases": 5,
+   "correct": 0,
+   "rate": 0.0
+  },
+  "layer": "l2",
+  "merge_and_split": {
+   "false_merge": 1,
+   "false_split": 0,
+   "multi_target_cases": 5,
+   "single_target_cases": 0
+  },
+  "negative_cases": 41,
+  "no_map": {
+   "declined": 110,
+   "declined_correctly": 37,
+   "false_mapping_on_gold_none": 3,
+   "false_mapping_on_gold_none_rate": 0.1,
+   "false_mapping_on_out_of_scope": 1,
+   "false_mapping_on_out_of_scope_rate": 0.0909,
+   "precision": 0.3364,
+   "reading": "gold none and out_of_scope both expect a decline but mean different things: none is content the ontology should not cover, out_of_scope is content it cannot. Mapping an out_of_scope expression is a ceiling failure wearing the costume of a false positive.",
+   "recall": 0.9024
+  },
+  "ontology_ceiling": {
+   "ceiling": 1.0,
+   "gold_targets_named": 4,
+   "gold_targets_present_in_ontology": 4,
+   "missing_targets": [],
+   "reading": "the share of gold targets the ontology contains. A mapper cannot recover what was never admitted, so this bounds every metric below it."
+  },
+  "positive_cases": 5,
+  "ranking_accuracy": {
+   "accuracy": null,
+   "cases_with_target_in_top_k": 0,
+   "ranked_first": 0,
+   "reading": "given recall, is the correct item first; isolates ranking from generation"
+  }
+ },
+ "report_sha256": "456513fecdf520ed2487f75b0209480c10dfc1bc03b0232560bc1acf35f6bb3d",
+ "run_discipline": "one run over the frozen sample. No threshold was adjusted, no alias added, no output corrected, and the sample was not re-run. A second run after any change would measure the change.",
+ "second_opinion_count": 47,
+ "standing": "immutable_result"
+}

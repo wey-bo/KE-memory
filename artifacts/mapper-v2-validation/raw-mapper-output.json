@@ -1,0 +1,4664 @@
+{
+ "gold_sha256": "718343722e7ce9dfb9b9ffcff2f856f9e3b8068b88143b64a8e1a3f846cf3834",
+ "mapper_freeze_hash": "3cd4fcd9a92276e826dc7650962096be22d1e53356f51abdf7743aef03604126",
+ "mapper_identity": {
+  "ambiguity_ratio": 0.85,
+  "mapper_id": "mapper-v2-structural",
+  "mapper_version": "2.0.0",
+  "o_l1_sha256": "76465be5ecfed0c988599f3c2dba442af0bc149911d2189bfe8e6f37b47932e9",
+  "o_l2_sha256": "308ba27fc274f4c1b538d70c0166e7ea01ba6c16d92adcb3136b801647c64858",
+  "propbank_sha256": "3a9d4d25d8f29b5f536452630e2dd83823ca230c45a3fabde785df21a21957dd",
+  "schemaorg_sha256": "4467fa19edcb1d7fb3c46c0adf3591b7f870c4a60b7838bdb61694fd02864cf6",
+  "wordnet_sha256": "cbda5ea6eef7f36a97a43d4a75f85e07fccbb4f23657d27b4ccbc93e2646ab59"
+ },
+ "note": "raw mapper output for every expression at both layers, preserved as produced. No result here was corrected, re-ranked or re-run.",
+ "results": {
+  "expr-000000": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "start.01 arity 3",
+        "kind": "predicate_roleset",
+        "term": "start"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "start"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.undergo_transition",
+      "score": 1.7,
+      "sense": "to come to be in a new state, where the change itself is what is reported"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "keep"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:predicate.possess",
+      "score": 0.7,
+      "sense": "to own or have something at one's disposal"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "whole phrase alias",
+        "kind": "ontology_alias",
+        "term": "can t"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:state.capability_constraint",
+      "score": 0.7,
+      "sense": "something the subject cannot do or have, which restricts what may be offered them"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000000",
+    "margin": 1.0,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.undergo_transition",
+    "top_sense": "to come to be in a new state, where the change itself is what is reported"
+   },
+   "l2": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "derived via m:abstraction.standing_condition (abstracts_from)",
+        "kind": "predicate_roleset",
+        "term": "l1:state.capability_constraint"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l2:abstraction.standing_condition",
+      "score": 1.0,
+      "sense": "a lasting fact about a subject that constrains what may be offered them at any time"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000000",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l2:abstraction.standing_condition",
+    "top_sense": "a lasting fact about a subject that constrains what may be offered them at any time"
+   }
+  },
+  "expr-000001": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000001",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000001",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000002": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "enjoy.01 arity 2",
+        "kind": "predicate_roleset",
+        "term": "enjoy"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "enjoy"
+       },
+       {
+        "detail": "love.01 arity 2",
+        "kind": "predicate_roleset",
+        "term": "love"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "love"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.hold_attitude",
+      "score": 3.4,
+      "sense": "to have a standing positive or negative attitude toward something"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "agreed"
+       },
+       {
+        "detail": "1 WordNet sense(s)",
+        "kind": "lexical_sense",
+        "term": "agreed"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:source_status.confirmed_by_both",
+      "score": 0.95,
+      "sense": "asserted by one party and explicitly acknowledged by the other"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000002",
+    "margin": 2.45,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.hold_attitude",
+    "top_sense": "to have a standing positive or negative attitude toward something"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000002",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000003": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "whole phrase alias",
+        "kind": "ontology_alias",
+        "term": "can t"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:state.capability_constraint",
+      "score": 0.7,
+      "sense": "something the subject cannot do or have, which restricts what may be offered them"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000003",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:state.capability_constraint",
+    "top_sense": "something the subject cannot do or have, which restricts what may be offered them"
+   },
+   "l2": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "derived via m:abstraction.standing_condition (abstracts_from)",
+        "kind": "predicate_roleset",
+        "term": "l1:state.capability_constraint"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l2:abstraction.standing_condition",
+      "score": 1.0,
+      "sense": "a lasting fact about a subject that constrains what may be offered them at any time"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000003",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l2:abstraction.standing_condition",
+    "top_sense": "a lasting fact about a subject that constrains what may be offered them at any time"
+   }
+  },
+  "expr-000004": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "love.01 arity 2",
+        "kind": "predicate_roleset",
+        "term": "love"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "love"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.hold_attitude",
+      "score": 1.7,
+      "sense": "to have a standing positive or negative attitude toward something"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "always"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:frequency.invariant",
+      "score": 0.7,
+      "sense": "holds on every relevant occasion, so an exception would be a contradiction"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000004",
+    "margin": 1.0,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.hold_attitude",
+    "top_sense": "to have a standing positive or negative attitude toward something"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000004",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000005": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "whole phrase alias",
+        "kind": "ontology_alias",
+        "term": "can t"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:state.capability_constraint",
+      "score": 0.7,
+      "sense": "something the subject cannot do or have, which restricts what may be offered them"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "whole phrase alias",
+        "kind": "ontology_alias",
+        "term": "is going to"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:task.declared_intention",
+      "score": 0.7,
+      "sense": "something the subject has said they intend to do, not yet done"
+     }
+    ],
+    "competing_ontology_ids": [
+     "l1:state.capability_constraint",
+     "l1:task.declared_intention"
+    ],
+    "expression_id": "expr-000005",
+    "margin": 0.0,
+    "outcome": "ambiguous",
+    "top_ontology_id": "l1:state.capability_constraint",
+    "top_sense": "something the subject cannot do or have, which restricts what may be offered them"
+   },
+   "l2": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "derived via m:abstraction.standing_condition (abstracts_from)",
+        "kind": "predicate_roleset",
+        "term": "l1:state.capability_constraint"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l2:abstraction.standing_condition",
+      "score": 1.0,
+      "sense": "a lasting fact about a subject that constrains what may be offered them at any time"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "derived via m:import.pattern_goal_decomposition (abstracts_from)",
+        "kind": "predicate_roleset",
+        "term": "l1:task.declared_intention"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l2:pattern.goal_decomposition",
+      "score": 1.0,
+      "sense": "group observations under one intention when each advances a part of it"
+     }
+    ],
+    "competing_ontology_ids": [
+     "l2:abstraction.standing_condition",
+     "l2:pattern.goal_decomposition"
+    ],
+    "expression_id": "expr-000005",
+    "margin": 0.0,
+    "outcome": "ambiguous",
+    "top_ontology_id": "l2:abstraction.standing_condition",
+    "top_sense": "a lasting fact about a subject that constrains what may be offered them at any time"
+   }
+  },
+  "expr-000006": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000006",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000006",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000007": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "keep"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:predicate.possess",
+      "score": 0.7,
+      "sense": "to own or have something at one's disposal"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000007",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.possess",
+    "top_sense": "to own or have something at one's disposal"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000007",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000008": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000008",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000008",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000009": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "check.01 arity 3",
+        "kind": "predicate_roleset",
+        "term": "check"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "check"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.seek_information",
+      "score": 1.7,
+      "sense": "to try to find out something, whether by asking or by searching"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000009",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.seek_information",
+    "top_sense": "to try to find out something, whether by asking or by searching"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000009",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000010": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "spend.01 arity 5",
+        "kind": "predicate_roleset",
+        "term": "spend"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "spend"
+       },
+       {
+        "detail": "3 WordNet sense(s)",
+        "kind": "lexical_sense",
+        "term": "spend"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.transfer_value",
+      "score": 1.95,
+      "sense": "to move money or goods between parties, in either direction"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "watch.01 arity 2",
+        "kind": "predicate_roleset",
+        "term": "watch"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "watch"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.consume_media",
+      "score": 1.7,
+      "sense": "to watch, read or listen to a work, as an experience the holder may later refer back to"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "whole phrase alias",
+        "kind": "ontology_alias",
+        "term": "every time"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "always"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:frequency.invariant",
+      "score": 1.4,
+      "sense": "holds on every relevant occasion, so an exception would be a contradiction"
+     }
+    ],
+    "competing_ontology_ids": [
+     "l1:predicate.transfer_value",
+     "l1:predicate.consume_media"
+    ],
+    "expression_id": "expr-000010",
+    "margin": 0.25,
+    "outcome": "ambiguous",
+    "top_ontology_id": "l1:predicate.transfer_value",
+    "top_sense": "to move money or goods between parties, in either direction"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000010",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000011": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000011",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000011",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000012": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "love.01 arity 2",
+        "kind": "predicate_roleset",
+        "term": "love"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "love"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.hold_attitude",
+      "score": 1.7,
+      "sense": "to have a standing positive or negative attitude toward something"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000012",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.hold_attitude",
+    "top_sense": "to have a standing positive or negative attitude toward something"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000012",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000013": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "book.01 arity 4",
+        "kind": "predicate_roleset",
+        "term": "book"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "book"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.commit_to_arrangement",
+      "score": 1.7,
+      "sense": "to bind oneself to a future arrangement, so that failing to honour it is a lapse"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "read.01 arity 4",
+        "kind": "predicate_roleset",
+        "term": "read"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "read"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.consume_media",
+      "score": 1.7,
+      "sense": "to watch, read or listen to a work, as an experience the holder may later refer back to"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "keep"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:predicate.possess",
+      "score": 0.7,
+      "sense": "to own or have something at one's disposal"
+     }
+    ],
+    "competing_ontology_ids": [
+     "l1:predicate.commit_to_arrangement",
+     "l1:predicate.consume_media"
+    ],
+    "expression_id": "expr-000013",
+    "margin": 0.0,
+    "outcome": "ambiguous",
+    "top_ontology_id": "l1:predicate.commit_to_arrangement",
+    "top_sense": "to bind oneself to a future arrangement, so that failing to honour it is a lapse"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000013",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000014": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000014",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000014",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000015": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "watch.01 arity 2",
+        "kind": "predicate_roleset",
+        "term": "watch"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "watch"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.consume_media",
+      "score": 1.7,
+      "sense": "to watch, read or listen to a work, as an experience the holder may later refer back to"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000015",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.consume_media",
+    "top_sense": "to watch, read or listen to a work, as an experience the holder may later refer back to"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000015",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000016": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "have"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:predicate.possess",
+      "score": 0.7,
+      "sense": "to own or have something at one's disposal"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000016",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.possess",
+    "top_sense": "to own or have something at one's disposal"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000016",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000017": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "whole phrase alias",
+        "kind": "ontology_alias",
+        "term": "won t"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:preference.avoidance",
+      "score": 0.7,
+      "sense": "a standing wish not to be offered or subjected to something, stronger than mere dislike"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000017",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:preference.avoidance",
+    "top_sense": "a standing wish not to be offered or subjected to something, stronger than mere dislike"
+   },
+   "l2": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "derived via m:abstraction.standing_condition (abstracts_from)",
+        "kind": "predicate_roleset",
+        "term": "l1:preference.avoidance"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l2:abstraction.standing_condition",
+      "score": 1.0,
+      "sense": "a lasting fact about a subject that constrains what may be offered them at any time"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000017",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l2:abstraction.standing_condition",
+    "top_sense": "a lasting fact about a subject that constrains what may be offered them at any time"
+   }
+  },
+  "expr-000018": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "love.01 arity 2",
+        "kind": "predicate_roleset",
+        "term": "love"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "love"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.hold_attitude",
+      "score": 1.7,
+      "sense": "to have a standing positive or negative attitude toward something"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "start.01 arity 3",
+        "kind": "predicate_roleset",
+        "term": "start"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "start"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.undergo_transition",
+      "score": 1.7,
+      "sense": "to come to be in a new state, where the change itself is what is reported"
+     }
+    ],
+    "competing_ontology_ids": [
+     "l1:predicate.hold_attitude",
+     "l1:predicate.undergo_transition"
+    ],
+    "expression_id": "expr-000018",
+    "margin": 0.0,
+    "outcome": "ambiguous",
+    "top_ontology_id": "l1:predicate.hold_attitude",
+    "top_sense": "to have a standing positive or negative attitude toward something"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000018",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000019": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "like.01 arity 2",
+        "kind": "predicate_roleset",
+        "term": "like"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "like"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.hold_attitude",
+      "score": 1.7,
+      "sense": "to have a standing positive or negative attitude toward something"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "schema:Place",
+        "kind": "schema_type",
+        "term": "place"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:attribute.place",
+      "score": 0.5,
+      "sense": "where an entity is, as a property of the entity rather than a movement endpoint"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "become"
+       },
+       {
+        "detail": "4 WordNet sense(s)",
+        "kind": "lexical_sense",
+        "term": "become"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:predicate.undergo_transition",
+      "score": 0.95,
+      "sense": "to come to be in a new state, where the change itself is what is reported"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000019",
+    "margin": 1.2,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.hold_attitude",
+    "top_sense": "to have a standing positive or negative attitude toward something"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000019",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000020": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000020",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000020",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000021": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000021",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000021",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000022": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "buy.01 arity 5",
+        "kind": "predicate_roleset",
+        "term": "buy"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "buy"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.transfer_value",
+      "score": 1.7,
+      "sense": "to move money or goods between parties, in either direction"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000022",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.transfer_value",
+    "top_sense": "to move money or goods between parties, in either direction"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000022",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000023": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000023",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000023",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000024": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000024",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000024",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000025": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "always"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:frequency.invariant",
+      "score": 0.7,
+      "sense": "holds on every relevant occasion, so an exception would be a contradiction"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000025",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:frequency.invariant",
+    "top_sense": "holds on every relevant occasion, so an exception would be a contradiction"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000025",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000026": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000026",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000026",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000027": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "own.01 arity 2",
+        "kind": "predicate_roleset",
+        "term": "own"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "own"
+       },
+       {
+        "detail": "1 WordNet sense(s)",
+        "kind": "lexical_sense",
+        "term": "own"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.possess",
+      "score": 1.95,
+      "sense": "to own or have something at one's disposal"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000027",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.possess",
+    "top_sense": "to own or have something at one's disposal"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000027",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000028": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "like.01 arity 2",
+        "kind": "predicate_roleset",
+        "term": "like"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "like"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.hold_attitude",
+      "score": 1.7,
+      "sense": "to have a standing positive or negative attitude toward something"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "have"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:predicate.possess",
+      "score": 0.7,
+      "sense": "to own or have something at one's disposal"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000028",
+    "margin": 1.0,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.hold_attitude",
+    "top_sense": "to have a standing positive or negative attitude toward something"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000028",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000029": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000029",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000029",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000030": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000030",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000030",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000031": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "will"
+       },
+       {
+        "detail": "3 WordNet sense(s)",
+        "kind": "lexical_sense",
+        "term": "will"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:task.declared_intention",
+      "score": 0.95,
+      "sense": "something the subject has said they intend to do, not yet done"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "keep"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:predicate.possess",
+      "score": 0.7,
+      "sense": "to own or have something at one's disposal"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "whole phrase alias",
+        "kind": "ontology_alias",
+        "term": "look for"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:predicate.seek_information",
+      "score": 0.7,
+      "sense": "to try to find out something, whether by asking or by searching"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000031",
+    "margin": 0.25,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:task.declared_intention",
+    "top_sense": "something the subject has said they intend to do, not yet done"
+   },
+   "l2": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "derived via m:import.pattern_goal_decomposition (abstracts_from)",
+        "kind": "predicate_roleset",
+        "term": "l1:task.declared_intention"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l2:pattern.goal_decomposition",
+      "score": 1.0,
+      "sense": "group observations under one intention when each advances a part of it"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000031",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l2:pattern.goal_decomposition",
+    "top_sense": "group observations under one intention when each advances a part of it"
+   }
+  },
+  "expr-000032": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "positive"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:polarity.affirmed",
+      "score": 0.7,
+      "sense": "the content is asserted to hold of its subject"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "keep"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:predicate.possess",
+      "score": 0.7,
+      "sense": "to own or have something at one's disposal"
+     }
+    ],
+    "competing_ontology_ids": [
+     "l1:polarity.affirmed",
+     "l1:predicate.possess"
+    ],
+    "expression_id": "expr-000032",
+    "margin": 0.0,
+    "outcome": "ambiguous",
+    "top_ontology_id": "l1:polarity.affirmed",
+    "top_sense": "the content is asserted to hold of its subject"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000032",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000033": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000033",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000033",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000034": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000034",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000034",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000035": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000035",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000035",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000036": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "own.01 arity 2",
+        "kind": "predicate_roleset",
+        "term": "own"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "own"
+       },
+       {
+        "detail": "1 WordNet sense(s)",
+        "kind": "lexical_sense",
+        "term": "own"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.possess",
+      "score": 1.95,
+      "sense": "to own or have something at one's disposal"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000036",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.possess",
+    "top_sense": "to own or have something at one's disposal"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000036",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000037": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "positive"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:polarity.affirmed",
+      "score": 0.7,
+      "sense": "the content is asserted to hold of its subject"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000037",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:polarity.affirmed",
+    "top_sense": "the content is asserted to hold of its subject"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000037",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000038": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "schema:Place",
+        "kind": "schema_type",
+        "term": "place"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:attribute.place",
+      "score": 0.5,
+      "sense": "where an entity is, as a property of the entity rather than a movement endpoint"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000038",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:attribute.place",
+    "top_sense": "where an entity is, as a property of the entity rather than a movement endpoint"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000038",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000039": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000039",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000039",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000040": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000040",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000040",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000041": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000041",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000041",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000042": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "check.01 arity 3",
+        "kind": "predicate_roleset",
+        "term": "check"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "check"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.seek_information",
+      "score": 1.7,
+      "sense": "to try to find out something, whether by asking or by searching"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "whole phrase alias",
+        "kind": "ontology_alias",
+        "term": "can t"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:state.capability_constraint",
+      "score": 0.7,
+      "sense": "something the subject cannot do or have, which restricts what may be offered them"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000042",
+    "margin": 1.0,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.seek_information",
+    "top_sense": "to try to find out something, whether by asking or by searching"
+   },
+   "l2": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "derived via m:abstraction.standing_condition (abstracts_from)",
+        "kind": "predicate_roleset",
+        "term": "l1:state.capability_constraint"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l2:abstraction.standing_condition",
+      "score": 1.0,
+      "sense": "a lasting fact about a subject that constrains what may be offered them at any time"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000042",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l2:abstraction.standing_condition",
+    "top_sense": "a lasting fact about a subject that constrains what may be offered them at any time"
+   }
+  },
+  "expr-000043": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "like.01 arity 2",
+        "kind": "predicate_roleset",
+        "term": "like"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "like"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.hold_attitude",
+      "score": 1.7,
+      "sense": "to have a standing positive or negative attitude toward something"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "upcoming"
+       },
+       {
+        "detail": "1 WordNet sense(s)",
+        "kind": "lexical_sense",
+        "term": "upcoming"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:time.after_assertion",
+      "score": 0.95,
+      "sense": "the content is expected or intended to hold later than the assertion"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000043",
+    "margin": 0.75,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.hold_attitude",
+    "top_sense": "to have a standing positive or negative attitude toward something"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000043",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000044": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000044",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000044",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000045": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000045",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000045",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000046": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "like.01 arity 2",
+        "kind": "predicate_roleset",
+        "term": "like"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "like"
+       },
+       {
+        "detail": "love.01 arity 2",
+        "kind": "predicate_roleset",
+        "term": "love"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "love"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.hold_attitude",
+      "score": 3.4,
+      "sense": "to have a standing positive or negative attitude toward something"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000046",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.hold_attitude",
+    "top_sense": "to have a standing positive or negative attitude toward something"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000046",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000047": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000047",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000047",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000048": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000048",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000048",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000049": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "positive"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:polarity.affirmed",
+      "score": 0.7,
+      "sense": "the content is asserted to hold of its subject"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "whole phrase alias",
+        "kind": "ontology_alias",
+        "term": "look for"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:predicate.seek_information",
+      "score": 0.7,
+      "sense": "to try to find out something, whether by asking or by searching"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "grounds"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:role.cause",
+      "score": 0.7,
+      "sense": "the state of affairs that brings the predicate about or is given as its grounds"
+     }
+    ],
+    "competing_ontology_ids": [
+     "l1:polarity.affirmed",
+     "l1:predicate.seek_information",
+     "l1:role.cause"
+    ],
+    "expression_id": "expr-000049",
+    "margin": 0.0,
+    "outcome": "ambiguous",
+    "top_ontology_id": "l1:polarity.affirmed",
+    "top_sense": "the content is asserted to hold of its subject"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000049",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000050": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "future"
+       },
+       {
+        "detail": "4 WordNet sense(s)",
+        "kind": "lexical_sense",
+        "term": "future"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:time.after_assertion",
+      "score": 0.95,
+      "sense": "the content is expected or intended to hold later than the assertion"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000050",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:time.after_assertion",
+    "top_sense": "the content is expected or intended to hold later than the assertion"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000050",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000051": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "love.01 arity 2",
+        "kind": "predicate_roleset",
+        "term": "love"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "love"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.hold_attitude",
+      "score": 1.7,
+      "sense": "to have a standing positive or negative attitude toward something"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "over"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:preference.comparative",
+      "score": 0.7,
+      "sense": "a preference for one option over a named alternative rather than in isolation"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000051",
+    "margin": 1.0,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.hold_attitude",
+    "top_sense": "to have a standing positive or negative attitude toward something"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000051",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000052": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000052",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000052",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000053": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "enjoy.01 arity 2",
+        "kind": "predicate_roleset",
+        "term": "enjoy"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "enjoy"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.hold_attitude",
+      "score": 1.7,
+      "sense": "to have a standing positive or negative attitude toward something"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000053",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.hold_attitude",
+    "top_sense": "to have a standing positive or negative attitude toward something"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000053",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000054": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000054",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000054",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000055": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "schema:Place",
+        "kind": "schema_type",
+        "term": "place"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:attribute.place",
+      "score": 0.5,
+      "sense": "where an entity is, as a property of the entity rather than a movement endpoint"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "whole phrase alias",
+        "kind": "ontology_alias",
+        "term": "go to"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:predicate.relocate",
+      "score": 0.7,
+      "sense": "to change where one is or lives, as a completed transition between two places"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000055",
+    "margin": -0.2,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:attribute.place",
+    "top_sense": "where an entity is, as a property of the entity rather than a movement endpoint"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000055",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000056": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "read.01 arity 4",
+        "kind": "predicate_roleset",
+        "term": "read"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "read"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.consume_media",
+      "score": 1.7,
+      "sense": "to watch, read or listen to a work, as an experience the holder may later refer back to"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000056",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.consume_media",
+    "top_sense": "to watch, read or listen to a work, as an experience the holder may later refer back to"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000056",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000057": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "schema:Place",
+        "kind": "schema_type",
+        "term": "place"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:attribute.place",
+      "score": 0.5,
+      "sense": "where an entity is, as a property of the entity rather than a movement endpoint"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000057",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:attribute.place",
+    "top_sense": "where an entity is, as a property of the entity rather than a movement endpoint"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000057",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000058": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "object"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:role.theme",
+      "score": 0.7,
+      "sense": "the entity the predicate is about, created, changed or transferred by the event"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000058",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:role.theme",
+    "top_sense": "the entity the predicate is about, created, changed or transferred by the event"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000058",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000059": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "start.01 arity 3",
+        "kind": "predicate_roleset",
+        "term": "start"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "start"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.undergo_transition",
+      "score": 1.7,
+      "sense": "to come to be in a new state, where the change itself is what is reported"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "positive"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:polarity.affirmed",
+      "score": 0.7,
+      "sense": "the content is asserted to hold of its subject"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000059",
+    "margin": 1.0,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.undergo_transition",
+    "top_sense": "to come to be in a new state, where the change itself is what is reported"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000059",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000060": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000060",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000060",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000061": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "enjoy.01 arity 2",
+        "kind": "predicate_roleset",
+        "term": "enjoy"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "enjoy"
+       },
+       {
+        "detail": "like.01 arity 2",
+        "kind": "predicate_roleset",
+        "term": "like"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "like"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.hold_attitude",
+      "score": 3.4,
+      "sense": "to have a standing positive or negative attitude toward something"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "ask.01 arity 4",
+        "kind": "predicate_roleset",
+        "term": "ask"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "ask"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.seek_information",
+      "score": 1.7,
+      "sense": "to try to find out something, whether by asking or by searching"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "have"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:predicate.possess",
+      "score": 0.7,
+      "sense": "to own or have something at one's disposal"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000061",
+    "margin": 1.7,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.hold_attitude",
+    "top_sense": "to have a standing positive or negative attitude toward something"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000061",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000062": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "stop.01 arity 3",
+        "kind": "predicate_roleset",
+        "term": "stop"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "stop"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.undergo_transition",
+      "score": 1.7,
+      "sense": "to come to be in a new state, where the change itself is what is reported"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "schema:Place",
+        "kind": "schema_type",
+        "term": "place"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:attribute.place",
+      "score": 0.5,
+      "sense": "where an entity is, as a property of the entity rather than a movement endpoint"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000062",
+    "margin": 1.2,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.undergo_transition",
+    "top_sense": "to come to be in a new state, where the change itself is what is reported"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000062",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000063": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "spend.01 arity 5",
+        "kind": "predicate_roleset",
+        "term": "spend"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "spend"
+       },
+       {
+        "detail": "3 WordNet sense(s)",
+        "kind": "lexical_sense",
+        "term": "spend"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.transfer_value",
+      "score": 1.95,
+      "sense": "to move money or goods between parties, in either direction"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "like.01 arity 2",
+        "kind": "predicate_roleset",
+        "term": "like"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "like"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.hold_attitude",
+      "score": 1.7,
+      "sense": "to have a standing positive or negative attitude toward something"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "schema:Place",
+        "kind": "schema_type",
+        "term": "place"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:attribute.place",
+      "score": 0.5,
+      "sense": "where an entity is, as a property of the entity rather than a movement endpoint"
+     }
+    ],
+    "competing_ontology_ids": [
+     "l1:predicate.transfer_value",
+     "l1:predicate.hold_attitude"
+    ],
+    "expression_id": "expr-000063",
+    "margin": 0.25,
+    "outcome": "ambiguous",
+    "top_ontology_id": "l1:predicate.transfer_value",
+    "top_sense": "to move money or goods between parties, in either direction"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000063",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000064": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "like.01 arity 2",
+        "kind": "predicate_roleset",
+        "term": "like"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "like"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.hold_attitude",
+      "score": 1.7,
+      "sense": "to have a standing positive or negative attitude toward something"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "start.01 arity 3",
+        "kind": "predicate_roleset",
+        "term": "start"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "start"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.undergo_transition",
+      "score": 1.7,
+      "sense": "to come to be in a new state, where the change itself is what is reported"
+     }
+    ],
+    "competing_ontology_ids": [
+     "l1:predicate.hold_attitude",
+     "l1:predicate.undergo_transition"
+    ],
+    "expression_id": "expr-000064",
+    "margin": 0.0,
+    "outcome": "ambiguous",
+    "top_ontology_id": "l1:predicate.hold_attitude",
+    "top_sense": "to have a standing positive or negative attitude toward something"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000064",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000065": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "watch.01 arity 2",
+        "kind": "predicate_roleset",
+        "term": "watch"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "watch"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.consume_media",
+      "score": 1.7,
+      "sense": "to watch, read or listen to a work, as an experience the holder may later refer back to"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000065",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.consume_media",
+    "top_sense": "to watch, read or listen to a work, as an experience the holder may later refer back to"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000065",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000066": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "start.01 arity 3",
+        "kind": "predicate_roleset",
+        "term": "start"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "start"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.undergo_transition",
+      "score": 1.7,
+      "sense": "to come to be in a new state, where the change itself is what is reported"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000066",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.undergo_transition",
+    "top_sense": "to come to be in a new state, where the change itself is what is reported"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000066",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000067": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "book.01 arity 4",
+        "kind": "predicate_roleset",
+        "term": "book"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "book"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.commit_to_arrangement",
+      "score": 1.7,
+      "sense": "to bind oneself to a future arrangement, so that failing to honour it is a lapse"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "read.01 arity 4",
+        "kind": "predicate_roleset",
+        "term": "read"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "read"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.consume_media",
+      "score": 1.7,
+      "sense": "to watch, read or listen to a work, as an experience the holder may later refer back to"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "currently"
+       },
+       {
+        "detail": "1 WordNet sense(s)",
+        "kind": "lexical_sense",
+        "term": "currently"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:time.at_assertion",
+      "score": 0.95,
+      "sense": "the content holds at the moment of assertion"
+     }
+    ],
+    "competing_ontology_ids": [
+     "l1:predicate.commit_to_arrangement",
+     "l1:predicate.consume_media"
+    ],
+    "expression_id": "expr-000067",
+    "margin": 0.0,
+    "outcome": "ambiguous",
+    "top_ontology_id": "l1:predicate.commit_to_arrangement",
+    "top_sense": "to bind oneself to a future arrangement, so that failing to honour it is a lapse"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000067",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000068": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000068",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000068",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000069": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "keep"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:predicate.possess",
+      "score": 0.7,
+      "sense": "to own or have something at one's disposal"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000069",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.possess",
+    "top_sense": "to own or have something at one's disposal"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000069",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000070": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000070",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000070",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000071": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "book.01 arity 4",
+        "kind": "predicate_roleset",
+        "term": "book"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "book"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.commit_to_arrangement",
+      "score": 1.7,
+      "sense": "to bind oneself to a future arrangement, so that failing to honour it is a lapse"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "love.01 arity 2",
+        "kind": "predicate_roleset",
+        "term": "love"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "love"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.hold_attitude",
+      "score": 1.7,
+      "sense": "to have a standing positive or negative attitude toward something"
+     }
+    ],
+    "competing_ontology_ids": [
+     "l1:predicate.commit_to_arrangement",
+     "l1:predicate.hold_attitude"
+    ],
+    "expression_id": "expr-000071",
+    "margin": 0.0,
+    "outcome": "ambiguous",
+    "top_ontology_id": "l1:predicate.commit_to_arrangement",
+    "top_sense": "to bind oneself to a future arrangement, so that failing to honour it is a lapse"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000071",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000072": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "like.01 arity 2",
+        "kind": "predicate_roleset",
+        "term": "like"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "like"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.hold_attitude",
+      "score": 1.7,
+      "sense": "to have a standing positive or negative attitude toward something"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000072",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.hold_attitude",
+    "top_sense": "to have a standing positive or negative attitude toward something"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000072",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000073": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000073",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000073",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000074": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "like.01 arity 2",
+        "kind": "predicate_roleset",
+        "term": "like"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "like"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.hold_attitude",
+      "score": 1.7,
+      "sense": "to have a standing positive or negative attitude toward something"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000074",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.hold_attitude",
+    "top_sense": "to have a standing positive or negative attitude toward something"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000074",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000075": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000075",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000075",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000076": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "sell.01 arity 5",
+        "kind": "predicate_roleset",
+        "term": "sell"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "sell"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.transfer_value",
+      "score": 1.7,
+      "sense": "to move money or goods between parties, in either direction"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000076",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.transfer_value",
+    "top_sense": "to move money or goods between parties, in either direction"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000076",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000077": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "will"
+       },
+       {
+        "detail": "3 WordNet sense(s)",
+        "kind": "lexical_sense",
+        "term": "will"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:task.declared_intention",
+      "score": 0.95,
+      "sense": "something the subject has said they intend to do, not yet done"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000077",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:task.declared_intention",
+    "top_sense": "something the subject has said they intend to do, not yet done"
+   },
+   "l2": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "derived via m:import.pattern_goal_decomposition (abstracts_from)",
+        "kind": "predicate_roleset",
+        "term": "l1:task.declared_intention"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l2:pattern.goal_decomposition",
+      "score": 1.0,
+      "sense": "group observations under one intention when each advances a part of it"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000077",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l2:pattern.goal_decomposition",
+    "top_sense": "group observations under one intention when each advances a part of it"
+   }
+  },
+  "expr-000078": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000078",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000078",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000079": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "have"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:predicate.possess",
+      "score": 0.7,
+      "sense": "to own or have something at one's disposal"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000079",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.possess",
+    "top_sense": "to own or have something at one's disposal"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000079",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000080": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000080",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000080",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000081": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "area"
+       },
+       {
+        "detail": "schema:area",
+        "kind": "schema_type",
+        "term": "area"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:attribute.place",
+      "score": 1.2,
+      "sense": "where an entity is, as a property of the entity rather than a movement endpoint"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "become"
+       },
+       {
+        "detail": "4 WordNet sense(s)",
+        "kind": "lexical_sense",
+        "term": "become"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:predicate.undergo_transition",
+      "score": 0.95,
+      "sense": "to come to be in a new state, where the change itself is what is reported"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000081",
+    "margin": 0.25,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:attribute.place",
+    "top_sense": "where an entity is, as a property of the entity rather than a movement endpoint"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000081",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000082": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "check.01 arity 3",
+        "kind": "predicate_roleset",
+        "term": "check"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "check"
+       },
+       {
+        "detail": "ask.01 arity 4",
+        "kind": "predicate_roleset",
+        "term": "ask"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "ask"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.seek_information",
+      "score": 3.4,
+      "sense": "to try to find out something, whether by asking or by searching"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "love.01 arity 2",
+        "kind": "predicate_roleset",
+        "term": "love"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "love"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.hold_attitude",
+      "score": 1.7,
+      "sense": "to have a standing positive or negative attitude toward something"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000082",
+    "margin": 1.7,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.seek_information",
+    "top_sense": "to try to find out something, whether by asking or by searching"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000082",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000083": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000083",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000083",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000084": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "buy.01 arity 5",
+        "kind": "predicate_roleset",
+        "term": "buy"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "buy"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.transfer_value",
+      "score": 1.7,
+      "sense": "to move money or goods between parties, in either direction"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000084",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.transfer_value",
+    "top_sense": "to move money or goods between parties, in either direction"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000084",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000085": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000085",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000085",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000086": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000086",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000086",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000087": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000087",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000087",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000088": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000088",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000088",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000089": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000089",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000089",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000090": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "genre"
+       },
+       {
+        "detail": "schema:genre",
+        "kind": "schema_type",
+        "term": "genre"
+       },
+       {
+        "detail": "4 WordNet sense(s)",
+        "kind": "lexical_sense",
+        "term": "genre"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:attribute.kind",
+      "score": 1.45,
+      "sense": "which sub-category of its type an entity falls into"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000090",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:attribute.kind",
+    "top_sense": "which sub-category of its type an entity falls into"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000090",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000091": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "ask.01 arity 4",
+        "kind": "predicate_roleset",
+        "term": "ask"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "ask"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.seek_information",
+      "score": 1.7,
+      "sense": "to try to find out something, whether by asking or by searching"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "patient"
+       },
+       {
+        "detail": "2 WordNet sense(s)",
+        "kind": "lexical_sense",
+        "term": "patient"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:role.theme",
+      "score": 0.95,
+      "sense": "the entity the predicate is about, created, changed or transferred by the event"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "whole phrase alias",
+        "kind": "ontology_alias",
+        "term": "how long"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:role.duration",
+      "score": 0.7,
+      "sense": "how long the predicate holds, as an interval length rather than a pair of endpoints"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000091",
+    "margin": 0.75,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.seek_information",
+    "top_sense": "to try to find out something, whether by asking or by searching"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000091",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000092": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "modify.01 arity 4",
+        "kind": "predicate_roleset",
+        "term": "modify"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "modify"
+       },
+       {
+        "detail": "3 WordNet sense(s)",
+        "kind": "lexical_sense",
+        "term": "modify"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.change_arrangement",
+      "score": 1.95,
+      "sense": "to alter or cancel an arrangement already committed to"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000092",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.change_arrangement",
+    "top_sense": "to alter or cancel an arrangement already committed to"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000092",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000093": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000093",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000093",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000094": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000094",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000094",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000095": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "like.01 arity 2",
+        "kind": "predicate_roleset",
+        "term": "like"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "like"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.hold_attitude",
+      "score": 1.7,
+      "sense": "to have a standing positive or negative attitude toward something"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "ask.01 arity 4",
+        "kind": "predicate_roleset",
+        "term": "ask"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "ask"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.seek_information",
+      "score": 1.7,
+      "sense": "to try to find out something, whether by asking or by searching"
+     }
+    ],
+    "competing_ontology_ids": [
+     "l1:predicate.hold_attitude",
+     "l1:predicate.seek_information"
+    ],
+    "expression_id": "expr-000095",
+    "margin": 0.0,
+    "outcome": "ambiguous",
+    "top_ontology_id": "l1:predicate.hold_attitude",
+    "top_sense": "to have a standing positive or negative attitude toward something"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000095",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000096": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "over"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:preference.comparative",
+      "score": 0.7,
+      "sense": "a preference for one option over a named alternative rather than in isolation"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000096",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:preference.comparative",
+    "top_sense": "a preference for one option over a named alternative rather than in isolation"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000096",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000097": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "whole phrase alias",
+        "kind": "ontology_alias",
+        "term": "compared to"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:role.comparison_target",
+      "score": 0.7,
+      "sense": "the alternative a comparative preference is measured against"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000097",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:role.comparison_target",
+    "top_sense": "the alternative a comparative preference is measured against"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000097",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000098": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000098",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000098",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000099": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "search.01 arity 3",
+        "kind": "predicate_roleset",
+        "term": "search"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "search"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.seek_information",
+      "score": 1.7,
+      "sense": "to try to find out something, whether by asking or by searching"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "area"
+       },
+       {
+        "detail": "schema:area",
+        "kind": "schema_type",
+        "term": "area"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:attribute.place",
+      "score": 1.2,
+      "sense": "where an entity is, as a property of the entity rather than a movement endpoint"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000099",
+    "margin": 0.5,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.seek_information",
+    "top_sense": "to try to find out something, whether by asking or by searching"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000099",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000100": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000100",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000100",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000101": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "like.01 arity 2",
+        "kind": "predicate_roleset",
+        "term": "like"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "like"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.hold_attitude",
+      "score": 1.7,
+      "sense": "to have a standing positive or negative attitude toward something"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "start.01 arity 3",
+        "kind": "predicate_roleset",
+        "term": "start"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "start"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.undergo_transition",
+      "score": 1.7,
+      "sense": "to come to be in a new state, where the change itself is what is reported"
+     }
+    ],
+    "competing_ontology_ids": [
+     "l1:predicate.hold_attitude",
+     "l1:predicate.undergo_transition"
+    ],
+    "expression_id": "expr-000101",
+    "margin": 0.0,
+    "outcome": "ambiguous",
+    "top_ontology_id": "l1:predicate.hold_attitude",
+    "top_sense": "to have a standing positive or negative attitude toward something"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000101",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000102": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000102",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000102",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000103": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "whole phrase alias",
+        "kind": "ontology_alias",
+        "term": "won t"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:preference.avoidance",
+      "score": 0.7,
+      "sense": "a standing wish not to be offered or subjected to something, stronger than mere dislike"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000103",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:preference.avoidance",
+    "top_sense": "a standing wish not to be offered or subjected to something, stronger than mere dislike"
+   },
+   "l2": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "derived via m:abstraction.standing_condition (abstracts_from)",
+        "kind": "predicate_roleset",
+        "term": "l1:preference.avoidance"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l2:abstraction.standing_condition",
+      "score": 1.0,
+      "sense": "a lasting fact about a subject that constrains what may be offered them at any time"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000103",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l2:abstraction.standing_condition",
+    "top_sense": "a lasting fact about a subject that constrains what may be offered them at any time"
+   }
+  },
+  "expr-000104": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000104",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000104",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000105": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000105",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000105",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000106": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "stop.01 arity 3",
+        "kind": "predicate_roleset",
+        "term": "stop"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "stop"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.undergo_transition",
+      "score": 1.7,
+      "sense": "to come to be in a new state, where the change itself is what is reported"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000106",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.undergo_transition",
+    "top_sense": "to come to be in a new state, where the change itself is what is reported"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000106",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000107": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000107",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000107",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000108": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "love.01 arity 2",
+        "kind": "predicate_roleset",
+        "term": "love"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "love"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.hold_attitude",
+      "score": 1.7,
+      "sense": "to have a standing positive or negative attitude toward something"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "start.01 arity 3",
+        "kind": "predicate_roleset",
+        "term": "start"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "start"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.undergo_transition",
+      "score": 1.7,
+      "sense": "to come to be in a new state, where the change itself is what is reported"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "will"
+       },
+       {
+        "detail": "3 WordNet sense(s)",
+        "kind": "lexical_sense",
+        "term": "will"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:task.declared_intention",
+      "score": 0.95,
+      "sense": "something the subject has said they intend to do, not yet done"
+     }
+    ],
+    "competing_ontology_ids": [
+     "l1:predicate.hold_attitude",
+     "l1:predicate.undergo_transition"
+    ],
+    "expression_id": "expr-000108",
+    "margin": 0.0,
+    "outcome": "ambiguous",
+    "top_ontology_id": "l1:predicate.hold_attitude",
+    "top_sense": "to have a standing positive or negative attitude toward something"
+   },
+   "l2": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "derived via m:import.pattern_goal_decomposition (abstracts_from)",
+        "kind": "predicate_roleset",
+        "term": "l1:task.declared_intention"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l2:pattern.goal_decomposition",
+      "score": 1.0,
+      "sense": "group observations under one intention when each advances a part of it"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000108",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l2:pattern.goal_decomposition",
+    "top_sense": "group observations under one intention when each advances a part of it"
+   }
+  },
+  "expr-000109": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "book.01 arity 4",
+        "kind": "predicate_roleset",
+        "term": "book"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "book"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.commit_to_arrangement",
+      "score": 1.7,
+      "sense": "to bind oneself to a future arrangement, so that failing to honour it is a lapse"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "like.01 arity 2",
+        "kind": "predicate_roleset",
+        "term": "like"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "like"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.hold_attitude",
+      "score": 1.7,
+      "sense": "to have a standing positive or negative attitude toward something"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "category"
+       },
+       {
+        "detail": "schema:category",
+        "kind": "schema_type",
+        "term": "category"
+       },
+       {
+        "detail": "2 WordNet sense(s)",
+        "kind": "lexical_sense",
+        "term": "category"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:attribute.kind",
+      "score": 1.45,
+      "sense": "which sub-category of its type an entity falls into"
+     }
+    ],
+    "competing_ontology_ids": [
+     "l1:predicate.commit_to_arrangement",
+     "l1:predicate.hold_attitude",
+     "l1:attribute.kind"
+    ],
+    "expression_id": "expr-000109",
+    "margin": 0.0,
+    "outcome": "ambiguous",
+    "top_ontology_id": "l1:predicate.commit_to_arrangement",
+    "top_sense": "to bind oneself to a future arrangement, so that failing to honour it is a lapse"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000109",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000110": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "condition.01 arity 3",
+        "kind": "predicate_roleset",
+        "term": "condition"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.suspend_on_condition",
+      "score": 1.0,
+      "sense": "to make an intention or commitment depend on a condition that has not yet been settled"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "condition"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:role.trigger",
+      "score": 0.7,
+      "sense": "the condition whose satisfaction is what makes a suspended commitment take effect"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000110",
+    "margin": 0.3,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.suspend_on_condition",
+    "top_sense": "to make an intention or commitment depend on a condition that has not yet been settled"
+   },
+   "l2": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "derived via m:import.pattern_trigger_watch (abstracts_from)",
+        "kind": "predicate_roleset",
+        "term": "l1:predicate.suspend_on_condition"
+       },
+       {
+        "detail": "derived via m:import.pattern_trigger_watch (abstracts_from)",
+        "kind": "predicate_roleset",
+        "term": "l1:role.trigger"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l2:pattern.trigger_watch",
+      "score": 2.0,
+      "sense": "hold an item unresolved until its stated condition is observed to hold or to fail"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "derived via m:abstraction.conditional_commitment (abstracts_from)",
+        "kind": "predicate_roleset",
+        "term": "l1:role.trigger"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l2:abstraction.conditional_commitment",
+      "score": 1.0,
+      "sense": "a commitment held open across sessions, waiting on a condition that may never be met"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "derived via m:lift.lifecycle_condition_failed (qualifier_lift)",
+        "kind": "predicate_roleset",
+        "term": "l1:role.trigger"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l2:lifecycle.condition_failed",
+      "score": 1.0,
+      "sense": "a conditional item whose trigger was settled false, so it will not take effect"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000110",
+    "margin": 1.0,
+    "outcome": "mapped",
+    "top_ontology_id": "l2:pattern.trigger_watch",
+    "top_sense": "hold an item unresolved until its stated condition is observed to hold or to fail"
+   }
+  },
+  "expr-000111": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000111",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000111",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000112": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000112",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000112",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000113": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "love.01 arity 2",
+        "kind": "predicate_roleset",
+        "term": "love"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "love"
+       },
+       {
+        "detail": "enjoy.01 arity 2",
+        "kind": "predicate_roleset",
+        "term": "enjoy"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "enjoy"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.hold_attitude",
+      "score": 3.4,
+      "sense": "to have a standing positive or negative attitude toward something"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000113",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.hold_attitude",
+    "top_sense": "to have a standing positive or negative attitude toward something"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000113",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000114": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000114",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000114",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000115": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "like.01 arity 2",
+        "kind": "predicate_roleset",
+        "term": "like"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "like"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.hold_attitude",
+      "score": 1.7,
+      "sense": "to have a standing positive or negative attitude toward something"
+     },
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "object"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:role.theme",
+      "score": 0.7,
+      "sense": "the entity the predicate is about, created, changed or transferred by the event"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000115",
+    "margin": 1.0,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.hold_attitude",
+    "top_sense": "to have a standing positive or negative attitude toward something"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000115",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000116": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "over"
+       }
+      ],
+      "has_structural_evidence": false,
+      "ontology_id": "l1:preference.comparative",
+      "score": 0.7,
+      "sense": "a preference for one option over a named alternative rather than in isolation"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000116",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:preference.comparative",
+    "top_sense": "a preference for one option over a named alternative rather than in isolation"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000116",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000117": {
+   "l1": {
+    "candidates": [
+     {
+      "evidence": [
+       {
+        "detail": "check.01 arity 3",
+        "kind": "predicate_roleset",
+        "term": "check"
+       },
+       {
+        "detail": "single-word alias",
+        "kind": "ontology_alias",
+        "term": "check"
+       }
+      ],
+      "has_structural_evidence": true,
+      "ontology_id": "l1:predicate.seek_information",
+      "score": 1.7,
+      "sense": "to try to find out something, whether by asking or by searching"
+     }
+    ],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000117",
+    "margin": null,
+    "outcome": "mapped",
+    "top_ontology_id": "l1:predicate.seek_information",
+    "top_sense": "to try to find out something, whether by asking or by searching"
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000117",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000118": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000118",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000118",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  },
+  "expr-000119": {
+   "l1": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000119",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   },
+   "l2": {
+    "candidates": [],
+    "competing_ontology_ids": [],
+    "expression_id": "expr-000119",
+    "margin": null,
+    "outcome": "no_map",
+    "top_ontology_id": "",
+    "top_sense": ""
+   }
+  }
+ },
+ "sample_sha256": "2a0a6813305c7a97b00ab321337dae46c7b9eb2f96d93112a5af9327ede31e33"
+}
