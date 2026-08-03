@@ -40,8 +40,8 @@ class MappingResult(Protocol):
     Hardcoded from the fields the real result type is expected to carry:
     ``expression_id: str``, ``outcome`` in ``{"mapped", "ambiguous", "unresolved"}``,
     ``frames: tuple``, ``target_ids: tuple[str, ...]``, ``unresolved_reason`` in
-    ``{"no_content", "request_only", "no_admissible_evidence"}`` or ``None``, and
-    ``constructions: tuple[str, ...]``. The invariant ``len(target_ids) == len(frames)`` is
+    ``{"no_content_terms", "request_only_asserts_nothing", "no_admissible_evidence"}`` or ``None``,
+    and ``constructions: tuple[str, ...]``. The invariant ``len(target_ids) == len(frames)`` is
     asserted by :func:`score`, not by this protocol, since a ``Protocol`` cannot express a
     cross-field constraint.
 

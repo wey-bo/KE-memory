@@ -11,7 +11,12 @@ from dataclasses import dataclass
 
 import pytest
 
-from ke_memory_demo.mapper_v3_scoring.models import Availability, ScoringError
+from ke_memory_demo.mapper_v3_scoring.models import (
+    MAPPING_OUTCOMES,
+    UNRESOLVED_REASONS,
+    Availability,
+    ScoringError,
+)
 from ke_memory_demo.mapper_v3_scoring.runner import build_report
 from ke_memory_demo.mapper_v3_scoring.scorer import score
 from ke_memory_demo.mapper_v3_validation.models import AnnotationGold, AnnotationRecord, Outcome
@@ -181,7 +186,7 @@ def test_true_ambiguity_abstention_is_unavailable_not_zero_when_gold_has_no_ambi
     None
 ):
     gold = [concept("e1", "l1:event.communicative_act"), none_record("e2")]
-    results = [mapped("e1", "l1:event.communicative_act"), unresolved("e2", "no_content")]
+    results = [mapped("e1", "l1:event.communicative_act"), unresolved("e2", "no_content_terms")]
 
     report = score(gold, results, ALLOWED_IDS)
 
@@ -197,7 +202,7 @@ def test_true_ambiguity_abstention_is_unavailable_not_zero_when_gold_has_no_ambi
 def test_candidate_recall_is_unavailable_when_no_gold_is_id_bearing() -> None:
     gold = [none_record("e1"), out_of_scope("e2")]
     results = [
-        unresolved("e1", "no_content"),
+        unresolved("e1", "no_content_terms"),
         FakeMappingResult(
             expression_id="e2", outcome="unresolved", unresolved_reason="no_admissible_evidence"
         ),
@@ -297,7 +302,7 @@ def test_perfect_score_case() -> None:
     results = [
         mapped("e1", "l1:event.communicative_act"),
         mapped("e2", "l1:state.capability", "l2:abstraction.pursuit_profile"),
-        unresolved("e3", "no_content"),
+        unresolved("e3", "no_content_terms"),
         unresolved("e4", "no_admissible_evidence"),
     ]
 
@@ -383,3 +388,29 @@ def test_build_report_scores_an_annotation_gold_object() -> None:
     assert report.total_gold_records == 1
     assert report.total_mapping_results == 1
     assert report.candidate_recall.micro.value == 1.0
+
+
+# ---------------------------------------------------------------------------
+# The two vocabularies must agree
+# ---------------------------------------------------------------------------
+
+
+def test_the_scorer_and_the_mapper_spell_the_outcomes_identically() -> None:
+    """The gap that let the first execution attempt fail with zero semantic output.
+
+    The scorer keeps its own copy of the outcome and abstention vocabularies rather than importing
+    the mapper's enums, because importing them would give the scorer a path to the mapper it
+    scores. The cost of that isolation is that the two copies can drift, and they did: two of the
+    three abstention reasons were transcribed from a paraphrase of the contract instead of from the
+    enum, so every real abstention was rejected as malformed.
+
+    Every synthetic fixture in this file passed throughout, because they all used the scorer's own
+    spelling. Only a test that reaches for the mapper's enum can catch this, which is why this one
+    test is allowed the import the rest of the module refuses -- it asserts agreement and never
+    scores anything.
+    """
+    from ke_memory_demo.mapper_v3.mapper_v3 import Outcome as MapperOutcome
+    from ke_memory_demo.mapper_v3.mapper_v3 import UnresolvedReason
+
+    assert {member.value for member in MapperOutcome} == set(MAPPING_OUTCOMES)
+    assert {member.value for member in UnresolvedReason} == set(UNRESOLVED_REASONS)

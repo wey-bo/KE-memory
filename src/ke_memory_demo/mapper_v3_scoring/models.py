@@ -236,6 +236,12 @@ class ScoringReport(_Frozen):
 # The three outcomes a mapping result may report, held here as the structural contract's vocabulary
 # rather than imported from the real mapper.
 MAPPING_OUTCOMES: Final[frozenset[str]] = frozenset({"mapped", "ambiguous", "unresolved"})
+
+# The abstention reasons, spelled exactly as the mapper's own enum spells them. Two of the three
+# were originally transcribed from a paraphrase of the contract rather than from the enum, and the
+# scorer rejected every real abstention on the first run as a result. The values are duplicated here
+# on purpose -- importing the mapper's enum would give the scorer a path to the mapper it scores --
+# so a test asserts the two vocabularies agree instead.
 UNRESOLVED_REASONS: Final[frozenset[str]] = frozenset(
-    {"no_content", "request_only", "no_admissible_evidence"}
+    {"no_content_terms", "request_only_asserts_nothing", "no_admissible_evidence"}
 )
