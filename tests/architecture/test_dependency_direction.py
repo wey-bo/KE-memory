@@ -52,6 +52,10 @@ LAYERS: tuple[tuple[str, ...], ...] = (
         "ontology_sources",
         "mapper_v1",
         "mapper_v2",
+        # The annotation line. Same layer as the mappers rather than above them, because it must
+        # not import one: gold produced with a mapper in view measures agreement, not mapping
+        # quality. The gate's cycle and direction checks then hold that separation mechanically.
+        "mapper_v2_validation",
         "answering",
         "history",
         "snapshots",

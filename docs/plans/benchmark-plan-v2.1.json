@@ -915,6 +915,63 @@
    "standing": "diagnostic. The mapper is lexical over a seed ontology and the gold set is 18 authored cases, so these figures detect gross behaviour rather than production mapping accuracy.",
    "status": "diagnostic_failed_as_expected"
   },
+  "mapper_v2_contract_review": {
+   "gold_layer_asymmetry": {
+    "l1_target_references": 231,
+    "l2_target_references": 5,
+    "note": "gold names 5 L2 targets against 231 L1. L2 accuracy will therefore rest on very few cases and must be reported with its denominator rather than as a rate."
+   },
+   "isolation_proof": {
+    "annotation_line_importing_a_mapper": "none; two docstring mentions only",
+    "mapper_line_referencing_validation": "none",
+    "method": "grep over both packages for the sample, the gold and the validation directory"
+   },
+   "l2_path": {
+    "consequence_for_reading_results": "the layers take different paths on purpose: L1 is recognition from lexical and structural evidence, L2 is derivation over attested L1 items. A single figure spanning both would hide that.",
+    "fixed": "L2 now derives from L1 candidates through the frozen map. Each entry declares l1_source_ids and an evidence_required count, and both are honoured.",
+    "found": "directly indexed by alias, which is wrong. \"I go running every Tuesday without fail\" returned no_map because the utterance contains no word from the habit item aliases [\"routine\",\"usually does\",\"regular practice\"]. An abstraction is recognised from what attests it, not from its own name.",
+    "mechanism_verified": "32 rules covering all 32 L2 items; the habit rule fires at exactly 3 of its 4 declared sources and stays silent at 2, so evidence_required is enforced rather than advisory",
+    "question": "is L2 directly indexed, or derived through M_L1_to_L2"
+   },
+   "no_map_metric_definitions": {
+    "false_mapping_rate_on_gold_none": "the share of gold none expressions the mapper mapped anyway, reported separately from out_of_scope",
+    "no_map_precision": "of the expressions the mapper declined, the share gold also expects nothing for",
+    "no_map_recall": "of the expressions gold expects nothing for, the share the mapper declined"
+   },
+   "output_format_alignment": {
+    "every_gold_id_exists_in_ontology_v2": true,
+    "gold_fields": [
+     "outcome",
+     "target_ids",
+     "sense"
+    ],
+    "gold_outcomes": [
+     "concept",
+     "ambiguous",
+     "none",
+     "out_of_scope"
+    ],
+    "mapper_fields": [
+     "outcome",
+     "top_ontology_id",
+     "candidates"
+    ],
+    "mapper_outcomes": [
+     "mapped",
+     "ambiguous",
+     "no_map"
+    ],
+    "mapping_rule": "gold concept maps to mapper mapped; gold ambiguous to ambiguous; gold none and out_of_scope both expect no_map, but they are scored separately because none means the ontology should not cover it while out_of_scope means the ontology cannot, and only the second measures the ceiling."
+   },
+   "reviewed_before_consuming_validation": true,
+   "source_filter_rules": {
+    "ontology_v2": "single-word aliases are decisive; multi-word aliases match only as whole phrases",
+    "propbank": "11205 rolesets indexed; light verbs excluded from structural evidence because be.01 is a real roleset and made every copular sentence look structural",
+    "schemaorg": "933 of 1010 classes and 1521 of 1676 properties carry a usable label; the difference is nodes without rdfs:label",
+    "wordnet": "lemma, part of speech and sense count only; polysemy above 4 is not standalone evidence"
+   },
+   "status": "passed_with_one_structural_fix"
+  },
   "next_sequence": [
    {
     "name": "freeze the mapper v1 failure record",
@@ -994,20 +1051,42 @@
     "step": 3
    },
    {
-    "annotation_line": "reviewers see natural expressions and ontology v2 only, and produce concept, sense, none and ambiguous gold.",
-    "mapper_line": "may use discovery data and the frozen WordNet, PropBank, schema.org and ontology v2. May not read validation expressions or labels.",
-    "name": "two isolated parallel lines",
-    "step": 4
-   },
-   {
+    "defects_found_and_fixed": [
+     "a term appearing inside any phrase alias, plus a low-polysemy lemma, was enough to generate a candidate: \"Mm hmm right okay then\" produced two. Evidence must now be admissible on its own.",
+     "be.01 is a real PropBank roleset, so every copular sentence looked structural and \"the weather has been mild\" matched three predicates. Light verbs are excluded from structural evidence.",
+     "phrase aliases were indexed word by word, so \"work\" reached event.attempt_failed through the alias \"didn't work\". A phrase is evidence only when the phrase appears.",
+     "the preposition \"out\" counted as a predicate for the same reason."
+    ],
+    "discovery_behaviour": {
+     "ambiguous": 0.275,
+     "basis": "1500 discovery-split turns; the validation sample was never read by this line",
+     "mapped": 0.571,
+     "no_map": 0.153
+    },
+    "evidence_kinds": [
+     "predicate_roleset: a PropBank roleset matched, reporting argument structure rather than vocabulary",
+     "ontology_alias: a single-word or whole-phrase alias matched, reachable through WordNet morphology",
+     "schema_type: a schema.org type or property matched",
+     "lexical_sense: a low-polysemy WordNet lemma matched"
+    ],
     "indices": [
      "WordNet lemma and sense index",
      "PropBank predicate, roleset and role index",
      "schema.org type and property aliases",
      "native O_L1/O_L2 aliases and type constraints"
     ],
+    "indices_built": {
+     "ontology_v2": "100 L1 entries indexed by single-word and whole-phrase aliases",
+     "propbank": "9087 predicates, 11205 rolesets (matches the source freeze exactly)",
+     "schemaorg": "933 types, 1521 properties",
+     "wordnet": "147306 lemmas, 450812 morphological variants"
+    },
+    "isolation_held": "this line read only discovery data, the frozen WordNet, PropBank and schema.org archives, and ontology v2. It did not read the validation sample or any annotation label.",
+    "mapper_id": "mapper-v2-structural",
     "name": "rebuild mapper v2 candidate generation",
+    "no_map_is_native": "generation returns nothing when no admissible evidence exists. There is no downstream gate, so the measurement is of the mapper rather than of a filter.",
     "rule": "no further tuning of lexical overlap thresholds. A no-map must be a native mapper output rather than a post-hoc gate.",
+    "status": "built_awaiting_validation",
     "step": 5
    },
    {
