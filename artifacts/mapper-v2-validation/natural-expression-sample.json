@@ -1,0 +1,756 @@
+{
+ "annotation_line_may_see": [
+  "these expressions",
+  "ontology v2 (O_L1, O_L2, M_L1_to_L2)"
+ ],
+ "artifact": "natural-expression validation sample",
+ "eligibility": {
+  "discovery_text_excluded": "any turn whose exact text appears anywhere in the mapper line's discovery split is removed. Splitting by question id alone left seven verbatim overlaps on the first draw, because an utterance can recur across conversations.",
+  "exact_duplicates_removed": true,
+  "maximum_chars": 400,
+  "minimum_chars": 25,
+  "rule": "filtered by length only. Filtering by whether the ontology covers a turn would bias the sample toward what the ontology already knows and would flatter the ceiling measurement."
+ },
+ "expressions": [
+  {
+   "expression_id": "expr-000000",
+   "source_pool": "locomo",
+   "speaker": "Jon",
+   "text": "Thanks, Gina! Your words of encouragement keep me motivated. Can't wait 'til my studio starts welcoming dancers of all ages and backgrounds!"
+  },
+  {
+   "expression_id": "expr-000001",
+   "source_pool": "locomo",
+   "speaker": "John",
+   "text": "Animals are amazing\u2014 They can be incredible companions."
+  },
+  {
+   "expression_id": "expr-000002",
+   "source_pool": "locomo",
+   "speaker": "Andrew",
+   "text": "Agreed! Sharing something you enjoy with someone is great. Plus, those types of bonds bring loads of joy and love."
+  },
+  {
+   "expression_id": "expr-000003",
+   "source_pool": "locomo",
+   "speaker": "Calvin",
+   "text": "Of course, Dave can't wait to catch up! I almost forgot, yesterday my friends and I recorded a podcast where we discuss the rapidly evolving rap industry!"
+  },
+  {
+   "expression_id": "expr-000004",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I think I'll try using roasted sweet potatoes and caramelized onions. I've had a sweet potato sitting in my pantry for a while, and I love the flavor of caramelized onions. Can you give me some tips on how to caramelize onions quickly? I've tried before, but they always seem to take forever."
+  },
+  {
+   "expression_id": "expr-000005",
+   "source_pool": "locomo",
+   "speaker": "Dave",
+   "text": "That sounds really exciting! Can't wait to experience it. I'm sure everyone in the crowd is going to be pumped up!"
+  },
+  {
+   "expression_id": "expr-000006",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "Thanks for providing me with the contact details of the tourism board of Speyer. Can you tell me how I can get to Speyer from Frankfurt?"
+  },
+  {
+   "expression_id": "expr-000007",
+   "source_pool": "locomo",
+   "speaker": "Tim",
+   "text": "Hey John, long time no see! Hope you've been doing well. Since we last chat, some stuff's happened. Last week, I had a huge writing issue - got stuck on a plot twist and couldn't find my way out. It was crazy frustrating, but I kept pushing and eventually got the ideas flowing again."
+  },
+  {
+   "expression_id": "expr-000008",
+   "source_pool": "locomo",
+   "speaker": "Gina",
+   "text": "Thanks! Got the tattoo a few years ago, it stands for freedom - dancing without worrying what people think. A reminder to follow my passions and express myself."
+  },
+  {
+   "expression_id": "expr-000009",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I'll definitely check out those bloggers and influencers. I'm excited to get inspiration from people who share my budget-conscious mindset. By the way, I've been thinking about my recent purchase of the luxury boots, and I was wondering if you could help me find similar boots at a lower price point."
+  },
+  {
+   "expression_id": "expr-000010",
+   "source_pool": "locomo",
+   "speaker": "Deborah",
+   "text": "I'll always cherish my memories with her at this spot. I remember a beautiful sunset we watched together in silence - the colors in the sky were so special. Every time I go back, I feel so much peace and gratitude for the time I spent with her."
+  },
+  {
+   "expression_id": "expr-000011",
+   "source_pool": "locomo",
+   "speaker": "Audrey",
+   "text": "Definitely! Safety is super important for me. I even got them something special. They sure look funny, but it works!"
+  },
+  {
+   "expression_id": "expr-000012",
+   "source_pool": "locomo",
+   "speaker": "John",
+   "text": "Thanks, James! It has been an awesome and challenging experience. I'm loving sharing my coding journey with others and tracking everything. It's a great way to connect with other coders."
+  },
+  {
+   "expression_id": "expr-000013",
+   "source_pool": "locomo",
+   "speaker": "Melanie",
+   "text": "Thanks, Caroline. It was tough, but I'm doing ok. Been reading that book you recommended a while ago and painting to keep busy."
+  },
+  {
+   "expression_id": "expr-000014",
+   "source_pool": "locomo",
+   "speaker": "Jon",
+   "text": "Thanks! Glad that you are on my side."
+  },
+  {
+   "expression_id": "expr-000015",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I'm interested in watching \"Westworld\" on HBO, but I'm not sure if I have access to it. Can I watch it through Amazon Prime Video, or do I need to subscribe to HBO separately?"
+  },
+  {
+   "expression_id": "expr-000016",
+   "source_pool": "locomo",
+   "speaker": "John",
+   "text": "Wow, having that is so cool! Your enthusiasm for it is awesome. You really go for it!"
+  },
+  {
+   "expression_id": "expr-000017",
+   "source_pool": "locomo",
+   "speaker": "Joanna",
+   "text": "Yeah, you're right. I won't let this bring me down. Thanks for your support. What have you been up to lately?"
+  },
+  {
+   "expression_id": "expr-000018",
+   "source_pool": "locomo",
+   "speaker": "Jolene",
+   "text": "Our loved ones sure are supportive! When I was 10, my parents got me that and it was the start of my passion for video games."
+  },
+  {
+   "expression_id": "expr-000019",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I've been carrying reusable bags with me whenever I go shopping, and it's become a habit now. I feel good about not contributing to the plastic waste. Do you think I could also use these reusable bags for bulk shopping at places like Costco?"
+  },
+  {
+   "expression_id": "expr-000020",
+   "source_pool": "locomo",
+   "speaker": "James",
+   "text": "I'm so excited for it! The world and story sound perfect. Thanks for recommending it, John!"
+  },
+  {
+   "expression_id": "expr-000021",
+   "source_pool": "locomo",
+   "speaker": "John",
+   "text": "Yeah, here's a screenshot of the system. It'll make tracking inventory, resources, and donations run smoother and generate reports for analysis. Feels great knowing my skills are making a real difference to them."
+  },
+  {
+   "expression_id": "expr-000022",
+   "source_pool": "locomo",
+   "speaker": "James",
+   "text": "Cool, which company did you choose? And what other devices did you buy?"
+  },
+  {
+   "expression_id": "expr-000023",
+   "source_pool": "locomo",
+   "speaker": "Evan",
+   "text": "Wow, Sam, that's great news! Making changes to live healthier can be challenging, how has it been going?"
+  },
+  {
+   "expression_id": "expr-000024",
+   "source_pool": "locomo",
+   "speaker": "Jolene",
+   "text": "Wow, those flowers are beautiful! What type are they? It looks so peaceful there."
+  },
+  {
+   "expression_id": "expr-000025",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "It responds curtly. \"Are you kidding, you must be new or an idiot. Didn't they give you the squares? Incompetents, the lot of them. Look, if you get desperate, you can always try to find those colored pipes and follow green to security.\"\n\n(Remember: always respond with what YOU do, using first-person perspective)"
+  },
+  {
+   "expression_id": "expr-000026",
+   "source_pool": "locomo",
+   "speaker": "Melanie",
+   "text": "Sounds awesome, Caroline! Have a great time and learn a lot. Have fun!"
+  },
+  {
+   "expression_id": "expr-000027",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I've been thinking of hosting my own BBQ party soon and I'm planning to invest in a new patio set that can accommodate a large group of people. Do you have any recommendations for outdoor furniture that's durable, comfortable, and easy to clean?"
+  },
+  {
+   "expression_id": "expr-000028",
+   "source_pool": "locomo",
+   "speaker": "Andrew",
+   "text": "Wow! Looks like they're having a blast. Are there any other furry pals they play with, or just the ones you have?"
+  },
+  {
+   "expression_id": "expr-000029",
+   "source_pool": "locomo",
+   "speaker": "Calvin",
+   "text": "Yeah Dave, someone even noticed my performance and now we're working together, which is wild. My tour ends soon and I'm heading to Boston. Maybe we can meet up then!"
+  },
+  {
+   "expression_id": "expr-000030",
+   "source_pool": "locomo",
+   "speaker": "Caroline",
+   "text": "Wow! What got you into running?"
+  },
+  {
+   "expression_id": "expr-000031",
+   "source_pool": "locomo",
+   "speaker": "John",
+   "text": "I'll keep my fingers crossed for you! You will definitely succeed, I look forward to the details!"
+  },
+  {
+   "expression_id": "expr-000032",
+   "source_pool": "locomo",
+   "speaker": "Evan",
+   "text": "Thanks, Sam. Your kind words and support mean a lot. It's great to have you here. I'm gonna stay positive and keep going. Cheers!"
+  },
+  {
+   "expression_id": "expr-000033",
+   "source_pool": "locomo",
+   "speaker": "Nate",
+   "text": "Hey Joanna, glad I could help. Let me know how it turns out!"
+  },
+  {
+   "expression_id": "expr-000034",
+   "source_pool": "locomo",
+   "speaker": "Sam",
+   "text": "Wow, that looks great! What are your plans for the trip?"
+  },
+  {
+   "expression_id": "expr-000035",
+   "source_pool": "locomo",
+   "speaker": "Nate",
+   "text": "Thanks Joanna! Yeah, I saved some but I'm not sure what to do with it - I'm completely content already. I don't have big plans anyway, so it's nice to have the extra cash on hand."
+  },
+  {
+   "expression_id": "expr-000036",
+   "source_pool": "locomo",
+   "speaker": "Gina",
+   "text": "Hi! You're so inspiring taking it on and opening your own studio!"
+  },
+  {
+   "expression_id": "expr-000037",
+   "source_pool": "locomo",
+   "speaker": "Tim",
+   "text": "That's incredible! How does it feel to have their trust and admiration? It must be such an honor to be a positive role model for them."
+  },
+  {
+   "expression_id": "expr-000038",
+   "source_pool": "locomo",
+   "speaker": "Andrew",
+   "text": "Not a problem at all! Let me know if you need any help finding more places for dogs."
+  },
+  {
+   "expression_id": "expr-000039",
+   "source_pool": "locomo",
+   "speaker": "Maria",
+   "text": "Yeah John, it's super important. Taking care of yourself helps us be strong for life's tough times - I learned that the hard way last year."
+  },
+  {
+   "expression_id": "expr-000040",
+   "source_pool": "locomo",
+   "speaker": "Dave",
+   "text": "That studio looks awesome, Cal! I hope you get it fixed soon so you can continue creating music. Hang in there!"
+  },
+  {
+   "expression_id": "expr-000041",
+   "source_pool": "locomo",
+   "speaker": "Deborah",
+   "text": "Hey Jolene! Great to hear from you. Taking a break is key. How have those practices been helping with everything?"
+  },
+  {
+   "expression_id": "expr-000042",
+   "source_pool": "locomo",
+   "speaker": "Jolene",
+   "text": "Let's plan for next month - I'll check my schedule and let you know. Can't wait!"
+  },
+  {
+   "expression_id": "expr-000043",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I think the Denver Philharmonic Orchestra's Family Concerts series sounds like a great idea. Do you know if they have any upcoming performances that might feature piano music or would be of interest to kids?"
+  },
+  {
+   "expression_id": "expr-000044",
+   "source_pool": "locomo",
+   "speaker": "John",
+   "text": "Hey Tim! We had a wild few days since we talked. I met back up with my teammates on the 15th after my trip and it was amazing! Everyone missed me. The atmosphere was electric and I felt so welcome being back with them. I'm so lucky to be a part of this team!"
+  },
+  {
+   "expression_id": "expr-000045",
+   "source_pool": "locomo",
+   "speaker": "Jon",
+   "text": "I've been feeling kinda low on confidence lately. It's hard to run a business when you don't have faith in yourself. Any tips on how you stay confident in your business?"
+  },
+  {
+   "expression_id": "expr-000046",
+   "source_pool": "locomo",
+   "speaker": "Tim",
+   "text": "Yeah, that's the one! It was awesome. Moments like that make me love sports and admire the players' determination and heart."
+  },
+  {
+   "expression_id": "expr-000047",
+   "source_pool": "locomo",
+   "speaker": "Joanna",
+   "text": "Wow, Nate, I'm on fire! I just set up meetings with movie producers \u2014 my dreams are comin' true!"
+  },
+  {
+   "expression_id": "expr-000048",
+   "source_pool": "locomo",
+   "speaker": "John",
+   "text": "Thanks, Maria! We had a great time throwing a small party and inviting some veterans to share their stories. It was awesome seeing them make connections and find camaraderie. All the smiles and new friendships made it really heartwarming."
+  },
+  {
+   "expression_id": "expr-000049",
+   "source_pool": "locomo",
+   "speaker": "Jon",
+   "text": "Hey Gina, congrats on the clothing store! The dance studio is on tenuous grounds right now, but I'm staying positive. I got a temp job to help cover expenses while I look for investors. It's tough, but I'm sure it'll be worth it."
+  },
+  {
+   "expression_id": "expr-000050",
+   "source_pool": "locomo",
+   "speaker": "Caroline",
+   "text": "Thanks, Melanie! I really appreciate it. Excited for the future! Bye!"
+  },
+  {
+   "expression_id": "expr-000051",
+   "source_pool": "locomo",
+   "speaker": "John",
+   "text": "Hey Tim! That's cool! I love learning about different cultures. It's really cool to meet people with different backgrounds. My teammates come from all over."
+  },
+  {
+   "expression_id": "expr-000052",
+   "source_pool": "locomo",
+   "speaker": "Maria",
+   "text": "Hey John, long time no see! I've been taking a poetry class lately to help me put my feelings into words. It's been a rough ride, but it's been good. How have you been?"
+  },
+  {
+   "expression_id": "expr-000053",
+   "source_pool": "locomo",
+   "speaker": "Joanna",
+   "text": "Glad to help, Nate. Let me know if you try it. I'm sure you'll enjoy it. It was great chatting."
+  },
+  {
+   "expression_id": "expr-000054",
+   "source_pool": "locomo",
+   "speaker": "Deborah",
+   "text": "Hey Jolene, nice to meet you! How's your week going? Anything fun happened?"
+  },
+  {
+   "expression_id": "expr-000055",
+   "source_pool": "locomo",
+   "speaker": "Deborah",
+   "text": "Hey Jolene! Good to hear from you! A lot's happened since we talked - last week I got to go to this yoga retreat near my mom's place. It was so cool - I got to hang with nature and really get to know myself. Definitely life-changing! That's how beautiful it was there!"
+  },
+  {
+   "expression_id": "expr-000056",
+   "source_pool": "locomo",
+   "speaker": "John",
+   "text": "Yep, I'll let you know once I'm done reading it. Thanks!"
+  },
+  {
+   "expression_id": "expr-000057",
+   "source_pool": "locomo",
+   "speaker": "Tim",
+   "text": "Those places must've been amazing! Nature sure has a way of leaving us speechless."
+  },
+  {
+   "expression_id": "expr-000058",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I'm interested in exploring object detection using YOLO. Can you provide more resources on YOLO, such as tutorials, research papers, and implementations?"
+  },
+  {
+   "expression_id": "expr-000059",
+   "source_pool": "locomo",
+   "speaker": "John",
+   "text": "I've thought about it a lot. I want to use my platform to make a positive difference and inspire others - maybe even start a foundation and do charity work. It's important to me to make the most of the chances I get and leave a meaningful legacy."
+  },
+  {
+   "expression_id": "expr-000060",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I think it might have been focused on the daily lives of the animals, and it was probably a standalone film. The tone was pretty serious, but it was still really engaging and inspiring."
+  },
+  {
+   "expression_id": "expr-000061",
+   "source_pool": "locomo",
+   "speaker": "Andrew",
+   "text": "I don't think I ever asked what breed they are right? Also, what do they enjoy doing the most? Looks like they're having a blast!"
+  },
+  {
+   "expression_id": "expr-000062",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I was thinking of maybe stopping by a cafe or restaurant along the waterfront to grab a bite to eat after my ride. Do you have any recommendations for good places to eat around there?"
+  },
+  {
+   "expression_id": "expr-000063",
+   "source_pool": "locomo",
+   "speaker": "Sam",
+   "text": "Wow, that pic is great! Do you often spend time in places like this?"
+  },
+  {
+   "expression_id": "expr-000064",
+   "source_pool": "locomo",
+   "speaker": "Sam",
+   "text": "Hey Evan! I've been missing our chats. I had quite the health scare last weekend - ended up in the ER with a severe stomachache. Turns out, it was gastritis, which was pretty alarming. It was a wake-up call for me to start prioritizing my health, like adopting a more nutritious diet and getting regular exercise. On top of that, my phone's been giving me a hard time, adding to the stress."
+  },
+  {
+   "expression_id": "expr-000065",
+   "source_pool": "locomo",
+   "speaker": "Tim",
+   "text": "It was really a dream come true! Watching that movie with my family was awesome, we'd all get comfy with snacks and a blanket and be totally absorbed. Such a special memory!"
+  },
+  {
+   "expression_id": "expr-000066",
+   "source_pool": "lme_validation",
+   "speaker": "assistant",
+   "text": "I thank the voice on the walky-talky and decide to follow their advice. I leave the records room and start looking for the green pipes in the hallway, planning to follow them to the security room."
+  },
+  {
+   "expression_id": "expr-000067",
+   "source_pool": "locomo",
+   "speaker": "John",
+   "text": "Thanks, Tim! It's awesome to see how sports can unite people. By the way, what book are you currently reading?"
+  },
+  {
+   "expression_id": "expr-000068",
+   "source_pool": "locomo",
+   "speaker": "James",
+   "text": "Yesterday I took my three dogs to a beach outing to have fun and bond with other dogkeepers."
+  },
+  {
+   "expression_id": "expr-000069",
+   "source_pool": "locomo",
+   "speaker": "Gina",
+   "text": "You got this, Jon! Don't let the bumps in the road bring you down. Keep going and make your dreams a reality! I'm rooting for you!"
+  },
+  {
+   "expression_id": "expr-000070",
+   "source_pool": "locomo",
+   "speaker": "Jon",
+   "text": "Oof, sorry to hear that. What's up? Is there anything I can do to help?"
+  },
+  {
+   "expression_id": "expr-000071",
+   "source_pool": "locomo",
+   "speaker": "John",
+   "text": "That book sounds awesome! Love a good fantasy with strong characters and cool world-building. Cheers for the suggestion. Adding it to my list. These are my lucky basketball shoes. They've been with me through the good and bad. Every mark has a story."
+  },
+  {
+   "expression_id": "expr-000072",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I think I'll try Mint. I've heard good things about it. Also, I was thinking about my shopping habits and I realized that I've been frequenting high-end department stores like Saks and Neiman Marcus a lot lately. Do you think that's a good idea?"
+  },
+  {
+   "expression_id": "expr-000073",
+   "source_pool": "lme_validation",
+   "speaker": "assistant",
+   "text": "Certainly! You can contact the tourism board of Speyer using the following details:\n\nSpeyer Tourismus Marketing GmbH\nMaximilianstra\u00dfe 13\n67346 Speyer\nPhone: +49 (0) 62 32 / 14 23 - 0\nEmail: info@speyer.de\nWebsite: https://www.speyer.de/"
+  },
+  {
+   "expression_id": "expr-000074",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I like the idea of exploring abstract expressions. Can you give me some tips on how to create a good abstract piece?"
+  },
+  {
+   "expression_id": "expr-000075",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I'm looking for something durable and comfortable, so maybe orthopedic or memory foam would be a good option. Do you have any recommendations for dog beds in the $40-$50 price range?"
+  },
+  {
+   "expression_id": "expr-000076",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I'm also planning to sell my old motorcycle, a Yamaha FZ6R, on Craigslist. I listed it for $3,500 on January 20th and have had a few interested buyers, but no one has made an offer yet."
+  },
+  {
+   "expression_id": "expr-000077",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I think I'll write a heartfelt letter to Emma, as it will be a more personal and intimate way to express my feelings. I'll make sure to follow your tips and include some specific memories and anecdotes that will make the letter more special. Can you suggest some ideas for a closing sentence or message that will inspire Emma to pursue her dreams and goals?"
+  },
+  {
+   "expression_id": "expr-000078",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I think I'll try to balance my loyalty to Shell with finding cheaper options along the way. I'll use gas price comparison apps to find the best deals and fill up at Shell stations when they're competitive. That way, I can earn rewards while also saving money on gas."
+  },
+  {
+   "expression_id": "expr-000079",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I'm having trouble finding a specific documentary I saw on Disney+ during my free trial last month. Do you think you can help me figure out what it was?"
+  },
+  {
+   "expression_id": "expr-000080",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "That's really helpful, thanks! I think I'll try a saline nasal spray to help with my congestion. By the way, I've been doing inhalation treatments twice a day with my nebulizer machine, but I'm not sure if that's enough. Do you think I should increase the frequency or duration of my nebulizer treatments?"
+  },
+  {
+   "expression_id": "expr-000081",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "That's really helpful! I'm particularly interested in explainable AI and fairness in AI systems. I think it's really important to make AI more transparent and accountable, especially as it becomes more pervasive in our lives. Do you think I could get in touch with Prof. Ver Steeg or Prof. Seltzer to learn more about their research in this area?"
+  },
+  {
+   "expression_id": "expr-000082",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I'll check out these options and see which one works best for me. By the way, I've been meaning to ask - do you know of any good resources for learning more about error coins? I recently acquired a 1943 Lincoln Wheat Cent with a copper planchet error and I'd love to learn more about it."
+  },
+  {
+   "expression_id": "expr-000083",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I'm planning a night out with friends this weekend and I need some fashion advice. I was thinking of wearing my new Jimmy Choo heels that I got at the outlet mall for $200 - do you have any outfit suggestions that would complement them well?"
+  },
+  {
+   "expression_id": "expr-000084",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I've had good experiences with the local bike shop downtown where I bought my Bell Zephyr helmet for $120. They did a great job with the tune-up last time, and the mechanic was knowledgeable and friendly. I might just go back there for my next tune-up."
+  },
+  {
+   "expression_id": "expr-000085",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I've been experimenting with different types of wood chips to add smoky flavors to my BBQ dishes. I recently tried using apple wood chips for the first time, and it added a lovely fruity flavor to my grilled chicken. Do you have any recommendations for other types of wood chips that would pair well with Korean-style BBQ?"
+  },
+  {
+   "expression_id": "expr-000086",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I'm particularly interested in the Language Models and Transformers section. Can you tell me more about the applications of BERT in industry settings, such as its use in chatbots or virtual assistants?"
+  },
+  {
+   "expression_id": "expr-000087",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I'll experiment with different techniques to find the best approach for my specific task. Thanks for the guidance!"
+  },
+  {
+   "expression_id": "expr-000088",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I think I have a good idea of how to express gratitude and show appreciation to the woman who helped me. I'll make sure to be specific, sincere, and genuine in my approach. Thank you for the advice!"
+  },
+  {
+   "expression_id": "expr-000089",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I'm looking for some new recipe ideas for stir-fries. Do you have any suggestions? By the way, my kitchen has been feeling so much more functional lately, especially with my new kitchen mat in front of the sink - it's from IKEA and has a nice grip and is easy to clean."
+  },
+  {
+   "expression_id": "expr-000090",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "That's really interesting. I didn't know it took them 5-6 years to develop the game. I can imagine the emotional storytelling part was a challenge, considering how emotional the game can be. By the way, have you got any recommendations for games with similar emotional storytelling, but maybe in a different setting or genre?"
+  },
+  {
+   "expression_id": "expr-000091",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I'll ask them about the wait time for new patients. How long do they expect me to wait before seeing the doctor, and do they offer any kind of reminder system to minimize wait times?"
+  },
+  {
+   "expression_id": "expr-000092",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I think I'll try the modified routine you provided and see how it goes. Can you give me some tips on how to track my progress and stay motivated?"
+  },
+  {
+   "expression_id": "expr-000093",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "That's helpful, thanks! I've been thinking of exploring the waterfront path, but I was wondering if you know if it's open to cyclists during the week, or is it more of a weekend thing?"
+  },
+  {
+   "expression_id": "expr-000094",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I'm particularly interested in the history podcasts. Can you give me some recommendations on how to organize my listening schedule, considering my commute is about 40 minutes each way?"
+  },
+  {
+   "expression_id": "expr-000095",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I like the idea of wall-mounted shelves. Do you think I could use a mix of wall-mounted shelves and glass-top display cases to create a visually appealing display? And by the way, I've been meaning to ask, do you know of any good resources for learning more about film development?"
+  },
+  {
+   "expression_id": "expr-000096",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I've heard the art market can be unpredictable, but I've been lucky with my flea market find. Do you think the art market trends tend to favor certain styles or periods over others?"
+  },
+  {
+   "expression_id": "expr-000097",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I see. So Ori and the Blind Forest has a more expansive open-world design compared to Celeste. That sounds appealing. Are there any other indie games that focus on exploration and discovery, similar to Ori, but with a stronger emphasis on storytelling and character development?"
+  },
+  {
+   "expression_id": "expr-000098",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I'm looking for some recommendations for open-world games with engaging storylines. I recently finished Assassin's Creed Odyssey, so I'm looking for something similar."
+  },
+  {
+   "expression_id": "expr-000099",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I'm looking for some help with finding research papers related to AI in medical diagnosis. I've been working on my Master's thesis in this area and I need some more sources to support my arguments. Can you suggest some academic databases or search engines that I can use?"
+  },
+  {
+   "expression_id": "expr-000100",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I'm planning to serve the cake at a birthday party, so I'll make sure to store it properly beforehand. Thanks for the tips!"
+  },
+  {
+   "expression_id": "expr-000101",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I like the idea of starting small and scaling up as I get more comfortable with the practice. Since I'm already waking up at 8:30 am on Saturdays, do you think it's possible to fit in a 30-minute yoga or stretching routine on Sundays, followed by a quick breakfast and then meal prep for the week?"
+  },
+  {
+   "expression_id": "expr-000102",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I haven't played any of those games, but I've heard great things about What Remains of Edith Finch and Firewatch. I think I'll give one of those a try. By the way, do you have any recommendations for gaming communities or forums where I can discuss games with other players and get more recommendations?"
+  },
+  {
+   "expression_id": "expr-000103",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "Can you give me some ideas for healthy snack options that are easy to prepare and won't take up too much of my time?"
+  },
+  {
+   "expression_id": "expr-000104",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I'm thinking of trying out the flaxseeds version, but I'm not sure how to grind them. Can I just use a regular blender or do I need a special grinder?"
+  },
+  {
+   "expression_id": "expr-000105",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I'm also considering organizing my phone apps, since I have so many and it's getting hard to find the ones I need. Do you have any tips on how to categorize and tidy up my home screen?"
+  },
+  {
+   "expression_id": "expr-000106",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I'm thinking of stopping at Topsail Island, NC for a quick lunch break and maybe a short walk on the beach. I've heard great things about the seafood there, and it'll be nice to stretch my legs after a few hours of driving. Plus, it's not too far out of the way, so it shouldn't add too much time to my overall trip."
+  },
+  {
+   "expression_id": "expr-000107",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I'm also interested in \"The Marvelous Mrs. Maisel\" on Amazon Prime, which I've heard great things about. Can you tell me more about the show's tone, pacing, and style? Is it more of a comedy or a drama?"
+  },
+  {
+   "expression_id": "expr-000108",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I'm actually working on a painting right now that I think my sister will love - it's a sunset scene. I've completed 4 projects since starting painting classes, and I'm feeling pretty confident about my skills. Do you have any tips on how to properly varnish and protect a painting?"
+  },
+  {
+   "expression_id": "expr-000109",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I'd like to explore more non-fiction books like the ones you mentioned. Can you recommend some books in the self-help or personal development category that are actually backed by scientific research, not just inspirational stories or anecdotes? I'm interested in practical advice that can help me improve my daily habits and productivity."
+  },
+  {
+   "expression_id": "expr-000110",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I'm thinking of planning a longer ride this weekend and I want to make sure my bike is in good condition. Can you remind me when I last lubricated my chain and if it's due for another application?"
+  },
+  {
+   "expression_id": "expr-000111",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I'm looking for some romantic getaway ideas for my partner and me. Our anniversary is coming up on July 22nd and I want to make it special."
+  },
+  {
+   "expression_id": "expr-000112",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "What about any other regular maintenance tasks, such as tire rotations or brake pad replacements? Have you had any of those done recently?"
+  },
+  {
+   "expression_id": "expr-000113",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I'm looking for some new breakfast recipes. I've been getting bored with my usual options and I recently got a fancy espresso machine from my sister as a gift, so I'd love to incorporate that into my morning routine. By the way, I donated my old coffee maker to Goodwill and I'm really enjoying the upgrade."
+  },
+  {
+   "expression_id": "expr-000114",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "That's really interesting. I've heard about some of these initiatives, but I didn't know the details. Do you think these programs are effective in increasing diversity and inclusion in the semiconductor industry? Are there any metrics or data that show their impact?"
+  },
+  {
+   "expression_id": "expr-000115",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I'd like to explore more about object detection in autonomous vehicles, specifically in the context of pedestrian detection. Can you recommend some resources on using YOLO for pedestrian detection in autonomous vehicles?"
+  },
+  {
+   "expression_id": "expr-000116",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "You recall your conversation with the Red facilities employee over the walky-talky..."
+  },
+  {
+   "expression_id": "expr-000117",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I think I've got a good idea of what I need. I'll check out those options and see which one fits my needs best. Thanks for the recommendations!"
+  },
+  {
+   "expression_id": "expr-000118",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "Let's discuss other ingredients that pair well with carrot cake. What are some nuts that you think would complement the flavor of carrot cake well?"
+  },
+  {
+   "expression_id": "expr-000119",
+   "source_pool": "lme_validation",
+   "speaker": "user",
+   "text": "I'm thinking of leveraging our sales team to help with the product launch, especially since we've been working closely with them on sales strategies and aligning our efforts. Can you provide some information on how the sales team can support the launch and what kind of training or enablement they may need?"
+  }
+ ],
+ "id_rule": "opaque expression ids; no dataset, conversation or question identity",
+ "judge": "not called",
+ "mapper_line_may_not_see": [
+  "these expressions",
+  "any label produced from them"
+ ],
+ "pool_sizes": {
+  "locomo_never_used_for_discovery": 5766,
+  "longmemeval_validation_split": 886
+ },
+ "pools": {
+  "locomo_never_used_for_discovery": "never used for discovery at all, so it cannot reward corpus-specific tuning",
+  "longmemeval_validation_split": "disjoint from the discovery split the mapper line may use"
+ },
+ "salt": "natural-expression-validation-v1",
+ "sample_sha256": "2a0a6813305c7a97b00ab321337dae46c7b9eb2f96d93112a5af9327ede31e33",
+ "sample_size": 120,
+ "sampling_rule": "drawn from real conversation turns and ranked by sha256(salt + text), so the draw is reproducible and independent of file order. No expression was composed by reading an ontology item.",
+ "standing": "frozen_before_mapper_v2_exists",
+ "why_frozen_first": "mapper v2 has not been built. A sample frozen afterwards could not rule out that its thresholds were chosen with these expressions in view."
+}

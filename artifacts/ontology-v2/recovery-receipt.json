@@ -1,0 +1,82 @@
+{
+ "artifact": "ontology v2 recovery receipt",
+ "corrections_to_original_content": [
+  {
+   "field": "ExternalGrounding.gloss min_length",
+   "now": 3,
+   "was": 8,
+   "why": "the constraint rejected real source data: PropBank decide.01 is named exactly 'decide', six characters. Verified against the frozen archive at propbank-frames-3.4.0.tar.gz before changing the floor."
+  },
+  {
+   "action": "removed",
+   "field": "l1_content._carried and l1_content._wn_source",
+   "why": "unreferenced helpers left by the crash; no item used either"
+  }
+ ],
+ "crash_state": {
+  "artifacts_present": "none; artifacts/ontology-v2 did not exist",
+  "cause": "the building process terminated on an HTTP 524 from the inference gateway at api.penguinsaichat.dpdns.org, mid-write",
+  "modules_absent": [
+   "__init__.py",
+   "scripts/build_foundation_ontology_v2.py",
+   "tests/unit/ontology_v2/"
+  ],
+  "modules_present_on_disk": [
+   "models.py",
+   "l1_content.py",
+   "l2_content.py",
+   "mapping_content.py",
+   "supersession.py",
+   "decisions.py (truncated)"
+  ],
+  "truncation_point": "decisions.py held its candidate tuples but ended before build_decisions, build_provenance and the source snapshots"
+ },
+ "decision_provenance": {
+  "carried_from_v1_with_original_reasoning": 27,
+  "human_reviewed": 20,
+  "marker": "reconstructed_from_entry_provenance",
+  "must_not_be_reported_as": "human reviewed",
+  "reconstructed_from_entry_provenance": 114,
+  "what_the_marker_means": "a reconstructed decision cites the evidence recorded on the item that admitted it. That closes the ledger completeness gap and is not independent semantic review: nobody re-judged whether the item should exist."
+ },
+ "judge": "not called",
+ "not_a_clean_rebuild": "the original build script was lost with the crash, so the ontology cannot currently be regenerated from source. The digests establish byte identity, not reproducibility.",
+ "original_fields": {
+  "modules": {
+   "l1_content.py": "bd0f05a643438f87dcf32c57f678a5b7d6ea3aaeea8d0553d76a78091f92977b",
+   "l2_content.py": "e1ce8949ed492a11424d93d83b0f3d677f9ea0ea0a73ba41b8b6d048ff435423",
+   "mapping_content.py": "c943fb029bb1a9ce827a432418d738e14bbbc02754b32538ab8837c3efdda082",
+   "models.py": "0c43c398c916edcaaff439e3f469e212cc56beba801a98e310437e998225f48f",
+   "supersession.py": "73a41d76c3d05f14b0badafb974143fccaa9f7fa3f0f68a04b10bb608608241d"
+  },
+  "scope": "every ontology item, its sense, aliases, roles, constraints and provenance, plus the layer mapping and the supersession record, are as the original process wrote them"
+ },
+ "receipt_sha256": "bcab42747f6484d2f37a521b66cd32e164463bd3f8cfd2c1c15377a6172e9464",
+ "reconstructed_fields": {
+  "__init__.py": "written during recovery",
+  "_carried_forward_refusals": "written during recovery; carries v1 refusals",
+  "_decisions_from_items": "written during recovery; derives a decision per undecided item",
+  "build_decisions": "written during recovery; assembles the ledger",
+  "build_provenance": "written during recovery; source snapshots and declined imports",
+  "scripts/build_foundation_ontology_v2.py": "written during recovery",
+  "tests/unit/ontology_v2/": "written during recovery"
+ },
+ "recovery_rule": "recover rather than rebuild, on the grounds that all six modules parsed and their content was substantial. Nothing in the content modules was rewritten; only the missing assembly was completed, and every correction to existing content is listed below.",
+ "required_before_formal_benchmark": "either restore reproducibility by regenerating the content modules from the frozen sources with a committed script, or cite this ontology explicitly as a recovered candidate freeze whose provenance is this receipt",
+ "standing": "recovered_candidate_frozen",
+ "verification_performed": {
+  "artifacts_match_build": true,
+  "cross_unit_validators": "assembly enforces layer id separation, map completeness, ledger coverage of every item and version agreement; the ontology cannot construct otherwise",
+  "every_item_decided": true,
+  "layers_share_no_id": true,
+  "tests": "16 ontology v2 tests; full suite 1025 passed, 1 skipped",
+  "unit_digests_recomputed": {
+   "decisions_sha256": "0faded7b7431dde9796f3e5fc86fced238cb9e4121d95a56c5ef3e548949b8d4",
+   "m_l1_to_l2_sha256": "e9827d28b8ee9bfb25fe88a807b18f9a3c239aaa686d4415f8650a404d98ec89",
+   "o_l1_sha256": "76465be5ecfed0c988599f3c2dba442af0bc149911d2189bfe8e6f37b47932e9",
+   "o_l2_sha256": "308ba27fc274f4c1b538d70c0166e7ea01ba6c16d92adcb3136b801647c64858",
+   "provenance_sha256": "9eb6974c92cd17232be6eb5b9fcc5fb69f4f2c6fe33a087d42dfdfc2fedebdc0",
+   "supersession_sha256": "1557d2166bb07979be935b7fb6e299e4526a4de6d05fe451c3f1c8ffab4e7ed1"
+  }
+ }
+}

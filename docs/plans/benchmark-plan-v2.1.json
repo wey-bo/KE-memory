@@ -744,12 +744,14 @@
  },
  "program_plan": {
   "current_status": {
-   "broad_foundation_ontology_not_yet_built": "v2 is built and pending review: O_L1 100 items and O_L2 32, up from the 67 and 20 seed, with all three published sources consulted rather than approximated. Whether that constitutes broad coverage of common memory situations is a review judgement, not something this build may assert.",
+   "broad_foundation_pending_natural_coverage_review": "breadth is not settled by the 100 and 32 item counts. It is settled by the ontology ceiling observed on natural expression, the shape of the remaining gap categories, and coverage of common memory situations. The two known gaps stay recorded.",
    "diagnostic_execution_chain_ready": "the nine-stage chain runs over a consumed builder artifact with per-layer traces, and the oracle attribution mechanism holds. The layers are lexical, so this is diagnostic capability only.",
    "formal_benchmark_not_yet_ready": "the critical path is ontology v2 and natural-expression mapper validation. The judge key can be handled in parallel and is not what gates the run.",
    "mapper_v1_diagnostic_failed_as_expected": "7 of 18 correct with all four negatives mis-mapped. A repair attempt on discovery data reached 12.5 percent abstention against v1 baseline 9.8 percent and is not a fix; the diagnosis is that lexical overlap is too weak a signal for the abstain decision.",
+   "mapper_v2_not_yet_built": "the lexical repair attempt is retired. Mapper v2 has not been built: candidate generation must be rebuilt on WordNet lemmas and senses, PropBank predicates and rolesets, schema.org types and properties, and the native O_L1/O_L2 aliases and type constraints.",
    "natural_mapping_quality_not_yet_measured": "the 18 cases were composed by reading ontology items, which makes them a controlled mapper probe. They say nothing about mapping quality on natural expression.",
-   "ontology_sources_frozen": "WordNet 3.0, PropBank 3.4.0 and schema.org 30.0 acquired and frozen at explicit commits with licences and independent hashes. They have not yet been used to extend the ontology."
+   "ontology_sources_frozen": "WordNet 3.0, PropBank 3.4.0 and schema.org 30.0 acquired and frozen at explicit commits with licences and independent hashes. They have not yet been used to extend the ontology.",
+   "ontology_v2_recovered_candidate_frozen": "six units frozen with independent digests. Recovered from a crashed build, so it is a candidate freeze and may not be described as a clean, reproducible ontology build."
   },
   "mapper_v1": {
    "artifacts": [
@@ -848,6 +850,20 @@
     "install mapper v1 into the nine-stage chain"
    ],
    "output_rule": "raw top-k candidates, sense, confidence, ambiguity and unresolved are preserved. No semantic correction gate, no post-hoc repair of an error.",
+   "repair_attempt": {
+    "conclusion": "lexical alias overlap cannot separate \"this turn attests a preference\" from \"this turn contains a word listed in a preference alias\". Each calibration fixes one side at the cost of the other because the signal is too weak, not because the threshold is wrong.",
+    "discipline_note": "tuning was stopped rather than continued. Further adjustment would have been fitting the retired 18-case probe and would have produced a number without a mechanism.",
+    "outcome": "five successive calibrations moved abstention 0.098, 0.073, 0.998, 0.000, 0.405, 0.125 on 1500 discovery turns and never got correct short mappings and correct abstentions right at once.",
+    "recommendation": "rebuild candidate generation on WordNet lemmas and senses, PropBank predicates and rolesets, schema.org types and properties, and the native ontology v2 aliases and type constraints.",
+    "root_causes_found": [
+     "a raw IDF sum has no fixed range, so an absolute score floor cannot be calibrated against it",
+     "normalising by observed terms made the score fall with turn length; normalising by item weight penalised richly aliased items",
+     "a fixed stopword list deleted 14 terms the ontology declares as aliases, including \"like\" for hold_attitude and \"than\" for the comparative preference",
+     "protecting those terms then let \"and\", \"for\" and \"every\" count as decisive evidence",
+     "ranking by score alone put a protected stopword above the real alias, and since the abstain check inspects only the top candidate, the whole mapping was discarded as generic"
+    ],
+    "status": "attempted_not_achieved"
+   },
    "results": {
     "attribution_class_mentions": {
      "annotation_disagreement": 1,
@@ -917,6 +933,13 @@
      "rejected": 25,
      "uncovered_expressions": 2
     },
+    "decision_provenance_marker": {
+     "applies_to": 112,
+     "distinct_from": "human_reviewed",
+     "human_reviewed_count": 49,
+     "marker": "reconstructed_from_entry_provenance",
+     "meaning": "those acceptances were derived from each item's own recorded provenance, which closes the ledger completeness gap. It is not independent semantic review, and the two must not be conflated: a derived decision cites the evidence that admitted the item, and nobody re-judged whether the item should exist."
+    },
     "defects_found_during_recovery": [
      "a gloss floor of min_length=8 rejected real PropBank data: decide.01 is named exactly \"decide\", six characters. Verified against the frozen archive and the floor lowered to 3.",
      "the ledger covered 20 of 132 items, so 112 had entered a layer with no recorded review. Decisions are now derived from each item's own provenance, so a decision cites the evidence that admitted the item rather than a reason written afterwards.",
@@ -940,8 +963,9 @@
     ],
     "name": "build O_L1/O_L2 v2",
     "recovery_note": "the building agent died mid-write on a gateway 524 and left six modules on disk with no build script, no package marker and a truncated decisions module. The content was recovered rather than rebuilt: all six modules parsed, so the missing builders, provenance and ledger assembly were completed and the artifacts emitted.",
+    "reproducibility_boundary": "the six digests prove the identity of the current bytes. They do not prove the ontology can be regenerated, because the original build script was lost with the crash. A recovery receipt is required before the formal benchmark, recording the crash state, the recovery rule, which fields are original versus reconstructed, and the verification performed. It must not be presented as a clean rebuild.",
     "rule": "no bulk import. The result must be stable ids, senses, aliases, roles and types suited to common memory situations, which is a curation problem rather than a volume problem.",
-    "status": "built_pending_review",
+    "status": "recovered_candidate_frozen",
     "step": 2,
     "v1_deferrals_resolved": [
      "l2.decision_with_rationale",
@@ -953,43 +977,60 @@
     ]
    },
    {
-    "finding": {
-     "conclusion": "lexical term overlap cannot separate \"this turn attests a preference\" from \"this turn contains a word that appears in a preference alias\". Each calibration fixes one side at the cost of the other because the signal itself is too weak, not because the threshold is wrong.",
-     "discipline_note": "tuning was stopped rather than continued. Further adjustment would have been fitting the retired 18-case probe, which the sequence forbids, and would have produced a number without a mechanism.",
-     "outcome": "not achieved. Five successive calibrations traded one degeneracy for another: abstention moved 0.098 -> 0.073 -> 0.998 -> 0.000 -> 0.405 -> 0.125 across attempts, and correct short mappings and correct abstentions were never simultaneously right.",
-     "recommendation": "defer the mapper fix until ontology v2 lands, then rebuild candidate generation on PropBank role sets and WordNet senses rather than on alias overlap.",
-     "root_causes_found": [
-      "a raw IDF sum has no fixed range, so an absolute score floor cannot be calibrated against it",
-      "normalising by observed terms made the score fall with turn length; normalising by item weight penalised richly aliased items",
-      "a fixed stopword list deleted 14 terms the ontology declares as aliases, including \"like\" for hold_attitude and \"than\" for the comparative preference",
-      "protecting those terms then let \"and\", \"for\" and \"every\" count as decisive evidence",
-      "ranking by score alone put a protected stopword above the real alias, and since the abstain check inspects only the top candidate, the whole mapping was discarded as generic"
-     ],
-     "what_this_implies": "the abstain path needs evidence the current representation does not carry: predicate-argument structure or sense disambiguation, which is what the frozen PropBank and WordNet snapshots exist to supply. Fixing it against the seed ontology with lexical overlap alone is the wrong shape of work."
+    "artifact": "artifacts/mapper-v2-validation/natural-expression-sample.json",
+    "isolation_evidence": "zero overlap with the discovery turns the mapper line may read. Splitting by question id alone was insufficient: seven utterances recurred verbatim across conversations on the first draw, so isolation is enforced by exact text.",
+    "name": "freeze the natural-expression validation sample and its split",
+    "naturalness_evidence": "no expression is a verbatim ontology alias, and none was composed by reading an ontology item. Eligibility is by length only, since filtering on whether the ontology covers a turn would bias the sample toward what the ontology already knows and flatter the ceiling measurement.",
+    "ordering_guarantee": "frozen while mapper v2 does not exist, so the sample cannot have shaped its thresholds",
+    "pools": {
+     "locomo_never_used_for_discovery": 5766,
+     "longmemeval_validation_split": 886
     },
-    "name": "fix mapper general behaviour on discovery data",
-    "rule": "fixes are derived from discovery data. No alias, threshold or special case may be added on the strength of the 18 probe cases, which would fit the probe rather than repair the mapper.",
-    "status": "attempted_not_achieved",
-    "step": 3,
-    "targets": [
-     "candidate generation",
-     "ranking",
-     "ambiguity",
-     "native no-map and abstain"
-    ]
+    "rule": "sample from real conversations; never construct a case by reading an ontology item. Opaque ids only. The expressions are frozen before mapper v2 development starts, so the sample cannot drive the optimisation.",
+    "salt": "natural-expression-validation-v1",
+    "sample_sha256": "2a0a6813305c7a97b00ab321337dae46c7b9eb2f96d93112a5af9327ede31e33",
+    "sample_size": 120,
+    "status": "frozen",
+    "step": 3
    },
    {
-    "name": "draw a natural mapping validation set",
-    "rule": "sample expressions from real conversations first, then annotate them. Never generate a case by reading an ontology item, which is what makes the current set a probe.",
+    "annotation_line": "reviewers see natural expressions and ontology v2 only, and produce concept, sense, none and ambiguous gold.",
+    "mapper_line": "may use discovery data and the frozen WordNet, PropBank, schema.org and ontology v2. May not read validation expressions or labels.",
+    "name": "two isolated parallel lines",
     "step": 4
    },
    {
-    "name": "freeze mapper v2, run one natural-expression blind test, reinstall into the chain",
+    "indices": [
+     "WordNet lemma and sense index",
+     "PropBank predicate, roleset and role index",
+     "schema.org type and property aliases",
+     "native O_L1/O_L2 aliases and type constraints"
+    ],
+    "name": "rebuild mapper v2 candidate generation",
+    "rule": "no further tuning of lexical overlap thresholds. A no-map must be a native mapper output rather than a post-hoc gate.",
     "step": 5
    },
    {
-    "name": "revalidate artifact, trace and oracle, then freeze formal benchmark inputs and run",
+    "metrics": [
+     "ontology ceiling: does the correct target exist in O_v2 at all",
+     "candidate recall: when the target exists, does it reach top-k",
+     "ranking and sense accuracy",
+     "ambiguity and unresolved rates",
+     "no-map precision on genuine out-of-vocabulary expression",
+     "false merge and false split"
+    ],
+    "name": "one-shot natural validation, reported separately",
     "step": 6
+   },
+   {
+    "name": "broad foundation review",
+    "rule": "judged on the natural-expression ontology ceiling, the gap categories and coverage of common memory situations, not on item counts. The two known gaps remain.",
+    "step": 7
+   },
+   {
+    "name": "reattach to the nine-stage chain",
+    "rule": "mapper v2 joins planner and mapping on one shared canonical namespace. The 32 items revalidate artifact, trace and oracle only. Whether to freeze the formal benchmark is decided after that.",
+    "step": 8
    }
   ],
   "ontology_source_debt": {
@@ -997,6 +1038,7 @@
    "hash_rule": "one independent sha256 per source; no combined digest stands in for the three",
    "independent_verification": "the three raw archive hashes were recomputed from /public/home/wwb/datasets/ontology-sources and matched the manifest; the three snapshot hashes were recomputed from the artifacts and matched; parsed counts are non-trivial (PropBank 11205 rolesets over 9087 predicates and 28616 roles, schema.org 1010 classes and 1676 properties, WordNet 45 lexnames).",
    "prose_constraints": "unchanged: prose constraint expressions still do not count toward any executable-constraint metric.",
+   "recovery_receipt": "artifacts/ontology-v2/recovery-receipt.json",
    "required": [
     "WordNet",
     "PropBank",
@@ -1189,7 +1231,7 @@
     "PropBank",
     "schema.org"
    ],
-   "status": "v2_built_pending_review",
+   "status": "ontology_v2_recovered_candidate_frozen",
    "unconsulted_note": "none are available offline: nltk is absent, no PropBank copy exists and outbound HTTPS to schema.org timed out. Predicate senses are labelled corpus-clustered from SGD intent verbs rather than claiming synset ids, and no schema.org type name appears anywhere.",
    "uncovered_expressions": 8
   },

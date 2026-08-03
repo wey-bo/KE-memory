@@ -218,7 +218,11 @@ def test_the_repair_is_recorded_as_incomplete() -> None:
             Path(__file__).resolve().parents[3] / "docs" / "plans" / "benchmark-plan-v2.1.json"
         ).read_text(encoding="utf-8")
     )
-    step = plan["program_plan"]["next_sequence"][2]
-    assert step["status"] == "attempted_not_achieved"
-    assert "lexical" in step["finding"]["conclusion"]
-    assert step["finding"]["recommendation"]
+    # Read from mapper_v1.repair_attempt rather than by index into next_sequence: the sequence is
+    # renumbered as the plan advances, and an index-based assertion silently checks a different step.
+    attempt = plan["program_plan"]["mapper_v1"]["repair_attempt"]
+    assert attempt["status"] == "attempted_not_achieved"
+    assert "lexical" in attempt["conclusion"]
+    assert attempt["recommendation"]
+    # The five root causes are the reusable part; losing them would cost more than the attempt did.
+    assert len(attempt["root_causes_found"]) >= 5
