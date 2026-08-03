@@ -1,0 +1,96 @@
+{
+ "artifact": "mapper v3 freeze",
+ "artifact_sha256": "ea41f69f4ba5a13502bceedb3aba6093af1969336f81e3039d6ae7ffa249b141",
+ "construction_count": 10,
+ "constructions": {
+  "ability_claim": [
+   "state_type"
+  ],
+  "evaluative_predication": [
+   "attribute_type",
+   "predicate_sense",
+   "preference_type"
+  ],
+  "habitual_aspect": [
+   "qualifier_dimension",
+   "qualifier_value",
+   "state_type"
+  ],
+  "information_request": [
+   "event_type",
+   "predicate_sense"
+  ],
+  "intention_declaration": [
+   "event_type",
+   "predicate_sense",
+   "task_type"
+  ],
+  "negated_or_ceased": [
+   "qualifier_value",
+   "state_type"
+  ],
+  "past_episode": [
+   "event_type",
+   "qualifier_value"
+  ],
+  "possession_claim": [
+   "attribute_type",
+   "predicate_sense",
+   "state_type"
+  ],
+  "propositional_stance": [
+   "predicate_sense"
+  ],
+  "salience_claim": [
+   "predicate_sense",
+   "preference_type"
+  ]
+ },
+ "contains_no_result": "written before the run. There is no field for a score, a candidate list or a threshold fitted to the evaluation set",
+ "design": {
+  "abstention_is_reasoned": "unresolved carries one of no_content, request_only or no_admissible_evidence. None of the three is a score below a cutoff: five v2 calibration attempts moved its abstention rate between 0.000 and 0.998 without the number ever meaning anything, and a stated reason cannot drift that way",
+  "constructions_map_to_item_types": "a construction licenses an item *type*, never a specific item id. Binding syntax to ids would let the ontology's naming leak into the evidence",
+  "evidence_excludes_namespace_words": "only an id's leaf segment contributes decisive words, minus namespace words such as role, predicate and time. Without that exclusion 'time' alone matched seven items and 680 of 1500 discovery turns hit the frame cap",
+  "frames_per_expression": "0..N. An utterance attesting two unrelated things yields two frames and two targets; mapper v2 returned a single best guess, which is why its recall on multi-topic turns was 0.165",
+  "targets_match_frames": "len(target_ids) == len(frames), enforced by the result model. A target without its frame has no evidence behind it"
+ },
+ "discovery_split_frequencies": {
+  "EVALUATIVE_PREDICATION": 0.022,
+  "HABITUAL_ASPECT": 0.21,
+  "INTENTION_DECLARATION": 0.2,
+  "PAST_EPISODE": 0.015,
+  "POSSESSION_CLAIM": 0.041
+ },
+ "freeze_hash": "f096094d789361314611c2bf58b887cb5338b6f78c8e1c2039f1f745aa2df219",
+ "frequencies_provenance": "measured on the discovery pool before the fresh set was drawn; no frequency here was computed over the evaluation corpus",
+ "identity": {
+  "ambiguity_ratio": 0.85,
+  "mapper_id": "mapper-v3-construction",
+  "mapper_version": "3.0.0",
+  "o_v2_l1_sha256": "76465be5ecfed0c988599f3c2dba442af0bc149911d2189bfe8e6f37b47932e9",
+  "o_v2_l2_sha256": "308ba27fc274f4c1b538d70c0166e7ea01ba6c16d92adcb3136b801647c64858",
+  "o_v3_l1_sha256": "f7fb828d16f4ced606f71d8f5040064879c94fe3d2e6ab4f97a6ad69d44eff9f",
+  "o_v3_l2_sha256": "e32f41b5f55d5e91f056848b415f0c5ba5f4ba6580bbf6909975225bcadafe68"
+ },
+ "inputs_read": {
+  "corpus": "discovery split only; the fresh mapping set was never read",
+  "ontology_v2": [
+   "decisions.json",
+   "m_l1_to_l2.json",
+   "o_l1.json",
+   "o_l2.json",
+   "provenance.json",
+   "recovery-receipt.json",
+   "summary.json",
+   "supersession.json"
+  ],
+  "ontology_v3": [
+   "decisions.json",
+   "m_l1_to_l2_additions.json",
+   "o_l1_additions.json",
+   "o_l2_additions.json",
+   "summary.json"
+  ]
+ },
+ "standing": "frozen_before_being_scored"
+}
