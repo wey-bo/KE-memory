@@ -751,7 +751,8 @@
    "mapper_v2_not_yet_built": "the lexical repair attempt is retired. Mapper v2 has not been built: candidate generation must be rebuilt on WordNet lemmas and senses, PropBank predicates and rolesets, schema.org types and properties, and the native O_L1/O_L2 aliases and type constraints.",
    "natural_mapping_quality_not_yet_measured": "measured. L1 end-to-end 0.114 with ontology ceiling 1.0, so the limit is candidate generation rather than ontology coverage. The result is immutable and the sample is spent.",
    "ontology_sources_frozen": "WordNet 3.0, PropBank 3.4.0 and schema.org 30.0 acquired and frozen at explicit commits with licences and independent hashes. They have not yet been used to extend the ontology.",
-   "ontology_v2_recovered_candidate_frozen": "six units frozen with independent digests. Recovered from a crashed build, so it is a candidate freeze and may not be described as a clean, reproducible ontology build."
+   "ontology_v2_recovered_candidate_frozen": "six units frozen with independent digests. Recovered from a crashed build, so it is a candidate freeze and may not be described as a clean, reproducible ontology build.",
+   "ontology_v3_candidate_frozen_replayable": "four families added over v2 with four independent digests, and a replay reproduces all four. Unlike v2 this is regenerable rather than recovered. Validation on a fresh set is still required."
   },
   "mapper_v1": {
    "artifacts": [
@@ -1324,6 +1325,49 @@
    },
    "status": "frozen_not_yet_incorporated",
    "still_outstanding": "the acquired sources are frozen snapshots and have not yet been consulted to extend O_L1/O_L2. Folding them in is a separate ontology version."
+  },
+  "ontology_v3": {
+   "additive": "v3 adds to v2 rather than replacing it. The v2 artifacts keep their digests, so an earlier citation stays valid.",
+   "artifacts": "artifacts/ontology-v3/",
+   "counts": {
+    "new_l1_items": 5,
+    "new_l2_items": 2,
+    "new_mapping_entries": 2,
+    "new_roles": 3
+   },
+   "excluded_by_ruling": {
+    "episodic_significance": "explicit residual gap; needs new corpora on personal experience, commemorative events and object meaning before modelling",
+    "role_play_framing": "residual limitation; an in-fiction source status is a provenance concern rather than a concept gap"
+   },
+   "families_admitted": {
+    "activity_or_pursuit": "admitted on frequency: 1915 first-person MSC occurrences and 15 activity-like SGD schema fields",
+    "held_belief": "admitted on expressibility: 124 occurrences and no SGD support",
+    "held_value": "admitted on expressibility: 24 occurrences and no SGD support, so frequency does not carry it",
+    "positive_capability_or_skill": "admitted on a structural gap: 454 occurrences, and v2 types only what a subject cannot do"
+   },
+   "hashes": {
+    "decisions_sha256": "3161ebc961464ddce8ebd0754e38ce6951954c93ec68934878171143206c880a",
+    "m_l1_to_l2_additions_sha256": "619a6e3edf1b85e940fc1bb3a8b4cf5a380d9c3b18a829ad6e12ebdb90684de7",
+    "o_l1_additions_sha256": "f7fb828d16f4ced606f71d8f5040064879c94fe3d2e6ab4f97a6ad69d44eff9f",
+    "o_l2_additions_sha256": "e32f41b5f55d5e91f056848b415f0c5ba5f4ba6580bbf6909975225bcadafe68"
+   },
+   "independent_blocker": "mapper candidate recall 0.165 and gold-none false mapping 0.633 remain blocking and are untouched by this freeze",
+   "isolation": "no validation expression, mapper output or annotation label was read. Aliases come from independent corpora and the frozen published sources only.",
+   "regression_status": "the 120 validation expressions are exposed regression only. Any v3 conclusion needs a fresh set, because the gaps were identified from that sample.",
+   "replayability": {
+    "contrast_with_v2": "v2 was a recovered-only freeze whose generator was lost before commit, so its content could not be regenerated. This one can.",
+    "corpus_digest_checked": "75440be006945f5e92141f2374becd551a17a4a98ccd982d1d06c821b40c7dc7",
+    "evidence_deterministic": true,
+    "generator_committed_before_freeze": true
+   },
+   "status": "replayable_candidate_freeze",
+   "value_belief_separation": {
+    "belief_carries": "l1:modality.believed (declared but unattested; MSC has zero explicit markers)",
+    "enforced_structurally": true,
+    "value_carries": "l1:qualifier.degree (strength attested in 18 MSC sentences)",
+    "why": "a merged item would have to drop one of the two, so two items preserve both"
+   },
+   "what_this_does_not_establish": "a candidate freeze is not a validated ontology. The four families were identified from the 120 expressions, so v3 must be validated on a fresh set before any conclusion rests on it."
   },
   "rationale": "C1 to C3 restored measurement credibility. They do not confer Stage 2 capability, so the work now switches from repairing instruments to exposing real system behaviour.",
   "shape": "two parallel tracks converging on one formal run",

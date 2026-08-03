@@ -49,6 +49,7 @@ LAYERS: tuple[tuple[str, ...], ...] = (
         "ontology",
         "ontology_v1",
         "ontology_v2",
+        "ontology_v3",
         "ontology_sources",
         "mapper_v1",
         "mapper_v2",

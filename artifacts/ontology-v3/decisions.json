@@ -1,0 +1,97 @@
+{
+ "evidence_provenance": {
+  "families_excluded_by_ruling": [
+   "episodic_significance (explicit residual gap, pending new corpora)",
+   "role_play_framing (provenance and modality limitation, not a concept gap)"
+  ],
+  "isolation": "no validation expression, mapper output or annotation label was read. Aliases come from independent corpora and the frozen published sources only.",
+  "min_alias_support": 2,
+  "msc_sentences_scanned": 62682,
+  "msc_sha256": "75440be006945f5e92141f2374becd551a17a4a98ccd982d1d06c821b40c7dc7",
+  "replayable": "deterministic over fixed corpora: the same bytes yield the same counts and therefore the same digests",
+  "sgd_schema_present": true
+ },
+ "families_admitted": [
+  {
+   "admitted_on": "frequency",
+   "aliases_used": 21,
+   "corpus_occurrences": 1915,
+   "family": "activity_or_pursuit",
+   "notes": [
+    "the only family with task-oriented schema support, which is why it was admitted on frequency rather than on expressibility"
+   ],
+   "sgd_support_fields": 15
+  },
+  {
+   "admitted_on": "structural_gap",
+   "aliases_used": 36,
+   "corpus_occurrences": 454,
+   "family": "positive_capability_or_skill",
+   "notes": [
+    "PropBank can.01 means 'put into tins' and can.02 is metaphorical throwing, so the modal sense has no roleset. This family needs an authored type rather than an imported frame.",
+    "v2 types only what a subject cannot do, via state.capability_constraint, so the positive case has no existing home."
+   ],
+   "sgd_support_fields": 0
+  },
+  {
+   "admitted_on": "expressibility",
+   "aliases_used": 3,
+   "corpus_occurrences": 24,
+   "family": "held_value",
+   "notes": [
+    "admitted on expressibility, not frequency: attribute.assessment rates an object while a held value is a property of the subject, so this is unrepresentable rather than rare.",
+    "18 sentences carry a strength marker, so preference strength is attested and is preserved as a qualifier rather than folded into the concept.",
+    "kept separate from held_belief by ruling: a merged item would lose strength on this side and modality on the other."
+   ],
+   "sgd_support_fields": 0
+  },
+  {
+   "admitted_on": "expressibility",
+   "aliases_used": 3,
+   "corpus_occurrences": 124,
+   "family": "held_belief",
+   "notes": [
+    "admitted on expressibility, not frequency: no existing type expresses a general claim about the world held by the subject.",
+    "0 sentences carry an explicit modality marker, so assertion modality is carried as a declared slot with no corpus support rather than as an attested qualifier. Inventing graded values for it would be fabricating coverage.",
+    "kept separate from held_value by ruling."
+   ],
+   "sgd_support_fields": 0
+  }
+ ],
+ "families_excluded": [
+  {
+   "disposition": "explicit_residual_gap",
+   "family": "episodic_significance",
+   "reason": "3 of 11 out_of_scope cases is concentration within one sample, not independent coverage: 24 MSC sentences and no SGD support",
+   "validation_requirement": "validate against new corpora covering personal experience, commemorative events and object meaning before modelling"
+  },
+  {
+   "disposition": "residual_limitation",
+   "family": "role_play_framing",
+   "reason": "what is missing is an in-fiction source status, a provenance and modality concern rather than a concept gap, and no fiction guard was committed to"
+  }
+ ],
+ "freeze": {
+  "derived_from_validation_sample": false,
+  "excludes_benchmark_facts": true,
+  "excludes_individuals": true,
+  "hash_scope": "SHA-256 over the canonical JSON of this unit alone, excluding this freeze block; a change to another unit cannot move this digest",
+  "judge_dependency": "none; no model or judge call was made by this build",
+  "sha256": "3161ebc961464ddce8ebd0754e38ce6951954c93ec68934878171143206c880a",
+  "unit": "decisions"
+ },
+ "unit_id": "DECISIONS_V3",
+ "value_and_belief_separation": {
+  "belief_qualifiers": [
+   "l1:modality.believed",
+   "l1:source_status.user_reported"
+  ],
+  "enforced": true,
+  "value_qualifiers": [
+   "l1:qualifier.degree",
+   "l1:source_status.user_reported"
+  ],
+  "why": "a merged item would have to drop either the strength qualifier only values take or the assertion modality only beliefs take"
+ },
+ "version": "3.0.0"
+}

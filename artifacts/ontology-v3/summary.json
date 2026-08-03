@@ -1,0 +1,47 @@
+{
+ "additive": "v3 adds to v2 rather than replacing it. The v2 artifacts keep their digests, so an earlier citation stays valid.",
+ "counts": {
+  "new_l1_items": 5,
+  "new_l2_items": 2,
+  "new_mapping_entries": 2,
+  "new_roles": 3
+ },
+ "families": {
+  "activity_or_pursuit": {
+   "occurrences": 1915,
+   "sgd_support": 15
+  },
+  "held_belief": {
+   "occurrences": 124,
+   "sgd_support": 0
+  },
+  "held_value": {
+   "occurrences": 24,
+   "sgd_support": 0
+  },
+  "positive_capability_or_skill": {
+   "occurrences": 454,
+   "sgd_support": 0
+  }
+ },
+ "hashes": {
+  "decisions_sha256": "3161ebc961464ddce8ebd0754e38ce6951954c93ec68934878171143206c880a",
+  "m_l1_to_l2_additions_sha256": "619a6e3edf1b85e940fc1bb3a8b4cf5a380d9c3b18a829ad6e12ebdb90684de7",
+  "o_l1_additions_sha256": "f7fb828d16f4ced606f71d8f5040064879c94fe3d2e6ab4f97a6ad69d44eff9f",
+  "o_l2_additions_sha256": "e32f41b5f55d5e91f056848b415f0c5ba5f4ba6580bbf6909975225bcadafe68"
+ },
+ "independent_blocker": "mapper candidate recall 0.165 and gold-none false mapping 0.633 remain blocking and are untouched by this freeze",
+ "isolation": "no validation expression, mapper output or annotation label was read. Aliases come from independent corpora and the frozen published sources only.",
+ "judge": "not called",
+ "no_combined_hash": "four independent digests and no combined one, so a change is attributable to a unit",
+ "ontology_version": "3.0.0",
+ "regression_status": "the 120 validation expressions are exposed regression only. Any v3 conclusion needs a fresh set, because the gaps were identified from that sample.",
+ "replayability": {
+  "contrast_with_v2": "v2 was a recovered-only freeze whose generator was lost before commit, so its content could not be regenerated. This one can.",
+  "corpus_digest_checked": "75440be006945f5e92141f2374becd551a17a4a98ccd982d1d06c821b40c7dc7",
+  "evidence_deterministic": true,
+  "generator_committed_before_freeze": true
+ },
+ "standing": "replayable_candidate_freeze",
+ "supersedes": "2.0.0"
+}

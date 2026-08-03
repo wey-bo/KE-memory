@@ -1,0 +1,39 @@
+{
+ "entries": [
+  {
+   "evidence_required": 2,
+   "kind": "abstracts_from",
+   "l1_source_ids": [
+    "l1:event.activity_occurrence",
+    "l1:state.ongoing_pursuit",
+    "l1:qualifier.frequency"
+   ],
+   "l2_target_id": "l2:abstraction.pursuit_profile",
+   "map_id": "m3-000",
+   "rule": "an abstraction is attested when at least evidence_required of its L1 sources are attested; fewer yields nothing rather than a weak candidate"
+  },
+  {
+   "evidence_required": 2,
+   "kind": "abstracts_from",
+   "l1_source_ids": [
+    "l1:predicate.hold_value",
+    "l1:predicate.hold_belief",
+    "l1:state.ongoing_pursuit"
+   ],
+   "l2_target_id": "l2:abstraction.value_commitment",
+   "map_id": "m3-001",
+   "rule": "an abstraction is attested when at least evidence_required of its L1 sources are attested; fewer yields nothing rather than a weak candidate"
+  }
+ ],
+ "freeze": {
+  "derived_from_validation_sample": false,
+  "excludes_benchmark_facts": true,
+  "excludes_individuals": true,
+  "hash_scope": "SHA-256 over the canonical JSON of this unit alone, excluding this freeze block; a change to another unit cannot move this digest",
+  "judge_dependency": "none; no model or judge call was made by this build",
+  "sha256": "619a6e3edf1b85e940fc1bb3a8b4cf5a380d9c3b18a829ad6e12ebdb90684de7",
+  "unit": "m_l1_to_l2_additions"
+ },
+ "unit_id": "M_L1_TO_L2_V3_ADDITIONS",
+ "version": "3.0.0"
+}

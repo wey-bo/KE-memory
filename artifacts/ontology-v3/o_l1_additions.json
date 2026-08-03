@@ -1,0 +1,284 @@
+{
+ "extends_v2_l1_sha256": "76465be5ecfed0c988599f3c2dba442af0bc149911d2189bfe8e6f37b47932e9",
+ "freeze": {
+  "derived_from_validation_sample": false,
+  "excludes_benchmark_facts": true,
+  "excludes_individuals": true,
+  "hash_scope": "SHA-256 over the canonical JSON of this unit alone, excluding this freeze block; a change to another unit cannot move this digest",
+  "judge_dependency": "none; no model or judge call was made by this build",
+  "sha256": "f7fb828d16f4ced606f71d8f5040064879c94fe3d2e6ab4f97a6ad69d44eff9f",
+  "unit": "o_l1_additions"
+ },
+ "items": [
+  {
+   "admitted_on": "frequency",
+   "aliases": [
+    "play",
+    "volunteer",
+    "read",
+    "run",
+    "travel",
+    "write",
+    "attend",
+    "collect",
+    "sing",
+    "paint",
+    "practice",
+    "cook",
+    "draw",
+    "dance",
+    "coach",
+    "hike",
+    "swim",
+    "knit",
+    "fish",
+    "garden",
+    "host"
+   ],
+   "constraints": [
+    "an occurrence is a single occasion. Repeated behaviour by the same subject is l1:state.ongoing_pursuit, and conflating them loses whether the thing recurs."
+   ],
+   "evidence_family": "activity_or_pursuit",
+   "evidence_occurrences": 1915,
+   "id": "l1:event.activity_occurrence",
+   "item_type": "event_type",
+   "qualifiers": [
+    "l1:time.before_assertion",
+    "l1:time.at_assertion"
+   ],
+   "roles": [
+    {
+     "is_required": true,
+     "note": "who took part",
+     "role_id": "l1:role.attribute_bearer"
+    },
+    {
+     "is_required": false,
+     "note": "others present, when stated",
+     "role_id": "l1:role.participant"
+    },
+    {
+     "is_required": false,
+     "note": "what the activity was about",
+     "role_id": "l1:role.topic"
+    }
+   ],
+   "sense": "a bounded occasion the subject took part in: hosting, attending, performing or making something on a particular occasion"
+  },
+  {
+   "admitted_on": "frequency",
+   "aliases": [
+    "play",
+    "volunteer",
+    "read",
+    "run",
+    "travel",
+    "write",
+    "attend",
+    "collect",
+    "sing",
+    "paint",
+    "practice",
+    "cook",
+    "draw",
+    "dance",
+    "coach",
+    "hike",
+    "swim",
+    "knit",
+    "fish",
+    "garden",
+    "host"
+   ],
+   "constraints": [
+    "a pursuit outlives any one occasion, so it is not attested by a single occurrence without a frequency or duration qualifier."
+   ],
+   "evidence_family": "activity_or_pursuit",
+   "evidence_occurrences": 1915,
+   "id": "l1:state.ongoing_pursuit",
+   "item_type": "state_type",
+   "qualifiers": [
+    "l1:qualifier.frequency",
+    "l1:time.spanning"
+   ],
+   "roles": [
+    {
+     "is_required": true,
+     "note": "who practises it",
+     "role_id": "l1:role.attribute_bearer"
+    },
+    {
+     "is_required": false,
+     "note": "the domain of the practice",
+     "role_id": "l1:role.topic"
+    }
+   ],
+   "sense": "an activity the subject practises on a continuing basis: a hobby, a discipline or a creative practice"
+  },
+  {
+   "admitted_on": "structural_gap",
+   "aliases": [
+    "i know how to",
+    "i am good at",
+    "i can speak",
+    "i am able to",
+    "i studied",
+    "i have a degree",
+    "i can drive",
+    "i can touch",
+    "i can play",
+    "i can move",
+    "i can sew",
+    "i can cook",
+    "i can make",
+    "i can not",
+    "i can do",
+    "i can be",
+    "i can draw",
+    "i can only",
+    "i can say",
+    "i can ride",
+    "i can get",
+    "i can type",
+    "i can bench",
+    "i can never",
+    "i can read",
+    "i can squat",
+    "i can talk",
+    "i can jump",
+    "i can spend",
+    "i can fly",
+    "i can fix",
+    "i can sing",
+    "i can swim",
+    "i can achieve",
+    "i can eat",
+    "i can whistle"
+   ],
+   "constraints": [
+    "the polar opposite of l1:state.capability_constraint, which types only what a subject cannot do. The two must not be merged into one signed type: a stated inability and a stated ability are separately memory-worthy.",
+    "authored rather than imported: PropBank can.01 means 'put into tins' and can.02 is metaphorical throwing, so the modal sense has no roleset to ground it in."
+   ],
+   "evidence_family": "positive_capability_or_skill",
+   "evidence_occurrences": 454,
+   "id": "l1:state.capability",
+   "item_type": "state_type",
+   "qualifiers": [
+    "l1:qualifier.degree"
+   ],
+   "roles": [
+    {
+     "is_required": true,
+     "note": "who holds the capability",
+     "role_id": "l1:role.attribute_bearer"
+    },
+    {
+     "is_required": false,
+     "note": "what the capability is over",
+     "role_id": "l1:role.topic"
+    }
+   ],
+   "sense": "something the subject is able to do, knows how to do, or is competent at"
+  },
+  {
+   "admitted_on": "expressibility",
+   "aliases": [
+    "i care about",
+    "is important to me",
+    "i value"
+   ],
+   "constraints": [
+    "must not be merged with l1:predicate.hold_belief. A value takes a strength qualifier and a belief takes an assertion modality; one merged item would have to drop one of them.",
+    "distinct from l1:attribute.assessment, which rates how good an object is. That is a claim about the object; this is a claim about the subject.",
+    "distinct from l1:preference.affinity, which is liking. Treating something as important is not the same as enjoying it."
+   ],
+   "evidence_family": "held_value",
+   "evidence_occurrences": 24,
+   "id": "l1:predicate.hold_value",
+   "item_type": "predicate_sense",
+   "qualifiers": [
+    "l1:qualifier.degree",
+    "l1:source_status.user_reported"
+   ],
+   "roles": [
+    {
+     "is_required": true,
+     "note": "whose value it is",
+     "role_id": "l1:role.attribute_bearer"
+    },
+    {
+     "is_required": true,
+     "note": "what is valued",
+     "role_id": "l1:role.topic"
+    }
+   ],
+   "sense": "the subject treats something as important or as a priority: a property of the subject rather than an evaluation of the object"
+  },
+  {
+   "admitted_on": "expressibility",
+   "aliases": [
+    "i believe",
+    "i believe in",
+    "i think that"
+   ],
+   "constraints": [
+    "must not be merged with l1:predicate.hold_value, for the same reason in reverse: modality belongs to the belief and strength to the value.",
+    "the content is a general claim. A report of a particular fact is an ordinary assertion and does not need this type.",
+    "assertion modality is declared but unattested: MSC carries no explicit modality marker, so no graded value set is supplied."
+   ],
+   "evidence_family": "held_belief",
+   "evidence_occurrences": 124,
+   "id": "l1:predicate.hold_belief",
+   "item_type": "predicate_sense",
+   "qualifiers": [
+    "l1:modality.believed",
+    "l1:source_status.user_reported"
+   ],
+   "roles": [
+    {
+     "is_required": true,
+     "note": "whose belief it is",
+     "role_id": "l1:role.attribute_bearer"
+    },
+    {
+     "is_required": true,
+     "note": "the proposition believed",
+     "role_id": "l1:role.proposition_content"
+    }
+   ],
+   "sense": "the subject holds a general claim about how the world is, as distinct from a report of a particular fact"
+  }
+ ],
+ "new_roles": [
+  {
+   "id": "l1:role.participant",
+   "item_type": "role",
+   "needed_by": [
+    "l1:event.activity_occurrence"
+   ],
+   "sense": "another party present at or taking part in an activity"
+  },
+  {
+   "id": "l1:role.topic",
+   "item_type": "role",
+   "needed_by": [
+    "l1:event.activity_occurrence",
+    "l1:state.ongoing_pursuit",
+    "l1:state.capability",
+    "l1:predicate.hold_value"
+   ],
+   "sense": "what an activity, capability or value is about"
+  },
+  {
+   "id": "l1:role.proposition_content",
+   "item_type": "role",
+   "needed_by": [
+    "l1:predicate.hold_belief"
+   ],
+   "sense": "the proposition a belief is about"
+  }
+ ],
+ "supersedes": "2.0.0",
+ "unit_id": "O_L1_V3_ADDITIONS",
+ "version": "3.0.0"
+}

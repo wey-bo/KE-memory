@@ -1,0 +1,40 @@
+{
+ "extends_v2_l2_sha256": "308ba27fc274f4c1b538d70c0166e7ea01ba6c16d92adcb3136b801647c64858",
+ "freeze": {
+  "derived_from_validation_sample": false,
+  "excludes_benchmark_facts": true,
+  "excludes_individuals": true,
+  "hash_scope": "SHA-256 over the canonical JSON of this unit alone, excluding this freeze block; a change to another unit cannot move this digest",
+  "judge_dependency": "none; no model or judge call was made by this build",
+  "sha256": "e32f41b5f55d5e91f056848b415f0c5ba5f4ba6580bbf6909975225bcadafe68",
+  "unit": "o_l2_additions"
+ },
+ "items": [
+  {
+   "evidence_required": 2,
+   "id": "l2:abstraction.pursuit_profile",
+   "item_type": "abstraction_type",
+   "kind": "abstracts_from",
+   "l1_source_ids": [
+    "l1:event.activity_occurrence",
+    "l1:state.ongoing_pursuit",
+    "l1:qualifier.frequency"
+   ],
+   "sense": "what the subject does with their time, across occasions and practices"
+  },
+  {
+   "evidence_required": 2,
+   "id": "l2:abstraction.value_commitment",
+   "item_type": "abstraction_type",
+   "kind": "abstracts_from",
+   "l1_source_ids": [
+    "l1:predicate.hold_value",
+    "l1:predicate.hold_belief",
+    "l1:state.ongoing_pursuit"
+   ],
+   "sense": "a standing commitment the subject holds, evidenced by a stated value together with behaviour consistent with it"
+  }
+ ],
+ "unit_id": "O_L2_V3_ADDITIONS",
+ "version": "3.0.0"
+}
