@@ -138,7 +138,7 @@ class MappingRecordV2(_Record):
 
 
 _WORD = re.compile(r"[a-z0-9]+")
-_STOPWORDS = frozenset(
+STOPWORDS = frozenset(
     {
         "the", "a", "an", "and", "or", "of", "to", "in", "on", "for", "with", "is", "are",
         "was", "were", "be", "been", "being", "at", "by", "from", "as", "it", "its", "this",
@@ -170,7 +170,7 @@ def terms(text: str, *, protected: frozenset[str] = frozenset()) -> set[str]:
     weight is low, but a genuine alias match is no longer invisible.
     """
     found = {t for t in _WORD.findall(text.lower()) if len(t) > 2}
-    return {t for t in found if t not in _STOPWORDS or t in protected}
+    return {t for t in found if t not in STOPWORDS or t in protected}
 
 
 class MapperV2:
@@ -199,7 +199,7 @@ class MapperV2:
         self._protected: dict[Layer, frozenset[str]] = {}
         for layer in Layer:
             items = ontology.items_for(layer)
-            protected = _alias_terms(items)
+            protected = protected_alias_terms(items)
             self._protected[layer] = protected
             index = _build_index(items, protected)
             self._index[layer] = index
@@ -264,7 +264,7 @@ class MapperV2:
             # it as discriminative let "and", "for" and "every" satisfy the evidence test, which put
             # 74 percent of turns into "ambiguous" and drove abstention to zero — the same degeneracy
             # as v1, arrived at from the other side.
-            discriminative = tuple(sorted(overlap - generic - _STOPWORDS))
+            discriminative = tuple(sorted(overlap - generic - STOPWORDS))
             scored.append(
                 CandidateV2(
                     ontology_id=ontology_id,
@@ -360,7 +360,7 @@ class MapperV2:
         )
 
 
-def _alias_terms(items: Sequence[JsonObject], *, maximum_items: int = 2) -> frozenset[str]:
+def protected_alias_terms(items: Sequence[JsonObject], *, maximum_items: int = 2) -> frozenset[str]:
     """Stopwords worth protecting: those that *are* an alias, not those that appear inside one.
 
     Protecting every alias word collapsed abstention to zero, because ``the``, ``and`` and ``for``
@@ -384,7 +384,7 @@ def _alias_terms(items: Sequence[JsonObject], *, maximum_items: int = 2) -> froz
             if len(words) != 1:
                 continue
             word = words[0]
-            if len(word) > 2 and word in _STOPWORDS:
+            if len(word) > 2 and word in STOPWORDS:
                 occurrences.setdefault(word, set()).add(ontology_id)
     return frozenset(
         word for word, ids in occurrences.items() if len(ids) <= maximum_items

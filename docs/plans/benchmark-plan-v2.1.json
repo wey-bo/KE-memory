@@ -744,7 +744,7 @@
  },
  "program_plan": {
   "current_status": {
-   "broad_foundation_ontology_not_yet_built": "O_L1 and O_L2 remain the 67 and 20 item seed. The frozen sources are snapshots on disk, not content in the ontology.",
+   "broad_foundation_ontology_not_yet_built": "v2 is built and pending review: O_L1 100 items and O_L2 32, up from the 67 and 20 seed, with all three published sources consulted rather than approximated. Whether that constitutes broad coverage of common memory situations is a review judgement, not something this build may assert.",
    "diagnostic_execution_chain_ready": "the nine-stage chain runs over a consumed builder artifact with per-layer traces, and the oracle attribution mechanism holds. The layers are lexical, so this is diagnostic capability only.",
    "formal_benchmark_not_yet_ready": "the critical path is ontology v2 and natural-expression mapper validation. The judge key can be handled in parallel and is not what gates the run.",
    "mapper_v1_diagnostic_failed_as_expected": "7 of 18 correct with all four negatives mis-mapped. A repair attempt on discovery data reached 12.5 percent abstention against v1 baseline 9.8 percent and is not a fix; the diagnosis is that lexical overlap is too weak a signal for the abstain decision.",
@@ -906,6 +906,32 @@
     "step": 1
    },
    {
+    "artifacts": "artifacts/ontology-v2/",
+    "counts": {
+     "accepted": 134,
+     "decisions": 161,
+     "deferred": 2,
+     "map_entries": 32,
+     "o_l1_items": 100,
+     "o_l2_items": 32,
+     "rejected": 25,
+     "uncovered_expressions": 2
+    },
+    "defects_found_during_recovery": [
+     "a gloss floor of min_length=8 rejected real PropBank data: decide.01 is named exactly \"decide\", six characters. Verified against the frozen archive and the floor lowered to 3.",
+     "the ledger covered 20 of 132 items, so 112 had entered a layer with no recorded review. Decisions are now derived from each item's own provenance, so a decision cites the evidence that admitted the item rather than a reason written afterwards.",
+     "the ledger had zero rejections, which would imply nothing was ever turned away. v1's 25 rejections and its still-open deferrals are carried forward with their original reasoning.",
+     "two provenance helpers left by the crash were unreferenced dead code and were removed."
+    ],
+    "hashes": {
+     "decisions_sha256": "0faded7b7431dde9796f3e5fc86fced238cb9e4121d95a56c5ef3e548949b8d4",
+     "m_l1_to_l2_sha256": "e9827d28b8ee9bfb25fe88a807b18f9a3c239aaa686d4415f8650a404d98ec89",
+     "o_l1_sha256": "76465be5ecfed0c988599f3c2dba442af0bc149911d2189bfe8e6f37b47932e9",
+     "o_l2_sha256": "308ba27fc274f4c1b538d70c0166e7ea01ba6c16d92adcb3136b801647c64858",
+     "provenance_sha256": "9eb6974c92cd17232be6eb5b9fcc5fb69f4f2c6fe33a087d42dfdfc2fedebdc0",
+     "supersession_sha256": "1557d2166bb07979be935b7fb6e299e4526a4de6d05fe451c3f1c8ffab4e7ed1"
+    },
+    "independent_verification": "the six unit digests were recomputed from the assembled ontology and matched the artifacts on disk; the two layers share no id; all 32 L2 items are derived through the map; every item now carries a ledger decision; and no Individual, date literal or dataset token appears in either layer.",
     "inputs": [
      "frozen WordNet",
      "frozen PropBank",
@@ -913,8 +939,18 @@
      "independent build corpus"
     ],
     "name": "build O_L1/O_L2 v2",
+    "recovery_note": "the building agent died mid-write on a gateway 524 and left six modules on disk with no build script, no package marker and a truncated decisions module. The content was recovered rather than rebuilt: all six modules parsed, so the missing builders, provenance and ledger assembly were completed and the artifacts emitted.",
     "rule": "no bulk import. The result must be stable ids, senses, aliases, roles and types suited to common memory situations, which is a curation problem rather than a volume problem.",
-    "step": 2
+    "status": "built_pending_review",
+    "step": 2,
+    "v1_deferrals_resolved": [
+     "l2.decision_with_rationale",
+     "l2.social_relationship",
+     "modality.hypothesis",
+     "modality.question",
+     "role.cause",
+     "role.duration"
+    ]
    },
    {
     "finding": {
@@ -1153,7 +1189,7 @@
     "PropBank",
     "schema.org"
    ],
-   "status": "ontology_seed_v1_frozen",
+   "status": "v2_built_pending_review",
    "unconsulted_note": "none are available offline: nltk is absent, no PropBank copy exists and outbound HTTPS to schema.org timed out. Predicate senses are labelled corpus-clustered from SGD intent verbs rather than claiming synset ids, and no schema.org type name appears anywhere.",
    "uncovered_expressions": 8
   },

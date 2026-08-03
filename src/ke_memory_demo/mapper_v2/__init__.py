@@ -7,10 +7,12 @@ from .mapper import (
     MAPPER_ID,
     MAPPER_VERSION,
     AbstainReason,
+    STOPWORDS,
     CandidateV2,
     MapperV2,
     MappingRecordV2,
     assert_no_correction_gate,
+    protected_alias_terms,
     terms,
 )
 
@@ -19,9 +21,11 @@ __all__ = [
     "MAPPER_ID",
     "MAPPER_VERSION",
     "AbstainReason",
+    "STOPWORDS",
     "CandidateV2",
     "MapperV2",
     "MappingRecordV2",
     "assert_no_correction_gate",
+    "protected_alias_terms",
     "terms",
 ]

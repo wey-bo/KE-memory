@@ -1,0 +1,657 @@
+{
+ "freeze": {
+  "excludes_benchmark_facts": true,
+  "excludes_individuals": true,
+  "hash_scope": "SHA-256 over the canonical JSON of this unit's model alone, excluding this freeze block; a change to another unit cannot move this digest",
+  "judge_dependency": "none; no model or judge call was made by this build",
+  "sha256": "1557d2166bb07979be935b7fb6e299e4526a4de6d05fe451c3f1c8ffab4e7ed1",
+  "unit": "supersession"
+ },
+ "records": [
+  {
+   "outcome": "revised",
+   "reason": "the facet survives with its sense rewritten to describe the property rather than the Taskmaster2 annotation that evidenced it. Changed: sense rewritten; alias set 4->4; role slots 1->2; provenance 1->2; constraints 1->2; cites 1 external reference",
+   "v1_id": "l1:attribute.assessment",
+   "v2_id": "l1:attribute.assessment"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the facet survives with its sense rewritten to describe the property rather than the Taskmaster2 annotation that evidenced it. Changed: sense rewritten; alias set 4->4; provenance 1->2",
+   "v1_id": "l1:attribute.availability",
+   "v2_id": "l1:attribute.availability"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the facet survives with its sense rewritten to describe the property rather than the Taskmaster2 annotation that evidenced it. Changed: sense rewritten; alias set 3->3; provenance 1->2",
+   "v1_id": "l1:attribute.calendar_position",
+   "v2_id": "l1:attribute.calendar_position"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the facet survives with its sense rewritten to describe the property rather than the Taskmaster2 annotation that evidenced it. Changed: sense rewritten; alias set 3->3; provenance 1->2",
+   "v1_id": "l1:attribute.clock_position",
+   "v2_id": "l1:attribute.clock_position"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the facet survives with its sense rewritten to describe the property rather than the Taskmaster2 annotation that evidenced it. Changed: sense rewritten; alias set 3->3; provenance 1->2; constraints 1->2; cites 1 external reference",
+   "v1_id": "l1:attribute.designation",
+   "v2_id": "l1:attribute.designation"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the facet survives with its sense rewritten to describe the property rather than the Taskmaster2 annotation that evidenced it. Changed: sense rewritten; alias set 4->4",
+   "v1_id": "l1:attribute.kind",
+   "v2_id": "l1:attribute.kind"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the facet survives with its sense rewritten to describe the property rather than the Taskmaster2 annotation that evidenced it. Changed: sense rewritten; alias set 5->5; provenance 1->3; cites 1 external reference",
+   "v1_id": "l1:attribute.magnitude",
+   "v2_id": "l1:attribute.magnitude"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the facet survives with its sense rewritten to describe the property rather than the Taskmaster2 annotation that evidenced it. Changed: sense rewritten; alias set 5->4; provenance 1->3; cites 1 external reference",
+   "v1_id": "l1:attribute.place",
+   "v2_id": "l1:attribute.place"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the event section widened from five to eight, so this type was tightened to leave room for the transitions, achievements and first encounters v1 had no types for. Changed: sense rewritten; alias set 3->3; role slots 2->3; provenance 1->2; cites 2 external references",
+   "v1_id": "l1:event.attempt_failed",
+   "v2_id": "l1:event.attempt_failed"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the event section widened from five to eight, so this type was tightened to leave room for the transitions, achievements and first encounters v1 had no types for. Changed: sense rewritten; alias set 3->3; role slots 2->3; relations 1->2; provenance 1->2; cites 1 external reference",
+   "v1_id": "l1:event.commitment_made",
+   "v2_id": "l1:event.commitment_made"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the event section widened from five to eight, so this type was tightened to leave room for the transitions, achievements and first encounters v1 had no types for. Changed: sense rewritten; alias set 2->2; role slots 2->3; relations 1->2; provenance 1->3; cites 1 external reference",
+   "v1_id": "l1:event.commitment_withdrawn",
+   "v2_id": "l1:event.commitment_withdrawn"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the event section widened from five to eight, so this type was tightened to leave room for the transitions, achievements and first encounters v1 had no types for. Changed: sense rewritten; alias set 2->2; role slots 2->3; provenance 1->2; cites 1 external reference",
+   "v1_id": "l1:event.information_request",
+   "v2_id": "l1:event.information_request"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the event section widened from five to eight, so this type was tightened to leave room for the transitions, achievements and first encounters v1 had no types for. Changed: sense rewritten; alias set 3->3; role slots 2->3; relations 1->2; provenance 1->2; cites 1 external reference",
+   "v1_id": "l1:event.media_consumption",
+   "v2_id": "l1:event.media_consumption"
+  },
+  {
+   "outcome": "revised",
+   "reason": "a value vocabulary carried over with its sense rewritten; v1 phrased several of these as descriptions of act labels rather than of what the value means. Changed: sense rewritten; alias set 2->2",
+   "v1_id": "l1:modality.asserted",
+   "v2_id": "l1:modality.asserted"
+  },
+  {
+   "outcome": "revised",
+   "reason": "a value vocabulary carried over with its sense rewritten; v1 phrased several of these as descriptions of act labels rather than of what the value means. Changed: sense rewritten; alias set 3->3; provenance 1->2; cites 1 external reference",
+   "v1_id": "l1:modality.believed",
+   "v2_id": "l1:modality.believed"
+  },
+  {
+   "outcome": "revised",
+   "reason": "a value vocabulary carried over with its sense rewritten; v1 phrased several of these as descriptions of act labels rather than of what the value means. Changed: sense rewritten; alias set 3->3; provenance 1->2; cites 1 external reference",
+   "v1_id": "l1:modality.desired",
+   "v2_id": "l1:modality.desired"
+  },
+  {
+   "outcome": "revised",
+   "reason": "a value vocabulary carried over with its sense rewritten; v1 phrased several of these as descriptions of act labels rather than of what the value means. Changed: sense rewritten; alias set 3->3",
+   "v1_id": "l1:modality.directed",
+   "v2_id": "l1:modality.directed"
+  },
+  {
+   "outcome": "revised",
+   "reason": "a value vocabulary carried over with its sense rewritten; v1 phrased several of these as descriptions of act labels rather than of what the value means. Changed: sense rewritten; alias set 3->3; provenance 1->2; cites 1 external reference",
+   "v1_id": "l1:modality.intended",
+   "v2_id": "l1:modality.intended"
+  },
+  {
+   "outcome": "revised",
+   "reason": "a value vocabulary carried over with its sense rewritten; v1 phrased several of these as descriptions of act labels rather than of what the value means. Changed: sense rewritten",
+   "v1_id": "l1:polarity.affirmed",
+   "v2_id": "l1:polarity.affirmed"
+  },
+  {
+   "outcome": "revised",
+   "reason": "a value vocabulary carried over with its sense rewritten; v1 phrased several of these as descriptions of act labels rather than of what the value means. Changed: sense rewritten; provenance 1->2",
+   "v1_id": "l1:polarity.denied",
+   "v2_id": "l1:polarity.denied"
+  },
+  {
+   "outcome": "revised",
+   "reason": "a value vocabulary carried over with its sense rewritten; v1 phrased several of these as descriptions of act labels rather than of what the value means. Changed: sense rewritten; alias set 1->1",
+   "v1_id": "l1:polarity.indeterminate",
+   "v2_id": "l1:polarity.indeterminate"
+  },
+  {
+   "outcome": "revised",
+   "reason": "v1's senses were clustered from SGD intent verbs and could claim no roleset id; this sense is now fixed by a named PropBank roleset and takes its slots from that roleset's numbered arguments. Changed: sense rewritten; alias set 5->5; role slots 2->3; provenance 1->2; cites 2 external references",
+   "v1_id": "l1:predicate.change_arrangement",
+   "v2_id": "l1:predicate.change_arrangement"
+  },
+  {
+   "outcome": "revised",
+   "reason": "v1's senses were clustered from SGD intent verbs and could claim no roleset id; this sense is now fixed by a named PropBank roleset and takes its slots from that roleset's numbered arguments. Changed: sense rewritten; alias set 4->5; role slots 3->5; relations 0->1; provenance 1->2; cites 3 external references",
+   "v1_id": "l1:predicate.commit_to_arrangement",
+   "v2_id": "l1:predicate.commit_to_arrangement"
+  },
+  {
+   "outcome": "revised",
+   "reason": "v1's senses were clustered from SGD intent verbs and could claim no roleset id; this sense is now fixed by a named PropBank roleset and takes its slots from that roleset's numbered arguments. Changed: sense rewritten; alias set 4->4; relations 0->1; provenance 1->2; cites 2 external references",
+   "v1_id": "l1:predicate.consume_media",
+   "v2_id": "l1:predicate.consume_media"
+  },
+  {
+   "outcome": "revised",
+   "reason": "v1's senses were clustered from SGD intent verbs and could claim no roleset id; this sense is now fixed by a named PropBank roleset and takes its slots from that roleset's numbered arguments. Changed: sense rewritten; alias set 5->5; role slots 2->3; relations 0->2; provenance 1->2; cites 2 external references",
+   "v1_id": "l1:predicate.hold_attitude",
+   "v2_id": "l1:predicate.hold_attitude"
+  },
+  {
+   "outcome": "revised",
+   "reason": "v1's senses were clustered from SGD intent verbs and could claim no roleset id; this sense is now fixed by a named PropBank roleset and takes its slots from that roleset's numbered arguments. Changed: sense rewritten; alias set 5->4; provenance 1->3; cites 3 external references",
+   "v1_id": "l1:predicate.occupy_role",
+   "v2_id": "l1:predicate.occupy_role"
+  },
+  {
+   "outcome": "revised",
+   "reason": "v1's senses were clustered from SGD intent verbs and could claim no roleset id; this sense is now fixed by a named PropBank roleset and takes its slots from that roleset's numbered arguments. Changed: sense rewritten; alias set 5->5; role slots 3->4; provenance 1->2; cites 1 external reference",
+   "v1_id": "l1:predicate.seek_information",
+   "v2_id": "l1:predicate.seek_information"
+  },
+  {
+   "outcome": "revised",
+   "reason": "v1's senses were clustered from SGD intent verbs and could claim no roleset id; this sense is now fixed by a named PropBank roleset and takes its slots from that roleset's numbered arguments. Changed: sense rewritten; alias set 4->5; provenance 1->2; cites 3 external references",
+   "v1_id": "l1:predicate.transfer_value",
+   "v2_id": "l1:predicate.transfer_value"
+  },
+  {
+   "outcome": "revised",
+   "reason": "preference types gained the beneficiary and strength machinery that closes v1's recorded gaps on preference strength and preference held for another person. Changed: sense rewritten; alias set 4->4; role slots 2->3; relations 2->3; provenance 1->2; cites 2 external references",
+   "v1_id": "l1:preference.affinity",
+   "v2_id": "l1:preference.affinity"
+  },
+  {
+   "outcome": "revised",
+   "reason": "preference types gained the beneficiary and strength machinery that closes v1's recorded gaps on preference strength and preference held for another person. Changed: sense rewritten; alias set 3->3; role slots 3->4; provenance 1->3; cites 1 external reference",
+   "v1_id": "l1:preference.comparative",
+   "v2_id": "l1:preference.comparative"
+  },
+  {
+   "outcome": "revised",
+   "reason": "preference types gained the beneficiary and strength machinery that closes v1's recorded gaps on preference strength and preference held for another person. Changed: sense rewritten; alias set 4->4; role slots 2->3; provenance 1->2; cites 1 external reference",
+   "v1_id": "l1:preference.threshold",
+   "v2_id": "l1:preference.threshold"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the dimension's sense was rewritten to say what it qualifies rather than which corpus slot suggested it. Changed: sense rewritten; alias set 2->2",
+   "v1_id": "l1:qualifier.assertion_standing",
+   "v2_id": "l1:qualifier.assertion_standing"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the dimension's sense was rewritten to say what it qualifies rather than which corpus slot suggested it. Changed: sense rewritten",
+   "v1_id": "l1:qualifier.modality",
+   "v2_id": "l1:qualifier.modality"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the dimension's sense was rewritten to say what it qualifies rather than which corpus slot suggested it. Changed: sense rewritten",
+   "v1_id": "l1:qualifier.polarity",
+   "v2_id": "l1:qualifier.polarity"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the dimension's sense was rewritten to say what it qualifies rather than which corpus slot suggested it. Changed: sense rewritten; alias set 2->2",
+   "v1_id": "l1:qualifier.source_status",
+   "v2_id": "l1:qualifier.source_status"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the dimension's sense was rewritten to say what it qualifies rather than which corpus slot suggested it. Changed: sense rewritten; alias set 2->2",
+   "v1_id": "l1:qualifier.time",
+   "v2_id": "l1:qualifier.time"
+  },
+  {
+   "outcome": "revised",
+   "reason": "v1 called its roles corpus-shaped and named PropBank as what would settle them; this role is now cross-checked against PropBank's function tag distribution. Changed: provenance 1->2; cites 1 external reference",
+   "v1_id": "l1:role.agent",
+   "v2_id": "l1:role.agent"
+  },
+  {
+   "outcome": "carried_forward",
+   "reason": "byte-identical to v1: the only item in either layer that needed no change at all. Its sense, its single alias and its Taskmaster2 provenance were still exactly right, and it is recorded so the carried-forward count is a real number",
+   "v1_id": "l1:role.attribute_bearer",
+   "v2_id": "l1:role.attribute_bearer"
+  },
+  {
+   "outcome": "revised",
+   "reason": "v1 called its roles corpus-shaped and named PropBank as what would settle them; this role is now cross-checked against PropBank's function tag distribution. Changed: provenance 1->2; cites 1 external reference",
+   "v1_id": "l1:role.constraint_on",
+   "v2_id": "l1:role.constraint_on"
+  },
+  {
+   "outcome": "revised",
+   "reason": "v1 called its roles corpus-shaped and named PropBank as what would settle them; this role is now cross-checked against PropBank's function tag distribution. Changed: provenance 1->2; cites 1 external reference",
+   "v1_id": "l1:role.holder",
+   "v2_id": "l1:role.holder"
+  },
+  {
+   "outcome": "revised",
+   "reason": "v1 called its roles corpus-shaped and named PropBank as what would settle them; this role is now cross-checked against PropBank's function tag distribution. Changed: provenance 1->2; cites 1 external reference",
+   "v1_id": "l1:role.instrument",
+   "v2_id": "l1:role.instrument"
+  },
+  {
+   "outcome": "revised",
+   "reason": "v1 called its roles corpus-shaped and named PropBank as what would settle them; this role is now cross-checked against PropBank's function tag distribution. Changed: provenance 1->2; cites 1 external reference",
+   "v1_id": "l1:role.quantity",
+   "v2_id": "l1:role.quantity"
+  },
+  {
+   "outcome": "revised",
+   "reason": "v1 called its roles corpus-shaped and named PropBank as what would settle them; this role is now cross-checked against PropBank's function tag distribution. Changed: alias set 2->2; provenance 1->2; cites 1 external reference",
+   "v1_id": "l1:role.recipient",
+   "v2_id": "l1:role.recipient"
+  },
+  {
+   "outcome": "revised",
+   "reason": "v1 called its roles corpus-shaped and named PropBank as what would settle them; this role is now cross-checked against PropBank's function tag distribution. Changed: provenance 1->2; cites 1 external reference",
+   "v1_id": "l1:role.source_location",
+   "v2_id": "l1:role.source_location"
+  },
+  {
+   "outcome": "revised",
+   "reason": "v1 called its roles corpus-shaped and named PropBank as what would settle them; this role is now cross-checked against PropBank's function tag distribution. Changed: provenance 1->2; cites 1 external reference",
+   "v1_id": "l1:role.target_location",
+   "v2_id": "l1:role.target_location"
+  },
+  {
+   "outcome": "revised",
+   "reason": "v1 called its roles corpus-shaped and named PropBank as what would settle them; this role is now cross-checked against PropBank's function tag distribution. Changed: provenance 1->2; cites 1 external reference",
+   "v1_id": "l1:role.theme",
+   "v2_id": "l1:role.theme"
+  },
+  {
+   "outcome": "revised",
+   "reason": "a value vocabulary carried over with its sense rewritten; v1 phrased several of these as descriptions of act labels rather than of what the value means. Changed: sense rewritten; alias set 2->2",
+   "v1_id": "l1:source_status.assistant_asserted",
+   "v2_id": "l1:source_status.assistant_asserted"
+  },
+  {
+   "outcome": "revised",
+   "reason": "a value vocabulary carried over with its sense rewritten; v1 phrased several of these as descriptions of act labels rather than of what the value means. Changed: sense rewritten; alias set 2->2; provenance 1->2",
+   "v1_id": "l1:source_status.confirmed_by_both",
+   "v2_id": "l1:source_status.confirmed_by_both"
+  },
+  {
+   "outcome": "revised",
+   "reason": "a value vocabulary carried over with its sense rewritten; v1 phrased several of these as descriptions of act labels rather than of what the value means. Changed: sense rewritten",
+   "v1_id": "l1:source_status.derived",
+   "v2_id": "l1:source_status.derived"
+  },
+  {
+   "outcome": "revised",
+   "reason": "a value vocabulary carried over with its sense rewritten; v1 phrased several of these as descriptions of act labels rather than of what the value means. Changed: sense rewritten; alias set 3->3",
+   "v1_id": "l1:source_status.tool_observed",
+   "v2_id": "l1:source_status.tool_observed"
+  },
+  {
+   "outcome": "revised",
+   "reason": "a value vocabulary carried over with its sense rewritten; v1 phrased several of these as descriptions of act labels rather than of what the value means. Changed: sense rewritten; alias set 2->2",
+   "v1_id": "l1:source_status.user_reported",
+   "v2_id": "l1:source_status.user_reported"
+  },
+  {
+   "outcome": "revised",
+   "reason": "a value vocabulary carried over with its sense rewritten; v1 phrased several of these as descriptions of act labels rather than of what the value means. Changed: sense rewritten; alias set 2->2",
+   "v1_id": "l1:standing.current",
+   "v2_id": "l1:standing.current"
+  },
+  {
+   "outcome": "revised",
+   "reason": "a value vocabulary carried over with its sense rewritten; v1 phrased several of these as descriptions of act labels rather than of what the value means. Changed: sense rewritten; alias set 3->3; provenance 1->2",
+   "v1_id": "l1:standing.retracted",
+   "v2_id": "l1:standing.retracted"
+  },
+  {
+   "outcome": "revised",
+   "reason": "a value vocabulary carried over with its sense rewritten; v1 phrased several of these as descriptions of act labels rather than of what the value means. Changed: sense rewritten; alias set 3->3",
+   "v1_id": "l1:standing.superseded",
+   "v2_id": "l1:standing.superseded"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the state section widened from four items to seven, so this type was tightened as occupation, residence and suspended commitment were split out of it. Changed: sense rewritten; alias set 4->4; role slots 2->3; relations 0->1; provenance 1->2; cites 2 external references",
+   "v1_id": "l1:state.capability_constraint",
+   "v2_id": "l1:state.capability_constraint"
+  },
+  {
+   "outcome": "revised",
+   "reason": "narrowed on purpose: v1's catch-all absorbed occupation, residence and restriction because it had nowhere else to put them, and its specializes_sense edge to the occupation predicate was dropped because occupation_status and residence now exist as their own state types. Changed: sense rewritten; alias set 3->3; role slots 2->1; relations 1->1; cites 1 external reference",
+   "v1_id": "l1:state.circumstance",
+   "v2_id": "l1:state.circumstance"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the state section widened from four items to seven, so this type was tightened as occupation, residence and suspended commitment were split out of it. Changed: sense rewritten; alias set 3->3; role slots 2->3; relations 0->1; provenance 1->2; cites 1 external reference",
+   "v1_id": "l1:state.pending_arrangement",
+   "v2_id": "l1:state.pending_arrangement"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the state section widened from four items to seven, so this type was tightened as occupation, residence and suspended commitment were split out of it. Changed: sense rewritten; alias set 3->3; role slots 2->3; provenance 1->2; cites 1 external reference",
+   "v1_id": "l1:state.possession",
+   "v2_id": "l1:state.possession"
+  },
+  {
+   "outcome": "revised",
+   "reason": "task types gained a beneficiary or cause position, and the conditional case moved to the new conditional-intention type. Changed: sense rewritten; alias set 3->3; role slots 2->3; relations 0->1; provenance 1->3; cites 1 external reference",
+   "v1_id": "l1:task.abandoned_intention",
+   "v2_id": "l1:task.abandoned_intention"
+  },
+  {
+   "outcome": "revised",
+   "reason": "task types gained a beneficiary or cause position, and the conditional case moved to the new conditional-intention type. Changed: sense rewritten; alias set 4->4; role slots 2->3; provenance 1->2; cites 2 external references",
+   "v1_id": "l1:task.declared_intention",
+   "v2_id": "l1:task.declared_intention"
+  },
+  {
+   "outcome": "revised",
+   "reason": "task types gained a beneficiary or cause position, and the conditional case moved to the new conditional-intention type. Changed: sense rewritten; alias set 3->3; role slots 2->3; provenance 1->2; cites 1 external reference",
+   "v1_id": "l1:task.outstanding_requirement",
+   "v2_id": "l1:task.outstanding_requirement"
+  },
+  {
+   "outcome": "revised",
+   "reason": "a value vocabulary carried over with its sense rewritten; v1 phrased several of these as descriptions of act labels rather than of what the value means. Changed: sense rewritten; alias set 3->3",
+   "v1_id": "l1:time.after_assertion",
+   "v2_id": "l1:time.after_assertion"
+  },
+  {
+   "outcome": "revised",
+   "reason": "a value vocabulary carried over with its sense rewritten; v1 phrased several of these as descriptions of act labels rather than of what the value means. Changed: sense rewritten; alias set 3->2",
+   "v1_id": "l1:time.at_assertion",
+   "v2_id": "l1:time.at_assertion"
+  },
+  {
+   "outcome": "revised",
+   "reason": "a value vocabulary carried over with its sense rewritten; v1 phrased several of these as descriptions of act labels rather than of what the value means. Changed: sense rewritten; alias set 2->2",
+   "v1_id": "l1:time.before_assertion",
+   "v2_id": "l1:time.before_assertion"
+  },
+  {
+   "outcome": "revised",
+   "reason": "a value vocabulary carried over with its sense rewritten; v1 phrased several of these as descriptions of act labels rather than of what the value means. Changed: sense rewritten; alias set 3->2; relations 1->2",
+   "v1_id": "l1:time.recurring",
+   "v2_id": "l1:time.recurring"
+  },
+  {
+   "outcome": "revised",
+   "reason": "a value vocabulary carried over with its sense rewritten; v1 phrased several of these as descriptions of act labels rather than of what the value means. Changed: sense rewritten; alias set 3->3; provenance 1->2",
+   "v1_id": "l1:time.spanning",
+   "v2_id": "l1:time.spanning"
+  },
+  {
+   "outcome": "revised",
+   "reason": "a value vocabulary carried over with its sense rewritten; v1 phrased several of these as descriptions of act labels rather than of what the value means. Changed: sense rewritten",
+   "v1_id": "l1:time.unspecified",
+   "v2_id": "l1:time.unspecified"
+  },
+  {
+   "outcome": "revised",
+   "reason": "re-derived against the wider L1 and, where its v1 evidence was thin, re-measured against the build corpora. Changed: sense rewritten; alias set 3->3; relations 1->0; constraints 1->0",
+   "v1_id": "l2:abstraction.carried_constraint",
+   "v2_id": "l2:abstraction.carried_constraint"
+  },
+  {
+   "outcome": "revised",
+   "reason": "re-derived against the wider L1 and, where its v1 evidence was thin, re-measured against the build corpora. Changed: sense rewritten; alias set 3->3; role slots 1->2; relations 1->0; constraints 2->1; cites 2 external references",
+   "v1_id": "l2:abstraction.habit",
+   "v2_id": "l2:abstraction.habit"
+  },
+  {
+   "outcome": "revised",
+   "reason": "re-derived against the wider L1 and, where its v1 evidence was thin, re-measured against the build corpora. Changed: sense rewritten; alias set 3->3; role slots 1->2; relations 1->0; provenance 1->2; constraints 1->1; cites 1 external reference",
+   "v1_id": "l2:abstraction.preference_profile",
+   "v2_id": "l2:abstraction.preference_profile"
+  },
+  {
+   "outcome": "revised",
+   "reason": "re-derived against the wider L1 and, where its v1 evidence was thin, re-measured against the build corpora. Changed: sense rewritten; alias set 3->3; role slots 1->2; relations 2->0; constraints 1->0",
+   "v1_id": "l2:abstraction.project",
+   "v2_id": "l2:abstraction.project"
+  },
+  {
+   "outcome": "revised",
+   "reason": "re-derived against the wider L1 and, where its v1 evidence was thin, re-measured against the build corpora. Changed: sense rewritten; alias set 3->3; relations 1->0; constraints 1->0",
+   "v1_id": "l2:abstraction.standing_condition",
+   "v2_id": "l2:abstraction.standing_condition"
+  },
+  {
+   "outcome": "revised",
+   "reason": "re-derived against the wider L1 and, where its v1 evidence was thin, re-measured against the build corpora. Changed: sense rewritten; alias set 3->3; relations 1->0; constraints 1->0",
+   "v1_id": "l2:abstraction.task",
+   "v2_id": "l2:abstraction.task"
+  },
+  {
+   "outcome": "revised",
+   "reason": "re-derived against the wider L1 and, where its v1 evidence was thin, re-measured against the build corpora. Changed: sense rewritten; alias set 3->3; relations 1->0; constraints 1->0",
+   "v1_id": "l2:abstraction.value_history",
+   "v2_id": "l2:abstraction.value_history"
+  },
+  {
+   "outcome": "revised",
+   "reason": "restated now that a third evidence constraint forbids aggregation from improving on the source status of its supports. Changed: sense rewritten; alias set 2->1; constraints 1->0",
+   "v1_id": "l2:evidence.partial_support_marked",
+   "v2_id": "l2:evidence.partial_support_marked"
+  },
+  {
+   "outcome": "revised",
+   "reason": "restated now that a third evidence constraint forbids aggregation from improving on the source status of its supports. Changed: sense rewritten; alias set 1->1; constraints 1->1",
+   "v1_id": "l2:evidence.supports_addressable",
+   "v2_id": "l2:evidence.supports_addressable"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the lifecycle vocabulary grew from four values to six, so this value's boundaries were restated against dormant and condition_failed. Changed: sense rewritten; alias set 3->3; relations 1->0; provenance 1->2; cites 3 external references",
+   "v1_id": "l2:lifecycle.achieved",
+   "v2_id": "l2:lifecycle.achieved"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the lifecycle vocabulary grew from four values to six, so this value's boundaries were restated against dormant and condition_failed. Changed: sense rewritten; alias set 2->2; relations 1->0; constraints 1->0",
+   "v1_id": "l2:lifecycle.lapsed",
+   "v2_id": "l2:lifecycle.lapsed"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the lifecycle vocabulary grew from four values to six, so this value's boundaries were restated against dormant and condition_failed. Changed: sense rewritten; alias set 3->3; relations 1->0",
+   "v1_id": "l2:lifecycle.open",
+   "v2_id": "l2:lifecycle.open"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the lifecycle vocabulary grew from four values to six, so this value's boundaries were restated against dormant and condition_failed. Changed: sense rewritten; alias set 2->2; relations 1->0",
+   "v1_id": "l2:lifecycle.superseded_by_revision",
+   "v2_id": "l2:lifecycle.superseded_by_revision"
+  },
+  {
+   "outcome": "revised",
+   "reason": "restated as a computation over the wider L1 rather than over v1's smaller qualifier set. Changed: sense rewritten; alias set 2->2; constraints 1->0",
+   "v1_id": "l2:pattern.constraint_union",
+   "v2_id": "l2:pattern.constraint_union"
+  },
+  {
+   "outcome": "revised",
+   "reason": "restated as a computation over the wider L1 rather than over v1's smaller qualifier set. Changed: sense rewritten; alias set 2->2; constraints 1->0",
+   "v1_id": "l2:pattern.goal_decomposition",
+   "v2_id": "l2:pattern.goal_decomposition"
+  },
+  {
+   "outcome": "revised",
+   "reason": "restated as a computation over the wider L1 rather than over v1's smaller qualifier set. Changed: sense rewritten; alias set 3->3; provenance 1->2; constraints 1->0; cites 1 external reference",
+   "v1_id": "l2:pattern.recurrence_count",
+   "v2_id": "l2:pattern.recurrence_count"
+  },
+  {
+   "outcome": "revised",
+   "reason": "restated as a computation over the wider L1 rather than over v1's smaller qualifier set. Changed: sense rewritten; alias set 3->3; constraints 1->0",
+   "v1_id": "l2:pattern.temporal_series",
+   "v2_id": "l2:pattern.temporal_series"
+  },
+  {
+   "outcome": "revised",
+   "reason": "v1 called its roles corpus-shaped and named PropBank as what would settle them; this role is now cross-checked against PropBank's function tag distribution. Changed: sense rewritten; alias set 2->2",
+   "v1_id": "l2:role.scope",
+   "v2_id": "l2:role.scope"
+  },
+  {
+   "outcome": "revised",
+   "reason": "v1 called its roles corpus-shaped and named PropBank as what would settle them; this role is now cross-checked against PropBank's function tag distribution. Changed: sense rewritten; alias set 1->1; constraints 1->0",
+   "v1_id": "l2:role.subject",
+   "v2_id": "l2:role.subject"
+  },
+  {
+   "outcome": "revised",
+   "reason": "v1 called its roles corpus-shaped and named PropBank as what would settle them; this role is now cross-checked against PropBank's function tag distribution. Changed: sense rewritten; alias set 1->1; constraints 1->0",
+   "v1_id": "l2:role.tracked_attribute",
+   "v2_id": "l2:role.tracked_attribute"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the map was rebuilt against the wider L1, so this edge names the sources that now exist rather than v1's nearest approximation. Changed: derivation rule rewritten",
+   "v1_id": "m:abstraction.carried_constraint",
+   "v2_id": "m:abstraction.carried_constraint"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the map was rebuilt against the wider L1, so this edge names the sources that now exist rather than v1's nearest approximation. Changed: L1 sources 3->4; derivation rule rewritten",
+   "v1_id": "m:abstraction.habit",
+   "v2_id": "m:abstraction.habit"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the map was rebuilt against the wider L1, so this edge names the sources that now exist rather than v1's nearest approximation. Changed: L1 sources 4->4; derivation rule rewritten",
+   "v1_id": "m:abstraction.preference_profile",
+   "v2_id": "m:abstraction.preference_profile"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the map was rebuilt against the wider L1, so this edge names the sources that now exist rather than v1's nearest approximation. Changed: derivation rule rewritten",
+   "v1_id": "m:abstraction.project",
+   "v2_id": "m:abstraction.project"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the map was rebuilt against the wider L1, so this edge names the sources that now exist rather than v1's nearest approximation. Changed: L1 sources 2->2; derivation rule rewritten",
+   "v1_id": "m:abstraction.standing_condition",
+   "v2_id": "m:abstraction.standing_condition"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the map was rebuilt against the wider L1, so this edge names the sources that now exist rather than v1's nearest approximation. Changed: derivation kind aggregates_over->import_as; L1 sources 4->1; derivation rule rewritten; required support 2->1",
+   "v1_id": "m:abstraction.task",
+   "v2_id": "m:abstraction.task"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the map was rebuilt against the wider L1, so this edge names the sources that now exist rather than v1's nearest approximation. Changed: L1 sources 4->2; derivation rule rewritten",
+   "v1_id": "m:abstraction.value_history",
+   "v2_id": "m:abstraction.value_history"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the map was rebuilt against the wider L1, so this edge names the sources that now exist rather than v1's nearest approximation. Changed: derivation kind import_as->abstracts_from; L1 sources 1->2; derivation rule rewritten",
+   "v1_id": "m:import.pattern_constraint_union",
+   "v2_id": "m:import.pattern_constraint_union"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the map was rebuilt against the wider L1, so this edge names the sources that now exist rather than v1's nearest approximation. Changed: derivation kind import_as->abstracts_from; L1 sources 1->2; derivation rule rewritten; required support 2->1",
+   "v1_id": "m:import.pattern_goal_decomposition",
+   "v2_id": "m:import.pattern_goal_decomposition"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the map was rebuilt against the wider L1, so this edge names the sources that now exist rather than v1's nearest approximation. Changed: derivation kind import_as->abstracts_from; L1 sources 1->2; derivation rule rewritten; required support 2->1",
+   "v1_id": "m:import.pattern_recurrence_count",
+   "v2_id": "m:import.pattern_recurrence_count"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the map was rebuilt against the wider L1, so this edge names the sources that now exist rather than v1's nearest approximation. Changed: derivation kind import_as->abstracts_from; L1 sources 1->2; derivation rule rewritten; required support 2->1",
+   "v1_id": "m:import.pattern_temporal_series",
+   "v2_id": "m:import.pattern_temporal_series"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the map was rebuilt against the wider L1, so this edge names the sources that now exist rather than v1's nearest approximation. Changed: derivation rule rewritten",
+   "v1_id": "m:import.role_scope",
+   "v2_id": "m:import.role_scope"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the map was rebuilt against the wider L1, so this edge names the sources that now exist rather than v1's nearest approximation. Changed: derivation rule rewritten",
+   "v1_id": "m:import.role_subject",
+   "v2_id": "m:import.role_subject"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the map was rebuilt against the wider L1, so this edge names the sources that now exist rather than v1's nearest approximation. Changed: derivation rule rewritten",
+   "v1_id": "m:import.role_tracked_attribute",
+   "v2_id": "m:import.role_tracked_attribute"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the map was rebuilt against the wider L1, so this edge names the sources that now exist rather than v1's nearest approximation. Changed: L1 sources 2->2; derivation rule rewritten",
+   "v1_id": "m:lift.evidence_partial_support",
+   "v2_id": "m:lift.evidence_partial_support"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the map was rebuilt against the wider L1, so this edge names the sources that now exist rather than v1's nearest approximation. Changed: derivation kind qualifier_lift->import_as; L1 sources 1->1; derivation rule rewritten",
+   "v1_id": "m:lift.evidence_supports_addressable",
+   "v2_id": "m:lift.evidence_supports_addressable"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the map was rebuilt against the wider L1, so this edge names the sources that now exist rather than v1's nearest approximation. Changed: L1 sources 2->2; derivation rule rewritten",
+   "v1_id": "m:lift.lifecycle_achieved",
+   "v2_id": "m:lift.lifecycle_achieved"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the map was rebuilt against the wider L1, so this edge names the sources that now exist rather than v1's nearest approximation. Changed: L1 sources 2->2; derivation rule rewritten",
+   "v1_id": "m:lift.lifecycle_lapsed",
+   "v2_id": "m:lift.lifecycle_lapsed"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the map was rebuilt against the wider L1, so this edge names the sources that now exist rather than v1's nearest approximation. Changed: derivation kind qualifier_lift->import_as; L1 sources 2->1; derivation rule rewritten",
+   "v1_id": "m:lift.lifecycle_open",
+   "v2_id": "m:lift.lifecycle_open"
+  },
+  {
+   "outcome": "revised",
+   "reason": "the map was rebuilt against the wider L1, so this edge names the sources that now exist rather than v1's nearest approximation. Changed: derivation kind qualifier_lift->import_as; derivation rule rewritten",
+   "v1_id": "m:lift.lifecycle_superseded",
+   "v2_id": "m:lift.lifecycle_superseded"
+  }
+ ],
+ "supersedes_version": "1.0.0",
+ "unit_id": "supersession",
+ "version": "2.0.0"
+}

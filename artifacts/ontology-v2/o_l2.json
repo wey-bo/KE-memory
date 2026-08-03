@@ -1,0 +1,1274 @@
+{
+ "freeze": {
+  "excludes_benchmark_facts": true,
+  "excludes_individuals": true,
+  "hash_scope": "SHA-256 over the canonical JSON of this unit's model alone, excluding this freeze block; a change to another unit cannot move this digest",
+  "judge_dependency": "none; no model or judge call was made by this build",
+  "sha256": "308ba27fc274f4c1b538d70c0166e7ea01ba6c16d92adcb3136b801647c64858",
+  "unit": "o_l2"
+ },
+ "items": [
+  {
+   "item": {
+    "aliases": [
+     "standing requirement",
+     "applies throughout",
+     "keeps applying"
+    ],
+    "constraints": [],
+    "grounding": [],
+    "id": "l2:abstraction.carried_constraint",
+    "provenance": [
+     {
+      "evidence": "86.4% of multi-service dialogues carry a slot value across services: city 2238, location 1711, destination_city 1672",
+      "source": "sgd_state_dynamics"
+     }
+    ],
+    "relations": [],
+    "role_kind": "concept",
+    "roles": [
+     {
+      "is_required": true,
+      "range_id": null,
+      "role_id": "l2:role.subject"
+     },
+     {
+      "is_required": true,
+      "range_id": null,
+      "role_id": "l2:role.scope"
+     }
+    ],
+    "sense": "a restriction stated once and treated as applying to later sub-goals without restating"
+   },
+   "item_type": "abstraction_type",
+   "minimum_support": 2,
+   "spans_sessions": true
+  },
+  {
+   "item": {
+    "aliases": [
+     "standing if-then",
+     "waiting on a condition",
+     "open conditional"
+    ],
+    "constraints": [
+     {
+      "expression": "carries three outcomes and not two: the trigger may be met, may be settled false, or may still be open. Collapsing the last two would make an unresolved conditional indistinguishable from a declined one",
+      "kind": "resolution"
+     }
+    ],
+    "grounding": [
+     {
+      "gloss": "to make dependent on a condition",
+      "reference": "condition.01",
+      "role_hint": "ARG2 GOL dependent on",
+      "source": "propbank"
+     },
+     {
+      "gloss": "a description of an action that is supported",
+      "reference": "schema:PotentialActionStatus",
+      "role_hint": null,
+      "source": "schemaorg"
+     }
+    ],
+    "id": "l2:abstraction.conditional_commitment",
+    "provenance": [
+     {
+      "evidence": "472 availability-conditioned requests, 88 if/then frames, 43 'in case', 14 'as long as' or 'only if' over 329964 utterances. v1 read the act labels, which are uniformly unconditional, and concluded the corpus did not attest the construct",
+      "source": "sgd_dialogue_acts"
+     },
+     {
+      "evidence": "21 sentence-initial conditionals and 38 'when X i want Y' triggers",
+      "source": "msc_personas"
+     },
+     {
+      "evidence": "condition.01 supplies the argument structure a suspended commitment needs, which is what v1 was waiting for",
+      "source": "propbank"
+     }
+    ],
+    "relations": [],
+    "role_kind": "concept",
+    "roles": [
+     {
+      "is_required": true,
+      "range_id": null,
+      "role_id": "l2:role.subject"
+     },
+     {
+      "is_required": true,
+      "range_id": null,
+      "role_id": "l2:role.scope"
+     }
+    ],
+    "sense": "a commitment held open across sessions, waiting on a condition that may never be met"
+   },
+   "item_type": "abstraction_type",
+   "minimum_support": 1,
+   "spans_sessions": true
+  },
+  {
+   "item": {
+    "aliases": [
+     "routine",
+     "usually does",
+     "regular practice"
+    ],
+    "constraints": [
+     {
+      "expression": "three observations minimum, raised from v1's two: two occurrences of a behaviour are a coincidence, and the frequency qualifier must also be habitual or stronger for the abstraction to hold",
+      "kind": "support"
+     }
+    ],
+    "grounding": [
+     {
+      "gloss": "a schedule defines a repeating time period used to describe a regularly occurring Event",
+      "reference": "schema:Schedule",
+      "role_hint": null,
+      "source": "schemaorg"
+     },
+     {
+      "gloss": "habit, wont: an established custom",
+      "reference": "n#05669034",
+      "role_hint": null,
+      "source": "wordnet"
+     }
+    ],
+    "id": "l2:abstraction.habit",
+    "provenance": [
+     {
+      "evidence": "295 explicit-frequency sentences and 926 frequency-adverb sentences. v1 rested this item on 80 of 65245 and called it the weakest evidence in either layer; this build measures the pattern an order of magnitude more widely, which is why the support threshold could be raised rather than lowered",
+      "source": "msc_personas"
+     },
+     {
+      "evidence": "schema:Schedule separates repeatFrequency from repeatCount, so a rate claim and a tally are different evidence and the abstraction needs the rate",
+      "source": "schemaorg"
+     }
+    ],
+    "relations": [],
+    "role_kind": "concept",
+    "roles": [
+     {
+      "is_required": true,
+      "range_id": null,
+      "role_id": "l2:role.subject"
+     },
+     {
+      "is_required": true,
+      "range_id": null,
+      "role_id": "l2:role.scope"
+     }
+    ],
+    "sense": "a behaviour a subject repeats often enough that it predicts what they will do"
+   },
+   "item_type": "abstraction_type",
+   "minimum_support": 3,
+   "spans_sessions": true
+  },
+  {
+   "item": {
+    "aliases": [
+     "taste profile",
+     "what they go for",
+     "their preferences"
+    ],
+    "constraints": [
+     {
+      "expression": "a profile is only a profile if it orders options; two unrelated likings are two observations, and the strength qualifier is what supplies the order",
+      "kind": "ordering"
+     }
+    ],
+    "grounding": [
+     {
+      "gloss": "predilection, preference, orientation: a predisposition in favor of something",
+      "reference": "n#06200344",
+      "role_hint": null,
+      "source": "wordnet"
+     }
+    ],
+    "id": "l2:abstraction.preference_profile",
+    "provenance": [
+     {
+      "evidence": "16482 affect statements over 65245 sentences, and the strength bands that order them: 2963 favourite, 4102 love, 9517 like, 717 dislike, 269 hate",
+      "source": "msc_personas"
+     },
+     {
+      "evidence": "USER SELECT 25869 and REQUEST_ALTS 11208 are choices that reveal a ranking without stating one",
+      "source": "sgd_dialogue_acts"
+     }
+    ],
+    "relations": [],
+    "role_kind": "concept",
+    "roles": [
+     {
+      "is_required": true,
+      "range_id": null,
+      "role_id": "l2:role.subject"
+     },
+     {
+      "is_required": true,
+      "range_id": null,
+      "role_id": "l2:role.scope"
+     }
+    ],
+    "sense": "a subject's settled ranking over options in some area, held across many statements"
+   },
+   "item_type": "abstraction_type",
+   "minimum_support": 2,
+   "spans_sessions": true
+  },
+  {
+   "item": {
+    "aliases": [
+     "multi-step goal",
+     "undertaking",
+     "the whole plan"
+    ],
+    "constraints": [],
+    "grounding": [],
+    "id": "l2:abstraction.project",
+    "provenance": [
+     {
+      "evidence": "10739 of 16142 dialogues touch more than one service, so a multi-part intention is the majority case rather than a special one",
+      "source": "sgd_state_dynamics"
+     }
+    ],
+    "relations": [],
+    "role_kind": "concept",
+    "roles": [
+     {
+      "is_required": true,
+      "range_id": null,
+      "role_id": "l2:role.subject"
+     },
+     {
+      "is_required": true,
+      "range_id": null,
+      "role_id": "l2:role.scope"
+     }
+    ],
+    "sense": "one intention pursued through several sub-goals that are individually completable"
+   },
+   "item_type": "abstraction_type",
+   "minimum_support": 2,
+   "spans_sessions": true
+  },
+  {
+   "item": {
+    "aliases": [
+     "who they know",
+     "personal tie",
+     "connection to someone"
+    ],
+    "constraints": [
+     {
+      "expression": "must instantiate one of the four admitted relation types; an untyped tie is not admitted, because 'knows somebody' carries no consequence a memory system could act on",
+      "kind": "typing"
+     },
+     {
+      "expression": "the counterpart is held as a filled position and never as a person, so this abstraction records that the subject has a spouse and never who",
+      "kind": "exclusion"
+     }
+    ],
+    "grounding": [
+     {
+      "gloss": "represents additional information about a relationship or property",
+      "reference": "schema:Role",
+      "role_hint": null,
+      "source": "schemaorg"
+     },
+     {
+      "gloss": "the most generic familial relation",
+      "reference": "schema:relatedTo",
+      "role_hint": null,
+      "source": "schemaorg"
+     }
+    ],
+    "id": "l2:abstraction.relationship",
+    "provenance": [
+     {
+      "evidence": "4647 relationship mentions over 65245 persona sentences, concentrated in four families. v1 recorded this as its largest O_L2 gap on the ground that any inventory would be guessed; four families at 3088/738/485/311 is a measurement",
+      "source": "msc_personas"
+     },
+     {
+      "evidence": "schema:knows, follows and relatedTo give the generic shapes, and Role with startDate/endDate gives the lifecycle",
+      "source": "schemaorg"
+     }
+    ],
+    "relations": [],
+    "role_kind": "concept",
+    "roles": [
+     {
+      "is_required": true,
+      "range_id": null,
+      "role_id": "l2:role.subject"
+     },
+     {
+      "is_required": true,
+      "range_id": null,
+      "role_id": "l2:role.first_party"
+     },
+     {
+      "is_required": true,
+      "range_id": null,
+      "role_id": "l2:role.second_party"
+     }
+    ],
+    "sense": "a standing tie between the subject and another party, of one of the admitted kinds"
+   },
+   "item_type": "abstraction_type",
+   "minimum_support": 1,
+   "spans_sessions": true
+  },
+  {
+   "item": {
+    "aliases": [
+     "permanent condition",
+     "always true of them",
+     "hard constraint"
+    ],
+    "constraints": [],
+    "grounding": [],
+    "id": "l2:abstraction.standing_condition",
+    "provenance": [
+     {
+      "evidence": "113 allergy and 80 dietary statements are conditions that outlive any one session and cannot be overridden by a later preference",
+      "source": "msc_personas"
+     }
+    ],
+    "relations": [],
+    "role_kind": "concept",
+    "roles": [
+     {
+      "is_required": true,
+      "range_id": null,
+      "role_id": "l2:role.subject"
+     }
+    ],
+    "sense": "a lasting fact about a subject that constrains what may be offered them at any time"
+   },
+   "item_type": "abstraction_type",
+   "minimum_support": 1,
+   "spans_sessions": true
+  },
+  {
+   "item": {
+    "aliases": [
+     "todo",
+     "open item",
+     "action item"
+    ],
+    "constraints": [],
+    "grounding": [],
+    "id": "l2:abstraction.task",
+    "provenance": [
+     {
+      "evidence": "domain.AggregateNodeKind declares Task and Project separately, so a single item and a multi-part undertaking are distinct structures",
+      "source": "repository_vocabulary"
+     }
+    ],
+    "relations": [],
+    "role_kind": "concept",
+    "roles": [
+     {
+      "is_required": true,
+      "range_id": null,
+      "role_id": "l2:role.subject"
+     }
+    ],
+    "sense": "one outstanding piece of work with a lifecycle of its own"
+   },
+   "item_type": "abstraction_type",
+   "minimum_support": 1,
+   "spans_sessions": true
+  },
+  {
+   "item": {
+    "aliases": [
+     "history of changes",
+     "how it changed",
+     "value series"
+    ],
+    "constraints": [],
+    "grounding": [],
+    "id": "l2:abstraction.value_history",
+    "provenance": [
+     {
+      "evidence": "3661 of 5110 dialogues (71.6%) revise a user slot value mid-dialogue, so the current value is only recoverable from the series",
+      "source": "sgd_state_dynamics"
+     }
+    ],
+    "relations": [],
+    "role_kind": "concept",
+    "roles": [
+     {
+      "is_required": true,
+      "range_id": null,
+      "role_id": "l2:role.subject"
+     },
+     {
+      "is_required": true,
+      "range_id": null,
+      "role_id": "l2:role.tracked_attribute"
+     }
+    ],
+    "sense": "the ordered series of values an attribute has taken, from which the current one follows"
+   },
+   "item_type": "abstraction_type",
+   "minimum_support": 2,
+   "spans_sessions": true
+  },
+  {
+   "item": {
+    "aliases": [
+     "mark thin evidence"
+    ],
+    "constraints": [],
+    "grounding": [],
+    "id": "l2:evidence.partial_support_marked",
+    "provenance": [
+     {
+      "evidence": "225 of 227 discovery observations shaped partial_gold_overlap: partial support is the normal case, so it needs a marking rather than an exception path",
+      "source": "discovery_gap_shape"
+     }
+    ],
+    "relations": [],
+    "role_kind": "concept",
+    "roles": [],
+    "sense": "an abstraction resting on fewer supports than it requires must say so rather than hold"
+   },
+   "item_type": "evidence_constraint",
+   "minimum_support": 1,
+   "spans_sessions": false
+  },
+  {
+   "item": {
+    "aliases": [
+     "no laundering",
+     "weakest link"
+    ],
+    "constraints": [
+     {
+      "expression": "aggregating three user reports does not produce a tool-observed fact. Without this, abstraction becomes a way of upgrading confidence that no single observation carried, which is the failure mode that makes a memory system confidently wrong",
+      "kind": "monotonicity"
+     }
+    ],
+    "grounding": [],
+    "id": "l2:evidence.source_status_preserved",
+    "provenance": [
+     {
+      "evidence": "both environments distinguish tool returns from user reports and the policy requires confirmation before a write; an abstraction that lost that distinction would let a report authorise an action only an observation should",
+      "source": "tau_bench_policy"
+     },
+     {
+      "evidence": "domain.Speaker separates user/assistant/tool/derived, so the distinction exists at the observation layer and must survive aggregation",
+      "source": "repository_vocabulary"
+     }
+    ],
+    "relations": [],
+    "role_kind": "concept",
+    "roles": [],
+    "sense": "an abstraction may be no better attested than the weakest observation it rests on"
+   },
+   "item_type": "evidence_constraint",
+   "minimum_support": 1,
+   "spans_sessions": false
+  },
+  {
+   "item": {
+    "aliases": [
+     "supports must be listed"
+    ],
+    "constraints": [
+     {
+      "expression": "an abstraction whose supports cannot be enumerated cannot be checked or revised, so it is not admissible however plausible it looks",
+      "kind": "addressability"
+     }
+    ],
+    "grounding": [],
+    "id": "l2:evidence.supports_addressable",
+    "provenance": [
+     {
+      "evidence": "the retail policy requires the agent to explain a change before making it, which is impossible if the grounds are not enumerable",
+      "source": "tau_bench_policy"
+     }
+    ],
+    "relations": [],
+    "role_kind": "concept",
+    "roles": [],
+    "sense": "every abstraction must name the observations it rests on, individually"
+   },
+   "item_type": "evidence_constraint",
+   "minimum_support": 1,
+   "spans_sessions": false
+  },
+  {
+   "item": {
+    "aliases": [
+     "done",
+     "completed",
+     "finished"
+    ],
+    "constraints": [],
+    "grounding": [
+     {
+      "gloss": "accomplish",
+      "reference": "achieve.01",
+      "role_hint": "ARG1 PPT thing achieved",
+      "source": "propbank"
+     },
+     {
+      "gloss": "bring to an end",
+      "reference": "complete.01",
+      "role_hint": "ARG1 PPT task coming to an end",
+      "source": "propbank"
+     },
+     {
+      "gloss": "an action that has already taken place",
+      "reference": "schema:CompletedActionStatus",
+      "role_hint": null,
+      "source": "schemaorg"
+     }
+    ],
+    "id": "l2:lifecycle.achieved",
+    "provenance": [
+     {
+      "evidence": "SYSTEM NOTIFY_SUCCESS 16868 is the observable that closes an intention",
+      "source": "sgd_dialogue_acts"
+     },
+     {
+      "evidence": "achieve.01 and complete.01 are the positive counterpart to fail.01",
+      "source": "propbank"
+     }
+    ],
+    "relations": [],
+    "role_kind": "vocabulary_value",
+    "roles": [],
+    "sense": "completed as intended, so nothing further is outstanding"
+   },
+   "item_type": "lifecycle_state",
+   "minimum_support": 1,
+   "spans_sessions": false
+  },
+  {
+   "item": {
+    "aliases": [
+     "condition not met",
+     "did not apply"
+    ],
+    "constraints": [],
+    "grounding": [
+     {
+      "gloss": "an action that failed to complete",
+      "reference": "schema:FailedActionStatus",
+      "role_hint": null,
+      "source": "schemaorg"
+     }
+    ],
+    "id": "l2:lifecycle.condition_failed",
+    "provenance": [
+     {
+      "evidence": "SYSTEM NOTIFY_FAILURE 2398 and the 472 availability-conditioned requests together give the case: the condition was checked and did not hold, which is neither an achievement nor a lapse",
+      "source": "sgd_dialogue_acts"
+     }
+    ],
+    "relations": [],
+    "role_kind": "vocabulary_value",
+    "roles": [],
+    "sense": "a conditional item whose trigger was settled false, so it will not take effect"
+   },
+   "item_type": "lifecycle_state",
+   "minimum_support": 1,
+   "spans_sessions": false
+  },
+  {
+   "item": {
+    "aliases": [
+     "quiet",
+     "not mentioned lately",
+     "possibly stale"
+    ],
+    "constraints": [
+     {
+      "expression": "dormant is not lapsed: a lapsed item has stopped progressing, a dormant one is presumed still true but unconfirmed. Conflating them would make every unmentioned relationship look ended",
+      "kind": "distinction"
+     }
+    ],
+    "grounding": [
+     {
+      "gloss": "the end date and time of the item",
+      "reference": "schema:endDate",
+      "role_hint": null,
+      "source": "schemaorg"
+     }
+    ],
+    "id": "l2:lifecycle.dormant",
+    "provenance": [
+     {
+      "evidence": "persona statements are asserted once and carried across sessions without restatement; 4647 relationship mentions are almost all single mentions of ties that plainly persist, so absence of restatement cannot mean absence",
+      "source": "msc_personas"
+     },
+     {
+      "evidence": "schema:Role carries startDate and endDate separately, so an open-ended role is representable without asserting it has ended",
+      "source": "schemaorg"
+     }
+    ],
+    "relations": [],
+    "role_kind": "vocabulary_value",
+    "roles": [],
+    "sense": "still holds but has produced no observation for long enough that it may be stale"
+   },
+   "item_type": "lifecycle_state",
+   "minimum_support": 1,
+   "spans_sessions": false
+  },
+  {
+   "item": {
+    "aliases": [
+     "went nowhere",
+     "stalled"
+    ],
+    "constraints": [],
+    "grounding": [],
+    "id": "l2:lifecycle.lapsed",
+    "provenance": [
+     {
+      "evidence": "225 of 227 observations in the discovery split shaped partial_gold_overlap and 1 was an empty selection, i.e. an intention that neither closed nor was retracted is the common residue. Read as a gap shape only: no question, gold label or dataset identity was consulted",
+      "source": "discovery_gap_shape"
+     }
+    ],
+    "relations": [],
+    "role_kind": "vocabulary_value",
+    "roles": [],
+    "sense": "neither completed nor withdrawn, and no longer progressing"
+   },
+   "item_type": "lifecycle_state",
+   "minimum_support": 1,
+   "spans_sessions": false
+  },
+  {
+   "item": {
+    "aliases": [
+     "active",
+     "in progress",
+     "ongoing"
+    ],
+    "constraints": [],
+    "grounding": [],
+    "id": "l2:lifecycle.open",
+    "provenance": [
+     {
+      "evidence": "domain.Lifecycle.ACTIVE",
+      "source": "repository_vocabulary"
+     }
+    ],
+    "relations": [],
+    "role_kind": "vocabulary_value",
+    "roles": [],
+    "sense": "still live and expected to progress"
+   },
+   "item_type": "lifecycle_state",
+   "minimum_support": 1,
+   "spans_sessions": false
+  },
+  {
+   "item": {
+    "aliases": [
+     "replaced",
+     "revised away"
+    ],
+    "constraints": [],
+    "grounding": [],
+    "id": "l2:lifecycle.superseded_by_revision",
+    "provenance": [
+     {
+      "evidence": "71.6% revision rate",
+      "source": "sgd_state_dynamics"
+     }
+    ],
+    "relations": [],
+    "role_kind": "vocabulary_value",
+    "roles": [],
+    "sense": "replaced by a later version of the same abstraction"
+   },
+   "item_type": "lifecycle_state",
+   "minimum_support": 1,
+   "spans_sessions": false
+  },
+  {
+   "item": {
+    "aliases": [
+     "all constraints together",
+     "intersect requirements"
+    ],
+    "constraints": [],
+    "grounding": [],
+    "id": "l2:pattern.constraint_union",
+    "provenance": [
+     {
+      "evidence": "a search intent may carry several user restrictions simultaneously and must satisfy every one",
+      "source": "sgd_schema"
+     }
+    ],
+    "relations": [],
+    "role_kind": "concept",
+    "roles": [],
+    "sense": "combine several restrictions into one that satisfies all of them at once"
+   },
+   "item_type": "aggregation_pattern",
+   "minimum_support": 1,
+   "spans_sessions": false
+  },
+  {
+   "item": {
+    "aliases": [
+     "break into sub-goals",
+     "parts of one aim"
+    ],
+    "constraints": [],
+    "grounding": [],
+    "id": "l2:pattern.goal_decomposition",
+    "provenance": [
+     {
+      "evidence": "multi-service dialogues distribute one user aim over 2 to 4 services",
+      "source": "sgd_state_dynamics"
+     }
+    ],
+    "relations": [],
+    "role_kind": "concept",
+    "roles": [],
+    "sense": "group observations under one intention when each advances a part of it"
+   },
+   "item_type": "aggregation_pattern",
+   "minimum_support": 1,
+   "spans_sessions": false
+  },
+  {
+   "item": {
+    "aliases": [
+     "count repeats",
+     "how many times",
+     "tally"
+    ],
+    "constraints": [],
+    "grounding": [
+     {
+      "gloss": "defines the number of times a recurring Event will take place",
+      "reference": "schema:repeatCount",
+      "role_hint": null,
+      "source": "schemaorg"
+     }
+    ],
+    "id": "l2:pattern.recurrence_count",
+    "provenance": [
+     {
+      "evidence": "295 explicit-frequency statements are the countable form of a habit claim",
+      "source": "msc_personas"
+     },
+     {
+      "evidence": "schema:repeatCount is declared separately from repeatFrequency, which is the distinction between this pattern and a rate claim",
+      "source": "schemaorg"
+     }
+    ],
+    "relations": [],
+    "role_kind": "concept",
+    "roles": [],
+    "sense": "count how often a behaviour recurs and compare the count against a threshold"
+   },
+   "item_type": "aggregation_pattern",
+   "minimum_support": 1,
+   "spans_sessions": false
+  },
+  {
+   "item": {
+    "aliases": [
+     "latest wins",
+     "order by time",
+     "series"
+    ],
+    "constraints": [],
+    "grounding": [],
+    "id": "l2:pattern.temporal_series",
+    "provenance": [
+     {
+      "evidence": "71.6% revision rate means recency, not frequency, decides the live value",
+      "source": "sgd_state_dynamics"
+     }
+    ],
+    "relations": [],
+    "role_kind": "concept",
+    "roles": [],
+    "sense": "order observations by assertion time and read the last one as current"
+   },
+   "item_type": "aggregation_pattern",
+   "minimum_support": 1,
+   "spans_sessions": false
+  },
+  {
+   "item": {
+    "aliases": [
+     "wait for the condition",
+     "watch for it",
+     "hold pending"
+    ],
+    "constraints": [
+     {
+      "expression": "the only pattern here that need never resolve; a watch whose condition is never observed stays open, and treating an open watch as a failure is what would make a conditional commitment indistinguishable from a lapsed one",
+      "kind": "non_termination"
+     }
+    ],
+    "grounding": [
+     {
+      "gloss": "to make dependent on a condition",
+      "reference": "condition.01",
+      "role_hint": "ARG1 and ARG2",
+      "source": "propbank"
+     }
+    ],
+    "id": "l2:pattern.trigger_watch",
+    "provenance": [
+     {
+      "evidence": "472 availability-conditioned requests await a fact the speaker does not have at the time of asking",
+      "source": "sgd_dialogue_acts"
+     },
+     {
+      "evidence": "condition.01's ARG1/ARG2 split is what this pattern watches: the entity made dependent, and the thing it depends on",
+      "source": "propbank"
+     }
+    ],
+    "relations": [],
+    "role_kind": "concept",
+    "roles": [],
+    "sense": "hold an item unresolved until its stated condition is observed to hold or to fail"
+   },
+   "item_type": "aggregation_pattern",
+   "minimum_support": 1,
+   "spans_sessions": false
+  },
+  {
+   "item": {
+    "aliases": [
+     "friend",
+     "close friend",
+     "knows socially"
+    ],
+    "constraints": [
+     {
+      "expression": "interchangeable, as schema:knows is declared bi-directional",
+      "kind": "symmetry"
+     },
+     {
+      "expression": "admits degree, which is carried by the strength qualifier through the map rather than by separate types for friend and best friend",
+      "kind": "gradation"
+     }
+    ],
+    "grounding": [
+     {
+      "gloss": "the most generic bi-directional social/work relation",
+      "reference": "schema:knows",
+      "role_hint": null,
+      "source": "schemaorg"
+     },
+     {
+      "gloss": "become friends with",
+      "reference": "befriend.01",
+      "role_hint": "ARG1 PPT new friend",
+      "source": "propbank"
+     },
+     {
+      "gloss": "friend: a person you know well and regard with affection and trust",
+      "reference": "n#10112591",
+      "role_hint": null,
+      "source": "wordnet"
+     }
+    ],
+    "id": "l2:relation.friendship",
+    "provenance": [
+     {
+      "evidence": "485 mentions: friend 163, best friend 136, plus neighbours and roommates",
+      "source": "msc_personas"
+     },
+     {
+      "evidence": "befriend.01 'become friends with' marks the transition into this relationship, which the first-encounter event type dates",
+      "source": "propbank"
+     },
+     {
+      "evidence": "schema:knows is 'the most generic bi-directional social/work relation'",
+      "source": "schemaorg"
+     }
+    ],
+    "relations": [
+     {
+      "kind": "holds_between",
+      "target_id": "l2:role.first_party"
+     },
+     {
+      "kind": "holds_between",
+      "target_id": "l2:role.second_party"
+     }
+    ],
+    "role_kind": "concept",
+    "roles": [
+     {
+      "is_required": true,
+      "range_id": null,
+      "role_id": "l2:role.subject"
+     }
+    ],
+    "sense": "a voluntary personal relationship that is not kin and not romantic"
+   },
+   "item_type": "relation_type",
+   "minimum_support": 1,
+   "spans_sessions": true
+  },
+  {
+   "item": {
+    "aliases": [
+     "parent or child",
+     "family by descent",
+     "blood relative"
+    ],
+    "constraints": [
+     {
+      "expression": "not interchangeable: the parent of X is not the child of X, so a mention from one side does not license the mirrored claim",
+      "kind": "asymmetry"
+     },
+     {
+      "expression": "may not lapse; unlike partnership and friendship a descent relation ends only if it was mis-recorded, so a later contradiction is a correction rather than a change",
+      "kind": "permanence"
+     }
+    ],
+    "grounding": [
+     {
+      "gloss": "a parent of this person",
+      "reference": "schema:parent",
+      "role_hint": null,
+      "source": "schemaorg"
+     },
+     {
+      "gloss": "relative, relation: a person related by blood or marriage",
+      "reference": "n#10235549",
+      "role_hint": null,
+      "source": "wordnet"
+     }
+    ],
+    "id": "l2:relation.kin_descent",
+    "provenance": [
+     {
+      "evidence": "3088 mentions, the largest relationship family by a factor of four: mother 493, father 513, mom 480, dad 442, parents 698, plus children, grandparents, nephews, aunts and cousins",
+      "source": "msc_personas"
+     },
+     {
+      "evidence": "schema.org declares parent and children as separate properties both with domain and range Person, which is the asymmetry this type carries",
+      "source": "schemaorg"
+     }
+    ],
+    "relations": [
+     {
+      "kind": "holds_between",
+      "target_id": "l2:role.first_party"
+     },
+     {
+      "kind": "holds_between",
+      "target_id": "l2:role.second_party"
+     }
+    ],
+    "role_kind": "concept",
+    "roles": [
+     {
+      "is_required": true,
+      "range_id": null,
+      "role_id": "l2:role.subject"
+     }
+    ],
+    "sense": "a family relationship along a line of descent, which holds for life once it holds"
+   },
+   "item_type": "relation_type",
+   "minimum_support": 1,
+   "spans_sessions": true
+  },
+  {
+   "item": {
+    "aliases": [
+     "sibling",
+     "brother or sister"
+    ],
+    "constraints": [
+     {
+      "expression": "interchangeable: if X is a sibling of Y then Y is a sibling of X, so either party's mention supports the same relationship",
+      "kind": "symmetry"
+     }
+    ],
+    "grounding": [
+     {
+      "gloss": "a sibling of the person",
+      "reference": "schema:sibling",
+      "role_hint": null,
+      "source": "schemaorg"
+     },
+     {
+      "gloss": "sibling, sib: a person's brother or sister",
+      "reference": "n#10595164",
+      "role_hint": null,
+      "source": "wordnet"
+     }
+    ],
+    "id": "l2:relation.kin_lateral",
+    "provenance": [
+     {
+      "evidence": "311 mentions: sister 124, brother 135, plus siblings and twins",
+      "source": "msc_personas"
+     },
+     {
+      "evidence": "schema:sibling has domain and range Person and no inverse property, unlike parent/children -- schema.org's own encoding of the symmetry",
+      "source": "schemaorg"
+     }
+    ],
+    "relations": [
+     {
+      "kind": "holds_between",
+      "target_id": "l2:role.first_party"
+     },
+     {
+      "kind": "holds_between",
+      "target_id": "l2:role.second_party"
+     },
+     {
+      "kind": "is_a",
+      "target_id": "l2:relation.kin_descent"
+     }
+    ],
+    "role_kind": "concept",
+    "roles": [
+     {
+      "is_required": true,
+      "range_id": null,
+      "role_id": "l2:role.subject"
+     }
+    ],
+    "sense": "a family relationship within one generation, which holds for life and reads alike from either side"
+   },
+   "item_type": "relation_type",
+   "minimum_support": 1,
+   "spans_sessions": true
+  },
+  {
+   "item": {
+    "aliases": [
+     "spouse",
+     "partner",
+     "married to"
+    ],
+    "constraints": [
+     {
+      "expression": "interchangeable while it holds, in the same way as kin_lateral",
+      "kind": "symmetry"
+     },
+     {
+      "expression": "may end, and an ending is a life transition rather than a contradiction of the earlier statement; this is why the type carries a lifecycle and kin_descent does not",
+      "kind": "termination"
+     }
+    ],
+    "grounding": [
+     {
+      "gloss": "the person's spouse",
+      "reference": "schema:spouse",
+      "role_hint": null,
+      "source": "schemaorg"
+     },
+     {
+      "gloss": "to take as a spouse, to join spouses",
+      "reference": "marry.01",
+      "role_hint": "ARG1/ARG2 the two halves",
+      "source": "propbank"
+     },
+     {
+      "gloss": "spouse, partner, married person, mate: a person's partner in marriage",
+      "reference": "n#10640620",
+      "role_hint": null,
+      "source": "wordnet"
+     }
+    ],
+    "id": "l2:relation.partnership",
+    "provenance": [
+     {
+      "evidence": "738 mentions: husband 255, wife 251, girlfriend 89, boyfriend 63, fiance 14, partner 14, plus 41 'my ex' which are the terminations",
+      "source": "msc_personas"
+     },
+     {
+      "evidence": "591 persona sentences state a marital status directly, and 47 the event",
+      "source": "msc_personas"
+     },
+     {
+      "evidence": "marry.01 'to take as a spouse' declares ARG1 'one half' and ARG2 'second half', which is the symmetric pair",
+      "source": "propbank"
+     }
+    ],
+    "relations": [
+     {
+      "kind": "holds_between",
+      "target_id": "l2:role.first_party"
+     },
+     {
+      "kind": "holds_between",
+      "target_id": "l2:role.second_party"
+     }
+    ],
+    "role_kind": "concept",
+    "roles": [
+     {
+      "is_required": true,
+      "range_id": null,
+      "role_id": "l2:role.subject"
+     }
+    ],
+    "sense": "a romantic or marital relationship, symmetric while it holds and able to end"
+   },
+   "item_type": "relation_type",
+   "minimum_support": 1,
+   "spans_sessions": true
+  },
+  {
+   "item": {
+    "aliases": [
+     "from whose side",
+     "relating party"
+    ],
+    "constraints": [],
+    "grounding": [
+     {
+      "gloss": "the most generic bi-directional social/work relation",
+      "reference": "schema:knows",
+      "role_hint": null,
+      "source": "schemaorg"
+     }
+    ],
+    "id": "l2:role.first_party",
+    "provenance": [
+     {
+      "evidence": "all 4647 relationship mentions are stated from the speaker's side ('my mother'), so one position is privileged by how the data is expressed",
+      "source": "msc_personas"
+     },
+     {
+      "evidence": "schema:knows has domain Person and range Person, i.e. both ends are the same kind of thing and only their positions distinguish them",
+      "source": "schemaorg"
+     }
+    ],
+    "relations": [],
+    "role_kind": "role",
+    "roles": [],
+    "sense": "the party from whose side a relationship is stated, ordinarily the remembered subject"
+   },
+   "item_type": "evidence_constraint",
+   "minimum_support": 1,
+   "spans_sessions": false
+  },
+  {
+   "item": {
+    "aliases": [
+     "ranges over",
+     "extent of"
+    ],
+    "constraints": [],
+    "grounding": [],
+    "id": "l2:role.scope",
+    "provenance": [
+     {
+      "evidence": "10739 of 16142 dialogues touch more than one service (2: 8266, 3: 2185, 4: 288), so what an abstraction covers must be stated rather than assumed",
+      "source": "sgd_state_dynamics"
+     }
+    ],
+    "relations": [],
+    "role_kind": "role",
+    "roles": [],
+    "sense": "what an abstraction ranges over, such as a goal, an attribute or a period"
+   },
+   "item_type": "evidence_constraint",
+   "minimum_support": 1,
+   "spans_sessions": false
+  },
+  {
+   "item": {
+    "aliases": [
+     "counterpart",
+     "the other party"
+    ],
+    "constraints": [
+     {
+      "expression": "records that a counterpart position exists and is filled, never which person fills it; a named individual is excluded from both layers, so this position is what makes relationships representable without naming anybody",
+      "kind": "exclusion"
+     }
+    ],
+    "grounding": [
+     {
+      "gloss": "the most generic uni-directional social relation",
+      "reference": "schema:follows",
+      "role_hint": null,
+      "source": "schemaorg"
+     }
+    ],
+    "id": "l2:role.second_party",
+    "provenance": [
+     {
+      "evidence": "schema:follows is the uni-directional counterpart to knows, which is what shows the two positions are not interchangeable in every relationship type",
+      "source": "schemaorg"
+     }
+    ],
+    "relations": [],
+    "role_kind": "role",
+    "roles": [],
+    "sense": "the other party to a relationship, held as a type of counterpart and never as a person"
+   },
+   "item_type": "evidence_constraint",
+   "minimum_support": 1,
+   "spans_sessions": false
+  },
+  {
+   "item": {
+    "aliases": [
+     "about whom"
+    ],
+    "constraints": [],
+    "grounding": [],
+    "id": "l2:role.subject",
+    "provenance": [
+     {
+      "evidence": "both tau-bench environments authenticate one user per session and the policy forbids acting across users, so an abstraction spanning two subjects has no referent",
+      "source": "tau_bench_policy"
+     }
+    ],
+    "relations": [],
+    "role_kind": "role",
+    "roles": [],
+    "sense": "the party an abstraction is about, which every abstraction has exactly one of"
+   },
+   "item_type": "evidence_constraint",
+   "minimum_support": 1,
+   "spans_sessions": false
+  },
+  {
+   "item": {
+    "aliases": [
+     "attribute followed"
+    ],
+    "constraints": [],
+    "grounding": [],
+    "id": "l2:role.tracked_attribute",
+    "provenance": [
+     {
+      "evidence": "revisions concentrate on particular slots -- city 571, departure_date 516, date 456 -- so a history is per attribute rather than per subject",
+      "source": "sgd_state_dynamics"
+     }
+    ],
+    "relations": [],
+    "role_kind": "role",
+    "roles": [],
+    "sense": "the attribute whose successive values an abstraction follows over time"
+   },
+   "item_type": "evidence_constraint",
+   "minimum_support": 1,
+   "spans_sessions": false
+  }
+ ],
+ "unit_id": "O_L2",
+ "version": "2.0.0"
+}

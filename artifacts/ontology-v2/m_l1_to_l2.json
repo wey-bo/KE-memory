@@ -1,0 +1,370 @@
+{
+ "entries": [
+  {
+   "evidence_required": 2,
+   "kind": "abstracts_from",
+   "l1_source_ids": [
+    "l1:preference.threshold",
+    "l1:role.constraint_on",
+    "l1:state.capability_constraint"
+   ],
+   "l2_target_id": "l2:abstraction.carried_constraint",
+   "map_id": "m:abstraction.carried_constraint",
+   "rule": "a restriction stated for one sub-goal is carried to a later one when the subject is the same and neither has been retracted; two occurrences are required because one is just a restriction"
+  },
+  {
+   "evidence_required": 1,
+   "kind": "abstracts_from",
+   "l1_source_ids": [
+    "l1:role.trigger",
+    "l1:state.suspended_commitment",
+    "l1:task.conditional_intention"
+   ],
+   "l2_target_id": "l2:abstraction.conditional_commitment",
+   "map_id": "m:abstraction.conditional_commitment",
+   "rule": "a suspended commitment becomes a cross-session conditional when its trigger has been neither observed to hold nor settled false by the end of the session in which it was stated; the trigger role is what the watch pattern reads"
+  },
+  {
+   "evidence_required": 3,
+   "kind": "aggregates_over",
+   "l1_source_ids": [
+    "l1:event.media_consumption",
+    "l1:predicate.consume_media",
+    "l1:qualifier.frequency",
+    "l1:time.recurring"
+   ],
+   "l2_target_id": "l2:abstraction.habit",
+   "map_id": "m:abstraction.habit",
+   "rule": "three or more occurrences of the same behaviour by the same subject, and a frequency qualifier of habitual or stronger. Both conditions, not either: three occurrences with a frequency of occasional describes something the subject does rarely and often"
+  },
+  {
+   "evidence_required": 2,
+   "kind": "aggregates_over",
+   "l1_source_ids": [
+    "l1:preference.affinity",
+    "l1:preference.avoidance",
+    "l1:preference.comparative",
+    "l1:qualifier.strength"
+   ],
+   "l2_target_id": "l2:abstraction.preference_profile",
+   "map_id": "m:abstraction.preference_profile",
+   "rule": "two or more affinity, avoidance or comparative observations by one subject in one area, ordered by their strength qualifiers. The ordering is what makes it a profile rather than a list, which is why the strength dimension is a source and not a decoration"
+  },
+  {
+   "evidence_required": 2,
+   "kind": "aggregates_over",
+   "l1_source_ids": [
+    "l1:task.declared_intention",
+    "l1:task.outstanding_requirement"
+   ],
+   "l2_target_id": "l2:abstraction.project",
+   "map_id": "m:abstraction.project",
+   "rule": "two or more declared intentions or outstanding requirements that share a subject and advance one stated aim, where completing any one of them leaves the others outstanding"
+  },
+  {
+   "evidence_required": 1,
+   "kind": "relates_parties",
+   "l1_source_ids": [
+    "l1:event.first_encounter",
+    "l1:role.beneficiary",
+    "l1:role.holder"
+   ],
+   "l2_target_id": "l2:abstraction.relationship",
+   "map_id": "m:abstraction.relationship",
+   "rule": "a tie is admitted when an observation places another party in the beneficiary or holder position relative to the subject and the family of the tie is stated; the first-encounter event dates it when present, and its absence leaves the tie undated rather than unheld"
+  },
+  {
+   "evidence_required": 1,
+   "kind": "abstracts_from",
+   "l1_source_ids": [
+    "l1:preference.avoidance",
+    "l1:state.capability_constraint"
+   ],
+   "l2_target_id": "l2:abstraction.standing_condition",
+   "map_id": "m:abstraction.standing_condition",
+   "rule": "a capability constraint or causal avoidance becomes standing when it is stated without a time qualifier or with an unspecified one, i.e. the subject presents it as simply true of them rather than true now"
+  },
+  {
+   "evidence_required": 1,
+   "kind": "import_as",
+   "l1_source_ids": [
+    "l1:task.outstanding_requirement"
+   ],
+   "l2_target_id": "l2:abstraction.task",
+   "map_id": "m:abstraction.task",
+   "rule": "one outstanding requirement becomes a tracked task when it acquires a lifecycle, which is the only thing the L2 side adds; the sense is unchanged"
+  },
+  {
+   "evidence_required": 2,
+   "kind": "aggregates_over",
+   "l1_source_ids": [
+    "l1:qualifier.assertion_standing",
+    "l1:standing.superseded"
+   ],
+   "l2_target_id": "l2:abstraction.value_history",
+   "map_id": "m:abstraction.value_history",
+   "rule": "two or more assertions about the same attribute of the same subject where at least one is superseded; the series is ordered by assertion time and the last unsuperseded value is the current one"
+  },
+  {
+   "evidence_required": 1,
+   "kind": "qualifier_lift",
+   "l1_source_ids": [
+    "l1:qualifier.source_status",
+    "l1:source_status.derived",
+    "l1:source_status.user_reported"
+   ],
+   "l2_target_id": "l2:evidence.source_status_preserved",
+   "map_id": "m:evidence.source_status_preserved",
+   "rule": "an aggregate takes the weakest source status among its supports; a set of user reports yields a user-reported or derived aggregate and never a tool-observed one, so the lift is a minimum rather than a merge"
+  },
+  {
+   "evidence_required": 1,
+   "kind": "abstracts_from",
+   "l1_source_ids": [
+    "l1:preference.threshold",
+    "l1:role.constraint_on"
+   ],
+   "l2_target_id": "l2:pattern.constraint_union",
+   "map_id": "m:import.pattern_constraint_union",
+   "rule": "several restrictions on one scope combine into a single restriction satisfying all of them; an empty result means the restrictions conflict and is not a failure to compute"
+  },
+  {
+   "evidence_required": 1,
+   "kind": "abstracts_from",
+   "l1_source_ids": [
+    "l1:task.declared_intention",
+    "l1:task.outstanding_requirement"
+   ],
+   "l2_target_id": "l2:pattern.goal_decomposition",
+   "map_id": "m:import.pattern_goal_decomposition",
+   "rule": "an intention decomposes when its outstanding requirements are individually completable and jointly sufficient for it"
+  },
+  {
+   "evidence_required": 1,
+   "kind": "abstracts_from",
+   "l1_source_ids": [
+    "l1:qualifier.frequency",
+    "l1:time.recurring"
+   ],
+   "l2_target_id": "l2:pattern.recurrence_count",
+   "map_id": "m:import.pattern_recurrence_count",
+   "rule": "counts distinct occasions rather than mentions, so one behaviour described three times in one session counts once; the frequency qualifier is what distinguishes a rate claim from a tally"
+  },
+  {
+   "evidence_required": 1,
+   "kind": "abstracts_from",
+   "l1_source_ids": [
+    "l1:qualifier.time",
+    "l1:standing.superseded"
+   ],
+   "l2_target_id": "l2:pattern.temporal_series",
+   "map_id": "m:import.pattern_temporal_series",
+   "rule": "orders observations by assertion time and treats the latest unsuperseded one as current; ties are unresolved rather than broken arbitrarily"
+  },
+  {
+   "evidence_required": 1,
+   "kind": "abstracts_from",
+   "l1_source_ids": [
+    "l1:predicate.suspend_on_condition",
+    "l1:role.trigger"
+   ],
+   "l2_target_id": "l2:pattern.trigger_watch",
+   "map_id": "m:import.pattern_trigger_watch",
+   "rule": "holds an item unresolved until its trigger is observed to hold or to fail; a watch that is never resolved stays open, which is why this pattern's absence of a result is not an error condition"
+  },
+  {
+   "evidence_required": 1,
+   "kind": "import_as",
+   "l1_source_ids": [
+    "l1:role.holder"
+   ],
+   "l2_target_id": "l2:role.first_party",
+   "map_id": "m:import.role_first_party",
+   "rule": "the side a relationship is stated from is the holder position of the observation that stated it, which is why all persona relationship mentions have the speaker here"
+  },
+  {
+   "evidence_required": 1,
+   "kind": "import_as",
+   "l1_source_ids": [
+    "l1:role.constraint_on"
+   ],
+   "l2_target_id": "l2:role.scope",
+   "map_id": "m:import.role_scope",
+   "rule": "what an abstraction ranges over is the aggregate reading of what a single restriction restricts"
+  },
+  {
+   "evidence_required": 1,
+   "kind": "import_as",
+   "l1_source_ids": [
+    "l1:role.beneficiary"
+   ],
+   "l2_target_id": "l2:role.second_party",
+   "map_id": "m:import.role_second_party",
+   "rule": "the counterpart position is the beneficiary of the observation that named it, held as a filled position and never as the person filling it"
+  },
+  {
+   "evidence_required": 1,
+   "kind": "import_as",
+   "l1_source_ids": [
+    "l1:role.holder"
+   ],
+   "l2_target_id": "l2:role.subject",
+   "map_id": "m:import.role_subject",
+   "rule": "the party an abstraction is about is the holder of its supporting observations; this is a separate id because an abstraction may aggregate observations made by several speakers about one subject, which no single holder position expresses"
+  },
+  {
+   "evidence_required": 1,
+   "kind": "import_as",
+   "l1_source_ids": [
+    "l1:role.attribute_bearer"
+   ],
+   "l2_target_id": "l2:role.tracked_attribute",
+   "map_id": "m:import.role_tracked_attribute",
+   "rule": "the attribute a history follows is the position an atomic attribute was predicated of, lifted from one observation to the series"
+  },
+  {
+   "evidence_required": 1,
+   "kind": "qualifier_lift",
+   "l1_source_ids": [
+    "l1:polarity.indeterminate",
+    "l1:qualifier.assertion_standing"
+   ],
+   "l2_target_id": "l2:evidence.partial_support_marked",
+   "map_id": "m:lift.evidence_partial_support",
+   "rule": "an abstraction with fewer supports than its declared minimum is marked partial rather than withheld or asserted, which is the lift of indeterminacy from a single assertion to an aggregate"
+  },
+  {
+   "evidence_required": 1,
+   "kind": "import_as",
+   "l1_source_ids": [
+    "l1:qualifier.source_status"
+   ],
+   "l2_target_id": "l2:evidence.supports_addressable",
+   "map_id": "m:lift.evidence_supports_addressable",
+   "rule": "each support must retain the source status it was observed with, which is what makes it individually addressable rather than absorbed into a count"
+  },
+  {
+   "evidence_required": 1,
+   "kind": "qualifier_lift",
+   "l1_source_ids": [
+    "l1:event.objective_achieved",
+    "l1:standing.current"
+   ],
+   "l2_target_id": "l2:lifecycle.achieved",
+   "map_id": "m:lift.lifecycle_achieved",
+   "rule": "an abstraction is achieved when an objective-achieved event names its aim and that event is the current standing assertion about it"
+  },
+  {
+   "evidence_required": 1,
+   "kind": "qualifier_lift",
+   "l1_source_ids": [
+    "l1:event.attempt_failed",
+    "l1:polarity.denied",
+    "l1:role.trigger"
+   ],
+   "l2_target_id": "l2:lifecycle.condition_failed",
+   "map_id": "m:lift.lifecycle_condition_failed",
+   "rule": "a conditional item fails when its trigger is observed with denied polarity, which is distinct from the item lapsing: the condition was reached and did not hold"
+  },
+  {
+   "evidence_required": 1,
+   "kind": "qualifier_lift",
+   "l1_source_ids": [
+    "l1:standing.current",
+    "l1:time.unspecified"
+   ],
+   "l2_target_id": "l2:lifecycle.dormant",
+   "map_id": "m:lift.lifecycle_dormant",
+   "rule": "an abstraction whose latest assertion still stands but carries no recent observation is dormant rather than lapsed; the unspecified-time value is what marks that no restatement was expected, so silence is not evidence of ending"
+  },
+  {
+   "evidence_required": 1,
+   "kind": "qualifier_lift",
+   "l1_source_ids": [
+    "l1:standing.superseded",
+    "l1:task.abandoned_intention"
+   ],
+   "l2_target_id": "l2:lifecycle.lapsed",
+   "map_id": "m:lift.lifecycle_lapsed",
+   "rule": "an abstraction lapses when its supports are superseded or abandoned without any objective-achieved event, i.e. it stopped progressing rather than closing"
+  },
+  {
+   "evidence_required": 1,
+   "kind": "import_as",
+   "l1_source_ids": [
+    "l1:standing.current"
+   ],
+   "l2_target_id": "l2:lifecycle.open",
+   "map_id": "m:lift.lifecycle_open",
+   "rule": "an abstraction is open while its supports are the current standing assertions about it"
+  },
+  {
+   "evidence_required": 1,
+   "kind": "import_as",
+   "l1_source_ids": [
+    "l1:standing.superseded"
+   ],
+   "l2_target_id": "l2:lifecycle.superseded_by_revision",
+   "map_id": "m:lift.lifecycle_superseded",
+   "rule": "an abstraction is superseded when a later abstraction over the same scope displaces it, which is the aggregate reading of the atomic standing value"
+  },
+  {
+   "evidence_required": 1,
+   "kind": "relates_parties",
+   "l1_source_ids": [
+    "l1:event.first_encounter",
+    "l1:role.beneficiary",
+    "l1:role.holder"
+   ],
+   "l2_target_id": "l2:relation.friendship",
+   "map_id": "m:relation.friendship",
+   "rule": "a voluntary non-kin non-romantic tie, symmetric, so an observation from either party's side supports it; degree comes from the strength qualifier rather than from a separate close-friend type"
+  },
+  {
+   "evidence_required": 1,
+   "kind": "relates_parties",
+   "l1_source_ids": [
+    "l1:role.beneficiary",
+    "l1:role.holder"
+   ],
+   "l2_target_id": "l2:relation.kin_descent",
+   "map_id": "m:relation.kin_descent",
+   "rule": "a descent tie, asymmetric, so the party positions are not interchangeable and a mention from one side does not license the mirrored claim; once held it does not lapse"
+  },
+  {
+   "evidence_required": 1,
+   "kind": "relates_parties",
+   "l1_source_ids": [
+    "l1:role.beneficiary",
+    "l1:role.holder"
+   ],
+   "l2_target_id": "l2:relation.kin_lateral",
+   "map_id": "m:relation.kin_lateral",
+   "rule": "a same-generation kin tie, symmetric, so either party's mention supports the same relationship; like descent it does not lapse"
+  },
+  {
+   "evidence_required": 1,
+   "kind": "relates_parties",
+   "l1_source_ids": [
+    "l1:event.life_transition",
+    "l1:role.beneficiary",
+    "l1:role.holder"
+   ],
+   "l2_target_id": "l2:relation.partnership",
+   "map_id": "m:relation.partnership",
+   "rule": "a romantic or marital tie, symmetric while it holds; the life-transition event is what records its beginning or ending, so an ending supersedes the tie rather than contradicting the statement that made it"
+  }
+ ],
+ "freeze": {
+  "excludes_benchmark_facts": true,
+  "excludes_individuals": true,
+  "hash_scope": "SHA-256 over the canonical JSON of this unit's model alone, excluding this freeze block; a change to another unit cannot move this digest",
+  "judge_dependency": "none; no model or judge call was made by this build",
+  "sha256": "e9827d28b8ee9bfb25fe88a807b18f9a3c239aaa686d4415f8650a404d98ec89",
+  "unit": "m_l1_to_l2"
+ },
+ "l1_version": "2.0.0",
+ "l2_version": "2.0.0",
+ "unit_id": "M_L1_to_L2",
+ "version": "2.0.0"
+}

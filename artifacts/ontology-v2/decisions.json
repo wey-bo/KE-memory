@@ -1,0 +1,1637 @@
+{
+ "decisions": [
+  {
+   "accepted_as": "l2:abstraction.carried_constraint",
+   "candidate": "abstraction.carried_constraint",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 86.4% of multi-service dialogues carry a slot value across services: city 2238, location 1711, destination_city 1672",
+   "resolves_v1_deferral": null,
+   "source": "sgd_state_dynamics"
+  },
+  {
+   "accepted_as": "l2:abstraction.conditional_commitment",
+   "candidate": "abstraction.conditional_commitment",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 472 availability-conditioned requests, 88 if/then frames, 43 'in case', 14 'as long as' or 'only if' over 329964 utterances. v1 read the act labels, which are uniformly unconditional, and concluded the corpus did not attest the construct",
+   "resolves_v1_deferral": null,
+   "source": "sgd_dialogue_acts"
+  },
+  {
+   "accepted_as": "l2:abstraction.habit",
+   "candidate": "abstraction.habit",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 295 explicit-frequency sentences and 926 frequency-adverb sentences. v1 rested this item on 80 of 65245 and called it the weakest evidence in either layer; this build measures the pattern an order of magnitude more widely, which is why the support threshold could be raised rather than lowered",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l2:abstraction.preference_profile",
+   "candidate": "abstraction.preference_profile",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 16482 affect statements over 65245 sentences, and the strength bands that order them: 2963 favourite, 4102 love, 9517 like, 717 dislike, 269 hate",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l2:abstraction.project",
+   "candidate": "abstraction.project",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 10739 of 16142 dialogues touch more than one service, so a multi-part intention is the majority case rather than a special one",
+   "resolves_v1_deferral": null,
+   "source": "sgd_state_dynamics"
+  },
+  {
+   "accepted_as": "l2:abstraction.relationship",
+   "candidate": "abstraction.relationship",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 4647 relationship mentions over 65245 persona sentences, concentrated in four families. v1 recorded this as its largest O_L2 gap on the ground that any inventory would be guessed; four families at 3088/738/485/311 is a measurement",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l2:abstraction.standing_condition",
+   "candidate": "abstraction.standing_condition",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 113 allergy and 80 dietary statements are conditions that outlive any one session and cannot be overridden by a later preference",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l2:abstraction.task",
+   "candidate": "abstraction.task",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: domain.AggregateNodeKind declares Task and Project separately, so a single item and a multi-part undertaking are distinct structures",
+   "resolves_v1_deferral": null,
+   "source": "repository_vocabulary"
+  },
+  {
+   "accepted_as": "l2:abstraction.value_history",
+   "candidate": "abstraction.value_history",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 3661 of 5110 dialogues (71.6%) revise a user slot value mid-dialogue, so the current value is only recoverable from the series",
+   "resolves_v1_deferral": null,
+   "source": "sgd_state_dynamics"
+  },
+  {
+   "accepted_as": null,
+   "candidate": "act.goodbye",
+   "disposition": "rejected",
+   "grounding": [],
+   "reason": "SYSTEM GOODBYE 2559 and USER GOODBYE 1320. Rejected on the same ground as thank_you: it marks conversation structure, not content",
+   "resolves_v1_deferral": null,
+   "source": "sgd_dialogue_acts"
+  },
+  {
+   "accepted_as": null,
+   "candidate": "act.inform_count",
+   "disposition": "rejected",
+   "grounding": [],
+   "reason": "SYSTEM INFORM_COUNT 1779 reports how many results matched. Rejected as an act; the quantity it reports is attribute.magnitude over attribute.availability",
+   "resolves_v1_deferral": null,
+   "source": "sgd_dialogue_acts"
+  },
+  {
+   "accepted_as": null,
+   "candidate": "act.offer",
+   "disposition": "rejected",
+   "grounding": [],
+   "reason": "SYSTEM OFFER 10569, the second most frequent act. Rejected as an act, but its content is retained: what an offer proposes is an arrangement, and choosing among offers is preference.comparative, both accepted",
+   "resolves_v1_deferral": null,
+   "source": "sgd_dialogue_acts"
+  },
+  {
+   "accepted_as": null,
+   "candidate": "act.req_more",
+   "disposition": "rejected",
+   "grounding": [],
+   "reason": "SYSTEM REQ_MORE 1534. Rejected as dialogue management with no content of its own",
+   "resolves_v1_deferral": null,
+   "source": "sgd_dialogue_acts"
+  },
+  {
+   "accepted_as": null,
+   "candidate": "act.select",
+   "disposition": "rejected",
+   "grounding": [],
+   "reason": "USER SELECT 2577. Rejected as an act while its content was accepted: selecting one of several offers is the evidence behind preference.comparative",
+   "resolves_v1_deferral": null,
+   "source": "sgd_dialogue_acts"
+  },
+  {
+   "accepted_as": null,
+   "candidate": "act.thank_you",
+   "disposition": "rejected",
+   "grounding": [],
+   "reason": "USER THANK_YOU 3035 occurrences. Rejected because an act is a property of an utterance and this one leaves nothing to remember; admitting frequent acts would fill the ontology with types no question can be about",
+   "resolves_v1_deferral": null,
+   "source": "sgd_dialogue_acts"
+  },
+  {
+   "accepted_as": null,
+   "candidate": "airline_named_carriers",
+   "disposition": "rejected",
+   "grounding": [],
+   "reason": "the airlines slot enumerates eight named carriers as possible_values. Rejected because each is an Individual, which the plan excludes outright; a type-level ontology records that carriers exist as a role filler, never which ones",
+   "resolves_v1_deferral": null,
+   "source": "sgd_schema"
+  },
+  {
+   "accepted_as": null,
+   "candidate": "amenity",
+   "disposition": "rejected",
+   "grounding": [],
+   "reason": "third most frequent facet at 19235. Rejected despite the frequency because it recurs only within lodging frames; the cross-domain test was recurrence across unrelated domains, which amenity fails while attribute.kind subsumes it",
+   "resolves_v1_deferral": null,
+   "source": "taskmaster2_annotations"
+  },
+  {
+   "accepted_as": "l1:attribute.affiliation",
+   "candidate": "attribute.affiliation",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 1830 persona sentences state a work affiliation ('i work as/at/for'), the second largest single pattern after 'i am a <role>' at 4357",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l1:attribute.assessment",
+   "candidate": "attribute.assessment",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 'rating' 2993 occurrences across restaurant, hotel and movie frames",
+   "resolves_v1_deferral": null,
+   "source": "taskmaster2_annotations"
+  },
+  {
+   "accepted_as": "l1:attribute.availability",
+   "candidate": "attribute.availability",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: available_start_time/available_end_time in Calendar_1, and every search intent returns a candidate set that may be empty",
+   "resolves_v1_deferral": null,
+   "source": "sgd_schema"
+  },
+  {
+   "accepted_as": "l1:attribute.calendar_position",
+   "candidate": "attribute.calendar_position",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: five date slots differ only in the declaring service: departure_date, check_in_date, appointment_date, pickup_date, show_date",
+   "resolves_v1_deferral": null,
+   "source": "sgd_schema"
+  },
+  {
+   "accepted_as": "l1:attribute.clock_position",
+   "candidate": "attribute.clock_position",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: time slots are declared separately from date slots in every service that has both, so the two granularities are not one facet",
+   "resolves_v1_deferral": null,
+   "source": "sgd_schema"
+  },
+  {
+   "accepted_as": null,
+   "candidate": "attribute.contact_channel",
+   "disposition": "deferred",
+   "grounding": [],
+   "reason": "still deferred in v2: phone_number is the single most widely shared slot name, in 9 of 26 services. Deferred rather than accepted because every observed use is an Individual's identifier, so the type-level content is thin: 'entities can be contacted'",
+   "resolves_v1_deferral": null,
+   "source": "sgd_schema"
+  },
+  {
+   "accepted_as": "l1:attribute.designation",
+   "candidate": "attribute.designation",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 'name' is the most frequent facet at 75676 occurrences across all 7 domains",
+   "resolves_v1_deferral": null,
+   "source": "taskmaster2_annotations"
+  },
+  {
+   "accepted_as": "l1:attribute.kind",
+   "candidate": "attribute.kind",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 'type' is the second most frequent facet at 25958 and recurs in every domain, unlike cuisine (12981, food only) or amenity (19235, lodging only)",
+   "resolves_v1_deferral": null,
+   "source": "taskmaster2_annotations"
+  },
+  {
+   "accepted_as": "l1:attribute.magnitude",
+   "candidate": "attribute.magnitude",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: price_range 6978 occurrences; hotel1_detail.price_per_night 1580",
+   "resolves_v1_deferral": null,
+   "source": "taskmaster2_annotations"
+  },
+  {
+   "accepted_as": "l1:attribute.place",
+   "candidate": "attribute.place",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 'location' 11461 occurrences across domains",
+   "resolves_v1_deferral": null,
+   "source": "taskmaster2_annotations"
+  },
+  {
+   "accepted_as": null,
+   "candidate": "cuisine",
+   "disposition": "rejected",
+   "grounding": [],
+   "reason": "food_order 12981 annotations with 'food' filling 13851 slots. Rejected as a sub-category of a single vertical; attribute.kind covers the position",
+   "resolves_v1_deferral": null,
+   "source": "taskmaster2_annotations"
+  },
+  {
+   "accepted_as": null,
+   "candidate": "date_literals",
+   "disposition": "rejected",
+   "grounding": [],
+   "reason": "non-categorical date slots carry literal dates. Rejected as Individuals. This is why the time vocabulary is relative to assertion time: the relation is type-level while the literal is a fact about one dialogue",
+   "resolves_v1_deferral": null,
+   "source": "sgd_schema"
+  },
+  {
+   "accepted_as": null,
+   "candidate": "departure_date",
+   "disposition": "rejected",
+   "grounding": [],
+   "reason": "one of five date slots (with check_in_date, appointment_date, pickup_date, show_date) that differ only in which service declares them. Rejected in favour of attribute.calendar_position; keeping all five would encode SGD's service catalogue",
+   "resolves_v1_deferral": null,
+   "source": "sgd_schema"
+  },
+  {
+   "accepted_as": "l1:event.attempt_failed",
+   "candidate": "event.attempt_failed",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: SYSTEM NOTIFY_FAILURE 2398",
+   "resolves_v1_deferral": null,
+   "source": "sgd_dialogue_acts"
+  },
+  {
+   "accepted_as": "l1:event.commitment_made",
+   "candidate": "event.commitment_made",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: SYSTEM NOTIFY_SUCCESS 16868 records a commitment coming into being",
+   "resolves_v1_deferral": null,
+   "source": "sgd_dialogue_acts"
+  },
+  {
+   "accepted_as": "l1:event.commitment_withdrawn",
+   "candidate": "event.commitment_withdrawn",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: USER NEGATE_INTENT 5425",
+   "resolves_v1_deferral": null,
+   "source": "sgd_dialogue_acts"
+  },
+  {
+   "accepted_as": "l1:event.first_encounter",
+   "candidate": "event.first_encounter",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: meet.02 is glossed 'kennenlernen -- come upon, become acquainted with initially', a separate roleset from meet.01 'arrive at, achieve', and its ARG1 is tagged COM (comitative). befriend.01 marks the same transition",
+   "resolves_v1_deferral": null,
+   "source": "propbank"
+  },
+  {
+   "accepted_as": "l1:event.information_request",
+   "candidate": "event.information_request",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: USER REQUEST 33612 and SYSTEM REQUEST 46082",
+   "resolves_v1_deferral": null,
+   "source": "sgd_dialogue_acts"
+  },
+  {
+   "accepted_as": "l1:event.life_transition",
+   "candidate": "event.life_transition",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 72 moved, 47 married, 81 graduated, 56 quit/stopped, 59 retired: 315 transition sentences in total",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l1:event.media_consumption",
+   "candidate": "event.media_consumption",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: movie_search 45318 and music annotations, generalised away from the vertical",
+   "resolves_v1_deferral": null,
+   "source": "taskmaster2_annotations"
+  },
+  {
+   "accepted_as": "l1:event.objective_achieved",
+   "candidate": "event.objective_achieved",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: achieve.01 'accomplish', complete.01 'bring to an end' with ARG1 'task, action coming to an end', and finish.01 are three rolesets for the positive outcome PropBank keeps distinct from fail.01",
+   "resolves_v1_deferral": null,
+   "source": "propbank"
+  },
+  {
+   "accepted_as": "l2:evidence.partial_support_marked",
+   "candidate": "evidence.partial_support_marked",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 225 of 227 discovery observations shaped partial_gold_overlap: partial support is the normal case, so it needs a marking rather than an exception path",
+   "resolves_v1_deferral": null,
+   "source": "discovery_gap_shape"
+  },
+  {
+   "accepted_as": "l2:evidence.source_status_preserved",
+   "candidate": "evidence.source_status_preserved",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: both environments distinguish tool returns from user reports and the policy requires confirmation before a write; an abstraction that lost that distinction would let a report authorise an action only an observation should",
+   "resolves_v1_deferral": null,
+   "source": "tau_bench_policy"
+  },
+  {
+   "accepted_as": "l2:evidence.supports_addressable",
+   "candidate": "evidence.supports_addressable",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: the retail policy requires the agent to explain a change before making it, which is impossible if the grounds are not enumerable",
+   "resolves_v1_deferral": null,
+   "source": "tau_bench_policy"
+  },
+  {
+   "accepted_as": null,
+   "candidate": "flight",
+   "disposition": "rejected",
+   "grounding": [],
+   "reason": "Flights_1 and Flights_2 in SGD, flight_search 32210 in Taskmaster2, and an entire tau-bench airline environment. Rejected as a domain vertical; its structure is role.source_location, role.target_location and commit_to_arrangement, all accepted",
+   "resolves_v1_deferral": null,
+   "source": "sgd_schema"
+  },
+  {
+   "accepted_as": "l1:frequency.habitual",
+   "candidate": "frequency.habitual",
+   "disposition": "accepted",
+   "grounding": [
+    {
+     "gloss": "accustomed to",
+     "reference": "use.02",
+     "role_hint": "ARG1 PPT custom",
+     "source": "propbank"
+    }
+   ],
+   "reason": "295 explicit-frequency sentences plus the usually/often band. use.02 'accustomed to' takes ARG1 'custom', so habituality is lexicalized and not merely a count",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l1:frequency.invariant",
+   "candidate": "frequency.invariant",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "the always/never pole of the 926 frequency-adverb sentences, kept separate because a claim admitting no exception is falsified by one counterexample and a habitual claim is not",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l1:frequency.occasional",
+   "candidate": "frequency.occasional",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "the sometimes/occasionally band, present because a minority-of-occasions claim predicts little and must not be read as a habit",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l1:frequency.rare",
+   "candidate": "frequency.rare",
+   "disposition": "accepted",
+   "grounding": [
+    {
+     "gloss": "commonly occurring",
+     "reference": "usual.01",
+     "role_hint": "ARG2 GOL unusual for",
+     "source": "propbank"
+    }
+   ],
+   "reason": "the rarely/never band. usual.01 declares ARG2 'entity arg1 is unusual for', so rarity is stated relative to a reference class rather than absolutely",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": null,
+   "candidate": "hotel",
+   "disposition": "rejected",
+   "grounding": [],
+   "reason": "three SGD services (Hotels_1/2/3) and 28074 Taskmaster2 hotel_search annotations. Rejected as a domain vertical. Notably the three services disagree on slot names (pets_welcome vs pets_allowed), so even within one corpus it is not one schema",
+   "resolves_v1_deferral": null,
+   "source": "sgd_schema"
+  },
+  {
+   "accepted_as": "l1:role.cause",
+   "candidate": "l2.decision_with_rationale",
+   "disposition": "accepted",
+   "grounding": [
+    {
+     "gloss": "decide",
+     "reference": "decide.01",
+     "role_hint": "ARG3 VSP subject-matter of decision",
+     "source": "propbank"
+    },
+    {
+     "gloss": "choose, pick",
+     "reference": "choose.01",
+     "role_hint": "ARG2 DIR group or source",
+     "source": "propbank"
+    }
+   ],
+   "reason": "v1 deferred a decision-with-rationale type because SELECT and REQUEST_ALTS record that a choice was made and never why, so the type would be unfillable. Resolved by decomposition rather than by a new type: the rationale is a causal argument position, which role.cause now provides on change_arrangement, relocate and undergo_transition. A separate decision type would still be unfillable, and would now be redundant as well",
+   "resolves_v1_deferral": "l2.decision_with_rationale",
+   "source": "propbank"
+  },
+  {
+   "accepted_as": "l2:abstraction.relationship",
+   "candidate": "l2.social_relationship",
+   "disposition": "accepted",
+   "grounding": [
+    {
+     "gloss": "the most generic bi-directional social/work relation",
+     "reference": "schema:knows",
+     "role_hint": null,
+     "source": "schemaorg"
+    },
+    {
+     "gloss": "represents additional information about a relationship or property",
+     "reference": "schema:Role",
+     "role_hint": null,
+     "source": "schemaorg"
+    }
+   ],
+   "reason": "v1 called this the largest known gap in O_L2 and deferred it because persona sentences are unannotated, so any inventory would be guessed. This build measures 4647 relationship mentions concentrated in four families (descent kin 3088, partnership 738, friendship 485, lateral kin 311), and schema.org supplies the symmetry distinction between knows and follows, so the shape is taken from the literature and the families from measurement",
+   "resolves_v1_deferral": "l2.social_relationship",
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": null,
+   "candidate": "l2.topic",
+   "disposition": "deferred",
+   "grounding": [],
+   "reason": "still deferred in v2: domain.AggregateNodeKind.TOPIC exists. Deferred because a topic has no derivation rule the map could state: nothing in the corpora says when two observations are the same topic, and an abstraction with no derivation is what O_L2 forbids",
+   "resolves_v1_deferral": null,
+   "source": "repository_vocabulary"
+  },
+  {
+   "accepted_as": "l2:lifecycle.achieved",
+   "candidate": "lifecycle.achieved",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: SYSTEM NOTIFY_SUCCESS 16868 is the observable that closes an intention",
+   "resolves_v1_deferral": null,
+   "source": "sgd_dialogue_acts"
+  },
+  {
+   "accepted_as": "l2:lifecycle.condition_failed",
+   "candidate": "lifecycle.condition_failed",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: SYSTEM NOTIFY_FAILURE 2398 and the 472 availability-conditioned requests together give the case: the condition was checked and did not hold, which is neither an achievement nor a lapse",
+   "resolves_v1_deferral": null,
+   "source": "sgd_dialogue_acts"
+  },
+  {
+   "accepted_as": "l2:lifecycle.dormant",
+   "candidate": "lifecycle.dormant",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: persona statements are asserted once and carried across sessions without restatement; 4647 relationship mentions are almost all single mentions of ties that plainly persist, so absence of restatement cannot mean absence",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l2:lifecycle.lapsed",
+   "candidate": "lifecycle.lapsed",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 225 of 227 observations in the discovery split shaped partial_gold_overlap and 1 was an empty selection, i.e. an intention that neither closed nor was retracted is the common residue. Read as a gap shape only: no question, gold label or dataset identity was consulted",
+   "resolves_v1_deferral": null,
+   "source": "discovery_gap_shape"
+  },
+  {
+   "accepted_as": "l2:lifecycle.open",
+   "candidate": "lifecycle.open",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: domain.Lifecycle.ACTIVE",
+   "resolves_v1_deferral": null,
+   "source": "repository_vocabulary"
+  },
+  {
+   "accepted_as": "l2:lifecycle.superseded_by_revision",
+   "candidate": "lifecycle.superseded_by_revision",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence from sgd_state_dynamics: 71.6% revision rate",
+   "resolves_v1_deferral": null,
+   "source": "sgd_state_dynamics"
+  },
+  {
+   "accepted_as": "l1:modality.asserted",
+   "candidate": "modality.asserted",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: USER INFORM 92945 is the single most frequent user act",
+   "resolves_v1_deferral": null,
+   "source": "sgd_dialogue_acts"
+  },
+  {
+   "accepted_as": "l1:modality.believed",
+   "candidate": "modality.believed",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 232 persona sentences use 'i think/believe/guess/suppose'",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l1:modality.desired",
+   "candidate": "modality.desired",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 775 'i want to' and 126 'i hope/wish' sentences",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l1:modality.directed",
+   "candidate": "modality.directed",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: USER REQUEST 33612: the user directs the system to act rather than reporting that it did",
+   "resolves_v1_deferral": null,
+   "source": "sgd_dialogue_acts"
+  },
+  {
+   "accepted_as": "l1:modality.hypothesis",
+   "candidate": "modality.hypothesis",
+   "disposition": "accepted",
+   "grounding": [
+    {
+     "gloss": "make an educated guess",
+     "reference": "hypothesize.01",
+     "role_hint": "ARG1 PPT hypothesis",
+     "source": "propbank"
+    },
+    {
+     "gloss": "think, assume",
+     "reference": "suppose.01",
+     "role_hint": "ARG1 PPT thing thought about",
+     "source": "propbank"
+    },
+    {
+     "gloss": "hypothesis, possibility, theory: a tentative insight, not yet verified",
+     "reference": "n#05888929",
+     "role_hint": null,
+     "source": "wordnet"
+    }
+   ],
+   "reason": "v1 deferred this because no build corpus attested it and admitting it on the strength of domain.Modality.HYPOTHESIS would be inventing coverage. PropBank distinguishes supposition from belief lexically across three rolesets (suppose.01, hypothesize.01, imagine.01), which is attestation in the reference frame set rather than in this project's enum",
+   "resolves_v1_deferral": "modality.hypothesis",
+   "source": "propbank"
+  },
+  {
+   "accepted_as": "l1:modality.intended",
+   "candidate": "modality.intended",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 86 'i plan/hope to' and 275 'i will / am going to' sentences",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l1:modality.question",
+   "candidate": "modality.question",
+   "disposition": "accepted",
+   "grounding": [
+    {
+     "gloss": "think about, ponder",
+     "reference": "wonder.01",
+     "role_hint": "ARG1 PAG thought",
+     "source": "propbank"
+    },
+    {
+     "gloss": "question, inquiry, query: an instance of questioning",
+     "reference": "n#07193596",
+     "role_hint": null,
+     "source": "wordnet"
+    }
+   ],
+   "reason": "v1 deferred this correctly: SGD's REQUEST is a speech act, not an assertion carrying question modality, and it left open whether a question is ever remembered content. PropBank answers it -- wonder.01 'think about, ponder' has no hearer position while ask.01 has ARG2 GOL hearer, so an unresolved question is a mental state independent of the act of asking. The 33612 REQUEST acts remain rejected as content",
+   "resolves_v1_deferral": "modality.question",
+   "source": "propbank"
+  },
+  {
+   "accepted_as": null,
+   "candidate": "movie",
+   "disposition": "rejected",
+   "grounding": [],
+   "reason": "movie_search 45318 annotations plus SGD Movies_1 and Media_1. Rejected as a domain vertical; what generalises is event.media_consumption, which is accepted",
+   "resolves_v1_deferral": null,
+   "source": "taskmaster2_annotations"
+  },
+  {
+   "accepted_as": null,
+   "candidate": "number_of_rooms",
+   "disposition": "rejected",
+   "grounding": [],
+   "reason": "one of seven count slots (passengers, travelers, group_size, party_size, number_of_seats, number_of_tickets, number_of_riders). Rejected in favour of role.quantity plus attribute.magnitude",
+   "resolves_v1_deferral": null,
+   "source": "sgd_schema"
+  },
+  {
+   "accepted_as": null,
+   "candidate": "order_status_values",
+   "disposition": "rejected",
+   "grounding": [],
+   "reason": "tau-bench's pending/processed/delivered/cancelled. Rejected as an application's state machine rather than an ontology; the general content is state.pending_arrangement and event.commitment_withdrawn, both accepted",
+   "resolves_v1_deferral": null,
+   "source": "tau_bench_policy"
+  },
+  {
+   "accepted_as": null,
+   "candidate": "origin_airport",
+   "disposition": "rejected",
+   "grounding": [],
+   "reason": "a service-local narrowing of the origin family (origin, from_location, from_station). Rejected in favour of role.source_location, which is the position all four names occupy",
+   "resolves_v1_deferral": null,
+   "source": "sgd_schema"
+  },
+  {
+   "accepted_as": "l2:pattern.constraint_union",
+   "candidate": "pattern.constraint_union",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: a search intent may carry several user restrictions simultaneously and must satisfy every one",
+   "resolves_v1_deferral": null,
+   "source": "sgd_schema"
+  },
+  {
+   "accepted_as": "l2:pattern.goal_decomposition",
+   "candidate": "pattern.goal_decomposition",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: multi-service dialogues distribute one user aim over 2 to 4 services",
+   "resolves_v1_deferral": null,
+   "source": "sgd_state_dynamics"
+  },
+  {
+   "accepted_as": "l2:pattern.recurrence_count",
+   "candidate": "pattern.recurrence_count",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 295 explicit-frequency statements are the countable form of a habit claim",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l2:pattern.temporal_series",
+   "candidate": "pattern.temporal_series",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 71.6% revision rate means recency, not frequency, decides the live value",
+   "resolves_v1_deferral": null,
+   "source": "sgd_state_dynamics"
+  },
+  {
+   "accepted_as": "l2:pattern.trigger_watch",
+   "candidate": "pattern.trigger_watch",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 472 availability-conditioned requests await a fact the speaker does not have at the time of asking",
+   "resolves_v1_deferral": null,
+   "source": "sgd_dialogue_acts"
+  },
+  {
+   "accepted_as": null,
+   "candidate": "playback_device",
+   "disposition": "rejected",
+   "grounding": [],
+   "reason": "appears in Music_1 and Music_2 with inconsistent casing of the same values ('Kitchen speaker' vs 'kitchen speaker'). Rejected as domain-specific; the general position is role.instrument, and the values themselves are Individuals",
+   "resolves_v1_deferral": null,
+   "source": "sgd_schema"
+  },
+  {
+   "accepted_as": "l1:polarity.affirmed",
+   "candidate": "polarity.affirmed",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: USER AFFIRM 20696 and AFFIRM_INTENT 4358",
+   "resolves_v1_deferral": null,
+   "source": "sgd_dialogue_acts"
+  },
+  {
+   "accepted_as": "l1:polarity.denied",
+   "candidate": "polarity.denied",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: USER NEGATE 11290 and NEGATE_INTENT 5425",
+   "resolves_v1_deferral": null,
+   "source": "sgd_dialogue_acts"
+  },
+  {
+   "accepted_as": "l1:polarity.indeterminate",
+   "candidate": "polarity.indeterminate",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: domain.Polarity declares exactly positive/negative/unknown",
+   "resolves_v1_deferral": null,
+   "source": "repository_vocabulary"
+  },
+  {
+   "accepted_as": "l1:predicate.change_arrangement",
+   "candidate": "predicate.change_arrangement",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: cancel.01 'cause to be not valid' and postpone.01, whose ARG3 'original time' and ARG4 'new time' show a change presupposes a prior arrangement. The cause slot is here because cancel takes a reason in practice",
+   "resolves_v1_deferral": null,
+   "source": "propbank"
+  },
+  {
+   "accepted_as": "l1:predicate.commit_to_arrangement",
+   "candidate": "predicate.commit_to_arrangement",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: reserve.01 'hold back, set aside' with ARG2 benefactive, and promise.01 with ARG1 GOL 'person promised to' plus ARG2 'promised action'. The recipient and beneficiary are separate positions in the reference frames, which is why both slots are here",
+   "resolves_v1_deferral": null,
+   "source": "propbank"
+  },
+  {
+   "accepted_as": "l1:predicate.consume_media",
+   "candidate": "predicate.consume_media",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: watch.01 'look at, observe', read.01 and listen.01 'attend to a sound' share the observer/thing-observed skeleton",
+   "resolves_v1_deferral": null,
+   "source": "propbank"
+  },
+  {
+   "accepted_as": "l1:predicate.hold_attitude",
+   "candidate": "predicate.hold_attitude",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: like.01 'have affection towards, be fond of, enjoy (habitually)' with ARG0 liker and ARG1 'object of affection'. The two-argument structure is what this sense is, and hate.01 and dislike.01 share it with polarity reversed",
+   "resolves_v1_deferral": null,
+   "source": "propbank"
+  },
+  {
+   "accepted_as": "l1:predicate.occupy_role",
+   "candidate": "predicate.occupy_role",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: work.01 declares ARG1 'job, project' and ARG2 GOL employer separately, and study.01 mirrors it with ARG1 subject and ARG2 DIR teacher",
+   "resolves_v1_deferral": null,
+   "source": "propbank"
+  },
+  {
+   "accepted_as": "l1:predicate.possess",
+   "candidate": "predicate.possess",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: own.01 'possess, own something' and have.03 'own, possess' are the same owner/possession skeleton; belong.01 inverts it",
+   "resolves_v1_deferral": null,
+   "source": "propbank"
+  },
+  {
+   "accepted_as": "l1:predicate.rank_alternatives",
+   "candidate": "predicate.rank_alternatives",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: prefer.01 'to choose as more desirable' has ARG2 'entity compared to' where like.01 stops at ARG1; favor.01 goes further with ARG3 'favored over' and ARG4 'superset of things arg1 is favored amongst'",
+   "resolves_v1_deferral": null,
+   "source": "propbank"
+  },
+  {
+   "accepted_as": "l1:predicate.relocate",
+   "candidate": "predicate.relocate",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: move.01 'change location' ARG2 GOL destination, and travel.01 with ARG2 DIR start point against ARG4 GOL destination",
+   "resolves_v1_deferral": null,
+   "source": "propbank"
+  },
+  {
+   "accepted_as": "l1:predicate.reside_at",
+   "candidate": "predicate.reside_at",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: reside.01 is 'to live for an extended period' with ARG1 tagged LOC, which is a different roleset from live.01 'not be dead' -- exactly the sense confusion a corpus-clustered predicate would make",
+   "resolves_v1_deferral": null,
+   "source": "propbank"
+  },
+  {
+   "accepted_as": "l1:predicate.seek_information",
+   "candidate": "predicate.seek_information",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: ask.01 'ask a question' with ARG1 'question' and ARG2 GOL hearer",
+   "resolves_v1_deferral": null,
+   "source": "propbank"
+  },
+  {
+   "accepted_as": "l1:predicate.suspend_on_condition",
+   "candidate": "predicate.suspend_on_condition",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: condition.01 is literally 'to make dependent on a condition', with ARG1 'entity made dependent' and ARG2 GOL 'dependent on'. v1 said the construct would be authored from imagination; it is a roleset in the reference frame set",
+   "resolves_v1_deferral": null,
+   "source": "propbank"
+  },
+  {
+   "accepted_as": "l1:predicate.transfer_value",
+   "candidate": "predicate.transfer_value",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: buy.01, sell.01 and pay.01 share one skeleton with the parties swapped: buyer/seller/price/benefactive appear in all three. Merged into one sense because the difference between them is which party the speaker occupies, which the agent slot already records; keeping three would triple the section for no new argument structure",
+   "resolves_v1_deferral": null,
+   "source": "propbank"
+  },
+  {
+   "accepted_as": "l1:predicate.undergo_transition",
+   "candidate": "predicate.undergo_transition",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: become.01 'change of state' takes ARG1 'entity changing' and ARG2 PRD 'new state', and change.01 adds ARG3 'start state'. The start/end pair is what makes this a transition rather than two unrelated states",
+   "resolves_v1_deferral": null,
+   "source": "propbank"
+  },
+  {
+   "accepted_as": "l1:preference.affinity",
+   "candidate": "preference.affinity",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 13819 affect-positive against 970 affect-negative persona sentences in v1's count; this build measures 9517 like/enjoy, 4102 love, 2963 favourite",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l1:preference.avoidance",
+   "candidate": "preference.avoidance",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: avoid.01 'stay away from' is its own roleset, and forbid.01 'disallow, prohibit' declares ARG1 'forbidden action' -- a prohibition rather than a sentiment",
+   "resolves_v1_deferral": null,
+   "source": "propbank"
+  },
+  {
+   "accepted_as": "l1:preference.comparative",
+   "candidate": "preference.comparative",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 162 'prefer' and 80 'more than' sentences",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l1:preference.threshold",
+   "candidate": "preference.threshold",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: price_range in Restaurants_1 and seating_class in Flights_1/2 are ordered categoricals a user narrows",
+   "resolves_v1_deferral": null,
+   "source": "sgd_schema"
+  },
+  {
+   "accepted_as": null,
+   "candidate": "product_and_item_ids",
+   "disposition": "rejected",
+   "grounding": [],
+   "reason": "order_id, product_id, item_id, user_id, reservation_id thread through nearly every tool. Rejected as identifiers of Individuals; attribute.designation records that entities are identified without recording any identifier",
+   "resolves_v1_deferral": null,
+   "source": "tau_bench_tools"
+  },
+  {
+   "accepted_as": "l1:qualifier.assertion_standing",
+   "candidate": "qualifier.assertion_standing",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 71.6% of a 5110-dialogue sample revise at least one slot value mid-dialogue, so a superseded value is the normal case rather than an error state",
+   "resolves_v1_deferral": null,
+   "source": "sgd_schema"
+  },
+  {
+   "accepted_as": "l1:qualifier.frequency",
+   "candidate": "qualifier.frequency",
+   "disposition": "accepted",
+   "grounding": [
+    {
+     "gloss": "defines the frequency at which Events occur",
+     "reference": "schema:repeatFrequency",
+     "role_hint": null,
+     "source": "schemaorg"
+    }
+   ],
+   "reason": "v1 had one recurrence value and rested habit on 80 of 65245 sentences, calling it the weakest evidence in either layer. This build measures 295 explicit frequencies and 926 frequency adverbs, and schema.org separates repeatFrequency from repeatCount, which is what makes a rate distinguishable from a tally",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l1:qualifier.modality",
+   "candidate": "qualifier.modality",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: domain.Modality declares 8 values (fact, belief, preference, goal, plan, instruction, hypothesis, question); v1 admitted 5 and deferred 2",
+   "resolves_v1_deferral": null,
+   "source": "repository_vocabulary"
+  },
+  {
+   "accepted_as": "l1:qualifier.polarity",
+   "candidate": "qualifier.polarity",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: USER NEGATE 11290 against USER AFFIRM 20696 over all 16142 dialogues: a predicate with no polarity position misreads a third of user turns",
+   "resolves_v1_deferral": null,
+   "source": "sgd_dialogue_acts"
+  },
+  {
+   "accepted_as": "l1:qualifier.source_status",
+   "candidate": "qualifier.source_status",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: tool returns are observations while user turns are reports; the retail policy requires confirmation before a write, i.e. the two are not interchangeable",
+   "resolves_v1_deferral": null,
+   "source": "tau_bench_tools"
+  },
+  {
+   "accepted_as": "l1:qualifier.strength",
+   "candidate": "qualifier.strength",
+   "disposition": "accepted",
+   "grounding": [
+    {
+     "gloss": "an evaluation on a numeric scale, such as 1 to 5 stars",
+     "reference": "schema:Rating",
+     "role_hint": null,
+     "source": "schemaorg"
+    }
+   ],
+   "reason": "v1 recorded preference strength as uncovered because intensifiers are unannotated and any scale would be an invented ordinal. The verb choice is the annotation: 2963 favourite, 4102 love, 9517 like, 269 hate. schema.org's Rating with bestRating and worstRating is why this is a bounded ordinal rather than a number",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l1:qualifier.time",
+   "candidate": "qualifier.time",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: date and time slots appear in 20 of 26 services under 15 distinct names, and every value is relative to when the dialogue happened",
+   "resolves_v1_deferral": null,
+   "source": "sgd_schema"
+  },
+  {
+   "accepted_as": "l2:relation.friendship",
+   "candidate": "relation.friendship",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 485 mentions: friend 163, best friend 136, plus neighbours and roommates",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l2:relation.kin_descent",
+   "candidate": "relation.kin_descent",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 3088 mentions, the largest relationship family by a factor of four: mother 493, father 513, mom 480, dad 442, parents 698, plus children, grandparents, nephews, aunts and cousins",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l2:relation.kin_lateral",
+   "candidate": "relation.kin_lateral",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 311 mentions: sister 124, brother 135, plus siblings and twins",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l2:relation.partnership",
+   "candidate": "relation.partnership",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 738 mentions: husband 255, wife 251, girlfriend 89, boyfriend 63, fiance 14, partner 14, plus 41 'my ex' which are the terminations",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": null,
+   "candidate": "restaurant",
+   "disposition": "rejected",
+   "grounding": [],
+   "reason": "Taskmaster2's most frequent frame at 46133 annotations, and SGD has Restaurants_1. Rejected because frequency in the build corpus is the wrong test: a foundation ontology containing restaurant has fitted the corpora it was built from, and the general content is already carried by attribute.place, attribute.assessment and predicate.commit_to_arrangement",
+   "resolves_v1_deferral": null,
+   "source": "taskmaster2_annotations"
+  },
+  {
+   "accepted_as": "l1:role.agent",
+   "candidate": "role.agent",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: USER INFORM 92945 and SYSTEM OFFER 101159 over all 16142 dialogues are acts by distinct initiators; every intent in schema.json is performed by one of the two",
+   "resolves_v1_deferral": null,
+   "source": "sgd_dialogue_acts"
+  },
+  {
+   "accepted_as": "l1:role.attribute_bearer",
+   "candidate": "role.attribute_bearer",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: the 3-part annotation names split frame.facet.filler, so the bearer position is separate from the facet; 'name' fills it 75676 times",
+   "resolves_v1_deferral": null,
+   "source": "taskmaster2_annotations"
+  },
+  {
+   "accepted_as": "l1:role.beneficiary",
+   "candidate": "role.beneficiary",
+   "disposition": "accepted",
+   "grounding": [
+    {
+     "gloss": "want, desire",
+     "reference": "want.01",
+     "role_hint": "ARG2 GOL beneficiary",
+     "source": "propbank"
+    }
+   ],
+   "reason": "v1 recorded 'preference held on behalf of another person' as uncovered because role.holder assumes the speaker. PropBank declares a benefactive position separately from agent and recipient in exactly the frames memory uses: want.01 ARG2, choose.01 ARG3, reserve.01 ARG2, buy.01 ARG4",
+   "resolves_v1_deferral": null,
+   "source": "propbank"
+  },
+  {
+   "accepted_as": "l1:role.cause",
+   "candidate": "role.cause",
+   "disposition": "accepted",
+   "grounding": [
+    {
+     "gloss": "impelled action",
+     "reference": "cause.01",
+     "role_hint": "ARG0 CAU forcer, causer",
+     "source": "propbank"
+    },
+    {
+     "gloss": "expect (roleset name)",
+     "reference": "plan.01",
+     "role_hint": "ARG2 CAU grounds for planning",
+     "source": "propbank"
+    }
+   ],
+   "reason": "v1 deferred this on a single tau-bench attestation (cancel_pending_order's two-value reason) and said PropBank would settle it. PropBank tags 285 roles CAU across 278 distinct lemmas, and cause.01's own ARG0 carries the tag, so the position is general rather than one tool's parameter",
+   "resolves_v1_deferral": "role.cause",
+   "source": "propbank"
+  },
+  {
+   "accepted_as": "l1:role.comparison_target",
+   "candidate": "role.comparison_target",
+   "disposition": "accepted",
+   "grounding": [
+    {
+     "gloss": "to choose as more desirable",
+     "reference": "prefer.01",
+     "role_hint": "ARG2 PPT entity compared to",
+     "source": "propbank"
+    }
+   ],
+   "reason": "prefer.01 declares ARG2 'entity compared to' where like.01 stops at ARG1, and favor.01 adds ARG3 'favored over'. v1's preference.comparative had no slot for the losing alternative, so a comparison's content was unrecoverable",
+   "resolves_v1_deferral": null,
+   "source": "propbank"
+  },
+  {
+   "accepted_as": "l1:role.constraint_on",
+   "candidate": "role.constraint_on",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: search intents pass user restrictions as slot values, e.g. Restaurants_1 price_range over ['inexpensive'..'very expensive'] narrows a search",
+   "resolves_v1_deferral": null,
+   "source": "sgd_schema"
+  },
+  {
+   "accepted_as": "l1:role.duration",
+   "candidate": "role.duration",
+   "disposition": "accepted",
+   "grounding": [
+    {
+     "gloss": "extend for some period of time; duration",
+     "reference": "last.01",
+     "role_hint": "ARG2 VSP period of time",
+     "source": "propbank"
+    },
+    {
+     "gloss": "the duration of the item in ISO 8601 duration format",
+     "reference": "schema:duration",
+     "role_hint": null,
+     "source": "schemaorg"
+    }
+   ],
+   "reason": "v1 deferred this because duration was derivable from boundary pairs but never expressed directly, and it lacked a measurement construct. PropBank has a roleset whose whole sense is duration (last.01, aliased have-duration), SGD declares three direct duration slots this build found (approximate_ride_duration, number_of_days, wait_time), and schema.org types Duration as a Quantity",
+   "resolves_v1_deferral": "role.duration",
+   "source": "propbank"
+  },
+  {
+   "accepted_as": "l2:role.first_party",
+   "candidate": "role.first_party",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: all 4647 relationship mentions are stated from the speaker's side ('my mother'), so one position is privileged by how the data is expressed",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l1:role.holder",
+   "candidate": "role.holder",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: of 65245 persona sentences 4357 match 'I am a <role>', 1830 a work status and 1640 a residence: states ascribed to a subject who performs no action",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l1:role.instrument",
+   "candidate": "role.instrument",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: retail order changes require payment_method_id and Music services require playback_device, both a means rather than a theme",
+   "resolves_v1_deferral": null,
+   "source": "tau_bench_tools"
+  },
+  {
+   "accepted_as": "l1:role.quantity",
+   "candidate": "role.quantity",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: a count family recurs with service-specific names: passengers, travelers, group_size, party_size, number_of_seats, number_of_tickets, number_of_rooms",
+   "resolves_v1_deferral": null,
+   "source": "sgd_schema"
+  },
+  {
+   "accepted_as": "l1:role.recipient",
+   "candidate": "role.recipient",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: Banks_1 separates account_type from recipient_account_type and recipient_account_name, so sender and receiver are separate positions",
+   "resolves_v1_deferral": null,
+   "source": "sgd_schema"
+  },
+  {
+   "accepted_as": "l2:role.scope",
+   "candidate": "role.scope",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 10739 of 16142 dialogues touch more than one service (2: 8266, 3: 2185, 4: 288), so what an abstraction covers must be stated rather than assumed",
+   "resolves_v1_deferral": null,
+   "source": "sgd_state_dynamics"
+  },
+  {
+   "accepted_as": "l2:role.second_party",
+   "candidate": "role.second_party",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: schema:follows is the uni-directional counterpart to knows, which is what shows the two positions are not interchangeable in every relationship type",
+   "resolves_v1_deferral": null,
+   "source": "schemaorg"
+  },
+  {
+   "accepted_as": "l1:role.source_location",
+   "candidate": "role.source_location",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: origin/from_location/from_station/origin_airport appear as an origin family across Buses, Flights and RideSharing services",
+   "resolves_v1_deferral": null,
+   "source": "sgd_schema"
+  },
+  {
+   "accepted_as": "l2:role.subject",
+   "candidate": "role.subject",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: both tau-bench environments authenticate one user per session and the policy forbids acting across users, so an abstraction spanning two subjects has no referent",
+   "resolves_v1_deferral": null,
+   "source": "tau_bench_policy"
+  },
+  {
+   "accepted_as": "l1:role.target_location",
+   "candidate": "role.target_location",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: destination appears in 5 services and destination_airport/to_location/to_station in others; Taskmaster2 records destination1 4018 times",
+   "resolves_v1_deferral": null,
+   "source": "sgd_schema"
+  },
+  {
+   "accepted_as": "l1:role.theme",
+   "candidate": "role.theme",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: every transactional intent (24 of 53) names the thing acted on in its required_slots, for instance TransferMoney requires amount",
+   "resolves_v1_deferral": null,
+   "source": "sgd_schema"
+  },
+  {
+   "accepted_as": "l2:role.tracked_attribute",
+   "candidate": "role.tracked_attribute",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: revisions concentrate on particular slots -- city 571, departure_date 516, date 456 -- so a history is per attribute rather than per subject",
+   "resolves_v1_deferral": null,
+   "source": "sgd_state_dynamics"
+  },
+  {
+   "accepted_as": "l1:role.trigger",
+   "candidate": "role.trigger",
+   "disposition": "accepted",
+   "grounding": [
+    {
+     "gloss": "to make dependent on a condition",
+     "reference": "condition.01",
+     "role_hint": "ARG2 GOL dependent on",
+     "source": "propbank"
+    }
+   ],
+   "reason": "condition.01 declares ARG2 GOL 'dependent on'. v1 recorded conditional commitment as uncovered on the ground that SGD attests no conditional act -- true of the act labels, and false of the utterances: 472 condition on availability and 88 use an if/then frame",
+   "resolves_v1_deferral": null,
+   "source": "propbank"
+  },
+  {
+   "accepted_as": null,
+   "candidate": "seating_class",
+   "disposition": "rejected",
+   "grounding": [],
+   "reason": "an ordered categorical slot in Flights_1/2. Rejected as vertical content, though its orderedness informed attribute.magnitude, which preference.threshold ranges over",
+   "resolves_v1_deferral": null,
+   "source": "sgd_schema"
+  },
+  {
+   "accepted_as": "l1:source_status.assistant_asserted",
+   "candidate": "source_status.assistant_asserted",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: SYSTEM INFORM 32885 and SYSTEM OFFER 101159",
+   "resolves_v1_deferral": null,
+   "source": "sgd_dialogue_acts"
+  },
+  {
+   "accepted_as": "l1:source_status.confirmed_by_both",
+   "candidate": "source_status.confirmed_by_both",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: SYSTEM CONFIRM 83259 followed by USER AFFIRM 20696 is the confirmation handshake",
+   "resolves_v1_deferral": null,
+   "source": "sgd_dialogue_acts"
+  },
+  {
+   "accepted_as": "l1:source_status.derived",
+   "candidate": "source_status.derived",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: domain.Speaker declares 'derived' alongside user/assistant/tool, so an inference must be distinguishable from a report",
+   "resolves_v1_deferral": null,
+   "source": "repository_vocabulary"
+  },
+  {
+   "accepted_as": "l1:source_status.tool_observed",
+   "candidate": "source_status.tool_observed",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: retail 17 tools and airline 15 tools return state the user did not assert",
+   "resolves_v1_deferral": null,
+   "source": "tau_bench_tools"
+  },
+  {
+   "accepted_as": "l1:source_status.user_reported",
+   "candidate": "source_status.user_reported",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: all 65245 persona sentences are self-report",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": null,
+   "candidate": "sports_team",
+   "disposition": "rejected",
+   "grounding": [],
+   "reason": "'team' is the single most frequent filler at 28230, across mlb/epl/mls/nba/nfl frames. Rejected as domain content, and it is close to an Individual: the filler positions are occupied by named teams rather than by a type",
+   "resolves_v1_deferral": null,
+   "source": "taskmaster2_annotations"
+  },
+  {
+   "accepted_as": "l1:standing.contested",
+   "candidate": "standing.contested",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "domain.Lifecycle declares CONTRADICTED and UNCERTAIN and v1 carried neither, so an unresolved conflict had no atomic-layer standing and had to be represented as a supersession that had not happened",
+   "resolves_v1_deferral": null,
+   "source": "repository_vocabulary"
+  },
+  {
+   "accepted_as": "l1:standing.current",
+   "candidate": "standing.current",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: domain.Lifecycle.ACTIVE",
+   "resolves_v1_deferral": null,
+   "source": "repository_vocabulary"
+  },
+  {
+   "accepted_as": "l1:standing.retracted",
+   "candidate": "standing.retracted",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: USER NEGATE_INTENT 5425 abandons an intent rather than revising a slot",
+   "resolves_v1_deferral": null,
+   "source": "sgd_dialogue_acts"
+  },
+  {
+   "accepted_as": "l1:standing.superseded",
+   "candidate": "standing.superseded",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 71.6% of a 5110-dialogue sample revise a slot value mid-dialogue",
+   "resolves_v1_deferral": null,
+   "source": "sgd_schema"
+  },
+  {
+   "accepted_as": "l1:state.capability_constraint",
+   "candidate": "state.capability_constraint",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 188 'i cannot / am unable' sentences, 113 allergy statements and 80 vegan/vegetarian statements",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l1:state.circumstance",
+   "candidate": "state.circumstance",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 14288 ongoing-state sentences in v1's count; the residual after the specific types below is what this now covers",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l1:state.occupation_status",
+   "candidate": "state.occupation_status",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 4357 'i am a <role>', 1830 work-status, 354 student-status and 59 retired sentences: the largest single family of persona content",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l1:state.pending_arrangement",
+   "candidate": "state.pending_arrangement",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: retail order status pending/processed/delivered: the pending case is a state between the commitment and its fulfilment",
+   "resolves_v1_deferral": null,
+   "source": "tau_bench_tools"
+  },
+  {
+   "accepted_as": "l1:state.possession",
+   "candidate": "state.possession",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 5307 persona sentences state a possession",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l1:state.residence",
+   "candidate": "state.residence",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 1640 residence sentences, of which 59 give a duration ('i have lived there since i was 5')",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l1:state.suspended_commitment",
+   "candidate": "state.suspended_commitment",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: condition.01 ARG1 'entity made dependent' is the thing left in this state once the conditioning act is over",
+   "resolves_v1_deferral": null,
+   "source": "propbank"
+  },
+  {
+   "accepted_as": "l1:strength.moderate",
+   "candidate": "strength.moderate",
+   "disposition": "accepted",
+   "grounding": [
+    {
+     "gloss": "have affection towards, be fond of, enjoy",
+     "reference": "like.01",
+     "role_hint": "ARG1 PPT object",
+     "source": "propbank"
+    }
+   ],
+   "reason": "9517 like/enjoy sentences, the largest affect band and the reading when no intensifier is present, which makes it the default rather than a middle guess",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l1:strength.paramount",
+   "candidate": "strength.paramount",
+   "disposition": "accepted",
+   "grounding": [
+    {
+     "gloss": "preference, penchant, predilection, taste: a strong liking",
+     "reference": "n#07498210",
+     "role_hint": null,
+     "source": "wordnet"
+    }
+   ],
+   "reason": "2963 'my favourite' sentences, a superlative frame distinct from the love band because it excludes ties, which is why the item carries a uniqueness constraint",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l1:strength.strong",
+   "candidate": "strength.strong",
+   "disposition": "accepted",
+   "grounding": [
+    {
+     "gloss": "object of affection",
+     "reference": "love.01",
+     "role_hint": "ARG1 PPT loved",
+     "source": "propbank"
+    }
+   ],
+   "reason": "4102 love/adore and 269 hate/can't-stand sentences. love.01 and adore.01 are separate rolesets from like.01, so the intensity difference is lexicalized rather than adverbial",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l1:strength.tolerant",
+   "candidate": "strength.tolerant",
+   "disposition": "accepted",
+   "grounding": [
+    {
+     "gloss": "tolerate, put up with, the act of tolerating",
+     "reference": "tolerate.01",
+     "role_hint": null,
+     "source": "propbank"
+    }
+   ],
+   "reason": "the weakest band, and admitted on PropBank rather than on persona counts: tolerate.01 and mind.01 are distinct rolesets from like.01, so acceptance is its own attitude. The persona evidence is 6 sentences and would not have carried it; SGD's 472 'if available' and 14 'as long as' utterances are the attestation",
+   "resolves_v1_deferral": null,
+   "source": "propbank"
+  },
+  {
+   "accepted_as": "l1:task.abandoned_intention",
+   "candidate": "task.abandoned_intention",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: USER NEGATE_INTENT 5425 abandons rather than revises",
+   "resolves_v1_deferral": null,
+   "source": "sgd_dialogue_acts"
+  },
+  {
+   "accepted_as": "l1:task.conditional_intention",
+   "candidate": "task.conditional_intention",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 472 availability-conditioned requests, 88 if/then frames, 14 'as long as'/'only if', 43 'in case'",
+   "resolves_v1_deferral": null,
+   "source": "sgd_dialogue_acts"
+  },
+  {
+   "accepted_as": "l1:task.declared_intention",
+   "candidate": "task.declared_intention",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 775 'i want to', 86 'i plan/hope to', 275 'i will / going to' sentences",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l1:task.outstanding_requirement",
+   "candidate": "task.outstanding_requirement",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: every transactional intent declares required_slots that must be filled before it can be executed",
+   "resolves_v1_deferral": null,
+   "source": "sgd_schema"
+  },
+  {
+   "accepted_as": "l1:time.after_assertion",
+   "candidate": "time.after_assertion",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 775 'i want to', 275 'i will/am going to', 94 'someday/one day/in the future'",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l1:time.at_assertion",
+   "candidate": "time.at_assertion",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 1640 residence and 1830 work-status sentences are stated in present tense as things that are the case now",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l1:time.before_assertion",
+   "candidate": "time.before_assertion",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 72 'i moved', 81 'i graduated', 46 'i met': completed events dominate persona narration",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l1:time.recurring",
+   "candidate": "time.recurring",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 295 explicit-frequency sentences describe recurrence rather than one occasion",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": "l1:time.spanning",
+   "candidate": "time.spanning",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: check_in_date/check_out_date and available_start_time/available_end_time are boundary pairs describing one interval",
+   "resolves_v1_deferral": null,
+   "source": "sgd_schema"
+  },
+  {
+   "accepted_as": "l1:time.unspecified",
+   "candidate": "time.unspecified",
+   "disposition": "accepted",
+   "grounding": [],
+   "reason": "admitted on attested evidence: 4357 'I am a <role>' sentences state a standing fact with no time reference at all",
+   "resolves_v1_deferral": null,
+   "source": "msc_personas"
+  },
+  {
+   "accepted_as": null,
+   "candidate": "tool.calculate",
+   "disposition": "rejected",
+   "grounding": [],
+   "reason": "present in both environments. Rejected: arithmetic on values is not an ontology type, and the accepted attribute.magnitude already marks which values are ordered",
+   "resolves_v1_deferral": null,
+   "source": "tau_bench_tools"
+  },
+  {
+   "accepted_as": null,
+   "candidate": "tool.think",
+   "disposition": "rejected",
+   "grounding": [],
+   "reason": "present in both tau-bench environments. Rejected because it is an agent scratchpad that changes no state and asserts nothing; treating it as content would let an agent's own reasoning enter memory as though it were observed",
+   "resolves_v1_deferral": null,
+   "source": "tau_bench_tools"
+  },
+  {
+   "accepted_as": null,
+   "candidate": "tool.transfer_to_human_agents",
+   "disposition": "rejected",
+   "grounding": [],
+   "reason": "present in both environments. Rejected as harness control flow rather than a type of remembered content",
+   "resolves_v1_deferral": null,
+   "source": "tau_bench_tools"
+  }
+ ],
+ "freeze": {
+  "excludes_benchmark_facts": true,
+  "excludes_individuals": true,
+  "hash_scope": "SHA-256 over the canonical JSON of this unit's model alone, excluding this freeze block; a change to another unit cannot move this digest",
+  "judge_dependency": "none; no model or judge call was made by this build",
+  "sha256": "0faded7b7431dde9796f3e5fc86fced238cb9e4121d95a56c5ef3e548949b8d4",
+  "unit": "decisions"
+ },
+ "ontology_version": "2.0.0",
+ "uncovered": [
+  {
+   "expression": "a preference asserted on behalf of a third party whose own stance is unknown",
+   "observed_in": "msc_personas",
+   "why_not_covered": "the atomic layer binds a preference to the holder who asserts it, and representing a reported preference requires a second holder slot the role inventory does not have",
+   "would_require": "a reported-attitude role distinguishing asserter from holder"
+  },
+  {
+   "expression": "graded preference strength beyond a binary affinity",
+   "observed_in": "msc_personas",
+   "why_not_covered": "the layer admits affinity, comparative and threshold, none of which carries an intensity scale, and inventing one would put a number where the corpora state a word",
+   "would_require": "an intensity qualifier grounded in attested lexical gradation"
+  }
+ ]
+}

@@ -25,8 +25,8 @@ from ke_memory_demo.mapper_v1.mapper import (
 from ke_memory_demo.mapper_v2.mapper import (
     CONVERSATIONAL_FILLER,
     MapperV2,
-    _alias_terms,
-    _STOPWORDS,
+    protected_alias_terms,
+    STOPWORDS,
     assert_no_correction_gate,
     terms,
 )
@@ -85,16 +85,16 @@ def test_an_abstention_must_state_why() -> None:
 
 
 @requires_ontology
-def test_ontology_alias_terms_survive_stopword_removal() -> None:
+def test_ontologyprotected_alias_terms_survive_stopword_removal() -> None:
     """The defect: a fixed stopword list deleted the words the ontology maps with.
 
     ``like`` is the alias carrying ``l1:predicate.hold_attitude``, so removing it made "I really like
     jazz records" unmappable. Fourteen such collisions exist in the seed ontology.
     """
     ontology = load_frozen_ontology(ONTOLOGY_DIR)
-    protected = _alias_terms(ontology.items_for(Layer.L1))
+    protected = protected_alias_terms(ontology.items_for(Layer.L1))
     assert "like" in protected
-    assert "like" in _STOPWORDS  # it is a stopword and still must survive
+    assert "like" in STOPWORDS  # it is a stopword and still must survive
     assert "like" in terms("I really like jazz records", protected=protected)
     # Without protection the term is gone, which is what broke the mapping.
     assert "like" not in terms("I really like jazz records")
@@ -113,7 +113,7 @@ def test_only_a_stopword_that_is_itself_an_alias_is_protected() -> None:
     hold_attitude, while ``the`` only ever appears inside a longer phrase.
     """
     ontology = load_frozen_ontology(ONTOLOGY_DIR)
-    protected = _alias_terms(ontology.items_for(Layer.L1))
+    protected = protected_alias_terms(ontology.items_for(Layer.L1))
     assert "like" in protected
     for ambient in ("the", "and", "for", "about", "make", "than", "please"):
         assert ambient not in protected, ambient
@@ -132,7 +132,7 @@ def test_a_protected_stopword_is_matchable_but_never_decisive() -> None:
         Layer.L1,
     )
     for candidate in record.candidates:
-        assert not (set(candidate.discriminative_terms) & _STOPWORDS)
+        assert not (set(candidate.discriminative_terms) & STOPWORDS)
 
 
 @requires_ontology
@@ -172,7 +172,7 @@ def test_conversational_filler_is_weighted_down_not_merely_excluded() -> None:
     # ending in "or True" cannot fail and was checking nothing.
     observed = terms("the thing is that day was a good time and things went the way people say")
     assert observed
-    assert observed <= CONVERSATIONAL_FILLER | _STOPWORDS
+    assert observed <= CONVERSATIONAL_FILLER | STOPWORDS
 
 
 @requires_ontology

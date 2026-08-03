@@ -1,0 +1,74 @@
+{
+ "declined_imports": [
+  "PropBank: 11205 rolesets read, the overwhelming majority declined. Only senses that a person plausibly states about their own life were admitted; the newswire and financial frames that dominate the corpus were not.",
+  "schema.org: 1010 classes and 1676 properties read, nearly all declined. The web-publishing vocabulary (CreativeWork, WebPage, Offer, breadcrumb) has no bearing on what a person remembers.",
+  "WordNet: no synset was imported as a type. It was used to check that an admitted item's sense is the one the lemma actually carries.",
+  "Domain verticals stay rejected as in v1: restaurant is Taskmaster-2's most frequent frame at 46133 occurrences and a foundation ontology containing it has fitted its build corpus.",
+  "Speech acts stay rejected: an act is a property of an utterance rather than remembered content.",
+  "Individuals and benchmark literals are excluded at the type level, so no named airline, date or order id appears."
+ ],
+ "discovery_split_use": "the discovery split contributed general gap candidates only. No question, gold label, dataset identity or sample id was read, and no alias was derived from a benchmark item.",
+ "freeze": {
+  "excludes_benchmark_facts": true,
+  "excludes_individuals": true,
+  "hash_scope": "SHA-256 over the canonical JSON of this unit's model alone, excluding this freeze block; a change to another unit cannot move this digest",
+  "judge_dependency": "none; no model or judge call was made by this build",
+  "sha256": "9eb6974c92cd17232be6eb5b9fcc5fb69f4f2c6fe33a087d42dfdfc2fedebdc0",
+  "unit": "provenance"
+ },
+ "judge_dependency": "none; no judge call was made by this build",
+ "keol_role": "offline construction and normalization only; no dynamic admission",
+ "model_api_calls": 0,
+ "ontology_version": "2.0.0",
+ "sources": [
+  {
+   "consulted": true,
+   "content_sha256": "cbda5ea6eef7f36a97a43d4a75f85e07fccbb4f23657d27b4ccbc93e2646ab59",
+   "detail": "used for sense disambiguation and lemma coverage on admitted items; synsets were not imported as types",
+   "locator": "/public/home/wwb/datasets/ontology-sources/wordnet-3.0-nltk.zip",
+   "name": "WordNet 3.0",
+   "observed_units": 45
+  },
+  {
+   "consulted": true,
+   "content_sha256": "3a9d4d25d8f29b5f536452630e2dd83823ca230c45a3fabde785df21a21957dd",
+   "detail": "used to settle predicate senses and role sets, which is what v1 deferred role.cause and role.duration for; 11205 rolesets were read and a small number admitted",
+   "locator": "/public/home/wwb/datasets/ontology-sources/propbank-frames-3.4.0.tar.gz",
+   "name": "PropBank 3.4.0",
+   "observed_units": 11205
+  },
+  {
+   "consulted": true,
+   "content_sha256": "4467fa19edcb1d7fb3c46c0adf3591b7f870c4a60b7838bdb61694fd02864cf6",
+   "detail": "used for type and property structure; the web-publishing vocabulary was left behind entirely",
+   "locator": "/public/home/wwb/datasets/ontology-sources/schemaorg-30.0-current-https.jsonld",
+   "name": "schema.org 30.0",
+   "observed_units": 1010
+  },
+  {
+   "consulted": true,
+   "content_sha256": null,
+   "detail": "independent build corpus: slot and intent structure across 26 services",
+   "locator": "/public/home/wwb/datasets/SGD/train",
+   "name": "Schema-Guided Dialogue (train)",
+   "observed_units": 16142
+  },
+  {
+   "consulted": true,
+   "content_sha256": null,
+   "detail": "independent build corpus: seven task domains, used for frame frequency only",
+   "locator": "/public/home/wwb/datasets/Taskmaster2",
+   "name": "Taskmaster-2",
+   "observed_units": 17304
+  },
+  {
+   "consulted": true,
+   "content_sha256": null,
+   "detail": "independent build corpus: the only source attesting long-horizon personal statements, so it drives the preference and habit evidence",
+   "locator": "/public/home/wwb/datasets/MSC/msc_personas_all.json",
+   "name": "Multi-Session Chat personas",
+   "observed_units": 65245
+  }
+ ],
+ "supersedes": "1.0.0"
+}

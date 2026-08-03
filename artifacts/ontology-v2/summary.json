@@ -1,0 +1,49 @@
+{
+ "counts": {
+  "accepted": 134,
+  "decisions": 161,
+  "deferred": 2,
+  "map_entries": 32,
+  "o_l1_items": 100,
+  "o_l2_items": 32,
+  "rejected": 25,
+  "uncovered_expressions": 2
+ },
+ "declined_imports": [
+  "PropBank: 11205 rolesets read, the overwhelming majority declined. Only senses that a person plausibly states about their own life were admitted; the newswire and financial frames that dominate the corpus were not.",
+  "schema.org: 1010 classes and 1676 properties read, nearly all declined. The web-publishing vocabulary (CreativeWork, WebPage, Offer, breadcrumb) has no bearing on what a person remembers.",
+  "WordNet: no synset was imported as a type. It was used to check that an admitted item's sense is the one the lemma actually carries.",
+  "Domain verticals stay rejected as in v1: restaurant is Taskmaster-2's most frequent frame at 46133 occurrences and a foundation ontology containing it has fitted its build corpus.",
+  "Speech acts stay rejected: an act is a property of an utterance rather than remembered content.",
+  "Individuals and benchmark literals are excluded at the type level, so no named airline, date or order id appears."
+ ],
+ "hashes": {
+  "decisions_sha256": "0faded7b7431dde9796f3e5fc86fced238cb9e4121d95a56c5ef3e548949b8d4",
+  "m_l1_to_l2_sha256": "e9827d28b8ee9bfb25fe88a807b18f9a3c239aaa686d4415f8650a404d98ec89",
+  "o_l1_sha256": "76465be5ecfed0c988599f3c2dba442af0bc149911d2189bfe8e6f37b47932e9",
+  "o_l2_sha256": "308ba27fc274f4c1b538d70c0166e7ea01ba6c16d92adcb3136b801647c64858",
+  "provenance_sha256": "9eb6974c92cd17232be6eb5b9fcc5fb69f4f2c6fe33a087d42dfdfc2fedebdc0",
+  "supersession_sha256": "1557d2166bb07979be935b7fb6e299e4526a4de6d05fe451c3f1c8ffab4e7ed1"
+ },
+ "judge": "not called",
+ "no_combined_hash": "six independent digests and no combined one, so a change is attributable to a unit",
+ "ontology_version": "2.0.0",
+ "sources_consulted": [
+  "WordNet 3.0",
+  "PropBank 3.4.0",
+  "schema.org 30.0",
+  "Schema-Guided Dialogue (train)",
+  "Taskmaster-2",
+  "Multi-Session Chat personas"
+ ],
+ "standing": "the published sources are consulted rather than approximated, so breadth is no longer limited by provenance. It remains a curation result: the layers grew from 67 and 20 items to their current size by admitting what common memory situations need, not by importing what the sources contain.",
+ "supersedes": "1.0.0",
+ "v1_deferrals_resolved": [
+  "l2.decision_with_rationale",
+  "l2.social_relationship",
+  "modality.hypothesis",
+  "modality.question",
+  "role.cause",
+  "role.duration"
+ ]
+}
