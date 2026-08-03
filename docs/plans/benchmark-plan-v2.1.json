@@ -747,9 +747,10 @@
    "broad_foundation_pending_natural_coverage_review": "breadth is not settled by the 100 and 32 item counts. It is settled by the ontology ceiling observed on natural expression, the shape of the remaining gap categories, and coverage of common memory situations. The two known gaps stay recorded.",
    "diagnostic_execution_chain_ready": "the nine-stage chain runs over a consumed builder artifact with per-layer traces, and the oracle attribution mechanism holds. The layers are lexical, so this is diagnostic capability only.",
    "formal_benchmark_not_yet_ready": "the critical path is ontology v2 and natural-expression mapper validation. The judge key can be handled in parallel and is not what gates the run.",
+   "fresh_mapping_set_not_yet_frozen": "frozen: 160 expressions, set_sha256 b576db052cb15836, zero overlap with discovery, the validation split or the spent 120-expression sample. Annotation still required before use.",
    "mapper_v1_diagnostic_failed_as_expected": "7 of 18 correct with all four negatives mis-mapped. A repair attempt on discovery data reached 12.5 percent abstention against v1 baseline 9.8 percent and is not a fix; the diagnosis is that lexical overlap is too weak a signal for the abstain decision.",
-   "mapper_v2_not_yet_built": "the lexical repair attempt is retired. Mapper v2 has not been built: candidate generation must be rebuilt on WordNet lemmas and senses, PropBank predicates and rolesets, schema.org types and properties, and the native O_L1/O_L2 aliases and type constraints.",
-   "natural_mapping_quality_not_yet_measured": "measured. L1 end-to-end 0.114 with ontology ceiling 1.0, so the limit is candidate generation rather than ontology coverage. The result is immutable and the sample is spent.",
+   "mapper_v2_measured_and_insufficient": "built and measured on the frozen natural sample: candidate recall 0.165, gold-none false mapping 0.633, L1 end-to-end 0.114 with ontology ceiling 1.0. The result is immutable and the sample is spent. Insufficient for a formal run, and the reason is candidate generation rather than ontology coverage.",
+   "mapper_v3_not_yet_built": "ready to start on the stable O_v3 namespace. Must use general 0..N semantic frames with construction and syntax evidence, and may not special-case task.declared_intention or preference.affinity.",
    "ontology_sources_frozen": "WordNet 3.0, PropBank 3.4.0 and schema.org 30.0 acquired and frozen at explicit commits with licences and independent hashes. They have not yet been used to extend the ontology.",
    "ontology_v2_recovered_candidate_frozen": "six units frozen with independent digests. Recovered from a crashed build, so it is a candidate freeze and may not be described as a clean, reproducible ontology build.",
    "ontology_v3_candidate_frozen_replayable": "four families added over v2 with four independent digests, and a replay reproduces all four. Unlike v2 this is regenerable rather than recovered. Validation on a fresh set is still required."
@@ -1018,6 +1019,42 @@
     "l2_recall_zero": "L2 recall is 0 over 5 cases. The derivation mechanism is verified correct in isolation, so this follows from L1 recall being too low to satisfy any rule evidence_required threshold."
    },
    "status": "spent_immutable"
+  },
+  "mapper_v3": {
+   "acceptance_metrics": [
+    "ontology coverage",
+    "candidate recall",
+    "ranking and sense accuracy",
+    "no-map",
+    "multi-label selection",
+    "critical false mapping"
+   ],
+   "design_constraints": [
+    "general 0..N semantic frames rather than one target per expression",
+    "construction and syntax evidence, not more aliases",
+    "no special case for task.declared_intention, preference.affinity or any other target",
+    "preserve mapped, ambiguous and unresolved outcomes plus multi-label output",
+    "never force a mapping to raise recall"
+   ],
+   "fresh_set": {
+    "artifact": "artifacts/mapper-v3-validation/fresh-mapping-set.json",
+    "disjointness": {
+     "discovery": 0,
+     "spent_sample": 0,
+     "validation": 0
+    },
+    "ordering_guarantee": "mapper v3 does not exist yet, so this set cannot have shaped its frames, thresholds or evidence types. A set frozen afterwards could not rule that out.",
+    "pools": {
+     "locomo_remaining": "LoCoMo turns not drawn into the spent sample",
+     "longmemeval_held_out": "the held_out split, untouched by discovery, by the validation split and by the spent sample"
+    },
+    "set_sha256": "b576db052cb158364dde3261bfb6d10d150b4874ee1dd524efc91799793d42db",
+    "size": 160,
+    "standing": "frozen_before_mapper_v3_exists"
+   },
+   "namespace": "O_v3, stable and frozen, so candidate generation changes are attributable",
+   "ordering_rule": "the fresh mapping set is frozen before implementation starts",
+   "status": "ready_to_start"
   },
   "next_sequence": [
    {
@@ -1368,6 +1405,14 @@
     "why": "a merged item would have to drop one of the two, so two items preserve both"
    },
    "what_this_does_not_establish": "a candidate freeze is not a validated ontology. The four families were identified from the 120 expressions, so v3 must be validated on a fresh set before any conclusion rests on it."
+  },
+  "progress_control": {
+   "continuation_rule": "if mapper v3 fresh validation does not clearly improve on recall 0.165 and gold-none false mapping 0.633, keep fixing the mapper rather than entering the formal benchmark.",
+   "formal_benchmark": "blocked",
+   "fresh_validation": "set_frozen_annotation_pending",
+   "mapper_v3": "ready_to_start",
+   "o_v3_candidate_freeze": "passed",
+   "o_v3_clean_commit": "passed (a7436a7; four hashes recorded, plan synced, worktree clean)"
   },
   "rationale": "C1 to C3 restored measurement credibility. They do not confer Stage 2 capability, so the work now switches from repairing instruments to exposing real system behaviour.",
   "shape": "two parallel tracks converging on one formal run",
