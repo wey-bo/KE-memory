@@ -1,0 +1,2543 @@
+{
+ "annotated_against_ontology": "ontology v2 base plus ontology v3 additions (union)",
+ "annotated_set_sha256": "b576db052cb158364dde3261bfb6d10d150b4874ee1dd524efc91799793d42db",
+ "artifact": "fresh-mapping-set annotation gold",
+ "counts_by_outcome": {
+  "ambiguous": 0,
+  "concept": 119,
+  "none": 36,
+  "out_of_scope": 5
+ },
+ "distinct_ids_named": 79,
+ "evaluation_limits": {
+  "true_ambiguity_abstention": {
+   "not_backfilled": "ambiguous records were not manufactured after the fact to give the metric a denominator",
+   "reason": "the gold contains zero ambiguous records, so the population over which a mapper's abstention on genuine ambiguity would be measured is empty. Any scorer reporting a rate here is reporting a number with no evidence behind it",
+   "status": "unavailable",
+   "why_empty": "borderline expressions were resolved either as multi-target concepts naming every defensible item, or by withholding the unsupported label. Neither route produces an ambiguous record, so the absence is a consequence of the annotation convention rather than of the corpus"
+  }
+ },
+ "expression_count": 160,
+ "gap_categories": [
+  "affective_state",
+  "epistemic_gap_or_confusion",
+  "loss_or_adverse_event",
+  "third_party_state",
+  "artefact_or_creation",
+  "social_offer_or_invitation",
+  "self_narrative_or_identity"
+ ],
+ "gaps": [
+  {
+   "adjudication_note": "the activity is a v3 pursuit but the bearer is a third party and the content is their enjoyment, so a concept label would attribute it to the wrong subject",
+   "expression_id": "fx-000033",
+   "sense": "reports that a third party, most likely his son or his dog, is happy and carefree in their favourite activity",
+   "would_require": "a frame for a third party's affective state and their favourite activity, where the subject of the memory is not the speaker; the combined ontology models the remembered subject and admits participants, but has no way to hold an attributed state of another party as its own content"
+  },
+  {
+   "adjudication_note": "frequency.invariant plus a pursuit would put the content on the wrong subject and would turn a character judgement into a behavioural record",
+   "expression_id": "fx-000044",
+   "sense": "characterises the addressee as someone who never shies from a challenge and always tries new things, and says he finds that inspiring",
+   "would_require": "a frame for an attributed disposition or character trait of another party, distinct from a preference or a habit of the remembered subject; the combined ontology holds habits and preferences of a subject, not one party's standing characterisation of another"
+  },
+  {
+   "adjudication_note": "the strongest gap in the set. state.circumstance would technically hold it, so a reviewer may downgrade this to concept; the reason it is a gap is that a memory that cannot say 'health' cannot answer a question about health",
+   "expression_id": "fx-000066",
+   "sense": "reports that things have been challenging lately and that something has been hard on his health, without saying what",
+   "would_require": "a health-status frame, or at minimum a way to hold an unspecified adverse condition affecting the subject; state.circumstance is the nearest v2 item but its sense is a general condition rather than a health impairment, and nothing in v3 adds health"
+  },
+  {
+   "adjudication_note": "possession of the car is presupposed rather than asserted here, so a possession label would be reaching; the whole content is affect and trust",
+   "expression_id": "fx-000068",
+   "sense": "feels much more confident and excited to show off his car, and trusts the expertise of whoever worked on it",
+   "would_require": "an affective-state frame for confidence and excitement, plus a way to hold trust in another party's competence; v2 and v3 together model attitudes toward objects and beliefs about the world, but not a felt state of the subject nor trust placed in an agent"
+  },
+  {
+   "adjudication_note": "hold_value could be forced onto 'make a difference', but the content of the turn is the significance and the recalled feeling, which is what a concept label would drop",
+   "expression_id": "fx-000090",
+   "sense": "found the occasion meaningful because it recalled her own past struggles and her loneliness then, and she was glad to share her story and support others",
+   "would_require": "a frame for the subject's remembered emotional history and for the personal significance an event holds for them; v2 and v3 hold events, values and beliefs, but not a felt past state nor the meaning a subject assigns to an occasion"
+  }
+ ],
+ "gold_sha256": "a976ffc33aca241e8b6dd774980ed5c224b1f10080e1821aa0d409dad0f6e6e9",
+ "graded_review": "everything was labelled once; v3 additions, L2 abstractions, ambiguity, gaps and cases the annotator found hard carry an adjudication note",
+ "ids_never_named": [
+  "l1:attribute.availability",
+  "l1:attribute.clock_position",
+  "l1:frequency.invariant",
+  "l1:modality.asserted",
+  "l1:modality.hypothesis",
+  "l1:polarity.affirmed",
+  "l1:predicate.commit_to_arrangement",
+  "l1:predicate.hold_attitude",
+  "l1:qualifier.assertion_standing",
+  "l1:qualifier.frequency",
+  "l1:qualifier.modality",
+  "l1:qualifier.polarity",
+  "l1:qualifier.source_status",
+  "l1:qualifier.strength",
+  "l1:qualifier.time",
+  "l1:role.agent",
+  "l1:role.attribute_bearer",
+  "l1:role.cause",
+  "l1:role.comparison_target",
+  "l1:role.constraint_on",
+  "l1:role.holder",
+  "l1:role.instrument",
+  "l1:role.participant",
+  "l1:role.proposition_content",
+  "l1:role.recipient",
+  "l1:role.source_location",
+  "l1:role.target_location",
+  "l1:role.theme",
+  "l1:role.topic",
+  "l1:role.trigger",
+  "l1:source_status.assistant_asserted",
+  "l1:source_status.derived",
+  "l1:source_status.tool_observed",
+  "l1:standing.contested",
+  "l1:standing.current",
+  "l1:standing.retracted",
+  "l1:standing.superseded",
+  "l1:state.suspended_commitment",
+  "l1:strength.moderate",
+  "l1:task.abandoned_intention",
+  "l2:abstraction.carried_constraint",
+  "l2:abstraction.standing_condition",
+  "l2:abstraction.value_commitment",
+  "l2:abstraction.value_history",
+  "l2:evidence.partial_support_marked",
+  "l2:evidence.source_status_preserved",
+  "l2:evidence.supports_addressable",
+  "l2:lifecycle.achieved",
+  "l2:lifecycle.condition_failed",
+  "l2:lifecycle.dormant",
+  "l2:lifecycle.lapsed",
+  "l2:lifecycle.open",
+  "l2:lifecycle.superseded_by_revision",
+  "l2:pattern.constraint_union",
+  "l2:pattern.goal_decomposition",
+  "l2:pattern.temporal_series",
+  "l2:pattern.trigger_watch",
+  "l2:relation.partnership",
+  "l2:role.first_party",
+  "l2:role.scope",
+  "l2:role.second_party",
+  "l2:role.subject",
+  "l2:role.tracked_attribute"
+ ],
+ "isolation_limit": {
+  "claim": "no mapper output informed any label",
+  "detail": "the first 120 labels and the last 40 were written after mapper v3 already existed in the same working tree, so the independence of the annotation line cannot be demonstrated from timestamps. What can be shown is that the annotation package imports no mapper module and that the mapper package references neither the set nor the gold. The stronger claim -- that the annotator did not read mapper output -- is a procedural declaration",
+  "evidence_strength": "procedural_declaration_not_artifact_proof"
+ },
+ "judge": "not called",
+ "known_ontology_gaps_accounted": [
+  {
+   "detail": "m:abstraction.habit names l1:event.media_consumption and l1:predicate.consume_media among its sources, but l2:abstraction.habit's sense is general. A weekly gym schedule and a weekly language class are uncontroversial habits that cannot reach the item through its own derivation rule, so the item's sense is wider than the rule that admits it",
+   "disposition": "accounted, not fixed; this round forbids modifying a frozen unit",
+   "gap": "habit_derivation_bound_to_media_consumption",
+   "observed_at": "fx-000120, fx-000148",
+   "unit": "M_L1_to_L2 (v2)"
+  },
+  {
+   "detail": "l2:relation.* offers kin_descent (direct, asymmetric) and kin_lateral (same generation, symmetric). A niece is collateral descent and fits neither, so the tie was labelled l2:abstraction.relationship with no relation kind",
+   "disposition": "accounted, not fixed; this round forbids modifying a frozen unit",
+   "gap": "kinship_lacks_collateral_descent",
+   "observed_at": "fx-000121",
+   "unit": "O_L2 (v2)"
+  },
+  {
+   "detail": "l1:state.circumstance will hold a named diagnosis, so a label exists, but it cannot record that the condition is medical. A memory carrying only that label cannot answer a question about the subject's health, which is why the earlier turn was labelled a gap even though an item was technically available",
+   "disposition": "accounted, not fixed; this round forbids modifying a frozen unit",
+   "gap": "circumstance_cannot_say_medical",
+   "observed_at": "fx-000066, fx-000124, fx-000156",
+   "unit": "O_L1 (v2)"
+  }
+ ],
+ "l2_labels_used": [
+  "l2:abstraction.conditional_commitment",
+  "l2:abstraction.habit",
+  "l2:abstraction.preference_profile",
+  "l2:abstraction.project",
+  "l2:abstraction.pursuit_profile",
+  "l2:abstraction.relationship",
+  "l2:abstraction.task",
+  "l2:pattern.recurrence_count",
+  "l2:relation.friendship",
+  "l2:relation.kin_descent",
+  "l2:relation.kin_lateral"
+ ],
+ "method": "each expression was read against O_v2 and the O_v3 additions and labelled with what a correct mapper should return. No mapper output was consulted for any record and no model or judge was called.",
+ "model_api_calls": 0,
+ "multi_target_count": 118,
+ "ontology_ids_available": 142,
+ "policies": {
+  "ambiguous_is_a_claim_about_the_text": "ambiguous means the text underdetermines the choice between two or more defensible items, not that the annotator was unsure. It was never invoked",
+  "out_of_scope_is_about_the_principal_assertion": "reserved for expressions whose main claim has no type in v2 or v3. Where the main clause is untyped but a second proposition is fully typed, the record is a concept and the gap is recorded in its note",
+  "qualifier_dimensions_not_listed": "l1:qualifier.* names an axis, not a value on it; the value items are what an expression attests",
+  "roles_not_listed_except_when_attested": "a role is a slot every frame of its kind requires, so listing roles would add a constant to every record. Three records name one: fx-000056 and fx-000143 for a stated count, fx-000139 for the beneficiary the whole selection is for",
+  "third_party_bearers": "a label is withheld when the attested state belongs to another party and the subject is only reporting it; where the tie itself is the content, the relationship items carry it"
+ },
+ "records": [
+  {
+   "adjudication_note": "the advocacy event is attested as a past occurrence, but of the addressee, and the speaker is only evaluating it. Reading it as the speaker's own activity_occurrence would attribute the wrong subject",
+   "expression_id": "fx-000000",
+   "needs_second_opinion": true,
+   "outcome": "none",
+   "sense": "praise, a question about a concert, and a positive gloss on an event the other party attended; nothing rememberable about the speaker herself",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "ongoing_pursuit for an intellectual interest rather than a practice is the v3 item's boundary case; affinity carries the liking and pursuit carries the continuing engagement",
+   "expression_id": "fx-000001",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "a standing strong interest in synchronicity and consciousness, plus a request for research on it, which is both an information-seeking act and a continuing intellectual pursuit",
+   "target_ids": [
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:preference.affinity",
+    "l1:state.ongoing_pursuit",
+    "l1:strength.strong",
+    "l1:time.at_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "",
+   "expression_id": "fx-000002",
+   "needs_second_opinion": false,
+   "outcome": "none",
+   "sense": "compliment on a picture plus a generic question about the other party's cooking; the speaker attests nothing about himself",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the housing difficulty is attributed to the addressee, not the speaker. Only the asking is the speaker's own content",
+   "expression_id": "fx-000003",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "asks the other party which part of town they want to live in; a question about the addressee's residence preference, so what is attested is the asking",
+   "target_ids": [
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.seek_information"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "reading is a v3 ongoing_pursuit here because he is mid-series and describes what the books do for him; the affinity and the strength are separate attestations",
+   "expression_id": "fx-000004",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "a strong standing liking for a book series and its immersive world, together with a question about the name of a dog in the other party's photo",
+   "target_ids": [
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:preference.affinity",
+    "l1:state.ongoing_pursuit",
+    "l1:strength.strong"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "",
+   "expression_id": "fx-000005",
+   "needs_second_opinion": false,
+   "outcome": "none",
+   "sense": "pleasantry and a well-wish about the addressee's hike; no content about the speaker",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "attempt_failed is the closest v2 item for 'stuck': the attempt is ongoing rather than concluded, so a reviewer may prefer declared_intention alone",
+   "expression_id": "fx-000006",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "an in-progress attempt to improve an algorithm that is currently stuck, plus a request for ideas",
+   "target_ids": [
+    "l1:event.attempt_failed",
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:task.declared_intention",
+    "l1:time.at_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "joke writing as ongoing_pursuit is a v3 absorption; v2 could only have held the information request",
+   "expression_id": "fx-000007",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "an ongoing attempt to write jokes, which is a continuing creative practice, plus a request for tips on structuring them",
+   "target_ids": [
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:state.ongoing_pursuit",
+    "l1:time.spanning"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "",
+   "expression_id": "fx-000008",
+   "needs_second_opinion": false,
+   "outcome": "none",
+   "sense": "agreement with a generic claim about pets plus two questions about the addressee's mentoring programme; nothing about the speaker",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "",
+   "expression_id": "fx-000009",
+   "needs_second_opinion": false,
+   "outcome": "none",
+   "sense": "pure agreement backchannel with no propositional content",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "",
+   "expression_id": "fx-000010",
+   "needs_second_opinion": false,
+   "outcome": "concept",
+   "sense": "asks where the addressees plan to explore; the speaker attests only the asking",
+   "target_ids": [
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.seek_information"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "tempting to read a musical pursuit into it, but the question is framed about musicians in general and never says the asker is one",
+   "expression_id": "fx-000011",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "a general question about the benefits of learning music theory, with nothing said about the asker's own situation",
+   "target_ids": [
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.seek_information"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "v3 hold_belief carries 'belief in its success'; the passion is an affective state with no home. Flagged also for the L2 project reading, which rests on the two sub-goals advancing one aim",
+   "expression_id": "fx-000012",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "finishing a business plan and looking for investors as one multi-step undertaking, driven by a stated belief that the project will succeed",
+   "target_ids": [
+    "l1:predicate.hold_belief",
+    "l1:state.occupation_status",
+    "l1:task.declared_intention",
+    "l1:time.at_assertion",
+    "l2:abstraction.project"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "'details for this case' is possession of information at her disposal; a reviewer might read the case as an open task instead, which the text does not settle",
+   "expression_id": "fx-000013",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "reports having new details for a case and directs the other party to rate it",
+   "target_ids": [
+    "l1:modality.directed",
+    "l1:predicate.possess",
+    "l1:time.at_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the visit is a v3 activity_occurrence; the desire behind it is separately attested and the calming view is an evaluation with no ontology home",
+   "expression_id": "fx-000014",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "two days ago he wanted to be alone with nature and went to a canyon he found nearby, which he reports as a past occasion",
+   "target_ids": [
+    "l1:event.activity_occurrence",
+    "l1:modality.desired",
+    "l1:time.before_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the densest expression in the set: purchase, attendance, possession, listening, taste and a request all in one turn. Worth checking that nothing was dropped",
+   "expression_id": "fx-000015",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "a strong current liking for indie and folk-rock, a festival attended last weekend where a named band was discovered, an EP bought there and now owned and repeatedly listened to, and a request for similar artists",
+   "target_ids": [
+    "l1:attribute.designation",
+    "l1:event.activity_occurrence",
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.consume_media",
+    "l1:predicate.transfer_value",
+    "l1:preference.affinity",
+    "l1:state.possession",
+    "l1:strength.strong",
+    "l1:time.before_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "possession of a living room is thin but it is the attribute bearer the desire is about; a reviewer may prefer to drop it",
+   "expression_id": "fx-000016",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "wants a cosier living room and asks for lamp placement ideas; the living room is a place at the speaker's disposal and the atmosphere is what they want",
+   "target_ids": [
+    "l1:event.information_request",
+    "l1:modality.desired",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:state.possession"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the clearest habit in the set: recurrence plus paramount strength plus a named set of practices. Flagged for the L2 habit reading and the v3 pursuit item",
+   "expression_id": "fx-000017",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "an annual family camping trip with marshmallows and campfire stories, described as the recurring highlight of the speaker's summer",
+   "target_ids": [
+    "l1:event.activity_occurrence",
+    "l1:frequency.habitual",
+    "l1:preference.affinity",
+    "l1:state.ongoing_pursuit",
+    "l1:strength.paramount",
+    "l1:time.recurring",
+    "l2:abstraction.habit"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "v3 hold_value is what makes this expressible; the stuckness itself is an affective state the ontology has no item for, so it is carried only in the sense",
+   "expression_id": "fx-000018",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "holds affecting people and the world positively as what matters to him, and states an intention to find a better way to focus on it, while currently feeling stuck",
+   "target_ids": [
+    "l1:predicate.hold_value",
+    "l1:task.declared_intention",
+    "l1:time.at_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "pending_arrangement is defensible because a trip is in progress, but nothing is committed to yet; a reviewer may prefer declared_intention",
+   "expression_id": "fx-000019",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "a trip is being planned with the destination not yet settled, and suggestions are requested",
+   "target_ids": [
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:polarity.indeterminate",
+    "l1:state.pending_arrangement",
+    "l1:time.at_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "a dated collaborative occasion plus a completion; the friend is a participant. The created artefact itself has no ontology home",
+   "expression_id": "fx-000020",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "last Thursday he worked with a gaming friend on a programming project and they finished a Witcher-3-inspired virtual world",
+   "target_ids": [
+    "l1:event.activity_occurrence",
+    "l1:event.objective_achieved",
+    "l1:time.before_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "",
+   "expression_id": "fx-000021",
+   "needs_second_opinion": false,
+   "outcome": "none",
+   "sense": "sympathetic advice and a question about how the addressee might channel their energy; nothing rememberable about the speaker",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "'we've gotta do what we can' brushes against hold_value, but no value content is named and the cause is only a deictic reference to the previous turn",
+   "expression_id": "fx-000022",
+   "needs_second_opinion": true,
+   "outcome": "none",
+   "sense": "thanks plus an evaluative gloss on people coming together for a cause; the cause is never named, so nothing specific is attested",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the residence is inferred from 'show you around town' plus naming local venues, which is strong but not stated; flagged for that inference",
+   "expression_id": "fx-000023",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "lives in Boston, will show the addressee around when he visits, and commits to attending his performance from the front row",
+   "target_ids": [
+    "l1:event.activity_occurrence",
+    "l1:predicate.reside_at",
+    "l1:state.residence",
+    "l1:task.declared_intention",
+    "l1:time.after_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "a v3 hold_belief with a normative edge; avoidance covers 'punishment is never the proper way'. Whether hold_value adds anything over hold_belief here is worth a check",
+   "expression_id": "fx-000024",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "believes positive reinforcement is the right way to train pets and that punishment is never proper, stated as a general claim she treats as important",
+   "target_ids": [
+    "l1:predicate.hold_belief",
+    "l1:predicate.hold_value",
+    "l1:preference.avoidance"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "kind covers 'classic movie' as a genre; the assessment is hers rather than a public rating, which is what attribute.assessment's attribution clause allows",
+   "expression_id": "fx-000025",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "watched a classic movie recently, judged the story gripping and the acting good, and reports it stayed with her",
+   "target_ids": [
+    "l1:attribute.assessment",
+    "l1:attribute.kind",
+    "l1:event.media_consumption",
+    "l1:predicate.consume_media",
+    "l1:time.before_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "first_encounter plus the tournament as an occasion he took part in; whether the new acquaintance rises to an L2 relationship on one mention is doubtful, so it is not named",
+   "expression_id": "fx-000026",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "started spending time with people outside his usual circle whom he met at a tournament",
+   "target_ids": [
+    "l1:event.activity_occurrence",
+    "l1:event.first_encounter",
+    "l1:time.before_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "'routines' is read as exercise from the standing context of the turn; the pursuit is a v3 absorption and the habitual frequency is explicit in 'always'",
+   "expression_id": "fx-000027",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "habitually looks for new exercise routines to vary her training, which presupposes a continuing practice",
+   "target_ids": [
+    "l1:frequency.habitual",
+    "l1:predicate.seek_information",
+    "l1:preference.affinity",
+    "l1:state.ongoing_pursuit",
+    "l1:time.at_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the canonical standing_condition case. capability_constraint plus avoidance rather than the L2 abstraction, which would need a second support",
+   "expression_id": "fx-000028",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "lactose intolerant, so requires a dairy-free recipe; a standing condition that restricts what may be offered her",
+   "target_ids": [
+    "l1:preference.avoidance",
+    "l1:state.capability_constraint",
+    "l1:time.unspecified"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "",
+   "expression_id": "fx-000029",
+   "needs_second_opinion": false,
+   "outcome": "concept",
+   "sense": "asks what made the other party name their pet Tilly; only the asking is the speaker's",
+   "target_ids": [
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.seek_information"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "occupation is stated ('as a writer'); the crash and data loss are an adverse event the ontology can only approximate through attempt_failed, which is a poor fit",
+   "expression_id": "fx-000030",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "a writer whose laptop crashed last week and who lost all her work, which she describes as a major blow to her livelihood",
+   "target_ids": [
+    "l1:event.attempt_failed",
+    "l1:predicate.occupy_role",
+    "l1:state.occupation_status",
+    "l1:state.ongoing_pursuit",
+    "l1:time.before_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "",
+   "expression_id": "fx-000031",
+   "needs_second_opinion": false,
+   "outcome": "none",
+   "sense": "shared excitement with no propositional content of its own",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "",
+   "expression_id": "fx-000032",
+   "needs_second_opinion": false,
+   "outcome": "none",
+   "sense": "pleasantry plus an invitation to report back after reading; the reading is the addressee's, not the speaker's",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the activity is a v3 pursuit but the bearer is a third party and the content is their enjoyment, so a concept label would attribute it to the wrong subject",
+   "expression_id": "fx-000033",
+   "needs_second_opinion": true,
+   "outcome": "out_of_scope",
+   "sense": "reports that a third party, most likely his son or his dog, is happy and carefree in their favourite activity",
+   "target_ids": [],
+   "would_require": "a frame for a third party's affective state and their favourite activity, where the subject of the memory is not the speaker; the combined ontology models the remembered subject and admits participants, but has no way to hold an attributed state of another party as its own content"
+  },
+  {
+   "adjudication_note": "",
+   "expression_id": "fx-000034",
+   "needs_second_opinion": false,
+   "outcome": "concept",
+   "sense": "asks what something the other party mentioned is about; a bare information request",
+   "target_ids": [
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.seek_information"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "a denied v3 capability plus a desire; the two time qualifiers are deliberate, one for the negated past experience and one for the hoped-for future",
+   "expression_id": "fx-000035",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "has not worked with any programming language other than his current one, and hopes to in future",
+   "target_ids": [
+    "l1:modality.desired",
+    "l1:polarity.denied",
+    "l1:state.capability",
+    "l1:time.after_assertion",
+    "l1:time.before_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "a v3 hold_belief about pets in general rather than about any pet of his; the warmth toward pets is the affinity",
+   "expression_id": "fx-000036",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "holds a general claim that pets become friends and confidantes who listen, comfort and leave a lasting mark",
+   "target_ids": [
+    "l1:predicate.hold_belief",
+    "l1:preference.affinity"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "a tag question attributing an affinity to the addressees; a reviewer may prefer none, since the content is about them and the speaker only seeks confirmation",
+   "expression_id": "fx-000037",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "asks the addressees to confirm that they enjoy spending time together in this bar, which presupposes a recurring practice he attributes to them",
+   "target_ids": [
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:preference.affinity",
+    "l1:state.ongoing_pursuit"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "",
+   "expression_id": "fx-000038",
+   "needs_second_opinion": false,
+   "outcome": "none",
+   "sense": "well-wish and a hedged agreement; no rememberable content",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "hosting the seminar is a v3 activity_occurrence and its successful completion is the achievement; the fulfilment is affective and has no item",
+   "expression_id": "fx-000039",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "ran a seminar that went well with a good turnout, learned new things from it, and found sharing his knowledge fulfilling",
+   "target_ids": [
+    "l1:attribute.assessment",
+    "l1:event.activity_occurrence",
+    "l1:event.objective_achieved",
+    "l1:time.before_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "two times on purpose: the completion is past and the launch is a scheduled future arrangement. Whether a launch date he does not control is a pending_arrangement is worth checking",
+   "expression_id": "fx-000040",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "finished building his first mobile game, which he frames as a career milestone, and it launches next month",
+   "target_ids": [
+    "l1:event.objective_achieved",
+    "l1:state.pending_arrangement",
+    "l1:time.after_assertion",
+    "l1:time.before_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "",
+   "expression_id": "fx-000041",
+   "needs_second_opinion": false,
+   "outcome": "none",
+   "sense": "congratulations, a compliment on a photo and a generic remark that such moments make life wonderful; nothing about the speaker",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "affiliation is now denied of him, which is why polarity is named; the hardship is affective and unrepresentable, and 'never saw this coming' is a defeated expectation with no item",
+   "expression_id": "fx-000042",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "lost his job at a mechanical engineering company that went under, an unforeseen transition he is finding hard",
+   "target_ids": [
+    "l1:attribute.affiliation",
+    "l1:event.life_transition",
+    "l1:polarity.denied",
+    "l1:predicate.undergo_transition",
+    "l1:state.occupation_status",
+    "l1:time.before_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "",
+   "expression_id": "fx-000043",
+   "needs_second_opinion": false,
+   "outcome": "none",
+   "sense": "thanks and appreciation for support; no rememberable content",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "frequency.invariant plus a pursuit would put the content on the wrong subject and would turn a character judgement into a behavioural record",
+   "expression_id": "fx-000044",
+   "needs_second_opinion": true,
+   "outcome": "out_of_scope",
+   "sense": "characterises the addressee as someone who never shies from a challenge and always tries new things, and says he finds that inspiring",
+   "target_ids": [],
+   "would_require": "a frame for an attributed disposition or character trait of another party, distinct from a preference or a habit of the remembered subject; the combined ontology holds habits and preferences of a subject, not one party's standing characterisation of another"
+  },
+  {
+   "adjudication_note": "travel as an ongoing pursuit is defensible from 'my next trip' implying a series; a reviewer may keep only the intention and the request",
+   "expression_id": "fx-000045",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "planning a next trip, undecided between solo and family travel, and asking how to balance freedom against bonding time",
+   "target_ids": [
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:polarity.indeterminate",
+    "l1:predicate.seek_information",
+    "l1:state.ongoing_pursuit",
+    "l1:task.declared_intention",
+    "l1:time.after_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "v3 hold_value for 'I love making him happy' as a priority of his; the affinity carries the liking. A reviewer may find hold_value too strong for a thanks-turn",
+   "expression_id": "fx-000046",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "says he loves making the third party happy, which is a standing thing he cares about rather than a one-off",
+   "target_ids": [
+    "l1:predicate.hold_value",
+    "l1:preference.affinity"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "",
+   "expression_id": "fx-000047",
+   "needs_second_opinion": false,
+   "outcome": "none",
+   "sense": "a teaser announcing she has something to show; the content itself is never stated",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "dense and multi-layered: a v3 pursuit (making beats), a v3 occurrence (this session), a v3 value (paying it forward) and an assessment of a third party",
+   "expression_id": "fx-000048",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "makes beats for young artists, is doing so in the photo, values paying it forward and working with new talent, and judges this artist to have great musical potential",
+   "target_ids": [
+    "l1:attribute.assessment",
+    "l1:event.activity_occurrence",
+    "l1:predicate.hold_value",
+    "l1:state.ongoing_pursuit",
+    "l1:time.at_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "",
+   "expression_id": "fx-000049",
+   "needs_second_opinion": false,
+   "outcome": "none",
+   "sense": "sign-off pleasantry with an agreement to report back later; nothing rememberable",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the clearest v3 hold_value in the set; the affective payoff is not representable but the value and its strength are",
+   "expression_id": "fx-000050",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "cherishes time with family and says it is when she feels most alive and happy",
+   "target_ids": [
+    "l1:predicate.hold_value",
+    "l1:preference.affinity",
+    "l1:strength.strong"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "v3 hold_belief for the general claim he took from the book; consume_media for having read it and a declared intention to act on it",
+   "expression_id": "fx-000051",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "read a book that convinced him a focused, efficient business adapting to customer feedback is right, and intends to try that approach",
+   "target_ids": [
+    "l1:predicate.consume_media",
+    "l1:predicate.hold_belief",
+    "l1:task.declared_intention",
+    "l1:time.after_assertion",
+    "l1:time.before_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "note-taking on local politics reads as a v3 ongoing pursuit given the progressive aspect; the praise for John is not her own content",
+   "expression_id": "fx-000052",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "has been taking notes about local politics in her notebook over some period, alongside praise for the addressee",
+   "target_ids": [
+    "l1:event.activity_occurrence",
+    "l1:state.ongoing_pursuit",
+    "l1:time.before_assertion",
+    "l1:time.spanning"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "",
+   "expression_id": "fx-000053",
+   "needs_second_opinion": false,
+   "outcome": "none",
+   "sense": "encouragement predicting that a third party's advice will help the addressee; nothing about the speaker",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the addressee's marriage is memory-worthy but belongs to the addressee; a relationship label here would record the wrong subject",
+   "expression_id": "fx-000054",
+   "needs_second_opinion": true,
+   "outcome": "none",
+   "sense": "congratulations on a marriage plus a generic remark about love; the marriage is the addressee's, not the speaker's",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the short film is an L2 project with a genuine second support (the ongoing filmmaking practice); flagged for that and for the pursuit reading",
+   "expression_id": "fx-000055",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "working on a short film project, has watched and been thinking about the cinematography of Joker, and asks whether camera format affects a film's mood",
+   "target_ids": [
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.consume_media",
+    "l1:predicate.seek_information",
+    "l1:state.ongoing_pursuit",
+    "l1:time.at_assertion",
+    "l2:abstraction.project"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the only place a role id is named: the count of seventeen is the attestation, not a slot the frame happens to have. Flagged also for the v3 L2 pursuit_profile, which the productivity burst plus the standing practice jointly support",
+   "expression_id": "fx-000056",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "has written seventeen poems in the past two weeks as creative self-expression, has writing deadlines to stay on top of, and asks for scheduling tools",
+   "target_ids": [
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:role.quantity",
+    "l1:state.ongoing_pursuit",
+    "l1:task.outstanding_requirement",
+    "l1:time.before_assertion",
+    "l2:abstraction.pursuit_profile"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "'I love those games too' is an affinity of the speaker's; whether playing them amounts to an ongoing pursuit on this evidence is the judgement to check",
+   "expression_id": "fx-000057",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "loves games of the kind the addressee made and asks whether development was difficult",
+   "target_ids": [
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:preference.affinity",
+    "l1:state.ongoing_pursuit",
+    "l1:strength.strong"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the routes are a place attribute and the enjoyment is his; the offer to show them is a social offer, which is only partly captured as a declared intention",
+   "expression_id": "fx-000058",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "knows and enjoys particular routes near the river and offers to show the addressee the best ones",
+   "target_ids": [
+    "l1:attribute.place",
+    "l1:preference.affinity",
+    "l1:state.ongoing_pursuit",
+    "l1:task.declared_intention",
+    "l1:time.after_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "pending_arrangement rests on 'see you soon' plus the prior arrangement being presupposed rather than made here",
+   "expression_id": "fx-000059",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "an imminent visit is arranged, and he intends to show the visitor the local music and food when it happens",
+   "target_ids": [
+    "l1:state.pending_arrangement",
+    "l1:task.declared_intention",
+    "l1:time.after_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "",
+   "expression_id": "fx-000060",
+   "needs_second_opinion": false,
+   "outcome": "none",
+   "sense": "congratulatory backchannel plus an exhortation to cherish family time; nothing about the speaker",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "capability_constraint for the admitted inability to design it; a reviewer may prefer state.capability denied instead, which is why this is flagged",
+   "expression_id": "fx-000061",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "thinks a custom phone case or personalised journal would be a good gift, does not know how to design or order one, and asks for websites or tools",
+   "target_ids": [
+    "l1:event.information_request",
+    "l1:modality.believed",
+    "l1:modality.question",
+    "l1:polarity.indeterminate",
+    "l1:predicate.seek_information",
+    "l1:state.capability_constraint",
+    "l1:task.declared_intention"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the dirty console is a state of a possessed thing rather than of the subject; outstanding_requirement carries the cleaning that still needs doing",
+   "expression_id": "fx-000062",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "owns a car whose centre console is dusty and needs cleaning, and asks for cleaning tips and a product recommendation",
+   "target_ids": [
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.possess",
+    "l1:predicate.seek_information",
+    "l1:state.possession",
+    "l1:task.outstanding_requirement",
+    "l1:time.at_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "an information_request label is defensible for any question, but the convention applied here reserves it for requests whose content bears on the asker",
+   "expression_id": "fx-000063",
+   "needs_second_opinion": true,
+   "outcome": "none",
+   "sense": "asks which part of an experience the addressee remembers best; the content sought is the addressee's",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "playing it is a v3 occurrence; the recommendation to the addressee is a prediction with no ontology item",
+   "expression_id": "fx-000064",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "played the game in question, judged its world immersive and its story amazing, and predicts the addressee will like it",
+   "target_ids": [
+    "l1:attribute.assessment",
+    "l1:event.activity_occurrence",
+    "l1:preference.affinity",
+    "l1:time.before_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "a v3 hold_belief that v2 could only have forced into hold_attitude, losing that it is a general claim about the world",
+   "expression_id": "fx-000065",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "holds that nature is calming and resets the mind and body, stated as a general claim rather than about a particular occasion",
+   "target_ids": [
+    "l1:predicate.hold_belief"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the strongest gap in the set. state.circumstance would technically hold it, so a reviewer may downgrade this to concept; the reason it is a gap is that a memory that cannot say 'health' cannot answer a question about health",
+   "expression_id": "fx-000066",
+   "needs_second_opinion": true,
+   "outcome": "out_of_scope",
+   "sense": "reports that things have been challenging lately and that something has been hard on his health, without saying what",
+   "target_ids": [],
+   "would_require": "a health-status frame, or at minimum a way to hold an unspecified adverse condition affecting the subject; state.circumstance is the nearest v2 item but its sense is a general condition rather than a health impairment, and nothing in v3 adds health"
+  },
+  {
+   "adjudication_note": "hosting is a v3 occurrence, the success is the achievement and the fundraising is a transfer of value to a third party",
+   "expression_id": "fx-000067",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "ran a game event that succeeded, drew a large turnout and raised money for charity",
+   "target_ids": [
+    "l1:event.activity_occurrence",
+    "l1:event.objective_achieved",
+    "l1:predicate.transfer_value",
+    "l1:time.before_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "possession of the car is presupposed rather than asserted here, so a possession label would be reaching; the whole content is affect and trust",
+   "expression_id": "fx-000068",
+   "needs_second_opinion": true,
+   "outcome": "out_of_scope",
+   "sense": "feels much more confident and excited to show off his car, and trusts the expertise of whoever worked on it",
+   "target_ids": [],
+   "would_require": "an affective-state frame for confidence and excitement, plus a way to hold trust in another party's competence; v2 and v3 together model attitudes toward objects and beliefs about the world, but not a felt state of the subject nor trust placed in an agent"
+  },
+  {
+   "adjudication_note": "",
+   "expression_id": "fx-000069",
+   "needs_second_opinion": false,
+   "outcome": "none",
+   "sense": "congratulation on a wedding, a generic remark about love, and a question about the addressee's favourite memories; nothing about the speaker",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the reframing itself is a coping stance with no item; what is representable is the intention to explore other active pursuits",
+   "expression_id": "fx-000070",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "is trying to treat a setback as a chance to find other ways of staying active and travelling, and may try something different",
+   "target_ids": [
+    "l1:modality.intended",
+    "l1:state.ongoing_pursuit",
+    "l1:task.declared_intention",
+    "l1:time.after_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the review is named media he consumed and the phone is a named option he is drawn to; the consideration is a desire short of an intention",
+   "expression_id": "fx-000071",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "watched Unbox Therapy's review of the Google Pixel 6 and has since been considering buying that named phone",
+   "target_ids": [
+    "l1:attribute.designation",
+    "l1:event.media_consumption",
+    "l1:modality.desired",
+    "l1:predicate.consume_media",
+    "l1:preference.affinity",
+    "l1:time.before_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "'my grocery shopping routine' names an existing habit explicitly, which is why the L2 item is defensible on one turn",
+   "expression_id": "fx-000072",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "has a habitual grocery shopping routine, intends to change it, and asks how to optimise lists and reduce food waste",
+   "target_ids": [
+    "l1:event.information_request",
+    "l1:frequency.habitual",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:task.declared_intention",
+    "l1:time.after_assertion",
+    "l2:abstraction.habit"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "",
+   "expression_id": "fx-000073",
+   "needs_second_opinion": false,
+   "outcome": "none",
+   "sense": "thanks plus an assurance she will follow the advice; nothing to keep",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "",
+   "expression_id": "fx-000074",
+   "needs_second_opinion": false,
+   "outcome": "none",
+   "sense": "admiration for a collective effort plus a question about what the addressee does there; nothing about the speaker",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "frequency.rare is about the recent lapse rather than the settled pattern, which is the tension worth adjudicating; the dogs are a possession and the walking is a pursuit",
+   "expression_id": "fx-000075",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "agrees that nature time is needed, has pets she normally walks outdoors and loves doing so, but life has been hectic so it has been a while since the last walk",
+   "target_ids": [
+    "l1:event.activity_occurrence",
+    "l1:frequency.rare",
+    "l1:predicate.hold_belief",
+    "l1:preference.affinity",
+    "l1:state.ongoing_pursuit",
+    "l1:state.possession",
+    "l1:time.before_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "",
+   "expression_id": "fx-000076",
+   "needs_second_opinion": false,
+   "outcome": "none",
+   "sense": "agreement plus a question about the addressee's favourite game with a third party",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "",
+   "expression_id": "fx-000077",
+   "needs_second_opinion": false,
+   "outcome": "none",
+   "sense": "a bare question about the addressee's preferred reading genre",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the walking pursuit and the dogs are presupposed by 'my pups'; the intention is conditional on learning the location, which the ontology could also hold as a conditional intention",
+   "expression_id": "fx-000078",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "asks where a pictured spot is because she wants to take her dogs walking there",
+   "target_ids": [
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:state.ongoing_pursuit",
+    "l1:state.possession",
+    "l1:task.declared_intention",
+    "l1:time.after_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the condition attaches to her recommendation rather than to an intention of her own, so conditional_intention is a stretch; a reviewer may drop it",
+   "expression_id": "fx-000079",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "recommends the thing under discussion on condition the addressee is willing to explain it to their friends",
+   "target_ids": [
+    "l1:modality.directed",
+    "l1:preference.affinity",
+    "l1:task.conditional_intention"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the items are a possession he means to transfer; the sale itself has not happened, so transfer_value would be premature",
+   "expression_id": "fx-000080",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "owns tea sets and typewriters he intends to sell, plans to approach local antique dealers who specialise in them, and asks whether that is wise and how to do it",
+   "target_ids": [
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:state.possession",
+    "l1:task.declared_intention",
+    "l1:time.after_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "",
+   "expression_id": "fx-000081",
+   "needs_second_opinion": false,
+   "outcome": "none",
+   "sense": "congratulates the addressee on finding a group where she can have an impact and invites her to say more; nothing about the speaker",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the dated collaboration is a v3 occurrence with a participant and the general 'it's great working with others' is a v3 value; whether that last clause is a value or merely an attitude is worth checking",
+   "expression_id": "fx-000082",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "worked with someone from the group on a project last week where their complementary strengths produced something good, and holds collaboration as valuable in general",
+   "target_ids": [
+    "l1:event.activity_occurrence",
+    "l1:event.objective_achieved",
+    "l1:predicate.hold_value",
+    "l1:preference.affinity",
+    "l1:time.before_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "following street art reads as an ongoing pursuit; the LA locality is a place attribute of what is sought rather than a stated residence",
+   "expression_id": "fx-000083",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "wants to explore more local artists' work and asks for LA-based street artists and muralists to look at",
+   "target_ids": [
+    "l1:attribute.place",
+    "l1:event.information_request",
+    "l1:modality.desired",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:preference.affinity",
+    "l1:state.ongoing_pursuit"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the densest L2 case: best_friend is a named friendship, so both the abstraction and the relation kind are defensible from one turn. The dated party and the gift are separate attestations",
+   "expression_id": "fx-000084",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "asks about a named watch model, and reports attending her best friend's thirtieth birthday party on 22 April, where the personalised photo album she gave was well received",
+   "target_ids": [
+    "l1:attribute.calendar_position",
+    "l1:attribute.designation",
+    "l1:event.activity_occurrence",
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.transfer_value",
+    "l1:preference.affinity",
+    "l1:time.before_assertion",
+    "l2:abstraction.relationship",
+    "l2:relation.friendship"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "",
+   "expression_id": "fx-000085",
+   "needs_second_opinion": false,
+   "outcome": "none",
+   "sense": "a bare question about challenges the addressee has met",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "",
+   "expression_id": "fx-000086",
+   "needs_second_opinion": false,
+   "outcome": "none",
+   "sense": "asks what something in a shared image is and says he looks forward to the story",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "'particularly interested in' is a topical affinity; there is no evidence of a practice, so no pursuit label",
+   "expression_id": "fx-000087",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "wants to know the current state of AI in medical diagnosis and asks for recent breakthroughs and notable applications",
+   "target_ids": [
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:preference.affinity"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "studying is the pursuit the question presupposes; the belief is about the practice's benefits rather than a report of an occasion",
+   "expression_id": "fx-000088",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "holds that the practice under discussion helps with challenges and gives balance and strength, and asks for tips on staying relaxed while studying",
+   "target_ids": [
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.hold_belief",
+    "l1:predicate.seek_information",
+    "l1:state.ongoing_pursuit"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the priority ordering ('first') brushes against hold_value but the text is an intention about a specific next action, so the intention is what is labelled",
+   "expression_id": "fx-000089",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "accepts the advice and states he will look after his dogs first",
+   "target_ids": [
+    "l1:state.possession",
+    "l1:task.declared_intention",
+    "l1:time.after_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "hold_value could be forced onto 'make a difference', but the content of the turn is the significance and the recalled feeling, which is what a concept label would drop",
+   "expression_id": "fx-000090",
+   "needs_second_opinion": true,
+   "outcome": "out_of_scope",
+   "sense": "found the occasion meaningful because it recalled her own past struggles and her loneliness then, and she was glad to share her story and support others",
+   "target_ids": [],
+   "would_require": "a frame for the subject's remembered emotional history and for the personal significance an event holds for them; v2 and v3 hold events, values and beliefs, but not a felt past state nor the meaning a subject assigns to an occasion"
+  },
+  {
+   "adjudication_note": "preference.comparative is defensible because sports brands are ranked above the open alternative; hold_value is explicit in 'align with my values' even though the values themselves are not named, which is the reason for the flag",
+   "expression_id": "fx-000091",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "is considering sponsorship or collaboration with named sports brands, prefers sports-related brands while remaining open to others that align with his values",
+   "target_ids": [
+    "l1:attribute.designation",
+    "l1:modality.desired",
+    "l1:predicate.hold_value",
+    "l1:preference.affinity",
+    "l1:preference.comparative",
+    "l1:task.declared_intention",
+    "l1:time.after_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "threshold is the right item for the high-protein low-carb constraint; whether the vegan framing is a standing avoidance or just this request's scope is not settled by the text, so no avoidance label",
+   "expression_id": "fx-000092",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "will try the quinoa tips, and asks for vegan protein sources for salads that are high in protein and low in carbohydrate",
+   "target_ids": [
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:preference.threshold",
+    "l1:state.ongoing_pursuit",
+    "l1:task.declared_intention"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the three-year span is the attestation rather than an incidental slot, which is why role.duration is named here as it was for the poem count",
+   "expression_id": "fx-000093",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "has had three named pets for three years and says she could not live without them",
+   "target_ids": [
+    "l1:attribute.designation",
+    "l1:preference.affinity",
+    "l1:role.duration",
+    "l1:state.possession",
+    "l1:strength.strong",
+    "l1:time.spanning"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the yoga practice is a v3 pursuit and the videos are consumed media; the request for variety is a preference the ontology holds only as the asking",
+   "expression_id": "fx-000094",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "is taking up yoga, follows Adriene's videos on YouTube for it, and asks for apps with more variety",
+   "target_ids": [
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.consume_media",
+    "l1:predicate.seek_information",
+    "l1:state.ongoing_pursuit",
+    "l1:task.declared_intention",
+    "l1:time.at_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "",
+   "expression_id": "fx-000095",
+   "needs_second_opinion": false,
+   "outcome": "none",
+   "sense": "asks whether the addressee's pets enjoy an object and compliments how comfy it looks",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "'I'm in the city of Los Angeles' is ambiguous between residence and current location; residence is taken because the surrounding request is about exploring locally over time",
+   "expression_id": "fx-000096",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "is in Los Angeles, knows the downtown area has much street art, and asks for specific recommendations and upcoming events or festivals",
+   "target_ids": [
+    "l1:attribute.place",
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.reside_at",
+    "l1:predicate.seek_information",
+    "l1:state.residence",
+    "l1:time.at_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "",
+   "expression_id": "fx-000097",
+   "needs_second_opinion": false,
+   "outcome": "none",
+   "sense": "thanks for support; no rememberable content",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "",
+   "expression_id": "fx-000098",
+   "needs_second_opinion": false,
+   "outcome": "none",
+   "sense": "compliments a photo of a crowd and stage and asks who the headliner was",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "a named first encounter with affiliation, plus an explicit outstanding item ('I should follow up'); the L2 task is defensible because the follow-up has a lifecycle the tracker column is meant to hold",
+   "expression_id": "fx-000099",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "met Jason, CEO of StartupX, at the TechConnect conference, owes him a follow-up about collaboration, and asks for help drafting the email",
+   "target_ids": [
+    "l1:attribute.affiliation",
+    "l1:attribute.designation",
+    "l1:event.first_encounter",
+    "l1:modality.directed",
+    "l1:task.outstanding_requirement",
+    "l1:time.before_assertion",
+    "l2:abstraction.task"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "two trips at two times, which is why both time qualifiers are named; hiking and camping are the pursuit the plan presupposes",
+   "expression_id": "fx-000100",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "started a solo camping trip to Yosemite today, is planning a further Eastern Sierra trip for July or August, and asks for scenic hiking trails there",
+   "target_ids": [
+    "l1:attribute.calendar_position",
+    "l1:event.activity_occurrence",
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:state.ongoing_pursuit",
+    "l1:task.declared_intention",
+    "l1:time.after_assertion",
+    "l1:time.at_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the channel is an ongoing creative pursuit and the strategy improvement is a project with sub-goals; the popularity is an assessment he draws from comment volume",
+   "expression_id": "fx-000101",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "runs a YouTube channel whose most popular video is about social media analytics, judges the direction to be working, and wants help brainstorming new content ideas",
+   "target_ids": [
+    "l1:attribute.assessment",
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:state.ongoing_pursuit",
+    "l1:state.possession",
+    "l1:task.declared_intention",
+    "l2:abstraction.project"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the breakage is an adverse event that attempt_failed fits only loosely; the two-week repair duration is stated and load-bearing for why the constraint is wanted",
+   "expression_id": "fx-000102",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "owns a stand mixer that broke last month and took two weeks at a repair shop, baked by hand meanwhile, and now wants dessert recipes that need no stand mixer",
+   "target_ids": [
+    "l1:event.attempt_failed",
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.possess",
+    "l1:preference.avoidance",
+    "l1:role.duration",
+    "l1:state.ongoing_pursuit",
+    "l1:state.possession",
+    "l1:time.before_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "preference.comparative because the choice is explicitly between two named alternatives; the attendance is a v3 occurrence with a named participant",
+   "expression_id": "fx-000103",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "attended his colleague Alex's leadership-programme graduation a few weeks ago, which prompted thoughts about his own education, and is choosing between two digital marketing certifications",
+   "target_ids": [
+    "l1:attribute.designation",
+    "l1:event.activity_occurrence",
+    "l1:event.information_request",
+    "l1:modality.desired",
+    "l1:modality.question",
+    "l1:preference.comparative",
+    "l1:task.declared_intention",
+    "l1:time.before_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "cooking is the pursuit and the preparation is the immediate intention; the thanks is pleasantry that carries nothing",
+   "expression_id": "fx-000104",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "will start preparing ingredients for the Korean Chicken Stew and will adjust the cooking time for chicken breast",
+   "target_ids": [
+    "l1:state.ongoing_pursuit",
+    "l1:task.declared_intention",
+    "l1:time.after_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "an assistant turn, so source_status.assistant_asserted would apply if anything were attested; nothing is, because the turn only poses a question",
+   "expression_id": "fx-000105",
+   "needs_second_opinion": true,
+   "outcome": "none",
+   "sense": "the assistant thanking the user and asking the next survey question about Netflix genre diversity; assistant meta-talk with no user content",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the earlier zoo visit is a past occurrence and the planned visit is a desire; the named event is a designation of what is asked about",
+   "expression_id": "fx-000106",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "saw pandas eating dinner at another zoo previously, and asks how best to plan a day at the San Diego Zoo to make the most of the Nighttime Zoo event",
+   "target_ids": [
+    "l1:attribute.designation",
+    "l1:event.activity_occurrence",
+    "l1:event.information_request",
+    "l1:modality.desired",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:time.before_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the 45-minute time is a magnitude and evidences a v3 capability; the completed run is both an occurrence and an achievement, and the uncertainty about pacing has no item",
+   "expression_id": "fx-000107",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "ran a 5K last year in 45 minutes, intends to start a base building phase, and is unsure how to pace himself",
+   "target_ids": [
+    "l1:attribute.magnitude",
+    "l1:event.activity_occurrence",
+    "l1:event.objective_achieved",
+    "l1:polarity.indeterminate",
+    "l1:state.capability",
+    "l1:state.ongoing_pursuit",
+    "l1:task.declared_intention",
+    "l1:time.before_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "quality and safety are a threshold on an ordered attribute; the presence of a baby is presupposed and would be memory-worthy, but the ontology has no item for it and the turn never asserts it",
+   "expression_id": "fx-000108",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "intends to buy a baby gym, requires it to be high quality and safe, and asks for durable safe brands",
+   "target_ids": [
+    "l1:event.information_request",
+    "l1:modality.desired",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:preference.threshold",
+    "l1:task.declared_intention",
+    "l1:time.after_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "colour and material are kinds rather than magnitudes; the future sofa is a plan the ontology holds only as a declared intention",
+   "expression_id": "fx-000109",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "wants a light grey or beige throw pillow with wooden or metal accents to match the colour scheme planned for a future sectional sofa, and asks for brands",
+   "target_ids": [
+    "l1:attribute.kind",
+    "l1:event.information_request",
+    "l1:modality.desired",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:preference.affinity",
+    "l1:task.declared_intention",
+    "l1:time.after_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "an assistant turn like fx-000105. Nothing is attested, so assistant_asserted has nothing to qualify",
+   "expression_id": "fx-000110",
+   "needs_second_opinion": true,
+   "outcome": "none",
+   "sense": "the assistant opening a survey and posing its first question about recommending Netflix; meta-talk with no user content",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the profiles are things at his disposal and the updating is outstanding work; a reviewer may find possession of a social profile too thin",
+   "expression_id": "fx-000111",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "has Instagram, Twitter and LinkedIn profiles that still need updating, and asks for platform-specific tips",
+   "target_ids": [
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:state.possession",
+    "l1:task.outstanding_requirement"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the points are a possession with a named counterparty, which is why affiliation is included; a reviewer may prefer to read the store only as a designation",
+   "expression_id": "fx-000112",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "wants a new coffee maker, holds accumulated loyalty points at BedBath&Beyond and intends to spend them, and asks for suggestions",
+   "target_ids": [
+    "l1:attribute.affiliation",
+    "l1:event.information_request",
+    "l1:modality.desired",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:state.possession",
+    "l1:task.declared_intention",
+    "l1:time.after_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "a team membership is an affiliation, the record is a magnitude, volleyball is the pursuit and the athletic self-assessment is a v3 capability. The confidence itself is affective and unrepresentable",
+   "expression_id": "fx-000113",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "plays for a named volleyball team currently at 5-2, feels athletically capable, intends to enter a triathlon in the fall, and asks how to train",
+   "target_ids": [
+    "l1:attribute.affiliation",
+    "l1:attribute.designation",
+    "l1:attribute.magnitude",
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:state.capability",
+    "l1:state.ongoing_pursuit",
+    "l1:task.declared_intention",
+    "l1:time.after_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the never-having-cooked-with-gochujang is a denied v3 capability; the spice concern is a threshold on an ordered attribute",
+   "expression_id": "fx-000114",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "wants to try a Korean chicken stew recipe, has never cooked with gochujang, is concerned about spiciness and asks how spicy the recommended amount will be",
+   "target_ids": [
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:polarity.denied",
+    "l1:predicate.seek_information",
+    "l1:preference.threshold",
+    "l1:state.capability",
+    "l1:state.ongoing_pursuit",
+    "l1:time.before_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "an explicit reminder-to-self with a named day, which is the cleanest L2 task in the set; two intentions on two occasions, both dated",
+   "expression_id": "fx-000115",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "will try on both boots at a local outdoor gear store this weekend, and must take his brown leather dress shoes to the cobbler on Saturday to be polished and conditioned",
+   "target_ids": [
+    "l1:attribute.calendar_position",
+    "l1:state.possession",
+    "l1:task.declared_intention",
+    "l1:task.outstanding_requirement",
+    "l1:time.after_assertion",
+    "l2:abstraction.task"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "both the consumption event and the resulting strong affinity are attested, and the audiobook format is part of the designation of what was consumed",
+   "expression_id": "fx-000116",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "recently listened to Ready Player One as an audiobook and loved it, and asks about the premise and reading order of Jasper Fforde's Thursday Next series",
+   "target_ids": [
+    "l1:attribute.designation",
+    "l1:event.information_request",
+    "l1:event.media_consumption",
+    "l1:modality.question",
+    "l1:predicate.consume_media",
+    "l1:preference.affinity",
+    "l1:strength.strong",
+    "l1:time.before_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the clearest conditional intention in the set, since the trigger ('if they're happening during my trip') is explicit and unsettled",
+   "expression_id": "fx-000117",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "has a trip arranged, will visit the Yokohama Oktoberfest and Autumn Leaves Festival if they fall within it, loves trying different beers and autumn foliage, and asks about the Minato Mirai 21 illuminations",
+   "target_ids": [
+    "l1:attribute.designation",
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:preference.affinity",
+    "l1:state.pending_arrangement",
+    "l1:task.conditional_intention",
+    "l1:time.after_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "collecting as a v3 pursuit with two independent supports (the watches and the figure), which is what makes the v3 L2 pursuit_profile defensible here",
+   "expression_id": "fx-000118",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "collects vintage watches and other collectibles, favours a 1960s Omega Seamaster, acquired a rare blue Snaggletooth figure from a thrift store a few weeks ago, and asks for display cases",
+   "target_ids": [
+    "l1:attribute.designation",
+    "l1:event.activity_occurrence",
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:state.ongoing_pursuit",
+    "l1:state.possession",
+    "l1:strength.paramount",
+    "l1:time.before_assertion",
+    "l2:abstraction.pursuit_profile"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "digestibility and taste are thresholds on the sought item; the uncertainty about suitability is indeterminate polarity rather than a denied capability",
+   "expression_id": "fx-000119",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "wants an easily digestible protein powder that tastes good, has heard whey is popular but is unsure it suits him, and asks for beginner-friendly whey powders",
+   "target_ids": [
+    "l1:event.information_request",
+    "l1:modality.believed",
+    "l1:modality.question",
+    "l1:polarity.indeterminate",
+    "l1:predicate.seek_information",
+    "l1:preference.threshold"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "modality.question without information_request: the closing 'how about' proposes a slot rather than asking for information, and treating every question mark as a request would make the request items unfalsifiable. The named days plus 'usually' are an explicit recurrence, so the L2 habit stands even though m:abstraction.habit's sources are media-flavoured -- a mismatch between the item's general sense and its v2 derivation worth recording",
+   "expression_id": "fx-000120",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "goes to the gym on Mondays, Wednesdays and Fridays, is otherwise flexible, wants the meeting kept off those days and proposes Tuesday or Thursday",
+   "target_ids": [
+    "l1:attribute.calendar_position",
+    "l1:frequency.habitual",
+    "l1:modality.desired",
+    "l1:modality.question",
+    "l1:preference.avoidance",
+    "l1:state.ongoing_pursuit",
+    "l1:state.pending_arrangement",
+    "l1:strength.tolerant",
+    "l1:time.recurring",
+    "l2:abstraction.habit"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the tie is named ('my niece') so abstraction.relationship is admitted, but no l2:relation.* kind fits: a niece is collateral descent, and the unit offers only kin_descent (asymmetric direct) and kin_lateral (same generation). The violin is the niece's possession, so no state.possession label -- the bearer would be wrong",
+   "expression_id": "fx-000121",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "helps his niece practise the violin whenever he can, reports she was given a student-level violin from a Pasadena shop about a month ago, and asks how to keep her engaged",
+   "target_ids": [
+    "l1:attribute.place",
+    "l1:event.activity_occurrence",
+    "l1:event.information_request",
+    "l1:frequency.occasional",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:source_status.user_reported",
+    "l1:time.before_assertion",
+    "l2:abstraction.relationship"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the densest label in this batch. 'a catchy beat and unique vocal style' is a threshold on what is sought, not merely an affinity; the album and track names are designations. Flagged for the pursuit reading of sustained listening",
+   "expression_id": "fx-000122",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "will check out the suggested playlists, has been listening to a named Billie Eilish album on Spotify and loves the track 'NDA', and asks for similar songs with a catchy beat and distinctive vocals",
+   "target_ids": [
+    "l1:attribute.designation",
+    "l1:event.information_request",
+    "l1:event.media_consumption",
+    "l1:frequency.habitual",
+    "l1:modality.question",
+    "l1:predicate.consume_media",
+    "l1:predicate.seek_information",
+    "l1:preference.affinity",
+    "l1:preference.threshold",
+    "l1:state.ongoing_pursuit",
+    "l1:strength.strong",
+    "l1:task.declared_intention",
+    "l1:time.at_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the sharing arrangement is the attestation and the kin tie is explicit, so both the L2 relationship and the descent kind hold from one turn. The trailing thanks is backchannel inside a turn that still carries content, which is why this is not none",
+   "expression_id": "fx-000123",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "reports her mother now uses the same grocery list app, so the two can share lists, and closes by thanking the assistant for the fajita advice",
+   "target_ids": [
+    "l1:attribute.designation",
+    "l1:source_status.user_reported",
+    "l1:state.possession",
+    "l1:time.at_assertion",
+    "l2:abstraction.relationship",
+    "l2:relation.kin_descent"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the ineffectiveness is an attempt that did not achieve its aim; the underlying illness is the health gap seen at fx-000066 and is not labelled here",
+   "expression_id": "fx-000124",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "has been taking over-the-counter medication that is not working as well as hoped, and asks how expectorants work",
+   "target_ids": [
+    "l1:event.attempt_failed",
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:time.before_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "membership of a named group is an affiliation; the judgement about what the members would enjoy is a belief about third parties rather than her own preference",
+   "expression_id": "fx-000125",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "belongs to a named Facebook group where she has been active, holds that its members would enjoy 'Gone Girl' as a book club pick, and asks for discussion questions",
+   "target_ids": [
+    "l1:attribute.affiliation",
+    "l1:attribute.designation",
+    "l1:event.information_request",
+    "l1:modality.believed",
+    "l1:modality.question",
+    "l1:predicate.hold_belief",
+    "l1:predicate.seek_information",
+    "l1:state.ongoing_pursuit",
+    "l1:time.at_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "rank_alternatives is what is requested rather than already held, which is the reason for the flag; the feeling of being overwhelmed is the affective_state gap",
+   "expression_id": "fx-000126",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "has work tasks outstanding and asks for help ordering them by urgency and importance",
+   "target_ids": [
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.rank_alternatives",
+    "l1:predicate.seek_information",
+    "l1:task.outstanding_requirement",
+    "l1:time.at_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "two L2 items on one turn: the degree and the leadership goal are one aim with separately outstanding steps, and the five-year occupation plus the continuing professional development satisfy the v3 pursuit_profile's two-source requirement. 'open to either' is tolerant strength, not a comparative preference",
+   "expression_id": "fx-000127",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "has worked in marketing for five years, wants a master's degree to stay competitive, aims at a leadership role, and is open to full-time or part-time and to online or on-campus study",
+   "target_ids": [
+    "l1:modality.desired",
+    "l1:preference.affinity",
+    "l1:state.occupation_status",
+    "l1:state.ongoing_pursuit",
+    "l1:strength.tolerant",
+    "l1:task.declared_intention",
+    "l1:time.after_assertion",
+    "l1:time.spanning",
+    "l2:abstraction.project",
+    "l2:abstraction.pursuit_profile"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "",
+   "expression_id": "fx-000128",
+   "needs_second_opinion": false,
+   "outcome": "concept",
+   "sense": "will send the email with the file link and a note, and asks whether to confirm the meeting's time and date in it",
+   "target_ids": [
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:state.pending_arrangement",
+    "l1:task.declared_intention",
+    "l1:time.after_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the absent stand mixer is what shapes the request. capability_constraint would be wrong -- not owning a tool is a missing possession, not an impaired capability of the subject -- and the distinction is worth a reviewer's eye",
+   "expression_id": "fx-000129",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "plans desserts for a dinner party and asks for recipes needing no stand mixer, ideally using a newly acquired coffee maker or other appliances already owned",
+   "target_ids": [
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:state.possession",
+    "l1:task.declared_intention",
+    "l1:time.after_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "'particularly interested in' narrows two named options out of a prior list, which brushes against preference.comparative; nothing ranks the two against each other, so only the affinity is labelled",
+   "expression_id": "fx-000130",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "is particularly interested in Todoist and Trello and asks how they integrate with Google Calendar",
+   "target_ids": [
+    "l1:attribute.designation",
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:preference.affinity"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "borderline against fx-000127, where the same topic came with a stated career goal. Here the turn alone carries no affinity or pursuit, and inferring one from the topic is the error this label refuses",
+   "expression_id": "fx-000131",
+   "needs_second_opinion": true,
+   "outcome": "none",
+   "sense": "asks which digital marketing certifications are well regarded; a bare information request attesting nothing about the asker",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the measured consumption is a magnitude attribute of the car and the efficiency requirement is a threshold on the filter, so the two ids attach to different bearers",
+   "expression_id": "fx-000132",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "owns a car returning about 28 miles per gallon in the city, intends to buy an air filter, and asks for recommendations that help fuel efficiency",
+   "target_ids": [
+    "l1:attribute.magnitude",
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:preference.threshold",
+    "l1:state.possession",
+    "l1:task.declared_intention",
+    "l1:time.after_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "a sister is a same-generation kin tie, so kin_lateral is the right kind; the introduction is what places her in the frame rather than a dated first encounter",
+   "expression_id": "fx-000133",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "has a rose tea her sister introduced her to, means to try it, and asks whether shortbread would pair with it",
+   "target_ids": [
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:source_status.user_reported",
+    "l1:state.possession",
+    "l1:task.declared_intention",
+    "l1:time.after_assertion",
+    "l2:abstraction.relationship",
+    "l2:relation.kin_lateral"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "a partial withdrawal: commitment_withdrawn is the nearest item but the commitment is reduced rather than dropped, and nothing in v2 or v3 grades that. Two sports plus training support the v3 pursuit_profile",
+   "expression_id": "fx-000134",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "will scale back running the league and look for a co-organiser to limit his responsibility, and will schedule his basketball games around triathlon training",
+   "target_ids": [
+    "l1:event.commitment_withdrawn",
+    "l1:frequency.habitual",
+    "l1:predicate.change_arrangement",
+    "l1:state.capability_constraint",
+    "l1:state.ongoing_pursuit",
+    "l1:task.declared_intention",
+    "l1:time.after_assertion",
+    "l2:abstraction.pursuit_profile"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the relocation is Rachel's, so predicate.relocate is attested with a third-party bearer -- admissible because the tie itself is the memory-worthy content. 'thinking of' is weaker than a declared intention but v2 offers no intermediate item between that and modality.desired",
+   "expression_id": "fx-000135",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "is thinking of visiting her friend Rachel, who recently moved to a city apartment, and asks about the weather there at this time of year",
+   "target_ids": [
+    "l1:attribute.designation",
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.relocate",
+    "l1:predicate.seek_information",
+    "l1:source_status.user_reported",
+    "l1:task.declared_intention",
+    "l1:time.after_assertion",
+    "l1:time.before_assertion",
+    "l2:abstraction.relationship",
+    "l2:relation.friendship"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "a reviewer could read 'those afternoon cravings when I need a boost' as a habitual recurrence. It is labelled none because the phrasing is a generic appeal rather than a report of the speaker's own schedule, and this is the thinnest none in the batch",
+   "expression_id": "fx-000136",
+   "needs_second_opinion": true,
+   "outcome": "none",
+   "sense": "asks for portable healthy snacks for afternoon energy dips; the craving is generic framing rather than a stated pattern of the asker",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the clearest conditional commitment in the whole set: an explicit contingency whose trigger is unresolved at the end of the turn, which is exactly what m:abstraction.conditional_commitment requires",
+   "expression_id": "fx-000137",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "will make a house offer contingent on the inspection and attach his pre-approval letter, and asks what mistakes buyers make when offering",
+   "target_ids": [
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:predicate.suspend_on_condition",
+    "l1:state.possession",
+    "l1:task.conditional_intention",
+    "l1:task.declared_intention",
+    "l1:time.after_assertion",
+    "l2:abstraction.conditional_commitment"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "hold_value is defensible because heritage preservation is endorsed as worth that dedication, not merely described; the surprise itself is the affective_state gap",
+   "expression_id": "fx-000138",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "asks for an overview of adhesives and consolidants in art conservation, and reports being struck during a behind-the-scenes tour of a named museum's conservation lab by the dedication cultural preservation demands",
+   "target_ids": [
+    "l1:attribute.designation",
+    "l1:event.activity_occurrence",
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.hold_value",
+    "l1:predicate.seek_information",
+    "l1:preference.affinity",
+    "l1:time.before_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the second place a role id is named: the sister is the beneficiary the whole selection is for, so the slot is the attestation rather than incidental. The earlier uncertainty is a resolved epistemic gap and is not labelled",
+   "expression_id": "fx-000139",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "saw jewellery pieces at a named market that caught her eye but was unsure they suited her sister, and now means to return and find one to match the phone case",
+   "target_ids": [
+    "l1:attribute.designation",
+    "l1:event.activity_occurrence",
+    "l1:preference.threshold",
+    "l1:role.beneficiary",
+    "l1:state.possession",
+    "l1:task.declared_intention",
+    "l1:time.after_assertion",
+    "l1:time.before_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the residence is dated and placed, so both the state and the transition hold. 'still getting used to' is an adjustment in progress that no item names; the closing choice is a request for a recommendation, not a preference the speaker already holds",
+   "expression_id": "fx-000140",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "has lived in a new studio flat in Harajuku, Tokyo for a month, is still adjusting but enjoys the independence and the convenient commute, and asks whether to book accommodation in Hakuba Valley or Matsumoto",
+   "target_ids": [
+    "l1:attribute.place",
+    "l1:event.information_request",
+    "l1:event.life_transition",
+    "l1:modality.question",
+    "l1:predicate.reside_at",
+    "l1:predicate.seek_information",
+    "l1:preference.affinity",
+    "l1:state.residence",
+    "l1:time.at_assertion",
+    "l1:time.spanning"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the two named colours are a threshold on what is sought rather than a ranking, so preference.comparative is withheld",
+   "expression_id": "fx-000141",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "likes velvet pillows in rich hues and asks for more options in mustard or teal",
+   "target_ids": [
+    "l1:attribute.kind",
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:preference.affinity",
+    "l1:preference.threshold"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "a named non-kin tie with a dated first encounter, which is the textbook case for m:relation.friendship. David's Google colleagues are third parties whose affiliation is attested but who are not themselves tied to the speaker",
+   "expression_id": "fx-000142",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "will add his friend David to the spreadsheet, having met him at the same WeWork startup mixer, where David introduced him to colleagues of his at Google",
+   "target_ids": [
+    "l1:attribute.affiliation",
+    "l1:attribute.designation",
+    "l1:event.first_encounter",
+    "l1:task.declared_intention",
+    "l1:time.after_assertion",
+    "l1:time.before_assertion",
+    "l2:abstraction.relationship",
+    "l2:relation.friendship"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the third and last role id in the gold: the count of seventeen skeins is the attestation, matching how role.quantity was used for the poem count at fx-000056",
+   "expression_id": "fx-000143",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "has a stash of seventeen skeins of worsted weight yarn found recently, wants to use them up, and asks whether they suit amigurumi toys",
+   "target_ids": [
+    "l1:event.information_request",
+    "l1:modality.desired",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:role.quantity",
+    "l1:state.possession",
+    "l1:time.at_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "'still trying to figure out' is an unsuccessful continuing attempt, so both the pursuit and the failed attempt are defensible; a reviewer may find attempt_failed too strong for an unfinished effort",
+   "expression_id": "fx-000144",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "is still trying to work out how to pack clothes strategically and asks how to decide what to take and how many outfits to build from it",
+   "target_ids": [
+    "l1:event.attempt_failed",
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:state.ongoing_pursuit",
+    "l1:time.at_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "'camping instead of a hotel' ranks two named alternatives, which is what separates comparative from a bare affinity. The plural 'we' implies a companion no item holds",
+   "expression_id": "fx-000145",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "is considering camping rather than a hotel for a planned trip and asks for campsites near Mount Rushmore",
+   "target_ids": [
+    "l1:attribute.place",
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:preference.comparative",
+    "l1:state.pending_arrangement",
+    "l1:time.after_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the Gucci handbag is presupposed of the assistant, not of the speaker, so a possession label would attach to a party the memory does not model. Contrast fx-000155, where the speaker answers the same question about herself",
+   "expression_id": "fx-000146",
+   "needs_second_opinion": true,
+   "outcome": "none",
+   "sense": "asks the assistant what fashion items it splurges on; meta-talk about the addressee that attests nothing about the speaker",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the completed booking is a commitment already made while the trip itself is still pending, so the two time qualifiers are both attested and attach to different frames; the cost ceiling on activities is a threshold",
+   "expression_id": "fx-000147",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "is planning a Maui trip, has already booked a resort there costing over $300 a night, and asks for free or affordable outdoor activities and hiking trails to offset it",
+   "target_ids": [
+    "l1:attribute.magnitude",
+    "l1:attribute.place",
+    "l1:event.commitment_made",
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:preference.threshold",
+    "l1:state.pending_arrangement",
+    "l1:time.after_assertion",
+    "l1:time.before_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the only turn in the gold carrying three L2 items: an explicit weekly recurrence (habit and recurrence_count) plus a sustained study practice with two independent supports (pursuit_profile). The reciprocal arrangement makes the schedule mutually established rather than merely user-reported, which is why confirmed_by_both is named here",
+   "expression_id": "fx-000148",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "attends a language exchange class at a local school every Wednesday evening with a Colombian tutor named Juan, who helps with her Spanish pronunciation and grammar while she helps with his English vocabulary, and she confirms the Wednesday slot on recall",
+   "target_ids": [
+    "l1:attribute.designation",
+    "l1:event.activity_occurrence",
+    "l1:frequency.habitual",
+    "l1:source_status.confirmed_by_both",
+    "l1:state.ongoing_pursuit",
+    "l1:time.recurring",
+    "l2:abstraction.habit",
+    "l2:abstraction.pursuit_profile",
+    "l2:pattern.recurrence_count"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "event design with several separately outstanding steps is an L2 project; the affinity is towards a proposal made by the assistant rather than a standing taste, which is the reading a reviewer should check",
+   "expression_id": "fx-000149",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "likes the Lakers trivia idea for an event around LA Live, plans a photo challenge at a Lakers-themed mural, and asks whether that works and where such murals are near the Staples Center",
+   "target_ids": [
+    "l1:attribute.designation",
+    "l1:attribute.place",
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:preference.affinity",
+    "l1:task.declared_intention",
+    "l1:time.after_assertion",
+    "l2:abstraction.project"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the console implies car ownership, already attested at fx-000132, but nothing in this turn states it. Labelling possession here would credit a mapper for an inference across turns that a single-expression mapping cannot make",
+   "expression_id": "fx-000150",
+   "needs_second_opinion": true,
+   "outcome": "none",
+   "sense": "asks the assistant's opinion on using an abrasive-sided microfiber cloth on a car's centre console; a technique question attesting nothing about the asker",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "deliberately parallel to fx-000083, where the same topic came with a pursuit; here only topical interest is stated, so no pursuit label",
+   "expression_id": "fx-000151",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "wants to learn about the LA street art scene and asks for its history and how it has evolved",
+   "target_ids": [
+    "l1:attribute.place",
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:preference.affinity"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "reviewing for a named conference is an occupied role rather than an occupation status; the past submission date is attested as a fact about the venue, not about the speaker's own timeline",
+   "expression_id": "fx-000152",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "is reviewing for ACL, whose submission date was 1 February, and asks for tips on reviewing for conferences of that kind",
+   "target_ids": [
+    "l1:attribute.calendar_position",
+    "l1:attribute.designation",
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.occupy_role",
+    "l1:predicate.seek_information",
+    "l1:time.at_assertion",
+    "l1:time.before_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "'twice before' is an explicit tally of distinct occasions, which is what m:import.pattern_recurrence_count counts; two meetings is below the three m:abstraction.habit requires, so recurrence_count is named without habit -- the pair of labels here and at fx-000148 is what makes that threshold checkable",
+   "expression_id": "fx-000153",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "plans to meet his friend Alex from Germany in Berlin, having met up with him twice before, and asks for cafes or bars in Kreuzberg",
+   "target_ids": [
+    "l1:attribute.affiliation",
+    "l1:attribute.designation",
+    "l1:attribute.place",
+    "l1:event.information_request",
+    "l1:frequency.occasional",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:state.pending_arrangement",
+    "l1:task.declared_intention",
+    "l1:time.after_assertion",
+    "l1:time.before_assertion",
+    "l2:abstraction.relationship",
+    "l2:pattern.recurrence_count",
+    "l2:relation.friendship"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the detailed comparison axes could read as topical affinity. It is none because the turn asks for the assistant's judgement and never places the speaker in the frame",
+   "expression_id": "fx-000154",
+   "needs_second_opinion": true,
+   "outcome": "none",
+   "sense": "asks which song on an album best shows the band's artistic growth and how it compares with their earlier work; a critical question about third-party work",
+   "target_ids": [],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "accessories are ranked above occasional clothing purchases, and two graded affinities in one area is exactly m:abstraction.preference_profile's requirement. The self-diagnosis is a belief about her own motives -- self-narrative content the ontology holds only as a belief, which is the residual thinness here",
+   "expression_id": "fx-000155",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "tends to spend heavily on high-end handbags and shoes and occasionally on luxury clothing such as evening gowns, has been justifying it to herself as investment buying, and believes it is really an emotional response to an occasion or mood",
+   "target_ids": [
+    "l1:frequency.occasional",
+    "l1:modality.believed",
+    "l1:predicate.hold_belief",
+    "l1:predicate.transfer_value",
+    "l1:preference.affinity",
+    "l1:preference.comparative",
+    "l1:state.ongoing_pursuit",
+    "l1:strength.strong",
+    "l1:time.at_assertion",
+    "l2:abstraction.preference_profile"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "a named diagnosis held as state.circumstance is the compromise fx-000066 was flagged for: the item holds it but cannot say it is medical, so a question about the speaker's health cannot be answered from the label. The overwhelmed feeling is the affective_state gap and the doctor is a third party with no tie item",
+   "expression_id": "fx-000156",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "is overwhelmed by the material on nasal saline irrigation, asks for a summary, and asks whether to discuss her sinusitis diagnosis and treatment plan with a named doctor",
+   "target_ids": [
+    "l1:attribute.designation",
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:state.circumstance",
+    "l1:time.at_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "'haven't gotten around to it' is an intention standing unfulfilled: the denied polarity is on the reading, not on the intention. attempt_failed is the nearest item for a lapsed intention, and a reviewer may prefer to drop it and keep only the intention",
+   "expression_id": "fx-000157",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "has been meaning to read more thrillers, has heard of some of the recommended authors but has not yet read them, and asks whether any would suit a book club",
+   "target_ids": [
+    "l1:event.attempt_failed",
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:polarity.denied",
+    "l1:predicate.seek_information",
+    "l1:preference.affinity",
+    "l1:state.ongoing_pursuit",
+    "l1:task.declared_intention",
+    "l1:time.before_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "the sneakers are an explicit comparison standard, so both comparative and threshold hold; l1:role.comparison_target is the slot that carries them and is omitted under the no-roles convention. The concern itself is affective and unlabelled",
+   "expression_id": "fx-000158",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "asks how heavy and bulky some hiking boots are, being concerned about foot weight, and notes that his old named Converse sneakers are very light",
+   "target_ids": [
+    "l1:attribute.designation",
+    "l1:attribute.magnitude",
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:preference.comparative",
+    "l1:preference.threshold",
+    "l1:state.ongoing_pursuit",
+    "l1:state.possession",
+    "l1:time.at_assertion"
+   ],
+   "would_require": ""
+  },
+  {
+   "adjudication_note": "three rides in one sitting is one occasion, not three: recurrence_count is named because the tally is stated, but no habit follows, since m:abstraction.habit counts distinct occasions. The thrill is affective and rests on preference.affinity alone",
+   "expression_id": "fx-000159",
+   "needs_second_opinion": true,
+   "outcome": "concept",
+   "sense": "rode a named rollercoaster three times in a row at Universal Studios Hollywood on 15 October and found it thrilling, and asks whether the assistant has ridden an Egyptian-tomb-themed rollercoaster",
+   "target_ids": [
+    "l1:attribute.designation",
+    "l1:attribute.place",
+    "l1:event.activity_occurrence",
+    "l1:event.information_request",
+    "l1:modality.question",
+    "l1:predicate.seek_information",
+    "l1:preference.affinity",
+    "l1:strength.strong",
+    "l1:time.before_assertion",
+    "l2:pattern.recurrence_count"
+   ],
+   "would_require": ""
+  }
+ ],
+ "records_resting_on_v3": 65,
+ "second_opinion_count": 131,
+ "set_digest_on_disk": "b576db052cb158364dde3261bfb6d10d150b4874ee1dd524efc91799793d42db",
+ "standing": "annotated_without_running_any_mapper",
+ "targets_per_expression": {
+  "0": 41,
+  "1": 1,
+  "10": 11,
+  "11": 1,
+  "13": 1,
+  "14": 1,
+  "2": 2,
+  "3": 17,
+  "4": 8,
+  "5": 20,
+  "6": 16,
+  "7": 17,
+  "8": 16,
+  "9": 8
+ },
+ "unattested_v3_additions": [
+  {
+   "detail": "admitted to O_v3 because the earlier sample's out_of_scope labels showed no way to hold a subject's own value ranking. Its derivation m3-001 requires two of l1:predicate.hold_value, l1:predicate.hold_belief and l1:state.ongoing_pursuit to support one commitment. Across these 160 expressions hold_value appears 8 times and hold_belief 9, but never converging on a single commitment, so the L2 item is attested zero times",
+   "disposition": "recorded as speculative on this corpus; the item is left in place and the threshold is left unlowered, since lowering it to earn a label would be tuning the ontology to the evaluation set",
+   "item": "l2:abstraction.value_commitment",
+   "kind": "addition_the_fresh_evidence_does_not_license",
+   "not_evidence_of": "neither that the item is wrong nor that the mapper failed; the fresh corpus simply never crossed its two-source threshold"
+  }
+ ],
+ "v3_absorption_by_item": {
+  "l1:event.activity_occurrence": 24,
+  "l1:predicate.hold_belief": 9,
+  "l1:predicate.hold_value": 8,
+  "l1:state.capability": 4,
+  "l1:state.ongoing_pursuit": 39,
+  "l2:abstraction.pursuit_profile": 5
+ },
+ "v3_additions_available": [
+  "l1:event.activity_occurrence",
+  "l1:predicate.hold_belief",
+  "l1:predicate.hold_value",
+  "l1:role.participant",
+  "l1:role.proposition_content",
+  "l1:role.topic",
+  "l1:state.capability",
+  "l1:state.ongoing_pursuit",
+  "l2:abstraction.pursuit_profile",
+  "l2:abstraction.value_commitment"
+ ]
+}
