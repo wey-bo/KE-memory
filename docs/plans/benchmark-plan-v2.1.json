@@ -994,6 +994,12 @@
     "positive_cases": 5
    },
    "mapper_freeze_hash": "3cd4fcd9a92276e826dc7650962096be22d1e53356f51abdf7743aef03604126",
+   "metric_naming_correction": {
+    "now": "incomplete_multi_label_selection",
+    "value_unchanged": "35/76",
+    "was": "false_merge",
+    "why": "a multi-target utterance answered with one item is an incomplete selection over several correct labels, not a merge of distinct items into one. The recorded figure keeps its value under the corrected name; only the claim it supports narrows."
+   },
    "not_a_gate": "a low semantic score is a result rather than a gate. Improving the mapper requires a new mapper version and a new fresh sample; this sample is spent.",
    "primary_finding": {
     "evidence": "the ontology ceiling is 1.0 at both layers, so every gold target the annotators named exists in ontology v2. Ranking is 0.69 when the target reaches top-k. But candidate recall is 0.165, so generation fails to surface the target in 66 of 79 positive cases.",
@@ -1007,7 +1013,7 @@
    "sample_sha256": "2a0a6813305c7a97b00ab321337dae46c7b9eb2f96d93112a5af9327ede31e33",
    "secondary_findings": {
     "false_mapping_on_gold_none": "0.6333 of gold-none expressions were mapped anyway, so the abstain path is still weak on natural conversation even after the discovery-data repairs",
-    "false_merge": "35 of 76 multi-target cases returned a single answer. Natural utterances routinely attest several things at once and the mapper reports one.",
+    "incomplete_multi_label_selection": "35 of 76 multi-target cases returned a single answer. Natural utterances routinely attest several things at once and the mapper reports one.",
     "l2_recall_zero": "L2 recall is 0 over 5 cases. The derivation mechanism is verified correct in isolation, so this follows from L1 recall being too low to satisfy any rule evidence_required threshold."
    },
    "status": "spent_immutable"
@@ -1152,6 +1158,112 @@
     "step": 8
    }
   ],
+  "ontology_breadth_review": {
+   "coverage_correction": {
+    "basis": "(73 concept + 6 ambiguous) / (73 + 6 + 11 out_of_scope)",
+    "ceiling_is_not_a_breadth_measure": "ceiling 1.0 (48/48) says only that the targets annotators chose exist. out_of_scope sits outside that denominator, so it measures target validity rather than ontology breadth.",
+    "content_relevant_coverage": "79/90 = 0.8778"
+   },
+   "data_rule": "the 120 expressions are exposed regression only. O_v3 must be validated on a fresh set, because every gap above was identified from this sample.",
+   "independent_blocker": "mapper v2 remains blocked on its own terms: candidate recall 0.165 and gold-none false mapping 0.633. The ontology ruling does not change that and does not make a formal run meaningful.",
+   "independent_corpus_evidence": {
+    "method": "first-person patterns over 62682 MSC persona sentences, with address-like false positives excluded after inspection (\"97 important person lane\" matched an early value pattern); cross-checked against SGD schema slots and intents and against PropBank rolesets in the frozen archive.",
+    "msc_frequencies": {
+     "activity_pursuit": "1355 (2.16%)",
+     "episodic_significance": "24 (0.04%)",
+     "held_belief": "78 (0.12%)",
+     "held_value": "24 (0.04%)",
+     "positive_capability": "202 (0.32%)"
+    },
+    "propbank_support": {
+     "activity": "20 rolesets (attend.01, play.*, host.*)",
+     "belief": "10 rolesets (believe.01)",
+     "capability": "10 rolesets, but can.01 is \"put into tins\" and can.02 is metaphorical throwing; the modal sense is not a PropBank predicate",
+     "significance": "6 rolesets (commemorate.01, remember.01)",
+     "value": "5 rolesets (cherish.01, prioritize.01)"
+    },
+    "sgd_schema": "27 of 268 slots and intents are activity-like (event_date, event_time, event_location, event_name). Zero are preference-like, capability-like or significance-like, so the task-oriented corpora attest activity as a first-class notion and the others not at all."
+   },
+   "per_case_ruling": [
+    {
+     "confidence": "strong",
+     "family": "activity_or_pursuit",
+     "ids": [
+      "expr-000003",
+      "expr-000048",
+      "expr-000055"
+     ],
+     "ruling": "o_v3_candidate",
+     "why": "2.16% of MSC persona sentences, 27 activity-like SGD schema fields and 20 PropBank rolesets. Attested well beyond this sample and needs an activity event type with a participation role plus a pursuit state type."
+    },
+    {
+     "confidence": "moderate",
+     "family": "positive_capability_or_skill",
+     "ids": [
+      "expr-000021"
+     ],
+     "ruling": "o_v3_candidate",
+     "why": "202 MSC sentences state a capability. v2 types only what a subject cannot do (state.capability_constraint), so the positive case has no home. PropBank does not supply the modal sense, so this needs an authored type rather than an imported frame."
+    },
+    {
+     "confidence": "admitted_on_expressibility_not_frequency",
+     "family": "held_value_and_held_belief",
+     "ids": [
+      "expr-000011",
+      "expr-000039"
+     ],
+     "must_not_be_merged": "value and belief enter as separate concepts with distinct predicates and senses. A single merged item would lose the distinctions that make them useful: preference strength on the value side, assertion modality on the belief side, and evidence source on both.",
+     "required_distinctions": [
+      "separate predicate and sense per concept, not one item with two readings",
+      "preference strength preserved on the value side",
+      "assertion modality preserved on the belief side",
+      "evidence source preserved on both"
+     ],
+     "ruling": "o_v3_candidate",
+     "why": "admitted because the existing model cannot express a value ordering or a general belief held by the subject. attribute.assessment describes an evaluation of an object and cannot stand in for a property of the subject. Frequency is explicitly not the ground: 24 value and 78 belief MSC sentences with zero SGD support would not carry an admission on their own."
+    },
+    {
+     "confidence": "weak",
+     "family": "episodic_significance",
+     "ids": [
+      "expr-000008",
+      "expr-000010",
+      "expr-000071"
+     ],
+     "ruling": "residual_gap_pending_o_v3_scoping",
+     "validation_requirement": "before modelling, validate against new corpora covering personal experience, commemorative events and object meaning. If those attest it, it enters a later version; if not, it stays a declared limitation.",
+     "why": "3 of 11 cases is concentration within this sample, not independent corpus coverage, so it is not an admission ground. Held as an explicit residual gap rather than a vague deferral."
+    },
+    {
+     "confidence": "strong",
+     "family": "role_play_framing",
+     "ids": [
+      "expr-000025",
+      "expr-000066"
+     ],
+     "ruling": "residual_limitation",
+     "why": "both from lme_validation and both role-play. What is missing is an in-fiction source status, which is a provenance or modality concern rather than a concept gap, and the project never committed to a fiction guard. Recorded as a limitation instead."
+    }
+   ],
+   "status": "ruled",
+   "summary": {
+    "candidate_case_count": 6,
+    "deferred_as_explicit_residual_gap": [
+     "episodic_significance"
+    ],
+    "held_value_and_belief_must_stay_separate": true,
+    "o_v3_candidates": [
+     "activity_or_pursuit",
+     "positive_capability_or_skill",
+     "held_value",
+     "held_belief"
+    ],
+    "residual_limitations": [
+     "role_play_framing"
+    ]
+   },
+   "what_this_does_not_decide": "the breadth ruling does not make mapper v2 benchmark-ready. Candidate recall 0.165 and gold-none false mapping 0.633 mean a formal run would mostly measure mapper failure, and that is independent of ontology version."
+  },
   "ontology_source_debt": {
    "effect_on_ontology_v1": "the sourcing bar on calling v1 a broad foundation ontology is lifted. The seed is still 67 and 20 items, so breadth remains a question of content rather than provenance.",
    "hash_rule": "one independent sha256 per source; no combined digest stands in for the three",
