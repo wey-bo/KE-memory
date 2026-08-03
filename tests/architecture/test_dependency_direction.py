@@ -57,6 +57,9 @@ LAYERS: tuple[tuple[str, ...], ...] = (
         # not import one: gold produced with a mapper in view measures agreement, not mapping
         # quality. The gate's cycle and direction checks then hold that separation mechanically.
         "mapper_v2_validation",
+        "mapper_v3_validation",
+        "mapper_v3",
+        "mapper_v3_scoring",
         "answering",
         "history",
         "snapshots",
