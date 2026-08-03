@@ -743,6 +743,14 @@
   "resumption_rule": "A partial run is never resumed. Continuing requires a separately pre-registered fresh sample and an explicit user decision, which is the same mandatory_stop boundary that governs a completed run."
  },
  "program_plan": {
+  "current_status": {
+   "broad_foundation_ontology_not_yet_built": "O_L1 and O_L2 remain the 67 and 20 item seed. The frozen sources are snapshots on disk, not content in the ontology.",
+   "diagnostic_execution_chain_ready": "the nine-stage chain runs over a consumed builder artifact with per-layer traces, and the oracle attribution mechanism holds. The layers are lexical, so this is diagnostic capability only.",
+   "formal_benchmark_not_yet_ready": "the critical path is ontology v2 and natural-expression mapper validation. The judge key can be handled in parallel and is not what gates the run.",
+   "mapper_v1_diagnostic_failed_as_expected": "7 of 18 correct with all four negatives mis-mapped. A repair attempt on discovery data reached 12.5 percent abstention against v1 baseline 9.8 percent and is not a fix; the diagnosis is that lexical overlap is too weak a signal for the abstain decision.",
+   "natural_mapping_quality_not_yet_measured": "the 18 cases were composed by reading ontology items, which makes them a controlled mapper probe. They say nothing about mapping quality on natural expression.",
+   "ontology_sources_frozen": "WordNet 3.0, PropBank 3.4.0 and schema.org 30.0 acquired and frozen at explicit commits with licences and independent hashes. They have not yet been used to extend the ontology."
+  },
   "mapper_v1": {
    "artifacts": [
     "artifacts/mapper-v1/blind-validation-report.json",
@@ -794,6 +802,7 @@
     "why_two_slots": "installing the mapper in the mapping slot alone drove selection from 19 of 32 to 0 of 32. The mapper was correct; the planner was the unmigrated layer, still emitting lex:* terms against l1:* ontology ids, so no plan could intersect a mapping. A mapper is only usable when the query side shares its vocabulary."
    },
    "chain_installation_rule": "mapper v1 replaces the lexical mapping slot, then the 32 items are rerun only to confirm the trace, artifact consumption and oracles still hold. That slice is not re-treated as a fresh evaluation.",
+   "data_rule": "the 18 authored cases are regression-only from now on. They are a controlled probe and are retired as a qualification set.",
    "defects_found_in_mapper_v1": [
     {
      "defect": "confidence normalised only by the item vocabulary, so a single decisive alias hit scored 1/12 and fell under the floor",
@@ -806,6 +815,7 @@
      "symptom": "the checker reported itself as a violation and the run aborted"
     }
    ],
+   "degeneracy": "all four negative cases were mis-mapped, so the mapper almost never declines an irrelevant expression. This must be removed before any fresh benchmark, independently of the score.",
    "gold": {
     "ambiguous_cases": 1,
     "case_count": 18,
@@ -887,8 +897,65 @@
     }
    },
    "standing": "diagnostic. The mapper is lexical over a seed ontology and the gold set is 18 authored cases, so these figures detect gross behaviour rather than production mapping accuracy.",
-   "status": "blind_validation_complete_pending_review"
+   "status": "diagnostic_failed_as_expected"
   },
+  "next_sequence": [
+   {
+    "name": "freeze the mapper v1 failure record",
+    "rule": "the 18 cases become regression-only and may never again serve as fresh qualification",
+    "step": 1
+   },
+   {
+    "inputs": [
+     "frozen WordNet",
+     "frozen PropBank",
+     "frozen schema.org",
+     "independent build corpus"
+    ],
+    "name": "build O_L1/O_L2 v2",
+    "rule": "no bulk import. The result must be stable ids, senses, aliases, roles and types suited to common memory situations, which is a curation problem rather than a volume problem.",
+    "step": 2
+   },
+   {
+    "finding": {
+     "conclusion": "lexical term overlap cannot separate \"this turn attests a preference\" from \"this turn contains a word that appears in a preference alias\". Each calibration fixes one side at the cost of the other because the signal itself is too weak, not because the threshold is wrong.",
+     "discipline_note": "tuning was stopped rather than continued. Further adjustment would have been fitting the retired 18-case probe, which the sequence forbids, and would have produced a number without a mechanism.",
+     "outcome": "not achieved. Five successive calibrations traded one degeneracy for another: abstention moved 0.098 -> 0.073 -> 0.998 -> 0.000 -> 0.405 -> 0.125 across attempts, and correct short mappings and correct abstentions were never simultaneously right.",
+     "recommendation": "defer the mapper fix until ontology v2 lands, then rebuild candidate generation on PropBank role sets and WordNet senses rather than on alias overlap.",
+     "root_causes_found": [
+      "a raw IDF sum has no fixed range, so an absolute score floor cannot be calibrated against it",
+      "normalising by observed terms made the score fall with turn length; normalising by item weight penalised richly aliased items",
+      "a fixed stopword list deleted 14 terms the ontology declares as aliases, including \"like\" for hold_attitude and \"than\" for the comparative preference",
+      "protecting those terms then let \"and\", \"for\" and \"every\" count as decisive evidence",
+      "ranking by score alone put a protected stopword above the real alias, and since the abstain check inspects only the top candidate, the whole mapping was discarded as generic"
+     ],
+     "what_this_implies": "the abstain path needs evidence the current representation does not carry: predicate-argument structure or sense disambiguation, which is what the frozen PropBank and WordNet snapshots exist to supply. Fixing it against the seed ontology with lexical overlap alone is the wrong shape of work."
+    },
+    "name": "fix mapper general behaviour on discovery data",
+    "rule": "fixes are derived from discovery data. No alias, threshold or special case may be added on the strength of the 18 probe cases, which would fit the probe rather than repair the mapper.",
+    "status": "attempted_not_achieved",
+    "step": 3,
+    "targets": [
+     "candidate generation",
+     "ranking",
+     "ambiguity",
+     "native no-map and abstain"
+    ]
+   },
+   {
+    "name": "draw a natural mapping validation set",
+    "rule": "sample expressions from real conversations first, then annotate them. Never generate a case by reading an ontology item, which is what makes the current set a probe.",
+    "step": 4
+   },
+   {
+    "name": "freeze mapper v2, run one natural-expression blind test, reinstall into the chain",
+    "step": 5
+   },
+   {
+    "name": "revalidate artifact, trace and oracle, then freeze formal benchmark inputs and run",
+    "step": 6
+   }
+  ],
   "ontology_source_debt": {
    "effect_on_ontology_v1": "the sourcing bar on calling v1 a broad foundation ontology is lifted. The seed is still 67 and 20 items, so breadth remains a question of content rather than provenance.",
    "hash_rule": "one independent sha256 per source; no combined digest stands in for the three",
@@ -946,7 +1013,7 @@
      "url": "https://api.github.com/repos/nltk/nltk_data/git/blobs/3c68cd207844f071a5206f7fbed23e5c607ec02f"
     }
    },
-   "status": "paid",
+   "status": "frozen_not_yet_incorporated",
    "still_outstanding": "the acquired sources are frozen snapshots and have not yet been consulted to extend O_L1/O_L2. Folding them in is a separate ontology version."
   },
   "rationale": "C1 to C3 restored measurement credibility. They do not confer Stage 2 capability, so the work now switches from repairing instruments to exposing real system behaviour.",
@@ -977,6 +1044,7 @@
    "status": "passed_instruments_only"
   },
   "stage_4_formal": {
+   "critical_path_correction": "an earlier note framed the formal benchmark as waiting on the judge key. That was wrong. Three things stand on the critical path: the ontology is still a 67 and 20 item seed, mapper v1 scores 7 of 18 while mis-mapping every negative, and no natural-expression mapping quality has been measured. Running fresh data before the known degeneracy is removed would only reproduce a conclusion already in hand.",
    "external_systems": "Mem0, Graphiti, Hindsight and similar are not rerun",
    "first_round_arms": [
     "full_history diagnostic",

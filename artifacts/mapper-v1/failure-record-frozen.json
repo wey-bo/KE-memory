@@ -1,0 +1,270 @@
+{
+ "failures": [
+  {
+   "case_id": "L1-001",
+   "correct": false,
+   "expected_ids": [
+    "l1:predicate.commit_to_arrangement"
+   ],
+   "expected_outcome": "maps_to",
+   "layer": "l1",
+   "note": "mapped to the wrong existing item; either ranking or an over-broad alias",
+   "observed_resolution": "ambiguous",
+   "observed_top": "l1:attribute.place",
+   "possible_classes": [
+    "mapper_ranking_disambiguation",
+    "ontology_sense_alias_type_defect"
+   ],
+   "review": "single_review"
+  },
+  {
+   "case_id": "L1-002",
+   "correct": false,
+   "expected_ids": [
+    "l1:predicate.change_arrangement"
+   ],
+   "expected_outcome": "maps_to",
+   "layer": "l1",
+   "note": "the correct item was generated but ranked below another candidate",
+   "observed_resolution": "ambiguous",
+   "observed_top": "l1:modality.directed",
+   "possible_classes": [
+    "mapper_ranking_disambiguation"
+   ],
+   "review": "single_review"
+  },
+  {
+   "case_id": "L1-003",
+   "correct": false,
+   "expected_ids": [
+    "l1:predicate.hold_attitude"
+   ],
+   "expected_outcome": "maps_to",
+   "layer": "l1",
+   "note": "the correct item was generated but ranked below another candidate",
+   "observed_resolution": "ambiguous",
+   "observed_top": "l1:modality.desired",
+   "possible_classes": [
+    "mapper_ranking_disambiguation"
+   ],
+   "review": "single_review"
+  },
+  {
+   "case_id": "L1-004",
+   "correct": false,
+   "expected_ids": [
+    "l1:predicate.transfer_value"
+   ],
+   "expected_outcome": "maps_to",
+   "layer": "l1",
+   "note": "generated no candidate for an item that exists; either retrieval missed it or its aliases do not cover this phrasing",
+   "observed_resolution": "unresolved",
+   "observed_top": "",
+   "possible_classes": [
+    "mapper_candidate_generation",
+    "ontology_sense_alias_type_defect"
+   ],
+   "review": "single_review"
+  },
+  {
+   "case_id": "L1-005",
+   "correct": false,
+   "expected_ids": [
+    "l1:predicate.seek_information"
+   ],
+   "expected_outcome": "maps_to",
+   "layer": "l1",
+   "note": "the correct item was generated but ranked below another candidate",
+   "observed_resolution": "ambiguous",
+   "observed_top": "l1:attribute.availability",
+   "possible_classes": [
+    "mapper_ranking_disambiguation"
+   ],
+   "review": "single_review"
+  },
+  {
+   "case_id": "L1-012",
+   "correct": false,
+   "expected_ids": [
+    "l1:predicate.change_arrangement",
+    "l1:predicate.commit_to_arrangement"
+   ],
+   "expected_outcome": "ambiguous_among",
+   "layer": "l1",
+   "note": "collapsed a genuine ambiguity to a single answer; the choice was defensible but the ambiguity was not reported",
+   "observed_resolution": "mapped",
+   "observed_top": "l1:predicate.change_arrangement",
+   "possible_classes": [
+    "genuine_ambiguity",
+    "mapper_ranking_disambiguation"
+   ],
+   "review": "double_review"
+  },
+  {
+   "case_id": "L1-013",
+   "correct": false,
+   "expected_ids": [],
+   "expected_outcome": "unresolved",
+   "layer": "l1",
+   "note": "fired where no item applies; either the ranking floor is too low or an alias is too broad",
+   "observed_resolution": "ambiguous",
+   "observed_top": "l1:qualifier.assertion_standing",
+   "possible_classes": [
+    "mapper_ranking_disambiguation",
+    "ontology_sense_alias_type_defect"
+   ],
+   "review": "single_review"
+  },
+  {
+   "case_id": "L1-014",
+   "correct": false,
+   "expected_ids": [],
+   "expected_outcome": "unresolved",
+   "layer": "l1",
+   "note": "fired where no item applies; either the ranking floor is too low or an alias is too broad",
+   "observed_resolution": "ambiguous",
+   "observed_top": "l1:task.abandoned_intention",
+   "possible_classes": [
+    "mapper_ranking_disambiguation",
+    "ontology_sense_alias_type_defect"
+   ],
+   "review": "single_review"
+  },
+  {
+   "case_id": "L1-015",
+   "correct": false,
+   "expected_ids": [],
+   "expected_outcome": "unresolved",
+   "layer": "l1",
+   "note": "fired on an expression the freeze recorded as uncovered; a partial match was ranked above declining",
+   "observed_resolution": "mapped",
+   "observed_top": "l1:attribute.magnitude",
+   "possible_classes": [
+    "mapper_ranking_disambiguation",
+    "ontology_missing"
+   ],
+   "review": "double_review"
+  },
+  {
+   "case_id": "L2-002",
+   "correct": false,
+   "expected_ids": [
+    "l2:abstraction.project"
+   ],
+   "expected_outcome": "maps_to",
+   "layer": "l2",
+   "note": "mapped to a different item on a case the reviewers themselves flagged as disputed",
+   "observed_resolution": "mapped",
+   "observed_top": "l2:abstraction.task",
+   "possible_classes": [
+    "annotation_disagreement",
+    "mapper_ranking_disambiguation"
+   ],
+   "review": "double_review"
+  },
+  {
+   "case_id": "L2-003",
+   "correct": false,
+   "expected_ids": [],
+   "expected_outcome": "unresolved",
+   "layer": "l2",
+   "note": "fired on an expression the freeze recorded as uncovered; a partial match was ranked above declining",
+   "observed_resolution": "ambiguous",
+   "observed_top": "l2:abstraction.value_history",
+   "possible_classes": [
+    "mapper_ranking_disambiguation",
+    "ontology_missing"
+   ],
+   "review": "double_review"
+  }
+ ],
+ "failures_by_possible_class": {
+  "annotation_disagreement": [
+   "L2-002"
+  ],
+  "genuine_ambiguity": [
+   "L1-012"
+  ],
+  "mapper_candidate_generation": [
+   "L1-004"
+  ],
+  "mapper_ranking_disambiguation": [
+   "L1-001",
+   "L1-002",
+   "L1-003",
+   "L1-005",
+   "L1-012",
+   "L1-013",
+   "L1-014",
+   "L1-015",
+   "L2-002",
+   "L2-003"
+  ],
+  "ontology_missing": [
+   "L1-015",
+   "L2-003"
+  ],
+  "ontology_sense_alias_type_defect": [
+   "L1-001",
+   "L1-004",
+   "L1-013",
+   "L1-014"
+  ]
+ },
+ "headline": {
+  "cases": 18,
+  "correct": 7,
+  "negatives": 4,
+  "negatives_mismapped": 4,
+  "negatives_mismapped_ids": [
+   "L1-013",
+   "L1-014",
+   "L1-015",
+   "L2-003"
+  ]
+ },
+ "judge": "not called",
+ "mapper_freeze_hash": "444f60f45e5ee2c507e36a2d48b09359ea0942a3b389683cf857ce3d7c1e4b74",
+ "mapper_identity": {
+  "ambiguity_margin": 0.15,
+  "mapper_id": "mapper-v1-lexical",
+  "mapper_version": "1.0.0",
+  "minimum_confidence": 0.1,
+  "o_l1_sha256": "a3ee1a25fd5cd71dc700822b9d540bf25956029d436dd6cee3bb26849d365648",
+  "o_l2_sha256": "7c34ad1b477deae86826758bf3be706f9a73b0513494c2616d8a23d17f439cec",
+  "top_k": 5
+ },
+ "primary_finding": {
+  "defect": "the mapper almost never declines an irrelevant expression",
+  "evidence": "4 of 4 negative cases were mapped to an ontology item when the correct behaviour was to decline",
+  "fix_scope": "candidate generation, ranking, ambiguity handling and a native no-map/abstain path, derived from discovery data",
+  "must_be_fixed_before": "any fresh benchmark, independently of the accuracy figure",
+  "why_it_matters": "a mapper without a working abstain path cannot be measured on natural conversation, where most turns evoke nothing. Running a fresh benchmark first would reproduce a conclusion already in hand."
+ },
+ "raw_records_preserved": {
+  "note": "the raw mapper output is retained unmodified so a later mapper can be compared against what this one actually produced",
+  "record_count": 18
+ },
+ "record_sha256": "6fa1365d5cff1447ab1f1fb63789125e743a6ea3dc4b5449b14e15a17fee60d8",
+ "retirement": {
+  "cases_retired": 18,
+  "future_use": "regression only",
+  "never_again": [
+   "fresh qualification",
+   "a pass gate for any mapper version",
+   "a source of aliases, thresholds or special cases"
+  ],
+  "reason": "the cases were composed by reading ontology items, which makes them a controlled probe. Tuning a later mapper against them would fit the probe rather than repair the mapper, and would leave natural mapping quality still unmeasured."
+ },
+ "source_reports": {
+  "raw_records_sha256": "619c65461491f53cb8c4cab0c0e3e1686807af95168fab78d85b070d04fc5324",
+  "validation_report_sha256": "f076e2a0afa0f17c2526339f7c11cec2d46391462f1397d164124cd99442360a"
+ },
+ "stage": "mapper-v1-failure-record",
+ "status": "frozen",
+ "what_this_does_not_establish": [
+  "mapping quality on natural expression",
+  "that the ontology is adequate; it is still a 67 and 20 item seed",
+  "any production capability"
+ ]
+}
