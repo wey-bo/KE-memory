@@ -1,0 +1,118 @@
+{
+  "operators": [
+    {
+      "id": "operator_fe9dd6d99ebf",
+      "canonical_name": "created_by",
+      "input_concepts": ["concept_fd8836ad6c9c", "concept_32ad50552813"],
+      "output_concept": "concept_b39c9a889cc6",
+      "description": "Tests whether a model was created by an organization.",
+      "sources": ["sources/memory-assertion-example/v1/manifest.json#/entities/created_by"],
+      "created_at": "2026-08-08T00:00:00Z",
+      "supply": {
+        "memory_assertion": {
+          "profile_version": "memory-assertion/v1",
+          "positional_parameters": [
+            {"index": 0, "name": "model", "definition": "The model being related."},
+            {"index": 1, "name": "organization", "definition": "The proposed creator organization."}
+          ],
+          "proposition_operation": "none",
+          "function_semantics": {
+            "purity": "pure",
+            "deterministic": true,
+            "partiality": "total"
+          },
+          "lexicalizations": [
+            {
+              "language": "zh-CN",
+              "surface_form": "创建",
+              "surface_relation": "canonical_label",
+              "disambiguation_status": "resolved",
+              "source_attestations": [
+                {
+                  "source_kind": "human",
+                  "lemma": "创建",
+                  "provenance_refs": ["sources/memory-assertion-example/v1/manifest.json#/lexicalizations/create_zh"]
+                }
+              ]
+            },
+            {
+              "language": "en",
+              "surface_form": "create",
+              "surface_relation": "equivalent_expression",
+              "disambiguation_status": "resolved",
+              "source_attestations": [
+                {
+                  "source_kind": "human",
+                  "lemma": "create",
+                  "provenance_refs": ["sources/memory-assertion-example/v1/manifest.json#/lexicalizations/create_en"]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "operator_7e2261ee9c51",
+      "canonical_name": "possible",
+      "input_concepts": ["concept_441bafa9e9ed"],
+      "output_concept": "concept_b39c9a889cc6",
+      "description": "Tests whether the referenced proposition is presented as possible.",
+      "sources": ["sources/memory-assertion-example/v1/manifest.json#/entities/possible"],
+      "created_at": "2026-08-08T00:00:00Z",
+      "supply": {
+        "memory_assertion": {
+          "profile_version": "memory-assertion/v1",
+          "positional_parameters": [
+            {"index": 0, "name": "proposition", "definition": "The proposition under modal scope."}
+          ],
+          "proposition_operation": "modifier",
+          "function_semantics": {"purity": "pure", "deterministic": true, "partiality": "total"},
+          "lexicalizations": []
+        }
+      }
+    },
+    {
+      "id": "operator_61921190c148",
+      "canonical_name": "event_time",
+      "input_concepts": ["concept_441bafa9e9ed", "concept_9bdb3283cc8f"],
+      "output_concept": "concept_b39c9a889cc6",
+      "description": "Tests whether the referenced proposition has the explicitly stated event date.",
+      "sources": ["sources/memory-assertion-example/v1/manifest.json#/entities/event_time"],
+      "created_at": "2026-08-08T00:00:00Z",
+      "supply": {
+        "memory_assertion": {
+          "profile_version": "memory-assertion/v1",
+          "positional_parameters": [
+            {"index": 0, "name": "proposition", "definition": "The proposition being temporally qualified."},
+            {"index": 1, "name": "date", "definition": "The explicit event date related to the proposition."}
+          ],
+          "proposition_operation": "modifier",
+          "function_semantics": {"purity": "pure", "deterministic": true, "partiality": "total"},
+          "lexicalizations": []
+        }
+      }
+    },
+    {
+      "id": "operator_0e0ca38b526f",
+      "canonical_name": "believes",
+      "input_concepts": ["concept_72c9781aa03b", "concept_441bafa9e9ed"],
+      "output_concept": "concept_b39c9a889cc6",
+      "description": "Tests whether a person is explicitly presented as believing a proposition.",
+      "sources": ["sources/memory-assertion-example/v1/manifest.json#/entities/believes"],
+      "created_at": "2026-08-08T00:00:00Z",
+      "supply": {
+        "memory_assertion": {
+          "profile_version": "memory-assertion/v1",
+          "positional_parameters": [
+            {"index": 0, "name": "believer", "definition": "The person holding the attitude."},
+            {"index": 1, "name": "proposition", "definition": "The proposition under attitude scope."}
+          ],
+          "proposition_operation": "attitude",
+          "function_semantics": {"purity": "pure", "deterministic": true, "partiality": "total"},
+          "lexicalizations": []
+        }
+      }
+    }
+  ]
+}

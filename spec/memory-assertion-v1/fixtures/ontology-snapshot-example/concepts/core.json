@@ -1,0 +1,281 @@
+{
+  "concepts": [
+    {
+      "id": "concept_58fa53e5ab6d",
+      "canonical_name": "Entity",
+      "description": "A thing that can be identified in the assertion environment.",
+      "sources": ["sources/memory-assertion-example/v1/manifest.json#/entities/entity"],
+      "created_at": "2026-08-08T00:00:00Z",
+      "parents": [],
+      "supply": {
+        "memory_assertion": {
+          "profile_version": "memory-assertion/v1",
+          "semantic_kind": "entity",
+          "lexicalizations": []
+        }
+      }
+    },
+    {
+      "id": "concept_72c9781aa03b",
+      "canonical_name": "Person",
+      "description": "A human individual.",
+      "sources": ["sources/memory-assertion-example/v1/manifest.json#/entities/person"],
+      "created_at": "2026-08-08T00:00:00Z",
+      "parents": ["concept_58fa53e5ab6d"],
+      "supply": {
+        "memory_assertion": {
+          "profile_version": "memory-assertion/v1",
+          "semantic_kind": "entity",
+          "lexicalizations": [
+            {
+              "language": "en",
+              "surface_form": "person",
+              "surface_relation": "canonical_label",
+              "disambiguation_status": "resolved",
+              "source_attestations": [
+                {
+                  "source_kind": "human",
+                  "lemma": "person",
+                  "provenance_refs": ["sources/memory-assertion-example/v1/manifest.json#/lexicalizations/person"]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "concept_32ad50552813",
+      "canonical_name": "Organization",
+      "description": "A stable organization identity.",
+      "sources": ["sources/memory-assertion-example/v1/manifest.json#/entities/organization"],
+      "created_at": "2026-08-08T00:00:00Z",
+      "parents": ["concept_58fa53e5ab6d"],
+      "supply": {
+        "memory_assertion": {
+          "profile_version": "memory-assertion/v1",
+          "semantic_kind": "entity",
+          "lexicalizations": [
+            {
+              "language": "en",
+              "surface_form": "organization",
+              "surface_relation": "canonical_label",
+              "disambiguation_status": "resolved",
+              "source_attestations": [
+                {
+                  "source_kind": "human",
+                  "lemma": "Organization",
+                  "provenance_refs": ["sources/memory-assertion-example/v1/manifest.json#/lexicalizations/organization"]
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "concept_fd8836ad6c9c",
+      "canonical_name": "Model",
+      "description": "A computational model identity.",
+      "sources": ["sources/memory-assertion-example/v1/manifest.json#/entities/model"],
+      "created_at": "2026-08-08T00:00:00Z",
+      "parents": ["concept_58fa53e5ab6d"],
+      "supply": {
+        "memory_assertion": {
+          "profile_version": "memory-assertion/v1",
+          "semantic_kind": "entity",
+          "lexicalizations": []
+        }
+      }
+    },
+    {
+      "id": "concept_b39c9a889cc6",
+      "canonical_name": "Boolean",
+      "description": "The canonical Boolean literal domain.",
+      "sources": ["sources/memory-assertion-example/v1/manifest.json#/entities/boolean"],
+      "created_at": "2026-08-08T00:00:00Z",
+      "parents": [],
+      "supply": {
+        "memory_assertion": {
+          "profile_version": "memory-assertion/v1",
+          "semantic_kind": "literal_value",
+          "lexicalizations": [],
+          "literal_value_contract": {
+            "codec_id": "ke-literal:boolean/v1",
+            "canonical_json_kind": "boolean",
+            "equality_mode": "canonical_json_identity",
+            "accepts_null": false
+          }
+        }
+      }
+    },
+    {
+      "id": "concept_9bdb3283cc8f",
+      "canonical_name": "Date",
+      "description": "An ISO 8601 full-date literal domain.",
+      "sources": ["sources/memory-assertion-example/v1/manifest.json#/entities/date"],
+      "created_at": "2026-08-08T00:00:00Z",
+      "parents": [],
+      "supply": {
+        "memory_assertion": {
+          "profile_version": "memory-assertion/v1",
+          "semantic_kind": "literal_value",
+          "lexicalizations": [],
+          "literal_value_contract": {
+            "codec_id": "ke-literal:date/v1",
+            "canonical_json_kind": "string",
+            "equality_mode": "canonical_json_identity",
+            "accepts_null": false
+          }
+        }
+      }
+    },
+    {
+      "id": "concept_441bafa9e9ed",
+      "canonical_name": "Proposition",
+      "description": "The semantic type of a closed assertion reference.",
+      "sources": ["sources/memory-assertion-example/v1/manifest.json#/entities/proposition"],
+      "created_at": "2026-08-08T00:00:00Z",
+      "parents": [],
+      "supply": {
+        "memory_assertion": {
+          "profile_version": "memory-assertion/v1",
+          "semantic_kind": "proposition",
+          "lexicalizations": []
+        }
+      }
+    },
+    {
+      "id": "concept_b809c63d2ee0",
+      "canonical_name": "Quantity",
+      "description": "A canonical mass quantity expressed in kilograms for this conformance Snapshot.",
+      "sources": ["sources/memory-assertion-example/v1/manifest.json#/entities/quantity"],
+      "created_at": "2026-08-08T00:00:00Z",
+      "parents": [],
+      "supply": {
+        "memory_assertion": {
+          "profile_version": "memory-assertion/v1",
+          "semantic_kind": "literal_value",
+          "lexicalizations": [],
+          "literal_value_contract": {
+            "codec_id": "ke-literal:quantity/v1",
+            "canonical_json_kind": "object",
+            "equality_mode": "canonical_json_identity",
+            "accepts_null": false,
+            "canonical_unit_symbol": "kg"
+          }
+        }
+      }
+    },
+    {
+      "id": "concept_400b1a5cb986",
+      "canonical_name": "Decimal",
+      "description": "A canonical arbitrary-precision decimal string.",
+      "sources": ["sources/memory-assertion-example/v1/manifest.json#/entities/decimal"],
+      "created_at": "2026-08-08T00:00:00Z",
+      "parents": [],
+      "supply": {
+        "memory_assertion": {
+          "profile_version": "memory-assertion/v1",
+          "semantic_kind": "literal_value",
+          "lexicalizations": [],
+          "literal_value_contract": {
+            "codec_id": "ke-literal:decimal/v1",
+            "canonical_json_kind": "string",
+            "equality_mode": "canonical_json_identity",
+            "accepts_null": false
+          }
+        }
+      }
+    },
+    {
+      "id": "concept_35f01a413e72",
+      "canonical_name": "DateTime",
+      "description": "A canonical UTC ISO 8601 date-time ending in Z.",
+      "sources": ["sources/memory-assertion-example/v1/manifest.json#/entities/datetime"],
+      "created_at": "2026-08-08T00:00:00Z",
+      "parents": [],
+      "supply": {
+        "memory_assertion": {
+          "profile_version": "memory-assertion/v1",
+          "semantic_kind": "literal_value",
+          "lexicalizations": [],
+          "literal_value_contract": {
+            "codec_id": "ke-literal:datetime/v1",
+            "canonical_json_kind": "string",
+            "equality_mode": "canonical_json_identity",
+            "accepts_null": false
+          }
+        }
+      }
+    },
+    {
+      "id": "concept_8b17e273c98f",
+      "canonical_name": "Duration",
+      "description": "A canonical non-negative duration normalized to ISO 8601 seconds form.",
+      "sources": ["sources/memory-assertion-example/v1/manifest.json#/entities/duration"],
+      "created_at": "2026-08-08T00:00:00Z",
+      "parents": [],
+      "supply": {
+        "memory_assertion": {
+          "profile_version": "memory-assertion/v1",
+          "semantic_kind": "literal_value",
+          "lexicalizations": [],
+          "literal_value_contract": {
+            "codec_id": "ke-literal:duration/v1",
+            "canonical_json_kind": "string",
+            "equality_mode": "canonical_json_identity",
+            "accepts_null": false
+          }
+        }
+      }
+    },
+    {
+      "id": "concept_b4bdacfaaec4",
+      "canonical_name": "Money",
+      "description": "A canonical monetary amount governed by the embedded currency minor-unit table.",
+      "sources": ["sources/memory-assertion-example/v1/manifest.json#/entities/money"],
+      "created_at": "2026-08-08T00:00:00Z",
+      "parents": [],
+      "supply": {
+        "memory_assertion": {
+          "profile_version": "memory-assertion/v1",
+          "semantic_kind": "literal_value",
+          "lexicalizations": [],
+          "literal_value_contract": {
+            "codec_id": "ke-literal:money/v1",
+            "canonical_json_kind": "object",
+            "equality_mode": "canonical_json_identity",
+            "accepts_null": false,
+            "currency_minor_units": [
+              {"currency": "CNY", "minor_units": 2},
+              {"currency": "JPY", "minor_units": 0},
+              {"currency": "USD", "minor_units": 2}
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "concept_13c81bbb1b78",
+      "canonical_name": "Text",
+      "description": "A canonical NFC text literal.",
+      "sources": ["sources/memory-assertion-example/v1/manifest.json#/entities/text"],
+      "created_at": "2026-08-08T00:00:00Z",
+      "parents": [],
+      "supply": {
+        "memory_assertion": {
+          "profile_version": "memory-assertion/v1",
+          "semantic_kind": "literal_value",
+          "lexicalizations": [],
+          "literal_value_contract": {
+            "codec_id": "ke-literal:text-nfc/v1",
+            "canonical_json_kind": "string",
+            "equality_mode": "canonical_json_identity",
+            "accepts_null": false
+          }
+        }
+      }
+    }
+  ]
+}

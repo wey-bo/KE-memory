@@ -1,0 +1,349 @@
+{
+  "format_version": "canonical-text-reference-v1",
+  "notes": "Reference-harness vectors only. They do not define a production parser, a second Snapshot authority, or additional ontology identities. The environment loads Concept and Operator symbols from the exact conformance fixture manifest.",
+  "environment": {
+    "snapshot_fixture_path": "../../../../fixtures/ontology-snapshot-example/snapshot.manifest.json",
+    "canonical_bindings": [
+      {
+        "individual_id": "model-gpt-4",
+        "local_symbol": "gpt_4",
+        "naming_concept_id": "concept_fd8836ad6c9c",
+        "concept_ids": ["concept_fd8836ad6c9c"]
+      },
+      {
+        "individual_id": "openai",
+        "local_symbol": "openai",
+        "naming_concept_id": "concept_32ad50552813",
+        "concept_ids": ["concept_32ad50552813"]
+      },
+      {
+        "individual_id": "alice",
+        "local_symbol": "alice",
+        "naming_concept_id": "concept_72c9781aa03b",
+        "concept_ids": ["concept_72c9781aa03b"]
+      }
+    ],
+    "local_declarations": [
+      {
+        "individual_id": "hypothesis-1/xiaowang",
+        "local_symbol": "xiaowang",
+        "naming_concept_id": "concept_72c9781aa03b",
+        "concept_ids": ["concept_72c9781aa03b"]
+      }
+    ],
+    "candidate_assertion_ids": ["created-by-1"],
+    "canonical_assertion_ids": ["claim/session-1:203"]
+  },
+  "leaf_cases": [
+    {
+      "name": "canonical IndividualRef",
+      "expected_valid": true,
+      "canonical_text": "Model__gpt_4",
+      "authoritative_json": {
+        "kind": "individual_ref",
+        "scope": "canonical",
+        "individual_id": "model-gpt-4"
+      }
+    },
+    {
+      "name": "local IndividualRef",
+      "expected_valid": true,
+      "canonical_text": "Person__xiaowang",
+      "authoritative_json": {
+        "kind": "individual_ref",
+        "scope": "local",
+        "individual_id": "hypothesis-1/xiaowang"
+      }
+    },
+    {
+      "name": "Boolean TypedValue",
+      "expected_valid": true,
+      "canonical_text": "Boolean::true",
+      "authoritative_json": {
+        "kind": "typed_value",
+        "concept_id": "concept_b39c9a889cc6",
+        "canonical_value": true
+      }
+    },
+    {
+      "name": "Date TypedValue with JCS string",
+      "expected_valid": true,
+      "canonical_text": "Date::\"2026-08-09\"",
+      "authoritative_json": {
+        "kind": "typed_value",
+        "concept_id": "concept_9bdb3283cc8f",
+        "canonical_value": "2026-08-09"
+      }
+    },
+    {
+      "name": "Text TypedValue in NFC",
+      "expected_valid": true,
+      "canonical_text": "Text::\"创建\"",
+      "authoritative_json": {
+        "kind": "typed_value",
+        "concept_id": "concept_13c81bbb1b78",
+        "canonical_value": "创建"
+      }
+    },
+    {
+      "name": "Decimal TypedValue without redundant zeros",
+      "expected_valid": true,
+      "canonical_text": "Decimal::\"12.5\"",
+      "authoritative_json": {
+        "kind": "typed_value",
+        "concept_id": "concept_400b1a5cb986",
+        "canonical_value": "12.5"
+      }
+    },
+    {
+      "name": "DateTime TypedValue normalized to UTC",
+      "expected_valid": true,
+      "canonical_text": "DateTime::\"2026-08-09T10:30:00Z\"",
+      "authoritative_json": {
+        "kind": "typed_value",
+        "concept_id": "concept_35f01a413e72",
+        "canonical_value": "2026-08-09T10:30:00Z"
+      }
+    },
+    {
+      "name": "Duration TypedValue normalized to seconds",
+      "expected_valid": true,
+      "canonical_text": "Duration::\"PT3600S\"",
+      "authoritative_json": {
+        "kind": "typed_value",
+        "concept_id": "concept_8b17e273c98f",
+        "canonical_value": "PT3600S"
+      }
+    },
+    {
+      "name": "Money TypedValue obeying CNY minor units",
+      "expected_valid": true,
+      "canonical_text": "Money::{\"amount\":\"12.50\",\"currency\":\"CNY\"}",
+      "authoritative_json": {
+        "kind": "typed_value",
+        "concept_id": "concept_b4bdacfaaec4",
+        "canonical_value": {
+          "amount": "12.50",
+          "currency": "CNY"
+        }
+      }
+    },
+    {
+      "name": "Quantity TypedValue obeying fixed unit",
+      "expected_valid": true,
+      "canonical_text": "Quantity::{\"unit\":\"kg\",\"value\":\"12.5\"}",
+      "authoritative_json": {
+        "kind": "typed_value",
+        "concept_id": "concept_b809c63d2ee0",
+        "canonical_value": {
+          "value": "12.5",
+          "unit": "kg"
+        }
+      }
+    },
+    {
+      "name": "candidate AssertionRef with JSON string ID",
+      "expected_valid": true,
+      "canonical_text": "Assertion::candidate::\"created-by-1\"",
+      "authoritative_json": {
+        "kind": "assertion_ref",
+        "scope": "candidate",
+        "assertion_id": "created-by-1"
+      }
+    },
+    {
+      "name": "canonical AssertionRef with punctuation in JSON string ID",
+      "expected_valid": true,
+      "canonical_text": "Assertion::canonical::\"claim/session-1:203\"",
+      "authoritative_json": {
+        "kind": "assertion_ref",
+        "scope": "canonical",
+        "assertion_id": "claim/session-1:203"
+      }
+    },
+    {
+      "name": "OntologyConceptRef",
+      "expected_valid": true,
+      "canonical_text": "Concept::Person",
+      "authoritative_json": {
+        "kind": "ontology_concept_ref",
+        "concept_id": "concept_72c9781aa03b"
+      }
+    },
+    {
+      "name": "OntologyOperatorRef",
+      "expected_valid": true,
+      "canonical_text": "Operator::created_by",
+      "authoritative_json": {
+        "kind": "ontology_operator_ref",
+        "operator_id": "operator_fe9dd6d99ebf"
+      }
+    }
+  ],
+  "leaf_error_cases": [
+    {
+      "name": "unknown Concept symbol",
+      "expected_valid": false,
+      "canonical_text": "Concept::UnknownConcept",
+      "expected_error_contains": "unknown Concept symbol"
+    },
+    {
+      "name": "unknown Operator symbol",
+      "expected_valid": false,
+      "canonical_text": "Operator::unknown_operator",
+      "expected_error_contains": "unknown Operator symbol"
+    },
+    {
+      "name": "missing Individual binding",
+      "expected_valid": false,
+      "canonical_text": "Model__missing",
+      "expected_error_contains": "unknown Individual symbol"
+    },
+    {
+      "name": "missing candidate AssertionRef binding",
+      "expected_valid": false,
+      "canonical_text": "Assertion::candidate::\"missing-1\"",
+      "expected_error_contains": "unknown candidate assertion ID"
+    },
+    {
+      "name": "AssertionRef ID must be a JSON string",
+      "expected_valid": false,
+      "canonical_text": "Assertion::candidate::created-by-1",
+      "expected_error_contains": "JSON string"
+    },
+    {
+      "name": "noncanonical escaped slash in AssertionRef",
+      "expected_valid": false,
+      "canonical_text": "Assertion::canonical::\"claim\\/session-1:203\"",
+      "expected_error_contains": "non-canonical"
+    },
+    {
+      "name": "Unicode AssertionRef ID is future-only in v1",
+      "expected_valid": false,
+      "canonical_text": "Assertion::candidate::\"候选/session-1:leave.203\"",
+      "expected_error_contains": "v1 RuntimeId"
+    },
+    {
+      "name": "AssertionRef ID rejects control characters",
+      "expected_valid": false,
+      "canonical_text": "Assertion::candidate::\"bad\\u0001id\"",
+      "expected_error_contains": "control character"
+    },
+    {
+      "name": "noncanonical TypedValue whitespace",
+      "expected_valid": false,
+      "canonical_text": "Boolean:: true",
+      "expected_error_contains": "non-canonical"
+    },
+    {
+      "name": "Boolean string is not Boolean",
+      "expected_valid": false,
+      "canonical_text": "Boolean::\"true\"",
+      "expected_error_contains": "JSON kind"
+    },
+    {
+      "name": "Text must be NFC",
+      "expected_valid": false,
+      "canonical_text": "Text::\"e\u0301\"",
+      "expected_error_contains": "NFC-normalized"
+    },
+    {
+      "name": "Decimal rejects redundant trailing zero",
+      "expected_valid": false,
+      "canonical_text": "Decimal::\"1.0\"",
+      "expected_error_contains": "Decimal TypedValue"
+    },
+    {
+      "name": "Date rejects invalid calendar date",
+      "expected_valid": false,
+      "canonical_text": "Date::\"2026-02-30\"",
+      "expected_error_contains": "Date TypedValue"
+    },
+    {
+      "name": "DateTime rejects non-UTC offset form",
+      "expected_valid": false,
+      "canonical_text": "DateTime::\"2026-08-09T18:30:00+08:00\"",
+      "expected_error_contains": "ending in Z"
+    },
+    {
+      "name": "Duration rejects non-seconds form",
+      "expected_valid": false,
+      "canonical_text": "Duration::\"PT1H\"",
+      "expected_error_contains": "seconds form"
+    },
+    {
+      "name": "Money rejects currency absent from Concept contract",
+      "expected_valid": false,
+      "canonical_text": "Money::{\"amount\":\"12.50\",\"currency\":\"EUR\"}",
+      "expected_error_contains": "not supported"
+    },
+    {
+      "name": "Money rejects wrong minor-unit width",
+      "expected_valid": false,
+      "canonical_text": "Money::{\"amount\":\"12.5\",\"currency\":\"CNY\"}",
+      "expected_error_contains": "minor-unit"
+    },
+    {
+      "name": "Quantity rejects unit outside Concept contract",
+      "expected_valid": false,
+      "canonical_text": "Quantity::{\"unit\":\"lb\",\"value\":\"12.5\"}",
+      "expected_error_contains": "Quantity TypedValue"
+    },
+    {
+      "name": "Quantity rejects redundant decimal zero",
+      "expected_valid": false,
+      "canonical_text": "Quantity::{\"unit\":\"kg\",\"value\":\"12.50\"}",
+      "expected_error_contains": "Quantity TypedValue"
+    }
+  ],
+  "equation_error_cases": [
+    {
+      "name": "bare LeafTerm equality",
+      "expected_valid": false,
+      "canonical_text": "Model__gpt_4=Organization__openai",
+      "expected_error_contains": "OperatorApplication"
+    },
+    {
+      "name": "unknown equation Operator symbol",
+      "expected_valid": false,
+      "canonical_text": "unknown_operator(Model__gpt_4)=Boolean::true",
+      "expected_error_contains": "unknown Operator symbol"
+    },
+    {
+      "name": "equation contains optional whitespace",
+      "expected_valid": false,
+      "canonical_text": "created_by(Model__gpt_4, Organization__openai)=Boolean::true",
+      "expected_error_contains": "non-canonical"
+    },
+    {
+      "name": "Operator arity mismatch",
+      "expected_valid": false,
+      "canonical_text": "created_by(Model__gpt_4)=Boolean::true",
+      "expected_error_contains": "arity"
+    },
+    {
+      "name": "Operator input type mismatch",
+      "expected_valid": false,
+      "canonical_text": "created_by(Organization__openai,Model__gpt_4)=Boolean::true",
+      "expected_error_contains": "input type"
+    },
+    {
+      "name": "Operator output type mismatch",
+      "expected_valid": false,
+      "canonical_text": "created_by(Model__gpt_4,Organization__openai)=Date::\"2026-08-09\"",
+      "expected_error_contains": "output type"
+    }
+  ],
+  "snapshot_ref_error_cases": [
+    {
+      "name": "wrong Snapshot hash",
+      "expected_valid": false,
+      "canonical_text": "created_by(Model__gpt_4,Organization__openai)=Boolean::true",
+      "snapshot_ref_override": {
+        "snapshot_id": "memory-assertion-example-v1",
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expected_error_contains": "Snapshot reference mismatch"
+    }
+  ]
+}

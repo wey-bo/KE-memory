@@ -1,0 +1,1696 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://genuineknowledge.com/specifications/memory-assertion/v1/memory-assertion-v1.schema.json",
+  "title": "memory-assertion/v1 NL2KE Exchange Contract",
+  "description": "Closed Draft-07 shapes for NL2KE request, response, error, capabilities, and readiness documents. Cross-reference closure, ontology typing, literal codec normalization, evidence replay, graph acyclicity, and snapshot hash verification require the versioned semantic validator.",
+  "oneOf": [
+    { "$ref": "#/definitions/Nl2KeRequest" },
+    { "$ref": "#/definitions/Nl2KeResponse" },
+    { "$ref": "#/definitions/Nl2KeError" },
+    { "$ref": "#/definitions/Nl2KeCapabilities" },
+    { "$ref": "#/definitions/Nl2KeReadiness" }
+  ],
+  "definitions": {
+    "NonEmptyString": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "RuntimeId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]*$"
+    },
+    "LocalSymbol": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*$"
+    },
+    "Sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "LiteralCodecId": {
+      "enum": [
+        "ke-literal:boolean/v1",
+        "ke-literal:text-nfc/v1",
+        "ke-literal:decimal/v1",
+        "ke-literal:date/v1",
+        "ke-literal:datetime/v1",
+        "ke-literal:duration/v1",
+        "ke-literal:money/v1",
+        "ke-literal:quantity/v1"
+      ]
+    },
+    "ConceptId": {
+      "type": "string",
+      "pattern": "^concept_[a-f0-9]{12}$"
+    },
+    "OperatorId": {
+      "type": "string",
+      "pattern": "^operator_[a-f0-9]{12}$"
+    },
+    "LanguageTag": {
+      "type": "string",
+      "pattern": "^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$"
+    },
+    "NullableNonNegativeInteger": {
+      "oneOf": [
+        { "$ref": "#/definitions/SafeNonNegativeInteger" },
+        { "type": "null" }
+      ]
+    },
+    "SafeNonNegativeInteger": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9007199254740991
+    },
+    "SafePositiveInteger": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "RuntimeIdArray": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/definitions/RuntimeId" }
+    },
+    "NonEmptyRuntimeIdArray": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/definitions/RuntimeId" }
+    },
+    "NonEmptyConceptIdArray": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/definitions/ConceptId" }
+    },
+    "NonEmptyStringArray": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/definitions/NonEmptyString" }
+    },
+    "OntologySnapshotRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["snapshot_id", "sha256"],
+      "properties": {
+        "snapshot_id": { "$ref": "#/definitions/RuntimeId" },
+        "sha256": { "$ref": "#/definitions/Sha256" }
+      }
+    },
+
+    "IndividualRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "scope", "individual_id"],
+      "properties": {
+        "kind": { "const": "individual_ref" },
+        "scope": { "enum": ["local", "canonical"] },
+        "individual_id": { "$ref": "#/definitions/RuntimeId" }
+      }
+    },
+    "MoneyValue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["amount", "currency"],
+      "properties": {
+        "amount": {
+          "type": "string",
+          "pattern": "^(?:0|-?[1-9][0-9]*)(?:\\.[0-9]+)?$"
+        },
+        "currency": {
+          "type": "string",
+          "pattern": "^[A-Z]{3}$"
+        }
+      }
+    },
+    "QuantityValue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "unit"],
+      "properties": {
+        "value": {
+          "type": "string",
+          "pattern": "^(?:0|-?(?:(?:[1-9][0-9]*)(?:\\.[0-9]*[1-9])?|0\\.[0-9]*[1-9]))$"
+        },
+        "unit": { "$ref": "#/definitions/NonEmptyString" }
+      }
+    },
+    "CanonicalLiteralValue": {
+      "oneOf": [
+        { "type": "boolean" },
+        { "type": "string" },
+        { "$ref": "#/definitions/MoneyValue" },
+        { "$ref": "#/definitions/QuantityValue" }
+      ]
+    },
+    "TypedValue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "concept_id", "canonical_value"],
+      "properties": {
+        "kind": { "const": "typed_value" },
+        "concept_id": { "$ref": "#/definitions/ConceptId" },
+        "canonical_value": { "$ref": "#/definitions/CanonicalLiteralValue" }
+      }
+    },
+    "AssertionRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "scope", "assertion_id"],
+      "properties": {
+        "kind": { "const": "assertion_ref" },
+        "scope": { "enum": ["candidate", "canonical"] },
+        "assertion_id": { "$ref": "#/definitions/RuntimeId" }
+      }
+    },
+    "OntologyConceptRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "concept_id"],
+      "properties": {
+        "kind": { "const": "ontology_concept_ref" },
+        "concept_id": { "$ref": "#/definitions/ConceptId" }
+      }
+    },
+    "OntologyOperatorRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "operator_id"],
+      "properties": {
+        "kind": { "const": "ontology_operator_ref" },
+        "operator_id": { "$ref": "#/definitions/OperatorId" }
+      }
+    },
+    "LeafTerm": {
+      "oneOf": [
+        { "$ref": "#/definitions/IndividualRef" },
+        { "$ref": "#/definitions/TypedValue" },
+        { "$ref": "#/definitions/AssertionRef" },
+        { "$ref": "#/definitions/OntologyConceptRef" },
+        { "$ref": "#/definitions/OntologyOperatorRef" }
+      ]
+    },
+    "OperatorApplication": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "operator_id", "arguments"],
+      "properties": {
+        "kind": { "const": "operator_application" },
+        "operator_id": { "$ref": "#/definitions/OperatorId" },
+        "arguments": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/LeafTerm" }
+        }
+      }
+    },
+    "KnowledgeEquation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["lhs", "rhs"],
+      "properties": {
+        "lhs": { "$ref": "#/definitions/OperatorApplication" },
+        "rhs": { "$ref": "#/definitions/LeafTerm" }
+      }
+    },
+
+    "SourceMessage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "message_id",
+        "message_revision_id",
+        "role",
+        "content",
+        "content_sha256",
+        "source_order",
+        "language"
+      ],
+      "properties": {
+        "message_id": { "$ref": "#/definitions/RuntimeId" },
+        "message_revision_id": { "$ref": "#/definitions/RuntimeId" },
+        "role": { "enum": ["user", "agent", "tool", "system"] },
+        "content": { "type": "string" },
+        "content_sha256": { "$ref": "#/definitions/Sha256" },
+        "source_order": { "$ref": "#/definitions/SafeNonNegativeInteger" },
+        "language": { "$ref": "#/definitions/LanguageTag" },
+        "recorded_at": { "type": "string", "format": "date-time" }
+      }
+    },
+    "SourceInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["messages", "focus_message_ids"],
+      "properties": {
+        "messages": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/definitions/SourceMessage" }
+        },
+        "focus_message_ids": { "$ref": "#/definitions/NonEmptyRuntimeIdArray" }
+      }
+    },
+    "ContextItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "context_id",
+        "context_kind",
+        "content",
+        "content_sha256",
+        "provenance_refs",
+        "support_policy"
+      ],
+      "properties": {
+        "context_id": { "$ref": "#/definitions/RuntimeId" },
+        "context_kind": {
+          "enum": ["raw_message", "summary", "time_anchor", "domain_rule"]
+        },
+        "content": { "$ref": "#/definitions/NonEmptyString" },
+        "content_sha256": { "$ref": "#/definitions/Sha256" },
+        "provenance_refs": { "$ref": "#/definitions/NonEmptyRuntimeIdArray" },
+        "support_policy": { "const": "resolution_only" }
+      }
+    },
+    "ContextInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["items"],
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ContextItem" }
+        }
+      }
+    },
+
+    "CanonicalBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "individual_id",
+        "local_symbol",
+        "naming_concept_id",
+        "concept_ids",
+        "binding_revision",
+        "binding_sha256",
+        "provenance_refs"
+      ],
+      "properties": {
+        "individual_id": { "$ref": "#/definitions/RuntimeId" },
+        "local_symbol": { "$ref": "#/definitions/LocalSymbol" },
+        "naming_concept_id": { "$ref": "#/definitions/ConceptId" },
+        "concept_ids": { "$ref": "#/definitions/NonEmptyConceptIdArray" },
+        "binding_revision": { "$ref": "#/definitions/RuntimeId" },
+        "binding_sha256": {
+          "$ref": "#/definitions/Sha256",
+          "description": "Caller-computed SHA-256 of RFC 8785 JCS UTF-8 bytes for this complete CanonicalBinding after removing binding_sha256. Source strings are not Unicode-normalized."
+        },
+        "surface_forms": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/definitions/NonEmptyString" }
+        },
+        "provenance_refs": { "$ref": "#/definitions/NonEmptyRuntimeIdArray" }
+      }
+    },
+    "CanonicalAssertion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assertion_id",
+        "ke",
+        "assertion_revision",
+        "assertion_sha256",
+        "provenance_refs"
+      ],
+      "properties": {
+        "assertion_id": { "$ref": "#/definitions/RuntimeId" },
+        "ke": { "$ref": "#/definitions/KnowledgeEquation" },
+        "assertion_revision": { "$ref": "#/definitions/RuntimeId" },
+        "assertion_sha256": {
+          "$ref": "#/definitions/Sha256",
+          "description": "Caller-computed SHA-256 of RFC 8785 JCS UTF-8 bytes for this complete CanonicalAssertion after removing assertion_sha256. Source strings are not Unicode-normalized."
+        },
+        "provenance_refs": { "$ref": "#/definitions/NonEmptyRuntimeIdArray" }
+      }
+    },
+    "KnownLocalDeclaration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "individual_id",
+        "local_symbol",
+        "naming_concept_id",
+        "concept_ids",
+        "surface_forms",
+        "provenance_refs"
+      ],
+      "properties": {
+        "individual_id": { "$ref": "#/definitions/RuntimeId" },
+        "local_symbol": { "$ref": "#/definitions/LocalSymbol" },
+        "naming_concept_id": { "$ref": "#/definitions/ConceptId" },
+        "concept_ids": { "$ref": "#/definitions/NonEmptyConceptIdArray" },
+        "surface_forms": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/definitions/NonEmptyString" }
+        },
+        "provenance_refs": { "$ref": "#/definitions/NonEmptyRuntimeIdArray" }
+      }
+    },
+    "ClosedHypothesisBundleInput": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonical_bindings",
+        "canonical_assertions",
+        "local_declarations"
+      ],
+      "properties": {
+        "canonical_bindings": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/CanonicalBinding" }
+        },
+        "canonical_assertions": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/CanonicalAssertion" }
+        },
+        "local_declarations": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/KnownLocalDeclaration" }
+        }
+      }
+    },
+
+    "RequestedExecution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["model", "credential", "budget", "strategy"],
+      "properties": {
+        "model": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["provider", "model_id", "route_id"],
+          "properties": {
+            "provider": { "$ref": "#/definitions/NonEmptyString" },
+            "model_id": { "$ref": "#/definitions/NonEmptyString" },
+            "route_id": {
+              "oneOf": [
+                { "$ref": "#/definitions/NonEmptyString" },
+                { "type": "null" }
+              ]
+            }
+          }
+        },
+        "credential": {
+          "type": "object",
+          "additionalProperties": false,
+                                          "required": [
+                                            "mode",
+                                            "credential_ref",
+                                            "credential_ref_fingerprint"
+                                          ],
+                                          "properties": {
+                                            "mode": { "const": "caller_managed" },
+                                            "credential_ref": { "$ref": "#/definitions/NonEmptyString" },
+                                            "credential_ref_fingerprint": {
+                                              "$ref": "#/definitions/Sha256",
+                                              "description": "Caller-computed HMAC-SHA-256 fingerprint of the exact credential_ref UTF-8 bytes using a caller-owned fingerprint key. The service MUST echo this value and MUST NOT replace it with a bare hash."
+                                            }
+                                          }
+        },
+        "budget": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "max_model_calls",
+            "max_input_tokens",
+            "max_output_tokens",
+            "deadline_ms"
+          ],
+          "properties": {
+            "max_model_calls": { "$ref": "#/definitions/SafePositiveInteger" },
+            "max_input_tokens": { "$ref": "#/definitions/SafePositiveInteger" },
+            "max_output_tokens": { "$ref": "#/definitions/SafePositiveInteger" },
+            "deadline_ms": { "$ref": "#/definitions/SafePositiveInteger" }
+          }
+        },
+        "strategy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["strategy_id", "strategy_version"],
+          "properties": {
+            "strategy_id": { "$ref": "#/definitions/NonEmptyString" },
+            "strategy_version": { "$ref": "#/definitions/NonEmptyString" }
+          }
+        }
+      }
+    },
+    "Nl2KeRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "document_kind",
+        "protocol_version",
+        "request_id",
+        "semantic_contract_version",
+        "ontology_snapshot_ref",
+        "source",
+        "context",
+        "execution"
+      ],
+      "properties": {
+        "document_kind": { "const": "nl2ke_request" },
+        "protocol_version": { "const": "nl-to-ke/v1" },
+        "request_id": { "$ref": "#/definitions/RuntimeId" },
+        "semantic_contract_version": { "const": "memory-assertion/v1" },
+        "ontology_snapshot_ref": { "$ref": "#/definitions/OntologySnapshotRef" },
+        "source": { "$ref": "#/definitions/SourceInput" },
+        "context": { "$ref": "#/definitions/ContextInput" },
+        "closed_hypothesis_bundle": {
+          "$ref": "#/definitions/ClosedHypothesisBundleInput"
+        },
+        "execution": { "$ref": "#/definitions/RequestedExecution" }
+      }
+    },
+
+    "WireEvidenceSpan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_id",
+        "message_id",
+        "message_revision_id",
+        "start_char",
+        "end_char",
+        "quote",
+        "quote_sha256"
+      ],
+      "properties": {
+        "evidence_id": { "$ref": "#/definitions/RuntimeId" },
+        "message_id": { "$ref": "#/definitions/RuntimeId" },
+        "message_revision_id": { "$ref": "#/definitions/RuntimeId" },
+        "start_char": { "$ref": "#/definitions/SafeNonNegativeInteger" },
+        "end_char": { "$ref": "#/definitions/SafePositiveInteger" },
+        "quote": { "$ref": "#/definitions/NonEmptyString" },
+        "quote_sha256": { "$ref": "#/definitions/Sha256" }
+      }
+    },
+    "SemanticAssessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "label",
+        "score",
+        "score_semantics",
+        "uncertainty_codes",
+        "reasons"
+      ],
+      "properties": {
+        "label": { "enum": ["supported", "uncertain"] },
+        "score": {
+          "oneOf": [
+            { "type": "number", "minimum": 0, "maximum": 1 },
+            { "type": "null" }
+          ]
+        },
+        "score_semantics": {
+          "enum": [
+            "not_provided",
+            "uncalibrated_relative",
+            "calibrated_probability"
+          ]
+        },
+        "uncertainty_codes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "lexical_ambiguity",
+              "possible_ambiguity",
+              "reference_ambiguity",
+              "temporal_ambiguity",
+              "scope_ambiguity",
+              "source_ambiguity"
+            ]
+          }
+        },
+        "reasons": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/NonEmptyString" }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "score_semantics": { "const": "not_provided" } },
+            "required": ["score_semantics"]
+          },
+          "then": { "properties": { "score": { "type": "null" } } },
+          "else": {
+            "properties": {
+              "score": { "type": "number", "minimum": 0, "maximum": 1 }
+            }
+          }
+        }
+      ]
+    },
+    "CandidateMetadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "speech_act": {
+          "enum": [
+            "assertion",
+            "question",
+            "request",
+            "command",
+            "suggestion",
+            "promise",
+            "other"
+          ]
+        },
+        "epistemic_mode": {
+          "enum": [
+            "self_reported",
+            "other_reported",
+            "agent_generated",
+            "tool_observed",
+            "quoted"
+          ]
+        },
+        "semantic_assessment": {
+          "$ref": "#/definitions/SemanticAssessment"
+        }
+      }
+    },
+    "CandidateAssertion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidate_id",
+        "ke",
+        "support_basis",
+        "source_evidence_ids",
+        "context_support_refs"
+      ],
+      "properties": {
+        "candidate_id": { "$ref": "#/definitions/RuntimeId" },
+        "ke": { "$ref": "#/definitions/KnowledgeEquation" },
+        "candidate_metadata": { "$ref": "#/definitions/CandidateMetadata" },
+        "support_basis": { "enum": ["direct_source", "context_resolved"] },
+        "source_evidence_ids": { "$ref": "#/definitions/NonEmptyRuntimeIdArray" },
+        "context_support_refs": { "$ref": "#/definitions/RuntimeIdArray" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "support_basis": { "const": "context_resolved" } },
+            "required": ["support_basis"]
+          },
+          "then": {
+            "properties": { "context_support_refs": { "minItems": 1 } }
+          },
+          "else": {
+            "properties": { "context_support_refs": { "maxItems": 0 } }
+          }
+        }
+      ]
+    },
+    "LocalIndividualDeclaration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "individual_id",
+        "local_symbol",
+        "naming_concept_id",
+        "concept_ids",
+        "surface_forms",
+        "mention_evidence_ids"
+      ],
+      "properties": {
+        "individual_id": { "$ref": "#/definitions/RuntimeId" },
+        "local_symbol": { "$ref": "#/definitions/LocalSymbol" },
+        "naming_concept_id": { "$ref": "#/definitions/ConceptId" },
+        "concept_ids": { "$ref": "#/definitions/NonEmptyConceptIdArray" },
+        "surface_forms": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/definitions/NonEmptyString" }
+        },
+        "mention_evidence_ids": { "$ref": "#/definitions/NonEmptyRuntimeIdArray" }
+      }
+    },
+    "Hypothesis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "hypothesis_id",
+        "rank",
+        "local_individuals",
+        "candidate_assertions",
+        "root_candidate_ids"
+      ],
+      "properties": {
+        "hypothesis_id": { "$ref": "#/definitions/RuntimeId" },
+        "rank": { "$ref": "#/definitions/SafePositiveInteger" },
+        "local_individuals": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/LocalIndividualDeclaration" }
+        },
+        "candidate_assertions": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/definitions/CandidateAssertion" }
+        },
+        "root_candidate_ids": { "$ref": "#/definitions/NonEmptyRuntimeIdArray" }
+      }
+    },
+
+    "ProcessedRange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "message_id",
+        "message_revision_id",
+        "start_char",
+        "end_char"
+      ],
+      "properties": {
+        "message_id": { "$ref": "#/definitions/RuntimeId" },
+        "message_revision_id": { "$ref": "#/definitions/RuntimeId" },
+        "start_char": { "$ref": "#/definitions/SafeNonNegativeInteger" },
+        "end_char": { "$ref": "#/definitions/SafePositiveInteger" }
+      }
+    },
+    "ProcessingScope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "received_focus_message_ids",
+        "processed_focus_message_ids",
+        "processed_ranges",
+        "truncated",
+        "max_candidate_assertions_reached"
+      ],
+      "properties": {
+        "received_focus_message_ids": {
+          "$ref": "#/definitions/NonEmptyRuntimeIdArray"
+        },
+        "processed_focus_message_ids": { "$ref": "#/definitions/RuntimeIdArray" },
+        "processed_ranges": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ProcessedRange" }
+        },
+        "truncated": { "type": "boolean" },
+        "truncation_reason": { "$ref": "#/definitions/NonEmptyString" },
+        "max_candidate_assertions_reached": { "type": "boolean" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "truncated": { "const": true } },
+            "required": ["truncated"]
+          },
+          "then": { "required": ["truncation_reason"] },
+          "else": { "not": { "required": ["truncation_reason"] } }
+        }
+      ]
+    },
+    "ActualExecution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider",
+        "model_id",
+        "route_id",
+        "strategy_id",
+        "strategy_version",
+        "credential_ref_fingerprint",
+        "model_calls",
+        "input_tokens",
+        "output_tokens",
+        "latency_ms"
+      ],
+      "properties": {
+        "provider": { "$ref": "#/definitions/NonEmptyString" },
+        "model_id": { "$ref": "#/definitions/NonEmptyString" },
+        "route_id": {
+          "oneOf": [
+            { "$ref": "#/definitions/NonEmptyString" },
+            { "type": "null" }
+          ]
+        },
+        "strategy_id": { "$ref": "#/definitions/NonEmptyString" },
+        "strategy_version": { "$ref": "#/definitions/NonEmptyString" },
+        "credential_ref_fingerprint": {
+          "$ref": "#/definitions/Sha256",
+          "description": "Exact echo of execution.credential.credential_ref_fingerprint from the paired request."
+        },
+        "model_calls": { "$ref": "#/definitions/SafeNonNegativeInteger" },
+        "input_tokens": { "$ref": "#/definitions/NullableNonNegativeInteger" },
+        "output_tokens": { "$ref": "#/definitions/NullableNonNegativeInteger" },
+        "latency_ms": { "$ref": "#/definitions/NullableNonNegativeInteger" }
+      }
+    },
+    "CompilerIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "service_version",
+        "parser_version",
+        "validator_version",
+        "semantic_contract_version"
+      ],
+      "properties": {
+        "service_version": { "$ref": "#/definitions/NonEmptyString" },
+        "prompt_sha256": {
+          "$ref": "#/definitions/Sha256",
+          "description": "SHA-256 of the raw bytes of the immutable prompt-template artifact used by the compiler. Dynamic source, context, credentials, and model responses are excluded."
+        },
+        "parser_version": { "$ref": "#/definitions/NonEmptyString" },
+        "validator_version": { "$ref": "#/definitions/NonEmptyString" },
+        "semantic_contract_version": { "const": "memory-assertion/v1" }
+      }
+    },
+
+    "SurfaceEvidencePayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_id", "surface_form"],
+      "properties": {
+        "evidence_id": { "$ref": "#/definitions/RuntimeId" },
+        "surface_form": { "$ref": "#/definitions/NonEmptyString" }
+      }
+    },
+    "EvidenceOnlyPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_id"],
+      "properties": {
+        "evidence_id": { "$ref": "#/definitions/RuntimeId" }
+      }
+    },
+    "IncompatibleLocation": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["side", "input_index"],
+          "properties": {
+            "side": { "const": "input" },
+            "input_index": { "$ref": "#/definitions/SafeNonNegativeInteger" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["side"],
+          "properties": {
+            "side": { "const": "output" }
+          }
+        }
+      ]
+    },
+    "IncompatibleTypePayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_id",
+        "operator_id",
+        "location",
+        "expected_concept_ids",
+        "actual_concept_ids"
+      ],
+      "properties": {
+        "evidence_id": { "$ref": "#/definitions/RuntimeId" },
+        "operator_id": { "$ref": "#/definitions/OperatorId" },
+        "location": { "$ref": "#/definitions/IncompatibleLocation" },
+        "expected_concept_ids": { "$ref": "#/definitions/NonEmptyConceptIdArray" },
+        "actual_concept_ids": { "$ref": "#/definitions/NonEmptyConceptIdArray" }
+      }
+    },
+    "UnsupportedLiteralCodecPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_id", "concept_id", "required_codec_id"],
+      "properties": {
+        "evidence_id": { "$ref": "#/definitions/RuntimeId" },
+        "concept_id": { "$ref": "#/definitions/ConceptId" },
+        "required_codec_id": { "$ref": "#/definitions/LiteralCodecId" }
+      }
+    },
+    "OntologyGapDiagnostic": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "payload"],
+          "properties": {
+            "code": { "const": "missing_concept" },
+            "payload": { "$ref": "#/definitions/SurfaceEvidencePayload" },
+            "display_message": { "$ref": "#/definitions/NonEmptyString" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "payload"],
+          "properties": {
+            "code": { "const": "missing_operator" },
+            "payload": { "$ref": "#/definitions/SurfaceEvidencePayload" },
+            "display_message": { "$ref": "#/definitions/NonEmptyString" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "payload"],
+          "properties": {
+            "code": { "const": "incompatible_type" },
+            "payload": { "$ref": "#/definitions/IncompatibleTypePayload" },
+            "display_message": { "$ref": "#/definitions/NonEmptyString" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "payload"],
+          "properties": {
+            "code": { "const": "unsupported_literal_codec" },
+            "payload": { "$ref": "#/definitions/UnsupportedLiteralCodecPayload" },
+            "display_message": { "$ref": "#/definitions/NonEmptyString" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "payload"],
+          "properties": {
+            "code": { "const": "unrepresentable_span" },
+            "payload": { "$ref": "#/definitions/EvidenceOnlyPayload" },
+            "display_message": { "$ref": "#/definitions/NonEmptyString" }
+          }
+        }
+      ]
+    },
+    "UnsupportedConstructPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_id", "construct"],
+      "properties": {
+        "evidence_id": { "$ref": "#/definitions/RuntimeId" },
+        "construct": {
+          "enum": [
+            "logical_connective",
+            "conditional",
+            "quantifier",
+            "variable_binding",
+            "inline_assertion",
+            "cyclic_proposition",
+            "cross_hypothesis_reference",
+            "multi_output_operator",
+            "arbitrary_rule"
+          ]
+        }
+      }
+    },
+    "CapabilityGapDiagnostic": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "payload"],
+          "properties": {
+            "code": { "const": "unsupported_construct" },
+            "payload": { "$ref": "#/definitions/UnsupportedConstructPayload" },
+            "display_message": { "$ref": "#/definitions/NonEmptyString" }
+          }
+        }
+      ]
+    },
+    "ConceptTarget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target_kind", "target_id"],
+      "properties": {
+        "target_kind": { "const": "concept" },
+        "target_id": { "$ref": "#/definitions/ConceptId" }
+      }
+    },
+    "OperatorTarget": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target_kind", "target_id"],
+      "properties": {
+        "target_kind": { "const": "operator" },
+        "target_id": { "$ref": "#/definitions/OperatorId" }
+      }
+    },
+    "AmbiguousLexicalPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_id", "candidate_targets"],
+      "properties": {
+        "evidence_id": { "$ref": "#/definitions/RuntimeId" },
+        "candidate_targets": {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": {
+            "oneOf": [
+              { "$ref": "#/definitions/ConceptTarget" },
+              { "$ref": "#/definitions/OperatorTarget" }
+            ]
+          }
+        }
+      }
+    },
+    "UnresolvedIndividualPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_id", "mention"],
+      "properties": {
+        "evidence_id": { "$ref": "#/definitions/RuntimeId" },
+        "mention": { "$ref": "#/definitions/NonEmptyString" }
+      }
+    },
+    "UnresolvedAssertionScopePayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_id", "scope_options"],
+      "properties": {
+        "evidence_id": { "$ref": "#/definitions/RuntimeId" },
+        "scope_options": {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": { "enum": ["candidate", "canonical"] }
+        }
+      }
+    },
+    "UnresolvedTimePayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_id", "expression", "required_anchor_kinds"],
+      "properties": {
+        "evidence_id": { "$ref": "#/definitions/RuntimeId" },
+        "expression": { "$ref": "#/definitions/NonEmptyString" },
+        "required_anchor_kinds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "message_recorded_at",
+              "conversation_time",
+              "session_time",
+              "calendar_date",
+              "timezone",
+              "reference_event"
+            ]
+          }
+        }
+      }
+    },
+    "UnresolvedValuePayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_id", "expression", "expected_concept_ids"],
+      "properties": {
+        "evidence_id": { "$ref": "#/definitions/RuntimeId" },
+        "expression": { "$ref": "#/definitions/NonEmptyString" },
+        "expected_concept_ids": { "$ref": "#/definitions/NonEmptyConceptIdArray" }
+      }
+    },
+    "InsufficientContextPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_id", "required_context_kinds"],
+      "properties": {
+        "evidence_id": { "$ref": "#/definitions/RuntimeId" },
+        "required_context_kinds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "raw_message",
+              "summary",
+              "time_anchor",
+              "domain_rule",
+              "canonical_binding",
+              "canonical_assertion"
+            ]
+          }
+        }
+      }
+    },
+    "UnresolvedDiagnostic": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "payload"],
+          "properties": {
+            "code": { "const": "ambiguous_lexical_mapping" },
+            "payload": { "$ref": "#/definitions/AmbiguousLexicalPayload" },
+            "display_message": { "$ref": "#/definitions/NonEmptyString" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "payload"],
+          "properties": {
+            "code": { "const": "unresolved_individual" },
+            "payload": { "$ref": "#/definitions/UnresolvedIndividualPayload" },
+            "display_message": { "$ref": "#/definitions/NonEmptyString" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "payload"],
+          "properties": {
+            "code": { "const": "unresolved_assertion_scope" },
+            "payload": { "$ref": "#/definitions/UnresolvedAssertionScopePayload" },
+            "display_message": { "$ref": "#/definitions/NonEmptyString" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "payload"],
+          "properties": {
+            "code": { "const": "unresolved_time" },
+            "payload": { "$ref": "#/definitions/UnresolvedTimePayload" },
+            "display_message": { "$ref": "#/definitions/NonEmptyString" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "payload"],
+          "properties": {
+            "code": { "const": "unresolved_value" },
+            "payload": { "$ref": "#/definitions/UnresolvedValuePayload" },
+            "display_message": { "$ref": "#/definitions/NonEmptyString" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "payload"],
+          "properties": {
+            "code": { "const": "insufficient_context" },
+            "payload": { "$ref": "#/definitions/InsufficientContextPayload" },
+            "display_message": { "$ref": "#/definitions/NonEmptyString" }
+          }
+        }
+      ]
+    },
+    "NormalizationWarningPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_id", "rule_id"],
+      "properties": {
+        "evidence_id": { "$ref": "#/definitions/RuntimeId" },
+        "rule_id": { "$ref": "#/definitions/RuntimeId" }
+      }
+    },
+    "RepairWarningPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repair_kind"],
+      "properties": {
+        "repair_kind": { "enum": ["json_syntax", "schema_shape"] }
+      }
+    },
+    "WarningDiagnostic": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "payload"],
+          "properties": {
+            "code": { "const": "normalization_applied" },
+            "payload": { "$ref": "#/definitions/NormalizationWarningPayload" },
+            "display_message": { "$ref": "#/definitions/NonEmptyString" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "payload"],
+          "properties": {
+            "code": { "const": "model_output_repaired" },
+            "payload": { "$ref": "#/definitions/RepairWarningPayload" },
+            "display_message": { "$ref": "#/definitions/NonEmptyString" }
+          }
+        }
+      ]
+    },
+    "NoCompilableKePayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["cause"],
+      "properties": {
+        "cause": {
+          "enum": [
+            "ontology_gap",
+            "capability_gap",
+            "semantic_ambiguity",
+            "insufficient_context",
+            "truncation"
+          ]
+        }
+      }
+    },
+    "SourceNotInterpretablePayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["focus_message_ids"],
+      "properties": {
+        "focus_message_ids": { "$ref": "#/definitions/NonEmptyRuntimeIdArray" }
+      }
+    },
+    "BudgetExhaustedPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["budget_dimension"],
+      "properties": {
+        "budget_dimension": {
+          "enum": ["model_calls", "input_tokens", "output_tokens", "deadline"]
+        }
+      }
+    },
+    "AbstentionReason": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "payload"],
+          "properties": {
+            "code": { "const": "no_compilable_ke" },
+            "payload": { "$ref": "#/definitions/NoCompilableKePayload" },
+            "display_message": { "$ref": "#/definitions/NonEmptyString" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "payload"],
+          "properties": {
+            "code": { "const": "insufficient_context" },
+            "payload": { "$ref": "#/definitions/InsufficientContextPayload" },
+            "display_message": { "$ref": "#/definitions/NonEmptyString" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "payload"],
+          "properties": {
+            "code": { "const": "source_not_interpretable" },
+            "payload": { "$ref": "#/definitions/SourceNotInterpretablePayload" },
+            "display_message": { "$ref": "#/definitions/NonEmptyString" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "payload"],
+          "properties": {
+            "code": { "const": "budget_exhausted" },
+            "payload": { "$ref": "#/definitions/BudgetExhaustedPayload" },
+            "display_message": { "$ref": "#/definitions/NonEmptyString" }
+          }
+        }
+      ]
+    },
+
+    "Nl2KeResponse": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "document_kind",
+        "protocol_version",
+        "request_id",
+        "request_hash",
+        "status",
+        "ontology_snapshot_ref",
+        "execution",
+        "compiler",
+        "processing_scope",
+        "source_evidence_spans",
+        "hypotheses",
+        "reported_ontology_gaps",
+        "reported_capability_gaps",
+        "unresolved_items",
+        "abstention_reasons",
+        "warnings"
+      ],
+      "properties": {
+        "document_kind": { "const": "nl2ke_response" },
+        "protocol_version": { "const": "nl-to-ke/v1" },
+        "request_id": { "$ref": "#/definitions/RuntimeId" },
+        "request_hash": {
+          "$ref": "#/definitions/Sha256",
+          "description": "SHA-256 of RFC 8785 JCS UTF-8 bytes for the paired nl2ke_request after removing execution.credential.credential_ref; execution.credential.credential_ref_fingerprint remains in the preimage. The request is parsed strictly with duplicate keys and non-I-JSON values rejected; source and context strings are not Unicode-normalized."
+        },
+        "status": { "enum": ["compiled", "abstained"] },
+        "ontology_snapshot_ref": { "$ref": "#/definitions/OntologySnapshotRef" },
+        "execution": { "$ref": "#/definitions/ActualExecution" },
+        "compiler": { "$ref": "#/definitions/CompilerIdentity" },
+        "processing_scope": { "$ref": "#/definitions/ProcessingScope" },
+        "source_evidence_spans": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/definitions/WireEvidenceSpan" }
+        },
+        "hypotheses": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Hypothesis" }
+        },
+        "reported_ontology_gaps": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/OntologyGapDiagnostic" }
+        },
+        "reported_capability_gaps": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/CapabilityGapDiagnostic" }
+        },
+        "unresolved_items": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/UnresolvedDiagnostic" }
+        },
+        "abstention_reasons": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/AbstentionReason" }
+        },
+        "warnings": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/WarningDiagnostic" }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "status": { "const": "compiled" } },
+            "required": ["status"]
+          },
+          "then": {
+            "properties": {
+              "hypotheses": { "minItems": 1 },
+              "abstention_reasons": { "maxItems": 0 }
+            }
+          },
+          "else": {
+            "properties": {
+              "hypotheses": { "maxItems": 0 },
+              "abstention_reasons": { "minItems": 1 }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "execution": {
+                "properties": { "model_calls": { "minimum": 1 } },
+                "required": ["model_calls"]
+              }
+            },
+            "required": ["execution"]
+          },
+          "then": {
+            "properties": {
+              "compiler": { "required": ["prompt_sha256"] }
+            }
+          }
+        }
+      ]
+    },
+
+    "InvalidRequestErrorPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["stage", "violation_code"],
+      "properties": {
+        "stage": { "enum": ["json_parse", "schema", "semantic_validation"] },
+        "violation_code": {
+          "enum": [
+            "malformed_json",
+            "duplicate_key",
+            "schema_violation",
+            "semantic_violation"
+          ]
+        },
+        "json_pointer": { "type": "string" }
+      }
+    },
+    "SnapshotCacheMissErrorPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ontology_snapshot_ref"],
+      "properties": {
+        "ontology_snapshot_ref": { "$ref": "#/definitions/OntologySnapshotRef" }
+      }
+    },
+    "SnapshotHashMismatchErrorPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["snapshot_id", "requested_sha256", "cached_sha256"],
+      "properties": {
+        "snapshot_id": { "$ref": "#/definitions/RuntimeId" },
+        "requested_sha256": { "$ref": "#/definitions/Sha256" },
+        "cached_sha256": { "$ref": "#/definitions/Sha256" }
+      }
+    },
+    "UnsupportedCapabilityErrorPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ontology_snapshot_ref", "capability_id"],
+      "properties": {
+        "ontology_snapshot_ref": { "$ref": "#/definitions/OntologySnapshotRef" },
+        "capability_id": { "$ref": "#/definitions/NonEmptyString" }
+      }
+    },
+    "SnapshotInvalidErrorPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ontology_snapshot_ref", "validation_stage"],
+      "properties": {
+        "ontology_snapshot_ref": { "$ref": "#/definitions/OntologySnapshotRef" },
+        "validation_stage": {
+          "enum": ["schema", "artifact_hash", "root_hash", "semantic_closure"]
+        }
+      }
+    },
+    "UnsupportedProtocolOrContractErrorPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requested_protocol_version",
+        "requested_semantic_contract_version",
+        "supported_protocol_versions",
+        "supported_semantic_contract_versions"
+      ],
+      "properties": {
+        "requested_protocol_version": { "$ref": "#/definitions/NonEmptyString" },
+        "requested_semantic_contract_version": { "$ref": "#/definitions/NonEmptyString" },
+        "supported_protocol_versions": { "$ref": "#/definitions/NonEmptyStringArray" },
+        "supported_semantic_contract_versions": { "$ref": "#/definitions/NonEmptyStringArray" }
+      }
+    },
+    "DependencyFailureErrorPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dependency", "retryable"],
+      "properties": {
+        "dependency": { "enum": ["model_provider", "credential_resolver"] },
+        "retryable": { "type": "boolean" }
+      }
+    },
+    "ServiceUnavailableErrorPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["retryable", "retry_after_ms"],
+      "properties": {
+        "retryable": { "const": true },
+        "retry_after_ms": { "$ref": "#/definitions/NullableNonNegativeInteger" }
+      }
+    },
+    "InternalErrorPayload": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["incident_id"],
+      "properties": {
+        "incident_id": { "$ref": "#/definitions/RuntimeId" }
+      }
+    },
+    "Nl2KeErrorDiagnostic": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "payload"],
+          "properties": {
+            "code": { "const": "invalid_request" },
+            "payload": { "$ref": "#/definitions/InvalidRequestErrorPayload" },
+            "display_message": { "$ref": "#/definitions/NonEmptyString" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "payload"],
+          "properties": {
+            "code": { "const": "snapshot_cache_miss" },
+            "payload": { "$ref": "#/definitions/SnapshotCacheMissErrorPayload" },
+            "display_message": { "$ref": "#/definitions/NonEmptyString" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "payload"],
+          "properties": {
+            "code": { "const": "snapshot_hash_mismatch" },
+            "payload": { "$ref": "#/definitions/SnapshotHashMismatchErrorPayload" },
+            "display_message": { "$ref": "#/definitions/NonEmptyString" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "payload"],
+          "properties": {
+            "code": { "const": "unsupported_capability" },
+            "payload": { "$ref": "#/definitions/UnsupportedCapabilityErrorPayload" },
+            "display_message": { "$ref": "#/definitions/NonEmptyString" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "payload"],
+          "properties": {
+            "code": { "const": "snapshot_invalid" },
+            "payload": { "$ref": "#/definitions/SnapshotInvalidErrorPayload" },
+            "display_message": { "$ref": "#/definitions/NonEmptyString" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "payload"],
+          "properties": {
+            "code": { "const": "unsupported_protocol_or_contract" },
+            "payload": {
+              "$ref": "#/definitions/UnsupportedProtocolOrContractErrorPayload"
+            },
+            "display_message": { "$ref": "#/definitions/NonEmptyString" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "payload"],
+          "properties": {
+            "code": { "const": "dependency_failure" },
+            "payload": { "$ref": "#/definitions/DependencyFailureErrorPayload" },
+            "display_message": { "$ref": "#/definitions/NonEmptyString" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "payload"],
+          "properties": {
+            "code": { "const": "service_unavailable" },
+            "payload": { "$ref": "#/definitions/ServiceUnavailableErrorPayload" },
+            "display_message": { "$ref": "#/definitions/NonEmptyString" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["code", "payload"],
+          "properties": {
+            "code": { "const": "internal_error" },
+            "payload": { "$ref": "#/definitions/InternalErrorPayload" },
+            "display_message": { "$ref": "#/definitions/NonEmptyString" }
+          }
+        }
+      ]
+    },
+    "Nl2KeError": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "document_kind",
+        "protocol_version",
+        "request_id",
+        "http_status",
+        "error"
+      ],
+      "properties": {
+        "document_kind": { "const": "nl2ke_error" },
+        "protocol_version": { "const": "nl-to-ke/v1" },
+        "request_id": {
+          "oneOf": [
+            { "$ref": "#/definitions/RuntimeId" },
+            { "type": "null" }
+          ]
+        },
+        "http_status": { "enum": [400, 409, 422, 500, 502, 503] },
+        "error": { "$ref": "#/definitions/Nl2KeErrorDiagnostic" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "error": {
+                "properties": { "code": { "const": "invalid_request" } },
+                "required": ["code"]
+              }
+            }
+          },
+          "then": { "properties": { "http_status": { "const": 400 } } }
+        },
+        {
+          "if": {
+            "properties": {
+              "error": {
+                "properties": {
+                  "code": { "enum": ["snapshot_cache_miss", "snapshot_hash_mismatch"] }
+                },
+                "required": ["code"]
+              }
+            }
+          },
+          "then": { "properties": { "http_status": { "const": 409 } } }
+        },
+        {
+          "if": {
+            "properties": {
+              "error": {
+                "properties": {
+                  "code": {
+                    "enum": [
+                      "unsupported_capability",
+                      "snapshot_invalid",
+                      "unsupported_protocol_or_contract"
+                    ]
+                  }
+                },
+                "required": ["code"]
+              }
+            }
+          },
+          "then": { "properties": { "http_status": { "const": 422 } } }
+        },
+        {
+          "if": {
+            "properties": {
+              "error": {
+                "properties": { "code": { "const": "dependency_failure" } },
+                "required": ["code"]
+              }
+            }
+          },
+          "then": { "properties": { "http_status": { "const": 502 } } }
+        },
+        {
+          "if": {
+            "properties": {
+              "error": {
+                "properties": { "code": { "const": "service_unavailable" } },
+                "required": ["code"]
+              }
+            }
+          },
+          "then": { "properties": { "http_status": { "const": 503 } } }
+        },
+        {
+          "if": {
+            "properties": {
+              "error": {
+                "properties": { "code": { "const": "internal_error" } },
+                "required": ["code"]
+              }
+            }
+          },
+          "then": { "properties": { "http_status": { "const": 500 } } }
+        }
+      ]
+    },
+    "Nl2KeCapabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "document_kind",
+        "protocol_version",
+        "semantic_contract_versions",
+        "ontology_schema_ids",
+        "literal_codec_ids",
+        "snapshot_delivery",
+        "final_validation"
+      ],
+      "properties": {
+        "document_kind": { "const": "nl2ke_capabilities" },
+        "protocol_version": { "const": "nl-to-ke/v1" },
+        "semantic_contract_versions": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "const": "memory-assertion/v1" }
+        },
+        "ontology_schema_ids": { "$ref": "#/definitions/NonEmptyStringArray" },
+        "literal_codec_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/definitions/LiteralCodecId" }
+        },
+        "snapshot_delivery": { "const": "preprovisioned_immutable_cache" },
+        "final_validation": { "const": "mandatory" }
+      }
+    },
+    "Nl2KeReadiness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["document_kind", "protocol_version", "ready", "checks"],
+      "properties": {
+        "document_kind": { "const": "nl2ke_readiness" },
+        "protocol_version": { "const": "nl-to-ke/v1" },
+        "ready": { "const": true },
+        "checks": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "compiler",
+            "schema_validator",
+            "semantic_validator",
+            "snapshot_cache"
+          ],
+          "properties": {
+            "compiler": { "const": true },
+            "schema_validator": { "const": true },
+            "semantic_validator": { "const": true },
+            "snapshot_cache": { "const": true }
+          }
+        }
+      }
+    }
+  }
+}

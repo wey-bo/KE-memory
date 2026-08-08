@@ -26,6 +26,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      # spec/memory-assertion-v1 runs its RFC 8785 JCS vectors through
+      # tools/jcs.mjs, which raises rather than skipping when node is missing.
+      # Pinned instead of relying on whatever the runner image preinstalls.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
       # Split into one step per command, rather than a single call to
       # check-portable.sh. Job logs need admin rights to download, but step
       # conclusions are readable from the public API -- so with named steps a
@@ -57,9 +63,15 @@ jobs:
           uv run pytest -q -rf --no-header --tb=line --last-failed \
             | tail -40 >> "$GITHUB_STEP_SUMMARY" || true
       - name: Lint
-        run: uv run ruff check src service ontology tests scripts
+        run: uv run ruff check src service ontology tests scripts spec
       - name: Type check
         run: uv run pyright
+      # The specification package is the authoritative memory-assertion/v1
+      # contract, so the remote gate verifies it rather than trusting a local run.
+      # Its own tests are unittest and import themselves as `tools.*`, which is
+      # why the script cds into the subtree instead of being invoked from here.
+      - name: Verify the specification package
+        run: scripts/ci/check-spec.sh
       - name: Build the distribution
         run: uv build
       - name: Verify the wheel contract

@@ -170,3 +170,20 @@ PR 模板三部分：远端 CI 状态；本机全量验证结果（`check.sh` �
 - 不纳入 `query-compiler-v2-task7` 的 766 行。
 - 不 squash 主干的 122 个提交。
 - 不放宽任何现有测试断言。
+
+## 追加：2026-08-09 PR A 撤下
+
+本节为事后追加，不改写上文。
+
+`memory-assertion/v1` 规范包（原 `/public/home/wwb/Memory core`）已确定为唯一活动语义合同，并于同日并入本仓 `spec/memory-assertion-v1/`。它与 `codex/ke-contract-v1-20260805` 所实现的 `ke_contract_v1` 在四处直接冲突：算子实参（`bindings`+`role_id` 对位置化 `arguments[]`）、`CoreRole`（profile schema 将 `core_roles`/`core_role_id` 列为 `ForbiddenLegacySupplyKey`）、`OperatorApplication` 递归嵌套（新合同禁止，须走 `assertion_ref`）、`AssertionScope{polarity, modality, temporal}`（三者均为禁止键）。
+
+因此**阶段 2 的 PR A 撤下**：合并一套已被取代的合同会让仓库同时存在两套活动语义。上文"顺序理由"中以 PR A 建立流程基线的论证随之失效。
+
+受影响与不受影响的部分：
+
+- PR C（`a1-index-baseline`）与 PR B（`personal-org`）的内容、顺序与冲突结论**不变**——两者都不碰 `ontology/`，与本次并入零文件重叠。原文测得的 PR A↔PR B「0 冲突、0 文件重叠」仍然成立，只是不再需要。
+- PR C 现为第一个走完整流程的 PR，因此它带的 `pythonpath` 缺陷（6 个测试收集失败）成为流程基线的首个验证点。
+- `codex/ke-contract-v1-20260805` 分支与 worktree **保留，不删除、不归档**。其 132 个聚焦测试与 Pyright strict 零错误是重写新合同实现时的对照物。这是「零工作丢失」不变量的应用，不是例外。
+- 阶段 0c 关于 `ci.yml` 第 15-16 行「重复 `actions/checkout@v4`」的判定**不成立**：第 15 行 checkout 本仓，第 16-20 行 checkout `genuineknowledge/KEOL` 到 `.deps/KEOL`，用途不同。两步都必需，不删。
+
+并入的完整设计见 `docs/superpowers/specs/2026-08-09-memory-assertion-v1-spec-intake-design.md`。

@@ -1,0 +1,521 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "memory-assertion-ontology-profile.schema.json",
+  "title": "memory-assertion/v1 Ontology Profile",
+  "description": "Validates Ontology Storage Specification v1 shards and overlays the closed memory-assertion/v1 profile on Concept and Operator supply data.",
+  "oneOf": [
+    { "$ref": "#/definitions/OntologyDocument" },
+    { "$ref": "#/definitions/ConceptsDocument" },
+    { "$ref": "#/definitions/OperatorsDocument" }
+  ],
+  "definitions": {
+    "NonEmptyString": {
+      "$ref": "../references/upstream-ontology-specification-v1/ontology.schema.json#/definitions/CanonicalName"
+    },
+    "ConceptId": {
+      "$ref": "../references/upstream-ontology-specification-v1/ontology.schema.json#/definitions/ConceptId"
+    },
+    "OperatorId": {
+      "$ref": "../references/upstream-ontology-specification-v1/ontology.schema.json#/definitions/OperatorId"
+    },
+    "ConceptSymbol": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Za-z0-9]*$"
+    },
+    "OperatorSymbol": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*$"
+    },
+    "LanguageTag": {
+      "type": "string",
+      "pattern": "^[A-Za-z]{2,3}(?:-[A-Za-z0-9]{2,8})*$"
+    },
+    "WordNetSenseId": {
+      "type": "string",
+      "pattern": "^wn30:[a-z0-9][a-z0-9_.-]*\\.[nvars]\\.[0-9]{2}$"
+    },
+    "PropBankRolesetId": {
+      "type": "string",
+      "pattern": "^pb3\\.4:[a-z][a-z0-9_-]*\\.[0-9]{2}$"
+    },
+    "SourcePath": {
+      "$ref": "../references/upstream-ontology-specification-v1/ontology.schema.json#/definitions/SourcePath"
+    },
+    "ConceptIdArray": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/definitions/ConceptId" }
+    },
+    "ForbiddenLegacySupplyKey": {
+      "enum": [
+        "is_pure",
+        "operator_form",
+        "extensional",
+        "referential_transparency",
+        "roles",
+        "core_roles",
+        "input_roles",
+        "output_role",
+        "designated_output_role",
+        "designated_output_slot",
+        "input_role_slots",
+        "role_id",
+        "core_role_id",
+        "qualifiers",
+        "polarity",
+        "modality",
+        "temporal",
+        "value_types",
+        "constraints",
+        "crosswalks",
+        "lexicalizations"
+      ]
+    },
+    "SourceAttestation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_kind", "lemma", "provenance_refs"],
+      "properties": {
+        "source_kind": {
+          "enum": [
+            "wordnet",
+            "propbank",
+            "schema_org",
+            "human",
+            "domain_corpus"
+          ]
+        },
+        "lemma": { "$ref": "#/definitions/NonEmptyString" },
+        "sense_id": { "$ref": "#/definitions/WordNetSenseId" },
+        "roleset_id": { "$ref": "#/definitions/PropBankRolesetId" },
+        "provenance_refs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/definitions/SourcePath" }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "source_kind": { "const": "wordnet" } },
+            "required": ["source_kind"]
+          },
+          "then": {
+            "required": ["sense_id"],
+            "not": { "required": ["roleset_id"] }
+          }
+        },
+        {
+          "if": {
+            "properties": { "source_kind": { "const": "propbank" } },
+            "required": ["source_kind"]
+          },
+          "then": {
+            "required": ["roleset_id"],
+            "not": { "required": ["sense_id"] }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "source_kind": {
+                "enum": ["schema_org", "human", "domain_corpus"]
+              }
+            },
+            "required": ["source_kind"]
+          },
+          "then": {
+            "not": {
+              "anyOf": [
+                { "required": ["sense_id"] },
+                { "required": ["roleset_id"] }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "Lexicalization": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "language",
+        "surface_form",
+        "surface_relation",
+        "disambiguation_status",
+        "source_attestations"
+      ],
+      "properties": {
+        "language": { "$ref": "#/definitions/LanguageTag" },
+        "surface_form": { "$ref": "#/definitions/NonEmptyString" },
+        "surface_relation": {
+          "enum": [
+            "canonical_label",
+            "equivalent_expression",
+            "abbreviated_expression",
+            "surface_variant"
+          ]
+        },
+        "disambiguation_status": {
+          "enum": ["resolved", "candidate"]
+        },
+        "source_attestations": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/definitions/SourceAttestation" }
+        }
+      }
+    },
+    "ExternalMapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "external_id", "relation", "provenance_refs"],
+      "properties": {
+        "source": { "$ref": "#/definitions/NonEmptyString" },
+        "external_id": { "$ref": "#/definitions/NonEmptyString" },
+        "relation": { "enum": ["exact", "narrow", "broad", "related"] },
+        "provenance_refs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/definitions/SourcePath" }
+        }
+      }
+    },
+    "CurrencyMinorUnit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["currency", "minor_units"],
+      "properties": {
+        "currency": { "type": "string", "pattern": "^[A-Z]{3}$" },
+        "minor_units": { "type": "integer", "minimum": 0, "maximum": 9 }
+      }
+    },
+    "LiteralValueContract": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "codec_id",
+            "canonical_json_kind",
+            "equality_mode",
+            "accepts_null"
+          ],
+          "properties": {
+            "codec_id": { "const": "ke-literal:boolean/v1" },
+            "canonical_json_kind": { "const": "boolean" },
+            "equality_mode": { "const": "canonical_json_identity" },
+            "accepts_null": { "const": false }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "codec_id",
+            "canonical_json_kind",
+            "equality_mode",
+            "accepts_null"
+          ],
+          "properties": {
+            "codec_id": {
+              "enum": [
+                "ke-literal:text-nfc/v1",
+                "ke-literal:decimal/v1",
+                "ke-literal:date/v1",
+                "ke-literal:datetime/v1",
+                "ke-literal:duration/v1"
+              ]
+            },
+            "canonical_json_kind": { "const": "string" },
+            "equality_mode": { "const": "canonical_json_identity" },
+            "accepts_null": { "const": false }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "codec_id",
+            "canonical_json_kind",
+            "equality_mode",
+            "accepts_null",
+            "currency_minor_units"
+          ],
+          "properties": {
+            "codec_id": { "const": "ke-literal:money/v1" },
+            "canonical_json_kind": { "const": "object" },
+            "equality_mode": { "const": "canonical_json_identity" },
+            "accepts_null": { "const": false },
+            "currency_minor_units": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": { "$ref": "#/definitions/CurrencyMinorUnit" }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "codec_id",
+            "canonical_json_kind",
+            "equality_mode",
+            "accepts_null",
+            "canonical_unit_symbol"
+          ],
+          "properties": {
+            "codec_id": { "const": "ke-literal:quantity/v1" },
+            "canonical_json_kind": { "const": "object" },
+            "equality_mode": { "const": "canonical_json_identity" },
+            "accepts_null": { "const": false },
+            "canonical_unit_symbol": { "$ref": "#/definitions/NonEmptyString" }
+          }
+        }
+      ]
+    },
+    "ConceptProfileExtension": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["profile_version", "semantic_kind", "lexicalizations"],
+      "properties": {
+        "profile_version": { "const": "memory-assertion/v1" },
+        "semantic_kind": {
+          "enum": [
+            "entity",
+            "proposition",
+            "event",
+            "state",
+            "literal_value",
+            "ontology_symbol"
+          ]
+        },
+        "disjoint_with": { "$ref": "#/definitions/ConceptIdArray" },
+        "external_mappings": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/definitions/ExternalMapping" }
+        },
+        "lexicalizations": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/definitions/Lexicalization" }
+        },
+        "literal_value_contract": {
+          "$ref": "#/definitions/LiteralValueContract"
+        },
+        "deprecated": { "type": "boolean" },
+        "replaced_by": { "$ref": "#/definitions/ConceptId" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "semantic_kind": { "const": "literal_value" } },
+            "required": ["semantic_kind"]
+          },
+          "then": { "required": ["literal_value_contract"] },
+          "else": { "not": { "required": ["literal_value_contract"] } }
+        },
+        {
+          "if": { "required": ["replaced_by"] },
+          "then": {
+            "required": ["deprecated"],
+            "properties": { "deprecated": { "const": true } }
+          }
+        }
+      ]
+    },
+    "PositionalParameter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["index", "name", "definition"],
+      "properties": {
+        "index": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+        "name": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+        "definition": { "$ref": "#/definitions/NonEmptyString" }
+      }
+    },
+    "FunctionSemantics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["purity", "deterministic", "partiality"],
+      "properties": {
+        "purity": { "const": "pure" },
+        "deterministic": { "const": true },
+        "partiality": { "enum": ["total", "partial"] }
+      }
+    },
+    "DefinednessContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "contract_id",
+        "required_input_indexes",
+        "failure_behavior"
+      ],
+      "properties": {
+        "contract_id": { "const": "ke-definedness/v1" },
+        "required_input_indexes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 }
+        },
+        "failure_behavior": { "const": "reject_application" }
+      }
+    },
+    "OperatorProfileExtension": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profile_version",
+        "positional_parameters",
+        "proposition_operation",
+        "function_semantics",
+        "lexicalizations"
+      ],
+      "properties": {
+        "profile_version": { "const": "memory-assertion/v1" },
+        "positional_parameters": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/PositionalParameter" }
+        },
+        "proposition_operation": {
+          "enum": ["none", "modifier", "attitude", "relation"]
+        },
+        "function_semantics": { "$ref": "#/definitions/FunctionSemantics" },
+        "definedness_contract": {
+          "$ref": "#/definitions/DefinednessContract"
+        },
+        "external_mappings": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/definitions/ExternalMapping" }
+        },
+        "lexicalizations": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/definitions/Lexicalization" }
+        },
+        "deprecated": { "type": "boolean" },
+        "replaced_by": { "$ref": "#/definitions/OperatorId" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "function_semantics": {
+                "type": "object",
+                "properties": { "partiality": { "const": "partial" } },
+                "required": ["partiality"]
+              }
+            },
+            "required": ["function_semantics"]
+          },
+          "then": { "required": ["definedness_contract"] },
+          "else": { "not": { "required": ["definedness_contract"] } }
+        },
+        {
+          "if": { "required": ["replaced_by"] },
+          "then": {
+            "required": ["deprecated"],
+            "properties": { "deprecated": { "const": true } }
+          }
+        }
+      ]
+    },
+    "ConceptSupplyOverlay": {
+      "type": "object",
+      "required": ["memory_assertion"],
+      "propertyNames": {
+        "not": { "$ref": "#/definitions/ForbiddenLegacySupplyKey" }
+      },
+      "properties": {
+        "memory_assertion": {
+          "$ref": "#/definitions/ConceptProfileExtension"
+        }
+      }
+    },
+    "OperatorSupplyOverlay": {
+      "type": "object",
+      "required": ["memory_assertion"],
+      "propertyNames": {
+        "not": { "$ref": "#/definitions/ForbiddenLegacySupplyKey" }
+      },
+      "properties": {
+        "memory_assertion": {
+          "$ref": "#/definitions/OperatorProfileExtension"
+        }
+      }
+    },
+    "ConceptOverlay": {
+      "type": "object",
+      "required": ["canonical_name", "supply"],
+      "properties": {
+        "canonical_name": { "$ref": "#/definitions/ConceptSymbol" },
+        "supply": { "$ref": "#/definitions/ConceptSupplyOverlay" }
+      }
+    },
+    "OperatorOverlay": {
+      "type": "object",
+      "required": ["canonical_name", "supply"],
+      "properties": {
+        "canonical_name": { "$ref": "#/definitions/OperatorSymbol" },
+        "supply": { "$ref": "#/definitions/OperatorSupplyOverlay" }
+      }
+    },
+    "OntologyDocument": {
+      "$ref": "../references/upstream-ontology-specification-v1/ontology.schema.json#/definitions/OntologyDocument"
+    },
+    "ConceptsDocument": {
+      "allOf": [
+        {
+          "$ref": "../references/upstream-ontology-specification-v1/ontology.schema.json#/definitions/ConceptsDocument"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "concepts": {
+              "type": "array",
+              "items": {
+                "allOf": [
+                  {
+                    "$ref": "../references/upstream-ontology-specification-v1/ontology.schema.json#/definitions/Concept"
+                  },
+                  { "$ref": "#/definitions/ConceptOverlay" }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    "OperatorsDocument": {
+      "allOf": [
+        {
+          "$ref": "../references/upstream-ontology-specification-v1/ontology.schema.json#/definitions/OperatorsDocument"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "operators": {
+              "type": "array",
+              "items": {
+                "allOf": [
+                  {
+                    "$ref": "../references/upstream-ontology-specification-v1/ontology.schema.json#/definitions/Operator"
+                  },
+                  { "$ref": "#/definitions/OperatorOverlay" }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
