@@ -13,11 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/checkout@v4
-        with:
-          repository: genuineknowledge/KEOL
-          ref: 44631e64fd07c9b85f22e36035bf49c882dba592
-          path: .deps/KEOL
+      # KEOL is deliberately not checked out. It is a private repository, so the
+      # default token gets a 404 and the step fails before any check has run --
+      # which is exactly what happened on the first remote run of this workflow.
+      # The remote gate is therefore check-portable.sh, which needs no private
+      # dependency. check.sh remains the local entry point and additionally
+      # covers the KEOL bridge contract when KEOL_SOURCE is set.
       - uses: astral-sh/setup-uv@v6
         with:
           version: "0.11.26"
@@ -25,10 +26,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Run repository checks
-        env:
-          KEOL_SOURCE: ${{ github.workspace }}/.deps/KEOL/src
-        run: scripts/ci/check.sh
+      - name: Run portable repository checks
+        run: scripts/ci/check-portable.sh
 
   # Separate job because the evaluation dependency must not be present when the
   # quality job builds and verifies the wheel: keeping them apart is what proves

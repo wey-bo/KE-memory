@@ -5,15 +5,6 @@ import hashlib
 
 import pytest
 
-from onto.models import (  # pyright: ignore[reportMissingTypeStubs]
-    Assertion,
-    Concept,
-    Evidence,
-    Individual,
-    Operator,
-    WorkflowRun,
-)
-
 from ke_memory_demo.domain import (
     AssertionRef,
     ConceptRef,
@@ -28,6 +19,22 @@ from ke_memory_demo.domain import (
 from ke_memory_demo.online.admission import AdmissionPolicy
 from ke_memory_demo.online.keol_bridge import KEOLBundleCompiler
 from ke_memory_demo.online.models import MemoryNamespace
+
+# KEOL is a private dependency, so a runner without credentials cannot import it. Skip
+# at collection rather than failing: a bare `from onto.models import ...` aborts the
+# whole session, which took the entire suite down with it on CI. The assertions below
+# are untouched -- when KEOL is present these tests run exactly as before, and this
+# file's own coverage is simply absent when it is not.
+onto_models = pytest.importorskip(
+    "onto.models", reason="KEOL is not available; run scripts/ci/check.sh with KEOL_SOURCE set"
+)
+
+Assertion = onto_models.Assertion
+Concept = onto_models.Concept
+Evidence = onto_models.Evidence
+Individual = onto_models.Individual
+Operator = onto_models.Operator
+WorkflowRun = onto_models.WorkflowRun
 
 
 RECORDED_AT = datetime(2026, 7, 26, 8, 0, tzinfo=UTC)
