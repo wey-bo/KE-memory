@@ -182,7 +182,10 @@ PR 模板三部分：远端 CI 状态；本机全量验证结果（`check.sh` �
 受影响与不受影响的部分：
 
 - PR C（`a1-index-baseline`）与 PR B（`personal-org`）的内容、顺序与冲突结论**不变**——两者都不碰 `ontology/`，与本次并入零文件重叠。原文测得的 PR A↔PR B「0 冲突、0 文件重叠」仍然成立，只是不再需要。
-- PR C 现为第一个走完整流程的 PR，因此它带的 `pythonpath` 缺陷（6 个测试收集失败）成为流程基线的首个验证点。
+- **阶段 1 的范围扩大一项。** 主干 `06e5754` 的 `check.sh` 是红的：pyright strict 49 个错误，二分定位到 `d29d01b`（见并入设计的「主干的 pyright 回归」一节）。修复在 `fix/evaluation-split-types-20260809`（`9769a01`，直接坐在 `06e5754` 上），已独立通过完整 `check.sh`，与三个活跃顶端零冲突。它随阶段 1 一同推送，因此远端 main 从第一天起门禁可信——否则第一次远端 CI 就是红的，后续每个 PR 都无法判断自己是否引入了新问题。
+- 规范并入分支 `codex/memory-assertion-v1-spec-intake-20260809` 现为 PR 序列的第一项，排在 PR C 之前。它建立在上述修复分支之上，因此**依赖阶段 1 先完成**：阶段 1 未推送前，它的基底还不在远端 main 上。
+- PR C（`a1-index-baseline`）随后，它带的 `pythonpath` 缺陷（6 个测试收集失败）仍是必须修的一项。
+- PR B（`personal-org`）最后，顺序理由不变。
 - `codex/ke-contract-v1-20260805` 分支与 worktree **保留，不删除、不归档**。其 132 个聚焦测试与 Pyright strict 零错误是重写新合同实现时的对照物。这是「零工作丢失」不变量的应用，不是例外。
 - 阶段 0c 关于 `ci.yml` 第 15-16 行「重复 `actions/checkout@v4`」的判定**不成立**：第 15 行 checkout 本仓，第 16-20 行 checkout `genuineknowledge/KEOL` 到 `.deps/KEOL`，用途不同。两步都必需，不删。
 

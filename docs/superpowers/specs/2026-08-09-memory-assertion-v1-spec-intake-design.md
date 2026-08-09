@@ -61,7 +61,9 @@ ID 体系也不同：`ke_contract_v1` 用 `pb34:`/`core:` 前缀的可读 ID，�
 
 ### 主仓测试收集基线
 
-`pyproject.toml` 未配 `testpaths`。main 上 `uv run pytest -q --collect-only` 得 **768 个测试**（`KEOL_SOURCE=/public/home/wwb/KE_mem/KEOL-44631e6/src`）。并入后此数必须不变。
+`pyproject.toml` 在现代主干 `codex/repository-reorganization-20260801` 上**已有** `testpaths = ["tests"]`，无需新增。该分支上 `uv run pytest -q --collect-only` 得 **1129 个测试**（`KEOL_SOURCE=/public/home/wwb/KE_mem/KEOL-44631e6/src`）。并入后此数必须不变。
+
+（本设计初稿曾把分支建在停于 2026-07-27 的 `main` 上，在那里 `testpaths` 确实不存在、收集数为 768。该基底选择是错误的：主干比 main 多 122 个提交。见文末「基底更正」。）
 
 ### CI 现状
 
@@ -130,7 +132,7 @@ cwd 必须是子树根：两个测试文件内部以 `import tools.validate_spec
 
 - **`scripts/ci/check.sh`** 末尾调用 `check-spec.sh`，本机全量检查覆盖规范包。
 - **依赖补齐。** `jsonschema>=4,<5` 加入 `[dependency-groups] dev` 并 `uv lock`（装入 4.26.0；规范包原在 4.23.0 上验证，需确认新版本下基线不变——验证器使用已废弃的 `RefResolver`）。`ci.yml` 增加 `actions/setup-node@v4`（node 20），因为缺 node 时验证器硬失败。不删任何 `checkout` 步骤（见上）。
-- **`pyproject.toml` 加 `testpaths = ["tests"]`**。仓库未配 `testpaths`，`pytest` 从根收集会捞到 `spec/.../tools/test_*.py`，而它们需要 `tools` 作为顶层包名，在主仓 `pythonpath = ["src","service","ontology"]` 下会 ImportError。限定收集范围比往 `pythonpath` 塞第四项干净：两套包体系不应互相可见。规范包测试由 `check-spec.sh` 独立驱动。
+- **`testpaths` 无需新增。** 主干已有 `testpaths = ["tests"]`，它同时也把根收集器挡在 `spec/.../tools/test_*.py` 之外——那些模块以 `tools.*` 导入自身，在主仓 `pythonpath = ["src","service","ontology"]` 下会 ImportError。只在该行上方补一条注释记录这层约束；规范包测试由 `check-spec.sh` 独立驱动。
 - **lint 边界。** 就地修掉 3 处 ruff 告警：F841 删除未用变量（`invalid` 仅赋值一次，从未读取或递增，不影响任何计数）；两处 E402 加 `# noqa: E402` 并注明原因——`validate_specifications.py:32` 的导入必须排在 `warnings.filterwarnings` 之后才能抑制 jsonschema 的 DeprecationWarning，`test_canonical_text_reference.py:22` 的导入依赖上一行的 `sys.path.insert`。然后把 `spec/` 纳入 `check.sh` 的 ruff 范围。**不**纳入 pyright strict：那 2932 行按独立项目写成，strict 化属于改造而非并入。
 
 ### 4. 路径修正
@@ -145,7 +147,7 @@ cwd 必须是子树根：两个测试文件内部以 `import tools.validate_spec
 
 1. `python spec/memory-assertion-v1/tools/validate_specifications.py` 输出与「已测量的事实」中的基线逐项相同。
 2. `python -m unittest tools.test_validate_specifications tools.test_canonical_text_reference`（cwd 为子树根）24 个测试全通过。
-3. `uv run pytest -q --collect-only` 仍为 768，证明加 `testpaths` 未丢掉主仓任何测试。
+3. `uv run pytest -q --collect-only` 仍为 1129，证明并入未影响主仓测试收集。
 4. `scripts/ci/check.sh` 全绿（需 `KEOL_SOURCE` 指向 pinned KEOL src）。
 5. `git show --stat` 确认 `spec/memory-assertion-v1/` 下新增恰好 35 个文件，加上被修改的 `pyproject.toml`、`uv.lock`、`ci.yml`、`check.sh`、新增 `check-spec.sh` 与集成设计追加。本设计文档先于实施单独提交，不计入这 35 个。
 6. `check-spec.sh` 在 `uv run` 下（即 CI 所用的锁定环境、jsonschema 4.26.0）复现基线，而非仅在本机 anaconda python 下通过。
@@ -160,3 +162,35 @@ cwd 必须是子树根：两个测试文件内部以 `import tools.validate_spec
 - 不改 `reference-manifest.json` 的溯源字段与迁移文档正文的历史路径。
 - 不把 `spec/` 纳入 pyright strict。
 - 不改写 `2026-08-09-ke-memory-pr-integration-design.md` 正文，只追加。
+
+## 基底更正
+
+本设计的初次实施把分支建在 `main`（`15da1ca`，2026-07-27）上，跳过了集成设计的阶段 0 与阶段 1。这是错的：现代主干 `codex/repository-reorganization-20260801`（`06e5754`）比 `main` 多 122 个提交，是所有现代工作的共同基点。
+
+已 `git rebase --onto` 到 `06e5754`（原提交保留于 `backup/spec-intake-on-stale-main-20260809`）。基底错误造成的三处失真已改正：
+
+- **`testpaths = ["tests"]` 不是本次新增**，主干早已有。初稿把它当作新发现，是在过时基底上看到的假象。现只在该行上方补注释，记录 `spec/` 子树自引用测试模块这层主干当时未知的约束。
+- **测试收集基线是 1129，不是 768。** 768 是过时 `main` 的数字。
+- **主干另有两项初稿未知的内容**，rebase 后保留：`[dependency-groups]` 的 `evaluation = ["duckdb==1.5.5"]`，以及 `ci.yml` 的独立 `conformance` job。已核实 `scripts/ci/verify_conformance_environment.sh` 不需要 node、不触及 `spec/`，故 `setup-node` 只加在 `quality` job，`conformance` 不改。
+
+`jsonschema` 缺失于 `uv.lock` 这一发现**不受影响**——主干同样没有它。rebase 后已在主干的 lock（含 duckdb）上重新 `uv lock`，`uv lock --check` 干净。
+
+`pyproject.toml` 的冲突按并集解决：主干的 `evaluation` 组与本次的 `jsonschema` 同时保留。
+
+### 主干的 pyright 回归
+
+初稿声称"pyright strict 0 错误"，那是在过时 `main` 上测的。现代主干上 `check.sh` **是红的**：pyright strict 报 49 个错误，全在 `src/ke_memory_demo/evaluation/`、`pipeline/runtime.py` 与两个测试文件中，与本次并入无关（在纯净的 `06e5754` 上开临时 worktree 复测，同样 49 个、同样行号）。
+
+二分定位：`28caa90` 为 0，`d29d01b`（Enforce dependency direction, and split evaluation out of the pipeline）引入 47，`76b1980` 再加 2。根因是 `evaluation/stage.py` 的三个转发方法写成 `(*args: object, **kwargs: object)` 且无返回标注，把 `EvaluationPort` 完整的签名（含 `SnapshotModelT` 泛型）擦成 `Unknown` 并向下游传播；其余是同一次拆分的另一面——十一个已移交 `evaluation` 的名字在 `pipeline/runtime.py` 仍带下划线，导入侧触发 `reportPrivateUsage`、原侧触发 `reportUnusedFunction`。
+
+`check.sh` 在 `d29d01b` 当时**已包含** `uv run pyright`，门禁存在但未被执行或未被查看：该提交详细报告了 779 passed 与架构测试，唯独没提 pyright。这 122 个提交从未推过远端，因此没有任何一次远端 CI 执行过。这正是集成设计第 2 条不变量要解决的问题。
+
+已修复，但**放在独立分支** `fix/evaluation-split-types-20260809`（`9769a01`，直接坐在 `06e5754` 上，不含 `spec/`）：pyright 0 错误，ruff 干净，1128 passed + 1 skipped = 1129 与基线一致，无行为改动——每处改动都是签名、标注或改名。该分支已独立通过完整 `check.sh`。
+
+分开的理由：它是主干修复，不属于规范并入。随阶段 1 一同进入远端 main，远端第一次 CI 就是绿的，之后每个 PR 才能判断自己是否引入了新问题。与三个活跃顶端 `merge-tree` 实测零冲突（两个顶端确实改了 `test_history_repository_equivalence.py`，但删的是另一个测试函数，与本修复所改的 `results` 标注不在同一函数）。
+
+本并入分支因此建立在该修复分支之上，阶段 1 的前置条件"推送前本机 `check.sh` 全绿"才真正成立。
+
+阶段 1 的前置条件"推送前本机 `check.sh` 全绿"因此才真正成立。
+
+顺序教训：任何新工作都应先落在现代主干上，或明确等待阶段 1 完成。在 `main` 上开工会让"新发现"与"过时基底的产物"无法区分。
