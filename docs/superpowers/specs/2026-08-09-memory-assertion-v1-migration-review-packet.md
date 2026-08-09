@@ -1,7 +1,8 @@
 # 迁移评审包：4 项待裁决
 
 日期：2026-08-09
-状态：待用户裁决
+状态：**已被 v2 取代**——本文件的 R2 与 R4 方案含语义错误，保留仅为审计。
+当前有效版本：`2026-08-09-memory-assertion-v1-migration-review-packet-v2.md`
 关联：`2026-08-09-ke-memory-to-memory-assertion-mapping-report.md`
 
 ## 怎么用这份文件

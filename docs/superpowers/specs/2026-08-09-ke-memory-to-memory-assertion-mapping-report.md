@@ -49,21 +49,33 @@ event_time(Assertion::candidate::"created-by-1",Date::"2026-08-09")=Boolean::tru
 
 ## `modality` 混合了两种不同的东西
 
-这是本次对照最重要的发现。`Modality` 的 8 个取值不属于同一范畴，因此整体映射必然失败，
-拆开后各有去向：
+这是本次对照最重要的发现。`Modality` 的 8 个取值不属于同一范畴，因此整体映射必然失败。
 
-| 取值 | 范畴 | 去向 |
-| --- | --- | --- |
-| `fact` | 无标记 | KE 本身，不加修饰 |
-| `belief` | 命题态度 | `believes(Person, Assertion)`，fixture 已有 `operator_0e0ca38b526f` |
-| `hypothesis` | 认识模态 | `possible(Assertion)`，fixture 已有 `operator_7e2261ee9c51` |
-| `question` | 言语行为 | `CandidateMetadata.speech_act = question` |
-| `instruction` | 言语行为 | `speech_act = command` |
-| `preference` | 言语行为/态度 | `speech_act = suggestion`，或态度 Operator——**见待评审 R2** |
-| `goal` | 意图 | 无直接对应——**见待评审 R2** |
-| `plan` | 意图 | 无直接对应——**见待评审 R2** |
+**但拆分方式比初稿设想的更复杂。** 已实测
+`src/ke_memory_demo/online/admission.py:29-36`：8 个取值**全部**被映射到 `MemoryKind`，
+后者进一步驱动 Admission 阈值（`PREFERENCE: 0.9`、`TASK: 0.95`）。所以 `modality` 同时是
 
-前五项去向明确，无需新增本体。后三项需要判断。
+- 命题语义的一部分，以及
+- **Admission 的分类输入**。
+
+规范明确 Admission 不属于本 Profile，因此这个字段的迁移必须先把两种用途分开——不能整体搬进
+内容 Operator，否则 Admission 策略会混入 KE 语义。
+
+| 取值 | 范畴 | 去向 | `MemoryKind` |
+| --- | --- | --- | --- |
+| `fact` | 无标记 | KE 本身，不加修饰 | `FACT` |
+| `belief` | 命题态度 | `believes(Person, Assertion)`，fixture 已有 | `FACT` |
+| `hypothesis` | 认识模态 | `possible(Assertion)`，fixture 已有 | `OTHER` |
+| `question` | 言语行为 | `CandidateMetadata.speech_act = question` | `OTHER` |
+| `instruction` | 言语行为 | `speech_act = command` | `CONSTRAINT` |
+| `preference` | **待分型** | 见评审包 v2 的 R2 | `PREFERENCE` |
+| `goal` | **待分型** | 见评审包 v2 的 R2 | `TASK` |
+| `plan` | **待分型** | 见评审包 v2 的 R2 | `TASK` |
+
+后三项**不给建议签名**。初稿曾建议 `prefers(Person, Assertion)` 等三个 Operator，该方案已被
+否决：golden 数据（`tests/golden/test_memory_pipeline.py:274-281`）中内容 Operator **已经是**
+`prefers(user, tea)`，包装成 `prefers(user, Assertion::"prefers(user,tea)")` 会重复并改写原
+语义。参数类型也未经分析——「更喜欢 A 而非 B」是三元关系，主体不限于 Person。详见评审包 v2。
 
 ## 逐字段对照
 
@@ -93,7 +105,7 @@ event_time(Assertion::candidate::"created-by-1",Date::"2026-08-09")=Boolean::tru
 `core_role_id` 映射，而 `core_roles`/`core_role_id` 在本合同中是 `ForbiddenLegacySupplyKey`，
 整个 crosswalk 机制不适用。
 
-但新增 Operator 有自己的硬要求（`ontology-standard.md:413-441`）：
+但新增 Operator 有自己的硬要求（`ontology-standard.md:413-461`）：
 
 - 每条 Lexicalization 必须带至少一项 `source_attestations`；
 - `source_kind` 是封闭枚举：`wordnet | propbank | schema_org | human | domain_corpus`；
@@ -101,25 +113,56 @@ event_time(Assertion::candidate::"created-by-1",Date::"2026-08-09")=Boolean::tru
   其余三类禁止这两个字段；
 - 无版本前缀的 `create.v.01` 必须拒绝。
 
-因此 `negated` 的 attestation 只能是 `wordnet`（需真实 sense）或 `human`（承认是本项目决定）。
+**关键限制**（`ontology-standard.md:461` 原文）：
 
-**实测结论**：`wn30:negate.v.01` 的 WordNet 释义是 **"be in contradiction with"**，即矛盾关系，
-不是逻辑否定。用它为 `negated` 作 attestation 是误引来源。因此 `negated` 只能用
-`source_kind=human`，这使它成为一项需要你签署的项目决定，而非可从来源推导的事实。
+> SourceAttestation 证明词面来源，不自动证明 owner 语义与外部资源完全等价。
+
+因此 `source_kind=human` **只证明词面来源，不构成 Operator 语义的授权**。Operator 语义必须
+来自版本化、且进入 `source_manifest` 的 Core Ontology 决策记录；`provenance_refs` 必须指向
+构建/审计系统中的既有记录，不能指向评审文档。
+
+**实测结论**：`wn30:negate.v.01` 的 WordNet 释义是 **"be in contradiction with"**，即两条断言
+之间的矛盾关系，不是一元逻辑否定。因此禁止用它为 `negated` 作 attestation。
+
+**Snapshot 缺 Operator 时的诊断 code**：报 `missing_operator`（Ontology gap，见
+`nl2ke-integration-requirements.md:389` 之后的枚举），**不是** `unsupported_construct`。
+后者是 Capability Gap，规范禁止二者互相报告。
+
+## 新增 Operator 的连带影响
+
+新增任何 Operator 都会改变 Operator 分片内容、记录数、Snapshot hash 与所有 hash echo 示例。
+必须同步更新：
+
+- `fixtures/ontology-snapshot-example/operators/core.json` 及 `snapshot.manifest.json` 的
+  hash 与记录数；
+- `schema/examples.json`、`ontology-profile-and-manifest-vectors.json` 中含 snapshot ref 的向量；
+- `schema/canonical-text-reference-vectors.json`（若涉及新 Operator 的 Canonical Text）；
+- 两处统一示例表；
+- 相关集成测试。
+
+`tools/validate_specifications.py` 的基线计数会随之变化，变化必须先解释再接受。因此
+「1760 个测试一个不改」只适用于旧 `domain` 侧测试，不适用于 `spec/` 子树。
 
 ## 结论
 
 - **11 个字段的去向明确，不需要新增本体**，其中 `lifecycle`、`contradicts`、`supersedes`、
   `revision`、`level` 是"不该迁移"而非"没有去向"——它们本就属于记忆系统。
-- **1 项需要新增 Operator**：`negated`，且只能用 `human` attestation。
-- **4 项需要你判断**，已单独整理为评审包
-  `2026-08-09-memory-assertion-v1-migration-review-packet.md`。
+- **1 项需要新增 Operator**：`negated`，但其语义授权必须来自版本化的 Core Ontology 决策记录，
+  而不是 `human` attestation（见治理要求）。
+- **4 项经评审后：R1、R3 带修订确认；R2、R4 退回补充事实。** 裁决与退回理由见
+  `2026-08-09-memory-assertion-v1-migration-review-packet-v2.md`。
 
-在评审包的 4 项裁决完成前，不得开始第二步（边界转换层）：其中 R1 决定
-`polarity=negative` 能否表达，而它出现在 140 处引用中。
+R2 与 R4 的补充事实到位前，不得开始第二步（边界转换层）。
+
+## 影响面数字的读法
+
+上表的「文件 / 引用」是**代码行计数**，不是数据量。例如 `polarity` 的 140 是含该标识符的
+代码行数，不等于 140 条 `negative` 数据。真实数据分布尚未测量，且仓库无持久化 KE JSON，
+因此只能从抽取产物或运行时统计得到。任何按这些数字估算迁移工作量的推断都不成立。
 
 ## 明确不做
 
 - 不改任何代码，不新增任何 Operator 记录。
 - 不把本报告的映射写成已验证：它是文档对照，尚无一条经过 round-trip 测试。
-- 不推断 `goal`/`plan`/`preference` 的去向——列为待裁决而非猜测。
+- 不为 `goal`/`plan`/`preference` 提出签名——分型完成前提签名就是让旧 schema 决定本体身份。
+- 不给出 R4 的通用展开规则：`assertion_ref` 只承载完整 Proposition，值函数复合需要分类处理。
