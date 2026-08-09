@@ -13,8 +13,10 @@ from ke_memory_demo.core.json import JsonObject, JsonValue, canonical_json
 from ke_memory_demo.domain import Conversation
 from ke_memory_demo.ingestion import load_beam_subset, select_beam_directories
 
+from fixtures.datasets import dataset_path, require_dataset
 
-ARCHIVE_PATH = Path("/public/home/wwb/datasets/BEAM.zip")
+
+ARCHIVE_PATH = dataset_path("BEAM.zip")
 ARCHIVE_SHA256 = "690106a93ab88dac46e8fef1e84884acc889518424240f57a47428d3efbe6346"
 EXPECTED_DIRECTORIES = (4, 15, 17)
 EXPECTED_SESSION_COUNTS = (3, 5, 5)
@@ -108,16 +110,18 @@ def _walk_json(value: JsonValue) -> list[JsonValue]:
 def test_fixed_beam_subset_is_normalized_exactly_without_network(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
+    archive_path = require_dataset("BEAM.zip")
+
     def deny_network(_socket: socket.socket, *_args: object, **_kwargs: object) -> None:
         raise AssertionError("BEAM normalization attempted network access")
 
     monkeypatch.setattr(socket.socket, "connect", deny_network)
 
-    assert ARCHIVE_PATH.stat().st_size == 728_569_926
-    assert _archive_sha256(ARCHIVE_PATH) == ARCHIVE_SHA256
+    assert archive_path.stat().st_size == 728_569_926
+    assert _archive_sha256(archive_path) == ARCHIVE_SHA256
     assert select_beam_directories(ARCHIVE_SHA256) == EXPECTED_DIRECTORIES
 
-    conversations = load_beam_subset(ARCHIVE_PATH)
+    conversations = load_beam_subset(archive_path)
     assert tuple(_directory_id(conversation) for conversation in conversations) == (
         EXPECTED_DIRECTORIES
     )
@@ -132,7 +136,7 @@ def test_fixed_beam_subset_is_normalized_exactly_without_network(
     assert sum(exchange_counts) == 385
     assert [len(conversation.probing_questions) for conversation in conversations] == [20] * 3
 
-    with ZipFile(ARCHIVE_PATH) as archive:
+    with ZipFile(archive_path) as archive:
         for conversation in conversations:
             directory_id = _directory_id(conversation)
             expected_content, expected_hash, topic_id, index, time_anchor = EXPECTED_FIRST_USERS[
@@ -199,5 +203,5 @@ def test_fixed_beam_subset_is_normalized_exactly_without_network(
                 category for category in QUESTION_CATEGORIES for _ in range(2)
             ]
 
-    assert conversations == load_beam_subset(ARCHIVE_PATH)
+    assert conversations == load_beam_subset(archive_path)
     assert sum(len(conversation.probing_questions) for conversation in conversations) == 60

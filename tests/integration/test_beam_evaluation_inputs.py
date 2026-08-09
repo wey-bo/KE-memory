@@ -1,14 +1,14 @@
 from __future__ import annotations
 
 from collections import Counter
-from pathlib import Path
 
 from ke_memory_demo.domain import Conversation
 from ke_memory_demo.evaluation import QuestionCategory, normalize_questions
 from ke_memory_demo.ingestion import load_beam_subset
 
+from fixtures.datasets import require_dataset
 
-ARCHIVE_PATH = Path("/public/home/wwb/datasets/BEAM.zip")
+
 EXPECTED_ANSWER_FIELDS = {
     "ideal_answer": 6,
     "ideal_response": 6,
@@ -19,7 +19,7 @@ EXPECTED_ANSWER_FIELDS = {
 
 
 def test_fixed_beam_evaluation_inputs_are_complete_stable_and_not_ingested() -> None:
-    conversations = load_beam_subset(ARCHIVE_PATH)
+    conversations = load_beam_subset(require_dataset("BEAM.zip"))
     questions = normalize_questions(conversations)
 
     assert len(questions) == 60
