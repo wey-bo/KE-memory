@@ -45,13 +45,13 @@ from ke_memory_demo.infra.llm import StructuredModelClient
 from ke_memory_demo.infra.telemetry import InMemoryTraceRecorder, TraceContext
 from ke_memory_demo.ontology.elasticsearch import ElasticsearchVocabulary
 from ke_memory_demo.pipeline.runtime import (
-    _GIT_SHA,
+    GIT_SHA,
     RuntimeInvariantError,
-    _git_text,
-    _nonsecret_model_endpoint,
-    _read_only_git_env,
-    _sha256_file,
-    _snapshot_records_from_git,
+    git_text,
+    nonsecret_model_endpoint,
+    read_only_git_env,
+    sha256_file,
+    snapshot_records_from_git,
     probe_state_repository_writable,
 )
 from ke_memory_demo.settings import (
@@ -67,14 +67,14 @@ from ke_memory_demo.storage.layout import StateLayout, validate_storage_name
 
 _SK_CREDENTIAL = re.compile(rb"sk-[A-Za-z0-9_-]{12,}", flags=re.ASCII)
 _APPROVED_SPEC_PATH = Path("docs/superpowers/specs/2026-07-17-ke-only-evaluation-design.md")
-_APPROVED_SPEC_SHA256 = "192bf8384185eaa014634ea61fee18c2ab35220bd23037c78da959aca8ca73cb"
+APPROVED_SPEC_SHA256 = "192bf8384185eaa014634ea61fee18c2ab35220bd23037c78da959aca8ca73cb"
 _APPROVED_PLAN_PATH = Path("docs/superpowers/plans/2026-07-17-ke-only-completion-implementation.md")
-_APPROVED_PLAN_SHA256 = "47fcf0e87ee7738a190c8cb3a9d3b253e35f01a446c465d2f47d024c216e680b"
+APPROVED_PLAN_SHA256 = "47fcf0e87ee7738a190c8cb3a9d3b253e35f01a446c465d2f47d024c216e680b"
 _FIXED_DATASET_SHA256 = "690106a93ab88dac46e8fef1e84884acc889518424240f57a47428d3efbe6346"
 _FIXED_DIRECTORIES = (4, 15, 17)
 _FIXED_SESSIONS = 13
 _FIXED_EXCHANGES = 385
-_FIXED_QUESTIONS = 60
+FIXED_QUESTIONS = 60
 
 
 class _EvaluationProbeResponse(BaseModel):
@@ -88,7 +88,7 @@ def evaluation_can_promote(run: EvaluationRun, *, smoke: bool) -> bool:
     return (
         not smoke
         and run.status.value == "complete"
-        and len(expected_ids) == _FIXED_QUESTIONS
+        and len(expected_ids) == FIXED_QUESTIONS
         and tuple(item.question_id for item in run.answers) == expected_ids
         and tuple(item.question_id for item in run.judgements) == expected_ids
         and not run.failures
@@ -110,7 +110,7 @@ def materialize_evaluation_report(
     )
     snapshots = GitSnapshotStore.init(artifacts.root, artifacts)
     verified = snapshots.verify(snapshot_id, run_id, PipelineStage.EVALUATION_COMPLETE)
-    documents = _snapshot_records_from_git(
+    documents = snapshot_records_from_git(
         artifacts.root,
         verified.snapshot_id,
         run_id,
@@ -148,7 +148,7 @@ def finalize_evaluation_outputs(
         )
         return None
     snapshot_id = promote_complete()
-    if _GIT_SHA.fullmatch(snapshot_id) is None:
+    if GIT_SHA.fullmatch(snapshot_id) is None:
         raise RuntimeInvariantError("evaluation promotion returned an invalid snapshot ID")
     return snapshot_id
 
@@ -216,21 +216,21 @@ class _LiveEvaluationPreflightPorts:
         raise PreflightCheckFailure(f"{name}:UnknownCheck")
 
     def _check_code_identity(self) -> str:
-        commit = _git_text(self._config_root, "rev-parse", "--verify", "HEAD^{commit}")
-        if _GIT_SHA.fullmatch(commit) is None:
+        commit = git_text(self._config_root, "rev-parse", "--verify", "HEAD^{commit}")
+        if GIT_SHA.fullmatch(commit) is None:
             raise PreflightCheckFailure("code_identity:InvalidGitHead")
-        if _git_text(
+        if git_text(
             self._config_root,
             "status",
             "--porcelain=v1",
             "--untracked-files=all",
         ):
             raise PreflightCheckFailure("code_identity:DirtyWorktree")
-        spec_sha = _sha256_file(self._config_root / _APPROVED_SPEC_PATH)
-        plan_sha = _sha256_file(self._config_root / _APPROVED_PLAN_PATH)
-        if spec_sha != _APPROVED_SPEC_SHA256:
+        spec_sha = sha256_file(self._config_root / _APPROVED_SPEC_PATH)
+        plan_sha = sha256_file(self._config_root / _APPROVED_PLAN_PATH)
+        if spec_sha != APPROVED_SPEC_SHA256:
             raise PreflightCheckFailure("code_identity:SpecHashMismatch")
-        if plan_sha != _APPROVED_PLAN_SHA256:
+        if plan_sha != APPROVED_PLAN_SHA256:
             raise PreflightCheckFailure("code_identity:PlanHashMismatch")
         return f"code_identity:commit={commit}:spec={spec_sha}:plan={plan_sha}"
 
@@ -265,7 +265,7 @@ class _LiveEvaluationPreflightPorts:
             ),
             check=False,
             capture_output=True,
-            env=_read_only_git_env(),
+            env=read_only_git_env(),
         )
         if completed.returncode != 0:
             raise RuntimeInvariantError("unable to enumerate tracked preflight files")
@@ -322,7 +322,7 @@ class _LiveEvaluationPreflightPorts:
         else:
             model_settings = settings.judge
             api_key = settings.require_judge_api_key()
-        endpoint = _nonsecret_model_endpoint(model_settings.base_url, check_name=name)
+        endpoint = nonsecret_model_endpoint(model_settings.base_url, check_name=name)
         client = StructuredModelClient.from_model_settings(
             model_settings,
             api_key=api_key,
@@ -394,14 +394,14 @@ class _LiveEvaluationPreflightPorts:
         artifacts = ArtifactStore(self._state_root, registry=PIPELINE_ARTIFACT_REGISTRY)
         snapshots = GitSnapshotStore(artifacts.root, artifacts)
         snapshots.verify(self._snapshot_id, self._run_id, PipelineStage.KE_READY)
-        manifests = _snapshot_records_from_git(
+        manifests = snapshot_records_from_git(
             self._state_root,
             self._snapshot_id,
             self._run_id,
             "pipeline_manifests",
             PipelineRunManifest,
         )
-        conversations = _snapshot_records_from_git(
+        conversations = snapshot_records_from_git(
             self._state_root,
             self._snapshot_id,
             self._run_id,
@@ -502,8 +502,8 @@ def validate_evaluation_snapshot_contract(
         _FIXED_SESSIONS,
         _FIXED_EXCHANGES,
         _FIXED_EXCHANGES,
-        _FIXED_QUESTIONS,
-        _FIXED_QUESTIONS,
+        FIXED_QUESTIONS,
+        FIXED_QUESTIONS,
         False,
         False,
         "bounded-best-effort",

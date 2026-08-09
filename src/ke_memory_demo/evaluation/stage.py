@@ -46,7 +46,7 @@ from ke_memory_demo.infra.telemetry import (
     validate_usage_context_only_trace,
 )
 from ke_memory_demo.retrieval.tokens import O200KTokenCounter
-from ke_memory_demo.pipeline.ports import EvaluationPort, RuntimeContext
+from ke_memory_demo.pipeline.ports import EvaluationPort, RuntimeContext, SnapshotModelT
 from ke_memory_demo.evaluation.baseline_results import load_public_baseline_results
 from ke_memory_demo.evaluation.gold_sources import (
     SourceCatalog,
@@ -72,29 +72,33 @@ from ke_memory_demo.evaluation.questions import (
 from ke_memory_demo.evaluation.report import ReportInput, ReportWriter
 from ke_memory_demo.evaluation.runner import EvaluationRunner
 from ke_memory_demo.evaluation.runtime import (
-    _APPROVED_PLAN_SHA256,
-    _APPROVED_SPEC_SHA256,
-    _FIXED_QUESTIONS,
+    APPROVED_PLAN_SHA256,
+    APPROVED_SPEC_SHA256,
+    FIXED_QUESTIONS,
     evaluation_can_promote,
     finalize_evaluation_outputs,
 )
 from ke_memory_demo.pipeline.runtime import (
     RuntimeInvariantError,
-    _RuntimeStructuredModelClient,
-    _runtime_trace_records,
-    _snapshot_records_from_git,
-    _snapshot_stage_manifest_from_git,
-    _sorted_model_traces,
+    RuntimeStructuredModelClient,
+    runtime_trace_records,
+    snapshot_records_from_git,
+    snapshot_stage_manifest_from_git,
+    sorted_model_traces,
 )
 from ke_memory_demo.storage.checkpoints import CheckpointStore
 from ke_memory_demo.storage.layout import validate_storage_name
 
 if TYPE_CHECKING:  # pragma: no cover - imported for annotations only
+    from collections.abc import Mapping
+    from pathlib import Path
+
     from ke_memory_demo.infra.llm import StructuredModelClient
     from ke_memory_demo.ontology.elasticsearch import ElasticsearchVocabulary
     from ke_memory_demo.settings import AppSettings
     from ke_memory_demo.storage import ArtifactStore
     from ke_memory_demo.snapshots import GitSnapshotStore
+    from ke_memory_demo.systems import KEMemorySystem
 
 
 class EvaluationStage:
@@ -121,30 +125,50 @@ class EvaluationStage:
         # Evaluation-run state. Owned here so a pipeline-only runtime never holds it.
         self._token_counter = O200KTokenCounter()
         self._evaluation_clients: (
-            tuple[_RuntimeStructuredModelClient, _RuntimeStructuredModelClient] | None
+            tuple[RuntimeStructuredModelClient, RuntimeStructuredModelClient] | None
         ) = None
         self._evaluation_snapshot_id: str | None = None
 
     @property
-    def _state_root(self):  # noqa: ANN202 - mirrors the moved code's attribute use
+    def _state_root(self) -> Path:
         return self._context.state_root
 
     @property
     def _code_commit(self) -> str:
         return self._context.code_commit
 
-    async def build_ke_systems(self, *args: object, **kwargs: object):  # noqa: ANN002,ANN003,ANN201
+    async def build_ke_systems(
+        self,
+        run_id: str,
+        snapshot_id: str,
+        *,
+        conversation_ids: frozenset[str] | None = None,
+    ) -> Mapping[str, KEMemorySystem]:
         """Delegate to the pipeline port.
 
         Present so the moved bodies keep calling ``self.build_ke_systems`` unchanged;
         it forwards rather than reimplementing, so there is one definition of how
-        systems are built.
+        systems are built. The signature mirrors ``EvaluationPort`` exactly: forwarding
+        through ``*args: object`` would erase these types at every call site, which is
+        how the split first lost them.
         """
-        return await self._port.build_ke_systems(*args, **kwargs)  # type: ignore[arg-type]
+        return await self._port.build_ke_systems(
+            run_id, snapshot_id, conversation_ids=conversation_ids
+        )
 
-    def _snapshot_records(self, *args: object, **kwargs: object):  # noqa: ANN002,ANN003,ANN202
-        """Delegate to the pipeline port, for the same reason as above."""
-        return self._port.snapshot_records(*args, **kwargs)  # type: ignore[arg-type]
+    def _snapshot_records(
+        self,
+        snapshot_id: str,
+        run_id: str,
+        artifact_name: str,
+        model: type[SnapshotModelT],
+    ) -> tuple[SnapshotModelT, ...]:
+        """Delegate to the pipeline port, for the same reason as above.
+
+        Generic in the record type so callers keep the concrete model they asked for
+        rather than an unknown tuple.
+        """
+        return self._port.snapshot_records(snapshot_id, run_id, artifact_name, model)
 
     async def aclose(self) -> None:
         """Close the clients this stage created.
@@ -166,7 +190,7 @@ class EvaluationStage:
 
     def build_evaluation_clients(
         self,
-    ) -> tuple[_RuntimeStructuredModelClient, _RuntimeStructuredModelClient]:
+    ) -> tuple[RuntimeStructuredModelClient, RuntimeStructuredModelClient]:
         if self._evaluation_clients is not None:
             return self._evaluation_clients
         answer_settings = self.settings.work.model_copy(
@@ -175,8 +199,8 @@ class EvaluationStage:
         answer_recorder = InMemoryTraceRecorder()
         judge_recorder = InMemoryTraceRecorder()
         answer = cast(
-            _RuntimeStructuredModelClient,
-            _RuntimeStructuredModelClient.from_model_settings(
+            RuntimeStructuredModelClient,
+            RuntimeStructuredModelClient.from_model_settings(
                 answer_settings,
                 api_key=self.settings.require_work_api_key(),
                 supports_json_schema=True,
@@ -184,8 +208,8 @@ class EvaluationStage:
             ),
         )
         judge = cast(
-            _RuntimeStructuredModelClient,
-            _RuntimeStructuredModelClient.from_model_settings(
+            RuntimeStructuredModelClient,
+            RuntimeStructuredModelClient.from_model_settings(
                 self.settings.judge,
                 api_key=self.settings.require_judge_api_key(),
                 supports_json_schema=True,
@@ -312,9 +336,9 @@ class EvaluationStage:
             "model_traces",
             ModelTrace,
         )
-        evaluation_traces = _sorted_model_traces(
+        evaluation_traces = sorted_model_traces(
             (
-                *_runtime_trace_records(self.work_model),
+                *runtime_trace_records(self.work_model),
                 *answer_client.trace_records,
                 *judge_client.trace_records,
             )
@@ -388,7 +412,7 @@ class EvaluationStage:
         if (
             pipeline_manifest.stage is not PipelineStage.KE_READY
             or pipeline_manifest.run_id != report_input.manifest.run_id
-            or report_input.manifest.expected_questions != _FIXED_QUESTIONS
+            or report_input.manifest.expected_questions != FIXED_QUESTIONS
         ):
             raise RuntimeInvariantError(
                 "evaluation-complete inputs do not match the verified ke-ready run"
@@ -455,7 +479,7 @@ class EvaluationStage:
             "baseline_public_results": tuple(report_input.baseline_public_results),
             "turn_ke_audits": tuple(report_input.turn_ke_audits),
             "report_documents": documents,
-            "model_traces": _sorted_model_traces(
+            "model_traces": sorted_model_traces(
                 (
                     *existing_traces,
                     *(usage_context_only_trace(trace) for trace in evaluation_traces),
@@ -510,7 +534,7 @@ class EvaluationStage:
         run_id: str,
         snapshot_id: str,
     ) -> dict[str, tuple[BaseModel, ...]]:
-        manifest = _snapshot_stage_manifest_from_git(
+        manifest = snapshot_stage_manifest_from_git(
             self._state_root,
             snapshot_id,
             run_id,
@@ -526,7 +550,7 @@ class EvaluationStage:
                 raise RuntimeInvariantError(
                     f"verified snapshot contains an unknown artifact: {artifact.name}"
                 ) from error
-            records[artifact.name] = _snapshot_records_from_git(
+            records[artifact.name] = snapshot_records_from_git(
                 self._state_root,
                 snapshot_id,
                 run_id,
@@ -561,8 +585,8 @@ class EvaluationStage:
         return ExperimentManifest(
             run_id=pipeline_manifest.run_id,
             code_commit=self._code_commit,
-            spec_sha256=_APPROVED_SPEC_SHA256,
-            plan_sha256=_APPROVED_PLAN_SHA256,
+            spec_sha256=APPROVED_SPEC_SHA256,
+            plan_sha256=APPROVED_PLAN_SHA256,
             ke_ready_snapshot_id=snapshot_id,
             dataset_sha256=pipeline_manifest.dataset_sha256,
             selected_directories=pipeline_manifest.selected_directories,

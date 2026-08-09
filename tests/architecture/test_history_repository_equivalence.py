@@ -215,7 +215,7 @@ print(json.dumps({
     "state_fields": sorted(state.model_dump(mode="json")),
 }))
 """
-    results = {}
+    results: dict[str, dict[str, object]] = {}
     for which in ("shipped", "research"):
         target = tmp_path / which
         outcome = subprocess.run(

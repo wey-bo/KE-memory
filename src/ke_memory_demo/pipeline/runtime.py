@@ -87,7 +87,7 @@ from .runner import MemoryPipeline, PipelineInvariantError
 Sleep = Callable[[float], Awaitable[None]]
 Clock = Callable[[], float]
 SnapshotModelT = TypeVar("SnapshotModelT", bound=BaseModel)
-_GIT_SHA = re.compile(r"[0-9a-f]{40}", flags=re.ASCII)
+GIT_SHA = re.compile(r"[0-9a-f]{40}", flags=re.ASCII)
 
 
 
@@ -96,7 +96,7 @@ _GIT_SHA = re.compile(r"[0-9a-f]{40}", flags=re.ASCII)
 
 
 
-def _read_only_git_env() -> dict[str, str]:
+def read_only_git_env() -> dict[str, str]:
     return {
         **os.environ,
         "GIT_OPTIONAL_LOCKS": "0",
@@ -110,7 +110,7 @@ class RuntimeInvariantError(RuntimeError):
 
 
 
-class _RuntimeStructuredModelClient(StructuredModelClient):
+class RuntimeStructuredModelClient(StructuredModelClient):
     def __init__(
         self,
         settings: ModelSettings,
@@ -337,8 +337,8 @@ class RuntimeFactory:
         work_secret = settings.require_work_api_key()
         work_recorder = InMemoryTraceRecorder()
         work_model = cast(
-            _RuntimeStructuredModelClient,
-            _RuntimeStructuredModelClient.from_model_settings(
+            RuntimeStructuredModelClient,
+            RuntimeStructuredModelClient.from_model_settings(
                 settings.work,
                 api_key=work_secret,
                 supports_json_schema=True,
@@ -497,7 +497,7 @@ class RuntimeFactory:
         artifact_name: str,
         model: type[SnapshotModelT],
     ) -> tuple[SnapshotModelT, ...]:
-        return _snapshot_records_from_git(
+        return snapshot_records_from_git(
             self._state_root,
             snapshot_id,
             run_id,
@@ -515,10 +515,10 @@ class RuntimeFactory:
 def probe_state_repository_writable(state_root: Path, expected_head: str) -> str:
     if not state_root.is_dir():
         raise PreflightCheckFailure("state_repo:MissingDirectory")
-    head = _git_text(state_root, "rev-parse", "--verify", "HEAD^{commit}")
+    head = git_text(state_root, "rev-parse", "--verify", "HEAD^{commit}")
     if head != expected_head:
         raise PreflightCheckFailure("state_repo:HeadMismatch")
-    if _git_text(
+    if git_text(
         state_root,
         "status",
         "--porcelain=v1",
@@ -547,7 +547,7 @@ def probe_state_repository_writable(state_root: Path, expected_head: str) -> str
     return f"state_repo:head={head}:writable=true"
 
 
-def _snapshot_stage_manifest_from_git(
+def snapshot_stage_manifest_from_git(
     state_root: Path,
     snapshot_id: str,
     run_id: str,
@@ -579,20 +579,20 @@ def _snapshot_file_from_git(
     *,
     description: str,
 ) -> bytes:
-    if _GIT_SHA.fullmatch(snapshot_id) is None:
+    if GIT_SHA.fullmatch(snapshot_id) is None:
         raise RuntimeInvariantError("snapshot ID must be a full Git SHA")
     completed = subprocess.run(
         ("git", "-C", str(state_root), "show", f"{snapshot_id}:{path}"),
         check=False,
         capture_output=True,
-        env=_read_only_git_env(),
+        env=read_only_git_env(),
     )
     if completed.returncode != 0:
         raise RuntimeInvariantError(f"verified snapshot is missing {description}")
     return completed.stdout
 
 
-def _snapshot_records_from_git(
+def snapshot_records_from_git(
     state_root: Path,
     snapshot_id: str,
     run_id: str,
@@ -624,7 +624,7 @@ def _snapshot_records_from_git(
     return records
 
 
-def _runtime_trace_records(model: object) -> tuple[ModelTrace, ...]:
+def runtime_trace_records(model: object) -> tuple[ModelTrace, ...]:
     raw = getattr(model, "trace_records", ())
     if not isinstance(raw, Sequence):
         raise RuntimeInvariantError("evaluation model exposed invalid trace records")
@@ -634,18 +634,18 @@ def _runtime_trace_records(model: object) -> tuple[ModelTrace, ...]:
         raise RuntimeInvariantError("evaluation model exposed an invalid trace") from error
 
 
-def _sorted_model_traces(traces: Iterable[ModelTrace]) -> tuple[ModelTrace, ...]:
+def sorted_model_traces(traces: Iterable[ModelTrace]) -> tuple[ModelTrace, ...]:
     validated = tuple(ModelTrace.model_validate(item) for item in traces)
     return tuple(sorted(validated, key=canonical_json))
 
 
-def _git_text(root: Path, *arguments: str) -> str:
+def git_text(root: Path, *arguments: str) -> str:
     completed = subprocess.run(
         ("git", "-C", str(root), *arguments),
         check=False,
         capture_output=True,
         text=True,
-        env=_read_only_git_env(),
+        env=read_only_git_env(),
     )
     if completed.returncode != 0:
         raise RuntimeInvariantError("Git preflight command failed")
@@ -658,7 +658,7 @@ def _git_optional_text(root: Path, *arguments: str) -> str | None:
         check=False,
         capture_output=True,
         text=True,
-        env=_read_only_git_env(),
+        env=read_only_git_env(),
     )
     if completed.returncode == 0:
         return completed.stdout.strip()
@@ -673,7 +673,7 @@ def _resolved_git_directory(
     *,
     failure_detail: str,
 ) -> Path:
-    raw_path = _git_text(root, "rev-parse", "--git-path", git_path)
+    raw_path = git_text(root, "rev-parse", "--git-path", git_path)
     path = Path(raw_path)
     if not path.is_absolute():
         path = root / path
@@ -683,7 +683,7 @@ def _resolved_git_directory(
 def _active_ref_lock_directory(root: Path) -> Path:
     active_ref = _git_optional_text(root, "symbolic-ref", "-q", "HEAD")
     if active_ref is None:
-        raw_path = _git_text(root, "rev-parse", "--git-dir")
+        raw_path = git_text(root, "rev-parse", "--git-dir")
         path = Path(raw_path)
         if not path.is_absolute():
             path = root / path
@@ -692,7 +692,7 @@ def _active_ref_lock_directory(root: Path) -> Path:
             failure_detail="state_repo:GitRefMetadataNotWritable",
         )
 
-    raw_path = _git_text(root, "rev-parse", "--git-path", active_ref)
+    raw_path = git_text(root, "rev-parse", "--git-path", active_ref)
     ref_path = Path(raw_path)
     if not ref_path.is_absolute():
         ref_path = root / ref_path
@@ -785,7 +785,7 @@ def _fsync_directory_if_supported(directory: Path) -> None:
         os.close(descriptor)
 
 
-def _sha256_file(path: Path) -> str:
+def sha256_file(path: Path) -> str:
     hasher = hashlib.sha256()
     try:
         with path.open("rb") as stream:
@@ -796,7 +796,7 @@ def _sha256_file(path: Path) -> str:
     return hasher.hexdigest()
 
 
-def _nonsecret_model_endpoint(value: str, *, check_name: str) -> str:
+def nonsecret_model_endpoint(value: str, *, check_name: str) -> str:
     try:
         parsed = urlsplit(value)
         hostname = parsed.hostname
@@ -850,7 +850,7 @@ def _code_commit(project_root: Path) -> str:
         check=False,
         capture_output=True,
         text=True,
-        env=_read_only_git_env(),
+        env=read_only_git_env(),
     )
     commit = completed.stdout.strip()
     if completed.returncode != 0 or len(commit) != 40:

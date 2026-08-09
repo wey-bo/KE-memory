@@ -235,8 +235,11 @@ def test_evaluation_commands_run_fake_ke_only_evaluation(
     ) -> FakeFactory:
         return FakeFactory()
 
+    def fake_stage(**_kwargs: object) -> FakeStage:
+        return FakeStage()
+
     monkeypatch.setattr(cli.RuntimeFactory, "from_paths", fake_from_paths)
-    monkeypatch.setattr(cli, "EvaluationStage", lambda **_kwargs: FakeStage())
+    monkeypatch.setattr(cli, "EvaluationStage", fake_stage)
     arguments = [
         "evaluate",
         command,
