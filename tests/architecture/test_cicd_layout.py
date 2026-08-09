@@ -19,9 +19,23 @@ def test_cicd_foundation_files_are_present() -> None:
 
 def test_workflow_delegates_to_vendor_neutral_check_script() -> None:
     workflow = (ROOT / ".github/workflows/ci.yml").read_text(encoding="utf-8")
-    # The gate is delegation: the workflow names a script rather than inlining a
-    # command list, so the local and remote entry points cannot drift apart.
-    assert "scripts/ci/check-portable.sh" in workflow
+    # The workflow currently inlines one step per command so that a remote failure
+    # names the failing command: job logs need admin rights, while step conclusions
+    # are public. So the delegation assertion is on the command set rather than the
+    # script name -- what must not drift is which checks run remotely.
+    for command in (
+        "uv sync --frozen",
+        "scripts/ci/verify_layout.py",
+        "uv run pytest -q",
+        "uv run ruff check",
+        "uv run pyright",
+        "uv build",
+        "scripts/ci/verify_wheel.py",
+    ):
+        assert command in workflow, command
+    # The script remains the local portable entry point even while the workflow
+    # inlines the same commands, so it cannot quietly disappear.
+    assert (ROOT / "scripts/ci/check-portable.sh").is_file()
 
     # KEOL must NOT be checked out here. It is private, so the default token gets a
     # 404 and the job dies before running anything -- observed on the first remote
@@ -36,7 +50,9 @@ def test_workflow_delegates_to_vendor_neutral_check_script() -> None:
     # substring check would match its own explanation. What must hold is that no
     # executable line consumes the variable.
     portable_code = [
-        line for line in portable_script.splitlines() if line.strip() and not line.lstrip().startswith("#")
+        line
+        for line in portable_script.splitlines()
+        if line.strip() and not line.lstrip().startswith("#")
     ]
     assert not [line for line in portable_code if "KEOL_SOURCE" in line]
 

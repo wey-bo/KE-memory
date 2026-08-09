@@ -26,8 +26,28 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Run portable repository checks
-        run: scripts/ci/check-portable.sh
+      # Split into one step per command, rather than a single call to
+      # check-portable.sh. Job logs need admin rights to download, but step
+      # conclusions are readable from the public API -- so with named steps a
+      # failure says which command failed instead of only "exit code 1". Local
+      # reproduction had been exhausted: a shallow clone with an empty dataset
+      # root, no KEOL and a cold venv passes here, so the difference is something
+      # only the runner sees. Collapse these back into check-portable.sh once the
+      # remote is reliably green.
+      - name: Sync the locked environment
+        run: uv sync --frozen
+      - name: Verify repository layout
+        run: uv run python scripts/ci/verify_layout.py
+      - name: Run tests
+        run: uv run pytest -q
+      - name: Lint
+        run: uv run ruff check src service ontology tests scripts
+      - name: Type check
+        run: uv run pyright
+      - name: Build the distribution
+        run: uv build
+      - name: Verify the wheel contract
+        run: uv run python scripts/ci/verify_wheel.py
 
   # Separate job because the evaluation dependency must not be present when the
   # quality job builds and verifies the wheel: keeping them apart is what proves
