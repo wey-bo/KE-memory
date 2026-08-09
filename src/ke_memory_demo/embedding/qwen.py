@@ -176,10 +176,17 @@ def _validate_fixed_settings(settings: EmbeddingSettings) -> None:
 
 def _sentence_transformer_factory() -> ModelFactory:
     try:
-        from sentence_transformers import SentenceTransformer
+        # Optional dependency: installed via the `embedding` group, absent from the
+        # default environment and from the wheel's requirements. Unresolved here is
+        # the expected state, hence the ignores -- the ImportError below is the
+        # contract, and the cast already discards the type either way.
+        from sentence_transformers import (  # pyright: ignore[reportMissingImports]
+            SentenceTransformer,  # pyright: ignore[reportUnknownVariableType]
+        )
     except ImportError as error:
         raise EmbeddingInvariantError(
-            "sentence-transformers is required for local embedding"
+            "sentence-transformers is required for local embedding; install the "
+            "embedding dependency group"
         ) from error
     return cast(Any, SentenceTransformer)
 

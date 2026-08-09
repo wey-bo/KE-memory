@@ -5,7 +5,7 @@ requires-python = ">=3.12,<3.13"
 dependencies = [
   "fastapi>=0.116,<1", "httpx>=0.28,<1", "numpy>=2.2,<3", "openai>=1.93,<2",
   "orjson>=3.10,<4", "pydantic>=2.11,<3", "python-dotenv>=1.1,<2",
-  "sentence-transformers>=5,<6", "tiktoken>=0.9,<1", "torch>=2.7,<3",
+  "tiktoken>=0.9,<1",
   "typer>=0.16,<1", "uvicorn>=0.35,<1",
 ]
 
@@ -22,6 +22,19 @@ dev = ["pyright>=1.1.403,<2", "pytest>=8.4,<9", "pytest-asyncio>=1,<2", "respx>=
 # kind of leak. Pinned rather than ranged so a conformance result names the
 # reader version that produced it.
 evaluation = ["duckdb==1.5.5"]
+# Local embedding only. The same rule as the evaluation group, applied to a much
+# larger leak: torch plus its nvidia and triton wheels install 4.5 GB, and no
+# module in src, service, ontology, tests or research imports torch at all. It was
+# named in [project.dependencies] anyway, so every install of this package pulled a
+# CUDA stack the production code never touches -- and a GitHub runner cannot fit it,
+# which is what failed the remote gate.
+#
+# sentence-transformers has exactly one use, a deferred import inside
+# embedding/qwen.py::_sentence_transformer_factory that already raises
+# EmbeddingInvariantError when the package is absent. So the optional group needs no
+# code change: without it, local embedding reports a clear domain error, and
+# test_local_embedding.py was already skipped unless KE_MEMORY_EMBEDDING_PATH is set.
+embedding = ["sentence-transformers>=5,<6", "torch>=2.7,<3"]
 
 [build-system]
 requires = ["hatchling>=1.27,<2"]
