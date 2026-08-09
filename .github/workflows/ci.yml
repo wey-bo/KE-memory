@@ -39,7 +39,23 @@ jobs:
       - name: Verify repository layout
         run: uv run python scripts/ci/verify_layout.py
       - name: Run tests
-        run: uv run pytest -q
+        # -rf and a short traceback so the failing test names itself in the step
+        # summary, which is public even though the full log is not. --no-header
+        # keeps the useful part near the end of the output.
+        run: uv run pytest -q -rf --no-header --tb=short
+        env:
+          # Point the corpus root at a directory that does not exist, so any test
+          # still reaching for this host's datasets skips loudly here rather than
+          # depending on what a runner happens to have.
+          KE_DATASETS_ROOT: ${{ github.workspace }}/.no-datasets
+      - name: Summarize a test failure
+        if: failure()
+        # The step above fails the job; this one makes the reason visible without
+        # log-download rights by re-running only what failed and echoing it into
+        # the run summary.
+        run: |
+          uv run pytest -q -rf --no-header --tb=line --last-failed \
+            | tail -40 >> "$GITHUB_STEP_SUMMARY" || true
       - name: Lint
         run: uv run ruff check src service ontology tests scripts
       - name: Type check
