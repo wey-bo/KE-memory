@@ -11,11 +11,18 @@ PACKAGE_ROOTS = (
     "src/ke_memory_demo",
     "service/ke_memory_service",
     "ontology/ke_memory_ontology",
+    "memory_assertion/memory_assertion_v1",
 )
 SERVICE_COMPATIBILITY_FACADES = {
     "src/ke_memory_demo/online/api.py",
     "src/ke_memory_demo/online/factory.py",
 }
+# The memory-assertion/v1 contract layer depends on pydantic and nothing else in this
+# repository. The direction is the point: the runtime is meant to migrate toward this
+# contract, and a contract that imported the runtime it constrains could not serve as
+# that target. So this is checked rather than merely intended.
+CONTRACT_ROOT = "memory_assertion"
+FORBIDDEN_CONTRACT_IMPORTS = ("ke_memory_demo", "ke_memory_service", "ke_memory_ontology")
 
 
 def main() -> int:
@@ -38,6 +45,13 @@ def main() -> int:
             imports = _imports(path)
             if any(_is_service_import(name) for name in imports):
                 failures.append(f"forbidden service dependency: {relative}")
+
+    for path in (ROOT / CONTRACT_ROOT).rglob("*.py"):
+        relative = path.relative_to(ROOT).as_posix()
+        for name in _imports(path):
+            root = name.split(".", 1)[0]
+            if root in FORBIDDEN_CONTRACT_IMPORTS:
+                failures.append(f"contract layer depends on the runtime: {relative} -> {name}")
 
     if failures:
         for failure in failures:

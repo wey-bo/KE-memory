@@ -63,7 +63,7 @@ jobs:
           uv run pytest -q -rf --no-header --tb=line --last-failed \
             | tail -40 >> "$GITHUB_STEP_SUMMARY" || true
       - name: Lint
-        run: uv run ruff check src service ontology tests scripts spec
+        run: uv run ruff check src service ontology memory_assertion tests scripts spec
       - name: Type check
         run: uv run pyright
       # The specification package is the authoritative memory-assertion/v1

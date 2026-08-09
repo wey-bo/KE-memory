@@ -45,20 +45,21 @@ packages = [
   "src/ke_memory_demo",
   "service/ke_memory_service",
   "ontology/ke_memory_ontology",
+  "memory_assertion/memory_assertion_v1",
 ]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 markers = ["live_embedding", "live_es", "live_model", "live_baseline", "live_evaluation"]
-pythonpath = ["src", "service", "ontology"]
+pythonpath = ["src", "service", "ontology", "memory_assertion"]
 # Also keeps the collector away from spec/memory-assertion-v1/tools/test_*.py:
 # those modules import themselves as `tools.*` and are driven by
 # scripts/ci/check-spec.sh, not from this repo root.
 testpaths = ["tests"]
 
 [tool.pyright]
-include = ["src", "service", "ontology", "tests"]
-extraPaths = ["src", "service", "ontology"]
+include = ["src", "service", "ontology", "memory_assertion", "tests"]
+extraPaths = ["src", "service", "ontology", "memory_assertion"]
 pythonVersion = "3.12"
 typeCheckingMode = "strict"
 

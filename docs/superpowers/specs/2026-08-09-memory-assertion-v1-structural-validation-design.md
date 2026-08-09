@@ -133,7 +133,26 @@ memory_assertion/memory_assertion_v1/
   `include` 与 `extraPaths` 加 `memory_assertion`，pytest `pythonpath` 同加。
 - `scripts/ci/verify_layout.py`：`PACKAGE_ROOTS` 加第四项，并把 `memory_assertion` 纳入
   反向依赖扫描。
-- `check.sh` / `check-portable.sh` / `ci.yml` 的 `ruff check` 参数加 `memory_assertion`。
+- `scripts/ci/verify_wheel.py`：`PACKAGE_NAMES` 加 `memory_assertion_v1`，使新包必须能从
+  wheel 导入。
+- `tests/architecture/test_package_boundaries.py`：**第二处硬编码的包列表**。它逐字断言
+  wheel packages 等于那个三元组，还独立维护自己的 `PACKAGE_ROOTS`。初稿只提到
+  `verify_layout.py`，遗漏了这里——实施时由远端门禁的 `1 failed` 发现。四处一并更新，并
+  把依赖方向断言同时做成测试：脚本守 CI，测试守开发者推送前的本机运行。
+
+三处包根清单（`pyproject`、`verify_layout.py`、`test_package_boundaries.py`）加
+`verify_wheel.py` 的包名清单，共四处必须同步。这个重复本身是既有设计，本轮不改动它。
+
+### 5. 断言的可伪证性
+
+依赖方向与结构禁止都要实测可伪证，不接受"通过即正确"：
+
+- 向 `memory_assertion/` 注入 `from ke_memory_demo... import ...`，确认 `verify_layout.py`
+  报错并 exit 1、`test_contract_layer_does_not_depend_on_the_runtime` 失败，再还原。
+- 三个专门 patch `/ke` 路径的向量中，确认 `invalid nested operator application argument`
+  与 `invalid null typed value` 被本层拒绝，而 `invalid self-referential candidate graph`
+  **构造成功**——环检测需要整张 candidate 表，是语义校验的输入。这个边界写成显式断言
+  （`test_semantically_invalid_cases_still_construct`），而不是留给"未被拒绝"去暗示。
 
 ## 验证方式
 

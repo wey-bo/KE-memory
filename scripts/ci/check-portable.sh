@@ -22,7 +22,7 @@ cd "$repo_root"
 uv sync --frozen
 uv run python scripts/ci/verify_layout.py
 uv run pytest -q
-uv run ruff check src service ontology tests scripts spec
+uv run ruff check src service ontology memory_assertion tests scripts spec
 uv run pyright
 # The memory-assertion/v1 contract. Needs node for its RFC 8785 vectors, which is
 # portable enough for any runner -- unlike KEOL, it is not a private dependency.
