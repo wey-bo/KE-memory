@@ -38,13 +38,17 @@ fixture 已有 13 个 Concept（含 `Entity`、`Proposition` 与全部 8 个 lit
 `literal_value_contract`）、4 个 Operator（`created_by`、`possible`、`event_time`、`believes`，
 签名与 `proposition_operation`/`function_semantics`/`positional_parameters` 齐全）。
 
-对照规范 `foundation-ontology-v1-build-plan.md:139-141` 的最小内容，缺口三类：
+**但 fixture 的内容构成不是 Core 的判据。** 其中 `created_by`、`Model`、`Organization`、
+`believes`、`Person` 依赖实体模型，属 Foundation；见第 2.1 节的边界。Core 从 fixture 沿用的
+只有 `Entity`、`Proposition` 与 8 个 literal concept 的语义定义，且**身份独立重新分配**。
+
+对照规范 `foundation-ontology-v1-build-plan.md:139-141` 的最小内容，Core 的缺口三类：
 
 | 类别 | 缺口 |
 | --- | --- |
 | Concept | `Event`、`State` |
 | Operator | `negated` |
-| Lexicalization | **13 个 Concept 中 11 个词面为 0**，仅 `Person`/`Organization` 各 1 条 |
+| Lexicalization | **fixture 13 个 Concept 中 11 个词面为 0**，仅 `Person`/`Organization` 各 1 条；Core 的 12 个需全部新写 |
 
 第三项是工作量主体。规范要求中英文一等词面加来源 attestation。
 
@@ -74,7 +78,13 @@ fixture 已有 13 个 Concept（含 `Entity`、`Proposition` 与全部 8 个 lit
 1. **决策源先于运行时分片。** Operator/Concept 的语义授权来自版本化决策记录，分片是其产物。
    `provenance_refs` 指向决策文件内的条目，不指向评审文档。
 2. **正式本体与 conformance fixture 分离。** `KECoreV1` 与 `MemoryAssertionExample` 是两套独立
-   身份、两份 seed registry。本轮不得改动 fixture，`validate_specifications.py` 的基线必须不变。
+   身份、两份 seed registry，**全部 ID 重新分配，不复用 fixture 的种子**。因此：
+   - 相同 `canonical_name` **不表示**相同 Canonical ID；
+   - 解析始终绑定精确 Snapshot（`snapshot_id + sha256`）；
+   - fixture 的统一示例表继续使用旧 ID，Core 文档使用新 ID；
+   - **不建立** fixture ID 到 Core ID 的 `exact` ExternalMapping——fixture 不是外部语义本体。
+
+   本轮不得改动 fixture，`validate_specifications.py` 的基线必须不变。
 3. **approved 条目失败即整体失败。** candidate 决策失败进 quarantine；approved 决策失败则
    Snapshot 构建失败。先建到临时目录，全部验证通过后原子替换——否则会发布一个静默缺项的
    KE Core。
@@ -146,22 +156,75 @@ OperatorDecision
 
 `status ∈ {approved, candidate}`：决定失败时的处理路径（见不变量 3）。
 
-### 2.1 本轮的 Core 内容
+### 2.1 Core 与 Foundation 的边界
 
-15 个 Concept：`Entity`、`Proposition`、`Event`、`State`、`Person`、`Organization`、`Model`，
-加 8 个 literal concept `Boolean`、`Text`、`Decimal`、`Date`、`DateTime`、`Duration`、`Money`、
-`Quantity`。其中 `Event`、`State` 是新增，其余 13 个的语义定义沿用 fixture 已有形态，但**身份
-独立重新分配**——`KECoreV1` 与 `MemoryAssertionExample` 不共用 ID。
+判据是**表达闭包**，不是"fixture 已有"。Core 只包含 KE Semantic Contract 表达自身所需的
+Concept 与 Operator；任何依赖实体模型的语义进入 Foundation。
 
-5 个 Operator：`negated`、`possible`、`event_time`、`believes`、`created_by`。`negated` 是新增，
-签名按 R1 裁决：
+```mermaid
+flowchart LR
+    C["Core<br/>通用表达闭包"]
+    F["Foundation<br/>通用现实语义"]
+    C --> F
 
-```text
-negated(Proposition) -> Boolean        proposition_operation = modifier
+    C --- C1["Entity / Proposition / Event / State<br/>8 个 Literal Concept"]
+    C --- C2["negated / possible / event_time"]
+    F --- F1["Person / Organization / Model"]
+    F --- F2["believes / created_by"]
 ```
 
-全部 20 个条目 `status=approved`，因此任一失败即整体失败。本轮不引入 candidate 条目——
-Core 的每一条都需要人工语义授权，没有"待定后补"的位置。
+**KE Core v1：12 个 Concept**
+
+```text
+Entity  Proposition  Event  State
+Boolean  Text  Decimal  Date  DateTime  Duration  Money  Quantity
+```
+
+**KE Core v1：3 个 Operator**
+
+```text
+negated(Proposition) -> Boolean       proposition_operation = modifier
+possible(Proposition) -> Boolean      proposition_operation = modifier
+event_time(Proposition, Date) -> Boolean
+```
+
+这三个的共同性质正是 Core 的判据：**参数只用 Core 自己的 Concept**（`Proposition`、`Date`），
+不需要任何实体类型；三者都输出 Boolean，都是 `partiality=total`。
+
+规范 `ontology-standard.md:299` 解释了 `event_time` 为何不写成 `event_time(Proposition)->Date`：
+后者并非对每个 Proposition 都有定义，会与 v1 对 `partial` Operator 的无条件拒绝冲突。
+
+**移入 Foundation**
+
+```text
+Person  Organization  Model
+believes(Person, Proposition) -> Boolean
+created_by(Model, Organization) -> Boolean
+```
+
+`created_by` 是普通实体关系，用于演示 Boolean predicate，不是 Semantic Contract 所必需；
+`Model`、`Organization` 主要为支撑该示例而存在。它们进入 Core 的唯一理由曾是"fixture 已有"，
+那不是 Core 的判据——fixture 是合同测试资产，其内容构成不能反向决定生产本体的边界。
+
+`believes` 的归属由规范的闭合规则决定。`ontology-standard.md:299` 的表格规定
+`proposition_operation=attitude` 需「恰好一个 Proposition 输入，且**至少一个非 Proposition
+主体/来源输入**」。规范因此定义了 `attitude` 的通用校验规则，但并不要求 Core 提供具体的
+`believes`；那个非 Proposition 主体必然是实体类型，也就必然属于 Foundation。
+
+**不为保留 `believes` 而新增宽泛的 `Agent`。** `semantic_kind` 是粗粒度分类而非 Concept 类型
+全集，枚举中没有 agent 不构成缺陷——`Agent` 若存在也只是 `semantic_kind=entity` 的普通
+Concept。日后若 `Person` 过窄，应在 Foundation 单独定义语义明确的 `EpistemicAgent` 或
+`BeliefHolder`；通用 `Agent` 容易混淆行动主体、认知主体、组织与模型。
+
+fixture 中的 `believes(Person, Proposition)` 可继续作为示例，但不能据此认定它是生产 Core 内容。
+
+**连带后果**：Core 内没有 Operator 引用 `Event`、`State`、`Text`、`Decimal`、`DateTime`、
+`Duration`、`Money`、`Quantity`——它们是给 Foundation 与领域层的类型基底。这不是缺陷（literal
+concept 本就是被引用而非引用者），但意味着 Core 的签名闭包验证只实际覆盖 `Proposition`、
+`Date`、`Boolean` 三个。
+
+全部 15 个条目 `status=approved`，因此任一失败即整体失败。本轮不引入 candidate——Core 的
+每一条都需要人工语义授权，没有"待定后补"的位置。
 
 ### 3. 种子按 `(kind, decision_id)` 复用
 
@@ -259,11 +322,19 @@ root hash 算法与 JCS 序列化直接复用 `spec/memory-assertion-v1/tools/` 
    时间等非确定字段。
 2. **四个 fail-closed 测试**，分别覆盖：删除整个 seed registry、删除单个种子、篡改种子、
    制造 ID 碰撞。每项都必须失败而非静默产出。
-3. **验证器六项全过**，输出计数基线。
-4. **`spec/` 的 `validate_specifications.py` 基线不变**（`required_files=23` 等）——证明 Core
+3. **quarantine 的三条路径**——空 quarantine 是正常且有效的生产结果，不为凑数据人为降级
+   任何真实条目：
+
+   | 情形 | 期望 |
+   | --- | --- |
+   | 合法构建 | `quarantine.entries == []` |
+   | 注入非法 candidate | 进入 quarantine，其余照常发布 |
+   | 注入非法 approved | 整体构建失败，不产生正式 Snapshot |
+
+4. **验证器六项全过**，输出计数基线。
+5. **`spec/` 的 `validate_specifications.py` 基线不变**（`required_files=23` 等）——证明 Core
    与 fixture 真正分离。
-5. 两个门禁全绿，pyright strict 0 错误，ruff 干净。
-6. approved 决策注入一处失败后，构建**整体失败**且正式分片未被替换。
+6. 两个门禁全绿，pyright strict 0 错误，ruff 干净。
 
 ## 明确不做
 
