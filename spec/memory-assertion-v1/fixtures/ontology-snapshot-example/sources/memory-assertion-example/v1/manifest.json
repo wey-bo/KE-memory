@@ -1,0 +1,32 @@
+{
+  "source_id": "memory-assertion-example/v1",
+  "source_kind": "core_ontology",
+  "version": "1.0.0",
+  "description": "Frozen human-authored input used to build the memory-assertion/v1 conformance fixture.",
+  "entities": {
+    "ontology": {"kind": "ontology", "canonical_name": "MemoryAssertionExample", "definition": "A closed example ontology for memory-assertion/v1 conformance tests."},
+    "entity": {"kind": "concept", "canonical_name": "Entity", "definition": "A thing that can be identified in the assertion environment."},
+    "person": {"kind": "concept", "canonical_name": "Person", "definition": "A human individual."},
+    "organization": {"kind": "concept", "canonical_name": "Organization", "definition": "A stable organization identity."},
+    "model": {"kind": "concept", "canonical_name": "Model", "definition": "A computational model identity."},
+    "boolean": {"kind": "concept", "canonical_name": "Boolean", "definition": "The canonical Boolean literal domain."},
+    "date": {"kind": "concept", "canonical_name": "Date", "definition": "An ISO 8601 full-date literal domain."},
+    "proposition": {"kind": "concept", "canonical_name": "Proposition", "definition": "The semantic type of a closed assertion reference."},
+    "quantity": {"kind": "concept", "canonical_name": "Quantity", "definition": "A canonical mass quantity expressed in kilograms for this conformance Snapshot."},
+    "decimal": {"kind": "concept", "canonical_name": "Decimal", "definition": "A canonical arbitrary-precision decimal string."},
+    "datetime": {"kind": "concept", "canonical_name": "DateTime", "definition": "A canonical UTC ISO 8601 date-time ending in Z."},
+    "duration": {"kind": "concept", "canonical_name": "Duration", "definition": "A canonical non-negative duration normalized to ISO 8601 seconds form."},
+    "money": {"kind": "concept", "canonical_name": "Money", "definition": "A canonical monetary amount governed by the embedded currency minor-unit table."},
+    "text": {"kind": "concept", "canonical_name": "Text", "definition": "A canonical NFC text literal."},
+    "created_by": {"kind": "operator", "canonical_name": "created_by", "definition": "Tests whether a model was created by an organization."},
+    "possible": {"kind": "operator", "canonical_name": "possible", "definition": "Tests whether the referenced proposition is presented as possible."},
+    "event_time": {"kind": "operator", "canonical_name": "event_time", "definition": "Tests whether the referenced proposition has the explicitly stated event date."},
+    "believes": {"kind": "operator", "canonical_name": "believes", "definition": "Tests whether a person is explicitly presented as believing a proposition."}
+  },
+  "lexicalizations": {
+    "person": {"owner_kind": "concept", "owner_canonical_name": "Person", "language": "en", "surface_form": "person"},
+    "organization": {"owner_kind": "concept", "owner_canonical_name": "Organization", "language": "en", "surface_form": "organization"},
+    "create_zh": {"owner_kind": "operator", "owner_canonical_name": "created_by", "language": "zh-CN", "surface_form": "创建"},
+    "create_en": {"owner_kind": "operator", "owner_canonical_name": "created_by", "language": "en", "surface_form": "create"}
+  }
+}

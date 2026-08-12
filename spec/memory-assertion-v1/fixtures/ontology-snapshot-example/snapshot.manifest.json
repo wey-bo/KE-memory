@@ -1,0 +1,43 @@
+{
+  "document_kind": "ontology_snapshot_manifest",
+  "ontology_schema_id": "https://genuineknowledge.com/specifications/ontology/v1/ontology.specification.json",
+  "semantic_contract_version": "memory-assertion/v1",
+  "profile": "memory-assertion/v1",
+  "snapshot_id": "memory-assertion-example-v1",
+  "sha256": "6163b7f30ed60650d3f4361d3a8368c3901619e92d25114bb4667339e1286787",
+  "source_manifest": [
+    {
+      "source_id": "memory-assertion-example/v1",
+      "source_kind": "core_ontology",
+      "version": "1.0.0",
+      "sha256": "8913911f3664c0a0061db575a401ad579534b58573808a2d998dd56038684dbd",
+      "provenance_refs": [
+        "sources/memory-assertion-example/v1/manifest.json"
+      ]
+    }
+  ],
+  "required_capabilities": [],
+  "artifacts": [
+    {
+      "artifact_kind": "concepts",
+      "path": "concepts/core.json",
+      "media_type": "application/json",
+      "sha256": "562c61c40518417771ed5a55a7db6482f2f91f32d5282184ee15afc042ba3c24",
+      "record_count": 13
+    },
+    {
+      "artifact_kind": "ontology",
+      "path": "ontology/ontology.json",
+      "media_type": "application/json",
+      "sha256": "189faf1b88c0d6abbf6a70cd8f7c7569089c119e7e9ec88d3dc34a841e9a3902",
+      "record_count": 1
+    },
+    {
+      "artifact_kind": "operators",
+      "path": "operators/core.json",
+      "media_type": "application/json",
+      "sha256": "dd098ca698095e32daa70b9d60911e68c0ba64e1e17e059a9f254c77277a33c3",
+      "record_count": 4
+    }
+  ]
+}

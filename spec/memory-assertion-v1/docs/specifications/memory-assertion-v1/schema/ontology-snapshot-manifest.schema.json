@@ -1,0 +1,226 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://genuineknowledge.com/specifications/memory-assertion/v1/ontology-snapshot-manifest.schema.json",
+  "title": "memory-assertion/v1 OntologySnapshot Manifest",
+  "description": "Validates the content-addressed manifest that references mutually exclusive Ontology Storage Specification v1 shards. Exact ontology-artifact cardinality, unique paths, record counts against shard contents, cross-shard closure, and hashes require provisioning semantic validation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "document_kind",
+    "ontology_schema_id",
+    "semantic_contract_version",
+    "profile",
+    "snapshot_id",
+    "sha256",
+    "source_manifest",
+    "required_capabilities",
+    "artifacts"
+  ],
+  "properties": {
+    "document_kind": {
+      "const": "ontology_snapshot_manifest"
+    },
+    "ontology_schema_id": {
+      "const": "https://genuineknowledge.com/specifications/ontology/v1/ontology.specification.json"
+    },
+    "semantic_contract_version": {
+      "const": "memory-assertion/v1"
+    },
+    "profile": {
+      "const": "memory-assertion/v1"
+    },
+    "snapshot_id": {
+      "$ref": "#/definitions/RuntimeId"
+    },
+    "sha256": {
+      "$ref": "#/definitions/Sha256"
+    },
+    "source_manifest": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/SourceManifestEntry"
+      }
+    },
+    "required_capabilities": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/CapabilityId"
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "minItems": 3,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/definitions/Artifact"
+      }
+    }
+  },
+  "allOf": [
+    {
+      "properties": {
+        "artifacts": {
+          "contains": {
+            "type": "object",
+            "required": ["artifact_kind"],
+            "properties": {
+              "artifact_kind": {
+                "const": "ontology"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "properties": {
+        "artifacts": {
+          "contains": {
+            "type": "object",
+            "required": ["artifact_kind"],
+            "properties": {
+              "artifact_kind": {
+                "const": "concepts"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "properties": {
+        "artifacts": {
+          "contains": {
+            "type": "object",
+            "required": ["artifact_kind"],
+            "properties": {
+              "artifact_kind": {
+                "const": "operators"
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "definitions": {
+    "RuntimeId": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:/-]{0,254}$"
+    },
+    "Sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "SemVer": {
+      "type": "string",
+      "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$"
+    },
+    "ArtifactRelativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!.*(?:^|/)\\.{1,2}(?:/|$))(?!.*[\\\\:#?%])(?!.*//)(?:[A-Za-z0-9_-]|[A-Za-z0-9_-][A-Za-z0-9._-]*[A-Za-z0-9_-])(?:/(?:[A-Za-z0-9_-]|[A-Za-z0-9_-][A-Za-z0-9._-]*[A-Za-z0-9_-]))*$"
+    },
+    "ProvenanceRef": {
+      "type": "string",
+      "format": "iri-reference",
+      "minLength": 1
+    },
+    "CapabilityId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]*/v[1-9][0-9]*$"
+    },
+    "SourceManifestEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_id",
+        "source_kind",
+        "version",
+        "sha256",
+        "provenance_refs"
+      ],
+      "properties": {
+        "source_id": {
+          "$ref": "#/definitions/RuntimeId"
+        },
+        "source_kind": {
+          "enum": [
+            "core_ontology",
+            "foundation_ontology",
+            "domain_ontology",
+            "source_artifact"
+          ]
+        },
+        "version": {
+          "$ref": "#/definitions/SemVer"
+        },
+        "sha256": {
+          "$ref": "#/definitions/Sha256"
+        },
+        "provenance_refs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/definitions/ProvenanceRef"
+          }
+        }
+      }
+    },
+    "Artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_kind",
+        "path",
+        "media_type",
+        "sha256",
+        "record_count"
+      ],
+      "properties": {
+        "artifact_kind": {
+          "enum": ["ontology", "concepts", "operators"]
+        },
+        "path": {
+          "$ref": "#/definitions/ArtifactRelativePath"
+        },
+        "media_type": {
+          "const": "application/json"
+        },
+        "sha256": {
+          "$ref": "#/definitions/Sha256"
+        },
+        "record_count": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9007199254740991
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "artifact_kind": {
+                "const": "ontology"
+              }
+            },
+            "required": ["artifact_kind"]
+          },
+          "then": {
+            "properties": {
+              "record_count": {
+                "const": 1
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

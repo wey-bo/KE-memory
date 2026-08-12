@@ -1,0 +1,188 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://genuineknowledge.com/specifications/ontology/v1/ontology.specification.json",
+  "title": "Ontology Storage Specification",
+  "description": "Defines ontology metadata files, concept fragment files, and operator fragment files.",
+  "oneOf": [
+    { "$ref": "#/definitions/OntologyDocument" },
+    { "$ref": "#/definitions/ConceptsDocument" },
+    { "$ref": "#/definitions/OperatorsDocument" }
+  ],
+  "definitions": {
+    "OntologyDocument": {
+      "type": "object",
+      "required": ["ontology"],
+      "additionalProperties": false,
+      "properties": {
+        "ontology": { "$ref": "#/definitions/Ontology" }
+      }
+    },
+    "ConceptsDocument": {
+      "type": "object",
+      "required": ["concepts"],
+      "additionalProperties": false,
+      "properties": {
+        "concepts": {
+          "type": "array",
+          "description": "A fragment containing one or more concepts.",
+          "minItems": 1,
+          "items": { "$ref": "#/definitions/Concept" }
+        }
+      }
+    },
+    "OperatorsDocument": {
+      "type": "object",
+      "required": ["operators"],
+      "additionalProperties": false,
+      "properties": {
+        "operators": {
+          "type": "array",
+          "description": "A fragment containing one or more operators.",
+          "minItems": 1,
+          "items": { "$ref": "#/definitions/Operator" }
+        }
+      }
+    },
+    "Ontology": {
+      "type": "object",
+      "required": [
+        "id",
+        "canonical_name",
+        "description",
+        "sources",
+        "created_at",
+        "version"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/definitions/OntologyId" },
+        "canonical_name": { "$ref": "#/definitions/CanonicalName" },
+        "description": { "$ref": "#/definitions/Description" },
+        "sources": { "$ref": "#/definitions/Sources" },
+        "created_at": { "$ref": "#/definitions/CreatedAt" },
+        "abstraction_method": { "$ref": "#/definitions/AbstractionMethod" },
+        "version": {
+          "type": "string",
+          "pattern": "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)(?:-((?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*)(?:\\.(?:0|[1-9][0-9]*|[0-9]*[A-Za-z-][0-9A-Za-z-]*))*))?(?:\\+([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?$",
+          "description": "Ontology version in Semantic Versioning format."
+        }
+      }
+    },
+    "Concept": {
+      "type": "object",
+      "required": [
+        "id",
+        "canonical_name",
+        "description",
+        "sources",
+        "created_at",
+        "parents"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/definitions/ConceptId" },
+        "canonical_name": { "$ref": "#/definitions/CanonicalName" },
+        "description": { "$ref": "#/definitions/Description" },
+        "sources": { "$ref": "#/definitions/Sources" },
+        "created_at": { "$ref": "#/definitions/CreatedAt" },
+        "abstraction_method": { "$ref": "#/definitions/AbstractionMethod" },
+        "parents": {
+          "type": "array",
+          "description": "IDs of the direct parent concepts. An empty array identifies a top-level concept.",
+          "items": { "$ref": "#/definitions/ConceptId" },
+          "uniqueItems": true
+        },
+        "supply": {
+          "type": "object",
+          "description": "Unrestricted extension data agreed upon with downstream consumers.",
+          "additionalProperties": true
+        }
+      }
+    },
+    "Operator": {
+      "type": "object",
+      "required": [
+        "id",
+        "canonical_name",
+        "input_concepts",
+        "output_concept",
+        "description",
+        "sources",
+        "created_at"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/definitions/OperatorId" },
+        "canonical_name": { "$ref": "#/definitions/CanonicalName" },
+        "input_concepts": {
+          "type": "array",
+          "description": "Ordered concept IDs accepted as input. The array may be empty.",
+          "items": { "$ref": "#/definitions/ConceptId" }
+        },
+        "output_concept": {
+          "$ref": "#/definitions/ConceptId"
+        },
+        "description": { "$ref": "#/definitions/Description" },
+        "sources": { "$ref": "#/definitions/Sources" },
+        "created_at": { "$ref": "#/definitions/CreatedAt" },
+        "abstraction_method": { "$ref": "#/definitions/AbstractionMethod" },
+        "supply": {
+          "type": "object",
+          "description": "Unrestricted extension data agreed upon with downstream consumers.",
+          "additionalProperties": true
+        }
+      }
+    },
+    "Sources": {
+      "type": "array",
+      "description": "Public paths to original resources stored under the shared resource root. A URI fragment may identify a section or paragraph.",
+      "items": { "$ref": "#/definitions/SourcePath" },
+      "uniqueItems": true,
+      "minItems": 1
+    },
+    "SourcePath": {
+      "type": "string",
+      "format": "iri-reference",
+      "minLength": 1,
+      "description": "A public IRI reference relative to the shared resource root, optionally followed by a fragment locator."
+    },
+    "OntologyId": {
+      "type": "string",
+      "pattern": "^ontology_[a-f0-9]{12}$",
+      "description": "Ontology identifier with an ontology_ prefix and a 12-character lowercase hexadecimal hash."
+    },
+    "ConceptId": {
+      "type": "string",
+      "pattern": "^concept_[a-f0-9]{12}$",
+      "description": "Concept identifier with a concept_ prefix and a 12-character lowercase hexadecimal hash."
+    },
+    "OperatorId": {
+      "type": "string",
+      "pattern": "^operator_[a-f0-9]{12}$",
+      "description": "Operator identifier with an operator_ prefix and a 12-character lowercase hexadecimal hash."
+    },
+    "CanonicalName": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S",
+      "description": "The unified canonical name."
+    },
+    "Description": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S",
+      "description": "The definition of the entity."
+    },
+    "AbstractionMethod": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S",
+      "description": "How the entity was produced, such as extraction or inference."
+    },
+    "CreatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Creation time in RFC 3339 date-time format."
+    }
+  }
+}

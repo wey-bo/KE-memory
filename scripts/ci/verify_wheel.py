@@ -12,6 +12,7 @@ PACKAGE_NAMES = (
     "ke_memory_demo",
     "ke_memory_service",
     "ke_memory_ontology",
+    "memory_assertion_v1",
 )
 
 

@@ -1,0 +1,582 @@
+{
+  "format_version": "memory-assertion-conformance-v1",
+  "notes": "Vectors derive from the authoritative conformance fixture. Operations use JSON Pointer paths and are applied in order.",
+  "profile_cases": [
+    {
+      "name": "valid ontology shard",
+      "fixture_path": "../../../../fixtures/ontology-snapshot-example/ontology/ontology.json",
+      "expected_valid": true,
+      "operations": []
+    },
+    {
+      "name": "valid Concept shard with human-authored attestations",
+      "fixture_path": "../../../../fixtures/ontology-snapshot-example/concepts/core.json",
+      "expected_valid": true,
+      "operations": []
+    },
+    {
+      "name": "valid total Operator shard with human-authored attestations",
+      "fixture_path": "../../../../fixtures/ontology-snapshot-example/operators/core.json",
+      "expected_valid": true,
+      "operations": []
+    },
+    {
+      "name": "valid proposition_operation none shape",
+      "fixture_path": "../../../../fixtures/ontology-snapshot-example/operators/core.json",
+      "expected_valid": true,
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/operators/0/supply/memory_assertion/proposition_operation",
+          "value": "none"
+        }
+      ]
+    },
+    {
+      "name": "valid proposition_operation modifier shape",
+      "fixture_path": "../../../../fixtures/ontology-snapshot-example/operators/core.json",
+      "expected_valid": true,
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/operators/0/input_concepts",
+          "value": ["concept_441bafa9e9ed"]
+        },
+        {
+          "op": "replace",
+          "path": "/operators/0/supply/memory_assertion/positional_parameters",
+          "value": [
+            {
+              "index": 0,
+              "name": "proposition",
+              "definition": "The proposition under modifier scope."
+            }
+          ]
+        },
+        {
+          "op": "replace",
+          "path": "/operators/0/supply/memory_assertion/proposition_operation",
+          "value": "modifier"
+        }
+      ]
+    },
+    {
+      "name": "valid proposition_operation attitude shape",
+      "fixture_path": "../../../../fixtures/ontology-snapshot-example/operators/core.json",
+      "expected_valid": true,
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/operators/0/input_concepts",
+          "value": ["concept_72c9781aa03b", "concept_441bafa9e9ed"]
+        },
+        {
+          "op": "replace",
+          "path": "/operators/0/supply/memory_assertion/positional_parameters",
+          "value": [
+            {
+              "index": 0,
+              "name": "person",
+              "definition": "The person holding the attitude."
+            },
+            {
+              "index": 1,
+              "name": "proposition",
+              "definition": "The proposition under attitude scope."
+            }
+          ]
+        },
+        {
+          "op": "replace",
+          "path": "/operators/0/supply/memory_assertion/proposition_operation",
+          "value": "attitude"
+        }
+      ]
+    },
+    {
+      "name": "valid proposition_operation relation shape",
+      "fixture_path": "../../../../fixtures/ontology-snapshot-example/operators/core.json",
+      "expected_valid": true,
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/operators/0/input_concepts",
+          "value": ["concept_58fa53e5ab6d", "concept_441bafa9e9ed"]
+        },
+        {
+          "op": "replace",
+          "path": "/operators/0/supply/memory_assertion/positional_parameters",
+          "value": [
+            {
+              "index": 0,
+              "name": "evidence",
+              "definition": "The evidence-bearing entity."
+            },
+            {
+              "index": 1,
+              "name": "proposition",
+              "definition": "The proposition supported by the evidence."
+            }
+          ]
+        },
+        {
+          "op": "replace",
+          "path": "/operators/0/supply/memory_assertion/proposition_operation",
+          "value": "relation"
+        }
+      ]
+    },
+    {
+      "name": "valid reserved partial Operator shape",
+      "fixture_path": "../../../../fixtures/ontology-snapshot-example/operators/core.json",
+      "expected_valid": true,
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/operators/0/supply/memory_assertion/function_semantics/partiality",
+          "value": "partial"
+        },
+        {
+          "op": "add",
+          "path": "/operators/0/supply/memory_assertion/definedness_contract",
+          "value": {
+            "contract_id": "ke-definedness/v1",
+            "required_input_indexes": [0, 1],
+            "failure_behavior": "reject_application"
+          }
+        }
+      ]
+    },
+    {
+      "name": "invalid partial Operator without definedness contract",
+      "fixture_path": "../../../../fixtures/ontology-snapshot-example/operators/core.json",
+      "expected_valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/operators/0/supply/memory_assertion/function_semantics/partiality",
+          "value": "partial"
+        }
+      ]
+    },
+    {
+      "name": "invalid total Operator with definedness contract",
+      "fixture_path": "../../../../fixtures/ontology-snapshot-example/operators/core.json",
+      "expected_valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": "/operators/0/supply/memory_assertion/definedness_contract",
+          "value": {
+            "contract_id": "ke-definedness/v1",
+            "required_input_indexes": [0, 1],
+            "failure_behavior": "reject_application"
+          }
+        }
+      ]
+    },
+    {
+      "name": "invalid legacy supply is_pure",
+      "fixture_path": "../../../../fixtures/ontology-snapshot-example/operators/core.json",
+      "expected_valid": false,
+      "operations": [
+        {"op": "add", "path": "/operators/0/supply/is_pure", "value": true}
+      ]
+    },
+    {
+      "name": "invalid legacy operator_form",
+      "fixture_path": "../../../../fixtures/ontology-snapshot-example/operators/core.json",
+      "expected_valid": false,
+      "operations": [
+        {"op": "add", "path": "/operators/0/supply/memory_assertion/operator_form", "value": "predicate"}
+      ]
+    },
+    {
+      "name": "invalid legacy mapping_relation",
+      "fixture_path": "../../../../fixtures/ontology-snapshot-example/concepts/core.json",
+      "expected_valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": "/concepts/1/supply/memory_assertion/lexicalizations/0/mapping_relation",
+          "value": "exact"
+        }
+      ]
+    },
+    {
+      "name": "invalid legacy extensional",
+      "fixture_path": "../../../../fixtures/ontology-snapshot-example/operators/core.json",
+      "expected_valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": "/operators/0/supply/memory_assertion/extensional",
+          "value": true
+        }
+      ]
+    },
+    {
+      "name": "invalid explicit_state purity",
+      "fixture_path": "../../../../fixtures/ontology-snapshot-example/operators/core.json",
+      "expected_valid": false,
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/operators/0/supply/memory_assertion/function_semantics/purity",
+          "value": "explicit_state"
+        },
+        {
+          "op": "add",
+          "path": "/operators/0/supply/memory_assertion/function_semantics/state_parameter_indexes",
+          "value": [0]
+        }
+      ]
+    },
+    {
+      "name": "invalid legacy state_parameter_indexes",
+      "fixture_path": "../../../../fixtures/ontology-snapshot-example/operators/core.json",
+      "expected_valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": "/operators/0/supply/memory_assertion/function_semantics/state_parameter_indexes",
+          "value": [0]
+        }
+      ]
+    },
+    {
+      "name": "invalid legacy roles",
+      "fixture_path": "../../../../fixtures/ontology-snapshot-example/operators/core.json",
+      "expected_valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": "/operators/0/supply/memory_assertion/roles",
+          "value": []
+        }
+      ]
+    },
+    {
+      "name": "invalid legacy qualifiers",
+      "fixture_path": "../../../../fixtures/ontology-snapshot-example/operators/core.json",
+      "expected_valid": false,
+      "operations": [
+        {
+          "op": "add",
+          "path": "/operators/0/supply/memory_assertion/qualifiers",
+          "value": []
+        }
+      ]
+    },
+    {
+      "name": "invalid second lexicalization authority in supply",
+      "fixture_path": "../../../../fixtures/ontology-snapshot-example/operators/core.json",
+      "expected_valid": false,
+      "operations": [
+        {"op": "add", "path": "/operators/0/supply/lexicalizations", "value": []}
+      ]
+    },
+    {
+      "name": "invalid WordNet attestation without sense_id",
+      "fixture_path": "../../../../fixtures/ontology-snapshot-example/concepts/core.json",
+      "expected_valid": false,
+      "operations": [
+        {"op": "replace", "path": "/concepts/1/supply/memory_assertion/lexicalizations/0/source_attestations/0/source_kind", "value": "wordnet"}
+      ]
+    },
+    {
+      "name": "invalid PropBank attestation without roleset_id",
+      "fixture_path": "../../../../fixtures/ontology-snapshot-example/operators/core.json",
+      "expected_valid": false,
+      "operations": [
+        {"op": "replace", "path": "/operators/0/supply/memory_assertion/lexicalizations/1/source_attestations/0/source_kind", "value": "propbank"}
+      ]
+    },
+    {
+      "name": "invalid human attestation with sense_id",
+      "fixture_path": "../../../../fixtures/ontology-snapshot-example/operators/core.json",
+      "expected_valid": false,
+      "operations": [
+        {"op": "add", "path": "/operators/0/supply/memory_assertion/lexicalizations/0/source_attestations/0/sense_id", "value": "invented-sense"}
+      ]
+    },
+    {
+      "name": "invalid Operator canonical symbol",
+      "fixture_path": "../../../../fixtures/ontology-snapshot-example/operators/core.json",
+      "expected_valid": false,
+      "operations": [
+        {"op": "replace", "path": "/operators/0/canonical_name", "value": "CreatedBy"}
+      ]
+    }
+  ],
+  "manifest_cases": [
+    {
+      "name": "valid content-addressed manifest",
+      "fixture_path": "../../../../fixtures/ontology-snapshot-example/snapshot.manifest.json",
+      "expected_valid": true,
+      "operations": []
+    },
+    {
+      "name": "invalid manifest without source digest",
+      "fixture_path": "../../../../fixtures/ontology-snapshot-example/snapshot.manifest.json",
+      "expected_valid": false,
+      "operations": [
+        {"op": "remove", "path": "/source_manifest/0/sha256"}
+      ]
+    },
+    {
+      "name": "invalid manifest with traversal path",
+      "fixture_path": "../../../../fixtures/ontology-snapshot-example/snapshot.manifest.json",
+      "expected_valid": false,
+      "operations": [
+        {"op": "replace", "path": "/artifacts/0/path", "value": "../concepts.json"}
+      ]
+    },
+    {
+      "name": "invalid manifest with inline concepts",
+      "fixture_path": "../../../../fixtures/ontology-snapshot-example/snapshot.manifest.json",
+      "expected_valid": false,
+      "operations": [
+        {"op": "add", "path": "/concepts", "value": []}
+      ]
+    }
+  ],
+  "snapshot_cases": [
+    {
+      "name": "valid relation with mixed Entity and Proposition signature",
+      "expected_valid": true,
+      "artifact_operations": [
+        {
+          "artifact_path": "operators/core.json",
+          "operations": [
+            {
+              "op": "replace",
+              "path": "/operators/3/supply/memory_assertion/proposition_operation",
+              "value": "relation"
+            }
+          ]
+        }
+      ],
+      "manifest_operations": [],
+      "definedness_registry_entries": []
+    },
+    {
+      "name": "invalid partial Operator without required capability",
+      "expected_valid": false,
+      "artifact_operations": [
+        {
+          "artifact_path": "operators/core.json",
+          "operations": [
+            {
+              "op": "replace",
+              "path": "/operators/0/supply/memory_assertion/function_semantics/partiality",
+              "value": "partial"
+            },
+            {
+              "op": "add",
+              "path": "/operators/0/supply/memory_assertion/definedness_contract",
+              "value": {
+                "contract_id": "ke-definedness/v1",
+                "required_input_indexes": [0, 1],
+                "failure_behavior": "reject_application"
+              }
+            }
+          ]
+        }
+      ],
+      "manifest_operations": [],
+      "definedness_registry_entries": [
+        {
+          "contract_id": "ke-definedness/v1",
+          "operator_id": "operator_fe9dd6d99ebf"
+        }
+      ]
+    },
+    {
+      "name": "invalid partial Operator without exact registry predicate",
+      "expected_valid": false,
+      "artifact_operations": [
+        {
+          "artifact_path": "operators/core.json",
+          "operations": [
+            {
+              "op": "replace",
+              "path": "/operators/0/supply/memory_assertion/function_semantics/partiality",
+              "value": "partial"
+            },
+            {
+              "op": "add",
+              "path": "/operators/0/supply/memory_assertion/definedness_contract",
+              "value": {
+                "contract_id": "ke-definedness/v1",
+                "required_input_indexes": [0, 1],
+                "failure_behavior": "reject_application"
+              }
+            }
+          ]
+        }
+      ],
+      "manifest_operations": [
+        {
+          "op": "add",
+          "path": "/required_capabilities/-",
+          "value": "ke-definedness/v1"
+        }
+      ],
+      "definedness_registry_entries": [
+        {
+          "contract_id": "ke-definedness/v1",
+          "operator_id": "operator_7e2261ee9c51"
+        }
+      ]
+    },
+    {
+      "name": "invalid partial Operator even with capability and exact registry predicate",
+      "expected_valid": false,
+      "artifact_operations": [
+        {
+          "artifact_path": "operators/core.json",
+          "operations": [
+            {
+              "op": "replace",
+              "path": "/operators/0/supply/memory_assertion/function_semantics/partiality",
+              "value": "partial"
+            },
+            {
+              "op": "add",
+              "path": "/operators/0/supply/memory_assertion/definedness_contract",
+              "value": {
+                "contract_id": "ke-definedness/v1",
+                "required_input_indexes": [0, 1],
+                "failure_behavior": "reject_application"
+              }
+            }
+          ]
+        }
+      ],
+      "manifest_operations": [
+        {
+          "op": "add",
+          "path": "/required_capabilities/-",
+          "value": "ke-definedness/v1"
+        }
+      ],
+      "definedness_registry_entries": [
+        {
+          "contract_id": "ke-definedness/v1",
+          "operator_id": "operator_fe9dd6d99ebf"
+        }
+      ]
+    },
+    {
+      "name": "invalid self-disjoint Concept",
+      "expected_valid": false,
+      "artifact_operations": [
+        {
+          "artifact_path": "concepts/core.json",
+          "operations": [
+            {
+              "op": "add",
+              "path": "/concepts/0/supply/memory_assertion/disjoint_with",
+              "value": ["concept_58fa53e5ab6d"]
+            }
+          ]
+        }
+      ],
+      "manifest_operations": [],
+      "definedness_registry_entries": []
+    },
+    {
+      "name": "invalid disjoint Concept ancestor pair",
+      "expected_valid": false,
+      "artifact_operations": [
+        {
+          "artifact_path": "concepts/core.json",
+          "operations": [
+            {
+              "op": "add",
+              "path": "/concepts/0/supply/memory_assertion/disjoint_with",
+              "value": ["concept_72c9781aa03b"]
+            },
+            {
+              "op": "add",
+              "path": "/concepts/1/supply/memory_assertion/disjoint_with",
+              "value": ["concept_58fa53e5ab6d"]
+            }
+          ]
+        }
+      ],
+      "manifest_operations": [],
+      "definedness_registry_entries": []
+    },
+    {
+      "name": "invalid modifier outputting Proposition",
+      "expected_valid": false,
+      "artifact_operations": [
+        {
+          "artifact_path": "operators/core.json",
+          "operations": [
+            {
+              "op": "replace",
+              "path": "/operators/1/output_concept",
+              "value": "concept_441bafa9e9ed"
+            }
+          ]
+        }
+      ],
+      "manifest_operations": [],
+      "definedness_registry_entries": []
+    },
+    {
+      "name": "invalid duplicate positional parameter name",
+      "expected_valid": false,
+      "artifact_operations": [
+        {
+          "artifact_path": "operators/core.json",
+          "operations": [
+            {
+              "op": "replace",
+              "path": "/operators/0/supply/memory_assertion/positional_parameters/1/name",
+              "value": "model"
+            }
+          ]
+        }
+      ],
+      "manifest_operations": [],
+      "definedness_registry_entries": []
+    }
+  ],
+  "jcs_cases": [
+    {
+      "name": "ECMAScript number serialization",
+      "value": {
+        "one": 1.0,
+        "negative_zero": -0.0,
+        "tiny": 1e-7,
+        "large": 1e20
+      },
+      "expected_canonical_text": "{\"large\":100000000000000000000,\"negative_zero\":0,\"one\":1,\"tiny\":1e-7}",
+      "expected_sha256": "0371b25e0cd46044aec6f6f7753c0113375d28e500fae6284a59976f704c3f90"
+    },
+    {
+      "name": "UTF-16 object key ordering",
+      "value": {
+        "\ue000": "bmp",
+        "\ud800\udc00": "supplementary",
+        "a": "ascii"
+      },
+      "expected_canonical_text": "{\"a\":\"ascii\",\"\ud800\udc00\":\"supplementary\",\"\ue000\":\"bmp\"}",
+      "expected_sha256": "bb91dd129735878b55f54510de66db85f3fa2017aa6ef4b234e2a1587414d631"
+    }
+  ],
+  "jcs_error_cases": [
+    {
+      "name": "NFC object key collision",
+      "value": {
+        "\u00e9": "precomposed",
+        "e\u0301": "decomposed"
+      },
+      "expected_error": "NFC object key collision"
+    }
+  ]
+}

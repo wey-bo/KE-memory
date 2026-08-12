@@ -1,0 +1,1663 @@
+{
+  "format_version": "memory-assertion-examples/v1",
+  "schema_id": "https://genuineknowledge.com/specifications/memory-assertion/v1/memory-assertion-v1.schema.json",
+  "notes": "Each derived case applies its ordered JSON Pointer operations to a deep copy of the named concrete case. Draft-07 checks structure; the shipped semantic validator additionally checks exchange hashes, request/response pairing, evidence replay, ontology typing, scoped identity, and candidate graph closure.",
+  "exchange_hash_vectors": {
+    "credential_ref_fingerprint": {
+      "algorithm": "HMAC-SHA-256",
+      "test_only_key_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+      "credential_ref_utf8": "secret://tenant/nl2ke",
+      "expected_hex": "97f9fe1fe0c76702674409e768dd69316d4299fb8db82f0971ab72eee615ce88"
+    },
+    "prompt_artifact": {
+      "algorithm": "SHA-256",
+      "raw_utf8": "memory-assertion/v1 prompt template",
+      "expected_hex": "b7fdb502fb17e14ce5bdc4aa431d4a263fa281d92be974fd336a9209daf8548a"
+    }
+  },
+  "canonical_text_examples": [
+    {
+      "name": "created_by equality",
+      "expected_valid": true,
+      "canonical_text": "created_by(Model__gpt_4,Organization__openai)=Boolean::true",
+      "authoritative_json": {
+        "lhs": {
+          "kind": "operator_application",
+          "operator_id": "operator_fe9dd6d99ebf",
+          "arguments": [
+            {
+              "kind": "individual_ref",
+              "scope": "canonical",
+              "individual_id": "model-gpt-4"
+            },
+            {
+              "kind": "individual_ref",
+              "scope": "canonical",
+              "individual_id": "openai"
+            }
+          ]
+        },
+        "rhs": {
+          "kind": "typed_value",
+          "concept_id": "concept_b39c9a889cc6",
+          "canonical_value": true
+        }
+      }
+    },
+    {
+      "name": "possible proposition",
+      "expected_valid": true,
+      "canonical_text": "possible(Assertion::candidate::\"created-by-1\")=Boolean::true",
+      "authoritative_json": {
+        "lhs": {
+          "kind": "operator_application",
+          "operator_id": "operator_7e2261ee9c51",
+          "arguments": [
+            {
+              "kind": "assertion_ref",
+              "scope": "candidate",
+              "assertion_id": "created-by-1"
+            }
+          ]
+        },
+        "rhs": {
+          "kind": "typed_value",
+          "concept_id": "concept_b39c9a889cc6",
+          "canonical_value": true
+        }
+      }
+    },
+    {
+      "name": "event time proposition",
+      "expected_valid": true,
+      "canonical_text": "event_time(Assertion::candidate::\"created-by-1\",Date::\"2026-08-09\")=Boolean::true",
+      "authoritative_json": {
+        "lhs": {
+          "kind": "operator_application",
+          "operator_id": "operator_61921190c148",
+          "arguments": [
+            {
+              "kind": "assertion_ref",
+              "scope": "candidate",
+              "assertion_id": "created-by-1"
+            },
+            {
+              "kind": "typed_value",
+              "concept_id": "concept_9bdb3283cc8f",
+              "canonical_value": "2026-08-09"
+            }
+          ]
+        },
+        "rhs": {
+          "kind": "typed_value",
+          "concept_id": "concept_b39c9a889cc6",
+          "canonical_value": true
+        }
+      }
+    },
+    {
+      "name": "belief proposition",
+      "expected_valid": true,
+      "canonical_text": "believes(Person__alice,Assertion::candidate::\"created-by-1\")=Boolean::true",
+      "authoritative_json": {
+        "lhs": {
+          "kind": "operator_application",
+          "operator_id": "operator_0e0ca38b526f",
+          "arguments": [
+            {
+              "kind": "individual_ref",
+              "scope": "canonical",
+              "individual_id": "alice"
+            },
+            {
+              "kind": "assertion_ref",
+              "scope": "candidate",
+              "assertion_id": "created-by-1"
+            }
+          ]
+        },
+        "rhs": {
+          "kind": "typed_value",
+          "concept_id": "concept_b39c9a889cc6",
+          "canonical_value": true
+        }
+      }
+    }
+  ],
+  "leaf_term_examples": [
+    {
+      "name": "individual reference",
+      "expected_valid": true,
+      "term": {
+        "kind": "individual_ref",
+        "scope": "local",
+        "individual_id": "hypothesis-1/alice"
+      }
+    },
+    {
+      "name": "boolean typed value",
+      "expected_valid": true,
+      "term": {
+        "kind": "typed_value",
+        "concept_id": "concept_b39c9a889cc6",
+        "canonical_value": true
+      }
+    },
+    {
+      "name": "quantity typed value",
+      "expected_valid": true,
+      "term": {
+        "kind": "typed_value",
+        "concept_id": "concept_b809c63d2ee0",
+        "canonical_value": {
+          "value": "3",
+          "unit": "kg"
+        }
+      }
+    },
+    {
+      "name": "candidate assertion reference",
+      "expected_valid": true,
+      "term": {
+        "kind": "assertion_ref",
+        "scope": "candidate",
+        "assertion_id": "created-by-1"
+      }
+    },
+    {
+      "name": "ontology concept reference",
+      "expected_valid": true,
+      "term": {
+        "kind": "ontology_concept_ref",
+        "concept_id": "concept_fd8836ad6c9c"
+      }
+    },
+    {
+      "name": "ontology operator reference",
+      "expected_valid": true,
+      "term": {
+        "kind": "ontology_operator_ref",
+        "operator_id": "operator_fe9dd6d99ebf"
+      }
+    },
+    {
+      "name": "invalid bare leaf string",
+      "expected_valid": false,
+      "term": "true"
+    },
+    {
+      "name": "invalid nested operator application leaf",
+      "expected_valid": false,
+      "term": {
+        "kind": "operator_application",
+        "operator_id": "operator_fe9dd6d99ebf",
+        "arguments": []
+      }
+    },
+    {
+      "name": "invalid null typed value",
+      "expected_valid": false,
+      "term": {
+        "kind": "typed_value",
+        "concept_id": "concept_b39c9a889cc6",
+        "canonical_value": null
+      }
+    },
+    {
+      "name": "invalid quantity amount field",
+      "expected_valid": false,
+      "term": {
+        "kind": "typed_value",
+        "concept_id": "concept_b809c63d2ee0",
+        "canonical_value": {
+          "amount": "3",
+          "unit": "kg"
+        }
+      }
+    },
+    {
+      "name": "invalid unresolved leaf placeholder",
+      "expected_valid": false,
+      "term": {
+        "kind": "value_ref",
+        "value": "unknown"
+      }
+    }
+  ],
+  "diagnostic_examples": [
+    {
+      "name": "missing concept",
+      "definition": "OntologyGapDiagnostic",
+      "expected_valid": true,
+      "diagnostic": {
+        "code": "missing_concept",
+        "payload": {
+          "evidence_id": "ev-1",
+          "surface_form": "release"
+        }
+      }
+    },
+    {
+      "name": "missing operator",
+      "definition": "OntologyGapDiagnostic",
+      "expected_valid": true,
+      "diagnostic": {
+        "code": "missing_operator",
+        "payload": {
+          "evidence_id": "ev-1",
+          "surface_form": "created by"
+        }
+      }
+    },
+    {
+      "name": "incompatible input type",
+      "definition": "OntologyGapDiagnostic",
+      "expected_valid": true,
+      "diagnostic": {
+        "code": "incompatible_type",
+        "payload": {
+          "evidence_id": "ev-1",
+          "operator_id": "operator_fe9dd6d99ebf",
+          "location": {
+            "side": "input",
+            "input_index": 0
+          },
+          "expected_concept_ids": ["concept_fd8836ad6c9c"],
+          "actual_concept_ids": ["concept_72c9781aa03b"]
+        }
+      }
+    },
+    {
+      "name": "incompatible output type",
+      "definition": "OntologyGapDiagnostic",
+      "expected_valid": true,
+      "diagnostic": {
+        "code": "incompatible_type",
+        "payload": {
+          "evidence_id": "ev-1",
+          "operator_id": "operator_61921190c148",
+          "location": {
+            "side": "output"
+          },
+          "expected_concept_ids": ["concept_b39c9a889cc6"],
+          "actual_concept_ids": ["concept_9bdb3283cc8f"]
+        }
+      }
+    },
+    {
+      "name": "unsupported literal codec",
+      "definition": "OntologyGapDiagnostic",
+      "expected_valid": true,
+      "diagnostic": {
+        "code": "unsupported_literal_codec",
+        "payload": {
+          "evidence_id": "ev-1",
+          "concept_id": "concept_9bdb3283cc8f",
+          "required_codec_id": "ke-literal:date/v1"
+        }
+      }
+    },
+    {
+      "name": "unrepresentable span",
+      "definition": "OntologyGapDiagnostic",
+      "expected_valid": true,
+      "diagnostic": {
+        "code": "unrepresentable_span",
+        "payload": {
+          "evidence_id": "ev-1"
+        }
+      }
+    },
+    {
+      "name": "unsupported conditional construct",
+      "definition": "CapabilityGapDiagnostic",
+      "expected_valid": true,
+      "diagnostic": {
+        "code": "unsupported_construct",
+        "payload": {
+          "evidence_id": "ev-1",
+          "construct": "conditional"
+        }
+      }
+    },
+    {
+      "name": "ambiguous lexical target",
+      "definition": "UnresolvedDiagnostic",
+      "expected_valid": true,
+      "diagnostic": {
+        "code": "ambiguous_lexical_mapping",
+        "payload": {
+          "evidence_id": "ev-1",
+          "candidate_targets": [
+            {
+              "target_kind": "concept",
+              "target_id": "concept_fd8836ad6c9c"
+            },
+            {
+              "target_kind": "operator",
+              "target_id": "operator_fe9dd6d99ebf"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "unresolved individual",
+      "definition": "UnresolvedDiagnostic",
+      "expected_valid": true,
+      "diagnostic": {
+        "code": "unresolved_individual",
+        "payload": {
+          "evidence_id": "ev-1",
+          "mention": "the other model"
+        }
+      }
+    },
+    {
+      "name": "unresolved assertion scope",
+      "definition": "UnresolvedDiagnostic",
+      "expected_valid": true,
+      "diagnostic": {
+        "code": "unresolved_assertion_scope",
+        "payload": {
+          "evidence_id": "ev-1",
+          "scope_options": ["candidate", "canonical"]
+        }
+      }
+    },
+    {
+      "name": "unresolved time",
+      "definition": "UnresolvedDiagnostic",
+      "expected_valid": true,
+      "diagnostic": {
+        "code": "unresolved_time",
+        "payload": {
+          "evidence_id": "ev-1",
+          "expression": "next Friday",
+          "required_anchor_kinds": ["calendar_date", "timezone"]
+        }
+      }
+    },
+    {
+      "name": "unresolved value",
+      "definition": "UnresolvedDiagnostic",
+      "expected_valid": true,
+      "diagnostic": {
+        "code": "unresolved_value",
+        "payload": {
+          "evidence_id": "ev-1",
+          "expression": "a few",
+          "expected_concept_ids": ["concept_b809c63d2ee0"]
+        }
+      }
+    },
+    {
+      "name": "insufficient context",
+      "definition": "UnresolvedDiagnostic",
+      "expected_valid": true,
+      "diagnostic": {
+        "code": "insufficient_context",
+        "payload": {
+          "evidence_id": "ev-1",
+          "required_context_kinds": ["canonical_binding"]
+        }
+      }
+    },
+    {
+      "name": "normalization warning",
+      "definition": "WarningDiagnostic",
+      "expected_valid": true,
+      "diagnostic": {
+        "code": "normalization_applied",
+        "payload": {
+          "evidence_id": "ev-1",
+          "rule_id": "nfc-v1"
+        }
+      }
+    },
+    {
+      "name": "model repair warning",
+      "definition": "WarningDiagnostic",
+      "expected_valid": true,
+      "diagnostic": {
+        "code": "model_output_repaired",
+        "payload": {
+          "repair_kind": "json_syntax"
+        }
+      }
+    },
+    {
+      "name": "abstention no compilable KE",
+      "definition": "AbstentionReason",
+      "expected_valid": true,
+      "diagnostic": {
+        "code": "no_compilable_ke",
+        "payload": {
+          "cause": "ontology_gap"
+        }
+      }
+    },
+    {
+      "name": "abstention no compilable KE from capability gap",
+      "definition": "AbstentionReason",
+      "expected_valid": true,
+      "diagnostic": {
+        "code": "no_compilable_ke",
+        "payload": {
+          "cause": "capability_gap"
+        }
+      }
+    },
+    {
+      "name": "abstention insufficient context",
+      "definition": "AbstentionReason",
+      "expected_valid": true,
+      "diagnostic": {
+        "code": "insufficient_context",
+        "payload": {
+          "evidence_id": "ev-1",
+          "required_context_kinds": ["time_anchor"]
+        }
+      }
+    },
+    {
+      "name": "abstention source not interpretable",
+      "definition": "AbstentionReason",
+      "expected_valid": true,
+      "diagnostic": {
+        "code": "source_not_interpretable",
+        "payload": {
+          "focus_message_ids": ["message-1"]
+        }
+      }
+    },
+    {
+      "name": "abstention budget exhausted",
+      "definition": "AbstentionReason",
+      "expected_valid": true,
+      "diagnostic": {
+        "code": "budget_exhausted",
+        "payload": {
+          "budget_dimension": "model_calls"
+        }
+      }
+    },
+    {
+      "name": "invalid incompatible type missing location",
+      "definition": "OntologyGapDiagnostic",
+      "expected_valid": false,
+      "diagnostic": {
+        "code": "incompatible_type",
+        "payload": {
+          "evidence_id": "ev-1",
+          "operator_id": "operator_fe9dd6d99ebf",
+          "expected_concept_ids": ["concept_fd8836ad6c9c"],
+          "actual_concept_ids": ["concept_72c9781aa03b"]
+        }
+      }
+    },
+    {
+      "name": "invalid lexical target legacy fields",
+      "definition": "UnresolvedDiagnostic",
+      "expected_valid": false,
+      "diagnostic": {
+        "code": "ambiguous_lexical_mapping",
+        "payload": {
+          "evidence_id": "ev-1",
+          "candidate_targets": [
+            {
+              "target_kind": "concept",
+              "concept_id": "concept_fd8836ad6c9c"
+            },
+            {
+              "target_kind": "operator",
+              "operator_id": "operator_fe9dd6d99ebf"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "invalid unresolved time generic payload",
+      "definition": "UnresolvedDiagnostic",
+      "expected_valid": false,
+      "diagnostic": {
+        "code": "unresolved_time",
+        "payload": {
+          "evidence_id": "ev-1",
+          "surface_form": "tomorrow"
+        }
+      }
+    },
+    {
+      "name": "invalid warning unknown repair kind",
+      "definition": "WarningDiagnostic",
+      "expected_valid": false,
+      "diagnostic": {
+        "code": "model_output_repaired",
+        "payload": {
+          "repair_kind": "enum_value"
+        }
+      }
+    },
+    {
+      "name": "invalid abstention legacy top-level cause",
+      "definition": "AbstentionReason",
+      "expected_valid": false,
+      "diagnostic": {
+        "code": "no_compilable_ke",
+        "cause": "ontology_gap"
+      }
+    },
+    {
+      "name": "invalid abstention unapproved other cause",
+      "definition": "AbstentionReason",
+      "expected_valid": false,
+      "diagnostic": {
+        "code": "no_compilable_ke",
+        "payload": {
+          "cause": "other"
+        }
+      }
+    }
+  ],
+  "cases": [
+    {
+      "name": "valid NL2KE request with exact snapshot reference",
+      "expected_valid": true,
+      "document": {
+        "document_kind": "nl2ke_request",
+        "protocol_version": "nl-to-ke/v1",
+        "request_id": "request-1",
+        "semantic_contract_version": "memory-assertion/v1",
+        "ontology_snapshot_ref": {
+          "snapshot_id": "memory-assertion-example-v1",
+          "sha256": "6163b7f30ed60650d3f4361d3a8368c3901619e92d25114bb4667339e1286787"
+        },
+        "source": {
+          "messages": [
+            {
+              "message_id": "message-1",
+              "message_revision_id": "message-1/rev-1",
+              "role": "user",
+              "content": "OpenAI created GPT-4.",
+              "content_sha256": "9990df125457edfdcb6e60d517645c41a6a56ddd59ba7b7f2a1af491cba81057",
+              "source_order": 0,
+              "language": "en",
+              "recorded_at": "2026-08-08T00:00:00Z"
+            }
+          ],
+          "focus_message_ids": ["message-1"]
+        },
+        "context": {
+          "items": [
+            {
+              "context_id": "context-1",
+              "context_kind": "summary",
+              "content": "GPT-4 is a model.",
+              "content_sha256": "87f811aa97ef3212b060201570e8781b4c2467c61d2bdcc83ac81511a189d5a8",
+              "provenance_refs": ["memory://summaries/context-1/rev-1"],
+              "support_policy": "resolution_only"
+            }
+          ]
+        },
+        "closed_hypothesis_bundle": {
+          "canonical_bindings": [
+            {
+              "individual_id": "model-gpt-4",
+              "local_symbol": "gpt_4",
+              "naming_concept_id": "concept_fd8836ad6c9c",
+              "concept_ids": ["concept_fd8836ad6c9c"],
+              "binding_revision": "binding-model-gpt-4/rev-1",
+              "binding_sha256": "69937b0a0aa0971d20c43296c12ccdd7326829c03364cbf2b4d848b48359d9ae",
+              "surface_forms": ["GPT-4"],
+              "provenance_refs": ["message-1/rev-1"]
+            },
+            {
+              "individual_id": "openai",
+              "local_symbol": "openai",
+              "naming_concept_id": "concept_32ad50552813",
+              "concept_ids": ["concept_32ad50552813"],
+              "binding_revision": "binding-openai/rev-1",
+              "binding_sha256": "953488c1d1cca6a39ff4c3dd1b028825a8ca21ca2bb17a3130467bf4259ece0c",
+              "surface_forms": ["OpenAI"],
+              "provenance_refs": ["message-1/rev-1"]
+            }
+          ],
+          "canonical_assertions": [
+            {
+              "assertion_id": "claim-existing-created-by",
+              "ke": {
+                "lhs": {
+                  "kind": "operator_application",
+                  "operator_id": "operator_fe9dd6d99ebf",
+                  "arguments": [
+                    {
+                      "kind": "individual_ref",
+                      "scope": "canonical",
+                      "individual_id": "model-gpt-4"
+                    },
+                    {
+                      "kind": "individual_ref",
+                      "scope": "canonical",
+                      "individual_id": "openai"
+                    }
+                  ]
+                },
+                "rhs": {
+                  "kind": "typed_value",
+                  "concept_id": "concept_b39c9a889cc6",
+                  "canonical_value": true
+                }
+              },
+              "assertion_revision": "claim-existing-created-by/rev-1",
+              "assertion_sha256": "8c90a2e309b172a6fd21af1324159df65efc906ff1f1b0085d2b3cd050594a1d",
+              "provenance_refs": ["memory://claims/claim-existing-created-by/rev-1"]
+            }
+          ],
+          "local_declarations": []
+        },
+        "execution": {
+          "model": {
+            "provider": "openai-compatible-provider",
+            "model_id": "model-id",
+            "route_id": null
+          },
+          "credential": {
+            "mode": "caller_managed",
+            "credential_ref": "secret://tenant/nl2ke",
+              "credential_ref_fingerprint": "97f9fe1fe0c76702674409e768dd69316d4299fb8db82f0971ab72eee615ce88"
+          },
+          "budget": {
+            "max_model_calls": 2,
+            "max_input_tokens": 120000,
+            "max_output_tokens": 16000,
+            "deadline_ms": 60000
+          },
+          "strategy": {
+            "strategy_id": "nl2ke-standard",
+            "strategy_version": "1"
+          }
+        }
+      }
+    },
+    {
+      "name": "valid NL2KE request for abstention example",
+      "expected_valid": true,
+      "derive_from": "valid NL2KE request with exact snapshot reference",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/request_id",
+          "value": "request-2"
+        },
+        {
+          "op": "replace",
+          "path": "/source/messages/0/message_id",
+          "value": "message-2"
+        },
+        {
+          "op": "replace",
+          "path": "/source/messages/0/message_revision_id",
+          "value": "message-2/rev-1"
+        },
+        {
+          "op": "replace",
+          "path": "/source/messages/0/content",
+          "value": "Use two-person approval."
+        },
+        {
+          "op": "replace",
+          "path": "/source/messages/0/content_sha256",
+          "value": "db48b128c32ac54ba75c6f4d54e7f20cd6615e23e1303b0f4891bd62ec6ba574"
+        },
+        {
+          "op": "replace",
+          "path": "/source/focus_message_ids/0",
+          "value": "message-2"
+        },
+        {
+          "op": "remove",
+          "path": "/closed_hypothesis_bundle"
+        }
+      ]
+    },
+    {
+      "name": "valid NL2KE request for embedded possible example",
+      "expected_valid": true,
+      "derive_from": "valid NL2KE request with exact snapshot reference",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/request_id",
+          "value": "request-possible-1"
+        },
+        {
+          "op": "replace",
+          "path": "/source/messages/0/message_id",
+          "value": "message-possible-1"
+        },
+        {
+          "op": "replace",
+          "path": "/source/messages/0/message_revision_id",
+          "value": "message-possible-1/rev-1"
+        },
+        {
+          "op": "replace",
+          "path": "/source/messages/0/content",
+          "value": "OpenAI may have created GPT-4."
+        },
+        {
+          "op": "replace",
+          "path": "/source/messages/0/content_sha256",
+          "value": "bab3e537100f9b5da913eaad90d1e0cd3bc64b273483a165bc32297b141463e8"
+        },
+        {
+          "op": "replace",
+          "path": "/source/focus_message_ids/0",
+          "value": "message-possible-1"
+        },
+        {
+          "op": "replace",
+          "path": "/closed_hypothesis_bundle/canonical_bindings/0/provenance_refs/0",
+          "value": "message-possible-1/rev-1"
+        },
+        {
+          "op": "replace",
+          "path": "/closed_hypothesis_bundle/canonical_bindings/1/provenance_refs/0",
+          "value": "message-possible-1/rev-1"
+        },
+        {
+          "op": "replace",
+          "path": "/closed_hypothesis_bundle/canonical_bindings/0/binding_sha256",
+          "value": "f25b8b6d0780c58633160b486bfc8fc77b8a2e004caf18c17160fa28f4717ee8"
+        },
+        {
+          "op": "replace",
+          "path": "/closed_hypothesis_bundle/canonical_bindings/1/binding_sha256",
+          "value": "3ad254295704b953ffa5a2cfe05efbe693088e12bebc91febc8fcab8f8b52193"
+        },
+        {
+          "op": "remove",
+          "path": "/closed_hypothesis_bundle/canonical_assertions/0"
+        }
+      ]
+    },
+    {
+      "name": "invalid request with unsafe JCS integer",
+      "expected_valid": false,
+      "derive_from": "valid NL2KE request with exact snapshot reference",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/execution/budget/max_input_tokens",
+          "value": 9007199254740992
+        }
+      ]
+    },
+    {
+      "name": "invalid request with unpaired Unicode surrogate",
+      "expected_valid": false,
+      "derive_from": "valid NL2KE request with exact snapshot reference",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/source/messages/0/content",
+          "value": "\ud800"
+        },
+        {
+          "op": "replace",
+          "path": "/source/messages/0/content_sha256",
+          "value": "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    {
+      "name": "valid compiled NL2KE response",
+      "expected_valid": true,
+      "document": {
+        "document_kind": "nl2ke_response",
+        "protocol_version": "nl-to-ke/v1",
+        "request_id": "request-1",
+        "request_hash": "cf700de389dac8842ca83a2c445d93daac66c8d7665016ff2dc3357d8a4806a7",
+        "status": "compiled",
+        "ontology_snapshot_ref": {
+          "snapshot_id": "memory-assertion-example-v1",
+          "sha256": "6163b7f30ed60650d3f4361d3a8368c3901619e92d25114bb4667339e1286787"
+        },
+        "execution": {
+          "provider": "openai-compatible-provider",
+          "model_id": "model-id",
+          "route_id": null,
+          "strategy_id": "nl2ke-standard",
+          "strategy_version": "1",
+          "credential_ref_fingerprint": "97f9fe1fe0c76702674409e768dd69316d4299fb8db82f0971ab72eee615ce88",
+          "model_calls": 1,
+          "input_tokens": 500,
+          "output_tokens": 180,
+          "latency_ms": 420
+        },
+        "compiler": {
+          "service_version": "1.0.0",
+          "prompt_sha256": "b7fdb502fb17e14ce5bdc4aa431d4a263fa281d92be974fd336a9209daf8548a",
+          "parser_version": "1",
+          "validator_version": "1",
+          "semantic_contract_version": "memory-assertion/v1"
+        },
+        "processing_scope": {
+          "received_focus_message_ids": ["message-1"],
+          "processed_focus_message_ids": ["message-1"],
+          "processed_ranges": [
+            {
+              "message_id": "message-1",
+              "message_revision_id": "message-1/rev-1",
+              "start_char": 0,
+              "end_char": 21
+            }
+          ],
+          "truncated": false,
+          "max_candidate_assertions_reached": false
+        },
+        "source_evidence_spans": [
+          {
+            "evidence_id": "ev-1",
+            "message_id": "message-1",
+            "message_revision_id": "message-1/rev-1",
+            "start_char": 0,
+            "end_char": 21,
+            "quote": "OpenAI created GPT-4.",
+            "quote_sha256": "9990df125457edfdcb6e60d517645c41a6a56ddd59ba7b7f2a1af491cba81057"
+          }
+        ],
+        "hypotheses": [
+          {
+            "hypothesis_id": "hypothesis-1",
+            "rank": 1,
+            "local_individuals": [],
+            "candidate_assertions": [
+              {
+                "candidate_id": "created-by-1",
+                "ke": {
+                  "lhs": {
+                    "kind": "operator_application",
+                    "operator_id": "operator_fe9dd6d99ebf",
+                    "arguments": [
+                      {
+                        "kind": "individual_ref",
+                        "scope": "canonical",
+                        "individual_id": "model-gpt-4"
+                      },
+                      {
+                        "kind": "individual_ref",
+                        "scope": "canonical",
+                        "individual_id": "openai"
+                      }
+                    ]
+                  },
+                  "rhs": {
+                    "kind": "typed_value",
+                    "concept_id": "concept_b39c9a889cc6",
+                    "canonical_value": true
+                  }
+                },
+                "candidate_metadata": {
+                  "speech_act": "assertion",
+                  "epistemic_mode": "self_reported",
+                  "semantic_assessment": {
+                    "label": "supported",
+                    "score": 0.99,
+                    "score_semantics": "uncalibrated_relative",
+                    "uncertainty_codes": [],
+                    "reasons": ["explicit source relation"]
+                  }
+                },
+                "support_basis": "direct_source",
+                "source_evidence_ids": ["ev-1"],
+                "context_support_refs": []
+              }
+            ],
+            "root_candidate_ids": ["created-by-1"]
+          }
+        ],
+        "reported_ontology_gaps": [],
+        "reported_capability_gaps": [],
+        "unresolved_items": [],
+        "abstention_reasons": [],
+        "warnings": []
+      }
+    },
+    {
+      "name": "valid compiled response with embedded created_by and root possible",
+      "expected_valid": true,
+      "derive_from": "valid compiled NL2KE response",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/request_id",
+          "value": "request-possible-1"
+        },
+        {
+          "op": "replace",
+          "path": "/request_hash",
+          "value": "57d3045e551c81125b8bdf2fa81f35d4f540263c0257f3fd0ebb43ab489539aa"
+        },
+        {
+          "op": "replace",
+          "path": "/processing_scope/received_focus_message_ids/0",
+          "value": "message-possible-1"
+        },
+        {
+          "op": "replace",
+          "path": "/processing_scope/processed_focus_message_ids/0",
+          "value": "message-possible-1"
+        },
+        {
+          "op": "replace",
+          "path": "/processing_scope/processed_ranges/0/message_id",
+          "value": "message-possible-1"
+        },
+        {
+          "op": "replace",
+          "path": "/processing_scope/processed_ranges/0/message_revision_id",
+          "value": "message-possible-1/rev-1"
+        },
+        {
+          "op": "replace",
+          "path": "/processing_scope/processed_ranges/0/end_char",
+          "value": 30
+        },
+        {
+          "op": "replace",
+          "path": "/source_evidence_spans/0/message_id",
+          "value": "message-possible-1"
+        },
+        {
+          "op": "replace",
+          "path": "/source_evidence_spans/0/message_revision_id",
+          "value": "message-possible-1/rev-1"
+        },
+        {
+          "op": "replace",
+          "path": "/source_evidence_spans/0/end_char",
+          "value": 30
+        },
+        {
+          "op": "replace",
+          "path": "/source_evidence_spans/0/quote",
+          "value": "OpenAI may have created GPT-4."
+        },
+        {
+          "op": "replace",
+          "path": "/source_evidence_spans/0/quote_sha256",
+          "value": "bab3e537100f9b5da913eaad90d1e0cd3bc64b273483a165bc32297b141463e8"
+        },
+        {
+          "op": "remove",
+          "path": "/hypotheses/0/candidate_assertions/0/candidate_metadata"
+        },
+        {
+          "op": "add",
+          "path": "/hypotheses/0/candidate_assertions/-",
+          "value": {
+            "candidate_id": "possible-1",
+            "ke": {
+              "lhs": {
+                "kind": "operator_application",
+                "operator_id": "operator_7e2261ee9c51",
+                "arguments": [
+                  {
+                    "kind": "assertion_ref",
+                    "scope": "candidate",
+                    "assertion_id": "created-by-1"
+                  }
+                ]
+              },
+              "rhs": {
+                "kind": "typed_value",
+                "concept_id": "concept_b39c9a889cc6",
+                "canonical_value": true
+              }
+            },
+            "support_basis": "direct_source",
+            "source_evidence_ids": ["ev-1"],
+            "context_support_refs": []
+          }
+        },
+        {
+          "op": "replace",
+          "path": "/hypotheses/0/root_candidate_ids",
+          "value": ["possible-1"]
+        }
+      ]
+    },
+    {
+      "name": "valid abstained NL2KE response with ontology gap",
+      "expected_valid": true,
+      "document": {
+        "document_kind": "nl2ke_response",
+        "protocol_version": "nl-to-ke/v1",
+        "request_id": "request-2",
+        "request_hash": "00c1404d86cfea39a9f6c80c6da2770bdf8785cfd4289c51d37a62441295bb62",
+        "status": "abstained",
+        "ontology_snapshot_ref": {
+          "snapshot_id": "memory-assertion-example-v1",
+          "sha256": "6163b7f30ed60650d3f4361d3a8368c3901619e92d25114bb4667339e1286787"
+        },
+        "execution": {
+          "provider": "openai-compatible-provider",
+          "model_id": "model-id",
+          "route_id": null,
+          "strategy_id": "nl2ke-standard",
+          "strategy_version": "1",
+          "credential_ref_fingerprint": "97f9fe1fe0c76702674409e768dd69316d4299fb8db82f0971ab72eee615ce88",
+          "model_calls": 1,
+          "input_tokens": 420,
+          "output_tokens": 90,
+          "latency_ms": 300
+        },
+        "compiler": {
+          "service_version": "1.0.0",
+          "prompt_sha256": "b7fdb502fb17e14ce5bdc4aa431d4a263fa281d92be974fd336a9209daf8548a",
+          "parser_version": "1",
+          "validator_version": "1",
+          "semantic_contract_version": "memory-assertion/v1"
+        },
+        "processing_scope": {
+          "received_focus_message_ids": ["message-2"],
+          "processed_focus_message_ids": ["message-2"],
+          "processed_ranges": [
+            {
+              "message_id": "message-2",
+              "message_revision_id": "message-2/rev-1",
+              "start_char": 0,
+              "end_char": 24
+            }
+          ],
+          "truncated": false,
+          "max_candidate_assertions_reached": false
+        },
+        "source_evidence_spans": [
+          {
+            "evidence_id": "ev-2",
+            "message_id": "message-2",
+            "message_revision_id": "message-2/rev-1",
+            "start_char": 0,
+            "end_char": 24,
+            "quote": "Use two-person approval.",
+            "quote_sha256": "db48b128c32ac54ba75c6f4d54e7f20cd6615e23e1303b0f4891bd62ec6ba574"
+          }
+        ],
+        "hypotheses": [],
+        "reported_ontology_gaps": [
+          {
+            "code": "missing_operator",
+            "payload": {
+              "evidence_id": "ev-2",
+              "surface_form": "two-person approval"
+            },
+            "display_message": "The exact Snapshot has no matching Operator."
+          }
+        ],
+        "reported_capability_gaps": [],
+        "unresolved_items": [],
+        "abstention_reasons": [
+          {
+            "code": "no_compilable_ke",
+            "payload": {
+              "cause": "ontology_gap"
+            }
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "name": "valid compiled response without candidate metadata",
+      "expected_valid": true,
+      "derive_from": "valid compiled NL2KE response",
+      "operations": [
+        {
+          "op": "remove",
+          "path": "/hypotheses/0/candidate_assertions/0/candidate_metadata"
+        }
+      ]
+    },
+    {
+      "name": "valid context-resolved candidate",
+      "expected_valid": true,
+      "derive_from": "valid compiled NL2KE response",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/hypotheses/0/candidate_assertions/0/support_basis",
+          "value": "context_resolved"
+        },
+        {
+          "op": "replace",
+          "path": "/hypotheses/0/candidate_assertions/0/context_support_refs",
+          "value": ["context-1"]
+        }
+      ]
+    },
+    {
+      "name": "invalid request with inline snapshot",
+      "expected_valid": false,
+      "derive_from": "valid NL2KE request with exact snapshot reference",
+      "operations": [
+        {
+          "op": "add",
+          "path": "/ontology_snapshot",
+          "value": {
+            "ontology": {},
+            "concepts": [],
+            "operators": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "invalid empty candidate metadata",
+      "expected_valid": false,
+      "derive_from": "valid compiled NL2KE response",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/hypotheses/0/candidate_assertions/0/candidate_metadata",
+          "value": {}
+        }
+      ]
+    },
+    {
+      "name": "invalid flattened speech act",
+      "expected_valid": false,
+      "derive_from": "valid compiled response without candidate metadata",
+      "operations": [
+        {
+          "op": "add",
+          "path": "/hypotheses/0/candidate_assertions/0/speech_act",
+          "value": "assertion"
+        }
+      ]
+    },
+    {
+      "name": "invalid unknown epistemic mode",
+      "expected_valid": false,
+      "derive_from": "valid compiled NL2KE response",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/hypotheses/0/candidate_assertions/0/candidate_metadata/epistemic_mode",
+          "value": "unknown"
+        }
+      ]
+    },
+    {
+      "name": "invalid hypothesis-level semantic assessment",
+      "expected_valid": false,
+      "derive_from": "valid compiled NL2KE response",
+      "operations": [
+        {
+          "op": "add",
+          "path": "/hypotheses/0/semantic_assessment",
+          "value": {
+            "label": "supported",
+            "score": null,
+            "score_semantics": "not_provided",
+            "uncertainty_codes": [],
+            "reasons": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "invalid compiled response with no hypotheses",
+      "expected_valid": false,
+      "derive_from": "valid compiled NL2KE response",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/hypotheses",
+          "value": []
+        }
+      ]
+    },
+    {
+      "name": "invalid compiled response with abstention reason",
+      "expected_valid": false,
+      "derive_from": "valid compiled NL2KE response",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/abstention_reasons",
+          "value": [
+            {
+              "code": "no_compilable_ke",
+              "payload": {
+                "cause": "ontology_gap"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "invalid abstained response with a hypothesis",
+      "expected_valid": false,
+      "derive_from": "valid abstained NL2KE response with ontology gap",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/hypotheses",
+          "value": [
+            {
+              "hypothesis_id": "nonempty-hypothesis",
+              "rank": 1,
+              "local_individuals": [],
+              "candidate_assertions": [
+                {
+                  "candidate_id": "created-by-1",
+                  "ke": {
+                    "lhs": {
+                      "kind": "operator_application",
+                      "operator_id": "operator_fe9dd6d99ebf",
+                      "arguments": [
+                        {
+                          "kind": "individual_ref",
+                          "scope": "canonical",
+                          "individual_id": "model-gpt-4"
+                        },
+                        {
+                          "kind": "individual_ref",
+                          "scope": "canonical",
+                          "individual_id": "openai"
+                        }
+                      ]
+                    },
+                    "rhs": {
+                      "kind": "typed_value",
+                      "concept_id": "concept_b39c9a889cc6",
+                      "canonical_value": true
+                    }
+                  },
+                  "support_basis": "direct_source",
+                  "source_evidence_ids": ["ev-2"],
+                  "context_support_refs": []
+                }
+              ],
+              "root_candidate_ids": ["created-by-1"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "invalid direct-source candidate with context support",
+      "expected_valid": false,
+      "derive_from": "valid compiled NL2KE response",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/hypotheses/0/candidate_assertions/0/context_support_refs",
+          "value": ["context-1"]
+        }
+      ]
+    },
+    {
+      "name": "invalid context-resolved candidate without context support",
+      "expected_valid": false,
+      "derive_from": "valid compiled NL2KE response",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/hypotheses/0/candidate_assertions/0/support_basis",
+          "value": "context_resolved"
+        }
+      ]
+    },
+    {
+      "name": "invalid nested operator application argument",
+      "expected_valid": false,
+      "derive_from": "valid compiled NL2KE response",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/hypotheses/0/candidate_assertions/0/ke/lhs/arguments/0",
+          "value": {
+            "kind": "operator_application",
+            "operator_id": "operator_7e2261ee9c51",
+            "arguments": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "invalid null typed value",
+      "expected_valid": false,
+      "derive_from": "valid compiled NL2KE response",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/hypotheses/0/candidate_assertions/0/ke/rhs/canonical_value",
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "invalid unknown diagnostic code",
+      "expected_valid": false,
+      "derive_from": "valid compiled NL2KE response",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/reported_ontology_gaps",
+          "value": [
+            {
+              "code": "unknown_gap",
+              "payload": {
+                "evidence_id": "ev-1",
+                "surface_form": "created"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "invalid open diagnostic payload",
+      "expected_valid": false,
+      "derive_from": "valid abstained NL2KE response with ontology gap",
+      "operations": [
+        {
+          "op": "add",
+          "path": "/reported_ontology_gaps/0/payload/details",
+          "value": {
+            "free_form": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "invalid self-reported source coverage",
+      "expected_valid": false,
+      "derive_from": "valid compiled NL2KE response",
+      "operations": [
+        {
+          "op": "add",
+          "path": "/source_coverage",
+          "value": 1.0
+        }
+      ]
+    },
+    {
+      "name": "invalid unapproved status",
+      "expected_valid": false,
+      "derive_from": "valid compiled NL2KE response",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/status",
+          "value": "compiled_with_gaps"
+        }
+      ]
+    },
+    {
+      "name": "invalid truncation reason when not truncated",
+      "expected_valid": false,
+      "derive_from": "valid compiled NL2KE response",
+      "operations": [
+        {
+          "op": "add",
+          "path": "/processing_scope/truncation_reason",
+          "value": "none"
+        }
+      ]
+    },
+    {
+      "name": "invalid canonical binding digest",
+      "expected_valid": false,
+      "derive_from": "valid NL2KE request with exact snapshot reference",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/closed_hypothesis_bundle/canonical_bindings/0/binding_sha256",
+          "value": "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    {
+      "name": "invalid paired request hash",
+      "expected_valid": false,
+      "derive_from": "valid compiled NL2KE response",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/request_hash",
+          "value": "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    {
+      "name": "invalid credential fingerprint echo",
+      "expected_valid": false,
+      "derive_from": "valid compiled NL2KE response",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/execution/credential_ref_fingerprint",
+          "value": "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    {
+      "name": "invalid Evidence message revision",
+      "expected_valid": false,
+      "derive_from": "valid compiled NL2KE response",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/source_evidence_spans/0/message_revision_id",
+          "value": "message-1/rev-missing"
+        }
+      ]
+    },
+    {
+      "name": "invalid self-referential candidate graph",
+      "expected_valid": false,
+      "derive_from": "valid compiled NL2KE response",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/hypotheses/0/candidate_assertions/0/ke/lhs/operator_id",
+          "value": "operator_7e2261ee9c51"
+        },
+        {
+          "op": "replace",
+          "path": "/hypotheses/0/candidate_assertions/0/ke/lhs/arguments",
+          "value": [
+            {
+              "kind": "assertion_ref",
+              "scope": "candidate",
+              "assertion_id": "created-by-1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "valid snapshot cache miss error",
+      "expected_valid": true,
+      "document": {
+        "document_kind": "nl2ke_error",
+        "protocol_version": "nl-to-ke/v1",
+        "request_id": "request-1",
+        "http_status": 409,
+        "error": {
+          "code": "snapshot_cache_miss",
+          "payload": {
+            "ontology_snapshot_ref": {
+              "snapshot_id": "memory-assertion-example-v1",
+              "sha256": "6163b7f30ed60650d3f4361d3a8368c3901619e92d25114bb4667339e1286787"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "valid snapshot hash mismatch error",
+      "expected_valid": true,
+      "document": {
+        "document_kind": "nl2ke_error",
+        "protocol_version": "nl-to-ke/v1",
+        "request_id": "request-1",
+        "http_status": 409,
+        "error": {
+          "code": "snapshot_hash_mismatch",
+          "payload": {
+            "snapshot_id": "memory-assertion-example-v1",
+            "requested_sha256": "6163b7f30ed60650d3f4361d3a8368c3901619e92d25114bb4667339e1286787",
+            "cached_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+          }
+        }
+      }
+    },
+    {
+      "name": "valid unsupported capability error",
+      "expected_valid": true,
+      "document": {
+        "document_kind": "nl2ke_error",
+        "protocol_version": "nl-to-ke/v1",
+        "request_id": "request-1",
+        "http_status": 422,
+        "error": {
+          "code": "unsupported_capability",
+          "payload": {
+            "ontology_snapshot_ref": {
+              "snapshot_id": "memory-assertion-example-v1",
+              "sha256": "6163b7f30ed60650d3f4361d3a8368c3901619e92d25114bb4667339e1286787"
+            },
+            "capability_id": "ke-literal:duration/v1"
+          }
+        }
+      }
+    },
+    {
+      "name": "valid invalid request error",
+      "expected_valid": true,
+      "document": {
+        "document_kind": "nl2ke_error",
+        "protocol_version": "nl-to-ke/v1",
+        "request_id": null,
+        "http_status": 400,
+        "error": {
+          "code": "invalid_request",
+          "payload": {
+            "stage": "json_parse",
+            "violation_code": "duplicate_key"
+          }
+        }
+      }
+    },
+    {
+      "name": "valid invalid snapshot error",
+      "expected_valid": true,
+      "document": {
+        "document_kind": "nl2ke_error",
+        "protocol_version": "nl-to-ke/v1",
+        "request_id": "request-1",
+        "http_status": 422,
+        "error": {
+          "code": "snapshot_invalid",
+          "payload": {
+            "ontology_snapshot_ref": {
+              "snapshot_id": "memory-assertion-example-v1",
+              "sha256": "6163b7f30ed60650d3f4361d3a8368c3901619e92d25114bb4667339e1286787"
+            },
+            "validation_stage": "semantic_closure"
+          }
+        }
+      }
+    },
+    {
+      "name": "valid unsupported protocol or contract error",
+      "expected_valid": true,
+      "document": {
+        "document_kind": "nl2ke_error",
+        "protocol_version": "nl-to-ke/v1",
+        "request_id": "request-unsupported",
+        "http_status": 422,
+        "error": {
+          "code": "unsupported_protocol_or_contract",
+          "payload": {
+            "requested_protocol_version": "nl-to-ke/v2",
+            "requested_semantic_contract_version": "memory-assertion/v2",
+            "supported_protocol_versions": ["nl-to-ke/v1"],
+            "supported_semantic_contract_versions": ["memory-assertion/v1"]
+          }
+        }
+      }
+    },
+    {
+      "name": "invalid error status_code alias",
+      "expected_valid": false,
+      "derive_from": "valid invalid request error",
+      "operations": [
+        {
+          "op": "add",
+          "path": "/status_code",
+          "value": "invalid_request"
+        }
+      ]
+    },
+    {
+      "name": "valid capabilities response",
+      "expected_valid": true,
+      "document": {
+        "document_kind": "nl2ke_capabilities",
+        "protocol_version": "nl-to-ke/v1",
+        "semantic_contract_versions": ["memory-assertion/v1"],
+        "ontology_schema_ids": [
+          "https://genuineknowledge.com/specifications/ontology/v1/ontology.specification.json"
+        ],
+        "literal_codec_ids": [
+          "ke-literal:boolean/v1",
+          "ke-literal:text-nfc/v1",
+          "ke-literal:decimal/v1",
+          "ke-literal:date/v1",
+          "ke-literal:datetime/v1",
+          "ke-literal:duration/v1",
+          "ke-literal:money/v1",
+          "ke-literal:quantity/v1"
+        ],
+        "snapshot_delivery": "preprovisioned_immutable_cache",
+        "final_validation": "mandatory"
+      }
+    },
+    {
+      "name": "valid readiness response",
+      "expected_valid": true,
+      "document": {
+        "document_kind": "nl2ke_readiness",
+        "protocol_version": "nl-to-ke/v1",
+        "ready": true,
+        "checks": {
+          "compiler": true,
+          "schema_validator": true,
+          "semantic_validator": true,
+          "snapshot_cache": true
+        }
+      }
+    },
+    {
+      "name": "invalid readiness with failed check",
+      "expected_valid": false,
+      "derive_from": "valid readiness response",
+      "operations": [
+        {
+          "op": "replace",
+          "path": "/checks/semantic_validator",
+          "value": false
+        }
+      ]
+    }
+  ]
+}
