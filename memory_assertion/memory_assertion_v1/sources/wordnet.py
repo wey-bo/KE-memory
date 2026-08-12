@@ -2,7 +2,8 @@
 
 Each line is `sense_key synset_offset sense_number tag_cnt`, and the sense key is taken
 verbatim. That is the whole point: keys look like `'hood%1:15:00::`, `.22%1:06:00::` and
-`s_gravenhage%1:15:00::`, so 1,390 of them contain leading dots, apostrophes or slashes.
+`s_gravenhage%1:15:00::`, so 1,818 sense lines carry a lemma containing a dot, apostrophe or slash (1,726 distinct
+lemmas), and 17 of those lemmas begin with punctuation.
 Any pattern this module invented for `lemma.pos.sense` would reject real senses, and
 WordNet already publishes an authoritative identity -- there is nothing to improve on.
 

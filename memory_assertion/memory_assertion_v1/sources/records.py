@@ -49,8 +49,8 @@ class WordNetSenseRecord(_SourceRecord):
     """One sense from WordNet 3.0's `index.sense`.
 
     `sense_key` is WordNet's own key, taken verbatim -- `create%2:36:00::`, not a
-    `lemma.pos.nn` string assembled here. 1,390 lemmas contain leading dots, apostrophes
-    or slashes, so any pattern this implementation invented would reject real data. The
+    `lemma.pos.nn` string assembled here. 1,818 sense lines carry a lemma containing a dot,
+    apostrophe or slash, so any pattern this implementation invented would reject real data. The
     source already has an authoritative identity; using it is both simpler and correct.
     """
 

@@ -45,8 +45,8 @@ VerbNet（11,047）与 FrameNet（5,203），其约 83 处 "WordNet" 提及全�
 ### 源 ID 正则必须放弃构词约束
 
 实测：PropBank 11,206 条 roleset 中 **40 条**不符合 `<lemma>.<nn>` 形态，例如 `1500.01`、
-`anticoagulate.101`、`make.LV`、`point.yy`。WordNet 有 **1,390 条** lemma 含前导点、撇号、
-斜杠等字符，不符合 `<lemma>.<pos>.<nn>` 形态。
+`anticoagulate.101`、`make.LV`、`point.yy`。WordNet 有 **1,818 条** sense 行的 lemma 含点、撇号或斜杠（1,726 个不同 lemma），
+其中 17 个 lemma 以标点开头，均不符合 `<lemma>.<pos>.<nn>` 形态。
 
 所以采用来源自身的权威身份，不由本实现定义构词规则：
 

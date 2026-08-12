@@ -50,6 +50,17 @@ def test_workflow_delegates_to_vendor_neutral_check_script() -> None:
     # rather than skipping, so the workflow must provision it.
     assert "actions/setup-node" in workflow
 
+    # The corpus gate is deliberately NOT in the remote workflow: it needs 16 MB of frozen
+    # linguistic archives, and uploading them to make CI green would be the wrong fix. It must
+    # still exist and still fail on absent data, because both other gates let corpus tests skip
+    # -- and a skipped test establishes none of the absolute ingestion counts.
+    corpus_gate = ROOT / "scripts/ci/check-corpus.sh"
+    assert corpus_gate.is_file()
+    corpus_text = corpus_gate.read_text(encoding="utf-8")
+    assert "corpus_gate_failed" in corpus_text
+    assert "skipped" in corpus_text
+    assert "scripts/ci/check-corpus.sh" not in workflow
+
     # KEOL must NOT be checked out here. It is private, so the default token gets a
     # 404 and the job dies before running anything -- observed on the first remote
     # run of this workflow. This assertion used to require the checkout and its
